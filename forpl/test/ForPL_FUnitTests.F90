@@ -5,7 +5,7 @@ subroutine test_forpl_set_get_int(verbose, result_flag_out)
   use forpl
   implicit none
 
-  integer(c_bool), intent(in) :: verbose
+  logical(c_bool), intent(in) :: verbose
   integer(c_int), intent(out) :: result_flag_out
   integer(c_int) myint1, myint2
 
@@ -22,7 +22,7 @@ subroutine test_forpl_set_get_int(verbose, result_flag_out)
   if (verbose) then
     print *, "my int 1 = ", myint1
   end if
-  if (myint1 .neqv. 5) then
+  if (myint1 /= 5) then
     result_flag_out = 1
   end if
 
@@ -32,7 +32,7 @@ subroutine test_forpl_set_get_int(verbose, result_flag_out)
   if (verbose) then
     print *, "my int 2 = ", myint2
   end if
-  if (myint2 .neqv. 6) then
+  if (myint2 /= 6) then
     result_flag_out = 2
   end if
 
