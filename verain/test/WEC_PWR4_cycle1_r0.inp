@@ -1,0 +1,303 @@
+[CASEID]
+ CASL Westinghouse Four-Loop PWR Cycle 1 - Public - Rev. 0
+!-----------------------------------------------------------------------------------------
+! This sample input file contains all the information needed
+! to accurately model the zero power startup testing of a
+! full westinghouse four-loop reactor.  This is just a sample,
+! and should be viewed for content, brevity, and overall ease
+! of use by an industry user.  The specific syntax is 
+! relatively unimportant as long as the functionality is preserved.
+! It is specific to PWR reactor types.  It does not include 
+! depletion, etc)
+!
+! This input assumes that some standard materials are predefined:
+!  AIR - air for helium gap
+!  ZR4 - zircaloy-4
+!  H2O - water without boron
+!  MOD - water with boron
+!  PYX - borosilicate glass (pyrex - with some default B2O3 content)
+!  AIC - silver-indium-cadmium (80-15-5)
+!  B4C - boron carbide
+!  INC - inconel
+!  SSL - stainless steel
+!
+!---------------------------------------------------------------------------------------
+
+! empty line implies nothing
+! should be able to include files
+
+[STATE]
+  power 0.0                             ! current % of rated power
+  flow  100.0                           ! current % of rated flow
+  rods  7*230 167                       ! current RCCA bank positions (steps withdrawn)
+! 7*230 implies 230 230 230 ... 7 times
+! implies ids 1-8 for map in CONTROL/banks section
+  xenon none                            ! use no short term fission product poisons
+  sym quarter                           ! execute the problem with quarter core symmetry
+  boron 1300 MOD                        ! boron concentration (or initial guess) and material(?)
+  search 'boron' 1.0                    ! search for critical boron with k=1.0
+  cycle 1 19960118                      ! new cycle number and startup date
+
+[MATERIAL]
+! keyword integer_id label_id density  /-separator btw different data character, can be replacement for continuation,
+! usually data after / is character-based, here after / is enrichment
+  uo2    1 U21 10.257 / 2.110           ! 2.110% u235
+  uo2    2 U26 10.257 / 2.619           ! 2.619% u235
+  uo2    3 U31 10.257 / 3.100           ! 3.100% u235
+  pyrex  4 PRX  2.25  / 12.5            ! 12.5% b2o3
+  aic    5 AIC  10.2 
+  b4c    6 B4C  1.76
+
+! ref-keyword followed by integer_id label_id  (1, 2.03) not needed, throw out
+! MOD- keyword for moderator, SSL-stainless steel, INC-Inconel, ZR4-Zircalloy, composition volume fraction, must add to 100  
+  ref 11 RF1 / MOD  30.1         ! custom reflector materials
+                      SSL  69.9         ! unlike the mixture card,
+  ref 12 RF2 / MOD  36.0         ! the reflector input uses volume fractions
+                      SSL  56.2         !
+                      INC   7.8         ! the mixture card allows flexibility for input
+  ref 13 RF3 / MOD  27.4         ! of isotopes or materials by weight fraction
+                      SSL  17.3
+                      INC   8.2
+                      ZR4  47.1
+  ref 15 RF5 / MOD  14.6
+                      SSL  46.7
+                      ZR4  38.7
+  ref 16 RF6 / MOD  30.9
+                      SSL  69.1
+
+[CORE]
+  size 15                               ! number of assemblies across the core
+  apitch 21.5                           ! assembly pitch(cm)
+  rated 3411 557.7 2500 144.7           ! power(MW), t_in(F), p_exit(psia), mdot(Mlbs/hr) 
+  sym rotational                        ! quarter core symmetry option
+  
+  baffle 2.8575 0.14 / SSL                          ! thickness(cm), gap(cm), material
+  barrel 188.0 193.7 / SSL                          ! inner radius(cm), outer radius(cm), material  
+
+! RF? labels correspond to RF? above
+!
+  bot_reflector 11.951        30 / RF5 RF6          ! bottom reflector thicknesses(cm) and mixtures
+  top_reflector 14.656 15.506 30 / RF3 RF2 RF1      !    top reflector thicknesses(cm) and mixtures
+ 
+! need to recognize the symmetry
+! rather specify keyword for maps
+! assume start from 270 
+! how are maps extended, e.g. does last line must have 4 entries?
+! correspond to ASSEMBLY/assy ids
+!
+  fuel                          ! core location of fuel assemblies
+     1                          ! using octant symmetry
+     2  1
+     1  2  1
+     2  1  2  1
+     1  2  1  2  2
+     2  1  2  1  2  3
+     1  3  1  3  3  3 
+     3  3  3  3 
+ 
+! can only fit into assemblies that let one do that
+! XXP are labels of assembly definitions defined below
+! 
+  poison                        ! core location of inserts
+     -                          ! 0 - no insert, ss: in conversation 0 and - can be used interchangebly
+    20P  0                      ! - = control rod location
+     -  24P  -
+    20P  0  20P  -
+     -  20P  0  20P  -
+    20P  -  16P  -  24P 12P
+     -  24P  -  16P  -   0 
+    12P  0   8P  0  
+
+[ASSEMBLY]
+  title "Westinghouse VANTAGE-5H Assembly"            
+  pitch  1.260                                          ! pin pitch for lattice
+  offset 11.951                                         ! distance from bottom of fuel stack to FAS
+                                                        ! assembly material definitions can go here 
+                                                        ! these override the global materials
+! description of cross-section of tubes
+! for U21 = 0-0.4096 is U21, 0.4096-0.418 is AIR (gap), 0.418-0.475 is cladding,
+! correspond to MATERIAL labels
+! guide tube has MOD in 0-0.561, 0.561-0.602 is ZR4
+! keyw integer_id label_id information
+  cell 1 U21  0.4096 0.418 0.475 / U21 AIR ZR4          ! low enriched pin cell
+  cell 2 U26  0.4096 0.418 0.475 / U26 AIR ZR4          ! middle enriched pin cell
+  cell 3 U31  0.4096 0.418 0.475 / U31 AIR ZR4          ! high enriched pin cell
+  cell 4  GT         0.561 0.602 / MOD ZR4              ! guide tube
+  cell 5  IT         0.559 0.605 / MOD ZR4              ! instrument tube
+
+! check if 0 and 2 meet maps later on, cannot put fuel into them or controls into fuel, etc.
+! master assembly layout
+  layout 17                             ! default assembly layout for core component interactions
+     2                                  ! 17x17, octant symmetry
+     1 1                                ! 0 = guide tube
+     1 1 1                              ! 1 = fuel rod
+     0 1 1 0                            ! 2 = instrument tube
+     1 1 1 1 1
+     1 1 1 1 1 0
+     0 1 1 0 1 1 1
+     1 1 1 1 1 1 1 1
+     1 1 1 1 1 1 1 1 1
+ 
+! keywd integer_id(not used) label_id(used below)
+  lattice 1 REG1 
+     5
+     1 1
+     1 1 1
+     4 1 1 4
+     1 1 1 1 1
+     1 1 1 1 1 4
+     4 1 1 4 1 1 1
+     1 1 1 1 1 1 1 1
+     1 1 1 1 1 1 1 1 1
+     
+  lattice 2 REG2 
+     5
+     2 2
+     2 2 2
+     4 2 2 4
+     2 2 2 2 2
+     2 2 2 2 2 4
+     4 2 2 4 2 2 2
+     2 2 2 2 2 2 2 2
+     2 2 2 2 2 2 2 2 3
+  
+  lattice 3 REG3 
+     5
+     3 3
+     3 3 3
+     4 3 3 4
+     3 3 3 3 3
+     3 3 3 3 3 4
+     4 3 3 4 3 3 3
+     3 3 3 3 3 3 3 3
+     3 3 3 3 3 3 3 3 3
+
+! aseembly ids that correspond to stacked lattices, 0-365.76 is REG1
+!     
+  assy 1 A21 365.76 / REG1                      ! axial arrangement of lattices
+  assy 2 A26 365.76 / REG2                      ! no axial blankets in cycle 1
+  assy 3 A31 365.76 / REG3
+
+
+  grid 1 MID 0.909 3.81 / ZR4                   ! mid grid mass(kg), height(cm), and material
+  grid 2 END 0.915 3.87 / INC                   ! end grid mass(kg), height(cm), and material
+  
+  spacers  5.074 29.60 50.15 70.70 91.25 111.80 132.35 152.84 / END 6*MID END    
+                                                ! spacers grid types and locations(cm)
+                                                ! (center of strap to FAS)
+
+[INSERT]
+! poison arrangements
+! keyw int_id lab_id radial arrangment / materials
+  cell 1 PRX 0.214 0.230 0.241 0.427 0.437 0.484 / AIR SSL AIR PRX AIR SSL   ! radial pyrex geometry
+  cell 2 PLM                         0.437 0.484 /                 AIR SSL   ! pyrex plenum
+  cell 3 PLG 0.538 / SSL                                                     ! thimble plug 
+
+! keyw id label_id, used in assy below, must fit with master assembly map
+!
+  rod  1 PRX  15.76 376.44 396.7 / PRX PLM          ! pyrex axial elevations relative to FAS
+  rod  2 PLG        383.3  394.3 / PLG              ! thimble plug elevations relative to FAS
+  
+  assy 1 8P              ! 8 pyrex rodss
+     -                   ! 0 = no insert
+     - -                 ! # = insert rod number
+     - - -
+     1 - - 0
+     - - - - -
+     - - - - - 1
+     0 - - 0 - - -
+     - - - - - - - -
+     - - - - - - - - -
+     
+  assy 2 12P             ! 12 pyrex rods
+     -
+     - -
+     - - -
+     1 - - 0
+     - - - - -
+     - - - - - 0
+     0 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  assy 3 16P             ! 16 pyrex rods
+     -
+     - -
+     - - -
+     1 - - 0
+     - - - - -
+     - - - - - 1
+     0 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  assy 4 20P             ! 20 pyrex rods
+     -
+     - -
+     - - -
+     1 - - 0
+     - - - - -
+     - - - - - 1
+     1 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  assy 5 24P             ! 24 pyrex rods
+     -
+     - -
+     - - -
+     1 - - 1
+     - - - - -
+     - - - - - 1
+     1 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -     
+
+  assy 6 PLG              ! 24 thimble plugs
+     -
+     - -
+     - - -
+     2 - - 2
+     - - - - -
+     - - - - - 2
+     2 - - 2 - - -
+     - - - - - - - -
+     - - - - - - - - -     
+
+[CONTROL]
+! control rod configurations
+
+  cell 1 AIC  0.382 0.386 0.484 / AIC AIR SSL       ! radial rodlet geometry
+  cell 2 B4C  0.373 0.386 0.484 / B4C AIR SSL
+  
+! z sequence, not starting from 0
+  rod  1 RCCA  17.0 118.63 377.71 / AIC B4C         ! axial elevations relative to FAS - fully inserted
+  stroke 1.5875 230                                 ! step/notch size(cm), total number of notches
+! numbers correspond to STATE/rods implied ids
+  banks                                             ! core locations for each rod bank
+    8 - 5 - 8 - 7 -                                 ! SA = 1
+    - - - - - 2 - -                                 ! SB = 2
+    5 - 7 - - - 6 -                                 ! SC = 3
+    - - - 5 - 3 - -                                 ! SD = 4
+    8 - - - 8 - 1                                   !  A = 5
+    - 2 - 4 - - -                                   !  B = 6
+    7 - 6 - 1 -                                     !  C = 7
+    - - - -                                         !  D = 8
+  types 56*RCCA                                     ! all banks are the same type
+                                                    ! (type 1 should be the default)
+
+#include "instrument.ini"
+
+         
+#include <edit.ini>
+
+
+[DECART]
+  file  hel047g_v19a_ascii.xsl                  ! cross section file
+  mesh    15.24 5.08 10.16 25*15.24             ! axial computation meshe 
+  ray 0.04 16 4                                 ! ray tracing options
+  fuel_mesh 8 3                                 ! number of azi and radial divisions per pin cell
+  cmfd T T                                      ! cmfd options
+  conv_crit 1e-5 1e-4                           ! convergence criteria
+  reso_opt  4 F F                               ! resonance options
+  threads 12                                    ! number of OpenMP threads to use

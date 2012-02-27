@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MODEL>
+  <CASEID>
+    <CASEID>CASL Westinghouse Pin Cell - Public - Rev. 0
+</CASEID>
+  </CASEID>
+  <STATE>
+    <power> 0.0                             
+</power>
+    <flow>  0.0                             
+</flow>
+    <search> 'keff'                         
+</search>
+    <tmod> 565                              
+</tmod>
+    <tfuel> 565                             
+</tfuel>
+    <boron> 1300 MOD                        
+</boron>
+    <xenon> none                            
+</xenon>
+  </STATE>
+  <CORE>
+    <size> 1 1                              
+</size>
+    <apitch> 1.260                          
+</apitch>
+    <rated> 17.673 557.7 2500 0.75          
+</rated>
+    <boundary> reflect                      
+</boundary>
+  </CORE>
+  <ASSEMBLY>
+    <title> "Westinghouse VANTAGE-5H Fuel Pin"
+</title>
+    <pitch>  1.260                                          
+</pitch>
+    <uo2>    1 U21 10.257 / 2.110                           
+</uo2>
+    <cell> 1 U21  0.4096 0.418 0.475 / U21 AIR ZR4          
+</cell>
+    <lattice>
+      <map row="0"> 1 1                                           </map>
+    </lattice>
+  </ASSEMBLY>
+  <DENOVO>
+    <mesh> 10                                       
+</mesh>
+    <conv_crit> 1e-5 1e-4                           
+</conv_crit>
+  </DENOVO>
+</MODEL>
