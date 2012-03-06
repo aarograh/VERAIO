@@ -54,7 +54,7 @@ local *IFILE;
 tie *IFILE, 'IncludeHandle', $ifile, 
 sub {
     /^#include \"(.*)\"/ ? $1 : /^#include <(.*)>/ ? $1 : undef
-} or die "Cannot tie: $!";
+} or die "Cannot tie $ifile: $!";
 
 # read blocks and save them in variables
 undef $block;
