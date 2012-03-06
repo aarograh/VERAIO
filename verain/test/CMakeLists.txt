@@ -1,5 +1,11 @@
 INCLUDE(TribitsAddExecutableAndTest)
+INCLUDE(TribitsAddAdvancedTest)
+INCLUDE(TribitsCopyFilesToBinaryDir)
 
+
+#
+# Test the Reactor-aware PL validator
+#
 TRIBITS_ADD_EXECUTABLE_AND_TEST(
   ReactorAwareParameterListValidator_UnitTests
   SOURCES
@@ -10,26 +16,31 @@ TRIBITS_ADD_EXECUTABLE_AND_TEST(
   )
 
 
-TRIBITS_COPY_FILES_TO_BINARY_DIR(CopyScriptFiles
-  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
-  SOURCE_FILES
-    sample_input_pr1.inp sample_input_pr1.xml.gold
-    sample_input_pr2.inp
-    WEC_PWR4_cycle1_r0.inp
-  )
+#
+# Function to copy test files and run test for a given test case
+#
+FUNCTION(ADD_REACTOR_AWARE_INPUT_PARSER_TEST FILE_NAME)
+  ASSERT_DEFINED(VERAIn_SOURCE_DIR)
+  TRIBITS_COPY_FILES_TO_BINARY_DIR(CopyScriptFiles_${FILE_NAME}
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
+    SOURCE_FILES
+      ${FILE_NAME}.inp ${FILE_NAME}.xml.gold
+    )
+  TRIBITS_ADD_ADVANCED_TEST(
+    first_pass_inc_${FILE_NAME}
+    TEST_0
+      CMND ${PERL_EXECUTABLE}
+      ARGS -I ${VERAIn_SOURCE_DIR}/scripts
+        ${VERAIn_SOURCE_DIR}/scripts/first_pass_inc.pl 
+        ${FILE_NAME}.inp  ${FILE_NAME}.xml
+    TEST_1
+      CMND diff ARGS ${FILE_NAME}.xml ${FILE_NAME}.xml.gold
+    )
+ENDFUNCTION()
 
 
-ASSERT_DEFINED(VERAIn_SOURCE_DIR)
-
-TRIBITS_ADD_ADVANCED_TEST(
-  first_pass_inc_simple_input_pr1
-  TEST_0
-    CMND ${PERL_EXECUTABLE}
-    ARGS -I ${VERAIn_SOURCE_DIR}/scripts
-      ${VERAIn_SOURCE_DIR}/scripts/first_pass_inc.pl 
-      sample_input_pr1.inp  sample_input_pr1.xml
-  TEST_1
-#    CMND ${CMAKE_COMMAND}
-#    ARGS -E compare_files sample_input_pr1.xml sample_input_pr1.xml.gold
-     CMND diff ARGS sample_input_pr1.xml sample_input_pr1.xml.gold
-  )
+#
+# Run the different test cases
+#
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(sample_input_pr1)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(sample_input_pr2)
