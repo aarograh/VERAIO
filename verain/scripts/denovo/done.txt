@@ -1,0 +1,8 @@
+../xml2yml.pl assembly_test.xml assembly_test.yml
+ed assembly_test.yml
+./clean.sh > denovo.yml
+ed denovo.yml
+cd ..
+ed Directory.yml , save as denovo/DENOVO_available.txt
+cd denovo
+egrep -v '<' DENOVO_available.txt | egrep -v ' _default' | egrep -v '_check' | sed 's/://'

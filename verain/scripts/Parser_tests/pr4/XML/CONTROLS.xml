@@ -1,0 +1,39 @@
+<ParameterList name="CONTROLS">
+  <ParameterList name="Control_1">
+    <Parameter name="axial_labels" type="Array(string)" value="{AIC,B4C}"/>
+    <Parameter name="stroke" type="double" value="365.125"/>
+    <ParameterList name="CellMaps">
+      <ParameterList name="CellMap_AIC">
+        <Parameter name="cell_map" type="Array(string)" value="{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}"/>
+        <Parameter name="label" type="string" value="AIC"/>
+      </ParameterList>
+      <ParameterList name="CellMap_B4C">
+        <Parameter name="cell_map" type="Array(string)" value="{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,2,0,0,2,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,2,0,0,2,0,0,2,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,2,0,0,0,0,0,2,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,2,0,0,2,0,0,2,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,2,0,0,2,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}"/>
+        <Parameter name="label" type="string" value="B4C"/>
+      </ParameterList>
+    </ParameterList>
+    <Parameter name="num_pins" type="int" value="17"/>
+    <Parameter name="maxstep" type="double" value="230"/>
+    <ParameterList name="Materials">
+    </ParameterList>
+    <Parameter name="label" type="string" value="1"/>
+    <Parameter name="title" type="string" value="B4C with AIC tips"/>
+    <ParameterList name="Cells">
+      <ParameterList name="Cell_2">
+        <Parameter name="radii" type="Array(double)" value="{0.373,0.386,0.484}"/>
+        <Parameter name="num_rings" type="int" value="3"/>
+        <Parameter name="label" type="string" value="2"/>
+        <Parameter name="mats" type="Array(string)" value="{b4c,he,ss}"/>
+        <Parameter name="type" type="string" value="other"/>
+      </ParameterList>
+      <ParameterList name="Cell_1">
+        <Parameter name="radii" type="Array(double)" value="{0.382,0.386,0.484}"/>
+        <Parameter name="num_rings" type="int" value="3"/>
+        <Parameter name="label" type="string" value="1"/>
+        <Parameter name="mats" type="Array(string)" value="{aic,he,ss}"/>
+        <Parameter name="type" type="string" value="other"/>
+      </ParameterList>
+    </ParameterList>
+    <Parameter name="axial_elevations" type="Array(double)" value="{17.031,118.6,377.71}"/>
+  </ParameterList>
+</ParameterList>

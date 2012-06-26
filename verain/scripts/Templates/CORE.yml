@@ -1,0 +1,221 @@
+CORE:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+  _content:
+
+    rated_power:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@rated:0
+      _content:
+
+    rated_flow:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@rated:1,apply=>$_[0]*125.9978
+      _content:
+
+    core_name:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/$name
+      _content:
+
+    cycle_num:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy CORE/$cycnum
+      _content:
+
+    cyc_stdate:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy CORE/$cycsdate
+      _content:
+
+    cyc_edate:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy CORE/$cycedate
+      _content:
+
+    apitch:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/$apitch
+      _content:
+
+    baffle_thick:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/$baffle_thick
+      _content:
+
+    baffle_gap:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/$baffle_gap
+      _content:
+
+    baffle_mat:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/$baffle_mat
+      _content:
+
+    vessel_thick:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/$vessel_thick
+      _content:
+
+    vessel_radius:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/$vessel_radius
+      _content:
+
+    vessel_mat:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/$vessel_mat
+      _content:
+
+    assm_map:
+      _pltype: array
+      _type: string
+      _do:
+        - copy CORE/@assm_map
+      _content:
+
+    insert_map:
+      _pltype: array
+      _type: string
+      _do:
+        - copy CORE/@insert_map
+      _content:
+
+    det_map:
+      _pltype: array
+      _type: string
+      _do:
+        - copy CORE/@det_map
+      _content:
+
+    crd_map:
+      _pltype: array
+      _type: string
+      _do:
+        - copy CORE/@crd_map
+      _content:
+
+    shape:
+      _pltype: array
+      _type: int
+      _do:
+        - copy CORE/@core_shape
+      _content:
+
+    lower_thick:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@lower_plate:1
+      _content:
+
+    lower_mat:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/@lower_plate:0
+      _content:
+
+    lower_vfrac:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@lower_plate:2
+      _content:
+
+    upper_thick:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@upper_plate:1
+      _content:
+
+    upper_mat:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/@upper_plate:0
+      _content:
+
+    upper_vfrac:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@upper_plate:2
+      _content:
+
+    bc_bot:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/$bc_bot
+      _content:
+
+    bc_top:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/$bc_top
+      _content:
+
+    bc_rad:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/$bc_rad
+      _content:
+
+    xlabel:
+      _pltype: array
+      _type: string
+      _do:
+        - copy CORE/@xlabel
+      _content:
+
+    ylabel:
+      _pltype: array
+      _type: string
+      _do:
+        - copy CORE/@ylabel
+      _content:
+
+    height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/$height
+      _content:
+
+    Materials:
+      _pltype: list
+      _do:
+        - matmap Material_,CORE/%vacuum/*,CORE/%mod/*,CORE/%uo2/*,CORE/%zirc/*,CORE/%pyrex/*,CORE/%aic/*,CORE/%he/*,CORE/%b4c/*,CORE/%inc/*,CORE/%ss/*
+      _content:

@@ -1,0 +1,6 @@
+CASEID:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+    - rename CASEID/$title
+  _content:

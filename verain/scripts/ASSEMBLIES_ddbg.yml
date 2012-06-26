@@ -1,0 +1,3151 @@
+---
+ASSEMBLIES:
+  _content:
+    Assembly_A1:
+      _content:
+        CellMaps:
+          _content:
+            CellMap_FUEL1:
+              _content:
+                cell_map:
+                  _content:
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 6
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 5
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                    - 1
+                  _pltype: array
+                  _type: string
+                label:
+                  _content: FUEL1
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            CellMap_PLEN:
+              _content:
+                cell_map:
+                  _content:
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 6
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                  _pltype: array
+                  _type: string
+                label:
+                  _content: PLEN
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            CellMap_PLUG:
+              _content:
+                cell_map:
+                  _content:
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 6
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                  _pltype: array
+                  _type: string
+                label:
+                  _content: PLUG
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+          _pltype: list
+        Cells:
+          _content:
+            Cell_1:
+              _content:
+                label:
+                  _content: 1
+                  _pltype: parameter
+                  _type: string
+                mats:
+                  _content:
+                    - U21
+                    - he
+                    - zirc
+                  _pltype: array
+                  _type: string
+                num_rings:
+                  _content: 3
+                  _pltype: parameter
+                  _type: int
+                radii:
+                  _content:
+                    - 0.4096
+                    - 0.418
+                    - 0.475
+                  _pltype: array
+                  _type: double
+                type:
+                  _content: fuel
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            Cell_3:
+              _content:
+                label:
+                  _content: 3
+                  _pltype: parameter
+                  _type: string
+                mats:
+                  _content:
+                    - he
+                    - zirc
+                  _pltype: array
+                  _type: string
+                num_rings:
+                  _content: 2
+                  _pltype: parameter
+                  _type: int
+                radii:
+                  _content:
+                    - 0.418
+                    - 0.475
+                  _pltype: array
+                  _type: double
+                type:
+                  _content: other
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            Cell_4:
+              _content:
+                label:
+                  _content: 4
+                  _pltype: parameter
+                  _type: string
+                mats:
+                  _content:
+                    - zirc
+                  _pltype: array
+                  _type: string
+                num_rings:
+                  _content: 1
+                  _pltype: parameter
+                  _type: int
+                radii:
+                  _content:
+                    - 0.475
+                  _pltype: array
+                  _type: double
+                type:
+                  _content: other
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            Cell_5:
+              _content:
+                label:
+                  _content: 5
+                  _pltype: parameter
+                  _type: string
+                mats:
+                  _content:
+                    - mod
+                    - zirc
+                  _pltype: array
+                  _type: string
+                num_rings:
+                  _content: 2
+                  _pltype: parameter
+                  _type: int
+                radii:
+                  _content:
+                    - 0.561
+                    - 0.602
+                  _pltype: array
+                  _type: double
+                type:
+                  _content: other
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            Cell_6:
+              _content:
+                label:
+                  _content: 6
+                  _pltype: parameter
+                  _type: string
+                mats:
+                  _content:
+                    - mod
+                    - zirc
+                  _pltype: array
+                  _type: string
+                num_rings:
+                  _content: 2
+                  _pltype: parameter
+                  _type: int
+                radii:
+                  _content:
+                    - 0.559
+                    - 0.605
+                  _pltype: array
+                  _type: double
+                type:
+                  _content: other
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+          _pltype: list
+        Materials:
+          _content:
+            Material_U21:
+              _content:
+                density:
+                  _content: 10.257
+                  _pltype: parameter
+                  _type: double
+                depletable:
+                  _content: true
+                  _pltype: parameter
+                  _type: bool
+                enrichment:
+                  _content: 2.11
+                  _pltype: parameter
+                  _type: double
+                key_name:
+                  _content: U21
+                  _pltype: parameter
+                  _type: string
+                mat_name:
+                  _content: uo2
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            Material_U26:
+              _content:
+                density:
+                  _content: 10.257
+                  _pltype: parameter
+                  _type: double
+                depletable:
+                  _content: true
+                  _pltype: parameter
+                  _type: bool
+                enrichment:
+                  _content: 2.62
+                  _pltype: parameter
+                  _type: double
+                key_name:
+                  _content: U26
+                  _pltype: parameter
+                  _type: string
+                mat_name:
+                  _content: uo2
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+          _do:
+            - 'matmap Material_,ASSEMBLY/%vacuum/*,ASSEMBLY/%mod/*,ASSEMBLY/%uo2/*,ASSEMBLY/%zirc/*,ASSEMBLY/%pyrex/*,ASSEMBLY/%aic/*,ASSEMBLY/%he/*,ASSEMBLY/%b4c/*,ASSEMBLY/%inc/*,ASSEMBLY/%ss/*'
+          _pltype: list
+        SpacerGrids:
+          _content:
+            Grid_END:
+              _content:
+                height:
+                  _content: 3.866
+                  _pltype: parameter
+                  _type: double
+                label:
+                  _content: END
+                  _pltype: parameter
+                  _type: string
+                mass:
+                  _content: 1017
+                  _pltype: parameter
+                  _type: double
+                material:
+                  _content: inc
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            Grid_MID:
+              _content:
+                height:
+                  _content: 3.810
+                  _pltype: parameter
+                  _type: double
+                label:
+                  _content: MID
+                  _pltype: parameter
+                  _type: string
+                mass:
+                  _content: 875
+                  _pltype: parameter
+                  _type: double
+                material:
+                  _content: zirc
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+          _do:
+            - 'gridmap Grid_,ASSEMBLY/%grid/*'
+          _pltype: list
+        axial_elevations:
+          _content:
+            - 10.3
+            - 11.951
+            - 377.71
+            - 393.71
+            - 395.4
+          _pltype: array
+          _type: double
+        axial_labels:
+          _content:
+            - PLUG
+            - FUEL1
+            - PLEN
+            - PLUG
+          _pltype: array
+          _type: string
+        dancoff_map:
+          _content:
+            - 0.310
+            - 0.322
+            - 0.323
+            - 0.322
+            - 0.320
+            - 0.322
+            - 0.321
+            - 0.322
+            - 0.323
+            - 0.322
+            - 0.321
+            - 0.322
+            - 0.320
+            - 0.322
+            - 0.323
+            - 0.322
+            - 0.310
+            - 0.322
+            - 0.337
+            - 0.333
+            - 0.335
+            - 0.315
+            - 0.286
+            - 0.319
+            - 0.319
+            - 0.287
+            - 0.319
+            - 0.319
+            - 0.286
+            - 0.315
+            - 0.335
+            - 0.333
+            - 0.337
+            - 0.322
+            - 0.323
+            - 0.333
+            - 0.321
+            - 0.286
+            - 0.270
+            - 0.000
+            - 0.286
+            - 0.286
+            - 0.000
+            - 0.286
+            - 0.286
+            - 0.000
+            - 0.270
+            - 0.286
+            - 0.321
+            - 0.333
+            - 0.323
+            - 0.322
+            - 0.335
+            - 0.286
+            - 0.000
+            - 0.267
+            - 0.287
+            - 0.316
+            - 0.317
+            - 0.288
+            - 0.317
+            - 0.316
+            - 0.287
+            - 0.267
+            - 0.000
+            - 0.286
+            - 0.335
+            - 0.322
+            - 0.320
+            - 0.315
+            - 0.270
+            - 0.267
+            - 0.299
+            - 0.284
+            - 0.316
+            - 0.316
+            - 0.287
+            - 0.316
+            - 0.316
+            - 0.284
+            - 0.299
+            - 0.267
+            - 0.270
+            - 0.315
+            - 0.320
+            - 0.322
+            - 0.286
+            - 0.000
+            - 0.287
+            - 0.284
+            - 0.000
+            - 0.286
+            - 0.287
+            - 0.000
+            - 0.287
+            - 0.286
+            - 0.000
+            - 0.284
+            - 0.287
+            - 0.000
+            - 0.286
+            - 0.322
+            - 0.321
+            - 0.319
+            - 0.286
+            - 0.316
+            - 0.316
+            - 0.286
+            - 0.315
+            - 0.315
+            - 0.287
+            - 0.315
+            - 0.315
+            - 0.286
+            - 0.316
+            - 0.316
+            - 0.286
+            - 0.319
+            - 0.321
+            - 0.322
+            - 0.319
+            - 0.286
+            - 0.317
+            - 0.316
+            - 0.287
+            - 0.315
+            - 0.315
+            - 0.287
+            - 0.315
+            - 0.315
+            - 0.287
+            - 0.316
+            - 0.317
+            - 0.286
+            - 0.319
+            - 0.322
+            - 0.323
+            - 0.287
+            - 0.000
+            - 0.288
+            - 0.287
+            - 0.000
+            - 0.287
+            - 0.287
+            - 0.000
+            - 0.287
+            - 0.287
+            - 0.000
+            - 0.287
+            - 0.288
+            - 0.000
+            - 0.287
+            - 0.323
+            - 0.322
+            - 0.319
+            - 0.286
+            - 0.317
+            - 0.316
+            - 0.287
+            - 0.315
+            - 0.315
+            - 0.287
+            - 0.315
+            - 0.315
+            - 0.287
+            - 0.316
+            - 0.317
+            - 0.286
+            - 0.319
+            - 0.322
+            - 0.321
+            - 0.319
+            - 0.286
+            - 0.316
+            - 0.316
+            - 0.286
+            - 0.315
+            - 0.315
+            - 0.287
+            - 0.315
+            - 0.315
+            - 0.286
+            - 0.316
+            - 0.316
+            - 0.286
+            - 0.319
+            - 0.321
+            - 0.322
+            - 0.286
+            - 0.000
+            - 0.287
+            - 0.284
+            - 0.000
+            - 0.286
+            - 0.287
+            - 0.000
+            - 0.287
+            - 0.286
+            - 0.000
+            - 0.284
+            - 0.287
+            - 0.000
+            - 0.286
+            - 0.322
+            - 0.320
+            - 0.315
+            - 0.270
+            - 0.267
+            - 0.299
+            - 0.284
+            - 0.316
+            - 0.316
+            - 0.287
+            - 0.316
+            - 0.316
+            - 0.284
+            - 0.299
+            - 0.267
+            - 0.270
+            - 0.315
+            - 0.320
+            - 0.322
+            - 0.335
+            - 0.286
+            - 0.000
+            - 0.267
+            - 0.287
+            - 0.316
+            - 0.317
+            - 0.288
+            - 0.317
+            - 0.316
+            - 0.287
+            - 0.267
+            - 0.000
+            - 0.286
+            - 0.335
+            - 0.322
+            - 0.323
+            - 0.333
+            - 0.321
+            - 0.286
+            - 0.270
+            - 0.000
+            - 0.286
+            - 0.286
+            - 0.000
+            - 0.286
+            - 0.286
+            - 0.000
+            - 0.270
+            - 0.286
+            - 0.321
+            - 0.333
+            - 0.323
+            - 0.322
+            - 0.337
+            - 0.333
+            - 0.335
+            - 0.315
+            - 0.286
+            - 0.319
+            - 0.319
+            - 0.287
+            - 0.319
+            - 0.319
+            - 0.286
+            - 0.315
+            - 0.335
+            - 0.333
+            - 0.337
+            - 0.322
+            - 0.310
+            - 0.322
+            - 0.323
+            - 0.322
+            - 0.320
+            - 0.322
+            - 0.321
+            - 0.322
+            - 0.323
+            - 0.322
+            - 0.321
+            - 0.322
+            - 0.320
+            - 0.322
+            - 0.323
+            - 0.322
+            - 0.310
+          _do:
+            - 'makemap ASSEMBLY/$npin,ASSEMBLY/@dancoff'
+          _pltype: array
+          _type: double
+        grid_elev:
+          _content:
+            - 13.88
+            - 75.2
+            - 127.4
+            - 179.6
+            - 231.8
+            - 284.0
+            - 336.2
+            - 388.2
+          _do:
+            - 'copyarray ASSEMBLY/@grid_axial,select=>odd'
+          _pltype: array
+          _type: double
+        grid_map:
+          _content:
+            - END
+            - MID
+            - MID
+            - MID
+            - MID
+            - MID
+            - MID
+            - END
+          _do:
+            - 'copyarray ASSEMBLY/@grid_axial,select=>even'
+          _pltype: array
+          _type: string
+        label:
+          _content: A1
+          _pltype: parameter
+          _type: string
+        lower_nozzle_comp:
+          _content: ss
+          _do:
+            - copy ASSEMBLY/@lower_nozzle:0
+          _pltype: parameter
+          _type: string
+        lower_nozzle_gap_height:
+          _content: ~
+          _do:
+            - copy ASSEMBLY/$lower_nozzle_gap_height
+          _pltype: parameter
+          _type: double
+        lower_nozzle_height:
+          _content: 6.053
+          _do:
+            - copy ASSEMBLY/@lower_nozzle:1
+          _pltype: parameter
+          _type: double
+        lower_nozzle_mass:
+          _content: 6250.0
+          _do:
+            - copy ASSEMBLY/@lower_nozzle:2
+          _pltype: parameter
+          _type: double
+        lower_pincap_height:
+          _content: ~
+          _do:
+            - copy ASSEMBLY/$lower_pincap_height
+          _pltype: parameter
+          _type: double
+        lower_plenum_height:
+          _content: ~
+          _do:
+            - copy ASSEMBLY/$lower_plenum_height
+          _pltype: parameter
+          _type: double
+        num_pins:
+          _content: 17
+          _do:
+            - copy ASSEMBLY/$npin
+          _pltype: parameter
+          _type: int
+        ppitch:
+          _content: 1.260
+          _do:
+            - copy ASSEMBLY/$ppitch
+          _pltype: parameter
+          _type: double
+        title:
+          _content: Westinghouse 17x17 A
+          _do:
+            - copy ASSEMBLY/$title
+          _pltype: parameter
+          _type: string
+        upper_nozzle_comp:
+          _content: ss
+          _do:
+            - copy ASSEMBLY/@upper_nozzle:0
+          _pltype: parameter
+          _type: string
+        upper_nozzle_gap_height:
+          _content: ~
+          _do:
+            - copy ASSEMBLY/$upper_nozzle_gap_height
+          _pltype: parameter
+          _type: double
+        upper_nozzle_height:
+          _content: 8.827
+          _do:
+            - copy ASSEMBLY/@upper_nozzle:1
+          _pltype: parameter
+          _type: double
+        upper_nozzle_mass:
+          _content: 6250.0
+          _do:
+            - copy ASSEMBLY/@upper_nozzle:2
+          _pltype: parameter
+          _type: double
+        upper_pincap_height:
+          _content: ~
+          _do:
+            - copy ASSEMBLY/$upper_pincap_height
+          _pltype: parameter
+          _type: double
+        upper_plenum_height:
+          _content: ~
+          _do:
+            - copy ASSEMBLY/$upper_plenum_height
+          _pltype: parameter
+          _type: double
+      _pltype: list
+    Assembly_A2:
+      _content:
+        CellMaps:
+          _content:
+            CellMap_FUEL2:
+              _content:
+                cell_map:
+                  _content:
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 6
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 5
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                    - 2
+                  _pltype: array
+                  _type: string
+                label:
+                  _content: FUEL2
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            CellMap_PLEN:
+              _content:
+                cell_map:
+                  _content:
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 6
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 5
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                    - 3
+                  _pltype: array
+                  _type: string
+                label:
+                  _content: PLEN
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            CellMap_PLUG:
+              _content:
+                cell_map:
+                  _content:
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 6
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 5
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                    - 4
+                  _pltype: array
+                  _type: string
+                label:
+                  _content: PLUG
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+          _pltype: list
+        Cells:
+          _content:
+            Cell_2:
+              _content:
+                label:
+                  _content: 2
+                  _pltype: parameter
+                  _type: string
+                mats:
+                  _content:
+                    - U26
+                    - he
+                    - zirc
+                  _pltype: array
+                  _type: string
+                num_rings:
+                  _content: 3
+                  _pltype: parameter
+                  _type: int
+                radii:
+                  _content:
+                    - 0.4096
+                    - 0.418
+                    - 0.475
+                  _pltype: array
+                  _type: double
+                type:
+                  _content: fuel
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            Cell_3:
+              _content:
+                label:
+                  _content: 3
+                  _pltype: parameter
+                  _type: string
+                mats:
+                  _content:
+                    - he
+                    - zirc
+                  _pltype: array
+                  _type: string
+                num_rings:
+                  _content: 2
+                  _pltype: parameter
+                  _type: int
+                radii:
+                  _content:
+                    - 0.418
+                    - 0.475
+                  _pltype: array
+                  _type: double
+                type:
+                  _content: other
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            Cell_4:
+              _content:
+                label:
+                  _content: 4
+                  _pltype: parameter
+                  _type: string
+                mats:
+                  _content:
+                    - zirc
+                  _pltype: array
+                  _type: string
+                num_rings:
+                  _content: 1
+                  _pltype: parameter
+                  _type: int
+                radii:
+                  _content:
+                    - 0.475
+                  _pltype: array
+                  _type: double
+                type:
+                  _content: other
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            Cell_5:
+              _content:
+                label:
+                  _content: 5
+                  _pltype: parameter
+                  _type: string
+                mats:
+                  _content:
+                    - mod
+                    - zirc
+                  _pltype: array
+                  _type: string
+                num_rings:
+                  _content: 2
+                  _pltype: parameter
+                  _type: int
+                radii:
+                  _content:
+                    - 0.561
+                    - 0.602
+                  _pltype: array
+                  _type: double
+                type:
+                  _content: other
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            Cell_6:
+              _content:
+                label:
+                  _content: 6
+                  _pltype: parameter
+                  _type: string
+                mats:
+                  _content:
+                    - mod
+                    - zirc
+                  _pltype: array
+                  _type: string
+                num_rings:
+                  _content: 2
+                  _pltype: parameter
+                  _type: int
+                radii:
+                  _content:
+                    - 0.559
+                    - 0.605
+                  _pltype: array
+                  _type: double
+                type:
+                  _content: other
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+          _pltype: list
+        Materials:
+          _content:
+            Material_U21:
+              _content:
+                density:
+                  _content: 10.257
+                  _pltype: parameter
+                  _type: double
+                depletable:
+                  _content: true
+                  _pltype: parameter
+                  _type: bool
+                enrichment:
+                  _content: 2.11
+                  _pltype: parameter
+                  _type: double
+                key_name:
+                  _content: U21
+                  _pltype: parameter
+                  _type: string
+                mat_name:
+                  _content: uo2
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            Material_U26:
+              _content:
+                density:
+                  _content: 10.257
+                  _pltype: parameter
+                  _type: double
+                depletable:
+                  _content: true
+                  _pltype: parameter
+                  _type: bool
+                enrichment:
+                  _content: 2.62
+                  _pltype: parameter
+                  _type: double
+                key_name:
+                  _content: U26
+                  _pltype: parameter
+                  _type: string
+                mat_name:
+                  _content: uo2
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+          _do:
+            - 'matmap Material_,ASSEMBLY/%vacuum/*,ASSEMBLY/%mod/*,ASSEMBLY/%uo2/*,ASSEMBLY/%zirc/*,ASSEMBLY/%pyrex/*,ASSEMBLY/%aic/*,ASSEMBLY/%he/*,ASSEMBLY/%b4c/*,ASSEMBLY/%inc/*,ASSEMBLY/%ss/*'
+          _pltype: list
+        SpacerGrids:
+          _content:
+            Grid_END:
+              _content:
+                height:
+                  _content: 3.866
+                  _pltype: parameter
+                  _type: double
+                label:
+                  _content: END
+                  _pltype: parameter
+                  _type: string
+                mass:
+                  _content: 1017
+                  _pltype: parameter
+                  _type: double
+                material:
+                  _content: inc
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+            Grid_MID:
+              _content:
+                height:
+                  _content: 3.810
+                  _pltype: parameter
+                  _type: double
+                label:
+                  _content: MID
+                  _pltype: parameter
+                  _type: string
+                mass:
+                  _content: 875
+                  _pltype: parameter
+                  _type: double
+                material:
+                  _content: zirc
+                  _pltype: parameter
+                  _type: string
+              _pltype: list
+          _do:
+            - 'gridmap Grid_,ASSEMBLY/%grid/*'
+          _pltype: list
+        axial_elevations:
+          _content:
+            - 10.3
+            - 11.951
+            - 377.71
+            - 393.71
+            - 395.4
+          _pltype: array
+          _type: double
+        axial_labels:
+          _content:
+            - PLUG
+            - FUEL2
+            - PLEN
+            - PLUG
+          _pltype: array
+          _type: string
+        dancoff_map:
+          _content:
+            - 0.310
+            - 0.322
+            - 0.323
+            - 0.322
+            - 0.320
+            - 0.322
+            - 0.321
+            - 0.322
+            - 0.323
+            - 0.322
+            - 0.321
+            - 0.322
+            - 0.320
+            - 0.322
+            - 0.323
+            - 0.322
+            - 0.310
+            - 0.322
+            - 0.337
+            - 0.333
+            - 0.335
+            - 0.315
+            - 0.286
+            - 0.319
+            - 0.319
+            - 0.287
+            - 0.319
+            - 0.319
+            - 0.286
+            - 0.315
+            - 0.335
+            - 0.333
+            - 0.337
+            - 0.322
+            - 0.323
+            - 0.333
+            - 0.321
+            - 0.286
+            - 0.270
+            - 0.000
+            - 0.286
+            - 0.286
+            - 0.000
+            - 0.286
+            - 0.286
+            - 0.000
+            - 0.270
+            - 0.286
+            - 0.321
+            - 0.333
+            - 0.323
+            - 0.322
+            - 0.335
+            - 0.286
+            - 0.000
+            - 0.267
+            - 0.287
+            - 0.316
+            - 0.317
+            - 0.288
+            - 0.317
+            - 0.316
+            - 0.287
+            - 0.267
+            - 0.000
+            - 0.286
+            - 0.335
+            - 0.322
+            - 0.320
+            - 0.315
+            - 0.270
+            - 0.267
+            - 0.299
+            - 0.284
+            - 0.316
+            - 0.316
+            - 0.287
+            - 0.316
+            - 0.316
+            - 0.284
+            - 0.299
+            - 0.267
+            - 0.270
+            - 0.315
+            - 0.320
+            - 0.322
+            - 0.286
+            - 0.000
+            - 0.287
+            - 0.284
+            - 0.000
+            - 0.286
+            - 0.287
+            - 0.000
+            - 0.287
+            - 0.286
+            - 0.000
+            - 0.284
+            - 0.287
+            - 0.000
+            - 0.286
+            - 0.322
+            - 0.321
+            - 0.319
+            - 0.286
+            - 0.316
+            - 0.316
+            - 0.286
+            - 0.315
+            - 0.315
+            - 0.287
+            - 0.315
+            - 0.315
+            - 0.286
+            - 0.316
+            - 0.316
+            - 0.286
+            - 0.319
+            - 0.321
+            - 0.322
+            - 0.319
+            - 0.286
+            - 0.317
+            - 0.316
+            - 0.287
+            - 0.315
+            - 0.315
+            - 0.287
+            - 0.315
+            - 0.315
+            - 0.287
+            - 0.316
+            - 0.317
+            - 0.286
+            - 0.319
+            - 0.322
+            - 0.323
+            - 0.287
+            - 0.000
+            - 0.288
+            - 0.287
+            - 0.000
+            - 0.287
+            - 0.287
+            - 0.000
+            - 0.287
+            - 0.287
+            - 0.000
+            - 0.287
+            - 0.288
+            - 0.000
+            - 0.287
+            - 0.323
+            - 0.322
+            - 0.319
+            - 0.286
+            - 0.317
+            - 0.316
+            - 0.287
+            - 0.315
+            - 0.315
+            - 0.287
+            - 0.315
+            - 0.315
+            - 0.287
+            - 0.316
+            - 0.317
+            - 0.286
+            - 0.319
+            - 0.322
+            - 0.321
+            - 0.319
+            - 0.286
+            - 0.316
+            - 0.316
+            - 0.286
+            - 0.315
+            - 0.315
+            - 0.287
+            - 0.315
+            - 0.315
+            - 0.286
+            - 0.316
+            - 0.316
+            - 0.286
+            - 0.319
+            - 0.321
+            - 0.322
+            - 0.286
+            - 0.000
+            - 0.287
+            - 0.284
+            - 0.000
+            - 0.286
+            - 0.287
+            - 0.000
+            - 0.287
+            - 0.286
+            - 0.000
+            - 0.284
+            - 0.287
+            - 0.000
+            - 0.286
+            - 0.322
+            - 0.320
+            - 0.315
+            - 0.270
+            - 0.267
+            - 0.299
+            - 0.284
+            - 0.316
+            - 0.316
+            - 0.287
+            - 0.316
+            - 0.316
+            - 0.284
+            - 0.299
+            - 0.267
+            - 0.270
+            - 0.315
+            - 0.320
+            - 0.322
+            - 0.335
+            - 0.286
+            - 0.000
+            - 0.267
+            - 0.287
+            - 0.316
+            - 0.317
+            - 0.288
+            - 0.317
+            - 0.316
+            - 0.287
+            - 0.267
+            - 0.000
+            - 0.286
+            - 0.335
+            - 0.322
+            - 0.323
+            - 0.333
+            - 0.321
+            - 0.286
+            - 0.270
+            - 0.000
+            - 0.286
+            - 0.286
+            - 0.000
+            - 0.286
+            - 0.286
+            - 0.000
+            - 0.270
+            - 0.286
+            - 0.321
+            - 0.333
+            - 0.323
+            - 0.322
+            - 0.337
+            - 0.333
+            - 0.335
+            - 0.315
+            - 0.286
+            - 0.319
+            - 0.319
+            - 0.287
+            - 0.319
+            - 0.319
+            - 0.286
+            - 0.315
+            - 0.335
+            - 0.333
+            - 0.337
+            - 0.322
+            - 0.310
+            - 0.322
+            - 0.323
+            - 0.322
+            - 0.320
+            - 0.322
+            - 0.321
+            - 0.322
+            - 0.323
+            - 0.322
+            - 0.321
+            - 0.322
+            - 0.320
+            - 0.322
+            - 0.323
+            - 0.322
+            - 0.310
+          _do:
+            - 'makemap ASSEMBLY/$npin,ASSEMBLY/@dancoff'
+          _pltype: array
+          _type: double
+        grid_elev:
+          _content:
+            - 13.88
+            - 75.2
+            - 127.4
+            - 179.6
+            - 231.8
+            - 284.0
+            - 336.2
+            - 388.2
+          _do:
+            - 'copyarray ASSEMBLY/@grid_axial,select=>odd'
+          _pltype: array
+          _type: double
+        grid_map:
+          _content:
+            - END
+            - MID
+            - MID
+            - MID
+            - MID
+            - MID
+            - MID
+            - END
+          _do:
+            - 'copyarray ASSEMBLY/@grid_axial,select=>even'
+          _pltype: array
+          _type: string
+        label:
+          _content: A2
+          _pltype: parameter
+          _type: string
+        lower_nozzle_comp:
+          _content: ss
+          _do:
+            - copy ASSEMBLY/@lower_nozzle:0
+          _pltype: parameter
+          _type: string
+        lower_nozzle_gap_height:
+          _content: ~
+          _do:
+            - copy ASSEMBLY/$lower_nozzle_gap_height
+          _pltype: parameter
+          _type: double
+        lower_nozzle_height:
+          _content: 6.053
+          _do:
+            - copy ASSEMBLY/@lower_nozzle:1
+          _pltype: parameter
+          _type: double
+        lower_nozzle_mass:
+          _content: 6250.0
+          _do:
+            - copy ASSEMBLY/@lower_nozzle:2
+          _pltype: parameter
+          _type: double
+        lower_pincap_height:
+          _content: ~
+          _do:
+            - copy ASSEMBLY/$lower_pincap_height
+          _pltype: parameter
+          _type: double
+        lower_plenum_height:
+          _content: ~
+          _do:
+            - copy ASSEMBLY/$lower_plenum_height
+          _pltype: parameter
+          _type: double
+        num_pins:
+          _content: 17
+          _do:
+            - copy ASSEMBLY/$npin
+          _pltype: parameter
+          _type: int
+        ppitch:
+          _content: 1.260
+          _do:
+            - copy ASSEMBLY/$ppitch
+          _pltype: parameter
+          _type: double
+        title:
+          _content: Westinghouse 17x17 A
+          _do:
+            - copy ASSEMBLY/$title
+          _pltype: parameter
+          _type: string
+        upper_nozzle_comp:
+          _content: ss
+          _do:
+            - copy ASSEMBLY/@upper_nozzle:0
+          _pltype: parameter
+          _type: string
+        upper_nozzle_gap_height:
+          _content: ~
+          _do:
+            - copy ASSEMBLY/$upper_nozzle_gap_height
+          _pltype: parameter
+          _type: double
+        upper_nozzle_height:
+          _content: 8.827
+          _do:
+            - copy ASSEMBLY/@upper_nozzle:1
+          _pltype: parameter
+          _type: double
+        upper_nozzle_mass:
+          _content: 6250.0
+          _do:
+            - copy ASSEMBLY/@upper_nozzle:2
+          _pltype: parameter
+          _type: double
+        upper_pincap_height:
+          _content: ~
+          _do:
+            - copy ASSEMBLY/$upper_pincap_height
+          _pltype: parameter
+          _type: double
+        upper_plenum_height:
+          _content: ~
+          _do:
+            - copy ASSEMBLY/$upper_plenum_height
+          _pltype: parameter
+          _type: double
+      _pltype: list
+  _do:
+    - setdb MAIN_DB
+    - 'rodmap CORE/@assm_map,ASSEMBLY/%axial,mapname=>lattice,basename=>Assembly_'
+  _pltype: list

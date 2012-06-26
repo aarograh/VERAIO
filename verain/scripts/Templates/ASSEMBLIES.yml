@@ -1,0 +1,141 @@
+ASSEMBLIES:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+    - rodmap CORE/@assm_map,ASSEMBLY/%axial,mapname=>lattice,basename=>Assembly_
+  _content:
+    Materials:
+      _pltype: list
+      _do:
+        - matmap Material_,ASSEMBLY/%vacuum/*,ASSEMBLY/%mod/*,ASSEMBLY/%uo2/*,ASSEMBLY/%zirc/*,ASSEMBLY/%pyrex/*,ASSEMBLY/%aic/*,ASSEMBLY/%he/*,ASSEMBLY/%b4c/*,ASSEMBLY/%inc/*,ASSEMBLY/%ss/*
+      _content:
+    title:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy ASSEMBLY/$title
+      _content:
+    num_pins:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy ASSEMBLY/$npin
+      _content:
+    ppitch:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/$ppitch
+      _content:
+    dancoff_map:
+      _pltype: array
+      _type: double
+      _do:
+        - makemap ASSEMBLY/$npin,ASSEMBLY/@dancoff
+      _content:
+
+
+    lower_nozzle_gap_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/$lower_nozzle_gap_height
+      _content:
+
+    upper_nozzle_gap_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/$upper_nozzle_gap_height
+      _content:
+
+    lower_pincap_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/$lower_pincap_height
+      _content:
+
+    upper_pincap_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/$upper_pincap_height
+      _content:
+
+    lower_plenum_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/$lower_plenum_height
+      _content:
+
+    upper_plenum_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/$upper_plenum_height
+      _content:
+
+
+    lower_nozzle_comp:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy ASSEMBLY/@lower_nozzle:0
+      _content:
+
+    lower_nozzle_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@lower_nozzle:1
+      _content:
+
+    lower_nozzle_mass:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@lower_nozzle:2
+      _content:
+
+    upper_nozzle_comp:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy ASSEMBLY/@upper_nozzle:0
+      _content:
+
+    upper_nozzle_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@upper_nozzle:1
+      _content:
+
+    upper_nozzle_mass:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@upper_nozzle:2
+      _content:
+
+    grid_elev:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray ASSEMBLY/@grid_axial,select=>odd
+      _content:
+
+    grid_map:
+      _pltype: array
+      _type: string
+      _do:
+        - copyarray ASSEMBLY/@grid_axial,select=>even
+      _content:
+
+    SpacerGrids:
+      _pltype: list
+      _do:
+        - gridmap Grid_,ASSEMBLY/%grid/*
+      _content:

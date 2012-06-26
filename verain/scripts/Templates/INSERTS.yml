@@ -1,0 +1,23 @@
+INSERTS:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+    - rodmap CORE/@insert_map,INSERT/%axial,basename=>Insert_
+  _content:
+    Materials:
+      _pltype: list
+      _do:
+        - matmap Material_,INSERT/%vacuum/*,INSERT/%mod/*,INSERT/%uo2/*,INSERT/%zirc/*,INSERT/%pyrex/*,INSERT/%aic/*,INSERT/%he/*,INSERT/%b4c/*,INSERT/%inc/*,INSERT/%ss/*
+      _content:
+    title:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy INSERT/$title
+      _content:
+    num_pins:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy INSERT/$npin
+      _content:

@@ -1,0 +1,26 @@
+<ParameterList name="DETECTORS">
+  <ParameterList name="Detector_1">
+    <Parameter name="num_pins" type="int" value="17"/>
+    <Parameter name="axial_labels" type="Array(string)" value="{DET}"/>
+    <ParameterList name="Materials">
+    </ParameterList>
+    <Parameter name="title" type="string" value="double cheeseburger w  fries"/>
+    <Parameter name="label" type="string" value="1"/>
+    <ParameterList name="Cells">
+      <ParameterList name="Cell_1">
+        <Parameter name="radii" type="Array(double)" value="{0.258,0.382}"/>
+        <Parameter name="num_rings" type="int" value="2"/>
+        <Parameter name="label" type="string" value="1"/>
+        <Parameter name="mats" type="Array(string)" value="{vacuum,ss}"/>
+        <Parameter name="type" type="string" value="fuel"/>
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="CellMaps">
+      <ParameterList name="CellMap_DET">
+        <Parameter name="cell_map" type="Array(string)" value="{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}"/>
+        <Parameter name="label" type="string" value="DET"/>
+      </ParameterList>
+    </ParameterList>
+    <Parameter name="axial_elevations" type="Array(double)" value="{0.0,406.3}"/>
+  </ParameterList>
+</ParameterList>

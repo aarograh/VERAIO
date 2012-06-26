@@ -1,0 +1,213 @@
+<ParameterList name="problem_3">
+  <ParameterList id="98" name="Assemblies">
+    <ParameterList id="97" name="Assembly_0000">
+      <ParameterList id="6" name="CellMaps">
+        <ParameterList id="2" name="CellMap_0">
+          <Parameter docString="" id="0" isDefault="false" isUsed="true" name="cell_map" type="Array(string)" value="{1, 1, 100, 1, 200, 1, 100, 1, 100}"/>
+          <Parameter docString="" id="1" isDefault="false" isUsed="true" name="label" type="string" value="cellmap_0"/>
+        </ParameterList>
+        <ParameterList id="5" name="CellMap_1">
+          <Parameter docString="" id="3" isDefault="false" isUsed="true" name="cell_map" type="Array(string)" value="{2, 2, 100, 2, 200, 2, 100, 2, 100}"/>
+          <Parameter docString="" id="4" isDefault="false" isUsed="true" name="label" type="string" value="cellmap_1"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList id="35" name="Cells">
+        <ParameterList id="13" name="Cell_1">
+          <Parameter docString="" id="7" isDefault="false" isUsed="true" name="label" type="string" value="1"/>
+          <Parameter docString="" id="8" isDefault="false" isUsed="true" name="mats" type="Array(string)" value="{u21, he, zirc}"/>
+          <Parameter docString="" id="9" isDefault="false" isUsed="true" name="mesh" type="int" value="10"/>
+          <Parameter docString="" id="10" isDefault="false" isUsed="true" name="num_rings" type="int" value="3"/>
+          <Parameter docString="" id="11" isDefault="false" isUsed="true" name="radii" type="Array(double)" value="{0.474345, 0.4826, 0.5461}"/>
+          <Parameter docString="" id="12" isDefault="false" isUsed="true" name="type" type="string" value="fuel"/>
+        </ParameterList>
+        <ParameterList id="20" name="Cell_100">
+          <Parameter docString="" id="14" isDefault="false" isUsed="true" name="label" type="string" value="100"/>
+          <Parameter docString="" id="15" isDefault="false" isUsed="true" name="mats" type="Array(string)" value="{mod, zirc}"/>
+          <Parameter docString="" id="16" isDefault="false" isUsed="true" name="mesh" type="int" value="8"/>
+          <Parameter docString="" id="17" isDefault="false" isUsed="true" name="num_rings" type="int" value="2"/>
+          <Parameter docString="" id="18" isDefault="false" isUsed="true" name="radii" type="Array(double)" value="{0.63246, 0.6731}"/>
+          <Parameter docString="" id="19" isDefault="false" isUsed="true" name="type" type="string" value="guide"/>
+        </ParameterList>
+        <ParameterList id="27" name="Cell_2">
+          <Parameter docString="" id="21" isDefault="false" isUsed="true" name="label" type="string" value="2"/>
+          <Parameter docString="" id="22" isDefault="false" isUsed="true" name="mats" type="Array(string)" value="{u45, he, zirc}"/>
+          <Parameter docString="" id="23" isDefault="false" isUsed="true" name="mesh" type="int" value="10"/>
+          <Parameter docString="" id="24" isDefault="false" isUsed="true" name="num_rings" type="int" value="3"/>
+          <Parameter docString="" id="25" isDefault="false" isUsed="true" name="radii" type="Array(double)" value="{0.474345, 0.4826, 0.5461}"/>
+          <Parameter docString="" id="26" isDefault="false" isUsed="true" name="type" type="string" value="fuel"/>
+        </ParameterList>
+        <ParameterList id="34" name="Cell_200">
+          <Parameter docString="" id="28" isDefault="false" isUsed="true" name="label" type="string" value="200"/>
+          <Parameter docString="" id="29" isDefault="false" isUsed="true" name="mats" type="Array(string)" value="{mod, zirc}"/>
+          <Parameter docString="" id="30" isDefault="false" isUsed="true" name="mesh" type="int" value="8"/>
+          <Parameter docString="" id="31" isDefault="false" isUsed="true" name="num_rings" type="int" value="2"/>
+          <Parameter docString="" id="32" isDefault="false" isUsed="true" name="radii" type="Array(double)" value="{0.508, 0.62611}"/>
+          <Parameter docString="" id="33" isDefault="false" isUsed="true" name="type" type="string" value="instrument"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList id="67" name="Materials">
+        <ParameterList id="39" name="b4c">
+          <Parameter docString="" id="36" isDefault="false" isUsed="true" name="density" type="double" value="1.76"/>
+          <Parameter docString="" id="37" isDefault="false" isUsed="true" name="key_name" type="string" value="b4c"/>
+          <Parameter docString="" id="38" isDefault="false" isUsed="true" name="mat_name" type="string" value="boron"/>
+        </ParameterList>
+        <ParameterList id="44" name="he">
+          <Parameter docString="" id="40" isDefault="false" isUsed="true" name="density" type="double" value="0.0001786"/>
+          <Parameter docString="" id="41" isDefault="false" isUsed="true" name="depletable" type="bool" value="false"/>
+          <Parameter docString="" id="42" isDefault="false" isUsed="true" name="key_name" type="string" value="he"/>
+          <Parameter docString="" id="43" isDefault="false" isUsed="true" name="mat_name" type="string" value="he"/>
+        </ParameterList>
+        <ParameterList id="49" name="inconel">
+          <Parameter docString="" id="45" isDefault="false" isUsed="true" name="density" type="double" value="8.2"/>
+          <Parameter docString="" id="46" isDefault="false" isUsed="true" name="depletable" type="bool" value="false"/>
+          <Parameter docString="" id="47" isDefault="false" isUsed="true" name="key_name" type="string" value="inc"/>
+          <Parameter docString="" id="48" isDefault="false" isUsed="true" name="mat_name" type="string" value="zirc"/>
+        </ParameterList>
+        <ParameterList id="55" name="u21">
+          <Parameter docString="" id="50" isDefault="false" isUsed="true" name="density" type="double" value="10.96"/>
+          <Parameter docString="" id="51" isDefault="false" isUsed="true" name="depletable" type="bool" value="true"/>
+          <Parameter docString="" id="52" isDefault="false" isUsed="true" name="enrichment" type="double" value="2.11"/>
+          <Parameter docString="" id="53" isDefault="false" isUsed="true" name="key_name" type="string" value="u21"/>
+          <Parameter docString="" id="54" isDefault="false" isUsed="true" name="mat_name" type="string" value="uo2"/>
+        </ParameterList>
+        <ParameterList id="61" name="u45">
+          <Parameter docString="" id="56" isDefault="false" isUsed="true" name="density" type="double" value="10.9"/>
+          <Parameter docString="" id="57" isDefault="false" isUsed="true" name="depletable" type="bool" value="true"/>
+          <Parameter docString="" id="58" isDefault="false" isUsed="true" name="enrichment" type="double" value="4.5"/>
+          <Parameter docString="" id="59" isDefault="false" isUsed="true" name="key_name" type="string" value="u45"/>
+          <Parameter docString="" id="60" isDefault="false" isUsed="true" name="mat_name" type="string" value="uo2"/>
+        </ParameterList>
+        <ParameterList id="66" name="zirc">
+          <Parameter docString="" id="62" isDefault="false" isUsed="true" name="density" type="double" value="6.56"/>
+          <Parameter docString="" id="63" isDefault="false" isUsed="true" name="depletable" type="bool" value="false"/>
+          <Parameter docString="" id="64" isDefault="false" isUsed="true" name="key_name" type="string" value="zirc"/>
+          <Parameter docString="" id="65" isDefault="false" isUsed="true" name="mat_name" type="string" value="zirc"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList id="78" name="SpacerGrids">
+        <ParameterList id="72" name="SpacerGrid_0">
+          <Parameter docString="" id="68" isDefault="false" isUsed="true" name="height" type="double" value="2.4"/>
+          <Parameter docString="" id="69" isDefault="false" isUsed="true" name="label" type="string" value="zirc"/>
+          <Parameter docString="" id="70" isDefault="false" isUsed="true" name="mass" type="double" value="24.2"/>
+          <Parameter docString="" id="71" isDefault="false" isUsed="true" name="material" type="string" value="zirc"/>
+        </ParameterList>
+        <ParameterList id="77" name="SpacerGrid_1">
+          <Parameter docString="" id="73" isDefault="false" isUsed="true" name="height" type="double" value="3.2"/>
+          <Parameter docString="" id="74" isDefault="false" isUsed="true" name="label" type="string" value="inc"/>
+          <Parameter docString="" id="75" isDefault="false" isUsed="true" name="mass" type="double" value="26.3"/>
+          <Parameter docString="" id="76" isDefault="false" isUsed="true" name="material" type="string" value="inc"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter docString="" id="79" isDefault="false" isUsed="true" name="axial_elevations" type="Array(double)" value="{8.526, 14.28}"/>
+      <Parameter docString="" id="80" isDefault="false" isUsed="true" name="axial_labels" type="Array(string)" value="{cellmap_0, cellmap_1}"/>
+      <Parameter docString="" id="81" isDefault="false" isUsed="true" name="grid_elev" type="Array(double)" value="{4.625, 10.332, 12.223}"/>
+      <Parameter docString="" id="82" isDefault="false" isUsed="true" name="grid_map" type="Array(string)" value="{zirc, inc, zirc}"/>
+      <Parameter docString="" id="83" isDefault="false" isUsed="true" name="label" type="string" value="0"/>
+      <Parameter docString="" id="84" isDefault="false" isUsed="true" name="lower_nozzle_comp" type="string" value="ss"/>
+      <Parameter docString="" id="85" isDefault="false" isUsed="true" name="lower_nozzle_gap_height" type="double" value="1.3"/>
+      <Parameter docString="" id="86" isDefault="false" isUsed="true" name="lower_nozzle_height" type="double" value="1.5"/>
+      <Parameter docString="" id="87" isDefault="false" isUsed="true" name="lower_nozzle_mass" type="double" value="932.2"/>
+      <Parameter docString="" id="88" isDefault="false" isUsed="true" name="lower_pincap_height" type="double" value="2.3"/>
+      <Parameter docString="" id="89" isDefault="false" isUsed="true" name="num_pins" type="int" value="3"/>
+      <Parameter docString="" id="90" isDefault="false" isUsed="true" name="ppitch" type="double" value="1.44272"/>
+      <Parameter docString="" id="91" isDefault="false" isUsed="true" name="upper_nozzle_comp" type="string" value="ss"/>
+      <Parameter docString="" id="92" isDefault="false" isUsed="true" name="upper_nozzle_gap_height" type="double" value="2.2"/>
+      <Parameter docString="" id="93" isDefault="false" isUsed="true" name="upper_nozzle_height" type="double" value="1.2"/>
+      <Parameter docString="" id="94" isDefault="false" isUsed="true" name="upper_nozzle_mass" type="double" value="964.4"/>
+      <Parameter docString="" id="95" isDefault="false" isUsed="true" name="upper_pincap_height" type="double" value="3.2"/>
+      <Parameter docString="" id="96" isDefault="false" isUsed="true" name="upper_plenum_height" type="double" value="16"/>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList id="131" name="Controls">
+    <ParameterList id="130" name="Control_0">
+      <ParameterList id="102" name="CellMaps">
+        <ParameterList id="101" name="CellMap_0">
+          <Parameter docString="" id="99" isDefault="false" isUsed="true" name="cell_map" type="Array(string)" value="{0}"/>
+          <Parameter docString="" id="100" isDefault="false" isUsed="true" name="label" type="string" value="axial_level_0"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList id="108" name="Cells">
+        <ParameterList id="107" name="Cells_0">
+          <Parameter docString="" id="103" isDefault="false" isUsed="true" name="label" type="string" value="0"/>
+          <Parameter docString="" id="104" isDefault="false" isUsed="true" name="mats" type="Array(string)" value="{b4c, he, zirc}"/>
+          <Parameter docString="" id="105" isDefault="false" isUsed="true" name="num_rings" type="int" value="2"/>
+          <Parameter docString="" id="106" isDefault="false" isUsed="true" name="radii" type="Array(double)" value="{0.5444, 0.56, 0.6221}"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList id="123" name="Materials">
+        <ParameterList id="112" name="b4c">
+          <Parameter docString="" id="109" isDefault="false" isUsed="true" name="density" type="double" value="1.76"/>
+          <Parameter docString="" id="110" isDefault="false" isUsed="true" name="key_name" type="string" value="b4c"/>
+          <Parameter docString="" id="111" isDefault="false" isUsed="true" name="mat_name" type="string" value="boron"/>
+        </ParameterList>
+        <ParameterList id="117" name="he">
+          <Parameter docString="" id="113" isDefault="false" isUsed="true" name="density" type="double" value="0.0001786"/>
+          <Parameter docString="" id="114" isDefault="false" isUsed="true" name="depletable" type="bool" value="false"/>
+          <Parameter docString="" id="115" isDefault="false" isUsed="true" name="key_name" type="string" value="he"/>
+          <Parameter docString="" id="116" isDefault="false" isUsed="true" name="mat_name" type="string" value="he"/>
+        </ParameterList>
+        <ParameterList id="122" name="zirc">
+          <Parameter docString="" id="118" isDefault="false" isUsed="true" name="density" type="double" value="6.56"/>
+          <Parameter docString="" id="119" isDefault="false" isUsed="true" name="depletable" type="bool" value="false"/>
+          <Parameter docString="" id="120" isDefault="false" isUsed="true" name="key_name" type="string" value="zirc"/>
+          <Parameter docString="" id="121" isDefault="false" isUsed="true" name="mat_name" type="string" value="zirc"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter docString="" id="124" isDefault="false" isUsed="true" name="axial_elevations" type="Array(double)" value="{14.28}"/>
+      <Parameter docString="" id="125" isDefault="false" isUsed="true" name="axial_labels" type="Array(string)" value="{axial_level_0}"/>
+      <Parameter docString="" id="126" isDefault="false" isUsed="true" name="label" type="string" value="control_0"/>
+      <Parameter docString="" id="127" isDefault="false" isUsed="true" name="maxstep" type="int" value="14"/>
+      <Parameter docString="" id="128" isDefault="false" isUsed="true" name="num_pins" type="int" value="1"/>
+      <Parameter docString="" id="129" isDefault="false" isUsed="true" name="stroke" type="double" value="14.28"/>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList id="150" name="Core">
+    <ParameterList id="142" name="Materials">
+      <ParameterList id="136" name="Mod">
+        <Parameter docString="" id="132" isDefault="false" isUsed="true" name="density" type="double" value="0.7422"/>
+        <Parameter docString="" id="133" isDefault="false" isUsed="true" name="depletable" type="bool" value="false"/>
+        <Parameter docString="" id="134" isDefault="false" isUsed="true" name="key_name" type="string" value="mod"/>
+        <Parameter docString="" id="135" isDefault="false" isUsed="true" name="mat_name" type="string" value="mod"/>
+      </ParameterList>
+      <ParameterList id="141" name="Steel">
+        <Parameter docString="" id="137" isDefault="false" isUsed="true" name="density" type="double" value="8"/>
+        <Parameter docString="" id="138" isDefault="false" isUsed="true" name="depletable" type="bool" value="false"/>
+        <Parameter docString="" id="139" isDefault="false" isUsed="true" name="key_name" type="string" value="ss"/>
+        <Parameter docString="" id="140" isDefault="false" isUsed="true" name="mat_name" type="string" value="ss"/>
+      </ParameterList>
+    </ParameterList>
+    <Parameter docString="" id="143" isDefault="false" isUsed="true" name="apitch" type="double" value="5.32816"/>
+    <Parameter docString="" id="144" isDefault="false" isUsed="true" name="assm_map" type="Array(string)" value="{0}"/>
+    <Parameter docString="" id="145" isDefault="false" isUsed="true" name="bc_bot" type="string" value="vacuum"/>
+    <Parameter docString="" id="146" isDefault="false" isUsed="true" name="bc_rad" type="string" value="reflecting"/>
+    <Parameter docString="" id="147" isDefault="false" isUsed="true" name="bc_top" type="string" value="vacuum"/>
+    <Parameter docString="" id="148" isDefault="false" isUsed="true" name="rated_power" type="double" value="1000"/>
+    <Parameter docString="" id="149" isDefault="false" isUsed="true" name="shape" type="Array(int)" value="{1}"/>
+  </ParameterList>
+  <ParameterList id="162" name="Denovo">
+    <Parameter docString="" id="151" isDefault="false" isUsed="true" name="do_transport" type="bool" value="false"/>
+    <Parameter docString="" id="152" isDefault="false" isUsed="true" name="mat_library" type="string" value="test_comp.sh5"/>
+    <Parameter docString="" id="153" isDefault="false" isUsed="true" name="max_delta_z" type="double" value="1"/>
+    <Parameter docString="" id="154" isDefault="false" isUsed="true" name="num_blocks_I" type="int" value="1"/>
+    <Parameter docString="" id="155" isDefault="false" isUsed="true" name="num_blocks_J" type="int" value="1"/>
+    <Parameter docString="" id="156" isDefault="false" isUsed="true" name="num_blocks_K" type="int" value="1"/>
+    <Parameter docString="" id="157" isDefault="false" isUsed="true" name="num_groups" type="int" value="8"/>
+    <Parameter docString="" id="158" isDefault="false" isUsed="true" name="num_sets" type="int" value="1"/>
+    <Parameter docString="" id="159" isDefault="false" isUsed="true" name="pn_order" type="int" value="1"/>
+    <Parameter docString="" id="160" isDefault="false" isUsed="true" name="silo_output" type="string" value="output.silo"/>
+    <Parameter docString="" id="161" isDefault="false" isUsed="true" name="xs_library" type="string" value="test-8grp"/>
+  </ParameterList>
+  <ParameterList id="165" name="Edits">
+    <Parameter docString="" id="163" isDefault="false" isUsed="true" name="axial_edit_bounds" type="Array(double)" value="{3.1, 6.2, 9.3}"/>
+    <Parameter docString="" id="164" isDefault="false" isUsed="true" name="axial_edit_mesh_delta" type="double" value="0.5"/>
+  </ParameterList>
+  <ParameterList id="170" name="State">
+    <Parameter docString="" id="166" isDefault="false" isUsed="true" name="boron" type="double" value="1000"/>
+    <Parameter docString="" id="167" isDefault="false" isUsed="true" name="power" type="double" value="100"/>
+    <Parameter docString="" id="168" isDefault="false" isUsed="true" name="tfuel" type="double" value="593"/>
+    <Parameter docString="" id="169" isDefault="false" isUsed="true" name="tinlet" type="double" value="273"/>
+  </ParameterList>
+  <Parameter docString="" id="171" isDefault="false" isUsed="true" name="case_id" type="string" value="3x3 3D Assembly Lattice"/>
+  <Validators/>
+</ParameterList>
+

@@ -1,0 +1,35 @@
+CONTROLS:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+    - rodmap CORE/@crd_map,CONTROL/%axial,basename=>Control_
+  _content:
+    Materials:
+      _pltype: list
+      _do:
+        - matmap Material_,INSERT/%vacuum/*,INSERT/%mod/*,INSERT/%uo2/*,INSERT/%zirc/*,INSERT/%pyrex/*,INSERT/%aic/*,INSERT/%he/*,INSERT/%b4c/*,INSERT/%inc/*,INSERT/%ss/*
+      _content:
+    title:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CONTROL/$title
+      _content:
+    num_pins:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy CONTROL/$npin
+      _content:
+    stroke:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CONTROL/@stroke:0
+      _content:
+    maxstep:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CONTROL/@stroke:1
+      _content:

@@ -1,0 +1,583 @@
+---
+_DATATYPES:
+  _dtstring: &dtstring
+    _parse: 'scalar'
+    _type:  'string'
+  _dttitle: &dttitle
+    _parse: 'scalar'
+    _type:  'title'
+  _dtdate: &dtdate
+    _parse: 'scalar'
+    _type:  'date'
+  _dtfloat: &dtfloat
+    _parse: 'scalar'
+    _type:  'float'
+  _dtdouble: &dtdouble
+    _parse: 'scalar'
+    _type:  'double'
+  _dtint: &dtint
+    _parse: 'scalar'
+    _type:  'int'
+  _dtbool: &dtbool
+    _parse: 'scalar'
+    _type:  'string'
+  _dtlist: &dtlist
+    _parse: 'list'
+    _named: 0
+  _dtlistnamed: &dtlistnamed
+    _parse: 'list'
+    _named: 1
+
+_MATLIB: &matlib
+  vacuum:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  mod:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  uo2:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  zirc:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  pyrex:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  aic:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  he:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  b4c:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  inc:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  ss:
+    <<: *dtlistnamed
+    _default:
+    _check:
+
+_DIRECTORY:
+  CASEID:
+  STATE:
+  CORE:
+  ASSEMBLY:
+  CONTROL:
+  INSERT:
+  DETECTOR:
+  EDITS:
+  DECART:
+  UTILS:
+  DENOVO:
+
+CASEID:
+  title:
+    <<: *dttitle
+    _default:
+    _check:
+
+STATE:
+  title:
+    <<: *dttitle
+    _default:
+    _check:
+  power:
+    <<: *dtdouble
+    _default:
+    _check:
+  flow:
+    <<: *dtdouble
+    _default:
+    _check:
+  bypass:
+    <<: *dtdouble
+    _default:
+    _check:
+  tinlet:
+    <<: *dtdouble
+    _default:
+    _check:
+  tfuel:
+    <<: *dtdouble
+    _default:
+    _check:
+  modden:
+    <<: *dtdouble
+    _default:
+    _check:
+  xenon:
+    <<: *dtdouble
+    _default:
+    _check:
+  samar:
+    <<: *dtdouble
+    _default:
+    _check:
+  boron:
+    <<: *dtdouble
+    _default:
+    _check:
+  kcrit:
+    <<: *dtdouble
+    _default:
+    _check:
+  search:
+    <<: *dtstring
+    _default:
+    _check:
+  pressure:
+    <<: *dtdouble
+    _default:
+    _check:
+  dexp:
+    <<: *dtdouble
+    _default:
+    _check:
+  rodbank:
+    <<: *dtlist
+    _default:
+    _check:
+  feedback:
+    <<: *dtstring
+    _default:
+    _check:
+  sym:
+    <<: *dtstring
+    _default:
+    _check:
+
+CORE:
+  name:
+    <<: *dttitle
+    _default:
+    _check:
+  cycnum:
+    <<: *dtint
+    _default:
+    _check:
+  cycsdate:
+    <<: *dtdate
+    _default:
+    _check:
+  cycedate:
+    <<: *dtdate
+    _default:
+    _check:
+  size:
+    <<: *dtint
+    _default:
+    _check:
+  rated:
+    <<: *dtlist
+    _default:
+    _check:
+  apitch:
+    <<: *dtdouble
+    _default:
+    _check:
+  baffle_thick:
+    <<: *dtdouble
+    _default:
+    _check:
+  baffle_gap:
+    <<: *dtdouble
+    _default:
+    _check:
+  baffle_mat:
+    <<: *dtstring
+    _default:
+    _check:
+  vessel_thick:
+    <<: *dtdouble
+    _default:
+    _check:
+  vessel_radius:
+    <<: *dtdouble
+    _default:
+    _check:
+  vessel_mat:
+    <<: *dtstring
+    _default:
+    _check:
+  core_shape:
+    <<: *dtlist
+    _default:
+    _check:
+  assm_map:
+    <<: *dtlist
+    _default:
+    _check:
+  insert_map:
+    <<: *dtlist
+    _default:
+    _check:
+  det_map:
+    <<: *dtlist
+    _default:
+    _check:
+  crd_map:
+    <<: *dtlist
+    _default:
+    _check:
+  lower_plate:
+    <<: *dtlist
+    _default:
+    _check:
+  upper_plate:
+    <<: *dtlist
+    _default:
+    _check:
+  bc_bot:
+    <<: *dtstring
+    _default:
+    _check:
+  bc_top:
+    <<: *dtstring
+    _default:
+    _check:
+  bc_rad:
+    <<: *dtstring
+    _default:
+    _check:
+  xlabel:
+    <<: *dtlist
+    _default:
+    _check:
+  ylabel:
+    <<: *dtlist
+    _default:
+    _check:
+  height:
+    <<: *dtdouble
+    _default:
+    _check:
+  <<: *matlib
+
+ASSEMBLY:
+  title:
+    <<: *dttitle
+    _default:
+    _check:
+  npin:
+    <<: *dtint
+    _default:
+    _check:
+  ppitch:
+    <<: *dtdouble
+    _default:
+    _check:
+  cell:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  lattice:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  axial:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  dancoff:
+    <<: *dtlist
+    _default:
+    _check:
+  grid:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  grid_axial:
+    <<: *dtlist
+    _default:
+    _check:
+  lower_nozzle:
+    <<: *dtlist
+    _default:
+    _check:
+  upper_nozzle:
+    <<: *dtlist
+    _default:
+    _check:
+  lower_nozzle_gap_height:
+    <<: *dtdouble
+    _default:
+    _check:
+  upper_nozzle_gap_height:
+    <<: *dtdouble
+    _default:
+    _check:
+  lower_pincap_height:
+    <<: *dtdouble
+    _default:
+    _check:
+  upper_pincap_height:
+    <<: *dtdouble
+    _default:
+    _check:
+  lower_plenum_height:
+    <<: *dtdouble
+    _default:
+    _check:
+  upper_plenum_height:
+    <<: *dtdouble
+    _default:
+    _check:
+  <<: *matlib
+
+CONTROL:
+  title:
+    <<: *dttitle
+    _default:
+    _check:
+  npin:
+    <<: *dtint
+    _default:
+    _check:
+  stroke:
+    <<: *dtlist
+    _default:
+    _check:
+  cell:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  rodmap:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  axial:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  <<: *matlib
+
+INSERT:
+  title:
+    <<: *dttitle
+    _default:
+    _check:
+  npin:
+    <<: *dtint
+    _default:
+    _check:
+  cell:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  rodmap:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  axial:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  <<: *matlib
+
+DETECTOR:
+  title:
+    <<: *dttitle
+    _default:
+    _check:
+  npin:
+    <<: *dtint
+    _default:
+    _check:
+  cell:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  rodmap:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  axial:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  <<: *matlib
+
+EDITS:
+  axial_edit_bounds:
+    <<: *dtlist
+    _default:
+    _check:
+  axial_edit_mesh_delta:
+    <<: *dtdouble
+    _default:
+    _check:
+
+DECART:
+  parameter:
+    <<: *dttitle
+    _default:
+    _check:
+
+UTILS:
+  parameter:
+    <<: *dttitle
+    _default:
+    _check:
+
+DENOVO:
+  problem_name:
+    <<: *dttitle
+    _default:
+    _check:
+  xs_library:
+    <<: *dtstring
+    _default:
+    _check:
+  mat_library:
+    <<: *dtstring
+    _default:
+    _check:
+  dimension:
+    <<: *dtint
+    _default:
+    _check:
+  do_transport:
+    <<: *dtbool
+    _default:
+    _check:
+  do_output:
+    <<: *dtbool
+    _default:
+    _check:
+  num_blocks_i:
+    <<: *dtint
+    _default:
+    _check:
+  num_blocks_j:
+    <<: *dtint
+    _default:
+    _check:
+  num_z_blocks:
+    <<: *dtint
+    _default:
+    _check:
+  num_sets:
+    <<: *dtint
+    _default:
+    _check:
+  num_groups:
+    <<: *dtint
+    _default:
+    _check:
+  max_delta_z:
+    <<: *dtdouble
+    _default:
+    _check:
+  partition_upscatter:
+    <<: *dtbool
+    _default:
+    _check:
+  store_fulcrum_string:
+    <<: *dtstring
+    _default:
+    _check:
+  mg_solver:
+    <<: *dtstring
+    _default:
+    _check:
+  eigen_solver:
+    <<: *dtstring
+    _default:
+    _check:
+  iterate_downscatter:
+    <<: *dtbool
+    _default:
+    _check:
+  downscatter:
+    <<: *dtbool
+    _default:
+    _check:
+  pn_order:
+    <<: *dtint
+    _default:
+    _check:
+  aztec_kspace:
+    <<: *dtint
+    _default:
+    _check:
+  max_itr:
+    <<: *dtint
+    _default:
+    _check:
+  tolerance:
+    <<: *dtdouble
+    _default:
+    _check:
+
+  quad_type:
+    <<: *dtstring
+    _default:
+    _check:
+  polar_angles:
+    <<: *dtint
+    _default:
+    _check:
+  azimuthal_angles:
+    <<: *dtint
+    _default:
+    _check:
+  sn_order:
+    <<: *dtint
+    _default:
+    _check:
+
+  k_tolerance:
+    <<: *dtdouble
+    _default:
+    _check:
+  l2_tolerance:
+    <<: *dtdouble
+    _default:
+    _check:
+  arnoldi_kspace:
+    <<: *dtint
+    _default:
+    _check:
+  arnoldi_restarts:
+    <<: *dtint
+    _default:
+    _check:
+  diagnostic_level:
+    <<: *dtint
+    _default:
+    _check:
+
+  upscatter_tolerance:
+    <<: *dtdouble
+    _default:
+    _check:
+  aztec_diag:
+    <<: *dtint
+    _default:
+    _check:
+  aztec_output:
+    <<: *dtint
+    _default:
+    _check:
+
+  silo_output:
+    <<: *dtstring
+    _default:
+    _check:
+  mixing_table:
+    <<: *dtbool
+    _default:
+    _check:

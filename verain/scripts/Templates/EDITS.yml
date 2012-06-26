@@ -1,0 +1,19 @@
+EDITS:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+  _content:
+
+    axial_edit_bounds:
+      _pltype: array
+      _type: double
+      _do:
+        - copy EDITS/@axial_edit_bounds
+      _content:
+
+    axial_edit_mesh_delta:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy EDITS/$axial_edit_mesh_delta
+      _content:
