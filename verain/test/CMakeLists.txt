@@ -47,4 +47,5 @@ ENDFUNCTION()
 # Run the different test cases
 #
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(pr4)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_full_core)
 
