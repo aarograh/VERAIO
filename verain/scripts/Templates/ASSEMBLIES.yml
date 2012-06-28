@@ -2,7 +2,7 @@ ASSEMBLIES:
   _pltype: list
   _do:
     - setdb MAIN_DB
-    - rodmap CORE/@assm_map,ASSEMBLY/%axial,mapname=>lattice,basename=>Assembly_
+    - rodmap ASSEMBLY/%axial,mapname=>lattice,basename=>Assembly_,coremap=>CORE/@assm_map
   _content:
     Materials:
       _pltype: list

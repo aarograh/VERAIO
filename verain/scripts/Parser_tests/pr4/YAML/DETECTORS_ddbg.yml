@@ -363,7 +363,7 @@ DETECTORS:
           _pltype: parameter
           _type: int
         title:
-          _content: double cheeseburger w  fries
+          _content: Sample Detector
           _do:
             - copy DETECTOR/$title
           _pltype: parameter
@@ -371,5 +371,5 @@ DETECTORS:
       _pltype: list
   _do:
     - setdb MAIN_DB
-    - 'rodmap CORE/@det_map,DETECTOR/%axial,basename=>Detector_'
+    - 'rodmap DETECTOR/%axial,basename=>Detector_,coremap=>CORE/@det_map'
   _pltype: list

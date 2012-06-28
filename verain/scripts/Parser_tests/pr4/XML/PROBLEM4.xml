@@ -8,12 +8,13 @@
   <Parameter name="ylabel" type="Array(string)" value="{7,8,9}"/>
   <Parameter name="insert_map" type="Array(string)" value="{-,1,-,1,-,1,-,1,-}"/>
   <Parameter name="det_map" type="Array(string)" value="{1,-,-,1,-,-,-,-,1}"/>
-  <Parameter name="height" type="double" value="406.3"/>
   <Parameter name="assm_map" type="Array(string)" value="{A1,A2,A1,A2,A1,A2,A1,A2,A1}"/>
+  <Parameter name="height" type="double" value="406.3"/>
   <Parameter name="lower_mat" type="string" value="ss"/>
   <Parameter name="xlabel" type="Array(string)" value="{J,H,G}"/>
   <Parameter name="crd_map" type="Array(string)" value="{-,-,-,-,1,-,-,-,-}"/>
   <Parameter name="lower_vfrac" type="double" value="0.5"/>
+  <Parameter name="crd_bank" type="Array(string)" value="{-,-,-,-,A,-,-,-,-}"/>
   <ParameterList name="Materials">
   </ParameterList>
   <Parameter name="rated_flow" type="double" value="555.650298"/>
@@ -27,8 +28,8 @@
   <Parameter name="feedback" type="string" value="off"/>
   <Parameter name="boron" type="double" value="1300"/>
   <Parameter name="power" type="double" value="0.0"/>
-  <Parameter name="tinlet" type="double" value="362.405555555556"/>
-  <Parameter name="bank_labels" type="Array(string)" value="{1}"/>
+  <Parameter name="tinlet" type="double" value="326.85"/>
+  <Parameter name="bank_labels" type="Array(string)" value="{A}"/>
   <Parameter name="bank_pos" type="Array(int)" value="{167}"/>
   <Parameter name="tfuel" type="double" value="620.33"/>
 </ParameterList>
@@ -245,7 +246,7 @@
       </ParameterList>
     </ParameterList>
     <Parameter name="num_pins" type="int" value="17"/>
-    <Parameter name="maxstep" type="double" value="230"/>
+    <Parameter name="maxstep" type="int" value="230"/>
     <ParameterList name="Materials">
     </ParameterList>
     <Parameter name="label" type="string" value="1"/>
@@ -343,5 +344,6 @@
   </ParameterList>
 </ParameterList>
 <ParameterList name="EDITS">
+  <Parameter name="axial_edit_bounds" type="Array(double)" value="{0,365.24}"/>
 </ParameterList>
 </ParameterList>

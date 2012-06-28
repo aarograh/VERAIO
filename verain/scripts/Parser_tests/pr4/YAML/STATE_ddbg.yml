@@ -3,14 +3,28 @@ STATE:
   _content:
     bank_labels:
       _content:
-        - 1
+        - A
+        - B
+        - C
+        - D
+        - SA
+        - SB
+        - SC
+        - SD
       _do:
         - 'copyarray STATE/@rodbank,select=>even'
       _pltype: array
       _type: string
     bank_pos:
       _content:
-        - 167
+        - 228
+        - 216
+        - 228
+        - 228
+        - 228
+        - 228
+        - 228
+        - 228
       _do:
         - 'copyarray STATE/@rodbank,select=>odd'
       _pltype: array
@@ -22,37 +36,37 @@ STATE:
       _pltype: parameter
       _type: double
     bypass:
-      _content: ~
+      _content: 8.98
       _do:
         - copy STATE/$bypass
       _pltype: parameter
       _type: double
     dexp:
-      _content: ~
+      _content: 0.0
       _do:
         - copy STATE/$dexp
       _pltype: parameter
       _type: double
     feedback:
-      _content: off
+      _content: ~
       _do:
         - copy STATE/$feedback
       _pltype: parameter
       _type: string
     flow:
-      _content: ~
+      _content: 100.0
       _do:
         - copy STATE/$flow
       _pltype: parameter
       _type: double
     kcrit:
-      _content: ~
+      _content: 1.0
       _do:
         - copy STATE/$kcrit
       _pltype: parameter
       _type: double
     modden:
-      _content: 0.743
+      _content: ~
       _do:
         - copy STATE/$modden
       _pltype: parameter
@@ -64,49 +78,49 @@ STATE:
       _pltype: parameter
       _type: double
     pressure:
-      _content: ~
+      _content: 2250
       _do:
         - copy STATE/$pressure
       _pltype: parameter
       _type: double
     samopt:
-      _content: ~
+      _content: zero
       _do:
         - copy STATE/$samar
       _pltype: parameter
       _type: string
     search:
-      _content: ~
+      _content: boron
       _do:
         - copy STATE/$search
       _pltype: parameter
       _type: string
     sym:
-      _content: qtr
+      _content: ~
       _do:
         - copy STATE/$sym
       _pltype: parameter
       _type: string
     tfuel:
-      _content: 620.33
+      _content: ~
       _do:
         - copy STATE/$tfuel
       _pltype: parameter
       _type: double
     tinlet:
-      _content: 362.405555555556
+      _content: 292.777777777778
       _do:
-        - 'copy STATE/$tinlet,apply=>($_[0]+32)*5/9'
+        - 'copy STATE/$tinlet,apply=>($_[0]-32)*5/9'
       _pltype: parameter
       _type: double
     title:
-      _content: ~
+      _content: HZP Statepoint BOL
       _do:
         - copy STATE/$title
       _pltype: parameter
       _type: string
     xenopt:
-      _content: ~
+      _content: zero
       _do:
         - copy STATE/$xenon
       _pltype: parameter

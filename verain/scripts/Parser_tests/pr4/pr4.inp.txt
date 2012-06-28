@@ -7,7 +7,7 @@
   tfuel  620.33     ! F - 600K
   boron  1300       ! ppmB
   modden 0.743      ! g/cc
-  rodbank 1 167
+  rodbank A 167
   feedback off !??
   sym qtr
 
@@ -35,6 +35,11 @@
   crd_map
     - - -
     - 1 -
+    - - -
+    
+  crd_bank
+    - - -
+    - A -
     - - -
     
   det_map
@@ -222,6 +227,7 @@
 
 [EDITS]
   ! axial_edit_bounds to be determined
+  axial_edit_bounds  0  365.24
 
 [DENOVO]
   ! none

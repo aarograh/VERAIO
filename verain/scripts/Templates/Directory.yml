@@ -232,6 +232,10 @@ CORE:
     <<: *dtlist
     _default:
     _check:
+  crd_bank:
+    <<: *dtlist
+    _default:
+    _check:
   lower_plate:
     <<: *dtlist
     _default:

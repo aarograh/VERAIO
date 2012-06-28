@@ -674,9 +674,9 @@ CONTROLS:
           _pltype: list
         axial_elevations:
           _content:
-            - 17.031
-            - 118.6
-            - 377.71
+            - 15.76
+            - 376.44
+            - 394.3
           _pltype: array
           _type: double
         axial_labels:
@@ -690,11 +690,11 @@ CONTROLS:
           _pltype: parameter
           _type: string
         maxstep:
-          _content: 230
+          _content: 228
           _do:
             - copy CONTROL/@stroke:1
           _pltype: parameter
-          _type: double
+          _type: int
         num_pins:
           _content: 17
           _do:
@@ -702,13 +702,13 @@ CONTROLS:
           _pltype: parameter
           _type: int
         stroke:
-          _content: 365.125
+          _content: 360.0
           _do:
             - copy CONTROL/@stroke:0
           _pltype: parameter
           _type: double
         title:
-          _content: B4C with AIC tips
+          _content: B4C control rods with AIC tips
           _do:
             - copy CONTROL/$title
           _pltype: parameter
@@ -716,5 +716,5 @@ CONTROLS:
       _pltype: list
   _do:
     - setdb MAIN_DB
-    - 'rodmap CORE/@crd_map,CONTROL/%axial,basename=>Control_'
+    - 'rodmap CONTROL/%axial,basename=>Control_,coremap=>CORE/@crd_map'
   _pltype: list

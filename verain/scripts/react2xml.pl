@@ -1,5 +1,13 @@
 #!/usr/local/bin/perl
 
+$MOTD=<<MOTD;
+No, this is not the final version of the code. All the separate
+files will be pulled into one package, and checks will be added as
+we determine what is the actual input format.
+There is minimal error checking. At this point this is a converter
+for valid reactor input files into xml parameter list.
+MOTD
+
 use Getopt::Long;
 
 my ($filename, $directory) = GetPaths();
@@ -16,10 +24,11 @@ sub GetPaths()
 my $pgnam=$filename;     # program name
 
 # options
-my ($VERBOSE,$HELP);
+my ($VERBOSE,$HELP,$DEBUG);
 { # process options
     GetOptions(
 	"verbose"   => \$VERBOSE,
+	"debug"     => \$DEBUG,
 	"help"      => \$HELP);
 }
 
@@ -29,12 +38,14 @@ if($HELP || @ARGV < 2){
 options:
   --help
   --verbose
+
+$MOTD
 \n";
 }
 
 my ($ifile,$ofile)=@ARGV;
 
-die "File $ifile $!\n" unless (-e $ifile);
+die "File $ifile $!\n" unless (-e $filename);
 
 @runit=(
     "${directory}phase1.pl $ifile --yml $ifile.yml",
@@ -55,11 +66,11 @@ die "File $ifile $!\n" unless (-e $ifile);
     "${directory}tst2xml.pl EDITS_dbg.yml      EDITS      EDITS.xml",
     "${directory}tst2xml.pl CASEID_dbg.yml     CASEID     CASEID.xml",
 
-    "mv STATE_dbg.yml  STATE_ddbg.yml",
-    "mv CORE_dbg.yml   CORE_ddbg.yml",
-    "mv DENOVO_dbg.yml DENOVO_ddbg.yml",
-    "mv EDITS_dbg.yml  EDITS_ddbg.yml",
-    "mv CASEID_dbg.yml CASEID_ddbg.yml",
+    "cp STATE_dbg.yml  STATE_ddbg.yml",
+    "cp CORE_dbg.yml   CORE_ddbg.yml",
+    "cp DENOVO_dbg.yml DENOVO_ddbg.yml",
+    "cp EDITS_dbg.yml  EDITS_ddbg.yml",
+    "cp CASEID_dbg.yml CASEID_ddbg.yml",
 
     "head -1 CASEID.xml > $ofile",
     "cat CORE.xml STATE.xml ASSEMBLIES.xml CONTROLS.xml DETECTORS.xml INSERTS.xml DENOVO.xml EDITS.xml >> $ofile",
@@ -74,4 +85,28 @@ foreach (@runit){
     $out=`$_`;
     print "$out"  if $VERBOSE;
 #    system($_);
+}
+
+unless($DEBUG){
+    @DBGF=( 
+	"ASSEMBLIES",
+	"DETECTORS",
+	"INSERTS",
+	"CONTROLS",
+	"STATE",
+	"CORE",
+	"DENOVO",
+	"EDITS",
+	"CASEID" );
+
+    print "rm $ifile.yml\n" if $VERBOSE;
+    unlink("$ifile.yml");
+    foreach $i (@DBGF){
+	print "rm ${i}_dbg.yml ", "${i}_ddbg.yml", "\n"   if $VERBOSE;
+	unlink "${i}_dbg.yml", "${i}_ddbg.yml"
+    }
+    foreach $i (@DBGF){
+	print "rm ${i}.xml ", "${i}.xml", "\n"   if $VERBOSE;
+	unlink "${i}.xml", "${i}.xml"
+    }
 }

@@ -1,3 +1,0 @@
-<ParameterList name="EDITS">
-  <Parameter name="axial_edit_bounds" type="Array(double)" value="{0,365.24}"/>
-</ParameterList>

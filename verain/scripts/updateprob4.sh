@@ -2,6 +2,9 @@
 
 set b=(CASEID CORE STATE ASSEMBLIES CONTROLS DETECTORS INSERTS DENOVO EDITS)
 
+mkdir -p Parser_tests/pr4/XML
+mkdir -p Parser_tests/pr4/YAML
+
 cp pr4.inp Parser_tests/pr4/pr4.inp.txt
 foreach ib ($b)
   set iby="${ib}_ddbg.yml"
@@ -11,4 +14,4 @@ foreach ib ($b)
   cp $ibx Parser_tests/pr4/XML/
 end
 
-cp RINPUT.xml Parser_tests/pr4/XML/PROBLEM4.xml
+cp pr4.xml Parser_tests/pr4/XML/pr4.xml

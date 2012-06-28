@@ -2,7 +2,7 @@ INSERTS:
   _pltype: list
   _do:
     - setdb MAIN_DB
-    - rodmap CORE/@insert_map,INSERT/%axial,basename=>Insert_
+    - rodmap INSERT/%axial,basename=>Insert_,coremap=>CORE/@insert_map
   _content:
     Materials:
       _pltype: list

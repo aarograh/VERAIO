@@ -385,7 +385,7 @@ sub matmap{
 }
 
 sub rodmap{
-    my ($home,$coremap_path,$axial_path,%userparam)=@_;
+    my ($home,$axial_path,%userparam)=@_;
     my ($i,$j,$k,$m,$n);
     my (@a,@b,@c,@d);
 
@@ -395,27 +395,31 @@ sub rodmap{
 	$OPTIONS{$key}=$value;
     }
 
-    # get unique ids for assemblies, 0 means missing
-    my @coremap_path=parse_path($coremap_path);
-    my $coremap_ref=key_defined($SOURCE_DB,@coremap_path);
-    my @axials=unique(@{ $coremap_ref });    # labels of all unique axials
-    print "axials w/path: [@axials] [@coremap_path]\n";  # debug
-    @axials=nonstring('0',@axials);
-    @axials=nonstring('-',@axials);
-    print "axials: @axials\n";  # debug
-
     # create hash of all axial ids and their values
     my @axial_rpath = parse_path($axial_path);
     my $axial_ref=key_defined($SOURCE_DB,@axial_rpath);
     my @axial_available = keys_at($axial_ref);
     print "available axials: @axial_available\n";
+    my @axial_common=@axial_available;
 
-    my @axial_common=intersection(\@axials,\@axial_available);
+    if(exists($OPTIONS{coremap})){
+	# get unique ids for assemblies, 0 means missing
+	$coremap_path=$OPTIONS{coremap};
+	my @coremap_path=parse_path($coremap_path);
+	my $coremap_ref=key_defined($SOURCE_DB,@coremap_path);
+	my @axials=unique(@{ $coremap_ref });    # labels of all unique axials
+	print "axials w/path: [@axials] [@coremap_path]\n";  # debug
+	@axials=nonstring('0',@axials);
+	@axials=nonstring('-',@axials);
+	print "axials: @axials\n";  # debug
 
-    unless($#axial_common == $#axials){
-	print "axial labels needed   : @axials\n";
-	print "axial labels available: @axial_available\n";
-	die   "missing axial definitions in $axial_path\n";
+	my @axial_common=intersection(\@axials,\@axial_available);
+
+	unless($#axial_common == $#axials){
+	    print "axial labels needed   : @axials\n";
+	    print "axial labels available: @axial_available\n";
+	    die   "missing axial definitions in $axial_path\n";
+	}
     }
 
     print "axial_rpath: @axial_rpath\n";

@@ -1,11 +1,16 @@
 <ParameterList name="STATE">
-  <Parameter name="modden" type="double" value="0.743"/>
-  <Parameter name="sym" type="string" value="qtr"/>
-  <Parameter name="feedback" type="string" value="off"/>
+  <Parameter name="pressure" type="double" value="2250"/>
+  <Parameter name="search" type="string" value="boron"/>
+  <Parameter name="samopt" type="string" value="zero"/>
+  <Parameter name="kcrit" type="double" value="1.0"/>
   <Parameter name="boron" type="double" value="1300"/>
+  <Parameter name="flow" type="double" value="100.0"/>
   <Parameter name="power" type="double" value="0.0"/>
-  <Parameter name="tinlet" type="double" value="362.405555555556"/>
-  <Parameter name="bank_labels" type="Array(string)" value="{1}"/>
-  <Parameter name="bank_pos" type="Array(int)" value="{167}"/>
-  <Parameter name="tfuel" type="double" value="620.33"/>
+  <Parameter name="dexp" type="double" value="0.0"/>
+  <Parameter name="tinlet" type="double" value="292.777777777778"/>
+  <Parameter name="xenopt" type="string" value="zero"/>
+  <Parameter name="bank_labels" type="Array(string)" value="{A,B,C,D,SA,SB,SC,SD}"/>
+  <Parameter name="bank_pos" type="Array(int)" value="{228,216,228,228,228,228,228,228}"/>
+  <Parameter name="bypass" type="double" value="8.98"/>
+  <Parameter name="title" type="string" value="HZP Statepoint BOL"/>
 </ParameterList>
