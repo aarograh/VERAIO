@@ -8,8 +8,8 @@
   <Parameter name="ylabel" type="Array(string)" value="{7,8,9}"/>
   <Parameter name="insert_map" type="Array(string)" value="{-,1,-,1,-,1,-,1,-}"/>
   <Parameter name="det_map" type="Array(string)" value="{1,-,-,1,-,-,-,-,1}"/>
-  <Parameter name="height" type="double" value="406.3"/>
   <Parameter name="assm_map" type="Array(string)" value="{A1,A2,A1,A2,A1,A2,A1,A2,A1}"/>
+  <Parameter name="height" type="double" value="406.3"/>
   <Parameter name="lower_mat" type="string" value="ss"/>
   <Parameter name="xlabel" type="Array(string)" value="{J,H,G}"/>
   <Parameter name="crd_map" type="Array(string)" value="{-,-,-,-,1,-,-,-,-}"/>
@@ -245,7 +245,7 @@
       </ParameterList>
     </ParameterList>
     <Parameter name="num_pins" type="int" value="17"/>
-    <Parameter name="maxstep" type="double" value="230"/>
+    <Parameter name="maxstep" type="int" value="230"/>
     <ParameterList name="Materials">
     </ParameterList>
     <Parameter name="label" type="string" value="1"/>

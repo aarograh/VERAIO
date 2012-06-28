@@ -45,7 +45,7 @@ $MOTD
 
 my ($ifile,$ofile)=@ARGV;
 
-die "File $ifile $!\n" unless (-e $filename);
+die "File $ifile $!\n" unless (-e $ifile);
 
 @runit=(
     "${directory}phase1.pl $ifile --yml $ifile.yml",
