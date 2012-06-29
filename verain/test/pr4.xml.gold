@@ -1,4 +1,5 @@
-<ParameterList name="CASL AMA Benchmark Problem 4">
+<ParameterList name="CASEID">
+  <Parameter name="case_id" type="string" value="CASL AMA Benchmark Problem 4"/>
 <ParameterList name="CORE">
   <Parameter name="lower_thick" type="double" value="5.0"/>
   <Parameter name="upper_thick" type="double" value="7.6"/>
