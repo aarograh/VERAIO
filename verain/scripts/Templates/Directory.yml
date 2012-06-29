@@ -461,6 +461,10 @@ DENOVO:
     <<: *dtbool
     _default:
     _check:
+  mesh:
+    <<: *dtint
+    _default:
+    _check:
   num_blocks_i:
     <<: *dtint
     _default:

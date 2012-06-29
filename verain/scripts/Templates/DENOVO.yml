@@ -24,6 +24,13 @@ DENOVO:
         - copy DENOVO/$mat_library
       _content:
 
+    mesh:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy DENOVO/$mesh
+      _content:
+
     dimension:
       _pltype: parameter
       _type: int

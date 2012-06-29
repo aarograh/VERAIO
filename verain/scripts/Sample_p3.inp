@@ -32,6 +32,11 @@
   upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
 
   bc_rad reflecting
+
+  he he 0.000176
+  inc inc 8.19
+  ss ss 8.0
+  zirc zirc 6.56 
   
 [ASSEMBLY]
   title "Westinghouse 17x17"
@@ -40,11 +45,12 @@
   
   uo2 U31 10.257 / 3.1
 
+
 !=== material label, key_name, mat_name, density
-!  mat He      he   he   0.000176
-!  mat Inconel inc  inc  8.19
-!  mat Steel   ss   zirc 8.0
-!  mat Zirc    zirc zirc 6.56 
+!  mat he   he   0.000176
+!  mat inc  inc  8.19
+!  mat ss   ss 8.0
+!  mat zirc zirc 6.56 
 
 ! *** no way to specify mesh=10?
 
@@ -160,6 +166,7 @@
     tolerance     1e-06
     Pn_order      1
     dimension     3
+    mesh          4
 !    eigenvalue_db:
         k_tolerance  0.0001
         L2_tolerance 0.001
