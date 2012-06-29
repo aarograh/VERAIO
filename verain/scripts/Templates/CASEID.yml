@@ -2,5 +2,10 @@ CASEID:
   _pltype: list
   _do:
     - setdb MAIN_DB
-    - rename CASEID/$title
   _content:
+    case_id:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CASEID/$title
+      _content:

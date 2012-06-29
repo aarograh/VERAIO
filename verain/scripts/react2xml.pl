@@ -72,7 +72,7 @@ die "File $ifile $!\n" unless (-e $ifile);
     "cp EDITS_dbg.yml  EDITS_ddbg.yml",
     "cp CASEID_dbg.yml CASEID_ddbg.yml",
 
-    "head -1 CASEID.xml > $ofile",
+    "head -2 CASEID.xml > $ofile",
     "cat CORE.xml STATE.xml ASSEMBLIES.xml CONTROLS.xml DETECTORS.xml INSERTS.xml DENOVO.xml EDITS.xml >> $ofile",
     "tail -1 CASEID.xml >> $ofile"
     );
