@@ -674,9 +674,9 @@ CONTROLS:
           _pltype: list
         axial_elevations:
           _content:
-            - 15.76
-            - 376.44
-            - 394.3
+            - 17.031
+            - 118.6
+            - 377.71
           _pltype: array
           _type: double
         axial_labels:
@@ -690,7 +690,7 @@ CONTROLS:
           _pltype: parameter
           _type: string
         maxstep:
-          _content: 228
+          _content: 230
           _do:
             - copy CONTROL/@stroke:1
           _pltype: parameter
@@ -702,13 +702,13 @@ CONTROLS:
           _pltype: parameter
           _type: int
         stroke:
-          _content: 360.0
+          _content: 365.125
           _do:
             - copy CONTROL/@stroke:0
           _pltype: parameter
           _type: double
         title:
-          _content: B4C control rods with AIC tips
+          _content: B4C with AIC tips
           _do:
             - copy CONTROL/$title
           _pltype: parameter

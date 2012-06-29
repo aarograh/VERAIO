@@ -4,7 +4,7 @@
     <Parameter name="axial_labels" type="Array(string)" value="{DET}"/>
     <ParameterList name="Materials">
     </ParameterList>
-    <Parameter name="title" type="string" value="Sample Detector"/>
+    <Parameter name="title" type="string" value="double cheeseburger w  fries"/>
     <Parameter name="label" type="string" value="1"/>
     <ParameterList name="Cells">
       <ParameterList name="Cell_1">

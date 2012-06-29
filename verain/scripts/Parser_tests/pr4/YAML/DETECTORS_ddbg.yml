@@ -363,7 +363,7 @@ DETECTORS:
           _pltype: parameter
           _type: int
         title:
-          _content: Sample Detector
+          _content: double cheeseburger w  fries
           _do:
             - copy DETECTOR/$title
           _pltype: parameter

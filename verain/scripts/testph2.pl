@@ -145,11 +145,17 @@ YAML::DumpFile("DENOVO_dbg.yml",$DENOVO_SCH) if $DEBUG;
 PLlist($EDITS_SCH->{EDITS},$DISPATCH);
 YAML::DumpFile("EDITS_dbg.yml",$EDITS_SCH) if $DEBUG;
 
+print STDERR "CONTROLS\n";
+
 PLlist($CONTROLS_SCH->{CONTROLS},$DISPATCH);
 YAML::DumpFile("CONTROLS_dbg.yml",$CONTROLS_SCH) if $DEBUG;
 
+print STDERR "INSERTS\n";
+
 PLlist($INSERTS_SCH->{INSERTS},$DISPATCH);
 YAML::DumpFile("INSERTS_dbg.yml",$INSERTS_SCH) if $DEBUG;
+
+print STDERR "DETECTORS\n";
 
 PLlist($DETECTORS_SCH->{DETECTORS},$DISPATCH);
 YAML::DumpFile("DETECTORS_dbg.yml",$DETECTORS_SCH) if $DEBUG;
@@ -222,6 +228,8 @@ sub makemap {
 
     my @cmap_path=parse_path($cmap_path);
     my $cm_ref=key_defined($SOURCE_DB,@cmap_path);
+    return undef unless $cm_ref;
+
     die "makemap: cm_ref not valid [$cmap_path] [@cmap_path] [$cm_ref]\n" 
 	unless ref $cm_ref eq 'ARRAY';
 
@@ -398,7 +406,9 @@ sub rodmap{
     # create hash of all axial ids and their values
     my @axial_rpath = parse_path($axial_path);
     my $axial_ref=key_defined($SOURCE_DB,@axial_rpath);
+    return unless $axial_ref;
     my @axial_available = keys_at($axial_ref);
+    return unless @axial_available;
     print "available axials: @axial_available\n";
     my @axial_common=@axial_available;
 

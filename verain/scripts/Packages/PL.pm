@@ -232,6 +232,9 @@ sub PLlist{
 
     my @PLcontent = keys %{ $ref->{_content} };
 
+    print STDERR "PLlist: @PLcontent\n";
+
+
     my $val;
     if(my $todo=PLdo($ref)){
 	foreach my $ido (@{ $todo }){

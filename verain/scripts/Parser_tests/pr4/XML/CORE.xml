@@ -1,26 +1,23 @@
 <ParameterList name="CORE">
   <Parameter name="lower_thick" type="double" value="5.0"/>
   <Parameter name="upper_thick" type="double" value="7.6"/>
-  <Parameter name="cycle_num" type="int" value="1"/>
-  <Parameter name="upper_mat" type="string" value="SS304"/>
+  <Parameter name="upper_mat" type="string" value="ss"/>
   <Parameter name="apitch" type="double" value="21.5"/>
-  <Parameter name="ylabel" type="Array(string)" value="{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}"/>
-  <Parameter name="insert_map" type="Array(string)" value="{-,BP8,-,BP12,-,BP8,-,-,-,BP16,-,BP24,-,BP24,-,BP16,-,-,-,BP12,BP24,-,BP16,-,BP20,-,BP16,-,BP24,BP12,-,-,BP24,-,BP20,-,BP20,-,BP20,-,BP20,-,BP24,-,-,BP16,-,BP20,-,BP20,-,BP20,-,BP20,-,BP20,-,BP16,-,BP8,-,BP16,-,BP20,-,BP24,-,BP24,-,BP20,-,BP16,-,BP8,-,BP24,-,BP20,-,BP24,-,BP20,-,BP24,-,BP20,-,BP24,-,BP12,-,BP20,-,BP20,-,BP20,-,BP20,-,BP20,-,BP20,-,BP12,-,BP24,-,BP20,-,BP24,-,BP20,-,BP24,-,BP20,-,BP24,-,BP8,-,BP16,-,BP20,-,BP24,-,BP24,-,BP20,-,BP16,-,BP8,-,BP16,-,BP20,-,BP20,-,BP20,-,BP20,-,BP20,-,BP16,-,-,BP24,-,BP20,-,BP20,-,BP20,-,BP20,-,BP24,-,-,BP12,BP24,-,BP16,-,BP20,-,BP16,-,BP24,BP12,-,-,-,BP16,-,BP24,-,BP24,-,BP16,-,-,-,BP8,-,BP12,-,BP8,-}"/>
-  <Parameter name="cyc_stdate" type="int" value="19970301"/>
-  <Parameter name="det_map" type="Array(string)" value="{-,-,1,-,-,1,-,1,-,-,1,-,1,-,-,-,-,-,-,-,-,-,-,-,1,-,1,-,1,-,1,1,1,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,1,-,-,-,1,-,1,-,1,-,-,1,-,1,-,-,1,-,1,-,-,-,-,-,1,-,-,-,-,1,-,-,1,-,-,1,-,-,1,-,-,1,-,1,-,1,-,1,-,-,1,-,1,1,1,-,-,1,-,-,-,-,-,-,1,-,1,-,-,-,1,-,-,-,-,1,-,1,-,-,-,-,1,-,-,-,1,-,-,-,1,-,-,1,-,-,1,-,-,-,1,-,-,-,-,1,-,-,1,-,-,1,-,-,-,1,-,1,-,-,1,-,-,-,-,-,1,1,-,-,-,1,-,-,1,-,1,-,1,-,-,1,-,-,-}"/>
-  <Parameter name="core_name" type="string" value="Watts Bar Unit 1"/>
-  <Parameter name="assm_map" type="Array(string)" value="{A3,A3,A3,A3,A3,A3,A3,A3,A3,A3,A1,A3,A1,A3,A1,A3,A3,A3,A3,A3,A2,A1,A2,A1,A2,A1,A2,A1,A2,A3,A3,A3,A2,A2,A2,A1,A2,A1,A2,A1,A2,A2,A2,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A2,A2,A2,A1,A2,A1,A2,A1,A2,A2,A2,A3,A3,A3,A2,A1,A2,A1,A2,A1,A2,A1,A2,A3,A3,A3,A3,A3,A1,A3,A1,A3,A1,A3,A3,A3,A3,A3,A3,A3,A3,A3,A3}"/>
+  <Parameter name="bc_rad" type="string" value="reflecting"/>
+  <Parameter name="ylabel" type="Array(string)" value="{7,8,9}"/>
+  <Parameter name="insert_map" type="Array(string)" value="{-,1,-,1,-,1,-,1,-}"/>
+  <Parameter name="det_map" type="Array(string)" value="{1,-,-,1,-,-,-,-,1}"/>
+  <Parameter name="assm_map" type="Array(string)" value="{A1,A2,A1,A2,A1,A2,A1,A2,A1}"/>
   <Parameter name="height" type="double" value="406.3"/>
-  <Parameter name="lower_mat" type="string" value="SS304"/>
-  <Parameter name="xlabel" type="Array(string)" value="{R,P,N,M,L,K,J,H,G,F,E,D,C,B,A}"/>
-  <Parameter name="crd_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,1,-,1,-,1,-,1,-,1,-,-,-,-,1,-,1,-,1,-,1,-,-,-,1,-,1,-,-,-,1,-,-,-,1,-,1,-,-,1,-,1,-,-,-,-,-,1,-,1,-,-,-,1,-,-,-,1,-,1,-,1,-,-,-,1,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,1,-,1,-,1,-,1,-,1,-,1,-,1,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,1,-,-,-,1,-,1,-,1,-,-,-,1,-,-,-,1,-,1,-,-,-,-,-,1,-,1,-,-,1,-,1,-,-,-,1,-,-,-,1,-,1,-,-,-,1,-,1,-,1,-,1,-,-,-,-,1,-,1,-,1,-,1,-,1,-,-,-,-,-,-,-,-}"/>
+  <Parameter name="lower_mat" type="string" value="ss"/>
+  <Parameter name="xlabel" type="Array(string)" value="{J,H,G}"/>
+  <Parameter name="crd_map" type="Array(string)" value="{-,-,-,-,1,-,-,-,-}"/>
   <Parameter name="lower_vfrac" type="double" value="0.5"/>
-  <Parameter name="crd_bank" type="Array(string)" value="{-,-,-,-,-,-,-,-,SA,-,B,-,C,-,B,-,SA,-,-,-,-,SD,-,SB,-,SB,-,SC,-,-,-,SA,-,D,-,-,-,D,-,-,-,D,-,SA,-,-,SC,-,A,-,-,-,-,-,A,-,SD,-,-,-,B,-,-,-,C,-,A,-,C,-,-,-,B,-,-,-,SB,-,-,-,-,-,-,-,-,-,SB,-,-,-,C,-,D,-,A,-,D,-,A,-,D,-,C,-,-,-,SB,-,-,-,-,-,-,-,-,-,SB,-,-,-,B,-,-,-,C,-,A,-,C,-,-,-,B,-,-,-,SD,-,A,-,-,-,-,-,A,-,SC,-,-,SA,-,D,-,-,-,D,-,-,-,D,-,SA,-,-,-,SC,-,SB,-,SB,-,SD,-,-,-,-,SA,-,B,-,C,-,B,-,SA,-,-,-,-,-,-,-,-}"/>
+  <Parameter name="crd_bank" type="Array(string)" value="{-,-,-,-,A,-,-,-,-}"/>
   <ParameterList name="Materials">
   </ParameterList>
-  <Parameter name="rated_flow" type="double" value="18231.88166"/>
-  <Parameter name="rated_power" type="double" value="3411.0"/>
-  <Parameter name="shape" type="Array(int)" value="{0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0}"/>
+  <Parameter name="rated_flow" type="double" value="555.650298"/>
+  <Parameter name="rated_power" type="double" value="159.1"/>
+  <Parameter name="shape" type="Array(int)" value="{1,1,1,1,1,1,1,1,1}"/>
   <Parameter name="upper_vfrac" type="double" value="0.5"/>
-  <Parameter name="cyc_edate" type="int" value="19980401"/>
 </ParameterList>

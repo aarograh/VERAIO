@@ -4,5 +4,5 @@ CASEID:
   _do:
     - setdb MAIN_DB
     - rename CASEID/$title
-  _name: 'Watts Bar Unit 1 Cycle 1 - Public - Draft 4 - 6 27 2012'
+  _name: CASL AMA Benchmark Problem 4
   _pltype: list

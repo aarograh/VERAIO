@@ -251,8 +251,7 @@ DENOVO:
           _do:
             - copy DENOVO/$aztec_output
           _content:
-    
-      
+          
     silo_database:
       _pltype: list
       _content:
@@ -270,5 +269,3 @@ DENOVO:
           _do:
             - copy DENOVO/$mixing_table
           _content:
-    
-      

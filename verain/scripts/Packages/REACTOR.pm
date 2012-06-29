@@ -122,6 +122,7 @@ sub read_ascii {
       s/(\!\s*(.*))$//;         # strip comments
       s/(\d+)\s*\*\s*(\w+)/"$2 " x $1/ge; # expand fortran expressions
       s/['"]//g;                # remove quotes
+      s/[,;]/ /g;               # remove commas and such
       s/^\s+//;                 # strip leading blanks
       s/\s+$//;                 # strip trailing blanks
       next READ if /^$/;        # skip empty lines

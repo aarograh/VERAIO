@@ -585,3 +585,28 @@ DENOVO:
     <<: *dtbool
     _default:
     _check:
+
+  eq_set:
+    <<: *dtstring
+    _default:
+    _check:
+
+  energy_dep_ev:
+    <<: *dtbool
+    _default:
+    _check:
+
+  azimuthals_octant:
+    <<: *dtint
+    _default:
+    _check:
+
+  polars_octant:
+    <<: *dtint
+    _default:
+    _check:
+
+  new_grp_bounds:
+    <<: *dtlist
+    _default:
+    _check:

@@ -1,0 +1,5 @@
+        energy_dep_ev
+    eq_set
+        azimuthals_octant
+        polars_octant
+    new_grp_bounds 
