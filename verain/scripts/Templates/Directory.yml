@@ -69,6 +69,10 @@ _MATLIB: &matlib
     <<: *dtlistnamed
     _default:
     _check:
+  boron:
+    <<: *dtlistnamed
+    _default:
+    _check:
 
 _DIRECTORY:
   CASEID:
@@ -182,6 +186,7 @@ CORE:
     _check:
   rated:
     <<: *dtlist
+    _size: 2
     _default:
     _check:
   apitch:
@@ -238,10 +243,12 @@ CORE:
     _check:
   lower_plate:
     <<: *dtlist
+    _size: 3
     _default:
     _check:
   upper_plate:
     <<: *dtlist
+    _size: 3
     _default:
     _check:
   bc_bot:

@@ -22,11 +22,15 @@ sub GetPaths()
 
 
 my $pgnam=$filename;     # program name
+$XML_HEADER='<?xml version="1.0" encoding="UTF-8"?>';
+$XSLT_HEADER='<?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>';
 
 # options
-my ($VERBOSE,$HELP,$DEBUG);
+my ($VERBOSE,$HELP,$XML,$XSLT,$DEBUG);
 { # process options
     GetOptions(
+	"xml"       => \$XML,
+	"xslt"      => \$XSLT,
 	"verbose"   => \$VERBOSE,
 	"debug"     => \$DEBUG,
 	"help"      => \$HELP);
@@ -36,8 +40,10 @@ if($HELP || @ARGV < 2){
     die "Usage: $pgnam [options ...] reactor_file xml_file
 
 options:
-  --help
-  --verbose
+  --xml      : adds xml processing instruction into the header
+  --xslt     : adds xslt processing instruction into the header
+  --help     : this message
+  --verbose  : debug
 
 $MOTD
 \n";
@@ -72,14 +78,26 @@ die "File $ifile $!\n" unless (-e $ifile);
     "cp EDITS_dbg.yml  EDITS_ddbg.yml",
     "cp CASEID_dbg.yml CASEID_ddbg.yml",
 
-    "head -2 CASEID.xml > $ofile",
+    "head -2 CASEID.xml >> $ofile",
     "cat CORE.xml STATE.xml ASSEMBLIES.xml CONTROLS.xml DETECTORS.xml INSERTS.xml DENOVO.xml EDITS.xml >> $ofile",
     "tail -1 CASEID.xml >> $ofile"
     );
 
-if (-e $ofile ){
+if (-e $ofile) {
+    print "Removing $ofile\n" if $VERBOSE;
     unlink $ofile;
+} 
+open(OFILE,">$ofile") || die "$pgnam: cannot open $ofile.\n";
+if($XML){
+    print "Adding XML header ... $XML_HEADER\n" if $VERBOSE;
+    print OFILE "$XML_HEADER\n";
 }
+if($XSLT){
+    print "Adding XSLT header ... $XSLT_HEADER\n" if $VERBOSE;
+    print OFILE "$XSLT_HEADER\n";
+}
+close OFILE;
+
 foreach (@runit){
     print "Running ... $_\n" if $VERBOSE;
     $out=`$_`;

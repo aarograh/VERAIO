@@ -30,7 +30,8 @@ use Exporter;
 	 'nonstring',
 	 'part',
 	 'apply',
-	 'natatime'
+	 'natatime',
+	 'arraysize'
     );
 
 sub nonzero { # remove zeros from array entry
@@ -105,12 +106,14 @@ sub fronthalf {my ($aref,$offset)=@_; return @{$aref}[$offset..int(($#{$aref}+$o
 sub endhalf {my ($aref,$offset)=@_; return @{$aref}[int(($#{$aref}+$offset)/2)+1..$#{$aref}];}
 
 # apply block to array
-sub apply (&@) {
+sub apply {
     my $action = shift;
-    &$action foreach my @values = @_;
-    wantarray ? @values : $values[-1];
+    my @values=@_;
+    foreach (@values) {
+	$_=$action->($_);
+    }
+    return wantarray ? @values : $values[-1];
 }
-
 
 sub min{
     (sort { $a <=> $b } @_)[0];
@@ -177,6 +180,11 @@ sub intersection {
 sub difference {
     my ($first, $second) = @_;
     return aryop($first,$second,'difference');
+}
+
+sub arraysize {
+    my $size=@_;
+    return $size;
 }
 
 1;

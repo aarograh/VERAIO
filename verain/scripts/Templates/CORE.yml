@@ -25,6 +25,13 @@ CORE:
         - copy CORE/$name
       _content:
 
+    core_size:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy CORE/$size
+      _content:
+
     cycle_num:
       _pltype: parameter
       _type: int

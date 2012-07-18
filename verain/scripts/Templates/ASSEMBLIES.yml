@@ -7,7 +7,7 @@ ASSEMBLIES:
     Materials:
       _pltype: list
       _do:
-        - matmap Material_,ASSEMBLY/%vacuum/*,ASSEMBLY/%mod/*,ASSEMBLY/%uo2/*,ASSEMBLY/%zirc/*,ASSEMBLY/%pyrex/*,ASSEMBLY/%aic/*,ASSEMBLY/%he/*,ASSEMBLY/%b4c/*,ASSEMBLY/%inc/*,ASSEMBLY/%ss/*
+        - matmap Material_,ASSEMBLY/%vacuum/*,ASSEMBLY/%mod/*,ASSEMBLY/%uo2/*,ASSEMBLY/%zirc/*,ASSEMBLY/%pyrex/*,ASSEMBLY/%aic/*,ASSEMBLY/%he/*,ASSEMBLY/%b4c/*,ASSEMBLY/%inc/*,ASSEMBLY/%ss/*,ASSEMBLY/%boron/*
       _content:
     title:
       _pltype: parameter
