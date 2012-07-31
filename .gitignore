@@ -4,5 +4,6 @@
 \#*#
 .#*
 .*.swp
+*.old
 
 /checkin_message

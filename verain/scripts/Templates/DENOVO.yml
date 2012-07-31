@@ -136,7 +136,7 @@ DENOVO:
         - copy DENOVO/$downscatter
       _content:
 
-    pn_order:
+    Pn_order:
       _pltype: parameter
       _type: int
       _do:
