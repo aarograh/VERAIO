@@ -7,3 +7,6 @@
 *.old
 
 /checkin_message
+
+# Ignore Panassas temp files
+.panfs.*
