@@ -125,7 +125,7 @@
   stroke  365.125 230     ! approx for 1.5875 step sizes and 360 max stroke
 
 ! added material
-  boron B4C 6.56
+  boron b4c 6.56
 
   cell 1  0.382 0.386 0.484 / aic he ss
   cell 2  0.373 0.386 0.484 / b4c he ss
@@ -214,7 +214,7 @@
     eq_set        ld
     eigen_solver  arnoldi
     tolerance     1e-06
-    pn_order      1
+    Pn_order      1
     dimension     3
     mesh          4
 !    eigenvalue_db:
