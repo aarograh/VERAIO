@@ -140,7 +140,7 @@ DENOVO:
       _pltype: parameter
       _type: int
       _do:
-        - copy DENOVO/$pn_order
+        - copy DENOVO/$Pn_order
       _content:
 
     aztec_kspace:
