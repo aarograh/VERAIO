@@ -626,7 +626,7 @@ DENOVO:
     <<: *dtbool
     _default:
     _check:
-  pn_order:
+  Pn_order:
     <<: *dtint
     _default:
     _check:
