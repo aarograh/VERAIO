@@ -28,8 +28,8 @@
   assm_map
     A1
 
-  !! lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
-  !! upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
+  lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
+  upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
 
   bc_rad reflecting
 
@@ -109,7 +109,7 @@
 
 !  3in intervals in active fuel
   axial_edit_bounds 
-          11.952
+          11.951
           15.817 
           24.028 
           32.239 
@@ -158,10 +158,9 @@
           353.9474 
           361.8686 
           369.7898 
-          377.710
+          377.711
 
 [DENOVO]
-    do_transport  false
     eq_set        ld
     eigen_solver  arnoldi
     tolerance     1e-06
@@ -174,11 +173,11 @@
         energy_dep_ev  false
     mat_library   test_comp.sh5
     max_delta_z   2.54
-    num_blocks_i  1
-    num_blocks_j  1
+    num_blocks_i  40
+    num_blocks_j  40
     num_z_blocks  64
-    num_groups    8
-    num_sets      1
+    num_groups    23
+    num_sets      6
 !    quadrature_db:
         azimuthals_octant  4
         polars_octant      4
@@ -187,28 +186,28 @@
         silo_output  vera
 !    upscatter_db:
         upscatter_tolerance  1e-05
-    xs_library     "test-8grp"
-   !new_grp_bounds 
-   !    8.2085e+05 
-   !    1.1109e+05 
-   !    5.5308e+03 
-   !    1.8644e+02 
-   !    3.7612e+01 
-   !    3.5379e+01
-   !    2.7697e+01 
-   !    2.1684e+01 
-   !    2.0397e+01 
-   !    1.5968e+01 
-   !    7.1500e+00
-   !    6.7000e+00
-   !    6.3000e+00 
-   !    1.0970e+00 
-   !    1.0450e+00 
-   !    9.5000e-01 
-   !    3.5000e-01 
-   !    2.0600e-01
-   !    1.0700e-01 
-   !    5.8000e-02 
-   !    2.5000e-02 
-   !    1.0000e-02 
-   !    1.0000e-05
+    xs_library     "v7-238ir"
+   new_grp_bounds 
+       8.2085e+05 
+       1.1109e+05 
+       5.5308e+03 
+       1.8644e+02 
+       3.7612e+01 
+       3.5379e+01
+       2.7697e+01 
+       2.1684e+01 
+       2.0397e+01 
+       1.5968e+01 
+       7.1500e+00
+       6.7000e+00
+       6.3000e+00 
+       1.0970e+00 
+       1.0450e+00 
+       9.5000e-01 
+       3.5000e-01 
+       2.0600e-01
+       1.0700e-01 
+       5.8000e-02 
+       2.5000e-02 
+       1.0000e-02 
+       1.0000e-05
