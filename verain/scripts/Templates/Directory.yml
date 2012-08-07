@@ -1,11 +1,11 @@
 ---
 _DATATYPES:
+  _dtword: &dtword
+    _parse: 'scalar'
+    _type:  'word'
   _dtstring: &dtstring
     _parse: 'scalar'
     _type:  'string'
-  _dttitle: &dttitle
-    _parse: 'scalar'
-    _type:  'title'
   _dtdate: &dtdate
     _parse: 'scalar'
     _type:  'date'
@@ -89,89 +89,127 @@ _DIRECTORY:
 
 CASEID:
   title:
-    <<: *dttitle
+    <<: *dtstring
     _default:
     _check:
+      - is_string()
 
 STATE:
   title:
-    <<: *dttitle
+    <<: *dtstring
     _default:
     _check:
+      - is_string()
   power:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_geq() 0
   flow:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_geq() 0
   bypass:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_geq() 0
+      - is_leq() 100
   tinlet:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_gt() 0
   tfuel:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_gt() 0
   modden:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_gt() 0
   xenon:
-    <<: *dtdouble
+    <<: *dtword
     _default:
     _check:
+      - is_word()
+      - in_dictionary() zero dep equil
   samar:
-    <<: *dtdouble
+    <<: *dtword
     _default:
     _check:
+      - is_word()
+      - in_dictionary() zero dep equil peak
   boron:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_geq() 0
   kcrit:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_geq() 0
   search:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
+      - in_dictionary() keff boron
   pressure:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_gt() 0
   dexp:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_geq() 0
   rodbank:
     <<: *dtlist
+    _style: multi-line
     _default:
     _check:
+      - fall(sub{is_string(shift)},())
+      - fall(sub{is_int(shift)},odd[])
+      - fall(sub{is_geq(shift,0)},odd[])
   feedback:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
   sym:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
-
+      - is_word()
+      - in_dictionary() full qtr
 CORE:
   name:
-    <<: *dttitle
+    <<: *dtstring
     _default:
     _check:
+      - is_string()
   cycnum:
     <<: *dtint
     _default:
     _check:
+      - is_int()
+      - is_gt() 0
   cycsdate:
     <<: *dtdate
     _default:
@@ -184,85 +222,108 @@ CORE:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   rated:
     <<: *dtlist
-    _size: 2
     _default:
     _check:
+      - fall(sub{is_float(shift)},())
+      - arraysize()==2
+      - nth((),0)>=0
+      - nth((),1)>=0
   apitch:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_gt() 0
   baffle_thick:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_geq() 0
   baffle_gap:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_geq() 0
   baffle_mat:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
   vessel_thick:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_geq() 0
   vessel_radius:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
+      - is_gt() 0
   vessel_mat:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
   core_shape:
     <<: *dtlist
+    _style: multi-line
     _default:
     _check:
   assm_map:
     <<: *dtlist
+    _style: multi-line
     _default:
     _check:
   insert_map:
     <<: *dtlist
+    _style: multi-line
     _default:
     _check:
   det_map:
     <<: *dtlist
+    _style: multi-line
     _default:
     _check:
   crd_map:
     <<: *dtlist
+    _style: multi-line
     _default:
     _check:
   crd_bank:
     <<: *dtlist
+    _style: multi-line
     _default:
     _check:
   lower_plate:
     <<: *dtlist
-    _size: 3
     _default:
     _check:
   upper_plate:
     <<: *dtlist
-    _size: 3
     _default:
     _check:
   bc_bot:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
   bc_top:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
   bc_rad:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
   xlabel:
     <<: *dtlist
     _default:
@@ -275,43 +336,52 @@ CORE:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
   <<: *matlib
 
 ASSEMBLY:
   title:
-    <<: *dttitle
+    <<: *dtstring
     _default:
     _check:
+      - is_string()
   npin:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   ppitch:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
   cell:
     <<: *dtlistnamed
     _default:
     _check:
   lattice:
     <<: *dtlistnamed
+    _style: multi-line
     _default:
     _check:
   axial:
     <<: *dtlistnamed
+    _style: multi-line
     _default:
     _check:
   dancoff:
     <<: *dtlist
+    _style: multi-line
     _default:
     _check:
   grid:
     <<: *dtlistnamed
+    _style:
     _default:
     _check:
   grid_axial:
     <<: *dtlist
+    _style: multi-line
     _default:
     _check:
   lower_nozzle:
@@ -326,37 +396,45 @@ ASSEMBLY:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
   upper_nozzle_gap_height:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
   lower_pincap_height:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
   upper_pincap_height:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
   lower_plenum_height:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
   upper_plenum_height:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
   <<: *matlib
 
 CONTROL:
   title:
-    <<: *dttitle
+    <<: *dtstring
     _default:
     _check:
+      - is_string()
   npin:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   stroke:
     <<: *dtlist
     _default:
@@ -367,56 +445,66 @@ CONTROL:
     _check:
   rodmap:
     <<: *dtlistnamed
+    _style: multi-line
     _default:
     _check:
   axial:
     <<: *dtlistnamed
+    _style: multi-line
     _default:
     _check:
   <<: *matlib
 
 INSERT:
   title:
-    <<: *dttitle
+    <<: *dtstring
     _default:
     _check:
+      - is_string()
   npin:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   cell:
     <<: *dtlistnamed
     _default:
     _check:
   rodmap:
     <<: *dtlistnamed
+    _style: multi-line
     _default:
     _check:
   axial:
     <<: *dtlistnamed
+    _style: multi-line
     _default:
     _check:
   <<: *matlib
 
 DETECTOR:
   title:
-    <<: *dttitle
+    <<: *dtstring
     _default:
     _check:
+      - is_string()
   npin:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   cell:
     <<: *dtlistnamed
     _default:
     _check:
   rodmap:
     <<: *dtlistnamed
+    _style: multi-line
     _default:
     _check:
   axial:
     <<: *dtlistnamed
+    _style: multi-line
     _default:
     _check:
   <<: *matlib
@@ -424,42 +512,50 @@ DETECTOR:
 EDITS:
   axial_edit_bounds:
     <<: *dtlist
+    _style: multi-line
     _default:
     _check:
   axial_edit_mesh_delta:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
 
 DECART:
   parameter:
-    <<: *dttitle
+    <<: *dtstring
     _default:
     _check:
+      - is_string()
 
 UTILS:
   parameter:
-    <<: *dttitle
+    <<: *dtstring
     _default:
     _check:
+      - is_string()
 
 DENOVO:
   problem_name:
-    <<: *dttitle
+    <<: *dtstring
     _default:
     _check:
+      - is_string()
   xs_library:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
   mat_library:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
   dimension:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   do_transport:
     <<: *dtbool
     _default:
@@ -472,46 +568,56 @@ DENOVO:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   num_blocks_i:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   num_blocks_j:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   num_z_blocks:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   num_sets:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   num_groups:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   max_delta_z:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
   partition_upscatter:
     <<: *dtbool
     _default:
     _check:
   store_fulcrum_string:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
   mg_solver:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
   eigen_solver:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
   iterate_downscatter:
     <<: *dtbool
     _default:
@@ -524,83 +630,101 @@ DENOVO:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   aztec_kspace:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   max_itr:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   tolerance:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
 
   quad_type:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
   polar_angles:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   azimuthal_angles:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   sn_order:
     <<: *dtint
     _default:
     _check:
+      - is_int()
 
   k_tolerance:
     <<: *dtdouble
     _default:
     _check:
-  l2_tolerance:
+      - is_float()
+  L2_tolerance:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
   arnoldi_kspace:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   arnoldi_restarts:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   diagnostic_level:
     <<: *dtint
     _default:
     _check:
+      - is_int()
 
   upscatter_tolerance:
     <<: *dtdouble
     _default:
     _check:
+      - is_float()
   aztec_diag:
     <<: *dtint
     _default:
     _check:
+      - is_int()
   aztec_output:
     <<: *dtint
     _default:
     _check:
+      - is_int()
 
   silo_output:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
   mixing_table:
     <<: *dtbool
     _default:
     _check:
 
   eq_set:
-    <<: *dtstring
+    <<: *dtword
     _default:
     _check:
+      - is_word()
 
   energy_dep_ev:
     <<: *dtbool
@@ -611,13 +735,16 @@ DENOVO:
     <<: *dtint
     _default:
     _check:
+      - is_int()
 
   polars_octant:
     <<: *dtint
     _default:
     _check:
+      - is_int()
 
   new_grp_bounds:
     <<: *dtlist
+    _style: multi-line
     _default:
     _check:

@@ -1,6 +1,10 @@
 package PL;
 
+use Clone qw(clone);
+
 use KeyTree;
+use MiscUtils;
+use REACTOR;
 
 use Exporter;
 @ISA = ('Exporter');
@@ -14,8 +18,40 @@ use Exporter;
 	 'PLnotempty',
 	 'PLkeys',
 	 'PLdelete',
-	 'PLkeyon'
+	 'PLkeyon',
+	 'rethread'
     );
+
+{
+    my $_VERBOSE = 0;
+    sub get_verbose  {$_VERBOSE;}
+    sub set_verbose { $_VERBOSE = 1; }
+
+    my $_DEBUG = 0;
+    sub get_debug  {$_DEBUG;}
+    sub set_debug { $_DEBUG = 1; }
+
+    $SOURCE_DB=undef;
+
+    sub set_sourcedb {
+	my ($self,$db)=@_;
+	$SOURCE_DB=$db;
+    }
+
+    $DISPATCH={
+	copy      => \&dbcopy1,
+	copyarray => \&copyarray,
+	copyhash  => \&copyhash,
+	setdb     => \&setdb,
+	matmap    => \&matmap,
+	rodmap    => \&rodmap,
+	makemap   => \&makemap,
+	echos     => \&echos,
+	rename    => \&dbcopy,
+	gridmap   => \&gridmap
+    };
+
+}
 
 sub PLdoarg{
     my( $str, %userparam ) = @_ ;
@@ -221,18 +257,14 @@ sub PLarray{
 }
 
 sub PLlist{
-    my ($ref,$actions,%userparam)=@_;
-    my %OPTIONS;
+    my ($ref)=@_;
     my $home=$ref;
 
-    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
-    {
-	$OPTIONS{$key}=$value;
-    }
+    $actions=$DISPATCH;
 
     my @PLcontent = keys %{ $ref->{_content} };
 
-    print STDERR "PLlist: @PLcontent\n";
+    print STDERR "PLlist: @PLcontent\n" if get_verbose();
 
 
     my $val;
@@ -258,13 +290,494 @@ sub PLlist{
 	    &PLarray($rref,$actions);
 	}
 	if($typ eq 'list'){
-	    &PLlist($rref,$actions);
+	    &PLlist($rref);
 	}
 	if($typ eq 'map'){
-	    print STDERR "type map\n";
-	    &PLlist($rref,$actions);
+	    print STDERR "type map\n" if get_verbose();
+	    &PLlist($rref);
 	}
     }
+}
+
+sub rethread {
+    my ($pref,$keyname,$reth_key)=@_;
+    my (@parents,@children);
+
+    my $ref=$pref->{$keyname};
+
+    my %DIR=PLkeys($ref);
+    foreach (keys %DIR){
+	next if /^_/;
+	if( /^$reth_key/ ){
+	    push @parents, $_;
+	}
+	else{
+	    push @children, $_;
+	}
+    }
+
+    print STDERR "parents: @parents\n" if get_verbose();
+    print STDERR "children: @children\n" if get_verbose();
+
+    my %clones;
+    my $ichild;
+    foreach $ichild (@children){
+	my $child_ref=$DIR{$ichild};
+	my $child_copy_ref=clone($child_ref);
+	PLdelete($ref,$ichild);
+	$clone{$ichild}=$child_copy_ref;
+    }
+
+    foreach my $iparent (@parents){
+	foreach $ichild (@children){
+	    PLkeyon($DIR{$iparent},$clone{$ichild},$ichild);
+	}
+    }
+}
+
+# dispatch functions
+
+sub dbcopy{
+    my( $home, $path, %userparam ) = @_ ;
+    my %OPTIONS;
+
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+
+    my @path=parse_path($path);
+    my $t=key_defined($SOURCE_DB,@path);
+
+    return $t;
+}
+
+sub dbcopy1{
+    my( $home, $path, %userparam ) = @_ ;
+    my %OPTIONS;
+    my @result;
+
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+    my $def=undef;
+    if(exists($OPTIONS{apply})){
+	$def = eval "sub { return $OPTIONS{apply};}";
+	die "dbcopy: invalid apply string $OPTIONS{apply}\n" unless ref $def eq 'CODE';
+    }
+
+    my @path=parse_path($path);
+    my $t=key_defined($SOURCE_DB,@path);
+
+    if(ref $t eq 'ARRAY'){
+	foreach (@{ $t }){
+	    push @result, $def ? $def->($_) : $_;
+	}
+	return \@result;
+    }
+    elsif(ref $t eq 'HASH'){
+	die "dbcopy: HASH copy not supported\n";
+    }
+    else{
+	return $def ? $def->($t) : $t;
+    }
+}
+
+sub makemap {
+    my( $home, $npin_path, $cmap_path, %userparam ) = @_ ;
+    my %OPTIONS;
+
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+
+    my @npin_path=parse_path($npin_path);
+    my $npin=key_defined($SOURCE_DB,@npin_path);
+    die "makemap: npin not valid [$npin_path] [@npin_path] [$npin]\n" 
+	if ref $npin;
+
+    my @cmap_path=parse_path($cmap_path);
+    my $cm_ref=key_defined($SOURCE_DB,@cmap_path);
+    return undef unless $cm_ref;
+
+    die "makemap: cm_ref not valid [$cmap_path] [@cmap_path] [$cm_ref]\n" 
+	unless ref $cm_ref eq 'ARRAY';
+
+    my @a=fullcellmap($npin,@{ $cm_ref });
+
+    return \@a;
+}
+
+sub copyarray{
+    my( $home, $path, %userparam ) = @_ ;
+    my %OPTIONS;
+    my @a=();
+    my @result=();
+
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+
+    # get what
+    my @path=parse_path($path);
+    my $t=key_defined($SOURCE_DB,@path);
+    return undef if ref $t ne 'ARRAY';
+    @result=@{ $t };
+
+    if(exists($OPTIONS{select})){
+	if(lc($OPTIONS{select}) eq 'odd'){
+	    @a=@{ $t };
+	    @result=odd(\@a);
+	}
+	elsif(lc($OPTIONS{select}) eq 'even'){
+	    @a=@{ $t };
+	    @result=even(\@a);	    
+	}
+	else{
+	    warn "copyarray: select option $OPTIONS{select} not valid\n";
+	    return undef;
+	}
+    }
+    return \@result;
+}
+
+sub copyhash{
+    my( $home, $path, %userparam ) = @_ ;
+    my %OPTIONS;
+    my @a=();
+    my @result=();
+    my $key;
+    my $value;
+
+    while ( ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+
+    # get what
+    my @path=parse_path($path);
+    my $t=key_defined($SOURCE_DB,@path);
+    return undef if ref $t ne 'HASH';
+    @a=keys %{ $t };
+    foreach $key (@a){
+	$value= $t->{$key}->{_content};
+	push @result, ($key,$value);
+    }
+
+    if(exists($OPTIONS{select})){
+	if(lc($OPTIONS{select}) eq 'keys'){
+	    @result=even(\@result);
+	}
+	elsif(lc($OPTIONS{select}) eq 'values'){
+	    @result=odd(\@result);
+	}
+	else{
+	    warn "copyhash: select option $OPTIONS{select} not valid\n";
+	    return undef;
+	}
+    }
+    return \@result;
+}
+
+sub echos{
+    my ($home,@args)=@_;
+    print STDERR "echos: @args\n";
+    return;
+}
+
+sub setdb{
+    my ($home,$db)=@_;
+    
+    if($db eq 'MAIN_DB'){
+#	$SOURCE_DB=$MAIN_DB;
+    }
+    return undef;
+}
+
+sub gridmap{
+    my ($home,$basename,@paths)=@_;
+
+#    my $flagref=key_defined($home,'_content');
+#    key_on($flagref,'FLAG','I was here');
+    my @mats;
+    my @mats_names;
+    foreach my $ipath (@paths){
+	my @apaths=find_keys($SOURCE_DB,$ipath);
+	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
+	push @mats, @apaths if @apaths;
+	push @mats_names, @names if @names;
+    }
+
+    foreach my $imat_path (@mats){
+	my @keypath=@{ $imat_path };
+	my $keyname=$keypath[$#keypath];
+	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
+
+	my $mat_ref=&key_on_list($home,$basename.$keyname);
+
+	&key_on_parameter($mat_ref,'label','string',$keyname);
+	&key_on_parameter($mat_ref,'material','string',$content[0]);
+	&key_on_parameter($mat_ref,'mass','double',$content[1]);
+	&key_on_parameter($mat_ref,'height','double',$content[2]);
+    }
+}
+
+sub matmap{
+    my ($home,$basename,@paths)=@_;
+
+    my @mats;
+    my @mats_names;
+    foreach my $ipath (@paths){
+	my @apaths=find_keys($SOURCE_DB,$ipath);
+	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
+	push @mats, @apaths if @apaths;
+	push @mats_names, @names if @names;
+    }
+
+    foreach my $imat_path (@mats){
+	my @keypath=@{ $imat_path };
+	my $keyname=$keypath[$#keypath];
+	my $mattype=$keypath[$#keypath-2];
+	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
+	my $density=$content[0];
+
+	my $enrichable=0;
+	my $depletable='false';
+	if($mattype eq 'uo2' || $mattype eq 'pyrex'){
+	    $enrichable=1;
+	    $enrichment=$content[1];
+	    $depletable='true';
+	}
+
+	my $mat_ref=&key_on_list($home,$basename.$keyname);
+
+	&key_on_parameter($mat_ref,'density','double',$density);
+	&key_on_parameter($mat_ref,'depletable','bool',$depletable);
+	if($enrichable){
+	    &key_on_parameter($mat_ref,'enrichment','double',$enrichment);
+	}
+	&key_on_parameter($mat_ref,'key_name','string',$keyname);
+	&key_on_parameter($mat_ref,'mat_name','string',$mattype);
+    }
+}
+
+sub rodmap{
+    my ($home,$axial_path,%userparam)=@_;
+    my ($i,$j,$k,$m,$n);
+    my (@a,@b,@c,@d);
+
+    my %OPTIONS=('basename'=>'List','mapname'=>'rodmap');
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+
+    # create hash of all axial ids and their values
+    my @axial_rpath = parse_path($axial_path);
+    my $axial_ref=key_defined($SOURCE_DB,@axial_rpath);
+    return unless $axial_ref;
+    my @axial_available = keys_at($axial_ref);
+    return unless @axial_available;
+    print STDERR "available axials: @axial_available\n" if get_verbose();
+    my @axial_common=@axial_available;
+
+    if(exists($OPTIONS{coremap})){
+	# get unique ids for assemblies, 0 means missing
+	$coremap_path=$OPTIONS{coremap};
+	my @coremap_path=parse_path($coremap_path);
+	my $coremap_ref=key_defined($SOURCE_DB,@coremap_path);
+	my @axials=unique(@{ $coremap_ref });    # labels of all unique axials
+	print STDERR "axials w/path: [@axials] [@coremap_path]\n" if get_verbose();  # debug
+	@axials=nonstring('0',@axials);
+	@axials=nonstring('-',@axials);
+	print STDERR "axials: @axials\n" if get_verbose();  # debug
+
+	my @axial_common=intersection(\@axials,\@axial_available);
+
+	unless($#axial_common == $#axials){
+	    print STDERR "axial labels needed   : @axials\n";
+	    print STDERR "axial labels available: @axial_available\n";
+	    die   "missing axial definitions in $axial_path\n";
+	}
+    }
+
+    print STDERR "axial_rpath: @axial_rpath\n" if get_verbose();
+    foreach (@axial_available){
+	$AXIAL_DEFS{$_} = key_exists($axial_ref,$_);
+	$AXIAL_CONTENT{$_}=[@{ $AXIAL_DEFS{$_}->{_content} }];
+	@a=@{ $AXIAL_CONTENT{$_} };
+	unless(@a%2){
+	    die "axial $_ has even number of elements @a\n";
+	}
+	@b=even(\@a);
+	@c=odd(\@a);
+	$AXIAL_ELEVATIONS{$_}=[@b];
+	$AXIAL_LABELS{$_}=[@c];
+	print STDERR "  AXIAL_DEFS{$_}: $AXIAL_DEFS{$_}\n" if get_verbose();
+	print STDERR "         content: @{ $AXIAL_CONTENT{$_} }\n" if get_verbose();
+	print STDERR "         heights: @b\n" if get_verbose();
+	print STDERR "         labels : @c\n" if get_verbose();
+    }
+
+    # get npin for setting the maps
+    my @npin_rpath=@axial_rpath;
+    $npin_rpath[$#cell_rpath-1]='npin';
+    $npin_rpath[$#cell_rpath]='_content';
+    print STDERR "npin_rpath: @npin_rpath\n" if get_verbose();
+    my $npin=key_defined($SOURCE_DB,@npin_rpath);
+    print STDERR "npin: $npin\n" if get_verbose();
+
+    # create hash of all rodmap ids and their values
+    my @cellmap_rpath=@axial_rpath;
+    $cellmap_rpath[$#cellmap_rpath-1]=$OPTIONS{mapname};
+    my $cellmap_ref=key_defined($SOURCE_DB,@cellmap_rpath);
+    my @cellmap_available = keys_at($cellmap_ref);
+    print STDERR "cellmap_rpath: @cellmap_rpath\n" if get_verbose();
+    foreach (@cellmap_available){
+	$CELLMAP_DEFS{$_} = key_exists($cellmap_ref,$_);
+	$CELLMAP_CONTENT{$_}=[@{ $CELLMAP_DEFS{$_}->{_content} }];
+	print STDERR "  CELLMAP_DEFS{$_}: $CELLMAP_DEFS{$_}\n" if get_verbose();
+
+	@a=@{ $CELLMAP_CONTENT{$_} };
+	@b=();
+	@c=unique(@a);
+	@c=nonzero(@c);
+	@c=nonstring('-',@c);
+	$CELLMAP_CELLS{$_}=[@c];
+	print STDERR "  CELLMAP_CELLS{$_}: @c\n" if get_verbose();
+
+	@b=fullcellmap($npin,@a);
+	$CELLMAP_CONTENT{$_}=[@b];
+    }
+ 
+    # create hash of all cell ids and their values
+    my @cell_rpath=@axial_rpath;
+    $cell_rpath[$#cell_rpath-1]='cell';
+    my $cell_ref=key_defined($SOURCE_DB,@cell_rpath);
+    my @cell_available = keys_at($cell_ref);
+    print STDERR "cell_rpath: @cell_rpath\n" if get_verbose();
+    foreach (@cell_available){
+	$CELL_DEFS{$_} = key_exists($cell_ref,$_);
+	$CELL_CONTENT{$_}=[@{ $CELL_DEFS{$_}->{_content} }];
+	print STDERR "  CELL_DEFS{$_}: $CELL_DEFS{$_}\n" if get_verbose();
+	print STDERR "        content: @{ $CELL_CONTENT{$_} }\n" if get_verbose();
+
+	@a=@{$CELL_CONTENT{$_}};
+	if(@a==1){
+	    if($a[0] ne 'mod'){
+		die "cell $_ @a has one entry and is not a moderator\n";
+	    }
+	    $CELL_TYPE{$_}='mod';
+	    $CELL_radii{$_}=[];
+	    $CELL_mats{$_} =['mod'];
+	}
+	else{
+	    if(@a%2 != 0){
+		die "cell $_ @a has odd number of entries\n";
+	    }
+	    else{
+		$CELL_radii{$_}=[fronthalf(\@a,0)];
+		my @cmats=endhalf(\@a,0);
+		if(fany(sub{m/(u)/i}, @cmats)){
+		    $CELL_TYPE{$_}='fuel';
+		}
+		else{
+		    $CELL_TYPE{$_}='other';
+		}
+		$CELL_mats{$_} =[@cmats];
+		print STDERR "    CELL radii @{ $CELL_radii{$_} }\n" if get_verbose();
+		print STDERR "    CELL mats  @{ $CELL_mats{$_} }\n" if get_verbose();
+		print STDERR "    CELL type  $CELL_TYPE{$_}\n" if get_verbose();
+	    }
+	}
+    }
+
+    my ($iref, $jref, $a_ref, $cm_ref, $c_ref);
+    foreach $i (@axial_common){
+	# create entry for Basename_X
+	$a_ref=&key_on_list($home,$OPTIONS{basename}.$i);
+
+	# create entries for bank level 
+	&key_on_parameter($a_ref,'label','string',$i);
+	&key_on_array($a_ref,'axial_labels','string',@{ $AXIAL_LABELS{$i} });
+	&key_on_array($a_ref,'axial_elevations','double',@{ $AXIAL_ELEVATIONS{$i} });
+
+	# see if we have all cellmaps needed
+	@b=unique( @{ $AXIAL_LABELS{$i} } );
+	my @cellmap_common=intersection(\@b,\@cellmap_available);
+	unless($#cellmap_common == $#b){
+	    print STDERR "cellmap labels needed   : [@b]\n";
+	    print STDERR "cellmap labels available: [@cellmap_available]\n";
+	    die   "missing cellmap definitions in $axial_path\n";
+	}
+
+	# Create CellMaps list in Assembly_X
+	$cm_ref=&key_on_list($a_ref,'CellMaps');
+	@c=();
+	foreach $j (@b){
+	    # Create CellMap in CellMaps list
+	    $iref=&key_on_list($cm_ref,'CellMap'.'_'.$j);
+
+	    &key_on_parameter($iref,'label','string',$j);
+	    &key_on_array($iref,'cell_map','string',@{ $CELLMAP_CONTENT{$j} });
+	    push @c, @{ $CELLMAP_CELLS{$j} }
+	}
+
+	@b=unique(@c);
+
+	# see if we have all cells needed
+	my @cell_common=intersection(\@b,\@cell_available);
+	unless($#cell_common == $#b){
+	    print STDERR "cell labels needed   : [@b]\n";
+	    print STDERR "cell labels available: [@cell_available]\n";
+	    die   "missing cell definitions in $axial_path\n";
+	}
+
+	# Create Cells list in Assembly_X
+	$c_ref=&key_on_list($a_ref,'Cells');
+	foreach $j (@b){
+	    # Create Cells in Cells list
+	    $iref=&key_on_list($c_ref,'Cell'.'_'.$j);
+
+	    &key_on_parameter($iref,'label','string',$j);
+	    &key_on_parameter($iref,'type','string',$CELL_TYPE{$j});
+	    $k=@{ $CELL_radii{$j} };
+	    &key_on_parameter($iref,'num_rings','int',$k);
+	    &key_on_array($iref,'mats','string',@{ $CELL_mats{$j} });
+	    &key_on_array($iref,'radii','double',@{ $CELL_radii{$j} });
+	}
+    }
+}
+
+sub key_on_parameter {
+    ($iref,$name,$type,$value)=@_;
+    my $jref;
+
+    $jref=new_key($iref,'_content',$name);
+    key_on($jref,'_pltype','parameter');
+    key_on($jref,'_type',$type);
+    key_on($jref,'_content',$value);
+}
+sub key_on_array {
+    ($iref,$name,$type,@value)=@_;
+    my $jref;
+
+    $jref=new_key($iref,'_content',$name);
+    key_on($jref,'_pltype','array');
+    key_on($jref,'_type',$type);
+    key_on($jref,'_content',[@value]);
+}
+sub key_on_list {
+    ($iref,$name)=@_;
+    my $jref;
+
+    $jref=new_key($iref,'_content',$name);
+    key_on($jref,'_pltype','list');
+
+    return $jref;
 }
 
 1;

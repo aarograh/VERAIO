@@ -26,10 +26,19 @@ use Exporter;
 	 'counter',
 	 'parse_path',
 	 'find_keys',
-	 'keys_at'
+	 'keys_at',
+	 'values_at',
+	 'value_eq_at'
     );
 
 my $DIE_ON_UNDEF=1;
+
+{
+    my $_VERBOSE = 0;
+    sub get_verbose  {$_VERBOSE;}
+    sub set_verbose { $_VERBOSE = 1; }
+}
+
 
 #used
 sub new_key { # initialize tree node, return pointer to the node
@@ -73,7 +82,7 @@ sub key_hash_assign {
     return 1;
 }
 
-sub key_defined {
+sub key_defined {           # will return actual value if it is a leaf with a value
     my( $ref, @keys ) = @_ ;
     unless ( @keys ) {
 	warn "key_defined: no keys" ;
@@ -146,11 +155,51 @@ sub keys_at {
     my( $hash_ref ) = @_ ;
 
     unless( ref $hash_ref eq 'HASH' ) {
-	warn "key_exists: $hash_ref not a HASH ref" ;
+	warn "keys_at: $hash_ref not a HASH ref" ;
 	return undef;
     }
 	
     return keys %{ $hash_ref };
+}
+
+sub array_at {
+    my( $ref ) = @_ ;
+
+    unless( ref $ref eq 'ARRAY' ) {
+	warn "array_at: $ref not an ARRAY ref" ;
+	return undef;
+    }
+	
+    return @{ $ref };
+}
+
+sub values_at{
+    my( $ref, @path) = @_ ;
+    my @values;
+
+    my $refN=key_defined( $ref, @path);
+    if( ref $refN eq 'ARRAY' ) {
+	@values=@{$refN};
+	return @values;
+    }
+    else{
+	return;
+    }
+}
+
+sub value_eq_at{
+    my( $ref, $cmpvalue, @path) = @_ ;
+    my $value;
+
+    my $refN=key_defined( $ref, @path);
+    if( !ref($refN) ){
+	$value=$refN;
+	return unless $value eq $refN;
+	return 1;
+    }
+    else{
+	die "value_eq_at: invalid reference type", ref($refN), "\n";
+    }
 }
 
 sub parse_path{

@@ -31,8 +31,17 @@ use Exporter;
 	 'part',
 	 'apply',
 	 'natatime',
-	 'arraysize'
+	 'arraysize',
+	 'first',
+	 'last',
+	 'nth'
     );
+
+{
+    my $_VERBOSE = 0;
+    sub get_verbose  {$_VERBOSE;}
+    sub set_verbose { $_VERBOSE = 1; }
+}
 
 sub nonzero { # remove zeros from array entry
     @_ = grep { $_ != 0 } @_;
@@ -185,6 +194,17 @@ sub difference {
 sub arraysize {
     my $size=@_;
     return $size;
+}
+
+sub first {
+    return $_[0];
+}
+sub last {
+    return $_[-1];
+}
+sub nth ($@) {
+    my ($idx,@a)=@_;
+    return $a[$idx] || undef;
 }
 
 1;

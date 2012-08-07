@@ -220,11 +220,11 @@ DENOVO:
             - copy DENOVO/$k_tolerance
           _content:
 
-        l2_tolerance:
+        L2_tolerance:
           _pltype: parameter
           _type: double
           _do:
-            - copy DENOVO/$l2_tolerance
+            - copy DENOVO/$L2_tolerance
           _content:
     
         arnoldi_kspace:

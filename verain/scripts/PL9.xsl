@@ -8,7 +8,7 @@
 >
 
 <!--
-    version 9.0:07/17/2012:446:13160:Srdjan Simunovic
+    version 9.C:07/27/2012:463:13911:Srdjan Simunovic
     simunovics@ornl.gov
     http://thyme.ornl.gov/simunovics
     XSLT for ParameterList reactor file
@@ -27,11 +27,11 @@
 <!-- SSMOD: Note to self, change tags to xsl elements -->
 
 <xsl:template match="/">
-  <html>
-    <head>
-      <title>
+  <xsl:element name="html">
+    <xsl:element name="head">
+      <xsl:element name="title">
 	<xsl:value-of select="ParameterList/Parameter[@name='case_id']/@value" />
-      </title>
+      </xsl:element>
 
       <!-- CSS 3, IE will not work -->
 
@@ -64,30 +64,40 @@
 	background-color: #E0FFFF;
 	}
       </style>
-    </head>
+    </xsl:element>
 
-    <body>
-      <p>
+    <xsl:element name="body">
+<!-- comment from here to -A1- if you want the exact hierarchy -->
+<!--
+      <xsl:element name="p">
 	<strong><xsl:value-of select="ParameterList/@name" /></strong>
-      </p>
-      <ul>
+      </xsl:element>
+      <xsl:element name="ul">
 	<xsl:apply-templates select="ParameterList/Parameter" />
-      </ul>
+      </xsl:element>
       <xsl:apply-templates select="ParameterList/ParameterList" />
-    </body>
-  </html>
+-->
+<!-- -A1- -->
+
+<!-- uncomment from here to -A2- if you want the exact hierarchy -->
+    <xsl:apply-templates select="*"/>
+<!-- -A2- -->
+    </xsl:element>
+  </xsl:element>
 </xsl:template>
 
 <xsl:template match="ParameterList">
-  <p>
-    <strong><xsl:value-of select="@name" /></strong>
-  </p>
-  <ul>
+  <xsl:element name="p">
+    <xsl:element name="strong">
+      <xsl:value-of select="@name" />
+    </xsl:element>
+  </xsl:element>
+  <xsl:element name="ul">
     <xsl:apply-templates select="Parameter" />
-  </ul>
-  <ul>
+  </xsl:element>
+  <xsl:element name="ul">
     <xsl:apply-templates select="ParameterList" />
-  </ul>
+  </xsl:element>
 </xsl:template>
 
 <xsl:template match="Parameter">
@@ -115,7 +125,8 @@
       <xsl:variable name="map" select="@value" />
 
       <xsl:if test="$num_pins > 0">
-	<li><p>
+	<xsl:element name="li">
+	  <xsl:element name="p">
 	    <xsl:value-of select="@name" /> = 
 	    <xsl:call-template name="make_map">
 	      <xsl:with-param name="num_pins">
@@ -125,7 +136,8 @@
 		<xsl:value-of select="$map" />
 	      </xsl:with-param>
 	    </xsl:call-template>
-	</p></li>
+	  </xsl:element>
+	</xsl:element>
       </xsl:if>
     </xsl:when>
 
@@ -137,7 +149,8 @@
       <xsl:variable name="map"      select="@value" />
 
       <xsl:if test="$num_pins > 0">
-	<li><p>
+	<xsl:element name="li">
+	  <xsl:element name="p">
 	    <xsl:value-of select="@name" /> = 
 	    <xsl:call-template name="make_core_map">
 	      <xsl:with-param name="num_pins">
@@ -150,7 +163,8 @@
 		<xsl:value-of select="$map" />
 	      </xsl:with-param>
 	    </xsl:call-template>
-	</p></li>
+	  </xsl:element>
+	</xsl:element>
       </xsl:if>
     </xsl:when>
 
@@ -166,26 +180,32 @@
 	</xsl:call-template>
       </xsl:variable>
 
-      <li><p>
-	<xsl:value-of select="@name" /> = 
-	<table>
-	  <tr>
-	    <xsl:for-each select="exslt:node-set($map_array)/token">
-	      <td>
-		<xsl:value-of select="."/>
-	      </td>
-	    </xsl:for-each>
-	  </tr>
-	</table>
-      </p></li>
+      <xsl:element name="li">
+	<xsl:element name="p">
+	  <xsl:value-of select="@name" /> = 
+	  <table>
+	    <tr>
+	      <xsl:for-each select="exslt:node-set($map_array)/token">
+		<td>
+		  <xsl:value-of select="."/>
+		</td>
+	      </xsl:for-each>
+	    </tr>
+	  </table>
+	</xsl:element>
+      </xsl:element>
     </xsl:when>
 
     <!-- scalars -->
 
     <xsl:otherwise>
-      <li><p>
-	<i><xsl:value-of select="@name" /></i> = <xsl:value-of select="@value" />
-      </p></li>
+      <xsl:element name="li">
+	<xsl:element name="p">
+	  <xsl:element name="i">
+	    <xsl:value-of select="@name" />
+	  </xsl:element> = <xsl:value-of select="@value" />
+	</xsl:element>
+      </xsl:element>
     </xsl:otherwise>
   </xsl:choose>
 

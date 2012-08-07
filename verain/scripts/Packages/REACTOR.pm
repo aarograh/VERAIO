@@ -2,6 +2,10 @@ package REACTOR;
 
 use KeyTree;
 use MiscUtils;
+use TypeUtils;
+
+use REACTORBlock;
+use REACTORCommand;
 
 use Clone qw(clone);
 
@@ -16,6 +20,17 @@ use Exporter;
 	 'fullcellmap',
 	 'read_ascii'
     );
+
+{
+    my $_VERBOSE = 0;
+    sub get_verbose  {$_VERBOSE;}
+    sub set_verbose { $_VERBOSE = 1; }
+
+    my $_DEBUG = 0;
+    sub get_debug  {$_DEBUG;}
+    sub set_debug { $_DEBUG = 1; }
+
+}
 
 sub full_size {
     my $size=shift;
@@ -65,7 +80,7 @@ sub gen_oct_list {
 	    push @a, $map8->($i,$j);
 	    push @b, $map8->($i,$j);
 	}
-	print "@a\n";
+	print "@a\n" if get_verbose();
     }
     return @b;
 }
@@ -87,171 +102,121 @@ sub gen_quad_list {
 	    push @a, $map4->($i,$j);
 	    push @b, $map4->($i,$j);
 	}
-	print "@a\n";
+	print "@a\n" if get_verbose();
     }
     return @b;
 }
 
+sub clean_line{
+    my $lineref=shift;
 
+#    die "clean_line: invalid reference\n" unless (ref($lineref) eq 'SCALAR' && defined($$lineref));
+
+    $$lineref =~ s/\// /g;                 # replace slashes with spaces
+    $$lineref =~  s/(\!\s*(.*))$//;         # strip comments
+    $$lineref =~ s/(\d+)\s*\*\s*(\w+)/"$2 " x $1/ge; # expand fortran expressions
+#    $$lineref =~ s/(zero)/0/g;               # convert zero to 0
+    $$lineref =~ s/['"]//g;                # remove quotes
+    $$lineref =~ s/[,;]/ /g;               # remove commas and such
+    $$lineref =~ s/^\s+//;                 # strip leading blanks
+    $$lineref =~ s/\s+$//;                 # strip trailing blanks
+}
 
 sub read_ascii {
-    my ($filename, $INPUT_DB, $MAIN_DB, $VERBOSE, %userparam) = @_;
+    my ($filename, $INPUT_DB, $MAIN_DB, %userparam) = @_;
     # temporary references to store data while building the db
-    my ($block,$command,$ctext,$file,$line);
-    my ($cmd,$ctxt);
-    my ($block_ref,$dir_ref);
-    my ($key, $value);
-    my @options;
-    my $BLOCK_COUNTER;
+    my ($block,$command,$cname,$ctext);
+    my ($name,$res);
 
-    $block=$command=$ctext=$block_ref=undef;
-    while ( ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    $block=$command=undef;
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
     {
 	$key eq 'block'   && do {$block=$value;};     # current open block
 	$key eq 'command' && do {$command=$value;};   # open command
-	$key eq 'ctext'   && do {$ctext=$value;};     # accumulated text for the command
-	$key eq 'db'      && do {$block_ref=$value;}; # block db built so far
-	$key eq 'file'    && do {$file=$value;};      # command file 
-	$key eq 'line'    && do {$line=$value;};      # command line
     }
 
-    open my($IFILE), $filename or return;  # Failure
+    open my($IFILE), $filename or die "Cannot open file $filename\n";
 
   READ: while (<$IFILE>) {       # main read loop
-      s/\// /g;                 # replace slashes with spaces
-      s/(\!\s*(.*))$//;         # strip comments
-      s/(\d+)\s*\*\s*(\w+)/"$2 " x $1/ge; # expand fortran expressions
-      s/['"]//g;                # remove quotes
-      s/[,;]/ /g;               # remove commas and such
-      s/^\s+//;                 # strip leading blanks
-      s/\s+$//;                 # strip trailing blanks
+      &clean_line(\$_);
       next READ if /^$/;        # skip empty lines
 
       /^include\s+(\S+)/ && do{
 	  my $ifile=$1;
-	  print STDERR "[$.] Include file: $ifile\n" if $VERBOSE;
-	  read_ascii($ifile,$INPUT_DB, $MAIN_DB, $VERBOSE,
-		     'block'=>$block, 'command'=>$command,
-		     'ctext'=>$ctext,'db'=>$block_ref,
-		     'file'=>$file,'line'=>$line);
+	  print STDERR "[$filename:$.] Include file: $ifile\n" if get_verbose();
+	  read_ascii($ifile,$INPUT_DB, $MAIN_DB, 
+		     'block'=>$block, 'command'=>$command);
 	  next READ;
       };
 
       /^\[\s*(\w+)\s*\]/ &&     # found new block
 	  do{
-	      if($block){        # there is an old block that needs to be put into the main tree
-		  if($command){  # check for a command to complete
-		      print STDERR "[$.] End command: $command ", defined($ctext) ? $ctext : '',"\n"  if $VERBOSE;
-		      &keyin($block_ref,$command,$ctext,$file,$line);
+	      $name=$1;
+	      if($block){        # old block that needs to be put into the main tree
+		  if($command){  # old command to complete
+		      print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+		      $command->keyin();
 		  }
-		  # store block into the main tree
-		  my $store=clone($block_ref);
-#		  my $lref=key_exists($MAIN_DB,$block);
-#		  my $lnum=++$BLOCK_COUNTER;
-#		  key_on($lref,$lnum,$store);
-#ssASM		  if($block eq 'ASSEMBLY'){
-#ssASM		      push_on($MAIN_DB,$block,$store);
-#ssASM		  }
-#ssASM		  else{
-		      key_on($MAIN_DB,$block,$store);
-#ssASM		  }
+		  print STDERR "[$filename:$.] End block: ", $block->name(), "\n"  if get_verbose();
+		  $block->keyon();
 	      }
-	      $block=$1;          # block name
-	      $BLOCK_COUNTER=0;
-	      die "[$.] Bad block name.\n" unless key_exists($INPUT_DB,$block);
-	      print STDERR "[$.] Found block: $block\n"  if $VERBOSE;
-	      $dir_ref=key_exists($INPUT_DB,$block);     # find block data tree in the main template
-	      $block_ref=clone($dir_ref);                # create new instance of block db
+	      print STDERR "[$filename:$.] New block: $name\n"  if get_verbose();
+	      die "[$filename:$.] Bad block name.\n" unless key_exists($INPUT_DB,$name);
+	      $block=REACTORBlock->new( name=>$name, out_db=>$MAIN_DB );
+	      $block->inp_db($INPUT_DB);
 	      $command=undef;
-	      $ctext=undef;
 	      next READ;
       };
       $block && !$command && do{      # block previously initialized, but no commands yet.
 	  /^(\w+)\s*(.*?)$/ && do{ # check if the first line is a command
-	      $command=$1;
+	      $cname=$1;
 	      $ctext=($+[2]-$-[2]) ? $2 : '';
-	      die "[$.] invalid keyword $command in block $block\n" unless key_exists($block_ref,$command);
-	      print STDERR "[$.] Found new command: $command ", defined($ctext) ? $ctext : '',"\n"  if $VERBOSE;
-	      $file=$filename;
-	      $line=$.;
+	      $res=$block->is_command($cname) || 0;
+	      die "[$filename:$.] invalid keyword $cname in block ", $block->name(), "\n" unless $res;
+	      print STDERR "[$filename:$.] New command: $cname $ctext\n"  if get_verbose();
+
+	      $command=REACTORCommand->new(keyword=>$cname,keytree=>$res,ctext=>$ctext,file=>$filename,line=>$.);
+	      unless($command->is_multiline()){
+		  print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+		  $command->keyin();
+		  $command=undef;
+	      }
 	      next READ;
-	  };};
-      $block && $command && do{       # new block initialized, command already started
+	  };
+      };
+      $block && $command && do{    # new block initialized, multi-line command already started
 	  /^(\w+)\s*(.*)$/ && do{  # check if the new entry is a command
-	      $cmd=$1;
-	      $ctxt=($+[2]-$-[2]) ? $2 : '';
-	      if(key_exists($block_ref,$cmd)){   # new command is starting, complete old command
-		  print STDERR "[$.] End command: $command ", defined($ctext) ? $ctext : '',"\n"  if $VERBOSE;
-		  &keyin($block_ref,$command,$ctext,$file,$line);
-		  $command=$cmd;
-		  $ctext=$ctxt ? $ctxt : undef;
-		  $file=$filename;
-		  $line=$.;
-		  print STDERR "[$.] Found command: $command ", defined($ctext) ? $ctext : '',"\n"  if $VERBOSE;
+	      $cname=$1;
+	      $ctext=($+[2]-$-[2]) ? $2 : '';
+	      $res=$block->is_command($cname) || 0;
+
+	      if($res){   # complete old command
+		  print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+		  $command->keyin();
+		  $command=undef;
+
+		  print STDERR "[$filename:$.] New command: $cname $ctext\n"  if get_verbose();
+		  $command=REACTORCommand->new(keyword=>$cname,keytree=>$res,ctext=>$ctext,file=>$filename,line=>$.);
+		  unless($command->is_multiline()){
+		      print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+		      $command->keyin();
+		      $command=undef;
+		  }
 		  next READ;
 	      }
 	  };
+	  $command->ctext($_); # if not a new command, keep accumulating
       };
-      $ctext.=" ".$_;  # if not a new command, keep accumulating
   }
     # file ended, check for uncompleted commands
-    print STDERR "[$.] End command: ", $command ? $command : '', $ctext ? $ctext : '',"\n"  if $VERBOSE;
-    &keyin($block_ref,$command,$ctext,$file,$line);
-    my $store=clone($block_ref);
-#    my $lref=key_exists($MAIN_DB,$block);
-#    my $lnum=++$BLOCK_COUNTER;
-#    key_on($lref,$lnum,$store);
-#ssASM    if($block eq 'ASSEMBLY'){
-#ssASM	push_on($MAIN_DB,$block,$store);
-#ssASM    }
-#ssASM    else{
-	key_on($MAIN_DB,$block,$store);
-#ssASM    }
+    if($command){
+	print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+	$command->keyin();
+	print STDERR "[$filename:$.] End block: ", $block->name(), "\n"  if get_verbose();
+	$block->keyon();
+    }
 
     return 1;
-}
-
-sub keyin {
-    my ($directory,$command,$dtx,$file,$line)=@_;
-    my ($templ, $name_idx, $name);
-    my %args;
-    my @a;
-
-    my $REF_LABEL='_key';
-    my $CONTENT_LABEL='_content';
-    my $FILE_LABEL='_file';
-    my $LINE_LABEL='_line';
-
-    $templ=key_exists($directory,$command);
-    return undef unless $templ;
-    %args=%{$templ};
-
-    $args{_parse} eq 'scalar' && do{
-	$dtx=~s/^\s+//;
-	@a=split /\s+/, $dtx;
-	$dtx=$args{_type} eq 'title' ? $dtx : $a[0];
-	key_on($templ,$CONTENT_LABEL,$dtx);
-	key_on($templ,$FILE_LABEL,$file);
-	key_on($templ,$LINE_LABEL,$line);
-
-	return 1;
-    };
-
-    $args{_parse} eq 'list' && do{
-	$dtx=~s/^\s+//;
-	@a=split /\s+/, $dtx;
-	$name_idx=$args{_named};
-	if($name_idx){
-	    $name=splice(@a,$name_idx-1,1);
-	    $templ=new_key($templ,$REF_LABEL,$name);
-	}
-	key_on($templ,$CONTENT_LABEL,[@a]);
-	key_on($templ,$FILE_LABEL,$file);
-	key_on($templ,$LINE_LABEL,$line);
-
-	return 1;
-    };	
-
 }
 
 sub reflectOCT {
