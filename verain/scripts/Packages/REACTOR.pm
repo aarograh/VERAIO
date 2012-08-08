@@ -209,9 +209,11 @@ sub read_ascii {
       };
   }
     # file ended, check for uncompleted commands
-    if($command){
-	print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
-	$command->keyin();
+    if($block || $command){
+	if($command){
+	    print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+	    $command->keyin();
+	}
 	print STDERR "[$filename:$.] End block: ", $block->name(), "\n"  if get_verbose();
 	$block->keyon();
     }
