@@ -193,6 +193,13 @@ CORE:
         - copy CORE/$bc_bot
       _content:
 
+    bc_sym:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/$bc_sym
+      _content:
+
     bc_top:
       _pltype: parameter
       _type: string

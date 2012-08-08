@@ -20,7 +20,7 @@ _DATATYPES:
     _type:  'int'
   _dtbool: &dtbool
     _parse: 'scalar'
-    _type:  'string'
+    _type:  'word'
   _dtlist: &dtlist
     _parse: 'list'
     _named: 0
@@ -118,7 +118,6 @@ STATE:
     _check:
       - is_float()
       - is_geq() 0
-      - is_leq() 100
   tinlet:
     <<: *dtdouble
     _default:
@@ -184,7 +183,7 @@ STATE:
     _style: multi-line
     _default:
     _check:
-      - fall(sub{is_string(shift)},())
+      - fall(sub{is_word(shift)},())
       - fall(sub{is_int(shift)},odd[])
       - fall(sub{is_geq(shift,0)},odd[])
   feedback:
@@ -214,10 +213,12 @@ CORE:
     <<: *dtdate
     _default:
     _check:
+      - is_date()
   cycedate:
     <<: *dtdate
     _default:
     _check:
+      - is_date()
   size:
     <<: *dtint
     _default:
@@ -276,67 +277,106 @@ CORE:
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_int(shift)},())
+      - fall(sub{is_geq(shift,0)},())
+      - fall(sub{is_leq(shift,1)},())
   assm_map:
     <<: *dtlist
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
   insert_map:
     <<: *dtlist
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
   det_map:
     <<: *dtlist
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
   crd_map:
     <<: *dtlist
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
   crd_bank:
     <<: *dtlist
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
   lower_plate:
     <<: *dtlist
     _default:
     _check:
+      - arraysize()==3
+      - is_word(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+      - nth(1,())>=0
+      - nth(2,())>=0
+      - nth(2,())<=1
   upper_plate:
     <<: *dtlist
     _default:
     _check:
+      - arraysize()==3
+      - is_word(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+      - nth(1,())>=0
+      - nth(2,())>=0
+      - nth(2,())<=1
+  bc_sym:
+    <<: *dtword
+    _default:
+    _check:
+      - is_word()
+      - in_dictionary() rot mir
   bc_bot:
     <<: *dtword
     _default:
     _check:
       - is_word()
+      - in_dictionary() reflecting vacuum
   bc_top:
     <<: *dtword
     _default:
     _check:
       - is_word()
+      - in_dictionary() reflecting vacuum
   bc_rad:
     <<: *dtword
     _default:
     _check:
       - is_word()
+      - in_dictionary() reflecting vacuum
   xlabel:
     <<: *dtlist
     _default:
     _check:
+      - fall(sub{is_word(shift)},())
   ylabel:
     <<: *dtlist
     _default:
     _check:
+      - fall(sub{is_word(shift)},())
   height:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
+      - is_geq() 0
   <<: *matlib
 
 ASSEMBLY:
@@ -364,6 +404,8 @@ ASSEMBLY:
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
   axial:
     <<: *dtlistnamed
     _style: multi-line
@@ -374,6 +416,7 @@ ASSEMBLY:
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_float(shift)},())
   grid:
     <<: *dtlistnamed
     _style:
@@ -448,6 +491,8 @@ CONTROL:
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
   axial:
     <<: *dtlistnamed
     _style: multi-line
@@ -475,6 +520,8 @@ INSERT:
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
   axial:
     <<: *dtlistnamed
     _style: multi-line
@@ -502,6 +549,8 @@ DETECTOR:
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
   axial:
     <<: *dtlistnamed
     _style: multi-line
@@ -515,6 +564,7 @@ EDITS:
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_float(shift)},())
   axial_edit_mesh_delta:
     <<: *dtdouble
     _default:
@@ -556,53 +606,68 @@ DENOVO:
     _default:
     _check:
       - is_int()
+      - is_geq() 2
+      - is_leq() 3
   do_transport:
     <<: *dtbool
     _default:
     _check:
+      - is_word()
+      - in_dictionary() true false
   do_output:
     <<: *dtbool
     _default:
     _check:
+      - is_word()
+      - in_dictionary() true false
   mesh:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_gt() 0
   num_blocks_i:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_gt() 0
   num_blocks_j:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_gt() 0
   num_z_blocks:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_gt() 0
   num_sets:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_gt() 0
   num_groups:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_gt() 0
   max_delta_z:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
+      - is_gt() 0
   partition_upscatter:
     <<: *dtbool
     _default:
     _check:
+      - is_word()
+      - in_dictionary() true false
   store_fulcrum_string:
     <<: *dtword
     _default:
@@ -613,102 +678,142 @@ DENOVO:
     _default:
     _check:
       - is_word()
+      - in_dictionary() Krylov Gauss-Seidel
   eigen_solver:
     <<: *dtword
     _default:
     _check:
       - is_word()
+      - in_dictionary() power_iteration arnoldi
   iterate_downscatter:
     <<: *dtbool
     _default:
     _check:
+      - is_word()
+      - in_dictionary() true false
   downscatter:
     <<: *dtbool
     _default:
     _check:
+      - is_word()
+      - in_dictionary() true false
   Pn_order:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_geq() 0
   aztec_kspace:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_gt() 0
   max_itr:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_gt() 0
   tolerance:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
+      - is_gt() 0
+      - is_lt() 1
+  eq_set:
+    <<: *dtword
+    _default:
+    _check:
+      - is_word()
+      - in_dictionary() sc LD BLD
+  new_grp_bounds:
+    <<: *dtlist
+    _style: multi-line
+    _default:
+    _check:
+      - fall(sub{is_float(shift)},())
+      - fall(sub{is_gt(shift,0)},())
 
   quad_type:
     <<: *dtword
     _default:
     _check:
       - is_word()
-  polar_angles:
+      - in_dictionary() qr levelsym galerkin glproduct ldfe
+  polar_octant:
     <<: *dtint
     _default:
     _check:
       - is_int()
-  azimuthal_angles:
+      - is_gt() 0
+  azimuthal_octant:
     <<: *dtint
     _default:
     _check:
       - is_int()
-  sn_order:
+      - is_gt() 0
+  Sn_order:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_gt() 0
 
   k_tolerance:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
+      - is_gt() 0
+      - is_lt() 1
   L2_tolerance:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
+      - is_gt() 0
+      - is_lt() 1
   arnoldi_kspace:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_gt() 0
   arnoldi_restarts:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_gt() 0
   diagnostic_level:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_lt() 3
 
   upscatter_tolerance:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
+      - is_gt() 0
+      - is_lt() 1
   aztec_diag:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_geq() 0
   aztec_output:
     <<: *dtint
     _default:
     _check:
       - is_int()
+      - is_geq() 0
 
   silo_output:
     <<: *dtword
@@ -719,32 +824,5 @@ DENOVO:
     <<: *dtbool
     _default:
     _check:
-
-  eq_set:
-    <<: *dtword
-    _default:
-    _check:
       - is_word()
-
-  energy_dep_ev:
-    <<: *dtbool
-    _default:
-    _check:
-
-  azimuthals_octant:
-    <<: *dtint
-    _default:
-    _check:
-      - is_int()
-
-  polars_octant:
-    <<: *dtint
-    _default:
-    _check:
-      - is_int()
-
-  new_grp_bounds:
-    <<: *dtlist
-    _style: multi-line
-    _default:
-    _check:
+      - in_dictionary() true false

@@ -5,7 +5,9 @@ use Exporter;
 @EXPORT=('is_whole','to_whole','is_count','to_count','is_int','to_int','is_real',
 	 'to_real','is_decimal','to_decimal','is_float','to_float','is_string',
 	 'to_string','is_eq','is_neq','is_geq','is_leq','is_gt','is_lt',
-	 'is_word','in_dictionary');
+	 'is_word','in_dictionary','not_in_dictionary','is_date');
+
+use Time::Local;
 
 use constant DEF_PRECISION => 5;
 
@@ -145,9 +147,31 @@ sub in_dictionary ($@) {
     my $iword;
 
     foreach $iword (@dict){
-	return 1 if $iword =~ m/$word/;
+	return 1 if $iword eq $word;
     }
     return 0;
 }
+
+sub not_in_dictionary ($@) {
+    my ($word,@dict)=@_;
+    my $iword;
+
+    foreach $iword (@dict){
+	return 0 if $iword eq $word;
+    }
+    return 1;
+}
+
+sub is_date ($) {
+    my $date=shift;
+
+    $date =~ s/\s+$//;
+    $date =~ s/^\s*//;
+    my ($year, $month, $day) = unpack "A4 A2 A2", $date;
+    eval{ 
+	timelocal(0,0,0,$day, $month-1, $year); # croaks in case of bad date 
+	1;
+    } or return 0;
+	     }
 
 1;

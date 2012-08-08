@@ -5,6 +5,7 @@
 .#*
 .*.swp
 *.old
+*.sh
 
 /checkin_message
 

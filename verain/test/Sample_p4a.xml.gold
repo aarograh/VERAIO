@@ -179,15 +179,14 @@
       <Parameter name="k_tolerance" type="double" value="0.0001"/>
     </ParameterList>
     <ParameterList name="quadrature_database">
+      <Parameter name="azimuthal_octant" type="int" value="4"/>
+      <Parameter name="polar_octant" type="int" value="4"/>
       <Parameter name="quad_type" type="string" value="qr"/>
-      <Parameter name="azimuthals_octant" type="int" value="4"/>
-      <Parameter name="polars_octant" type="int" value="4"/>
     </ParameterList>
-    <Parameter name="energy_dep_ev" type="bool" value="false"/>
     <Parameter name="num_sets" type="int" value="1"/>
     <Parameter name="num_z_blocks" type="int" value="1"/>
     <Parameter name="eigen_solver" type="string" value="arnoldi"/>
-    <Parameter name="eq_set" type="string" value="ld"/>
+    <Parameter name="eq_set" type="string" value="LD"/>
     <ParameterList name="silo_database">
       <Parameter name="silo_output" type="string" value="vera"/>
     </ParameterList>
