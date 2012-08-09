@@ -176,7 +176,7 @@ DENOVO:
         - copyarray DENOVO/@new_grp_bounds
       _content:
 
-    quadrature_database:
+    quadrature_db:
       _pltype: list
       _content:
         quad_type:
@@ -186,18 +186,18 @@ DENOVO:
             - copy DENOVO/$quad_type
           _content:
 
-        polar_octant:
+        polars_octant:
           _pltype: parameter
           _type: int
           _do:
-            - copy DENOVO/$polar_octant
+            - copy DENOVO/$polars_octant
           _content:
 
-        azimuthal_octant:
+        azimuthals_octant:
           _pltype: parameter
           _type: int
           _do:
-            - copy DENOVO/$azimuthal_octant
+            - copy DENOVO/$azimuthals_octant
           _content:
 
         Sn_order:
@@ -207,7 +207,7 @@ DENOVO:
             - copy DENOVO/$Sn_order
           _content:
 
-    eigenvalue_database:
+    eigenvalue_db:
       _pltype: list
       _content:
   
@@ -246,7 +246,14 @@ DENOVO:
             - copy DENOVO/$diagnostic_level
           _content:
     
-    upscatter_database:
+        energy_dep_ev:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy DENOVO/$energy_dep_ev
+          _content:
+    
+    upscatter_db:
       _pltype: list
       _content:
       
@@ -271,7 +278,7 @@ DENOVO:
             - copy DENOVO/$aztec_output
           _content:
           
-    silo_database:
+    silo_db:
       _pltype: list
       _content:
       

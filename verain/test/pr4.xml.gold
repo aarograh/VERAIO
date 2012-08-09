@@ -338,13 +338,13 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="DENOVO">
-    <ParameterList name="upscatter_database">
+    <ParameterList name="silo_db">
     </ParameterList>
-    <ParameterList name="eigenvalue_database">
+    <ParameterList name="eigenvalue_db">
     </ParameterList>
-    <ParameterList name="quadrature_database">
+    <ParameterList name="quadrature_db">
     </ParameterList>
-    <ParameterList name="silo_database">
+    <ParameterList name="upscatter_db">
     </ParameterList>
   </ParameterList>
   <ParameterList name="EDITS">

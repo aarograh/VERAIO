@@ -727,7 +727,7 @@ DENOVO:
     _default:
     _check:
       - is_word()
-      - in_dictionary() sc LD BLD
+      - in_dictionary() sc ld bld
   new_grp_bounds:
     <<: *dtlist
     _style: multi-line
@@ -742,13 +742,13 @@ DENOVO:
     _check:
       - is_word()
       - in_dictionary() qr levelsym galerkin glproduct ldfe
-  polar_octant:
+  polars_octant:
     <<: *dtint
     _default:
     _check:
       - is_int()
       - is_gt() 0
-  azimuthal_octant:
+  azimuthals_octant:
     <<: *dtint
     _default:
     _check:
@@ -794,6 +794,12 @@ DENOVO:
       - is_int()
       - is_geq() 0
       - is_lt() 3
+  energy_dep_ev:
+    <<: *dtbool
+    _default:
+    _check:
+      - is_word()
+      - in_dictionary() true false
 
   upscatter_tolerance:
     <<: *dtdouble
