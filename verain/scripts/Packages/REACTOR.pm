@@ -7,7 +7,8 @@ use TypeUtils;
 use REACTORBlock;
 use REACTORCommand;
 
-use Clone qw(clone);
+# use Clone qw(clone);
+use ClonePP qw(clone);
 
 use Exporter;
 @ISA = ('Exporter');

@@ -9,6 +9,7 @@ use KeyTree;
 use REACTOR;
 use PL;
 use XMLPack;
+use ClonePP qw(clone);
 use TypeUtils;";
 
 sub GetPaths()
@@ -24,7 +25,7 @@ sub GetPaths()
 use warnings ;
 use Data::Dumper ;
 use Getopt::Long;
-use Clone qw(clone);
+# use Clone qw(clone);
 use YAML;
 
 # data structure with reactor file input commands
@@ -88,7 +89,7 @@ mergekeys_loop( $INPUT_DB );
 
 # set main directory tree for storage
 my $dref=key_exists($INPUT_DB,'_DIRECTORY');
-$MAIN_DB=clone($dref);
+$MAIN_DB=ClonePP::clone($dref);
 
 REACTOR->set_verbose()        if $VERBOSE;
 REACTORBlock->set_verbose()   if $VERBOSE;

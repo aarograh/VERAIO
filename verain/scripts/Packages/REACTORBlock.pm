@@ -1,6 +1,7 @@
 package REACTORBlock;
 
-use Clone qw(clone);
+# use Clone qw(clone);
+use ClonePP qw(clone);
 use Carp;
 
 use KeyTree;
