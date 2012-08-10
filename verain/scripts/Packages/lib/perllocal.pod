@@ -1,0 +1,22 @@
+=head2 Fri Aug 10 11:50:17 2012: C<Module> L<YAML|YAML>
+
+=over 4
+
+=item *
+
+C<installed into: /Users/qs9b/perl/work3/scripts/Packages>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.84>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+

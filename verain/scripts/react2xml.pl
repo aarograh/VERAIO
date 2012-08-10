@@ -4,6 +4,7 @@
 
 my ($filename, $directory) = GetPaths();
 eval "use lib qw(${directory}Packages);
+use YAML;
 use YAMLUtil;
 use KeyTree;
 use REACTOR;
@@ -26,7 +27,7 @@ use warnings ;
 use Data::Dumper ;
 use Getopt::Long;
 # use Clone qw(clone);
-use YAML;
+# use YAML;
 
 # data structure with reactor file input commands
 my $INPUT_DB;
@@ -89,7 +90,7 @@ mergekeys_loop( $INPUT_DB );
 
 # set main directory tree for storage
 my $dref=key_exists($INPUT_DB,'_DIRECTORY');
-$MAIN_DB=ClonePP::clone($dref);
+$MAIN_DB=clone($dref);
 
 REACTOR->set_verbose()        if $VERBOSE;
 REACTORBlock->set_verbose()   if $VERBOSE;
