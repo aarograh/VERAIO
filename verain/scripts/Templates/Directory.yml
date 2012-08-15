@@ -184,8 +184,8 @@ STATE:
     _default:
     _check:
       - fall(sub{is_word(shift)},())
-      - fall(sub{is_int(shift)},odd[])
-      - fall(sub{is_geq(shift,0)},odd[])
+      - fall(sub{is_int(shift)},odd([]))
+      - fall(sub{is_geq(shift,0)},odd([]))
   feedback:
     <<: *dtword
     _default:
@@ -390,11 +390,13 @@ ASSEMBLY:
     _default:
     _check:
       - is_int()
+      - is_gt() 0
   ppitch:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
+      - is_gt() 0
   cell:
     <<: *dtlistnamed
     _default:
@@ -411,6 +413,7 @@ ASSEMBLY:
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_geq(shift,0)},odd([]))
   dancoff:
     <<: *dtlist
     _style: multi-line
@@ -422,49 +425,65 @@ ASSEMBLY:
     _style:
     _default:
     _check:
+      - nth(2,())>0
+      - nth(3,())>0
+      - in_dictionary(nth(1,())) ss inc zirc
   grid_axial:
     <<: *dtlist
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_float(shift)},odd([]))
   lower_nozzle:
     <<: *dtlist
     _default:
     _check:
+      - nth(1,())>0
+      - nth(2,())>0
+      - in_dictionary(nth(0,()),'ss','inc','zirc')
   upper_nozzle:
     <<: *dtlist
     _default:
     _check:
+      - nth(1,())>0
+      - nth(2,())>0
+      - in_dictionary(nth(0,()),'ss','inc','zirc')
   lower_nozzle_gap_height:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
+      - is_geq() 0
   upper_nozzle_gap_height:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
+      - is_geq() 0
   lower_pincap_height:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
+      - is_geq() 0
   upper_pincap_height:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
+      - is_geq() 0
   lower_plenum_height:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
+      - is_geq() 0
   upper_plenum_height:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
+      - is_geq() 0
   <<: *matlib
 
 CONTROL:
@@ -478,10 +497,13 @@ CONTROL:
     _default:
     _check:
       - is_int()
+      - is_gt() 0
   stroke:
     <<: *dtlist
     _default:
     _check:
+      - is_float(nth(0,()))
+      - is_int(nth(1,()))
   cell:
     <<: *dtlistnamed
     _default:
@@ -498,6 +520,7 @@ CONTROL:
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_geq(shift,0)},odd([]))
   <<: *matlib
 
 INSERT:
@@ -540,6 +563,7 @@ DETECTOR:
     _default:
     _check:
       - is_int()
+      - is_gt() 0
   cell:
     <<: *dtlistnamed
     _default:
@@ -556,6 +580,7 @@ DETECTOR:
     _style: multi-line
     _default:
     _check:
+      - fall(sub{is_geq(shift,0)},odd([]))
   <<: *matlib
 
 EDITS:
