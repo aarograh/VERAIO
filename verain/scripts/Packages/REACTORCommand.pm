@@ -30,10 +30,13 @@ sub new
     my $self={
 	keyword => $arg{keyword} || croak("missing keyword"),
 	keytree => $arg{keytree} || croak("missing keytree"),
-	ctext   => $arg{ctext}   || undef,
-	file    => $arg{file}    || undef,
-	line    => $arg{line}    || undef,
+	ctext   => exists($arg{ctext}) ? $arg{ctext} : undef,
+#	ctext   =>$arg{ctext} || undef,
+	file    => exists($arg{file})  ? $arg{ctext} : undef,
+	line    => exists($arg{line})  ? $arg{ctext} : undef,
     };
+
+    print STDERR "ctext $arg{ctext}\n";
 
     bless $self, $class;
 }
