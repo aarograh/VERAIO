@@ -36,7 +36,7 @@ sub new
 	line    => exists($arg{line})  ? $arg{ctext} : undef,
     };
 
-    print STDERR "ctext $arg{ctext}\n";
+#    print STDERR "ctext $arg{ctext}\n";
 
     bless $self, $class;
 }
