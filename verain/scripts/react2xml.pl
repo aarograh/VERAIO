@@ -56,30 +56,30 @@ $XML_HEADER='<?xml version="1.0" encoding="UTF-8"?>';
 $XSLT_HEADER='<?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>';
 
 my $DEBUG=0;
-my ($LOGFILE, $VERBOSE,$HELP,$XML,$XSLT);
+my ($VERBOSE,$HELP,$XML,$XSLT);
 { # process options
-    GetOptions("logfile=s" => \$LOGFILE,
-	       "schema=s"  => \$SCHEMA,
-	       "xml"       => \$XML,
+    GetOptions("xml"       => \$XML,
 	       "xslt"      => \$XSLT,
 	       "verbose"   => \$VERBOSE,
-	       "debug"   => \$DEBUG,
+	       "debug"     => \$DEBUG,
                "help"      => \$HELP);
 }
 
-if($HELP || @ARGV < 2){
-    die "Usage: $pgnam [options ...] reactor_input_file output_xml_file
+if($HELP){
+    &help_print();
+    exit;
+}
 
+if(@ARGV < 2){
+    die "Usage: $pgnam [options ...] reactor_input_file output_xml_file
 options:
-  --logfile file
-  --schema file
   --xml
   --xslt
   --verbose
   --debug
-  --help
-\n";
+  --help\n";
 }
+
 
 my ($ifile,$ofile)=@ARGV;
 
@@ -124,7 +124,7 @@ foreach $iblock (@BLOCKS){
 # ------ xml
 
 open my($OFILE), '>', $ofile or die "$0: $! $ofile\n";
-if($XML){
+if($XML || $XSLT){
     print "Adding XML header ... $XML_HEADER\n" if $VERBOSE;
     print $OFILE "$XML_HEADER\n";
 }
@@ -144,3 +144,36 @@ foreach $iblock (@BLOCKS){
 print $OFILE "</ParameterList>\n";
 
 close $OFILE;
+
+sub help_print{
+    print STDERR <<EOF
+
+Converts reactor input file (reactor_input_file) into ParameterList
+XML file (output_xml_file). ParameterList format is defined in
+Trilinos Teuchos package http://trilinos.sandia.gov/packages/teuchos/
+
+Program errors messages indicate errors in the input file. More
+verbose diagnostic messages are currently being added.
+
+Program switches:
+
+--help    This help
+
+--xml     Write XML declaration as the first line of the ParameterList
+          XML file. Disabled by default.
+
+--xslt    Write XSLT processing instruction as the second line of the
+          ParameterList XML file. Disabled by default. Turns on --xml
+          switch, as well. XSLT style file PL9.xsl should be in the
+          same directory as the resulting ParameterListXML file in
+          order for transofrmation to work in a browser. See
+          additional information in "User-Friendly Formatting of VERA
+          Input" on CASL Wiki.
+
+--verbose Add processing printouts as the code executes.
+
+--debug   Create debug files for finding the errors in the converter
+          program. Does not help much in tracing invalid input.
+
+EOF
+}
