@@ -86,6 +86,7 @@ _DIRECTORY:
   DECART:
   UTILS:
   DENOVO:
+  COBRATF:
 
 CASEID:
   title:
@@ -609,6 +610,43 @@ UTILS:
     _default:
     _check:
       - is_string()
+
+COBRATF:
+  problem_name:
+    <<: *dtstring
+    _default:
+    _check:
+      - is_string()
+  nfuel:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+  irfc:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+  epso:
+    <<: *dtdouble
+    _default:
+    _check:
+      - is_float()
+      - is_gt() 0
+  oitmax:
+    <<: *dtdouble
+    _default:
+    _check:
+      - is_float()
+      - is_gt() 0
+  iitmax:
+    <<: *dtdouble
+    _default:
+    _check:
+      - is_float()
+      - is_gt() 0
 
 DENOVO:
   problem_name:
