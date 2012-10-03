@@ -8,6 +8,10 @@
 !     * turn on T/H feedback
 !     * remove "tfuel" and "modden" because these will be set by T/H feedback
 !
+!  Draft 2 - 10/3/2012
+!     * add pressure to STATE block
+!     * add COBRATF block
+!
 !  To process:
 !     ./react2xml.pl --xml --xslt Sample_p6.inp Sample_p6.xml
 !
@@ -17,6 +21,7 @@
   power  100.0         ! %
   tinlet 620.33        ! F - 600K
   boron  1300          ! ppmB
+  pressure 2250        ! psia
 
 ! tfuel  600.0         ! K - 600K  Not used with T/H feedback!
 ! modden 0.743         ! g/cc      Not used with T/H feedback!
@@ -25,7 +30,7 @@
 
 [CORE]
   size 1                ! 1x1 single-assembly
-  rated 17.67   0.5     ! MW, Mlbs/hr  *** flow is wrong!
+  rated 17.67   0.5     ! MW, Mlbs/hr  *** flow is wrong, need to fix!
   apitch 21.5
   height 406.328
 
@@ -166,6 +171,14 @@
           361.8686 
           369.7898 
           377.711
+
+[COBRATF]
+  nfuel   3
+  irfc    1
+  epso    0.001
+  oitmax  3
+  iitmax  40
+
 
 [DENOVO]
     eq_set        ld
