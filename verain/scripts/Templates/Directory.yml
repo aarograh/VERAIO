@@ -857,3 +857,39 @@ DENOVO:
     _check:
       - is_word()
       - in_dictionary() true false
+
+COBRATF:
+  nfuel:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+
+  irfc:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+
+  epso:
+    <<: *dtdouble
+    _default:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  oitmax:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+
+  iitmax:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0

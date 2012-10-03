@@ -1,0 +1,39 @@
+COBRATF:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+  _content:
+    nfuel:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$nfuel
+      _content:
+
+    irfc:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$irfc
+      _content:
+
+    epso:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$epso
+      _content:
+
+    oitmax:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$oitmax
+      _content:
+
+    iitmax:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$iitmax
+      _content:
