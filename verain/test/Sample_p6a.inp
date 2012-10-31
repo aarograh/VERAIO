@@ -1,5 +1,5 @@
 [CASEID]
-  title 'CASL Problem 6'
+  title 'CASL Problem 6a'
 !================================================================================
 !  Sample input for Problem 6 (Single-assembly with T/H feedback)
 !
@@ -8,6 +8,13 @@
 !     * turn on T/H feedback
 !     * remove "tfuel" and "modden" because these will be set by T/H feedback
 !
+!  Draft 2 - 10/13/2012
+!     * added "mat" card in front of material cards
+!
+!  To-Do:
+!     * add percent of theoretical density to pellets
+!     * add grid spacer loss coefficients
+
 !  To process:
 !     ./react2xml.pl --xml --xslt Sample_p6.inp Sample_p6.xml
 !
@@ -53,15 +60,14 @@
   
   uo2 U31 10.257 / 3.1
 
+  fuel U31A uo2 10.257 / 3.1
 
 !=== material label, key_name, mat_name, density
-!  mat he   he   0.000176
-!  mat inc  inc  8.19
-!  mat ss   ss 8.0
-!  mat zirc zirc 6.56 
-
-! *** no way to specify mesh=10?
-
+  mat he   he   0.000176
+  mat inc  inc  8.19
+  mat ss   ss   8.0
+  mat zirc zirc 6.56 
+  
   cell 1     0.4096 0.418 0.475 / U31 he zirc
   cell 100          0.561 0.602 / mod    zirc       ! guide tube
   
