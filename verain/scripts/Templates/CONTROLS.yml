@@ -7,7 +7,7 @@ CONTROLS:
     Materials:
       _pltype: list
       _do:
-        - matmap Material_,CONTROL/%vacuum/*,CONTROL/%mod/*,CONTROL/%uo2/*,CONTROL/%zirc/*,CONTROL/%pyrex/*,CONTROL/%aic/*,CONTROL/%he/*,CONTROL/%b4c/*,CONTROL/%inc/*,CONTROL/%ss/*,CONTROL/%boron/*
+        - matmap Material_,CONTROL/%zirc/*,CONTROL/%aic/*,CONTROL/%he/*,CONTROL/%b4c/*,CONTROL/%inc/*,CONTROL/%ss/*,CONTROL/%boron/*,CONTROL/%mat/*
       _content:
     title:
       _pltype: parameter

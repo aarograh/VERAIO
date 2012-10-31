@@ -7,7 +7,7 @@ INSERTS:
     Materials:
       _pltype: list
       _do:
-        - matmap Material_,INSERT/%vacuum/*,INSERT/%mod/*,INSERT/%uo2/*,INSERT/%zirc/*,INSERT/%pyrex/*,INSERT/%aic/*,INSERT/%he/*,INSERT/%b4c/*,INSERT/%inc/*,INSERT/%ss/*,INSERT/%boron/*
+        - matmap Material_,INSERT/%zirc/*,INSERT/%aic/*,INSERT/%he/*,INSERT/%b4c/*,INSERT/%inc/*,INSERT/%ss/*,INSERT/%boron/*,INSERT/%mat/*
       _content:
     title:
       _pltype: parameter

@@ -44,7 +44,7 @@ use Exporter;
 	copyarray => \&copyarray,
 	copyhash  => \&copyhash,
 	setdb     => \&setdb,
-	matmap    => \&matmap,
+	matmap    => \&matmap2,
 	rodmap    => \&rodmap,
 	makemap   => \&makemap,
 	echos     => \&echos,
@@ -562,6 +562,75 @@ sub matmap{
 	}
 	&key_on_parameter($mat_ref,'key_name','string',$keyname);
 	&key_on_parameter($mat_ref,'mat_name','string',$mattype);
+    }
+}
+
+sub matmap2{
+    my ($home,$basename,@paths)=@_;
+
+    my @mats;
+    my @mats_names;
+
+    my $keyname;
+    my $mattype;
+
+    foreach my $ipath (@paths){
+	my @apaths=find_keys($SOURCE_DB,$ipath);
+	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
+	push @mats, @apaths if @apaths;
+	push @mats_names, @names if @names;
+    }
+
+    foreach my $imat_path (@mats){
+	my @keypath=@{ $imat_path };
+	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
+
+	my $enrichable=0;
+	my $depletable='false';
+	my $enrichment;
+	my @mat_names=();
+	my @mat_fracs=();
+
+	my $density=$content[0];
+
+	if($keypath[$#keypath-2] eq 'mat'){
+	    $keyname=$keypath[$#keypath];
+	    $mattype=$content[1] || $keyname;
+	    push @mat_names, $mattype;
+	    push @mat_fracs, 1.0;
+	}
+	elsif($keypath[$#keypath-2] eq 'fuel'){
+	    $keyname=$keypath[$#keypath];
+	    $mattype=$content[1];
+	    $enrichable=1;
+	    $enrichment=$content[2];
+	    $depletable='true';
+	    push @mat_names, $mattype;
+	    push @mat_fracs, 1.0;
+	}
+	else{    # old format
+	    $keyname=$keypath[$#keypath];
+	    $mattype=$keypath[$#keypath-2];
+	    if($mattype eq 'uo2' || $mattype eq 'pyrex'){
+		$enrichable=1;
+		$enrichment=$content[1];
+		$depletable='true';
+	    }
+	    push @mat_names, $mattype;
+	    push @mat_fracs, 1.0;
+	}
+
+	my $mat_ref=&key_on_list($home,$basename.$keyname);
+	&key_on_parameter($mat_ref,'density','double',$density);
+	&key_on_parameter($mat_ref,'depletable','bool',$depletable)   if $enrichable;
+	&key_on_parameter($mat_ref,'enrichment','double',$enrichment) if $enrichable;
+	&key_on_parameter($mat_ref,'key_name','string',$keyname);
+
+#	&key_on_parameter($mat_ref,'mat_name','string',$mattype);
+
+	&key_on_array($mat_ref,'mat_names','string', @mat_names);
+	&key_on_array($mat_ref,'mat_fracs','double', @mat_fracs);
+
     }
 }
 

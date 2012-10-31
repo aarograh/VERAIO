@@ -29,23 +29,7 @@ _DATATYPES:
     _named: 1
 
 _MATLIB: &matlib
-  vacuum:
-    <<: *dtlistnamed
-    _default:
-    _check:
-  mod:
-    <<: *dtlistnamed
-    _default:
-    _check:
-  uo2:
-    <<: *dtlistnamed
-    _default:
-    _check:
   zirc:
-    <<: *dtlistnamed
-    _default:
-    _check:
-  pyrex:
     <<: *dtlistnamed
     _default:
     _check:
@@ -378,6 +362,10 @@ CORE:
     _check:
       - is_float()
       - is_geq() 0
+  mat:
+    <<: *dtlistnamed
+    _default:
+    _check:
   <<: *matlib
 
 ASSEMBLY:
@@ -485,7 +473,24 @@ ASSEMBLY:
     _check:
       - is_float()
       - is_geq() 0
+  fuel:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  uo2:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  pyrex:
+    <<: *dtlistnamed
+    _default:
+    _check:
+  mat:
+    <<: *dtlistnamed
+    _default:
+    _check:
   <<: *matlib
+
 
 CONTROL:
   title:
@@ -522,6 +527,10 @@ CONTROL:
     _default:
     _check:
       - fall(sub{is_geq(shift,0)},odd([]))
+  mat:
+    <<: *dtlistnamed
+    _default:
+    _check:
   <<: *matlib
 
 INSERT:
@@ -549,6 +558,10 @@ INSERT:
   axial:
     <<: *dtlistnamed
     _style: multi-line
+    _default:
+    _check:
+  mat:
+    <<: *dtlistnamed
     _default:
     _check:
   <<: *matlib
@@ -582,6 +595,10 @@ DETECTOR:
     _default:
     _check:
       - fall(sub{is_geq(shift,0)},odd([]))
+  mat:
+    <<: *dtlistnamed
+    _default:
+    _check:
   <<: *matlib
 
 EDITS:

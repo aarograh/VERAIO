@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
 <ParameterList name="CASEID">
-  <Parameter name="case_id" type="string" value="CASL Problem 6"/>
+  <Parameter name="case_id" type="string" value="CASL Problem 6a"/>
   <ParameterList name="STATE">
     <Parameter name="pressure" type="double" value="2250"/>
     <Parameter name="feedback" type="string" value="on"/>
@@ -25,26 +25,26 @@
     <Parameter name="lower_vfrac" type="double" value="0.5"/>
     <ParameterList name="Materials">
       <ParameterList name="Material_he">
-        <Parameter name="mat_name" type="string" value="he"/>
-        <Parameter name="depletable" type="bool" value="false"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{he}"/>
         <Parameter name="key_name" type="string" value="he"/>
         <Parameter name="density" type="double" value="0.000176"/>
       </ParameterList>
       <ParameterList name="Material_zirc">
-        <Parameter name="mat_name" type="string" value="zirc"/>
-        <Parameter name="depletable" type="bool" value="false"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
         <Parameter name="key_name" type="string" value="zirc"/>
         <Parameter name="density" type="double" value="6.56"/>
       </ParameterList>
       <ParameterList name="Material_ss">
-        <Parameter name="mat_name" type="string" value="ss"/>
-        <Parameter name="depletable" type="bool" value="false"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
         <Parameter name="key_name" type="string" value="ss"/>
         <Parameter name="density" type="double" value="8.0"/>
       </ParameterList>
       <ParameterList name="Material_inc">
-        <Parameter name="mat_name" type="string" value="inc"/>
-        <Parameter name="depletable" type="bool" value="false"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{inc}"/>
         <Parameter name="key_name" type="string" value="inc"/>
         <Parameter name="density" type="double" value="8.19"/>
       </ParameterList>
@@ -90,9 +90,42 @@
       <Parameter name="upper_plenum_height" type="double" value="16"/>
       <Parameter name="lower_nozzle_mass" type="double" value="6250.0"/>
       <ParameterList name="Materials">
+        <ParameterList name="Material_he">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{0.000176}"/>
+          <Parameter name="key_name" type="string" value="he"/>
+          <Parameter name="density" type="double" value="he"/>
+        </ParameterList>
+        <ParameterList name="Material_zirc">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{6.56}"/>
+          <Parameter name="key_name" type="string" value="zirc"/>
+          <Parameter name="density" type="double" value="zirc"/>
+        </ParameterList>
+        <ParameterList name="Material_ss">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{8.0}"/>
+          <Parameter name="key_name" type="string" value="ss"/>
+          <Parameter name="density" type="double" value="ss"/>
+        </ParameterList>
+        <ParameterList name="Material_inc">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{8.19}"/>
+          <Parameter name="key_name" type="string" value="inc"/>
+          <Parameter name="density" type="double" value="inc"/>
+        </ParameterList>
+        <ParameterList name="Material_U31A">
+          <Parameter name="enrichment" type="double" value="3.1"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{10.257}"/>
+          <Parameter name="key_name" type="string" value="U31A"/>
+          <Parameter name="depletable" type="bool" value="true"/>
+          <Parameter name="density" type="double" value="uo2"/>
+        </ParameterList>
         <ParameterList name="Material_U31">
           <Parameter name="enrichment" type="double" value="3.1"/>
-          <Parameter name="mat_name" type="string" value="uo2"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{uo2}"/>
           <Parameter name="key_name" type="string" value="U31"/>
           <Parameter name="depletable" type="bool" value="true"/>
           <Parameter name="density" type="double" value="10.257"/>

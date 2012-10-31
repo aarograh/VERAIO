@@ -7,7 +7,7 @@ DETECTORS:
     Materials:
       _pltype: list
       _do:
-        - matmap Material_,DETECTOR/%vacuum/*,DETECTOR/%mod/*,DETECTOR/%uo2/*,DETECTOR/%zirc/*,DETECTOR/%pyrex/*,DETECTOR/%aic/*,DETECTOR/%he/*,DETECTOR/%b4c/*,DETECTOR/%inc/*,DETECTOR/%ss/*,DETECTOR/%boron/*
+        - matmap Material_,DETECTOR/%zirc/*,DETECTOR/%aic/*,DETECTOR/%he/*,DETECTOR/%b4c/*,DETECTOR/%inc/*,DETECTOR/%ss/*,DETECTOR/%boron/*,DETECTOR/%mat/*
       _content:
     title:
       _pltype: parameter

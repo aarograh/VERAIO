@@ -48,11 +48,10 @@
 
   bc_rad reflecting
 
-!=== material label, key_name, mat_name, density
-  mat he   he   0.000176
-  mat inc  inc  8.19
-  mat ss   ss   8.0
-  mat zirc zirc 6.56 
+  he he 0.000176
+  inc inc 8.19
+  ss ss 8.0
+  zirc zirc 6.56 
   
 [ASSEMBLY]
   title "Westinghouse 17x17"
@@ -61,6 +60,14 @@
   
   uo2 U31 10.257 / 3.1
 
+  fuel U31A uo2 10.257 / 3.1
+
+!=== material label, key_name, mat_name, density
+  mat he   he   0.000176
+  mat inc  inc  8.19
+  mat ss   ss   8.0
+  mat zirc zirc 6.56 
+  
   cell 1     0.4096 0.418 0.475 / U31 he zirc
   cell 100          0.561 0.602 / mod    zirc       ! guide tube
   

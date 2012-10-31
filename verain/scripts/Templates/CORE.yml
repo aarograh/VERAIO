@@ -238,5 +238,5 @@ CORE:
     Materials:
       _pltype: list
       _do:
-        - matmap Material_,CORE/%vacuum/*,CORE/%mod/*,CORE/%uo2/*,CORE/%zirc/*,CORE/%pyrex/*,CORE/%aic/*,CORE/%he/*,CORE/%b4c/*,CORE/%inc/*,CORE/%ss/*
+        - matmap Material_,CORE/%zirc/*,CORE/%aic/*,CORE/%he/*,CORE/%b4c/*,CORE/%inc/*,CORE/%ss/*,CORE/%mat/*
       _content:
