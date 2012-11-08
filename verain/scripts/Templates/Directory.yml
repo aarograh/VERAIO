@@ -770,7 +770,7 @@ DENOVO:
     _default:
     _check:
       - is_word()
-      - in_dictionary() sc ld bld
+      - in_dictionary() sc ld bld bld_2d
   new_grp_bounds:
     <<: *dtlist
     _style: multi-line
