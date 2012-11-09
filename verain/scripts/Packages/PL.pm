@@ -714,7 +714,7 @@ sub rodmap{
 	@a=@{ $CELLMAP_CONTENT{$_} };
 	@b=();
 	@c=unique(@a);
-	@c=nonzero(@c);
+#	@c=nonzero(@c);
 	@c=nonstring('-',@c);
 	$CELLMAP_CELLS{$_}=[@c];
 	print STDERR "  CELLMAP_CELLS{$_}: @c\n" if get_verbose();
