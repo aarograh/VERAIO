@@ -3,6 +3,7 @@
 <ParameterList name="CASEID">
   <Parameter name="case_id" type="string" value="CASL AMA Benchmark Problem 4"/>
   <ParameterList name="STATE">
+    <Parameter name="pressure" type="double" value="0"/>
     <Parameter name="modden" type="double" value="0.743"/>
     <Parameter name="sym" type="string" value="qtr"/>
     <Parameter name="feedback" type="string" value="off"/>

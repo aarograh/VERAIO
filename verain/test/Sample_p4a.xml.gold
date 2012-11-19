@@ -3,6 +3,7 @@
 <ParameterList name="CASEID">
   <Parameter name="case_id" type="string" value="CASL Problem 4x"/>
   <ParameterList name="STATE">
+    <Parameter name="pressure" type="double" value="0"/>
     <Parameter name="modden" type="double" value="0.743"/>
     <Parameter name="feedback" type="string" value="off"/>
     <Parameter name="boron" type="double" value="1300"/>
