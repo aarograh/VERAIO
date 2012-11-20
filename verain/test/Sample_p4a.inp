@@ -1,5 +1,5 @@
 [CASEID]
-  title 'CASL Problem 4a'
+  title 'CASL Problem 4x'
 !================================================================================
 !  Sample input for Single-assembly with control rods  (problem 4 is multi-assembly)
 !  Draft 1 - 6/28/2012 - based on XML on parameter list Wiki page
@@ -7,22 +7,14 @@
 !  Draft 3 - 7/17/2012 - control rods from pr4.inp, changes marked w/ SSMOD
 !  Draft 4 - 11/2/2012 - moved assembly description to include file (Scott)
 !
-!  Update 11/19/2012   
-!     * added explict lattice models for:
-!         * lower_nozzle_gap_height
-!         * lower_pincap_height
-!         * upper_nozzle_gap_height
-!         * upper_pincap_height
-!         * upper_plenum_height
-!
 !================================================================================
 
 [STATE]
   power  1.0e-7        ! %
   tinlet 620.33        ! F - 600K
-  tfuel  600.0         ! K - 600K  ** only used if feedback off
+  tfuel  600.0         ! K - 600K
   boron  1300          ! ppmB
-  modden 0.743         ! g/cc      ** only used if feedback off
+  modden 0.743         ! g/cc
 
 ! SSMOD
   rodbank 1 167
@@ -70,13 +62,9 @@
 
   cell 1     0.4096 0.418 0.475 / U31 he zirc
   cell 100          0.561 0.602 / mod    zirc       ! guide tube
-  cell 200          0.561 0.602 / mod    zirc       ! instrument tube
-  cell 7            0.418 0.475 / mod    mod        ! empty location
-  cell 8            0.418 0.475 /     he zirc       ! plenum
-  cell 9                  0.475 /        zirc       ! pincap
   
   lattice FUEL1
-     200
+     100
        1 1
        1 1 1
      100 1 1 100
@@ -86,46 +74,8 @@
        1 1 1   1 1   1 1 1
        1 1 1   1 1   1 1 1 1
 
-  lattice LGAP1
-     200
-       7 7
-       7 7 7
-     100 7 7 100
-       7 7 7   7 7
-       7 7 7   7 7 100
-     100 7 7 100 7   7 7
-       7 7 7   7 7   7 7 7
-       7 7 7   7 7   7 7 7 7
-
-  lattice PLEN1
-     200
-       8 8
-       8 8 8
-     100 8 8 100
-       8 8 8   8 8
-       8 8 8   8 8 100
-     100 8 8 100 8   8 8
-       8 8 8   8 8   8 8 8
-       8 8 8   8 8   8 8 8 8
-
-  lattice PCAP1
-     200
-       9 9
-       9 9 9
-     100 9 9 100
-       9 9 9   9 9
-       9 9 9   9 9 100
-     100 9 9 100 9   9 9
-       9 9 9   9 9   9 9 9
-       9 9 9   9 9   9 9 9 9
-
-  axial A1    6.050
-      LGAP1  10.281
-      PCAP1  11.951
+  axial A1   11.951 
       FUEL1 377.711
-      PLEN1 393.711
-      PCAP1 395.381
-      LGAP1 397.501
 
   grid END inc  1017 3.866
   grid MID zirc 875  3.810
@@ -143,6 +93,13 @@
   lower_nozzle  ss 6.05  6250.0  ! mat, height, mass (g)
   upper_nozzle  ss 8.827 6250.0  ! mat, height, mass (g)
 
+  lower_nozzle_gap_height  4.231
+  lower_pincap_height      1.67
+
+  upper_nozzle_gap_height  2.12
+  upper_pincap_height      1.67
+  upper_plenum_height      16
+  
  !! dancoff                   ! assembly_dancoff_map
  !!   0.000
  !!   0.287 0.315                            

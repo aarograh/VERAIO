@@ -1,8 +1,6 @@
 [CASEID]
   title CASL AMA Benchmark Problem 4
 
-!  update 11/19/2012 - add comment about missing upper and lower gap definitions
-
 [STATE]
   power  0.0        ! %
   tinlet 620.33     ! F - 600K
@@ -115,9 +113,6 @@
      5 4 4 5 4 4 4
      4 4 4 4 4 4 4 4
      4 4 4 4 4 4 4 4 4
-
-! ERROR: There is lower_gap defined from 6.053 to 10.3
-! ERROR: There is upper_gap defined from 395.4 to (406.3-8.827)
 
   axial A1 10.3 PLUG 11.951 FUEL1 377.71 PLEN 393.71 PLUG 395.4
   axial A2 10.3 PLUG 11.951 FUEL2 377.71 PLEN 393.71 PLUG 395.4

@@ -1,5 +1,5 @@
 [CASEID]
-  title CASL Westinghouse Lattice - Public - Rev. 0
+ CASL Westinghouse Lattice - Public - Rev. 0
 !-----------------------------------------------------------------------
 ! This sample input file contains all the information needed
 ! to accurately model a fuel lattice
@@ -8,12 +8,6 @@
 !  AIR - air for helium gap
 !  ZR4 - zircaloy-4
 !  MOD - water with boron
-!
-! **********************************************************************************
-! **********************************************************************************
-! ********** ERROR: This is an old style input deck and no longer works ************
-! **********************************************************************************
-! **********************************************************************************
 !
 !-----------------------------------------------------------------------
 [STATE]

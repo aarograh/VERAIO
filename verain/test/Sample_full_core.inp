@@ -28,14 +28,6 @@
 !  Draft 4 -
 !    Update control rod maps "crd_map", "crd_bank"
 !
-!  Update 11/19/2012   
-!     * added explict lattice models for:
-!         * lower_nozzle_gap_height
-!         * lower_pincap_height
-!         * upper_nozzle_gap_height
-!         * upper_pincap_height
-!         * upper_plenum_height
-!
 !-----------------------------------------------------------------------
 [STATE]
   title 'HZP Statepoint BOL'            ! state_title
@@ -267,8 +259,6 @@
 ! *** add top and bottom "shoulders"
 ! *** check plug lengths
 
-! *** ERROR: missing definition for upper gap between 395.3 and (406.3-8.827)
-
   axial A1  6.05 PLUG  11.95 REG1 377.71 PLEN 390.0 PLUG  395.3      ! REG1 2.1%
   axial A2  6.05 PLUG  11.95 REG2 377.71 PLEN 390.0 PLUG  395.3      ! REG2 2.6%
   axial A3  6.05 PLUG  11.95 REG3 377.71 PLEN 390.0 PLUG  395.3      ! REG3 3.1%
@@ -302,6 +292,19 @@
 ! Parser: lower_nozzle_comp, lower_nozzle_height, lower_nozzle_mass
   lower_nozzle  ss  6.05   6250.0
   upper_nozzle  ss  8.827  6250.0
+
+!*** set "automatic" end caps/plenums to zero
+
+  lower_nozzle_gap_height 0.0
+  upper_nozzle_gap_height 0.0
+
+  lower_pincap_height  0.0
+  upper_pincap_height  0.0
+
+  lower_plenum_height  0.0
+  upper_plenum_height  0.0
+
+
 
 [CONTROL]
   title "B4C control rods with AIC tips"   ! control_title
