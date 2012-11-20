@@ -2,12 +2,12 @@ CONTROLS:
   _pltype: list
   _do:
     - setdb MAIN_DB
-    - rodmap CONTROL/%axial,basename=>Control_,coremap=>CORE/@crd_map
+    - rodmap CONTROL/%axial,basename=>Control_,coremap=>CORE/@crd_map,matsearch=>CONTROL/%zirc/*:CONTROL/%aic/*:CONTROL/%he/*:CONTROL/%b4c/*:CONTROL/%inc/*:CONTROL/%ss/*:CONTROL/%pyrex/*:CONTROL/%mat/*:CORE/%zirc/*:CORE/%aic/*:CORE/%he/*:CORE/%b4c/*:CORE/%inc/*:CORE/%ss/*:CORE/%pyrex/*:CORE/%mat/*
   _content:
     Materials:
       _pltype: list
       _do:
-        - matmap Material_,CONTROL/%zirc/*,CONTROL/%aic/*,CONTROL/%he/*,CONTROL/%b4c/*,CONTROL/%inc/*,CONTROL/%ss/*,CONTROL/%boron/*,CONTROL/%mat/*
+        - matmap Material_,CONTROL/%zirc/*,CONTROL/%aic/*,CONTROL/%he/*,CONTROL/%b4c/*,CONTROL/%inc/*,CONTROL/%ss/*,CONTROL/%pyrex/*,CONTROL/%mat/*
       _content:
     title:
       _pltype: parameter

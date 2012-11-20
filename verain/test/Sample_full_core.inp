@@ -184,6 +184,23 @@
 
 ! To-Do:   Need to add CORE_MATERIALS sublist
 
+!  Old material format
+!
+!  he he 0.000176
+!  inc inc 8.19
+!  ss ss 8.0
+!  zirc zirc 6.56 
+!  aic aic 10.20
+!  pyrex pyrex 2.23
+!  b4c b4c 6.56
+
+  mat he     0.000176
+  mat inc    8.19
+  mat ss     8.0
+  mat zirc   6.56 
+  mat aic   10.20
+  mat pyrex  2.23
+  mat b4c    6.56
 
 [ASSEMBLY]
 
@@ -191,9 +208,13 @@
   npin   17                                       ! assembly_num_pins
   ppitch 1.26                                     ! assembly_ppitch
  
-  uo2    U21 10.257 / 2.11
-  uo2    U26 10.257 / 2.60
-  uo2    U31 10.257 / 3.10
+!  uo2    U21 10.257 / 2.11
+!  uo2    U26 10.257 / 2.60
+!  uo2    U31 10.257 / 3.10
+
+  fuel    U21 10.257 95.0 / 2.11
+  fuel    U26 10.257 95.0 / 2.60
+  fuel    U31 10.257 95.0 / 3.10
 
 
   cell 1   0.4096 0.418 0.475 / U21 he  zirc    ! low enriched pin cell

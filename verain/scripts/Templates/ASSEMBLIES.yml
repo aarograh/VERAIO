@@ -2,12 +2,12 @@ ASSEMBLIES:
   _pltype: list
   _do:
     - setdb MAIN_DB
-    - rodmap ASSEMBLY/%axial,mapname=>lattice,basename=>Assembly_,coremap=>CORE/@assm_map
+    - rodmap ASSEMBLY/%axial,mapname=>lattice,basename=>Assembly_,coremap=>CORE/@assm_map,matsearch=>ASSEMBLY/%uo2/*:ASSEMBLY/%zirc/*:ASSEMBLY/%aic/*:ASSEMBLY/%he/*:ASSEMBLY/%b4c/*:ASSEMBLY/%inc/*:ASSEMBLY/%ss/*:ASSEMBLY/%pyrex/*:ASSEMBLY/%mat/*:ASSEMBLY/%fuel/*:CORE/%zirc/*:CORE/%aic/*:CORE/%he/*:CORE/%b4c/*:CORE/%inc/*:CORE/%ss/*:CORE/%pyrex/*:CORE/%mat/*
   _content:
     Materials:
       _pltype: list
       _do:
-        - matmap Material_,ASSEMBLY/%uo2/*,ASSEMBLY/%zirc/*,ASSEMBLY/%pyrex/*,ASSEMBLY/%aic/*,ASSEMBLY/%he/*,ASSEMBLY/%b4c/*,ASSEMBLY/%inc/*,ASSEMBLY/%ss/*,ASSEMBLY/%boron/*,ASSEMBLY/%mat/*,ASSEMBLY/%fuel/*
+        - matmap Material_,ASSEMBLY/%uo2/*,ASSEMBLY/%zirc/*,ASSEMBLY/%pyrex/*,ASSEMBLY/%aic/*,ASSEMBLY/%he/*,ASSEMBLY/%b4c/*,ASSEMBLY/%inc/*,ASSEMBLY/%ss/*,ASSEMBLY/%pyrex/*,ASSEMBLY/%mat/*,ASSEMBLY/%fuel/*
       _content:
     title:
       _pltype: parameter
@@ -33,50 +33,6 @@ ASSEMBLIES:
       _do:
         - makemap ASSEMBLY/$npin,ASSEMBLY/@dancoff
       _content:
-
-
-    lower_nozzle_gap_height:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy ASSEMBLY/$lower_nozzle_gap_height
-      _content:
-
-    upper_nozzle_gap_height:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy ASSEMBLY/$upper_nozzle_gap_height
-      _content:
-
-    lower_pincap_height:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy ASSEMBLY/$lower_pincap_height
-      _content:
-
-    upper_pincap_height:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy ASSEMBLY/$upper_pincap_height
-      _content:
-
-    lower_plenum_height:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy ASSEMBLY/$lower_plenum_height
-      _content:
-
-    upper_plenum_height:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy ASSEMBLY/$upper_plenum_height
-      _content:
-
 
     lower_nozzle_comp:
       _pltype: parameter

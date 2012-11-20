@@ -3,7 +3,6 @@
 <ParameterList name="CASEID">
   <Parameter name="case_id" type="string" value="CASL Problem 3"/>
   <ParameterList name="STATE">
-    <Parameter name="pressure" type="double" value="0"/>
     <Parameter name="modden" type="double" value="0.743"/>
     <Parameter name="feedback" type="string" value="off"/>
     <Parameter name="boron" type="double" value="1300"/>
@@ -28,24 +27,49 @@
     <ParameterList name="Materials">
       <ParameterList name="Material_he">
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
         <Parameter name="mat_names" type="Array(string)" value="{he}"/>
         <Parameter name="key_name" type="string" value="he"/>
         <Parameter name="density" type="double" value="0.000176"/>
       </ParameterList>
+      <ParameterList name="Material_b4c">
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
+        <Parameter name="mat_names" type="Array(string)" value="{b4c}"/>
+        <Parameter name="key_name" type="string" value="b4c"/>
+        <Parameter name="density" type="double" value="6.56"/>
+      </ParameterList>
+      <ParameterList name="Material_aic">
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
+        <Parameter name="mat_names" type="Array(string)" value="{aic}"/>
+        <Parameter name="key_name" type="string" value="aic"/>
+        <Parameter name="density" type="double" value="10.20"/>
+      </ParameterList>
       <ParameterList name="Material_zirc">
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
         <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
         <Parameter name="key_name" type="string" value="zirc"/>
         <Parameter name="density" type="double" value="6.56"/>
       </ParameterList>
+      <ParameterList name="Material_pyrex">
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
+        <Parameter name="mat_names" type="Array(string)" value="{pyrex}"/>
+        <Parameter name="key_name" type="string" value="pyrex"/>
+        <Parameter name="density" type="double" value="2.23"/>
+      </ParameterList>
       <ParameterList name="Material_ss">
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
         <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
         <Parameter name="key_name" type="string" value="ss"/>
         <Parameter name="density" type="double" value="8.0"/>
       </ParameterList>
       <ParameterList name="Material_inc">
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
         <Parameter name="mat_names" type="Array(string)" value="{inc}"/>
         <Parameter name="key_name" type="string" value="inc"/>
         <Parameter name="density" type="double" value="8.19"/>
@@ -104,13 +128,14 @@
           <Parameter name="enrichment" type="double" value="3.1"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fissionable" type="bool" value="true"/>
           <Parameter name="key_name" type="string" value="U31"/>
           <Parameter name="depletable" type="bool" value="true"/>
           <Parameter name="density" type="double" value="10.257"/>
         </ParameterList>
       </ParameterList>
-      <Parameter name="label" type="string" value="A1"/>
       <Parameter name="title" type="string" value="Westinghouse 17x17"/>
+      <Parameter name="label" type="string" value="A1"/>
       <ParameterList name="Cells">
         <ParameterList name="Cell_8">
           <Parameter name="radii" type="Array(double)" value="{0.418,0.475}"/>

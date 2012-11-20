@@ -56,17 +56,31 @@
 
   bc_rad reflecting
 
-  he he 0.000176
-  inc inc 8.19
-  ss ss 8.0
-  zirc zirc 6.56 
+!  Old material format
+!
+!  he he 0.000176
+!  inc inc 8.19
+!  ss ss 8.0
+!  zirc zirc 6.56 
+!  aic aic 10.20
+!  pyrex pyrex 2.23
+!  b4c b4c 6.56
+
+  mat he     0.000176
+  mat inc    8.19
+  mat ss     8.0
+  mat zirc   6.56 
+  mat aic   10.20
+  mat pyrex  2.23
+  mat b4c    6.56
   
 [ASSEMBLY]
   title "Westinghouse 17x17"
   npin 17 
   ppitch 1.260
   
-  uo2 U31 10.257 / 3.1
+!  uo2 U31 10.257 / 3.1
+  fuel U31 10.257 95.0 / 3.1
 
 !=== material label, key_name, mat_name, density
   mat he   he   0.000176

@@ -1,177 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ParameterList>
-  <ParameterList name="CASEID">
-    <Parameter name="CASEID" type="string" value="CASL Westinghouse Lattice - Public - Rev. 0&#10;"/>
-  </ParameterList>
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
+<ParameterList name="CASEID">
+  <Parameter name="case_id" type="string" value="CASL Westinghouse Lattice - Public - Rev. 0"/>
   <ParameterList name="STATE">
-    <Parameter name="power" type="double" value="0.0"/>
+    <Parameter name="search" type="string" value="boron"/>
+    <Parameter name="boron" type="double" value="1000"/>
     <Parameter name="flow" type="double" value="0.0"/>
-    <Parameter name="xenon" type="string" value="none"/>
-    <ParameterList name="boron">
-      <Parameter name="boron.0" type="double" value="1000"/>
-      <Parameter name="boron.1" type="string" value="MOD"/>
-    </ParameterList>
-    <ParameterList name="search">
-      <Parameter name="search.0" type="string" value="'boron'"/>
-      <Parameter name="search.1" type="double" value="1.0"/>
-    </ParameterList>
+    <Parameter name="power" type="double" value="0.0"/>
   </ParameterList>
   <ParameterList name="CORE">
-    <ParameterList name="size">
-      <Parameter name="size.0" type="double" value="1"/>
-      <Parameter name="size.1" type="double" value="17"/>
-    </ParameterList>
+    <Parameter name="rated_power" type="double" value="17.673"/>
+    <Parameter name="rated_flow" type="double" value="94.49835"/>
     <Parameter name="apitch" type="double" value="21.5"/>
-    <ParameterList name="rated">
-      <Parameter name="rated.0" type="double" value="17.673"/>
-      <Parameter name="rated.1" type="double" value="557.7"/>
-      <Parameter name="rated.2" type="double" value="2500"/>
-      <Parameter name="rated.3" type="double" value="0.75"/>
+    <ParameterList name="Materials">
+      <ParameterList name="Material_he">
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
+        <Parameter name="mat_names" type="Array(string)" value="{he}"/>
+        <Parameter name="key_name" type="string" value="he"/>
+        <Parameter name="density" type="double" value="0.000176"/>
+      </ParameterList>
+      <ParameterList name="Material_b4c">
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
+        <Parameter name="mat_names" type="Array(string)" value="{b4c}"/>
+        <Parameter name="key_name" type="string" value="b4c"/>
+        <Parameter name="density" type="double" value="6.56"/>
+      </ParameterList>
+      <ParameterList name="Material_aic">
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
+        <Parameter name="mat_names" type="Array(string)" value="{aic}"/>
+        <Parameter name="key_name" type="string" value="aic"/>
+        <Parameter name="density" type="double" value="10.20"/>
+      </ParameterList>
+      <ParameterList name="Material_zirc">
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
+        <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
+        <Parameter name="key_name" type="string" value="zirc"/>
+        <Parameter name="density" type="double" value="6.56"/>
+      </ParameterList>
+      <ParameterList name="Material_pyrex">
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
+        <Parameter name="mat_names" type="Array(string)" value="{pyrex}"/>
+        <Parameter name="key_name" type="string" value="pyrex"/>
+        <Parameter name="density" type="double" value="2.23"/>
+      </ParameterList>
+      <ParameterList name="Material_ss">
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
+        <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
+        <Parameter name="key_name" type="string" value="ss"/>
+        <Parameter name="density" type="double" value="8.0"/>
+      </ParameterList>
+      <ParameterList name="Material_inc">
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="fissionable" type="bool" value="false"/>
+        <Parameter name="mat_names" type="Array(string)" value="{inc}"/>
+        <Parameter name="key_name" type="string" value="inc"/>
+        <Parameter name="density" type="double" value="8.19"/>
+      </ParameterList>
     </ParameterList>
-    <Parameter name="boundary" type="string" value="reflect"/>
+    <Parameter name="core_size" type="int" value="1"/>
   </ParameterList>
-  <ParameterList name="ASSEMBLY">
-    <Parameter name="title" type="string" value="&quot;Westinghouse VANTAGE-5H Lattice&quot;&#10;"/>
-    <ParameterList name="uo2">
-      <Parameter name="uo2.0" type="double" value="1"/>
-      <Parameter name="uo2.1" type="string" value="U21"/>
-      <Parameter name="uo2.2" type="double" value="10.257"/>
-      <Parameter name="uo2.3" type="double" value="2.110"/>
+  <ParameterList name="ASSEMBLIES">
+  </ParameterList>
+  <ParameterList name="CONTROLS">
+  </ParameterList>
+  <ParameterList name="DETECTORS">
+  </ParameterList>
+  <ParameterList name="INSERTS">
+  </ParameterList>
+  <ParameterList name="DENOVO">
+    <ParameterList name="silo_db">
     </ParameterList>
-    <Parameter name="pitch" type="double" value="1.260"/>
-    <ParameterList name="cell">
-      <Parameter name="cell.0" type="double" value="1"/>
-      <Parameter name="cell.1" type="string" value="U21"/>
-      <Parameter name="cell.2" type="double" value="0.4096"/>
-      <Parameter name="cell.3" type="double" value="0.418"/>
-      <Parameter name="cell.4" type="double" value="0.475"/>
-      <Parameter name="cell.5" type="string" value="U21"/>
-      <Parameter name="cell.6" type="string" value="AIR"/>
-      <Parameter name="cell.7" type="string" value="ZR4"/>
+    <ParameterList name="eigenvalue_db">
     </ParameterList>
-    <ParameterList name="cell">
-      <Parameter name="cell.0" type="double" value="2"/>
-      <Parameter name="cell.1" type="string" value="GT"/>
-      <Parameter name="cell.2" type="double" value="0.561"/>
-      <Parameter name="cell.3" type="double" value="0.602"/>
-      <Parameter name="cell.4" type="string" value="MOD"/>
-      <Parameter name="cell.5" type="string" value="ZR4"/>
+    <ParameterList name="quadrature_db">
     </ParameterList>
-    <ParameterList name="cell">
-      <Parameter name="cell.0" type="double" value="3"/>
-      <Parameter name="cell.1" type="string" value="IT"/>
-      <Parameter name="cell.2" type="double" value="0.559"/>
-      <Parameter name="cell.3" type="double" value="0.605"/>
-      <Parameter name="cell.4" type="string" value="MOD"/>
-      <Parameter name="cell.5" type="string" value="ZR4"/>
-    </ParameterList>
-    <ParameterList name="lattice">
-      <ParameterList name="row">
-        <Parameter name="rowNumber" type="int" value="0"/>
-        <Parameter name="rowData" type="Array(string)" value="{1}"/>
-      </ParameterList>
-      <ParameterList name="row">
-        <Parameter name="rowNumber" type="int" value="1"/>
-        <Parameter name="rowData" type="Array(string)" value="{3}"/>
-      </ParameterList>
-      <ParameterList name="row">
-        <Parameter name="rowNumber" type="int" value="2"/>
-        <Parameter name="rowData" type="Array(string)" value="{1,1}"/>
-      </ParameterList>
-      <ParameterList name="row">
-        <Parameter name="rowNumber" type="int" value="3"/>
-        <Parameter name="rowData" type="Array(string)" value="{1,1,1}"/>
-      </ParameterList>
-      <ParameterList name="row">
-        <Parameter name="rowNumber" type="int" value="4"/>
-        <Parameter name="rowData" type="Array(string)" value="{2,1,1,2}"/>
-      </ParameterList>
-      <ParameterList name="row">
-        <Parameter name="rowNumber" type="int" value="5"/>
-        <Parameter name="rowData" type="Array(string)" value="{1,1,1,1,1}"/>
-      </ParameterList>
-      <ParameterList name="row">
-        <Parameter name="rowNumber" type="int" value="6"/>
-        <Parameter name="rowData" type="Array(string)" value="{1,1,1,1,1,2}"/>
-      </ParameterList>
-      <ParameterList name="row">
-        <Parameter name="rowNumber" type="int" value="7"/>
-        <Parameter name="rowData" type="Array(string)" value="{2,1,1,2,1,1,1}"/>
-      </ParameterList>
-      <ParameterList name="row">
-        <Parameter name="rowNumber" type="int" value="8"/>
-        <Parameter name="rowData" type="Array(string)" value="{1,1,1,1,1,1,1,1}"/>
-      </ParameterList>
-      <ParameterList name="row">
-        <Parameter name="rowNumber" type="int" value="9"/>
-        <Parameter name="rowData" type="Array(string)" value="{1,1,1,1,1,1,1,1,1}"/>
-      </ParameterList>
+    <ParameterList name="upscatter_db">
     </ParameterList>
   </ParameterList>
-  <ParameterList name="EDIT">
-    <ParameterList name="restart">
-      <Parameter name="restart.0" type="string" value="restart.res"/>
-      <Parameter name="restart.1" type="double" value="0"/>
-    </ParameterList>
-    <Parameter name="ascii" type="string" value="3PIN"/>
-    <Parameter name="silo" type="string" value="3PIN"/>
+  <ParameterList name="EDITS">
   </ParameterList>
-  <ParameterList name="DECART">
-    <Parameter name="file" type="string" value="hel047g_v19a_ascii.xsl"/>
-    <ParameterList name="mesh">
-      <Parameter name="mesh.0" type="double" value="15.24"/>
-      <Parameter name="mesh.1" type="double" value="5.08"/>
-      <Parameter name="mesh.2" type="double" value="10.16"/>
-      <Parameter name="mesh.3" type="double" value="15"/>
-      <Parameter name="mesh.4" type="double" value="15"/>
-      <Parameter name="mesh.5" type="double" value="15"/>
-      <Parameter name="mesh.6" type="double" value="15"/>
-      <Parameter name="mesh.7" type="double" value="15"/>
-      <Parameter name="mesh.8" type="double" value="15"/>
-      <Parameter name="mesh.9" type="double" value="15"/>
-      <Parameter name="mesh.10" type="double" value="15"/>
-      <Parameter name="mesh.11" type="double" value="15"/>
-      <Parameter name="mesh.12" type="double" value="15"/>
-      <Parameter name="mesh.13" type="double" value="15"/>
-      <Parameter name="mesh.14" type="double" value="15"/>
-      <Parameter name="mesh.15" type="double" value="15"/>
-      <Parameter name="mesh.16" type="double" value="15"/>
-      <Parameter name="mesh.17" type="double" value="15"/>
-      <Parameter name="mesh.18" type="double" value="15"/>
-      <Parameter name="mesh.19" type="double" value="15"/>
-      <Parameter name="mesh.20" type="double" value="15"/>
-      <Parameter name="mesh.21" type="double" value="15"/>
-      <Parameter name="mesh.22" type="double" value="15"/>
-      <Parameter name="mesh.23" type="double" value="15"/>
-      <Parameter name="mesh.24" type="double" value="15"/>
-      <Parameter name="mesh.25" type="double" value="15"/>
-      <Parameter name="mesh.26" type="double" value="15"/>
-      <Parameter name="mesh.27" type="double" value="15"/>
-      <Parameter name="mesh.28" type="double" value=".24"/>
-    </ParameterList>
-    <ParameterList name="ray">
-      <Parameter name="ray.0" type="double" value="0.04"/>
-      <Parameter name="ray.1" type="double" value="16"/>
-      <Parameter name="ray.2" type="double" value="4"/>
-    </ParameterList>
-    <ParameterList name="fuel_mesh">
-      <Parameter name="fuel_mesh.0" type="double" value="8"/>
-      <Parameter name="fuel_mesh.1" type="double" value="3"/>
-    </ParameterList>
-    <ParameterList name="cmfd">
-      <Parameter name="cmfd.0" type="string" value="T"/>
-      <Parameter name="cmfd.1" type="string" value="T"/>
-    </ParameterList>
-    <ParameterList name="conv_crit">
-      <Parameter name="conv_crit.0" type="double" value="1e-5"/>
-      <Parameter name="conv_crit.1" type="double" value="1e-4"/>
-    </ParameterList>
-    <ParameterList name="reso_opt">
-      <Parameter name="reso_opt.0" type="double" value="4"/>
-      <Parameter name="reso_opt.1" type="string" value="F"/>
-      <Parameter name="reso_opt.2" type="string" value="F"/>
-    </ParameterList>
-    <Parameter name="boron" type="double" value="1300"/>
-    <Parameter name="threads" type="double" value="12"/>
+  <ParameterList name="COBRATF">
   </ParameterList>
 </ParameterList>
