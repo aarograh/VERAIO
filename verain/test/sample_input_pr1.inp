@@ -1,5 +1,5 @@
 [CASEID]
- CASL Westinghouse Pin Cell - Public - Rev. 0
+  title CASL Westinghouse Pin Cell - Public - Rev. 0
 !-----------------------------------------------------------------------
 ! This sample input file contains all the information needed
 ! to accurately model a fuel lattice
@@ -13,6 +13,12 @@
 ! figure out how to make this input span the space of pin->core
 !
 ! many of the 'core' parameters may need to default
+!
+! **********************************************************************************
+! **********************************************************************************
+! ********** ERROR: This is an old style input deck and no longer works ************
+! **********************************************************************************
+! **********************************************************************************
 !
 !-----------------------------------------------------------------------
 [STATE]
