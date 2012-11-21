@@ -127,6 +127,7 @@
         <ParameterList name="Material_U31">
           <Parameter name="enrichment" type="double" value="3.1"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="thden" type="double" value="95.0"/>
           <Parameter name="mat_names" type="Array(string)" value="{uo2}"/>
           <Parameter name="fissionable" type="bool" value="true"/>
           <Parameter name="key_name" type="string" value="U31"/>
