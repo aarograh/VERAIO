@@ -71,6 +71,7 @@ _DIRECTORY:
   UTILS:
   DENOVO:
   COBRATF:
+  MPACT:
 
 CASEID:
   title:
@@ -907,6 +908,79 @@ COBRATF:
       - is_gt() 0
 
   iitmax:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+
+MPACT:
+
+  quad_type:
+    <<: *dtword
+    _default:
+    _check:
+      - is_word()
+  azi_ang:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+  pol_ang:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+
+  xs_type:
+    <<: *dtword
+    _default:
+    _check:
+      - is_word()
+  xs_path:
+    <<: *dtword
+    _default:
+    _check:
+      - is_word()
+  xs_name:
+    <<: *dtword
+    _default:
+    _check:
+      - is_word()
+
+  kconv:
+    <<: *dtdouble
+    _default:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  fluxconv:
+    <<: *dtdouble
+    _default:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  cmfd:
+    <<: *dtbool
+    _default:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  nouter:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+  ninner:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+  nupscat:
     <<: *dtint
     _default:
     _check:

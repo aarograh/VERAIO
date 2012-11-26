@@ -39,7 +39,7 @@ my $pgnam=$0;     # program name
 # input schema
 my $SCHEMA="${directory}Templates/Directory.yml";
 # output schemas
-my @BLOCKS=('CASEID','STATE','CORE','ASSEMBLIES','CONTROLS','DETECTORS','INSERTS','DENOVO','EDITS','COBRATF');
+my @BLOCKS=('CASEID','STATE','CORE','ASSEMBLIES','CONTROLS','DETECTORS','INSERTS','DENOVO','EDITS','COBRATF','MPACT');
 foreach $iblock (@BLOCKS){
     $SCHEMA_PL{$iblock} = "${directory}Templates/$iblock.yml";
 }
