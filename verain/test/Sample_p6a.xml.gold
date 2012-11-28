@@ -125,31 +125,31 @@
       <ParameterList name="Materials">
         <ParameterList name="Material_he">
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{0.000176}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{he}"/>
           <Parameter name="fissionable" type="bool" value="false"/>
           <Parameter name="key_name" type="string" value="he"/>
-          <Parameter name="density" type="double" value="he"/>
+          <Parameter name="density" type="double" value="0.000176"/>
         </ParameterList>
         <ParameterList name="Material_zirc">
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{6.56}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
           <Parameter name="fissionable" type="bool" value="false"/>
           <Parameter name="key_name" type="string" value="zirc"/>
-          <Parameter name="density" type="double" value="zirc"/>
+          <Parameter name="density" type="double" value="6.56"/>
         </ParameterList>
         <ParameterList name="Material_ss">
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{8.0}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
           <Parameter name="fissionable" type="bool" value="false"/>
           <Parameter name="key_name" type="string" value="ss"/>
-          <Parameter name="density" type="double" value="ss"/>
+          <Parameter name="density" type="double" value="8.0"/>
         </ParameterList>
         <ParameterList name="Material_inc">
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{8.19}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{inc}"/>
           <Parameter name="fissionable" type="bool" value="false"/>
           <Parameter name="key_name" type="string" value="inc"/>
-          <Parameter name="density" type="double" value="inc"/>
+          <Parameter name="density" type="double" value="8.19"/>
         </ParameterList>
         <ParameterList name="Material_U31">
           <Parameter name="enrichment" type="double" value="3.1"/>
