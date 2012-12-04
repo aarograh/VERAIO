@@ -195,4 +195,12 @@
     <Parameter name="epso" type="double" value="0.001"/>
     <Parameter name="iitmax" type="int" value="40"/>
   </ParameterList>
+  <ParameterList name="MPACT">
+    <ParameterList name="quad_set">
+    </ParameterList>
+    <ParameterList name="iteration_control">
+    </ParameterList>
+    <ParameterList name="xs_library">
+    </ParameterList>
+  </ParameterList>
 </ParameterList>
