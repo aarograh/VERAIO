@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LIST="Sample_full_core sample_input_pr2 Sample_p3 Sample_p4a Sample_p4 Sample_p6a small_3x3rod_HFP small_3x3rod_HZP"
+LIST="Sample_full_core Sample_p3 Sample_p4a Sample_p4 Sample_p6a small_3x3rod_HFP small_3x3rod_HZP"
 #  sample_input_pr1
 
 for CASE in $LIST; do
