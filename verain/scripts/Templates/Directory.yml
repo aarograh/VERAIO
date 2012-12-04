@@ -916,18 +916,25 @@ COBRATF:
 
 MPACT:
 
+  ray_spacing:
+    <<: *dtdouble
+    _default:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  
   quad_type:
     <<: *dtword
     _default:
     _check:
       - is_word()
-  azi_ang:
+  azimuthals_octant:
     <<: *dtint
     _default:
     _check:
       - is_int()
       - is_gt() 0
-  pol_ang:
+  polars_octant:
     <<: *dtint
     _default:
     _check:
@@ -939,24 +946,19 @@ MPACT:
     _default:
     _check:
       - is_word()
-  xs_path:
-    <<: *dtword
-    _default:
-    _check:
-      - is_word()
-  xs_name:
+  xs_filename:
     <<: *dtword
     _default:
     _check:
       - is_word()
 
-  kconv:
+  k_tolerance:
     <<: *dtdouble
     _default:
     _check:
       - is_float()
       - is_gt() 0.0
-  fluxconv:
+  flux_tolerance:
     <<: *dtdouble
     _default:
     _check:
@@ -968,19 +970,19 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
-  nouter:
+  num_outers:
     <<: *dtint
     _default:
     _check:
       - is_int()
       - is_gt() 0
-  ninner:
+  num_inners:
     <<: *dtint
     _default:
     _check:
       - is_int()
       - is_gt() 0
-  nupscat:
+  up_scatter:
     <<: *dtint
     _default:
     _check:

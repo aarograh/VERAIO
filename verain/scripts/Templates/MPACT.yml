@@ -4,6 +4,13 @@ MPACT:
     - setdb MAIN_DB
   _content:
 
+    ray_spacing:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MPACT/$ray_spacing
+      _content:
+
     quad_set:
       _pltype: list
       _content:
@@ -18,14 +25,14 @@ MPACT:
           _pltype: parameter
           _type: int
           _do:
-            - copy MPACT/$pol_ang
+            - copy MPACT/$polars_octant
           _content:
 
         azimuthals_octant:
           _pltype: parameter
           _type: int
           _do:
-            - copy MPACT/$azi_ang
+            - copy MPACT/$azimuthals_octant
           _content:
 
     iteration_control:
@@ -36,14 +43,14 @@ MPACT:
           _pltype: parameter
           _type: double
           _do:
-            - copy MPACT/$kconv
+            - copy MPACT/$k_tolerance
           _content:
 
         flux_tolerance:
           _pltype: parameter
           _type: double
           _do:
-            - copy MPACT/$fluxconv
+            - copy MPACT/$flux_tolerance
           _content:
         
         cmfd:
@@ -57,21 +64,21 @@ MPACT:
           _pltype: parameter
           _type: int
           _do:
-            - copy MPACT/$nouter
+            - copy MPACT/$num_outers
           _content:
     
         num_inners:
           _pltype: parameter
           _type: int
           _do:
-            - copy MPACT/$ninner
+            - copy MPACT/$num_inners
           _content:
 
         up_scatter:
           _pltype: parameter
           _type: int
           _do:
-            - copy MPACT/$nupscat
+            - copy MPACT/$up_scatter
           _content:
     
     xs_library:
@@ -85,17 +92,10 @@ MPACT:
             - copy MPACT/$xs_type
           _content:
     
-        xs_path:
+        xs_filename:
           _pltype: parameter
           _type: string
           _do:
-            - copy MPACT/$xs_path
-          _content:
-
-        xs_file:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy MPACT/$xs_name
+            - copy MPACT/$xs_filename
           _content:
 
