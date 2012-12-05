@@ -115,6 +115,6 @@
   cmfd              true
   up_scatter        2
   num_outers        500
-!xs_library">
+!xs_library
   xs_filename       hy047n18g110u.dat
   xs_type           HELIOS
