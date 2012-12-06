@@ -75,6 +75,7 @@ _DIRECTORY:
   UTILS:
   DENOVO:
   COBRATF:
+  MPACT:
 
 CASEID:
   title:
@@ -881,3 +882,78 @@ COBRATF:
     <<: *dtdblnamed
     _default:
     _check:
+
+MPACT:
+
+  ray_spacing:
+    <<: *dtdouble
+    _default:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+
+  quad_type:
+    <<: *dtword
+    _default:
+    _check:
+      - is_word()
+  azimuthals_octant:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+  polars_octant:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+
+  xs_type:
+    <<: *dtword
+    _default:
+    _check:
+      - is_word()
+  xs_filename:
+    <<: *dtword
+    _default:
+    _check:
+      - is_word()
+
+  k_tolerance:
+    <<: *dtdouble
+    _default:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  flux_tolerance:
+    <<: *dtdouble
+    _default:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  cmfd:
+    <<: *dtbool
+    _default:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  num_outers:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+  num_inners:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
+  up_scatter:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0
