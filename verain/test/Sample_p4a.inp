@@ -8,7 +8,7 @@
 !  Draft 4 - 11/2/2012 - moved assembly description to include file (Scott)
 !
 !  Update 11/19/2012   
-!     * added explict lattice models for:
+!     * added explicit lattice models for:
 !         * lower_nozzle_gap_height
 !         * lower_pincap_height
 !         * upper_nozzle_gap_height

@@ -227,4 +227,12 @@
   </ParameterList>
   <ParameterList name="COBRATF">
   </ParameterList>
+  <ParameterList name="MPACT">
+    <ParameterList name="quad_set">
+    </ParameterList>
+    <ParameterList name="iteration_control">
+    </ParameterList>
+    <ParameterList name="xs_library">
+    </ParameterList>
+  </ParameterList>
 </ParameterList>
