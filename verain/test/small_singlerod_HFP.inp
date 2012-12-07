@@ -1,0 +1,240 @@
+[CASEID]
+  title 'single rod HFP'
+!================================================================================
+!  Sample input for testing Cobra - single rod
+!
+!    single rod problem
+!      pin pitch = 1.26 cm
+!      no assembly gap
+!
+!  Steps to create COBRA Input deck:
+!   * Reactor aware input (ascii input to XML)
+!   * Cobra converter     (XML to cobra preprocessor)
+!   * Cobra preprocessor  (cobra preprocessor to cobra input)
+
+!  To process:
+!     ./react2xml.pl --xml --xslt small_singlerod_HFP.inp small_singlerod_HFP.xml
+!
+!================================================================================
+
+[STATE]
+  power  150.0         ! %     high power!
+  tinlet 559.0         ! F
+  boron  1300          ! ppmB
+  pressure 2250        ! psia
+
+! tfuel  600.0         ! K - 600K  Not used with T/H feedback!
+! modden 0.743         ! g/cc      Not used with T/H feedback!
+  
+  feedback on          ! T/H feedback
+
+[CORE]
+  size 1               ! 1x1 single-assembly
+
+! ****
+! **** Power
+! ****    For Watts Bar, the nominal power is 5.45 kW/ft
+! ****    corresponds to 0.07848 MW for a single rod
+! **** Flow
+! ****    For Watts Bar, nominal flow for a single rod is 0.00236 Mlb/hr
+! ****
+
+  rated 0.07848  0.00236    ! MW, Mlbs/hr
+  apitch 1.26               ! single rod lattice, no gap
+  height 406.328
+
+  core_shape
+    1
+  
+  assm_map
+    A1
+
+  lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
+  upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
+
+  bc_rad reflecting
+
+  mat he     0.000176
+  mat inc    8.19
+  mat ss     8.0
+  mat zirc   6.56 
+  mat aic   10.20
+  mat pyrex  2.23
+  mat b4c    6.56
+
+[ASSEMBLY]
+  title "Tiny single rod assembly"
+  npin 1
+  ppitch 1.26
+  
+  fuel U31 10.257 95.0 / 3.1
+
+!=== material label, key_name, density
+  mat he    0.000176
+  mat inc   8.19
+  mat ss    8.0
+  mat zirc  6.56 
+
+  cell 1     0.4096 0.418 0.475   / U31 he zirc
+  cell 2            0.561 0.602   / mod    zirc       ! instrument tube
+  cell 7            0.418 0.475   / mod    mod        ! empty location
+  cell 8            0.418 0.475   /     he zirc       ! plenum
+  cell 9                  0.475   /        zirc       ! pincap
+  
+  lattice FUEL1
+      1
+
+  lattice LGAP1
+      7
+
+  lattice PLEN1
+      8
+
+  lattice PCAP1
+      9
+
+!  Note: active fuel = 365.76cm = 12ft
+
+  axial A1    6.050
+      LGAP1  10.281
+      PCAP1  11.951
+      FUEL1 377.711
+      PLEN1 393.711
+      PCAP1 395.381
+      LGAP1 397.501
+
+! grid masses reduced by (1/17)^2
+
+  grid END inc  3.519 3.866
+  grid MID zirc 3.028 3.810
+
+  grid_axial
+      END  13.884
+      MID  75.2
+      MID 127.4
+      MID 179.6
+      MID 231.8
+      MID 284.0
+      MID 336.2
+      END 388.2
+
+! nozzle masses reduced by (1/17)^2
+
+  lower_nozzle  ss 6.05  21.626  ! mat, height, mass (g)
+  upper_nozzle  ss 8.827 21.626  ! mat, height, mass (g)
+
+[EDITS]
+
+!  3in intervals in active fuel
+  axial_edit_bounds 
+          11.951
+          15.817 
+          24.028 
+          32.239 
+          40.45 
+          48.662 
+          56.873 
+          65.084 
+          73.295 
+          77.105 
+          85.17 
+          93.235 
+          101.3 
+          109.365 
+          117.43 
+          125.495 
+          129.305 
+          137.37 
+          145.435 
+          153.5 
+          161.565 
+          169.63 
+          177.695 
+          181.505 
+          189.57 
+          197.635 
+          205.7 
+          213.765 
+          221.83 
+          229.895 
+          233.705 
+          241.77 
+          249.835 
+          257.9 
+          265.965 
+          274.03 
+          282.095 
+          285.905 
+          293.97 
+          302.035 
+          310.1 
+          318.165 
+          326.23 
+          334.295 
+          338.105 
+          346.0262 
+          353.9474 
+          361.8686 
+          369.7898 
+          377.711
+
+[DENOVO]
+    eq_set        sc
+    eigen_solver  arnoldi
+    tolerance     1e-06
+    Pn_order      0
+    dimension     3
+    mesh          4
+!    eigenvalue_db:
+        k_tolerance  0.0001
+        L2_tolerance 0.001
+        energy_dep_ev  true
+    mat_library   casl_comp.sh5
+    max_delta_z   2.54
+    num_blocks_i  1 
+    num_blocks_j  1  
+    num_z_blocks  9  
+    num_groups    23
+    num_sets      4
+!    quadrature_db:
+        azimuthals_octant  4
+        polars_octant      4
+        quad_type          qr
+!    silo_db:
+        silo_output  vera
+!    upscatter_db:
+        upscatter_tolerance  1e-05
+    xs_library     "v7-238ir"
+   new_grp_bounds 
+       8.2085e+05 
+       1.1109e+05 
+       5.5308e+03 
+       1.8644e+02 
+       3.7612e+01 
+       3.5379e+01
+       2.7697e+01 
+       2.1684e+01 
+       2.0397e+01 
+       1.5968e+01 
+       7.1500e+00
+       6.7000e+00
+       6.3000e+00 
+       1.0970e+00 
+       1.0450e+00 
+       9.5000e-01 
+       3.5000e-01 
+       2.0600e-01
+       1.0700e-01 
+       5.8000e-02 
+       2.5000e-02 
+       1.0000e-02 
+       1.0000e-05
+
+[COBRATF]
+  nfuel   3
+  irfc    1
+  epso    0.001
+  oitmax  5
+  iitmax  40
+
+
