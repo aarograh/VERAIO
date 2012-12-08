@@ -988,3 +988,9 @@ MPACT:
     _check:
       - is_int()
       - is_gt() 0
+  num_threads:
+    <<: *dtint
+    _default:
+    _check:
+      - is_int()
+      - is_gt() 0

@@ -80,6 +80,13 @@ MPACT:
           _do:
             - copy MPACT/$up_scatter
           _content:
+
+        num_threads:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$num_threads
+          _content:
     
     xs_library:
       _pltype: list

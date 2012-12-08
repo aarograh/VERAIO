@@ -151,6 +151,7 @@
     </ParameterList>
     <ParameterList name="iteration_control">
       <Parameter name="flux_tolerance" type="double" value="1e-6"/>
+      <Parameter name="num_threads" type="int" value="8"/>
       <Parameter name="num_inners" type="int" value="2"/>
       <Parameter name="k_tolerance" type="double" value="1e-6"/>
       <Parameter name="cmfd" type="bool" value="true"/>
