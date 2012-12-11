@@ -39,13 +39,6 @@ CORE:
         - copy CORE/$cycnum
       _content:
 
-    best_param_ever:
-      _pltype: parameter
-      _type: int
-      _do:
-        - copy CORE/$bestpar
-      _content:
-
     cyc_stdate:
       _pltype: parameter
       _type: int
