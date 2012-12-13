@@ -66,7 +66,7 @@ foreach $iblock (@BLOCKS){
 
 #
 # Rethreads
-# PL for DENOVO requies repeating maps, axial, cells, etc
+# PL for DENOVO requires repeating maps, axial, cells, etc
 #
 %RETHREAD=( 
     'ASSEMBLIES' => 'Assembly_',
@@ -120,7 +120,8 @@ my ($ifile,$ofile)=@ARGV;
 #
 $YAML::UseAliases=0;    # minimize references
 ($INPUT_DB) = YAML::LoadFile( $SCHEMA );
-# Clean up
+# Clean up the inner references in the tree
+# Need to fix
 mergekeys_loop( $INPUT_DB );
 
 #
@@ -152,20 +153,24 @@ YAML::DumpFile("$ifile.dbg.yml",$MAIN_DB) if $DEBUG;
 #
 
 # Associate the MAIN_DB data with the PL package
+# To be used for multiple blocks of the same name in the future
+# Currently, setting the main database in the PL yml files is
+# just a placeholder for multiple blocks
 PL->set_sourcedb($MAIN_DB);
 $YAML::UseAliases=0;    # minimize references
 foreach $iblock (@BLOCKS){
 
     # Initiate each block
     ($SCH_PL{$iblock}) = YAML::LoadFile( $SCHEMA_PL{$iblock} );
-    mergekeys_loop( $SCH_PL{$iblock} );
+    mergekeys_loop( $SCH_PL{$iblock} );   # needs fix to eliminate
 
     # Process the block using commands in the block templates
     PLlist($SCH_PL{$iblock}->{$iblock});
     YAML::DumpFile("$iblock.dbg.yml",$SCH_PL{$iblock}) if $DEBUG;
 
+    # Used for repeating information in the PL, lattices, cells and such
     if(exists($RETHREAD{$iblock})){
-	# Gum up the tree because of the duplication
+	# Gum up the tree
 	rethread($SCH_PL{$iblock},$iblock,$RETHREAD{$iblock});
 	YAML::DumpFile("$iblock.ddbg.yml",$SCH_PL{$iblock}) if $DEBUG;
     };
@@ -187,7 +192,7 @@ if($XSLT ne "off"){
 }
 
 
-# Assumes that CASEID goes first
+# Select CASEID to be the root XML node
 foreach $iblock (@BLOCKS){
     if($iblock eq 'CASEID'){
 	packXMLlist($SCH_PL{$iblock}->{$iblock},$iblock,$OFILE,0,notclose=>1);
@@ -196,6 +201,7 @@ foreach $iblock (@BLOCKS){
 	packXMLlist($SCH_PL{$iblock}->{$iblock},$iblock,$OFILE,1);
     }
 }
+# close the CASEID node
 print $OFILE "</ParameterList>\n";
 
 close $OFILE;
