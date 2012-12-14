@@ -1,6 +1,8 @@
 [CASEID]
   title CASL AMA Benchmark Problem 4
 
+!  update 11/19/2012 - add comment about missing upper and lower gap definitions
+
 [STATE]
   power  0.0        ! %
   tinlet 620.33     ! F - 600K
@@ -54,14 +56,35 @@
   ylabel  7 8 9
 
   bc_rad reflecting
-  
+
+!  Old material format
+!
+!  he he 0.000176
+!  inc inc 8.19
+!  ss ss 8.0
+!  zirc zirc 6.56 
+!  aic aic 10.20
+!  pyrex pyrex 2.23
+!  b4c b4c 6.56
+
+  mat he     0.000176
+  mat inc    8.19
+  mat ss     8.0
+  mat zirc   6.56 
+  mat aic   10.20
+  mat pyrex  2.23
+  mat b4c    6.56
+
 [ASSEMBLY]
   title "Westinghouse 17x17 A"
   npin 17
   ppitch 1.260
   
-  uo2 U21 10.257 / 2.11
-  uo2 U26 10.257 / 2.62
+!  uo2 U21 10.257 / 2.11
+!  uo2 U26 10.257 / 2.62
+
+  fuel U21 10.257 95.0 / 2.11
+  fuel U26 10.257 95.0 / 2.62
 
   cell 1   0.4096 0.418 0.475 / U21 he zirc
   cell 2   0.4096 0.418 0.475 / U26 he zirc
@@ -113,6 +136,9 @@
      5 4 4 5 4 4 4
      4 4 4 4 4 4 4 4
      4 4 4 4 4 4 4 4 4
+
+! ERROR: There is lower_gap defined from 6.053 to 10.3
+! ERROR: There is upper_gap defined from 395.4 to (406.3-8.827)
 
   axial A1 10.3 PLUG 11.951 FUEL1 377.71 PLEN 393.71 PLUG 395.4
   axial A2 10.3 PLUG 11.951 FUEL2 377.71 PLEN 393.71 PLUG 395.4

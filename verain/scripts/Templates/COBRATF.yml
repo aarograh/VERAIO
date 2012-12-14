@@ -37,3 +37,18 @@ COBRATF:
       _do:
         - copy COBRATF/$iitmax
       _content:
+
+    gridlabel:
+      _pltype: array
+      _type: string
+      _do:
+        - copyhash COBRATF/%gridloss,select=>keys
+      _content:
+
+    gridlloss:
+      _pltype: array
+      _type: double
+      _do:
+        - copyhash COBRATF/%gridloss,select=>values
+      _content:
+

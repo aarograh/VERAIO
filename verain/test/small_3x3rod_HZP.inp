@@ -62,42 +62,36 @@
 
   bc_rad reflecting
 
-!new materials
-! mat he     0.000176
-! mat inc    8.19
-! mat ss     8.0
-! mat zirc   6.56 
-! mat aic   10.20
-! mat pyrex  2.23
-! mat b4c    6.56
+!  Old material format
+!
+!  he he 0.000176
+!  inc inc 8.19
+!  ss ss 8.0
+!  zirc zirc 6.56
+!  aic aic 10.20
+!  pyrex pyrex 2.23
+!  b4c b4c 6.56
 
-!old material formats
-  he   he 0.000176
-  inc  inc 8.19
-  ss   ss 8.0
-  zirc zirc 6.56
+  mat he     0.000176
+  mat inc    8.19
+  mat ss     8.0
+  mat zirc   6.56
+  mat aic   10.20
+  mat pyrex  2.23
+  mat b4c    6.56
   
 [ASSEMBLY]
   title "Tiny 3x3 Rod Assembly"
   npin 3
   ppitch 1.20
   
-!new format
-! fuel U31 10.257 95.0 / 3.1
-!old format
-  uo2  U31 10.257 / 3.1
+  fuel U31 10.257 95.0 / 3.1
 
 !=== material label, key_name, density
-! mat he    0.000176
-! mat inc   8.19
-! mat ss    8.0
-! mat zirc  6.56 
-
-!old format
-  he   he 0.000176
-  inc  inc 8.19
-  ss   ss 8.0
-  zirc zirc 6.56
+  mat he    0.000176
+  mat inc   8.19
+  mat ss    8.0
+  mat zirc  6.56 
 
   cell 1     0.4096 0.418 0.475   / U31 he zirc
   cell 2            0.561 0.602   / mod    zirc       ! instrument tube
@@ -123,16 +117,13 @@
 
 !  Note: active fuel = 365.76cm = 12ft
 
-! axial A1    6.050
-!     LGAP1  10.281
-!     PCAP1  11.951
-!     FUEL1 377.711
-!     PLEN1 393.711
-!     PCAP1 395.381
-!     LGAP1 397.501
-
-  axial A1   11.951
+  axial A1    6.050
+      LGAP1  10.281
+      PCAP1  11.951
       FUEL1 377.711
+      PLEN1 393.711
+      PCAP1 395.381
+      LGAP1 397.501
 
 ! grid masses reduced for small problem
 
@@ -153,14 +144,6 @@
 
   lower_nozzle  ss 6.05  195.0   ! mat, height, mass (g)
   upper_nozzle  ss 8.827 195.0   ! mat, height, mass (g)
-
-!old geometry
-  lower_nozzle_gap_height  4.231
-  lower_pincap_height      1.67
-
-  upper_nozzle_gap_height  2.12
-  upper_pincap_height      1.67
-  upper_plenum_height      16
 
 [EDITS]
 

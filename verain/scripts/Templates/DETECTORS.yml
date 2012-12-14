@@ -2,12 +2,12 @@ DETECTORS:
   _pltype: list
   _do:
     - setdb MAIN_DB
-    - rodmap DETECTOR/%axial,basename=>Detector_,coremap=>CORE/@det_map
+    - rodmap DETECTOR/%axial,basename=>Detector_,coremap=>CORE/@det_map,matsearch=>DETECTOR/%zirc/*:DETECTOR/%aic/*:DETECTOR/%he/*:DETECTOR/%b4c/*:DETECTOR/%inc/*:DETECTOR/%ss/*:DETECTOR/%pyrex/*:DETECTOR/%mat/*:CORE/%zirc/*:CORE/%aic/*:CORE/%he/*:CORE/%b4c/*:CORE/%inc/*:CORE/%ss/*:CORE/%pyrex/*:CORE/%mat/*
   _content:
     Materials:
       _pltype: list
       _do:
-        - matmap Material_,DETECTOR/%zirc/*,DETECTOR/%aic/*,DETECTOR/%he/*,DETECTOR/%b4c/*,DETECTOR/%inc/*,DETECTOR/%ss/*,DETECTOR/%boron/*,DETECTOR/%mat/*
+        - matmap Material_,DETECTOR/%zirc/*,DETECTOR/%aic/*,DETECTOR/%he/*,DETECTOR/%b4c/*,DETECTOR/%inc/*,DETECTOR/%ss/*,DETECTOR/%pyrex/*,DETECTOR/%mat/*
       _content:
     title:
       _pltype: parameter

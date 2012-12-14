@@ -6,6 +6,7 @@ use ClonePP qw(clone);
 use KeyTree;
 use MiscUtils;
 use REACTOR;
+use TypeUtils;
 
 use Exporter;
 @ISA = ('Exporter');
@@ -65,9 +66,14 @@ sub PLdoarg{
 
     $str =~ s/=>/,/g;
     $str =~ s/,/ /g;
+
+#    $str =~ s/ //g;
+
     $str =~ s/^\s+//;
     $str =~ s/\s+$//;
     my @a=split / +/, $str;
+
+#    my @a = ($str =~ /(?:$RE{balanced}{-parens=>'[]'}|[^,])+/g);
 
     return @a;
 }
@@ -371,6 +377,8 @@ sub dbcopy1{
     my @path=parse_path($path);
     my $t=key_defined($SOURCE_DB,@path);
 
+    return $t unless defined($t);
+
     if(ref $t eq 'ARRAY'){
 	foreach (@{ $t }){
 	    push @result, $def ? $def->($_) : $_;
@@ -547,7 +555,7 @@ sub matmap{
 
 	my $enrichable=0;
 	my $depletable='false';
-	if($mattype eq 'uo2' || $mattype eq 'pyrex'){
+	if($mattype eq 'uo2'){
 	    $enrichable=1;
 	    $enrichment=$content[1];
 	    $depletable='true';
@@ -574,6 +582,11 @@ sub matmap2{
     my $keyname;
     my $mattype;
 
+#    my @MATS_RESERVED=('mod','vacuum','zirc','aic','he','b4c','inc','ss','pyrex','uo2');
+    my @MATS_RESERVED=('mod','vacuum');
+    my @MAT_RESERVED =('mod','vacuum','zirc','aic','he','b4c','inc','ss','pyrex');
+    my @FUEL_RESERVED=('uo2');
+
     foreach my $ipath (@paths){
 	my @apaths=find_keys($SOURCE_DB,$ipath);
 	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
@@ -588,10 +601,12 @@ sub matmap2{
 	my $enrichable=0;
 	my $depletable='false';
 	my $enrichment;
+	my $thdensity=0;
 	my @mat_names=();
 	my @mat_fracs=();
 
 	my $density=$content[0];
+	my $fissionable='false';
 
 	if($keypath[$#keypath-2] eq 'mat'){
 	    $keyname=$keypath[$#keypath];
@@ -601,20 +616,23 @@ sub matmap2{
 	}
 	elsif($keypath[$#keypath-2] eq 'fuel'){
 	    $keyname=$keypath[$#keypath];
-	    $mattype=$content[1];
+	    $mattype="uo2";
 	    $enrichable=1;
+	    $thdensity=$content[1];
 	    $enrichment=$content[2];
 	    $depletable='true';
+	    $fissionable='true';
 	    push @mat_names, $mattype;
 	    push @mat_fracs, 1.0;
 	}
 	else{    # old format
 	    $keyname=$keypath[$#keypath];
 	    $mattype=$keypath[$#keypath-2];
-	    if($mattype eq 'uo2' || $mattype eq 'pyrex'){
+	    if($mattype eq 'uo2'){
 		$enrichable=1;
 		$enrichment=$content[1];
 		$depletable='true';
+		$fissionable='true';
 	    }
 	    push @mat_names, $mattype;
 	    push @mat_fracs, 1.0;
@@ -622,6 +640,8 @@ sub matmap2{
 
 	my $mat_ref=&key_on_list($home,$basename.$keyname);
 	&key_on_parameter($mat_ref,'density','double',$density);
+	&key_on_parameter($mat_ref,'thden','double',$thdensity) if $thdensity;
+	&key_on_parameter($mat_ref,'fissionable','bool',$fissionable);
 	&key_on_parameter($mat_ref,'depletable','bool',$depletable)   if $enrichable;
 	&key_on_parameter($mat_ref,'enrichment','double',$enrichment) if $enrichable;
 	&key_on_parameter($mat_ref,'key_name','string',$keyname);
@@ -638,6 +658,11 @@ sub rodmap{
     my ($home,$axial_path,%userparam)=@_;
     my ($i,$j,$k,$m,$n);
     my (@a,@b,@c,@d);
+
+#    my @MATS_RESERVED=('mod','vacuum','zirc','aic','he','b4c','inc','ss','pyrex','uo2');
+    my @MATS_RESERVED=('mod','vacuum');
+    my @MAT_RESERVED =('mod','vacuum','zirc','aic','he','b4c','inc','ss','pyrex');
+    my @FUEL_RESERVED=('uo2');
 
     my %OPTIONS=('basename'=>'List','mapname'=>'rodmap');
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
@@ -670,7 +695,7 @@ sub rodmap{
 	unless($#axial_common == $#axials){
 	    print STDERR "axial labels needed   : @axials\n";
 	    print STDERR "axial labels available: @axial_available\n";
-	    die   "missing axial definitions in $axial_path\n";
+	    die   "rodmap: missing axial definitions in $axial_path\n";
 	}
     }
 
@@ -680,7 +705,7 @@ sub rodmap{
 	$AXIAL_CONTENT{$_}=[@{ $AXIAL_DEFS{$_}->{_content} }];
 	@a=@{ $AXIAL_CONTENT{$_} };
 	unless(@a%2){
-	    die "axial $_ has even number of elements @a\n";
+	    die "rodmap: axial $_ has even number of elements @a\n";
 	}
 	@b=even(\@a);
 	@c=odd(\@a);
@@ -690,6 +715,41 @@ sub rodmap{
 	print STDERR "         content: @{ $AXIAL_CONTENT{$_} }\n" if get_verbose();
 	print STDERR "         heights: @b\n" if get_verbose();
 	print STDERR "         labels : @c\n" if get_verbose();
+    }
+
+    # get material paths
+    my @block_rpath=@axial_rpath;
+    pop @block_rpath;
+    pop @block_rpath;
+    print STDERR "block_path: @block_rpath\n" if get_verbose();
+    my %MATS_DB;
+    if(defined $OPTIONS{ matsearch }){
+	my $mat_search=$OPTIONS{ matsearch } ;
+	print STDERR "mat_search: $mat_search\n" if get_verbose();
+	my @mat_array=split(':',$mat_search);
+	print "mat_array @mat_array\n" if get_verbose();
+	foreach my $imat (@mat_array){
+	    my @apaths=find_keys($SOURCE_DB,$imat);
+	    my @names =find_keys($SOURCE_DB,$imat,undef,strings=>'true');
+	    if(@apaths){
+		print "\timat  : $imat\n" if get_verbose();
+		print "\t\tapaths: @apaths\n" if get_verbose();
+		print "\t\tnames : @names\n" if get_verbose();
+		foreach my $iapath (@apaths){
+		    print "\t\t\t @{ $iapath }\n" if get_verbose();
+		    my @mat_path=@{ $iapath };
+		    my @mat_flags = ($mat_path[$#mat_path],'other');
+		    if( @mat_path[1] =~ m/(fuel|uo2)/ ){
+			$mat_flags[1]='fuel';
+		    }
+		    unless(exists $MATS_DB{ $mat_flags[0] }){
+			$MATS_DB{ $mat_flags[0] } = $mat_flags[1];
+			print "\t\t\t\tMATS_DB{$mat_flags[0]}=$mat_flags[1]\n" if get_verbose();
+		    }
+		}
+	    }
+
+	}
     }
 
     # get npin for setting the maps
@@ -713,8 +773,8 @@ sub rodmap{
 
 	@a=@{ $CELLMAP_CONTENT{$_} };
 	@b=();
-	@c=unique(@a);
-#	@c=nonzero(@c);
+	@c=unique(@a);   # why?
+#	@c=nonzero(@c);  # why?
 	@c=nonstring('-',@c);
 	$CELLMAP_CELLS{$_}=[@c];
 	print STDERR "  CELLMAP_CELLS{$_}: @c\n" if get_verbose();
@@ -738,7 +798,7 @@ sub rodmap{
 	@a=@{$CELL_CONTENT{$_}};
 	if(@a==1){
 	    if($a[0] ne 'mod'){
-		die "cell $_ @a has one entry and is not a moderator\n";
+		die "rodmap: cell $_ @a has one entry and is not a moderator\n";
 	    }
 	    $CELL_TYPE{$_}='mod';
 	    $CELL_radii{$_}=[];
@@ -746,17 +806,46 @@ sub rodmap{
 	}
 	else{
 	    if(@a%2 != 0){
-		die "cell $_ @a has odd number of entries\n";
+		die "rodmap: cell $_ @a has odd number of entries\n";
 	    }
 	    else{
 		$CELL_radii{$_}=[fronthalf(\@a,0)];
 		my @cmats=endhalf(\@a,0);
-		if(fany(sub{m/(u)/i}, @cmats)){
-		    $CELL_TYPE{$_}='fuel';
+
+		# start mod
+		# have to search for available materials and fuels
+		# bomb if mat and fuel are at the same level
+		# if exists mat cell_type=other, if exists fuel =fuel
+
+		$CELL_TYPE{$_}='other';
+
+		if(defined $OPTIONS{ matsearch }){
+		    foreach my $imat (@cmats){
+			print STDERR "    CELL mat $imat\n" if get_verbose();
+
+			next if in_dictionary($imat, @MATS_RESERVED);
+
+			if(exists($MATS_DB{ $imat })){
+			    if($MATS_DB{ $imat } eq 'fuel'){
+				$CELL_TYPE{$_}='fuel';
+				print STDERR "    \tCELL mat $imat is fuel\n" if get_verbose();
+			    }
+			}
+			else{
+			    die "rodmap: cell $_ has material $imat which is not defined\n";
+			}
+		    }
 		}
-		else{
-		    $CELL_TYPE{$_}='other';
+		else{    # remove after update of input files with new definitions
+		    if(fany(sub{m/(u)/i}, @cmats)){
+			$CELL_TYPE{$_}='fuel';
+		    }
 		}
+#		else{
+#		    $CELL_TYPE{$_}='other';
+#		}
+		# end mod
+
 		$CELL_mats{$_} =[@cmats];
 		print STDERR "    CELL radii @{ $CELL_radii{$_} }\n" if get_verbose();
 		print STDERR "    CELL mats  @{ $CELL_mats{$_} }\n" if get_verbose();
@@ -779,9 +868,9 @@ sub rodmap{
 	@b=unique( @{ $AXIAL_LABELS{$i} } );
 	my @cellmap_common=intersection(\@b,\@cellmap_available);
 	unless($#cellmap_common == $#b){
-	    print STDERR "cellmap labels needed   : [@b]\n";
-	    print STDERR "cellmap labels available: [@cellmap_available]\n";
-	    die   "missing cellmap definitions in $axial_path\n";
+	    print STDERR "$OPTIONS{mapname} labels needed   : [@b]\n";
+	    print STDERR "$OPTIONS{mapname} labels available: [@cellmap_available]\n";
+	    die   "missing $OPTIONS{mapname} definitions in $axial_path\n";
 	}
 
 	# Create CellMaps list in Assembly_X
@@ -803,7 +892,7 @@ sub rodmap{
 	unless($#cell_common == $#b){
 	    print STDERR "cell labels needed   : [@b]\n";
 	    print STDERR "cell labels available: [@cell_available]\n";
-	    die   "missing cell definitions in $axial_path\n";
+	    die   "rodmap: missing cell definitions in $axial_path\n";
 	}
 
 	# Create Cells list in Assembly_X

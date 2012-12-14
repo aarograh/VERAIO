@@ -15,6 +15,10 @@ _DATATYPES:
   _dtdouble: &dtdouble
     _parse: 'scalar'
     _type:  'double'
+  _dtdblnamed: &dtdblnamed
+    _parse: 'scalar'
+    _type:  'double'
+    _named: 1
   _dtint: &dtint
     _parse: 'scalar'
     _type:  'int'
@@ -53,7 +57,7 @@ _MATLIB: &matlib
     <<: *dtlistnamed
     _default:
     _check:
-  boron:
+  pyrex:
     <<: *dtlistnamed
     _default:
     _check:
@@ -438,51 +442,11 @@ ASSEMBLY:
       - nth(1,())>0
       - nth(2,())>0
       - in_dictionary(nth(0,()),'ss','inc','zirc')
-  lower_nozzle_gap_height:
-    <<: *dtdouble
-    _default:
-    _check:
-      - is_float()
-      - is_geq() 0
-  upper_nozzle_gap_height:
-    <<: *dtdouble
-    _default:
-    _check:
-      - is_float()
-      - is_geq() 0
-  lower_pincap_height:
-    <<: *dtdouble
-    _default:
-    _check:
-      - is_float()
-      - is_geq() 0
-  upper_pincap_height:
-    <<: *dtdouble
-    _default:
-    _check:
-      - is_float()
-      - is_geq() 0
-  lower_plenum_height:
-    <<: *dtdouble
-    _default:
-    _check:
-      - is_float()
-      - is_geq() 0
-  upper_plenum_height:
-    <<: *dtdouble
-    _default:
-    _check:
-      - is_float()
-      - is_geq() 0
   fuel:
     <<: *dtlistnamed
     _default:
     _check:
   uo2:
-    <<: *dtlistnamed
-    _default:
-    _check:
-  pyrex:
     <<: *dtlistnamed
     _default:
     _check:
@@ -914,6 +878,11 @@ COBRATF:
       - is_int()
       - is_gt() 0
 
+  gridloss:
+    <<: *dtdblnamed
+    _default:
+    _check:
+
 MPACT:
 
   ray_spacing:
@@ -922,7 +891,7 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
-  
+
   quad_type:
     <<: *dtword
     _default:

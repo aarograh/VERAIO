@@ -113,7 +113,7 @@ sub clean_line{
 
 #    die "clean_line: invalid reference\n" unless (ref($lineref) eq 'SCALAR' && defined($$lineref));
 
-    $$lineref =~ s/\// /g;                 # replace slashes with spaces
+#    $$lineref =~ s/\// /g;                 # replace slashes with spaces
     $$lineref =~  s/(\!\s*(.*))$//;         # strip comments
     $$lineref =~ s/(\d+)\s*\*\s*(\w+)/"$2 " x $1/ge; # expand fortran expressions
 #    $$lineref =~ s/(zero)/0/g;               # convert zero to 0
@@ -121,6 +121,12 @@ sub clean_line{
     $$lineref =~ s/[,;]/ /g;               # remove commas and such
     $$lineref =~ s/^\s+//;                 # strip leading blanks
     $$lineref =~ s/\s+$//;                 # strip trailing blanks
+}
+
+sub clean_slash{
+    my $lineref=shift;
+
+    $$lineref =~ s/\// /g;                 # replace slashes with spaces
 }
 
 sub read_ascii {
@@ -149,6 +155,7 @@ sub read_ascii {
 		     'block'=>$block, 'command'=>$command);
 	  next READ;
       };
+      &clean_slash(\$_);
 
       /^\[\s*(\w+)\s*\]/ &&     # found new block
 	  do{
