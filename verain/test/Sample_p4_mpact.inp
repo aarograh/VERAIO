@@ -1,0 +1,188 @@
+[CASEID]
+  title CASL AMA Benchmark Problem 4
+
+!  update 11/19/2012 - add comment about missing upper and lower gap definitions
+
+[STATE]
+  power  0.0        ! %
+  tinlet 620.33     ! F - 600K
+  tfuel  620.33     ! F - 600K
+  boron  1300       ! ppmB
+  modden 0.743      ! g/cc
+  rodbank A 1       ! 1 is out, 0 is in
+  feedback off !??
+  sym qtr
+
+[CORE]
+  size 3                ! 3x3
+  rated 159.1 4.41      ! MW, Mlbs/hr
+  apitch 21.5
+
+  core_shape
+    1 1 1
+    1 1 1
+    1 1 1
+  
+  assm_map
+    A1 A2 A1
+    A2 A1 A2
+    A1 A2 A1
+           
+  insert_map
+    - 1 -
+    1 - 1
+    - 1 -
+    
+  crd_map
+    - - -
+    - 1 -
+    - - -
+    
+  crd_bank
+    - - -
+    - A -
+    - - -
+    
+  det_map
+    1 - -
+    1 - -
+    - - 1
+
+  xlabel  J H G
+  ylabel  7 8 9
+
+  bc_rad reflecting
+
+!  Old material format
+!
+!  he he 0.000176
+!  inc inc 8.19
+!  ss ss 8.0
+!  zirc zirc 6.56 
+!  aic aic 10.20
+!  pyrex pyrex 2.23
+!  b4c b4c 6.56
+
+  mat he     0.000176
+  mat inc    8.19
+  mat ss     8.0
+  mat zirc   6.56 
+  mat aic   10.20
+  mat pyrex  2.23
+  mat b4c    6.56
+
+[ASSEMBLY]
+  title "Westinghouse 17x17 A"
+  npin 17
+  ppitch 1.260
+  
+!  uo2 U21 10.257 / 2.11
+!  uo2 U26 10.257 / 2.62
+
+  fuel U21 10.257 95.0 / 2.11
+  fuel U26 10.257 95.0 / 2.62
+
+  cell 1   0.4096 0.418 0.475 / U21 he zirc
+  cell 2   0.4096 0.418 0.475 / U26 he zirc
+  cell 5          0.561 0.602 / mod    zirc       ! guide tube
+  cell 6          0.559 0.605 / mod    zirc       ! instrument tube
+
+  lattice FUEL1
+     6
+     1 1
+     1 1 1
+     5 1 1 5
+     1 1 1 1 1
+     1 1 1 1 1 5
+     5 1 1 5 1 1 1
+     1 1 1 1 1 1 1 1
+     1 1 1 1 1 1 1 1 1
+
+  lattice FUEL2
+     6
+     2 2
+     2 2 2
+     5 2 2 5
+     2 2 2 2 2
+     2 2 2 2 2 5
+     5 2 2 5 2 2 2
+     2 2 2 2 2 2 2 2
+     2 2 2 2 2 2 2 2 2
+
+  axial A1 0.0 FUEL1 1.0
+  axial A2 0.0 FUEL2 1.0
+
+[INSERT]
+  title "Pyrex"
+  npin 17
+
+  cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrex he ss
+
+  rodmap  PY20
+     -
+     - -
+     - - -
+     1 - - -
+     - - - - -
+     - - - - - 1
+     1 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  axial 1 0.0 PY20 1.0
+
+  [CONTROL]
+  title "AIC rod" 
+  npin 17 
+  stroke  1.0 1     ! approx for 1.5875 step sizes and 360 max stroke
+
+  cell 1  0.382 0.386 0.484 / aic he ss
+
+  rodmap  AIC
+     -
+     - -
+     - - -
+     1 - - 1
+     - - - - -
+     - - - - - 1
+     1 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  axial 1 0.0 AIC 1.0
+
+[DETECTOR]
+  title "double cheeseburger w/ fries" 
+  npin 17
+  cell 1 0.258 0.382 / vacuum ss
+  
+  rodmap DET
+     1
+     - -
+     - - -
+     - - - -
+     - - - - -
+     - - - - - -
+     - - - - - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  axial 1 0.0 DET 406.3
+
+[MPACT]
+  ray_spacing            0.05
+!quad_set
+  quad_type         CHEBYSHEV-YAMAMOTO
+  polars_octant     3
+  azimuthals_octant 16
+!iteration_control
+  flux_tolerance    1e-6
+  num_inners        2
+  k_tolerance       1e-6
+  cmfd              true
+  up_scatter        2
+  num_outers        500
+  num_threads       8
+!xs_library
+  xs_filename       hy047n18g110u.dat
+  xs_type           HELIOS
