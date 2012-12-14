@@ -4,10 +4,12 @@
   <Parameter name="case_id" type="string" value="3x3 rod problem HFP"/>
   <ParameterList name="STATE">
     <Parameter name="pressure" type="double" value="15.5132039025"/>
+    <Parameter name="modden" type="double" value="0.743"/>
     <Parameter name="feedback" type="string" value="on"/>
     <Parameter name="boron" type="double" value="1300"/>
     <Parameter name="power" type="double" value="100.0"/>
     <Parameter name="tinlet" type="double" value="292.777777777778"/>
+    <Parameter name="tfuel" type="double" value="600.0"/>
   </ParameterList>
   <ParameterList name="CORE">
     <Parameter name="upper_mat" type="string" value="ss"/>
