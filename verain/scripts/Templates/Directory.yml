@@ -371,7 +371,6 @@ CORE:
     <<: *dtlistnamed
     _default:
     _check:
-  <<: *matlib
 
 ASSEMBLY:
   title:
@@ -446,15 +445,10 @@ ASSEMBLY:
     <<: *dtlistnamed
     _default:
     _check:
-  uo2:
-    <<: *dtlistnamed
-    _default:
-    _check:
   mat:
     <<: *dtlistnamed
     _default:
     _check:
-  <<: *matlib
 
 
 CONTROL:
@@ -496,7 +490,6 @@ CONTROL:
     <<: *dtlistnamed
     _default:
     _check:
-  <<: *matlib
 
 INSERT:
   title:
@@ -529,7 +522,6 @@ INSERT:
     <<: *dtlistnamed
     _default:
     _check:
-  <<: *matlib
 
 DETECTOR:
   title:
@@ -564,7 +556,6 @@ DETECTOR:
     <<: *dtlistnamed
     _default:
     _check:
-  <<: *matlib
 
 EDITS:
   axial_edit_bounds:
