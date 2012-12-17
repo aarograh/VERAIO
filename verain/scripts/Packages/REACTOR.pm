@@ -19,7 +19,12 @@ use Exporter;
 	 'gen_oct_list',
 	 'gen_quad_list',
 	 'fullcellmap',
-	 'read_ascii'
+	 'read_ascii',
+	 'times_in_array',
+	 'fillin',
+	 'purge_array',
+	 'extract_map',
+	 'core_map'
     );
 
 {
@@ -308,6 +313,116 @@ sub fullcellmap {
 	die "setcellmap: invalid map $npin [@a]\n";
     }
     return @b;
+}
+
+sub times_in_array{
+    my ($ary,$symbol)=@_;
+
+    my $n=0;
+    foreach (@{ $ary }){
+	$n++ if $_ eq $symbol;
+    }
+    return $n;
+}
+
+sub fillin{
+    my ($ary1, $ary2, $valid)=@_;
+    my @result;
+    my $i;
+
+    @result= map { $_ == $valid ? $ary2->[$i++] : $_ } @{ $ary1 };
+
+    return  wantarray ? @result : \@result;
+}
+
+sub purge_array{
+    my ($ary, $invalid)=@_;
+    my @result;
+    my $i;
+
+    @result= grep { $_ ne $invalid } @{ $ary };
+
+    return  wantarray ? @result : \@result;
+}
+
+sub extract_map{
+    my($ary,$n,$m,$maptype)=@_;
+    my $na=@{ $ary };
+
+    die "extract_map: indices not valid $n, $m, $na\n"
+	if ($n <= 0 || 
+	    $m <= 0 || 
+	    ($n*$m > $na) ||
+	    !($n % 2) ||
+	    !($m % 2)
+	);
+
+    my $nhalf=int($n/2);
+    my $mhalf=int($m/2);
+    my $icenter= $nhalf * $m + $mhalf;  # central location
+
+    my @result = ();
+    if($maptype eq 'OCTANT'){
+	for(my $i=0; $i<=$nhalf;$i++){
+	    for(my $j=0; $j<=$i;$j++){
+		push @result, $ary->[$icenter+$i*$m+$j];
+	    }
+	}
+	return wantarray ? @result : \@result;
+    }
+    if($maptype eq 'QUARTER'){
+	for(my $i=0; $i<=$nhalf;$i++){
+	    for(my $j=0; $j<=$mhalf;$j++){
+		push @result, $ary->[$icenter+$i*$m+$j];
+	    }
+	}
+	return wantarray ? @result : \@result;
+    }
+    
+    die "extract_map: invalid maptype: $maptype\n";
+
+}
+
+sub core_map{
+    my ($cmap, $mmap, $n)=@_;
+
+    # how many 1 in core shape
+    my $nfull=times_in_array($cmap,1);
+
+    # get octant and quarter maps from core shape
+    my @core_map_o=extract_map($cmap,$n,$n,'OCTANT');
+    my $noct      =times_in_array(\@core_map_o,1);
+    my @core_map_q=extract_map($cmap,$n,$n,'QUARTER');
+    my $nquad     =times_in_array(\@core_map_q,1);
+
+    # elements in the other map
+    my $nmmap=@{ $mmap };
+
+    my @ccmap;
+    my @resmap;
+    my @fullm;
+    my @fullmp;
+
+    if($nmmap == $noct){
+	@ccmap=@core_map_o;
+	@resmap=fillin(\@ccmap, $mmap, 1);
+	@fullm=fullcellmap($n,@resmap);
+	@fullmp=purge_array(\@fullm,0);
+    }
+    elsif ($nmmap == $nquad){
+	@ccmap=@core_map_q;
+	@resmap=fillin(\@ccmap, $mmap, 1);
+	@fullm=fullcellmap($n,@resmap);
+	@fullmp=purge_array(\@fullm,0);
+    }
+    elsif ($nmmap == $nfull){
+	@fullmp=@{ $mmap };
+    }
+    else{
+	die "coremap: invalid map, map=$nmmap, octant=$noct, quarter=$nquad, full=$nfull\n";
+    }
+
+    return  wantarray ? @fullmp : \@fullmp;
 }
 
 1;
