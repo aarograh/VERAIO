@@ -64,21 +64,21 @@ CORE:
       _pltype: parameter
       _type: double
       _do:
-        - copy CORE/$baffle_thick
+        - copy CORE/@baffle:2
       _content:
 
     baffle_gap:
       _pltype: parameter
       _type: double
       _do:
-        - copy CORE/$baffle_gap
+        - copy CORE/@baffle:1
       _content:
 
     baffle_mat:
       _pltype: parameter
       _type: string
       _do:
-        - copy CORE/$baffle_mat
+        - copy CORE/@baffle:0
       _content:
 
     vessel_thick:
