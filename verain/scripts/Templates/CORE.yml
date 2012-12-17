@@ -64,21 +64,21 @@ CORE:
       _pltype: parameter
       _type: double
       _do:
-        - copy CORE/$baffle_thick
+        - copy CORE/@baffle:2
       _content:
 
     baffle_gap:
       _pltype: parameter
       _type: double
       _do:
-        - copy CORE/$baffle_gap
+        - copy CORE/@baffle:1
       _content:
 
     baffle_mat:
       _pltype: parameter
       _type: string
       _do:
-        - copy CORE/$baffle_mat
+        - copy CORE/@baffle:0
       _content:
 
     vessel_thick:
@@ -106,35 +106,35 @@ CORE:
       _pltype: array
       _type: string
       _do:
-        - copy CORE/@assm_map
+        - coremapmap CORE/$size,CORE/@core_shape,CORE/@assm_map
       _content:
 
     insert_map:
       _pltype: array
       _type: string
       _do:
-        - copy CORE/@insert_map
+        - coremapmap CORE/$size,CORE/@core_shape,CORE/@insert_map
       _content:
 
     det_map:
       _pltype: array
       _type: string
       _do:
-        - copy CORE/@det_map
+        - coremapmap CORE/$size,CORE/@core_shape,CORE/@det_map
       _content:
 
     crd_map:
       _pltype: array
       _type: string
       _do:
-        - copy CORE/@crd_map
+        - coremapmap CORE/$size,CORE/@core_shape,CORE/@crd_map
       _content:
 
     crd_bank:
       _pltype: array
       _type: string
       _do:
-        - copy CORE/@crd_bank
+        - coremapmap CORE/$size,CORE/@core_shape,CORE/@crd_bank
       _content:
 
     shape:

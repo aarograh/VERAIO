@@ -36,6 +36,12 @@
 !         * upper_pincap_height
 !         * upper_plenum_height
 !
+!  Update 12/17/2012
+!     * update axial regions to include gaps
+!     * add plenum regions to pyrex rods
+!     * update axial edit bounds
+!     * add baffle
+!
 !-----------------------------------------------------------------------
 [STATE]
   title 'HZP Statepoint BOL'            ! state_title
@@ -63,7 +69,7 @@
   rated 3411.0 144.7                    ! core_rated_power(MW), core_rated_flow (Mlbs/hr)
   apitch 21.5                           ! core_apitch (cm)
 
-  height 406.3                          ! distance from lower core plate to upper core plate
+  height 406.33                         ! distance from lower core plate to upper core plate
 
 !  Note that core maps are always "full-core", i.e. no symmetry
 
@@ -84,22 +90,33 @@
      0  0  1  1  1  1  1  1  1  1  1  1  1  0  0
      0  0  0  0  1  1  1  1  1  1  1  0  0  0  0
 
+! assm_map
+!                 A3 A3 A3 A3 A3 A3 A3
+!           A3 A3 A3 A1 A3 A1 A3 A1 A3 A3 A3
+!        A3 A3 A2 A1 A2 A1 A2 A1 A2 A1 A2 A3 A3
+!        A3 A2 A2 A2 A1 A2 A1 A2 A1 A2 A2 A2 A3
+!     A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
+!     A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
+!     A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
+!     A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
+!     A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
+!     A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
+!     A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
+!        A3 A2 A2 A2 A1 A2 A1 A2 A1 A2 A2 A2 A3
+!        A3 A3 A2 A1 A2 A1 A2 A1 A2 A1 A2 A3 A3
+!           A3 A3 A3 A1 A3 A1 A3 A1 A3 A3 A3
+!                 A3 A3 A3 A3 A3 A3 A3
+
   assm_map
-                  A3 A3 A3 A3 A3 A3 A3
-            A3 A3 A3 A1 A3 A1 A3 A1 A3 A3 A3
-         A3 A3 A2 A1 A2 A1 A2 A1 A2 A1 A2 A3 A3
-         A3 A2 A2 A2 A1 A2 A1 A2 A1 A2 A2 A2 A3
-      A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
-      A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
-      A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
-      A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
-      A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
-      A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
-      A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
-         A3 A2 A2 A2 A1 A2 A1 A2 A1 A2 A2 A2 A3
-         A3 A3 A2 A1 A2 A1 A2 A1 A2 A1 A2 A3 A3
-            A3 A3 A3 A1 A3 A1 A3 A1 A3 A3 A3
-                  A3 A3 A3 A3 A3 A3 A3
+     A1
+     A2 A1
+     A1 A2 A1
+     A2 A1 A2 A1
+     A1 A2 A1 A2 A2
+     A2 A1 A2 A1 A2 A3
+     A1 A3 A1 A3 A3 A3
+     A3 A3 A3 A3
+
 
 
 ! *** Note that the following map ignores the source bundles:  BP23s and BP19s
@@ -178,57 +195,42 @@
   lower_plate SS304  5.0  0.5   ! core_lower_mat, core_lower_thick, core_lower_vfrac
   upper_plate SS304  7.6  0.5   ! core_upper_mat, core_upper_thick, core_upper_vfrac
 
+! ** check baffle dimensions
+
+  baffle SS304 0.02 1.26
 
   xlabel   R  P  N  M  L  K  J  H  G  F  E  D  C  B  A    ! core_xlabel
   ylabel   1  2  3  4  5  6  7  8  9 10 11 12 13 14 15    ! core_ylabel
 
-! To-Do:   Need to add CORE_MATERIALS sublist
-
-!  Old material format
-!
-!  he he 0.000176
-!  inc inc 8.19
-!  ss ss 8.0
-!  zirc zirc 6.56 
-!  aic aic 10.20
-!  pyrex pyrex 2.23
-!  b4c b4c 6.56
-
   mat he     0.000176
   mat inc    8.19
-  mat ss     8.0
+  mat SS304  8.0   ss 1.0
   mat zirc   6.56 
-  mat aic   10.20
-  mat pyrex  2.23
-  mat b4c    6.56
 
 [ASSEMBLY]
 
   title "Westinghouse VANTAGE-5H"                 ! assembly_title
   npin   17                                       ! assembly_num_pins
   ppitch 1.26                                     ! assembly_ppitch
- 
-!  uo2    U21 10.257 / 2.11
-!  uo2    U26 10.257 / 2.60
-!  uo2    U31 10.257 / 3.10
 
+  mat ss 8.0
+ 
   fuel    U21 10.257 95.0 / 2.11
   fuel    U26 10.257 95.0 / 2.60
   fuel    U31 10.257 95.0 / 3.10
-
 
   cell 1   0.4096 0.418 0.475 / U21 he  zirc    ! low enriched pin cell
   cell 2   0.4096 0.418 0.475 / U26 he  zirc    ! med enriched pin cell
   cell 3   0.4096 0.418 0.475 / U31 he  zirc    ! hi  enriched pin cell
 
-
   cell 4          0.561 0.602 / mod  zirc       ! guide tube
   cell 6          0.559 0.605 / mod  zirc       ! instrument tube
 
+  cell 7                0.475 /      mod        ! empty location
   cell 8          0.418 0.475 / he   zirc       ! plenum pin
-  cell 9          0.418 0.475 / zirc zirc       ! end plug
+  cell 9                0.475 /      zirc       ! end plug
 
-  lattice REG1
+  lattice FUEL1
      6
      1 1
      1 1 1
@@ -239,7 +241,7 @@
      1 1 1 1 1 1 1 1
      1 1 1 1 1 1 1 1 1
 
-  lattice REG2
+  lattice FUEL2
      6
      2 2
      2 2 2
@@ -250,7 +252,7 @@
      2 2 2 2 2 2 2 2
      2 2 2 2 2 2 2 2 2
 
-  lattice REG3
+  lattice FUEL3
      6
      3 3
      3 3 3
@@ -260,6 +262,17 @@
      4 3 3 4 3 3 3
      3 3 3 3 3 3 3 3
      3 3 3 3 3 3 3 3 3
+
+  lattice PGAP
+     6
+     7 7
+     7 7 7
+     4 7 7 4
+     7 7 7 7 7
+     7 7 7 7 7 4
+     4 7 7 4 7 7 7
+     7 7 7 7 7 7 7 7
+     7 7 7 7 7 7 7 7 7
 
   lattice PLEN
      6
@@ -283,16 +296,9 @@
      9 9 9 9 9 9 9 9
      9 9 9 9 9 9 9 9 9
 
-! Parser: First label on following card is assembly_id (which corresponds to core maps)
-
-! *** add top and bottom "shoulders"
-! *** check plug lengths
-
-! *** ERROR: missing definition for upper gap between 395.3 and (406.3-8.827)
-
-  axial A1  6.05 PLUG  11.95 REG1 377.71 PLEN 390.0 PLUG  395.3      ! REG1 2.1%
-  axial A2  6.05 PLUG  11.95 REG2 377.71 PLEN 390.0 PLUG  395.3      ! REG2 2.6%
-  axial A3  6.05 PLUG  11.95 REG3 377.71 PLEN 390.0 PLUG  395.3      ! REG3 3.1%
+  axial A1  6.05 PGAP 10.28 PLUG 11.95 FUEL1 377.71 PLEN 393.71 PLUG  395.38 PGAP 397.50     ! FUEL1 2.1%
+  axial A2  6.05 PGAP 10.28 PLUG 11.95 FUEL2 377.71 PLEN 393.71 PLUG  395.38 PGAP 397.50     ! FUEL2 2.6%
+  axial A3  6.05 PGAP 10.28 PLUG 11.95 FUEL3 377.71 PLEN 393.71 PLUG  395.38 PGAP 397.50     ! FUEL3 3.1%
 
   dancoff                   ! assembly_dancoff_map
       0.000
@@ -311,7 +317,7 @@
   grid GZRC  zirc 875   3.81
 
   grid_axial
-      GINC  13.88
+      GINC  13.883   ! bottom of grid lines up with BAF
       GZRC  75.2
       GZRC 127.4
       GZRC 179.6
@@ -321,12 +327,16 @@
       GINC 388.2
 
 ! Parser: lower_nozzle_comp, lower_nozzle_height, lower_nozzle_mass
-  lower_nozzle  ss  6.05   6250.0
-  upper_nozzle  ss  8.827  6250.0
+  lower_nozzle  ss  6.05  6250.0
+  upper_nozzle  ss  8.83  6250.0
 
 [CONTROL]
   title "B4C control rods with AIC tips"   ! control_title
   npin 17                                  ! control_num_pins
+
+  mat aic   10.20
+  mat b4c    6.56
+  mat ss     8.0
 
   stroke  360.0 228                        ! control_stroke, control_maxstep
 
@@ -355,18 +365,17 @@
      - - - - - - - -
      - - - - - - - - -
 
-! Parser: First label on following card is control_id.  This is currently not used.
-! Parser: Following card is used to define control_num_levels, control_axial_heights,
-!   and control_cellmap_axial_level  (from the cellmap sublist)
-
+! Note: First "1" corresponds control rod type in "crd_map" in CORE block
 ! ** check elevations
-! Note: "1" corresponds control rod type in "crd_map" in CORE block
 
   axial 1 15.76 AIC  376.44 B4C  394.3
 
 [INSERT]
   title "Pyrex Inserts"  ! insert_title
   npin 17                ! insert_num_pins
+
+  mat pyrex  2.23
+  mat ss     8.0
 
 ! *** check cell cards
   cell 1  0.214 0.230 0.241 0.427 0.437 0.484 / he ss he  pyrex he ss     ! radial pyrex geometry
@@ -431,9 +440,18 @@
 ! *** add  PY19s - need full map   Fig 4.3-4b p. 174
 ! *** add  PY23s - need full map   Fig 4.3-4b p. 174
 
-! *** add multiple plenum regions!  One for each BP config
+  rodmap  PLEN8
+     -
+     - -
+     - - -
+     2 - - -
+     - - - - -
+     - - - - - 2
+     - - - - - - -
+     - - - - - - - -
+     - - - - - - - - -
 
-  rodmap  PLEN
+  rodmap  PLEN12
      -
      - -
      - - -
@@ -444,19 +462,51 @@
      - - - - - - - -
      - - - - - - - - -
 
-! Parser: First label on following card is insert_id (which corresponds to core maps)
-! Parser: Following card is used to define insert_num_levels, insert_axial_heights,
-!   and insert_cellmap_axial_level  (from the cellmap sublist)
+  rodmap  PLEN16
+     -
+     - -
+     - - -
+     2 - - -
+     - - - - -
+     - - - - - 2
+     - - - 2 - - -
+     - - - - - - - -
+     - - - - - - - - -
 
-  axial BP8  15.76 PY8  376.44 PLEN 394.3
-  axial BP12 15.76 PY12 376.44 PLEN 394.3
-  axial BP16 15.76 PY16 376.44 PLEN 394.3
-  axial BP20 15.76 PY20 376.44 PLEN 394.3
-  axial BP24 15.76 PY24 376.44 PLEN 394.3
+  rodmap  PLEN20
+     -
+     - -
+     - - -
+     2 - - -
+     - - - - -
+     - - - - - 2
+     2 - - 2 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  PLEN24
+     -
+     - -
+     - - -
+     2 - - 2
+     - - - - -
+     - - - - - 2
+     2 - - 2 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  axial BP8  15.76 PY8  376.44 PLEN8  394.3
+  axial BP12 15.76 PY12 376.44 PLEN12 394.3
+  axial BP16 15.76 PY16 376.44 PLEN16 394.3
+  axial BP20 15.76 PY20 376.44 PLEN20 394.3
+  axial BP24 15.76 PY24 376.44 PLEN24 394.3
 
 [DETECTOR]
   title "Sample Detector"
   npin 17
+
+  mat ss 8.0
+
   cell 1 0.258 0.382 / vacuum ss
 
   rodmap DET
@@ -475,34 +525,56 @@
 
 [EDITS]
   axial_edit_bounds
-       0
-     11.95     ! bottom of active fuel
-     27.19     ! uniform 6" nodes
-     42.43
-     57.67
-     72.91
-     88.15
-     103.39
-     118.63
-     133.87
-     149.11
-     164.35
-     179.59
-     194.83
-     210.07
-     225.31
-     240.55
-     255.79
-     271.03
-     286.27
-     301.51
-     316.75
-     331.99
-     347.23
-     362.47
-     377.71    ! top of active fuel
-     406.30
-
+      11.9500  ! BAF
+      15.8160
+      24.0273
+      32.2386
+      40.4499
+      48.6611
+      56.8724
+      65.0837
+      73.2950
+      77.1050
+      85.1700
+      93.2350
+     101.3000
+     109.3650
+     117.4300
+     125.4950
+     129.3050
+     137.3700
+     145.4350
+     153.5000
+     161.5650
+     169.6300
+     177.6950
+     181.5050
+     189.5700
+     197.6350
+     205.7000
+     213.7650
+     221.8300
+     229.8950
+     233.7050
+     241.7700
+     249.8350
+     257.9000
+     265.9650
+     274.0300
+     282.0950
+     285.9050
+     293.9700
+     302.0350
+     310.1000
+     318.1650
+     326.2300
+     334.2950
+     338.1050
+     346.0260
+     353.9470
+     361.8680
+     369.7890
+     377.7100   ! TAF
 
 [DENOVO]
 

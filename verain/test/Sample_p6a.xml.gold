@@ -257,6 +257,8 @@
     <Parameter name="nfuel" type="int" value="3"/>
     <Parameter name="irfc" type="int" value="1"/>
     <Parameter name="epso" type="double" value="0.001"/>
+    <Parameter name="gridlabel" type="Array(string)" value="{MID,END}"/>
+    <Parameter name="gridlloss" type="Array(double)" value="{0.9065,0.9070}"/>
     <Parameter name="iitmax" type="int" value="40"/>
   </ParameterList>
   <ParameterList name="MPACT">

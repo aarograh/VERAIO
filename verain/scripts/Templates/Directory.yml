@@ -228,23 +228,16 @@ CORE:
     _check:
       - is_float()
       - is_gt() 0
-  baffle_thick:
-    <<: *dtdouble
+  baffle:
+    <<: *dtlist
     _default:
     _check:
-      - is_float()
-      - is_geq() 0
-  baffle_gap:
-    <<: *dtdouble
-    _default:
-    _check:
-      - is_float()
-      - is_geq() 0
-  baffle_mat:
-    <<: *dtword
-    _default:
-    _check:
-      - is_word()
+      - arraysize()==3
+      - is_word(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+      - nth(1,())>=0
+      - nth(2,())>=0
   vessel_thick:
     <<: *dtdouble
     _default:
