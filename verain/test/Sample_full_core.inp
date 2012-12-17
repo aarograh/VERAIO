@@ -90,22 +90,33 @@
      0  0  1  1  1  1  1  1  1  1  1  1  1  0  0
      0  0  0  0  1  1  1  1  1  1  1  0  0  0  0
 
+! assm_map
+!                 A3 A3 A3 A3 A3 A3 A3
+!           A3 A3 A3 A1 A3 A1 A3 A1 A3 A3 A3
+!        A3 A3 A2 A1 A2 A1 A2 A1 A2 A1 A2 A3 A3
+!        A3 A2 A2 A2 A1 A2 A1 A2 A1 A2 A2 A2 A3
+!     A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
+!     A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
+!     A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
+!     A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
+!     A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
+!     A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
+!     A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
+!        A3 A2 A2 A2 A1 A2 A1 A2 A1 A2 A2 A2 A3
+!        A3 A3 A2 A1 A2 A1 A2 A1 A2 A1 A2 A3 A3
+!           A3 A3 A3 A1 A3 A1 A3 A1 A3 A3 A3
+!                 A3 A3 A3 A3 A3 A3 A3
+
   assm_map
-                  A3 A3 A3 A3 A3 A3 A3
-            A3 A3 A3 A1 A3 A1 A3 A1 A3 A3 A3
-         A3 A3 A2 A1 A2 A1 A2 A1 A2 A1 A2 A3 A3
-         A3 A2 A2 A2 A1 A2 A1 A2 A1 A2 A2 A2 A3
-      A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
-      A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
-      A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
-      A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
-      A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
-      A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
-      A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
-         A3 A2 A2 A2 A1 A2 A1 A2 A1 A2 A2 A2 A3
-         A3 A3 A2 A1 A2 A1 A2 A1 A2 A1 A2 A3 A3
-            A3 A3 A3 A1 A3 A1 A3 A1 A3 A3 A3
-                  A3 A3 A3 A3 A3 A3 A3
+     A1
+     A2 A1
+     A1 A2 A1
+     A2 A1 A2 A1
+     A1 A2 A1 A2 A2
+     A2 A1 A2 A1 A2 A3
+     A1 A3 A1 A3 A3 A3
+     A3 A3 A3 A3
+
 
 
 ! *** Note that the following map ignores the source bundles:  BP23s and BP19s

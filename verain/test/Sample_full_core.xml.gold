@@ -29,11 +29,14 @@
     <Parameter name="upper_vfrac" type="double" value="0.5"/>
     <Parameter name="lower_thick" type="double" value="5.0"/>
     <Parameter name="upper_thick" type="double" value="7.6"/>
+    <Parameter name="baffle_mat" type="string" value="SS304"/>
     <Parameter name="cycle_num" type="int" value="1"/>
+    <Parameter name="baffle_gap" type="double" value="0.02"/>
     <Parameter name="apitch" type="double" value="21.5"/>
     <Parameter name="ylabel" type="Array(string)" value="{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}"/>
     <Parameter name="insert_map" type="Array(string)" value="{-,BP8,-,BP12,-,BP8,-,-,-,BP16,-,BP24,-,BP24,-,BP16,-,-,-,BP12,BP24,-,BP16,-,BP20,-,BP16,-,BP24,BP12,-,-,BP24,-,BP20,-,BP20,-,BP20,-,BP20,-,BP24,-,-,BP16,-,BP20,-,BP20,-,BP20,-,BP20,-,BP20,-,BP16,-,BP8,-,BP16,-,BP20,-,BP24,-,BP24,-,BP20,-,BP16,-,BP8,-,BP24,-,BP20,-,BP24,-,BP20,-,BP24,-,BP20,-,BP24,-,BP12,-,BP20,-,BP20,-,BP20,-,BP20,-,BP20,-,BP20,-,BP12,-,BP24,-,BP20,-,BP24,-,BP20,-,BP24,-,BP20,-,BP24,-,BP8,-,BP16,-,BP20,-,BP24,-,BP24,-,BP20,-,BP16,-,BP8,-,BP16,-,BP20,-,BP20,-,BP20,-,BP20,-,BP20,-,BP16,-,-,BP24,-,BP20,-,BP20,-,BP20,-,BP20,-,BP24,-,-,BP12,BP24,-,BP16,-,BP20,-,BP16,-,BP24,BP12,-,-,-,BP16,-,BP24,-,BP24,-,BP16,-,-,-,BP8,-,BP12,-,BP8,-}"/>
     <Parameter name="det_map" type="Array(string)" value="{-,-,1,-,-,1,-,1,-,-,1,-,1,-,-,-,-,-,-,-,-,-,-,-,1,-,1,-,1,-,1,1,1,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,1,-,-,-,1,-,1,-,1,-,-,1,-,1,-,-,1,-,1,-,-,-,-,-,1,-,-,-,-,1,-,-,1,-,-,1,-,-,1,-,-,1,-,1,-,1,-,1,-,-,1,-,1,1,1,-,-,1,-,-,-,-,-,-,1,-,1,-,-,-,1,-,-,-,-,1,-,1,-,-,-,-,1,-,-,-,1,-,-,-,1,-,-,1,-,-,1,-,-,-,1,-,-,-,-,1,-,-,1,-,-,1,-,-,-,1,-,1,-,-,1,-,-,-,-,-,1,1,-,-,-,1,-,-,1,-,1,-,1,-,-,1,-,-,-}"/>
+    <Parameter name="baffle_thick" type="double" value="1.26"/>
     <Parameter name="assm_map" type="Array(string)" value="{A3,A3,A3,A3,A3,A3,A3,A3,A3,A3,A1,A3,A1,A3,A1,A3,A3,A3,A3,A3,A2,A1,A2,A1,A2,A1,A2,A1,A2,A3,A3,A3,A2,A2,A2,A1,A2,A1,A2,A1,A2,A2,A2,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A2,A2,A2,A1,A2,A1,A2,A1,A2,A2,A2,A3,A3,A3,A2,A1,A2,A1,A2,A1,A2,A1,A2,A3,A3,A3,A3,A3,A1,A3,A1,A3,A1,A3,A3,A3,A3,A3,A3,A3,A3,A3,A3}"/>
     <Parameter name="height" type="double" value="406.33"/>
     <Parameter name="lower_mat" type="string" value="SS304"/>
@@ -47,20 +50,6 @@
         <Parameter name="key_name" type="string" value="he"/>
         <Parameter name="density" type="double" value="0.000176"/>
       </ParameterList>
-      <ParameterList name="Material_b4c">
-        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-        <Parameter name="fissionable" type="bool" value="false"/>
-        <Parameter name="mat_names" type="Array(string)" value="{b4c}"/>
-        <Parameter name="key_name" type="string" value="b4c"/>
-        <Parameter name="density" type="double" value="6.56"/>
-      </ParameterList>
-      <ParameterList name="Material_aic">
-        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-        <Parameter name="fissionable" type="bool" value="false"/>
-        <Parameter name="mat_names" type="Array(string)" value="{aic}"/>
-        <Parameter name="key_name" type="string" value="aic"/>
-        <Parameter name="density" type="double" value="10.20"/>
-      </ParameterList>
       <ParameterList name="Material_zirc">
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
         <Parameter name="fissionable" type="bool" value="false"/>
@@ -68,18 +57,11 @@
         <Parameter name="key_name" type="string" value="zirc"/>
         <Parameter name="density" type="double" value="6.56"/>
       </ParameterList>
-      <ParameterList name="Material_pyrex">
-        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-        <Parameter name="fissionable" type="bool" value="false"/>
-        <Parameter name="mat_names" type="Array(string)" value="{pyrex}"/>
-        <Parameter name="key_name" type="string" value="pyrex"/>
-        <Parameter name="density" type="double" value="2.23"/>
-      </ParameterList>
-      <ParameterList name="Material_ss">
+      <ParameterList name="Material_SS304">
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
         <Parameter name="fissionable" type="bool" value="false"/>
         <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
-        <Parameter name="key_name" type="string" value="ss"/>
+        <Parameter name="key_name" type="string" value="SS304"/>
         <Parameter name="density" type="double" value="8.0"/>
       </ParameterList>
       <ParameterList name="Material_inc">
@@ -150,6 +132,13 @@
           <Parameter name="key_name" type="string" value="U21"/>
           <Parameter name="depletable" type="bool" value="true"/>
           <Parameter name="density" type="double" value="10.257"/>
+        </ParameterList>
+        <ParameterList name="Material_ss">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="ss"/>
+          <Parameter name="density" type="double" value="8.0"/>
         </ParameterList>
         <ParameterList name="Material_U26">
           <Parameter name="enrichment" type="double" value="2.60"/>
@@ -276,6 +265,13 @@
           <Parameter name="depletable" type="bool" value="true"/>
           <Parameter name="density" type="double" value="10.257"/>
         </ParameterList>
+        <ParameterList name="Material_ss">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="ss"/>
+          <Parameter name="density" type="double" value="8.0"/>
+        </ParameterList>
         <ParameterList name="Material_U26">
           <Parameter name="enrichment" type="double" value="2.60"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
@@ -401,6 +397,13 @@
           <Parameter name="depletable" type="bool" value="true"/>
           <Parameter name="density" type="double" value="10.257"/>
         </ParameterList>
+        <ParameterList name="Material_ss">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="ss"/>
+          <Parameter name="density" type="double" value="8.0"/>
+        </ParameterList>
         <ParameterList name="Material_U26">
           <Parameter name="enrichment" type="double" value="2.60"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
@@ -489,6 +492,27 @@
       <Parameter name="stroke" type="double" value="360.0"/>
       <Parameter name="maxstep" type="int" value="228"/>
       <ParameterList name="Materials">
+        <ParameterList name="Material_b4c">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{b4c}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="b4c"/>
+          <Parameter name="density" type="double" value="6.56"/>
+        </ParameterList>
+        <ParameterList name="Material_aic">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{aic}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="aic"/>
+          <Parameter name="density" type="double" value="10.20"/>
+        </ParameterList>
+        <ParameterList name="Material_ss">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="ss"/>
+          <Parameter name="density" type="double" value="8.0"/>
+        </ParameterList>
       </ParameterList>
       <Parameter name="label" type="string" value="1"/>
       <Parameter name="title" type="string" value="B4C control rods with AIC tips"/>
@@ -522,6 +546,13 @@
       <Parameter name="num_pins" type="int" value="17"/>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,406.3}"/>
       <ParameterList name="Materials">
+        <ParameterList name="Material_ss">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="ss"/>
+          <Parameter name="density" type="double" value="8.0"/>
+        </ParameterList>
       </ParameterList>
       <Parameter name="title" type="string" value="Sample Detector"/>
       <Parameter name="label" type="string" value="1"/>
@@ -552,6 +583,20 @@
       <Parameter name="num_pins" type="int" value="17"/>
       <Parameter name="axial_elevations" type="Array(double)" value="{15.76,376.44,394.3}"/>
       <ParameterList name="Materials">
+        <ParameterList name="Material_pyrex">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{pyrex}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="pyrex"/>
+          <Parameter name="density" type="double" value="2.23"/>
+        </ParameterList>
+        <ParameterList name="Material_ss">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="ss"/>
+          <Parameter name="density" type="double" value="8.0"/>
+        </ParameterList>
       </ParameterList>
       <Parameter name="title" type="string" value="Pyrex Inserts"/>
       <Parameter name="label" type="string" value="BP20"/>
@@ -587,6 +632,20 @@
       <Parameter name="num_pins" type="int" value="17"/>
       <Parameter name="axial_elevations" type="Array(double)" value="{15.76,376.44,394.3}"/>
       <ParameterList name="Materials">
+        <ParameterList name="Material_pyrex">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{pyrex}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="pyrex"/>
+          <Parameter name="density" type="double" value="2.23"/>
+        </ParameterList>
+        <ParameterList name="Material_ss">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="ss"/>
+          <Parameter name="density" type="double" value="8.0"/>
+        </ParameterList>
       </ParameterList>
       <Parameter name="title" type="string" value="Pyrex Inserts"/>
       <Parameter name="label" type="string" value="BP16"/>
@@ -622,6 +681,20 @@
       <Parameter name="num_pins" type="int" value="17"/>
       <Parameter name="axial_elevations" type="Array(double)" value="{15.76,376.44,394.3}"/>
       <ParameterList name="Materials">
+        <ParameterList name="Material_pyrex">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{pyrex}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="pyrex"/>
+          <Parameter name="density" type="double" value="2.23"/>
+        </ParameterList>
+        <ParameterList name="Material_ss">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="ss"/>
+          <Parameter name="density" type="double" value="8.0"/>
+        </ParameterList>
       </ParameterList>
       <Parameter name="title" type="string" value="Pyrex Inserts"/>
       <Parameter name="label" type="string" value="BP8"/>
@@ -657,6 +730,20 @@
       <Parameter name="num_pins" type="int" value="17"/>
       <Parameter name="axial_elevations" type="Array(double)" value="{15.76,376.44,394.3}"/>
       <ParameterList name="Materials">
+        <ParameterList name="Material_pyrex">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{pyrex}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="pyrex"/>
+          <Parameter name="density" type="double" value="2.23"/>
+        </ParameterList>
+        <ParameterList name="Material_ss">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="ss"/>
+          <Parameter name="density" type="double" value="8.0"/>
+        </ParameterList>
       </ParameterList>
       <Parameter name="title" type="string" value="Pyrex Inserts"/>
       <Parameter name="label" type="string" value="BP12"/>
@@ -692,6 +779,20 @@
       <Parameter name="num_pins" type="int" value="17"/>
       <Parameter name="axial_elevations" type="Array(double)" value="{15.76,376.44,394.3}"/>
       <ParameterList name="Materials">
+        <ParameterList name="Material_pyrex">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{pyrex}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="pyrex"/>
+          <Parameter name="density" type="double" value="2.23"/>
+        </ParameterList>
+        <ParameterList name="Material_ss">
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
+          <Parameter name="fissionable" type="bool" value="false"/>
+          <Parameter name="key_name" type="string" value="ss"/>
+          <Parameter name="density" type="double" value="8.0"/>
+        </ParameterList>
       </ParameterList>
       <Parameter name="title" type="string" value="Pyrex Inserts"/>
       <Parameter name="label" type="string" value="BP24"/>
