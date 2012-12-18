@@ -76,16 +76,15 @@ foreach $iblock (@BLOCKS){
     );
 
 # To have a bona fide XMl file
-$XML_HEADER='<?xml version="1.0" encoding="UTF-8"?>';
-# For formatted display in a browser.
-$XSLT_HEADER='<?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>';
+my $XML_HEADER='<?xml version="1.0" encoding="UTF-8"?>';
 
 #
 # Process the command line
 #
 my $DEBUG=0;
 my ($VERBOSE,$HELP,$VERSION);
-my $XML=$XSLT='on';
+my $XML='on';
+my $XSLT='on';
 { # process options
     GetOptions(
 	"xml=s"     => \$XML,
@@ -101,6 +100,14 @@ if($VERSION){
     print STDERR "@VERSION\n";
     exit;
 }
+
+# For formatted display in a browser.
+my $XSLT_FILE='PL9.xsl';
+if($XSLT ne 'on' && $XSLT ne 'off'){
+   $XSLT_FILE=$XSLT; 
+}
+my $XSLT_HEADER="<?xml-stylesheet version=\"1.0\" type=\"text/xsl\" href=\"$XSLT_FILE\"?>";
+
 
 if(@ARGV < 2){
     die "Usage: $pgnam [options ...] reactor_input_file output_xml_file
