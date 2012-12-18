@@ -37,7 +37,7 @@ FUNCTION(ADD_REACTOR_AWARE_INPUT_PARSER_TEST FILE_NAME)
       CMND ${PERL_EXECUTABLE}
       ARGS
         ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl
-        ../${FILE_NAME}.inp  ${FILE_NAME}.xml  --xslt --xml
+        ../${FILE_NAME}.inp  ${FILE_NAME}.xml
     TEST_2
       CMND diff ARGS ${FILE_NAME}.xml ../${FILE_NAME}.xml.gold
     )
