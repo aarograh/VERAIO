@@ -941,7 +941,7 @@ sub key_on_list {
 }
 
 sub coremapmap {
-    my( $home, $csize_path, $cmap_path, $mmap_path, %userparam ) = @_ ;
+    my( $home, $csize_path, $cmap_path, $mmap_path, $bc_sym_path, %userparam ) = @_ ;
     my %OPTIONS;
 
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
@@ -957,18 +957,26 @@ sub coremapmap {
     my @cmap_path=parse_path($cmap_path);
     my $cm_ref=key_defined($SOURCE_DB,@cmap_path);
     return undef unless $cm_ref;
-
     die "coremapmap: cm_ref not valid [$cmap_path] [@cmap_path] [$cm_ref]\n" 
 	unless ref $cm_ref eq 'ARRAY';
 
     my @mmap_path=parse_path($mmap_path);
     my $mm_ref=key_defined($SOURCE_DB,@mmap_path);
     return undef unless $mm_ref;
-
     die "coremapmap: mm_ref not valid [$mmap_path] [@mmap_path] [$mm_ref]\n" 
 	unless ref $mm_ref eq 'ARRAY';
 
-    my @a=core_map($cm_ref,$mm_ref,$csize);
+    my @bc_sym_path=parse_path($bc_sym_path);
+    my $bc_sym=key_defined($SOURCE_DB,@bc_sym_path);
+    die "coremapmap: bc_sym not valid [$bc_sym_path] [@bc_sym_path] [$bc_sym]\n" 
+	if ref $bc_sym;
+
+    unless(defined($bc_sym)){
+	## ssmod
+	$bc_sym='mir';
+    }
+
+    my @a=core_map($cm_ref,$mm_ref,$csize,$bc_sym);
 
     return \@a;
 }

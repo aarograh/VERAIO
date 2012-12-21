@@ -106,35 +106,35 @@ CORE:
       _pltype: array
       _type: string
       _do:
-        - coremapmap CORE/$size,CORE/@core_shape,CORE/@assm_map
+        - coremapmap CORE/$size,CORE/@core_shape,CORE/@assm_map,CORE/$bc_sym
       _content:
 
     insert_map:
       _pltype: array
       _type: string
       _do:
-        - coremapmap CORE/$size,CORE/@core_shape,CORE/@insert_map
+        - coremapmap CORE/$size,CORE/@core_shape,CORE/@insert_map,CORE/$bc_sym
       _content:
 
     det_map:
       _pltype: array
       _type: string
       _do:
-        - coremapmap CORE/$size,CORE/@core_shape,CORE/@det_map
+        - coremapmap CORE/$size,CORE/@core_shape,CORE/@det_map,CORE/$bc_sym
       _content:
 
     crd_map:
       _pltype: array
       _type: string
       _do:
-        - coremapmap CORE/$size,CORE/@core_shape,CORE/@crd_map
+        - coremapmap CORE/$size,CORE/@core_shape,CORE/@crd_map,CORE/$bc_sym
       _content:
 
     crd_bank:
       _pltype: array
       _type: string
       _do:
-        - coremapmap CORE/$size,CORE/@core_shape,CORE/@crd_bank
+        - coremapmap CORE/$size,CORE/@core_shape,CORE/@crd_bank,CORE/$bc_sym
       _content:
 
     shape:

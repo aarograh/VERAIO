@@ -57,6 +57,8 @@
 
   height 406.3                          ! distance from lower core plate to upper core plate
 
+!  bc_sym mir
+
 !  Note that core_shape is always "full-core", i.e. no symmetry
 
    core_shape

@@ -34,7 +34,9 @@ use Exporter;
 	 'arraysize',
 	 'first',
 	 'last',
-	 'nth'
+	 'nth',
+	 'mmult',
+	 'transpose'
     );
 
 {
@@ -205,6 +207,38 @@ sub last {
 sub nth ($@) {
     my ($idx,@a)=@_;
     return $a[$idx] || undef;
+}
+
+# multiply two matrices which are arrays of arrays
+sub mmult {
+    my ($rows, $cols, $m1, $m2) = @_;
+    my $m3 = [];
+    --$rows; --$cols;
+    for my $i (0 .. $rows) {
+        for my $j (0 .. $cols) {
+            $m3->[$i][$j] += $m1->[$i][$_] * $m2->[$_][$j] for 0..$cols;
+        }
+    }
+    return $m3;
+}
+
+# transpose a matrix
+sub transpose {
+    my $matrix = shift;
+    my @result;
+    my $m;
+
+    for my $col (@{$matrix->[0]}) {
+        push @result, [];
+    }
+    for my $row (@{$matrix}) {
+        $m=0;
+        for my $col (@{$row}) {
+            push(@{$result[$m++]}, $col);
+        }
+    }
+
+    return \@result;
 }
 
 1;

@@ -28,7 +28,8 @@ use Exporter;
 	 'find_keys',
 	 'keys_at',
 	 'values_at',
-	 'value_eq_at'
+	 'value_eq_at',
+	 'key_delete'
     );
 
 my $DIE_ON_UNDEF=1;
@@ -149,6 +150,38 @@ sub key_exists {
 #	$hash_ref = $hash_ref->{$key};
     }
     return $hash_ref;
+}
+
+sub key_delete {
+    my( $hash_ref, @keys ) = @_ ;
+    my $last_hash;
+    my $last_key;
+
+    print "key_delete: @keys\n";
+
+    unless ( @keys ) {
+	warn "key_delete: no keys" ;
+	return $hash_ref;
+    }
+    foreach my $key ( @keys ) {
+	unless( ref $hash_ref eq 'HASH' ) {
+	    warn "key_delete: $hash_ref not a HASH ref" ;
+	    return undef;
+	}
+	return undef unless exists( $hash_ref->{$key} ) ;
+
+	$last_hash= $hash_ref;
+	$last_key=$key;
+
+	$hash_ref = \%{ $hash_ref->{$key} };
+
+
+#	$hash_ref = $hash_ref->{$key};
+    }
+
+    delete $last_hash->{$last_key};
+    print "deleted $last_hash $last_key\n";
+    return;
 }
 
 sub keys_at {

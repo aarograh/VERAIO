@@ -158,6 +158,14 @@ sub keyin{
     $name_idx=$args{_named};
     if($name_idx){
 	$name=splice(@a,$name_idx-1,1);
+
+# In case we want to use _content instead of _default. Then must
+# change all entries in Directory.yml, _default -> _content, and use
+# content to define default value. Otherwise, use _default and make a
+# map from _default to create _content.
+#
+#	key_delete($templ,$CONTENT_LABEL) if key_exists($templ,$CONTENT_LABEL);
+
 	$templ=new_key($templ,$REF_LABEL,$name);
     }
 

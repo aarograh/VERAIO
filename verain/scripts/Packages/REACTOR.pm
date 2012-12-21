@@ -18,7 +18,10 @@ use Exporter;
 	 'reflectOCT',
 	 'gen_oct_list',
 	 'gen_quad_list',
+	 'gen_oct_list_rot',
+	 'gen_quad_list_rot',
 	 'fullcellmap',
+	 'fullcellmap_rot',
 	 'read_ascii',
 	 'times_in_array',
 	 'fillin',
@@ -67,7 +70,7 @@ sub qtr_size {
     return $total;
 }
 
-# generates array with full map from a list of quarter symmetry
+# generates array with full map from a list of octal symmetry
 sub gen_oct_list {
     my ($isize,@cellmap)=@_;
     my ($i,$j);
@@ -80,6 +83,7 @@ sub gen_oct_list {
     my $it = incrmf3($ITLIMIT, 1, 1);  # create iterator for partitioning
     my @part = part { $it->($_) } @cellmap; # get list of references to array chunks
     my $map8=index_map(\@part,'OCTANT'); # make addressing function mapping into the original array chunks
+#    my $map8=index_map_rotational(\@part,'OCTANT'); # make addressing function mapping into the original array chunks
     for($i=-$ibound;$i<=$ibound;$i++){ # make an array of values from mapping into chunks
 	@a=();
 	for($j=-$ibound;$j<=$ibound;$j++){
@@ -88,9 +92,11 @@ sub gen_oct_list {
 	}
 	print "@a\n" if get_verbose();
     }
+#    exit;
     return @b;
 }
 
+# generates array with full map from a list of quarter symmetry
 sub gen_quad_list {
     my ($isize,@cellmap)=@_;
     my ($i,$j);
@@ -102,6 +108,57 @@ sub gen_quad_list {
     my $it = incrmf3($ITLIMIT, 1, 1, $ibound);
     my @part = part { $it->($_) } @cellmap;
     my $map4=index_map(\@part,'QUARTER');
+#    my $map4=index_map_rotational(\@part,'QUARTER');
+    for($i=-$ibound;$i<=$ibound;$i++){
+	my @a=();
+	for($j=-$ibound;$j<=$ibound;$j++){
+	    push @a, $map4->($i,$j);
+	    push @b, $map4->($i,$j);
+	}
+	print "@a\n" if get_verbose();
+    }
+    return @b;
+}
+
+# generates array with full map from a list of octal symmetry
+sub gen_oct_list_rot {
+    my ($isize,@cellmap)=@_;
+    my ($i,$j);
+    my @a=();
+    my @b=();
+
+    my $ITLIMIT=$isize+3;
+
+    my $ibound=int($isize/2);
+    my $it = incrmf3($ITLIMIT, 1, 1);  # create iterator for partitioning
+    my @part = part { $it->($_) } @cellmap; # get list of references to array chunks
+#    my $map8=index_map(\@part,'OCTANT'); # make addressing function mapping into the original array chunks
+    my $map8=index_map_rotational(\@part,'OCTANT'); # make addressing function mapping into the original array chunks
+    for($i=-$ibound;$i<=$ibound;$i++){ # make an array of values from mapping into chunks
+	@a=();
+	for($j=-$ibound;$j<=$ibound;$j++){
+	    push @a, $map8->($i,$j);
+	    push @b, $map8->($i,$j);
+	}
+	print "@a\n" if get_verbose();
+    }
+#    exit;
+    return @b;
+}
+
+# generates array with full map from a list of quarter symmetry
+sub gen_quad_list_rot {
+    my ($isize,@cellmap)=@_;
+    my ($i,$j);
+    my @b=();
+
+    my $ITLIMIT=$isize+3;
+
+    my $ibound=int($isize/2);
+    my $it = incrmf3($ITLIMIT, 1, 1, $ibound);
+    my @part = part { $it->($_) } @cellmap;
+#    my $map4=index_map(\@part,'QUARTER');
+    my $map4=index_map_rotational(\@part,'QUARTER');
     for($i=-$ibound;$i<=$ibound;$i++){
 	my @a=();
 	for($j=-$ibound;$j<=$ibound;$j++){
@@ -274,19 +331,46 @@ sub index_map {
     if(uc($type) eq 'OCTANT'){
 	return sub {
 	    my ($i,$j)=@_;
+#	    my $flag="$i$j";
+
 	    $i=abs($i);
 	    $j=abs($j);
+	    if($j>$i){
+		my $t=$i;
+		$i=$j;
+		$j=$t;
+	    }
 
-	    return $j>$i ? $map->[$j]->[$i] : $map->[$i]->[$j];
+	    my $value= $map->[$i]->[$j];
+
+	    unless(defined($map->[$i]->[$j])){
+		die "index_map: undefined OCTANT $i $j\n";
+	    }
+
+#	    my $flag="$i$j";
+#	    $value = $value eq 0 ? 0 : $flag;
+
+	    return $value;
 	}
     }
     if(uc($type) eq 'QUARTER'){
 	return sub {
 	    my ($i,$j)=@_;
+#	    my $flag="$i$j";
+
 	    $i=abs($i);
 	    $j=abs($j);
 
-	    return $map->[$i]->[$j];
+	    unless(defined($map->[$i]->[$j])){
+		die "index_map: undefined QARTER $i $j\n";
+	    }
+
+	    my $value= $map->[$i]->[$j];
+
+#	    my $flag="$i$j";
+#	    $value = $value eq 0 ? 0 : $flag;
+
+	    return $value;
 	}
     }
     undef;
@@ -310,7 +394,30 @@ sub fullcellmap {
 	@b=@a;
     }
     else{
-	die "setcellmap: invalid map $npin [@a]\n";
+	die "fullcellmap: invalid map $npin [@a]\n";
+    }
+    return @b;
+}
+
+sub fullcellmap_rot {
+    my ($npin,@a)=@_;
+    my @b=();
+
+    my $qtrsize =qtr_size($npin);
+    my $octsize =oct_size($npin);
+    my $fullsize=full_size($npin);
+
+    if(@a == $qtrsize){
+	@b=gen_quad_list_rot($npin,@a);
+    }
+    elsif(@a == $octsize){
+	@b=gen_oct_list_rot($npin,@a);
+    }
+    elsif(@a == $fullsize){
+	@b=@a;
+    }
+    else{
+	die "fullcellmap_rot: invalid map $npin [@a]\n";
     }
     return @b;
 }
@@ -384,7 +491,7 @@ sub extract_map{
 }
 
 sub core_map{
-    my ($cmap, $mmap, $n)=@_;
+    my ($cmap, $mmap, $n, $bc_sym)=@_;
 
     # how many 1 in core shape
     my $nfull=times_in_array($cmap,1);
@@ -403,26 +510,171 @@ sub core_map{
     my @fullm;
     my @fullmp;
 
+    print STDERR "core_map: $bc_sym\n"  if get_verbose();;
+
     if($nmmap == $noct){
 	@ccmap=@core_map_o;
 	@resmap=fillin(\@ccmap, $mmap, 1);
-	@fullm=fullcellmap($n,@resmap);
+	## ssmod
+	if($bc_sym eq 'mir'){
+	    @fullm=fullcellmap($n,@resmap);
+	}
+	else{
+	    @fullm=fullcellmap_rot($n,@resmap);
+#	    @fullm=fullcellmap($n,@resmap);
+	}
+
 	@fullmp=purge_array(\@fullm,0);
     }
     elsif ($nmmap == $nquad){
 	@ccmap=@core_map_q;
 	@resmap=fillin(\@ccmap, $mmap, 1);
-	@fullm=fullcellmap($n,@resmap);
+	## ssmod
+	if($bc_sym eq 'mir'){
+	    @fullm=fullcellmap($n,@resmap);
+	}
+	else{
+	    @fullm=fullcellmap_rot($n,@resmap);
+#	    @fullm=fullcellmap($n,@resmap);
+	}
 	@fullmp=purge_array(\@fullm,0);
     }
     elsif ($nmmap == $nfull){
 	@fullmp=@{ $mmap };
     }
     else{
-	die "coremap: invalid map, map=$nmmap, octant=$noct, quarter=$nquad, full=$nfull\n";
+	die "core_map: invalid map, map=$nmmap, octant=$noct, quarter=$nquad, full=$nfull\n";
     }
 
     return  wantarray ? @fullmp : \@fullmp;
 }
+
+sub index_map_rotational {
+    my ($map,$type)=@_;
+    my $m=@{ $map };
+
+    if(uc($type) eq 'OCTANT'){
+	return sub {
+	    my ($ibar,$jbar)=@_;
+	    my ($i,$j)=($ibar,$jbar);
+	    my $region=1.1;
+
+	    # second octant in first quadrant, O^-1
+	    ($ibar >  0 && $jbar >  0 && $ibar <=  $jbar) &&
+		do{
+		    $i=         $jbar;
+		    $j=-$ibar + $jbar;
+		    $region=1.2;
+	    };
+
+	    # second quadrant, Q^-1
+	    ($ibar <= 0 && $jbar >  0 && $jbar >  (-$ibar)) &&
+		do{
+		    $i= $jbar;
+		    $j=-$ibar;
+		    die "redoing region 2.1\n" if $region != 1.1;
+		    $region=2.1;
+	    };
+	    # second quadrant, O^-1 Q^-1
+	    ($ibar <= 0 && $jbar >  0 && $jbar <=  (-$ibar)) &&
+		do{
+		    $i=-$ibar;
+		    $j=-$ibar - $jbar;
+		    die "redoing region 2.2\n" if $region != 1.1;
+		    $region=2.2;
+	    };
+
+	    # third quadrant, Q^-2
+	    ($ibar <  0 && $jbar <=  0 && (-$jbar) <  (-$ibar)) &&
+		do{
+		    $i=-$ibar;
+		    $j=-$jbar;
+		    die "redoing region 3.1\n" if $region != 1.1;
+		    $region=3.1;
+	    };
+	    # third quadrant, O^-1 Q^-2
+	    ($ibar <  0 && $jbar <=  0 && (-$jbar) >= (-$ibar)) &&
+		do{
+		    $i=       - $jbar;
+		    $j= $ibar - $jbar;
+		    die "redoing region 3.2\n" if $region != 1.1;
+		    $region=3.2;
+	    };
+
+	    # fourth quadrant, Q^-3
+	    ($ibar >=  0 && $jbar <  0 && (-$jbar) >  $ibar) &&
+		do{
+		    $i=-$jbar;
+		    $j= $ibar;
+		    die "redoing region 4.1\n" if $region != 1.1;
+		    $region=4.1;
+	    };
+	    # fourth quadrant
+	    ($ibar >=  0 && $jbar <  0 && (-$jbar) <=  $ibar) &&
+		do{
+		    $i= $ibar;
+		    $j= $ibar + $jbar;
+		    die "redoing region 4.2\n" if $region != 1.1;
+		    $region=4.2;
+	    };
+
+	    unless(defined($map->[$i]->[$j])){
+		die "oct: $region ($ibar, $jbar) = ($i,$j)\n";
+	    }
+
+	    my $value= $map->[$i]->[$j];
+
+#	    my $flag="$i$j";
+#	    print "oct: $region: $ibar,$jbar -> $i,$j\n";
+#	    $value = $value eq 0 ? 0 : $flag;
+
+	    return $value;
+	}
+    }
+    if(uc($type) eq 'QUARTER'){
+	return sub {
+	    my ($ibar,$jbar)=@_;
+	    my ($i,$j)=($ibar,$jbar);
+
+	    my $region=1;
+
+	    # second quadrant
+	    ($ibar <= 0 && $jbar >  0) &&
+		do{
+		    $i=         $jbar;
+		    $j=-$ibar;
+		    $region=2;
+	    };
+	    # third quadrant
+	    ($ibar <  0 && $jbar <=  0) &&
+		do{
+		    $i=-$ibar;
+		    $j=-$jbar;
+		    $region=3;
+	    };
+	    # fourth quadrant
+	    ($ibar >=  0 && $jbar <   0) &&
+		do{
+		    $i=        -$jbar;
+		    $j= $ibar;
+		    $region=4;
+	    };
+	    
+	    unless(defined($map->[$i]->[$j])){
+		die "quad: $region ($ibar, $jbar) = ($i,$j)\n";
+	    }
+
+	    my $value= $map->[$i]->[$j];
+
+#	    my $flag="$i$j";
+#	    print "qad: $region: $ibar,$jbar -> $i,$j\n";
+#	    $value = $value eq 0 ? 0 : $flag;
+
+	    return $value;
+	}
+    }
+    undef;
+}
+
 
 1;
