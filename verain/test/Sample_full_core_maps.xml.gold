@@ -90,7 +90,7 @@
         <Parameter name="density" type="double" value="8.19"/>
       </ParameterList>
     </ParameterList>
-    <Parameter name="crd_bank" type="Array(string)" value="{-,-,-,-,-,-,-,-,SA,-,B,-,C,-,B,-,SA,-,-,-,-,SD,-,SB,-,SB,-,SD,-,-,-,SA,-,D,-,-,-,D,-,-,-,D,-,SA,-,-,SC,-,A,-,-,-,-,-,A,-,SC,-,-,-,B,-,-,-,C,-,A,-,C,-,-,-,B,-,-,-,SB,-,-,-,-,-,-,-,-,-,SB,-,-,-,C,-,D,-,A,-,D,-,A,-,D,-,C,-,-,-,SB,-,-,-,-,-,-,-,-,-,SB,-,-,-,B,-,-,-,C,-,A,-,C,-,-,-,B,-,-,-,SC,-,A,-,-,-,-,-,A,-,SC,-,-,SA,-,D,-,-,-,D,-,-,-,D,-,SA,-,-,-,SD,-,SB,-,SB,-,SD,-,-,-,-,SA,-,B,-,C,-,B,-,SA,-,-,-,-,-,-,-,-}"/>
+    <Parameter name="crd_bank" type="Array(string)" value="{-,-,-,-,-,-,-,-,SA,-,B,-,C,-,B,-,SA,-,-,-,-,SD,-,SB,-,SB,-,SC,-,-,-,SA,-,D,-,-,-,D,-,-,-,D,-,SA,-,-,SC,-,A,-,-,-,-,-,A,-,SD,-,-,-,B,-,-,-,C,-,A,-,C,-,-,-,B,-,-,-,SB,-,-,-,-,-,-,-,-,-,SB,-,-,-,C,-,D,-,A,-,D,-,A,-,D,-,C,-,-,-,SB,-,-,-,-,-,-,-,-,-,SB,-,-,-,B,-,-,-,C,-,A,-,C,-,-,-,B,-,-,-,SD,-,A,-,-,-,-,-,A,-,SC,-,-,SA,-,D,-,-,-,D,-,-,-,D,-,SA,-,-,-,SC,-,SB,-,SB,-,SD,-,-,-,-,SA,-,B,-,C,-,B,-,SA,-,-,-,-,-,-,-,-}"/>
     <Parameter name="core_size" type="int" value="15"/>
     <Parameter name="cyc_edate" type="int" value="19980401"/>
   </ParameterList>

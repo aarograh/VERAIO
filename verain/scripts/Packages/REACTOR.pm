@@ -520,8 +520,8 @@ sub core_map{
 	    @fullm=fullcellmap($n,@resmap);
 	}
 	else{
-	    @fullm=fullcellmap_rot($n,@resmap);
-#	    @fullm=fullcellmap($n,@resmap);
+#	    @fullm=fullcellmap_rot($n,@resmap);
+	    @fullm=fullcellmap($n,@resmap);
 	}
 
 	@fullmp=purge_array(\@fullm,0);

@@ -973,7 +973,8 @@ sub coremapmap {
 
     unless(defined($bc_sym)){
 	## ssmod
-	$bc_sym='mir';
+#	$bc_sym='mir';
+	$bc_sym='rot';
     }
 
     my @a=core_map($cm_ref,$mm_ref,$csize,$bc_sym);
