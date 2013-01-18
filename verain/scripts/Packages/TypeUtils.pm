@@ -5,7 +5,7 @@ use Exporter;
 @EXPORT=('is_whole','to_whole','is_count','to_count','is_int','to_int','is_real',
 	 'to_real','is_decimal','to_decimal','is_float','to_float','is_string',
 	 'to_string','is_eq','is_neq','is_geq','is_leq','is_gt','is_lt',
-	 'is_word','in_dictionary','not_in_dictionary','is_date');
+	 'is_word','in_dictionary','not_in_dictionary','is_date','is_odd','is_even');
 
 use Time::Local;
 
@@ -173,5 +173,16 @@ sub is_date ($) {
 	1;
     } or return 0;
 	     }
+
+sub is_even ($) {
+    return unless defined $_[0] && $_[0] ne '';
+    return  $_[0] % 2 == 0;
+}
+
+sub is_odd ($) {
+    return unless defined $_[0] && $_[0] ne '';
+    return  $_[0] % 2 == 1;
+}
+
 
 1;

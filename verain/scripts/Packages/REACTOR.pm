@@ -43,7 +43,13 @@ use Exporter;
 
 sub full_size {
     my $size=shift;
-    !($size % 2) && die "full_size: size not odd: $size\n";
+
+    unless(is_int($size) && $size > 0){
+	die "full_size: size not valid: $size\n";
+    }
+
+#    SSMOD: quick hack for Andrew, needs more checks
+#    !($size % 2) && die "full_size: size not odd: $size\n";
 
     my $total=$size*$size;
     return $total;
@@ -51,10 +57,22 @@ sub full_size {
 
 sub oct_size {
     my $size=shift;
-    !($size % 2) && die "oct_size: size not odd: $size\n";
 
-    $size--;
-    $size=$size/2+1;
+#    SSMOD: quick hack for Andrew, needs more checks
+#    !($size % 2) && die "oct_size: size not odd: $size\n";
+
+    unless(is_int($size) && $size > 0){
+	die "oct_size: size not valid: $size\n";
+    }
+
+    if(is_odd($size)){
+	$size--;
+	$size=$size/2+1;
+    }
+    else{
+	$size=$size/2;
+    }
+
     my $total=0;
     $total += $_ foreach (1..$size);
     return $total;
@@ -62,10 +80,22 @@ sub oct_size {
 
 sub qtr_size {
     my $size=shift;
-    !($size % 2) && die "qtr_size: size not odd: $size\n";
 
-    $size--;
-    $size=$size/2+1;
+#    SSMOD: quick hack for Andrew, needs more checks
+#    !($size % 2) && die "qtr_size: size not odd: $size\n";
+
+    unless(is_int($size) && $size > 0){
+	die "qtr_size: size not valid: $size\n";
+    }
+
+    if(is_odd($size)){
+	$size--;
+	$size=$size/2+1;
+    }
+    else{
+	$size=$size/2;
+    }
+
     my $total=$size*$size;
     return $total;
 }
@@ -80,13 +110,24 @@ sub gen_oct_list {
     my $ITLIMIT=$isize+3;
 
     my $ibound=int($isize/2);
+    my @bounds;
+    if(is_odd($isize)){
+	@bounds=(-$ibound..$ibound);
+    }
+    else{
+	$ibound--;
+	@bounds=(-$ibound..0,0..$ibound);
+    }
+
     my $it = incrmf3($ITLIMIT, 1, 1);  # create iterator for partitioning
     my @part = part { $it->($_) } @cellmap; # get list of references to array chunks
     my $map8=index_map(\@part,'OCTANT'); # make addressing function mapping into the original array chunks
 #    my $map8=index_map_rotational(\@part,'OCTANT'); # make addressing function mapping into the original array chunks
-    for($i=-$ibound;$i<=$ibound;$i++){ # make an array of values from mapping into chunks
+#    for($i=-$ibound;$i<=$ibound;$i++){ # make an array of values from mapping into chunks
+    foreach $i (@bounds){
 	@a=();
-	for($j=-$ibound;$j<=$ibound;$j++){
+#	for($j=-$ibound;$j<=$ibound;$j++){
+	foreach $j (@bounds){
 	    push @a, $map8->($i,$j);
 	    push @b, $map8->($i,$j);
 	}
@@ -105,13 +146,25 @@ sub gen_quad_list {
     my $ITLIMIT=$isize+3;
 
     my $ibound=int($isize/2);
+    my @bounds;
+    if(is_odd($isize)){
+	@bounds=(-$ibound..$ibound);
+    }
+    else{
+	$ibound--;
+	@bounds=(-$ibound..0,0..$ibound);
+    }
+
     my $it = incrmf3($ITLIMIT, 1, 1, $ibound);
     my @part = part { $it->($_) } @cellmap;
     my $map4=index_map(\@part,'QUARTER');
 #    my $map4=index_map_rotational(\@part,'QUARTER');
-    for($i=-$ibound;$i<=$ibound;$i++){
+
+#    for($i=-$ibound;$i<=$ibound;$i++){
+    foreach $i (@bounds){
 	my @a=();
-	for($j=-$ibound;$j<=$ibound;$j++){
+#	for($j=-$ibound;$j<=$ibound;$j++){
+	foreach $j (@bounds){
 	    push @a, $map4->($i,$j);
 	    push @b, $map4->($i,$j);
 	}
@@ -384,18 +437,29 @@ sub fullcellmap {
     my $octsize =oct_size($npin);
     my $fullsize=full_size($npin);
 
-    if(@a == $qtrsize){
-	@b=gen_quad_list($npin,@a);
-    }
-    elsif(@a == $octsize){
-	@b=gen_oct_list($npin,@a);
-    }
-    elsif(@a == $fullsize){
-	@b=@a;
-    }
-    else{
-	die "fullcellmap: invalid map $npin [@a]\n";
-    }
+ #   if(is_odd($npin)){
+	if(@a == $qtrsize){
+	    @b=gen_quad_list($npin,@a);
+	}
+	elsif(@a == $octsize){
+	    @b=gen_oct_list($npin,@a);
+	}
+	elsif(@a == $fullsize){
+	    @b=@a;
+	}
+	else{
+	    die "fullcellmap: invalid map size ($fullsize) for map dimension (odd, $npin) [@a]\n";
+	}
+#    }
+#    else{
+#	if(@a == $fullsize){
+#	    @b=@a;
+#	}
+#	else{
+#	    die "fullcellmap: invalid map size ($fullsize) for map dimension (even, $npin) [@a]\n";
+#	}
+#    }
+
     return @b;
 }
 
