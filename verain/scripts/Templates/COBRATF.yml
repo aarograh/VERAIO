@@ -52,3 +52,37 @@ COBRATF:
         - copyhash COBRATF/%gridloss,select=>values
       _content:
 
+    dtmax:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$dtmax
+      _content:
+
+    dtmin:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$dtmin
+      _content:
+
+    tend:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$tend
+      _content:
+
+    rtwfp:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$rtwfp
+      _content:
+
+    maxits:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$maxits
+      _content:

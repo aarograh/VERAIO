@@ -819,6 +819,41 @@ COBRATF:
     <<: *dtdblnamed
     _check:
 
+  dtmin:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  dtmax:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  tend:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  rtwfp:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  maxits:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+
 MPACT:
 
   ray_spacing:
