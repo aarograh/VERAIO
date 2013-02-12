@@ -212,7 +212,7 @@
           369.7898 
           377.711
 
-[DENOVO]
+[INSILICO]
     do_transport  false
     eq_set        ld
     eigen_solver  arnoldi

@@ -211,7 +211,7 @@
   </ParameterList>
   <ParameterList name="INSERTS">
   </ParameterList>
-  <ParameterList name="DENOVO">
+  <ParameterList name="INSILICO">
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="vera"/>
     </ParameterList>
