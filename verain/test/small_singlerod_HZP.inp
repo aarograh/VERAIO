@@ -178,7 +178,7 @@
           369.7898 
           377.711
 
-[INSILICO]
+[DENOVO]
     eq_set        sc
     eigen_solver  arnoldi
     tolerance     1e-06

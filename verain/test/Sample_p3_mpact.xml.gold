@@ -189,7 +189,7 @@
   </ParameterList>
   <ParameterList name="INSERTS">
   </ParameterList>
-  <ParameterList name="INSILICO">
+  <ParameterList name="DENOVO">
     <ParameterList name="silo_db">
     </ParameterList>
     <ParameterList name="eigenvalue_db">
