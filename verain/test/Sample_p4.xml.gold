@@ -398,7 +398,7 @@
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="DENOVO">
+  <ParameterList name="INSILICO">
     <ParameterList name="silo_db">
     </ParameterList>
     <ParameterList name="eigenvalue_db">

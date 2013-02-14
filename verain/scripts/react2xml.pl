@@ -59,14 +59,14 @@ my $SCHEMA="${directory}Templates/Directory.yml";
 #
 my @BLOCKS=('CASEID','STATE','CORE','ASSEMBLIES',
 	    'CONTROLS','DETECTORS','INSERTS',
-	    'DENOVO','EDITS','COBRATF','MPACT');
+	    'INSILICO','EDITS','COBRATF','MPACT');
 foreach $iblock (@BLOCKS){
     $SCHEMA_PL{$iblock} = "${directory}Templates/$iblock.yml";
 }
 
 #
 # Rethreads
-# PL for DENOVO requires repeating maps, axial, cells, etc
+# PL for INSILICO requires repeating maps, axial, cells, etc
 #
 %RETHREAD=( 
     'ASSEMBLIES' => 'Assembly_',

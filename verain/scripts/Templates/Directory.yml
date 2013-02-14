@@ -43,7 +43,7 @@ _DIRECTORY:
   EDITS:
   DECART:
   UTILS:
-  DENOVO:
+  INSILICO:
   COBRATF:
   MPACT:
 
@@ -530,7 +530,7 @@ UTILS:
     _check:
       - is_string()
 
-DENOVO:
+INSILICO:
   problem_name:
     <<: *dtstring
     _content:

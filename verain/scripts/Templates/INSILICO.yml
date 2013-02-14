@@ -1,4 +1,4 @@
-DENOVO:
+INSILICO:
   _pltype: list
   _do:
     - setdb MAIN_DB
@@ -7,173 +7,173 @@ DENOVO:
       _pltype: parameter
       _type: string
       _do:
-        - copy DENOVO/$problem_name
+        - copy INSILICO/$problem_name
       _content:
 
     xs_library:
       _pltype: parameter
       _type: string
       _do:
-        - copy DENOVO/$xs_library
+        - copy INSILICO/$xs_library
       _content:
 
     mat_library:
       _pltype: parameter
       _type: string
       _do:
-        - copy DENOVO/$mat_library
+        - copy INSILICO/$mat_library
       _content:
 
     mesh:
       _pltype: parameter
       _type: int
       _do:
-        - copy DENOVO/$mesh
+        - copy INSILICO/$mesh
       _content:
 
     dimension:
       _pltype: parameter
       _type: int
       _do:
-        - copy DENOVO/$dimension
+        - copy INSILICO/$dimension
       _content:
 
     do_transport:
       _pltype: parameter
       _type: bool
       _do:
-        - copy DENOVO/$do_transport
+        - copy INSILICO/$do_transport
       _content:
 
     do_output:
       _pltype: parameter
       _type: bool
       _do:
-        - copy DENOVO/$do_output
+        - copy INSILICO/$do_output
       _content:
 
     num_blocks_i:
       _pltype: parameter
       _type: int
       _do:
-        - copy DENOVO/$num_blocks_i
+        - copy INSILICO/$num_blocks_i
       _content:
 
     num_blocks_j:
       _pltype: parameter
       _type: int
       _do:
-        - copy DENOVO/$num_blocks_j
+        - copy INSILICO/$num_blocks_j
       _content:
 
     num_z_blocks:
       _pltype: parameter
       _type: int
       _do:
-        - copy DENOVO/$num_z_blocks
+        - copy INSILICO/$num_z_blocks
       _content:
 
     num_sets:
       _pltype: parameter
       _type: int
       _do:
-        - copy DENOVO/$num_sets
+        - copy INSILICO/$num_sets
       _content:
 
     num_groups:
       _pltype: parameter
       _type: int
       _do:
-        - copy DENOVO/$num_groups
+        - copy INSILICO/$num_groups
       _content:
 
     max_delta_z:
       _pltype: parameter
       _type: double
       _do:
-        - copy DENOVO/$max_delta_z
+        - copy INSILICO/$max_delta_z
       _content:
 
     partition_upscatter:
       _pltype: parameter
       _type: bool
       _do:
-        - copy DENOVO/$partition_upscatter
+        - copy INSILICO/$partition_upscatter
       _content:
 
     store_fulcrum_string:
       _pltype: parameter
       _type: string
       _do:
-        - copy DENOVO/$store_fulcrum_string
+        - copy INSILICO/$store_fulcrum_string
       _content:
 
     mg_solver:
       _pltype: parameter
       _type: string
       _do:
-        - copy DENOVO/$mg_solver
+        - copy INSILICO/$mg_solver
       _content:
 
     eigen_solver:
       _pltype: parameter
       _type: string
       _do:
-        - copy DENOVO/$eigen_solver
+        - copy INSILICO/$eigen_solver
       _content:
 
     iterate_downscatter:
       _pltype: parameter
       _type: bool
       _do:
-        - copy DENOVO/$iterate_downscatter
+        - copy INSILICO/$iterate_downscatter
       _content:
 
     downscatter:
       _pltype: parameter
       _type: string
       _do:
-        - copy DENOVO/$downscatter
+        - copy INSILICO/$downscatter
       _content:
 
     Pn_order:
       _pltype: parameter
       _type: int
       _do:
-        - copy DENOVO/$Pn_order
+        - copy INSILICO/$Pn_order
       _content:
 
     aztec_kspace:
       _pltype: parameter
       _type: int
       _do:
-        - copy DENOVO/$aztec_kspace
+        - copy INSILICO/$aztec_kspace
       _content:
 
     max_itr:
       _pltype: parameter
       _type: int
       _do:
-        - copy DENOVO/$max_itr
+        - copy INSILICO/$max_itr
       _content:
 
     tolerance:
       _pltype: parameter
       _type: double
       _do:
-        - copy DENOVO/$tolerance
+        - copy INSILICO/$tolerance
       _content:
     eq_set:
       _pltype: parameter
       _type: string
       _do:
-        - copy DENOVO/$eq_set
+        - copy INSILICO/$eq_set
       _content:
     new_grp_bounds:
       _pltype: array
       _type: double
       _do:
-        - copyarray DENOVO/@new_grp_bounds
+        - copyarray INSILICO/@new_grp_bounds
       _content:
 
     quadrature_db:
@@ -183,28 +183,28 @@ DENOVO:
           _pltype: parameter
           _type: string
           _do:
-            - copy DENOVO/$quad_type
+            - copy INSILICO/$quad_type
           _content:
 
         polars_octant:
           _pltype: parameter
           _type: int
           _do:
-            - copy DENOVO/$polars_octant
+            - copy INSILICO/$polars_octant
           _content:
 
         azimuthals_octant:
           _pltype: parameter
           _type: int
           _do:
-            - copy DENOVO/$azimuthals_octant
+            - copy INSILICO/$azimuthals_octant
           _content:
 
         Sn_order:
           _pltype: parameter
           _type: int
           _do:
-            - copy DENOVO/$Sn_order
+            - copy INSILICO/$Sn_order
           _content:
 
     eigenvalue_db:
@@ -215,42 +215,42 @@ DENOVO:
           _pltype: parameter
           _type: double
           _do:
-            - copy DENOVO/$k_tolerance
+            - copy INSILICO/$k_tolerance
           _content:
 
         L2_tolerance:
           _pltype: parameter
           _type: double
           _do:
-            - copy DENOVO/$L2_tolerance
+            - copy INSILICO/$L2_tolerance
           _content:
     
         arnoldi_kspace:
           _pltype: parameter
           _type: int
           _do:
-            - copy DENOVO/$arnoldi_kspace
+            - copy INSILICO/$arnoldi_kspace
           _content:
     
         arnoldi_restarts:
           _pltype: parameter
           _type: int
           _do:
-            - copy DENOVO/$arnoldi_restarts
+            - copy INSILICO/$arnoldi_restarts
           _content:
     
         diagnostic_level:
           _pltype: parameter
           _type: int
           _do:
-            - copy DENOVO/$diagnostic_level
+            - copy INSILICO/$diagnostic_level
           _content:
     
         energy_dep_ev:
           _pltype: parameter
           _type: bool
           _do:
-            - copy DENOVO/$energy_dep_ev
+            - copy INSILICO/$energy_dep_ev
           _content:
     
     upscatter_db:
@@ -261,21 +261,21 @@ DENOVO:
           _pltype: parameter
           _type: double
           _do:
-            - copy DENOVO/$upscatter_tolerance
+            - copy INSILICO/$upscatter_tolerance
           _content:
     
         aztec_diag:
           _pltype: parameter
           _type: int
           _do:
-            - copy DENOVO/$aztec_diag
+            - copy INSILICO/$aztec_diag
           _content:
     
         aztec_output:
           _pltype: parameter
           _type: int
           _do:
-            - copy DENOVO/$aztec_output
+            - copy INSILICO/$aztec_output
           _content:
           
     silo_db:
@@ -286,12 +286,12 @@ DENOVO:
           _pltype: parameter
           _type: string
           _do:
-            - copy DENOVO/$silo_output
+            - copy INSILICO/$silo_output
           _content:
     
         mixing_table:
           _pltype: parameter
           _type: bool
           _do:
-            - copy DENOVO/$mixing_table
+            - copy INSILICO/$mixing_table
           _content:
