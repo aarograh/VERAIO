@@ -41,7 +41,7 @@
 
 [CORE]
   size 1                ! 1x1 single-assembly
-  rated 17.67   0.5     ! MW, Mlbs/hr  *** flow is wrong, need to fix!
+  rated 17.67   0.6824  ! MW, Mlbs/hr
   apitch 21.5
   height 406.328
 

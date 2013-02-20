@@ -15,7 +15,7 @@
 
 [CORE]
   size 3                ! 3x3
-  rated 159.1 4.41      ! MW, Mlbs/hr
+  rated 159.0 6.1416    ! MW, Mlbs/hr  (for 9 assemblies)
   apitch 21.5
 
   core_shape

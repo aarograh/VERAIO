@@ -17,8 +17,8 @@
     <Parameter name="upper_mat" type="string" value="ss"/>
     <Parameter name="bc_rad" type="string" value="reflecting"/>
     <Parameter name="xlabel" type="Array(string)" value="{J,H,G}"/>
-    <Parameter name="rated_power" type="double" value="159.1"/>
-    <Parameter name="rated_flow" type="double" value="555.650298"/>
+    <Parameter name="rated_power" type="double" value="159.0"/>
+    <Parameter name="rated_flow" type="double" value="773.82808848"/>
     <Parameter name="shape" type="Array(int)" value="{1,1,1,1,1,1,1,1,1}"/>
     <Parameter name="upper_vfrac" type="double" value="0.5"/>
     <Parameter name="lower_thick" type="double" value="5.0"/>
