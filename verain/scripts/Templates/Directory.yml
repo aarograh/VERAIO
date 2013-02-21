@@ -847,6 +847,13 @@ COBRATF:
       - is_float()
       - is_gt() 0
 
+  courant:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
   maxits:
     <<: *dtdouble
     _content:

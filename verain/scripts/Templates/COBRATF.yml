@@ -80,6 +80,13 @@ COBRATF:
         - copy COBRATF/$rtwfp
       _content:
 
+    courant:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$courant
+      _content:
+
     maxits:
       _pltype: parameter
       _type: int
