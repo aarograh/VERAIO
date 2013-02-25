@@ -36,7 +36,10 @@ use Exporter;
 	 'last',
 	 'nth',
 	 'mmult',
-	 'transpose'
+	 'transpose',
+	 'everynth',
+	 'skipeverynth',
+	 'stride'
     );
 
 {
@@ -207,6 +210,33 @@ sub last {
 sub nth ($@) {
     my ($idx,@a)=@_;
     return $a[$idx] || undef;
+}
+
+sub everynth ($@) {
+    my ($n,@a)=@_;
+    my $i;
+
+    my @b=grep {not ++$i % $n} @a;
+    return @b;
+}
+
+sub stride ($$@) {
+    my ($offset,$n,@a)=@_;
+    my $i;
+
+    my @c=splice @a, $offset;
+    my $b=shift @c;
+    @b=grep {not ++$i % $n} @c;
+
+    return ($b,@b);
+}
+
+sub skipeverynth ($@) {
+    my ($n,@a)=@_;
+    my $i;
+
+    my @b=grep {++$i % $n} @a;
+    return @b;
 }
 
 # multiply two matrices which are arrays of arrays

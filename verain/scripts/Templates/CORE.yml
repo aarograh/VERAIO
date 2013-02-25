@@ -235,6 +235,48 @@ CORE:
         - copy CORE/$height
       _content:
 
+    upper_refl_mats:
+      _pltype: array
+      _type: string
+      _do:
+        - copyarray CORE/@upper_ref,start=>0,stride=>3
+      _content:
+
+    upper_refl_thicks:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray CORE/@upper_ref,start=>1,stride=>3
+      _content:
+
+    upper_refl_vfracs:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray CORE/@upper_ref,start=>2,stride=>3
+      _content:
+
+    lower_refl_mats:
+      _pltype: array
+      _type: string
+      _do:
+        - copyarray CORE/@lower_ref,start=>0,stride=>3
+      _content:
+
+    lower_refl_thicks:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray CORE/@lower_ref,start=>1,stride=>3
+      _content:
+
+    lower_refl_vfracs:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray CORE/@lower_ref,start=>2,stride=>3
+      _content:
+
     Materials:
       _pltype: list
       _do:

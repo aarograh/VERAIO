@@ -437,13 +437,25 @@ sub copyarray{
     return undef if ref $t ne 'ARRAY';
     @result=@{ $t };
 
+    if(exists($OPTIONS{start})){
+	@a=splice(@result,$OPTIONS{start});
+	@result=@a;
+    }
+
+    if(exists($OPTIONS{stride})){
+	@a=stride(0,$OPTIONS{stride},@result);
+	@result=@a;
+    }
+
     if(exists($OPTIONS{select})){
 	if(lc($OPTIONS{select}) eq 'odd'){
-	    @a=@{ $t };
+#	    @a=@{ $t };
+	    @a=@result;
 	    @result=odd(\@a);
 	}
 	elsif(lc($OPTIONS{select}) eq 'even'){
-	    @a=@{ $t };
+#	    @a=@{ $t };
+	    @a=@result;
 	    @result=even(\@a);	    
 	}
 	else{

@@ -82,7 +82,7 @@ sub packXMLlist {
 
     my @b=keys %a;
     print STDERR "Level $Nindent: found @b\n" if get_verbose();
-    foreach my $PLentry (keys %a){
+    foreach my $PLentry (sort keys %a){
 	if( PLtype($a{$PLentry} ) eq 'parameter'){
 	    &packXMLparameter($a{$PLentry},$PLentry,$phandle,$Nindent);
 	}

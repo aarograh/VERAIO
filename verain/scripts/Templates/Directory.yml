@@ -335,6 +335,31 @@ CORE:
   mat:
     <<: *dtlistnamed
     _check:
+  lower_ref:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%3==0
+      - fall(sub{is_string(shift)},stride(0,3,()))
+      - fall(sub{is_float(shift)},stride(1,3,()))
+      - fall(sub{is_geq(shift,0)},stride(1,3,()))
+      - fall(sub{is_float(shift)},stride(2,3,()))
+      - fall(sub{is_geq(shift,0)},stride(2,3,()))
+      - fall(sub{is_leq(shift,1)},stride(2,3,()))
+  upper_ref:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%3==0
+      - fall(sub{is_string(shift)},stride(0,3,()))
+      - fall(sub{is_float(shift)},stride(1,3,()))
+      - fall(sub{is_geq(shift,0)},stride(1,3,()))
+      - fall(sub{is_float(shift)},stride(2,3,()))
+      - fall(sub{is_geq(shift,0)},stride(2,3,()))
+      - fall(sub{is_leq(shift,1)},stride(2,3,()))
+
 
 ASSEMBLY:
   title:
