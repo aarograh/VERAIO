@@ -812,12 +812,37 @@ COBRATF:
       - is_int()
       - is_gt() 0
 
+  nc: 
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+
   irfc:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+
+  dhfrac:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  hgap:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  gridloss:
+    <<: *dtdblnamed
+    _check:
 
   epso:
     <<: *dtdouble
@@ -839,10 +864,6 @@ COBRATF:
     _check:
       - is_int()
       - is_gt() 0
-
-  gridloss:
-    <<: *dtdblnamed
-    _check:
 
   dtmin:
     <<: *dtdouble
@@ -872,18 +893,18 @@ COBRATF:
       - is_float()
       - is_gt() 0
 
-  courant:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-
   maxits:
     <<: *dtdouble
     _content:
     _check:
       - is_int()
+      - is_gt() 0
+
+  courant:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
       - is_gt() 0
 
 MPACT:

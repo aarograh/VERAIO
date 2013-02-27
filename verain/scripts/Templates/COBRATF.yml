@@ -10,11 +10,46 @@ COBRATF:
         - copy COBRATF/$nfuel
       _content:
 
+    nc:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$nc
+      _content:
+
     irfc:
       _pltype: parameter
       _type: int
       _do:
         - copy COBRATF/$irfc
+      _content:
+
+    dhfrac:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$dhfrac
+      _content:
+
+    hgap:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$hgap
+      _content:
+
+    gridlabel:
+      _pltype: array
+      _type: string
+      _do:
+        - copyhash COBRATF/%gridloss,select=>keys
+      _content:
+
+    gridlloss:
+      _pltype: array
+      _type: double
+      _do:
+        - copyhash COBRATF/%gridloss,select=>values
       _content:
 
     epso:
@@ -38,18 +73,11 @@ COBRATF:
         - copy COBRATF/$iitmax
       _content:
 
-    gridlabel:
-      _pltype: array
-      _type: string
-      _do:
-        - copyhash COBRATF/%gridloss,select=>keys
-      _content:
-
-    gridlloss:
-      _pltype: array
+    dtmin:
+      _pltype: parameter
       _type: double
       _do:
-        - copyhash COBRATF/%gridloss,select=>values
+        - copy COBRATF/$dtmin
       _content:
 
     dtmax:
@@ -57,13 +85,6 @@ COBRATF:
       _type: double
       _do:
         - copy COBRATF/$dtmax
-      _content:
-
-    dtmin:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy COBRATF/$dtmin
       _content:
 
     tend:
@@ -80,16 +101,16 @@ COBRATF:
         - copy COBRATF/$rtwfp
       _content:
 
-    courant:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy COBRATF/$courant
-      _content:
-
     maxits:
       _pltype: parameter
       _type: int
       _do:
         - copy COBRATF/$maxits
+      _content:
+
+    courant:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$courant
       _content:
