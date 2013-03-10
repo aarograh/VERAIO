@@ -24,7 +24,7 @@
         <Parameter name="density" type="double" value="8.0"/>
         <Parameter name="fissionable" type="bool" value="false"/>
         <Parameter name="key_name" type="string" value="SS304"/>
-        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1.0}"/>
         <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
       </ParameterList>
       <ParameterList name="Material_he">

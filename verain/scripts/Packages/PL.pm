@@ -618,21 +618,39 @@ sub matmap2{
 	my @mat_names=();
 	my @mat_fracs=();
 
-	my $density=$content[0];
+#	my $density=$content[0];
+	my $density=shift @content;
 	my $fissionable='false';
 
 	if($keypath[$#keypath-2] eq 'mat'){
 	    $keyname=$keypath[$#keypath];
-	    $mattype=$content[1] || $keyname;
-	    push @mat_names, $mattype;
-	    push @mat_fracs, 1.0;
+
+#	    $mattype=$content[1] || $keyname;
+#	    $mattype=shift(@content) || $keyname;
+#	    push @mat_names, $mattype;
+#	    push @mat_fracs, 1.0;
+
+	    if(@content > 1){
+		@mat_names=even(\@content);
+		@mat_fracs=odd(\@content);
+	    }
+	    else{
+		$mattype=shift(@content) || $keyname;
+		push @mat_names, $mattype;
+		push @mat_fracs, 1.0;
+	    }
+
 	}
 	elsif($keypath[$#keypath-2] eq 'fuel'){
 	    $keyname=$keypath[$#keypath];
 	    $mattype="uo2";
 	    $enrichable=1;
-	    $thdensity=$content[1];
-	    $enrichment=$content[2];
+
+#	    $thdensity=$content[1];
+#	    $enrichment=$content[2];
+	    $thdensity=shift @content;
+	    $enrichment=shift @content;
+
 	    $depletable='true';
 	    $fissionable='true';
 	    push @mat_names, $mattype;
