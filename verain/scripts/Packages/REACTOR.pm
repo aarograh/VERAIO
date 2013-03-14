@@ -238,11 +238,11 @@ sub clean_line{
     $$lineref =~ s/\s+$//;                 # strip trailing blanks
 }
 
-sub clean_slash{
-    my $lineref=shift;
-
-    $$lineref =~ s/\// /g;                 # replace slashes with spaces
-}
+# sub clean_slash{
+#     my $lineref=shift;
+# 
+#     $$lineref =~ s/\// /g;                 # replace slashes with spaces
+# }
 
 sub read_ascii {
     my ($filename, $INPUT_DB, $MAIN_DB, %userparam) = @_;
@@ -270,7 +270,7 @@ sub read_ascii {
 		     'block'=>$block, 'command'=>$command);
 	  next READ;
       };
-      &clean_slash(\$_);
+#      &clean_slash(\$_);
 
       /^\[\s*(\w+)\s*\]/ &&     # found new block
 	  do{

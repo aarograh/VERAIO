@@ -392,7 +392,7 @@ ASSEMBLY:
     <<: *dtlistnamed
     _style: multi-line
     _check:
-      - fall(sub{is_geq(shift,0)},odd([]))
+      - fall(sub{is_geq(shift,0)},even([]))
   dancoff:
     <<: *dtlist
     _style: multi-line
@@ -403,9 +403,9 @@ ASSEMBLY:
     <<: *dtlistnamed
     _style:
     _check:
+      - nth(1,())>0
       - nth(2,())>0
-      - nth(3,())>0
-      - in_dictionary(nth(1,())) ss inc zirc
+      - in_dictionary(nth(0,()),'ss','inc','zirc')
   grid_axial:
     <<: *dtlist
     _style: multi-line
@@ -429,6 +429,8 @@ ASSEMBLY:
   fuel:
     <<: *dtlistnamed
     _check:
+      - is_regex(join(',',()),'[+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?,[+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?,[+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?')
+      - nth(0,())>0&&nth(1,())>=0&&nth(2,())>0
   mat:
     <<: *dtlistnamed
     _check:
@@ -465,7 +467,7 @@ CONTROL:
     <<: *dtlistnamed
     _style: multi-line
     _check:
-      - fall(sub{is_geq(shift,0)},odd([]))
+      - fall(sub{is_geq(shift,0)},even([]))
   mat:
     <<: *dtlistnamed
     _check:
@@ -494,6 +496,7 @@ INSERT:
     <<: *dtlistnamed
     _style: multi-line
     _check:
+      - fall(sub{is_geq(shift,0)},even([]))
   mat:
     <<: *dtlistnamed
     _check:
@@ -523,7 +526,7 @@ DETECTOR:
     <<: *dtlistnamed
     _style: multi-line
     _check:
-      - fall(sub{is_geq(shift,0)},odd([]))
+      - fall(sub{is_geq(shift,0)},even([]))
   mat:
     <<: *dtlistnamed
     _check:

@@ -32,8 +32,8 @@ sub new
 	keytree => $arg{keytree} || croak("missing keytree"),
 	ctext   => exists($arg{ctext}) ? $arg{ctext} : undef,
 #	ctext   =>$arg{ctext} || undef,
-	file    => exists($arg{file})  ? $arg{ctext} : undef,
-	line    => exists($arg{line})  ? $arg{ctext} : undef,
+	file    => exists($arg{file})  ? $arg{file} : undef,
+	line    => exists($arg{line})  ? $arg{line} : undef,
     };
 
 #    print STDERR "ctext $arg{ctext}\n";
@@ -132,6 +132,12 @@ sub keyword
     return $self->{keyword};
 }
 
+sub clean_slash{
+    my $lineref=shift;
+
+    $$lineref =~ s/\// /g;                 # replace slashes with spaces
+}
+
 sub keyin{
     my $self=shift;
     my $myfun=(caller(0))[3];
@@ -151,9 +157,14 @@ sub keyin{
     my $LINE_LABEL='_line';
 
     my $templ=$self->keytree();
+    my $templ0=$templ;
     my %args=%{ $templ };
 
+    unless(exists$args{_slash}){
+	&clean_slash(\$dtx);
+    }
     $dtx=~s/^\s+//;
+
     @a=split /\s+/, $dtx;
     $name_idx=$args{_named};
     if($name_idx){
@@ -169,7 +180,8 @@ sub keyin{
 	$templ=new_key($templ,$REF_LABEL,$name);
     }
 
-    my @sr=values_at($templ,'_check');
+#  $^#%@#$^!!!
+    my @sr=values_at($templ0,'_check');
     $result=0;
     if($args{_parse} eq 'scalar'){
 	$dtx=$args{_type} eq 'string' ? $dtx : $a[0];

@@ -5,7 +5,8 @@ use Exporter;
 @EXPORT=('is_whole','to_whole','is_count','to_count','is_int','to_int','is_real',
 	 'to_real','is_decimal','to_decimal','is_float','to_float','is_string',
 	 'to_string','is_eq','is_neq','is_geq','is_leq','is_gt','is_lt',
-	 'is_word','in_dictionary','not_in_dictionary','is_date','is_odd','is_even');
+	 'is_word','in_dictionary','not_in_dictionary','is_date','is_odd','is_even',
+    'is_regex');
 
 use Time::Local;
 
@@ -184,5 +185,8 @@ sub is_odd ($) {
     return  $_[0] % 2 == 1;
 }
 
+sub is_regex ($$) {
+    return $_[0] =~ m/$_[1]/;
+}
 
 1;
