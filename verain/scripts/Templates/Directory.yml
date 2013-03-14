@@ -834,7 +834,7 @@ COBRATF:
     _content:
     _check:
       - is_float()
-      - is_gt() 0
+      - is_geq() 0
 
   hgap:
     <<: *dtdouble
