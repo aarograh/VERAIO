@@ -46,6 +46,7 @@ use Exporter;
 	copyhash  => \&copyhash,
 	setdb     => \&setdb,
 	matmap    => \&matmap2,
+	fuelmap   => \&fuelmap,
 	rodmap    => \&rodmap,
 	makemap   => \&makemap,
 	echos     => \&echos,
@@ -595,7 +596,6 @@ sub matmap2{
     my $keyname;
     my $mattype;
 
-#    my @MATS_RESERVED=('mod','vacuum','zirc','aic','he','b4c','inc','ss','pyrex','uo2');
     my @MATS_RESERVED=('mod','vacuum');
     my @MAT_RESERVED =('mod','vacuum','zirc','aic','he','b4c','inc','ss','pyrex');
     my @FUEL_RESERVED=('uo2');
@@ -618,17 +618,11 @@ sub matmap2{
 	my @mat_names=();
 	my @mat_fracs=();
 
-#	my $density=$content[0];
 	my $density=shift @content;
 	my $fissionable='false';
 
 	if($keypath[$#keypath-2] eq 'mat'){
 	    $keyname=$keypath[$#keypath];
-
-#	    $mattype=$content[1] || $keyname;
-#	    $mattype=shift(@content) || $keyname;
-#	    push @mat_names, $mattype;
-#	    push @mat_fracs, 1.0;
 
 	    if(@content > 1){
 		@mat_names=even(\@content);
@@ -641,13 +635,60 @@ sub matmap2{
 	    }
 
 	}
-	elsif($keypath[$#keypath-2] eq 'fuel'){
+	else{    # old format
+	    die "matmap2: invalid material type: @keypath\n";
+	}
+
+	my $mat_ref=&key_on_list($home,$basename.$keyname);
+	&key_on_parameter($mat_ref,'density','double',$density);
+	&key_on_parameter($mat_ref,'fissionable','bool',$fissionable);
+	&key_on_parameter($mat_ref,'key_name','string',$keyname);
+
+	&key_on_array($mat_ref,'mat_names','string', @mat_names);
+	&key_on_array($mat_ref,'mat_fracs','double', @mat_fracs);
+
+    }
+}
+
+sub fuelmap{
+    my ($home,$basename,@paths)=@_;
+
+    my @mats;
+    my @mats_names;
+
+    my $keyname;
+    my $mattype;
+
+    my @MATS_RESERVED=('mod','vacuum');
+    my @MAT_RESERVED =('mod','vacuum','zirc','aic','he','b4c','inc','ss','pyrex');
+    my @FUEL_RESERVED=('uo2');
+
+    foreach my $ipath (@paths){
+	my @apaths=find_keys($SOURCE_DB,$ipath);
+	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
+	push @mats, @apaths if @apaths;
+	push @mats_names, @names if @names;
+    }
+
+    foreach my $imat_path (@mats){
+	my @keypath=@{ $imat_path };
+	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
+
+	my $enrichable=0;
+	my $depletable='false';
+	my $enrichment;
+	my $thdensity=0;
+	my @mat_names=();
+	my @mat_fracs=();
+
+	my $density=shift @content;
+	my $fissionable='false';
+
+	if($keypath[$#keypath-2] eq 'fuel'){
 	    $keyname=$keypath[$#keypath];
 	    $mattype="uo2";
 	    $enrichable=1;
 
-#	    $thdensity=$content[1];
-#	    $enrichment=$content[2];
 	    $thdensity=shift @content;
 	    $enrichment=shift @content;
 
@@ -657,16 +698,7 @@ sub matmap2{
 	    push @mat_fracs, 1.0;
 	}
 	else{    # old format
-	    $keyname=$keypath[$#keypath];
-	    $mattype=$keypath[$#keypath-2];
-	    if($mattype eq 'uo2'){
-		$enrichable=1;
-		$enrichment=$content[1];
-		$depletable='true';
-		$fissionable='true';
-	    }
-	    push @mat_names, $mattype;
-	    push @mat_fracs, 1.0;
+	    die "fuelmap: invalid material type: @keypath\n";
 	}
 
 	my $mat_ref=&key_on_list($home,$basename.$keyname);
@@ -676,8 +708,6 @@ sub matmap2{
 	&key_on_parameter($mat_ref,'depletable','bool',$depletable)   if $enrichable;
 	&key_on_parameter($mat_ref,'enrichment','double',$enrichment) if $enrichable;
 	&key_on_parameter($mat_ref,'key_name','string',$keyname);
-
-#	&key_on_parameter($mat_ref,'mat_name','string',$mattype);
 
 	&key_on_array($mat_ref,'mat_names','string', @mat_names);
 	&key_on_array($mat_ref,'mat_fracs','double', @mat_fracs);
