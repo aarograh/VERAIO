@@ -132,10 +132,12 @@ sub keyword
     return $self->{keyword};
 }
 
-sub clean_slash{
+sub cleanline ($$$) {
     my $lineref=shift;
+    my $what=shift;
+    my $with=shift;
 
-    $$lineref =~ s/\// /g;                 # replace slashes with spaces
+    $$lineref =~ s/$what/$with/g;
 }
 
 sub keyin{
@@ -160,11 +162,21 @@ sub keyin{
     my $templ0=$templ;
     my %args=%{ $templ };
 
-    unless(exists$args{_slash}){
-	&clean_slash(\$dtx);
+    if(exists$args{_slash}){
+	$dtx=~s/\// \/ /g;
     }
-    $dtx=~s/^\s+//;
+    else{
+	$dtx=~s/\// /g;
+    }
+    if(exists$args{_equal}){
+	$dtx=~s/=/ = /g;
+    }
+    else{
+	$dtx=~s/=/ /g;
+    }
 
+    $dtx=~s/^\s+//;
+    $dtx=~s/\s+$//;
     @a=split /\s+/, $dtx;
     $name_idx=$args{_named};
     if($name_idx){

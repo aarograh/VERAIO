@@ -548,45 +548,6 @@ sub gridmap{
     }
 }
 
-sub matmap{
-    my ($home,$basename,@paths)=@_;
-
-    my @mats;
-    my @mats_names;
-    foreach my $ipath (@paths){
-	my @apaths=find_keys($SOURCE_DB,$ipath);
-	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
-	push @mats, @apaths if @apaths;
-	push @mats_names, @names if @names;
-    }
-
-    foreach my $imat_path (@mats){
-	my @keypath=@{ $imat_path };
-	my $keyname=$keypath[$#keypath];
-	my $mattype=$keypath[$#keypath-2];
-	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
-	my $density=$content[0];
-
-	my $enrichable=0;
-	my $depletable='false';
-	if($mattype eq 'uo2'){
-	    $enrichable=1;
-	    $enrichment=$content[1];
-	    $depletable='true';
-	}
-
-	my $mat_ref=&key_on_list($home,$basename.$keyname);
-
-	&key_on_parameter($mat_ref,'density','double',$density);
-	&key_on_parameter($mat_ref,'depletable','bool',$depletable);
-	if($enrichable){
-	    &key_on_parameter($mat_ref,'enrichment','double',$enrichment);
-	}
-	&key_on_parameter($mat_ref,'key_name','string',$keyname);
-	&key_on_parameter($mat_ref,'mat_name','string',$mattype);
-    }
-}
-
 sub matmap2{
     my ($home,$basename,@paths)=@_;
 
@@ -609,34 +570,30 @@ sub matmap2{
 
     foreach my $imat_path (@mats){
 	my @keypath=@{ $imat_path };
-	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
+	$keyname=$keypath[$#keypath];
+	unless($keypath[$#keypath-2] eq 'mat'){
+	    die "matmap2: invalid material type: @keypath\n";
+	}
 
 	my $enrichable=0;
-	my $depletable='false';
+	my $fissionable='false';
+	my $depletable= 'false';
 	my $enrichment;
 	my $thdensity=0;
 	my @mat_names=();
 	my @mat_fracs=();
 
+	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
 	my $density=shift @content;
-	my $fissionable='false';
 
-	if($keypath[$#keypath-2] eq 'mat'){
-	    $keyname=$keypath[$#keypath];
-
-	    if(@content > 1){
-		@mat_names=even(\@content);
-		@mat_fracs=odd(\@content);
-	    }
-	    else{
-		$mattype=shift(@content) || $keyname;
-		push @mat_names, $mattype;
-		push @mat_fracs, 1.0;
-	    }
-
+	if(@content > 1){
+	    @mat_names=even(\@content);
+	    @mat_fracs=odd(\@content);
 	}
-	else{    # old format
-	    die "matmap2: invalid material type: @keypath\n";
+	else{
+	    $mattype=shift(@content) || $keyname;
+	    push @mat_names, $mattype;
+	    push @mat_fracs, 1.0;
 	}
 
 	my $mat_ref=&key_on_list($home,$basename.$keyname);
@@ -672,33 +629,56 @@ sub fuelmap{
 
     foreach my $imat_path (@mats){
 	my @keypath=@{ $imat_path };
-	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
+	$keyname=$keypath[$#keypath];
+	unless($keypath[$#keypath-2] eq 'fuel'){
+	    die "fuelmap: invalid material type: @keypath\n";
+	}
 
-	my $enrichable=0;
-	my $depletable='false';
+	my $enrichable=1;
+	my $fissionable='true';
+	my $depletable= 'true';
 	my $enrichment;
 	my $thdensity=0;
 	my @mat_names=();
 	my @mat_fracs=();
+	my $gad_mat;
+	my $gad_frac;
+	my $use_gad=0;
 
-	my $density=shift @content;
-	my $fissionable='false';
+	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
 
-	if($keypath[$#keypath-2] eq 'fuel'){
-	    $keyname=$keypath[$#keypath];
-	    $mattype="uo2";
-	    $enrichable=1;
-
-	    $thdensity=shift @content;
-	    $enrichment=shift @content;
-
-	    $depletable='true';
-	    $fissionable='true';
-	    push @mat_names, $mattype;
-	    push @mat_fracs, 1.0;
+# Per Scott's three commands in one
+	my @slshs=indexes { $_ eq '/' } @content;
+	if(@slshs < 1 && @slshs > 2){
+	    die "fuelmap: invalid number of slashes in command fuel @content\n";
 	}
-	else{    # old format
-	    die "fuelmap: invalid material type: @keypath\n";
+
+	my @part1=before {$_ eq '/'} @content;
+	my @part2=after  {$_ eq '/'} @content;
+	my @part3=();
+	if(@slshs == 2){
+	    @part3=after  {$_ eq '/'} @part2;
+	    @part2=before {$_ eq '/'} @part2;
+	}
+	
+# until the 1st slash
+	my $density=shift @part1;
+	$thdensity=shift @part1 || 0;
+
+# after the 1st slash until 2nd slash
+
+	if(is_float($part2[0])){
+	    unshift @part2, 'uo2';
+	}
+	($mattype,$enrichment)=@part2;
+	push @mat_names, $mattype;
+	push @mat_fracs, 1.0;
+
+# 2nd slash to the end
+	if(@part3){
+	    $use_gad=1;
+	    $gad_mat=shift  @part3;
+	    $gad_frac=shift @part3;
 	}
 
 	my $mat_ref=&key_on_list($home,$basename.$keyname);
@@ -708,6 +688,11 @@ sub fuelmap{
 	&key_on_parameter($mat_ref,'depletable','bool',$depletable)   if $enrichable;
 	&key_on_parameter($mat_ref,'enrichment','double',$enrichment) if $enrichable;
 	&key_on_parameter($mat_ref,'key_name','string',$keyname);
+
+	if($use_gad){
+	    &key_on_parameter($mat_ref,'gad_mat','string',$gad_mat);
+	    &key_on_parameter($mat_ref,'gad_frac','double',$gad_frac);
+	}
 
 	&key_on_array($mat_ref,'mat_names','string', @mat_names);
 	&key_on_array($mat_ref,'mat_fracs','double', @mat_fracs);

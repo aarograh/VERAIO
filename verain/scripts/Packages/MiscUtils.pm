@@ -39,7 +39,14 @@ use Exporter;
 	 'transpose',
 	 'everynth',
 	 'skipeverynth',
-	 'stride'
+	 'stride',
+	 'after',
+	 'after_incl',
+	 'before',
+	 'before_incl',
+	 'indexes',
+	 'lastval',
+	 'firstval'
     );
 
 {
@@ -269,6 +276,71 @@ sub transpose {
     }
 
     return \@result;
+}
+
+
+sub after (&@) {
+    my $test = shift;
+    my $started;
+    my $lag;
+    grep $started ||= do {
+        my $x = $lag;
+        $lag = $test->();
+        $x
+    }, @_;
+}
+
+sub after_incl (&@) {
+    my $test = shift;
+    my $started;
+    grep $started ||= $test->(), @_;
+}
+
+sub before (&@) {
+    my $test = shift;
+    my $more = 1;
+    grep $more &&= ! $test->(), @_;
+}
+
+sub before_incl (&@) {
+    my $test = shift;
+    my $more = 1;
+    my $lag  = 1;
+    grep $more &&= do {
+        my $x = $lag;
+        $lag = ! $test->();
+        $x
+    }, @_;
+}
+
+sub indexes (&@) {
+    my $test = shift;
+    grep {
+        local *_ = \$_[$_];
+        $test->()
+    } 0 .. $#_;
+}
+
+sub lastval (&@) {
+    my $test = shift;
+    my $ix;
+    for ( $ix = $#_; $ix >= 0; $ix-- ) {
+        local *_ = \$_[$ix];
+        my $testval = $test->();
+
+        # Simulate $_ as alias
+        $_[$ix] = $_;
+        return $_ if $testval;
+    }
+    return undef;
+}
+
+sub firstval (&@) {
+    my $test = shift;
+    foreach ( @_ ) {
+        return $_ if $test->();
+    }
+    return undef;
 }
 
 1;

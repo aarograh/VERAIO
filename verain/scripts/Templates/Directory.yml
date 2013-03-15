@@ -428,9 +428,12 @@ ASSEMBLY:
       - in_dictionary(nth(0,()),'ss','inc','zirc')
   fuel:
     <<: *dtlistnamed
+    _slash:
     _check:
-      - is_regex(join(',',()),'[+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?,[+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?,[+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?')
-      - nth(0,())>0&&nth(1,())>=0&&nth(2,())>0
+      - nth(0,())>0
+      - nth(1,())eq'/'||nth(2,())eq'/'
+      - (nth(1,())eq'/'&&(nth(2,())>=0))||(nth(2,())eq'/'&&(nth(3,())>=0))
+
   mat:
     <<: *dtlistnamed
     _check:
