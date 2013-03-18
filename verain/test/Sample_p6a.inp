@@ -19,25 +19,32 @@
 !         * upper_pincap_height
 !         * upper_plenum_height
 !
+!  Update 03/18/2013
+!     * fixed tinlet
+!     * added sym and reflector cards
+!     * updated dhfrac to default value
+!
+!
 !  To-Do:
 !     * add percent of theoretical density to pellets
 !     * add grid spacer loss coefficients
-
+!
 !  To process:
-!     ./react2xml.pl --xml --xslt Sample_p6.inp Sample_p6.xml
+!     ./react2xml.pl [file].inp [file].xml
 !
 !================================================================================
 
 [STATE]
   power  100.0         ! %
-  tinlet 620.33        ! F - 600K
+  tinlet 559.0         ! F - 600K
   boron  1300          ! ppmB
   pressure 2250        ! psia
 
-! tfuel  600.0         ! K - 600K  Not used with T/H feedback!
-! modden 0.743         ! g/cc      Not used with T/H feedback!
+  tfuel  900.0         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
+  modden 0.743         ! g/cc      Not used with T/H feedback!
 
   feedback on
+  sym full
 
 [CORE]
   size 1                ! 1x1 single-assembly
@@ -53,6 +60,9 @@
 
   lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
   upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
+  lower_ref   mod 26.0 1.0
+  upper_ref   mod 25.0 1.0
+
 
   bc_rad reflecting
 
@@ -69,7 +79,6 @@
   npin 17
   ppitch 1.260
 
-!  uo2 U31 10.257 / 3.1
   fuel U31 10.257 95.0 / 3.1
 
 !=== material label, key_name, density (lib_name defaults to key_name)
@@ -220,33 +229,41 @@
           377.711
 
 [INSILICO]
-    eq_set        ld
-    eigen_solver  arnoldi
-    tolerance     1e-06
-    Pn_order      1
-    dimension     3
-    mesh          4
-!    eigenvalue_db:
-        k_tolerance  0.0001
-        L2_tolerance 0.001
-        energy_dep_ev  false
-    mat_library   test_comp.sh5
+    mat_library casl_comp.sh5
+    xs_library  lib252_hetbondoneabs-noabssigp
+
     max_delta_z   2.54
-    num_blocks_i  40
-    num_blocks_j  40
-    num_z_blocks  64
+    num_blocks_i  17
+    num_blocks_j  17
+    num_z_blocks  12
     num_groups    23
-    num_sets      6
-!    quadrature_db:
-        azimuthals_octant  4
-        polars_octant      4
-        quad_type          qr
-!    silo_db:
-        silo_output  vera
-!    upscatter_db:
-        upscatter_tolerance  1e-05
-    xs_library     "v7-238ir"
-   new_grp_bounds
+    num_sets      8
+
+    mesh          4
+    dimension     3
+    eq_set        sc
+    eigen_solver  arnoldi
+    tolerance     1e-4
+    Pn_order      0
+
+!   eigenvalue_db:
+       k_tolerance   1e-4
+       L2_tolerance  1e-3
+       energy_dep_ev true
+
+!   quadrature_db:
+       quad_type          qr
+       azimuthals_octant  4
+       polars_octant      4
+
+!   silo_db:
+       silo_output  p6
+!      silo_out_power true
+
+!   upscatter_db:
+       upscatter_tolerance  1e-4
+
+    new_grp_bounds
        8.2085e+05
        1.1109e+05
        5.5308e+03
@@ -275,7 +292,7 @@
   nfuel   3             ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction
   irfc    2             ! friction factor correlation default=2
-  dhfrac  0.07          ! fraction of power deposited directly into coolant
+  dhfrac  0.02          ! fraction of power deposited directly into coolant
   hgap    5678.3        ! gap conductance
   epso    0.001
   oitmax  5
