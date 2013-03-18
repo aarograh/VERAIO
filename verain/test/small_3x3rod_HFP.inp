@@ -25,7 +25,7 @@
 [CORE]
   size 1                ! 1x1 single-assembly
   rated 0.53545 0.02125 ! MW, Mlbs/hr  *** scaled to 3x3
-  apitch 3.80           ! *** scaled to 3x3
+  apitch 3.78           ! *** scaled to 3x3, no gap
   height 406.328
 
   core_shape

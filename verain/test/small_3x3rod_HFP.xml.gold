@@ -64,7 +64,7 @@
         <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
       </ParameterList>
     </ParameterList>
-    <Parameter name="apitch" type="double" value="3.80"/>
+    <Parameter name="apitch" type="double" value="3.78"/>
     <Parameter name="assm_map" type="Array(string)" value="{A1}"/>
     <Parameter name="bc_rad" type="string" value="reflecting"/>
     <Parameter name="core_size" type="int" value="1"/>
