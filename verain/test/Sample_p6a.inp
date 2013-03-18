@@ -36,7 +36,7 @@
 
 [STATE]
   power  100.0         ! %
-  tinlet 559.0         ! F - 600K
+  tinlet 559.0         ! F
   boron  1300          ! ppmB
   pressure 2250        ! psia
 
