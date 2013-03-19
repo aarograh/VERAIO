@@ -45,7 +45,7 @@ COBRATF:
         - copyhash COBRATF/%gridloss,select=>keys
       _content:
 
-    gridlloss:
+    gridloss:
       _pltype: array
       _type: double
       _do:
