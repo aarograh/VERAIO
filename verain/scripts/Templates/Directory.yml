@@ -839,6 +839,13 @@ COBRATF:
       - is_float()
       - is_geq() 0
 
+  thdens:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+
   hgap:
     <<: *dtdouble
     _content:
