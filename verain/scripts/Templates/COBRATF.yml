@@ -31,13 +31,6 @@ COBRATF:
         - copy COBRATF/$dhfrac
       _content:
 
-    thdens:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy COBRATF/$thdens
-      _content:
-
     hgap:
       _pltype: parameter
       _type: double

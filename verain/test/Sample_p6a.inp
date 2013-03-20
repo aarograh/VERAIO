@@ -293,7 +293,6 @@
   nc      1             ! conduction option - radial conduction
   irfc    2             ! friction factor correlation default=2
   dhfrac  0.02          ! fraction of power deposited directly into coolant
-  thdens  95.0          ! percent of theoretical density of fuel pellets
   hgap    5678.3        ! gap conductance
   epso    0.001
   oitmax  5
