@@ -278,6 +278,7 @@
     <Parameter name="oitmax" type="int" value="5"/>
     <Parameter name="rtwfp" type="double" value="1000.0"/>
     <Parameter name="tend" type="double" value="0.1"/>
+    <Parameter name="thdens" type="double" value="95.0"/>
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="iteration_control">
