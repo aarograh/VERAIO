@@ -114,3 +114,10 @@ COBRATF:
       _do:
         - copy COBRATF/$courant
       _content:
+
+    maps_filename:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy COBRATF/$maps_filename
+      _content:

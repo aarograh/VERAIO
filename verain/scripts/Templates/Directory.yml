@@ -913,6 +913,13 @@ COBRATF:
       - is_float()
       - is_gt() 0
 
+  maps_filename:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+
+
 MPACT:
 
   ray_spacing:

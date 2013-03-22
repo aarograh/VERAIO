@@ -256,6 +256,7 @@
     <Parameter name="hgap" type="double" value="5678.3"/>
     <Parameter name="iitmax" type="int" value="40"/>
     <Parameter name="irfc" type="int" value="2"/>
+    <Parameter name="maps_filename" type="string" value="single_rod_HZP_no_spacers"/>
     <Parameter name="maxits" type="int" value="10000"/>
     <Parameter name="nc" type="int" value="1"/>
     <Parameter name="nfuel" type="int" value="3"/>

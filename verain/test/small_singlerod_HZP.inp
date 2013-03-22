@@ -237,5 +237,4 @@
   rtwfp   1000.0
   maxits  10000
   courant 0.8
-
-
+  maps_filename = single_rod_HZP
