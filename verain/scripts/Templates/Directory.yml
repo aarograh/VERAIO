@@ -429,6 +429,7 @@ ASSEMBLY:
   fuel:
     <<: *dtlistnamed
     _slash:
+    _equal:
     _check:
       - nth(0,())>0
       - nth(1,())eq'/'||nth(2,())eq'/'
