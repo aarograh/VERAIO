@@ -405,7 +405,6 @@ ASSEMBLY:
     _check:
       - nth(1,())>0
       - nth(2,())>0
-      - in_dictionary(nth(0,()),'ss','inc','zirc')
   grid_axial:
     <<: *dtlist
     _style: multi-line
@@ -418,14 +417,12 @@ ASSEMBLY:
     _check:
       - nth(1,())>0
       - nth(2,())>0
-      - in_dictionary(nth(0,()),'ss','inc','zirc')
   upper_nozzle:
     <<: *dtlist
     _content:
     _check:
       - nth(1,())>0
       - nth(2,())>0
-      - in_dictionary(nth(0,()),'ss','inc','zirc')
   fuel:
     <<: *dtlistnamed
     _slash:
