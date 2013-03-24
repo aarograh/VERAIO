@@ -335,6 +335,7 @@ CORE:
   mat:
     <<: *dtlistnamed
     _check:
+      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3')))||(arraysize()>2)
   lower_ref:
     <<: *dtlist
     _style: multi-line
@@ -426,7 +427,6 @@ ASSEMBLY:
   fuel:
     <<: *dtlistnamed
     _slash:
-    _equal:
     _check:
       - nth(1,())>0
       - nth(2,())eq'/'||nth(3,())eq'/'
@@ -435,6 +435,7 @@ ASSEMBLY:
   mat:
     <<: *dtlistnamed
     _check:
+      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3')))||(arraysize()>2)
 
 
 CONTROL:
@@ -472,6 +473,7 @@ CONTROL:
   mat:
     <<: *dtlistnamed
     _check:
+      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3')))||(arraysize()>2)
 
 INSERT:
   title:
@@ -501,6 +503,7 @@ INSERT:
   mat:
     <<: *dtlistnamed
     _check:
+      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3')))||(arraysize()>2)
 
 DETECTOR:
   title:
@@ -531,6 +534,7 @@ DETECTOR:
   mat:
     <<: *dtlistnamed
     _check:
+      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3')))||(arraysize()>2)
 
 EDITS:
   axial_edit_bounds:
