@@ -24,6 +24,8 @@ use Exporter;
 	 'rethread'
     );
 
+our $DISPATCH;
+
 {
     my $_VERBOSE = 0;
     sub get_verbose  {$_VERBOSE;}
@@ -40,21 +42,24 @@ use Exporter;
 	$SOURCE_DB=$db;
     }
 
-    $DISPATCH={
-	copy      => \&dbcopy1,
-	copyarray => \&copyarray,
-	copyhash  => \&copyhash,
-	setdb     => \&setdb,
-	matmap    => \&matmap2,
-	fuelmap   => \&fuelmap,
-	rodmap    => \&rodmap,
-	makemap   => \&makemap,
-	echos     => \&echos,
-	rename    => \&dbcopy,
-	gridmap   => \&gridmap,
-	coremapmap   => \&coremapmap
-    };
+}
 
+sub dispatch {
+    my $version=shift;
+    $DISPATCH={
+	copy       => \&dbcopy1,
+	copyarray  => \&copyarray,
+	copyhash   => \&copyhash,
+	setdb      => \&setdb,
+	matmap     => \&matmap2,
+	fuelmap    => \&fuelmap,
+	rodmap     => \&rodmap,
+	makemap    => \&makemap,
+	echos      => \&echos,
+	rename     => \&dbcopy,
+	gridmap    => \&gridmap,
+	coremapmap => \&coremapmap
+    };
 }
 
 sub PLdoarg{

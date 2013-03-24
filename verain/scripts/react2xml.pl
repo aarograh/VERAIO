@@ -164,6 +164,7 @@ YAML::DumpFile("$ifile.dbg.yml",$MAIN_DB) if $DEBUG;
 # Currently, setting the main database in the PL yml files is
 # just a placeholder for multiple blocks
 PL->set_sourcedb($MAIN_DB);
+PL->dispatch();
 $YAML::UseAliases=0;    # minimize references
 foreach $iblock (@BLOCKS){
 
