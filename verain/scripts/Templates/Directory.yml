@@ -387,12 +387,12 @@ ASSEMBLY:
     _style: multi-line
     _check:
       - fall(sub{is_word(shift)},())
-      - fall(sub{not_in_dictionary(shift,'0')},())
+      - fall(sub{not_in_dictionary(shift,'0')},stride(1,2,()))
   axial:
     <<: *dtlistnamed
     _style: multi-line
     _check:
-      - fall(sub{is_geq(shift,0)},even([]))
+      - fall(sub{is_geq(shift,0)},stride(1,2,()))
   dancoff:
     <<: *dtlist
     _style: multi-line
@@ -403,8 +403,8 @@ ASSEMBLY:
     <<: *dtlistnamed
     _style:
     _check:
-      - nth(1,())>0
       - nth(2,())>0
+      - nth(3,())>0
   grid_axial:
     <<: *dtlist
     _style: multi-line
@@ -428,9 +428,9 @@ ASSEMBLY:
     _slash:
     _equal:
     _check:
-      - nth(0,())>0
-      - nth(1,())eq'/'||nth(2,())eq'/'
-      - (nth(1,())eq'/'&&(nth(2,())>=0))||(nth(2,())eq'/'&&(nth(3,())>=0))
+      - nth(1,())>0
+      - nth(2,())eq'/'||nth(3,())eq'/'
+      - (nth(2,())eq'/'&&(nth(3,())>=0))||(nth(3,())eq'/'&&(nth(4,())>=0))
 
   mat:
     <<: *dtlistnamed
@@ -463,12 +463,12 @@ CONTROL:
     _style: multi-line
     _check:
       - fall(sub{is_word(shift)},())
-      - fall(sub{not_in_dictionary(shift,'0')},())
+      - fall(sub{not_in_dictionary(shift,'0')},stride(1,2,()))
   axial:
     <<: *dtlistnamed
     _style: multi-line
     _check:
-      - fall(sub{is_geq(shift,0)},even([]))
+      - fall(sub{is_geq(shift,0)},stride(1,2,()))
   mat:
     <<: *dtlistnamed
     _check:
@@ -492,12 +492,12 @@ INSERT:
     _style: multi-line
     _check:
       - fall(sub{is_word(shift)},())
-      - fall(sub{not_in_dictionary(shift,'0')},())
+      - fall(sub{not_in_dictionary(shift,'0')},stride(1,2,()))
   axial:
     <<: *dtlistnamed
     _style: multi-line
     _check:
-      - fall(sub{is_geq(shift,0)},even([]))
+      - fall(sub{is_geq(shift,0)},stride(1,2,()))
   mat:
     <<: *dtlistnamed
     _check:
@@ -522,12 +522,12 @@ DETECTOR:
     _style: multi-line
     _check:
       - fall(sub{is_word(shift)},())
-      - fall(sub{not_in_dictionary(shift,'0')},())
+      - fall(sub{not_in_dictionary(shift,'0')},stride(1,2,()))
   axial:
     <<: *dtlistnamed
     _style: multi-line
     _check:
-      - fall(sub{is_geq(shift,0)},even([]))
+      - fall(sub{is_geq(shift,0)},stride(1,2,()))
   mat:
     <<: *dtlistnamed
     _check:

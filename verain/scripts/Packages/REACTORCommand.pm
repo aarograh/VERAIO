@@ -178,6 +178,7 @@ sub keyin{
     $dtx=~s/^\s+//;
     $dtx=~s/\s+$//;
     @a=split /\s+/, $dtx;
+    my @a0=@a;
     $name_idx=$args{_named};
     if($name_idx){
 	$name=splice(@a,$name_idx-1,1);
@@ -201,7 +202,7 @@ sub keyin{
 	key_on($templ,$CONTENT_LABEL,$dtx);
     }
     elsif($args{_parse} eq 'list'){
-	$result=&apply_evals(\@a,\@sr,\$errmsg);
+	$result=&apply_evals(\@a0,\@sr,\$errmsg);
 	key_on($templ,$CONTENT_LABEL,[@a]);
     }
     else{

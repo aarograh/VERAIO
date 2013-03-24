@@ -557,10 +557,6 @@ sub matmap2{
     my $keyname;
     my $mattype;
 
-    my @MATS_RESERVED=('mod','vacuum');
-    my @MAT_RESERVED =('mod','vacuum','zirc','aic','he','b4c','inc','ss','pyrex');
-    my @FUEL_RESERVED=('uo2');
-
     foreach my $ipath (@paths){
 	my @apaths=find_keys($SOURCE_DB,$ipath);
 	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
@@ -615,10 +611,6 @@ sub fuelmap{
 
     my $keyname;
     my $mattype;
-
-    my @MATS_RESERVED=('mod','vacuum');
-    my @MAT_RESERVED =('mod','vacuum','zirc','aic','he','b4c','inc','ss','pyrex');
-    my @FUEL_RESERVED=('uo2');
 
     foreach my $ipath (@paths){
 	my @apaths=find_keys($SOURCE_DB,$ipath);
@@ -785,7 +777,7 @@ sub rodmap{
 		    print "\t\t\t @{ $iapath }\n" if get_verbose();
 		    my @mat_path=@{ $iapath };
 		    my @mat_flags = ($mat_path[$#mat_path],'other');
-		    if( @mat_path[1] =~ m/(fuel|uo2)/ ){
+		    if( @mat_path[1] =~ m/(fuel)/ ){
 			$mat_flags[1]='fuel';
 		    }
 		    unless(exists $MATS_DB{ $mat_flags[0] }){
