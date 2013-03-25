@@ -748,7 +748,7 @@ sub matmap007{
 
 	my $mat_ref=&key_on_list($home,$basename.$keyname);
 	&key_on_parameter($mat_ref,'density','double',$density);
-	&key_on_parameter($mat_ref,'depletable','bool',$depletable) if ($depleatable eq 'true');
+	&key_on_parameter($mat_ref,'depletable','bool',$depletable) if ($depletable eq 'true');
 	&key_on_parameter($mat_ref,'key_name','string',$keyname);
 
 	&key_on_array($mat_ref,'mat_names','string', @mat_names);
@@ -780,7 +780,7 @@ sub fuelmap007{
 	    die "fuelmap: invalid material type: @keypath\n";
 	}
 
-	my $depletable= 'false';
+#	my $depletable= 'false';
 	my $thdensity=0;
 	my @mat_names=();
 	my @mat_fracs=();
@@ -828,7 +828,7 @@ sub fuelmap007{
 	my $mat_ref=&key_on_list($home,$basename.$keyname);
 	&key_on_parameter($mat_ref,'density','double',$density);
 	&key_on_parameter($mat_ref,'thden','double',$thdensity) if $thdensity;
-	&key_on_parameter($mat_ref,'depletable','bool',$depletable)   if ($depleatable eq 'true');
+#	&key_on_parameter($mat_ref,'depletable','bool',$depletable)   if ($depletable eq 'true');
 	&key_on_parameter($mat_ref,'key_name','string',$keyname);
 
 	if($use_gad){
