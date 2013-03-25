@@ -335,7 +335,9 @@ CORE:
   mat:
     <<: *dtlistnamed
     _check:
-      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3')))||(arraysize()>2)
+      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','boron','o','b2o3')))||(arraysize()>2)
+      - lc(nth(0,()))ne'mod'
+
   lower_ref:
     <<: *dtlist
     _style: multi-line
@@ -435,8 +437,8 @@ ASSEMBLY:
   mat:
     <<: *dtlistnamed
     _check:
-      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3')))||(arraysize()>2)
-
+      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','boron','o','b2o3')))||(arraysize()>2)
+      - lc(nth(0,()))ne'mod'
 
 CONTROL:
   title:
@@ -473,7 +475,8 @@ CONTROL:
   mat:
     <<: *dtlistnamed
     _check:
-      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3')))||(arraysize()>2)
+      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','boron','o','b2o3')))||(arraysize()>2)
+      - lc(nth(0,()))ne'mod'
 
 INSERT:
   title:
@@ -503,7 +506,8 @@ INSERT:
   mat:
     <<: *dtlistnamed
     _check:
-      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3')))||(arraysize()>2)
+      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','boron','o','b2o3')))||(arraysize()>2)
+      - lc(nth(0,()))ne'mod'
 
 DETECTOR:
   title:
@@ -534,7 +538,8 @@ DETECTOR:
   mat:
     <<: *dtlistnamed
     _check:
-      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3')))||(arraysize()>2)
+      - (arraysize()==2&&(in_dictionary(nth(0,()),'vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','boron','o','b2o3')))||(arraysize()>2)
+      - lc(nth(0,()))ne'mod'
 
 EDITS:
   axial_edit_bounds:

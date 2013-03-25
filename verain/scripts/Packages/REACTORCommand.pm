@@ -179,6 +179,9 @@ sub keyin{
     $dtx=~s/\s+$//;
     @a=split /\s+/, $dtx;
     my @a0=@a;
+# SSMOD: Decide on case
+#    my @a = map { lc } @a;
+#    my @a = map { uc } @a;
     $name_idx=$args{_named};
     if($name_idx){
 	$name=splice(@a,$name_idx-1,1);
@@ -189,7 +192,7 @@ sub keyin{
 # map from _default to create _content.
 #
 #	key_delete($templ,$CONTENT_LABEL) if key_exists($templ,$CONTENT_LABEL);
-
+#
 	$templ=new_key($templ,$REF_LABEL,$name);
     }
 
