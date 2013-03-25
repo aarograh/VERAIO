@@ -811,7 +811,7 @@ sub fuelmap007{
 # after the 1st slash until 2nd slash
 
 	if(is_float($part2[0])){
-	    unshift @part2, 'uo2';
+	    unshift @part2, 'u-235';
 	}
 	@mat_names  =even(\@part2);
 	@mat_fracs  =odd(\@part2);
