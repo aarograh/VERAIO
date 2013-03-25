@@ -1,0 +1,102 @@
+ASSEMBLIES:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+    - rodmap ASSEMBLY/%axial,mapname=>lattice,basename=>Assembly_,coremap=>CORE/@assm_map,matsearch=>ASSEMBLY/%mat/*:ASSEMBLY/%fuel/*:CORE/%mat/*
+  _content:
+    Materials:
+      _pltype: list
+      _do:
+        - matmap Material_,ASSEMBLY/%mat/*
+      _content:
+    Fuels:
+      _pltype: list
+      _do:
+        - fuelmap Fuel_,ASSEMBLY/%fuel/*
+      _content:
+    title:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy ASSEMBLY/$title
+      _content:
+    num_pins:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy ASSEMBLY/$npin
+      _content:
+    ppitch:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/$ppitch
+      _content:
+    dancoff_map:
+      _pltype: array
+      _type: double
+      _do:
+        - makemap ASSEMBLY/$npin,ASSEMBLY/@dancoff
+      _content:
+
+    lower_nozzle_comp:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy ASSEMBLY/@lower_nozzle:0
+      _content:
+
+    lower_nozzle_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@lower_nozzle:1
+      _content:
+
+    lower_nozzle_mass:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@lower_nozzle:2
+      _content:
+
+    upper_nozzle_comp:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy ASSEMBLY/@upper_nozzle:0
+      _content:
+
+    upper_nozzle_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@upper_nozzle:1
+      _content:
+
+    upper_nozzle_mass:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@upper_nozzle:2
+      _content:
+
+    grid_elev:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray ASSEMBLY/@grid_axial,select=>odd
+      _content:
+
+    grid_map:
+      _pltype: array
+      _type: string
+      _do:
+        - copyarray ASSEMBLY/@grid_axial,select=>even
+      _content:
+
+    SpacerGrids:
+      _pltype: list
+      _do:
+        - gridmap Grid_,ASSEMBLY/%grid/*
+      _content:

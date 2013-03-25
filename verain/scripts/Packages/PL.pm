@@ -45,7 +45,8 @@ our $DISPATCH;
 }
 
 sub dispatch {
-    my $version=shift;
+    my ($self,$version)=@_;
+
     $DISPATCH={
 	copy       => \&dbcopy1,
 	copyarray  => \&copyarray,
@@ -60,6 +61,11 @@ sub dispatch {
 	gridmap    => \&gridmap,
 	coremapmap => \&coremapmap
     };
+
+    if($version eq '007'){
+	$DISPATCH->{matmap}  = \&matmap007;
+	$DISPATCH->{fuelmap} = \&fuelmap007;
+    }
 }
 
 sub PLdoarg{
@@ -697,15 +703,152 @@ sub fuelmap{
     }
 }
 
+sub matmap007{
+    my ($home,$basename,@paths)=@_;
+
+    my @mats;
+    my @mats_names;
+
+    my $keyname;
+    my $mattype;
+
+    foreach my $ipath (@paths){
+	my @apaths=find_keys($SOURCE_DB,$ipath);
+	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
+	push @mats, @apaths if @apaths;
+	push @mats_names, @names if @names;
+    }
+
+    foreach my $imat_path (@mats){
+	my @keypath=@{ $imat_path };
+	$keyname=$keypath[$#keypath];
+	unless($keypath[$#keypath-2] eq 'mat'){
+	    die "matmap2: invalid material type: @keypath\n";
+	}
+
+	my $enrichable=0;
+	my $depletable= 'false';
+	my $enrichment;
+	my $thdensity=0;
+	my @mat_names=();
+	my @mat_fracs=();
+
+	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
+	my $density=shift @content;
+
+	if(@content > 1){
+	    @mat_names=even(\@content);
+	    @mat_fracs=odd(\@content);
+	}
+	else{
+	    $mattype=shift(@content) || $keyname;
+	    push @mat_names, $mattype;
+	    push @mat_fracs, 1.0;
+	}
+
+	my $mat_ref=&key_on_list($home,$basename.$keyname);
+	&key_on_parameter($mat_ref,'density','double',$density);
+	&key_on_parameter($mat_ref,'depletable','bool',$depletable) if ($depleatable eq 'true');
+	&key_on_parameter($mat_ref,'key_name','string',$keyname);
+
+	&key_on_array($mat_ref,'mat_names','string', @mat_names);
+	&key_on_array($mat_ref,'mat_fracs','double', @mat_fracs);
+
+    }
+}
+
+sub fuelmap007{
+    my ($home,$basename,@paths)=@_;
+
+    my @mats;
+    my @mats_names;
+
+    my $keyname;
+    my $mattype;
+
+    foreach my $ipath (@paths){
+	my @apaths=find_keys($SOURCE_DB,$ipath);
+	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
+	push @mats, @apaths if @apaths;
+	push @mats_names, @names if @names;
+    }
+
+    foreach my $imat_path (@mats){
+	my @keypath=@{ $imat_path };
+	$keyname=$keypath[$#keypath];
+	unless($keypath[$#keypath-2] eq 'fuel'){
+	    die "fuelmap: invalid material type: @keypath\n";
+	}
+
+	my $depletable= 'false';
+	my $thdensity=0;
+	my @mat_names=();
+	my @mat_fracs=();
+	my $gad_mat;
+	my $gad_frac;
+	my $use_gad=0;
+
+	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
+
+# Per Scott's three commands in one
+	my @slshs=indexes { $_ eq '/' } @content;
+	if(@slshs < 1 && @slshs > 2){
+	    die "fuelmap: invalid number of slashes in command fuel @content\n";
+	}
+
+	my @part1=before {$_ eq '/'} @content;
+	my @part2=after  {$_ eq '/'} @content;
+	my @part3=();
+	if(@slshs == 2){
+	    @part3=after  {$_ eq '/'} @part2;
+	    @part2=before {$_ eq '/'} @part2;
+	}
+	
+# until the 1st slash
+	my $density=shift @part1;
+	$thdensity=shift @part1 || 0;
+
+# after the 1st slash until 2nd slash
+
+	if(is_float($part2[0])){
+	    unshift @part2, 'uo2';
+	}
+	@mat_names  =even(\@part2);
+	@mat_fracs  =odd(\@part2);
+#	push @mat_names, $mattype;
+#	push @mat_fracs, 1.0;
+
+# 2nd slash to the end
+	if(@part3){
+	    $use_gad=1;
+	    $gad_mat=shift  @part3;
+	    $gad_frac=shift @part3;
+	}
+
+	my $mat_ref=&key_on_list($home,$basename.$keyname);
+	&key_on_parameter($mat_ref,'density','double',$density);
+	&key_on_parameter($mat_ref,'thden','double',$thdensity) if $thdensity;
+	&key_on_parameter($mat_ref,'depletable','bool',$depletable)   if ($depleatable eq 'true');
+	&key_on_parameter($mat_ref,'key_name','string',$keyname);
+
+	if($use_gad){
+	    &key_on_parameter($mat_ref,'gad_mat','string',$gad_mat);
+	    &key_on_parameter($mat_ref,'gad_frac','double',$gad_frac);
+	}
+
+	&key_on_array($mat_ref,'fuel_names','string', @mat_names);
+	&key_on_array($mat_ref,'enrichments','double',@mat_fracs);
+
+    }
+}
+
 sub rodmap{
     my ($home,$axial_path,%userparam)=@_;
     my ($i,$j,$k,$m,$n);
     my (@a,@b,@c,@d);
 
-#    my @MATS_RESERVED=('mod','vacuum','zirc','aic','he','b4c','inc','ss','pyrex','uo2');
-    my @MATS_RESERVED=('mod','vacuum');
-    my @MAT_RESERVED =('mod','vacuum','zirc','aic','he','b4c','inc','ss','pyrex');
-    my @FUEL_RESERVED=('uo2');
+#    my @MATS_RESERVED=('mod','vacuum');
+    my @MATS_RESERVED =('vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3');
 
     my %OPTIONS=('basename'=>'List','mapname'=>'rodmap');
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$

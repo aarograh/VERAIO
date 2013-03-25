@@ -60,6 +60,7 @@ my $SCHEMA="${directory}Templates/Directory.yml";
 my @BLOCKS=('CASEID','STATE','CORE','ASSEMBLIES',
 	    'CONTROLS','DETECTORS','INSERTS',
 	    'INSILICO','EDITS','COBRATF','MPACT');
+
 foreach $iblock (@BLOCKS){
     $SCHEMA_PL{$iblock} = "${directory}Templates/$iblock.yml";
 }
@@ -81,6 +82,7 @@ my $XML_HEADER='<?xml version="1.0" encoding="UTF-8"?>';
 #
 # Process the command line
 #
+my $_UPDATE='stable';
 my $DEBUG=0;
 my ($VERBOSE,$HELP,$VERSION);
 my $XML='on';
@@ -92,13 +94,22 @@ my $XSLT='on';
 	"verbose"   => \$VERBOSE,
 	"debug"     => \$DEBUG,
 	"version"   => \$VERSION,
-	"help"      => \$HELP
+	"help"      => \$HELP,
+
+	"update=s"  => \$_UPDATE
 	);
 }
 (&help_print() && exit) if $HELP;;
 if($VERSION){
     print STDERR "@VERSION\n";
     exit;
+}
+
+#
+# hidden update
+#
+if($_UPDATE eq '007'){
+    $SCHEMA_PL{ASSEMBLIES} = "${directory}Templates/ASSEMBLIES007.yml";
 }
 
 # For formatted display in a browser.
@@ -164,7 +175,7 @@ YAML::DumpFile("$ifile.dbg.yml",$MAIN_DB) if $DEBUG;
 # Currently, setting the main database in the PL yml files is
 # just a placeholder for multiple blocks
 PL->set_sourcedb($MAIN_DB);
-PL->dispatch();
+PL->dispatch($_UPDATE);
 $YAML::UseAliases=0;    # minimize references
 foreach $iblock (@BLOCKS){
 
