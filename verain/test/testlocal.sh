@@ -1,12 +1,13 @@
 #!/bin/bash
 #
 # Update 12/7/2012 - the command line parameters "--xml and --xslt" are no longer required, they are turned on by default
+# Update 4/08/2013 - automatically include all *.inp files in testing instead of explicitly listing
 #
 
-
-LIST="Sample_full_core Sample_p3 Sample_p3_mpact Sample_p3_unit_test Sample_p4a Sample_p4a_unit_test Sample_p4 Sample_p4_mpact Sample_p6a small_3x3rod_HFP small_3x3rod_HZP small_singlerod_HFP small_singlerod_HZP small_multibundle"
+LIST=$(ls *inp)
 
 for CASE in $LIST; do
+  CASE=$(echo $CASE | sed 's/\.inp$//')
   echo "========================================"
   echo "    Running case $CASE"
   echo "========================================"
