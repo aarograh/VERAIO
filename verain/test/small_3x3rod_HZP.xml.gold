@@ -16,49 +16,42 @@
     <ParameterList name="Materials">
       <ParameterList name="Material_aic">
         <Parameter name="density" type="double" value="10.20"/>
-        <Parameter name="fissionable" type="bool" value="false"/>
         <Parameter name="key_name" type="string" value="aic"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
         <Parameter name="mat_names" type="Array(string)" value="{aic}"/>
       </ParameterList>
       <ParameterList name="Material_b4c">
         <Parameter name="density" type="double" value="6.56"/>
-        <Parameter name="fissionable" type="bool" value="false"/>
         <Parameter name="key_name" type="string" value="b4c"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
         <Parameter name="mat_names" type="Array(string)" value="{b4c}"/>
       </ParameterList>
       <ParameterList name="Material_he">
         <Parameter name="density" type="double" value="0.000176"/>
-        <Parameter name="fissionable" type="bool" value="false"/>
         <Parameter name="key_name" type="string" value="he"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
         <Parameter name="mat_names" type="Array(string)" value="{he}"/>
       </ParameterList>
       <ParameterList name="Material_inc">
         <Parameter name="density" type="double" value="8.19"/>
-        <Parameter name="fissionable" type="bool" value="false"/>
         <Parameter name="key_name" type="string" value="inc"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
         <Parameter name="mat_names" type="Array(string)" value="{inc}"/>
       </ParameterList>
       <ParameterList name="Material_pyrex">
         <Parameter name="density" type="double" value="2.23"/>
-        <Parameter name="fissionable" type="bool" value="false"/>
         <Parameter name="key_name" type="string" value="pyrex"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
         <Parameter name="mat_names" type="Array(string)" value="{pyrex}"/>
       </ParameterList>
       <ParameterList name="Material_ss">
         <Parameter name="density" type="double" value="8.0"/>
-        <Parameter name="fissionable" type="bool" value="false"/>
         <Parameter name="key_name" type="string" value="ss"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
         <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
       </ParameterList>
       <ParameterList name="Material_zirc">
         <Parameter name="density" type="double" value="6.56"/>
-        <Parameter name="fissionable" type="bool" value="false"/>
         <Parameter name="key_name" type="string" value="zirc"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
         <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
@@ -142,41 +135,36 @@
           <Parameter name="type" type="string" value="other"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="Materials">
-        <ParameterList name="Material_U31">
+      <ParameterList name="Fuels">
+        <ParameterList name="Fuel_U31">
           <Parameter name="density" type="double" value="10.257"/>
-          <Parameter name="depletable" type="bool" value="true"/>
-          <Parameter name="enrichment" type="double" value="3.1"/>
-          <Parameter name="fissionable" type="bool" value="true"/>
+          <Parameter name="enrichments" type="Array(double)" value="{3.1}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="U31"/>
-          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{uo2}"/>
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
+      </ParameterList>
+      <ParameterList name="Materials">
         <ParameterList name="Material_he">
           <Parameter name="density" type="double" value="0.000176"/>
-          <Parameter name="fissionable" type="bool" value="false"/>
           <Parameter name="key_name" type="string" value="he"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{he}"/>
         </ParameterList>
         <ParameterList name="Material_inc">
           <Parameter name="density" type="double" value="8.19"/>
-          <Parameter name="fissionable" type="bool" value="false"/>
           <Parameter name="key_name" type="string" value="inc"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{inc}"/>
         </ParameterList>
         <ParameterList name="Material_ss">
           <Parameter name="density" type="double" value="8.0"/>
-          <Parameter name="fissionable" type="bool" value="false"/>
           <Parameter name="key_name" type="string" value="ss"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
         </ParameterList>
         <ParameterList name="Material_zirc">
           <Parameter name="density" type="double" value="6.56"/>
-          <Parameter name="fissionable" type="bool" value="false"/>
           <Parameter name="key_name" type="string" value="zirc"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>

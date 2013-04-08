@@ -146,41 +146,41 @@
         <ParameterList name="Fuel_U21">
           <Parameter name="density" type="double" value="10.257"/>
           <Parameter name="enrichments" type="Array(double)" value="{2.11}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="U21"/>
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
         <ParameterList name="Fuel_U26">
           <Parameter name="density" type="double" value="10.257"/>
           <Parameter name="enrichments" type="Array(double)" value="{2.60}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="U26"/>
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
         <ParameterList name="Fuel_U31">
           <Parameter name="density" type="double" value="10.257"/>
           <Parameter name="enrichments" type="Array(double)" value="{3.10}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="U31"/>
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
         <ParameterList name="Fuel_g18a">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{1.8}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="g18a"/>
         </ParameterList>
         <ParameterList name="Fuel_g18b">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{1.8}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="g18b"/>
           <Parameter name="thden" type="double" value="94.5"/>
         </ParameterList>
         <ParameterList name="Fuel_g18c">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{1.8}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="gad_frac" type="double" value="0.05"/>
           <Parameter name="gad_mat" type="string" value="gxx"/>
           <Parameter name="key_name" type="string" value="g18c"/>
@@ -189,14 +189,14 @@
         <ParameterList name="Fuel_g18d">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{0.711,23.4,1.9}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2,Pu-239,Pu-241}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235,Pu-239,Pu-241}"/>
           <Parameter name="key_name" type="string" value="g18d"/>
           <Parameter name="thden" type="double" value="94.5"/>
         </ParameterList>
         <ParameterList name="Fuel_g18e">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{1.8}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="gad_frac" type="double" value="0.05"/>
           <Parameter name="gad_mat" type="string" value="gxx"/>
           <Parameter name="key_name" type="string" value="g18e"/>
@@ -204,7 +204,7 @@
         <ParameterList name="Fuel_g18f">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{0.711,0.001,3.4,1.9}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2,U-234,Pu-239,Pu-241}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235,U-234,Pu-239,Pu-241}"/>
           <Parameter name="gad_frac" type="double" value="0.05"/>
           <Parameter name="gad_mat" type="string" value="gxx"/>
           <Parameter name="key_name" type="string" value="g18f"/>
@@ -325,41 +325,41 @@
         <ParameterList name="Fuel_U21">
           <Parameter name="density" type="double" value="10.257"/>
           <Parameter name="enrichments" type="Array(double)" value="{2.11}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="U21"/>
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
         <ParameterList name="Fuel_U26">
           <Parameter name="density" type="double" value="10.257"/>
           <Parameter name="enrichments" type="Array(double)" value="{2.60}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="U26"/>
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
         <ParameterList name="Fuel_U31">
           <Parameter name="density" type="double" value="10.257"/>
           <Parameter name="enrichments" type="Array(double)" value="{3.10}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="U31"/>
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
         <ParameterList name="Fuel_g18a">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{1.8}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="g18a"/>
         </ParameterList>
         <ParameterList name="Fuel_g18b">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{1.8}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="g18b"/>
           <Parameter name="thden" type="double" value="94.5"/>
         </ParameterList>
         <ParameterList name="Fuel_g18c">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{1.8}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="gad_frac" type="double" value="0.05"/>
           <Parameter name="gad_mat" type="string" value="gxx"/>
           <Parameter name="key_name" type="string" value="g18c"/>
@@ -368,14 +368,14 @@
         <ParameterList name="Fuel_g18d">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{0.711,23.4,1.9}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2,Pu-239,Pu-241}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235,Pu-239,Pu-241}"/>
           <Parameter name="key_name" type="string" value="g18d"/>
           <Parameter name="thden" type="double" value="94.5"/>
         </ParameterList>
         <ParameterList name="Fuel_g18e">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{1.8}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="gad_frac" type="double" value="0.05"/>
           <Parameter name="gad_mat" type="string" value="gxx"/>
           <Parameter name="key_name" type="string" value="g18e"/>
@@ -383,7 +383,7 @@
         <ParameterList name="Fuel_g18f">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{0.711,0.001,3.4,1.9}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2,U-234,Pu-239,Pu-241}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235,U-234,Pu-239,Pu-241}"/>
           <Parameter name="gad_frac" type="double" value="0.05"/>
           <Parameter name="gad_mat" type="string" value="gxx"/>
           <Parameter name="key_name" type="string" value="g18f"/>
@@ -504,41 +504,41 @@
         <ParameterList name="Fuel_U21">
           <Parameter name="density" type="double" value="10.257"/>
           <Parameter name="enrichments" type="Array(double)" value="{2.11}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="U21"/>
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
         <ParameterList name="Fuel_U26">
           <Parameter name="density" type="double" value="10.257"/>
           <Parameter name="enrichments" type="Array(double)" value="{2.60}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="U26"/>
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
         <ParameterList name="Fuel_U31">
           <Parameter name="density" type="double" value="10.257"/>
           <Parameter name="enrichments" type="Array(double)" value="{3.10}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="U31"/>
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
         <ParameterList name="Fuel_g18a">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{1.8}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="g18a"/>
         </ParameterList>
         <ParameterList name="Fuel_g18b">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{1.8}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="key_name" type="string" value="g18b"/>
           <Parameter name="thden" type="double" value="94.5"/>
         </ParameterList>
         <ParameterList name="Fuel_g18c">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{1.8}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="gad_frac" type="double" value="0.05"/>
           <Parameter name="gad_mat" type="string" value="gxx"/>
           <Parameter name="key_name" type="string" value="g18c"/>
@@ -547,14 +547,14 @@
         <ParameterList name="Fuel_g18d">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{0.711,23.4,1.9}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2,Pu-239,Pu-241}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235,Pu-239,Pu-241}"/>
           <Parameter name="key_name" type="string" value="g18d"/>
           <Parameter name="thden" type="double" value="94.5"/>
         </ParameterList>
         <ParameterList name="Fuel_g18e">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{1.8}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
           <Parameter name="gad_frac" type="double" value="0.05"/>
           <Parameter name="gad_mat" type="string" value="gxx"/>
           <Parameter name="key_name" type="string" value="g18e"/>
@@ -562,7 +562,7 @@
         <ParameterList name="Fuel_g18f">
           <Parameter name="density" type="double" value="10.111"/>
           <Parameter name="enrichments" type="Array(double)" value="{0.711,0.001,3.4,1.9}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{uo2,U-234,Pu-239,Pu-241}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235,U-234,Pu-239,Pu-241}"/>
           <Parameter name="gad_frac" type="double" value="0.05"/>
           <Parameter name="gad_mat" type="string" value="gxx"/>
           <Parameter name="key_name" type="string" value="g18f"/>

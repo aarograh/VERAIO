@@ -82,7 +82,7 @@ my $XML_HEADER='<?xml version="1.0" encoding="UTF-8"?>';
 #
 # Process the command line
 #
-my $_UPDATE='stable';
+my $_UPDATE='007';
 my $DEBUG=0;
 my ($VERBOSE,$HELP,$VERSION);
 my $XML='on';
