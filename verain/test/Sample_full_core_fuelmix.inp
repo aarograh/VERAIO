@@ -225,11 +225,11 @@
 
   fuel    g18a 10.111 / 1.8
   fuel    g18b 10.111 94.5 / 1.8
-  fuel    g18c 10.111 94.5 / 1.8 / gxx=0.05
+  fuel    g18c 10.111 94.5 / 1.8 / gxx=5.0
   fuel    g18d 10.111 94.5 / 0.711 Pu-239=23.4 Pu-241=1.9        ! should it be Pu-239=3.4?
-  fuel    g18e 10.111      / 1.8 / gxx=0.05
-  fuel    g18f 10.111 94.5 / 0.711 U-234=0.001 Pu-239=3.4 Pu-241=1.9 / gxx=0.05
-  fuel    g18g 10.111 94.5 / U-235=0.711 U-234=0.001 Pu-239=3.4 Pu-241=1.9 / gxx=0.05
+  fuel    g18e 10.111      / 1.8 / gxx=5.0
+  fuel    g18f 10.111 94.5 / 0.711 U-234=0.001 Pu-239=3.4 Pu-241=1.9 / gxx=5.0
+  fuel    g18g 10.111 94.5 / U-235=0.711 U-234=0.001 Pu-239=3.4 Pu-241=1.9 / gxx=5.0
 
   cell 1   0.4096 0.418 0.475 / U21 he  zirc    ! low enriched pin cell
   cell 2   0.4096 0.418 0.475 / U26 he  zirc    ! med enriched pin cell
