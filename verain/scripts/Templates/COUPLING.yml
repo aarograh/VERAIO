@@ -1,0 +1,46 @@
+COUPLING:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+  _content:
+    epsk:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COUPLING/$epsk
+      _content:
+
+    rlx_power:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COUPLING/$rlx_power
+      _content:
+
+    rlx_tfuel:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COUPLING/$rlx_tfuel
+      _content:
+
+    rlx_den:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COUPLING/$rlx_den
+      _content:
+
+    maxiter:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COUPLING/$maxiter
+      _content:
+
+    LIME_xml:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy COUPLING/$LIME_xml
+      _content:

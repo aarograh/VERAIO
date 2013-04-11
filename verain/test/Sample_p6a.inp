@@ -24,10 +24,9 @@
 !     * added sym and reflector cards
 !     * updated dhfrac to default value
 !
+!  Update 04/10/2013
+!     * add COUPLING block
 !
-!  To-Do:
-!     * add percent of theoretical density to pellets
-!     * add grid spacer loss coefficients
 !
 !  To process:
 !     ./react2xml.pl [file].inp [file].xml
@@ -305,5 +304,15 @@
   rtwfp   1000.0
   maxits  10000
   courant 0.8
+
+[COUPLING]
+  epsk        0.00005
+  rlx_power   0.6
+  rlx_tfuel   1.0
+  rlx_den     1.0
+  maxiter     1000
+
+
+
 
 

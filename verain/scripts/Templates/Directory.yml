@@ -45,6 +45,7 @@ _DIRECTORY:
   UTILS:
   INSILICO:
   COBRATF:
+  COUPLING:
   MPACT:
 
 CASEID:
@@ -926,6 +927,51 @@ COBRATF:
     _check:
       - is_string()
 
+COUPLING:
+
+  epsk:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  rlx_power:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_leq() 1.0
+
+  rlx_tfuel:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_leq() 1.0
+
+  rlx_den:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_leq() 1.0
+
+  maxiter:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+
+  LIME_xml:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
 
 MPACT:
 

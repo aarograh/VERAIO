@@ -282,6 +282,8 @@
   </ParameterList>
   <ParameterList name="COBRATF">
   </ParameterList>
+  <ParameterList name="COUPLING">
+  </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="iteration_control">
       <Parameter name="cmfd" type="bool" value="true"/>
