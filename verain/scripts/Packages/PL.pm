@@ -1025,11 +1025,11 @@ sub rodmap{
 			}
 		    }
 		}
-		else{    # remove after update of input files with new definitions
-		    if(fany(sub{m/(u)/i}, @cmats)){
-			$CELL_TYPE{$_}='fuel';
-		    }
-		}
+#		else{    # remove after update of input files with new definitions
+#		    if(fany(sub{m/(u)/i}, @cmats)){
+#			$CELL_TYPE{$_}='fuel';
+#		    }
+#		}
 #		else{
 #		    $CELL_TYPE{$_}='other';
 #		}
