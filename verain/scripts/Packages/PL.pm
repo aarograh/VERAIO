@@ -594,6 +594,9 @@ sub matmap2{
 	my $density=shift @content;
 
 	if(@content > 1){
+	    if(@content%2){
+		die "matmap2: material $keyname error, mixture map size is not an even number\n";
+	    }
 	    @mat_names=even(\@content);
 	    @mat_fracs=odd(\@content);
 	}
