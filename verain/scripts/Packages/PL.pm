@@ -851,7 +851,8 @@ sub rodmap{
     my (@a,@b,@c,@d);
 
 #    my @MATS_RESERVED=('mod','vacuum');
-    my @MATS_RESERVED =('vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3');
+#    my @MATS_RESERVED =('vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3');
+    my @MATS_RESERVED =('vacuum','mod');
 
     my %OPTIONS=('basename'=>'List','mapname'=>'rodmap');
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
@@ -931,6 +932,14 @@ sub rodmap{
 		    if( @mat_path[1] =~ m/(fuel)/ ){
 			$mat_flags[1]='fuel';
 		    }
+
+		    if(exists $MATS_DB{ $mat_flags[0] }){
+			my $mat_type=$MATS_DB{ $mat_flags[0] };
+			if($mat_type ne $mat_flags[1]){
+			    die "rodmap2: material and fuel keyword use same identifiers.\n"
+			}
+		    }
+
 		    unless(exists $MATS_DB{ $mat_flags[0] }){
 			$MATS_DB{ $mat_flags[0] } = $mat_flags[1];
 			print "\t\t\t\tMATS_DB{$mat_flags[0]}=$mat_flags[1]\n" if get_verbose();
