@@ -244,3 +244,11 @@
   maxits  10000
   courant 0.8
   maps_filename = 3x3_HFP
+
+[COUPLING]
+  epsk        0.00005
+  rlx_power   0.6
+  rlx_tfuel   1.0
+  rlx_den     1.0
+  maxiter     1000
+
