@@ -162,7 +162,7 @@
 
 [INSILICO]
     mat_library casl_comp.sh5
-    xs_library  test-8gr
+    xs_library  test-8grp
 
     max_delta_z   2.54
     num_blocks_i  1
