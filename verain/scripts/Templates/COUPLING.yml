@@ -10,6 +10,13 @@ COUPLING:
         - copy COUPLING/$epsk
       _content:
 
+    epsp:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COUPLING/$epsp
+      _content:
+
     rlx_power:
       _pltype: parameter
       _type: double

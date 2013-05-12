@@ -217,6 +217,6 @@
 [COUPLING]
   epsk        0.00005
   rlx_power   1.0
-  rlx_tfuel   1.0
-  rlx_den     1.0
+  rlx_tfuel   0.3
+  rlx_den     0.3
   maxiter     1000
