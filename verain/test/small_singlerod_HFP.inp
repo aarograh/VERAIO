@@ -239,6 +239,10 @@
   courant 0.8
   maps_filename = single_rod_HFP
 
+[MAMBA2D]
+  Nx   50
+  Ny   40
+
 [COUPLING]
   epsk        5.0  ! pcm
   rlx_power   1.0

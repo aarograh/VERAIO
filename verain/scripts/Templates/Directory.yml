@@ -48,6 +48,7 @@ _DIRECTORY:
   COUPLING:
   MPACT:
   PEREGRINE:
+  MAMBA2D:
 
 CASEID:
   title:
@@ -1055,6 +1056,169 @@ MPACT:
     _content:
     _check:
       - is_int()
+      - is_gt() 0
+
+MAMBA2D:
+  problem_name:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  Nx:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  Ny:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  deltaX:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  deltaY:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  deltat:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  tmax:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  imod:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+  HFprod:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+  Tsat:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  C_por:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  C_den:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  Cp:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  C_k:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  Hc:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  Nc:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  rc:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  Db:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  jm:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+  Wden:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+  ksnb:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+  ksnbp:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+  npar:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  AFe:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  EFe:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  nsol:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  AB:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  EB:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
       - is_gt() 0
 
 PEREGRINE:
