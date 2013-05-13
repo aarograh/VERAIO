@@ -1,0 +1,20 @@
+PEREGRINE:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+  _content:
+
+    porosity:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$porosity
+      _content:
+
+    grain_radius:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$grain_radius
+      _content:
+

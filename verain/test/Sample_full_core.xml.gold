@@ -797,4 +797,6 @@
     <ParameterList name="xs_library">
     </ParameterList>
   </ParameterList>
+  <ParameterList name="PEREGRINE">
+  </ParameterList>
 </ParameterList>

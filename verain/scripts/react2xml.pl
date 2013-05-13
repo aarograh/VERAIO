@@ -59,7 +59,7 @@ my $SCHEMA="${directory}Templates/Directory.yml";
 #
 my @BLOCKS=('CASEID','STATE','CORE','ASSEMBLIES',
 	    'CONTROLS','DETECTORS','INSERTS',
-	    'INSILICO','EDITS','COBRATF','COUPLING','MPACT');
+	    'INSILICO','EDITS','COBRATF','COUPLING','MPACT','PEREGRINE');
 
 foreach $iblock (@BLOCKS){
     $SCHEMA_PL{$iblock} = "${directory}Templates/$iblock.yml";

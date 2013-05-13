@@ -47,6 +47,7 @@ _DIRECTORY:
   COBRATF:
   COUPLING:
   MPACT:
+  PEREGRINE:
 
 CASEID:
   title:
@@ -1055,3 +1056,20 @@ MPACT:
     _check:
       - is_int()
       - is_gt() 0
+
+PEREGRINE:
+
+  porosity:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_lt() 1.0
+  grain_radius:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_lt() 0.1

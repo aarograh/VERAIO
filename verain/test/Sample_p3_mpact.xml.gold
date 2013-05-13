@@ -218,4 +218,6 @@
       <Parameter name="xs_type" type="string" value="HELIOS"/>
     </ParameterList>
   </ParameterList>
+  <ParameterList name="PEREGRINE">
+  </ParameterList>
 </ParameterList>
