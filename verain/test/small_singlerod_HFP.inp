@@ -240,7 +240,7 @@
   maps_filename = single_rod_HFP
 
 [COUPLING]
-  epsk        0.00005
+  epsk        5.0  ! pcm
   rlx_power   1.0
   rlx_tfuel   0.3
   rlx_den     0.3
