@@ -218,6 +218,8 @@
       <Parameter name="xs_type" type="string" value="HELIOS"/>
     </ParameterList>
   </ParameterList>
+  <ParameterList name="MAMBA2D">
+  </ParameterList>
   <ParameterList name="PEREGRINE">
   </ParameterList>
 </ParameterList>

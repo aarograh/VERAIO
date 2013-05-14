@@ -229,6 +229,8 @@
     <ParameterList name="xs_library">
     </ParameterList>
   </ParameterList>
+  <ParameterList name="MAMBA2D">
+  </ParameterList>
   <ParameterList name="PEREGRINE">
   </ParameterList>
 </ParameterList>

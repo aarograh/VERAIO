@@ -276,6 +276,8 @@
     <ParameterList name="xs_library">
     </ParameterList>
   </ParameterList>
+  <ParameterList name="MAMBA2D">
+  </ParameterList>
   <ParameterList name="PEREGRINE">
     <Parameter name="grain_radius" type="double" value="3.0e-6"/>
     <Parameter name="porosity" type="double" value="0.2"/>
