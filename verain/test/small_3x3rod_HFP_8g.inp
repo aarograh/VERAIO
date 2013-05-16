@@ -169,8 +169,8 @@
     xs_library  test-8grp
 
     max_delta_z   2.54
-    num_blocks_i  3
-    num_blocks_j  3
+    num_blocks_i  1
+    num_blocks_j  1
     num_z_blocks  12
     num_groups    8
     num_sets      4
