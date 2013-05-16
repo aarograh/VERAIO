@@ -219,4 +219,4 @@
   rlx_power   1.0
   rlx_tfuel   0.3
   rlx_den     0.3
-  maxiter     1000
+  maxiter     2
