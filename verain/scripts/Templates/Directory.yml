@@ -337,6 +337,7 @@ CORE:
       - is_geq() 0
   mat:
     <<: *dtlistnamed
+    _style: multi-line
     _check:
       - lc(nth(0,()))ne'mod'
 
@@ -430,6 +431,7 @@ ASSEMBLY:
       - nth(2,())>0
   fuel:
     <<: *dtlistnamed
+    _style: multi-line
     _slash:
     _check:
       - nth(1,())>0
@@ -438,6 +440,7 @@ ASSEMBLY:
 
   mat:
     <<: *dtlistnamed
+    _style: multi-line
     _check:
       - lc(nth(0,()))ne'mod'
 
@@ -475,6 +478,7 @@ CONTROL:
       - fall(sub{is_geq(shift,0)},stride(1,2,()))
   mat:
     <<: *dtlistnamed
+    _style: multi-line
     _check:
       - lc(nth(0,()))ne'mod'
 
@@ -505,6 +509,7 @@ INSERT:
       - fall(sub{is_geq(shift,0)},stride(1,2,()))
   mat:
     <<: *dtlistnamed
+    _style: multi-line
     _check:
       - lc(nth(0,()))ne'mod'
 
@@ -536,6 +541,7 @@ DETECTOR:
       - fall(sub{is_geq(shift,0)},stride(1,2,()))
   mat:
     <<: *dtlistnamed
+    _style: multi-line
     _check:
       - lc(nth(0,()))ne'mod'
 

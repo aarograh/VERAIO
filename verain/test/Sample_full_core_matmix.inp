@@ -207,7 +207,10 @@
   mat SS304  8.0   ss 1.0
   mat zirc   6.56 
 
-  mat ifba 3.85 b-10 0.09347 b-11 0.09347 zr 0.81306
+  mat ifba 3.85 
+    b-10 0.09347 
+    b-11 0.09347 
+    zr 0.81306
 
 [ASSEMBLY]
 
