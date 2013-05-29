@@ -215,6 +215,7 @@
   </ParameterList>
   <ParameterList name="INSILICO">
     <Parameter name="Pn_order" type="int" value="0"/>
+    <Parameter name="cell_broadcast_size" type="int" value="289"/>
     <Parameter name="dimension" type="int" value="3"/>
     <Parameter name="eigen_solver" type="string" value="arnoldi"/>
     <ParameterList name="eigenvalue_db">

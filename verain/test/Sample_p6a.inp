@@ -245,6 +245,8 @@
     tolerance     1e-4
     Pn_order      0
 
+    cell_broadcast_size  289   ! set for larger problems
+
 !   eigenvalue_db:
        k_tolerance   1e-4
        L2_tolerance  1e-3

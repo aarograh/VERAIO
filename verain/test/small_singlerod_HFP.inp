@@ -245,8 +245,9 @@
 
 [COUPLING]
   epsk        5.0  ! pcm
-  rlx_power   1.0
-  rlx_tfuel   0.3
-  rlx_den     0.3
-  maxiter     1000
+  eps_temp    1.0  ! temperature convergence
+  rlx_power   0.5
+  rlx_tfuel   1.0
+  rlx_den     1.0
+  maxiter     100
 

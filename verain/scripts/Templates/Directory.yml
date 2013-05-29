@@ -690,6 +690,12 @@ INSILICO:
     _check:
       - is_int()
       - is_geq() 0
+  cell_broadcast_size:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
   aztec_kspace:
     <<: *dtint
     _content:
@@ -954,6 +960,13 @@ COUPLING:
       - is_gt() 0
 
   epsp:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  eps_temp:
     <<: *dtdouble
     _content:
     _check:

@@ -143,6 +143,13 @@ INSILICO:
         - copy INSILICO/$Pn_order
       _content:
 
+    cell_broadcast_size:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy INSILICO/$cell_broadcast_size
+      _content:
+
     aztec_kspace:
       _pltype: parameter
       _type: int

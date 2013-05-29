@@ -17,6 +17,13 @@ COUPLING:
         - copy COUPLING/$epsp
       _content:
 
+    eps_temp:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COUPLING/$eps_temp
+      _content:
+
     rlx_power:
       _pltype: parameter
       _type: double

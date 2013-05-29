@@ -255,11 +255,12 @@
     <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>
   <ParameterList name="COUPLING">
+    <Parameter name="eps_temp" type="double" value="1.0"/>
     <Parameter name="epsk" type="double" value="5.0"/>
-    <Parameter name="maxiter" type="int" value="1000"/>
-    <Parameter name="rlx_den" type="double" value="0.3"/>
-    <Parameter name="rlx_power" type="double" value="1.0"/>
-    <Parameter name="rlx_tfuel" type="double" value="0.3"/>
+    <Parameter name="maxiter" type="int" value="100"/>
+    <Parameter name="rlx_den" type="double" value="1.0"/>
+    <Parameter name="rlx_power" type="double" value="0.5"/>
+    <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="iteration_control">
