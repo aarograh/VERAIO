@@ -145,22 +145,11 @@
   lower_nozzle  ss 6.05  6250.0  ! mat, height, mass (g)
   upper_nozzle  ss 8.827 6250.0  ! mat, height, mass (g)
 
- !! dancoff                   ! assembly_dancoff_map
- !!   0.000
- !!   0.287 0.315                            
- !!   0.287 0.315 0.315                        
- !!   0.000 0.287 0.286 0.000                        
- !!   0.287 0.316 0.316 0.284 0.299                
- !!   0.288 0.317 0.316 0.287 0.267 0.000
- !!   0.000 0.286 0.286 0.000 0.270 0.286 0.321        
- !!   0.287 0.319 0.319 0.286 0.315 0.335 0.333 0.337    
- !!   0.323 0.322 0.321 0.322 0.320 0.322 0.323 0.322 0.310
-
-  
 [EDITS]
 
 [MPACT]
-  ray_spacing            0.05
+  vis_edits         core
+  ray_spacing       0.05
 !quad_set
   quad_type         CHEBYSHEV-YAMAMOTO
   polars_octant     3
@@ -169,10 +158,83 @@
   flux_tolerance    1e-6
   num_inners        2
   k_tolerance       1e-6
-  cmfd              true
   up_scatter        2
   num_outers        500
-  num_threads       8
+!cmfd
+  cmfd              cmfd
+  cmfd_solver       mgnode
+  k_shift           1.5
+  cmfd_num_outers   20
+!2D1D
+  split_TL          true
+  TL_treatment      lflat
+  nodal_method      none
+!parallel
+  nspace            1
+  nangle            1
+  nenergy           1
+  nthreads          8
 !xs_library
   xs_filename       hy047n18g110u.dat
   xs_type           HELIOS
+  subgroup_set      4
+!mesh
+  axial_mesh        5.0000
+                    6.0500
+                    5.9010
+                    3.8660
+                    8.2110
+                    8.2110
+                    8.2110
+                    8.2120
+                    8.2110
+                    8.2110
+                    8.2110
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    7.9212
+                    7.9212
+                    7.9212
+                    7.9212
+                    7.9212
+                    8.5560
+                    3.8660
+                    3.5780
+                    3.7990
+                    8.8270
+                    7.6000
+
