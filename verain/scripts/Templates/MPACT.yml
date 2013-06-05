@@ -49,12 +49,16 @@ MPACT:
         - copy MPACT/$jagged
       _content:
 
-    axial_mesh:
-      _pltype: array
-      _type: double
-      _do:
-        - copy MPACT/$axial_mesh
+    mesh:
+      _pltype: list
       _content:
+  
+        axial_mesh:
+          _pltype: array
+          _type: double
+          _do:
+            - copy MPACT/$axial_mesh
+          _content:
 
     parallel_env:
       _pltype: list
@@ -195,7 +199,7 @@ MPACT:
           _pltype: parameter
           _type: string
           _do:
-            - copy MPACT/$tl_treatment
+            - copy MPACT/$TL_treatment
           _content:
 
         nodal_method:

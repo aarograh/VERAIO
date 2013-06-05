@@ -1029,8 +1029,8 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none coroe fsr
-  axial_mesh
+      - in_dictionary() none core fsr
+  axial_mesh:
     <<: *dtlist
     _style: multi-line
     _content:
@@ -1143,13 +1143,13 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() CMFD yCMFD
+      - in_dictionary() cmfd ycmfd none
   cmfd_solver:
     <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() 1GSweep MGNode MGGroup
+      - in_dictionary() 1gsweep mgnode mggroup
   k_shift:
     <<: *dtdouble
     _content:
@@ -1180,13 +1180,13 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() FLAT LFLAT
+      - in_dictionary() flat lflat
   nodal_method:
     <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() NEM SANM NONE
+      - in_dictionary() nem sanm none
 
 MAMBA2D:
   problem_name:
