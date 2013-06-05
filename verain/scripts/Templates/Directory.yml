@@ -1018,6 +1018,24 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  jagged:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  vis_edits:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none coroe fsr
+  axial_mesh
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())
 
   quad_type:
     <<: *dtword
@@ -1047,6 +1065,12 @@ MPACT:
     _content:
     _check:
       - is_word()
+  subgroup_set:
+    <<: *dtword
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
 
   k_tolerance:
     <<: *dtdouble
@@ -1060,12 +1084,6 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
-  cmfd:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
   num_outers:
     <<: *dtint
     _content:
@@ -1084,12 +1102,91 @@ MPACT:
     _check:
       - is_int()
       - is_gt() 0
-  num_threads:
+
+  nspace:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+  nangle:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  nenergy:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_eq() 1
+  nthreads:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  par_method:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+  par_file:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+
+  cmfd:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() CMFD yCMFD
+  cmfd_solver:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() 1GSweep MGNode MGGroup
+  k_shift:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  cmfd_num_outers:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  cmfd_up_scatter:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+
+  split_TL:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  TL_treatment:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() FLAT LFLAT
+  nodal_method:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() NEM SANM NONE
 
 MAMBA2D:
   problem_name:

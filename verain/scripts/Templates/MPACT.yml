@@ -35,6 +35,73 @@ MPACT:
             - copy MPACT/$azimuthals_octant
           _content:
 
+    vis_edits:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$vis_edits
+      _content:
+
+    jagged:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy MPACT/$jagged
+      _content:
+
+    axial_mesh:
+      _pltype: array
+      _type: double
+      _do:
+        - copy MPACT/$axial_mesh
+      _content:
+
+    parallel_env:
+      _pltype: list
+      _content:
+  
+        nspace:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$nspace
+          _content:
+
+        nangle:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$nangle
+          _content:
+
+        nenergy:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$nenergy
+          _content:
+
+        nthreads:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$nthreads
+          _content:
+      
+        method:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$par_method
+          _content:
+
+        filename:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$par_file
+          _content:
+
     iteration_control:
       _pltype: list
       _content:
@@ -51,13 +118,6 @@ MPACT:
           _type: double
           _do:
             - copy MPACT/$flux_tolerance
-          _content:
-        
-        cmfd:
-          _pltype: parameter
-          _type: bool
-          _do:
-            - copy MPACT/$cmfd
           _content:
 
         num_outers:
@@ -81,13 +141,70 @@ MPACT:
             - copy MPACT/$up_scatter
           _content:
 
-        num_threads:
+    cmfd:
+      _pltype: list
+      _content:
+  
+        cmfd:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$cmfd
+          _content:
+
+        solver:
           _pltype: parameter
           _type: int
           _do:
-            - copy MPACT/$num_threads
+            - copy MPACT/$cmfd_solver
           _content:
-    
+
+        k_shift:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$k_shift
+          _content:
+
+        num_outers:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$cmfd_num_outers
+          _content:
+
+        up_scatter:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$cmfd_up_scatter
+          _content:
+
+    2d1d:
+      _pltype: list
+      _content:
+  
+        split_TL:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$split_TL
+          _content:
+
+        TL_treatment:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$tl_treatment
+          _content:
+
+        nodal_method:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$nodal_method
+          _content:
+
     xs_library:
       _pltype: list
       _content:
@@ -104,5 +221,12 @@ MPACT:
           _type: string
           _do:
             - copy MPACT/$xs_filename
+          _content:
+
+        subgroup_set:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$subgroup_set
           _content:
 
