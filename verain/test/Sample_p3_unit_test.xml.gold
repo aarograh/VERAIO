@@ -222,7 +222,15 @@
   <ParameterList name="COUPLING">
   </ParameterList>
   <ParameterList name="MPACT">
+    <ParameterList name="2d1d">
+    </ParameterList>
+    <ParameterList name="cmfd">
+    </ParameterList>
     <ParameterList name="iteration_control">
+    </ParameterList>
+    <ParameterList name="mesh">
+    </ParameterList>
+    <ParameterList name="parallel_env">
     </ParameterList>
     <ParameterList name="quad_set">
     </ParameterList>
