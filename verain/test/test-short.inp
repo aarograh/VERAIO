@@ -112,7 +112,7 @@
     num_blocks_j  1
     num_z_blocks  12
     num_groups    23
-    num_sets      4
+    num_sets      1
 
     do_transport  false
 
