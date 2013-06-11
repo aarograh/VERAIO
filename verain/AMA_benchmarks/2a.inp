@@ -1,0 +1,248 @@
+[CASEID]
+  title 'CASL AMA Benchmark Problem 2A - Fuel Lattice - Public'
+
+[STATE]
+  power 0.0                             ! %
+  tinlet 557.33                         ! F
+  tfuel 565                             ! K
+  modden 0.743                          ! g/cc
+  boron 1300                            ! ppm
+  rodbank A 1                           ! rod fully withdrawn
+  sym qtr  
+
+[CORE]
+  size 1
+  apitch 21.50 
+  height 1.0
+  rated 0.01 0.01
+
+  core_shape
+    1
+
+  assm_map
+    ASSY
+
+  insert_map
+    -  
+
+  crd_map
+    AIC
+ 
+  crd_bank
+    A
+
+  det_map
+    -
+
+  bc_rad reflecting
+  bc_top reflecting
+  bc_bot reflecting
+  
+[ASSEMBLY]
+  npin 17
+  ppitch 1.26
+  
+  fuel U31 10.257 94.5 / 3.1
+  mat he 0.000176
+  mat zirc 6.56 zirc4
+
+  cell 1 0.4096 0.418 0.475 / U31 he zirc
+  cell 2        0.561 0.602 / mod zirc
+
+  lattice LAT
+    2
+    1 1
+    1 1 1
+    2 1 1 2
+    1 1 1 1 1
+    1 1 1 1 1 2
+    2 1 1 2 1 1 1
+    1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1
+
+  axial ASSY 0.0 LAT 1.0 
+
+[INSERT]
+  title "Pyrex"
+  npin 17
+
+  mat he     0.0001786 
+  mat pyrex  2.25 pyrex-vera
+  mat ss     8.0
+
+  cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrex he ss
+
+  rodmap  LAT8 
+     -
+     - -
+     - - -
+     1 - - -
+     - - - - -
+     - - - - - 1
+     - - - - - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  LAT12
+     -
+     - -
+     - - -
+     1 - - -
+     - - - - -
+     - - - - - -
+     - - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  LAT16
+     -
+     - -
+     - - -
+     1 - - -
+     - - - - -
+     - - - - - 1
+     - - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  LAT20
+     -
+     - -
+     - - -
+     1 - - -
+     - - - - -
+     - - - - - 1
+     1 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  LAT24  
+     -
+     - -
+     - - -
+     1 - - 1
+     - - - - -
+     - - - - - 1
+     1 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  axial PY8   0.0 LAT8  1.0 
+  axial PY12  0.0 LAT12 1.0 
+  axial PY16  0.0 LAT16 1.0 
+  axial PY20  0.0 LAT20 1.0 
+  axial PY24  0.0 LAT24 1.0 
+
+[CONTROL]
+  title "B4C and AIC RCCAs"
+  npin 17
+  stroke  1.0 1           ! 1 step for in/out
+
+  mat he     0.0001786 
+  mat ss     8.0
+  mat aic   10.2 
+  mat b4c    1.76
+
+  cell 1  0.382 0.386 0.484 / aic he ss
+  cell 2  0.373 0.386 0.484 / b4c he ss
+
+  rodmap LAT_AIC
+     -
+     - -
+     - - -
+     1 - - 1
+     - - - - -
+     - - - - - 1
+     1 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap LAT_B4C
+     -
+     - -
+     - - -
+     2 - - 2
+     - - - - -
+     - - - - - 2
+     2 - - 2 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  axial AIC  0.0 LAT_AIC 1.0
+  axial B4C  0.0 LAT_B4C 1.0
+
+[DETECTOR]
+  title "Incore instrument thimble"
+  npin 17
+
+  mat he 0.0001786 
+  mat ss 8.0
+
+  cell 1  0.258 0.382 / he ss
+
+  rodmap  LAT  
+     1
+     - -
+     - - -
+     - - - -
+     - - - - -
+     - - - - - -
+     - - - - - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  axial 1  0.0 LAT 1.0 
+
+[EDITS]
+     
+[INSILICO]
+  silo_output 'p2' 
+  dimension 2
+
+  eq_set bld_2d
+  eigen_solver power_iteration
+  tolerance 1e-5
+  Pn_order 1
+  k_tolerance 1e-5
+  L2_tolerance 0.001
+  energy_dep_ev true 
+  upscatter_tolerance 1e-5 
+  
+  mesh 16
+  num_groups 23
+  
+  num_blocks_i 4 
+  num_blocks_j 4  
+  num_sets 2
+  
+  quad_type qr
+  azimuthals_octant 4
+  polars_octant 4
+  
+  mat_library casl_comp_r1_draft_03092013.sh5  
+  xs_library lib252_hetbondoneabs-noabssigp
+  
+  new_grp_bounds
+    8.2085e+05
+    1.1109e+05
+    5.5308e+03
+    1.8644e+02
+    3.7612e+01
+    3.5379e+01
+    2.7697e+01
+    2.1684e+01
+    2.0397e+01
+    1.5968e+01
+    7.1500e+00
+    6.7000e+00
+    6.3000e+00
+    1.0970e+00
+    1.0450e+00
+    9.5000e-01
+    3.5000e-01
+    2.0600e-01
+    1.0700e-01
+    5.8000e-02
+    2.5000e-02
+    1.0000e-02
+    1.0000e-05
