@@ -18,3 +18,184 @@ PEREGRINE:
         - copy PEREGRINE/$grain_radius
       _content:
 
+    globalparams_density:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$globalparams_density
+      _content:
+
+    mesh_file:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$mesh_file
+      _content:
+
+    auxvariables_porosity_initial_condition:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$auxvariables_porosity_initial_condition
+      _content:
+
+    auxvariables_grain_radius_initial_condition:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$auxvariables_grain_radius_initial_condition
+      _content:
+
+    burnup_fuel_outer_radius:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$burnup_fuel_outer_radius
+      _content:
+
+    burnup_i_enrich:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$burnup_i_enrich
+      _content:
+
+    auxkernels_pelletid_a_lower:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$auxkernels_pelletid_a_lower
+      _content:
+
+    auxkernels_pelletid_a_upper:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$auxkernels_pelletid_a_upper
+      _content:
+
+    auxkernels_fast_neutron_flux_factor:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$auxkernels_fast_neutron_flux_factor
+      _content:
+
+    thermalcontact_roughness_fuel:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$thermalcontact_roughness_fuel
+      _content:
+
+    thermalcontact_roughness_clad:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$thermalcontact_roughness_clad
+      _content:
+
+    bcs_pressure_function:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$bcs_pressure_function
+      _content:
+
+    bcs_plenumpressure_initial_pressure:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$bcs_plenumpressure_initial_pressure
+      _content:
+
+    materials_fuel_thermal_initial_porosity:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_fuel_thermal_initial_porosity
+      _content:
+
+    materials_fuel_relocation_diameter:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_fuel_relocation_diameter
+      _content:
+
+    materials_fuel_relocation_gap:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_fuel_relocation_gap
+      _content:
+
+    materials_fission_gas_release_initial_grain_radius:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_fission_gas_release_initial_grain_radius
+      _content:
+
+    materials_fission_gas_release_initial_porosity:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_fission_gas_release_initial_porosity
+      _content:
+
+    materials_fission_gas_release_axial_power_profile:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$materials_fission_gas_release_axial_power_profile
+      _content:
+
+    materials_fission_gas_release_file_name:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$materials_fission_gas_release_file_name
+      _content:
+
+    executioner_time_t:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$executioner_time_t
+      _content:
+
+    executioner_time_dt:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$executioner_time_dt
+      _content:
+
+    executioner_dt:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$executioner_dt
+      _content:
+
+    executioner_end_time:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$executioner_end_time
+      _content:
+
+    executioner_num_steps:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy PEREGRINE/$executioner_num_steps
+      _content:
+
+    output_file_base:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$output_file_base
+      _content:

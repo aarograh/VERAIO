@@ -1373,3 +1373,151 @@ PEREGRINE:
       - is_float()
       - is_gt() 0
       - is_lt() 0.1
+  globalparams_density:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  mesh_file:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  auxvariables_porosity_initial_condition:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  auxvariables_grain_radius_initial_condition:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  burnup_fuel_outer_radius:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  burnup_i_enrich:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  auxkernels_pelletid_a_lower:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  auxkernels_pelletid_a_upper:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  auxkernels_fast_neutron_flux_factor:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  thermalcontact_roughness_fuel:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  thermalcontact_roughness_clad:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  bcs_pressure_function:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  bcs_plenumpressure_initial_pressure:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_fuel_thermal_initial_porosity:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_fuel_relocation_diameter:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_fuel_relocation_gap:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_fission_gas_release_initial_grain_radius:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_fission_gas_release_initial_porosity:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_fission_gas_release_axial_power_profile:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  materials_fission_gas_release_file_name:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  executioner_time_t:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  executioner_time_dt:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  executioner_dt:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  executioner_end_time:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  executioner_num_steps:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  output_file_base:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()

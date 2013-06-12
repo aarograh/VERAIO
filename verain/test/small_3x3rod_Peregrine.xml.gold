@@ -289,7 +289,33 @@
   <ParameterList name="MAMBA2D">
   </ParameterList>
   <ParameterList name="PEREGRINE">
+    <Parameter name="auxkernels_fast_neutron_flux_factor" type="double" value="1.e17"/>
+    <Parameter name="auxkernels_pelletid_a_lower" type="double" value="0.00226"/>
+    <Parameter name="auxkernels_pelletid_a_upper" type="double" value="0.5418"/>
+    <Parameter name="auxvariables_grain_radius_initial_condition" type="double" value="3.0e-6"/>
+    <Parameter name="auxvariables_porosity_initial_condition" type="double" value="0.07"/>
+    <Parameter name="bcs_plenumpressure_initial_pressure" type="double" value="2.31e6"/>
+    <Parameter name="bcs_pressure_function" type="string" value="pressure_ramp"/>
+    <Parameter name="burnup_fuel_outer_radius" type="double" value="0.0045265"/>
+    <Parameter name="burnup_i_enrich" type="string" value="0.0295 0.9705 0 0 0 0"/>
+    <Parameter name="executioner_dt" type="double" value="1.0e3"/>
+    <Parameter name="executioner_end_time" type="double" value="105418113.6"/>
+    <Parameter name="executioner_num_steps" type="int" value="10000"/>
+    <Parameter name="executioner_time_dt" type="string" value="2.5e3   1.0e5   1.0e6   1000 1.0e5"/>
+    <Parameter name="executioner_time_t" type="string" value="0   1.0e5  5.0e7  104337560    104418113.6"/>
+    <Parameter name="globalparams_density" type="double" value="10303.024"/>
     <Parameter name="grain_radius" type="double" value="3.0e-6"/>
+    <Parameter name="materials_fission_gas_release_axial_power_profile" type="string" value="axial_peaking_factors"/>
+    <Parameter name="materials_fission_gas_release_file_name" type="string" value="powerhistory_RISO_AN8.csv"/>
+    <Parameter name="materials_fission_gas_release_initial_grain_radius" type="double" value="3.0e-6"/>
+    <Parameter name="materials_fission_gas_release_initial_porosity" type="double" value="0.07"/>
+    <Parameter name="materials_fuel_relocation_diameter" type="double" value="0.009053"/>
+    <Parameter name="materials_fuel_relocation_gap" type="double" value="208.0e-6"/>
+    <Parameter name="materials_fuel_thermal_initial_porosity" type="double" value="0.07"/>
+    <Parameter name="mesh_file" type="string" value="RISO_AN8.e"/>
+    <Parameter name="output_file_base" type="string" value="output_RISO_AN8_bump"/>
     <Parameter name="porosity" type="double" value="0.2"/>
+    <Parameter name="thermalcontact_roughness_clad" type="double" value="5.0e-7"/>
+    <Parameter name="thermalcontact_roughness_fuel" type="double" value="1.0e-6"/>
   </ParameterList>
 </ParameterList>
