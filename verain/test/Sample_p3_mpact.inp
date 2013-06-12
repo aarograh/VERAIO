@@ -179,6 +179,10 @@
   xs_type           HELIOS
   subgroup_set      4
 !mesh
+
+  mesh fuel 3 1 1 1 / 8
+  mesh gtube 3 1 1 / 8
+
   axial_mesh        5.0000
                     6.0500
                     5.9010

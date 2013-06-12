@@ -1188,6 +1188,12 @@ MPACT:
       - is_word()
       - in_dictionary() nem sanm none
 
+  mesh:
+    <<: *dtlistnamed
+    _slash:
+    _check:
+
+
 MAMBA2D:
   problem_name:
     <<: *dtstring

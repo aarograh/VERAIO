@@ -234,3 +234,8 @@ MPACT:
             - copy MPACT/$subgroup_set
           _content:
 
+    Pinmesh:
+      _pltype: list
+      _do:
+        - mpact_mesh Pinmesh_,MPACT/%mesh/*
+      _content:

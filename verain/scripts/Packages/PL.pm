@@ -59,7 +59,8 @@ sub dispatch {
 	echos      => \&echos,
 	rename     => \&dbcopy,
 	gridmap    => \&gridmap,
-	coremapmap => \&coremapmap
+	coremapmap => \&coremapmap,
+	mpact_mesh => \&mpact_mesh
     };
 
     if($version eq '007'){
@@ -1177,6 +1178,52 @@ sub coremapmap {
     my @a=core_map($cm_ref,$mm_ref,$csize,$bc_sym);
 
     return \@a;
+}
+
+sub mpact_mesh{
+    my ($home,$basename,@paths)=@_;
+
+    my @mats;
+    my @mats_names;
+
+    my $keyname;
+    my $mattype;
+
+    foreach my $ipath (@paths){
+	my @apaths=find_keys($SOURCE_DB,$ipath);
+	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
+	push @mats, @apaths if @apaths;
+	push @mats_names, @names if @names;
+    }
+
+    foreach my $imat_path (@mats){
+	my @keypath=@{ $imat_path };
+	$keyname=$keypath[$#keypath];
+	unless($keypath[$#keypath-2] eq 'mesh'){
+	    die "mpact_mesh: invalid mesh type: @keypath\n";
+	}
+
+	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
+
+# count slashes
+	my @slshs=indexes { $_ eq '/' } @content;
+	if(@slshs != 1){
+	    die "mpact_mesh: invalid number of slashes in MPACT command mesh @content\n";
+	}
+
+	my @part1=before {$_ eq '/'} @content;
+	my @part2=after  {$_ eq '/'} @content;
+	
+# template
+	my @nrad = @part1;
+	my @nazi = @part2;
+
+	my $mat_ref=&key_on_list($home,$basename.$keyname);
+	&key_on_parameter($mat_ref,'name','string',$keyname);
+	&key_on_array($mat_ref,'nrad','integer', @nrad);
+	&key_on_array($mat_ref,'nazi','integer', @nazi);
+
+    }
 }
 
 1;
