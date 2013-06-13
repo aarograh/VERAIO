@@ -314,3 +314,11 @@ INSILICO:
           _do:
             - copy INSILICO/$mixing_table
           _content:
+
+    Pn_correction:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy INSILICO/$Pn_correction
+      _content:
+
