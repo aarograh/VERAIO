@@ -322,3 +322,10 @@ INSILICO:
         - copy INSILICO/$Pn_correction
       _content:
 
+    pin_partitioning:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy INSILICO/$pin_partitioning
+      _content:
+
