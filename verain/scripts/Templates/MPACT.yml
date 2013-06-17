@@ -53,6 +53,12 @@ MPACT:
       _pltype: list
       _content:
   
+        pinmesh:
+          _pltype: list
+          _do:
+            - mpact_mesh pinmesh_,MPACT/%mesh/*
+          _content:
+
         axial_mesh:
           _pltype: array
           _type: double
@@ -64,32 +70,32 @@ MPACT:
       _pltype: list
       _content:
   
-        nspace:
+        num_space:
           _pltype: parameter
           _type: int
           _do:
-            - copy MPACT/$nspace
+            - copy MPACT/$num_space
           _content:
 
-        nangle:
+        num_angle:
           _pltype: parameter
           _type: int
           _do:
-            - copy MPACT/$nangle
+            - copy MPACT/$num_angle
           _content:
 
-        nenergy:
+        num_energy:
           _pltype: parameter
           _type: int
           _do:
-            - copy MPACT/$nenergy
+            - copy MPACT/$num_energy
           _content:
 
-        nthreads:
+        num_threads:
           _pltype: parameter
           _type: int
           _do:
-            - copy MPACT/$nthreads
+            - copy MPACT/$num_threads
           _content:
       
         method:
@@ -158,7 +164,7 @@ MPACT:
 
         solver:
           _pltype: parameter
-          _type: int
+          _type: string
           _do:
             - copy MPACT/$cmfd_solver
           _content:
@@ -234,8 +240,3 @@ MPACT:
             - copy MPACT/$subgroup_set
           _content:
 
-    Pinmesh:
-      _pltype: list
-      _do:
-        - mpact_mesh Pinmesh_,MPACT/%mesh/*
-      _content:

@@ -1215,13 +1215,13 @@ sub mpact_mesh{
 	my @part2=after  {$_ eq '/'} @content;
 	
 # template
-	my @nrad = @part1;
-	my @nazi = @part2;
+	my @num_rad = @part1;
+	my @num_theta = @part2;
 
 	my $mat_ref=&key_on_list($home,$basename.$keyname);
 	&key_on_parameter($mat_ref,'name','string',$keyname);
-	&key_on_array($mat_ref,'nrad','integer', @nrad);
-	&key_on_array($mat_ref,'nazi','integer', @nazi);
+	&key_on_array($mat_ref,'num_rad','integer', @num_rad);
+	&key_on_array($mat_ref,'num_theta','integer', @num_theta);
 
     }
 }

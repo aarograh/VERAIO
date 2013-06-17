@@ -1117,25 +1117,25 @@ MPACT:
       - is_int()
       - is_gt() 0
 
-  nspace:
+  num_space:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
-  nangle:
+  num_angle:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
-  nenergy:
+  num_energy:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_eq() 1
-  nthreads:
+  num_threads:
     <<: *dtint
     _content:
     _check:
