@@ -792,13 +792,13 @@
   <ParameterList name="MPACT">
     <ParameterList name="2d1d">
     </ParameterList>
-    <ParameterList name="Pinmesh">
-    </ParameterList>
     <ParameterList name="cmfd">
     </ParameterList>
     <ParameterList name="iteration_control">
     </ParameterList>
     <ParameterList name="mesh">
+      <ParameterList name="pinmesh">
+      </ParameterList>
     </ParameterList>
     <ParameterList name="parallel_env">
     </ParameterList>
