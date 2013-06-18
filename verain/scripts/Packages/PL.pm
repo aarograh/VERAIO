@@ -21,7 +21,8 @@ use Exporter;
 	 'PLkeys',
 	 'PLdelete',
 	 'PLkeyon',
-	 'rethread'
+	 'rethread',
+	 'PLtrim'
     );
 
 our $DISPATCH;
@@ -354,6 +355,37 @@ sub rethread {
 	    PLkeyon($DIR{$iparent},$clone{$ichild},$ichild);
 	}
     }
+}
+
+sub PLtrim{
+    my ($ref,$indent)=@_;
+
+    my @PLcontent = keys %{ $ref->{_content} };
+
+    print STDERR "PLtrim: @PLcontent\n" if get_verbose();
+    my $empty=0;
+
+    $indent++;
+
+    foreach $iaddr (@PLcontent){
+	my $rref = key_defined($ref,'_content',$iaddr);
+	my $typ=PLtype($rref);
+
+	if($typ eq 'parameter' || $typ eq 'array'){
+	    $empty++ if PLnotempty($rref,_content=>'_content');
+	    next;
+	}
+	if($typ eq 'list'){
+	    $empty+=&PLtrim($rref,$indent);
+	    next;
+	}
+	die "PLtrim: undefined type @PLCONTENT\n";
+    }
+    print "\t" x $indent, "PLtrim: counter $empty at @PLcontent\n" if get_verbose();
+    
+    $ref->{_content}={} unless $empty;
+
+    return $empty;
 }
 
 # dispatch functions
