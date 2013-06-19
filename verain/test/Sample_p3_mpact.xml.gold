@@ -214,6 +214,7 @@
       <Parameter name="k_tolerance" type="double" value="1e-6"/>
       <Parameter name="num_inners" type="int" value="2"/>
       <Parameter name="num_outers" type="int" value="500"/>
+      <Parameter name="scattering" type="string" value="TCP0"/>
       <Parameter name="up_scatter" type="int" value="2"/>
     </ParameterList>
     <ParameterList name="mesh">

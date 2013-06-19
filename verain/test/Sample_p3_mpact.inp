@@ -160,6 +160,7 @@
   k_tolerance       1e-6
   up_scatter        2
   num_outers        500
+  scattering        TCP0
 !cmfd
   cmfd              cmfd
   cmfd_solver       mgnode
