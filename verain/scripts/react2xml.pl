@@ -88,6 +88,7 @@ my $DEBUG=0;
 my ($VERBOSE,$HELP,$VERSION);
 my $XML='on';
 my $XSLT='on';
+my $TRIM;
 { # process options
     GetOptions(
 	"xml=s"     => \$XML,
@@ -97,6 +98,7 @@ my $XSLT='on';
 	"version"   => \$VERSION,
 	"help"      => \$HELP,
 
+	"trim"      => \$TRIM,
 	"update=s"  => \$_UPDATE
 	);
 }
@@ -196,6 +198,12 @@ foreach $iblock (@BLOCKS){
     };
 }
 
+if($TRIM){
+    my $ilevel=0;
+    foreach $iblock (@BLOCKS){
+	PLtrim($SCH_PL{$iblock}->{$iblock},$ilevel);
+    }
+}
 #
 # XML output
 #
