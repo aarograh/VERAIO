@@ -221,13 +221,13 @@
       <ParameterList name="pinmesh">
         <ParameterList name="pinmesh_fuel">
           <Parameter name="name" type="string" value="fuel"/>
-          <Parameter name="num_rad" type="Array(integer)" value="{3,1,1,1}"/>
-          <Parameter name="num_theta" type="Array(integer)" value="{8,8,8,8}"/>
+          <Parameter name="num_rad" type="Array(int)" value="{3,1,1,1}"/>
+          <Parameter name="num_theta" type="Array(int)" value="{8,8,8,8}"/>
         </ParameterList>
         <ParameterList name="pinmesh_gtube">
           <Parameter name="name" type="string" value="gtube"/>
-          <Parameter name="num_rad" type="Array(integer)" value="{3,1,1}"/>
-          <Parameter name="num_theta" type="Array(integer)" value="{8,8,8}"/>
+          <Parameter name="num_rad" type="Array(int)" value="{3,1,1}"/>
+          <Parameter name="num_theta" type="Array(int)" value="{8,8,8}"/>
         </ParameterList>
       </ParameterList>
     </ParameterList>
