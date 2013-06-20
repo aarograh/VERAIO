@@ -180,7 +180,7 @@ MPACT:
           _pltype: parameter
           _type: double
           _do:
-            - copy MPACT/$k_shift
+            - copy mpact/$k_shift
           _content:
 
         num_outers:
@@ -220,6 +220,13 @@ MPACT:
           _type: string
           _do:
             - copy MPACT/$nodal_method
+          _content:
+
+        under_relax:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy mpact/$under_relax
           _content:
 
     xs_library:
