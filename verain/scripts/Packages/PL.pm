@@ -1251,7 +1251,7 @@ sub mpact_mesh{
 	my @num_theta = @part2;
 
 	my $mat_ref=&key_on_list($home,$basename.$keyname);
-	&key_on_parameter($mat_ref,'name','string',$keyname);
+	&key_on_parameter($mat_ref,'label','string',$keyname);
 	&key_on_array($mat_ref,'num_rad','int', @num_rad);
 	&key_on_array($mat_ref,'num_theta','int', @num_theta);
 
