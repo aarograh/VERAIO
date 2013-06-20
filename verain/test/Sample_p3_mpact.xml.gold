@@ -221,12 +221,12 @@
       <Parameter name="axial_mesh" type="Array(double)" value="{5.0000,6.0500,5.9010,3.8660,8.2110,8.2110,8.2110,8.2120,8.2110,8.2110,8.2110,3.8100,8.0650,8.0650,8.0650,8.0650,8.0650,8.0650,3.8100,8.0650,8.0650,8.0650,8.0650,8.0650,8.0650,3.8100,8.0650,8.0650,8.0650,8.0650,8.0650,8.0650,3.8100,8.0650,8.0650,8.0650,8.0650,8.0650,8.0650,3.8100,8.0650,8.0650,8.0650,8.0650,8.0650,8.0650,3.8100,7.9212,7.9212,7.9212,7.9212,7.9212,8.5560,3.8660,3.5780,3.7990,8.8270,7.6000}"/>
       <ParameterList name="pinmesh">
         <ParameterList name="pinmesh_fuel">
-          <Parameter name="name" type="string" value="fuel"/>
+          <Parameter name="label" type="string" value="fuel"/>
           <Parameter name="num_rad" type="Array(int)" value="{3,1,1,1}"/>
           <Parameter name="num_theta" type="Array(int)" value="{8,8,8,8}"/>
         </ParameterList>
         <ParameterList name="pinmesh_gtube">
-          <Parameter name="name" type="string" value="gtube"/>
+          <Parameter name="label" type="string" value="gtube"/>
           <Parameter name="num_rad" type="Array(int)" value="{3,1,1}"/>
           <Parameter name="num_theta" type="Array(int)" value="{8,8,8}"/>
         </ParameterList>
