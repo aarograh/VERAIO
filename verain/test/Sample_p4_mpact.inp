@@ -192,6 +192,7 @@
   split_TL          true
   TL_treatment      lflat
   nodal_method      none
+  under_relax       0.4
 !parallel
   num_space         1
   num_angle         1
