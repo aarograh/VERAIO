@@ -176,13 +176,13 @@
   num_energy        1
   num_threads       8
 !xs_library
-  xs_filename       hy047n18g110u.dat
-  xs_type           HELIOS
+  xs_filename       declib64g01_e7.fmt
+  xs_type           ORNL
   subgroup_set      4
 !mesh
 
-  mesh fuel 3 1 1 1 / 8 8 8 8
-  mesh gtube 3 1 1 / 8 8 8
+  mesh fuel  3 1 1 / 8 8 8 8 8 8
+  mesh gtube 3 1   / 8 8 8 8 8
 
   axial_mesh        5.0000
                     6.0500

@@ -214,13 +214,13 @@
       <ParameterList name="pinmesh">
         <ParameterList name="pinmesh_fuel">
           <Parameter name="label" type="string" value="fuel"/>
-          <Parameter name="num_rad" type="Array(int)" value="{3,1,1,1}"/>
-          <Parameter name="num_theta" type="Array(int)" value="{8,8,8,8}"/>
+          <Parameter name="num_rad" type="Array(int)" value="{3,1,1}"/>
+          <Parameter name="num_theta" type="Array(int)" value="{8,8,8,8,8,8}"/>
         </ParameterList>
         <ParameterList name="pinmesh_gtube">
           <Parameter name="label" type="string" value="gtube"/>
-          <Parameter name="num_rad" type="Array(int)" value="{3,1,1}"/>
-          <Parameter name="num_theta" type="Array(int)" value="{8,8,8}"/>
+          <Parameter name="num_rad" type="Array(int)" value="{3,1}"/>
+          <Parameter name="num_theta" type="Array(int)" value="{8,8,8,8,8}"/>
         </ParameterList>
       </ParameterList>
     </ParameterList>
@@ -239,8 +239,8 @@
     <Parameter name="vis_edits" type="string" value="core"/>
     <ParameterList name="xs_library">
       <Parameter name="subgroup_set" type="int" value="4"/>
-      <Parameter name="xs_filename" type="string" value="hy047n18g110u.dat"/>
-      <Parameter name="xs_type" type="string" value="HELIOS"/>
+      <Parameter name="xs_filename" type="string" value="declib64g01_e7.fmt"/>
+      <Parameter name="xs_type" type="string" value="ORNL"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="MAMBA2D">
