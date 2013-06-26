@@ -281,6 +281,7 @@
       <Parameter name="TL_treatment" type="string" value="lflat"/>
       <Parameter name="nodal_method" type="string" value="none"/>
       <Parameter name="split_TL" type="bool" value="true"/>
+      <Parameter name="under_relax" type="double" value="0.4"/>
     </ParameterList>
     <ParameterList name="cmfd">
       <Parameter name="cmfd" type="string" value="cmfd"/>

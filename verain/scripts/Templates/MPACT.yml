@@ -222,6 +222,13 @@ MPACT:
             - copy MPACT/$nodal_method
           _content:
 
+        under_relax:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$under_relax
+          _content:
+
     xs_library:
       _pltype: list
       _content:

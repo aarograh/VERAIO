@@ -1207,6 +1207,13 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() nem sanm none
+  under_relax:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+      - is_lt() 1.0
 
   mesh:
     <<: *dtlistnamed
