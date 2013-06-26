@@ -384,14 +384,6 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="INSILICO">
-    <ParameterList name="eigenvalue_db">
-    </ParameterList>
-    <ParameterList name="quadrature_db">
-    </ParameterList>
-    <ParameterList name="silo_db">
-    </ParameterList>
-    <ParameterList name="upscatter_db">
-    </ParameterList>
   </ParameterList>
   <ParameterList name="EDITS">
     <Parameter name="axial_edit_bounds" type="Array(double)" value="{0,365.24}"/>
@@ -401,22 +393,6 @@
   <ParameterList name="COUPLING">
   </ParameterList>
   <ParameterList name="MPACT">
-    <ParameterList name="2d1d">
-    </ParameterList>
-    <ParameterList name="cmfd">
-    </ParameterList>
-    <ParameterList name="iteration_control">
-    </ParameterList>
-    <ParameterList name="mesh">
-      <ParameterList name="pinmesh">
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="parallel_env">
-    </ParameterList>
-    <ParameterList name="quad_set">
-    </ParameterList>
-    <ParameterList name="xs_library">
-    </ParameterList>
   </ParameterList>
   <ParameterList name="MAMBA2D">
   </ParameterList>

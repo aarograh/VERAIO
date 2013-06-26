@@ -182,14 +182,6 @@
   <ParameterList name="INSERTS">
   </ParameterList>
   <ParameterList name="INSILICO">
-    <ParameterList name="eigenvalue_db">
-    </ParameterList>
-    <ParameterList name="quadrature_db">
-    </ParameterList>
-    <ParameterList name="silo_db">
-    </ParameterList>
-    <ParameterList name="upscatter_db">
-    </ParameterList>
   </ParameterList>
   <ParameterList name="EDITS">
   </ParameterList>

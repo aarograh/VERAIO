@@ -269,22 +269,6 @@
     <Parameter name="rlx_tfuel" type="double" value="0.3"/>
   </ParameterList>
   <ParameterList name="MPACT">
-    <ParameterList name="2d1d">
-    </ParameterList>
-    <ParameterList name="cmfd">
-    </ParameterList>
-    <ParameterList name="iteration_control">
-    </ParameterList>
-    <ParameterList name="mesh">
-      <ParameterList name="pinmesh">
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="parallel_env">
-    </ParameterList>
-    <ParameterList name="quad_set">
-    </ParameterList>
-    <ParameterList name="xs_library">
-    </ParameterList>
   </ParameterList>
   <ParameterList name="MAMBA2D">
   </ParameterList>

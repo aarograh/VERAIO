@@ -88,7 +88,7 @@ my $DEBUG=0;
 my ($VERBOSE,$HELP,$VERSION);
 my $XML='on';
 my $XSLT='on';
-my $TRIM;
+my $NOTRIM;
 { # process options
     GetOptions(
 	"xml=s"     => \$XML,
@@ -98,7 +98,7 @@ my $TRIM;
 	"version"   => \$VERSION,
 	"help"      => \$HELP,
 
-	"trim"      => \$TRIM
+	"notrim"    => \$NOTRIM
 #	"update=s"  => \$_UPDATE
 	);
 }
@@ -201,7 +201,7 @@ foreach $iblock (@BLOCKS){
     };
 }
 
-if($TRIM){
+unless($NOTRIM){
     my $ilevel=0;
     foreach $iblock (@BLOCKS){
 	PLtrim($SCH_PL{$iblock}->{$iblock},$ilevel);
