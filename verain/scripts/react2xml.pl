@@ -83,7 +83,7 @@ my $XML_HEADER='<?xml version="1.0" encoding="UTF-8"?>';
 #
 # Process the command line
 #
-my $_UPDATE='007';
+# my $_UPDATE='007';
 my $DEBUG=0;
 my ($VERBOSE,$HELP,$VERSION);
 my $XML='on';
@@ -98,8 +98,8 @@ my $TRIM;
 	"version"   => \$VERSION,
 	"help"      => \$HELP,
 
-	"trim"      => \$TRIM,
-	"update=s"  => \$_UPDATE
+	"trim"      => \$TRIM
+#	"update=s"  => \$_UPDATE
 	);
 }
 (&help_print() && exit) if $HELP;;
@@ -111,9 +111,9 @@ if($VERSION){
 #
 # hidden update
 #
-if($_UPDATE eq '007'){
-    $SCHEMA_PL{ASSEMBLIES} = "${directory}Templates/ASSEMBLIES007.yml";
-}
+# if($_UPDATE eq '007'){
+#    $SCHEMA_PL{ASSEMBLIES} = "${directory}Templates/ASSEMBLIES007.yml";
+#}
 
 # For formatted display in a browser.
 my $XSLT_FILE='PL9.xsl';
@@ -179,6 +179,9 @@ YAML::DumpFile("$ifile.dbg.yml",$MAIN_DB) if $DEBUG;
 # just a placeholder for multiple blocks
 PL->set_sourcedb($MAIN_DB);
 PL->dispatch($_UPDATE);
+# PL->dispatch($_UPDATE);
+PL->dispatch();
+
 $YAML::UseAliases=0;    # minimize references
 foreach $iblock (@BLOCKS){
 

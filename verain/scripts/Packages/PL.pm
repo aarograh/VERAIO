@@ -53,8 +53,8 @@ sub dispatch {
 	copyarray  => \&copyarray,
 	copyhash   => \&copyhash,
 	setdb      => \&setdb,
-	matmap     => \&matmap2,
-	fuelmap    => \&fuelmap,
+	matmap     => \&matmap007,
+	fuelmap    => \&fuelmap007,
 	rodmap     => \&rodmap,
 	makemap    => \&makemap,
 	echos      => \&echos,
@@ -64,10 +64,10 @@ sub dispatch {
 	mpact_mesh => \&mpact_mesh
     };
 
-    if($version eq '007'){
-	$DISPATCH->{matmap}  = \&matmap007;
-	$DISPATCH->{fuelmap} = \&fuelmap007;
-    }
+#    if($version eq '007'){
+#	$DISPATCH->{matmap}  = \&matmap007;
+#	$DISPATCH->{fuelmap} = \&fuelmap007;
+#    }
 }
 
 sub PLdoarg{

@@ -8,7 +8,11 @@ ASSEMBLIES:
       _pltype: list
       _do:
         - matmap Material_,ASSEMBLY/%mat/*
-        - fuelmap Material_,ASSEMBLY/%fuel/*
+      _content:
+    Fuels:
+      _pltype: list
+      _do:
+        - fuelmap Fuel_,ASSEMBLY/%fuel/*
       _content:
     title:
       _pltype: parameter
