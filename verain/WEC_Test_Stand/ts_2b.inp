@@ -1,0 +1,135 @@
+[CASEID]
+  title 'CASL WEC Test Stand - Tungsten - Public'
+
+[STATE]
+  power 0.0                             ! %
+  tinlet 620.33                         ! F - 600K
+  tfuel 600                             ! K
+  modden 0.743                          ! g/cc
+  boron 1300                            ! ppm
+  rodbank A 0                           ! rod fully inserted 
+  sym qtr  
+
+[CORE]
+  size 1
+  apitch 21.50 
+  height 1.0
+  rated 0.01 0.01
+
+  core_shape
+    1
+
+  assm_map
+    ASSY
+
+  crd_map
+    1   
+ 
+  crd_bank
+    A
+
+  bc_rad reflecting
+  bc_top reflecting
+  bc_bot reflecting
+  
+[ASSEMBLY]
+  npin 17
+  ppitch 1.26
+  
+  fuel U31 10.257 94.5 / 3.1
+  mat he 0.000176
+  mat zirc 6.56 zirc4
+
+  cell 1 0.4096 0.418 0.475 / U31 he zirc
+  cell 2        0.561 0.602 / mod zirc
+
+  lattice LAT
+    2
+    1 1
+    1 1 1
+    2 1 1 2
+    1 1 1 1 1
+    1 1 1 1 1 2
+    2 1 1 2 1 1 1
+    1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1
+
+  axial ASSY 0.0 LAT 1.0 
+
+[CONTROL]
+  title "Tungsten Gray Rods"
+  npin 17
+  stroke  1.0 1           ! 1 step for in/out
+
+  mat ss     8.0
+  mat inc    8.19
+  mat tg    19.3 tungsten
+
+  cell 1  0.254 0.406 0.483 / tg inc ss
+
+  rodmap LAT_TG 
+     -
+     - -
+     - - -
+     1 - - 1
+     - - - - -
+     - - - - - 1
+     1 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  axial 1 0.0 LAT_TG 1.0
+
+[EDITS]
+     
+[INSILICO]
+  cell_homogenize true
+  silo_output 'p2' 
+  dimension 3
+
+  eq_set spn_fv
+  SPN_order 3
+  Pn_order 1
+  tolerance 1e-6
+  Pn_correction true
+  
+  mesh 2 
+  num_groups 23
+  
+  num_blocks_i 4 
+  num_blocks_j 4  
+  num_sets 1
+
+  max_delta_z 1.0
+  
+  quad_type qr
+  azimuthals_octant 4
+  polars_octant 4
+  
+  mat_library casl_comp_r2.sh5  
+  xs_library lib252_hetbondoneabs-noabssigp
+  
+  new_grp_bounds
+    8.2085e+05
+    1.1109e+05
+    5.5308e+03
+    1.8644e+02
+    3.7612e+01
+    3.5379e+01
+    2.7697e+01
+    2.1684e+01
+    2.0397e+01
+    1.5968e+01
+    7.1500e+00
+    6.7000e+00
+    6.3000e+00
+    1.0970e+00
+    1.0450e+00
+    9.5000e-01
+    3.5000e-01
+    2.0600e-01
+    1.0700e-01
+    5.8000e-02
+    2.5000e-02
+    1.0000e-02
+    1.0000e-05
