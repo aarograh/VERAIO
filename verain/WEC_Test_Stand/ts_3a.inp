@@ -1,0 +1,95 @@
+[CASEID]
+  title 'CASL Test Stand - Custom Enrichment- Public'
+
+[STATE]
+  power 0.0              !
+  tinlet 557.33          ! F - 565K
+  tfuel 565              ! K
+  modden 0.743           ! g/cc
+  boron 1300             ! ppm
+  sym full               ! full symmetry
+
+[CORE]
+  size 1
+  apitch 1.26  
+  rated 0.01 0.01
+  height 1.0
+
+  core_shape
+    1
+
+  assm_map
+    ASSY1
+
+  bc_rad reflecting
+  bc_top reflecting
+  bc_bot reflecting
+  
+[ASSEMBLY]
+  title "pin cell"
+  npin 1
+  ppitch 1.26
+  
+  fuel U31 10.257 94.5 / u-235=20.0 u-234=0.0 u-236=0.0
+  mat he 0.000176
+  mat zirc 6.56 zirc4
+
+  cell PIN1 0.4096 0.418 0.475 / U31 he zirc
+
+  lattice LAT1
+     PIN1
+
+  axial ASSY1 0.0 LAT1 1.0 
+
+[EDITS]
+     
+[INSILICO]
+  silo_output 'p1' 
+  dimension 3
+
+  cell_homogenize true
+  Pn_correction true
+  eq_set spn_fv
+  SPN_order 3
+  Pn_order 1
+  tolerance 1e-6
+  
+  mesh 2  
+  num_groups 23 
+  max_delta_z 1.0
+  
+  num_blocks_i 1 
+  num_blocks_j 1  
+  num_sets 1 
+  
+  quad_type qr
+  azimuthals_octant 4
+  polars_octant 4
+  
+  mat_library casl_comp_r2.sh5  
+  xs_library lib252_hetbondoneabs-noabssigp
+
+  new_grp_bounds
+    8.2085e+05
+    1.1109e+05
+    5.5308e+03
+    1.8644e+02
+    3.7612e+01
+    3.5379e+01
+    2.7697e+01
+    2.1684e+01
+    2.0397e+01
+    1.5968e+01
+    7.1500e+00
+    6.7000e+00
+    6.3000e+00
+    1.0970e+00
+    1.0450e+00
+    9.5000e-01
+    3.5000e-01
+    2.0600e-01
+    1.0700e-01
+    5.8000e-02
+    2.5000e-02
+    1.0000e-02
+    1.0000e-05
