@@ -244,6 +244,7 @@
   maps_filename = 3x3_HFP
 
 [PEREGRINE]
+  nfuelrod     8          ! number of fuel rods in problem
   porosity     0.2
   grain_radius 3.0e-6
   globalparams_density 10303.024

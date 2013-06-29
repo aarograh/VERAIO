@@ -1548,3 +1548,9 @@ PEREGRINE:
     _content:
     _check:
       - is_string()
+  nfuelrod:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0

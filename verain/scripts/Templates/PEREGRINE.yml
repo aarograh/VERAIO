@@ -199,3 +199,11 @@ PEREGRINE:
       _do:
         - copy PEREGRINE/$output_file_base
       _content:
+
+    nfuelrod:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy PEREGRINE/$nfuelrod
+      _content:
+

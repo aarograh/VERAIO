@@ -297,6 +297,7 @@
     <Parameter name="materials_fuel_relocation_gap" type="double" value="208.0e-6"/>
     <Parameter name="materials_fuel_thermal_initial_porosity" type="double" value="0.07"/>
     <Parameter name="mesh_file" type="string" value="RISO_AN8.e"/>
+    <Parameter name="nfuelrod" type="int" value="8"/>
     <Parameter name="output_file_base" type="string" value="output_RISO_AN8_bump"/>
     <Parameter name="porosity" type="double" value="0.2"/>
     <Parameter name="thermalcontact_roughness_clad" type="double" value="5.0e-7"/>
