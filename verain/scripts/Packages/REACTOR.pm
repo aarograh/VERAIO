@@ -448,7 +448,7 @@ sub fullcellmap {
 	    @b=@a;
 	}
 	else{
-	    die "fullcellmap: invalid map size ($fullsize) for map dimension (odd, $npin) [@a]\n";
+	    die "fullcellmap: invalid map size ($fullsize) for map dimension (odd, $npin) [@a] $#a\n";
 	}
 #    }
 #    else{
@@ -523,14 +523,17 @@ sub extract_map{
     die "extract_map: indices not valid $n, $m, $na\n"
 	if ($n <= 0 || 
 	    $m <= 0 || 
-	    ($n*$m > $na) ||
-	    !($n % 2) ||
-	    !($m % 2)
+	    ($n*$m > $na)
+# ||
+#	    !($n % 2) ||
+#	    !($m % 2)
 	);
 
     my $nhalf=int($n/2);
     my $mhalf=int($m/2);
     my $icenter= $nhalf * $m + $mhalf;  # central location
+
+    $icenter += ($n%2) ? 0 : 1;
 
     my @result = ();
     if($maptype eq 'OCTANT'){
