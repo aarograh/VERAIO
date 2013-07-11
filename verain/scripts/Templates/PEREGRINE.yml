@@ -4,60 +4,25 @@ PEREGRINE:
     - setdb MAIN_DB
   _content:
 
-    porosity:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$porosity
-      _content:
-
-    grain_radius:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$grain_radius
-      _content:
-
-    globalparams_density:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$globalparams_density
-      _content:
-
-    mesh_file:
+    auxkernels_fast_neutron_flux_rod_ave_lin_pow:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$mesh_file
+        - copy PEREGRINE/$auxkernels_fast_neutron_flux_rod_ave_lin_pow
       _content:
 
-    auxvariables_porosity_initial_condition:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$auxvariables_porosity_initial_condition
-      _content:
-
-    auxvariables_grain_radius_initial_condition:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$auxvariables_grain_radius_initial_condition
-      _content:
-
-    burnup_fuel_outer_radius:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$burnup_fuel_outer_radius
-      _content:
-
-    burnup_i_enrich:
+    auxkernels_fast_neutron_flux_axial_power_profile:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$burnup_i_enrich
+        - copy PEREGRINE/$auxkernels_fast_neutron_flux_axial_power_profile
+      _content:
+
+    auxkernels_fast_neutron_flux_factor:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$auxkernels_fast_neutron_flux_factor
       _content:
 
     auxkernels_pelletid_a_lower:
@@ -74,102 +39,123 @@ PEREGRINE:
         - copy PEREGRINE/$auxkernels_pelletid_a_upper
       _content:
 
-    auxkernels_fast_neutron_flux_factor:
+    auxvariables_grain_radius_initial_condition:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$auxkernels_fast_neutron_flux_factor
+        - copy PEREGRINE/$auxvariables_grain_radius_initial_condition
       _content:
 
-    thermalcontact_roughness_fuel:
+    auxvariables_porosity_initial_condition:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$thermalcontact_roughness_fuel
+        - copy PEREGRINE/$auxvariables_porosity_initial_condition
       _content:
 
-    thermalcontact_roughness_clad:
+    bcs_plenumpressure_plenumpressure_initial_pressure:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$thermalcontact_roughness_clad
+        - copy PEREGRINE/$bcs_plenumpressure_plenumpressure_initial_pressure
       _content:
 
-    bcs_pressure_function:
+    bcs_plenumpressure_plenumpressure_startup_time:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$bcs_plenumpressure_plenumpressure_startup_time
+      _content:
+
+    bcs_pressure_coolantpressue_factor:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$bcs_pressure_coolantpressue_factor
+      _content:
+
+    bcs_pressure_coolantpressue_function:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$bcs_pressure_function
+        - copy PEREGRINE/$bcs_pressure_coolantpressue_function
       _content:
 
-    bcs_plenumpressure_initial_pressure:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$bcs_plenumpressure_initial_pressure
-      _content:
-
-    materials_fuel_thermal_initial_porosity:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$materials_fuel_thermal_initial_porosity
-      _content:
-
-    materials_fuel_relocation_diameter:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$materials_fuel_relocation_diameter
-      _content:
-
-    materials_fuel_relocation_gap:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$materials_fuel_relocation_gap
-      _content:
-
-    materials_fission_gas_release_initial_grain_radius:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$materials_fission_gas_release_initial_grain_radius
-      _content:
-
-    materials_fission_gas_release_initial_porosity:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$materials_fission_gas_release_initial_porosity
-      _content:
-
-    materials_fission_gas_release_axial_power_profile:
+    burnup_burnup_rod_ave_lin_pow:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$materials_fission_gas_release_axial_power_profile
+        - copy PEREGRINE/$burnup_burnup_rod_ave_lin_pow
       _content:
 
-    materials_fission_gas_release_file_name:
+    burnup_burnup_axial_power_profile:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$materials_fission_gas_release_file_name
+        - copy PEREGRINE/$burnup_burnup_axial_power_profile
       _content:
 
-    executioner_time_t:
+    burnup_burnup_fuel_outer_radius:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$burnup_burnup_fuel_outer_radius
+      _content:
+
+    burnup_burnup_i_enrich:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$executioner_time_t
+        - copy PEREGRINE/$burnup_burnup_i_enrich
       _content:
 
-    executioner_time_dt:
+    coolantchannel_convective_clad_surface_inlet_temperature:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$coolantchannel_convective_clad_surface_inlet_temperature
+      _content:
+
+    coolantchannel_convective_clad_surface_inlet_pressure:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$coolantchannel_convective_clad_surface_inlet_pressure
+      _content:
+
+    coolantchannel_convective_clad_surface_inlet_massflux:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$coolantchannel_convective_clad_surface_inlet_massflux
+      _content:
+
+    coolantchannel_convective_clad_surface_rod_diameter:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$coolantchannel_convective_clad_surface_rod_diameter
+      _content:
+
+    coolantchannel_convective_clad_surface_rod_pitch:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$coolantchannel_convective_clad_surface_rod_pitch
+      _content:
+
+    coolantchannel_convective_clad_surface_linear_heat_rate:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$executioner_time_dt
+        - copy PEREGRINE/$coolantchannel_convective_clad_surface_linear_heat_rate
+      _content:
+
+    coolantchannel_convective_clad_surface_axial_power_profile:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$coolantchannel_convective_clad_surface_axial_power_profile
       _content:
 
     executioner_dt:
@@ -193,11 +179,186 @@ PEREGRINE:
         - copy PEREGRINE/$executioner_num_steps
       _content:
 
-    output_file_base:
+    executioner_timestepper_time_dt:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$output_file_base
+        - copy PEREGRINE/$executioner_timestepper_time_dt
+      _content:
+
+    executioner_timestepper_time_t:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$executioner_timestepper_time_t
+      _content:
+
+    globalparams_a_lower:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$globalparams_a_lower
+      _content:
+
+    globalparams_a_upper:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$globalparams_a_upper
+      _content:
+
+    globalparams_density:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$globalparams_density
+      _content:
+
+    globalparams_energy_per_fission:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$globalparams_energy_per_fission
+      _content:
+
+    materials_clad_density_density:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_clad_density_density
+      _content:
+
+    materials_clad_solid_mechanics_cold_work_factor:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_clad_solid_mechanics_cold_work_factor
+      _content:
+
+    materials_clad_solid_mechanics_oxygen_concentration:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_clad_solid_mechanics_oxygen_concentration
+      _content:
+
+    materials_fission_gas_release_axial_power_profile:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$materials_fission_gas_release_axial_power_profile
+      _content:
+
+    materials_fission_gas_release_file_name:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$materials_fission_gas_release_file_name
+      _content:
+
+    materials_fission_gas_release_grain_radius:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_fission_gas_release_grain_radius
+      _content:
+
+    materials_fission_gas_release_initial_grain_radius:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_fission_gas_release_initial_grain_radius
+      _content:
+
+    materials_fission_gas_release_initial_porosity:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_fission_gas_release_initial_porosity
+      _content:
+
+    materials_fuel_mech_grain_radius:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_fuel_mech_grain_radius
+      _content:
+
+    materials_fuel_relocation_diameter:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_fuel_relocation_diameter
+      _content:
+
+    materials_fuel_relocation_gap:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_fuel_relocation_gap
+      _content:
+
+    materials_fuel_relocation_q:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$materials_fuel_relocation_q
+      _content:
+
+    materials_fuel_thermal_initial_porosity:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$materials_fuel_thermal_initial_porosity
+      _content:
+
+    mesh_pellet_outer_radius:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$mesh_pellet_outer_radius
+      _content:
+
+    mesh_pellet_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$mesh_pellet_height
+      _content:
+
+    mesh_clad_gap_width:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$mesh_clad_gap_width
+      _content:
+
+    mesh_clad_bot_gap_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$mesh_clad_bot_gap_height
+      _content:
+
+    mesh_clad_thickness:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$mesh_clad_thickness
+      _content:
+
+    mesh_top_bot_clad_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$mesh_top_bot_clad_height
+      _content:
+
+    mesh_plenum_fuel_ratio:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$mesh_plenum_fuel_ratio
       _content:
 
     nfuelrod:
@@ -205,5 +366,47 @@ PEREGRINE:
       _type: int
       _do:
         - copy PEREGRINE/$nfuelrod
+      _content:
+
+    output_file_base:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$output_file_base
+      _content:
+
+    postprocessors_rod_input_power_scale_factor:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$postprocessors_rod_input_power_scale_factor
+      _content:
+
+    porosity:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$porosity
+      _content:
+
+    thermalcontact_initial_gas_fractions:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$thermalcontact_initial_gas_fractions
+      _content:
+
+    thermalcontact_roughness_clad:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$thermalcontact_roughness_clad
+      _content:
+
+    thermalcontact_roughness_fuel:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy PEREGRINE/$thermalcontact_roughness_fuel
       _content:
 
