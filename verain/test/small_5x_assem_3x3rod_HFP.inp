@@ -1,0 +1,255 @@
+[CASEID]
+  title 'CASL Problem 3x3 HFP'
+!================================================================================
+!  Sample input for small 3x3 Problem
+!
+!  Added 3/25/2013 in order to test multi-assembly capabilities of COBRA
+!
+!  To process:
+!     ./react2xml.pl [file].inp [file].xml
+!
+!================================================================================
+
+[STATE]
+  power  100.0         ! %
+  tinlet 559.0         ! F
+  boron  1300          ! ppmB
+  pressure 2250        ! psia
+
+  tfuel  900.0         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
+  modden 0.743         ! g/cc      Not used with T/H feedback!
+
+  feedback on
+  sym full
+
+[CORE]
+  size 3                ! 3x3 cross - 5 assemblies
+!  rated 0.53545 0.02125 ! MW, Mlbs/hr  *** For 1 active fuel pin in bundle
+!  rated 1.07090 0.04250 ! MW, Mlbs/hr  *** For 2 active fuel pins in bundle
+!  rated 1.60635 0.06375 ! MW, Mlbs/hr  *** For 3 active fuel pins in bundle
+!  rated 2.1418  0.08500 ! MW, Mlbs/hr  *** For 4 active fuel pins in bundle
+  rated 2.67725  0.10625 ! MW, Mlbs/hr  *** For 5 active fuel pins in bundle
+!  rated 4.28360  0.17000 ! MW, Mlbs/hr  *** For 8 active fuel pins in bundle
+!  rated 4.81905  0.19125 ! MW, Mlbs/hr  *** For 9 active fuel pins in bundle
+  apitch 3.78           ! *** scaled to 3x3, no gap
+  height 406.328
+
+  core_shape
+    1 0 1
+    0 1 0
+    1 0 1
+
+  assm_map
+   A1    A1
+      A1 
+   A1    A1
+
+  lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
+  upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
+  lower_ref   mod 26.0 1.0
+  upper_ref   mod 25.0 1.0
+
+  bc_rad reflecting
+
+  mat he     0.000176
+  mat inc    8.19
+  mat ss     8.0
+  mat zirc   6.56
+  mat aic   10.20
+  mat pyrex  2.23
+  mat b4c    6.56
+
+[ASSEMBLY]
+  title "Westinghouse 17x17"
+  npin 3    ! *** scaled to 3x3
+  ppitch 1.260
+
+  fuel U31 10.257 95.0 / 3.1
+
+!=== material label, key_name, density (lib_name defaults to key_name)
+  mat he   0.000176
+  mat inc  8.19
+  mat ss   8.0
+  mat zirc 6.56
+
+  cell 1     0.4096 0.418 0.475 / U31 he zirc
+  cell 100          0.561 0.602 / mod    zirc       ! guide tube
+  cell 200          0.561 0.602 / mod    zirc       ! instrument tube
+  cell 7            0.418 0.475 / mod    mod        ! empty location
+  cell 8            0.418 0.475 /     he zirc       ! plenum
+  cell 9                  0.475 /        zirc       ! pincap
+
+  lattice FUEL1
+     200
+       1 1
+
+  lattice LGAP1
+     200
+       7 7
+
+  lattice PLEN1
+     200
+       8 8
+
+  lattice PCAP1
+     200
+       9 9
+
+  axial A1    6.050
+      LGAP1  10.281
+      PCAP1  11.951
+      FUEL1 377.711
+      PLEN1 393.711
+      PCAP1 395.381
+      LGAP1 397.501
+
+  grid END inc  31.67 3.866  ! *** mass scaled to 3x3
+  grid MID zirc 27.25 3.810  ! *** mass scaled to 3x3
+
+  grid_axial
+      END  13.884
+      MID  75.2
+      MID 127.4
+      MID 179.6
+      MID 231.8
+      MID 284.0
+      MID 336.2
+      END 388.2
+
+  lower_nozzle  ss 6.05  194.64  ! mat, height, mass (g)  *** mass scaled to 3x3
+  upper_nozzle  ss 8.827 194.64  ! mat, height, mass (g)  *** mass scaled to 3x3
+
+[EDITS]
+
+!  3in intervals in active fuel
+  axial_edit_bounds
+          11.951
+          15.817
+          24.028
+          32.239
+          40.45
+          48.662
+          56.873
+          65.084
+          73.295
+          77.105
+          85.17
+          93.235
+          101.3
+          109.365
+          117.43
+          125.495
+          129.305
+          137.37
+          145.435
+          153.5
+          161.565
+          169.63
+          177.695
+          181.505
+          189.57
+          197.635
+          205.7
+          213.765
+          221.83
+          229.895
+          233.705
+          241.77
+          249.835
+          257.9
+          265.965
+          274.03
+          282.095
+          285.905
+          293.97
+          302.035
+          310.1
+          318.165
+          326.23
+          334.295
+          338.105
+          346.0262
+          353.9474
+          361.8686
+          369.7898
+          377.711
+
+[INSILICO]
+    mat_library casl_comp.sh5
+    xs_library  lib252_hetbondoneabs-noabssigp
+
+    max_delta_z   2.54
+    num_blocks_i  3
+    num_blocks_j  3
+    num_z_blocks  12
+    num_groups    23
+    num_sets      8
+
+    mesh          4
+    dimension     3
+    eq_set        sc
+    eigen_solver  arnoldi
+    tolerance     1e-4
+    Pn_order      0
+
+!   eigenvalue_db:
+       k_tolerance   1e-4
+       L2_tolerance  1e-3
+       energy_dep_ev true
+
+!   quadrature_db:
+       quad_type          qr
+       azimuthals_octant  4
+       polars_octant      4
+
+!   silo_db:
+       silo_output  p6
+!      silo_out_power true
+
+!   upscatter_db:
+       upscatter_tolerance  1e-4
+
+    new_grp_bounds
+       8.2085e+05
+       1.1109e+05
+       5.5308e+03
+       1.8644e+02
+       3.7612e+01
+       3.5379e+01
+       2.7697e+01
+       2.1684e+01
+       2.0397e+01
+       1.5968e+01
+       7.1500e+00
+       6.7000e+00
+       6.3000e+00
+       1.0970e+00
+       1.0450e+00
+       9.5000e-01
+       3.5000e-01
+       2.0600e-01
+       1.0700e-01
+       5.8000e-02
+       2.5000e-02
+       1.0000e-02
+       1.0000e-05
+
+[COBRATF]
+  nfuel   3             ! number of fuel rings in conduction model
+  nc      1             ! conduction option - radial conduction
+  irfc    2             ! friction factor correlation default=2
+  dhfrac  0.02          ! fraction of power deposited directly into coolant
+  hgap    5678.3        ! gap conductance
+  epso    0.001
+  oitmax  5
+  iitmax  40
+  gridloss END 0.9070   ! spacer grid loss coefficient
+  gridloss MID 0.9065   ! spacer grid loss coefficient
+  dtmin   0.000001
+  dtmax   0.1
+  tend    0.1
+  rtwfp   1000.0
+  maxits  10000
+  courant 0.8
+
+
