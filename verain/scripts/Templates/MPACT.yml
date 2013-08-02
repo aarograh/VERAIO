@@ -201,14 +201,14 @@ MPACT:
       _pltype: list
       _content:
   
-        split_TL:
+        splitTL:
           _pltype: parameter
           _type: bool
           _do:
             - copy MPACT/$split_TL
           _content:
 
-        TL_treatment:
+        TLtreatment:
           _pltype: parameter
           _type: string
           _do:
