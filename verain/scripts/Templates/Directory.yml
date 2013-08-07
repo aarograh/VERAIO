@@ -944,7 +944,7 @@ COBRATF:
       - is_gt() 0
 
   maxits:
-    <<: *dtdouble
+    <<: *dtint
     _content:
     _check:
       - is_int()
@@ -962,6 +962,39 @@ COBRATF:
     _content:
     _check:
       - is_string()
+
+  heated_elements_type:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
+  heater_tube_id:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  heater_tube_od:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  heater_tube_pitch:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  solver:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
 
 COUPLING:
 

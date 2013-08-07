@@ -121,3 +121,38 @@ COBRATF:
       _do:
         - copy COBRATF/$maps_filename
       _content:
+
+    heated_elements_type:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$heated_elements_type
+      _content:
+
+    heater_tube_id:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$heater_tube_id
+      _content:
+
+    heater_tube_od:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$heater_tube_od
+      _content:
+
+    heater_tube_pitch:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$heater_tube_pitch
+      _content:
+
+    solver:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$solver
+      _content:
