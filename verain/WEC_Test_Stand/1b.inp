@@ -2,16 +2,16 @@
   title 'CASL AMA Benchmark Problem 1B - Pin Cell- Public'
 
 [STATE]
-  power 0.0              !
-  tinlet 620.33          ! F
-  tfuel 600              ! K
-  modden 0.661           ! g/cc
-  boron 1300             ! ppm
-  sym full               ! full symmetry
+  power 0.0		 !
+  tinlet 620.33		 ! F
+  tfuel 600		 ! K
+  modden 0.661		 ! g/cc
+  boron 1300		 ! ppm
+  sym full		 ! full symmetry
 
 [CORE]
   size 1
-  apitch 1.26  
+  apitch 1.26
   rated 0.01 0.01
   height 1.0
 
@@ -24,12 +24,12 @@
   bc_rad reflecting
   bc_top reflecting
   bc_bot reflecting
-  
+
 [ASSEMBLY]
   title "pin cell"
   npin 1
   ppitch 1.26
-  
+
   fuel U31 10.257 94.5 / 3.1
   mat he 0.000176
   mat zirc 6.56 zirc4
@@ -39,12 +39,12 @@
   lattice LAT1
      PIN1
 
-  axial ASSY1 0.0 LAT1 1.0 
+  axial ASSY1 0.0 LAT1 1.0
 
 [EDITS]
-     
+
 [INSILICO]
-  silo_output 'p1' 
+  silo_output 'p1'
   dimension 3
 
   cell_homogenize true
@@ -53,20 +53,20 @@
   Pn_order 1
   tolerance 1e-6
   Pn_correction true
-  
-  mesh 2  
-  num_groups 23 
+
+  mesh 2
+  num_groups 23
   max_delta_z 1.0
-  
-  num_blocks_i 1 
-  num_blocks_j 1  
-  num_sets 1 
-  
+
+  num_blocks_i 1
+  num_blocks_j 1
+  num_sets 1
+
   quad_type qr
   azimuthals_octant 4
   polars_octant 4
-  
-  mat_library casl_comp_r2.sh5  
+
+  mat_library casl_comp_r2.sh5
   xs_library lib252_hetbondoneabs-noabssigp
 
   new_grp_bounds
@@ -93,3 +93,37 @@
     2.5000e-02
     1.0000e-02
     1.0000e-05
+
+[MPACT]
+  vis_edits	    core
+  ray_spacing	    0.05
+!quad_set
+  quad_type	    CHEBYSHEV-YAMAMOTO
+  polars_octant	    2
+  azimuthals_octant 16
+!iteration_control
+  flux_tolerance    1e-6
+  num_inners	    2
+  k_tolerance	    1e-6
+  up_scatter	    2
+  num_outers	    500
+!cmfd
+  cmfd		    cmfd
+  cmfd_solver	    mgnode
+  k_shift	    1.5
+  cmfd_num_outers   20
+!parallel
+  num_space	    1
+  num_angle	    8
+  num_energy	    1
+  num_threads	    1
+!xs_library
+  xs_filename	    declib60g02_e7.fmt
+  xs_type	    ORNL
+  subgroup_set	    4
+!mesh
+
+  mesh fuel	    3 1 1 / 8 8 8 8 8 8
+  mesh gtube	    3 1	  / 8 8 8 8 8
+
+  axial_mesh	    1.0000
