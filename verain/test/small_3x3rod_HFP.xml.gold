@@ -272,6 +272,8 @@
   <ParameterList name="MPACT">
   </ParameterList>
   <ParameterList name="MAMBA2D">
+    <Parameter name="Nx" type="int" value="50"/>
+    <Parameter name="Ny" type="int" value="40"/>
   </ParameterList>
   <ParameterList name="PEREGRINE">
   </ParameterList>

@@ -53,7 +53,7 @@
     </ParameterList>
     <Parameter name="apitch" type="double" value="21.5"/>
     <Parameter name="assm_map" type="Array(string)" value="{A3,A3,A3,A3,A3,A3,A3,A3,A3,A3,A1,A3,A1,A3,A1,A3,A3,A3,A3,A3,A2,A1,A2,A1,A2,A1,A2,A1,A2,A3,A3,A3,A2,A2,A2,A1,A2,A1,A2,A1,A2,A2,A2,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A1,A2,A1,A2,A1,A2,A1,A2,A1,A2,A1,A3,A3,A3,A2,A2,A2,A1,A2,A1,A2,A1,A2,A2,A2,A3,A3,A3,A2,A1,A2,A1,A2,A1,A2,A1,A2,A3,A3,A3,A3,A3,A1,A3,A1,A3,A1,A3,A3,A3,A3,A3,A3,A3,A3,A3,A3}"/>
-    <Parameter name="baffle_gap" type="double" value="0.02"/>
+    <Parameter name="baffle_gap" type="double" value="0.19"/>
     <Parameter name="baffle_mat" type="string" value="SS304"/>
     <Parameter name="baffle_thick" type="double" value="1.26"/>
     <Parameter name="core_name" type="string" value="Watts Bar Unit 1"/>

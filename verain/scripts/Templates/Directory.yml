@@ -188,7 +188,6 @@ CORE:
     _check:
       - is_int()
       - is_gt() 0
-      - is_odd()
   rated:
     <<: *dtlist
     _content:
@@ -945,7 +944,7 @@ COBRATF:
       - is_gt() 0
 
   maxits:
-    <<: *dtdouble
+    <<: *dtint
     _content:
     _check:
       - is_int()
@@ -963,6 +962,39 @@ COBRATF:
     _content:
     _check:
       - is_string()
+
+  heated_elements_type:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
+  heater_tube_id:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  heater_tube_od:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  heater_tube_pitch:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  solver:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
 
 COUPLING:
 
@@ -1207,6 +1239,13 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() nem sanm none
+  under_relax:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+      - is_lt() 1.0
 
   mesh:
     <<: *dtlistnamed
@@ -1379,54 +1418,22 @@ MAMBA2D:
 
 PEREGRINE:
 
-  porosity:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-      - is_lt() 1.0
-  grain_radius:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-      - is_lt() 0.1
-  globalparams_density:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  mesh_file:
+  auxkernels_fast_neutron_flux_rod_ave_lin_pow:
     <<: *dtstring
     _content:
     _check:
       - is_string()
-  auxvariables_porosity_initial_condition:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  auxvariables_grain_radius_initial_condition:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  burnup_fuel_outer_radius:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  burnup_i_enrich:
+  auxkernels_fast_neutron_flux_axial_power_profile:
     <<: *dtstring
     _content:
     _check:
       - is_string()
+  auxkernels_fast_neutron_flux_factor:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
   auxkernels_pelletid_a_lower:
     <<: *dtdouble
     _content:
@@ -1439,81 +1446,98 @@ PEREGRINE:
     _check:
       - is_float()
       - is_gt() 0
-  auxkernels_fast_neutron_flux_factor:
+  auxvariables_grain_radius_initial_condition:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
-  thermalcontact_roughness_fuel:
+  auxvariables_porosity_initial_condition:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
-  thermalcontact_roughness_clad:
+  bcs_plenumpressure_plenumpressure_initial_pressure:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
-  bcs_pressure_function:
+  bcs_plenumpressure_plenumpressure_startup_time:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  bcs_pressure_coolantpressue_factor:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  bcs_pressure_coolantpressue_function:
     <<: *dtstring
     _content:
     _check:
       - is_string()
-  bcs_plenumpressure_initial_pressure:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  materials_fuel_thermal_initial_porosity:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  materials_fuel_relocation_diameter:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  materials_fuel_relocation_gap:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  materials_fission_gas_release_initial_grain_radius:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  materials_fission_gas_release_initial_porosity:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  materials_fission_gas_release_axial_power_profile:
+  burnup_burnup_rod_ave_lin_pow:
     <<: *dtstring
     _content:
     _check:
       - is_string()
-  materials_fission_gas_release_file_name:
+  burnup_burnup_axial_power_profile:
     <<: *dtstring
     _content:
     _check:
       - is_string()
-  executioner_time_t:
+  burnup_burnup_fuel_outer_radius:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  burnup_burnup_i_enrich:
     <<: *dtstring
     _content:
     _check:
       - is_string()
-  executioner_time_dt:
+  coolantchannel_convective_clad_surface_inlet_temperature:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  coolantchannel_convective_clad_surface_inlet_pressure:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  coolantchannel_convective_clad_surface_inlet_massflux:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  coolantchannel_convective_clad_surface_rod_diameter:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  coolantchannel_convective_clad_surface_rod_pitch:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  coolantchannel_convective_clad_surface_linear_heat_rate:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  coolantchannel_convective_clad_surface_axial_power_profile:
     <<: *dtstring
     _content:
     _check:
@@ -1536,8 +1560,195 @@ PEREGRINE:
     _check:
       - is_int()
       - is_gt() 0
+  executioner_timestepper_time_dt:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  executioner_timestepper_time_t:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  globalparams_a_lower:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  globalparams_a_upper:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  globalparams_density:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  globalparams_energy_per_fission:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_clad_density_density:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_clad_solid_mechanics_cold_work_factor:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_clad_solid_mechanics_oxygen_concentration:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+  materials_fission_gas_release_axial_power_profile:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  materials_fission_gas_release_file_name:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  materials_fission_gas_release_grain_radius:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_fission_gas_release_initial_grain_radius:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_fission_gas_release_initial_porosity:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_fuel_mech_grain_radius:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_fuel_relocation_diameter:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_fuel_relocation_gap:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_fuel_relocation_q:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  materials_fuel_thermal_initial_porosity:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  mesh_pellet_outer_radius:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  mesh_pellet_height:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  mesh_clad_gap_width:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  mesh_clad_bot_gap_height:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  mesh_clad_thickness:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  mesh_top_bot_clad_height:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  mesh_plenum_fuel_ratio:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  nfuelrod:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   output_file_base:
     <<: *dtstring
     _content:
     _check:
       - is_string()
+  postprocessors_rod_input_power_scale_factor:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  porosity:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_lt() 1.0
+  thermalcontact_initial_gas_fractions:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  thermalcontact_roughness_clad:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  thermalcontact_roughness_fuel:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
