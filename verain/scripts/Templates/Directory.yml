@@ -141,6 +141,12 @@ STATE:
     _check:
       - is_float()
       - is_geq() 0
+  deplete:
+    <<: *dtlist
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())
+      - nth(0,())==0
   rodbank:
     <<: *dtlist
     _style: multi-line

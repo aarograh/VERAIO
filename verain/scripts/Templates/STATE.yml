@@ -102,6 +102,13 @@ STATE:
         - copy STATE/$dexp
       _content:
 
+    deplete:
+      _pltype: array
+      _type: double
+      _do:
+        - copy STATE/@deplete
+      _content:
+
     tfuel:
       _pltype: parameter
       _type: double
