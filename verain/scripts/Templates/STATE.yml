@@ -95,13 +95,6 @@ STATE:
         - copy STATE/$kcrit
       _content:
 
-    dexp:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy STATE/$dexp
-      _content:
-
     deplete:
       _pltype: array
       _type: double

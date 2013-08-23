@@ -135,12 +135,6 @@ STATE:
     _check:
       - is_float()
       - is_gt() 0
-  dexp:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_geq() 0
   deplete:
     <<: *dtlist
     _content:
