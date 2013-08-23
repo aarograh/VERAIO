@@ -7,7 +7,7 @@
     <Parameter name="bank_pos" type="Array(int)" value="{228,216,228,228,228,228,228,228}"/>
     <Parameter name="boron" type="double" value="1300"/>
     <Parameter name="bypass" type="double" value="8.98"/>
-    <Parameter name="dexp" type="double" value="0.0"/>
+    <Parameter name="deplete" type="Array(double)" value="{0.0}"/>
     <Parameter name="flow" type="double" value="100.0"/>
     <Parameter name="kcrit" type="double" value="1.0"/>
     <Parameter name="power" type="double" value="0.0"/>

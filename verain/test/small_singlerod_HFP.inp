@@ -20,7 +20,7 @@
   tfuel  900.0         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
   modden 0.743         ! g/cc      Not used with T/H feedback!
 
-  deplete 0.0  2.0  4.0  8.0  16.0   ! (GWD/MT) for stacked cases
+  deplete 0.0 1010.0 2020.0 3000.0 4200.0   ! depletion steps (MWD/MTU)
 
   feedback on
   sym full

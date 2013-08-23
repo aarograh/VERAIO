@@ -4,7 +4,7 @@
   <Parameter name="case_id" type="string" value="CASL Problem Singlerod HFP"/>
   <ParameterList name="STATE">
     <Parameter name="boron" type="double" value="1300"/>
-    <Parameter name="deplete" type="Array(double)" value="{0.0,2.0,4.0,8.0,16.0}"/>
+    <Parameter name="deplete" type="Array(double)" value="{0.0,1010.0,2020.0,3000.0,4200.0}"/>
     <Parameter name="feedback" type="string" value="on"/>
     <Parameter name="modden" type="double" value="0.743"/>
     <Parameter name="power" type="double" value="100.0"/>
