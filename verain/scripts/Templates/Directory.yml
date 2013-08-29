@@ -1416,6 +1416,44 @@ MAMBA2D:
       - is_float()
       - is_gt() 0
 
+  nbnd:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  C_NiFe2O4c:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+  C_NiFe2O4s:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  nint:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  C_Bc:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+  C_Bs:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+
 PEREGRINE:
 
   auxkernels_fast_neutron_flux_rod_ave_lin_pow:

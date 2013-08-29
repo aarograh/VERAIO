@@ -157,49 +157,87 @@ MAMBA2D:
         - copy MAMBA2D/$ksnbp
       _content:
 
-#    kinetics:
-#      _pltype: list
-#      _content:
-#  
-#        npar:
-#          _pltype: parameter
-#          _type: int
-#          _do:
-#            - copy MAMBA2D/$npar
-#          _content:
-#    
-#        AFe:
-#          _pltype: parameter
-#          _type: double
-#          _do:
-#            - copy MAMBA2D/$AFe
-#          _content:
-#    
-#        EFe:
-#          _pltype: parameter
-#          _type: double
-#          _do:
-#            - copy MAMBA2D/$EFe
-#          _content:
-#    
-#        nsol:
-#          _pltype: parameter
-#          _type: int
-#          _do:
-#            - copy MAMBA2D/$nsol
-#          _content:
-#    
-#        AB:
-#          _pltype: parameter
-#          _type: double
-#          _do:
-#            - copy MAMBA2D/$AB
-#          _content:
-#    
-#        EB:
-#          _pltype: parameter
-#          _type: double
-#          _do:
-#            - copy MAMBA2D/$EB
-#          _content:
-#    
+    npar:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MAMBA2D/$npar
+      _content:
+    
+    AFe:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA2D/$AFe
+      _content:
+    
+    EFe:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA2D/$EFe
+      _content:
+    
+    nsol:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MAMBA2D/$nsol
+      _content:
+    
+    AB:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA2D/$AB
+      _content:
+    
+    EB:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA2D/$EB
+      _content:
+    
+    nbnd:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MAMBA2D/$nbnd
+      _content:
+    
+    C_NiFe2O4c:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA2D/$C_NiFe2O4c
+      _content:
+    
+    C_NiFe2O4s:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA2D/$C_NiFe2O4s
+      _content:
+    
+    nint:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MAMBA2D/$nint
+      _content:
+    
+    C_Bc:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA2D/$C_Bc
+      _content:
+    
+    C_Bs:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA2D/$C_Bs
+      _content:
+    
