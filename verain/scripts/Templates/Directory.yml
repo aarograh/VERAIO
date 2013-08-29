@@ -1111,6 +1111,11 @@ MPACT:
     _content:
     _check:
       - is_word()
+  mats_file:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
   subgroup_set:
     <<: *dtword
     _content:

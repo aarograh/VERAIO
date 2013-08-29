@@ -247,6 +247,13 @@ MPACT:
             - copy MPACT/$xs_filename
           _content:
 
+        mats_file:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$mats_file
+          _content:
+
         subgroup_set:
           _pltype: parameter
           _type: int
