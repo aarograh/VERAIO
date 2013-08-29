@@ -325,7 +325,7 @@
       <ParameterList name="Cells">
         <ParameterList name="Cell_1">
           <Parameter name="label" type="string" value="1"/>
-          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrex,he,ss}"/>
+          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrx1,he,ss}"/>
           <Parameter name="num_rings" type="int" value="6"/>
           <Parameter name="radii" type="Array(double)" value="{0.214,0.231,0.241,0.427,0.437,0.484}"/>
           <Parameter name="type" type="string" value="other"/>
@@ -338,9 +338,9 @@
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{he}"/>
         </ParameterList>
-        <ParameterList name="Material_pyrex">
+        <ParameterList name="Material_pyrx1">
           <Parameter name="density" type="double" value="2.25"/>
-          <Parameter name="key_name" type="string" value="pyrex"/>
+          <Parameter name="key_name" type="string" value="pyrx1"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
         </ParameterList>
@@ -367,7 +367,7 @@
       <ParameterList name="Cells">
         <ParameterList name="Cell_1">
           <Parameter name="label" type="string" value="1"/>
-          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrex,he,ss}"/>
+          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrx1,he,ss}"/>
           <Parameter name="num_rings" type="int" value="6"/>
           <Parameter name="radii" type="Array(double)" value="{0.214,0.231,0.241,0.427,0.437,0.484}"/>
           <Parameter name="type" type="string" value="other"/>
@@ -380,9 +380,9 @@
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{he}"/>
         </ParameterList>
-        <ParameterList name="Material_pyrex">
+        <ParameterList name="Material_pyrx1">
           <Parameter name="density" type="double" value="2.25"/>
-          <Parameter name="key_name" type="string" value="pyrex"/>
+          <Parameter name="key_name" type="string" value="pyrx1"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
         </ParameterList>
@@ -409,7 +409,7 @@
       <ParameterList name="Cells">
         <ParameterList name="Cell_1">
           <Parameter name="label" type="string" value="1"/>
-          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrex,he,ss}"/>
+          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrx1,he,ss}"/>
           <Parameter name="num_rings" type="int" value="6"/>
           <Parameter name="radii" type="Array(double)" value="{0.214,0.231,0.241,0.427,0.437,0.484}"/>
           <Parameter name="type" type="string" value="other"/>
@@ -422,9 +422,9 @@
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{he}"/>
         </ParameterList>
-        <ParameterList name="Material_pyrex">
+        <ParameterList name="Material_pyrx1">
           <Parameter name="density" type="double" value="2.25"/>
-          <Parameter name="key_name" type="string" value="pyrex"/>
+          <Parameter name="key_name" type="string" value="pyrx1"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
         </ParameterList>
@@ -451,7 +451,7 @@
       <ParameterList name="Cells">
         <ParameterList name="Cell_1">
           <Parameter name="label" type="string" value="1"/>
-          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrex,he,ss}"/>
+          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrx1,he,ss}"/>
           <Parameter name="num_rings" type="int" value="6"/>
           <Parameter name="radii" type="Array(double)" value="{0.214,0.231,0.241,0.427,0.437,0.484}"/>
           <Parameter name="type" type="string" value="other"/>
@@ -464,9 +464,9 @@
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{he}"/>
         </ParameterList>
-        <ParameterList name="Material_pyrex">
+        <ParameterList name="Material_pyrx1">
           <Parameter name="density" type="double" value="2.25"/>
-          <Parameter name="key_name" type="string" value="pyrex"/>
+          <Parameter name="key_name" type="string" value="pyrx1"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
         </ParameterList>
@@ -493,7 +493,7 @@
       <ParameterList name="Cells">
         <ParameterList name="Cell_1">
           <Parameter name="label" type="string" value="1"/>
-          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrex,he,ss}"/>
+          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrx1,he,ss}"/>
           <Parameter name="num_rings" type="int" value="6"/>
           <Parameter name="radii" type="Array(double)" value="{0.214,0.231,0.241,0.427,0.437,0.484}"/>
           <Parameter name="type" type="string" value="other"/>
@@ -506,9 +506,9 @@
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{he}"/>
         </ParameterList>
-        <ParameterList name="Material_pyrex">
+        <ParameterList name="Material_pyrx1">
           <Parameter name="density" type="double" value="2.25"/>
-          <Parameter name="key_name" type="string" value="pyrex"/>
+          <Parameter name="key_name" type="string" value="pyrx1"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
         </ParameterList>
@@ -536,7 +536,7 @@
       <Parameter name="k_tolerance" type="double" value="1e-5"/>
     </ParameterList>
     <Parameter name="eq_set" type="string" value="bld_2d"/>
-    <Parameter name="mat_library" type="string" value="casl_comp_r1_draft_03092013.sh5"/>
+    <Parameter name="mat_library" type="string" value="casl_comp_r2.sh5"/>
     <Parameter name="mesh" type="int" value="16"/>
     <Parameter name="new_grp_bounds" type="Array(double)" value="{8.2085e+05,1.1109e+05,5.5308e+03,1.8644e+02,3.7612e+01,3.5379e+01,2.7697e+01,2.1684e+01,2.0397e+01,1.5968e+01,7.1500e+00,6.7000e+00,6.3000e+00,1.0970e+00,1.0450e+00,9.5000e-01,3.5000e-01,2.0600e-01,1.0700e-01,5.8000e-02,2.5000e-02,1.0000e-02,1.0000e-05}"/>
     <Parameter name="num_blocks_i" type="int" value="4"/>
@@ -564,20 +564,6 @@
   <ParameterList name="COUPLING">
   </ParameterList>
   <ParameterList name="MPACT">
-    <ParameterList name="2d1d">
-    </ParameterList>
-    <ParameterList name="cmfd">
-    </ParameterList>
-    <ParameterList name="iteration_control">
-    </ParameterList>
-    <ParameterList name="mesh">
-    </ParameterList>
-    <ParameterList name="parallel_env">
-    </ParameterList>
-    <ParameterList name="quad_set">
-    </ParameterList>
-    <ParameterList name="xs_library">
-    </ParameterList>
   </ParameterList>
   <ParameterList name="MAMBA2D">
   </ParameterList>
