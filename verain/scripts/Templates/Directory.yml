@@ -1436,11 +1436,11 @@ MAMBA2D:
       - is_float()
       - is_geq() 0
   C_NiFe2O4s:
-    <<: *dtdouble
+    <<: *dtlist
     _content:
     _check:
-      - is_float()
-      - is_gt() 0
+      - fall(sub{is_float(shift)},())
+      - fall(sub{is_geq(shift,0)},())
   nint:
     <<: *dtint
     _content:
@@ -1454,12 +1454,11 @@ MAMBA2D:
       - is_float()
       - is_geq() 0
   C_Bs:
-    <<: *dtdouble
+    <<: *dtlist
     _content:
     _check:
-      - is_float()
-      - is_gt() 0
-
+      - fall(sub{is_float(shift)},())
+      - fall(sub{is_geq(shift,0)},())
 
 PEREGRINE:
 

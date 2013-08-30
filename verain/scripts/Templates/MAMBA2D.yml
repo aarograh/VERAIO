@@ -214,10 +214,10 @@ MAMBA2D:
       _content:
     
     C_NiFe2O4s:
-      _pltype: parameter
+      _pltype: array
       _type: double
       _do:
-        - copy MAMBA2D/$C_NiFe2O4s
+        - copy MAMBA2D/@C_NiFe2O4s
       _content:
     
     nint:
@@ -235,9 +235,9 @@ MAMBA2D:
       _content:
     
     C_Bs:
-      _pltype: parameter
+      _pltype: array
       _type: double
       _do:
-        - copy MAMBA2D/$C_Bs
+        - copy MAMBA2D/@C_Bs
       _content:
     
