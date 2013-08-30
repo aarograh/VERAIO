@@ -17,6 +17,13 @@ COUPLING:
         - copy COUPLING/$epsp
       _content:
 
+    eps_boron:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COUPLING/$eps_boron
+      _content:
+
     eps_temp:
       _pltype: parameter
       _type: double

@@ -216,6 +216,7 @@
 
 [COUPLING]
   epsk        2.0  ! pcm
+  eps_boron   0.1  ! boron convergence (ppm)
   rlx_power   0.7
   rlx_tfuel   1.0
   rlx_den     1.0

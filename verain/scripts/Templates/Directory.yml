@@ -1019,6 +1019,13 @@ COUPLING:
       - is_float()
       - is_gt() 0
 
+  eps_boron:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
   rlx_power:
     <<: *dtdouble
     _content:

@@ -262,6 +262,7 @@
     <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>
   <ParameterList name="COUPLING">
+    <Parameter name="eps_boron" type="double" value="0.1"/>
     <Parameter name="eps_temp" type="double" value="1.0"/>
     <Parameter name="epsk" type="double" value="5.0"/>
     <Parameter name="maxiter" type="int" value="100"/>
