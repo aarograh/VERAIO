@@ -3,6 +3,12 @@ INCLUDE(TribitsAddAdvancedTest)
 INCLUDE(TribitsCopyFilesToBinaryDir)
 
 
+#===========================================================
+#
+#            Test the perl VERA input parser
+#
+#===========================================================
+
 #
 # Test the Reactor-aware PL validator
 #
@@ -13,12 +19,19 @@ TRIBITS_ADD_EXECUTABLE(
     ${TEUCHOS_STD_UNIT_TEST_MAIN}
   #NUM_MPI_PROCS 1
   #STANDARD_PASS_OUTPUT
+
   )
 
+#===========================================================
+#
+#            Test the perl VERA input parser
+#
+#===========================================================
 
 #
 # Function to copy test files and run test for a given test case
 #
+
 FUNCTION(ADD_REACTOR_AWARE_INPUT_PARSER_TEST FILE_NAME)
   ASSERT_DEFINED(VERAIn_SOURCE_DIR)
   TRIBITS_COPY_FILES_TO_BINARY_DIR(CopyScriptFiles_${FILE_NAME}
@@ -75,3 +88,42 @@ ADD_REACTOR_AWARE_INPUT_PARSER_TEST(small_singlerod_HZP)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test-short)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_full_core_wsym_even)
 
+
+#===========================================================
+#
+#               Test the verdiff program!
+#
+#===========================================================
+
+
+SET(WEC_TEST_STAND_DIR ${${PACKAGE_NAME}_SOURCE_DIR}/WEC_Test_Stand)
+
+
+TRIBITS_ADD_ADVANCED_TEST( veradiff_match
+  TEST_0 CMND ${VERADIFF_EXE}
+    ARGS ${WEC_TEST_STAND_DIR}/2a.gold.h5 ${WEC_TEST_STAND_DIR}/2a.gold.h5
+    PASS_REGULAR_EXPRESSION_ALL
+      "reading h5 file: .+/verain/WEC_Test_Stand/2a.gold.h5"
+      "reading dataset: keff"
+      "keff1"
+      "keff2"
+      "diff .+ 0.00 pcm"
+      "tol .+ 10.00 pcm"
+      "PASS - eigenvalue difference is less than tolerance"
+  OVERALL_NUM_MPI_PROCS 1
+  )
+
+TRIBITS_ADD_ADVANCED_TEST( veradiff_fail
+  TEST_0 CMND ${VERADIFF_EXE}
+    ARGS ${WEC_TEST_STAND_DIR}/2a.gold.h5 ${WEC_TEST_STAND_DIR}/2b.gold.h5
+    PASS_REGULAR_EXPRESSION_ALL
+      "reading h5 file: .+/verain/WEC_Test_Stand/2a.gold.h5"
+      "reading h5 file: .+/verain/WEC_Test_Stand/2b.gold.h5"
+      "reading dataset: keff"
+      "keff1"
+      "keff2"
+      "diff .+ 81.81 pcm"
+      "tol .+ 10.00 pcm"
+      "FAIL - eigenvalue difference exceeds tolerance"
+  OVERALL_NUM_MPI_PROCS 1
+  )
