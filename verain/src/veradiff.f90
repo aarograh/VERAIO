@@ -13,7 +13,7 @@
       use  hdf5
       implicit none
 
-      character(len=100) :: fname1, fname2
+      character(len=250) :: fname1, fname2
       character(len=80)  :: dataset
       integer            :: iargs
 
