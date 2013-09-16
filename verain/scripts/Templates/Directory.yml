@@ -996,6 +996,12 @@ COBRATF:
     _check:
       - is_int()
 
+  parallel:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
 COUPLING:
 
   epsk:

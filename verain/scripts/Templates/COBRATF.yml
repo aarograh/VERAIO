@@ -156,3 +156,10 @@ COBRATF:
       _do:
         - copy COBRATF/$solver
       _content:
+
+    parallel:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$parallel
+      _content:
