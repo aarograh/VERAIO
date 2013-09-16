@@ -170,25 +170,25 @@
 
 [INSILICO]
     mat_library casl_comp.sh5
-    xs_library  lib252_hetbondoneabs-noabssigp
+    xs_library  test-8grp
 
     max_delta_z   2.54
-    num_blocks_i  3
-    num_blocks_j  3
-    num_z_blocks  12
-    num_groups    23
-    num_sets      8
+    num_blocks_i  2
+    num_blocks_j  2
+    num_z_blocks  1
+    num_groups    8
+    num_sets      1
 
     mesh          4
     dimension     3
-    eq_set        sc
+    eq_set        spn_fv
     eigen_solver  arnoldi
     tolerance     1e-4
     Pn_order      0
 
 !   eigenvalue_db:
-       k_tolerance   1e-4
-       L2_tolerance  1e-3
+       k_tolerance   1e-7
+       L2_tolerance  1e-6
        energy_dep_ev true
 
 !   quadrature_db:
@@ -202,31 +202,6 @@
 
 !   upscatter_db:
        upscatter_tolerance  1e-4
-
-    new_grp_bounds
-       8.2085e+05
-       1.1109e+05
-       5.5308e+03
-       1.8644e+02
-       3.7612e+01
-       3.5379e+01
-       2.7697e+01
-       2.1684e+01
-       2.0397e+01
-       1.5968e+01
-       7.1500e+00
-       6.7000e+00
-       6.3000e+00
-       1.0970e+00
-       1.0450e+00
-       9.5000e-01
-       3.5000e-01
-       2.0600e-01
-       1.0700e-01
-       5.8000e-02
-       2.5000e-02
-       1.0000e-02
-       1.0000e-05
 
 [COBRATF]
   nfuel   3             ! number of fuel rings in conduction model
