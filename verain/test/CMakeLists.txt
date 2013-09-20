@@ -60,6 +60,7 @@ ENDFUNCTION()
 #
 # Run the different test cases
 #
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(misc_options)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_full_core_fuelmix)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_full_core_maps)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_full_core_matmix)

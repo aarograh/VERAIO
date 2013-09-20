@@ -256,9 +256,9 @@
     <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>
   <ParameterList name="COUPLING">
-    <Parameter name="eps_boron" type="double" value="0.1"/>
+    <Parameter name="eps_boron" type="double" value="10.0"/>
     <Parameter name="epsk" type="double" value="2.0"/>
-    <Parameter name="maxiter" type="int" value="2"/>
+    <Parameter name="maxiter" type="int" value="20"/>
     <Parameter name="rlx_den" type="double" value="1.0"/>
     <Parameter name="rlx_power" type="double" value="0.7"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>

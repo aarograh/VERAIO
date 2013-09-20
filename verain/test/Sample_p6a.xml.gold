@@ -271,10 +271,10 @@
   <ParameterList name="COUPLING">
     <Parameter name="epsk" type="double" value="5.0"/>
     <Parameter name="epsp" type="double" value="1.0e-4"/>
-    <Parameter name="maxiter" type="int" value="1000"/>
-    <Parameter name="rlx_den" type="double" value="0.3"/>
-    <Parameter name="rlx_power" type="double" value="1.0"/>
-    <Parameter name="rlx_tfuel" type="double" value="0.3"/>
+    <Parameter name="maxiter" type="int" value="100"/>
+    <Parameter name="rlx_den" type="double" value="1.0"/>
+    <Parameter name="rlx_power" type="double" value="0.6"/>
+    <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
   <ParameterList name="MPACT">
   </ParameterList>
