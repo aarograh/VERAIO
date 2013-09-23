@@ -973,6 +973,36 @@ COBRATF:
     _check:
       - is_int()
 
+  global_energy_balance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  global_mass_balance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  fluid_energy_storage:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  solid_energy_storage:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  mass_storage:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
 COUPLING:
 
   epsk:
