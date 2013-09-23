@@ -59,6 +59,13 @@ COUPLING:
         - copy COUPLING/$maxiter
       _content:
 
+    read_restart:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy COUPLING/$read_restart
+      _content:
+
     LIME_xml:
       _pltype: parameter
       _type: string

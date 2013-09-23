@@ -41,8 +41,6 @@ _DIRECTORY:
   INSERT:
   DETECTOR:
   EDITS:
-  DECART:
-  UTILS:
   INSILICO:
   COBRATF:
   COUPLING:
@@ -556,20 +554,6 @@ EDITS:
     _content:
     _check:
       - is_float()
-
-DECART:
-  parameter:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
-
-UTILS:
-  parameter:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
 
 INSILICO:
   problem_name:
@@ -1092,6 +1076,12 @@ COUPLING:
     _check:
       - is_int()
       - is_gt() 0
+
+  read_restart:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
 
   LIME_xml:
     <<: *dtstring
