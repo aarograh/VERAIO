@@ -213,6 +213,11 @@
   maxits  10000
   courant 0.8
   maps_filename = single_rod_HFP
+  global_energy_balance    0.01 !%
+  global_mass_balance      0.01 !%
+  fluid_energy_storage     0.5  !%
+  solid_energy_storage     0.5  !%
+  mass_storage             0.5  !%
 
 [COUPLING]
   epsk        2.0  ! pcm
