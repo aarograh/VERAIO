@@ -167,22 +167,22 @@
     xs_library  test-8grp
 
     max_delta_z   2.54
-    num_blocks_i  1
-    num_blocks_j  1
-    num_z_blocks  12
+    num_blocks_i  2
+    num_blocks_j  2
+    num_z_blocks  1
     num_groups    8 
-    num_sets      4
+    num_sets      1
 
     mesh          4
     dimension     3
-    eq_set        sc
+    eq_set        spn_fv
     eigen_solver  arnoldi
-    tolerance     1e-4
+    tolerance     1e-7
     Pn_order      0
 
 !   eigenvalue_db:
        k_tolerance   1e-4
-       L2_tolerance  1e-3
+       L2_tolerance  1e-7
        energy_dep_ev true
 
 !   quadrature_db:
@@ -219,7 +219,7 @@
 [COUPLING]
   epsk        2.0  ! pcm
   eps_boron  10.0  ! boron convergence (ppm)
-  rlx_power   0.7
+  rlx_power   0.4
   rlx_tfuel   1.0
   rlx_den     1.0
   maxiter     20
