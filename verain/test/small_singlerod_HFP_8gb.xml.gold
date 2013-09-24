@@ -206,19 +206,19 @@
     <Parameter name="dimension" type="int" value="3"/>
     <Parameter name="eigen_solver" type="string" value="arnoldi"/>
     <ParameterList name="eigenvalue_db">
-      <Parameter name="L2_tolerance" type="double" value="1e-3"/>
+      <Parameter name="L2_tolerance" type="double" value="1e-7"/>
       <Parameter name="energy_dep_ev" type="bool" value="true"/>
       <Parameter name="k_tolerance" type="double" value="1e-4"/>
     </ParameterList>
-    <Parameter name="eq_set" type="string" value="sc"/>
+    <Parameter name="eq_set" type="string" value="spn_fv"/>
     <Parameter name="mat_library" type="string" value="casl_comp.sh5"/>
     <Parameter name="max_delta_z" type="double" value="2.54"/>
     <Parameter name="mesh" type="int" value="4"/>
-    <Parameter name="num_blocks_i" type="int" value="1"/>
-    <Parameter name="num_blocks_j" type="int" value="1"/>
+    <Parameter name="num_blocks_i" type="int" value="2"/>
+    <Parameter name="num_blocks_j" type="int" value="2"/>
     <Parameter name="num_groups" type="int" value="8"/>
-    <Parameter name="num_sets" type="int" value="4"/>
-    <Parameter name="num_z_blocks" type="int" value="12"/>
+    <Parameter name="num_sets" type="int" value="1"/>
+    <Parameter name="num_z_blocks" type="int" value="1"/>
     <ParameterList name="quadrature_db">
       <Parameter name="azimuthals_octant" type="int" value="4"/>
       <Parameter name="polars_octant" type="int" value="4"/>
@@ -227,7 +227,7 @@
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p6"/>
     </ParameterList>
-    <Parameter name="tolerance" type="double" value="1e-4"/>
+    <Parameter name="tolerance" type="double" value="1e-7"/>
     <ParameterList name="upscatter_db">
       <Parameter name="tolerance" type="double" value="1e-4"/>
     </ParameterList>
@@ -260,7 +260,7 @@
     <Parameter name="epsk" type="double" value="2.0"/>
     <Parameter name="maxiter" type="int" value="20"/>
     <Parameter name="rlx_den" type="double" value="1.0"/>
-    <Parameter name="rlx_power" type="double" value="0.7"/>
+    <Parameter name="rlx_power" type="double" value="0.4"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
   <ParameterList name="MPACT">
