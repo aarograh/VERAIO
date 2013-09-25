@@ -61,9 +61,7 @@
 
 [CORE]
   name "Watts Bar Unit 1"               ! core_name
-  cycnum  1                             ! core_cycle_num
-  cycsdate 19970301                     ! ** check
-  cycedate 19980401                     ! ** check
+  cycle 1 19970301 19980401             ! cycle number, start date, end date *** check
 
   size 16                               ! number of assemblies across the core
   rated 3411.0 144.7                    ! core_rated_power(MW), core_rated_flow (Mlbs/hr)

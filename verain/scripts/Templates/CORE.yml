@@ -36,21 +36,21 @@ CORE:
       _pltype: parameter
       _type: int
       _do:
-        - copy CORE/$cycnum
+        - copy CORE/@cycle:0
       _content:
 
-    cyc_stdate:
+    cycle_sdate:
       _pltype: parameter
       _type: int
       _do:
-        - copy CORE/$cycsdate
+        - copy CORE/@cycle:1
       _content:
 
-    cyc_edate:
+    cycle_edate:
       _pltype: parameter
       _type: int
       _do:
-        - copy CORE/$cycedate
+        - copy CORE/@cycle:2
       _content:
 
     apitch:

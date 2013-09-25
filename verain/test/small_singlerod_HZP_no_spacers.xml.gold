@@ -224,7 +224,7 @@
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p6"/>
     </ParameterList>
-    <Parameter name="tolerance" type="double" value="1e-4"/>
+    <Parameter name="tolerance" type="double" value="1e-6"/>
     <ParameterList name="upscatter_db">
       <Parameter name="tolerance" type="double" value="1e-4"/>
     </ParameterList>

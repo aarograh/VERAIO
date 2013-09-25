@@ -165,7 +165,7 @@
     dimension     3
     eq_set        sc
     eigen_solver  arnoldi
-    tolerance     1e-4
+    tolerance     1e-6
     Pn_order      0
 
 !   eigenvalue_db:
