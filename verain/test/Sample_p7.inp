@@ -112,7 +112,8 @@
             - - 1 - - 1 - 
 
   baffle ss 0.19 2.85 
-! vessel cs 219.71 21.99 - not functional yet
+! vessel cs 219.71 21.99 - old vessel card
+  vessel mod 219.71 cs 241.70
 
   lower_plate ss  5.0 0.5   ! mat, thickness, vol frac
   upper_plate ss  7.6 0.5   ! mat, thickness, vol frac

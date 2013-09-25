@@ -61,6 +61,8 @@
     <Parameter name="upper_mat" type="string" value="ss"/>
     <Parameter name="upper_thick" type="double" value="7.6"/>
     <Parameter name="upper_vfrac" type="double" value="0.5"/>
+    <Parameter name="vessel_mats" type="Array(string)" value="{mod,cs}"/>
+    <Parameter name="vessel_radii" type="Array(double)" value="{219.71,241.70}"/>
     <Parameter name="xlabel" type="Array(string)" value="{R,P,N,M,L,K,J,H,G,F,E,D,C,B,A}"/>
     <Parameter name="ylabel" type="Array(string)" value="{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}"/>
   </ParameterList>

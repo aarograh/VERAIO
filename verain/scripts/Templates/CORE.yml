@@ -81,25 +81,18 @@ CORE:
         - copy CORE/@baffle:0
       _content:
 
-    vessel_thick:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy CORE/$vessel_thick
-      _content:
-
-    vessel_radius:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy CORE/$vessel_radius
-      _content:
-
-    vessel_mat:
-      _pltype: parameter
+    vessel_mats:
+      _pltype: array
       _type: string
       _do:
-        - copy CORE/$vessel_mat
+        - copyarray CORE/@vessel,start=>0,stride=>2
+      _content:
+
+    vessel_radii:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray CORE/@vessel,start=>1,stride=>2
       _content:
 
     assm_map:

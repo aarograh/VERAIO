@@ -203,23 +203,17 @@ CORE:
       - is_float(nth(2,()))
       - nth(1,())>=0
       - nth(2,())>=0
-  vessel_thick:
-    <<: *dtdouble
+
+  vessel:
+    <<: *dtlist
+    _style: multi-line
     _content:
     _check:
-      - is_float()
-      - is_geq() 0
-  vessel_radius:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  vessel_mat:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
+      - arraysize()%2==0
+      - fall(sub{is_string(shift)},stride(0,2,()))
+      - fall(sub{is_float(shift)},stride(1,2,()))
+      - fall(sub{is_geq(shift,0)},stride(1,2,()))
+
   core_shape:
     <<: *dtlist
     _style: multi-line
