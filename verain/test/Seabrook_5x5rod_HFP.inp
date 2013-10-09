@@ -245,8 +245,7 @@
   epso    0.001
   oitmax  5       
   iitmax  40
-  gridloss END 0.750
-  gridloss MID 0.970
+  gridloss END 0.8
+  gridloss MID 0.9065
 
-! need to add grid loss coefficients
 
