@@ -237,7 +237,7 @@
   <ParameterList name="COBRATF">
     <Parameter name="epso" type="double" value="0.001"/>
     <Parameter name="gridlabel" type="Array(string)" value="{MID,END}"/>
-    <Parameter name="gridloss" type="Array(double)" value="{0.970,0.750}"/>
+    <Parameter name="gridloss" type="Array(double)" value="{0.9065,0.8}"/>
     <Parameter name="iitmax" type="int" value="40"/>
     <Parameter name="irfc" type="int" value="2"/>
     <Parameter name="nfuel" type="int" value="3"/>
