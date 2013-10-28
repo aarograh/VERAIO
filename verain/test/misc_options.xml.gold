@@ -360,6 +360,7 @@
     <Parameter name="eigen_solver" type="string" value="arnoldi"/>
     <ParameterList name="eigenvalue_db">
       <Parameter name="L2_tolerance" type="double" value="1e-6"/>
+      <Parameter name="Preconditioner" type="string" value="Ifpack"/>
       <Parameter name="energy_dep_ev" type="bool" value="true"/>
       <Parameter name="k_tolerance" type="double" value="1e-7"/>
     </ParameterList>

@@ -763,6 +763,12 @@ INSILICO:
     _check:
       - is_word()
       - in_dictionary() true false
+  preconditioner:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() Ifpack LUDXXX
 
   upscatter_tolerance:
     <<: *dtdouble

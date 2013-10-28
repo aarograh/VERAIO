@@ -243,6 +243,7 @@
     dimension     3
     eq_set        spn_fv
     eigen_solver  arnoldi
+    preconditioner Ifpack
     tolerance     1e-6
     Pn_order      0
 

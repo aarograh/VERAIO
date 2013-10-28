@@ -272,6 +272,13 @@ INSILICO:
             - copy INSILICO/$energy_dep_ev
           _content:
     
+        Preconditioner:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy INSILICO/$preconditioner
+          _content:
+    
     upscatter_db:
       _pltype: list
       _content:
