@@ -245,7 +245,7 @@
   TL_treatment      lflat
   nodal_method      nem
 !parallel
-  num_space         61
+  num_space         60
   num_angle         1
   num_energy        1
   num_threads       1
