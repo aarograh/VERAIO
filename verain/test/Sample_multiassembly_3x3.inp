@@ -20,9 +20,13 @@
   sym full
 
 [CORE]
-  size 3                ! 3x3 assemblies
-! rated  17.67   0.6824  ! MW, Mlbs/hr    single-assembly
-  rated 159.03   6.1416  ! MW, Mlbs/hr    3x3 assemblies
+  size 3                  ! 3x3 assemblies
+! rated   17.67   0.6824  ! MW, Mlbs/hr    single-assembly
+! rated   88.35   3.4120  ! MW, Mlbs/hr    5 assemblies (3x3-cross)
+  rated  159.03   6.1416  ! MW, Mlbs/hr    3x3 assemblies
+! rated  441.75  17.0600  ! MW, Mlbs/hr    5x5 assemblies
+! rated  865.83  33.4376  ! MW, Mlbs/hr    7x7 assemblies
+! rated 1431.27  55.2744  ! MW, Mlbs/hr    9x9 assemblies
   apitch 21.50
   height 406.328
 
@@ -207,9 +211,7 @@
     num_sets      1
     pin_partitioning true
 
-    mesh          4
     dimension     3
-    eq_set        sc
     eigen_solver  arnoldi
     tolerance     1e-6
     Pn_order      0
@@ -283,7 +285,7 @@
   nfuel   3             ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction
   irfc    2             ! friction factor correlation default=2
-  dhfrac  0.02          ! fraction of power deposited directly into coolant
+  dhfrac  0.0           ! fraction of power deposited directly into coolant
   hgap    5678.3        ! gap conductance
   epso    0.001
   oitmax  5
