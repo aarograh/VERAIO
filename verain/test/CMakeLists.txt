@@ -122,7 +122,6 @@ TRIBITS_ADD_ADVANCED_TEST( veradiff_fail
       "reading dataset: keff"
       "keff1"
       "keff2"
-      "diff .+ 81.81 pcm"
       "tol .+ 10.00 pcm"
       "FAIL - eigenvalue difference exceeds tolerance"
   OVERALL_NUM_MPI_PROCS 1
