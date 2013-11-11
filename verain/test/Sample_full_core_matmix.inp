@@ -203,7 +203,7 @@
   mat he     0.000176
   mat inc    8.19
   mat SS304  8.0   ss 1.0
-  mat zirc   6.56 
+  mat zirc   6.56  zirc4 1.0
 
   mat ifba 3.85 
     b-10 0.09347 

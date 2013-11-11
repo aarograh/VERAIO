@@ -60,7 +60,7 @@
         <Parameter name="density" type="double" value="6.56"/>
         <Parameter name="key_name" type="string" value="zirc"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-        <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
       </ParameterList>
     </ParameterList>
     <Parameter name="apitch" type="double" value="21.5"/>
