@@ -20,7 +20,7 @@
   modden 0.743         ! g/cc      Not used with T/H feedback!
 
   feedback on
-  sym qtr
+  sym full
 
 [CORE]
   size 1                ! 1x1 single-assembly
