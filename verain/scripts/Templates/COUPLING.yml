@@ -17,6 +17,13 @@ COUPLING:
         - copy COUPLING/$epsp
       _content:
 
+    eps_boron:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COUPLING/$eps_boron
+      _content:
+
     eps_temp:
       _pltype: parameter
       _type: double
@@ -50,6 +57,13 @@ COUPLING:
       _type: int
       _do:
         - copy COUPLING/$maxiter
+      _content:
+
+    read_restart:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy COUPLING/$read_restart
       _content:
 
     LIME_xml:

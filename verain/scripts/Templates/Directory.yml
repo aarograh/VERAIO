@@ -41,8 +41,6 @@ _DIRECTORY:
   INSERT:
   DETECTOR:
   EDITS:
-  DECART:
-  UTILS:
   INSILICO:
   COBRATF:
   COUPLING:
@@ -166,22 +164,15 @@ CORE:
     _content:
     _check:
       - is_string()
-  cycnum:
-    <<: *dtint
+  cycle:
+    <<: *dtlist
     _content:
     _check:
-      - is_int()
-      - is_gt() 0
-  cycsdate:
-    <<: *dtdate
-    _content:
-    _check:
-      - is_date()
-  cycedate:
-    <<: *dtdate
-    _content:
-    _check:
-      - is_date()
+      - fall(sub{is_int(shift)},())
+      - arraysize()==3
+      - nth(0,())>=0
+      - nth(1,())>=0
+      - nth(2,())>=0
   size:
     <<: *dtint
     _content:
@@ -212,23 +203,17 @@ CORE:
       - is_float(nth(2,()))
       - nth(1,())>=0
       - nth(2,())>=0
-  vessel_thick:
-    <<: *dtdouble
+
+  vessel:
+    <<: *dtlist
+    _style: multi-line
     _content:
     _check:
-      - is_float()
-      - is_geq() 0
-  vessel_radius:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  vessel_mat:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
+      - arraysize()%2==0
+      - fall(sub{is_string(shift)},stride(0,2,()))
+      - fall(sub{is_float(shift)},stride(1,2,()))
+      - fall(sub{is_geq(shift,0)},stride(1,2,()))
+
   core_shape:
     <<: *dtlist
     _style: multi-line
@@ -556,20 +541,6 @@ EDITS:
     _content:
     _check:
       - is_float()
-
-DECART:
-  parameter:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
-
-UTILS:
-  parameter:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
 
 INSILICO:
   problem_name:
@@ -996,6 +967,42 @@ COBRATF:
     _check:
       - is_int()
 
+  parallel:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
+  global_energy_balance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  global_mass_balance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  fluid_energy_storage:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  solid_energy_storage:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  mass_storage:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
 COUPLING:
 
   epsk:
@@ -1013,6 +1020,13 @@ COUPLING:
       - is_gt() 0
 
   eps_temp:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  eps_boron:
     <<: *dtdouble
     _content:
     _check:
@@ -1049,6 +1063,12 @@ COUPLING:
     _check:
       - is_int()
       - is_gt() 0
+
+  read_restart:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
 
   LIME_xml:
     <<: *dtstring
@@ -1255,7 +1275,7 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
-      - is_lt() 1.0
+      - is_lt() 2.0
 
   mesh:
     <<: *dtlistnamed
@@ -1425,6 +1445,43 @@ MAMBA2D:
     _check:
       - is_float()
       - is_gt() 0
+
+  nbnd:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  C_NiFe2O4c:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+  C_NiFe2O4s:
+    <<: *dtlist
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())
+      - fall(sub{is_geq(shift,0)},())
+  nint:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  C_Bc:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+  C_Bs:
+    <<: *dtlist
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())
+      - fall(sub{is_geq(shift,0)},())
 
 PEREGRINE:
 

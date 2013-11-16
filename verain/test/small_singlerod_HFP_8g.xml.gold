@@ -204,19 +204,19 @@
     <Parameter name="dimension" type="int" value="3"/>
     <Parameter name="eigen_solver" type="string" value="arnoldi"/>
     <ParameterList name="eigenvalue_db">
-      <Parameter name="L2_tolerance" type="double" value="1e-3"/>
+      <Parameter name="L2_tolerance" type="double" value="1e-4"/>
       <Parameter name="energy_dep_ev" type="bool" value="true"/>
       <Parameter name="k_tolerance" type="double" value="1e-4"/>
     </ParameterList>
-    <Parameter name="eq_set" type="string" value="sc"/>
+    <Parameter name="eq_set" type="string" value="spn_fv"/>
     <Parameter name="mat_library" type="string" value="casl_comp.sh5"/>
     <Parameter name="max_delta_z" type="double" value="2.54"/>
     <Parameter name="mesh" type="int" value="4"/>
-    <Parameter name="num_blocks_i" type="int" value="1"/>
-    <Parameter name="num_blocks_j" type="int" value="1"/>
+    <Parameter name="num_blocks_i" type="int" value="2"/>
+    <Parameter name="num_blocks_j" type="int" value="2"/>
     <Parameter name="num_groups" type="int" value="8"/>
-    <Parameter name="num_sets" type="int" value="4"/>
-    <Parameter name="num_z_blocks" type="int" value="12"/>
+    <Parameter name="num_sets" type="int" value="1"/>
+    <Parameter name="num_z_blocks" type="int" value="1"/>
     <ParameterList name="quadrature_db">
       <Parameter name="azimuthals_octant" type="int" value="4"/>
       <Parameter name="polars_octant" type="int" value="4"/>
@@ -225,7 +225,7 @@
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p6"/>
     </ParameterList>
-    <Parameter name="tolerance" type="double" value="1e-4"/>
+    <Parameter name="tolerance" type="double" value="1e-6"/>
     <ParameterList name="upscatter_db">
       <Parameter name="tolerance" type="double" value="1e-4"/>
     </ParameterList>
@@ -240,24 +240,30 @@
     <Parameter name="dtmax" type="double" value="0.1"/>
     <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="epso" type="double" value="0.001"/>
+    <Parameter name="fluid_energy_storage" type="double" value="0.5"/>
+    <Parameter name="global_energy_balance" type="double" value="0.01"/>
+    <Parameter name="global_mass_balance" type="double" value="0.01"/>
     <Parameter name="gridlabel" type="Array(string)" value="{MID,END}"/>
     <Parameter name="gridloss" type="Array(double)" value="{0.9065,0.9070}"/>
     <Parameter name="hgap" type="double" value="5678.3"/>
     <Parameter name="iitmax" type="int" value="40"/>
     <Parameter name="irfc" type="int" value="2"/>
     <Parameter name="maps_filename" type="string" value="single_rod_HFP"/>
+    <Parameter name="mass_storage" type="double" value="0.5"/>
     <Parameter name="maxits" type="int" value="10000"/>
     <Parameter name="nc" type="int" value="1"/>
     <Parameter name="nfuel" type="int" value="3"/>
     <Parameter name="oitmax" type="int" value="5"/>
     <Parameter name="rtwfp" type="double" value="1000.0"/>
+    <Parameter name="solid_energy_storage" type="double" value="0.5"/>
     <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>
   <ParameterList name="COUPLING">
+    <Parameter name="eps_boron" type="double" value="0.1"/>
     <Parameter name="epsk" type="double" value="2.0"/>
     <Parameter name="maxiter" type="int" value="2"/>
     <Parameter name="rlx_den" type="double" value="1.0"/>
-    <Parameter name="rlx_power" type="double" value="0.7"/>
+    <Parameter name="rlx_power" type="double" value="0.5"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
   <ParameterList name="MPACT">

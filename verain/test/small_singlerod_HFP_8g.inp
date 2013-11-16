@@ -23,7 +23,7 @@
   sym full
 
 [CORE]
-  size 1                ! 1x1 single-assembly
+  size 1                  ! 1x1 single-assembly
   rated 0.066932 0.00260  ! MW, Mlbs/hr  *** scaled to 1x1, increased flow to match 17x17 outlet conditions
   apitch 1.270            ! *** scaled to 1x1, no gap but larger flow area
   height 406.328
@@ -51,7 +51,7 @@
 
 [ASSEMBLY]
   title "Westinghouse 17x17"
-  npin 1        ! *** scaled to 1x1
+  npin 1        ! *** scaled to 1x1 rod
   ppitch 1.270  ! *** increased for 1x1 to get rid of gap
 
   fuel U31 10.257 95.0 / 3.1
@@ -89,8 +89,8 @@
       PCAP1 395.381
       LGAP1 397.501
 
-  grid END inc  3.519 3.866  ! *** mass scaled to 1x1
-  grid MID zirc 3.028 3.810  ! *** mass scaled to 1x1
+  grid END inc  3.519 3.866  ! *** mass scaled to 1x1 rod
+  grid MID zirc 3.028 3.810  ! *** mass scaled to 1x1 rod
 
   grid_axial
       END  13.884
@@ -102,8 +102,8 @@
       MID 336.2
       END 388.2
 
-  lower_nozzle  ss 6.05  21.626  ! mat, height, mass (g)  *** mass scaled to 1x1
-  upper_nozzle  ss 8.827 21.626  ! mat, height, mass (g)  *** mass scaled to 1x1
+  lower_nozzle  ss 6.05  21.626  ! mat, height, mass (g)  *** mass scaled to 1x1 rod
+  upper_nozzle  ss 8.827 21.626  ! mat, height, mass (g)  *** mass scaled to 1x1 rod
 
 [EDITS]
 
@@ -165,22 +165,22 @@
     xs_library  test-8grp
 
     max_delta_z   2.54
-    num_blocks_i  1
-    num_blocks_j  1
-    num_z_blocks  12
-    num_groups    8 
-    num_sets      4
+    num_blocks_i  2
+    num_blocks_j  2
+    num_z_blocks  1
+    num_groups    8
+    num_sets      1
 
     mesh          4
     dimension     3
-    eq_set        sc
+    eq_set        spn_fv
     eigen_solver  arnoldi
-    tolerance     1e-4
+    tolerance     1e-6
     Pn_order      0
 
 !   eigenvalue_db:
        k_tolerance   1e-4
-       L2_tolerance  1e-3
+       L2_tolerance  1e-4
        energy_dep_ev true
 
 !   quadrature_db:
@@ -213,10 +213,16 @@
   maxits  10000
   courant 0.8
   maps_filename = single_rod_HFP
+  global_energy_balance    0.01 !%
+  global_mass_balance      0.01 !%
+  fluid_energy_storage     0.5  !%
+  solid_energy_storage     0.5  !%
+  mass_storage             0.5  !%
 
 [COUPLING]
   epsk        2.0  ! pcm
-  rlx_power   0.7
+  eps_boron   0.1  ! boron convergence (ppm)
+  rlx_power   0.5
   rlx_tfuel   1.0
   rlx_den     1.0
   maxiter     2

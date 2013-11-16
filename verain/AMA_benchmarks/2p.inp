@@ -84,10 +84,10 @@
   npin 17
 
   mat he     0.0001786 
-  mat pyrex  2.25 pyrex-vera
+  mat pyrx1  2.25 pyrex-vera
   mat ss     8.0
 
-  cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrex he ss
+  cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrx1 he ss
 
   rodmap  LAT8 
      -
@@ -236,7 +236,7 @@
   azimuthals_octant 4
   polars_octant 4
   
-  mat_library casl_comp_r1_draft_03092013.sh5  
+  mat_library casl_comp_r2.sh5  
   xs_library lib252_hetbondoneabs-noabssigp
   
   new_grp_bounds

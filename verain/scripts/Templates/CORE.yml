@@ -36,21 +36,21 @@ CORE:
       _pltype: parameter
       _type: int
       _do:
-        - copy CORE/$cycnum
+        - copy CORE/@cycle:0
       _content:
 
-    cyc_stdate:
+    cycle_sdate:
       _pltype: parameter
       _type: int
       _do:
-        - copy CORE/$cycsdate
+        - copy CORE/@cycle:1
       _content:
 
-    cyc_edate:
+    cycle_edate:
       _pltype: parameter
       _type: int
       _do:
-        - copy CORE/$cycedate
+        - copy CORE/@cycle:2
       _content:
 
     apitch:
@@ -81,25 +81,18 @@ CORE:
         - copy CORE/@baffle:0
       _content:
 
-    vessel_thick:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy CORE/$vessel_thick
-      _content:
-
-    vessel_radius:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy CORE/$vessel_radius
-      _content:
-
-    vessel_mat:
-      _pltype: parameter
+    vessel_mats:
+      _pltype: array
       _type: string
       _do:
-        - copy CORE/$vessel_mat
+        - copyarray CORE/@vessel,start=>0,stride=>2
+      _content:
+
+    vessel_radii:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray CORE/@vessel,start=>1,stride=>2
       _content:
 
     assm_map:

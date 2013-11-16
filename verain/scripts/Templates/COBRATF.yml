@@ -156,3 +156,45 @@ COBRATF:
       _do:
         - copy COBRATF/$solver
       _content:
+
+    parallel:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$parallel
+      _content:
+
+    global_energy_balance:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$global_energy_balance
+      _content:
+
+    global_mass_balance:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$global_mass_balance
+      _content:
+
+    fluid_energy_storage:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$fluid_energy_storage
+      _content:
+
+    solid_energy_storage:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$solid_energy_storage
+      _content:
+
+    mass_storage:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$mass_storage
+      _content:

@@ -242,7 +242,7 @@
     dimension     3
     eq_set        sc
     eigen_solver  arnoldi
-    tolerance     1e-4
+    tolerance     1e-6
     Pn_order      0
 
     cell_broadcast_size  289   ! set for larger problems
@@ -310,10 +310,10 @@
 [COUPLING]
   epsk        5.0  ! pcm
   epsp        1.0e-4
-  rlx_power   1.0
-  rlx_tfuel   0.3
-  rlx_den     0.3
-  maxiter     1000
+  rlx_power   0.6
+  rlx_tfuel   1.0
+  rlx_den     1.0
+  maxiter     100
 
 
 

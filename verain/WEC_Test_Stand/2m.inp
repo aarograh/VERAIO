@@ -171,8 +171,8 @@
   mesh 2
   num_groups 23
 
-  num_blocks_i 4
-  num_blocks_j 4
+  num_blocks_i 2
+  num_blocks_j 2
   num_sets 1
   max_delta_z 1.0
 

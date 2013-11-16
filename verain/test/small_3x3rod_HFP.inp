@@ -179,7 +179,7 @@
     dimension     3
     eq_set        sc
     eigen_solver  arnoldi
-    tolerance     1e-4
+    tolerance     1e-6
     Pn_order      0
 
 !   eigenvalue_db:
@@ -251,6 +251,7 @@
 [COUPLING]
   epsk        5.0  ! pcm
   eps_temp    1.0  ! temperature convergence
+  eps_boron   0.1  ! boron convergence (ppm)
   rlx_power   0.5
   rlx_tfuel   1.0
   rlx_den     1.0

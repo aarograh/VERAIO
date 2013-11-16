@@ -4,7 +4,6 @@
 !  Sample input for small singlerod Problem
 !
 !  Updated 3/18/2013 to be consistent with Problem 6 T/H
-!  Updated 8/22/2013 to include multiple depletion times (stacked cases times)
 !
 !  To process:
 !     ./react2xml.pl [file].inp [file].xml
@@ -19,8 +18,6 @@
 
   tfuel  900.0         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
   modden 0.743         ! g/cc      Not used with T/H feedback!
-
-  deplete 0.0 1010.0 2020.0 3000.0 4200.0   ! depletion steps (MWD/MTU)
 
   feedback on
   sym full
@@ -178,7 +175,7 @@
     dimension     3
     eq_set        sc
     eigen_solver  arnoldi
-    tolerance     1e-4
+    tolerance     1e-6
     Pn_order      0
 
 !   eigenvalue_db:

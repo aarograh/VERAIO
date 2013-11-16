@@ -1,9 +1,9 @@
 [CASEID]
-  title 'CASL Problem Singlerod HZP'
+  title 'Test Misc options'
 !================================================================================
-!  Sample input for small singlerod Problem
+! This test case is somewhere we can test misc. options added to the input
 !
-!  Updated 3/18/2013 to be consistent with Problem 6 T/H
+! Running this case will not produce any meaningful results
 !
 !  To process:
 !     ./react2xml.pl [file].inp [file].xml
@@ -14,25 +14,31 @@
   power  100.0         ! %
   tinlet 559.0         ! F
   boron  1300          ! ppmB
+  search 'boron'
+  kcrit  1.02   
   pressure 2250        ! psia
 
-  tfuel  600.0         ! K - 600K  Not used with T/H feedback! set to 600K with no feedback
+  tfuel  900.0         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
   modden 0.743         ! g/cc      Not used with T/H feedback!
 
-  feedback off
+  feedback on
   sym full
 
 [CORE]
-  size 1                ! 1x1 single-assembly
-  rated 0.066932 0.00260  ! MW, Mlbs/hr  *** scaled to 1x1, increased flow to match 17x17 outlet conditions
-  apitch 1.270            ! *** scaled to 1x1, no gap but larger flow area
+  size 3                ! 3x3 cross - 5 assemblies
+  rated 2.67725  0.10625 ! MW, Mlbs/hr  *** scaled to 3x3 5 assemblies
+  apitch 3.78           ! *** scaled to 3x3, no gap
   height 406.328
 
   core_shape
-    1
+    0 1 0
+    1 1 1
+    0 1 0
 
   assm_map
-    A1
+       A1   
+    A1 A1 A1
+       A1   
 
   lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
   upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
@@ -49,12 +55,22 @@
   mat pyrex  2.23
   mat b4c    6.56
 
+  vessel mod 166.7 ss 169.2 mod 169.9 ss 174.1 mod 176.1 cs 201.9   ! complicated vessel card
+
 [ASSEMBLY]
   title "Westinghouse 17x17"
-  npin 1        ! *** scaled to 1x1
-  ppitch 1.270  ! *** increased for 1x1 to get rid of gap
+  npin 3    ! *** scaled to 3x3
+  ppitch 1.260
 
-  fuel U31 10.257 95.0 / 3.1
+  fuel U31 10.251 95.10 / 3.1
+  fuel U32 10.252 95.20 / 3.2
+  fuel U33 10.253 95.30 / 3.3
+  fuel U34 10.254 95.40 / 3.4
+  fuel U35 10.255 95.50 / 3.5
+  fuel U36 10.256 95.60 / 3.6
+  fuel U37 10.257 95.70 / 3.7
+  fuel U38 10.258 95.80 / 3.8
+  fuel U39 10.259 95.90 / 3.9
 
 !=== material label, key_name, density (lib_name defaults to key_name)
   mat he   0.000176
@@ -62,42 +78,104 @@
   mat ss   8.0
   mat zirc 6.56
 
-  cell 1     0.4096 0.418 0.475 / U31 he zirc
-  cell 100          0.561 0.602 / mod    zirc       ! guide tube
-  cell 200          0.561 0.602 / mod    zirc       ! instrument tube
-  cell 7            0.418 0.475 / mod    mod        ! empty location
-  cell 8            0.418 0.475 /     he zirc       ! plenum
-  cell 9                  0.475 /        zirc       ! pincap
+  cell 1     0.4091 0.418 0.475 / U31 he zirc
+  cell 2     0.4092 0.418 0.475 / U31 he zirc
+  cell 3     0.4093 0.418 0.475 / U31 he zirc
+  cell 4     0.4094 0.418 0.475 / U31 he zirc
+  cell 5     0.4095 0.418 0.475 / U31 he zirc
+  cell 6     0.4096 0.418 0.475 / U31 he zirc
+  cell 7     0.4097 0.418 0.475 / U31 he zirc
+  cell 8     0.4098 0.418 0.475 / U31 he zirc
+  cell 9     0.4099 0.418 0.475 / U31 he zirc
+  cell GT           0.561 0.602 / mod    zirc       ! guide tube
+  cell IT           0.561 0.602 / mod    zirc       ! instrument tube
+  cell MT           0.418 0.475 / mod    mod        ! empty location
+  cell PL           0.418 0.475 /     he zirc       ! plenum
+  cell PC                 0.475 /        zirc       ! pincap
 
   lattice FUEL1
-     1
+      IT
+       1 1
+
+  lattice FUEL2
+      IT
+       2 2
+
+  lattice FUEL3
+      IT
+       3 3
+
+  lattice FUEL4
+      IT
+       4 4
+
+  lattice FUEL5
+      IT
+       5 5
+
+  lattice FUEL6
+      IT
+       6 6
+
+  lattice FUEL7
+      IT
+       7 7
+
+  lattice FUEL8
+      IT
+       8 8
+
+  lattice FUEL9
+      IT
+       9 9
 
   lattice LGAP1
-     7
+      IT
+      MT MT
 
   lattice PLEN1
-     8
+      IT
+      PL PL
 
   lattice PCAP1
-     9
+      IT
+      PC PC
 
   axial A1    6.050
       LGAP1  10.281
       PCAP1  11.951
-      FUEL1 377.711
+      FUEL1  15.817
+      FUEL2  48.662
+      FUEL3  77.105
+      FUEL4  93.235
+      FUEL5 109.365
+      FUEL6 125.495
+      FUEL7 137.37
+      FUEL8 213.765
+      FUEL9 377.711
       PLEN1 393.711
       PCAP1 395.381
       LGAP1 397.501
 
-  grid END inc  3.519 3.866  ! *** mass scaled to 1x1
-  grid MID zirc 3.028 3.810  ! *** mass scaled to 1x1
+  grid END inc  31.67 3.866  ! *** mass scaled to 3x3
+  grid MID zirc 27.25 3.810  ! *** mass scaled to 3x3
 
-  lower_nozzle  ss 6.05  21.626  ! mat, height, mass (g)  *** mass scaled to 1x1
-  upper_nozzle  ss 8.827 21.626  ! mat, height, mass (g)  *** mass scaled to 1x1
+  grid_axial
+      END  13.884
+      MID  75.2
+      MID 127.4
+      MID 179.6
+      MID 231.8
+      MID 284.0
+      MID 336.2
+      END 388.2
+
+  lower_nozzle  ss 6.05  194.64  ! mat, height, mass (g)  *** mass scaled to 3x3
+  upper_nozzle  ss 8.827 194.64  ! mat, height, mass (g)  *** mass scaled to 3x3
 
 [EDITS]
 
-!  3in intervals in active fuel
+!  approximately 3in intervals in active fuel
   axial_edit_bounds
           11.951
           15.817
@@ -152,25 +230,25 @@
 
 [INSILICO]
     mat_library casl_comp.sh5
-    xs_library  lib252_hetbondoneabs-noabssigp
+    xs_library  test-8grp
 
     max_delta_z   2.54
-    num_blocks_i  1
-    num_blocks_j  1
-    num_z_blocks  12
-    num_groups    23
-    num_sets      8
+    num_blocks_i  2
+    num_blocks_j  2
+    num_z_blocks  1
+    num_groups    8
+    num_sets      1
 
     mesh          4
     dimension     3
-    eq_set        sc
+    eq_set        spn_fv
     eigen_solver  arnoldi
-    tolerance     1e-4
+    tolerance     1e-6
     Pn_order      0
 
 !   eigenvalue_db:
-       k_tolerance   1e-4
-       L2_tolerance  1e-3
+       k_tolerance   1e-7
+       L2_tolerance  1e-6
        energy_dep_ev true
 
 !   quadrature_db:
@@ -185,30 +263,8 @@
 !   upscatter_db:
        upscatter_tolerance  1e-4
 
-    new_grp_bounds
-       8.2085e+05
-       1.1109e+05
-       5.5308e+03
-       1.8644e+02
-       3.7612e+01
-       3.5379e+01
-       2.7697e+01
-       2.1684e+01
-       2.0397e+01
-       1.5968e+01
-       7.1500e+00
-       6.7000e+00
-       6.3000e+00
-       1.0970e+00
-       1.0450e+00
-       9.5000e-01
-       3.5000e-01
-       2.0600e-01
-       1.0700e-01
-       5.8000e-02
-       2.5000e-02
-       1.0000e-02
-       1.0000e-05
+[COUPLING] 
+  read_restart  my_restart_file
 
 [COBRATF]
   nfuel   3             ! number of fuel rings in conduction model
@@ -227,4 +283,5 @@
   rtwfp   1000.0
   maxits  10000
   courant 0.8
-  maps_filename = single_rod_HZP_no_spacers
+
+
