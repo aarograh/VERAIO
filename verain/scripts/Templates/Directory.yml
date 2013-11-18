@@ -768,7 +768,7 @@ INSILICO:
     _content:
     _check:
       - is_word()
-      - in_dictionary() Ifpack LUDXXX
+      - in_dictionary() Ifpack ML
 
   upscatter_tolerance:
     <<: *dtdouble
