@@ -1,0 +1,360 @@
+%*-------------------------------------------------------------------------*
+%*                 Copyright 2013 Core Physics, Inc.                       *
+%*  Under terms of the contract to support CASL, there is a non-exclusive  *
+%*  license for use of this work by or on behalf of the U.S. Government.   *
+%*-------------------------------------------------------------------------*
+%
+% @version CVS $Id: verain.tex,v 1.24 2013/11/19 17:28:04 scott Exp $
+%
+\documentclass{report}
+%
+%  various packages that you may wish to activate for usage
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{fancyheadings}
+\usepackage{amssymb,amsmath}
+
+\numberwithin{equation}{section}
+
+\usepackage[pdftex,
+  pdftitle={VERA Common Input},
+  pdfauthor={www.casl.gov},
+  pdfsubject={ },
+  bookmarks, bookmarksopen, bookmarksnumbered,
+  pdfstartview={FitH},
+  colorlinks,linkcolor={blue},citecolor={blue},
+  urlcolor={red}]{hyperref}
+
+\DeclareGraphicsExtensions{.eps}
+\DeclareGraphicsRule{.eps}{eps}{}{}
+
+%  standard margins are 1.875in for 10pt document
+%  this changes them to 1.25 inch
+\addtolength{\oddsidemargin}{-0.525in}
+\addtolength{\evensidemargin}{-0.525in}
+\addtolength{\textwidth}{1.05in}
+
+\setlength{\parindent}{0in}  % do not indent paragraphs, double space between
+\addtolength{\parskip}{1.0\baselineskip}
+
+%% card list - See pg. 75 in book
+\newenvironment{cardlist}
+ {\begin{list}{}
+  {\setlength{\labelwidth}{2.0cm}
+   \setlength{\leftmargin}{2.5cm}   % was 2
+   \setlength{\labelsep}{0.25cm}    % was 0.5
+   \setlength{\rightmargin}{2.0cm}
+   \setlength{\topsep}{-0.2cm}
+%  \setlength{\parsep}{0.5ex plus0.2ex minus0.5ex}
+   \setlength{\itemsep}{0ex plus0.2ex} }}
+{\end{list}}
+
+%  Define page headers and footers
+\pagestyle{fancy}
+\newcommand{\tstamp}{\today}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\lhead[\fancyplain{}{\thepage}]         {\fancyplain{}{\rightmark}}
+\chead[\fancyplain{}{}]                 {\fancyplain{}{}}
+\rhead[\fancyplain{}{\rightmark}]       {\fancyplain{VERA Common Input}{VERA Common Input}}
+\lfoot[\fancyplain{}{}]                 {\fancyplain{}{}}
+\cfoot[\fancyplain{\thepage}{}]         {\fancyplain{\thepage}{\thepage}}
+\rfoot[\fancyplain{\tstamp} {\tstamp}]  {\fancyplain{}{}}
+
+\begin{document}
+\include{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+
+% \listoffigures
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Introduction}
+
+\section{Introduction to CASL}
+The Consortium for Advanced Simulation of Light Water Reactors (CASL) is the first
+DOE Energy Innovation Hub established in July 2010, for the purpose of providing
+advanced modeling and simulation (M\&S) solutions for commercial nuclear reactors.
+
+CASL’s vision is to predict, with confidence, the performance of nuclear reactors
+through comprehensive, science-based modeling and simulation technology that is
+deployed and applied broadly throughout the nuclear energy industry to enhance safety,
+reliability, and economics.
+
+CASL’s mission is to provide coupled, higher-fidelity, usable modeling and simulation
+capabilities needed to address light water reactor operational and safety performance-defining phenomena.
+
+CASL’s foundational technology products include CASL solutions and CASL ModSim Technologies.
+CASL’s ModSim technology, the Virtual Environment for Reactor Applications (VERA), provides
+higher-fidelity results than the current industry approach by incorporating coupled physics
+and science-based models, state-of-the-art numerical methods, modern computational science,
+integrated uncertainty quantification (UQ) and validation against data from operating
+pressurized water reactors (PWRs), single-effect experiments, and integral tests.
+
+CASL will address, through new insights afforded by its ModSim technology, key nuclear
+energy industry challenges to furthering power uprates, higher fuel burnup, and lifetime
+extension while providing higher confidence in enhanced nuclear safety and this cleaner energy source.
+
+The CASL Team is a consortium that consists of ten core partners and numerous contributing members.
+The CASL organization is led by Oak Ridge National Lab, and CASL’s R\&D is executed
+in six technical teams called Focus Areas (FA) and one integrating technical area,
+Collaboration and Ideation (C\&I). This ground-breaking partnership provides unparalleled
+collective institutional knowledge, nuclear science and engineering talent, computational
+science leadership, and a record of LWR design and regulatory accomplishments!
+
+\section{VERA Core Simulator}
+One piece of VERA is the VERA Core Simulator.  The core simulator is the specific collection
+of multi-physics computer codes used to model and deplete a LWR core over multiple cycles.
+Examples of the separate physics codes include cross section models, neutron transport, depletion,
+thermal-hydraulics, and fuel performance.
+
+The purpose of the core simulator is to provide data and boundary conditions to model
+CASL Challenge Problems such as CIPS, CILC, DNB, and PCI analysis.
+
+One important feature of the core simulator is that a single common input file is used to drive all
+of the different physics codes\footnote{The only exception to this is for CFD codes,
+which require a CAD drawing to perform any meaningful analysis.}.
+One benefit of using a single common input is that users only need to understand and be proficient with one input,
+instead of having to understand multiple inputs for multiple physics codes.
+Another benefit of using a single common input is that all codes will be working from a single
+geometry description and this will reduce errors due to inconsistent models.
+
+This document lives in the VERA GIT repository file ``VERAInExt/verain/docs/verain\_UM.pdf''.  
+Please refer to this location for the latest version of the input manual.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{User Manual}
+
+% fix: add more about input, parsing rules, white space, comments, etc
+% fix: add description of units.  Most units are CGS, but there are exceptions.  See Chap4.
+% fix: what happens if you misspell a word?  Does the parser catch this?
+
+The VERA input is an ASCII input file.
+The VERA input is designed to be modular.  The input is split into separate modules
+(or blocks) to describe different geometric objects in the core, and also separate
+modules to define specific modeling options for each of the physics codes.
+
+Geometric objects are defined as the physical ``parts'' of the reactor, which includes
+fuel assemblies, control rod assemblies, removable burnable poison assemblies, and detectors.
+By defining each geometric object as a separate module, the objects can be described
+independently of each other and rely on very little global information.  The independent
+descriptions make QA easier and allows objects to be defined on one cycle and re-used in
+multiple cycles without worrying about conflicts.
+Another advantage of the module approach is that it makes it easier to shuffle fuel assemblies,
+and insert and withdraw ``inserts'' (such as control rods, detectors, and removable burnable
+poison assemblies) into the fuel assemblies as the core configuration changes.
+
+Additional modules/blocks are used to define modeling options in each of the physics
+codes.  Separating the geometry description from the modeling options allows all of the
+physics codes to share the same geometry description and also allows for the same input to be
+used with multiple physics codes.
+
+A listing of some of the input blocks in the VERA input is:
+\begin{description}
+\item[CASEID] This block contains an input title card.
+\item[CORE] This block describes the core layout including core map, assembly locations,
+  control rod locations, and assembly insert locations.  The CORE block contains data that will not change
+  during a cycle depletion.
+\item[STATE] This blocks describes the statepoint values at a particular point in time.
+  This include inlet temperature, pressure, power, and control rod positions.  STATE values can (and usually do)
+  change at each statepoint.
+\item[ASSEMBLY] This block contains the physical description of a fuel assembly,
+   not including control rods, detectors, or inserts.
+\item[INSERT] This block contains the physical description of an assembly insert.  An insert is a
+   generic term and can be used to describe a removable burnable poison assembly or a thimble plug assembly.
+\item[CONTROL] This block contains the physical description of a control rod assembly.
+   A control rod assembly is very similar to an assembly insert, except that it can move
+   during operations.
+\item[DETECTOR] This block contains the physical description of a detector string.
+\item[EDITS] This block contains information on what edits the code should produce.
+\item[COUPLING] This block contains parameters for coupling different physics codes together.
+\end{description}
+
+In addition to these blocks listed above, there are additional blocks that contain code-specific
+information.  Examples of these code blocks are {\bf COBRATF}, {\bf INSILICO}, {\bf MAMBA2D}, and {\bf MPACT}.
+Additional code input blocks can be added as new physics codes are added to the simulator.
+
+The following sections in this chapter describe the most common concepts and features of each input block.
+A complete listing of all the input cards in each input block is included in Chapter \ref{chap:cards}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Section: Core Description
+\include{core}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Section: Assemblies
+\include{assemblies}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Statepoint Values}
+
+The [STATE] block defines the state of the core at a particular point in time
+(power, flow, pressure, inlet temperature, rod positions, boron concentration, etc.).
+These values will typically change during a depletion.
+
+An example showing the most common input cards in the [STATE] block is shown below.
+
+\begin{verbatim}
+  [STATE]
+    power   98.0       ! % of rated power
+    flow   100.0       ! % of rated flow
+    pressure 2250.0    ! psia
+    tinlet 557.33      ! F
+    feedback on        ! turn on T/H feedback
+
+    boron  1285        ! initial boron ppmB
+    search 'boron'     ! turn on boron search
+
+    sym qtr            ! run problem in qtr-symmetry
+
+    rodbank SA 228
+            SB 228
+            SC 228
+            SD 228
+             A 228
+             B 228
+             C 228
+             D 167
+\end{verbatim}
+
+The {\it sym} card tells the code to run the calculation in full-core symmetry or
+qtr-core symmetry. If the calculation is run in qtr-core symmetry, the symmetry is either
+set to qtr-core rotational or qtr-core mirror by the {\it bc\_sym} card in the [CORE] block.
+
+The {\it rodbank} card is used to position the control rods. The input includes pairs of bank names
+and bank positions.  The bank names correspond to the {\it crd\_map} in the [CORE] block.
+The positions indicate the position of the control rod bank in steps.
+For most PWR's, 0 steps is fully inserted.
+The number of steps for a rod to be completely withdrawn is set by the {\it stroke} card in
+the [CONTROL] block. For Westinghouse PWR's, a typical value of fully-withdrawn is 228 steps.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Edits}
+
+The [EDITS] block is used to define the edits the user would like to see.
+
+The {\it axial\_edit\_bounds} defines the axial levels to average the power over.
+The user may choose to average power over uniform axial intervals (like most nodal codes),
+or to specify the edit intervals manually.
+
+\subsection{CTF Nodalization}
+
+The [EDITS] block is also used to set the axial nodalization in CTF.
+
+If running CTF, there is a restriction that the grid boundaries must be explicitly
+included in the {\it axial\_edit\_bounds}. This can get a little complicated for the user.
+The grids are defined by specifying the grid heights on the {\it grid} card and the elevations of
+the grid midpoints on the {\it grid\_axial} card.
+These heights and midpoints must be converted to the elevations at the top and bottom of the grid,
+and then the top and bottom elevations must be included in the {\it axial\_edit\_bounds}.
+
+For example, if a grid is defined with a centerline at 75.0 and a height of 2.5, then the
+{\it axial\_edit\_bounds} must include the points $75.0 \pm 1.25 $= 73.75 and 76.25.
+
+\begin{verbatim}
+   [ASSEMBLY]
+    grid GRID1 inc 1000 2.5    ! grid name, material, mass (g), and height (cm)
+    grid_axial                 ! locations of grid midpoints (cm)
+        GRID1 75.0
+
+   [EDITS]
+    axial_edit_bounds
+       ...
+       73.75                   ! this array must include top and bottom grid boundaries
+       76.25
+       ...
+\end{verbatim}
+
+The reason for this restriction is because the power is already calculated on the {\it axial\_edit\_bounds},
+so it is natural to use these boundaries in the CTF model as well.
+The grids must be explicitly included in the CTF boundaries so the loss coefficients are calculated correctly.
+
+In the future, this restriction may be lifted and an additional edit bounds array will
+be added explicitly for CTF calculations.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Coupling Parameters}
+
+The [COUPLING] block defines the relaxation parameters and convergence criteria to be
+used when coupling different physics codes.  These values are used to determine
+convergence {\it between} physics codes.  Convergence criteria {\it within} a physics
+code is controlled by the specific code block.
+
+Refer to Chapter \ref{chap:cards} for a complete listing of all the cards in the [COUPLING] block.
+
+No code-specific information is included in the [COUPLING] block.  All code-specific information
+is contained in the code-specific blocks.
+
+As an example, consider the following multi-physics code coupling:
+\begin{enumerate}
+  \item  Run T/H calculation
+  \item  Run neutronics calculation
+  \item  Check eigenvalue convergence \label{stepepsk}
+  \item  Check power convergence \label{stepepsp}
+  \item  Relax/dampen the power shape
+  \item  If not converged, go to step 1.
+\end{enumerate}
+The eigenvalue convergence in step \ref{stepepsk} uses the parameter {\it epsk} to check
+the change in eigenvalue between coupled iterations.
+There are additional eigenvalue convergence criteria {\it within} the neutronics
+code, but the internal parameters are specified in the individual code blocks.
+
+The power convergence in step \ref{stepepsp} uses the parameter {\it epsp} to check
+the change in power between coupled iterations.
+
+Additional convergence checks are made on the peak fuel temperature, maximum change in density,
+and change in boron concentration (if applicable).
+
+The example shown above uses a Picard iteration to converge.  Picard iterations usually
+need to apply a relaxation factor (also called a damping factor or under-relaxation factor) to
+one or more of the calculated quantities to converge.
+The relaxation factors are applied in the following manner:
+\begin{equation}
+  x = \omega \, x^{\mbox{new}} + (1 - \omega) x^{\mbox{old}}
+\end{equation}
+where $x$ is the calculated parameter and $\omega$ is the relaxation factor.
+A relaxation factor of 1.0 signifies no relaxation is performed.
+A relaxation factor $< 1.0$ signifies under-relaxation.
+
+Relaxation factors can be specified for the point-wise power, point-wise temperature, and/or point-wise density.
+The relaxation is applied to the transferred quantities sent between physics codes.  The state variables
+within each physics code are not changed.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Chapter: Materials
+\include{materials}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Input Card Descriptions} \label{chap:cards}
+This chapter contains a complete listing of the available input cards.
+
+The input for each block is given in a separate subsection.
+
+Input cards are given in {\bf bold} text followed by the parameters on the card.
+Following each input card is a description of the parameters on that card.
+
+An example of an input card is:
+
+{\bf card\_name} param1, param2
+\begin{cardlist}
+  \item[param1]  The first parameter on card (units)
+  \item[param2]  The second parameter on card (units)
+\end{cardlist}
+
+
+\include{cards}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Example}
+
+This chapter includes a complete input example for a full-core problem.
+This problem is Problem 7 of the AMA Progression Benchmark Problems and
+is based upon the publicly available description of the Watts Bar reactors.
+
+\include{example}
+
+\end{document}
