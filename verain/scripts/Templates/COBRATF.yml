@@ -198,3 +198,31 @@ COBRATF:
       _do:
         - copy COBRATF/$mass_storage
       _content:
+
+    edit_gaps:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_gaps
+      _content:
+
+    edit_channels:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_channels
+      _content:
+
+    edit_rods:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_rods
+      _content:
+
+    edit_dnb:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_rods
+      _content:
