@@ -228,6 +228,10 @@
   solid_energy_storage     0.5  !%
   mass_storage             0.5  !%
   parallel 1
+  edit_gaps 0         ! Generate the gaps.out file and print gap results
+  edit_channels 0     ! Generate the channels.out file and print channel results
+  edit_rods 0         ! Print rod results (found in deck.out)
+  edit_dnb 0          ! Generate the dnb.out file
 
 [COUPLING]
   epsk        2.0  ! pcm

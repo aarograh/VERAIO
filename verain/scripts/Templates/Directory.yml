@@ -1009,6 +1009,30 @@ COBRATF:
     _check:
       - is_float()
 
+  edit_gaps:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
+  edit_channels:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
+  edit_rods:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
+  edit_dnb:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
 COUPLING:
 
   epsk:
