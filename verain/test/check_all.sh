@@ -1,11 +1,25 @@
 #!/bin/tcsh
 
-set t=`egrep 'ADD_REACTOR_AWARE_INPUT_PARSER_TEST\(' CMakeLists.txt | sed 's/ADD_REACTOR_AWARE_INPUT_PARSER_TEST//g' | sed 's/[()]//g'`
+# set printexitvalue
 
-foreach i ($t)
-   echo $i
- #   ../scripts/react2xml.pl $i.inp $i.xml.gold; rm $i.xml
-    ../scripts/react2xml.pl $i.inp $i.xml
-    diff $i.xml  $i.xml.gold
+foreach i ( *.xml.gold )
+    set l=`echo $i | sed 's/\.xml\.gold//'`
+    if ( -e ${l}.inp ) then
+	echo -n Checking ${l}.inp '... '
+	if ( -e _${l}.xml ) then
+	   echo _${l}.xml exists
+	   exit 1
+	endif
+        ../scripts/react2xml.pl ${l}.inp _${l}.xml
+        diff _${l}.xml  ${l}.xml.gold
+	if ( $status ) then
+           echo false
+	   exit 2
+	else
+           echo ok
+	endif
+	rm _${l}.xml
+    endif
 end
+    
 

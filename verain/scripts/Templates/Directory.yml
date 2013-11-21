@@ -1161,6 +1161,11 @@ MPACT:
     _content:
     _check:
       - is_word()
+  dep_filename:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
   mats_file:
     <<: *dtword
     _content:
