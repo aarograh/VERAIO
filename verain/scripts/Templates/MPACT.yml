@@ -49,6 +49,12 @@ MPACT:
         - copy MPACT/$jagged
       _content:
 
+    db_entry:
+      _pltype: list
+      _do:
+        - mpact_db db_entry_,MPACT/%db_entry/*
+      _content:
+
     mesh:
       _pltype: list
       _content:

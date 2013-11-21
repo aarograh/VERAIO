@@ -61,7 +61,8 @@ sub dispatch {
 	rename     => \&dbcopy,
 	gridmap    => \&gridmap,
 	coremapmap => \&coremapmap,
-	mpact_mesh => \&mpact_mesh
+	mpact_mesh => \&mpact_mesh,
+	mpact_db   => \&mpact_db
     };
 
 #    if($version eq '007'){
@@ -1254,6 +1255,57 @@ sub mpact_mesh{
 	&key_on_parameter($mat_ref,'label','string',$keyname);
 	&key_on_array($mat_ref,'num_rad','int', @num_rad);
 	&key_on_array($mat_ref,'num_theta','int', @num_theta);
+
+    }
+}
+
+sub mpact_db{
+    my ($home,$basename,@paths)=@_;
+
+    my @mats;
+    my @mats_names;
+
+    my $keyname;
+    my $mattype;
+
+    foreach my $ipath (@paths){
+	my @apaths=find_keys($SOURCE_DB,$ipath);
+	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
+	push @mats, @apaths if @apaths;
+	push @mats_names, @names if @names;
+    }
+
+    foreach my $imat_path (@mats){
+	my @keypath=@{ $imat_path };
+	$keyname=$keypath[$#keypath];
+	unless($keypath[$#keypath-2] eq 'db_entry'){
+	    die "mpact_db: invalid type: @keypath\n";
+	}
+
+	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
+
+# count slashes
+	my @slshs=indexes { $_ eq '/' } @content;
+	if(@slshs != 2){
+	    die "mpact_db: invalid number of slashes in MPACT command db_set @content\n";
+	}
+
+	my @part1=before {$_ eq '/'} @content;
+# part 2 will contain both 2 and 3, to be further seperated
+	my @part2=after  {$_ eq '/'} @content;
+	my @part3=after  {$_ eq '/'} @part2;
+	my @part2=before {$_ eq '/'} @part2;
+
+	
+# template
+	my @input_path = @part1;
+	my @data_type  = @part2;
+	my @data_value = @part3;
+
+	my $mat_ref=&key_on_list($home,$basename.$keyname);
+	&key_on_parameter($mat_ref,'path','string',@input_path);
+	&key_on_parameter($mat_ref,'type','string',@data_type);
+	&key_on_parameter($mat_ref,'value','string',@data_value);
 
     }
 }
