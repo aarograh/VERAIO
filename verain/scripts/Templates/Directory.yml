@@ -1096,6 +1096,7 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() none core fsr
+
   axial_mesh:
     <<: *dtlist
     _style: multi-line
@@ -1282,6 +1283,10 @@ MPACT:
     _slash:
     _check:
 
+  db_entry:
+    <<: *dtlistnamed
+    _slash:
+    _check:
 
 MAMBA2D:
   problem_name:
