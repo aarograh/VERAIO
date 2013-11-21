@@ -1,0 +1,462 @@
+[CASEID]
+  title 'CASL AMA Problem 4 - Nine 3x3 WEC Assemblies - Public'
+
+[STATE]
+  power  0.0            ! %
+  tinlet 557.33         ! F - 565K
+  tfuel  565.0          ! K - 565K
+  boron  1360           ! ppmB
+  modden 0.743          ! g/cc
+  rodbank D 23          ! Bank D steps withdrawn
+  feedback off      
+  sym qtr  
+
+[CORE]
+  size 3                ! nine assemblies
+  rated 159.1 6.14      ! MW, Mlbs/hr 
+  apitch 21.5
+  height 406.337
+
+  core_shape
+    1 1 1
+    1 1 1
+    1 1 1
+  
+  assm_map
+    A21
+    A26 A21
+
+  insert_map
+    -  
+    1 -
+
+  crd_map
+    1
+    - -
+ 
+  crd_bank
+    D
+    - -
+
+  lower_plate ss  5.0 0.5   ! mat, thickness, vol frac
+  upper_plate ss  7.6 0.5   ! mat, thickness, vol frac
+  lower_ref  mod 20.0 1.0
+  upper_ref  mod 20.0 1.0
+
+  xlabel  J H G
+  ylabel  7 8 9
+
+  bc_rad reflecting
+
+  mat he     0.0001786 
+  mat inc    8.19
+  mat ss     8.0
+  mat zirc   6.56 zirc4
+!!! Added spring material for upper plenum, 5% stainless steel
+  mat spring 0.4 ss 0.05 he 0.95
+!!! Hand mixing upper and lower plug
+  mat lplug  0.4 ss 0.2831 mod 0.7169
+  mat uplug  0.4 ss 0.4396 mod 0.5604
+
+[ASSEMBLY]
+  title "Westinghouse 17x17"
+  npin 17 
+  ppitch 1.260
+  
+  fuel U21 10.257 94.5 / 2.110
+  fuel U26 10.257 94.5 / 2.619
+
+  cell 1     0.4096 0.418 0.475 / U21 he zirc
+  cell 2     0.4096 0.418 0.475 / U26 he zirc
+  cell 3            0.561 0.602 / mod    zirc       ! guide/instrument tube
+  cell 4            0.418 0.475 / spring zirc       ! plenum  using spring
+  cell 5                  0.475 /        lplg       ! lower end plug
+  cell 6                  0.475 /        uplg       ! upper end plug
+
+  lattice LAT21 
+       3
+       1 1
+       1 1 1
+       3 1 1 3
+       1 1 1 1 1
+       1 1 1 1 1 3
+       3 1 1 3 1 1 1
+       1 1 1 1 1 1 1 1
+       1 1 1 1 1 1 1 1 1
+
+  lattice LAT26  
+       3
+       2 2
+       2 2 2
+       3 2 2 3
+       2 2 2 2 2
+       2 2 2 2 2 3
+       3 2 2 3 2 2 2
+       2 2 2 2 2 2 2 2
+       2 2 2 2 2 2 2 2 2
+
+  lattice PLEN
+       3
+       4 4
+       4 4 4
+       3 4 4 3
+       4 4 4 4 4
+       4 4 4 4 4 3
+       3 4 4 3 4 4 4
+       4 4 4 4 4 4 4 4
+       4 4 4 4 4 4 4 4 4
+
+  lattice LPLUG 
+       3
+       5 5
+       5 5 5
+       3 5 5 3
+       5 5 5 5 5
+       5 5 5 5 5 3
+       3 5 5 3 5 5 5
+       5 5 5 5 5 5 5 5
+       5 5 5 5 5 5 5 5 5
+
+  lattice UPLUG 
+       3
+       6 6
+       6 6 6
+       6 6 6 3
+       6 6 6 6 6
+       6 6 6 6 6 3
+       6 6 6 3 6 6 6
+       6 6 6 6 6 6 6 6
+       6 6 6 6 6 6 6 6 6
+
+  axial A21 6.053 LPLUG 11.951 LAT21 377.711 PLEN 393.711 UPLUG 397.510
+  axial A26 6.053 LPLUG 11.951 LAT26 377.711 PLEN 393.711 UPLUG 397.510
+
+  grid END inc  1017 3.866
+  grid MID zirc 875  3.810
+
+  grid_axial
+      END  13.884
+      MID  75.2
+      MID 127.4
+      MID 179.6
+      MID 231.8
+      MID 284.0
+      MID 336.2
+      END 388.2
+
+  lower_nozzle  ss 6.053 6250.0  ! mat, height, mass (g)
+  upper_nozzle  ss 8.827 6250.0  ! mat, height, mass (g)
+
+[INSERT]
+  title "Pyrex"
+  npin 17
+
+  mat pyrx1 2.25 pyrex-vera
+
+  cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrx1 he ss
+  cell 2                          0.437 0.484 /            spring ss    ! plenum  using spring
+  cell 3                                0.484 /                   ss    ! plug  
+
+  rodmap  PY20
+     -
+     - -
+     - - -
+     1 - - -
+     - - - - -
+     - - - - - 1
+     1 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  PLEN20
+     -
+     - -
+     - - -
+     2 - - -
+     - - - - -
+     - - - - - 2
+     2 - - 2 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  PLUG20
+     -
+     - -
+     - - -
+     3 - - -
+     - - - - -
+     - - - - - 3
+     3 - - 3 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  axial 1      13.221 
+        PLUG20 15.761 
+          PY20 376.441 
+        PLEN20 398.64
+
+[CONTROL]
+  title "B4C with AIC tips"
+  npin 17
+  stroke  365.125 230     ! approx for 1.5875 step sizes and 230 max stroke
+
+  mat aic 10.2 
+  mat b4c 1.76
+
+  cell 1  0.382 0.386 0.484 / aic he ss
+  cell 2  0.373 0.386 0.484 / b4c he ss
+  cell 3        0.386 0.484 / spring ss ! plenum  using spring
+  cell 4              0.484 /        ss !plug
+
+  rodmap AIC
+     -
+     - -
+     - - -
+     1 - - 1
+     - - - - -
+     - - - - - 1
+     1 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap B4C
+     -
+     - -
+     - - -
+     2 - - 2
+     - - - - -
+     - - - - - 2
+     2 - - 2 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap PLEN
+     -
+     - -
+     - - -
+     3 - - 3
+     - - - - -
+     - - - - - 3
+     3 - - 3 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap PLUG
+     -
+     - -
+     - - -
+     4 - - 4
+     - - - - -
+     - - - - - 4
+     4 - - 4 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  axial 1     16.2875
+        PLUG  18.1875 
+         AIC 119.7875 
+         B4C 378.8675
+        PLEN 389.5675
+
+[EDITS]
+  axial_edit_bounds 
+      11.951
+      15.817 
+      24.028 
+      32.239 
+      40.45 
+      48.662 
+      56.873 
+      65.084 
+      73.295 
+      77.105 
+      85.17 
+      93.235 
+      101.3 
+      109.365 
+      117.43 
+      125.495 
+      129.305 
+      137.37 
+      145.435 
+      153.5 
+      161.565 
+      169.63 
+      177.695 
+      181.505 
+      189.57 
+      197.635 
+      205.7 
+      213.765 
+      221.83 
+      229.895 
+      233.705 
+      241.77 
+      249.835 
+      257.9 
+      265.965 
+      274.03 
+      282.095 
+      285.905 
+      293.97 
+      302.035 
+      310.1 
+      318.165 
+      326.23 
+      334.295 
+      338.105 
+      346.0262 
+      353.9474 
+      361.8686 
+      369.7898 
+      377.711
+
+[INSILICO]
+    cell_homogenize true
+    eq_set        spn_fv
+    SPN_order     3
+    Pn_order      1
+    tolerance     1e-6
+    dimension     3
+    mesh          2
+    max_delta_z   1.27
+    Pn_correction true
+
+    mat_library casl_comp_r2.sh5
+    xs_library  lib252_hetbondoneabs-noabssigp
+
+!   pin_partitioning true
+    num_blocks_i  12  
+    num_blocks_j  12  
+    num_z_blocks  1  
+    num_groups    23
+    num_sets      1
+
+    azimuthals_octant  4
+    polars_octant      4
+    quad_type          qr
+
+    silo_output  p4 
+
+    new_grp_bounds 
+       8.2085e+05 
+       1.1109e+05 
+       5.5308e+03 
+       1.8644e+02 
+       3.7612e+01 
+       3.5379e+01
+       2.7697e+01 
+       2.1684e+01 
+       2.0397e+01 
+       1.5968e+01 
+       7.1500e+00
+       6.7000e+00
+       6.3000e+00 
+       1.0970e+00 
+       1.0450e+00 
+       9.5000e-01 
+       3.5000e-01 
+       2.0600e-01
+       1.0700e-01 
+       5.8000e-02 
+       2.5000e-02 
+       1.0000e-02 
+       1.0000e-05
+
+[MPACT]
+  vis_edits         none
+  ray_spacing       0.05
+!quad_set
+  quad_type         CHEBYSHEV-GAUSS
+  polars_octant     4
+  azimuthals_octant 16
+!iteration_control
+  flux_tolerance    1e-4
+  num_inners        3
+  k_tolerance       1e-6
+  up_scatter        2
+  num_outers        30
+  scattering        P2
+!cmfd
+  cmfd              cmfd
+  cmfd_solver       mgnode
+  k_shift           1.5
+  cmfd_num_outers   20
+!2D1D
+  split_TL          true
+  TL_treatment      lflat
+  nodal_method      nem
+!  under_relax       1.0
+!parallel
+  num_space         60
+  num_angle         1
+  num_energy        1
+  num_threads       1
+!xs_library
+  xs_filename       declib56g_e7_v3.0_0708.fmt 
+  xs_type           ORNL
+  subgroup_set      4
+!mesh
+
+  mesh fuel  3 1 1 / 8 8 8 8 8 8
+  mesh gtube 3 1   / 8 8 8 8 8
+  axial_mesh       20.0000
+                    5.0000
+                    6.0530
+                    5.8980
+                    3.8660
+                    8.2110
+                    8.2110
+                    8.2110
+                    8.2120
+                    8.2110
+                    8.2110
+                    8.2110
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    7.9212
+                    7.9212
+                    7.9212
+                    7.9212
+                    7.9212
+                    8.5560
+                    3.8660
+                    3.5780
+                    3.7990
+                    8.8270
+                    7.6000
+                   20.0000
