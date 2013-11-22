@@ -148,8 +148,6 @@
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="Materials">
-      </ParameterList>
       <ParameterList name="SpacerGrids">
         <ParameterList name="Grid_END">
           <Parameter name="height" type="double" value="3.866"/>
@@ -248,8 +246,6 @@
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="Materials">
-      </ParameterList>
       <ParameterList name="SpacerGrids">
         <ParameterList name="Grid_END">
           <Parameter name="height" type="double" value="3.866"/>
@@ -309,8 +305,6 @@
           <Parameter name="type" type="string" value="other"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="Materials">
-      </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{17.031,118.6,377.71}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{AIC,B4C}"/>
       <Parameter name="label" type="string" value="1"/>
@@ -336,8 +330,6 @@
           <Parameter name="radii" type="Array(double)" value="{0.258,0.382}"/>
           <Parameter name="type" type="string" value="other"/>
         </ParameterList>
-      </ParameterList>
-      <ParameterList name="Materials">
       </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,406.3}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{DET}"/>
@@ -374,8 +366,6 @@
           <Parameter name="type" type="string" value="other"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="Materials">
-      </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{15.76,376.44,396.7}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{PY20,PLEN20}"/>
       <Parameter name="label" type="string" value="1"/>
@@ -383,19 +373,7 @@
       <Parameter name="title" type="string" value="Pyrex"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="INSILICO">
-  </ParameterList>
   <ParameterList name="EDITS">
     <Parameter name="axial_edit_bounds" type="Array(double)" value="{0,365.24}"/>
-  </ParameterList>
-  <ParameterList name="COBRATF">
-  </ParameterList>
-  <ParameterList name="COUPLING">
-  </ParameterList>
-  <ParameterList name="MPACT">
-  </ParameterList>
-  <ParameterList name="MAMBA2D">
-  </ParameterList>
-  <ParameterList name="PEREGRINE">
   </ParameterList>
 </ParameterList>

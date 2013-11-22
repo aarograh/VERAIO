@@ -13,8 +13,6 @@
     <Parameter name="tinlet" type="double" value="326.85"/>
   </ParameterList>
   <ParameterList name="CORE">
-    <ParameterList name="Materials">
-    </ParameterList>
     <Parameter name="apitch" type="double" value="21.50"/>
     <Parameter name="assm_map" type="Array(string)" value="{12GAD}"/>
     <Parameter name="bc_bot" type="string" value="reflecting"/>
@@ -95,8 +93,6 @@
           <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="SpacerGrids">
-      </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{LAT12}"/>
       <Parameter name="label" type="string" value="12GAD"/>
@@ -172,8 +168,6 @@
           <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="SpacerGrids">
-      </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{LAT24}"/>
       <Parameter name="label" type="string" value="24GAD"/>
@@ -181,12 +175,6 @@
       <Parameter name="ppitch" type="double" value="1.26"/>
       <Parameter name="title" type="string" value="17x17 assemblies with gadolinia"/>
     </ParameterList>
-  </ParameterList>
-  <ParameterList name="CONTROLS">
-  </ParameterList>
-  <ParameterList name="DETECTORS">
-  </ParameterList>
-  <ParameterList name="INSERTS">
   </ParameterList>
   <ParameterList name="INSILICO">
     <Parameter name="Pn_order" type="int" value="1"/>
@@ -218,17 +206,5 @@
       <Parameter name="tolerance" type="double" value="1e-5"/>
     </ParameterList>
     <Parameter name="xs_library" type="string" value="lib252_hetbondoneabs-noabssigp"/>
-  </ParameterList>
-  <ParameterList name="EDITS">
-  </ParameterList>
-  <ParameterList name="COBRATF">
-  </ParameterList>
-  <ParameterList name="COUPLING">
-  </ParameterList>
-  <ParameterList name="MPACT">
-  </ParameterList>
-  <ParameterList name="MAMBA2D">
-  </ParameterList>
-  <ParameterList name="PEREGRINE">
   </ParameterList>
 </ParameterList>
