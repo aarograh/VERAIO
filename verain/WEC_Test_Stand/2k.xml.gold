@@ -497,6 +497,8 @@
       <Parameter name="num_outers" type="int" value="20"/>
       <Parameter name="solver" type="string" value="mgnode"/>
     </ParameterList>
+    <ParameterList name="db_entry">
+    </ParameterList>
     <ParameterList name="iteration_control">
       <Parameter name="flux_tolerance" type="double" value="1e-6"/>
       <Parameter name="k_tolerance" type="double" value="1e-6"/>
