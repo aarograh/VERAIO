@@ -17,6 +17,13 @@ INSILICO:
         - copy INSILICO/$xs_library
       _content:
 
+    celib_file:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy INSILICO/$celib_file
+      _content:
+
     mat_library:
       _pltype: parameter
       _type: string
@@ -36,6 +43,13 @@ INSILICO:
       _type: int
       _do:
         - copy INSILICO/$dimension
+      _content:
+
+    use_symmetry:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy INSILICO/$use_symmetry
       _content:
 
     do_transport:
@@ -229,7 +243,7 @@ INSILICO:
     eigenvalue_db:
       _pltype: list
       _content:
-  
+
         k_tolerance:
           _pltype: parameter
           _type: double
@@ -243,28 +257,28 @@ INSILICO:
           _do:
             - copy INSILICO/$L2_tolerance
           _content:
-    
+
         arnoldi_kspace:
           _pltype: parameter
           _type: int
           _do:
             - copy INSILICO/$arnoldi_kspace
           _content:
-    
+
         arnoldi_restarts:
           _pltype: parameter
           _type: int
           _do:
             - copy INSILICO/$arnoldi_restarts
           _content:
-    
+
         diagnostic_level:
           _pltype: parameter
           _type: int
           _do:
             - copy INSILICO/$diagnostic_level
           _content:
-    
+
         energy_dep_ev:
           _pltype: parameter
           _type: bool
@@ -282,44 +296,69 @@ INSILICO:
     upscatter_db:
       _pltype: list
       _content:
-      
+
         tolerance:
           _pltype: parameter
           _type: double
           _do:
             - copy INSILICO/$upscatter_tolerance
           _content:
-    
+
         aztec_diag:
           _pltype: parameter
           _type: int
           _do:
             - copy INSILICO/$aztec_diag
           _content:
-    
+
         aztec_output:
           _pltype: parameter
           _type: int
           _do:
             - copy INSILICO/$aztec_output
           _content:
-          
+
     silo_db:
       _pltype: list
       _content:
-      
+
         silo_output:
           _pltype: parameter
           _type: string
           _do:
             - copy INSILICO/$silo_output
           _content:
-    
+
         mixing_table:
           _pltype: parameter
           _type: bool
           _do:
             - copy INSILICO/$mixing_table
+          _content:
+
+    kcode_db:
+      _pltype: list
+      _content:
+
+        Np:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy INSILICO/$Np
+          _content:
+
+        num_cycles:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy INSILICO/$num_cycles
+          _content:
+
+        num_inactive_cycles:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy INSILICO/$num_inactive_cycles
           _content:
 
     Pn_correction:
@@ -336,3 +375,9 @@ INSILICO:
         - copy INSILICO/$pin_partitioning
       _content:
 
+    transport:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy INSILICO/$transport
+      _content:

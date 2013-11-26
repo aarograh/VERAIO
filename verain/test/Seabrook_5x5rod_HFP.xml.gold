@@ -192,12 +192,6 @@
       <Parameter name="upper_nozzle_mass" type="double" value="600.0"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="CONTROLS">
-  </ParameterList>
-  <ParameterList name="DETECTORS">
-  </ParameterList>
-  <ParameterList name="INSERTS">
-  </ParameterList>
   <ParameterList name="INSILICO">
     <Parameter name="Pn_order" type="int" value="0"/>
     <Parameter name="dimension" type="int" value="3"/>
@@ -242,13 +236,5 @@
     <Parameter name="irfc" type="int" value="2"/>
     <Parameter name="nfuel" type="int" value="3"/>
     <Parameter name="oitmax" type="int" value="5"/>
-  </ParameterList>
-  <ParameterList name="COUPLING">
-  </ParameterList>
-  <ParameterList name="MPACT">
-  </ParameterList>
-  <ParameterList name="MAMBA2D">
-  </ParameterList>
-  <ParameterList name="PEREGRINE">
   </ParameterList>
 </ParameterList>

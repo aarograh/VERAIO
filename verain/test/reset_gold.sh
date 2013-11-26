@@ -1,12 +1,17 @@
 #!/bin/tcsh
 
-set t=`egrep 'ADD_REACTOR_AWARE_INPUT_PARSER_TEST\(' CMakeLists.txt | sed 's/ADD_REACTOR_AWARE_INPUT_PARSER_TEST//g' | sed 's/[()]//g'`
-# Sample_full_core_fuelmix 
+# set printexitvalue
 
-
-foreach i ($t)
-    echo ../scripts/react2xml.pl $i.inp $i.xml.gold
-    ../scripts/react2xml.pl $i.inp $i.xml.gold
-    if (-e $i.xml) rm $i.xml
+foreach i ( *.xml.gold )
+    set l=`echo $i | sed 's/\.xml\.gold//'`
+    if ( -e ${l}.inp ) then
+	echo -n Resetting XML file for ${l}.inp '... '
+	if ( -e _${l}.xml ) then
+	   echo _${l}.xml exists
+	   exit 1
+	endif
+        ../scripts/react2xml.pl ${l}.inp _${l}.xml
+	mv _${l}.xml $i
+	echo done.
+    endif
 end
-

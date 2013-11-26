@@ -772,19 +772,7 @@
       <Parameter name="title" type="string" value="Pyrex Inserts"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="INSILICO">
-  </ParameterList>
   <ParameterList name="EDITS">
     <Parameter name="axial_edit_bounds" type="Array(double)" value="{11.9500,15.8160,24.0273,32.2386,40.4499,48.6611,56.8724,65.0837,73.2950,77.1050,85.1700,93.2350,101.3000,109.3650,117.4300,125.4950,129.3050,137.3700,145.4350,153.5000,161.5650,169.6300,177.6950,181.5050,189.5700,197.6350,205.7000,213.7650,221.8300,229.8950,233.7050,241.7700,249.8350,257.9000,265.9650,274.0300,282.0950,285.9050,293.9700,302.0350,310.1000,318.1650,326.2300,334.2950,338.1050,346.0260,353.9470,361.8680,369.7890,377.7100}"/>
-  </ParameterList>
-  <ParameterList name="COBRATF">
-  </ParameterList>
-  <ParameterList name="COUPLING">
-  </ParameterList>
-  <ParameterList name="MPACT">
-  </ParameterList>
-  <ParameterList name="MAMBA2D">
-  </ParameterList>
-  <ParameterList name="PEREGRINE">
   </ParameterList>
 </ParameterList>

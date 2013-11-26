@@ -143,8 +143,6 @@
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="Materials">
-      </ParameterList>
       <ParameterList name="SpacerGrids">
         <ParameterList name="Grid_END">
           <Parameter name="height" type="double" value="3.866"/>
@@ -174,20 +172,6 @@
       <Parameter name="upper_nozzle_height" type="double" value="8.827"/>
       <Parameter name="upper_nozzle_mass" type="double" value="6250.0"/>
     </ParameterList>
-  </ParameterList>
-  <ParameterList name="CONTROLS">
-  </ParameterList>
-  <ParameterList name="DETECTORS">
-  </ParameterList>
-  <ParameterList name="INSERTS">
-  </ParameterList>
-  <ParameterList name="INSILICO">
-  </ParameterList>
-  <ParameterList name="EDITS">
-  </ParameterList>
-  <ParameterList name="COBRATF">
-  </ParameterList>
-  <ParameterList name="COUPLING">
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="2d1d">
@@ -250,9 +234,5 @@
       <Parameter name="xs_filename" type="string" value="declib64g01_e7.fmt"/>
       <Parameter name="xs_type" type="string" value="ORNL"/>
     </ParameterList>
-  </ParameterList>
-  <ParameterList name="MAMBA2D">
-  </ParameterList>
-  <ParameterList name="PEREGRINE">
   </ParameterList>
 </ParameterList>

@@ -74,14 +74,16 @@ sub packXMLlist {
     }
 
     my %a=PLkeys($ref);
+    my @b=keys %a;
+    return unless(@b > 0);
+    print STDERR "Level $Nindent: found @b\n" if get_verbose();
 
     my $indent=$OPTIONS{indent} x $Nindent;
+
     print $phandle "$indent<ParameterList name=\"$name\">\n";
  
     $Nindent++;
 
-    my @b=keys %a;
-    print STDERR "Level $Nindent: found @b\n" if get_verbose();
     foreach my $PLentry (sort keys %a){
 	if( PLtype($a{$PLentry} ) eq 'parameter'){
 	    &packXMLparameter($a{$PLentry},$PLentry,$phandle,$Nindent);

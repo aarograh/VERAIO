@@ -200,12 +200,6 @@
       <Parameter name="upper_nozzle_mass" type="double" value="194.64"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="CONTROLS">
-  </ParameterList>
-  <ParameterList name="DETECTORS">
-  </ParameterList>
-  <ParameterList name="INSERTS">
-  </ParameterList>
   <ParameterList name="INSILICO">
     <Parameter name="Pn_order" type="int" value="0"/>
     <Parameter name="dimension" type="int" value="3"/>
@@ -259,13 +253,5 @@
     <Parameter name="oitmax" type="int" value="5"/>
     <Parameter name="rtwfp" type="double" value="1000.0"/>
     <Parameter name="tend" type="double" value="0.1"/>
-  </ParameterList>
-  <ParameterList name="COUPLING">
-  </ParameterList>
-  <ParameterList name="MPACT">
-  </ParameterList>
-  <ParameterList name="MAMBA2D">
-  </ParameterList>
-  <ParameterList name="PEREGRINE">
   </ParameterList>
 </ParameterList>

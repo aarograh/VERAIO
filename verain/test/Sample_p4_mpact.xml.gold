@@ -119,10 +119,6 @@
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="Materials">
-      </ParameterList>
-      <ParameterList name="SpacerGrids">
-      </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{FUEL1}"/>
       <Parameter name="label" type="string" value="A1"/>
@@ -176,10 +172,6 @@
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="Materials">
-      </ParameterList>
-      <ParameterList name="SpacerGrids">
-      </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{FUEL2}"/>
       <Parameter name="label" type="string" value="A2"/>
@@ -204,8 +196,6 @@
           <Parameter name="radii" type="Array(double)" value="{0.382,0.386,0.484}"/>
           <Parameter name="type" type="string" value="other"/>
         </ParameterList>
-      </ParameterList>
-      <ParameterList name="Materials">
       </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{AIC}"/>
@@ -233,8 +223,6 @@
           <Parameter name="type" type="string" value="other"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="Materials">
-      </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,406.3}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{DET}"/>
       <Parameter name="label" type="string" value="1"/>
@@ -259,22 +247,12 @@
           <Parameter name="type" type="string" value="other"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="Materials">
-      </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{PY20}"/>
       <Parameter name="label" type="string" value="1"/>
       <Parameter name="num_pins" type="int" value="17"/>
       <Parameter name="title" type="string" value="Pyrex"/>
     </ParameterList>
-  </ParameterList>
-  <ParameterList name="INSILICO">
-  </ParameterList>
-  <ParameterList name="EDITS">
-  </ParameterList>
-  <ParameterList name="COBRATF">
-  </ParameterList>
-  <ParameterList name="COUPLING">
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="2d1d">
@@ -288,8 +266,6 @@
       <Parameter name="k_shift" type="double" value="1.5"/>
       <Parameter name="num_outers" type="int" value="20"/>
       <Parameter name="solver" type="string" value="mgnode"/>
-    </ParameterList>
-    <ParameterList name="db_entry">
     </ParameterList>
     <ParameterList name="iteration_control">
       <Parameter name="flux_tolerance" type="double" value="1e-6"/>
@@ -332,9 +308,5 @@
       <Parameter name="xs_filename" type="string" value="declib64g01_e7.fmt"/>
       <Parameter name="xs_type" type="string" value="ORNL"/>
     </ParameterList>
-  </ParameterList>
-  <ParameterList name="MAMBA2D">
-  </ParameterList>
-  <ParameterList name="PEREGRINE">
   </ParameterList>
 </ParameterList>

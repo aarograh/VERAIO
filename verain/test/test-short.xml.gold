@@ -163,8 +163,6 @@
           <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="SpacerGrids">
-      </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{6.050,10.280,11.950,51.950,67.950,69.620,71.740}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{LGAP1,PCAP1,FUEL1,PLEN1,PCAP1,LGAP1}"/>
       <Parameter name="label" type="string" value="A1"/>
@@ -178,12 +176,6 @@
       <Parameter name="upper_nozzle_height" type="double" value="8.827"/>
       <Parameter name="upper_nozzle_mass" type="double" value="21.626"/>
     </ParameterList>
-  </ParameterList>
-  <ParameterList name="CONTROLS">
-  </ParameterList>
-  <ParameterList name="DETECTORS">
-  </ParameterList>
-  <ParameterList name="INSERTS">
   </ParameterList>
   <ParameterList name="INSILICO">
     <Parameter name="Pn_order" type="int" value="0"/>
@@ -245,11 +237,5 @@
     <Parameter name="rlx_den" type="double" value="1.0"/>
     <Parameter name="rlx_power" type="double" value="0.5"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
-  </ParameterList>
-  <ParameterList name="MPACT">
-  </ParameterList>
-  <ParameterList name="MAMBA2D">
-  </ParameterList>
-  <ParameterList name="PEREGRINE">
   </ParameterList>
 </ParameterList>

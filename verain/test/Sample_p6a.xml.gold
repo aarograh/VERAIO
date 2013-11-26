@@ -207,12 +207,6 @@
       <Parameter name="upper_nozzle_mass" type="double" value="6250.0"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="CONTROLS">
-  </ParameterList>
-  <ParameterList name="DETECTORS">
-  </ParameterList>
-  <ParameterList name="INSERTS">
-  </ParameterList>
   <ParameterList name="INSILICO">
     <Parameter name="Pn_order" type="int" value="0"/>
     <Parameter name="cell_broadcast_size" type="int" value="289"/>
@@ -275,11 +269,5 @@
     <Parameter name="rlx_den" type="double" value="1.0"/>
     <Parameter name="rlx_power" type="double" value="0.6"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
-  </ParameterList>
-  <ParameterList name="MPACT">
-  </ParameterList>
-  <ParameterList name="MAMBA2D">
-  </ParameterList>
-  <ParameterList name="PEREGRINE">
   </ParameterList>
 </ParameterList>
