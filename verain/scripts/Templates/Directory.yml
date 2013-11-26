@@ -553,6 +553,11 @@ INSILICO:
     _content:
     _check:
       - is_word()
+  celib_file:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
   mat_library:
     <<: *dtword
     _content:
@@ -565,6 +570,12 @@ INSILICO:
       - is_int()
       - is_geq() 2
       - is_leq() 3
+  use_symmetry:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   do_transport:
     <<: *dtbool
     _content:
@@ -608,6 +619,24 @@ INSILICO:
       - is_int()
       - is_gt() 0
   num_groups:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  num_cycles:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  num_inactive_cycles:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  Np:
     <<: *dtint
     _content:
     _check:
@@ -830,6 +859,13 @@ INSILICO:
       - is_word()
       - in_dictionary() true false
 
+  transport:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() deterministic ce_mc mg_mc
+
 COBRATF:
 
   nfuel:
@@ -839,7 +875,7 @@ COBRATF:
       - is_int()
       - is_gt() 0
 
-  nc: 
+  nc:
     <<: *dtint
     _content:
     _check:
