@@ -87,15 +87,15 @@
        5 5 5 5 5 5 5 5 5
 
   lattice UPLUG 
-       3
-       6 6
-       6 6 6
-       6 6 6 3
-       6 6 6 6 6
-       6 6 6 6 6 3
-       6 6 6 3 6 6 6
-       6 6 6 6 6 6 6 6
-       6 6 6 6 6 6 6 6 6
+       3 
+       6 6 
+       6 6 6 
+       3 6 6 3 
+       6 6 6 6 6 
+       6 6 6 6 6 3 
+       3 6 6 3 6 6 6 
+       6 6 6 6 6 6 6 6 
+       6 6 6 6 6 6 6 6 6 
 
 axial ASSY     6.053 
        LPLUG  11.951 
@@ -255,7 +255,7 @@ axial ASSY     6.053
   num_energy        1
   num_threads       1
 !xs_library
-  xs_filename       declib56g_e7_v3.0_0708.fmt
+  xs_filename       declib56g_e7_09042013_p0mixed.fmt
   xs_type           ORNL
   subgroup_set      4
 !mesh
