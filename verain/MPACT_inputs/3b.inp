@@ -47,7 +47,7 @@
   npin 17 
   ppitch 1.26
   
-  fuel U31 10.257 94.5 / 3.1 
+  fuel U31 10.257 94.5 / 2.619 
 
   cell 1     0.4096 0.418 0.475 / U31 he zirc
   cell 3            0.561 0.602 / mod    zirc       ! guide/instrument tube
