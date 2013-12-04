@@ -69,7 +69,7 @@
   cell 1     0.4096 0.418 0.475 / U21 he zirc
   cell 2     0.4096 0.418 0.475 / U26 he zirc
   cell 3            0.561 0.602 / mod    zirc       ! guide/instrument tube
-  cell 4            0.418 0.475 /     he zirc       ! plenum  using spring
+  cell 4            0.418 0.475 / spring zirc       ! plenum  using spring
   cell 5                  0.475 /       lplug       ! lower end plug
   cell 6                  0.475 /       uplug       ! upper end plug
 
@@ -118,15 +118,15 @@
        5 5 5 5 5 5 5 5 5
 
   lattice UPLUG 
-       3
-       6 6
-       6 6 6
-       6 6 6 3
-       6 6 6 6 6
-       6 6 6 6 6 3
-       6 6 6 3 6 6 6
-       6 6 6 6 6 6 6 6
-       6 6 6 6 6 6 6 6 6
+       3 
+       6 6 
+       6 6 6 
+       3 6 6 3 
+       6 6 6 6 6 
+       6 6 6 6 6 3 
+       3 6 6 3 6 6 6 
+       6 6 6 6 6 6 6 6 
+       6 6 6 6 6 6 6 6 6 
 
   axial A21 6.053 LPLUG 11.951 LAT21 377.711 PLEN 393.711 UPLUG 397.510
   axial A26 6.053 LPLUG 11.951 LAT26 377.711 PLEN 393.711 UPLUG 397.510
@@ -393,7 +393,7 @@
   num_energy        1
   num_threads       1
 !xs_library
-  xs_filename       declib56g_e7_v3.0_0708.fmt 
+  xs_filename       declib56g_e7_09042013_p0mixed.fmt 
   xs_type           ORNL
   subgroup_set      4
 !mesh
