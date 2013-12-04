@@ -69,7 +69,7 @@
   cell 1     0.4096 0.418 0.475 / U21 he zirc
   cell 2     0.4096 0.418 0.475 / U26 he zirc
   cell 3            0.561 0.602 / mod    zirc       ! guide/instrument tube
-  cell 4            0.418 0.475 /     he zirc       ! plenum  using spring
+  cell 4            0.418 0.475 / spring zirc       ! plenum  using spring
   cell 5                  0.475 /       lplug       ! lower end plug
   cell 6                  0.475 /       uplug       ! upper end plug
 
