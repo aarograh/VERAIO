@@ -126,11 +126,11 @@
   cmfd_num_outers   20
 !parallel
   num_space         1
-  num_angle         1
+  num_angle         4
   num_energy        1
   num_threads       1
 !xs_library
-  xs_filename       declib60g02_e7.fmt
+  xs_filename       declib56g_e7_09042013_p0mixed.fmt
   xs_type           ORNL
   subgroup_set      4
 !mesh

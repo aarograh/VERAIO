@@ -755,7 +755,7 @@
       </ParameterList>
     </ParameterList>
     <ParameterList name="parallel_env">
-      <Parameter name="num_angle" type="int" value="1"/>
+      <Parameter name="num_angle" type="int" value="4"/>
       <Parameter name="num_energy" type="int" value="1"/>
       <Parameter name="num_space" type="int" value="1"/>
       <Parameter name="num_threads" type="int" value="1"/>
@@ -769,7 +769,7 @@
     <Parameter name="vis_edits" type="string" value="core"/>
     <ParameterList name="xs_library">
       <Parameter name="subgroup_set" type="int" value="4"/>
-      <Parameter name="xs_filename" type="string" value="declib60g02_e7.fmt"/>
+      <Parameter name="xs_filename" type="string" value="declib56g_e7_09042013_p0mixed.fmt"/>
       <Parameter name="xs_type" type="string" value="ORNL"/>
     </ParameterList>
   </ParameterList>
