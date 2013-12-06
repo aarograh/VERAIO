@@ -1163,6 +1163,17 @@ MPACT:
       - is_word()
       - in_dictionary() none core fsr
 
+  meshing_method:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+  automesh_bounds:
+    <<: *dtlist
+    _content:
+    _check:
+      - nth(0,())>0
+      - nth(1,())>0
   axial_mesh:
     <<: *dtlist
     _style: multi-line
