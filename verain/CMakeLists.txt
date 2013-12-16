@@ -21,15 +21,6 @@ INSTALL(
   COMPONENT ${PACKAGE_NAME}
   )  
 
-# Install some examples
-
-INSTALL(
-  DIRECTORY install/example/
-  DESTINATION "share/VERAIn/example"
-  COMPONENT ${PACKAGE_NAME}
-  PATTERN "*.sh" PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ GROUP_EXECUTE GROUP_READ
-  )
-
 # Install documentation
 
 INSTALL(
