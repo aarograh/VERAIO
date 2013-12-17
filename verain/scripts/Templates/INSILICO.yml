@@ -381,3 +381,18 @@ INSILICO:
       _do:
         - copy INSILICO/$transport
       _content:
+
+    output_geometry:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy INSILICO/$output_geometry
+      _content:
+
+    thermal_energy_cutoff:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy INSILICO/$thermal_energy_cutoff
+      _content:
+

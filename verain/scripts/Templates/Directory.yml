@@ -866,6 +866,20 @@ INSILICO:
       - is_word()
       - in_dictionary() deterministic ce_mc mg_mc
 
+  output_geometry:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
+  thermal_energy_cutoff:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
 COBRATF:
 
   nfuel:
