@@ -9,6 +9,8 @@
   tfuel  620.33     ! F - 600K
   boron  1300       ! ppmB
   modden 0.743      ! g/cc
+  pressure 2250     ! psia
+
   rodbank A 167
   feedback off !??
   sym qtr
