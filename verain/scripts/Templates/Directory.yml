@@ -838,6 +838,13 @@ INSILICO:
       - is_word()
       - in_dictionary() true false
 
+  SPN_matrix_type:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() mat_free
+
   SPN_order:
     <<: *dtint
     _content:
