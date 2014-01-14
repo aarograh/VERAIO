@@ -753,6 +753,13 @@ INSILICO:
       - is_int()
       - is_gt() 0
 
+  init_tolerance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_lt() 1
   k_tolerance:
     <<: *dtdouble
     _content:

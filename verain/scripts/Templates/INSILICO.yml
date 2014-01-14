@@ -252,6 +252,13 @@ INSILICO:
       _pltype: list
       _content:
 
+        tolerance:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy INSILICO/$init_tolerance
+          _content:
+
         k_tolerance:
           _pltype: parameter
           _type: double
