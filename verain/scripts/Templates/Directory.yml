@@ -31,6 +31,12 @@ _DATATYPES:
   _dtlistnamed: &dtlistnamed
     _parse: 'list'
     _named: 1
+  _dtblock: &dtblock
+    _parse: 'block'
+    _named: 0
+  _dtblocknamed: &dtblocknamed
+    _parse: 'block'
+    _named: 1
 
 _DIRECTORY:
   CASEID:
@@ -56,6 +62,12 @@ CASEID:
       - is_string()
 
 STATE:
+  <<: *dtblock
+  id:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   title:
     <<: *dtstring
     _content:

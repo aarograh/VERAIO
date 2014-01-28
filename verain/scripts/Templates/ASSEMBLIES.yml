@@ -3,6 +3,7 @@ ASSEMBLIES:
   _do:
     - setdb MAIN_DB
     - rodmap ASSEMBLY/%axial,mapname=>lattice,basename=>Assembly_,coremap=>CORE/@assm_map,matsearch=>ASSEMBLY/%mat/*:ASSEMBLY/%fuel/*:CORE/%mat/*
+
   _content:
     Materials:
       _pltype: list
