@@ -7,6 +7,7 @@ use KeyTree;
 use MiscUtils;
 use REACTOR;
 use TypeUtils;
+use Data::Dumper ;
 
 use Exporter;
 @ISA = ('Exporter');
@@ -223,21 +224,44 @@ sub PLnotempty {
 
 sub PLparameter{
     my ($ref,$actions,%userparam)=@_;
-    my %OPTIONS;
+    my %OPTIONS=(
+	'trsub' => [],
+	'trvar' => [],
+	);
     my $home=$ref;
 
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
     {
 	$OPTIONS{$key}=$value;
     }
+    if( @{$OPTIONS{trsub}} ){
+	print "parameter trvar: @{$OPTIONS{trvar}}\n" if get_verbose();;
+	print "parameter trsub: @{$OPTIONS{trsub}}\n" if get_verbose();;
+    }
+
+    my @trsubin=@{ $OPTIONS{'trsub'} };
+    my @trvarin=@{ $OPTIONS{'trvar'} };
 
     if(my $todo=PLdo($ref)){
 	my $val;
 	foreach my $ido (@{ $todo }){
+
+	    for(my $i; $i<@trsubin; $i++){
+		my $trsub=$trsubin[$i];
+		my $trvar=$trvarin[$i];
+		$trsub=quotemeta($trsub);
+		$trvar=quotemeta($trvar);
+		print "parameter ido1 $ido: $trvar,$trsub\n" if get_verbose();;
+		$ido =~ s/\($trvar\)/$trsub/g;
+		print "parameter ido2 $ido\n" if get_verbose();;
+	    }
+
 	    my @do_parse=PLdoarg($ido);
 	    my $command=shift @do_parse;
 	    if(PLnotempty($ref,_content=>'_content')){
+		print "----> content $ref->{_content}\n" if get_verbose();
 		unshift @do_parse, $ref->{_content};
+		print "----> doparse @do_parse\n" if get_verbose();
 	    }
 	    $val=$actions->{$command}->($home,@do_parse);
 	    if(defined($val)){
@@ -252,17 +276,38 @@ sub PLparameter{
 
 sub PLarray{
     my ($ref,$actions,%userparam)=@_;
-    my %OPTIONS;
+    my %OPTIONS=(
+	'trsub' => [],
+	'trvar' => [],
+	);
     my $home=$ref;
 
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
     {
 	$OPTIONS{$key}=$value;
     }
+    if( @{$OPTIONS{trsub}} ){
+	print "array trvar: @{$OPTIONS{trvar}}\n" if get_verbose();;
+	print "trsub: @{$OPTIONS{trsub}}\n" if get_verbose();;
+    }
+
+    my @trsubin=@{ $OPTIONS{'trsub'} };
+    my @trvarin=@{ $OPTIONS{'trvar'} };
 
     if(my $todo=PLdo($ref)){
 	my $val;
 	foreach my $ido (@{ $todo }){
+
+	    for(my $i; $i<@trsubin; $i++){
+		my $trsub=$trsubin[$i];
+		my $trvar=$trvarin[$i];
+		$trsub=quotemeta($trsub);
+		$trvar=quotemeta($trvar);
+		print "array ido1 $ido: $trvar,$trsub\n" if get_verbose();;
+		$ido =~ s/\($trvar\)/$trsub/g;
+		print "array ido2 $ido\n" if get_verbose();;
+	    }
+
 	    my @do_parse=PLdoarg($ido);
 	    my $command=shift @do_parse;
 	    if(PLnotempty($ref,_content=>'_content')){
@@ -280,46 +325,137 @@ sub PLarray{
 }
 
 sub PLlist{
-    my ($ref)=@_;
+    my ($ref,%userparam)=@_;
     my $home=$ref;
+    my %OPTIONS=(
+	'trsub' => [],
+	'trvar' => [],
+	);
 
     $actions=$DISPATCH;
 
-    my @PLcontent = keys %{ $ref->{_content} };
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+    if( @{$OPTIONS{trsub}} ){
+	print "PLlist trvar: @{$OPTIONS{trvar}}\n" if get_verbose();;
+	print "PLlist trsub: @{$OPTIONS{trsub}}\n" if get_verbose();;
+    }
 
-    print STDERR "PLlist: @PLcontent\n" if get_verbose();
+# applying actions:
+# needs to be done with modified commands, but only modified by the arguments
+# that are passed through the function call
 
+    my @trsubin=@{ $OPTIONS{'trsub'} };
+    my @trvarin=@{ $OPTIONS{'trvar'} };
 
     my $val;
     if(my $todo=PLdo($ref)){
 	foreach my $ido (@{ $todo }){
+
+	    for(my $i; $i<@trsubin; $i++){
+		my $trsub=$trsubin[$i];
+		my $trvar=$trvarin[$i];
+		$trsub=quotemeta($trsub);
+		$trvar=quotemeta($trvar);
+		print "PLlist ido1 $ido: $trvar,$trsub\n" if get_verbose();;
+		$ido =~ s/\($trvar\)/$trsub/g;
+		print "PLlist ido2 $ido\n" if get_verbose();;
+	    }
+
 	    my @do_parse=PLdoarg($ido);
 	    my $command=shift @do_parse;
 	    $val=$actions->{$command}->($home,@do_parse);
-	    if(lc($command) eq 'rename'){
-		key_on($ref,'_name',$val);
+
+# must fix this one out
+#	    if(lc($command) eq 'rename'){
+#		key_on($ref,'_name',$val);
+#	    }
+	}
+    }
+
+    my $trref = key_exists($ref,'_tr');
+    my $trname;
+    my @trsubs=();
+    if(defined($trref)){
+	$trname=read_off_label($trref,'_name');
+	my $trcont=read_off_label($trref,'_content');
+
+	my @trpath=parse_path($trcont);
+	my $kr=key_defined($SOURCE_DB,@trpath);
+	my $krtype=ref($kr);
+
+	if($krtype eq 'HASH'){
+	    @trsubs=keys(%{ $kr });
+	}
+	elsif($krtype eq 'ARRAY'){
+	    @trsubs=@{ $kr };
+	}
+	else{
+#	    die "PLlist: error in translation expression, invalid $trcont expression.\n";
+	}
+    }
+
+    my $trvar_arg;
+    my $trsub_arg;
+
+# if trref defined, do the loop and pass regex arguments
+
+    my @PLcontent = keys %{ $ref->{_content} };
+    my %DIR=PLkeys($ref);
+
+
+    print STDERR "PLlist: @PLcontent\n" if get_verbose();
+
+    do {
+
+	$trsub_arg=[ @trsubin ];
+	$trvar_arg=[ @trvarin ];
+	my $trsubi;
+	if(@trsubs && defined($trname)){
+	    print "trname: $trname trsubs: @trsubs\n" if get_verbose();
+	    $trsubi=shift @trsubs;
+	    $trsub_arg=[ @trsubin, $trsubi ];
+	    $trvar_arg=[ @trvarin, $trname ];
+	}
+
+	foreach $iaddr (@PLcontent){
+	    print "PLlist content loop: $iaddr\n" if get_verbose();;
+	    my $rref = key_defined($ref,'_content',$iaddr);
+	    my $typ=PLtype($rref);
+	    print "PLlist typ: $typ\n" if get_verbose();;
+
+	    my $crref=$rref;	    
+	    if(defined($trref)){
+		if($iaddr =~ m/\($trname\)/){
+		    $imaddr=$iaddr;
+		    $imaddr=~s/\($trname\)/$trsubi/g;
+		    print "translated -----> $imaddr\n" if get_verbose();
+		    $crref=clone($rref);
+		    print Dumper($crref) if get_verbose();
+		    PLkeyon($ref,$crref,$imaddr);
+		}
+	    }
+		
+
+	    if($typ eq 'parameter'){
+		&PLparameter($crref,$actions, trsub=>$trsub_arg, trvar=>$trvar_arg);
+	    }
+	    if($typ eq 'array'){
+		&PLarray($crref,$actions, trsub=>$trsub_arg, trvar=>$trvar_arg);
+	    }
+	    if($typ eq 'list'){
+		&PLlist($crref, trsub=>$trsub_arg, trvar=>$trvar_arg);
+	    }
+	    if($typ eq 'map'){
+		print STDERR "type map\n" if get_verbose();
+		&PLlist($crref, trsub=>$trsub_arg, trvar=>$trvar_arg);
 	    }
 	}
-    }
 
-    foreach $iaddr (@PLcontent){
-	my $rref = key_defined($ref,'_content',$iaddr);
-	my $typ=PLtype($rref);
+    } while (@trsubs);
 
-	if($typ eq 'parameter'){
-	    &PLparameter($rref,$actions);
-	}
-	if($typ eq 'array'){
-	    &PLarray($rref,$actions);
-	}
-	if($typ eq 'list'){
-	    &PLlist($rref);
-	}
-	if($typ eq 'map'){
-	    print STDERR "type map\n" if get_verbose();
-	    &PLlist($rref);
-	}
-    }
 }
 
 sub rethread {
