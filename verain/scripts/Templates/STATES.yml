@@ -9,7 +9,7 @@ STATES:
     
   _content:
 
-    STATE_(_loop):
+    State_(_loop):
       _pltype: list
       _do:
         - setdb MAIN_DB

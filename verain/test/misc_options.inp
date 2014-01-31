@@ -24,6 +24,32 @@
   feedback on
   sym full
 
+  deplete 0.0 1.0 2.0 3.5 4.5
+
+[STATE]
+  power  80.0     ! added multistate 1/30/2014 , must use --multistate command line option
+
+[STATE]
+  power  70.0
+
+[STATE]
+  power  60.0
+
+[STATE]
+  power  50.0
+
+[STATE]
+  power  40.0
+
+[STATE]
+  power  30.0
+
+[STATE]
+  power  20.0
+
+[STATE]
+  power  10.0
+
 [CORE]
   size 3                ! 3x3 cross - 5 assemblies
   rated 2.67725  0.10625 ! MW, Mlbs/hr  *** scaled to 3x3 5 assemblies
