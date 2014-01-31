@@ -31,6 +31,12 @@ _DATATYPES:
   _dtlistnamed: &dtlistnamed
     _parse: 'list'
     _named: 1
+  _dtblock: &dtblock
+    _parse: 'block'
+    _named: 0
+  _dtblocknamed: &dtblocknamed
+    _parse: 'block'
+    _named: 1
 
 _DIRECTORY:
   CASEID:
@@ -56,6 +62,12 @@ CASEID:
       - is_string()
 
 STATE:
+  <<: *dtblock
+  id:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   title:
     <<: *dtstring
     _content:
@@ -753,6 +765,13 @@ INSILICO:
       - is_int()
       - is_gt() 0
 
+  init_tolerance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_lt() 1
   k_tolerance:
     <<: *dtdouble
     _content:
@@ -838,6 +857,13 @@ INSILICO:
       - is_word()
       - in_dictionary() true false
 
+  SPN_matrix_type:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() mat_free
+
   SPN_order:
     <<: *dtint
     _content:
@@ -865,6 +891,20 @@ INSILICO:
     _check:
       - is_word()
       - in_dictionary() deterministic ce_mc mg_mc
+
+  output_geometry:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
+  thermal_energy_cutoff:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
 
 COBRATF:
 
@@ -1163,6 +1203,17 @@ MPACT:
       - is_word()
       - in_dictionary() none core fsr
 
+  meshing_method:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+  automesh_bounds:
+    <<: *dtlist
+    _content:
+    _check:
+      - nth(0,())>0
+      - nth(1,())>0
   axial_mesh:
     <<: *dtlist
     _style: multi-line
@@ -1335,7 +1386,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() nem sanm none
+      - in_dictionary() nem sanm nem-mg sn-0 sn-1 sn-2 sn-3 none
   under_relax:
     <<: *dtdouble
     _content:

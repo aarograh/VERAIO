@@ -7,32 +7,43 @@
 !      * COUPLING block
 !      * added pressure, feedback, and full-power
 !
+!  2014/01/04 - modified to match input used for Problem 7 Milestone
+!  This case:
+!      * quarter symmetry
+!      * remove vessel card
+!      * remove detectors
+!      * remove control rods
+!      * modify insert axial boundaries to line up with axial edit bounds
+!      * modified Insilico options to use ML
+!      * modify to use 11-groups
+!      * add cobra parallel option
+!
 [CASEID]
   title 'CASL AMA Problem 7 - Watts Bar Unit 1 Cycle 1 - Public'
 
 [STATE]
   power  100.0          ! %
   pressure 2250.0
-  feedback on     
+  feedback on
 
   tinlet 557.33         ! F - 565K
   tfuel  900.0          ! K     (HFP value)
   boron  1285           ! ppmB
   modden 0.743          ! g/cc
-  sym qtr    ! ***
+  sym qtr          ! ***
 
-  rodbank SA 230
-          SB 230
-          SC 230
-          SD 230
-           A 230 
-           B 230
-           C 230 
-           D 167 
+! rodbank SA 230   *** removed for Problem 7
+!         SB 230
+!         SC 230
+!         SD 230
+!          A 230
+!          B 230
+!          C 230
+!          D 167
 
 [CORE]
   size 15               ! assemblies across core
-  rated 3411 131.68     ! MW, Mlbs/hr 
+  rated 3411 131.68     ! MW, Mlbs/hr
   apitch 21.5
   height 406.337
 
@@ -60,83 +71,82 @@
     2 1 2 1
     1 2 1 2 2
     2 1 2 1 2 3
-    1 3 1 3 3 3 
-    3 3 3 3 
+    1 3 1 3 3 3
+    3 3 3 3
 
   insert_map
-     -     
-    20  -    
-     - 24  -   
-    20  - 20  -  
-     - 20  - 20  - 
+     -
+    20  -
+     - 24  -
+    20  - 20  -
+     - 20  - 20  -
     20  - 16  - 24 12
      - 24  - 16  -  -
     12  -  8  -
 
-  crd_map
-    1 
-    - - 
-    1 - 1 
-    - - - 1 
-    1 - - - 1 
-    - 1 - 1 - - 
-    1 - 1 - 1 - 
-    - - - - 
- 
-  crd_bank
-    D  -  A  -  D  -  C  -
-    -  -  -  -  - SB  -  -
-    A  -  C  -  -  -  B  -
-    -  -  -  A  - SC  -  -
-    D  -  -  -  D  - SA 
-    - SB  - SD  -  -  - 
-    C  -  B  - SA  - 
-    -  -  -  -
+! crd_map   *** removed for Problem 7
+!   1
+!   - -
+!   1 - 1
+!   - - - 1
+!   1 - - - 1
+!   - 1 - 1 - -
+!   1 - 1 - 1 -
+!   - - - -
+
+! crd_bank   *** removed for Problem 7
+!   D  -  A  -  D  -  C  -
+!   -  -  -  -  - SB  -  -
+!   A  -  C  -  -  -  B  -
+!   -  -  -  A  - SC  -  -
+!   D  -  -  -  D  - SA
+!   - SB  - SD  -  -  -
+!   C  -  B  - SA  -
+!   -  -  -  -
 
 ! the detector map is upside down for denovo
-  det_map
-            1 - - 1 - - - 
-        1 - - - 1 - - 1 - 1 - 
-      - 1 - 1 - - 1 - - - - - 1 
-      - - - - 1 - - 1 - - 1 - - 
-    1 - - - 1 - - 1 - - 1 - - - 1
-    - - - - 1 - 1 - - - - 1 - - -
-    - 1 - - - - - - 1 - 1 - - - 1
-    1 - 1 - 1 - 1 - - 1 - 1 1 1 -
-    - - - 1 - - 1 - - 1 - - 1 - -
-    1 - 1 - - 1 - 1 - - - - - 1 -
-    - - - - 1 - - - 1 - 1 - 1 - -
-      1 1 - - - - 1 - - - - - -
-      - - - - - - 1 - 1 - 1 - 1
-        1 - - 1 - 1 - - - - - 
-            - - 1 - - 1 - 
+! det_map   *** removed for Problem 7
+!           1 - - 1 - - -
+!       1 - - - 1 - - 1 - 1 -
+!     - 1 - 1 - - 1 - - - - - 1
+!     - - - - 1 - - 1 - - 1 - -
+!   1 - - - 1 - - 1 - - 1 - - - 1
+!   - - - - 1 - 1 - - - - 1 - - -
+!   - 1 - - - - - - 1 - 1 - - - 1
+!   1 - 1 - 1 - 1 - - 1 - 1 1 1 -
+!   - - - 1 - - 1 - - 1 - - 1 - -
+!   1 - 1 - - 1 - 1 - - - - - 1 -
+!   - - - - 1 - - - 1 - 1 - 1 - -
+!     1 1 - - - - 1 - - - - - -
+!     - - - - - - 1 - 1 - 1 - 1
+!       1 - - 1 - 1 - - - - -
+!           - - 1 - - 1 -
 
-  baffle ss 0.19 2.85 
-! vessel cs 219.71 21.99 - old vessel card
-  vessel mod 219.71 cs 241.70
+  baffle ss 0.19 2.85
+! vessel mod 219.71 cs 241.70   *** removed for Problem 7
 
   lower_plate ss  5.0 0.5   ! mat, thickness, vol frac
   upper_plate ss  7.6 0.5   ! mat, thickness, vol frac
 
-! lower_ref  mod 20.0 1.0   ! reduce this as much as possible for now                        
+! lower_ref  mod 20.0 1.0   ! reduce this as much as possible for now
 ! upper_ref  mod 20.0 1.0 - ignore this for now
 
   xlabel  R P N M L K J H G  F  E  D  C  B  A
   ylabel  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
 
-  mat he     0.0001786 
+  mat he     0.0001786
   mat inc    8.19
   mat ss     8.0
   mat zirc   6.56 zirc4
 
 [ASSEMBLY]
   title "Westinghouse 17x17"
-  npin 17 
+  npin 17
   ppitch 1.260
-  
+
   fuel U21 10.257 94.5 / 2.110
   fuel U26 10.257 94.5 / 2.619
-  fuel U31 10.257 94.5 / 3.100 
+  fuel U31 10.257 94.5 / 3.100
 
   cell 1     0.4096 0.418 0.475 / U21 he zirc
   cell 2     0.4096 0.418 0.475 / U26 he zirc
@@ -144,7 +154,7 @@
   cell 4            0.561 0.602 / mod    zirc       ! guide/instrument tube
   cell 5            0.418 0.475 /     he zirc       ! plenum
 
-  lattice LAT21 
+  lattice LAT21
        4
        1 1
        1 1 1
@@ -155,7 +165,7 @@
        1 1 1 1 1 1 1 1
        1 1 1 1 1 1 1 1 1
 
-  lattice LAT26  
+  lattice LAT26
        4
        2 2
        2 2 2
@@ -166,7 +176,7 @@
        2 2 2 2 2 2 2 2
        2 2 2 2 2 2 2 2 2
 
-  lattice LAT31 
+  lattice LAT31
        4
        3 3
        3 3 3
@@ -216,7 +226,7 @@
 
   cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrx1 he ss
 
-  rodmap  PY8 
+  rodmap  PY8
      -
      - -
      - - -
@@ -227,7 +237,7 @@
      - - - - - - - -
      - - - - - - - - -
 
-  rodmap  PY12 
+  rodmap  PY12
      -
      - -
      - - -
@@ -260,7 +270,7 @@
      - - - - - - - -
      - - - - - - - - -
 
-  rodmap  PY24  
+  rodmap  PY24
      -
      - -
      - - -
@@ -271,18 +281,27 @@
      - - - - - - - -
      - - - - - - - - -
 
-  axial   8  15.761 PY8  376.441
-  axial  12  15.761 PY12 376.441
-  axial  16  15.761 PY16 376.441
-  axial  20  15.761 PY20 376.441
-  axial  24  15.761 PY24 376.441
+! axial   8  15.761 PY8  376.441
+! axial  12  15.761 PY12 376.441
+! axial  16  15.761 PY16 376.441
+! axial  20  15.761 PY20 376.441
+! axial  24  15.761 PY24 376.441
+!
+! *** bottom elevation wass 15.761 - changed to match axial_edit_bounds for Problem 7
+! *** top    elevation wass 376.441- changed to match axial_edit_bounds for Problem 7
+
+  axial   8  15.817 PY8  377.711
+  axial  12  15.817 PY12 377.711
+  axial  16  15.817 PY16 377.711
+  axial  20  15.817 PY20 377.711
+  axial  24  15.817 PY24 377.711
 
 [CONTROL]
   title "B4C with AIC tips"
   npin 17
   stroke  365.125 230     ! approx for 1.5875 step sizes and 230 max stroke
 
-  mat aic 10.2 
+  mat aic 10.2
   mat b4c 1.76
 
   cell 1  0.382 0.386 0.484 / aic he ss
@@ -310,20 +329,20 @@
      - - - - - - - -
      - - - - - - - - -
 
-  axial  1    17.031 
-         AIC 118.631 
-         B4C 377.711 
+  axial  1    17.031
+         AIC 118.631
+         B4C 377.711
 
 [DETECTOR]
   title "Incore instrument thimble"
   npin 17
 
-  mat he 0.0001786 
+  mat he 0.0001786
   mat ss 8.0
 
   cell 1  0.258 0.382 / he ss
 
-  rodmap  LAT  
+  rodmap  LAT
      1
      - -
      - - -
@@ -337,56 +356,56 @@
   axial 1  0.0 LAT 406.337
 
 [EDITS]
-  axial_edit_bounds 
+  axial_edit_bounds
       11.951
-      15.817 
-      24.028 
-      32.239 
-      40.45 
-      48.662 
-      56.873 
-      65.084 
-      73.295 
-      77.105 
-      85.17 
-      93.235 
-      101.3 
-      109.365 
-      117.43 
-      125.495 
-      129.305 
-      137.37 
-      145.435 
-      153.5 
-      161.565 
-      169.63 
-      177.695 
-      181.505 
-      189.57 
-      197.635 
-      205.7 
-      213.765 
-      221.83 
-      229.895 
-      233.705 
-      241.77 
-      249.835 
-      257.9 
-      265.965 
-      274.03 
-      282.095 
-      285.905 
-      293.97 
-      302.035 
-      310.1 
-      318.165 
-      326.23 
-      334.295 
-      338.105 
-      346.0262 
-      353.9474 
-      361.8686 
-      369.7898 
+      15.817
+      24.028
+      32.239
+      40.45
+      48.662
+      56.873
+      65.084
+      73.295
+      77.105
+      85.17
+      93.235
+      101.3
+      109.365
+      117.43
+      125.495
+      129.305
+      137.37
+      145.435
+      153.5
+      161.565
+      169.63
+      177.695
+      181.505
+      189.57
+      197.635
+      205.7
+      213.765
+      221.83
+      229.895
+      233.705
+      241.77
+      249.835
+      257.9
+      265.965
+      274.03
+      282.095
+      285.905
+      293.97
+      302.035
+      310.1
+      318.165
+      326.23
+      334.295
+      338.105
+      346.0262
+      353.9474
+      361.8686
+      369.7898
       377.711
 
 [INSILICO]
@@ -399,53 +418,83 @@
     dimension     3
     mesh          2
     max_delta_z   7.62
+    preconditioner ML
+    SPN_matrix_type mat_free
 
     mat_library casl_comp_r2.sh5
-    xs_library  lib252_hetbondoneabs-noabssigp
+!   xs_library  lib252_hetbondoneabs-noabssigp
+!   xs_library  test-8grp
+    xs_library  v7-56
 
-!   pin_partitioning true
-    num_blocks_i  30  
-    num_blocks_j  24  
-    num_z_blocks  1  
-    num_groups    23
+    pin_partitioning true
+    num_blocks_i  137
+    num_blocks_j  137
+    num_z_blocks  1
+    num_groups    11
     num_sets      1
 
-    azimuthals_octant  4
-    polars_octant      4
-    quad_type          qr
+!   azimuthals_octant  4
+!   polars_octant      4
+!   quad_type          qr
 
-    silo_output  p5 
+    silo_output  p5
 
-    new_grp_bounds 
-       8.2085e+05 
-       1.1109e+05 
-       5.5308e+03 
-       1.8644e+02 
-       3.7612e+01 
-       3.5379e+01
-       2.7697e+01 
-       2.1684e+01 
-       2.0397e+01 
-       1.5968e+01 
-       7.1500e+00
-       6.7000e+00
-       6.3000e+00 
-       1.0970e+00 
-       1.0450e+00 
-       9.5000e-01 
-       3.5000e-01 
-       2.0600e-01
-       1.0700e-01 
-       5.8000e-02 
-       2.5000e-02 
-       1.0000e-02 
-       1.0000e-05
+!   ** 23-group
+!   new_grp_bounds
+!      8.2085e+05
+!      1.1109e+05
+!      5.5308e+03
+!      1.8644e+02
+!      3.7612e+01
+!      3.5379e+01
+!      2.7697e+01
+!      2.1684e+01
+!      2.0397e+01
+!      1.5968e+01
+!      7.1500e+00
+!      6.7000e+00
+!      6.3000e+00
+!      1.0970e+00
+!      1.0450e+00
+!      9.5000e-01
+!      3.5000e-01
+!      2.0600e-01
+!      1.0700e-01
+!      5.8000e-02
+!      2.5000e-02
+!      1.0000e-02
+!      1.0000e-05
+
+!   ** 8-group
+!   new_grp_bounds
+!      8.200e+05
+!      1.700e+04
+!      1.000e+02
+!      3.000e+00
+!      6.250e-01
+!      1.500e-01
+!      4.000e-02
+!      1.000e-05
+
+!   ** 11-group
+    new_grp_bounds
+       7.5000E+05
+       1.7000E+04
+       6.7500E+01
+       2.1750E+01
+       2.0500E+01
+       7.0000E+00
+       6.2500E-01
+       3.5000E-01
+       2.0000E-01
+       1.0000E-01
+       1.0000E-05
 
 [COBRATF]
   nfuel   3             ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction
   irfc    2             ! friction factor correlation default=2
-  dhfrac  0.02          ! fraction of power deposited directly into coolant
+  dhfrac  0.0           ! fraction of power deposited directly into coolant
   hgap    5678.3        ! gap conductance
   epso    0.001
   oitmax  5
@@ -458,6 +507,7 @@
   rtwfp   1000.0
   maxits  10000
   courant 0.8
+  parallel 1
 
 [COUPLING]
   epsk        5.0  ! pcm
@@ -466,4 +516,5 @@
   rlx_tfuel   1.0
   rlx_den     1.0
   maxiter     100
+! read_restart cobra_denovo_restart.out
 

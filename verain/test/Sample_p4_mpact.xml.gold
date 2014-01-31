@@ -9,6 +9,7 @@
     <Parameter name="feedback" type="string" value="off"/>
     <Parameter name="modden" type="double" value="0.743"/>
     <Parameter name="power" type="double" value="0.0"/>
+    <Parameter name="pressure" type="double" value="15.5132039025"/>
     <Parameter name="sym" type="string" value="qtr"/>
     <Parameter name="tfuel" type="double" value="620.33"/>
     <Parameter name="tinlet" type="double" value="326.85"/>

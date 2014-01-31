@@ -8,6 +8,8 @@
   tinlet 620.33     ! F - 600K
   tfuel  620.33     ! F - 600K
   boron  1300       ! ppmB
+  pressure 2250        ! psia
+
   modden 0.743      ! g/cc
   rodbank A 1       ! 1 is out, 0 is in
   feedback off !??

@@ -47,24 +47,26 @@ my $MAIN_DB;
 
 my $pgnam=$0;                # program name
 my @VERSION=('major'=>3,
-	     'minor'=>1,
-	     'date'=>10242012);
+	     'minor'=>3,
+	     'date'=>01242014);
 
 #
 # Input schema to initiate INPUT_DB
 #
-my $SCHEMA="${directory}Templates/Directory.yml";
+my $SCHEMA;
 #
 # Schemas for the format of the output blocks in PL
 #
-my @BLOCKS=('CASEID','STATE','CORE','ASSEMBLIES',
-	    'CONTROLS','DETECTORS','INSERTS',
-	    'INSILICO','EDITS','COBRATF','COUPLING',
-            'MPACT','MAMBA2D','PEREGRINE');
+my @BLOCKS;
 
-foreach $iblock (@BLOCKS){
-    $SCHEMA_PL{$iblock} = "${directory}Templates/$iblock.yml";
-}
+#
+# Data trees, default
+#
+$SCHEMA="${directory}Templates/Directory.yml";
+@BLOCKS=('CASEID','STATE','CORE','ASSEMBLIES',
+	 'CONTROLS','DETECTORS','INSERTS',
+	 'INSILICO','EDITS','COBRATF','COUPLING',
+	 'MPACT','MAMBA2D','PEREGRINE');
 
 #
 # Rethreads
@@ -89,6 +91,7 @@ my ($VERBOSE,$HELP,$VERSION);
 my $XML='on';
 my $XSLT='on';
 my $NOTRIM;
+my $MULTI;
 { # process options
     GetOptions(
 	"xml=s"     => \$XML,
@@ -98,7 +101,9 @@ my $NOTRIM;
 	"version"   => \$VERSION,
 	"help"      => \$HELP,
 
-	"notrim"    => \$NOTRIM
+	"notrim"    => \$NOTRIM,
+
+	"multistate" => \$MULTI
 #	"update=s"  => \$_UPDATE
 	);
 }
@@ -109,11 +114,22 @@ if($VERSION){
 }
 
 #
-# hidden update
+# hidden update, 1
 #
 # if($_UPDATE eq '007'){
 #    $SCHEMA_PL{ASSEMBLIES} = "${directory}Templates/ASSEMBLIES007.yml";
 #}
+
+#
+# hidden update, 2
+#
+if($MULTI){
+    $SCHEMA="${directory}Templates/DirectoryMulti.yml";
+    @BLOCKS=('CASEID','STATES','CORE','ASSEMBLIES',
+	     'CONTROLS','DETECTORS','INSERTS',
+	     'INSILICO','EDITS','COBRATF','COUPLING',
+	     'MPACT','MAMBA2D','PEREGRINE');
+}
 
 # For formatted display in a browser.
 my $XSLT_FILE='PL9.xsl';
@@ -133,6 +149,15 @@ options:
   --version
   --help\n";
 }
+
+
+# 
+# Initiate output blocks
+#
+foreach $iblock (@BLOCKS){
+    $SCHEMA_PL{$iblock} = "${directory}Templates/$iblock.yml";
+}
+
 
 my ($ifile,$ofile)=@ARGV;
 
