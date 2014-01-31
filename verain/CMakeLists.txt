@@ -21,19 +21,18 @@ INSTALL(
   COMPONENT ${PACKAGE_NAME}
   )  
 
-# Install some examples
+# Install documentation
 
 INSTALL(
-  DIRECTORY install/example/
-  DESTINATION "${${PROJECT_NAME}_INSTALL_EXAMPLE_DIR}/react2xml"
+  DIRECTORY docs/
+  DESTINATION "share/VERAIn/doc"
   COMPONENT ${PACKAGE_NAME}
-  PATTERN "*.sh" PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ GROUP_EXECUTE GROUP_READ
   )
 
 # Install documentation
 
 INSTALL(
-  FILES install/README.react2xml
+  FILES install/README.VERAIn
   DESTINATION "."
   COMPONENT ${PACKAGE_NAME}
   )
