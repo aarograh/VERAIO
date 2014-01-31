@@ -232,7 +232,7 @@ sub clean_line{
     $$lineref =~  s/(\!\s*(.*))$//;         # strip comments
     $$lineref =~ s/(\d+)\s*\*\s*(\w+)/"$2 " x $1/ge; # expand fortran expressions
 #    $$lineref =~ s/(zero)/0/g;               # convert zero to 0
-#    $$lineref =~ s/['"]//g;                # remove quotes
+    $$lineref =~ s/['"]//g;                # remove quotes
     $$lineref =~ s/[,;]/ /g;               # remove commas and such
     $$lineref =~ s/^\s+//;                 # strip leading blanks
     $$lineref =~ s/\s+$//;                 # strip trailing blanks
@@ -286,7 +286,7 @@ sub read_ascii {
 	      print STDERR "[$filename:$.] New block: $name\n"  if get_verbose();
 	      die "[$filename:$.] Bad block name.\n" unless key_exists($INPUT_DB,$name);
 	      $block=REACTORBlock->new( name=>$name, out_db=>$MAIN_DB );
-	      $block->inp_db($INPUT_DB);  # INPUT_DB is root of Directory.yml
+	      $block->inp_db($INPUT_DB);
 	      $command=undef;
 	      next READ;
       };

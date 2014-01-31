@@ -202,14 +202,6 @@ INSILICO:
       _do:
         - copy INSILICO/$cell_homogenize
       _content:
-
-    spn_matrix_type:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy INSILICO/$SPN_matrix_type
-      _content:
-
     SPN_order:
       _pltype: parameter
       _type: int
@@ -251,13 +243,6 @@ INSILICO:
     eigenvalue_db:
       _pltype: list
       _content:
-
-        tolerance:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy INSILICO/$init_tolerance
-          _content:
 
         k_tolerance:
           _pltype: parameter
@@ -396,18 +381,3 @@ INSILICO:
       _do:
         - copy INSILICO/$transport
       _content:
-
-    output_geometry:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy INSILICO/$output_geometry
-      _content:
-
-    thermal_energy_cutoff:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy INSILICO/$thermal_energy_cutoff
-      _content:
-

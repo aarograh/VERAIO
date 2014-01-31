@@ -43,8 +43,8 @@ perl $vera/VERAInExt/verain/scripts/react2xml.pl $inp.inp $inp.xml
 ls -l $inp.xml
 ls -l $exe 
 
-export DATA=$vera/SCALE/test_data
-export SCALE=$vera/SCALE
+export DATA=$vera/Scale/test_data
+export SCALE=$vera/Scale
 
 aprun -n 720 $exe -i $inp.xml
 date

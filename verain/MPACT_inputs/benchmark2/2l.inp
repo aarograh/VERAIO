@@ -46,7 +46,10 @@
   fuel U31 10.257 94.5 / 3.1
   mat he 0.000176
   mat zirc 6.56 zirc4
-  mat ifba 3.85 zr 0.81306 b-10 0.09347 b-11 0.09347
+  mat b10 1.0 b-10
+  mat b11 1.0 b-11
+  mat zr  1.0 zr   
+  mat ifba 3.85 zr 0.81306 b10 0.09347 b11 0.09347
 
   cell 1 0.4096        0.418 0.475 / U31      he zirc
   cell X 0.4096 0.4106 0.418 0.475 / U31 ifba he zirc

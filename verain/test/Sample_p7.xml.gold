@@ -3,6 +3,8 @@
 <ParameterList name="CASEID">
   <Parameter name="case_id" type="string" value="CASL AMA Problem 7 - Watts Bar Unit 1 Cycle 1 - Public"/>
   <ParameterList name="STATE">
+    <Parameter name="bank_labels" type="Array(string)" value="{SA,SB,SC,SD,A,B,C,D}"/>
+    <Parameter name="bank_pos" type="Array(int)" value="{230,230,230,230,230,230,230,167}"/>
     <Parameter name="boron" type="double" value="1285"/>
     <Parameter name="feedback" type="string" value="on"/>
     <Parameter name="modden" type="double" value="0.743"/>
@@ -45,6 +47,9 @@
     <Parameter name="baffle_mat" type="string" value="ss"/>
     <Parameter name="baffle_thick" type="double" value="2.85"/>
     <Parameter name="core_size" type="int" value="15"/>
+    <Parameter name="crd_bank" type="Array(string)" value="{-,-,-,-,-,-,-,-,SA,-,B,-,C,-,B,-,SA,-,-,-,-,SD,-,SB,-,SB,-,SC,-,-,-,SA,-,D,-,-,-,D,-,-,-,D,-,SA,-,-,SC,-,A,-,-,-,-,-,A,-,SD,-,-,-,B,-,-,-,C,-,A,-,C,-,-,-,B,-,-,-,SB,-,-,-,-,-,-,-,-,-,SB,-,-,-,C,-,D,-,A,-,D,-,A,-,D,-,C,-,-,-,SB,-,-,-,-,-,-,-,-,-,SB,-,-,-,B,-,-,-,C,-,A,-,C,-,-,-,B,-,-,-,SD,-,A,-,-,-,-,-,A,-,SC,-,-,SA,-,D,-,-,-,D,-,-,-,D,-,SA,-,-,-,SC,-,SB,-,SB,-,SD,-,-,-,-,SA,-,B,-,C,-,B,-,SA,-,-,-,-,-,-,-,-}"/>
+    <Parameter name="crd_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,1,-,1,-,1,-,1,-,1,-,-,-,-,1,-,1,-,1,-,1,-,-,-,1,-,1,-,-,-,1,-,-,-,1,-,1,-,-,1,-,1,-,-,-,-,-,1,-,1,-,-,-,1,-,-,-,1,-,1,-,1,-,-,-,1,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,1,-,1,-,1,-,1,-,1,-,1,-,1,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,1,-,-,-,1,-,1,-,1,-,-,-,1,-,-,-,1,-,1,-,-,-,-,-,1,-,1,-,-,1,-,1,-,-,-,1,-,-,-,1,-,1,-,-,-,1,-,1,-,1,-,1,-,-,-,-,1,-,1,-,1,-,1,-,1,-,-,-,-,-,-,-,-}"/>
+    <Parameter name="det_map" type="Array(string)" value="{1,-,-,1,-,-,-,1,-,-,-,1,-,-,1,-,1,-,-,1,-,1,-,-,1,-,-,-,-,-,1,-,-,-,-,1,-,-,1,-,-,1,-,-,1,-,-,-,1,-,-,1,-,-,1,-,-,-,1,-,-,-,-,1,-,1,-,-,-,-,1,-,-,-,-,1,-,-,-,-,-,-,1,-,1,-,-,-,1,1,-,1,-,1,-,1,-,-,1,-,1,1,1,-,-,-,-,1,-,-,1,-,-,1,-,-,1,-,-,1,-,1,-,-,1,-,1,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,1,-,1,-,1,-,-,1,1,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,1,-,1,-,1,-,1,1,-,-,1,-,1,-,-,-,-,-,-,-,1,-,-,1,-}"/>
     <Parameter name="height" type="double" value="406.337"/>
     <Parameter name="insert_map" type="Array(string)" value="{-,8,-,12,-,8,-,-,-,16,-,24,-,24,-,16,-,-,-,12,24,-,16,-,20,-,16,-,24,12,-,-,24,-,20,-,20,-,20,-,20,-,24,-,-,16,-,20,-,20,-,20,-,20,-,20,-,16,-,8,-,16,-,20,-,24,-,24,-,20,-,16,-,8,-,24,-,20,-,24,-,20,-,24,-,20,-,24,-,12,-,20,-,20,-,20,-,20,-,20,-,20,-,12,-,24,-,20,-,24,-,20,-,24,-,20,-,24,-,8,-,16,-,20,-,24,-,24,-,20,-,16,-,8,-,16,-,20,-,20,-,20,-,20,-,20,-,16,-,-,24,-,20,-,20,-,20,-,20,-,24,-,-,12,24,-,16,-,20,-,16,-,24,12,-,-,-,16,-,24,-,24,-,16,-,-,-,8,-,12,-,8,-}"/>
     <Parameter name="lower_mat" type="string" value="ss"/>
@@ -56,6 +61,8 @@
     <Parameter name="upper_mat" type="string" value="ss"/>
     <Parameter name="upper_thick" type="double" value="7.6"/>
     <Parameter name="upper_vfrac" type="double" value="0.5"/>
+    <Parameter name="vessel_mats" type="Array(string)" value="{mod,cs}"/>
+    <Parameter name="vessel_radii" type="Array(double)" value="{219.71,241.70}"/>
     <Parameter name="xlabel" type="Array(string)" value="{R,P,N,M,L,K,J,H,G,F,E,D,C,B,A}"/>
     <Parameter name="ylabel" type="Array(string)" value="{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}"/>
   </ParameterList>
@@ -433,7 +440,7 @@
           <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
         </ParameterList>
       </ParameterList>
-      <Parameter name="axial_elevations" type="Array(double)" value="{15.817,377.711}"/>
+      <Parameter name="axial_elevations" type="Array(double)" value="{15.761,376.441}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{PY12}"/>
       <Parameter name="label" type="string" value="12"/>
       <Parameter name="num_pins" type="int" value="17"/>
@@ -463,7 +470,7 @@
           <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
         </ParameterList>
       </ParameterList>
-      <Parameter name="axial_elevations" type="Array(double)" value="{15.817,377.711}"/>
+      <Parameter name="axial_elevations" type="Array(double)" value="{15.761,376.441}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{PY16}"/>
       <Parameter name="label" type="string" value="16"/>
       <Parameter name="num_pins" type="int" value="17"/>
@@ -493,7 +500,7 @@
           <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
         </ParameterList>
       </ParameterList>
-      <Parameter name="axial_elevations" type="Array(double)" value="{15.817,377.711}"/>
+      <Parameter name="axial_elevations" type="Array(double)" value="{15.761,376.441}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{PY20}"/>
       <Parameter name="label" type="string" value="20"/>
       <Parameter name="num_pins" type="int" value="17"/>
@@ -523,7 +530,7 @@
           <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
         </ParameterList>
       </ParameterList>
-      <Parameter name="axial_elevations" type="Array(double)" value="{15.817,377.711}"/>
+      <Parameter name="axial_elevations" type="Array(double)" value="{15.761,376.441}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{PY24}"/>
       <Parameter name="label" type="string" value="24"/>
       <Parameter name="num_pins" type="int" value="17"/>
@@ -553,7 +560,7 @@
           <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
         </ParameterList>
       </ParameterList>
-      <Parameter name="axial_elevations" type="Array(double)" value="{15.817,377.711}"/>
+      <Parameter name="axial_elevations" type="Array(double)" value="{15.761,376.441}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{PY8}"/>
       <Parameter name="label" type="string" value="8"/>
       <Parameter name="num_pins" type="int" value="17"/>
@@ -566,33 +573,33 @@
     <Parameter name="SPN_order" type="int" value="3"/>
     <Parameter name="cell_homogenize" type="bool" value="true"/>
     <Parameter name="dimension" type="int" value="3"/>
-    <ParameterList name="eigenvalue_db">
-      <Parameter name="Preconditioner" type="string" value="ML"/>
-    </ParameterList>
     <Parameter name="eq_set" type="string" value="spn_fv"/>
     <Parameter name="mat_library" type="string" value="casl_comp_r2.sh5"/>
     <Parameter name="max_delta_z" type="double" value="7.62"/>
     <Parameter name="mesh" type="int" value="2"/>
-    <Parameter name="new_grp_bounds" type="Array(double)" value="{7.5000E+05,1.7000E+04,6.7500E+01,2.1750E+01,2.0500E+01,7.0000E+00,6.2500E-01,3.5000E-01,2.0000E-01,1.0000E-01,1.0000E-05}"/>
-    <Parameter name="num_blocks_i" type="int" value="137"/>
-    <Parameter name="num_blocks_j" type="int" value="137"/>
-    <Parameter name="num_groups" type="int" value="11"/>
+    <Parameter name="new_grp_bounds" type="Array(double)" value="{8.2085e+05,1.1109e+05,5.5308e+03,1.8644e+02,3.7612e+01,3.5379e+01,2.7697e+01,2.1684e+01,2.0397e+01,1.5968e+01,7.1500e+00,6.7000e+00,6.3000e+00,1.0970e+00,1.0450e+00,9.5000e-01,3.5000e-01,2.0600e-01,1.0700e-01,5.8000e-02,2.5000e-02,1.0000e-02,1.0000e-05}"/>
+    <Parameter name="num_blocks_i" type="int" value="30"/>
+    <Parameter name="num_blocks_j" type="int" value="24"/>
+    <Parameter name="num_groups" type="int" value="23"/>
     <Parameter name="num_sets" type="int" value="1"/>
     <Parameter name="num_z_blocks" type="int" value="1"/>
-    <Parameter name="pin_partitioning" type="bool" value="true"/>
+    <ParameterList name="quadrature_db">
+      <Parameter name="azimuthals_octant" type="int" value="4"/>
+      <Parameter name="polars_octant" type="int" value="4"/>
+      <Parameter name="quad_type" type="string" value="qr"/>
+    </ParameterList>
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p5"/>
     </ParameterList>
-    <Parameter name="spn_matrix_type" type="string" value="mat_free"/>
     <Parameter name="tolerance" type="double" value="1e-6"/>
-    <Parameter name="xs_library" type="string" value="v7-56"/>
+    <Parameter name="xs_library" type="string" value="lib252_hetbondoneabs-noabssigp"/>
   </ParameterList>
   <ParameterList name="EDITS">
     <Parameter name="axial_edit_bounds" type="Array(double)" value="{11.951,15.817,24.028,32.239,40.45,48.662,56.873,65.084,73.295,77.105,85.17,93.235,101.3,109.365,117.43,125.495,129.305,137.37,145.435,153.5,161.565,169.63,177.695,181.505,189.57,197.635,205.7,213.765,221.83,229.895,233.705,241.77,249.835,257.9,265.965,274.03,282.095,285.905,293.97,302.035,310.1,318.165,326.23,334.295,338.105,346.0262,353.9474,361.8686,369.7898,377.711}"/>
   </ParameterList>
   <ParameterList name="COBRATF">
     <Parameter name="courant" type="double" value="0.8"/>
-    <Parameter name="dhfrac" type="double" value="0.0"/>
+    <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="dtmax" type="double" value="0.1"/>
     <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="epso" type="double" value="0.001"/>
@@ -605,7 +612,6 @@
     <Parameter name="nc" type="int" value="1"/>
     <Parameter name="nfuel" type="int" value="3"/>
     <Parameter name="oitmax" type="int" value="5"/>
-    <Parameter name="parallel" type="int" value="1"/>
     <Parameter name="rtwfp" type="double" value="1000.0"/>
     <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>

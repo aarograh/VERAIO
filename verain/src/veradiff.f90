@@ -8,8 +8,6 @@
 !  tolerance of 10 pcm.
 !  This will be modifed in the future to check other parameters as well.
 !
-!  2014/01/27 - read boron coparison if dataset is present on file
-!
 !--------------------------------------------------------------------------------
       program veradiff
       use  hdf5
@@ -25,10 +23,6 @@
 
       logical            :: ifxst
 
-      real(8)            :: boron1, boron2
-      real(8)            :: bordiff
-      real(8)            :: bortol=1.0d0   ! boron tolerance (ppm)
-
       real(8)            :: xkeff1, xkeff2
       real(8)            :: xkdiff
       real(8)            :: xktol=10.0d0   ! eigenvalue tolerance (pcm)
@@ -36,9 +30,6 @@
       ierror=0
       fname1=' '
       fname2=' '
-
-      boron1=-9999.0d0    ! large negative number if dataset not present
-      boron2=-9999.0d0    ! large negative number if dataset not present
 
       xkeff1=0.0d0
       xkeff2=0.0d0
@@ -105,49 +96,9 @@
 ! Read Eigenvalue and other scalers
 !--------------------------------------------------------------------------------
 
-!--- boron
-
-      dataset='boron'    ! 'boron_conc' for some versions of Insilico
-      call h5lexists_f(file_id1, dataset, ifxst, ierror)
-      if (ifxst) call read_double(file_id1, dataset, boron1)
-      call h5lexists_f(file_id2, dataset, ifxst, ierror)
-      if (ifxst) call read_double(file_id2, dataset, boron2)
-
-      if (boron1.gt.-1000.0d0 .and. boron2.gt.-1000.0d0) then
-        bordiff=(boron2-boron1)
-        write (*,'(a, f12.2)')   ' boron1 =', boron1
-        write (*,'(a, f12.2)')   ' boron2 =', boron2
-        write (*,'(a, f12.2,a)') ' diff   =', bordiff,' ppm'
-        write (*,'(a, f12.2,a)') ' tol    =', bortol ,' ppm'
-        if (abs(bordiff).lt.bortol) then
-          write (*,*) 'PASS - boron difference is less than tolerance'
-        else
-          nfail=nfail+1
-          write (*,*) 'FAIL - boron difference exceeds tolerance'
-        endif
-      else
-        write (*,'(a)') 'No boron comparison performed - at least one file missing boron'
-      endif
-
-!--- eigenvalue
- 
-
       dataset='keff'
-      call h5lexists_f(file_id1, dataset, ifxst, ierror)
-      if (ifxst) then
-        call read_double(file_id1, dataset, xkeff1)
-      else
-        nfail=nfail+1
-        write (*,*) 'FAIL - keff dataset does not exist on file'
-      endif
-
-      call h5lexists_f(file_id2, dataset, ifxst, ierror)
-      if (ifxst) then
-        call read_double(file_id2, dataset, xkeff2)
-      else
-        nfail=nfail+1
-        write (*,*) 'FAIL - keff dataset does not exist on file'
-      endif
+      call read_double(file_id1, dataset, xkeff1)
+      call read_double(file_id2, dataset, xkeff2)
 
       xkdiff=(xkeff2-xkeff1)*1.0d5
 

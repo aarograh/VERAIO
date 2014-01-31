@@ -1,7 +1,6 @@
 package KeyTree;
 
 use Carp  qw(cluck);;
-use Data::Dumper ;
 
 use Exporter;
 @ISA = ('Exporter');
@@ -270,11 +269,6 @@ sub find_keys {
 
     if( ref $ref0 eq 'HASH' ) {
 	@loop=keys(%{$ref0});
-#	print "path0: $path0\n";
-#	print Dumper($ref0);
-#	print "path0: [@path0]\n";
-#	print "find keys: @loop\n";
-
     }
     elsif( ref $ref0 eq 'ARRAY' ) {
 	@loop=(0..$#{$ref0});

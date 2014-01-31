@@ -1,6 +1,5 @@
 package REACTORCommand;
 use Carp;
-use Text::ParseWords;
 
 use REACTORBlock;
 
@@ -178,13 +177,7 @@ sub keyin{
 
     $dtx=~s/^\s+//;
     $dtx=~s/\s+$//;
-
-#    @a=split /\s+/, $dtx;
-    @a=quotewords('\s+', 0, $dtx);
-#    print "a[$#a]: @a\n";
-#    exit;
-
-
+    @a=split /\s+/, $dtx;
     my @a0=@a;
 # SSMOD: Decide on case
 #    my @a = map { lc } @a;
@@ -207,13 +200,7 @@ sub keyin{
     my @sr=values_at($templ0,'_check');
     $result=0;
     if($args{_parse} eq 'scalar'){
-#	$dtx=$args{_type} eq 'string' ? $dtx : $a[0];
-	if($args{_type} eq 'string'){
-	    $dtx=~s/["']//g;
-	}
-	else{
-	    $dtx=$a[0];
-	}
+	$dtx=$args{_type} eq 'string' ? $dtx : $a[0];
 	$result=&apply_evals(\$dtx,\@sr,\$errmsg);
 	key_on($templ,$CONTENT_LABEL,$dtx);
     }
@@ -259,10 +246,6 @@ sub apply_evals {
 	return 1 unless $ieval;
 
 	my @cargs=split(/\s+/,$ieval);
-#	print "ieval $ieval\n";
-#	my @cargs=quotewords('\s+', 0, $ieval);
-
-
 	my $cmdc=shift(@cargs);
 	if($dtype eq 'SCALAR'){
 	    unshift @cargs,$$data_ref;

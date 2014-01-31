@@ -65,27 +65,6 @@ MPACT:
             - mpact_mesh pinmesh_,MPACT/%mesh/*
           _content:
 
-        automesh_bounds_min:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy MPACT/@automesh_bounds:0
-          _content:
-
-        automesh_bounds_max:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy MPACT/@automesh_bounds:1
-          _content:
-
-        meshing_method:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy MPACT/$meshing_method
-          _content:
-
         axial_mesh:
           _pltype: array
           _type: double

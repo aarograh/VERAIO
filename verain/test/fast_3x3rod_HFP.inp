@@ -133,8 +133,9 @@
     Pn_order      0
 
 !   eigenvalue_db:
-       init_tolerance   1e-2
-       energy_dep_ev    true
+       k_tolerance   1e-4
+       L2_tolerance  1e-4
+       energy_dep_ev true
 
 !   quadrature_db:
        quad_type          qr

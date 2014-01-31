@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
 <ParameterList name="CASEID">
-  <Parameter name="case_id" type="string" value="CASL Problem 6a"/>
+  <Parameter name="case_id" type="string" value="CASL Problem 6a x 3x3"/>
   <ParameterList name="STATE">
-    <Parameter name="boron" type="double" value="1300"/>
+    <Parameter name="boron" type="double" value="600"/>
     <Parameter name="feedback" type="string" value="on"/>
     <Parameter name="modden" type="double" value="0.743"/>
     <Parameter name="power" type="double" value="100.0"/>
@@ -57,10 +57,10 @@
         <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
       </ParameterList>
     </ParameterList>
-    <Parameter name="apitch" type="double" value="21.5"/>
-    <Parameter name="assm_map" type="Array(string)" value="{A1}"/>
+    <Parameter name="apitch" type="double" value="21.50"/>
+    <Parameter name="assm_map" type="Array(string)" value="{A1,A1,A1,A1,A1,A1,A1,A1,A1}"/>
     <Parameter name="bc_rad" type="string" value="reflecting"/>
-    <Parameter name="core_size" type="int" value="1"/>
+    <Parameter name="core_size" type="int" value="3"/>
     <Parameter name="height" type="double" value="406.328"/>
     <Parameter name="lower_mat" type="string" value="ss"/>
     <Parameter name="lower_refl_mats" type="Array(string)" value="{mod}"/>
@@ -68,9 +68,9 @@
     <Parameter name="lower_refl_vfracs" type="Array(double)" value="{1.0}"/>
     <Parameter name="lower_thick" type="double" value="5.0"/>
     <Parameter name="lower_vfrac" type="double" value="0.5"/>
-    <Parameter name="rated_flow" type="double" value="85.98089872"/>
-    <Parameter name="rated_power" type="double" value="17.67"/>
-    <Parameter name="shape" type="Array(int)" value="{1}"/>
+    <Parameter name="rated_flow" type="double" value="773.82808848"/>
+    <Parameter name="rated_power" type="double" value="159.03"/>
+    <Parameter name="shape" type="Array(int)" value="{1,1,1,1,1,1,1,1,1}"/>
     <Parameter name="upper_mat" type="string" value="ss"/>
     <Parameter name="upper_refl_mats" type="Array(string)" value="{mod}"/>
     <Parameter name="upper_refl_thicks" type="Array(double)" value="{25.0}"/>
@@ -210,22 +210,21 @@
   <ParameterList name="INSILICO">
     <Parameter name="Pn_order" type="int" value="0"/>
     <Parameter name="SPN_order" type="int" value="3"/>
-    <Parameter name="cell_broadcast_size" type="int" value="289"/>
     <Parameter name="cell_homogenize" type="bool" value="true"/>
     <Parameter name="dimension" type="int" value="3"/>
     <Parameter name="eigen_solver" type="string" value="arnoldi"/>
     <ParameterList name="eigenvalue_db">
-      <Parameter name="L2_tolerance" type="double" value="1e-3"/>
+      <Parameter name="L2_tolerance" type="double" value="1e-5"/>
       <Parameter name="energy_dep_ev" type="bool" value="true"/>
-      <Parameter name="k_tolerance" type="double" value="1e-4"/>
+      <Parameter name="k_tolerance" type="double" value="1e-5"/>
     </ParameterList>
     <Parameter name="eq_set" type="string" value="spn_fv"/>
-    <Parameter name="mat_library" type="string" value="casl_comp_r2.sh5"/>
+    <Parameter name="mat_library" type="string" value="casl_comp.sh5"/>
     <Parameter name="max_delta_z" type="double" value="2.54"/>
     <Parameter name="mesh" type="int" value="2"/>
     <Parameter name="new_grp_bounds" type="Array(double)" value="{8.200e+05,1.700e+04,1.000e+02,3.000e+00,6.250e-01,1.500e-01,4.000e-02,1.000e-05}"/>
-    <Parameter name="num_blocks_i" type="int" value="8"/>
-    <Parameter name="num_blocks_j" type="int" value="8"/>
+    <Parameter name="num_blocks_i" type="int" value="51"/>
+    <Parameter name="num_blocks_j" type="int" value="51"/>
     <Parameter name="num_groups" type="int" value="8"/>
     <Parameter name="num_sets" type="int" value="1"/>
     <Parameter name="num_z_blocks" type="int" value="1"/>
@@ -240,7 +239,7 @@
     </ParameterList>
     <Parameter name="tolerance" type="double" value="1e-6"/>
     <ParameterList name="upscatter_db">
-      <Parameter name="tolerance" type="double" value="1e-4"/>
+      <Parameter name="tolerance" type="double" value="1e-5"/>
     </ParameterList>
     <Parameter name="xs_library" type="string" value="test-8grp"/>
   </ParameterList>
@@ -267,10 +266,9 @@
   </ParameterList>
   <ParameterList name="COUPLING">
     <Parameter name="epsk" type="double" value="5.0"/>
-    <Parameter name="epsp" type="double" value="1.0e-4"/>
     <Parameter name="maxiter" type="int" value="100"/>
     <Parameter name="rlx_den" type="double" value="1.0"/>
-    <Parameter name="rlx_power" type="double" value="0.6"/>
+    <Parameter name="rlx_power" type="double" value="0.5"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
 </ParameterList>

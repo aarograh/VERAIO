@@ -69,6 +69,18 @@
         </ParameterList>
       </ParameterList>
       <ParameterList name="Materials">
+        <ParameterList name="Material_b10">
+          <Parameter name="density" type="double" value="1.0"/>
+          <Parameter name="key_name" type="string" value="b10"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{b-10}"/>
+        </ParameterList>
+        <ParameterList name="Material_b11">
+          <Parameter name="density" type="double" value="1.0"/>
+          <Parameter name="key_name" type="string" value="b11"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{b-11}"/>
+        </ParameterList>
         <ParameterList name="Material_he">
           <Parameter name="density" type="double" value="0.000176"/>
           <Parameter name="key_name" type="string" value="he"/>
@@ -79,13 +91,19 @@
           <Parameter name="density" type="double" value="3.85"/>
           <Parameter name="key_name" type="string" value="ifba"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{0.81306,0.09347,0.09347}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{zr,b-10,b-11}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{zr,b10,b11}"/>
         </ParameterList>
         <ParameterList name="Material_zirc">
           <Parameter name="density" type="double" value="6.56"/>
           <Parameter name="key_name" type="string" value="zirc"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
+        </ParameterList>
+        <ParameterList name="Material_zr">
+          <Parameter name="density" type="double" value="1.0"/>
+          <Parameter name="key_name" type="string" value="zr"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{zr}"/>
         </ParameterList>
       </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
@@ -135,6 +153,18 @@
         </ParameterList>
       </ParameterList>
       <ParameterList name="Materials">
+        <ParameterList name="Material_b10">
+          <Parameter name="density" type="double" value="1.0"/>
+          <Parameter name="key_name" type="string" value="b10"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{b-10}"/>
+        </ParameterList>
+        <ParameterList name="Material_b11">
+          <Parameter name="density" type="double" value="1.0"/>
+          <Parameter name="key_name" type="string" value="b11"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{b-11}"/>
+        </ParameterList>
         <ParameterList name="Material_he">
           <Parameter name="density" type="double" value="0.000176"/>
           <Parameter name="key_name" type="string" value="he"/>
@@ -145,13 +175,19 @@
           <Parameter name="density" type="double" value="3.85"/>
           <Parameter name="key_name" type="string" value="ifba"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{0.81306,0.09347,0.09347}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{zr,b-10,b-11}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{zr,b10,b11}"/>
         </ParameterList>
         <ParameterList name="Material_zirc">
           <Parameter name="density" type="double" value="6.56"/>
           <Parameter name="key_name" type="string" value="zirc"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
+        </ParameterList>
+        <ParameterList name="Material_zr">
+          <Parameter name="density" type="double" value="1.0"/>
+          <Parameter name="key_name" type="string" value="zr"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{zr}"/>
         </ParameterList>
       </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
@@ -201,6 +237,18 @@
         </ParameterList>
       </ParameterList>
       <ParameterList name="Materials">
+        <ParameterList name="Material_b10">
+          <Parameter name="density" type="double" value="1.0"/>
+          <Parameter name="key_name" type="string" value="b10"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{b-10}"/>
+        </ParameterList>
+        <ParameterList name="Material_b11">
+          <Parameter name="density" type="double" value="1.0"/>
+          <Parameter name="key_name" type="string" value="b11"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{b-11}"/>
+        </ParameterList>
         <ParameterList name="Material_he">
           <Parameter name="density" type="double" value="0.000176"/>
           <Parameter name="key_name" type="string" value="he"/>
@@ -211,13 +259,19 @@
           <Parameter name="density" type="double" value="3.85"/>
           <Parameter name="key_name" type="string" value="ifba"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{0.81306,0.09347,0.09347}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{zr,b-10,b-11}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{zr,b10,b11}"/>
         </ParameterList>
         <ParameterList name="Material_zirc">
           <Parameter name="density" type="double" value="6.56"/>
           <Parameter name="key_name" type="string" value="zirc"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
+        </ParameterList>
+        <ParameterList name="Material_zr">
+          <Parameter name="density" type="double" value="1.0"/>
+          <Parameter name="key_name" type="string" value="zr"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{zr}"/>
         </ParameterList>
       </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>

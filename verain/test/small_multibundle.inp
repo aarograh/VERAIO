@@ -159,9 +159,9 @@
   irfc    2             ! friction factor correlation default=2
   dhfrac  0.02          ! fraction of power deposited directly into coolant
   hgap    5678.3        ! gap conductance
-  epso    0.0001
-  oitmax  15
-  iitmax  80
+  epso    0.001
+  oitmax  5
+  iitmax  40
   gridloss END 0.9070   ! spacer grid loss coefficient
   gridloss MID 0.9065   ! spacer grid loss coefficient
   dtmin   0.000001
@@ -171,11 +171,11 @@
   maxits  10000
   courant 0.8
 ! maps_filename = single_rod_HFP
-  global_energy_balance    0.001 !%
-  global_mass_balance      0.0001 !%
-  fluid_energy_storage     0.05  !%
-  solid_energy_storage     0.05  !%
-  mass_storage             0.05  !%
+  global_energy_balance    0.01 !%
+  global_mass_balance      0.01 !%
+  fluid_energy_storage     0.5  !%
+  solid_energy_storage     0.5  !%
+  mass_storage             0.5  !%
 
 [COUPLING]
   read_restart cobra_denovo_restart.out  ! generated when run the first time.

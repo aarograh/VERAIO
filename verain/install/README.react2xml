@@ -1,24 +1,20 @@
 ################################################################################
 #                                                                              #
-#                VERA Standard Core Simulator Input Parser                     #
+#            VERA Reactor-Aware Core Simulator Input Parser                    #
 #                                                                              #
 ################################################################################
 
-The VERA reactor input parser react2xml.pl is installed under:
+The reactor-aware input parser react2xml.pl is installed under
 
    bin/react2xml.pl
 
-The examples are installed under:
+The examples are installed under
 
-   share/VERAIn/example/
+   example/react2xml
 
 Each of the subdirectories under the above example directory has a
 run_example.sh script that will run the example, demonstrating how to run the
-code.  Just open each run_example.sh script and look at what it does.
-
-Documentation for the format of the input parser in installed under:
-
-   share/VERAIn/doc/
+code.  Justs open each run_example.sh script and look at what it does.
 
 More info on how to run the parser is given by:
 

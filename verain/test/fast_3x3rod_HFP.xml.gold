@@ -205,8 +205,9 @@
     <Parameter name="dimension" type="int" value="3"/>
     <Parameter name="eigen_solver" type="string" value="arnoldi"/>
     <ParameterList name="eigenvalue_db">
+      <Parameter name="L2_tolerance" type="double" value="1e-4"/>
       <Parameter name="energy_dep_ev" type="bool" value="true"/>
-      <Parameter name="tolerance" type="double" value="1e-2"/>
+      <Parameter name="k_tolerance" type="double" value="1e-4"/>
     </ParameterList>
     <Parameter name="eq_set" type="string" value="spn_fv"/>
     <Parameter name="mat_library" type="string" value="casl_comp.sh5"/>
