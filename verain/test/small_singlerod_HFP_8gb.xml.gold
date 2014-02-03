@@ -181,8 +181,8 @@
       </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{6.050,10.281,11.951,377.711,393.711,395.381,397.501}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{LGAP1,PCAP1,FUEL1,PLEN1,PCAP1,LGAP1}"/>
-      <Parameter name="grid_elev" type="Array(double)" value="{13.884,75.2,127.4,179.6,231.8,284.0,336.2}"/>
-      <Parameter name="grid_map" type="Array(string)" value="{END,MID,MID,MID,MID,MID,MID}"/>
+      <Parameter name="grid_elev" type="Array(double)" value="{13.884,75.2,127.4,179.6,231.8,284.0,336.2,388.2}"/>
+      <Parameter name="grid_map" type="Array(string)" value="{END,MID,MID,MID,MID,MID,MID,END}"/>
       <Parameter name="label" type="string" value="A1"/>
       <Parameter name="lower_nozzle_comp" type="string" value="ss"/>
       <Parameter name="lower_nozzle_height" type="double" value="6.05"/>

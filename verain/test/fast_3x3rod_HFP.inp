@@ -99,6 +99,7 @@
   grid_axial
       END  13.884
       MID 127.4
+      END 388.2
 
   lower_nozzle  ss 6.05  194.64  ! mat, height, mass (g)  *** mass scaled to 3x3
   upper_nozzle  ss 8.827 194.64  ! mat, height, mass (g)  *** mass scaled to 3x3
