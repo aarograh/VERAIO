@@ -100,6 +100,7 @@
       MID 231.8
       MID 284.0
       MID 336.2
+      END 388.2
 
   lower_nozzle  ss 6.05  21.626  ! mat, height, mass (g)  *** mass scaled to 1x1 rod
   upper_nozzle  ss 8.827 21.626  ! mat, height, mass (g)  *** mass scaled to 1x1 rod
