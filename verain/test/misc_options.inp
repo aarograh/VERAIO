@@ -66,6 +66,11 @@
     A1 A1 A1
        A1   
 
+  rotate_map
+      2
+    3 0 1
+      0
+
   lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
   upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
   lower_ref   mod 26.0 1.0
