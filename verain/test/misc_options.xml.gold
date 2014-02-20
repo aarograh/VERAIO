@@ -6,6 +6,7 @@
     <ParameterList name="State_1">
       <Parameter name="boron" type="double" value="1300"/>
       <Parameter name="deplete" type="Array(double)" value="{0.0,1.0,2.0,3.5,4.5}"/>
+      <Parameter name="deplete_units" type="string" value="GWDMT"/>
       <Parameter name="feedback" type="string" value="on"/>
       <Parameter name="kcrit" type="double" value="1.02"/>
       <Parameter name="modden" type="double" value="0.743"/>
