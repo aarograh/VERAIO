@@ -1249,6 +1249,12 @@ MPACT:
     _content:
     _check:
       - is_word()
+  xs_shielder:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() t f true false
   dep_filename:
     <<: *dtword
     _content:
