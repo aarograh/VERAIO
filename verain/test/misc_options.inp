@@ -24,7 +24,7 @@
   feedback on
   sym full
 
-  deplete 0.0 1.0 2.0 3.5 4.5
+  deplete GWDMT 0.0 1.0 2.0 3.5 4.5
 
 [STATE]
   power  80.0     ! added multistate 1/30/2014 , must use --multistate command line option

@@ -118,7 +118,14 @@ STATES:
           _pltype: array
           _type: double
           _do:
-            - copy STATE/(_loop)/@deplete
+            - copyarray STATE/(_loop)/@deplete,start=>1
+          _content:
+
+        deplete_units:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy STATE/(_loop)/@deplete:0
           _content:
     
         tfuel:

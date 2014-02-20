@@ -149,8 +149,8 @@ STATE:
     <<: *dtlist
     _content:
     _check:
-      - fall(sub{is_float(shift)},())
-      - nth(0,())==0
+      - fall(sub{is_float(shift)},stride(1,1,()))
+      - nth(0,())eq"GWDMT"||nth(0,())eq"EFPD"||nth(0,())eq"hours"
   rodbank:
     <<: *dtlist
     _style: multi-line
