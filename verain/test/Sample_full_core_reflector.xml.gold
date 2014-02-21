@@ -8,6 +8,7 @@
     <Parameter name="boron" type="double" value="1300"/>
     <Parameter name="bypass" type="double" value="8.98"/>
     <Parameter name="deplete" type="Array(double)" value="{0.0}"/>
+    <Parameter name="deplete_units" type="string" value="GWDMT"/>
     <Parameter name="flow" type="double" value="100.0"/>
     <Parameter name="kcrit" type="double" value="1.0"/>
     <Parameter name="power" type="double" value="0.0"/>
