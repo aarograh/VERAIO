@@ -99,7 +99,7 @@
   polars_octant 4
   
   mat_library casl_comp_r2.sh5
-  xs_library lib252_hetbondoneabs-noabssigp
+  xs_library v7-252
   
   new_grp_bounds
     8.2085e+05
