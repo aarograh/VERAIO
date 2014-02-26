@@ -573,7 +573,7 @@
       <Parameter name="silo_output" type="string" value="p2"/>
     </ParameterList>
     <Parameter name="tolerance" type="double" value="1e-6"/>
-    <Parameter name="xs_library" type="string" value="lib252_hetbondoneabs-noabssigp"/>
+    <Parameter name="xs_library" type="string" value="v7-252"/>
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="cmfd">

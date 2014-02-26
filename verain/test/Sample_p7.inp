@@ -422,7 +422,7 @@
     SPN_matrix_type mat_free
 
     mat_library casl_comp_r2.sh5
-!   xs_library  lib252_hetbondoneabs-noabssigp
+!   xs_library  v7-252
 !   xs_library  test-8grp
     xs_library  v7-56
 
