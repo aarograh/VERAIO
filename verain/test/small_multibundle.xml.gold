@@ -243,7 +243,7 @@
     <Parameter name="epso" type="double" value="0.0001"/>
     <Parameter name="fluid_energy_storage" type="double" value="0.05"/>
     <Parameter name="global_energy_balance" type="double" value="0.001"/>
-    <Parameter name="global_mass_balance" type="double" value="0.0001"/>
+    <Parameter name="global_mass_balance" type="double" value="0.00005"/>
     <Parameter name="gridlabel" type="Array(string)" value="{MID,END}"/>
     <Parameter name="gridloss" type="Array(double)" value="{0.9065,0.9070}"/>
     <Parameter name="hgap" type="double" value="5678.3"/>
