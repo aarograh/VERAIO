@@ -224,5 +224,5 @@ COBRATF:
       _pltype: parameter
       _type: int
       _do:
-        - copy COBRATF/$edit_rods
+        - copy COBRATF/$edit_dnb
       _content:
