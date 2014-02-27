@@ -41,7 +41,7 @@
   kcrit  1.0
   search 'boron'                        ! state_search
   pressure 2250                         ! state_pressure (psia)
-  deplete 0.0                           ! state_deplete  (MWD/MTU)
+  deplete GWDMT 0.0                     ! state_deplete  (MWD/MTU)
   rodbank  A 228 B 216 C 228 D 228 SA 228 SB 228 SC 228 SD 228    ! state_bank_labels, state_bank_pos
 !  rodbank  B 216      ! only position bank B, keep other banks unchanged
 

@@ -8,6 +8,7 @@
     <Parameter name="boron" type="double" value="1300"/>
     <Parameter name="bypass" type="double" value="8.98"/>
     <Parameter name="deplete" type="Array(double)" value="{0.0}"/>
+    <Parameter name="deplete_units" type="string" value="GWDMT"/>
     <Parameter name="flow" type="double" value="100.0"/>
     <Parameter name="kcrit" type="double" value="1.0"/>
     <Parameter name="power" type="double" value="0.0"/>
@@ -71,6 +72,7 @@
     <Parameter name="lower_vfrac" type="double" value="0.5"/>
     <Parameter name="rated_flow" type="double" value="18231.88166"/>
     <Parameter name="rated_power" type="double" value="3411.0"/>
+    <Parameter name="rotate_map" type="Array(int)" value="{0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}"/>
     <Parameter name="shape" type="Array(int)" value="{0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0}"/>
     <Parameter name="upper_mat" type="string" value="SS304"/>
     <Parameter name="upper_thick" type="double" value="7.6"/>
