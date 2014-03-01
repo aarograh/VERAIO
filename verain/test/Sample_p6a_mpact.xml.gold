@@ -266,7 +266,7 @@
   <ParameterList name="COUPLING">
     <Parameter name="epsk" type="double" value="5.0"/>
     <Parameter name="epsp" type="double" value="1.0e-4"/>
-    <Parameter name="maxiter" type="int" value="1"/>
+    <Parameter name="maxiter" type="int" value="15"/>
     <Parameter name="rlx_den" type="double" value="1.0"/>
     <Parameter name="rlx_power" type="double" value="0.6"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
@@ -315,17 +315,17 @@
       <Parameter name="num_threads" type="int" value="1"/>
     </ParameterList>
     <ParameterList name="quad_set">
-      <Parameter name="azimuthals_octant" type="int" value="2"/>
-      <Parameter name="polars_octant" type="int" value="2"/>
+      <Parameter name="azimuthals_octant" type="int" value="16"/>
+      <Parameter name="polars_octant" type="int" value="4"/>
       <Parameter name="quad_type" type="string" value="CHEBYSHEV-GAUSS"/>
     </ParameterList>
-    <Parameter name="ray_spacing" type="double" value="0.1"/>
+    <Parameter name="ray_spacing" type="double" value="0.05"/>
     <Parameter name="vis_edits" type="string" value="none"/>
     <ParameterList name="xs_library">
       <Parameter name="subgroup_set" type="int" value="4"/>
       <Parameter name="xs_filename" type="string" value="declib56g_e7_09042013_p0mixed.fmt"/>
       <Parameter name="xs_type" type="string" value="ORNL"/>
-      <Parameter name="xsshielder" type="string" value="f"/>
+      <Parameter name="xsshielder" type="string" value="t"/>
     </ParameterList>
   </ParameterList>
 </ParameterList>

@@ -314,15 +314,15 @@
   rlx_power   0.6
   rlx_tfuel   1.0
   rlx_den     1.0
-  maxiter     1 
+  maxiter     15 
 
 [MPACT]
   vis_edits         none
-  ray_spacing       0.1
+  ray_spacing       0.05
 !quad_set
   quad_type         CHEBYSHEV-GAUSS
-  polars_octant     2
-  azimuthals_octant 2
+  polars_octant     4
+  azimuthals_octant 16
 !iteration_control
   flux_tolerance    1e-4
   num_inners        3
@@ -348,7 +348,7 @@
 !xs_library
   xs_filename       declib56g_e7_09042013_p0mixed.fmt
   xs_type           ORNL
-  xs_shielder       f
+  xs_shielder       t 
   subgroup_set      4
 !mesh
   
