@@ -288,8 +288,8 @@
     <Parameter name="executioner_dt" type="double" value="1.0e3"/>
     <Parameter name="executioner_end_time" type="double" value="6.0e7"/>
     <Parameter name="executioner_num_steps" type="int" value="2000"/>
-    <Parameter name="executioner_timestepper_time_dt" type="string" value="1.0e3  1.0e5"/>
-    <Parameter name="executioner_timestepper_time_t" type="string" value="0      1.0e5"/>
+    <Parameter name="executioner_timestepper_time_dt" type="string" value="1.0e3 1.0e5"/>
+    <Parameter name="executioner_timestepper_time_t" type="string" value="0 1.0e5"/>
     <Parameter name="globalparams_a_lower" type="double" value="0.01676"/>
     <Parameter name="globalparams_a_upper" type="double" value="3.67436"/>
     <Parameter name="globalparams_density" type="double" value="10431.0"/>
