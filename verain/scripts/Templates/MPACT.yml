@@ -274,6 +274,13 @@ MPACT:
             - copy MPACT/$xs_filename
           _content:
 
+        xsshielder:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$xs_shielder
+          _content:
+
         dep_filename:
           _pltype: parameter
           _type: string

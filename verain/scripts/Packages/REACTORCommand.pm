@@ -181,6 +181,14 @@ sub keyin{
 
 #    @a=split /\s+/, $dtx;
     @a=quotewords('\s+', 0, $dtx);
+    foreach my $data (@a){
+	$data =~ s/&/&amp;/g;
+	$data =~ s/</&lt;/g;
+#	$data =~ s/>/&gt;/g;
+	# should this trigger error, like unbalanced quotes?
+	$data =~ s/'/&apos;/g;
+	$data =~ s/"/&quot;/g;
+    }
 #    print "a[$#a]: @a\n";
 #    exit;
 
@@ -192,6 +200,9 @@ sub keyin{
     $name_idx=$args{_named};
     if($name_idx){
 	$name=splice(@a,$name_idx-1,1);
+	unless(defined($name)){
+	    die "keyin: parameter does not have key name defined, input line $dtx\n";
+	}
 
 # In case we want to use _content instead of _default. Then must
 # change all entries in Directory.yml, _default -> _content, and use
@@ -209,7 +220,17 @@ sub keyin{
     if($args{_parse} eq 'scalar'){
 #	$dtx=$args{_type} eq 'string' ? $dtx : $a[0];
 	if($args{_type} eq 'string'){
-	    $dtx=~s/["']//g;
+	    # this assumes there is no named scalar string
+	    # ok for now, but may be needed later
+#	    $dtx=~s/["']//g;
+	    $dtx =~ s/&/&amp;/g;
+	    $dtx =~ s/</&lt;/g;
+#	    $dtx =~ s/>/&gt;/g;
+	    $dtx =~ s/'/&apos;/g;
+	    $dtx =~ s/"/&quot;/g;
+	    if(@a){
+		$dtx=join(' ',@a);
+	    }
 	}
 	else{
 	    $dtx=$a[0];

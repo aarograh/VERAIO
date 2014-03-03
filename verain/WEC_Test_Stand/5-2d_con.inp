@@ -281,7 +281,7 @@
     Pn_correction true
 
     mat_library casl_comp_r2.sh5
-    xs_library  lib252_hetbondoneabs-noabssigp
+    xs_library  v7-252
 
     max_delta_z   1.0
     num_blocks_i  12 
