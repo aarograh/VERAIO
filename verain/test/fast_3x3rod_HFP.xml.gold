@@ -2,15 +2,17 @@
 <?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
 <ParameterList name="CASEID">
   <Parameter name="case_id" type="string" value="CASL Problem 3x3 HFP"/>
-  <ParameterList name="STATE">
-    <Parameter name="boron" type="double" value="1300"/>
-    <Parameter name="feedback" type="string" value="on"/>
-    <Parameter name="modden" type="double" value="0.743"/>
-    <Parameter name="power" type="double" value="100.0"/>
-    <Parameter name="pressure" type="double" value="15.5132039025"/>
-    <Parameter name="sym" type="string" value="full"/>
-    <Parameter name="tfuel" type="double" value="900.0"/>
-    <Parameter name="tinlet" type="double" value="292.777777777778"/>
+  <ParameterList name="STATES">
+    <ParameterList name="State_1">
+      <Parameter name="boron" type="double" value="1300"/>
+      <Parameter name="feedback" type="string" value="on"/>
+      <Parameter name="modden" type="double" value="0.743"/>
+      <Parameter name="power" type="double" value="100.0"/>
+      <Parameter name="pressure" type="double" value="15.5132039025"/>
+      <Parameter name="sym" type="string" value="full"/>
+      <Parameter name="tfuel" type="double" value="900.0"/>
+      <Parameter name="tinlet" type="double" value="292.777777777778"/>
+    </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">
     <ParameterList name="Materials">

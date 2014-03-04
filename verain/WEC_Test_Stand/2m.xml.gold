@@ -2,13 +2,15 @@
 <?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
 <ParameterList name="CASEID">
   <Parameter name="case_id" type="string" value="CASL AMA Benchmark Problem 2M - Fuel Lattice - Public"/>
-  <ParameterList name="STATE">
-    <Parameter name="boron" type="double" value="1300"/>
-    <Parameter name="modden" type="double" value="0.743"/>
-    <Parameter name="power" type="double" value="0.0"/>
-    <Parameter name="sym" type="string" value="qtr"/>
-    <Parameter name="tfuel" type="double" value="600"/>
-    <Parameter name="tinlet" type="double" value="326.85"/>
+  <ParameterList name="STATES">
+    <ParameterList name="State_1">
+      <Parameter name="boron" type="double" value="1300"/>
+      <Parameter name="modden" type="double" value="0.743"/>
+      <Parameter name="power" type="double" value="0.0"/>
+      <Parameter name="sym" type="string" value="qtr"/>
+      <Parameter name="tfuel" type="double" value="600"/>
+      <Parameter name="tinlet" type="double" value="326.85"/>
+    </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">
     <Parameter name="apitch" type="double" value="21.50"/>

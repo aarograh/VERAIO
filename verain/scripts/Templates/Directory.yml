@@ -62,7 +62,7 @@ CASEID:
       - is_string()
 
 STATE:
-  <<: *dtblock
+  <<: *dtblocknamed
   id:
     <<: *dtstring
     _content:
