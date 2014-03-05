@@ -163,24 +163,14 @@ sub keyin{
     my $templ0=$templ;
     my %args=%{ $templ };
 
-    if(exists$args{_slash}){
-	$dtx=~s/\// \/ /g;
-    }
-    else{
-	$dtx=~s/\// /g;
-    }
-    if(exists$args{_equal}){
-	$dtx=~s/=/ = /g;
-    }
-    else{
-	$dtx=~s/=/ /g;
+    my $split_exp='\s+|=';
+    @a=quotewords($split_exp, 0, $dtx);
+    @a = grep {defined && $_ ne ''} @a;
+
+    unless(exists($args{_slash})){
+	@a = grep {defined && $_ ne '/'} @a;
     }
 
-    $dtx=~s/^\s+//;
-    $dtx=~s/\s+$//;
-
-#    @a=split /\s+/, $dtx;
-    @a=quotewords('\s+', 0, $dtx);
     foreach my $data (@a){
 	$data =~ s/&/&amp;/g;
 	$data =~ s/</&lt;/g;
@@ -189,9 +179,6 @@ sub keyin{
 	$data =~ s/'/&apos;/g;
 	$data =~ s/"/&quot;/g;
     }
-#    print "a[$#a]: @a\n";
-#    exit;
-
 
     my @a0=@a;
 # SSMOD: Decide on case

@@ -230,7 +230,7 @@
       <Parameter name="axial_labels" type="Array(string)" value="{DET}"/>
       <Parameter name="label" type="string" value="1"/>
       <Parameter name="num_pins" type="int" value="17"/>
-      <Parameter name="title" type="string" value="double cheeseburger w  fries"/>
+      <Parameter name="title" type="string" value="double cheeseburger w/ fries"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="INSERTS">
