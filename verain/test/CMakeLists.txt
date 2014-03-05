@@ -56,39 +56,10 @@ FUNCTION(ADD_REACTOR_AWARE_INPUT_PARSER_TEST FILE_NAME)
     )
 ENDFUNCTION()
 
-#  Temporaty function that runs that runs the parser with the --multistate option
-#  Remove this function when multistate is the default option
-
-FUNCTION(ADD_REACTOR_AWARE_MULTISTATE_TEST FILE_NAME)
-  ASSERT_DEFINED(VERAIn_SOURCE_DIR)
-  TRIBITS_COPY_FILES_TO_BINARY_DIR(CopyScriptFiles_${FILE_NAME}
-    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
-    SOURCE_FILES
-      ${FILE_NAME}.inp ${FILE_NAME}.xml.gold
-    )
-  TRIBITS_ADD_ADVANCED_TEST(
-    react2xml_${FILE_NAME}
-    OVERALL_WORKING_DIRECTORY TEST_NAME
-    OVERALL_NUM_MPI_PROCS 1
-    TEST_0
-      CMND ${CMAKE_COMMAND}
-      ARGS -E remove *.xml *.yml
-    TEST_1
-      CMND ${PERL_EXECUTABLE}
-      ARGS
-        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl --multistate
-        ../${FILE_NAME}.inp  ${FILE_NAME}.xml
-    TEST_2
-      CMND diff ARGS ${FILE_NAME}.xml ../${FILE_NAME}.xml.gold
-    )
-ENDFUNCTION()
-
-
-
 #
 # Run the different test cases
 #
-ADD_REACTOR_AWARE_MULTISTATE_TEST(misc_options)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(misc_options)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_full_core_fuelmix)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_full_core_maps)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_full_core_matmix)
