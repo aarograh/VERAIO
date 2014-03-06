@@ -30,13 +30,19 @@ my %BLOCK_COUNTERS;
 sub new
 {
     my ($class, %arg) = @_;
-    bless{
+    my $o=bless{
 	name    => $arg{name}    || croak("missing block name"),
-	inp_db  => $arg{inp_db}  || undef,
+	inp_db  => undef,
 	out_db  => $arg{out_db}  || undef,
 	named   => $arg{named}   || 0,
 	keytree => undef,
     }, $class;
+
+    if($arg{inp_db}){
+	$o->inp_db($arg{inp_db});
+    }
+
+    return $o;
 }
 
 sub name
