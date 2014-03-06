@@ -57,7 +57,7 @@ _DIRECTORY:
 CASEID:
   title:
     <<: *dtstring
-    _content:
+    _content: default
     _check:
       - is_string()
 

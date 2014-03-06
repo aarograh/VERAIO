@@ -11,6 +11,7 @@ use YAML;
 use YAMLUtil;
 use KeyTree;
 use REACTOR;
+use REACTORBlock;
 use PL;
 use XMLPack;
 use ClonePP qw(clone);
@@ -194,6 +195,12 @@ REACTORBlock->set_verbose()   if $VERBOSE;
 REACTORCommand->set_verbose() if $VERBOSE;
 PL->set_verbose()             if $VERBOSE;
 XMLPack->set_verbose()        if $VERBOSE;
+
+#
+# Initiate CASEID directly because it is the root node
+#
+my $block=REACTORBlock->new( name=>'CASEID', inp_db=>$INPUT_DB, out_db=>$MAIN_DB );
+$block->keyon();
 
 #
 # Read input file into main_db
