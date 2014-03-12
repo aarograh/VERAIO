@@ -97,7 +97,7 @@
   grid MID zirc 27.25 3.810  ! *** mass scaled to 3x3
 
   grid_axial
-      END  13.884
+      END  12.9
       MID  75.2
       MID 127.4
       MID 179.6
@@ -113,8 +113,9 @@
 
 !  3in intervals in active fuel
   axial_edit_bounds
-          11.951
-          15.817
+           6.05
+          10.967
+          14.833
           24.028
           32.239
           40.45
@@ -163,6 +164,10 @@
           361.8686
           369.7898
           377.711
+          386.267
+          390.133
+          395.3
+          397.5
 
 [INSILICO]
     mat_library casl_comp.sh5
