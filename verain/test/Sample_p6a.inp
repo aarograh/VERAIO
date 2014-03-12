@@ -229,7 +229,7 @@
 
 [INSILICO]
     mat_library casl_comp.sh5
-    xs_library  lib252_hetbondoneabs-noabssigp
+    xs_library  v7-252
 
     max_delta_z   2.54
     num_blocks_i  17
@@ -306,6 +306,7 @@
   rtwfp   1000.0
   maxits  10000
   courant 0.8
+  edit_channels 1
 
 [COUPLING]
   epsk        5.0  ! pcm

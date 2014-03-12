@@ -2,13 +2,16 @@
 <?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
 <ParameterList name="CASEID">
   <Parameter name="case_id" type="string" value="Seabrook 5x5 rod problem HFP"/>
-  <ParameterList name="STATE">
-    <Parameter name="boron" type="double" value="1362"/>
-    <Parameter name="deplete" type="Array(double)" value="{0.0,100.0,200.0,300.0,400.0,500.0,600.0,700.0,800.0,900.0,1000.0,1100.0,1200.0}"/>
-    <Parameter name="feedback" type="string" value="on"/>
-    <Parameter name="power" type="double" value="100.0"/>
-    <Parameter name="pressure" type="double" value="15.5132039025"/>
-    <Parameter name="tinlet" type="double" value="292.666666666667"/>
+  <ParameterList name="STATES">
+    <ParameterList name="State_1">
+      <Parameter name="boron" type="double" value="1362"/>
+      <Parameter name="deplete" type="Array(double)" value="{0.0,100.0,200.0,300.0,400.0,500.0,600.0,700.0,800.0,900.0,1000.0,1100.0,1200.0}"/>
+      <Parameter name="deplete_units" type="string" value="GWDMT"/>
+      <Parameter name="feedback" type="string" value="on"/>
+      <Parameter name="power" type="double" value="100.0"/>
+      <Parameter name="pressure" type="double" value="15.5132039025"/>
+      <Parameter name="tinlet" type="double" value="292.666666666667"/>
+    </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">
     <ParameterList name="Materials">

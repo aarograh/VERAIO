@@ -11,6 +11,7 @@
 !================================================================================
 
 [STATE]
+  title "Test & in input - see Story # 3279"
   power  100.0         ! %
   tinlet 559.0         ! F
   boron  1300          ! ppmB
@@ -24,7 +25,7 @@
   feedback on
   sym full
 
-  deplete 0.0 1.0 2.0 3.5 4.5
+  deplete GWDMT 0.0 1.0 2.0 3.5 4.5
 
 [STATE]
   power  80.0     ! added multistate 1/30/2014 , must use --multistate command line option
@@ -65,6 +66,11 @@
        A1   
     A1 A1 A1
        A1   
+
+  rotate_map
+      2
+    3 0 1
+      0
 
   lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
   upper_plate ss 7.6 0.5   ! mat, thickness, vol frac

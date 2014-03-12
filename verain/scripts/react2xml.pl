@@ -11,6 +11,7 @@ use YAML;
 use YAMLUtil;
 use KeyTree;
 use REACTOR;
+use REACTORBlock;
 use PL;
 use XMLPack;
 use ClonePP qw(clone);
@@ -63,7 +64,7 @@ my @BLOCKS;
 # Data trees, default
 #
 $SCHEMA="${directory}Templates/Directory.yml";
-@BLOCKS=('CASEID','STATE','CORE','ASSEMBLIES',
+@BLOCKS=('CASEID','STATES','CORE','ASSEMBLIES',
 	 'CONTROLS','DETECTORS','INSERTS',
 	 'INSILICO','EDITS','COBRATF','COUPLING',
 	 'MPACT','MAMBA2D','PEREGRINE');
@@ -92,6 +93,7 @@ my $XML='on';
 my $XSLT='on';
 my $NOTRIM;
 my $MULTI;
+my $SINGLE;
 { # process options
     GetOptions(
 	"xml=s"     => \$XML,
@@ -103,6 +105,7 @@ my $MULTI;
 
 	"notrim"    => \$NOTRIM,
 
+	"onestate"   => \$SINGLE,
 	"multistate" => \$MULTI
 #	"update=s"  => \$_UPDATE
 	);
@@ -123,9 +126,17 @@ if($VERSION){
 #
 # hidden update, 2
 #
-if($MULTI){
-    $SCHEMA="${directory}Templates/DirectoryMulti.yml";
-    @BLOCKS=('CASEID','STATES','CORE','ASSEMBLIES',
+# if($MULTI){
+#    $SCHEMA="${directory}Templates/DirectoryMulti.yml";
+#    @BLOCKS=('CASEID','STATES','CORE','ASSEMBLIES',
+#	     'CONTROLS','DETECTORS','INSERTS',
+#	     'INSILICO','EDITS','COBRATF','COUPLING',
+#	     'MPACT','MAMBA2D','PEREGRINE');
+# }
+
+if($SINGLE){
+    $SCHEMA="${directory}Templates/DirectorySingle.yml";
+    @BLOCKS=('CASEID','STATE','CORE','ASSEMBLIES',
 	     'CONTROLS','DETECTORS','INSERTS',
 	     'INSILICO','EDITS','COBRATF','COUPLING',
 	     'MPACT','MAMBA2D','PEREGRINE');
@@ -184,6 +195,12 @@ REACTORBlock->set_verbose()   if $VERBOSE;
 REACTORCommand->set_verbose() if $VERBOSE;
 PL->set_verbose()             if $VERBOSE;
 XMLPack->set_verbose()        if $VERBOSE;
+
+#
+# Initiate CASEID directly because it is the root node
+#
+my $block=REACTORBlock->new( name=>'CASEID', inp_db=>$INPUT_DB, out_db=>$MAIN_DB );
+$block->keyon();
 
 #
 # Read input file into main_db

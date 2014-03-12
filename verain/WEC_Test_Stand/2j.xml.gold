@@ -2,15 +2,17 @@
 <?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
 <ParameterList name="CASEID">
   <Parameter name="case_id" type="string" value="CASL AMA Benchmark Problem 2J - Fuel Lattice - Public"/>
-  <ParameterList name="STATE">
-    <Parameter name="bank_labels" type="Array(string)" value="{A}"/>
-    <Parameter name="bank_pos" type="Array(int)" value="{1}"/>
-    <Parameter name="boron" type="double" value="1300"/>
-    <Parameter name="modden" type="double" value="0.743"/>
-    <Parameter name="power" type="double" value="0.0"/>
-    <Parameter name="sym" type="string" value="qtr"/>
-    <Parameter name="tfuel" type="double" value="600"/>
-    <Parameter name="tinlet" type="double" value="326.85"/>
+  <ParameterList name="STATES">
+    <ParameterList name="State_1">
+      <Parameter name="bank_labels" type="Array(string)" value="{A}"/>
+      <Parameter name="bank_pos" type="Array(int)" value="{1}"/>
+      <Parameter name="boron" type="double" value="1300"/>
+      <Parameter name="modden" type="double" value="0.743"/>
+      <Parameter name="power" type="double" value="0.0"/>
+      <Parameter name="sym" type="string" value="qtr"/>
+      <Parameter name="tfuel" type="double" value="600"/>
+      <Parameter name="tinlet" type="double" value="326.85"/>
+    </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">
     <Parameter name="apitch" type="double" value="21.50"/>
@@ -458,7 +460,7 @@
       <Parameter name="silo_output" type="string" value="p2"/>
     </ParameterList>
     <Parameter name="tolerance" type="double" value="1e-6"/>
-    <Parameter name="xs_library" type="string" value="lib252_hetbondoneabs-noabssigp"/>
+    <Parameter name="xs_library" type="string" value="v7-252"/>
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="cmfd">

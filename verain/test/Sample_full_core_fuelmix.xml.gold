@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
 <ParameterList name="CASEID">
-  <Parameter name="case_id" type="string" value="Watts Bar Unit 1 Cycle 1 - Public - Draft 4 - 6 27 2012"/>
-  <ParameterList name="STATE">
-    <Parameter name="bank_labels" type="Array(string)" value="{A,B,C,D,SA,SB,SC,SD}"/>
-    <Parameter name="bank_pos" type="Array(int)" value="{228,216,228,228,228,228,228,228}"/>
-    <Parameter name="boron" type="double" value="1300"/>
-    <Parameter name="bypass" type="double" value="8.98"/>
-    <Parameter name="deplete" type="Array(double)" value="{0.0}"/>
-    <Parameter name="flow" type="double" value="100.0"/>
-    <Parameter name="kcrit" type="double" value="1.0"/>
-    <Parameter name="power" type="double" value="0.0"/>
-    <Parameter name="pressure" type="double" value="15.5132039025"/>
-    <Parameter name="samopt" type="string" value="zero"/>
-    <Parameter name="search" type="string" value="boron"/>
-    <Parameter name="tinlet" type="double" value="292.777777777778"/>
-    <Parameter name="title" type="string" value="HZP Statepoint BOL"/>
-    <Parameter name="xenopt" type="string" value="zero"/>
+  <Parameter name="case_id" type="string" value="Watts Bar Unit 1 Cycle 1 - Public - Draft 4 - 6/27/2012"/>
+  <ParameterList name="STATES">
+    <ParameterList name="State_1">
+      <Parameter name="bank_labels" type="Array(string)" value="{A,B,C,D,SA,SB,SC,SD}"/>
+      <Parameter name="bank_pos" type="Array(int)" value="{228,216,228,228,228,228,228,228}"/>
+      <Parameter name="boron" type="double" value="1300"/>
+      <Parameter name="bypass" type="double" value="8.98"/>
+      <Parameter name="deplete" type="Array(double)" value="{0.0}"/>
+      <Parameter name="deplete_units" type="string" value="GWDMT"/>
+      <Parameter name="flow" type="double" value="100.0"/>
+      <Parameter name="kcrit" type="double" value="1.0"/>
+      <Parameter name="power" type="double" value="0.0"/>
+      <Parameter name="pressure" type="double" value="15.5132039025"/>
+      <Parameter name="samopt" type="string" value="zero"/>
+      <Parameter name="search" type="string" value="boron"/>
+      <Parameter name="tinlet" type="double" value="292.777777777778"/>
+      <Parameter name="title" type="string" value="HZP Statepoint BOL"/>
+      <Parameter name="xenopt" type="string" value="zero"/>
+    </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">
     <ParameterList name="Materials">
@@ -71,6 +74,7 @@
     <Parameter name="lower_vfrac" type="double" value="0.5"/>
     <Parameter name="rated_flow" type="double" value="18231.88166"/>
     <Parameter name="rated_power" type="double" value="3411.0"/>
+    <Parameter name="rotate_map" type="Array(int)" value="{0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}"/>
     <Parameter name="shape" type="Array(int)" value="{0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0}"/>
     <Parameter name="upper_mat" type="string" value="SS304"/>
     <Parameter name="upper_thick" type="double" value="7.6"/>

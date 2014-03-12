@@ -95,6 +95,13 @@ CORE:
         - copyarray CORE/@vessel,start=>1,stride=>2
       _content:
 
+    rotate_map:
+      _pltype: array
+      _type: int
+      _do:
+        - coremapmap CORE/$size,CORE/@core_shape,CORE/@rotate_map,CORE/$bc_sym
+      _content:
+
     assm_map:
       _pltype: array
       _type: string
