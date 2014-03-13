@@ -58,7 +58,7 @@
         <Parameter name="density" type="double" value="6.56"/>
         <Parameter name="key_name" type="string" value="zirc"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-        <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
       </ParameterList>
     </ParameterList>
     <Parameter name="apitch" type="double" value="1.270"/>
@@ -141,32 +141,6 @@
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="Materials">
-        <ParameterList name="Material_he">
-          <Parameter name="density" type="double" value="0.000176"/>
-          <Parameter name="key_name" type="string" value="he"/>
-          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{he}"/>
-        </ParameterList>
-        <ParameterList name="Material_inc">
-          <Parameter name="density" type="double" value="8.19"/>
-          <Parameter name="key_name" type="string" value="inc"/>
-          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{inc}"/>
-        </ParameterList>
-        <ParameterList name="Material_ss">
-          <Parameter name="density" type="double" value="8.0"/>
-          <Parameter name="key_name" type="string" value="ss"/>
-          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
-        </ParameterList>
-        <ParameterList name="Material_zirc">
-          <Parameter name="density" type="double" value="6.56"/>
-          <Parameter name="key_name" type="string" value="zirc"/>
-          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
-        </ParameterList>
-      </ParameterList>
       <ParameterList name="SpacerGrids">
         <ParameterList name="Grid_END">
           <Parameter name="height" type="double" value="3.866"/>
@@ -199,26 +173,17 @@
   </ParameterList>
   <ParameterList name="INSILICO">
     <Parameter name="Pn_order" type="int" value="0"/>
+    <Parameter name="SPN_order" type="int" value="3"/>
     <Parameter name="dimension" type="int" value="3"/>
-    <Parameter name="eigen_solver" type="string" value="arnoldi"/>
-    <ParameterList name="eigenvalue_db">
-      <Parameter name="energy_dep_ev" type="bool" value="true"/>
-      <Parameter name="tolerance" type="double" value="1e-2"/>
-    </ParameterList>
     <Parameter name="eq_set" type="string" value="spn_fv"/>
-    <Parameter name="mat_library" type="string" value="casl_comp.sh5"/>
+    <Parameter name="mat_library" type="string" value="casl_comp_r2.sh5"/>
     <Parameter name="max_delta_z" type="double" value="2.54"/>
-    <Parameter name="mesh" type="int" value="4"/>
+    <Parameter name="mesh" type="int" value="2"/>
     <Parameter name="num_blocks_i" type="int" value="2"/>
     <Parameter name="num_blocks_j" type="int" value="2"/>
     <Parameter name="num_groups" type="int" value="8"/>
     <Parameter name="num_sets" type="int" value="1"/>
     <Parameter name="num_z_blocks" type="int" value="1"/>
-    <ParameterList name="quadrature_db">
-      <Parameter name="azimuthals_octant" type="int" value="4"/>
-      <Parameter name="polars_octant" type="int" value="4"/>
-      <Parameter name="quad_type" type="string" value="qr"/>
-    </ParameterList>
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p6"/>
     </ParameterList>
