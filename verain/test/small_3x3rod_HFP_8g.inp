@@ -44,7 +44,7 @@
   mat he     0.000176
   mat inc    8.19
   mat ss     8.0
-  mat zirc   6.56
+  mat zirc   6.56 zirc4
   mat aic   10.20
   mat pyrex  2.23
   mat b4c    6.56
@@ -55,12 +55,6 @@
   ppitch 1.260
 
   fuel U31 10.257 95.0 / 3.1
-
-!=== material label, key_name, density (lib_name defaults to key_name)
-  mat he   0.000176
-  mat inc  8.19
-  mat ss   8.0
-  mat zirc 6.56
 
   cell 1     0.4096 0.418 0.475 / U31 he zirc
   cell 100          0.561 0.602 / mod    zirc       ! guide tube
@@ -165,32 +159,23 @@
           377.711
 
 [INSILICO]
-    mat_library casl_comp.sh5
+    mat_library casl_comp_r2.sh5
     xs_library  test-8grp
 
     max_delta_z   2.54
     num_blocks_i  1
     num_blocks_j  1
-    num_z_blocks  12
+    num_z_blocks  1
     num_groups    8
-    num_sets      4
+    num_sets      1
 
-    mesh          4
+    mesh          2
     dimension     3
-    eq_set        sc
-    eigen_solver  arnoldi
+    eq_set        spn_fv
+    SPN_order     3
+!!  cell_homogenize true   ! do not include for fast 8g problem
     tolerance     1e-6
     Pn_order      0
-
-!   eigenvalue_db:
-       k_tolerance   1e-4
-       L2_tolerance  1e-3
-       energy_dep_ev true
-
-!   quadrature_db:
-       quad_type          qr
-       azimuthals_octant  4
-       polars_octant      4
 
 !   silo_db:
        silo_output  p6

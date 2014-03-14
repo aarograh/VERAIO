@@ -44,7 +44,7 @@
   mat he     0.000176
   mat inc    8.19
   mat ss     8.0
-  mat zirc   6.56
+  mat zirc   6.56 zirc4
   mat aic   10.20
   mat pyrex  2.23
   mat b4c    6.56
@@ -55,12 +55,6 @@
   ppitch 1.270  ! *** increased for 1x1 to get rid of gap
 
   fuel U31 10.257 95.0 / 3.1
-
-!=== material label, key_name, density (lib_name defaults to key_name)
-  mat he   0.000176
-  mat inc  8.19
-  mat ss   8.0
-  mat zirc 6.56
 
   cell 1     0.4096 0.418 0.475 / U31 he zirc
   cell 100          0.561 0.602 / mod    zirc       ! guide tube
@@ -161,32 +155,23 @@
           377.711
 
 [INSILICO]
-    mat_library casl_comp.sh5
-    xs_library  v7-252
+    mat_library casl_comp_r2.sh5
+    xs_library  v7-56
 
     max_delta_z   2.54
     num_blocks_i  1
     num_blocks_j  1
-    num_z_blocks  12
-    num_groups    23
-    num_sets      8
+    num_z_blocks  1
+    num_groups    11
+    num_sets      1
 
-    mesh          4
+    mesh          2
     dimension     3
-    eq_set        sc
-    eigen_solver  arnoldi
+    eq_set        spn_fv
+    SPN_order     3
+    cell_homogenize true
     tolerance     1e-6
     Pn_order      0
-
-!   eigenvalue_db:
-       k_tolerance   1e-4
-       L2_tolerance  1e-3
-       energy_dep_ev true
-
-!   quadrature_db:
-       quad_type          qr
-       azimuthals_octant  4
-       polars_octant      4
 
 !   silo_db:
        silo_output  p6
@@ -195,30 +180,19 @@
 !   upscatter_db:
        upscatter_tolerance  1e-4
 
+!   ** 11-group
     new_grp_bounds
-       8.2085e+05
-       1.1109e+05
-       5.5308e+03
-       1.8644e+02
-       3.7612e+01
-       3.5379e+01
-       2.7697e+01
-       2.1684e+01
-       2.0397e+01
-       1.5968e+01
-       7.1500e+00
-       6.7000e+00
-       6.3000e+00
-       1.0970e+00
-       1.0450e+00
-       9.5000e-01
-       3.5000e-01
-       2.0600e-01
-       1.0700e-01
-       5.8000e-02
-       2.5000e-02
-       1.0000e-02
-       1.0000e-05
+       7.5000E+05
+       1.7000E+04
+       6.7500E+01
+       2.1750E+01
+       2.0500E+01
+       7.0000E+00
+       6.2500E-01
+       3.5000E-01
+       2.0000E-01
+       1.0000E-01
+       1.0000E-05
 
 [COBRATF]
   nfuel   3             ! number of fuel rings in conduction model
