@@ -56,7 +56,7 @@
         <Parameter name="density" type="double" value="6.56"/>
         <Parameter name="key_name" type="string" value="zirc"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-        <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
       </ParameterList>
     </ParameterList>
     <Parameter name="apitch" type="double" value="3.78"/>
@@ -169,7 +169,7 @@
           <Parameter name="density" type="double" value="6.56"/>
           <Parameter name="key_name" type="string" value="zirc"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
         </ParameterList>
       </ParameterList>
       <ParameterList name="SpacerGrids">
@@ -211,7 +211,7 @@
       <Parameter name="tolerance" type="double" value="1e-2"/>
     </ParameterList>
     <Parameter name="eq_set" type="string" value="spn_fv"/>
-    <Parameter name="mat_library" type="string" value="casl_comp.sh5"/>
+    <Parameter name="mat_library" type="string" value="casl_comp_r2.sh5"/>
     <Parameter name="max_delta_z" type="double" value="500."/>
     <Parameter name="mesh" type="int" value="1"/>
     <Parameter name="num_blocks_i" type="int" value="2"/>

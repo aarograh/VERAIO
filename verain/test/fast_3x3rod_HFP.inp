@@ -44,7 +44,7 @@
   mat he     0.000176
   mat inc    8.19
   mat ss     8.0
-  mat zirc   6.56
+  mat zirc   6.56 zirc4
   mat aic   10.20
   mat pyrex  2.23
   mat b4c    6.56
@@ -60,7 +60,7 @@
   mat he   0.000176
   mat inc  8.19
   mat ss   8.0
-  mat zirc 6.56
+  mat zirc 6.56 zirc4
 
   cell 1     0.4096 0.418 0.475 / U31 he zirc
   cell 100          0.561 0.602 / mod    zirc       ! guide tube
@@ -119,7 +119,7 @@
           397.5
 
 [INSILICO]
-    mat_library casl_comp.sh5
+    mat_library casl_comp_r2.sh5
     xs_library  test-8grp
 
     max_delta_z   500.
