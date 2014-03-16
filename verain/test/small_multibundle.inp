@@ -162,13 +162,13 @@
   dtmax   0.1
   tend    0.1
   rtwfp   1000.0
-  maxits  10000
+  maxits  100000
   courant 0.8
 ! maps_filename = single_rod_HFP
   global_energy_balance    0.001 !%
-  global_mass_balance      0.00005 !%
+  global_mass_balance      0.00003 !%
   fluid_energy_storage     0.05  !%
-  solid_energy_storage     0.05  !%
+  solid_energy_storage     0.02  !%
   mass_storage             0.05  !%
 
 [COUPLING]
