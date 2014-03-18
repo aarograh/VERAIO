@@ -80,12 +80,6 @@
 
   fuel U31 10.257 95.0 / 3.1
 
-!=== material label, key_name, density (lib_name defaults to key_name)
-  mat he   0.000176
-  mat inc  8.19
-  mat ss   8.0
-  mat zirc 6.56 zirc4
-
   cell 1     0.4096 0.418 0.475 / U31 he zirc
   cell 100          0.561 0.602 / mod    zirc       ! guide tube
   cell 200          0.561 0.602 / mod    zirc       ! instrument tube
@@ -161,17 +155,6 @@
   lower_nozzle  ss 6.05  6250.0  ! mat, height, mass (g)
   upper_nozzle  ss 8.827 6250.0  ! mat, height, mass (g)
 
- !! dancoff                   ! assembly_dancoff_map
- !!   0.000
- !!   0.287 0.315
- !!   0.287 0.315 0.315
- !!   0.000 0.287 0.286 0.000
- !!   0.287 0.316 0.316 0.284 0.299
- !!   0.288 0.317 0.316 0.287 0.267 0.000
- !!   0.000 0.286 0.286 0.000 0.270 0.286 0.321
- !!   0.287 0.319 0.319 0.286 0.315 0.335 0.333 0.337
- !!   0.323 0.322 0.321 0.322 0.320 0.322 0.323 0.322 0.310
-
 [EDITS]
 
 !  3in intervals in active fuel
@@ -228,34 +211,30 @@
           377.711
 
 [INSILICO]
-    mat_library casl_comp.sh5
+    mat_library casl_comp_r2.sh5
     xs_library  v7-252
 
     max_delta_z   2.54
     num_blocks_i  17
     num_blocks_j  17
-    num_z_blocks  12
+    num_z_blocks  1
     num_groups    23
-    num_sets      8
+    num_sets      1
 
-    mesh          4
+    mesh          2
     dimension     3
-    eq_set        sc
-    eigen_solver  arnoldi
     tolerance     1e-6
-    Pn_order      0
+    Pn_order      1
 
-    cell_broadcast_size  289   ! set for larger problems
+    pin_partitioning true
+    cell_homogenize  true
+    eq_set           spn_fv
+    SPN_order        3     !  (or 1 or 5, etc).
 
 !   eigenvalue_db:
        k_tolerance   1e-4
        L2_tolerance  1e-3
        energy_dep_ev true
-
-!   quadrature_db:
-       quad_type          qr
-       azimuthals_octant  4
-       polars_octant      4
 
 !   silo_db:
        silo_output  p6
