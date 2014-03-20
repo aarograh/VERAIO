@@ -184,8 +184,8 @@
     <Parameter name="mat_library" type="string" value="casl_comp_r2.sh5"/>
     <Parameter name="max_delta_z" type="double" value="2.54"/>
     <Parameter name="mesh" type="int" value="2"/>
-    <Parameter name="num_blocks_i" type="int" value="1"/>
-    <Parameter name="num_blocks_j" type="int" value="1"/>
+    <Parameter name="num_blocks_i" type="int" value="2"/>
+    <Parameter name="num_blocks_j" type="int" value="2"/>
     <Parameter name="num_groups" type="int" value="8"/>
     <Parameter name="num_sets" type="int" value="1"/>
     <Parameter name="num_z_blocks" type="int" value="1"/>
