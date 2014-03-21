@@ -1,32 +1,9 @@
 [CASEID]
-  title 'CASL Problem 6a'
+  title 'CASL Problem 3x3 HFP'
 !================================================================================
-!  Sample input for Problem 6 (Single-assembly with T/H feedback)
+!  Sample input for small 3x3 Problem
 !
-!  Draft 1 - 9/28/2012 - starting with Problem 3 input deck
-!     * changing power to 100%
-!     * turn on T/H feedback
-!     * remove "tfuel" and "modden" because these will be set by T/H feedback
-!
-!  Draft 2 - 10/13/2012
-!     * added "mat" card in front of material cards
-!
-!  Update 11/19/2012
-!     * added explicit lattice models for:
-!         * lower_nozzle_gap_height
-!         * lower_pincap_height
-!         * upper_nozzle_gap_height
-!         * upper_pincap_height
-!         * upper_plenum_height
-!
-!  Update 03/18/2013
-!     * fixed tinlet
-!     * added sym and reflector cards
-!     * updated dhfrac to default value
-!
-!  Update 04/10/2013
-!     * add COUPLING block
-!
+!  Updated 3/18/2013 to be consistent with Problem 6 T/H
 !
 !  To process:
 !     ./react2xml.pl [file].inp [file].xml
@@ -47,8 +24,8 @@
 
 [CORE]
   size 1                ! 1x1 single-assembly
-  rated 17.67   0.6824  ! MW, Mlbs/hr
-  apitch 21.5
+  rated 0.53545 0.02125 ! MW, Mlbs/hr  *** scaled to 3x3
+  apitch 3.78           ! *** scaled to 3x3, no gap
   height 406.328
 
   core_shape
@@ -62,7 +39,6 @@
   lower_ref   mod 26.0 1.0
   upper_ref   mod 25.0 1.0
 
-
   bc_rad reflecting
 
   mat he     0.000176
@@ -75,7 +51,7 @@
 
 [ASSEMBLY]
   title "Westinghouse 17x17"
-  npin 17
+  npin 3    ! *** scaled to 3x3
   ppitch 1.260
 
   fuel U31 10.257 95.0 / 3.1
@@ -90,46 +66,18 @@
   lattice FUEL1
      200
        1 1
-       1 1 1
-     100 1 1 100
-       1 1 1   1 1
-       1 1 1   1 1 100
-     100 1 1 100 1   1 1
-       1 1 1   1 1   1 1 1
-       1 1 1   1 1   1 1 1 1
 
   lattice LGAP1
      200
        7 7
-       7 7 7
-     100 7 7 100
-       7 7 7   7 7
-       7 7 7   7 7 100
-     100 7 7 100 7   7 7
-       7 7 7   7 7   7 7 7
-       7 7 7   7 7   7 7 7 7
 
   lattice PLEN1
      200
        8 8
-       8 8 8
-     100 8 8 100
-       8 8 8   8 8
-       8 8 8   8 8 100
-     100 8 8 100 8   8 8
-       8 8 8   8 8   8 8 8
-       8 8 8   8 8   8 8 8 8
 
   lattice PCAP1
      200
        9 9
-       9 9 9
-     100 9 9 100
-       9 9 9   9 9
-       9 9 9   9 9 100
-     100 9 9 100 9   9 9
-       9 9 9   9 9   9 9 9
-       9 9 9   9 9   9 9 9 9
 
   axial A1    6.050
       LGAP1  10.281
@@ -139,8 +87,8 @@
       PCAP1 395.381
       LGAP1 397.501
 
-  grid END inc  1017 3.866
-  grid MID zirc 875  3.810
+  grid END inc  31.67 3.866  ! *** mass scaled to 3x3
+  grid MID zirc 27.25 3.810  ! *** mass scaled to 3x3
 
   grid_axial
       END  13.884
@@ -152,8 +100,8 @@
       MID 336.2
       END 388.2
 
-  lower_nozzle  ss 6.05  6250.0  ! mat, height, mass (g)
-  upper_nozzle  ss 8.827 6250.0  ! mat, height, mass (g)
+  lower_nozzle  ss 6.05  194.64  ! mat, height, mass (g)  *** mass scaled to 3x3
+  upper_nozzle  ss 8.827 194.64  ! mat, height, mass (g)  *** mass scaled to 3x3
 
 [EDITS]
 
@@ -209,32 +157,29 @@
           361.8686
           369.7898
           377.711
+          381.9890
+          386.2670
+          390.1330
+          395.3810    ! add top plenum
 
 [INSILICO]
     mat_library casl_comp_r2.sh5
     xs_library  v7-252
 
     max_delta_z   2.54
-    num_blocks_i  6
-    num_blocks_j  6
+    num_blocks_i  3
+    num_blocks_j  3
     num_z_blocks  1
-    num_groups    23
+    num_groups    11
     num_sets      1
 
     mesh          2
     dimension     3
+    eq_set        spn_fv
+    SPN_order     3
+    cell_homogenize true
     tolerance     1e-6
     Pn_order      1
-
-    pin_partitioning true
-    cell_homogenize  true
-    eq_set           spn_fv
-    SPN_order        3     !  (or 1 or 5, etc).
-
-!   eigenvalue_db:
-       k_tolerance   1e-4
-       L2_tolerance  1e-3
-       energy_dep_ev true
 
 !   silo_db:
        silo_output  p6
@@ -243,30 +188,46 @@
 !   upscatter_db:
        upscatter_tolerance  1e-4
 
+!   ** 23-group
+!   new_grp_bounds
+!      8.2085e+05
+!      1.1109e+05
+!      5.5308e+03
+!      1.8644e+02
+!      3.7612e+01
+!      3.5379e+01
+!      2.7697e+01
+!      2.1684e+01
+!      2.0397e+01
+!      1.5968e+01
+!      7.1500e+00
+!      6.7000e+00
+!      6.3000e+00
+!      1.0970e+00
+!      1.0450e+00
+!      9.5000e-01
+!      3.5000e-01
+!      2.0600e-01
+!      1.0700e-01
+!      5.8000e-02
+!      2.5000e-02
+!      1.0000e-02
+!      1.0000e-05
+
+
+!   ** 11-group
     new_grp_bounds
-       8.2085e+05
-       1.1109e+05
-       5.5308e+03
-       1.8644e+02
-       3.7612e+01
-       3.5379e+01
-       2.7697e+01
-       2.1684e+01
-       2.0397e+01
-       1.5968e+01
-       7.1500e+00
-       6.7000e+00
-       6.3000e+00
-       1.0970e+00
-       1.0450e+00
-       9.5000e-01
-       3.5000e-01
-       2.0600e-01
-       1.0700e-01
-       5.8000e-02
-       2.5000e-02
-       1.0000e-02
-       1.0000e-05
+       7.5000E+05
+       1.7000E+04
+       6.7500E+01
+       2.1750E+01
+       2.0500E+01
+       7.0000E+00
+       6.2500E-01
+       3.5000E-01
+       2.0000E-01
+       1.0000E-01
+       1.0000E-05
 
 [COBRATF]
   nfuel   3             ! number of fuel rings in conduction model
@@ -285,17 +246,19 @@
   rtwfp   1000.0
   maxits  10000
   courant 0.8
-  edit_channels 1
+  maps_filename = 3x3_HFP
+
+[MAMBA2D]
+  Nx   50
+  Ny   40
+  tmax 400.0
 
 [COUPLING]
   epsk        5.0  ! pcm
-  epsp        1.0e-4
-  rlx_power   0.6
+  eps_temp    1.0  ! temperature convergence
+  eps_boron   0.1  ! boron convergence (ppm)
+  rlx_power   0.5
   rlx_tfuel   1.0
   rlx_den     1.0
   maxiter     100
-
-
-
-
 
