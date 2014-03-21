@@ -97,14 +97,14 @@ ADD_REACTOR_AWARE_INPUT_PARSER_TEST(smr-7x7)
 #===========================================================
 
 
-SET(WEC_TEST_STAND_DIR ${${PACKAGE_NAME}_SOURCE_DIR}/WEC_Test_Stand)
+SET(WEEKLY_TEST_DIR ${${PACKAGE_NAME}_SOURCE_DIR}/weekly_testing)
 
 
 TRIBITS_ADD_ADVANCED_TEST( veradiff_match
   TEST_0 CMND ${VERADIFF_EXE}
-    ARGS ${WEC_TEST_STAND_DIR}/2a.gold.h5 ${WEC_TEST_STAND_DIR}/2a.gold.h5
+    ARGS ${WEEKLY_TEST_DIR}/2a.gold.h5 ${WEEKLY_TEST_DIR}/2a.gold.h5
     PASS_REGULAR_EXPRESSION_ALL
-      "reading h5 file: .+/verain/WEC_Test_Stand/2a.gold.h5"
+      "reading h5 file: .+/verain/weekly_testing/2a.gold.h5"
       "reading dataset: keff"
       "keff1"
       "keff2"
@@ -116,10 +116,10 @@ TRIBITS_ADD_ADVANCED_TEST( veradiff_match
 
 TRIBITS_ADD_ADVANCED_TEST( veradiff_fail
   TEST_0 CMND ${VERADIFF_EXE}
-    ARGS ${WEC_TEST_STAND_DIR}/2a.gold.h5 ${WEC_TEST_STAND_DIR}/2b.gold.h5
+    ARGS ${WEEKLY_TEST_DIR}/2a.gold.h5 ${WEEKLY_TEST_DIR}/2b.gold.h5
     PASS_REGULAR_EXPRESSION_ALL
-      "reading h5 file: .+/verain/WEC_Test_Stand/2a.gold.h5"
-      "reading h5 file: .+/verain/WEC_Test_Stand/2b.gold.h5"
+      "reading h5 file: .+/verain/weekly_testing/2a.gold.h5"
+      "reading h5 file: .+/verain/weekly_testing/2b.gold.h5"
       "reading dataset: keff"
       "keff1"
       "keff2"
