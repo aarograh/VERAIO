@@ -102,9 +102,9 @@ SET(WEEKLY_TEST_DIR ${${PACKAGE_NAME}_SOURCE_DIR}/weekly_testing)
 
 TRIBITS_ADD_ADVANCED_TEST( veradiff_match
   TEST_0 CMND ${VERADIFF_EXE}
-    ARGS ${WEEKLY_TEST_DIR}/2a.gold.h5 ${WEEKLY_TEST_DIR}/2a.gold.h5
+    ARGS ${WEEKLY_TEST_DIR}/2a.h5.gold ${WEEKLY_TEST_DIR}/2a.h5.gold
     PASS_REGULAR_EXPRESSION_ALL
-      "reading h5 file: .+/verain/weekly_testing/2a.gold.h5"
+      "reading h5 file: .+/verain/weekly_testing/2a.h5.gold"
       "reading dataset: keff"
       "keff1"
       "keff2"
@@ -116,10 +116,10 @@ TRIBITS_ADD_ADVANCED_TEST( veradiff_match
 
 TRIBITS_ADD_ADVANCED_TEST( veradiff_fail
   TEST_0 CMND ${VERADIFF_EXE}
-    ARGS ${WEEKLY_TEST_DIR}/2a.gold.h5 ${WEEKLY_TEST_DIR}/2b.gold.h5
+    ARGS ${WEEKLY_TEST_DIR}/2a.h5.gold ${WEEKLY_TEST_DIR}/2b.h5.gold
     PASS_REGULAR_EXPRESSION_ALL
-      "reading h5 file: .+/verain/weekly_testing/2a.gold.h5"
-      "reading h5 file: .+/verain/weekly_testing/2b.gold.h5"
+      "reading h5 file: .+/verain/weekly_testing/2a.h5.gold"
+      "reading h5 file: .+/verain/weekly_testing/2b.h5.gold"
       "reading dataset: keff"
       "keff1"
       "keff2"
