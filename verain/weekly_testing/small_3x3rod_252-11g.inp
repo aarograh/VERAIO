@@ -3,7 +3,7 @@
 !================================================================================
 !  Sample input for small 3x3 Problem
 !
-!  Added 3/25/2013 in order to test multi-assembly capabilities of COBRA
+!  Updated 3/18/2013 to be consistent with Problem 6 T/H
 !
 !  To process:
 !     ./react2xml.pl [file].inp [file].xml
@@ -23,26 +23,16 @@
   sym full
 
 [CORE]
-  size 3                ! 3x3 cross - 5 assemblies
-!  rated 0.53545 0.02125 ! MW, Mlbs/hr  *** For 1 active fuel pin in bundle
-!  rated 1.07090 0.04250 ! MW, Mlbs/hr  *** For 2 active fuel pins in bundle
-!  rated 1.60635 0.06375 ! MW, Mlbs/hr  *** For 3 active fuel pins in bundle
-!  rated 2.1418  0.08500 ! MW, Mlbs/hr  *** For 4 active fuel pins in bundle
-  rated 2.67725  0.10625 ! MW, Mlbs/hr  *** For 5 active fuel pins in bundle
-!  rated 4.28360  0.17000 ! MW, Mlbs/hr  *** For 8 active fuel pins in bundle
-!  rated 4.81905  0.19125 ! MW, Mlbs/hr  *** For 9 active fuel pins in bundle
+  size 1                ! 1x1 single-assembly
+  rated 0.53545 0.02125 ! MW, Mlbs/hr  *** scaled to 3x3
   apitch 3.78           ! *** scaled to 3x3, no gap
   height 406.328
 
   core_shape
-    1 0 1
-    0 1 0
-    1 0 1
+    1
 
   assm_map
-   A1    A1
-      A1 
-   A1    A1
+    A1
 
   lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
   upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
@@ -54,7 +44,7 @@
   mat he     0.000176
   mat inc    8.19
   mat ss     8.0
-  mat zirc   6.56
+  mat zirc   6.56 zirc4
   mat aic   10.20
   mat pyrex  2.23
   mat b4c    6.56
@@ -65,12 +55,6 @@
   ppitch 1.260
 
   fuel U31 10.257 95.0 / 3.1
-
-!=== material label, key_name, density (lib_name defaults to key_name)
-  mat he   0.000176
-  mat inc  8.19
-  mat ss   8.0
-  mat zirc 6.56
 
   cell 1     0.4096 0.418 0.475 / U31 he zirc
   cell 100          0.561 0.602 / mod    zirc       ! guide tube
@@ -173,34 +157,29 @@
           361.8686
           369.7898
           377.711
+          381.9890
+          386.2670
+          390.1330
+          395.3810    ! add top plenum
 
 [INSILICO]
-    mat_library casl_comp.sh5
+    mat_library casl_comp_r2.sh5
     xs_library  v7-252
 
     max_delta_z   2.54
     num_blocks_i  3
     num_blocks_j  3
-    num_z_blocks  12
-    num_groups    23
-    num_sets      8
+    num_z_blocks  1
+    num_groups    11
+    num_sets      1
 
-    mesh          4
+    mesh          2
     dimension     3
-    eq_set        sc
-    eigen_solver  arnoldi
+    eq_set        spn_fv
+    SPN_order     3
+    cell_homogenize true
     tolerance     1e-6
-    Pn_order      0
-
-!   eigenvalue_db:
-       k_tolerance   1e-4
-       L2_tolerance  1e-3
-       energy_dep_ev true
-
-!   quadrature_db:
-       quad_type          qr
-       azimuthals_octant  4
-       polars_octant      4
+    Pn_order      1
 
 !   silo_db:
        silo_output  p6
@@ -209,30 +188,46 @@
 !   upscatter_db:
        upscatter_tolerance  1e-4
 
+!   ** 23-group
+!   new_grp_bounds
+!      8.2085e+05
+!      1.1109e+05
+!      5.5308e+03
+!      1.8644e+02
+!      3.7612e+01
+!      3.5379e+01
+!      2.7697e+01
+!      2.1684e+01
+!      2.0397e+01
+!      1.5968e+01
+!      7.1500e+00
+!      6.7000e+00
+!      6.3000e+00
+!      1.0970e+00
+!      1.0450e+00
+!      9.5000e-01
+!      3.5000e-01
+!      2.0600e-01
+!      1.0700e-01
+!      5.8000e-02
+!      2.5000e-02
+!      1.0000e-02
+!      1.0000e-05
+
+
+!   ** 11-group
     new_grp_bounds
-       8.2085e+05
-       1.1109e+05
-       5.5308e+03
-       1.8644e+02
-       3.7612e+01
-       3.5379e+01
-       2.7697e+01
-       2.1684e+01
-       2.0397e+01
-       1.5968e+01
-       7.1500e+00
-       6.7000e+00
-       6.3000e+00
-       1.0970e+00
-       1.0450e+00
-       9.5000e-01
-       3.5000e-01
-       2.0600e-01
-       1.0700e-01
-       5.8000e-02
-       2.5000e-02
-       1.0000e-02
-       1.0000e-05
+       7.5000E+05
+       1.7000E+04
+       6.7500E+01
+       2.1750E+01
+       2.0500E+01
+       7.0000E+00
+       6.2500E-01
+       3.5000E-01
+       2.0000E-01
+       1.0000E-01
+       1.0000E-05
 
 [COBRATF]
   nfuel   3             ! number of fuel rings in conduction model
@@ -251,5 +246,19 @@
   rtwfp   1000.0
   maxits  10000
   courant 0.8
+  maps_filename = 3x3_HFP
 
+[MAMBA2D]
+  Nx   50
+  Ny   40
+  tmax 400.0
+
+[COUPLING]
+  epsk        5.0  ! pcm
+  eps_temp    1.0  ! temperature convergence
+  eps_boron   0.1  ! boron convergence (ppm)
+  rlx_power   0.5
+  rlx_tfuel   1.0
+  rlx_den     1.0
+  maxiter     100
 

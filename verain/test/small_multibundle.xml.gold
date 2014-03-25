@@ -56,7 +56,7 @@
         <Parameter name="density" type="double" value="6.56"/>
         <Parameter name="key_name" type="string" value="zirc"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-        <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
       </ParameterList>
     </ParameterList>
     <Parameter name="apitch" type="double" value="3.86"/>
@@ -146,32 +146,6 @@
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="Materials">
-        <ParameterList name="Material_he">
-          <Parameter name="density" type="double" value="0.000176"/>
-          <Parameter name="key_name" type="string" value="he"/>
-          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{he}"/>
-        </ParameterList>
-        <ParameterList name="Material_inc">
-          <Parameter name="density" type="double" value="8.19"/>
-          <Parameter name="key_name" type="string" value="inc"/>
-          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{inc}"/>
-        </ParameterList>
-        <ParameterList name="Material_ss">
-          <Parameter name="density" type="double" value="8.0"/>
-          <Parameter name="key_name" type="string" value="ss"/>
-          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
-        </ParameterList>
-        <ParameterList name="Material_zirc">
-          <Parameter name="density" type="double" value="6.56"/>
-          <Parameter name="key_name" type="string" value="zirc"/>
-          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
-        </ParameterList>
-      </ParameterList>
       <ParameterList name="SpacerGrids">
         <ParameterList name="Grid_END">
           <Parameter name="height" type="double" value="3.866"/>
@@ -212,7 +186,7 @@
       <Parameter name="k_tolerance" type="double" value="1e-4"/>
     </ParameterList>
     <Parameter name="eq_set" type="string" value="spn_fv"/>
-    <Parameter name="mat_library" type="string" value="casl_comp.sh5"/>
+    <Parameter name="mat_library" type="string" value="casl_comp_r2.sh5"/>
     <Parameter name="max_delta_z" type="double" value="500."/>
     <Parameter name="mesh" type="int" value="1"/>
     <Parameter name="num_blocks_i" type="int" value="2"/>
@@ -245,19 +219,19 @@
     <Parameter name="epso" type="double" value="0.0001"/>
     <Parameter name="fluid_energy_storage" type="double" value="0.05"/>
     <Parameter name="global_energy_balance" type="double" value="0.001"/>
-    <Parameter name="global_mass_balance" type="double" value="0.00005"/>
+    <Parameter name="global_mass_balance" type="double" value="0.00003"/>
     <Parameter name="gridlabel" type="Array(string)" value="{MID,END}"/>
     <Parameter name="gridloss" type="Array(double)" value="{0.9065,0.9070}"/>
     <Parameter name="hgap" type="double" value="5678.3"/>
     <Parameter name="iitmax" type="int" value="80"/>
     <Parameter name="irfc" type="int" value="2"/>
     <Parameter name="mass_storage" type="double" value="0.05"/>
-    <Parameter name="maxits" type="int" value="10000"/>
+    <Parameter name="maxits" type="int" value="100000"/>
     <Parameter name="nc" type="int" value="1"/>
     <Parameter name="nfuel" type="int" value="3"/>
     <Parameter name="oitmax" type="int" value="15"/>
     <Parameter name="rtwfp" type="double" value="1000.0"/>
-    <Parameter name="solid_energy_storage" type="double" value="0.05"/>
+    <Parameter name="solid_energy_storage" type="double" value="0.02"/>
     <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>
   <ParameterList name="COUPLING">

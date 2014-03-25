@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
 <ParameterList name="CASEID">
-  <Parameter name="case_id" type="string" value="CASL Problem 3x3 HFP"/>
+  <Parameter name="case_id" type="string" value="CASL Problem Singlerod HFP"/>
   <ParameterList name="STATES">
     <ParameterList name="State_1">
       <Parameter name="boron" type="double" value="1300"/>
@@ -56,13 +56,13 @@
         <Parameter name="density" type="double" value="6.56"/>
         <Parameter name="key_name" type="string" value="zirc"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-        <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
       </ParameterList>
     </ParameterList>
-    <Parameter name="apitch" type="double" value="3.78"/>
-    <Parameter name="assm_map" type="Array(string)" value="{A1,A1,A1,A1,A1}"/>
+    <Parameter name="apitch" type="double" value="1.270"/>
+    <Parameter name="assm_map" type="Array(string)" value="{A1}"/>
     <Parameter name="bc_rad" type="string" value="reflecting"/>
-    <Parameter name="core_size" type="int" value="3"/>
+    <Parameter name="core_size" type="int" value="1"/>
     <Parameter name="height" type="double" value="406.328"/>
     <Parameter name="lower_mat" type="string" value="ss"/>
     <Parameter name="lower_refl_mats" type="Array(string)" value="{mod}"/>
@@ -70,9 +70,9 @@
     <Parameter name="lower_refl_vfracs" type="Array(double)" value="{1.0}"/>
     <Parameter name="lower_thick" type="double" value="5.0"/>
     <Parameter name="lower_vfrac" type="double" value="0.5"/>
-    <Parameter name="rated_flow" type="double" value="13.38726625"/>
-    <Parameter name="rated_power" type="double" value="2.67725"/>
-    <Parameter name="shape" type="Array(int)" value="{1,0,1,0,1,0,1,0,1}"/>
+    <Parameter name="rated_flow" type="double" value="0.32759428"/>
+    <Parameter name="rated_power" type="double" value="0.066932"/>
+    <Parameter name="shape" type="Array(int)" value="{1}"/>
     <Parameter name="upper_mat" type="string" value="ss"/>
     <Parameter name="upper_refl_mats" type="Array(string)" value="{mod}"/>
     <Parameter name="upper_refl_thicks" type="Array(double)" value="{25.0}"/>
@@ -84,19 +84,19 @@
     <ParameterList name="Assembly_A1">
       <ParameterList name="CellMaps">
         <ParameterList name="CellMap_FUEL1">
-          <Parameter name="cell_map" type="Array(string)" value="{1,1,1,1,200,1,1,1,1}"/>
+          <Parameter name="cell_map" type="Array(string)" value="{1}"/>
           <Parameter name="label" type="string" value="FUEL1"/>
         </ParameterList>
         <ParameterList name="CellMap_LGAP1">
-          <Parameter name="cell_map" type="Array(string)" value="{7,7,7,7,200,7,7,7,7}"/>
+          <Parameter name="cell_map" type="Array(string)" value="{7}"/>
           <Parameter name="label" type="string" value="LGAP1"/>
         </ParameterList>
         <ParameterList name="CellMap_PCAP1">
-          <Parameter name="cell_map" type="Array(string)" value="{9,9,9,9,200,9,9,9,9}"/>
+          <Parameter name="cell_map" type="Array(string)" value="{9}"/>
           <Parameter name="label" type="string" value="PCAP1"/>
         </ParameterList>
         <ParameterList name="CellMap_PLEN1">
-          <Parameter name="cell_map" type="Array(string)" value="{8,8,8,8,200,8,8,8,8}"/>
+          <Parameter name="cell_map" type="Array(string)" value="{8}"/>
           <Parameter name="label" type="string" value="PLEN1"/>
         </ParameterList>
       </ParameterList>
@@ -107,13 +107,6 @@
           <Parameter name="num_rings" type="int" value="3"/>
           <Parameter name="radii" type="Array(double)" value="{0.4096,0.418,0.475}"/>
           <Parameter name="type" type="string" value="fuel"/>
-        </ParameterList>
-        <ParameterList name="Cell_200">
-          <Parameter name="label" type="string" value="200"/>
-          <Parameter name="mats" type="Array(string)" value="{mod,zirc}"/>
-          <Parameter name="num_rings" type="int" value="2"/>
-          <Parameter name="radii" type="Array(double)" value="{0.561,0.602}"/>
-          <Parameter name="type" type="string" value="other"/>
         </ParameterList>
         <ParameterList name="Cell_7">
           <Parameter name="label" type="string" value="7"/>
@@ -146,43 +139,17 @@
           <Parameter name="thden" type="double" value="95.0"/>
         </ParameterList>
       </ParameterList>
-      <ParameterList name="Materials">
-        <ParameterList name="Material_he">
-          <Parameter name="density" type="double" value="0.000176"/>
-          <Parameter name="key_name" type="string" value="he"/>
-          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{he}"/>
-        </ParameterList>
-        <ParameterList name="Material_inc">
-          <Parameter name="density" type="double" value="8.19"/>
-          <Parameter name="key_name" type="string" value="inc"/>
-          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{inc}"/>
-        </ParameterList>
-        <ParameterList name="Material_ss">
-          <Parameter name="density" type="double" value="8.0"/>
-          <Parameter name="key_name" type="string" value="ss"/>
-          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
-        </ParameterList>
-        <ParameterList name="Material_zirc">
-          <Parameter name="density" type="double" value="6.56"/>
-          <Parameter name="key_name" type="string" value="zirc"/>
-          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-          <Parameter name="mat_names" type="Array(string)" value="{zirc}"/>
-        </ParameterList>
-      </ParameterList>
       <ParameterList name="SpacerGrids">
         <ParameterList name="Grid_END">
           <Parameter name="height" type="double" value="3.866"/>
           <Parameter name="label" type="string" value="END"/>
-          <Parameter name="mass" type="double" value="31.67"/>
+          <Parameter name="mass" type="double" value="3.519"/>
           <Parameter name="material" type="string" value="inc"/>
         </ParameterList>
         <ParameterList name="Grid_MID">
           <Parameter name="height" type="double" value="3.810"/>
           <Parameter name="label" type="string" value="MID"/>
-          <Parameter name="mass" type="double" value="27.25"/>
+          <Parameter name="mass" type="double" value="3.028"/>
           <Parameter name="material" type="string" value="zirc"/>
         </ParameterList>
       </ParameterList>
@@ -193,39 +160,28 @@
       <Parameter name="label" type="string" value="A1"/>
       <Parameter name="lower_nozzle_comp" type="string" value="ss"/>
       <Parameter name="lower_nozzle_height" type="double" value="6.05"/>
-      <Parameter name="lower_nozzle_mass" type="double" value="194.64"/>
-      <Parameter name="num_pins" type="int" value="3"/>
-      <Parameter name="ppitch" type="double" value="1.260"/>
+      <Parameter name="lower_nozzle_mass" type="double" value="21.626"/>
+      <Parameter name="num_pins" type="int" value="1"/>
+      <Parameter name="ppitch" type="double" value="1.270"/>
       <Parameter name="title" type="string" value="Westinghouse 17x17"/>
       <Parameter name="upper_nozzle_comp" type="string" value="ss"/>
       <Parameter name="upper_nozzle_height" type="double" value="8.827"/>
-      <Parameter name="upper_nozzle_mass" type="double" value="194.64"/>
+      <Parameter name="upper_nozzle_mass" type="double" value="21.626"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="INSILICO">
     <Parameter name="Pn_order" type="int" value="0"/>
+    <Parameter name="SPN_order" type="int" value="3"/>
     <Parameter name="dimension" type="int" value="3"/>
-    <Parameter name="eigen_solver" type="string" value="arnoldi"/>
-    <ParameterList name="eigenvalue_db">
-      <Parameter name="L2_tolerance" type="double" value="1e-3"/>
-      <Parameter name="energy_dep_ev" type="bool" value="true"/>
-      <Parameter name="k_tolerance" type="double" value="1e-4"/>
-    </ParameterList>
-    <Parameter name="eq_set" type="string" value="sc"/>
-    <Parameter name="mat_library" type="string" value="casl_comp.sh5"/>
+    <Parameter name="eq_set" type="string" value="spn_fv"/>
+    <Parameter name="mat_library" type="string" value="casl_comp_r2.sh5"/>
     <Parameter name="max_delta_z" type="double" value="2.54"/>
-    <Parameter name="mesh" type="int" value="4"/>
-    <Parameter name="new_grp_bounds" type="Array(double)" value="{8.2085e+05,1.1109e+05,5.5308e+03,1.8644e+02,3.7612e+01,3.5379e+01,2.7697e+01,2.1684e+01,2.0397e+01,1.5968e+01,7.1500e+00,6.7000e+00,6.3000e+00,1.0970e+00,1.0450e+00,9.5000e-01,3.5000e-01,2.0600e-01,1.0700e-01,5.8000e-02,2.5000e-02,1.0000e-02,1.0000e-05}"/>
-    <Parameter name="num_blocks_i" type="int" value="3"/>
-    <Parameter name="num_blocks_j" type="int" value="3"/>
-    <Parameter name="num_groups" type="int" value="23"/>
-    <Parameter name="num_sets" type="int" value="8"/>
-    <Parameter name="num_z_blocks" type="int" value="12"/>
-    <ParameterList name="quadrature_db">
-      <Parameter name="azimuthals_octant" type="int" value="4"/>
-      <Parameter name="polars_octant" type="int" value="4"/>
-      <Parameter name="quad_type" type="string" value="qr"/>
-    </ParameterList>
+    <Parameter name="mesh" type="int" value="2"/>
+    <Parameter name="num_blocks_i" type="int" value="2"/>
+    <Parameter name="num_blocks_j" type="int" value="2"/>
+    <Parameter name="num_groups" type="int" value="8"/>
+    <Parameter name="num_sets" type="int" value="1"/>
+    <Parameter name="num_z_blocks" type="int" value="1"/>
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p6"/>
     </ParameterList>
@@ -233,7 +189,7 @@
     <ParameterList name="upscatter_db">
       <Parameter name="tolerance" type="double" value="1e-4"/>
     </ParameterList>
-    <Parameter name="xs_library" type="string" value="v7-252"/>
+    <Parameter name="xs_library" type="string" value="test-8grp"/>
   </ParameterList>
   <ParameterList name="EDITS">
     <Parameter name="axial_edit_bounds" type="Array(double)" value="{11.951,15.817,24.028,32.239,40.45,48.662,56.873,65.084,73.295,77.105,85.17,93.235,101.3,109.365,117.43,125.495,129.305,137.37,145.435,153.5,161.565,169.63,177.695,181.505,189.57,197.635,205.7,213.765,221.83,229.895,233.705,241.77,249.835,257.9,265.965,274.03,282.095,285.905,293.97,302.035,310.1,318.165,326.23,334.295,338.105,346.0262,353.9474,361.8686,369.7898,377.711}"/>
@@ -243,17 +199,32 @@
     <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="dtmax" type="double" value="0.1"/>
     <Parameter name="dtmin" type="double" value="0.000001"/>
+    <Parameter name="edit_channels" type="int" value="1"/>
     <Parameter name="epso" type="double" value="0.001"/>
+    <Parameter name="fluid_energy_storage" type="double" value="0.5"/>
+    <Parameter name="global_energy_balance" type="double" value="0.01"/>
+    <Parameter name="global_mass_balance" type="double" value="0.01"/>
     <Parameter name="gridlabel" type="Array(string)" value="{MID,END}"/>
     <Parameter name="gridloss" type="Array(double)" value="{0.9065,0.9070}"/>
     <Parameter name="hgap" type="double" value="5678.3"/>
     <Parameter name="iitmax" type="int" value="40"/>
     <Parameter name="irfc" type="int" value="2"/>
+    <Parameter name="maps_filename" type="string" value="single_rod_HFP"/>
+    <Parameter name="mass_storage" type="double" value="0.5"/>
     <Parameter name="maxits" type="int" value="10000"/>
     <Parameter name="nc" type="int" value="1"/>
     <Parameter name="nfuel" type="int" value="3"/>
     <Parameter name="oitmax" type="int" value="5"/>
     <Parameter name="rtwfp" type="double" value="1000.0"/>
+    <Parameter name="solid_energy_storage" type="double" value="0.5"/>
     <Parameter name="tend" type="double" value="0.1"/>
+  </ParameterList>
+  <ParameterList name="COUPLING">
+    <Parameter name="eps_boron" type="double" value="0.1"/>
+    <Parameter name="epsk" type="double" value="2.0"/>
+    <Parameter name="maxiter" type="int" value="20"/>
+    <Parameter name="rlx_den" type="double" value="1.0"/>
+    <Parameter name="rlx_power" type="double" value="0.5"/>
+    <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
 </ParameterList>
