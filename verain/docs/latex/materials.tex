@@ -1,10 +1,10 @@
 %*-------------------------------------------------------------------------*
-%*                 Copyright 2013 Core Physics, Inc.                       *
+%*                 Copyright 2013-2014 Core Physics, Inc.                  *
 %*  Under terms of the contract to support CASL, there is a non-exclusive  *
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: materials.tex,v 1.11 2013/11/19 17:28:04 scott Exp $
+% @version CVS $Id: materials.tex,v 1.18 2014/03/28 15:40:05 scott Exp $
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Materials Description}  \label{chap:materials}
@@ -24,7 +24,7 @@ Fuel materials can only be defined in [ASSEMBLY] blocks.
 
 Materials are used in many different input cards.  They are used to define
 cells, nozzles, core plates, baffles, grids, reflectors, etc.  Every material that
-is used must be defined with either a {\it mat} card or a {\it fuel} card.
+is used in the input must be defined with either a {\it mat} card or a {\it fuel} card.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Structural Materials}
@@ -39,30 +39,33 @@ where:
 \item {\it user-mat} is a user-defined material name.  It is case sensitive.  {\it user-mat} is used to
 define material names in other input cards such as {\it cell}, {\it grid}, {\it nozzle}, etc. (No default)
 \item {\it density} is the material density in g/cc (No default)
-\item {\it library-name} is a corresponding material library name for the user material.  The library name
+\item {\it library-name} is a corresponding material library name(s) for the user material.  The library name
 must be defined in the material composition file. (Default = {\it user-mat}).  Multiple library materials
 can be mixed to form a single user material.
 \item {\it frac}  is the fraction of the library material in the user material. (Default=1.0 if there is only one library material in the user material).
 \end{itemize}
 
 There are two special user materials,  ``mod'' and ``vacuum''.
-The user can use these materials in cell definitions, but the code will be automatically
+The user can use these materials in cell definitions, but the code will automatically
 determine the composition of these materials  based on T/H feedback and soluble boron concentrations.
-The user is not allowed to define a user materials named ``mod'' or ``vacuum'' on a {\it mat} card.
+The user is not allowed to define a user material named ``mod'' or ``vacuum'' on a {\it mat} card.
+
+The material libraries are code-specific libraries.  Please refer to the specific physics codes to
+determine which library materials are available.
 
 Some example material cards are shown below.
 \begin{verbatim}
-  mat zirc 6.56                ! use default library name and fraction
-  mat zirc 6.56 zirc4 1.0
+  mat zirc 6.56                   ! library-name defaults to user-name 
+  mat zirx 6.56 zirc4 1.0         ! user-name does not equal to library-name
   mat B10  12.0 boron 1.0
-  mat XYZ  6.0  zirc4 0.8 ss 0.2
+  mat XYZ  6.0  zirc4 0.8 ss 0.2  ! define new mixture of 80% zirc4 and 20% ss
   mat ABCD 8.0  zirc4 0.8 ss 0.15 b4c 0.05
 \end{verbatim}
 
+%% Fixed bug Andrew found below ~Feb 2014, atomic and weight were switched
 All of the material fractions must sum to either +1.0 or -1.0.
-If positive fractions are used, the fractions refer to atomic fractions.
-If negative fractions are used, the fractions refer to weight fractions.
-
+If positive fractions are used, the fractions refer to weight fractions.
+If negative fractions are used, the fractions refer to atomic fractions.
 
 %%%%%%%%%%%%%%%%%%%%%%
 \subsection{Search Order}
@@ -79,32 +82,38 @@ If materials are defined in the [CORE] block, they have global scope over the en
 If materials are defined in other blocks, they only have scope over the local block.  This means
 that two geometry object blocks can use different material definitions with the same name.
 One example of this is that two assemblies can be defined with the material ``zirc'', but
-the ``zirc'' can have different compositions in the blocks.
+the ``zirc'' can have different compositions in each of the assemblies.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Composition File}
 
-All library materials must be included in the HDF composition file.
-The name of the composition file is specified on the [INSILICO] {\it mat\_library} card,
-or the [MPACT] {\it (TBD)} card, and is usually named something like ``casl\_comp.sh5''.
+All library materials must be included in a material composition file.
+The composition file is a code-specific file which contains a list of all
+of the available library materials.
 
-A partial list of materials that are present on the current composition file is:
+In Insilico, the composition file is specified in the [INSILICO] block {\it mat\_library} card,
+and is usually named ``casl\_comp.sh5''.
+In MPACT, the composition file is specified in the [MPACT] block.
+
+Examples of typical library materials that are present on the composition file include:
 \begin{itemize}   % itemize = bullet list
-  \item aic
-  \item b4c
+  \item aic (silver-indium-cadmium)
+  \item b4c (boron carbide)
   \item boron
-  \item inc
-  \item he
-  \item mod
-  \item ss
-  \item zirc
+  \item inc (Inconel)
+  \item he  (helium)
+  \item ss  (stainless steel)
+  \item zirc (zirconium)
+  \item zirc4 (Zircaloy-4)
 \end{itemize}
-
+Refer to the code-specific composition file for a complete list of valid library materials.
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 \section{Fuel Materials}
 
-Fuel materials are composed mostly of UO$_2$ with different U-235 enrichments.
+Fuel materials are defined with {\it fuel} cards.
+Fuel materials are heavy metal oxides which are usually UO$_2$ with different U-235 enrichments.
+Fuel materials may also include MOX fuel, which consists of mixtures of uranium, plutonium and other actinides.
 Fuel materials are different from structural materials in that they deplete and have
 additional properties as described below.
 
@@ -113,7 +122,8 @@ in the [ASSEMBLY] block they are defined in.
 
 Fuel materials are defined with the following input card:
 
-{\bf fuel} {\it user-mat} {\it density} {\it thden} / {\it U-235\_enrichment} \{{\it HM\_material$_i$}={\it HM\_enrichment$_i$}, i=1, N\}  \\
+{\bf fuel} {\it user-mat} {\it density} {\it thden} / {\it U-235\_enrichment}
+    \{{\it HM\_material$_i$}={\it HM\_enrichment$_i$}, i=1, N\}  \\
    \{ / {\it gad\_material}={\it gad\_fraction} \}
 
 Where:
@@ -124,16 +134,17 @@ Where:
   \item {\it thden} is the percent of theoretical density in the pellet (\%) (No default)
   \item {\it U-235\_enrichment} is the U-235 enrichment in the fuel in weight \%  (No default).
   \begin{itemize}   % itemize = bullet list
-    \item If U-234 and U-236 are not specified, the enrichments will automatically be added to the
+    \item If U-234 and U-236 are not specified, they will automatically be added to the
        fuel by a pre-determined function (see below)
     \item If the sum of the heavy metal (HM) enrichments does not equal 100\%, the remainder of the
         HM composition will be assigned to U-238.
   \end{itemize}
-  \item {\it HM\_material$_i$} is the material name for a HM (Pu-239, Pu-241, etc.) (optional)
+  \item {\it HM\_material$_i$} is the material name for HM isotope $i$ (Pu-239, Pu-241, etc.) (optional) 
+    The names of the HM materials must be valid library-names.
   \item {\it HM\_enrichment$_i$} is the enrichment of HM isotope $i$ in weight \% (optional)
-  \item {\it gad\_material} is the material name for the gad oxide (or other material) (optional).
-        The gad material may be a mixture defined on a separate {\it mat} card.
-  \item {\it gad\_fraction} is the weight percent of the gad material relative to the total mass (optional)
+  \item {\it gad\_material} is the material name for the gadolina oxide (or other material) (optional).
+        The gad material is usually a mixture defined on a separate {\it mat} card.
+  \item {\it gad\_fraction} is the weight percent of the gad material relative to the total fuel mass (optional)
 \end{itemize}
 
 Oxygen should not be included on the {\it fuel} card.  The correct amount of oxygen will automatically
@@ -146,10 +157,11 @@ It is calculated as the total mass of the fuel pellets divided by the total volu
   \mbox{stack density} = \frac{ (\mbox{fuel mass})} { \pi (\mbox{pellet radius})^2 \, (\mbox{fuel height}) }
 \end{equation}
 
-The {\it thden} refers to the actual density of the pellet.  This quantity is
-only used in fuel performance codes to evaluate material properties.
+The {\it thden} refers to the actual theoretical density of the pellet.  This quantity is
+used in fuel performance codes to evaluate material properties.
 
-If U-234 or U-236 enrichments are not included, they are automatically added to the fuel with the following formulas:
+If U-234 or U-236 enrichments are not included in the fuel definition, they are automatically
+added to the fuel with the following formulas:
 \begin{equation}
    W_{234} = 0.007731 \cdot W_{235}^{1.0837}
 \end{equation}
@@ -158,17 +170,35 @@ If U-234 or U-236 enrichments are not included, they are automatically added to 
 \end{equation}
 Where $W_{23x}$ is the enrichment of each of the uranium isotopes in percent.
 
+If a user specifically does NOT want U-234 or U-236, they should specify a U-234 
+and/or U-236 enrichment of zero.
 
-Examples of valid fuel cards are:
+Examples of typical {\it fuel} cards are shown below.  The user
+only has to specify the U-235 enrichment and the code will automatically add
+U-234, U-236, U-238, and oxygen to the fuel.
 \begin{verbatim}
-  fuel U21 10.4 95.2 / 2.1
-  fuel UO2-35 10.297 95.0 / 3.5
-  fuel U23 10.111 / 2.3                      ! bare minimum input for fuel
-  mat gad5 7.407 gd2o3 1.0                   ! define gad material
-  fuel U49 10.111 94.5 / 1.8  / gad5=0.05    ! 5% gad
-  fuel PX1 10.111 94.5 / 0.711  Pu-239=23.4  Pu-241=1.9    ! Sample MOX
-  fuel UPX21G 10.111 94.5 / 2.1 U-234=0.001 Pu-239=3.4  Pu-241=1.9 / gad3=0.03
+  fuel U21 10.4 95.2 / 2.1        ! 2.1% enriched UO2 fuel, no gad
+  fuel UO2-35 10.297 95.0 / 3.5   ! 3.5% enriched UO2 fuel, no gad
+  fuel U23    10.111 / 2.3        ! fuel with default thden
 \end{verbatim}
 
+An example of a {\it fuel} card with gadolinia burnable poison is shown next.
+In this example, the gadolinia oxide is first defined with a {\it mat} card and 
+is mixed with the fuel as 5\%  gad oxide and 95\% UO$_2$ (weight percents). 
+\begin{verbatim}
+  mat gad5 7.407 gd2o3 1.0                ! define gad material separately
+  fuel U49 10.111 94.5 / 1.8  / gad5=0.05 ! 1.8% enriched fuel with 5% gad
+\end{verbatim}
 
+Some examples of MOX fuel cards are shown next.  In these cards, the user specifies
+the U-235 enrichment (the U-235 enrichment is usually small in MOX fuel) and the
+plutonium isotope enrichments.  The code will automatically add U-234, U-236, U-238,
+and oxygen.
+\begin{verbatim}
+  fuel PX1  10.111 94.5 / 0.711 Pu-239=23.4 Pu-241=1.9    ! Sample MOX fuel
+  fuel MOX1 10.111 94.5 / 1.0   Pu-238=1.0  Pu-239=26.0 
+                    Pu-240=12.0 Pu-241=8.0 Pu-242=3.0 
+\end{verbatim}
+
+Only oxide fuel can be defined on the {\it fuel} card. Metallic fuel is not supported.
 
