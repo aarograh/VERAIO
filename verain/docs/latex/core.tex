@@ -1,30 +1,30 @@
 %*-------------------------------------------------------------------------*
-%*                 Copyright 2013 Core Physics, Inc.                       *
+%*                 Copyright 2013-2014 Core Physics, Inc.                  *
 %*  Under terms of the contract to support CASL, there is a non-exclusive  *
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: core.tex,v 1.2 2013/11/19 17:28:03 scott Exp $
+% @version CVS $Id: core.tex,v 1.8 2014/03/28 14:18:30 Scott Exp $
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Core Description}
 
-The [CORE] block describes the core configuration.  This block describes the core layout, including
-where the assemblies are placed, where the control rod locations are, where the removable burnable
-poison assemblies are inserted, and other core parameters that do not change during a
-cycle depletion.
+The [CORE] block describes the nuclear reactor core configuration.  This block describes the core layout, including
+the placement of nuclear fuel assemblies, control rods, detectors, inserts, and other core parameters
+that do not change during a cycle depletion.
 
 The geometric objects inside the core are defined in separate input blocks, the [CORE] block
 simply describes how all of these objects are placed together.
 
 \subsection{Core Geometry}
 
-The first thing that the code needs to know is the core geometry.  The overall {\it size} of the core is
-given by the number of assemblies along one major axis of the core.  The assembly pitch ({\it apitch}) defines the
+The reactor core geometry must be defined first. The overall {\it size} of the core is
+given by the number of assemblies across one major axis of the core.  The assembly pitch ({\it apitch}) defines the
 width of each assembly, including the assembly gap. The distance from the top of the lower core plate to the
-bottom of the upper core plate is given by the {\it height}. The assembly layout is given by the {\it core\_shape} map.
-Note that the core shape map is the only ``square'' core map and it must be of {\it size} assemblies by {\it size}.
-Once the core shape is defined, subsequent core maps only have to enter data for actual fuel assembly locations.
+bottom of the upper core plate is given by the parameter {\it height}.
+The assembly layout is given by the {\it core\_shape} map.
+Note that the core shape map is the only ``square'' core map in the input, and it must be of {\it size} assemblies by {\it size}.
+Once the core shape is defined, subsequent core maps only include entries for actual fuel assembly locations.
 
 \begin{verbatim}
   size 15               ! number of assemblies across one axis
@@ -50,24 +50,25 @@ Once the core shape is defined, subsequent core maps only have to enter data for
 \end{verbatim}
 
 The {\it core\_shape} map is unique because it is square in shape and composed of the integers 1 and 0.
-The purpose of this map is to define the shape for the subsequent core maps.
+The purpose of this map is to define the shape for subsequent core maps.
 
-Most physics codes support both calculations run in either full-core symmetry or quarter-core symmetry.
+Most physics codes support both calculations run in either full-core or quarter-core (qtr-core) symmetry.
 If a calculation is run in qtr-core symmetry,  the code must know if the symmetry is
-mirror symmetric or rotational symmetric.  This qtr-core symmetry is defined with the {\it bc\_sym}
-input card.  The symmetry option is not used if the calculation is run in full-core symmetry.
+mirror symmetric or rotational symmetric.  The type of qtr-core symmetry is defined with the {\it bc\_sym}
+input card.  The symmetry option is not used if the calculation is run in full-core.
 \begin{verbatim}
   bc_sym mir    ! define qtr-core symmetry as mirror
 \end{verbatim}
-(Note: rotational symmetry is not supported at this time)
+(Note: rotational symmetry is supported by the input parser, but may not be supported in the
+physics codes at this time)
 
 \subsection{Core Maps}
 
 Core maps are used to define the location of geometry objects in the core.
 There are different core maps to define types and locations of assemblies,
 inserts, detectors, and control rods.
-The maps are composed of arbitrary length character strings.
-Even though the character strings can be any size, you usually want to use fairly
+The entries in the maps are composed of arbitrary length character strings.
+Even though the character strings can be any size, it is recommended to use 
 compact names so the maps remain legible.
 
 \begin{figure}
@@ -79,16 +80,16 @@ compact names so the maps remain legible.
 
 All of the maps require one entry for each assembly location defined in the {\it core\_shape} map.
 However, the input parser can be used to take advantage of core symmetry.  If the core is symmetric,
-you only need to input the maps in quarter or octant symmetry, and the input parser will automatically
-fold the map out to full-symmetry.
-The method used to input the core maps is independent of how the actual calculations are run.
-For example, you can enter all of the core maps in octant symmetry and still run the calculations in quarter
-or full symmetry.
+the user only needs to input the maps in quarter or octant symmetry, and the input parser will automatically
+unfold the map to full-symmetry.
+The symmetry used in the core maps is independent of the symmetry used to run the actual calculations.
+For example, the user can enter all of the core maps in octant symmetry and still run the calculations
+in quarter or full symmetry.
 The quadrant and octant that the parser is expecting is shown in Figure~\ref{fig:coresym}.
 
 If there is an empty location in the map (e.g. if there is no detector or no control rod
-in an assembly), enter a dash ``-''.  The dash is significant and signifies a blank location
-in the core map.
+in an assembly), enter a dash ``-'' for that location.  The dash is significant and signifies an
+empty location in the core map.
 
 \clearpage
 
@@ -113,9 +114,9 @@ In the example below, there are three assembly types which will be defined in [A
                   A3 A3 A3 A3 A3 A3 A3
 \end{verbatim}
 
-The following map is equivalent to the previous map, but demonstrates a map with octant symmetry.
-Only values in the octant shown in Figure~\ref{fig:coresym} are entered and the parser automatically
-folds the map out to full-symmetry.
+The following map is equivalent to the previous map, but demonstrates the use of input with octant symmetry.
+Only values in the octant shown in Figure~\ref{fig:coresym} are entered in the map and the parser automatically
+unfolds the map to full-symmetry.
 \begin{verbatim}
   assm_map
      A1
@@ -131,8 +132,9 @@ folds the map out to full-symmetry.
 The {\it insert\_map} is used to show where assembly inserts are located within the core.
 In the following qtr-symmetry example,
 the inserts are burnable poison assemblies with different numbers of pyrex rods.
-The {\it insert\_map} can also be used to define thimble plug locations.
+The {\it insert\_map} can also be used to place geometry objects such as thimble plugs.
 The geometry description of the inserts will be given in the [INSERT] block.
+\vfill   % don't split map
 \begin{verbatim}
   insert_map
       -    BP20   -    BP20   -    BP20   -    BP12
@@ -147,8 +149,8 @@ The geometry description of the inserts will be given in the [INSERT] block.
 The {\it insert\_map} is optional if no inserts are present in the core.
 A dash ``-'' is used to specify assembly locations without an insert.
 
-The {\it det\_map} is used to shows where detectors are located in the core.  The geometry description
-of the detector strings is given in the [DETECTOR] block.  In this example,
+The {\it det\_map} is used to show where detectors are located in the core.  The geometry description
+of the corresponding detector strings is given in the [DETECTOR] block.  In this example,
 there is only one detector type denoted with a ``1''.  Since the ``1'' occurs in a core map,
 it is treated as a character string.  This example uses a full-symmetry map.
 \begin{verbatim}
@@ -178,6 +180,7 @@ The control rod assemblies are described with two maps.  The {\it crd\_map}
 defines the control rod types and locations in the core.
 The {\it crd\_bank} map assigns control rod locations to control rod banks.
 The control rod maps are optional if no control rods are present in the core.
+\vfill   % don't split map
 \begin{verbatim}
   crd_map
                  -  -  -  -  -  -  -
@@ -218,7 +221,7 @@ The control rod maps are optional if no control rods are present in the core.
 \subsection{Core Baffle and Vessel}
 
 The core baffle (sometimes called the shroud) is a steel reflector that closely surrounds
-the fuel assemblies. The barrel is a round steel structure that surrounds the baffle, and
+the fuel assemblies in the core. The barrel is a round steel structure that surrounds the baffle, and
 the vessel is the round outer pressure vessel.  These structures are shown in
 Figure~\ref{fig:corebaffle}.
 
@@ -231,25 +234,27 @@ Figure~\ref{fig:corebaffle}.
 
 % fix: add figure showing exactly how the baffle gap is defined
 
-The {\it baffle} is defined with a material, the size of the gap between the
+The {\it baffle} is defined with a single material, the size of the gap between the
 outer assembly and baffle, and the baffle thickness.
+\begin{verbatim}
+  baffle   SS304 0.19 1.26   ! material, gap (cm), and thickness (cm)
+\end{verbatim}
 
 The barrel and vessel are defined with a {\it vessel} card.  This card allows the
 user to enter any arbitrary number of rings surrounding a core by specifying the
 ring radii and the materials between the rings.
 
 \begin{verbatim}
-  baffle   SS304 0.19 1.26   ! material, gap (cm), and thickness (cm)
   vessel   mod 166.7 SS304 169.2 mod 175.0 SS304 176.0   ! materials and radii (cm)
 \end{verbatim}
 
-There is currently no input model for the neutron pad.
+There is currently no input defined to specify the neutron pad.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Core Plates}
 
 The core plates are large steel plates at the top and bottom of the core that have
-various flow holes passing through it.  All of the core dimensions are relative to the
+various flow holes passing through them.  All of the axial core heights are defined relative to the
 top of the bottom core plate and the total core {\it height} is defined as the distance
 between the top of the bottom core plate and the bottom of the top core plate.
 
@@ -265,10 +270,11 @@ The remainder of the volume fraction is filled with coolant.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Small Cores Geometries}
+\label{sec:smallcoregeom}
 
 Even though the VERA input is designed for ``real'' core geometries, it can accommodate smaller
 problems as well.
-For example, if you only want to run a single-assembly calculation, you would define the core size
+For example, if the user only wants to run a single-assembly calculation, they would define the core size
 as one assembly by one assembly, and all of the core maps would contain a single assembly.
 \begin{verbatim}
   size 1                ! core composed of a single-assembly
@@ -276,6 +282,6 @@ as one assembly by one assembly, and all of the core maps would contain a single
      1
 \end{verbatim}
 
-If you want to model a single fuel rod, you would define a core with one assembly in it and
+If the user wants to model a single fuel rod, they would define a core with one assembly and
 an assembly with one rod in it.
 
