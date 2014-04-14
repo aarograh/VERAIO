@@ -169,7 +169,8 @@ sub is_command
     my $alias=read_off_label($ref_key, '_alias');
     if( $alias ){
 	print "$myfun _alias: $command = $alias\n" if get_verbose();
-	$ref_key=key_exists($block_ref,$alias);
+	$ref_key=$self->is_command($alias);
+#	$ref_key=key_exists($block_ref,$alias);
     }
     return $ref_key;
 }
@@ -186,7 +187,8 @@ sub command_name
     my $alias=read_off_label($ref_key, '_alias');
     if( $alias ){
 	print "$myfun _alias: $command = $alias\n" if get_verbose();
-	$command=$alias;
+	$command=$self->command_name($alias);
+# 	$command=$alias;
     }
     return $command;
 }
