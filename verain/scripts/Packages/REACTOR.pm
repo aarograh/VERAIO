@@ -297,6 +297,7 @@ sub read_ascii {
 	      $res=$block->is_command($cname) || 0;
 	      die "[$filename:$.] invalid keyword $cname in block ", $block->name(), "\n" unless $res;
 	      print STDERR "[$filename:$.] New command: $cname $ctext\n"  if get_verbose();
+	      $cname=$block->command_name($cname);
 
 	      $command=REACTORCommand->new(keyword=>$cname,keytree=>$res,ctext=>$ctext,file=>$filename,line=>$.);
 	      unless($command->is_multiline()){
@@ -319,6 +320,7 @@ sub read_ascii {
 		  $command=undef;
 
 		  print STDERR "[$filename:$.] New command: $cname $ctext\n"  if get_verbose();
+		  $cname=$block->command_name($cname);
 		  $command=REACTORCommand->new(keyword=>$cname,keytree=>$res,ctext=>$ctext,file=>$filename,line=>$.);
 		  unless($command->is_multiline()){
 		      print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
