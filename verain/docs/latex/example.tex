@@ -1,10 +1,10 @@
 %*-------------------------------------------------------------------------*
-%*                 Copyright 2013 Core Physics, Inc.                       *
+%*                 Copyright 2013-2014 Core Physics, Inc.                  *
 %*  Under terms of the contract to support CASL, there is a non-exclusive  *
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: example.tex,v 1.3 2013/11/19 17:28:03 scott Exp $
+% @version CVS $Id: example.tex,v 1.6 2014/03/28 14:50:46 Scott Exp $
 %
 % Example file
 \begin{verbatim}
@@ -12,7 +12,7 @@
   !  Sample Test case for Problem 7 (Full-Core HFP)
   !
   [CASEID]
-    title 'CASL AMA Problem 7 - Watts Bar Unit 1 Cycle 1 - Public'
+    title 'CASL Progression Problem 7 - Watts Bar Unit 1 Cycle 1 - Public'
 
   [STATE]
     power  100.0          ! % of rated power
@@ -147,7 +147,7 @@
     cell 4            0.561 0.602 / mod    zirc       ! guide/instrument tube
     cell 5            0.418 0.475 /     he zirc       ! plenum
 
-    lattice LAT21
+    rodmap LAT21
          4
          1 1
          1 1 1
@@ -158,7 +158,7 @@
          1 1 1 1 1 1 1 1
          1 1 1 1 1 1 1 1 1
 
-    lattice LAT26
+    rodmap LAT26
          4
          2 2
          2 2 2
@@ -169,7 +169,7 @@
          2 2 2 2 2 2 2 2
          2 2 2 2 2 2 2 2 2
 
-    lattice LAT31
+    rodmap LAT31
          4
          3 3
          3 3 3
@@ -180,7 +180,7 @@
          3 3 3 3 3 3 3 3
          3 3 3 3 3 3 3 3 3
 
-    lattice PLEN
+    rodmap PLEN
          4
          5 5
          5 5 5
@@ -358,9 +358,6 @@
     irfc    2             ! friction factor correlation default=2
     dhfrac  0.02          ! fraction of power deposited directly into coolant
     hgap    5678.3        ! gap conductance
-    epso    0.001
-    oitmax  5
-    iitmax  40
     gridloss END 0.9070   ! spacer grid loss coefficient
     gridloss MID 0.9065   ! spacer grid loss coefficient
     dtmin   0.000001
