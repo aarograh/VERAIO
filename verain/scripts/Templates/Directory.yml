@@ -1124,6 +1124,12 @@ COBRATF:
     _check:
       - is_int()
 
+  boil_ht_cor:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
 COUPLING:
 
   epsk:
