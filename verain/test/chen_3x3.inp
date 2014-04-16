@@ -216,7 +216,7 @@
   maxits  10000
   courant 0.8
   maps_filename = 3x3_HFP
-  boil_ht_cor 0 ! Use the Chen correlation for subcooled/saturated boiling heat transfer
+  boil_ht_cor chen ! Use the Chen correlation for subcooled/saturated boiling heat transfer
 
 [MAMBA2D]
   Nx   50

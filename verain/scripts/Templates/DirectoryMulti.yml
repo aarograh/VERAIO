@@ -1121,7 +1121,7 @@ COBRATF:
     <<: *dtint
     _content:
     _check:
-      - is_int()
+      - is_string()
 
 COUPLING:
 

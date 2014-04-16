@@ -229,7 +229,7 @@ COBRATF:
 
     boil_ht_cor:
       _pltype: parameter
-      _type: int
+      _type: string
       _do:
         - copy COBRATF/$boil_ht_cor
       _content:
