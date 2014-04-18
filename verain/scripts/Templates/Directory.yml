@@ -1197,6 +1197,13 @@ COUPLING:
     _check:
       - is_string()
 
+  solver:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() BlockJacobi GaussSeidel
+
 MPACT:
 
   ray_spacing:
