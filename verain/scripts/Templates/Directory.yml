@@ -1969,3 +1969,13 @@ PEREGRINE:
     _check:
       - is_float()
       - is_gt() 0
+  fuel_pin_input_file_template:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  non_fuel_pin_input_file_template:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()

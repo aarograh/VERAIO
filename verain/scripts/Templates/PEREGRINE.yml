@@ -410,3 +410,17 @@ PEREGRINE:
         - copy PEREGRINE/$thermalcontact_roughness_fuel
       _content:
 
+    fuel_pin_input_file_template:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$fuel_pin_input_file_template
+      _content:
+
+    non_fuel_pin_input_file_template:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$non_fuel_pin_input_file_template
+      _content:
+

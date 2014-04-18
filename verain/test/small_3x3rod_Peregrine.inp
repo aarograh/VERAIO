@@ -277,7 +277,8 @@
   thermalcontact_initial_gas_fractions = 1 0 0 0 0 0 0 0 0 0
   thermalcontact_roughness_clad = 5.0e-7
   thermalcontact_roughness_fuel = 1.0e-6
-
+  fuel_pin_input_file_template = small_3x3rod_Peregrine.i.template
+  non_fuel_pin_input_file_template = small_3x3rod_Peregrine.i.template
 
 [COUPLING]
   epsk        5.0  ! pcm

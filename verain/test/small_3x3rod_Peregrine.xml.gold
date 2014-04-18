@@ -257,6 +257,7 @@
     <Parameter name="executioner_num_steps" type="int" value="2000"/>
     <Parameter name="executioner_timestepper_time_dt" type="string" value="1.0e3 1.0e5"/>
     <Parameter name="executioner_timestepper_time_t" type="string" value="0 1.0e5"/>
+    <Parameter name="fuel_pin_input_file_template" type="string" value="small_3x3rod_Peregrine.i.template"/>
     <Parameter name="globalparams_a_lower" type="double" value="0.01676"/>
     <Parameter name="globalparams_a_upper" type="double" value="3.67436"/>
     <Parameter name="globalparams_density" type="double" value="10431.0"/>
@@ -282,6 +283,7 @@
     <Parameter name="mesh_plenum_fuel_ratio" type="double" value="0.065"/>
     <Parameter name="mesh_top_bot_clad_height" type="double" value="1.524e-2"/>
     <Parameter name="nfuelrod" type="int" value="8"/>
+    <Parameter name="non_fuel_pin_input_file_template" type="string" value="small_3x3rod_Peregrine.i.template"/>
     <Parameter name="output_file_base" type="string" value="output_RISO_AN8_bump"/>
     <Parameter name="porosity" type="double" value="0.2"/>
     <Parameter name="postprocessors_rod_input_power_scale_factor" type="double" value="3.66"/>
