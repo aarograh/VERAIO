@@ -164,7 +164,33 @@ sub is_command
 
     croak "Invalid number of arguments to $myfun" if @_ != 2;
     my $block_ref=$self->keytree();
-    return key_exists($block_ref,$command);
+    my $ref_key=key_exists($block_ref,$command);
+
+    my $alias=read_off_label($ref_key, '_alias');
+    if( $alias ){
+	print "$myfun _alias: $command = $alias\n" if get_verbose();
+	$ref_key=$self->is_command($alias);
+#	$ref_key=key_exists($block_ref,$alias);
+    }
+    return $ref_key;
+}
+
+sub command_name
+{
+    my ($self,$command)=@_;
+    my $myfun=(caller(0))[3];
+
+    croak "Invalid number of arguments to $myfun" if @_ != 2;
+    my $block_ref=$self->keytree();
+    my $ref_key=key_exists($block_ref,$command);
+    croak "$myfun: invalid command name $command" unless $ref_key;
+    my $alias=read_off_label($ref_key, '_alias');
+    if( $alias ){
+	print "$myfun _alias: $command = $alias\n" if get_verbose();
+	$command=$self->command_name($alias);
+# 	$command=$alias;
+    }
+    return $command;
 }
 
 1;
