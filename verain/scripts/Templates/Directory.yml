@@ -1316,6 +1316,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() P0 P1 P2 P3 P4 P5 Pn0 TCP0 LTCP0 ITCP0
+  depl_time_method:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() p-c semip-c
 
   num_space:
     <<: *dtint
