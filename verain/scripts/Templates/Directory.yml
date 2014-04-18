@@ -1204,6 +1204,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+  internal_TH:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   vis_edits:
     <<: *dtword
     _content:

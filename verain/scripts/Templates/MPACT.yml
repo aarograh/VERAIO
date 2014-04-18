@@ -49,6 +49,13 @@ MPACT:
         - copy MPACT/$jagged
       _content:
 
+    internal_TH:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy MPACT/$internal_TH
+      _content:
+
     db_entry:
       _pltype: list
       _do:
