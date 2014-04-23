@@ -1125,7 +1125,13 @@ COBRATF:
       - is_int()
 
   boil_ht_cor:
-    <<: *dtint
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+
+  property_evaluations:
+    <<: *dtstring
     _content:
     _check:
       - is_string()
