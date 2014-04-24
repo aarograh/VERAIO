@@ -233,3 +233,10 @@ COBRATF:
       _do:
         - copy COBRATF/$boil_ht_cor
       _content:
+
+    property_evaluations:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy COBRATF/$property_evaluations
+      _content:
