@@ -237,6 +237,7 @@
   <ParameterList name="COUPLING">
     <Parameter name="eps_boron" type="double" value="2.0"/>
     <Parameter name="epsk" type="double" value="2.0"/>
+    <Parameter name="epsp" type="double" value="0.0002"/>
     <Parameter name="maxiter" type="int" value="20"/>
     <Parameter name="read_restart" type="string" value="cobra_denovo_restart.out"/>
     <Parameter name="rlx_den" type="double" value="1.0"/>

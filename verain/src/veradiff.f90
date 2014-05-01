@@ -1,47 +1,36 @@
 !--------------------------------------------------------------------------------
 !  Program to diff two VERA HDF output files
 !
-!  Copyright Core Physics, Inc.
-!  9/6/2013
+!  Copyright Core Physics, Inc. 2013-2014
 !
 !  Right now, we are just performing a simple diff on eigenvalues with a
 !  tolerance of 10 pcm.
 !  This will be modifed in the future to check other parameters as well.
 !
-!  2014/01/27 - read boron coparison if dataset is present on file
+!  2013/09/06 - original file
+!  2014/01/27 - compare boron if dataset is present on file
+!  2014/04/26 - add comparison for multiple statepoints - see #3164
 !
 !--------------------------------------------------------------------------------
       program veradiff
-      use  hdf5
+      use hdf5
       implicit none
 
       character(len=250) :: fname1, fname2
-      character(len=80)  :: dataset
       integer            :: iargs
 
       integer(hid_t)     :: file_id1, file_id2
       integer            :: ierror
-      integer            :: nfail
+      integer            :: nfail    ! number of diff failures
+      integer            :: nstate   ! statepoint number
 
       logical            :: ifxst
 
-      real(8)            :: boron1, boron2
-      real(8)            :: bordiff
-      real(8)            :: bortol=1.0d0   ! boron tolerance (ppm)
-
-      real(8)            :: xkeff1, xkeff2
-      real(8)            :: xkdiff
-      real(8)            :: xktol=10.0d0   ! eigenvalue tolerance (pcm)
+      character(len=10) :: group_name
 
       ierror=0
       fname1=' '
       fname2=' '
-
-      boron1=-9999.0d0    ! large negative number if dataset not present
-      boron2=-9999.0d0    ! large negative number if dataset not present
-
-      xkeff1=0.0d0
-      xkeff2=0.0d0
 
       nfail=0    ! number of test failures
 
@@ -101,17 +90,133 @@
         goto 900
       endif
 
+!--- check if "STATE_0001" exists on file.  If so, this is a new file
+
+      group_name='STATE_0001'
+      call h5lexists_f(file_id1, group_name, ifxst, ierror)
+      if (ifxst) then
+        nstate=1
+      else
+        nstate=0    ! old file without STATE groups
+      endif
+
+      do
+        call readstate(file_id1, file_id2, nstate, nfail)
+        if (nstate.eq.0) exit   ! old files only have one statepoint
+
+        nstate=nstate+1
+        write (group_name(7:10),'(i4.4)') nstate
+        call h5lexists_f(file_id1, group_name, ifxst, ierror)
+        if (.not.ifxst) exit
+
+      enddo
+
+!--------------------------------------------------------------------------------
+! Close File
+!--------------------------------------------------------------------------------
+      call h5fclose_f(file_id1, ierror)
+      call h5fclose_f(file_id2, ierror)
+
+!--------------------------------------------------------------------------------
+! Print Results
+!--------------------------------------------------------------------------------
+
+  900 continue
+
+      if (nfail.gt.0) call exit(nfail)    ! return error code
+
+      end program
+
+!=======================================================================
+!
+!  Subroutine to read a single statepoint from HDF file
+!
+!=======================================================================
+      subroutine readstate(file_id1, file_id2, nstate, nfail)
+      use hdf5
+      implicit none
+
+      integer(hid_t), intent(in) :: file_id1, file_id2
+      integer,        intent(in) :: nstate
+      integer                    :: nfail
+
+!--- local variables
+
+      integer            :: ierror
+      logical            :: ifmissing
+      logical            :: ifxst
+
+      real(8)            :: boron1, boron2
+      real(8)            :: bordiff
+      real(8)            :: bortol=1.0d0   ! boron tolerance (ppm)
+
+      real(8)            :: xkeff1, xkeff2
+      real(8)            :: xkdiff
+      real(8)            :: xktol=10.0d0   ! eigenvalue tolerance (pcm)
+
+      character(len=80)  :: dataset
+
+      boron1=-9999.0d0    ! large negative number if dataset not present
+      boron2=-9999.0d0    ! large negative number if dataset not present
+
+      xkeff1=0.0d0
+      xkeff2=0.0d0
+
+      ierror=0
+      ifmissing=.false.
+
+      write (*,*)
+
 !--------------------------------------------------------------------------------
 ! Read Eigenvalue and other scalers
 !--------------------------------------------------------------------------------
 
-!--- boron
+!--- eigenvalue
 
-      dataset='boron'    ! 'boron_conc' for some versions of Insilico
+      if (nstate.eq.0) then
+        dataset='keff'
+      else
+        dataset='STATE_0000/keff'
+        write (dataset(7:10),'(i4.4)') nstate
+      endif
+
+      call h5lexists_f(file_id1, dataset, ifxst, ierror)
+      if (ifxst) then
+        call read_double(file_id1, dataset, xkeff1)
+      else
+        nfail=nfail+1
+        ifmissing=.true.
+        write (*,*) 'FAIL - keff dataset does not exist on file'
+      endif
+
+      call h5lexists_f(file_id2, dataset, ifxst, ierror)
+      if (ifxst) then
+        call read_double(file_id2, dataset, xkeff2)
+      else
+        nfail=nfail+1
+        ifmissing=.true.
+        write (*,*) 'FAIL - keff dataset does not exist on file'
+      endif
+
+      if (ifmissing) return    ! return if eigenvalue missing
+
+      xkdiff=(xkeff2-xkeff1)*1.0d5
+
+!--- boron (optional)
+
+      if (nstate.eq.0) then
+        dataset='boron'
+      else
+        dataset='STATE_0000/boron'
+        write (dataset(7:10),'(i4.4)') nstate
+      endif
+
       call h5lexists_f(file_id1, dataset, ifxst, ierror)
       if (ifxst) call read_double(file_id1, dataset, boron1)
       call h5lexists_f(file_id2, dataset, ifxst, ierror)
       if (ifxst) call read_double(file_id2, dataset, boron2)
+
+!--- compare
 
       if (boron1.gt.-1000.0d0 .and. boron2.gt.-1000.0d0) then
         bordiff=(boron2-boron1)
@@ -128,28 +233,6 @@
       else
         write (*,'(a)') 'No boron comparison performed - at least one file missing boron'
       endif
-
-!--- eigenvalue
- 
-
-      dataset='keff'
-      call h5lexists_f(file_id1, dataset, ifxst, ierror)
-      if (ifxst) then
-        call read_double(file_id1, dataset, xkeff1)
-      else
-        nfail=nfail+1
-        write (*,*) 'FAIL - keff dataset does not exist on file'
-      endif
-
-      call h5lexists_f(file_id2, dataset, ifxst, ierror)
-      if (ifxst) then
-        call read_double(file_id2, dataset, xkeff2)
-      else
-        nfail=nfail+1
-        write (*,*) 'FAIL - keff dataset does not exist on file'
-      endif
-
-      xkdiff=(xkeff2-xkeff1)*1.0d5
 
       write (*,'(a, f12.7)')   ' keff1  =', xkeff1
       write (*,'(a, f12.7)')   ' keff2  =', xkeff2
@@ -187,21 +270,9 @@
 !!      stop 'mismatch found between axial levels in input and number of levels of output'
 !!    endif
 
-!--------------------------------------------------------------------------------
-! Close File
-!--------------------------------------------------------------------------------
-      call h5fclose_f(file_id1, ierror)
-      call h5fclose_f(file_id2, ierror)
+      return
 
-!--------------------------------------------------------------------------------
-! Print Results
-!--------------------------------------------------------------------------------
-
-  900 continue
-
-      if (nfail.gt.0) call exit(nfail)    ! return error code
-
-      end program
+      end subroutine readstate
 !=======================================================================
 !
 !  Subroutine to read double precision scalar from HDF5 file
