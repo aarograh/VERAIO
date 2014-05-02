@@ -147,10 +147,11 @@ STATE:
       - is_gt() 0
   deplete:
     <<: *dtlist
+    _style: multi-line
     _content:
     _check:
       - fall(sub{is_float(shift)},stride(1,1,()))
-      - nth(0,())eq"GWDMT"||nth(0,())eq"EFPD"||nth(0,())eq"hours"
+      - nth(0,())eq"GWDMT"||nth(0,())eq"MWDMT"||nth(0,())eq"EFPD"||nth(0,())eq"hours"
   rodbank:
     <<: *dtlist
     _style: multi-line
@@ -1247,6 +1248,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+  internal_TH:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   vis_edits:
     <<: *dtword
     _content:
@@ -1359,6 +1366,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() P0 P1 P2 P3 P4 P5 Pn0 TCP0 LTCP0 ITCP0
+  depl_time_method:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() p-c semip-c
 
   num_space:
     <<: *dtint
