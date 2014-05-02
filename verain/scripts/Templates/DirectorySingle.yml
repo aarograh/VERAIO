@@ -1117,6 +1117,18 @@ COBRATF:
     _check:
       - is_int()
 
+  edit_convergence:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
+  edit_hdf5:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
   boil_ht_cor:
     <<: *dtstring
     _content:
@@ -1128,6 +1140,19 @@ COBRATF:
     _content:
     _check:
       - is_string()
+
+  beta_sp:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  k_void_drift:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
 
 COUPLING:
 
