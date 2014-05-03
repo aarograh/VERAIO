@@ -67,6 +67,20 @@ STATE:
         - copy STATE/$boron
       _content:
 
+    b10:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy STATE/$b10:0
+      _content:
+
+    b10_depl:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy STATE/$b10:1
+      _content:
+
     tinlet:
       _pltype: parameter
       _type: double

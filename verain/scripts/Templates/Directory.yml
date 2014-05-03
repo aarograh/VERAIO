@@ -127,6 +127,14 @@ STATE:
     _check:
       - is_float()
       - is_geq() 0
+  b10:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_word(nth(1,()))
+      - nth(0,())>=0
   kcrit:
     <<: *dtdouble
     _content:
@@ -200,6 +208,12 @@ CORE:
       - arraysize()==2
       - nth(0,())>=0
       - nth(1,())>=0
+  rcs_volume:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
   apitch:
     <<: *dtdouble
     _content:
