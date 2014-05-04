@@ -95,7 +95,7 @@ STATES:
 
         b10_depl:
           _pltype: parameter
-          _type: string
+          _type: bool
           _do:
             - copy STATE/(_loop)/$b10:1
           _content:
