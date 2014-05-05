@@ -22,7 +22,7 @@ CORE:
       _pltype: parameter
       _type: double
       _do:
-        - copy CORE/@rcs_volume,apply=>$_[0]
+        - copy CORE/@rcs_volume
       _content:
 
     core_name:
