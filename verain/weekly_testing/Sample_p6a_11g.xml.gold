@@ -236,9 +236,11 @@
     <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>
   <ParameterList name="COUPLING">
+    <Parameter name="eps_temp" type="double" value="0.18"/>
     <Parameter name="epsk" type="double" value="5.0"/>
     <Parameter name="epsp" type="double" value="1.0e-4"/>
     <Parameter name="maxiter" type="int" value="100"/>
+    <Parameter name="read_restart" type="string" value="cobra_denovo_restart.out"/>
     <Parameter name="rlx_den" type="double" value="1.0"/>
     <Parameter name="rlx_power" type="double" value="0.6"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
