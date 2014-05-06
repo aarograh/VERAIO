@@ -207,13 +207,6 @@ PEREGRINE:
         - copy PEREGRINE/$globalparams_a_upper
       _content:
 
-    globalparams_density:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$globalparams_density
-      _content:
-
     globalparams_energy_per_fission:
       _pltype: parameter
       _type: double
@@ -284,20 +277,6 @@ PEREGRINE:
         - copy PEREGRINE/$materials_fuel_mech_grain_radius
       _content:
 
-    materials_fuel_relocation_diameter:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$materials_fuel_relocation_diameter
-      _content:
-
-    materials_fuel_relocation_gap:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$materials_fuel_relocation_gap
-      _content:
-
     materials_fuel_relocation_q:
       _pltype: parameter
       _type: string
@@ -312,53 +291,11 @@ PEREGRINE:
         - copy PEREGRINE/$materials_fuel_thermal_initial_porosity
       _content:
 
-    mesh_pellet_outer_radius:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$mesh_pellet_outer_radius
-      _content:
-
-    mesh_pellet_height:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$mesh_pellet_height
-      _content:
-
-    mesh_clad_gap_width:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$mesh_clad_gap_width
-      _content:
-
     mesh_clad_bot_gap_height:
       _pltype: parameter
       _type: double
       _do:
         - copy PEREGRINE/$mesh_clad_bot_gap_height
-      _content:
-
-    mesh_clad_thickness:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$mesh_clad_thickness
-      _content:
-
-    mesh_top_bot_clad_height:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$mesh_top_bot_clad_height
-      _content:
-
-    mesh_plenum_fuel_ratio:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy PEREGRINE/$mesh_plenum_fuel_ratio
       _content:
 
     nfuelrod:

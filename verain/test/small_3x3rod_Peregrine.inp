@@ -248,7 +248,6 @@
   executioner_timestepper_time_t = 0      1.0e5
   globalparams_a_lower = 0.01676
   globalparams_a_upper = 3.67436
-  globalparams_density = 10431.0
   globalparams_energy_per_fission = 3.2e-11
   materials_clad_density_density = 6551.0
   materials_clad_solid_mechanics_cold_work_factor = 0.01
@@ -259,17 +258,9 @@
   materials_fission_gas_release_initial_grain_radius = 3.0e-6
   materials_fission_gas_release_initial_porosity = 0.07
   materials_fuel_mech_grain_radius = 5.0e-6
-  materials_fuel_relocation_diameter = 0.008192
-  materials_fuel_relocation_gap = 165.0e-6
   materials_fuel_relocation_q = q
   materials_fuel_thermal_initial_porosity = 0.07
-  mesh_pellet_outer_radius = 0.0041
-  mesh_pellet_height = 3.66
-  mesh_clad_gap_width = 82.5e-6
   mesh_clad_bot_gap_height = 1.52e-3
-  mesh_clad_thickness = 0.572e-3
-  mesh_top_bot_clad_height = 1.524e-2
-  mesh_plenum_fuel_ratio = 0.065
   nfuelrod = 8
   output_file_base = output_RISO_AN8_bump
   postprocessors_rod_input_power_scale_factor = 3.66
