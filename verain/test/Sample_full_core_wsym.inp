@@ -662,4 +662,4 @@ crd_map
   thermalcontact_roughness_clad = 5.0e-7
   thermalcontact_roughness_fuel = 1.0e-6
   fuel_pin_input_file_template = bison.i.template
-  non_fuel_pin_input_file_template = bison.i.template
+  non_fuel_pin_input_file_template = guide_tube.moose.i.template
