@@ -227,6 +227,21 @@ COBRATF:
         - copy COBRATF/$edit_dnb
       _content:
 
+    edit_convergence:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_convergence
+      _content:
+
+    edit_hdf5:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_hdf5
+      _content:
+
+
     boil_ht_cor:
       _pltype: parameter
       _type: string
@@ -239,4 +254,18 @@ COBRATF:
       _type: string
       _do:
         - copy COBRATF/$property_evaluations
+      _content:
+
+    k_void_drift:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$k_void_drift
+      _content:
+
+    beta_sp:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$beta_sp
       _content:
