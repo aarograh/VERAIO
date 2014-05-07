@@ -287,8 +287,10 @@
   edit_channels 1
 
 [COUPLING]
+  read_restart cobra_denovo_restart.out  ! can be saved from a previous run
   epsk        5.0  ! pcm
   epsp        1.0e-4
+  eps_temp    0.18 ! temperature convergence
   rlx_power   0.6
   rlx_tfuel   1.0
   rlx_den     1.0
