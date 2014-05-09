@@ -31,6 +31,20 @@ COUPLING:
         - copy COUPLING/$eps_temp
       _content:
 
+    ctf_iters_max:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COUPLING/$ctf_iters_max
+      _content:
+
+    ctf_iters_growth:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COUPLING/$ctf_iters_growth
+      _content:
+
     rlx_power:
       _pltype: parameter
       _type: double

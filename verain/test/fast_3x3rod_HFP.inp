@@ -183,4 +183,6 @@
   rlx_tfuel   1.0
   rlx_den     1.0
   maxiter     20
+  ctf_iters_max    100
+  ctf_iters_growth 1.2
 

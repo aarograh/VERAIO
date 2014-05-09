@@ -1177,6 +1177,20 @@ COUPLING:
       - is_float()
       - is_gt() 0
 
+  ctf_iters_max:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+
+  ctf_iters_growth:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_double()
+      - is_gt() 0
+
   eps_boron:
     <<: *dtdouble
     _content:
