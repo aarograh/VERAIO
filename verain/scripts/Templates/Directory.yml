@@ -1248,6 +1248,13 @@ COUPLING:
     _check:
       - is_string()
 
+  solver:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() BlockJacobi GaussSeidel
+
 MPACT:
 
   ray_spacing:
@@ -1855,12 +1862,6 @@ PEREGRINE:
     _check:
       - is_float()
       - is_gt() 0
-  globalparams_density:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
   globalparams_energy_per_fission:
     <<: *dtdouble
     _content:
@@ -1919,18 +1920,6 @@ PEREGRINE:
     _check:
       - is_float()
       - is_gt() 0
-  materials_fuel_relocation_diameter:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  materials_fuel_relocation_gap:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
   materials_fuel_relocation_q:
     <<: *dtstring
     _content:
@@ -1942,43 +1931,7 @@ PEREGRINE:
     _check:
       - is_float()
       - is_gt() 0
-  mesh_pellet_outer_radius:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  mesh_pellet_height:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  mesh_clad_gap_width:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
   mesh_clad_bot_gap_height:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  mesh_clad_thickness:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  mesh_top_bot_clad_height:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  mesh_plenum_fuel_ratio:
     <<: *dtdouble
     _content:
     _check:
@@ -2025,3 +1978,13 @@ PEREGRINE:
     _check:
       - is_float()
       - is_gt() 0
+  fuel_pin_input_file_template:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  non_fuel_pin_input_file_template:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()

@@ -257,9 +257,9 @@
     <Parameter name="executioner_num_steps" type="int" value="2000"/>
     <Parameter name="executioner_timestepper_time_dt" type="string" value="1.0e3 1.0e5"/>
     <Parameter name="executioner_timestepper_time_t" type="string" value="0 1.0e5"/>
+    <Parameter name="fuel_pin_input_file_template" type="string" value="small_3x3rod_Peregrine.i.template"/>
     <Parameter name="globalparams_a_lower" type="double" value="0.01676"/>
     <Parameter name="globalparams_a_upper" type="double" value="3.67436"/>
-    <Parameter name="globalparams_density" type="double" value="10431.0"/>
     <Parameter name="globalparams_energy_per_fission" type="double" value="3.2e-11"/>
     <Parameter name="materials_clad_density_density" type="double" value="6551.0"/>
     <Parameter name="materials_clad_solid_mechanics_cold_work_factor" type="double" value="0.01"/>
@@ -270,18 +270,11 @@
     <Parameter name="materials_fission_gas_release_initial_grain_radius" type="double" value="3.0e-6"/>
     <Parameter name="materials_fission_gas_release_initial_porosity" type="double" value="0.07"/>
     <Parameter name="materials_fuel_mech_grain_radius" type="double" value="5.0e-6"/>
-    <Parameter name="materials_fuel_relocation_diameter" type="double" value="0.008192"/>
-    <Parameter name="materials_fuel_relocation_gap" type="double" value="165.0e-6"/>
     <Parameter name="materials_fuel_relocation_q" type="string" value="q"/>
     <Parameter name="materials_fuel_thermal_initial_porosity" type="double" value="0.07"/>
     <Parameter name="mesh_clad_bot_gap_height" type="double" value="1.52e-3"/>
-    <Parameter name="mesh_clad_gap_width" type="double" value="82.5e-6"/>
-    <Parameter name="mesh_clad_thickness" type="double" value="0.572e-3"/>
-    <Parameter name="mesh_pellet_height" type="double" value="3.66"/>
-    <Parameter name="mesh_pellet_outer_radius" type="double" value="0.0041"/>
-    <Parameter name="mesh_plenum_fuel_ratio" type="double" value="0.065"/>
-    <Parameter name="mesh_top_bot_clad_height" type="double" value="1.524e-2"/>
     <Parameter name="nfuelrod" type="int" value="8"/>
+    <Parameter name="non_fuel_pin_input_file_template" type="string" value="guide_tube.moose.i.template"/>
     <Parameter name="output_file_base" type="string" value="output_RISO_AN8_bump"/>
     <Parameter name="porosity" type="double" value="0.2"/>
     <Parameter name="postprocessors_rod_input_power_scale_factor" type="double" value="3.66"/>

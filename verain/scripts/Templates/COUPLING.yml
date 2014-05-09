@@ -86,3 +86,10 @@ COUPLING:
       _do:
         - copy COUPLING/$LIME_xml
       _content:
+
+    solver:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy COUPLING/$solver
+      _content:
