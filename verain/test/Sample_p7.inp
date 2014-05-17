@@ -26,8 +26,8 @@
   pressure 2250.0
   feedback on
 
-  tinlet 557.33         ! F - 565K
-  tfuel  900.0          ! K     (HFP value)
+  tinlet 557.33 F         ! F - 565K
+  tfuel 900.0 K          ! K     (HFP value)
   boron  1285           ! ppmB
   modden 0.743          ! g/cc
   sym qtr          ! ***

@@ -90,7 +90,7 @@ STATES:
           _pltype: parameter
           _type: double
           _do:
-            - copy STATE/(_loop)/$tinlet,apply=>($_[0]-32)*5/9
+            - tocelsius STATE/(_loop)/@tinlet
           _content:
     
         pressure:
@@ -132,7 +132,7 @@ STATES:
           _pltype: parameter
           _type: double
           _do:
-            - copy STATE/(_loop)/$tfuel
+            - tocelsius STATE/(_loop)/@tfuel,apply=>($_[0]+273.15)
           _content:
     
         modden:

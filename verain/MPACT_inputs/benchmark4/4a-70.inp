@@ -3,8 +3,8 @@
 
 [STATE]
   power  0.0            ! %
-  tinlet 557.33         ! F - 565K
-  tfuel  565.0          ! K - 565K
+  tinlet 557.33 F         ! F - 565K
+  tfuel 565.0 K          ! K - 565K
   boron  1360           ! ppmB
   modden 0.743          ! g/cc
   rodbank D 161         ! Bank D steps withdrawn

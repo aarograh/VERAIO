@@ -12,8 +12,8 @@
 
 [STATE]
   power  1.0e-7        ! %
-  tinlet 620.33        ! F - 600K
-  tfuel  600.0         ! K - 600K  ** only used if feedback off
+  tinlet 620.33 F        ! F - 600K
+  tfuel 600.0 K         ! K - 600K  ** only used if feedback off
   boron  1300          ! ppmB
   modden 0.743         ! g/cc      ** only used if feedback off
 

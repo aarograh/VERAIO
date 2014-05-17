@@ -63,7 +63,8 @@ sub dispatch {
 	gridmap    => \&gridmap,
 	coremapmap => \&coremapmap,
 	mpact_mesh => \&mpact_mesh,
-	mpact_db   => \&mpact_db
+	mpact_db   => \&mpact_db,
+	tocelsius  => \&toCelsius
     };
 
 #    if($version eq '007'){
@@ -1444,6 +1445,56 @@ sub mpact_db{
 	&key_on_parameter($mat_ref,'value','string',@data_value);
 
     }
+}
+
+# Tc=(Tf-32)/1.8
+# Tc=Tk-273.15
+# Tc=Tc
+sub toCelsius{
+    my( $home, $path, %userparam ) = @_ ;
+    my %OPTIONS;
+    my $result;
+
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+    my $def=undef;
+    if(exists($OPTIONS{apply})){
+	$def = eval "sub { return $OPTIONS{apply};}";
+	die "toCelsius: invalid apply string $OPTIONS{apply}\n" unless ref $def eq 'CODE';
+    }
+
+    my @path=parse_path($path);
+    my $t=key_defined($SOURCE_DB,@path);
+
+    return $t unless defined($t);
+
+    if(ref $t eq 'ARRAY'){
+	my ($T,$unit)=@{ $t };
+	if($unit eq 'F'){
+	    $result=($T-32)/1.8;
+	}
+	elsif($unit eq 'K'){
+	    $result=$T-273.15;
+	}
+	elsif($unit eq 'C'){
+	    $result=$T;
+	}
+	else{
+	    die "toCelsius: invalid temperature unit $unit\n";
+	}
+	if($result < -273.15){
+	    die "toCelsius: invalid temperature value $result\n";
+	}
+    }
+    else{
+	die "toCelsius: incorrect data stored. Email the developer, simunovics@ornl.gov.\n";
+    }
+
+    $result = $def ? $def->($result) : $result;
+
+    return $result;
 }
 
 1;

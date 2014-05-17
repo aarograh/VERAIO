@@ -48,7 +48,7 @@
   power 0.0                             ! state_power (%)
   flow  100.0                           ! state_flow  (%)
   bypass  8.98                          ! state_bypass (%)
-  tinlet 559.0                          ! state_tinlet (F)
+  tinlet 559.0 F                          ! state_tinlet (F)
   xenon zero                            ! state_xenon
   samar zero                            ! state_samarium
   boron 1300                            ! state_boron (ppm)

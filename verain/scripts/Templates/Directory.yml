@@ -92,17 +92,21 @@ STATE:
       - is_float()
       - is_geq() 0
   tinlet:
-    <<: *dtdouble
+    <<: *dtlist
     _content:
     _check:
-      - is_float()
-      - is_gt() 0
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_word(nth(1,()))
+      - in_dictionary(nth(1,()),'F','C','K')
   tfuel:
-    <<: *dtdouble
+    <<: *dtlist
     _content:
     _check:
-      - is_float()
-      - is_gt() 0
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_word(nth(1,()))
+      - in_dictionary(nth(1,()),'F','C','K')
   modden:
     <<: *dtdouble
     _content:

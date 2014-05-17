@@ -10,7 +10,7 @@
       <Parameter name="power" type="double" value="100.0"/>
       <Parameter name="pressure" type="double" value="12.7553009865"/>
       <Parameter name="sym" type="string" value="full"/>
-      <Parameter name="tfuel" type="double" value="900.0"/>
+      <Parameter name="tfuel" type="double" value="900"/>
       <Parameter name="tinlet" type="double" value="218.444444444444"/>
     </ParameterList>
   </ParameterList>

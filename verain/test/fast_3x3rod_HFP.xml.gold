@@ -10,7 +10,7 @@
       <Parameter name="power" type="double" value="100.0"/>
       <Parameter name="pressure" type="double" value="15.5132039025"/>
       <Parameter name="sym" type="string" value="full"/>
-      <Parameter name="tfuel" type="double" value="900.0"/>
+      <Parameter name="tfuel" type="double" value="900"/>
       <Parameter name="tinlet" type="double" value="292.777777777778"/>
     </ParameterList>
   </ParameterList>
@@ -261,6 +261,8 @@
     <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>
   <ParameterList name="COUPLING">
+    <Parameter name="ctf_iters_growth" type="double" value="1.2"/>
+    <Parameter name="ctf_iters_max" type="int" value="100"/>
     <Parameter name="eps_boron" type="double" value="2.0"/>
     <Parameter name="epsk" type="double" value="2.0"/>
     <Parameter name="maxiter" type="int" value="20"/>

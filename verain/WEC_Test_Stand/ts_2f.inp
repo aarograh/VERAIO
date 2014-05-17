@@ -3,8 +3,8 @@
 
 [STATE]
   power  0.0            ! %
-  tinlet 557.33         ! F - 
-  tfuel  565.0          ! K
+  tinlet 557.33 F         ! F - 
+  tfuel 565.0 K          ! K
   boron  1066           ! ppmB
   modden 0.743          ! g/cc
   sym qtr  
