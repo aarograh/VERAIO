@@ -15,11 +15,11 @@
 
 [STATE]
   power  100.0         ! %
-  tinlet 559.0         ! F
+  tinlet 559.0 F       ! F
   boron  1300          ! ppmB
   pressure 2250        ! psia
 
-  tfuel  900.0         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
+  tfuel  900.0 K       ! K - 600K  Not used with T/H feedback! set to 900K with feedback
   modden 0.743         ! g/cc      Not used with T/H feedback!
 
   feedback on
