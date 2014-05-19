@@ -361,3 +361,16 @@ PEREGRINE:
         - copy PEREGRINE/$non_fuel_pin_input_file_template
       _content:
 
+    ramping_time:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$ramping_time
+      _content:
+
+    ramping_factor:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$ramping_factor
+      _content:

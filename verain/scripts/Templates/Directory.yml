@@ -1992,3 +1992,13 @@ PEREGRINE:
     _content:
     _check:
       - is_string()
+  ramping_time:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  ramping_factor:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
