@@ -9,7 +9,7 @@
       <Parameter name="modden" type="double" value="0.743"/>
       <Parameter name="power" type="double" value="0.0"/>
       <Parameter name="sym" type="string" value="qtr"/>
-      <Parameter name="tfuel" type="double" value="600.0"/>
+      <Parameter name="tfuel" type="double" value="600"/>
       <Parameter name="tinlet" type="double" value="326.85"/>
     </ParameterList>
   </ParameterList>
