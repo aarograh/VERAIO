@@ -131,6 +131,14 @@ STATE:
     _check:
       - is_float()
       - is_geq() 0
+  b10:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_word(nth(1,()))
+      - nth(0,())>=0
   kcrit:
     <<: *dtdouble
     _content:
@@ -204,6 +212,12 @@ CORE:
       - arraysize()==2
       - nth(0,())>=0
       - nth(1,())>=0
+  rcs_volume:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
   apitch:
     <<: *dtdouble
     _content:
@@ -1391,6 +1405,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() P0 P1 P2 P3 P4 P5 Pn0 TCP0 LTCP0 ITCP0
+  boundary_update:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() P0 DP0 P1
   depl_time_method:
     <<: *dtword
     _content:

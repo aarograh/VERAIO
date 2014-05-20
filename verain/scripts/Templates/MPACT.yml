@@ -198,6 +198,20 @@ MPACT:
           _do:
             - copy MPACT/$depl_time_method
           _content:
+        
+        boundary_update:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$boundary_update
+          _content:
+
+        depl_time_method:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$depl_time_method
+          _content:
 
     cmfd:
       _pltype: list
