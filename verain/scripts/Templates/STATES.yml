@@ -6,114 +6,128 @@ STATES:
   _tr:
     _name: _loop
     _content: STATE
-    
+
   _content:
 
     State_(_loop):
       _pltype: list
       _do:
         - setdb MAIN_DB
-    
+
       _content:
-    
+
         id:
           _pltype: parameter
           _type: string
           _do:
             - copy STATE/(_loop)/$id
           _content:
-    
+
         title:
           _pltype: parameter
           _type: string
           _do:
             - copy STATE/(_loop)/$title
           _content:
-    
+
         power:
           _pltype: parameter
           _type: double
           _do:
             - copy STATE/(_loop)/$power
           _content:
-    
+
         flow:
           _pltype: parameter
           _type: double
           _do:
             - copy STATE/(_loop)/$flow
           _content:
-    
+
         bypass:
           _pltype: parameter
           _type: double
           _do:
             - copy STATE/(_loop)/$bypass
           _content:
-    
+
         xenopt:
           _pltype: parameter
           _type: string
           _do:
             - copy STATE/(_loop)/$xenon
           _content:
-    
+
         samopt:
           _pltype: parameter
           _type: string
           _do:
             - copy STATE/(_loop)/$samar
           _content:
-    
+
         bank_labels:
           _pltype: array
           _type: string
           _do:
             - copyarray STATE/(_loop)/@rodbank,select=>even
           _content:
-    
+
         bank_pos:
           _pltype: array
           _type: int
           _do:
             - copyarray STATE/(_loop)/@rodbank,select=>odd
           _content:
-    
+
         boron:
           _pltype: parameter
           _type: double
           _do:
             - copy STATE/(_loop)/$boron
           _content:
-    
+
+        b10:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy STATE/(_loop)/$b10:0
+          _content:
+
+        b10_depl:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy STATE/(_loop)/$b10:1
+          _content:
+
         tinlet:
           _pltype: parameter
           _type: double
           _do:
             - tocelsius STATE/(_loop)/@tinlet
           _content:
-    
+
         pressure:
           _pltype: parameter
           _type: double
           _do:
             - copy STATE/(_loop)/$pressure,apply=>($_[0])*0.00689475729
           _content:
-    
+
         search:
           _pltype: parameter
           _type: string
           _do:
             - copy STATE/(_loop)/$search
           _content:
-    
+
         kcrit:
           _pltype: parameter
           _type: double
           _do:
             - copy STATE/(_loop)/$kcrit
           _content:
-    
+
         deplete:
           _pltype: array
           _type: double
@@ -127,32 +141,32 @@ STATES:
           _do:
             - copy STATE/(_loop)/@deplete:0
           _content:
-    
+
         tfuel:
           _pltype: parameter
           _type: double
           _do:
             - tocelsius STATE/(_loop)/@tfuel,apply=>($_[0]+273.15)
           _content:
-    
+
         modden:
           _pltype: parameter
           _type: double
           _do:
             - copy STATE/(_loop)/$modden
           _content:
-    
+
         feedback:
           _pltype: parameter
           _type: string
           _do:
             - copy STATE/(_loop)/$feedback
           _content:
-    
+
         sym:
           _pltype: parameter
           _type: string
           _do:
             - copy STATE/(_loop)/$sym
           _content:
-    
+
