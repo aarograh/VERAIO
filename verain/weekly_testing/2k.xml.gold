@@ -4,8 +4,6 @@
   <Parameter name="case_id" type="string" value="CASL AMA Benchmark Problem 2K - Fuel Lattice - Public"/>
   <ParameterList name="STATES">
     <ParameterList name="State_1">
-      <Parameter name="bank_labels" type="Array(string)" value="{A}"/>
-      <Parameter name="bank_pos" type="Array(int)" value="{1}"/>
       <Parameter name="boron" type="double" value="1300"/>
       <Parameter name="modden" type="double" value="0.743"/>
       <Parameter name="power" type="double" value="0.0"/>
@@ -21,8 +19,6 @@
     <Parameter name="bc_rad" type="string" value="reflecting"/>
     <Parameter name="bc_top" type="string" value="reflecting"/>
     <Parameter name="core_size" type="int" value="1"/>
-    <Parameter name="crd_bank" type="Array(string)" value="{A}"/>
-    <Parameter name="crd_map" type="Array(string)" value="{AIC}"/>
     <Parameter name="det_map" type="Array(string)" value="{-}"/>
     <Parameter name="height" type="double" value="1.0"/>
     <Parameter name="insert_map" type="Array(string)" value="{PY24}"/>
