@@ -19,8 +19,6 @@
     <Parameter name="bc_rad" type="string" value="reflecting"/>
     <Parameter name="bc_top" type="string" value="reflecting"/>
     <Parameter name="core_size" type="int" value="1"/>
-    <Parameter name="crd_bank" type="Array(string)" value="{A}"/>
-    <Parameter name="crd_map" type="Array(string)" value="{-}"/>
     <Parameter name="det_map" type="Array(string)" value="{1}"/>
     <Parameter name="height" type="double" value="1.0"/>
     <Parameter name="insert_map" type="Array(string)" value="{PY24}"/>
