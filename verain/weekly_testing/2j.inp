@@ -1,13 +1,14 @@
 [CASEID]
   title 'CASL AMA Benchmark Problem 2J - Fuel Lattice - Public'
 
+!  2014/05/23 - fixed problem with CRD and AIC defined for same core location
+
 [STATE]
   power 0.0				! %
   tinlet 620.33 F			! F - 600K
   tfuel 600 K				! K
   modden 0.743				! g/cc
   boron 1300				! ppm
-  rodbank A 1				! rod fully withdrawn
   sym qtr
 
 [CORE]
@@ -24,12 +25,6 @@
 
   insert_map
     PY24
-
-  crd_map
-    AIC
-
-  crd_bank
-    A
 
   det_map
     1
