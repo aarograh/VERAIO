@@ -1993,12 +1993,14 @@ PEREGRINE:
     _check:
       - is_string()
   ramping_time:
-    <<: *dtstring
+    <<: *dtlist
+    _style: multi-line
     _content:
     _check:
-      - is_string()
+      - fall(sub{is_float(shift)},())
   ramping_factor:
-    <<: *dtstring
+    <<: *dtlist
+    _style: multi-line
     _content:
     _check:
-      - is_string()
+      - fall(sub{is_float(shift)},())

@@ -362,15 +362,15 @@ PEREGRINE:
       _content:
 
     ramping_time:
-      _pltype: parameter
-      _type: string
+      _pltype: array
+      _type: double
       _do:
-        - copy PEREGRINE/$ramping_time
+        - copy EDITS/@ramping_time
       _content:
 
     ramping_factor:
-      _pltype: parameter
-      _type: string
+      _pltype: array
+      _type: double
       _do:
-        - copy PEREGRINE/$ramping_factor
+        - copy EDITS/@ramping_factor
       _content:
