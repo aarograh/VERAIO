@@ -18,6 +18,13 @@ CORE:
         - copy CORE/@rated:1,apply=>$_[0]*125.9978
       _content:
 
+    rcs_volume:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@rcs_volume
+      _content:
+
     core_name:
       _pltype: parameter
       _type: string
