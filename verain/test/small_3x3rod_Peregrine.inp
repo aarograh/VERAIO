@@ -270,8 +270,8 @@
   thermalcontact_roughness_fuel = 1.0e-6
   fuel_pin_input_file_template = small_3x3rod_Peregrine.i.template
   non_fuel_pin_input_file_template = guide_tube.moose.i.template
-  ramping_time = -100.0 0.0 1.0e5
-  ramping_factor = 0.0 0.0 1.0
+  ramping_time -100.0 0.0 1.0e5
+  ramping_factor 0.0 0.0 1.0
 
 [COUPLING]
   epsk        5.0  ! pcm

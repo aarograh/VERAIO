@@ -365,12 +365,12 @@ PEREGRINE:
       _pltype: array
       _type: double
       _do:
-        - copy EDITS/@ramping_time
+        - copy PEREGRINE/@ramping_time
       _content:
 
     ramping_factor:
       _pltype: array
       _type: double
       _do:
-        - copy EDITS/@ramping_factor
+        - copy PEREGRINE/@ramping_factor
       _content:
