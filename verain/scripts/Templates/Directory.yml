@@ -1271,7 +1271,7 @@ COUPLING:
     _content:
     _check:
       - is_string()
-      - in_dictionary() BlockJacobi GaussSeidel
+      - in_dictionary() jacobi gauss-seidel
 
 MPACT:
 
