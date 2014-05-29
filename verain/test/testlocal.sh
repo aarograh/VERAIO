@@ -11,19 +11,11 @@ for CASE in $LIST; do
   echo "========================================"
   echo "    Running case $CASE"
   echo "========================================"
-# ../scripts/react2xml.pl --xml --xslt $CASE.inp $CASE.xml
   ../scripts/react2xml.pl $CASE.inp $CASE.xml
   diff $CASE.xml.gold $CASE.xml
 done
 
-# run special multistate case (this will eventually be the default)
-CASE=misc_options
-  echo "========================================"
-  echo "    Running case $CASE with multistate"
-  echo "========================================"
-# ../scripts/react2xml.pl --xml --xslt $CASE.inp $CASE.xml
-  ../scripts/react2xml.pl --multistate $CASE.inp $CASE.xml
-  diff $CASE.xml.gold $CASE.xml
+# removed multistate test - multistate is now the default
 
 echo "finished"
 
