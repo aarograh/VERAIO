@@ -434,6 +434,6 @@
   </ParameterList>
   <ParameterList name="COUPLING">
     <Parameter name="read_restart" type="string" value="my_restart_file"/>
-    <Parameter name="solver" type="string" value="BlockJacobi"/>
+    <Parameter name="solver" type="string" value="jacobi"/>
   </ParameterList>
 </ParameterList>
