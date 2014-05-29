@@ -1271,7 +1271,7 @@ COUPLING:
     _content:
     _check:
       - is_string()
-      - in_dictionary() BlockJacobi GaussSeidel
+      - in_dictionary() jacobi gauss-seidel
 
 MPACT:
 
@@ -2012,3 +2012,15 @@ PEREGRINE:
     _content:
     _check:
       - is_string()
+  ramping_time:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())
+  ramping_factor:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())

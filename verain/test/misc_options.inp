@@ -298,7 +298,7 @@
 
 [COUPLING] 
   read_restart  my_restart_file
-  solver BlockJacobi
+  solver jacobi
 
 [COBRATF]
   nfuel   3             ! number of fuel rings in conduction model
