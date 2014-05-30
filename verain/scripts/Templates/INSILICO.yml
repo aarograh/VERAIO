@@ -101,6 +101,20 @@ INSILICO:
         - copy INSILICO/$num_groups
       _content:
 
+    radial_geom_eps:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy INSILICO/$radial_geom_eps
+      _content:
+
+    axial_geom_eps:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy INSILICO/$axial_geom_eps
+      _content:
+
     max_delta_z:
       _pltype: parameter
       _type: double
