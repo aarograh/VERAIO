@@ -7,7 +7,7 @@
       <Parameter name="bank_labels" type="Array(string)" value="{A}"/>
       <Parameter name="bank_pos" type="Array(int)" value="{1}"/>
       <Parameter name="boron" type="double" value="1300"/>
-      <Parameter name="deplete" type="Array(double)" value="{0.0,0.1,0.5,1.0}"/>
+      <Parameter name="deplete" type="Array(double)" value="{0.0,0.1,0.5,1.0,2}"/>
       <Parameter name="deplete_units" type="string" value="GWDMT"/>
       <Parameter name="modden" type="double" value="0.743"/>
       <Parameter name="power" type="double" value="100.0"/>
@@ -29,7 +29,7 @@
     <Parameter name="height" type="double" value="1.0"/>
     <Parameter name="insert_map" type="Array(string)" value="{-}"/>
     <Parameter name="rated_flow" type="double" value="3779.934"/>
-    <Parameter name="rated_power" type="double" value="3.0"/>
+    <Parameter name="rated_power" type="double" value="0.04832"/>
     <Parameter name="shape" type="Array(int)" value="{1}"/>
   </ParameterList>
   <ParameterList name="ASSEMBLIES">
