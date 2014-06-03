@@ -2024,3 +2024,9 @@ PEREGRINE:
     _content:
     _check:
       - fall(sub{is_float(shift)},())
+  ramp_data_transfers:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
