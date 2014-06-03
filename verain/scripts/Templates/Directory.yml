@@ -688,6 +688,18 @@ INSILICO:
     _check:
       - is_int()
       - is_gt() 0
+  radial_geom_eps:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  axial_geom_eps:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
   max_delta_z:
     <<: *dtdouble
     _content:

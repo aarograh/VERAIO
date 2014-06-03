@@ -10,6 +10,13 @@ use REACTORCommand;
 # use Clone qw(clone);
 use ClonePP qw(clone);
 
+use Text::Balanced qw (
+                        extract_delimited
+                        extract_bracketed
+                       );
+
+use List::Maker 'range';
+
 use Exporter;
 @ISA = ('Exporter');
 @EXPORT=('full_size',
@@ -223,7 +230,7 @@ sub gen_quad_list_rot {
     return @b;
 }
 
-sub clean_line{
+sub clean_line2{
     my $lineref=shift;
 
 #    die "clean_line: invalid reference\n" unless (ref($lineref) eq 'SCALAR' && defined($$lineref));
@@ -243,6 +250,78 @@ sub clean_line{
 # 
 #     $$lineref =~ s/\// /g;                 # replace slashes with spaces
 # }
+
+sub clean_line{
+    my $lineref=shift;
+
+    my ($text, $loc1, $loc2, $delim);
+    my ($dist, $rest, $transl, $pfx, $next, $str);
+    my @ary;
+
+    $text=$$lineref;
+
+    $loc1=0;
+    $loc2=0;
+    pos($text) = $loc1;
+
+    while( $text =~ m/(['"<!])/g ){   # search for quote marks
+	$delim=$1;
+	$loc2=pos($text);             # quote mark location + 1
+	pos($text)= $loc2-1;          # set position to the quote
+	$dist=$loc2-$loc1;            # distance from the previous location to after quote
+	undef $next;
+	undef $rest;
+	if($delim eq '<'){
+	    ($next,$rest) = extract_bracketed($text,'<');
+	}
+	elsif($delim eq '!'){
+	    $pfx=substr($text, $loc1, $dist-1);   # string before the quote mark, prefix
+	    $transl.=$pfx;                        # append prefix to the result
+	    last;
+	}
+	else{
+	    ($next,$rest) = extract_delimited($text,"$delim");
+	}
+
+	if(defined($next)){                       # found balanced text
+	    $pfx=substr($text, $loc1, $dist-1);   # string before the quote mark, prefix
+	    if(length($pfx)){
+		$pfx =~ s/(\d+)\s*\*\s*(\w+)/"$2 " x $1/ge; # expand fortran expressions
+		$pfx =~ s/[,;]/ /g;               # remove commas and such
+		$transl.=$pfx;                        # append prefix to the result
+	    }
+	    $loc2=pos($text);                     # location of closing quote mark + 1
+	    if($delim eq '<'){                    # generate list
+		$next =~ s/^.//; $next =~ s/.$//; # strip angle brackets
+		@ary=();
+		$str = "\@ary = range( \'$next \' );"; # string to generate
+		eval $str;
+		$next=" @ary ";
+	    }
+	    $transl.=$next;                        # append to result
+	}
+	else{
+	    die "clean_line: unbalanced quotes in $text: at location $loc2\n";
+	}
+	$loc1=$loc2;       # location after quotes
+    }
+    if(defined($rest)){    # leftover from the match
+	$rest =~ s/(\d+)\s*\*\s*(\w+)/"$2 " x $1/ge; # expand fortran expressions
+	$rest =~ s/[,;]/ /g;               # remove commas and such
+	$transl.=$rest;
+    }
+    unless(defined($transl)){
+	$transl=$text;     # there were no quotes nor comments in the string
+	$transl =~ s/(\d+)\s*\*\s*(\w+)/"$2 " x $1/ge; # expand fortran expressions
+	$transl =~ s/[,;]/ /g;               # remove commas and such
+    }
+
+    $transl=~s/^\s+//;           # just in case
+    $transl=~s/\s+$//;
+
+    $$lineref=$transl;
+    return;
+}
 
 sub read_ascii {
     my ($filename, $INPUT_DB, $MAIN_DB, %userparam) = @_;

@@ -380,6 +380,7 @@
   </ParameterList>
   <ParameterList name="INSILICO">
     <Parameter name="Pn_order" type="int" value="0"/>
+    <Parameter name="axial_geom_eps" type="double" value="1.1e-3"/>
     <Parameter name="dimension" type="int" value="3"/>
     <Parameter name="eigen_solver" type="string" value="arnoldi"/>
     <ParameterList name="eigenvalue_db">
@@ -402,6 +403,7 @@
       <Parameter name="polars_octant" type="int" value="4"/>
       <Parameter name="quad_type" type="string" value="qr"/>
     </ParameterList>
+    <Parameter name="radial_geom_eps" type="double" value="1.1e-4"/>
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p6"/>
     </ParameterList>
