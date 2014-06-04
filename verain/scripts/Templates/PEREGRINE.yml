@@ -374,3 +374,10 @@ PEREGRINE:
       _do:
         - copy PEREGRINE/@ramping_factor
       _content:
+
+    ramp_data_transfers:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy PEREGRINE/$ramp_data_transfers
+      _content:
