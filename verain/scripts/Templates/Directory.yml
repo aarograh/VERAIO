@@ -2042,3 +2042,9 @@ PEREGRINE:
     _check:
       - is_word()
       - in_dictionary() true false
+  mesh_type:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() unit_test smeared_pellet

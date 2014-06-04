@@ -381,3 +381,10 @@ PEREGRINE:
       _do:
         - copy PEREGRINE/$ramp_data_transfers
       _content:
+
+    mesh_type:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy PEREGRINE/$mesh_type
+      _content:

@@ -272,6 +272,7 @@
   non_fuel_pin_input_file_template = guide_tube.moose.i.template
   ramping_time -100.0 0.0 1.0e5
   ramping_factor 0.0 0.0 1.0
+  mesh_type smeared_pellet
 
 [COUPLING]
   epsk        5.0  ! pcm
