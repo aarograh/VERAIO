@@ -1374,6 +1374,11 @@ MPACT:
     _content:
     _check:
       - is_word()
+  mod_mat:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
   subgroup_set:
     <<: *dtword
     _content:
