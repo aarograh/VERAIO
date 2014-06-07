@@ -330,3 +330,10 @@ MPACT:
             - copy MPACT/$subgroup_set
           _content:
 
+        mod_mat:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$mod_mat
+          _content:
+
