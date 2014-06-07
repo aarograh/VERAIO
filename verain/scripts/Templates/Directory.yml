@@ -1422,7 +1422,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() P0 DP0 P1
+      - in_dictionary() none P0 DP0 P1
   depl_time_method:
     <<: *dtword
     _content:
