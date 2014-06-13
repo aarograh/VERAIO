@@ -1470,6 +1470,19 @@ MPACT:
     _check:
       - is_word()
 
+  dep_edit:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  dep_substep:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+
   cmfd:
     <<: *dtword
     _content:
