@@ -213,6 +213,24 @@ MPACT:
             - copy MPACT/$depl_time_method
           _content:
 
+    depletion:
+      _pltype: list
+      _content:
+  
+        dep_edit:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$dep_edit
+          _content:
+
+        dep_substep:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$dep_substep
+          _content:
+
     cmfd:
       _pltype: list
       _content:
