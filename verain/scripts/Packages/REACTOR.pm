@@ -276,6 +276,7 @@ sub clean_line{
 	}
 	elsif($delim eq '!'){
 	    $pfx=substr($text, $loc1, $dist-1);   # string before the quote mark, prefix
+	    $pfx =~ s/(\d+)\s*\*\s*(\w+)/"$2 " x $1/ge; # expand fortran expressions
 	    $transl.=$pfx;                        # append prefix to the result
 	    last;
 	}
