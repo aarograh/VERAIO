@@ -301,6 +301,7 @@
 [COUPLING] 
   read_restart  my_restart_file
   solver jacobi
+  conserve_power_in_tiamat_transfer true
 
 [COBRATF]
   nfuel   3             ! number of fuel rings in conduction model

@@ -93,3 +93,10 @@ COUPLING:
       _do:
         - copy COUPLING/$solver
       _content:
+
+    conserve_power_in_tiamat_transfer:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy COUPLING/$conserve_power_in_tiamat_transfer
+      _content:

@@ -1285,6 +1285,13 @@ COUPLING:
       - is_string()
       - in_dictionary() jacobi gauss-seidel
 
+  conserve_power_in_tiamat_transfer:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
 MPACT:
 
   ray_spacing:
