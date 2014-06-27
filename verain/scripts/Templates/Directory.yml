@@ -1292,6 +1292,13 @@ COUPLING:
       - is_word()
       - in_dictionary() true false
 
+  num_subcycle_iterations_before_tiamat_ramping:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() -1
+
 MPACT:
 
   ray_spacing:

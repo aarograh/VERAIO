@@ -223,11 +223,14 @@
     <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>
   <ParameterList name="COUPLING">
+    <Parameter name="conserve_power_in_tiamat_transfer" type="bool" value="true"/>
     <Parameter name="epsk" type="double" value="5.0"/>
     <Parameter name="maxiter" type="int" value="100"/>
+    <Parameter name="num_subcycle_iterations_before_tiamat_ramping" type="int" value="0"/>
     <Parameter name="rlx_den" type="double" value="1.0"/>
     <Parameter name="rlx_power" type="double" value="0.5"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
+    <Parameter name="solver" type="string" value="jacobi"/>
   </ParameterList>
   <ParameterList name="PEREGRINE">
     <Parameter name="auxkernels_fast_neutron_flux_axial_power_profile" type="string" value="axial_peaking_factors"/>
@@ -279,6 +282,7 @@
     <Parameter name="output_file_base" type="string" value="output_RISO_AN8_bump"/>
     <Parameter name="porosity" type="double" value="0.2"/>
     <Parameter name="postprocessors_rod_input_power_scale_factor" type="double" value="3.66"/>
+    <Parameter name="ramp_data_transfers" type="bool" value="true"/>
     <Parameter name="ramping_factor" type="Array(double)" value="{0.0,0.0,1.0}"/>
     <Parameter name="ramping_time" type="Array(double)" value="{-100.0,0.0,1.0e5}"/>
     <Parameter name="thermalcontact_initial_gas_fractions" type="string" value="1 0 0 0 0 0 0 0 0 0"/>

@@ -273,6 +273,7 @@
   ramping_time -100.0 0.0 1.0e5
   ramping_factor 0.0 0.0 1.0
   mesh_type smeared_pellet
+  ramp_data_transfers = true
 
 [COUPLING]
   epsk        5.0  ! pcm
@@ -280,3 +281,6 @@
   rlx_tfuel   1.0
   rlx_den     1.0
   maxiter     100
+  solver jacobi
+  conserve_power_in_tiamat_transfer true
+  num_subcycle_iterations_before_tiamat_ramping 0

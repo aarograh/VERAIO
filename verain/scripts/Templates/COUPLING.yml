@@ -100,3 +100,10 @@ COUPLING:
       _do:
         - copy COUPLING/$conserve_power_in_tiamat_transfer
       _content:
+
+    num_subcycle_iterations_before_tiamat_ramping:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COUPLING/$num_subcycle_iterations_before_tiamat_ramping
+      _content:
