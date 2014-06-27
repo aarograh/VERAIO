@@ -388,3 +388,10 @@ PEREGRINE:
       _do:
         - copy PEREGRINE/$mesh_type
       _content:
+
+    output_average_axial_values:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy PEREGRINE/$output_average_axial_values
+      _content:
