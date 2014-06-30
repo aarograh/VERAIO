@@ -92,6 +92,7 @@ my ($VERBOSE,$HELP,$VERSION);
 my $XML='on';
 my $XSLT='on';
 my $NOTRIM;
+my $INIT;
 { # process options
     GetOptions(
 	"xml=s"     => \$XML,
@@ -101,7 +102,8 @@ my $NOTRIM;
 	"version"   => \$VERSION,
 	"help"      => \$HELP,
 
-	"notrim"    => \$NOTRIM
+	"notrim"    => \$NOTRIM,
+	"init"      => \$INIT
 
 #	"update=s"  => \$_UPDATE
 	);
@@ -160,6 +162,22 @@ options:
   --help\n";
 }
 
+# initialization files
+if($INIT){
+    my @BLOCKINIT=(
+	'CORE',
+	'ASSEMBLIES',
+	'CONTROLS',
+	'DETECTORS',
+	'INSERTS');
+    foreach $iblock (@BLOCKINIT){
+	my $finit="${directory}Init/${iblock}.ini";
+	if ( -e $finit ) {
+	    REACTOR::set_blockinit($iblock,$finit);
+	    print STDERR "Found initialization block file $finit\n" if $VERBOSE;
+	}
+    }
+}
 
 # 
 # Initiate output blocks

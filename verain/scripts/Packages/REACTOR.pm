@@ -37,7 +37,13 @@ use Exporter;
 	 'core_map'
     );
 
+# for initialization of every block
+# it gets used on every invocation of new block
+our %BLOCKINIT=();
+
 {
+    sub set_blockinit { $BLOCKINIT{$_[0]} = $_[1]; }
+
     my $_VERBOSE = 0;
     sub get_verbose  {$_VERBOSE;}
     sub set_verbose { $_VERBOSE = 1; }
@@ -367,6 +373,12 @@ sub read_ascii {
 	      die "[$filename:$.] Bad block name.\n" unless key_exists($INPUT_DB,$name);
 	      $block=REACTORBlock->new( name=>$name, out_db=>$MAIN_DB );
 	      $block->inp_db($INPUT_DB);  # INPUT_DB is root of Directory.yml
+
+	      if(exists($REACTOR::BLOCKINIT{$name})){
+		  print STDERR "Initialize block $name with file $BLOCKINIT{$name}\n" if get_verbose();
+		  read_ascii($BLOCKINIT{$name}, $INPUT_DB, $MAIN_DB, 'block'=>$block);
+	      }
+
 	      $command=undef;
 	      next READ;
       };
