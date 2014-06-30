@@ -7,7 +7,6 @@
   tfuel 600 K                             ! K
   modden 0.743                          ! g/cc
   boron 1300                            ! ppm
-  rodbank A 1                           ! rod fully withdrawn
   sym qtr  
 
 [CORE]
