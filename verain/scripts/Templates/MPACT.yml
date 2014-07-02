@@ -35,6 +35,20 @@ MPACT:
             - copy MPACT/$azimuthals_octant
           _content:
 
+    restart_mode:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$restart_mode
+      _content:
+
+    restart_file:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$restart_file
+      _content:
+
     vis_edits:
       _pltype: parameter
       _type: string

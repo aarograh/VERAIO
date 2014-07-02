@@ -97,6 +97,7 @@
     1.0000e-05
 
 [MPACT]
+  restart_mode      W
   vis_edits         core
   ray_spacing       0.05
 !quad_set

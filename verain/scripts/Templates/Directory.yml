@@ -1319,6 +1319,17 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+  restart_mode:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() T F W R RW
+  restart_file:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
   vis_edits:
     <<: *dtword
     _content:
