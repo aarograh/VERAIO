@@ -201,7 +201,7 @@
           377.711
 [MPACT]
   vis_edits         none
-  ray_spacing       0.1
+  ray_spacing       0.25
 !quad_set
   quad_type         CHEBYSHEV-GAUSS
   polars_octant     2

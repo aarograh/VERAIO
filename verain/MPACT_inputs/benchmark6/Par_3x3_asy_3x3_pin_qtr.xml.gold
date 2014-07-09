@@ -302,7 +302,7 @@
       <Parameter name="polars_octant" type="int" value="2"/>
       <Parameter name="quad_type" type="string" value="CHEBYSHEV-GAUSS"/>
     </ParameterList>
-    <Parameter name="ray_spacing" type="double" value="0.1"/>
+    <Parameter name="ray_spacing" type="double" value="0.25"/>
     <Parameter name="vis_edits" type="string" value="none"/>
     <ParameterList name="xs_library">
       <Parameter name="subgroup_set" type="int" value="4"/>
