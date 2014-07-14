@@ -222,7 +222,7 @@
 
 [COUPLING]
   epsk        5.0  ! pcm
-  eps_temp    1.0  ! temperature convergence
+  eps_temp    1.0  ! temperature convergence in C
   eps_boron   0.1  ! boron convergence (ppm)
   rlx_power   0.5
   rlx_tfuel   1.0
