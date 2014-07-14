@@ -219,7 +219,7 @@
     num_groups    11
 
     mat_library casl_comp_r2.sh5
-    xs_library  scale.rev01.xn56v7
+    xs_library  v7-56
 
     pin_partitioning true
     num_blocks_i  4   
