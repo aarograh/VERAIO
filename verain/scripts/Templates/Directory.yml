@@ -1562,7 +1562,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() nem sanm nem-mg sn-0 sn-1 sn-2 sn-3 none
+      - in_dictionary() nem sanm nem-mg sp1 sp3 sp5 sn-0 sn-1 sn-2 sn-3 none
   under_relax:
     <<: *dtdouble
     _content:
