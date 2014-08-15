@@ -2,10 +2,15 @@
 INCLUDE(TribitsPackageMacros)
 
 TRIBITS_PACKAGE_DECL(VERAIn)
-
 TRIBITS_PROCESS_SUBPACKAGES()
-
 TRIBITS_PACKAGE_DEF()
+
+#
+# The outer VERAIn SE package
+#
+# ToDo: Move all of this into a subpackage VERAIn_react2xml in subdir
+# react2xml/
+#
 
 ADD_SUBDIRECTORY(src)
 
