@@ -190,14 +190,16 @@ CORE:
     _check:
       - is_string()
   cycle:
-    <<: *dtlist
+    <<: *dtstring
     _content:
     _check:
-      - fall(sub{is_int(shift)},())
-      - arraysize()==3
-      - nth(0,())>=0
-      - nth(1,())>=0
-      - nth(2,())>=0
+      - is_string()
+  op_date:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
   size:
     <<: *dtint
     _content:
