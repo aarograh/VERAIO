@@ -11,30 +11,6 @@ MPACT:
         - copy MPACT/$ray_spacing
       _content:
 
-    quad_set:
-      _pltype: list
-      _content:
-        quad_type:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy MPACT/$quad_type
-          _content:
-
-        polars_octant:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy MPACT/$polars_octant
-          _content:
-
-        azimuthals_octant:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy MPACT/$azimuthals_octant
-          _content:
-
     restart_mode:
       _pltype: parameter
       _type: string
@@ -76,10 +52,34 @@ MPACT:
         - mpact_db db_entry_,MPACT/%db_entry/*
       _content:
 
+    quad_set:
+      _pltype: list
+      _content:
+        quad_type:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$quad_type
+          _content:
+
+        polars_octant:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$polars_octant
+          _content:
+
+        azimuthals_octant:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$azimuthals_octant
+          _content:
+
     mesh:
       _pltype: list
       _content:
-  
+
         pinmesh:
           _pltype: list
           _do:
@@ -117,7 +117,7 @@ MPACT:
     parallel_env:
       _pltype: list
       _content:
-  
+
         num_space:
           _pltype: parameter
           _type: int
@@ -145,7 +145,7 @@ MPACT:
           _do:
             - copy MPACT/$num_threads
           _content:
-      
+
         method:
           _pltype: parameter
           _type: string
@@ -163,7 +163,7 @@ MPACT:
     iteration_control:
       _pltype: list
       _content:
-  
+
         k_tolerance:
           _pltype: parameter
           _type: double
@@ -184,7 +184,7 @@ MPACT:
           _do:
             - copy MPACT/$num_outers
           _content:
-    
+
         num_inners:
           _pltype: parameter
           _type: int
@@ -212,7 +212,7 @@ MPACT:
           _do:
             - copy MPACT/$depl_time_method
           _content:
-        
+
         boundary_update:
           _pltype: parameter
           _type: string
@@ -230,7 +230,7 @@ MPACT:
     depletion:
       _pltype: list
       _content:
-  
+
         dep_edit:
           _pltype: parameter
           _type: string
@@ -245,10 +245,63 @@ MPACT:
             - copy MPACT/$dep_substep
           _content:
 
+    TH:
+      _pltype: list
+      _content:
+
+        internal_coupling:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$internal_coupling
+          _content:
+
+        average_ftemp:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$average_ftemp
+          _content:
+
+        shield_max_outers:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$shielder_TH:0
+          _content:
+
+        shield_min_dT:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$shielder_TH:1
+          _content:
+
+        shield_min_drho:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$shielder_TH:2
+          _content:
+
+        outers_per_TH:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$outers_per_TH
+          _content:
+
+        ctf_basename:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$ctf_basename
+          _content:
+
     cmfd:
       _pltype: list
       _content:
-  
+
         cmfd:
           _pltype: parameter
           _type: string
@@ -289,12 +342,12 @@ MPACT:
           _type: string
           _do:
             - copy MPACT/$cmfd_angle_decomp
-          content: 
+          content:
 
     2d1d:
       _pltype: list
       _content:
-  
+
         splitTL:
           _pltype: parameter
           _type: bool
@@ -326,14 +379,14 @@ MPACT:
     xs_library:
       _pltype: list
       _content:
-      
+
         xs_type:
           _pltype: parameter
           _type: string
           _do:
             - copy MPACT/$xs_type
           _content:
-    
+
         xs_filename:
           _pltype: parameter
           _type: string

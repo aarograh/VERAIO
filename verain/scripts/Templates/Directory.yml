@@ -1315,12 +1315,6 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
-  internal_TH:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
   restart_mode:
     <<: *dtword
     _content:
@@ -1492,6 +1486,47 @@ MPACT:
     _check:
       - is_word()
   par_file:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+
+  internal_TH:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  internal_coupling:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  shielder_th:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==3
+      - is_int(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+      - nth(0,())>0
+      - nth(1,())>0
+      - nth(2,())>0
+  outers_per_TH:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  average_ftemp:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  ctf_basename:
     <<: *dtword
     _content:
     _check:
