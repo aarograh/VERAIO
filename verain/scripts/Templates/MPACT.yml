@@ -10,6 +10,13 @@ MPACT:
       _do:
         - copy MPACT/$ray_spacing
       _content:
+    
+    valid_delim:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$valid_delim
+      _content:
 
     restart_mode:
       _pltype: parameter

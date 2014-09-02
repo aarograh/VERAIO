@@ -1315,6 +1315,11 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+  valid_delim:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   restart_mode:
     <<: *dtword
     _content:
