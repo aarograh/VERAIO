@@ -26,7 +26,7 @@ FUNCTION(XML2CTF_PARALLEL_TEST DIR TEST_NAME NUM_DECKS)
       ARGS
         ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl ${TEST_NAME}.inp ${TEST_NAME}.xml
     TEST_2
-       CMND python
+       CMND ${PYTHON_EXECUTABLE}
        ARGS ${COBRA_TF_SOURCE_DIR}/utils/par_file_copy.py
             ${NUM_DECKS} ${TEST_NAME}  ${GOLDDIR} ${WORKDIR} .gold
     TEST_3
@@ -34,7 +34,7 @@ FUNCTION(XML2CTF_PARALLEL_TEST DIR TEST_NAME NUM_DECKS)
       CMND ${CMAKE_CURRENT_BINARY_DIR}/../src/xml2ctf
       ARGS --xmlfile=${TEST_NAME}.xml --inpfile=${TEST_NAME}.inp
     TEST_4
-      CMND python
+      CMND ${PYTHON_EXECUTABLE}
       ARGS ${COBRA_TF_SOURCE_DIR}/utils/par_file_diff.py
               ${NUM_DECKS} ${TEST_NAME} ${COBRA_TF_SOURCE_DIR}/utils/filter_comments.py
    )
