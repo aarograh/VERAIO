@@ -39,13 +39,6 @@ MPACT:
         - copy MPACT/$jagged
       _content:
 
-    internal_TH:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy MPACT/$internal_TH
-      _content:
-
     db_entry:
       _pltype: list
       _do:
@@ -249,11 +242,11 @@ MPACT:
       _pltype: list
       _content:
 
-        internal_coupling:
+        coupling_method:
           _pltype: parameter
-          _type: bool
+          _type: string
           _do:
-            - copy MPACT/$internal_coupling
+            - copy MPACT/$coupling_method
           _content:
 
         average_ftemp:
@@ -267,21 +260,21 @@ MPACT:
           _pltype: parameter
           _type: int
           _do:
-            - copy MPACT/$shielder_TH:0
+            - copy MPACT/$shielder_th:0
           _content:
 
         shield_min_dT:
           _pltype: parameter
           _type: double
           _do:
-            - copy MPACT/$shielder_TH:1
+            - copy MPACT/$shielder_th:1
           _content:
 
         shield_min_drho:
           _pltype: parameter
           _type: double
           _do:
-            - copy MPACT/$shielder_TH:2
+            - copy MPACT/$shielder_th:2
           _content:
 
         outers_per_TH:
