@@ -151,7 +151,6 @@
   vis_edits         core
   ray_spacing       0.05
   db_entry  targkeff "OPTION->CRITBORON->targetKeff" / 'SRK' / '1.05'
-  internal_TH       true
 !quad_set
   quad_type         CHEBYSHEV-YAMAMOTO
   polars_octant     3
@@ -174,7 +173,7 @@
   nodal_method      none
   under_relax       0.5
 !TH
-  internal_coupling true
+  coupling_method   ctf
   shielder_th       4 10.0 1.0e-3
   outers_per_TH     2
   average_ftemp     true
