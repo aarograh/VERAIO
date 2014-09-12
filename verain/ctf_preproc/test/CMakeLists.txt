@@ -78,8 +78,9 @@ FUNCTION(XML2CTF_SERIAL_TEST VERAINDIR GOLDDIR TEST_NAME OPTS)
       ARGS -E copy
       ${GOLDDIR}/${TEST_NAME}.inp deck.inp.gold
     TEST_6
-      CMND ${VERAIn_XML_SOURCE_DIR}/test/filter_comments_whitespace.py
-      ARGS ${TEST_NAME}.inp deck.inp.gold
+      CMND ${PYTHON_EXECUTABLE}
+      ARGS ${VERAIn_XML_SOURCE_DIR}/test/filter_comments_whitespace.py
+           ${TEST_NAME}.inp deck.inp.gold
     )
 ENDFUNCTION()
 
