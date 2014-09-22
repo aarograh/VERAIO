@@ -1502,18 +1502,12 @@ MPACT:
     _check:
       - is_word()
 
-  internal_TH:
+  coupling_method:
     <<: *dtbool
     _content:
     _check:
       - is_word()
-      - in_dictionary() true false
-  internal_coupling:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
+      - in_dictionary() ctf internal ctf_external none
   shielder_th:
     <<: *dtlist
     _content:

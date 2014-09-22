@@ -184,9 +184,12 @@
     </ParameterList>
     <ParameterList name="TH">
       <Parameter name="average_ftemp" type="bool" value="true"/>
+      <Parameter name="coupling_method" type="string" value="ctf"/>
       <Parameter name="ctf_basename" type="string" value="ctf_base_filename"/>
-      <Parameter name="internal_coupling" type="bool" value="true"/>
       <Parameter name="outers_per_TH" type="int" value="2"/>
+      <Parameter name="shield_max_outers" type="int" value="4"/>
+      <Parameter name="shield_min_dT" type="double" value="10.0"/>
+      <Parameter name="shield_min_drho" type="double" value="1.0e-3"/>
     </ParameterList>
     <ParameterList name="cmfd">
       <Parameter name="cmfd" type="string" value="cmfd"/>
@@ -201,7 +204,6 @@
         <Parameter name="value" type="string" value="1.05"/>
       </ParameterList>
     </ParameterList>
-    <Parameter name="internal_TH" type="bool" value="true"/>
     <ParameterList name="iteration_control">
       <Parameter name="flux_tolerance" type="double" value="1e-6"/>
       <Parameter name="k_tolerance" type="double" value="1e-6"/>
