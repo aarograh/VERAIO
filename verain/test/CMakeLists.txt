@@ -1,6 +1,3 @@
-INCLUDE(TribitsAddExecutableAndTest)
-INCLUDE(TribitsAddAdvancedTest)
-INCLUDE(TribitsCopyFilesToBinaryDir)
 
 
 #===========================================================

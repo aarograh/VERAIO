@@ -1,4 +1,3 @@
-INCLUDE(TribitsAddAdvancedTest)
 
 SET(FD ${CMAKE_CURRENT_SOURCE_DIR})
 TRIBITS_ADD_ADVANCED_TEST(TableDiff_SimplePass
