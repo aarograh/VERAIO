@@ -1,6 +1,4 @@
 
-INCLUDE(TribitsLibraryMacros)
-INCLUDE(TribitsAddExecutable)
 
 IF (${PACKAGE_NAME}_ENABLE_HDF5)
   TRIBITS_ADD_EXECUTABLE( veradiff

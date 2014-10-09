@@ -1,7 +1,4 @@
 
-INCLUDE(TribitsAddExecutableAndTest)
-INCLUDE(TribitsAddAdvancedTest)
-INCLUDE(TribitsCopyFilesToBinaryDir)
 
 
 FUNCTION(XML2CTF_PARALLEL_TEST DIR TEST_NAME NUM_DECKS)
