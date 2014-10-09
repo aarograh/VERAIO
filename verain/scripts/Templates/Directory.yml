@@ -1315,6 +1315,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+  rod_treatment:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   valid_on:
     <<: *dtbool
     _content:

@@ -10,7 +10,7 @@ MPACT:
       _do:
         - copy MPACT/$ray_spacing
       _content:
-    
+
     valid_on:
       _pltype: parameter
       _type: bool
@@ -44,6 +44,13 @@ MPACT:
       _type: string
       _do:
         - copy MPACT/$vis_edits
+      _content:
+
+    rod_treatment:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy MPACT/$rod_treatment
       _content:
 
     jagged:
