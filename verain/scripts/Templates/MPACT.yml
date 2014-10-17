@@ -60,6 +60,13 @@ MPACT:
         - copy MPACT/$jagged
       _content:
 
+    grid_treatment:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$grid_treatment
+      _content:
+
     db_entry:
       _pltype: list
       _do:
@@ -310,6 +317,20 @@ MPACT:
           _type: string
           _do:
             - copy MPACT/$ctf_basename
+          _content:
+
+        ith_dhfrac:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$ith_dhfrac
+          _content:
+
+        ith_hgap:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$ith_hgap
           _content:
 
     cmfd:
