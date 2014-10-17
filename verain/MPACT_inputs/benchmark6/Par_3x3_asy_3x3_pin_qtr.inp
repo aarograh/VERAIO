@@ -223,6 +223,8 @@
   TL_treatment      lflat
   nodal_method      nem
 !  under_relax       1.0
+!th
+  coupling_method   ctf_external
 !parallel
   num_space         15
   num_angle         1
