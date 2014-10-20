@@ -170,3 +170,52 @@ STATES:
             - copy STATE/(_loop)/$sym
           _content:
 
+        restart_shuffle_file:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray STATE/(_loop)/@restart_shuffle,select=>odd
+          _content:
+
+        restart_shuffle_label:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray STATE/(_loop)/@restart_shuffle,select=>even
+          _content:
+
+        restart_write_file:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy STATE/(_loop)/@restart_write:0
+          _content:
+
+        restart_write_label:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy STATE/(_loop)/@restart_write:1
+          _content:
+
+        restart_read_file:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy STATE/(_loop)/@restart_read:0
+          _content:
+
+        restart_read_label:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy STATE/(_loop)/@restart_read:1
+          _content:
+
+        shuffle_label:
+          _pltype: array
+          _type: string
+          _do:
+            - coremapmap CORE/$size,CORE/@core_shape,STATE/(_loop)/@shuffle_label,CORE/$bc_sym
+          _content:
+

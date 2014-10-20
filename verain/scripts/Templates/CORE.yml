@@ -39,6 +39,20 @@ CORE:
         - copy CORE/$size
       _content:
 
+    unit:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/$unit
+      _content:
+
+    cycle:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/$cycle
+      _content:
+
     cycle_num:
       _pltype: parameter
       _type: string
@@ -95,18 +109,18 @@ CORE:
         - copyarray CORE/@vessel,start=>1,stride=>2
       _content:
 
-    rotate_map:
-      _pltype: array
-      _type: int
-      _do:
-        - coremapmap CORE/$size,CORE/@core_shape,CORE/@rotate_map,CORE/$bc_sym
-      _content:
-
     assm_map:
       _pltype: array
       _type: string
       _do:
         - coremapmap CORE/$size,CORE/@core_shape,CORE/@assm_map,CORE/$bc_sym
+      _content:
+
+    rotate_map:
+      _pltype: array
+      _type: int
+      _do:
+        - coremapmap CORE/$size,CORE/@core_shape,CORE/@rotate_map,CORE/$bc_sym
       _content:
 
     insert_map:
