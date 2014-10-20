@@ -46,13 +46,6 @@ CORE:
         - copy CORE/$unit
       _content:
 
-    cycle:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy CORE/$cycle
-      _content:
-
     cycle_num:
       _pltype: parameter
       _type: string
