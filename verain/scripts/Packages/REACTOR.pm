@@ -686,6 +686,7 @@ sub core_map{
 	}
 
 	@fullmp=purge_array(\@fullm,0);
+#	@fullmp=@fullm;
     }
     elsif ($nmmap == $nquad){
 	@ccmap=@core_map_q;
@@ -699,9 +700,12 @@ sub core_map{
 #	    @fullm=fullcellmap($n,@resmap);
 	}
 	@fullmp=purge_array(\@fullm,0);
+#	@fullmp=@fullm;
     }
     elsif ($nmmap == $nfull){
-	@fullmp=@{ $mmap };
+	@fullm=@{ $mmap };
+#	@fullmp=purge_array(\@fullm,0);
+	@fullmp=@fullm;
     }
     else{
 	die "core_map: invalid map, map=$nmmap, octant=$noct, quarter=$nquad, full=$nfull\n";
