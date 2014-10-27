@@ -143,7 +143,7 @@
 
     <!-- maps over templates -->
 
-    <xsl:when test="@name = 'insert_map' or @name = 'assm_map' or @name = 'crd_map' or @name = 'det_map' or @name = 'crd_bank'">
+    <xsl:when test="@name = 'insert_map' or @name = 'assm_map' or @name = 'crd_map' or @name = 'det_map' or @name = 'crd_bank' or @name = 'rotate_map'">
       <xsl:variable name="num_pins" select="../Parameter[@name = 'core_size']/@value" />
       <xsl:variable name="shape"    select="../Parameter[@name = 'shape']/@value" />
       <xsl:variable name="map"      select="@value" />
