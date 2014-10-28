@@ -183,6 +183,23 @@ STATE:
     _check:
       - is_word()
       - in_dictionary() full qtr
+  inlet_temp:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{is_float(shift)},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
+  inlet_flow:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{is_float(shift)},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
+
 CORE:
   name:
     <<: *dtstring
