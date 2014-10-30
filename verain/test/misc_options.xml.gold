@@ -19,12 +19,16 @@
       <Parameter name="title" type="string" value="Test &amp; in input - see Story # 3279"/>
     </ParameterList>
     <ParameterList name="State_2">
+      <Parameter name="inlet_flow" type="Array(double)" value="{20.,-20.,0,20,-20.}"/>
+      <Parameter name="inlet_temp" type="Array(double)" value="{0.,-2.,0.,2.,0.}"/>
       <Parameter name="power" type="double" value="80.0"/>
     </ParameterList>
     <ParameterList name="State_3">
       <Parameter name="power" type="double" value="70.0"/>
     </ParameterList>
     <ParameterList name="State_4">
+      <Parameter name="inlet_flow" type="Array(double)" value="{-10.,-10.,50.,-10.,-10.}"/>
+      <Parameter name="inlet_temp" type="Array(double)" value="{-1.,-1.,2.,-1.,-1.}"/>
       <Parameter name="power" type="double" value="60.0"/>
     </ParameterList>
     <ParameterList name="State_5">
