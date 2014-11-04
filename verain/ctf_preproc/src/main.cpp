@@ -150,15 +150,30 @@ extern "C" {
 }
 
 // -------------------------------------------------------------
-template< typename T> void GETIT(const ParameterList & pList,
-                                 const string        & name,
-                                       T             & value)
+template< typename T> void GetOptional(const ParameterList & pList,
+                                       const string        & name,
+                                             T             & value,
+                                             bool            print=true)
 {
     if (pList.isParameter(name)) {
         value = pList.getEntry(name).getValue(&value);
-        cout << setw(25) << name <<": (defined): "<<std::left << value <<std::right <<endl;
+        if(print) cout << setw(25) << name <<": (defined): "<<std::left << value <<std::right <<endl;
     } else {
-        cout << setw(25) << name <<": (DEFAULT): "<<std::left << value <<std::right <<endl;
+        if(print) cout << setw(25) << name <<": (DEFAULT): "<<std::left << value <<std::right <<endl;
+    }
+}
+// -------------------------------------------------------------
+template< typename T> void GetRequired(const ParameterList & pList,
+                                       const string        & block,
+                                       const string        & name,
+                                             T             & value,
+                                             bool            print=true)
+{
+    if (pList.isParameter(name)) {
+        value = pList.getEntry(name).getValue(&value);
+        if(print) cout << setw(25) << name <<": (defined): "<<std::left << value <<std::right <<endl;
+    } else {
+        throw runtime_error("ERROR: the "+name+" parameter is required to be on the "+block+" block of the xml input.");
     }
 }
 // -------------------------------------------------------------
@@ -217,7 +232,7 @@ namespace {
     const ParameterList & assembliesParams = pList.sublist("ASSEMBLIES");
 
     Array<double> edit_bounds;
-    edit_bounds = editsParams.getEntry("axial_edit_bounds").getValue(&edit_bounds);
+    GetRequired(editsParams, "EDITS", "axial_edit_bounds", edit_bounds, false);
 
     assem_struct assem_data;
 
@@ -889,18 +904,18 @@ namespace {
 
     // title
     string title = "ERROR:  undefined title";
-    GETIT(pList, "case_id", title);
+    GetOptional(pList, "case_id", title);
     strcpy(cntrl_data.title,title.c_str());
 
     int parallel = 0;
-    GETIT(cobraParams, "parallel", parallel);
+    GetOptional(cobraParams, "parallel", parallel);
     cntrl_data.run_parallel = parallel;
 
     string decktitle = inp_file.erase(inp_file.size()-4); // remove .xml to get base filename
     strcpy(cntrl_data.decktitle,decktitle.c_str());
 
     string maps_filename = "";
-    GETIT(cobraParams, "maps_filename", maps_filename);
+    GetOptional(cobraParams, "maps_filename", maps_filename);
     if (maps_filename.size()>0){
        cntrl_data.spec_titles=1;
     }
@@ -912,7 +927,7 @@ namespace {
 
     // stacked case option
     Array<double> stacked_case_times; // default to empty
-    GETIT(stateParams, "deplete", stacked_case_times);
+    GetOptional(stateParams, "deplete", stacked_case_times);
     int num_pf_files = 1;
     if (stacked_case_times.size()>0) num_pf_files = stacked_case_times.size();
     cntrl_data.num_pf_files = num_pf_files;
@@ -924,24 +939,26 @@ namespace {
     cntrl_data.iitmax  = 40;
     cntrl_data.courant = 0.8;
     cntrl_data.rfmod   = 2;
-    GETIT(cobraParams, "epso", cntrl_data.epso);
-    GETIT(cobraParams, "oitmax", cntrl_data.oitmax);
-    GETIT(cobraParams, "iitmax", cntrl_data.iitmax);
-    GETIT(cobraParams, "courant", cntrl_data.courant);
-    GETIT(cobraParams, "irfc", cntrl_data.rfmod);
+    GetOptional(cobraParams, "epso", cntrl_data.epso);
+    GetOptional(cobraParams, "oitmax", cntrl_data.oitmax);
+    GetOptional(cobraParams, "iitmax", cntrl_data.iitmax);
+    GetOptional(cobraParams, "courant", cntrl_data.courant);
+    GetOptional(cobraParams, "irfc", cntrl_data.rfmod);
     cntrl_data.entmod = 0;
     cntrl_data.mixmod = 1;
 
     cntrl_data.solver = 3;
     if (cntrl_data.run_parallel) cntrl_data.solver = 5;
-    GETIT(cobraParams, "solver", cntrl_data.solver);
+    GetOptional(cobraParams, "solver", cntrl_data.solver);
 
-    double tinlet = stateParams.getEntry("tinlet").getValue(&tinlet);
+    double tinlet;
+    GetRequired(stateParams,"STATE", "tinlet", tinlet);
     double flowfrac=100.;
-    GETIT(stateParams, "flow", flowfrac);
+    GetOptional(stateParams, "flow", flowfrac);
     flowfrac *= 0.01;   // convert from % to fraction
 
-    double flowrate = coreParams.getEntry("rated_flow").getValue(&flowrate);
+    double flowrate;
+    GetRequired(coreParams, "CORE", "rated_flow", flowrate);
     double tot_inlet_mass_flow_rate = flowfrac*flowrate;         // no unit conversion necessary
 
     cntrl_data.ginit = tot_inlet_mass_flow_rate;
@@ -949,13 +966,15 @@ namespace {
 
     // Reference pressure
     double conversion_factor = 10.0; // MPa --> bar
-    double reference_pressure = stateParams.getEntry("pressure").getValue(&reference_pressure) * conversion_factor;
+    double reference_pressure;
+    GetRequired(stateParams, "STATE", "pressure", reference_pressure);
+    reference_pressure *= conversion_factor;
 
     cntrl_data.pref = reference_pressure;
     cntrl_data.enth_bound_1 = -tinlet;
     cntrl_data.enth_bound_2 = 1496.80;
     cntrl_data.dhfrac = 0.02;
-    GETIT(cobraParams, "dhfrac", cntrl_data.dhfrac);
+    GetOptional(cobraParams, "dhfrac", cntrl_data.dhfrac);
     cntrl_data.ibound = 2;
     cntrl_data.obound = 1;
     cntrl_data.gtot = tot_inlet_mass_flow_rate;
@@ -982,25 +1001,25 @@ namespace {
     cntrl_data.edit_dnb= 0;
     cntrl_data.edit_hdf5= 1;
     cntrl_data.edit_convergence= 1;
-    GETIT(cobraParams, "dtmin", cntrl_data.dtmin);
-    GETIT(cobraParams, "dtmax", cntrl_data.dtmax);
-    GETIT(cobraParams, "tend", cntrl_data.tend);
-    GETIT(cobraParams, "rtwfp", cntrl_data.rtwfp);
-    GETIT(cobraParams, "maxits", cntrl_data.maxits);
-    GETIT(cobraParams, "global_mass_balance", cntrl_data.gmp);
-    GETIT(cobraParams, "global_energy_balance", cntrl_data.gep);
-    GETIT(cobraParams, "fluid_energy_storage", cntrl_data.fsp);
-    GETIT(cobraParams, "solid_energy_storage", cntrl_data.ssp);
-    GETIT(cobraParams, "mass_storage", cntrl_data.msp);
-    GETIT(cobraParams, "edit_gaps", cntrl_data.edit_gaps);
-    GETIT(cobraParams, "edit_channels", cntrl_data.edit_channels);
-    GETIT(cobraParams, "edit_rods", cntrl_data.edit_rods);
-    GETIT(cobraParams, "edit_dnb", cntrl_data.edit_dnb);
-    GETIT(cobraParams, "edit_hdf5", cntrl_data.edit_hdf5);
-    GETIT(cobraParams, "edit_convergence", cntrl_data.edit_convergence);
+    GetOptional(cobraParams, "dtmin", cntrl_data.dtmin);
+    GetOptional(cobraParams, "dtmax", cntrl_data.dtmax);
+    GetOptional(cobraParams, "tend", cntrl_data.tend);
+    GetOptional(cobraParams, "rtwfp", cntrl_data.rtwfp);
+    GetOptional(cobraParams, "maxits", cntrl_data.maxits);
+    GetOptional(cobraParams, "global_mass_balance", cntrl_data.gmp);
+    GetOptional(cobraParams, "global_energy_balance", cntrl_data.gep);
+    GetOptional(cobraParams, "fluid_energy_storage", cntrl_data.fsp);
+    GetOptional(cobraParams, "solid_energy_storage", cntrl_data.ssp);
+    GetOptional(cobraParams, "mass_storage", cntrl_data.msp);
+    GetOptional(cobraParams, "edit_gaps", cntrl_data.edit_gaps);
+    GetOptional(cobraParams, "edit_channels", cntrl_data.edit_channels);
+    GetOptional(cobraParams, "edit_rods", cntrl_data.edit_rods);
+    GetOptional(cobraParams, "edit_dnb", cntrl_data.edit_dnb);
+    GetOptional(cobraParams, "edit_hdf5", cntrl_data.edit_hdf5);
+    GetOptional(cobraParams, "edit_convergence", cntrl_data.edit_convergence);
 
     string restart_name="NONE";
-    GETIT(couplingParams, "read_restart", restart_name);
+    GetOptional(couplingParams, "read_restart", restart_name);
     strcpy(cntrl_data.restart_name,restart_name.c_str());
     cntrl_data.restart=1;
     if (restart_name=="NONE") {
@@ -1008,7 +1027,7 @@ namespace {
     }
 
     string ht_correlation="thom";
-    GETIT(cobraParams, "boil_ht_cor", ht_correlation);
+    GetOptional(cobraParams, "boil_ht_cor", ht_correlation);
     if(ht_correlation=="thom"){
        cntrl_data.boil_ht_cor=1;
     }else{
@@ -1016,7 +1035,7 @@ namespace {
     }
 
     string property_evals="asme";
-    GETIT(cobraParams, "property_evaluations", property_evals);
+    GetOptional(cobraParams, "property_evaluations", property_evals);
     if(property_evals=="asme"){
        cntrl_data.property_evaluations=0;
     }else{
@@ -1025,8 +1044,8 @@ namespace {
 
     cntrl_data.k_void_drift = 1.4;
     cntrl_data.beta_sp = 0.05;
-    GETIT(cobraParams, "k_void_drift", cntrl_data.k_void_drift);
-    GETIT(cobraParams, "beta_sp", cntrl_data.beta_sp);
+    GetOptional(cobraParams, "k_void_drift", cntrl_data.k_void_drift);
+    GetOptional(cobraParams, "beta_sp", cntrl_data.beta_sp);
 
     // Hand off the control data to lib_ctf_pp
     cout<<"\n A number printed in CTF's contrl_data_xfer is:"<<endl;
@@ -1050,7 +1069,7 @@ namespace {
     }
 
     Array<double> edit_bounds;
-    edit_bounds = editsParams.getEntry("axial_edit_bounds").getValue(&edit_bounds);
+    GetRequired(editsParams, "EDITS", "axial_edit_bounds", edit_bounds);
 
     const double conversion_factor = 10.0; // cm to mm
     
@@ -1059,7 +1078,7 @@ namespace {
 // calculate number of assemblies in core
 // only count non-zero entries in core shape map
     Array<int> core_shape;
-    core_shape = coreParams.getEntry("shape").getValue(&core_shape);
+    GetRequired(coreParams, "CORE", "shape", core_shape);
     int core_total_size = core_shape.size();   // NxN
 
     int num_assm = 0;
@@ -1070,7 +1089,7 @@ namespace {
     }
 
     int map_size;
-    map_size = coreParams.getEntry("core_size").getValue(&map_size);
+    GetRequired(coreParams, "CORE", "core_size", map_size);
 
  // The input file may have multiple assembly types, but we only support one "thermal-hydraulic type"
  // in the problem.  In the assembly file we must loop through each assembly and make sure each
@@ -1099,13 +1118,13 @@ namespace {
     geo_data.n_assem_row = map_size;
 
     geo_data.shroud_gap = -1.0;
-    GETIT(coreParams, "baffle_gap", geo_data.shroud_gap);
+    GetOptional(coreParams, "baffle_gap", geo_data.shroud_gap);
     geo_data.model_shroud = ( geo_data.shroud_gap > 0.0 );
 
   // symmetry options
 
     string symopt = "full";
-    GETIT(stateParams, "sym", symopt);
+    GetOptional(stateParams, "sym", symopt);
 
     if ( symopt == "full" )
        geo_data.sym_opt = 1;
@@ -1182,7 +1201,7 @@ namespace {
     // than the previous
     Array<double> stacked_case_times; // default to empty
     cout<<endl;
-    GETIT(stateParams, "deplete", stacked_case_times);
+    GetOptional(stateParams, "deplete", stacked_case_times, false);
     cout<<endl;
     int num_pf_files = 1;
     if (stacked_case_times.size()>0) num_pf_files = stacked_case_times.size();
@@ -1212,11 +1231,10 @@ namespace {
     }
 
     double statepow;
-    statepow = stateParams.getEntry("power").getValue(&statepow);
+    GetRequired(stateParams, "STATE", "power", statepow);  // percent of rated power.
     double power;
-    power = coreParams.getEntry("rated_power").getValue(&power) *
-                   statepow * 0.01;  // convert from percent
-                   // Are units of power correct? - RWH
+    GetRequired(coreParams, "CORE", "rated_power", power);
+    power *= statepow * 0.01;  // convert from percent
     // If running stacked case, set the power for each state point
     // Note that all powers are set to the same value
     vector<double> corepower(num_pf_files,power);
@@ -1284,7 +1302,7 @@ namespace {
  /* }  */
 
     int map_size;
-    map_size  = coreParams.getEntry("core_size").getValue(&map_size);
+    GetRequired(coreParams, "CORE", "core_size", map_size, false);
 
     // Set the power factor of each assembly... always 1.0, 0.0 for blank areas
     // Set the assembly power factor map that each assembly should use... always 1 since we use
@@ -1296,7 +1314,7 @@ namespace {
     // Note that for stacked cases, the power factor maps will always
     // look the same
     Array<int> core_shape;
-    core_shape = coreParams.getEntry("shape").getValue(&core_shape);
+    GetRequired(coreParams, "CORE", "shape", core_shape, false);
     for (int pf_file=0;pf_file<num_pf_files;pf_file++){
        if ( map_size == 1){     // preserve old edit format
           assempf.at(assem_counter) = 1.0;
