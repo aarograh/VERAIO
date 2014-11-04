@@ -150,6 +150,18 @@ extern "C" {
 }
 
 // -------------------------------------------------------------
+template< typename T> void GETIT(const ParameterList & pList,
+                                 const string        & name,
+                                       T               value)
+{
+    if (pList.isParameter(name)) {
+        value = pList.getEntry(name).getValue(&value);
+        cout << setw(25) << name <<": (defined): "<<std::left << value <<std::right <<endl;
+    } else {
+        cout << setw(25) << name <<": (DEFAULT): "<<std::left << value <<std::right <<endl;
+    }
+}
+// -------------------------------------------------------------
 
 int main(int argc, char**argv)
 {
@@ -169,6 +181,9 @@ int main(int argc, char**argv)
   VERAIn_XML_Common vera_common(vera_xml);
   ParameterList & pList = vera_common.get_vera_xml().get_pList();
 
+  // print values used.
+  cout << "\n\nParameters used :" << endl;
+
   // control.inp
   create_file_control_inp(pList, inp_file);
 
@@ -184,17 +199,6 @@ int main(int argc, char**argv)
 
   // Execute the lib_ctf_pp routines needed to build the maps and write the CTF deck
   gen_ctf_deck_driver();
-
-  // Output default parameters used
-  const vector<string> my_default_parameters = vera_xml.get_default_parameters();
-  if( !my_default_parameters.empty() )
-  {
-    cout << "\n\nParameter defaults used :\n" << endl;
-    for( size_t i = 0; i < my_default_parameters.size(); ++i )
-      cout << "\t" << my_default_parameters[i] << endl;
-  }
-  else
-    cout << "\n\nNo Parameter defaults used (all values explicity specified in xml)" << endl;
 
   return 0;
 }
@@ -885,21 +889,18 @@ namespace {
 
     // title
     string title = "ERROR:  undefined title";
-    if (pList.isParameter("case_id")) title 
-         = pList.getEntry("case_id").getValue(&title);
+    GETIT(pList, "case_id", title);
     strcpy(cntrl_data.title,title.c_str());
 
     int parallel = 0;
-    if (cobraParams.isParameter("parallel")) parallel
-         = cobraParams.getEntry("parallel").getValue(&parallel);
+    GETIT(cobraParams, "parallel", parallel);
     cntrl_data.run_parallel = parallel;
 
     string decktitle = inp_file.erase(inp_file.size()-4); // remove .xml to get base filename
     strcpy(cntrl_data.decktitle,decktitle.c_str());
 
     string maps_filename = "";
-    if (cobraParams.isParameter("maps_filename")) maps_filename
-         = cobraParams.getEntry("maps_filename").getValue(&maps_filename);
+    GETIT(cobraParams, "maps_filename", maps_filename);
     if (maps_filename.size()>0){
        cntrl_data.spec_titles=1;
     }
@@ -911,41 +912,33 @@ namespace {
 
     // stacked case option
     Array<double> stacked_case_times; // default to empty
-    if (stateParams.isParameter("deplete")) stacked_case_times
-         = stateParams.getEntry("deplete").getValue(&stacked_case_times);
+    GETIT(stateParams, "deplete", stacked_case_times);
     int num_pf_files = 1;
     if (stacked_case_times.size()>0) num_pf_files = stacked_case_times.size();
     cntrl_data.num_pf_files = num_pf_files;
 
     cntrl_data.icobra = 1;
     //defaults:
-    cntrl_data.epso = 0.001;
-    if (cobraParams.isParameter("epso")) cntrl_data.epso
-         = cobraParams.getEntry("epso").getValue(&cntrl_data.epso);
-    cntrl_data.oitmax = 5;
-    if (cobraParams.isParameter("oitmax")) cntrl_data.oitmax
-         = cobraParams.getEntry("oitmax").getValue(&cntrl_data.oitmax);
-    cntrl_data.iitmax = 40;
-    if (cobraParams.isParameter("iitmax")) cntrl_data.iitmax
-         = cobraParams.getEntry("iitmax").getValue(&cntrl_data.iitmax);
+    cntrl_data.epso    = 0.001;
+    cntrl_data.oitmax  = 5;
+    cntrl_data.iitmax  = 40;
     cntrl_data.courant = 0.8;
-    if (cobraParams.isParameter("courant")) cntrl_data.courant
-         = cobraParams.getEntry("courant").getValue(&cntrl_data.courant);
-    cntrl_data.rfmod= 2;
-    if (cobraParams.isParameter("irfc")) cntrl_data.rfmod
-         = cobraParams.getEntry("irfc").getValue(&cntrl_data.rfmod);
+    cntrl_data.rfmod   = 2;
+    GETIT(cobraParams, "epso", cntrl_data.epso);
+    GETIT(cobraParams, "oitmax", cntrl_data.oitmax);
+    GETIT(cobraParams, "iitmax", cntrl_data.iitmax);
+    GETIT(cobraParams, "courant", cntrl_data.courant);
+    GETIT(cobraParams, "irfc", cntrl_data.rfmod);
     cntrl_data.entmod = 0;
     cntrl_data.mixmod = 1;
 
     cntrl_data.solver = 3;
     if (cntrl_data.run_parallel) cntrl_data.solver = 5;
-    if (cobraParams.isParameter("solver")) cntrl_data.solver
-         = cobraParams.getEntry("solver").getValue(&cntrl_data.solver);
+    GETIT(cobraParams, "solver", cntrl_data.solver);
 
     double tinlet = stateParams.getEntry("tinlet").getValue(&tinlet);
     double flowfrac=100.;
-    if (stateParams.isParameter("flow")) flowfrac
-         = stateParams.getEntry("flow").getValue(&flowfrac);
+    GETIT(stateParams, "flow", flowfrac);
     flowfrac *= 0.01;   // convert from % to fraction
 
     double flowrate = coreParams.getEntry("rated_flow").getValue(&flowrate);
@@ -962,8 +955,7 @@ namespace {
     cntrl_data.enth_bound_1 = -tinlet;
     cntrl_data.enth_bound_2 = 1496.80;
     cntrl_data.dhfrac = 0.02;
-    if (cobraParams.isParameter("dhfrac")) cntrl_data.dhfrac
-         = cobraParams.getEntry("dhfrac").getValue(&cntrl_data.dhfrac);
+    GETIT(cobraParams, "dhfrac", cntrl_data.dhfrac);
     cntrl_data.ibound = 2;
     cntrl_data.obound = 1;
     cntrl_data.gtot = tot_inlet_mass_flow_rate;
@@ -975,67 +967,48 @@ namespace {
 
     // Get Time Domain Data
     cntrl_data.dtmin = 0.000001;
-    if (cobraParams.isParameter("dtmin")) cntrl_data.dtmin
-         = cobraParams.getEntry("dtmin").getValue(&cntrl_data.dtmin);
     cntrl_data.dtmax = 0.1;
-    if (cobraParams.isParameter("dtmax")) cntrl_data.dtmax
-         = cobraParams.getEntry("dtmax").getValue(&cntrl_data.dtmax);
     cntrl_data.tend = 0.1;
-    if (cobraParams.isParameter("tend")) cntrl_data.tend
-         = cobraParams.getEntry("tend").getValue(&cntrl_data.tend);
     cntrl_data.rtwfp = 1000.0;
-    if (cobraParams.isParameter("rtwfp")) cntrl_data.rtwfp
-         = cobraParams.getEntry("rtwfp").getValue(&cntrl_data.rtwfp);
     cntrl_data.maxits = 10000;
-    if (cobraParams.isParameter("maxits")) cntrl_data.maxits
-         = cobraParams.getEntry("maxits").getValue(&cntrl_data.maxits);
     cntrl_data.gmp = 0.01;
-    if (cobraParams.isParameter("global_mass_balance")) cntrl_data.gmp
-         = cobraParams.getEntry("global_mass_balance").getValue(&cntrl_data.gmp);
     cntrl_data.gep = 0.01;
-    if (cobraParams.isParameter("global_energy_balance")) cntrl_data.gep
-         = cobraParams.getEntry("global_energy_balance").getValue(&cntrl_data.gep);
     cntrl_data.fsp = 0.5;
-    if (cobraParams.isParameter("fluid_energy_storage")) cntrl_data.fsp
-         = cobraParams.getEntry("fluid_energy_storage").getValue(&cntrl_data.fsp);
     cntrl_data.ssp = 0.5;
-    if (cobraParams.isParameter("solid_energy_storage")) cntrl_data.ssp
-         = cobraParams.getEntry("solid_energy_storage").getValue(&cntrl_data.ssp);
     cntrl_data.msp = 0.5;
-    if (cobraParams.isParameter("mass_storage")) cntrl_data.msp
-         = cobraParams.getEntry("mass_storage").getValue(&cntrl_data.msp);
     cntrl_data.edit_gaps= 0;
-    if (cobraParams.isParameter("edit_gaps")) cntrl_data.edit_gaps
-         = cobraParams.getEntry("edit_gaps").getValue(&cntrl_data.edit_gaps);
     cntrl_data.edit_channels= 0;
-    if (cobraParams.isParameter("edit_channels")) cntrl_data.edit_channels
-         = cobraParams.getEntry("edit_channels").getValue(&cntrl_data.edit_channels);
     cntrl_data.edit_rods= 0;
-    if (cobraParams.isParameter("edit_rods")) cntrl_data.edit_rods
-         = cobraParams.getEntry("edit_rods").getValue(&cntrl_data.edit_rods);
     cntrl_data.edit_dnb= 0;
-    if (cobraParams.isParameter("edit_dnb")) cntrl_data.edit_dnb
-         = cobraParams.getEntry("edit_dnb").getValue(&cntrl_data.edit_dnb);
     cntrl_data.edit_hdf5= 1;
-    if (cobraParams.isParameter("edit_hdf5")) cntrl_data.edit_hdf5
-         = cobraParams.getEntry("edit_hdf5").getValue(&cntrl_data.edit_hdf5);
     cntrl_data.edit_convergence= 1;
-    if (cobraParams.isParameter("edit_convergence")) cntrl_data.edit_convergence
-         = cobraParams.getEntry("edit_convergence").getValue(&cntrl_data.edit_convergence);
+    GETIT(cobraParams, "dtmin", cntrl_data.dtmin);
+    GETIT(cobraParams, "dtmax", cntrl_data.dtmax);
+    GETIT(cobraParams, "tend", cntrl_data.tend);
+    GETIT(cobraParams, "rtwfp", cntrl_data.rtwfp);
+    GETIT(cobraParams, "maxits", cntrl_data.maxits);
+    GETIT(cobraParams, "global_mass_balance", cntrl_data.gmp);
+    GETIT(cobraParams, "global_energy_balance", cntrl_data.gep);
+    GETIT(cobraParams, "fluid_energy_storage", cntrl_data.fsp);
+    GETIT(cobraParams, "solid_energy_storage", cntrl_data.ssp);
+    GETIT(cobraParams, "mass_storage", cntrl_data.msp);
+    GETIT(cobraParams, "edit_gaps", cntrl_data.edit_gaps);
+    GETIT(cobraParams, "edit_channels", cntrl_data.edit_channels);
+    GETIT(cobraParams, "edit_rods", cntrl_data.edit_rods);
+    GETIT(cobraParams, "edit_dnb", cntrl_data.edit_dnb);
+    GETIT(cobraParams, "edit_hdf5", cntrl_data.edit_hdf5);
+    GETIT(cobraParams, "edit_convergence", cntrl_data.edit_convergence);
 
-    if (couplingParams.isParameter("read_restart")) {
-       string restart_name;
-       restart_name  = couplingParams.getEntry("read_restart").getValue(&restart_name);
-       strcpy(cntrl_data.restart_name,restart_name.c_str());
-       cntrl_data.restart=1;
-    }else{
-       strcpy(cntrl_data.restart_name,"NONE");
+    string restart_name="NONE";
+    GETIT(couplingParams, "read_restart", restart_name);
+    strcpy(cntrl_data.restart_name,restart_name.c_str());
+    cntrl_data.restart=1;
+    if (restart_name=="NONE") {
        cntrl_data.restart=0;
     }
 
     string ht_correlation="thom";
-    if (cobraParams.isParameter("boil_ht_cor")) ht_correlation
-         = cobraParams.getEntry("boil_ht_cor").getValue(&ht_correlation);
+    GETIT(cobraParams, "boil_ht_cor", ht_correlation);
     if(ht_correlation=="thom"){
        cntrl_data.boil_ht_cor=1;
     }else{
@@ -1043,8 +1016,7 @@ namespace {
     }
 
     string property_evals="asme";
-    if (cobraParams.isParameter("property_evaluations")) property_evals
-         = cobraParams.getEntry("property_evaluations").getValue(&property_evals);
+    GETIT(cobraParams, "property_evaluations", property_evals);
     if(property_evals=="asme"){
        cntrl_data.property_evaluations=0;
     }else{
@@ -1052,13 +1024,12 @@ namespace {
     }
 
     cntrl_data.k_void_drift = 1.4;
-    if (cobraParams.isParameter("k_void_drift")) cntrl_data.k_void_drift
-         = cobraParams.getEntry("k_void_drift").getValue(&cntrl_data.k_void_drift);
     cntrl_data.beta_sp = 0.05;
-    if (cobraParams.isParameter("beta_sp")) cntrl_data.beta_sp
-         = cobraParams.getEntry("beta_sp").getValue(&cntrl_data.beta_sp);
+    GETIT(cobraParams, "k_void_drift", cntrl_data.k_void_drift);
+    GETIT(cobraParams, "beta_sp", cntrl_data.beta_sp);
 
     // Hand off the control data to lib_ctf_pp
+    cout<<"\n A number printed in CTF's contrl_data_xfer is:"<<endl;
     cntrl_data_xfer(&cntrl_data);
 
   }
@@ -1116,30 +1087,25 @@ namespace {
 
     int num_assm_type =1;    // *** hardwire for now
 
+    cout << endl;
     cout << "debug: map  size = " << map_size  << endl;
     cout << "debug: num_assm  = " << num_assm  << endl;
     cout << "debug: core size = " << core_total_size << endl;
+    cout << endl;
 
     geo_data.nassem = num_assm;
     geo_data.tf     = num_assm_type;
     geo_data.n_assem_col = map_size;
     geo_data.n_assem_row = map_size;
 
-    if (coreParams.isParameter("baffle_gap")) {
-       geo_data.shroud_gap = coreParams.getEntry("baffle_gap").getValue(&geo_data.shroud_gap);
-       geo_data.model_shroud = ( geo_data.shroud_gap > 0.0 );
-    } else {
-       geo_data.model_shroud = false;
-       geo_data.shroud_gap = -1.0;
-    } 
+    geo_data.shroud_gap = -1.0;
+    GETIT(coreParams, "baffle_gap", geo_data.shroud_gap);
+    geo_data.model_shroud = ( geo_data.shroud_gap > 0.0 );
 
   // symmetry options
 
     string symopt = "full";
-    if (stateParams.isParameter("sym")) symopt
-         = stateParams.getEntry("sym").getValue(&symopt);
-
-    cout << "debug: STATE.sym = " << symopt << endl;
+    GETIT(stateParams, "sym", symopt);
 
     if ( symopt == "full" )
        geo_data.sym_opt = 1;
@@ -1215,8 +1181,9 @@ namespace {
     // set the transient time for each step 1000 seconds longer
     // than the previous
     Array<double> stacked_case_times; // default to empty
-    if (stateParams.isParameter("deplete")) stacked_case_times
-         = stateParams.getEntry("deplete").getValue(&stacked_case_times);
+    cout<<endl;
+    GETIT(stateParams, "deplete", stacked_case_times);
+    cout<<endl;
     int num_pf_files = 1;
     if (stacked_case_times.size()>0) num_pf_files = stacked_case_times.size();
 
