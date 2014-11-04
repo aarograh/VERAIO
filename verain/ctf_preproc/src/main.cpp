@@ -152,7 +152,7 @@ extern "C" {
 // -------------------------------------------------------------
 template< typename T> void GETIT(const ParameterList & pList,
                                  const string        & name,
-                                       T               value)
+                                       T             & value)
 {
     if (pList.isParameter(name)) {
         value = pList.getEntry(name).getValue(&value);
