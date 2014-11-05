@@ -90,6 +90,14 @@ STATE:
     _check:
       - is_float()
       - is_geq() 0
+  inlet_flow:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{is_float(shift)},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
   bypass:
     <<: *dtdouble
     _content:
@@ -104,6 +112,14 @@ STATE:
       - is_float(nth(0,()))
       - is_word(nth(1,()))
       - in_dictionary(nth(1,()),'F','C','K')
+  inlet_temp:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{is_float(shift)},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
   tfuel:
     <<: *dtlist
     _content:
@@ -189,6 +205,7 @@ STATE:
     _check:
       - is_word()
       - in_dictionary() full qtr
+
   restart_shuffle:
     <<: *dtlist
     _style: multi-line
@@ -293,6 +310,7 @@ CORE:
     _check:
       - fall(sub{is_word(shift)},())
       - fall(sub{not_in_dictionary(shift,'0')},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
   rotate_map:
     <<: *dtlist
     _style: multi-line
@@ -301,6 +319,7 @@ CORE:
       - fall(sub{is_int(shift)},())
       - fall(sub{is_geq(shift,0)},())
       - fall(sub{is_leq(shift,3)},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
   insert_map:
     <<: *dtlist
     _style: multi-line
@@ -308,6 +327,7 @@ CORE:
     _check:
       - fall(sub{is_word(shift)},())
       - fall(sub{not_in_dictionary(shift,'0')},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
   det_map:
     <<: *dtlist
     _style: multi-line
@@ -315,6 +335,7 @@ CORE:
     _check:
       - fall(sub{is_word(shift)},())
       - fall(sub{not_in_dictionary(shift,'0')},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
   crd_map:
     <<: *dtlist
     _style: multi-line
@@ -322,6 +343,7 @@ CORE:
     _check:
       - fall(sub{is_word(shift)},())
       - fall(sub{not_in_dictionary(shift,'0')},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
   crd_bank:
     <<: *dtlist
     _style: multi-line
@@ -329,6 +351,7 @@ CORE:
     _check:
       - fall(sub{is_word(shift)},())
       - fall(sub{not_in_dictionary(shift,'0')},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
   lower_plate:
     <<: *dtlist
     _content:

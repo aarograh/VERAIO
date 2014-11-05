@@ -30,11 +30,30 @@
 [STATE]
   power  80.0     ! added multistate 1/30/2014 , must use --multistate command line option
 
+  inlet_temp
+        0.
+    -2. 0. 2.
+        0.
+
+  inlet_flow
+         20.
+    -20.  0  20 
+        -20.    
+
+
 [STATE]
   power  70.0
 
 [STATE]
   power  60.0
+
+  inlet_temp
+        2. -1.
+       -1.   
+
+  inlet_flow
+     50. -20.5
+    -10. 
 
 [STATE]
   power  50.0
@@ -304,7 +323,7 @@
   conserve_power_in_tiamat_transfer true
 
 [COBRATF]
-  nfuel   3             ! number of fuel rings in conduction model
+  nfuel   18            ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction
   irfc    2             ! friction factor correlation default=2
   dhfrac  0.02          ! fraction of power deposited directly into coolant
@@ -320,6 +339,10 @@
   rtwfp   1000.0
   maxits  10000
   courant 0.8
+
+[MPACT]
+  ith_hgap   5200.0   ! internal t/h option
+  ith_dhfrac 0.02     ! internal t/h option
 
 [PEREGRINE]
   ramp_data_transfers = true

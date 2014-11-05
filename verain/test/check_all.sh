@@ -14,7 +14,7 @@ foreach i ( *.xml.gold )
         diff _${l}.xml  ${l}.xml.gold
 	if ( $status ) then
            echo false
-           exit 2
+#           exit 2
 	else
            echo ok
 	endif

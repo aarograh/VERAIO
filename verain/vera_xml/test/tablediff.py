@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys;
 import string;
+import math
 
 def bomb():
   print('End Result: TEST FAILED')
@@ -76,10 +77,17 @@ for lineG in fileGold:
         print('Error converting tokens to floating point on case '+str(case)+' at field '+field)
         fail = True
         continue
-      err = abs(g-r)
-      if err > float(rule):
-        print('Error ' + str(err) + ' exceeds tolerance ' + str(rule) + ' on case '+str(case)+' at field '+field)
+      if math.isnan(float(gold)):
+        print('Gold result contains a NaN on case '+str(case)+' at field '+field)
         fail = True
+      elif math.isnan(float(rslt)):
+        print('Test result contains a NaN on case '+str(case)+' at field '+field)
+        fail = True
+      else:
+        err = abs(g-r)
+        if err > float(rule):
+          print('Error ' + str(err) + ' exceeds tolerance ' + str(rule) + ' on case '+str(case)+' at field '+field)
+          fail = True
     
 if fail == True:
   bomb()

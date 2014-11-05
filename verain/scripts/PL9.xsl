@@ -143,9 +143,34 @@
 
     <!-- maps over templates -->
 
-    <xsl:when test="@name = 'insert_map' or @name = 'assm_map' or @name = 'crd_map' or @name = 'det_map' or @name = 'crd_bank'">
+    <xsl:when test="@name = 'insert_map' or @name = 'assm_map' or @name = 'crd_map' or @name = 'det_map' or @name = 'crd_bank' or @name = 'rotate_map'">
       <xsl:variable name="num_pins" select="../Parameter[@name = 'core_size']/@value" />
       <xsl:variable name="shape"    select="../Parameter[@name = 'shape']/@value" />
+      <xsl:variable name="map"      select="@value" />
+
+      <xsl:if test="$num_pins > 0">
+	<xsl:element name="li">
+	  <xsl:element name="p">
+	    <xsl:value-of select="@name" /> = 
+	    <xsl:call-template name="make_core_map">
+	      <xsl:with-param name="num_pins">
+		<xsl:value-of select="$num_pins" />
+	      </xsl:with-param>
+	      <xsl:with-param name="shape">
+		<xsl:value-of select="$shape" />
+	      </xsl:with-param>
+	      <xsl:with-param name="map">
+		<xsl:value-of select="$map" />
+	      </xsl:with-param>
+	    </xsl:call-template>
+	  </xsl:element>
+	</xsl:element>
+      </xsl:if>
+    </xsl:when>
+
+    <xsl:when test="@name = 'inlet_temp' or @name = 'inlet_flow'">
+      <xsl:variable name="num_pins" select="../../../ParameterList[@name = 'CORE']/Parameter[@name = 'core_size']/@value" />
+      <xsl:variable name="shape"    select="../../../ParameterList[@name = 'CORE']/Parameter[@name = 'shape']/@value" />
       <xsl:variable name="map"      select="@value" />
 
       <xsl:if test="$num_pins > 0">

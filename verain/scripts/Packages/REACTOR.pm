@@ -595,7 +595,8 @@ sub fillin{
     my @result;
     my $i;
 
-    @result= map { $_ == $valid ? $ary2->[$i++] : $_ } @{ $ary1 };
+#    @result= map { $_ == $valid ? $ary2->[$i++] : $_ } @{ $ary1 };
+    @result= map { $_ == $valid ? $ary2->[$i++] : '_EMPTY_' } @{ $ary1 };
 
     return  wantarray ? @result : \@result;
 }
@@ -685,7 +686,8 @@ sub core_map{
 	    @fullm=fullcellmap($n,@resmap);
 	}
 
-	@fullmp=purge_array(\@fullm,0);
+#	@fullmp=purge_array(\@fullm,0);
+	@fullmp=purge_array(\@fullm,'_EMPTY_');
     }
     elsif ($nmmap == $nquad){
 	@ccmap=@core_map_q;
@@ -698,10 +700,13 @@ sub core_map{
 	    @fullm=fullcellmap_rot($n,@resmap);
 #	    @fullm=fullcellmap($n,@resmap);
 	}
-	@fullmp=purge_array(\@fullm,0);
+#	@fullmp=purge_array(\@fullm,0);
+	@fullmp=purge_array(\@fullm,'_EMPTY_');
     }
     elsif ($nmmap == $nfull){
-	@fullmp=@{ $mmap };
+	@fullm=@{ $mmap };
+#	@fullmp=purge_array(\@fullm,0);
+	@fullmp=@fullm;
     }
     else{
 	die "core_map: invalid map, map=$nmmap, octant=$noct, quarter=$nquad, full=$nfull\n";

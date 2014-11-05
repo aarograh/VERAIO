@@ -226,3 +226,16 @@ STATES:
             - coremapmap CORE/$size,CORE/@core_shape,STATE/(_loop)/@shuffle_label,CORE/$bc_sym
           _content:
 
+        inlet_temp:
+          _pltype: array
+          _type: double
+          _do:
+            - coremapmap CORE/$size,CORE/@core_shape,STATE/(_loop)/@inlet_temp,CORE/$bc_sym
+          _content:
+
+        inlet_flow:
+          _pltype: array
+          _type: double
+          _do:
+            - coremapmap CORE/$size,CORE/@core_shape,STATE/(_loop)/@inlet_flow,CORE/$bc_sym
+          _content:
