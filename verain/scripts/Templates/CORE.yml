@@ -53,13 +53,6 @@ CORE:
         - copy CORE/$cycle
       _content:
 
-    op_date:
-      _pltype: parameter
-      _type: int
-      _do:
-        - copy CORE/$op_date
-      _content:
-
     apitch:
       _pltype: parameter
       _type: double

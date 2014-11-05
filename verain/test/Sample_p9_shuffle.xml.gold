@@ -1,0 +1,890 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
+<ParameterList name="CASEID">
+  <Parameter name="case_id" type="string" value="CASL AMA Problem 9 - Public"/>
+  <ParameterList name="STATES">
+    <ParameterList name="State_1">
+      <Parameter name="bank_labels" type="Array(string)" value="{SA,SB,SC,SD,A,B,C,D}"/>
+      <Parameter name="bank_pos" type="Array(int)" value="{230,230,230,230,230,230,230,220}"/>
+      <Parameter name="boron" type="double" value="1285"/>
+      <Parameter name="deplete" type="Array(double)" value="{0}"/>
+      <Parameter name="deplete_units" type="string" value="EFPD"/>
+      <Parameter name="feedback" type="string" value="on"/>
+      <Parameter name="modden" type="double" value="0.743"/>
+      <Parameter name="op_date" type="string" value="2014/11/05"/>
+      <Parameter name="power" type="double" value="0.0"/>
+      <Parameter name="restart_shuffle_file" type="Array(string)" value="{440EFPD_65POW_DOUT}"/>
+      <Parameter name="restart_shuffle_label" type="Array(string)" value="{p9_restart_cycl1.h5}"/>
+      <Parameter name="search" type="string" value="boron"/>
+      <Parameter name="shuffle_label" type="Array(string)" value="{C-10,F-9,M-13,L-10,C-4,G-10,F-13,K-2,M-14,+3,+1,+3,R-5,+3,+1,+3,B-4,P-6,P-6,+3,+2,+1,J-14,+1,H-3,+1,B-7,+1,+2,+3,K-2,B-4,+2,A-6,P-3,+1,E-14,+1,B-11,+1,N-2,A-6,+2,M-14,F-13,+3,+1,N-2,+1,J-12,+1,H-1,+1,D-7,+1,P-3,+1,+3,C-10,G-10,+1,B-7,+1,D-7,E-15,G-15,+1,1:A-9,E-15,J-12,+1,J-14,+1,F-9,C-4,+3,+1,B-11,+1,1:A-9,+1,N-3,+1,G-15,+1,E-14,+1,+3,M-13,L-10,R-5,H-3,+1,H-1,+1,N-3,1H-14,N-3,+1,H-1,+1,H-3,R-5,L-10,M-13,+3,+1,E-14,+1,G-15,+1,N-3,+1,1:A-9,+1,B-11,+1,+3,C-4,F-9,+1,J-14,+1,J-12,E-15,1:A-9,+1,G-15,E-15,D-7,+1,B-7,+1,G-10,C-10,+3,+1,P-3,+1,D-7,+1,H-1,+1,J-12,+1,N-2,+1,+3,F-13,M-14,+2,A-6,N-2,+1,B-11,+1,E-14,+1,P-3,A-6,+2,B-4,K-2,+3,+2,+1,B-7,+1,H-3,+1,J-14,+1,+2,+3,P-6,P-6,B-4,+3,+1,+3,R-5,+3,+1,+3,M-14,K-2,F-13,G-10,C-4,L-10,M-13,F-9,C-10}"/>
+      <Parameter name="sym" type="string" value="qtr"/>
+      <Parameter name="tfuel" type="double" value="565"/>
+      <Parameter name="tinlet" type="double" value="291.85"/>
+    </ParameterList>
+    <ParameterList name="State_2">
+      <Parameter name="b10" type="double" value="0.199"/>
+      <Parameter name="b10_depl" type="bool" value="true"/>
+      <Parameter name="deplete" type="Array(double)" value="{25,40,60,80,120,160}"/>
+      <Parameter name="deplete_units" type="string" value="EFPD"/>
+      <Parameter name="op_date" type="string" value="11/06/2014"/>
+      <Parameter name="power" type="double" value="100.0"/>
+      <Parameter name="restart_write_file" type="string" value="p9_restart_cycl2.h5"/>
+      <Parameter name="restart_write_label" type="string" value="160EFPD"/>
+    </ParameterList>
+    <ParameterList name="State_3">
+      <Parameter name="b10" type="double" value="0.199"/>
+      <Parameter name="b10_depl" type="bool" value="true"/>
+      <Parameter name="deplete" type="Array(double)" value="{160,200,240,250}"/>
+      <Parameter name="deplete_units" type="string" value="EFPD"/>
+      <Parameter name="power" type="double" value="100.0"/>
+      <Parameter name="restart_write_file" type="string" value="p9_restart_cycl2.h5"/>
+      <Parameter name="restart_write_label" type="string" value="250EFPD"/>
+    </ParameterList>
+    <ParameterList name="State_4">
+      <Parameter name="b10" type="double" value="0.199"/>
+      <Parameter name="b10_depl" type="bool" value="true"/>
+      <Parameter name="deplete" type="Array(double)" value="{250,286,320,360,400}"/>
+      <Parameter name="deplete_units" type="string" value="EFPD"/>
+      <Parameter name="power" type="double" value="100.0"/>
+      <Parameter name="restart_write_file" type="string" value="p9_restart_cycl2.h5"/>
+      <Parameter name="restart_write_label" type="string" value="400EFPD"/>
+    </ParameterList>
+    <ParameterList name="State_5">
+      <Parameter name="bank_labels" type="Array(string)" value="{D}"/>
+      <Parameter name="bank_pos" type="Array(int)" value="{230}"/>
+      <Parameter name="deplete" type="Array(double)" value="{440}"/>
+      <Parameter name="deplete_units" type="string" value="EFPD"/>
+      <Parameter name="power" type="double" value="65.0"/>
+      <Parameter name="restart_write_file" type="string" value="p9_restart_cycl2.h5"/>
+      <Parameter name="restart_write_label" type="string" value="440EFPD_65POW_DOUT"/>
+    </ParameterList>
+    <ParameterList name="State_6">
+      <Parameter name="deplete" type="Array(double)" value="{440}"/>
+      <Parameter name="deplete_units" type="string" value="EFPD"/>
+      <Parameter name="power" type="double" value="100.0"/>
+      <Parameter name="restart_read_file" type="string" value="p9_restart_cycl2.h5"/>
+      <Parameter name="restart_read_label" type="string" value="400EFPD"/>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="CORE">
+    <ParameterList name="Materials">
+      <ParameterList name="Material_he">
+        <Parameter name="density" type="double" value="0.0001786"/>
+        <Parameter name="key_name" type="string" value="he"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{he}"/>
+      </ParameterList>
+      <ParameterList name="Material_inc">
+        <Parameter name="density" type="double" value="8.19"/>
+        <Parameter name="key_name" type="string" value="inc"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{inc}"/>
+      </ParameterList>
+      <ParameterList name="Material_spring">
+        <Parameter name="density" type="double" value="0.4"/>
+        <Parameter name="key_name" type="string" value="spring"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{0.05,0.95}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{ss,he}"/>
+      </ParameterList>
+      <ParameterList name="Material_ss">
+        <Parameter name="density" type="double" value="8.0"/>
+        <Parameter name="key_name" type="string" value="ss"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
+      </ParameterList>
+      <ParameterList name="Material_zirc">
+        <Parameter name="density" type="double" value="6.56"/>
+        <Parameter name="key_name" type="string" value="zirc"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
+      </ParameterList>
+    </ParameterList>
+    <Parameter name="apitch" type="double" value="21.5"/>
+    <Parameter name="assm_map" type="Array(string)" value="{3,3,3,3,3,3,3,3,3,3,1,3,1,3,1,3,3,3,3,3,2,1,2,1,2,1,2,1,2,3,3,3,2,2,2,1,2,1,2,1,2,2,2,3,3,3,1,2,1,2,1,2,1,2,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,2,1,3,3,3,1,2,1,2,1,2,1,2,1,2,1,3,3,3,2,2,2,1,2,1,2,1,2,2,2,3,3,3,2,1,2,1,2,1,2,1,2,3,3,3,3,3,1,3,1,3,1,3,3,3,3,3,3,3,3,3,3}"/>
+    <Parameter name="baffle_gap" type="double" value="0.19"/>
+    <Parameter name="baffle_mat" type="string" value="ss"/>
+    <Parameter name="baffle_thick" type="double" value="2.85"/>
+    <Parameter name="core_size" type="int" value="15"/>
+    <Parameter name="crd_bank" type="Array(string)" value="{-,-,-,-,-,-,-,-,SA,-,B,-,C,-,B,-,SA,-,-,-,-,SD,-,SB,-,SB,-,SC,-,-,-,SA,-,D,-,-,-,D,-,-,-,D,-,SA,-,-,SC,-,A,-,-,-,-,-,A,-,SD,-,-,-,B,-,-,-,C,-,A,-,C,-,-,-,B,-,-,-,SB,-,-,-,-,-,-,-,-,-,SB,-,-,-,C,-,D,-,A,-,D,-,A,-,D,-,C,-,-,-,SB,-,-,-,-,-,-,-,-,-,SB,-,-,-,B,-,-,-,C,-,A,-,C,-,-,-,B,-,-,-,SD,-,A,-,-,-,-,-,A,-,SC,-,-,SA,-,D,-,-,-,D,-,-,-,D,-,SA,-,-,-,SC,-,SB,-,SB,-,SD,-,-,-,-,SA,-,B,-,C,-,B,-,SA,-,-,-,-,-,-,-,-}"/>
+    <Parameter name="crd_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,1,-,1,-,1,-,1,-,1,-,-,-,-,1,-,1,-,1,-,1,-,-,-,1,-,1,-,-,-,1,-,-,-,1,-,1,-,-,1,-,1,-,-,-,-,-,1,-,1,-,-,-,1,-,-,-,1,-,1,-,1,-,-,-,1,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,1,-,1,-,1,-,1,-,1,-,1,-,1,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,1,-,-,-,1,-,1,-,1,-,-,-,1,-,-,-,1,-,1,-,-,-,-,-,1,-,1,-,-,1,-,1,-,-,-,1,-,-,-,1,-,1,-,-,-,1,-,1,-,1,-,1,-,-,-,-,1,-,1,-,1,-,1,-,1,-,-,-,-,-,-,-,-}"/>
+    <Parameter name="cycle_num" type="string" value="2"/>
+    <Parameter name="det_map" type="Array(string)" value="{1,-,-,1,-,-,-,1,-,-,-,1,-,-,1,-,1,-,-,1,-,1,-,-,1,-,-,-,-,-,1,-,-,-,-,1,-,-,1,-,-,1,-,-,1,-,-,-,1,-,-,1,-,-,1,-,-,-,1,-,-,-,-,1,-,1,-,-,-,-,1,-,-,-,-,1,-,-,-,-,-,-,1,-,1,-,-,-,1,1,-,1,-,1,-,1,-,-,1,-,1,1,1,-,-,-,-,1,-,-,1,-,-,1,-,-,1,-,-,1,-,1,-,-,1,-,1,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,1,-,1,-,1,-,-,1,1,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,1,-,1,-,1,-,1,1,-,-,1,-,1,-,-,-,-,-,-,-,1,-,-,1,-}"/>
+    <Parameter name="height" type="double" value="406.337"/>
+    <Parameter name="insert_map" type="Array(string)" value="{-,8,-,12,-,8,-,-,-,16,-,24,-,24,-,16,-,-,-,12,24,-,16,-,20,-,16,-,24,12,-,-,24,-,20,-,20,-,20,-,20,-,24,-,-,16,-,20,-,20,-,20,-,20,-,20,-,16,-,8,-,16,-,20,-,24,-,24,-,20,-,16,-,8,-,24,-,20,-,24,-,20,-,24,-,20,-,24,-,12,-,20,-,20,-,20,-,20,-,20,-,20,-,12,-,24,-,20,-,24,-,20,-,24,-,20,-,24,-,8,-,16,-,20,-,24,-,24,-,20,-,16,-,8,-,16,-,20,-,20,-,20,-,20,-,20,-,16,-,-,24,-,20,-,20,-,20,-,20,-,24,-,-,12,24,-,16,-,20,-,16,-,24,12,-,-,-,16,-,24,-,24,-,16,-,-,-,8,-,12,-,8,-}"/>
+    <Parameter name="lower_mat" type="string" value="ss"/>
+    <Parameter name="lower_refl_mats" type="Array(string)" value="{mod}"/>
+    <Parameter name="lower_refl_thicks" type="Array(double)" value="{20.0}"/>
+    <Parameter name="lower_refl_vfracs" type="Array(double)" value="{1.0}"/>
+    <Parameter name="lower_thick" type="double" value="5.0"/>
+    <Parameter name="lower_vfrac" type="double" value="0.5"/>
+    <Parameter name="rated_flow" type="double" value="16591.390304"/>
+    <Parameter name="rated_power" type="double" value="3411"/>
+    <Parameter name="rotate_map" type="Array(int)" value="{3,3,1,2,3,2,1,2,2,3,1,1,2,1,1,2,2,1,3,2,3,1,1,2,1,1,3,3,1,1,3,3,2,1,1,1,1,1,1,2,3,3,1,1,3,3,1,1,2,1,1,3,2,3,1,2,2,1,1,2,1,1,3,2,2,1,2,3,2,1,3,3}"/>
+    <Parameter name="shape" type="Array(int)" value="{0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0}"/>
+    <Parameter name="unit" type="string" value="1"/>
+    <Parameter name="upper_mat" type="string" value="ss"/>
+    <Parameter name="upper_refl_mats" type="Array(string)" value="{mod}"/>
+    <Parameter name="upper_refl_thicks" type="Array(double)" value="{20.0}"/>
+    <Parameter name="upper_refl_vfracs" type="Array(double)" value="{1.0}"/>
+    <Parameter name="upper_thick" type="double" value="7.6"/>
+    <Parameter name="upper_vfrac" type="double" value="0.5"/>
+    <Parameter name="xlabel" type="Array(string)" value="{R,P,N,M,L,K,J,H,G,F,E,D,C,B,A}"/>
+    <Parameter name="ylabel" type="Array(string)" value="{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}"/>
+  </ParameterList>
+  <ParameterList name="ASSEMBLIES">
+    <ParameterList name="Assembly_1">
+      <ParameterList name="CellMaps">
+        <ParameterList name="CellMap_LAT21">
+          <Parameter name="cell_map" type="Array(string)" value="{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,1,1,4,1,1,4,1,1,1,1,1,1,1,1,4,1,1,1,1,1,1,1,1,1,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,1,1,4,1,1,4,1,1,4,1,1,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,1,1,4,1,1,4,1,1,4,1,1,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,1,1,4,1,1,4,1,1,4,1,1,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,1,1,1,1,1,1,1,1,1,4,1,1,1,1,1,1,1,1,4,1,1,4,1,1,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}"/>
+          <Parameter name="label" type="string" value="LAT21"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLEN">
+          <Parameter name="cell_map" type="Array(string)" value="{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,4,5,5,5,5,5,5,5,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,5,5,5,5,5,5,5,4,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}"/>
+          <Parameter name="label" type="string" value="PLEN"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLUG">
+          <Parameter name="cell_map" type="Array(string)" value="{6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,4,6,6,6,6,6,6,6,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,6,6,6,6,6,6,6,4,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6}"/>
+          <Parameter name="label" type="string" value="PLUG"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Cells">
+        <ParameterList name="Cell_1">
+          <Parameter name="label" type="string" value="1"/>
+          <Parameter name="mats" type="Array(string)" value="{U21,he,zirc}"/>
+          <Parameter name="num_rings" type="int" value="3"/>
+          <Parameter name="radii" type="Array(double)" value="{0.4096,0.418,0.475}"/>
+          <Parameter name="type" type="string" value="fuel"/>
+        </ParameterList>
+        <ParameterList name="Cell_4">
+          <Parameter name="label" type="string" value="4"/>
+          <Parameter name="mats" type="Array(string)" value="{mod,zirc}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.561,0.602}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_5">
+          <Parameter name="label" type="string" value="5"/>
+          <Parameter name="mats" type="Array(string)" value="{spring,zirc}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.418,0.475}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_6">
+          <Parameter name="label" type="string" value="6"/>
+          <Parameter name="mats" type="Array(string)" value="{mod}"/>
+          <Parameter name="num_rings" type="int" value="1"/>
+          <Parameter name="radii" type="Array(double)" value="{0.475}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Fuels">
+        <ParameterList name="Fuel_U21">
+          <Parameter name="density" type="double" value="10.257"/>
+          <Parameter name="enrichments" type="Array(double)" value="{2.110}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
+          <Parameter name="key_name" type="string" value="U21"/>
+          <Parameter name="thden" type="double" value="94.5"/>
+        </ParameterList>
+        <ParameterList name="Fuel_U26">
+          <Parameter name="density" type="double" value="10.257"/>
+          <Parameter name="enrichments" type="Array(double)" value="{2.619}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
+          <Parameter name="key_name" type="string" value="U26"/>
+          <Parameter name="thden" type="double" value="94.5"/>
+        </ParameterList>
+        <ParameterList name="Fuel_U31">
+          <Parameter name="density" type="double" value="10.257"/>
+          <Parameter name="enrichments" type="Array(double)" value="{3.100}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
+          <Parameter name="key_name" type="string" value="U31"/>
+          <Parameter name="thden" type="double" value="94.5"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="SpacerGrids">
+        <ParameterList name="Grid_END">
+          <Parameter name="height" type="double" value="3.866"/>
+          <Parameter name="label" type="string" value="END"/>
+          <Parameter name="mass" type="double" value="1017"/>
+          <Parameter name="material" type="string" value="inc"/>
+        </ParameterList>
+        <ParameterList name="Grid_MID">
+          <Parameter name="height" type="double" value="3.810"/>
+          <Parameter name="label" type="string" value="MID"/>
+          <Parameter name="mass" type="double" value="875"/>
+          <Parameter name="material" type="string" value="zirc"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="axial_elevations" type="Array(double)" value="{6.053,11.951,377.711,393.711,395.381}"/>
+      <Parameter name="axial_labels" type="Array(string)" value="{PLUG,LAT21,PLEN,PLUG}"/>
+      <Parameter name="grid_elev" type="Array(double)" value="{13.884,75.2,127.4,179.6,231.8,284.0,336.2,388.2}"/>
+      <Parameter name="grid_map" type="Array(string)" value="{END,MID,MID,MID,MID,MID,MID,END}"/>
+      <Parameter name="label" type="string" value="1"/>
+      <Parameter name="lower_nozzle_comp" type="string" value="ss"/>
+      <Parameter name="lower_nozzle_height" type="double" value="6.053"/>
+      <Parameter name="lower_nozzle_mass" type="double" value="6250.0"/>
+      <Parameter name="num_pins" type="int" value="17"/>
+      <Parameter name="ppitch" type="double" value="1.260"/>
+      <Parameter name="title" type="string" value="Westinghouse 17x17"/>
+      <Parameter name="upper_nozzle_comp" type="string" value="ss"/>
+      <Parameter name="upper_nozzle_height" type="double" value="8.827"/>
+      <Parameter name="upper_nozzle_mass" type="double" value="6250.0"/>
+    </ParameterList>
+    <ParameterList name="Assembly_2">
+      <ParameterList name="CellMaps">
+        <ParameterList name="CellMap_LAT26">
+          <Parameter name="cell_map" type="Array(string)" value="{2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,2,2,4,2,2,4,2,2,2,2,2,2,2,2,4,2,2,2,2,2,2,2,2,2,4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,2,2,4,2,2,4,2,2,4,2,2,4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,2,2,4,2,2,4,2,2,4,2,2,4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,2,2,4,2,2,4,2,2,4,2,2,4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,2,2,2,2,2,2,2,2,2,4,2,2,2,2,2,2,2,2,4,2,2,4,2,2,4,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2}"/>
+          <Parameter name="label" type="string" value="LAT26"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLEN">
+          <Parameter name="cell_map" type="Array(string)" value="{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,4,5,5,5,5,5,5,5,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,5,5,5,5,5,5,5,4,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}"/>
+          <Parameter name="label" type="string" value="PLEN"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLUG">
+          <Parameter name="cell_map" type="Array(string)" value="{6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,4,6,6,6,6,6,6,6,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,6,6,6,6,6,6,6,4,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6}"/>
+          <Parameter name="label" type="string" value="PLUG"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Cells">
+        <ParameterList name="Cell_2">
+          <Parameter name="label" type="string" value="2"/>
+          <Parameter name="mats" type="Array(string)" value="{U26,he,zirc}"/>
+          <Parameter name="num_rings" type="int" value="3"/>
+          <Parameter name="radii" type="Array(double)" value="{0.4096,0.418,0.475}"/>
+          <Parameter name="type" type="string" value="fuel"/>
+        </ParameterList>
+        <ParameterList name="Cell_4">
+          <Parameter name="label" type="string" value="4"/>
+          <Parameter name="mats" type="Array(string)" value="{mod,zirc}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.561,0.602}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_5">
+          <Parameter name="label" type="string" value="5"/>
+          <Parameter name="mats" type="Array(string)" value="{spring,zirc}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.418,0.475}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_6">
+          <Parameter name="label" type="string" value="6"/>
+          <Parameter name="mats" type="Array(string)" value="{mod}"/>
+          <Parameter name="num_rings" type="int" value="1"/>
+          <Parameter name="radii" type="Array(double)" value="{0.475}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Fuels">
+        <ParameterList name="Fuel_U21">
+          <Parameter name="density" type="double" value="10.257"/>
+          <Parameter name="enrichments" type="Array(double)" value="{2.110}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
+          <Parameter name="key_name" type="string" value="U21"/>
+          <Parameter name="thden" type="double" value="94.5"/>
+        </ParameterList>
+        <ParameterList name="Fuel_U26">
+          <Parameter name="density" type="double" value="10.257"/>
+          <Parameter name="enrichments" type="Array(double)" value="{2.619}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
+          <Parameter name="key_name" type="string" value="U26"/>
+          <Parameter name="thden" type="double" value="94.5"/>
+        </ParameterList>
+        <ParameterList name="Fuel_U31">
+          <Parameter name="density" type="double" value="10.257"/>
+          <Parameter name="enrichments" type="Array(double)" value="{3.100}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
+          <Parameter name="key_name" type="string" value="U31"/>
+          <Parameter name="thden" type="double" value="94.5"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="SpacerGrids">
+        <ParameterList name="Grid_END">
+          <Parameter name="height" type="double" value="3.866"/>
+          <Parameter name="label" type="string" value="END"/>
+          <Parameter name="mass" type="double" value="1017"/>
+          <Parameter name="material" type="string" value="inc"/>
+        </ParameterList>
+        <ParameterList name="Grid_MID">
+          <Parameter name="height" type="double" value="3.810"/>
+          <Parameter name="label" type="string" value="MID"/>
+          <Parameter name="mass" type="double" value="875"/>
+          <Parameter name="material" type="string" value="zirc"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="axial_elevations" type="Array(double)" value="{6.053,11.951,377.711,393.711,395.381}"/>
+      <Parameter name="axial_labels" type="Array(string)" value="{PLUG,LAT26,PLEN,PLUG}"/>
+      <Parameter name="grid_elev" type="Array(double)" value="{13.884,75.2,127.4,179.6,231.8,284.0,336.2,388.2}"/>
+      <Parameter name="grid_map" type="Array(string)" value="{END,MID,MID,MID,MID,MID,MID,END}"/>
+      <Parameter name="label" type="string" value="2"/>
+      <Parameter name="lower_nozzle_comp" type="string" value="ss"/>
+      <Parameter name="lower_nozzle_height" type="double" value="6.053"/>
+      <Parameter name="lower_nozzle_mass" type="double" value="6250.0"/>
+      <Parameter name="num_pins" type="int" value="17"/>
+      <Parameter name="ppitch" type="double" value="1.260"/>
+      <Parameter name="title" type="string" value="Westinghouse 17x17"/>
+      <Parameter name="upper_nozzle_comp" type="string" value="ss"/>
+      <Parameter name="upper_nozzle_height" type="double" value="8.827"/>
+      <Parameter name="upper_nozzle_mass" type="double" value="6250.0"/>
+    </ParameterList>
+    <ParameterList name="Assembly_3">
+      <ParameterList name="CellMaps">
+        <ParameterList name="CellMap_LAT31">
+          <Parameter name="cell_map" type="Array(string)" value="{3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,3,3,4,3,3,4,3,3,3,3,3,3,3,3,4,3,3,3,3,3,3,3,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,3,3,4,3,3,4,3,3,4,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,3,3,4,3,3,4,3,3,4,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,3,3,4,3,3,4,3,3,4,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,3,3,3,3,3,3,3,3,3,4,3,3,3,3,3,3,3,3,4,3,3,4,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3}"/>
+          <Parameter name="label" type="string" value="LAT31"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLEN">
+          <Parameter name="cell_map" type="Array(string)" value="{5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,4,5,5,5,5,5,5,5,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,5,5,5,5,5,5,5,5,5,4,5,5,5,5,5,5,5,5,4,5,5,4,5,5,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}"/>
+          <Parameter name="label" type="string" value="PLEN"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLUG">
+          <Parameter name="cell_map" type="Array(string)" value="{6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,4,6,6,6,6,6,6,6,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,4,6,6,6,6,6,6,6,6,6,4,6,6,6,6,6,6,6,6,4,6,6,4,6,6,4,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6}"/>
+          <Parameter name="label" type="string" value="PLUG"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Cells">
+        <ParameterList name="Cell_3">
+          <Parameter name="label" type="string" value="3"/>
+          <Parameter name="mats" type="Array(string)" value="{U31,he,zirc}"/>
+          <Parameter name="num_rings" type="int" value="3"/>
+          <Parameter name="radii" type="Array(double)" value="{0.4096,0.418,0.475}"/>
+          <Parameter name="type" type="string" value="fuel"/>
+        </ParameterList>
+        <ParameterList name="Cell_4">
+          <Parameter name="label" type="string" value="4"/>
+          <Parameter name="mats" type="Array(string)" value="{mod,zirc}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.561,0.602}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_5">
+          <Parameter name="label" type="string" value="5"/>
+          <Parameter name="mats" type="Array(string)" value="{spring,zirc}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.418,0.475}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_6">
+          <Parameter name="label" type="string" value="6"/>
+          <Parameter name="mats" type="Array(string)" value="{mod}"/>
+          <Parameter name="num_rings" type="int" value="1"/>
+          <Parameter name="radii" type="Array(double)" value="{0.475}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Fuels">
+        <ParameterList name="Fuel_U21">
+          <Parameter name="density" type="double" value="10.257"/>
+          <Parameter name="enrichments" type="Array(double)" value="{2.110}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
+          <Parameter name="key_name" type="string" value="U21"/>
+          <Parameter name="thden" type="double" value="94.5"/>
+        </ParameterList>
+        <ParameterList name="Fuel_U26">
+          <Parameter name="density" type="double" value="10.257"/>
+          <Parameter name="enrichments" type="Array(double)" value="{2.619}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
+          <Parameter name="key_name" type="string" value="U26"/>
+          <Parameter name="thden" type="double" value="94.5"/>
+        </ParameterList>
+        <ParameterList name="Fuel_U31">
+          <Parameter name="density" type="double" value="10.257"/>
+          <Parameter name="enrichments" type="Array(double)" value="{3.100}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
+          <Parameter name="key_name" type="string" value="U31"/>
+          <Parameter name="thden" type="double" value="94.5"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="SpacerGrids">
+        <ParameterList name="Grid_END">
+          <Parameter name="height" type="double" value="3.866"/>
+          <Parameter name="label" type="string" value="END"/>
+          <Parameter name="mass" type="double" value="1017"/>
+          <Parameter name="material" type="string" value="inc"/>
+        </ParameterList>
+        <ParameterList name="Grid_MID">
+          <Parameter name="height" type="double" value="3.810"/>
+          <Parameter name="label" type="string" value="MID"/>
+          <Parameter name="mass" type="double" value="875"/>
+          <Parameter name="material" type="string" value="zirc"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="axial_elevations" type="Array(double)" value="{6.053,11.951,377.711,393.711,395.381}"/>
+      <Parameter name="axial_labels" type="Array(string)" value="{PLUG,LAT31,PLEN,PLUG}"/>
+      <Parameter name="grid_elev" type="Array(double)" value="{13.884,75.2,127.4,179.6,231.8,284.0,336.2,388.2}"/>
+      <Parameter name="grid_map" type="Array(string)" value="{END,MID,MID,MID,MID,MID,MID,END}"/>
+      <Parameter name="label" type="string" value="3"/>
+      <Parameter name="lower_nozzle_comp" type="string" value="ss"/>
+      <Parameter name="lower_nozzle_height" type="double" value="6.053"/>
+      <Parameter name="lower_nozzle_mass" type="double" value="6250.0"/>
+      <Parameter name="num_pins" type="int" value="17"/>
+      <Parameter name="ppitch" type="double" value="1.260"/>
+      <Parameter name="title" type="string" value="Westinghouse 17x17"/>
+      <Parameter name="upper_nozzle_comp" type="string" value="ss"/>
+      <Parameter name="upper_nozzle_height" type="double" value="8.827"/>
+      <Parameter name="upper_nozzle_mass" type="double" value="6250.0"/>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="CONTROLS">
+    <ParameterList name="Control_1">
+      <ParameterList name="CellMaps">
+        <ParameterList name="CellMap_AIC">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,1,-,-,1,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,1,-,-,1,-,-,1,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,1,-,-,-,-,-,1,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,1,-,-,1,-,-,1,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,1,-,-,1,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="AIC"/>
+        </ParameterList>
+        <ParameterList name="CellMap_B4C">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,2,-,-,2,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,2,-,-,2,-,-,2,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,2,-,-,-,-,-,2,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,2,-,-,2,-,-,2,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,2,-,-,2,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="B4C"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLEN">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,3,-,-,3,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,3,-,-,3,-,-,3,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,3,-,-,-,-,-,3,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,3,-,-,3,-,-,3,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,3,-,-,3,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PLEN"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLUG">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,4,-,-,4,-,-,4,-,-,-,-,-,-,-,-,4,-,-,-,-,-,-,-,-,-,4,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,4,-,-,4,-,-,4,-,-,4,-,-,4,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,4,-,-,4,-,-,-,-,-,4,-,-,4,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,4,-,-,4,-,-,4,-,-,4,-,-,4,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,4,-,-,-,-,-,-,-,-,-,4,-,-,-,-,-,-,-,-,4,-,-,4,-,-,4,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PLUG"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Cells">
+        <ParameterList name="Cell_1">
+          <Parameter name="label" type="string" value="1"/>
+          <Parameter name="mats" type="Array(string)" value="{aic,ss}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.386,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_2">
+          <Parameter name="label" type="string" value="2"/>
+          <Parameter name="mats" type="Array(string)" value="{b4c,ss}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.386,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_3">
+          <Parameter name="label" type="string" value="3"/>
+          <Parameter name="mats" type="Array(string)" value="{spring,ss}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.386,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_4">
+          <Parameter name="label" type="string" value="4"/>
+          <Parameter name="mats" type="Array(string)" value="{ss,ss}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.386,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Materials">
+        <ParameterList name="Material_aic">
+          <Parameter name="density" type="double" value="9.989696368"/>
+          <Parameter name="key_name" type="string" value="aic"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{aic}"/>
+        </ParameterList>
+        <ParameterList name="Material_b4c">
+          <Parameter name="density" type="double" value="1.643447072"/>
+          <Parameter name="key_name" type="string" value="b4c"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{b4c}"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="axial_elevations" type="Array(double)" value="{15.131,17.031,118.631,377.711,388.411}"/>
+      <Parameter name="axial_labels" type="Array(string)" value="{PLUG,AIC,B4C,PLEN}"/>
+      <Parameter name="label" type="string" value="1"/>
+      <Parameter name="maxstep" type="int" value="230"/>
+      <Parameter name="num_pins" type="int" value="17"/>
+      <Parameter name="stroke" type="double" value="365.125"/>
+      <Parameter name="title" type="string" value="B4C with AIC tips"/>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="DETECTORS">
+    <ParameterList name="Detector_1">
+      <ParameterList name="CellMaps">
+        <ParameterList name="CellMap_LAT">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="LAT"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Cells">
+        <ParameterList name="Cell_1">
+          <Parameter name="label" type="string" value="1"/>
+          <Parameter name="mats" type="Array(string)" value="{he,ss}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.258,0.382}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Materials">
+        <ParameterList name="Material_he">
+          <Parameter name="density" type="double" value="0.0001786"/>
+          <Parameter name="key_name" type="string" value="he"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{he}"/>
+        </ParameterList>
+        <ParameterList name="Material_ss">
+          <Parameter name="density" type="double" value="8.0"/>
+          <Parameter name="key_name" type="string" value="ss"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{ss}"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="axial_elevations" type="Array(double)" value="{0.0,406.337}"/>
+      <Parameter name="axial_labels" type="Array(string)" value="{LAT}"/>
+      <Parameter name="label" type="string" value="1"/>
+      <Parameter name="num_pins" type="int" value="17"/>
+      <Parameter name="title" type="string" value="Incore instrument thimble"/>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="INSERTS">
+    <ParameterList name="Insert_12">
+      <ParameterList name="CellMaps">
+        <ParameterList name="CellMap_PLEN12">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PLEN12"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLUG12">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PLUG12"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PY12">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PY12"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Cells">
+        <ParameterList name="Cell_1">
+          <Parameter name="label" type="string" value="1"/>
+          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrx1,he,ss}"/>
+          <Parameter name="num_rings" type="int" value="6"/>
+          <Parameter name="radii" type="Array(double)" value="{0.214,0.231,0.241,0.427,0.437,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_2">
+          <Parameter name="label" type="string" value="2"/>
+          <Parameter name="mats" type="Array(string)" value="{spring,ss}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.437,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_3">
+          <Parameter name="label" type="string" value="3"/>
+          <Parameter name="mats" type="Array(string)" value="{ss}"/>
+          <Parameter name="num_rings" type="int" value="1"/>
+          <Parameter name="radii" type="Array(double)" value="{0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Materials">
+        <ParameterList name="Material_pyrx1">
+          <Parameter name="density" type="double" value="2.25"/>
+          <Parameter name="key_name" type="string" value="pyrx1"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="axial_elevations" type="Array(double)" value="{13.221,15.761,376.441,398.64}"/>
+      <Parameter name="axial_labels" type="Array(string)" value="{PLUG12,PY12,PLEN12}"/>
+      <Parameter name="label" type="string" value="12"/>
+      <Parameter name="num_pins" type="int" value="17"/>
+      <Parameter name="title" type="string" value="Pyrex"/>
+    </ParameterList>
+    <ParameterList name="Insert_16">
+      <ParameterList name="CellMaps">
+        <ParameterList name="CellMap_PLEN16">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PLEN16"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLUG16">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PLUG16"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PY16">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PY16"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Cells">
+        <ParameterList name="Cell_1">
+          <Parameter name="label" type="string" value="1"/>
+          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrx1,he,ss}"/>
+          <Parameter name="num_rings" type="int" value="6"/>
+          <Parameter name="radii" type="Array(double)" value="{0.214,0.231,0.241,0.427,0.437,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_2">
+          <Parameter name="label" type="string" value="2"/>
+          <Parameter name="mats" type="Array(string)" value="{spring,ss}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.437,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_3">
+          <Parameter name="label" type="string" value="3"/>
+          <Parameter name="mats" type="Array(string)" value="{ss}"/>
+          <Parameter name="num_rings" type="int" value="1"/>
+          <Parameter name="radii" type="Array(double)" value="{0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Materials">
+        <ParameterList name="Material_pyrx1">
+          <Parameter name="density" type="double" value="2.25"/>
+          <Parameter name="key_name" type="string" value="pyrx1"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="axial_elevations" type="Array(double)" value="{13.221,15.761,376.441,398.64}"/>
+      <Parameter name="axial_labels" type="Array(string)" value="{PLUG16,PY16,PLEN16}"/>
+      <Parameter name="label" type="string" value="16"/>
+      <Parameter name="num_pins" type="int" value="17"/>
+      <Parameter name="title" type="string" value="Pyrex"/>
+    </ParameterList>
+    <ParameterList name="Insert_20">
+      <ParameterList name="CellMaps">
+        <ParameterList name="CellMap_PLEN20">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,2,-,-,2,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,2,-,-,-,-,-,2,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,2,-,-,2,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PLEN20"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLUG20">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,3,-,-,3,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,3,-,-,-,-,-,3,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,3,-,-,3,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PLUG20"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PY20">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,1,-,-,1,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,1,-,-,-,-,-,1,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,1,-,-,1,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PY20"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Cells">
+        <ParameterList name="Cell_1">
+          <Parameter name="label" type="string" value="1"/>
+          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrx1,he,ss}"/>
+          <Parameter name="num_rings" type="int" value="6"/>
+          <Parameter name="radii" type="Array(double)" value="{0.214,0.231,0.241,0.427,0.437,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_2">
+          <Parameter name="label" type="string" value="2"/>
+          <Parameter name="mats" type="Array(string)" value="{spring,ss}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.437,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_3">
+          <Parameter name="label" type="string" value="3"/>
+          <Parameter name="mats" type="Array(string)" value="{ss}"/>
+          <Parameter name="num_rings" type="int" value="1"/>
+          <Parameter name="radii" type="Array(double)" value="{0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Materials">
+        <ParameterList name="Material_pyrx1">
+          <Parameter name="density" type="double" value="2.25"/>
+          <Parameter name="key_name" type="string" value="pyrx1"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="axial_elevations" type="Array(double)" value="{13.221,15.761,376.441,398.64}"/>
+      <Parameter name="axial_labels" type="Array(string)" value="{PLUG20,PY20,PLEN20}"/>
+      <Parameter name="label" type="string" value="20"/>
+      <Parameter name="num_pins" type="int" value="17"/>
+      <Parameter name="title" type="string" value="Pyrex"/>
+    </ParameterList>
+    <ParameterList name="Insert_24">
+      <ParameterList name="CellMaps">
+        <ParameterList name="CellMap_PLEN24">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,2,-,-,2,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,2,-,-,2,-,-,2,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,2,-,-,-,-,-,2,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,2,-,-,2,-,-,2,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,2,-,-,2,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PLEN24"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLUG24">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,3,-,-,3,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,3,-,-,3,-,-,3,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,3,-,-,-,-,-,3,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,3,-,-,3,-,-,3,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,3,-,-,3,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PLUG24"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PY24">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,1,-,-,1,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,1,-,-,1,-,-,1,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,1,-,-,-,-,-,1,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,1,-,-,1,-,-,1,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,1,-,-,1,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PY24"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Cells">
+        <ParameterList name="Cell_1">
+          <Parameter name="label" type="string" value="1"/>
+          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrx1,he,ss}"/>
+          <Parameter name="num_rings" type="int" value="6"/>
+          <Parameter name="radii" type="Array(double)" value="{0.214,0.231,0.241,0.427,0.437,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_2">
+          <Parameter name="label" type="string" value="2"/>
+          <Parameter name="mats" type="Array(string)" value="{spring,ss}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.437,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_3">
+          <Parameter name="label" type="string" value="3"/>
+          <Parameter name="mats" type="Array(string)" value="{ss}"/>
+          <Parameter name="num_rings" type="int" value="1"/>
+          <Parameter name="radii" type="Array(double)" value="{0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Materials">
+        <ParameterList name="Material_pyrx1">
+          <Parameter name="density" type="double" value="2.25"/>
+          <Parameter name="key_name" type="string" value="pyrx1"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="axial_elevations" type="Array(double)" value="{13.221,15.761,376.441,398.64}"/>
+      <Parameter name="axial_labels" type="Array(string)" value="{PLUG24,PY24,PLEN24}"/>
+      <Parameter name="label" type="string" value="24"/>
+      <Parameter name="num_pins" type="int" value="17"/>
+      <Parameter name="title" type="string" value="Pyrex"/>
+    </ParameterList>
+    <ParameterList name="Insert_8">
+      <ParameterList name="CellMaps">
+        <ParameterList name="CellMap_PLEN8">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PLEN8"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLUG8">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,3,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PLUG8"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PY8">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="PY8"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Cells">
+        <ParameterList name="Cell_1">
+          <Parameter name="label" type="string" value="1"/>
+          <Parameter name="mats" type="Array(string)" value="{he,ss,he,pyrx1,he,ss}"/>
+          <Parameter name="num_rings" type="int" value="6"/>
+          <Parameter name="radii" type="Array(double)" value="{0.214,0.231,0.241,0.427,0.437,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_2">
+          <Parameter name="label" type="string" value="2"/>
+          <Parameter name="mats" type="Array(string)" value="{spring,ss}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.437,0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_3">
+          <Parameter name="label" type="string" value="3"/>
+          <Parameter name="mats" type="Array(string)" value="{ss}"/>
+          <Parameter name="num_rings" type="int" value="1"/>
+          <Parameter name="radii" type="Array(double)" value="{0.484}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Materials">
+        <ParameterList name="Material_pyrx1">
+          <Parameter name="density" type="double" value="2.25"/>
+          <Parameter name="key_name" type="string" value="pyrx1"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{pyrex-vera}"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="axial_elevations" type="Array(double)" value="{13.221,15.761,376.441,398.64}"/>
+      <Parameter name="axial_labels" type="Array(string)" value="{PLUG8,PY8,PLEN8}"/>
+      <Parameter name="label" type="string" value="8"/>
+      <Parameter name="num_pins" type="int" value="17"/>
+      <Parameter name="title" type="string" value="Pyrex"/>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="INSILICO">
+    <Parameter name="Pn_correction" type="bool" value="true"/>
+    <Parameter name="Pn_order" type="int" value="1"/>
+    <Parameter name="SPN_order" type="int" value="3"/>
+    <Parameter name="cell_homogenize" type="bool" value="true"/>
+    <Parameter name="dimension" type="int" value="3"/>
+    <Parameter name="eq_set" type="string" value="spn_fv"/>
+    <Parameter name="mat_library" type="string" value="casl_comp_r2.sh5"/>
+    <Parameter name="max_delta_z" type="double" value="7.62"/>
+    <Parameter name="mesh" type="int" value="2"/>
+    <Parameter name="new_grp_bounds" type="Array(double)" value="{8.2085e+05,1.1109e+05,5.5308e+03,1.8644e+02,3.7612e+01,3.5379e+01,2.7697e+01,2.1684e+01,2.0397e+01,1.5968e+01,7.1500e+00,6.7000e+00,6.3000e+00,1.0970e+00,1.0450e+00,9.5000e-01,3.5000e-01,2.0600e-01,1.0700e-01,5.8000e-02,2.5000e-02,1.0000e-02,1.0000e-05}"/>
+    <Parameter name="num_blocks_i" type="int" value="30"/>
+    <Parameter name="num_blocks_j" type="int" value="24"/>
+    <Parameter name="num_groups" type="int" value="23"/>
+    <Parameter name="num_sets" type="int" value="1"/>
+    <Parameter name="num_z_blocks" type="int" value="1"/>
+    <ParameterList name="quadrature_db">
+      <Parameter name="azimuthals_octant" type="int" value="4"/>
+      <Parameter name="polars_octant" type="int" value="4"/>
+      <Parameter name="quad_type" type="string" value="qr"/>
+    </ParameterList>
+    <ParameterList name="silo_db">
+      <Parameter name="silo_output" type="string" value="p5"/>
+    </ParameterList>
+    <Parameter name="tolerance" type="double" value="1e-6"/>
+    <Parameter name="xs_library" type="string" value="lib252_hetbondoneabs-noabssigp"/>
+  </ParameterList>
+  <ParameterList name="EDITS">
+    <Parameter name="axial_edit_bounds" type="Array(double)" value="{11.951,15.817,24.028,32.239,40.45,48.662,56.873,65.084,73.295,77.105,85.17,93.235,101.3,109.365,117.43,125.495,129.305,137.37,145.435,153.5,161.565,169.63,177.695,181.505,189.57,197.635,205.7,213.765,221.83,229.895,233.705,241.77,249.835,257.9,265.965,274.03,282.095,285.905,293.97,302.035,310.1,318.165,326.23,334.295,338.105,346.0262,353.9474,361.8686,369.7898,377.711}"/>
+  </ParameterList>
+  <ParameterList name="MPACT">
+    <ParameterList name="2d1d">
+      <Parameter name="TLtreatment" type="string" value="lflat"/>
+      <Parameter name="nodal_method" type="string" value="nem"/>
+      <Parameter name="splitTL" type="bool" value="true"/>
+    </ParameterList>
+    <ParameterList name="cmfd">
+      <Parameter name="cmfd" type="string" value="ycmfd"/>
+      <Parameter name="k_shift" type="double" value="1.15"/>
+      <Parameter name="num_outers" type="int" value="20"/>
+      <Parameter name="solver" type="string" value="1gsweep"/>
+    </ParameterList>
+    <ParameterList name="iteration_control">
+      <Parameter name="flux_tolerance" type="double" value="1e-4"/>
+      <Parameter name="k_tolerance" type="double" value="1e-6"/>
+      <Parameter name="num_inners" type="int" value="3"/>
+      <Parameter name="num_outers" type="int" value="20"/>
+      <Parameter name="scattering" type="string" value="P2"/>
+      <Parameter name="up_scatter" type="int" value="2"/>
+    </ParameterList>
+    <Parameter name="jagged" type="bool" value="true"/>
+    <ParameterList name="mesh">
+      <Parameter name="automesh_bounds_max" type="double" value="20.0"/>
+      <Parameter name="automesh_bounds_min" type="double" value="2.0"/>
+      <Parameter name="meshing_method" type="string" value="nonfuel"/>
+      <ParameterList name="pinmesh">
+        <ParameterList name="pinmesh_fuel">
+          <Parameter name="label" type="string" value="fuel"/>
+          <Parameter name="num_rad" type="Array(int)" value="{3,1,1}"/>
+          <Parameter name="num_theta" type="Array(int)" value="{8,8,8,8,8,8}"/>
+        </ParameterList>
+        <ParameterList name="pinmesh_gtube">
+          <Parameter name="label" type="string" value="gtube"/>
+          <Parameter name="num_rad" type="Array(int)" value="{3,1}"/>
+          <Parameter name="num_theta" type="Array(int)" value="{8,8,8,8,8}"/>
+        </ParameterList>
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="parallel_env">
+      <Parameter name="filename" type="string" value="part_p5-3d_48r_60z_2880np.txt"/>
+      <Parameter name="method" type="string" value="EXPLICITFILE"/>
+      <Parameter name="num_angle" type="int" value="1"/>
+      <Parameter name="num_energy" type="int" value="1"/>
+      <Parameter name="num_space" type="int" value="2880"/>
+      <Parameter name="num_threads" type="int" value="1"/>
+    </ParameterList>
+    <ParameterList name="quad_set">
+      <Parameter name="azimuthals_octant" type="int" value="8"/>
+      <Parameter name="polars_octant" type="int" value="3"/>
+      <Parameter name="quad_type" type="string" value="CHEBYSHEV-GAUSS"/>
+    </ParameterList>
+    <Parameter name="ray_spacing" type="double" value="0.05"/>
+    <Parameter name="vis_edits" type="string" value="none"/>
+    <ParameterList name="xs_library">
+      <Parameter name="dep_filename" type="string" value="mpact.dpl"/>
+      <Parameter name="subgroup_set" type="int" value="4"/>
+      <Parameter name="xs_filename" type="string" value="declib56g_e7_09042013_p0mixed.fmt"/>
+      <Parameter name="xs_type" type="string" value="ORNL"/>
+    </ParameterList>
+  </ParameterList>
+</ParameterList>
