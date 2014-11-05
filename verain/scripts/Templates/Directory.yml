@@ -248,6 +248,11 @@ CORE:
     _content:
     _check:
       - is_string()
+  op_date:
+    <<: *dtdate
+    _content:
+    _check:
+      - is_string()
   size:
     <<: *dtint
     _content:

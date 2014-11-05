@@ -4,6 +4,13 @@ CORE:
     - setdb MAIN_DB
   _content:
 
+    op_date:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/$op_date
+      _content:
+
     rated_power:
       _pltype: parameter
       _type: double
