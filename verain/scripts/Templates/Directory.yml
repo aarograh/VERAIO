@@ -1632,6 +1632,12 @@ MPACT:
     _check:
       - is_int()
       - is_gt() 0
+  dep_kernel:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() internal origen
 
   cmfd:
     <<: *dtword

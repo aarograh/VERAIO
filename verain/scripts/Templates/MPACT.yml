@@ -227,13 +227,6 @@ MPACT:
             - copy MPACT/$scattering
           _content:
 
-        depl_time_method:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy MPACT/$depl_time_method
-          _content:
-
         boundary_update:
           _pltype: parameter
           _type: string
@@ -241,16 +234,16 @@ MPACT:
             - copy MPACT/$boundary_update
           _content:
 
-        depl_time_method:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy MPACT/$depl_time_method
-          _content:
-
     depletion:
       _pltype: list
       _content:
+
+        dep_filename:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$dep_filename
+          _content:
 
         dep_edit:
           _pltype: parameter
@@ -264,6 +257,20 @@ MPACT:
           _type: int
           _do:
             - copy MPACT/$dep_substep
+          _content:
+
+        dep_kernel:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$dep_kernel
+          _content:
+
+        depl_time_method:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$depl_time_method
           _content:
 
     TH:
@@ -434,13 +441,6 @@ MPACT:
           _type: string
           _do:
             - copy MPACT/$xs_shielder
-          _content:
-
-        dep_filename:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy MPACT/$dep_filename
           _content:
 
         mats_file:
