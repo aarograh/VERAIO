@@ -1,28 +1,39 @@
-!--------------------------------------------------------------------------------
-!  Program to diff two VERA HDF output files
+    program veradiff
+!=======================================================================
 !
-!  Copyright Core Physics, Inc. 2013-2014
+!  Program to compare twoH VERA HDF output file and print summary
 !
-!  Right now, we are just performing a simple diff on eigenvalues with a
-!  tolerance of 10 pcm.
+!  Copyright (c) 2014 Core Physics, Inc.
+!
+!  Distributed under the MIT license.
+!  See the LICENSE file in the main directory for details.
+!
+!  Main directory: https://github.com/palmtag/VERAout-tools/
+!
+!=======================================================================
+!
+!  This program is intended to be used in regressing testing
+!
+!  Right now, we are just performing a simple diff on eigenvalues with a tolerance of 10 pcm.
 !  This will be modifed in the future to check other parameters as well.
 !
 !  2013/09/06 - original file
 !  2014/01/27 - compare boron if dataset is present on file
 !  2014/04/26 - add comparison for multiple statepoints - see #3164
+!  2014/11/01 - added pin power comparisons             - see #3430
+!
 !
 !--------------------------------------------------------------------------------
-      program veradiff
       use hdf5
       implicit none
 
-      character(len=250) :: fname1, fname2
-      integer            :: iargs
+      character(len=250) :: fname1, fname2   ! HDF file names
+      integer            :: iargs            ! number of command line arguments
 
-      integer(hid_t)     :: file_id1, file_id2
+      integer(hid_t)     :: file_id1, file_id2  ! HDF file id's
       integer            :: ierror
-      integer            :: nfail    ! number of diff failures
-      integer            :: nstate   ! statepoint number
+      integer            :: nfail            ! number of diff failures
+      integer            :: nstate           ! statepoint number
 
       logical            :: ifxst
 
@@ -48,7 +59,7 @@
       call get_command_argument(1,fname1)
       call get_command_argument(2,fname2)
 
-      write (*,'(2a)') 'reading h5 file: ', trim(fname1)
+      write (*,'(/,1x,2a)') 'reading h5 file: ', trim(fname1)
       inquire(file=fname1, exist=ifxst)
       if (.not.ifxst) then
         write (*,*) 'ERROR: input file ',trim(fname1),' does not exist'
@@ -56,7 +67,7 @@
         goto 900
       endif
 
-      write (*,'(2a)') 'reading h5 file: ', trim(fname2)
+      write (*,'(1x,2a)') 'reading h5 file: ', trim(fname2)
       inquire(file=fname2, exist=ifxst)
       if (.not.ifxst) then
         write (*,*) 'ERROR: input file ',trim(fname2),' does not exist'
@@ -100,6 +111,8 @@
         nstate=0    ! old file without STATE groups
       endif
 
+!--- loop over all statepoints and do comparisons
+
       do
         call readstate(file_id1, file_id2, nstate, nfail)
         if (nstate.eq.0) exit   ! old files only have one statepoint
@@ -134,6 +147,7 @@
 !=======================================================================
       subroutine readstate(file_id1, file_id2, nstate, nfail)
       use hdf5
+      use mod_hdftools, only : hdf5_read_double
       implicit none
 
       integer(hid_t), intent(in) :: file_id1, file_id2
@@ -143,6 +157,7 @@
 !--- local variables
 
       integer            :: ierror
+
       logical            :: ifmissing
       logical            :: ifxst
 
@@ -154,7 +169,10 @@
       real(8)            :: xkdiff
       real(8)            :: xktol=10.0d0   ! eigenvalue tolerance (pcm)
 
+      real(8)            :: rms
+
       character(len=80)  :: dataset
+      character(len=12)  :: statename
 
       boron1=-9999.0d0    ! large negative number if dataset not present
       boron2=-9999.0d0    ! large negative number if dataset not present
@@ -167,63 +185,87 @@
 
       write (*,*)
 
+      if (nstate.eq.0) then
+        statename=' '
+      else
+        statename='STATE_0000/'
+        write (statename(7:10),'(i4.4)') nstate
+      endif
+
+
 !--------------------------------------------------------------------------------
 ! Read Eigenvalue and other scalers
 !--------------------------------------------------------------------------------
 
 !--- eigenvalue
 
-      if (nstate.eq.0) then
-        dataset='keff'
-      else
-        dataset='STATE_0000/keff'
-        write (dataset(7:10),'(i4.4)') nstate
-      endif
+      dataset=trim(statename)//'keff'
 
       call h5lexists_f(file_id1, dataset, ifxst, ierror)
       if (ifxst) then
-        call read_double(file_id1, dataset, xkeff1)
+        call hdf5_read_double(file_id1, dataset, xkeff1)
       else
         nfail=nfail+1
         ifmissing=.true.
-        write (*,*) 'FAIL - keff dataset does not exist on file'
+        write (*,*) 'FAIL - keff dataset does not exist on file 1'
       endif
 
       call h5lexists_f(file_id2, dataset, ifxst, ierror)
       if (ifxst) then
-        call read_double(file_id2, dataset, xkeff2)
+        call hdf5_read_double(file_id2, dataset, xkeff2)
       else
         nfail=nfail+1
         ifmissing=.true.
-        write (*,*) 'FAIL - keff dataset does not exist on file'
+        write (*,*) 'FAIL - keff dataset does not exist on file 2'
       endif
 
       if (ifmissing) return    ! return if eigenvalue missing
 
       xkdiff=(xkeff2-xkeff1)*1.0d5
 
-!--- boron (optional)
+!--- pin powers
 
-      if (nstate.eq.0) then
-        dataset='boron'
-      else
-        dataset='STATE_0000/boron'
-        write (dataset(7:10),'(i4.4)') nstate
-      endif
+      dataset=trim(statename)//'pin_powers'
 
       call h5lexists_f(file_id1, dataset, ifxst, ierror)
-      if (ifxst) call read_double(file_id1, dataset, boron1)
-      call h5lexists_f(file_id2, dataset, ifxst, ierror)
-      if (ifxst) call read_double(file_id2, dataset, boron2)
+      if (.not.ifxst) then
+        nfail=nfail+1
+        ifmissing=.true.
+        write (*,*) 'FAIL - pin power dataset does not exist on file 1'
+      endif
 
-!--- compare
+      call h5lexists_f(file_id2, dataset, ifxst, ierror)
+      if (.not.ifxst) then
+        nfail=nfail+1
+        ifmissing=.true.
+        write (*,*) 'FAIL - pin power dataset does not exist on file 2'
+      endif
+
+      if (ifmissing) return    ! return if pin powers missing
+
+      call pin_compare(file_id1, file_id2, dataset, rms)
+
+! ****** NOTE THAT NO TOLERANCE IS SET, PIN POWER DIFFERENCES *******
+! ******        IS JUST INFORMATIONAL AT THIS POINT           *******
+
+!--- boron (optional)
+
+      dataset=trim(statename)//'boron'
+
+      call h5lexists_f(file_id1, dataset, ifxst, ierror)
+      if (ifxst) call hdf5_read_double(file_id1, dataset, boron1)
+      call h5lexists_f(file_id2, dataset, ifxst, ierror)
+      if (ifxst) call hdf5_read_double(file_id2, dataset, boron2)
+
+!  compare boron
 
       if (boron1.gt.-1000.0d0 .and. boron2.gt.-1000.0d0) then
+        write (*,'(/,1x,a)') 'Boron comparisons'
         bordiff=(boron2-boron1)
-        write (*,'(a, f12.2)')   ' boron1 =', boron1
-        write (*,'(a, f12.2)')   ' boron2 =', boron2
-        write (*,'(a, f12.2,a)') ' diff   =', bordiff,' ppm'
-        write (*,'(a, f12.2,a)') ' tol    =', bortol ,' ppm'
+        write (*,'(2x,a, f12.2)')   'boron1 =', boron1
+        write (*,'(2x,a, f12.2)')   'boron2 =', boron2
+        write (*,'(2x,a, f12.2,a)') 'diff   =', bordiff,' ppm'
+        write (*,'(2x,a, f12.2,a)') 'tol    =', bortol ,' ppm'
         if (abs(bordiff).lt.bortol) then
           write (*,*) 'PASS - boron difference is less than tolerance'
         else
@@ -231,13 +273,14 @@
           write (*,*) 'FAIL - boron difference exceeds tolerance'
         endif
       else
-        write (*,'(a)') 'No boron comparison performed - at least one file missing boron'
+        write (*,'(/,1x,a)') 'No boron comparison performed - at least one file is missing boron'
       endif
 
-      write (*,'(a, f12.7)')   ' keff1  =', xkeff1
-      write (*,'(a, f12.7)')   ' keff2  =', xkeff2
-      write (*,'(a, f12.2,a)') ' diff   =', xkdiff,' pcm'
-      write (*,'(a, f12.2,a)') ' tol    =', xktol ,' pcm'
+      write (*,'(/,1x,a)') 'Eigenvalue comparisons'
+      write (*,'(2x,a, f12.7)')   'keff1  =', xkeff1
+      write (*,'(2x,a, f12.7)')   'keff2  =', xkeff2
+      write (*,'(2x,a, f12.2,a)') 'diff   =', xkdiff,' pcm'
+      write (*,'(2x,a, f12.2,a)') 'tol    =', xktol ,' pcm'
 
       if (abs(xkdiff).lt.xktol) then
         write (*,*) 'PASS - eigenvalue difference is less than tolerance'
@@ -246,114 +289,106 @@
         write (*,*) 'FAIL - eigenvalue difference exceeds tolerance'
       endif
 
-!--------------------------------------------------------------------------------
-! Read pin powers
-!--------------------------------------------------------------------------------
-
-! Note: power array is allocated in subroutine
-
-!!    dataset='pin_powers'
-!!    call h5info(file_id, dataset, itype, ndim, idim)
-!!    if (ndim.ne.4) stop 'invalid dimensions in core_map'
-!!    npin =idim(1)
-!!    kd   =idim(3)
-!!    nassm=idim(4)
-!!    if (idim(1).ne.idim(2)) stop 'invalid npin in read_power'
-!!    write (*,*) '   npin ', npin
-!!    write (*,*) '   kd   ', kd
-!!    write (*,*) '   nassm', nassm
-!!    allocate (power(npin, npin, kd, nassm))
-
-!!    call read_double4d(file_id, dataset, npin, npin, kd, nassm, power)
-
-!!    if (naxial-1.ne.kd) then
-!!      stop 'mismatch found between axial levels in input and number of levels of output'
-!!    endif
+!--- return
 
       return
 
       end subroutine readstate
 !=======================================================================
 !
-!  Subroutine to read double precision scalar from HDF5 file
+!  Subroutine to read two pin_power datasets and calculate RMS
 !
 !=======================================================================
-      subroutine read_double(file_id, dataset, xvar)
-      use  hdf5
+      subroutine pin_compare(file_id1, file_id2, dataset, rms)
+      use hdf5
+      use mod_hdftools, only : h5info, hdf5_read_double
       implicit none
+      integer(hid_t),   intent(in)  :: file_id1, file_id2
+      character(len=*), intent(in)  :: dataset
+      real(8),          intent(out) :: rms
 
-      integer(hid_t),   intent(in) :: file_id
-      character(len=*), intent(in) :: dataset
-      real(8),          intent(out):: xvar
+      integer :: ip, jp, k, na, np
+      integer :: nassm, kd, npin
+      integer :: ndim         ! number of array dimensions
+      integer :: idim(10)     ! array dimension sizes
+      integer :: itype        !
 
-!--- local
+      logical :: ifbad        ! flag for bad data
 
-      integer(hid_t)     :: dset_id
-      integer(hid_t)     :: ispace_id
-      integer            :: ierror
-      integer            :: maxndim
+      real(8)              :: p1, dd, dmax
+      real(8), allocatable :: power1(:,:,:,:)
+      real(8), allocatable :: power2(:,:,:,:)
 
-      integer, parameter :: max_dimen=2     ! maximum number of dimensions allowed
+!  find dimensions so we can allocate
 
-      integer(hsize_t)   :: h_dims(max_dimen)
-      integer(hsize_t)   :: h_maxdims(max_dimen)
+      rms=999999.0d0   ! set high in case reads fail
+      ifbad=.false.
 
-      ierror=0
-      xvar=-1.0d0    ! init
+      call h5info(file_id1, dataset, itype, ndim, idim)
 
-!--- Read double precision scalar
+      nassm=idim(1)    ! order (nassm, kd, npin, npin)
+      kd   =idim(2)
+      npin =idim(4)
 
-!--- open a dataset and dataspace
+!d    write (*,*) 'debug pin: ndim  = ', ndim
+!d    write (*,*) 'debug pin: nassm = ', nassm
+!d    write (*,*) 'debug pin: kd    = ', kd
+!d    write (*,*) 'debug pin: npin  = ', npin
 
-      write (*,'(1x,2a)') 'reading dataset: ', trim(dataset)
-
-      call h5dopen_f(file_id, dataset, dset_id, ierror)
-      if (ierror.lt.0) then
-        write(*,'(3a)')   'error: data set ',trim(dataset), ' could not be opened'
-        write(*,'(a,i8)') 'error code ', ierror
-        return
+      if (ndim .ne.4) then
+        ifbad=.true.
+        write (*,*) 'invalid dimensions in pin data'
       endif
-
-      call h5dget_space_f(dset_id, ispace_id, ierror)       !Assign a dataspace based on the dataset
-      if (ierror.ne.0) then
-        write (*,*) 'error: h5dget_space_f ', ierror
-        stop        'error: h5dget_space_f'
+      if (nassm.eq.0) then
+        ifbad=.true.
+        write (*,*) 'invalid number of assemblies in pin data'
       endif
-
-! Determine number of discrete subunits for each dimensions
-      h_dims(:)=0
-      h_maxdims(:)=0
-      call h5sget_simple_extent_dims_f(ispace_id, h_dims, h_maxdims, ierror)
-      if (ierror.lt.0) then    ! returns rank in ierror
-        write (*,*) 'error: h5sget_simple_extent_dims_f ', ierror
-        stop        'error: h5sget_simple_extent_dims_f'
+      if (npin .eq.0) then
+        ifbad=.true.
+        write (*,*) 'invalid number of pins in pin data'
       endif
-      maxndim=ierror
-
-      if (maxndim.gt.max_dimen) stop 'maximum dimensions exceeded'
-      if (maxndim.ne.1) stop 'invalid number of dimensions'
-
-!!    if (ifdebug) then
-!!      write (*,110) trim(dataset)
-!!      write (*,115) 'number of dimensions: ', maxndim
-!!      write (*,115) 'dimensions    : ', h_dims(1:maxndim)
-!!      write (*,115) 'dimensions max: ', h_maxdims(1:maxndim)
-!!    endif
-!!110 format (/,' dataset : ', a)
-!!115 format (1x,a,20i4)
-
-! Read data from dataset
-      call h5dread_f(dset_id, H5T_NATIVE_DOUBLE, xvar, h_dims, ierror)
-      if (ierror.ne.0) then
-        write(*,*) 'error: h5dread_f reading  data set ',trim(dataset)
-        stop
+      if (idim(3).ne.idim(4)) then
+        ifbad=.true.
+        write (*,*) 'invalid npin in pin data'
       endif
+      if (ifbad) return   ! return with big RMS
 
-! Close dataspace and dataset
+      allocate (power1(nassm, kd, npin, npin))
+      allocate (power2(nassm, kd, npin, npin))
 
-      call h5sclose_f(ispace_id, ierror)
-      call h5dclose_f(dset_id, ierror)
+      call hdf5_read_double(file_id1, dataset, idim(1), idim(2), idim(3), idim(4), power1)
+      call hdf5_read_double(file_id2, dataset, idim(1), idim(2), idim(3), idim(4), power2)
+
+      rms=0.0d0
+      dmax=0.0d0
+      np=0
+      do ip=1, npin
+        do jp=1, npin
+          do k=1, kd
+            do na=1, nassm
+              p1=power1(na,k,jp,ip)
+              if (p1.gt.0.0d0) then
+                np=np+1
+                dd=power2(na,k,jp,ip)-p1
+                rms=rms+dd*dd
+                dmax=max(dmax,dd)
+              endif
+            enddo
+          enddo
+        enddo
+      enddo
+
+      if (np.gt.0) rms=sqrt(rms/dble(np))
+ 
+      deallocate (power2)
+      deallocate (power1)
+
+      write (*,'(/1x,a)') 'Pin Power comparisons'
+      write (*,*)  ' num values=', np
+      write (*,30) 'max', dmax*100.0d0
+      write (*,30) 'rms', rms*100.0d0
+  30  format (2x,a,' difference =', f10.4,' %')
 
       return
-      end subroutine read_double
+      end subroutine pin_compare
 !=======================================================================
