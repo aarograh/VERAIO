@@ -48,6 +48,7 @@ _DIRECTORY:
   DETECTOR:
   EDITS:
   INSILICO:
+  SHIFT:
   COBRATF:
   COUPLING:
   MPACT:
@@ -991,6 +992,70 @@ INSILICO:
     _check:
       - is_word()
       - in_dictionary() true false
+
+  transport:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() deterministic ce_mc mg_mc
+
+  output_geometry:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
+  thermal_energy_cutoff:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+SHIFT:
+  celib_file:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+  do_transport:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  do_output:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  mesh:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  num_cycles:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  num_inactive_cycles:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  Np:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
 
   transport:
     <<: *dtstring
