@@ -15,9 +15,8 @@
   power  100.0         ! %
   tinlet 559.0 F         ! F
   boron  1300          ! ppmB
-  search 'boron'
-  kcrit  1.02   
-  pressure 2250        ! psia
+  search 'boron';  kcrit  1.02   
+  pressure 2250   ;     ! psia
 
   tfuel 900.0 K         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
   modden 0.743         ! g/cc      Not used with T/H feedback!
@@ -30,45 +29,21 @@
 [STATE]
   power  80.0     ! added multistate 1/30/2014 , must use --multistate command line option
 
-  inlet_temp
-        0.
-    -2. 0. 2.
-        0.
-
-  inlet_flow
-         20.
-    -20.  0  20 
-        -20.    
+  inlet_temp        0.    -2. 0. 2.        0. ;  inlet_flow         20.    -20.  0  20         -20.    
 
 
-[STATE]
-  power  70.0
+[STATE];  power  70.0
 
-[STATE]
-  power  60.0
-
-  inlet_temp
-        2. -1.
-       -1.   
+[STATE]  power  60.0;   inlet_temp        2. -1.       -1.   
 
   inlet_flow
      50. -20.5
     -10. 
 
-[STATE]
-  power  50.0
-
-[STATE]
-  power  40.0
-
-[STATE]
-  power  30.0
-
-[STATE]
-  power  20.0
-
-[STATE]
-  power  10.0
+[STATE];  power  50.0
+[STATE];  power  40.0
+[STATE]  power  30.0
+[STATE];  power  20.0 ; [STATE]  power  10.0
 
 [CORE]
   size 3                ! 3x3 cross - 5 assemblies
