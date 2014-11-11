@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -A nfi011
-#PBS -l nodes=14 
-#PBS -l walltime=00:30:00
+#PBS -l nodes=37 
+#PBS -l walltime=00:10:00
 #PBS -o p5.stdout
 #PBS -N MPACT_5b-2d
 #PBS -l gres=atlas1%atlas2
@@ -14,7 +14,7 @@ cd $PBS_O_WORKDIR
 export LD_LIBRARY_PATH=${HDF5_DIR}/lib:$LD_LIBRARY_PATH
 
 case=p5
-cores=448
+cores=584
 
 # set executables
 mpact=$PROJWORK/nfi011/agm/mpact/MPACT_11052014
@@ -44,11 +44,11 @@ perl $parser --init $case.inp $case.xml
 ls -l $case.xml
 date
 
-export OMP_NUM_THREADS=2
+export OMP_NUM_THREADS=1
 
 # run MPACT 
 echo "============================================="
 echo "   Running MPACT Job on $cores cores"
 echo "============================================="
-aprun -n $cores -j2 $exe $case.xml
+aprun -n $cores $exe $case.xml
 date
