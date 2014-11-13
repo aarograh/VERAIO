@@ -11,26 +11,17 @@
   sym      qtr  
   feedback off
 
-[STATE]
-  rodbank D 23
-[STATE]
-  rodbank D 46
-[STATE]
-  rodbank D 69
-[STATE]
-  rodbank D 92
-[STATE]
-  rodbank D 115
-[STATE]
-  rodbank D 138
-[STATE]
-  rodbank D 161
-[STATE]
-  rodbank D 184
-[STATE]
-  rodbank D 207
-[STATE]
-  rodbank D 230
+[STATE]  rodbank D 23
+[STATE]  rodbank D 46
+[STATE]  rodbank D 69
+[STATE]  rodbank D 92
+[STATE]  rodbank D 115
+[STATE]  rodbank D 138
+[STATE]  rodbank D 161
+[STATE]  rodbank D 184
+[STATE]  rodbank D 207
+[STATE]  rodbank D 230
+  
 
 [CORE]
   size   3              ! nine assemblies
