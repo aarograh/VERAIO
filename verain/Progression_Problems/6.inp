@@ -175,7 +175,7 @@
 [COBRATF]
   gridloss  END  0.9070
   gridloss  MID  0.9065
-  parallel       1
+  parallel       0
 
 [SHIFT]
   transport             ce_mc     

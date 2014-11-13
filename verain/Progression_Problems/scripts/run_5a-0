@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -A nfi011
 #PBS -l nodes=265 
-#PBS -l walltime=00:45:00
+#PBS -l walltime=00:30:00
 #PBS -o 5a-0.stdout
 #PBS -N MPACT_5a-0
 #PBS -l gres=atlas1%atlas2
