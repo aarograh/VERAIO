@@ -136,7 +136,7 @@
 [MPACT]
   num_space      9
   num_angle      8
-  num_threads    2
+  num_threads    1
 
 [SHIFT]
   transport            ce_mc       

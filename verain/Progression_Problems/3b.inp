@@ -221,9 +221,6 @@
       377.711
 
 [MPACT]
-  k_tolerance    1e-6
-  flux_tolerance 1e-6
-
   num_space      58
   num_angle      1
   num_threads    1
@@ -231,6 +228,7 @@
 [COBRATF]
   gridloss  END  0.9070
   gridloss  MID  0.9065
+  parallel  0
 
 [SHIFT]
   transport             ce_mc     

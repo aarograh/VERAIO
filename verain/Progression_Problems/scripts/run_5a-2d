@@ -2,7 +2,7 @@
 #PBS -A nfi011
 #PBS -l nodes=37 
 #PBS -l walltime=00:10:00
-#PBS -o p5.stdout
+#PBS -o 5a-2d.stdout
 #PBS -N MPACT_5a-2d
 #PBS -l gres=atlas1%atlas2
 #PBS -j oe
@@ -12,19 +12,19 @@
 
 cd $PBS_O_WORKDIR
 export LD_LIBRARY_PATH=${HDF5_DIR}/lib:$LD_LIBRARY_PATH
+export OMP_NUM_THREADS=1
 
-case=p5
+case=5a-2d
 cores=584
 
 # set executables
-mpact=$PROJWORK/nfi011/agm/mpact/MPACT_11052014
+mpact=MPACT_BUILD
 
 # set executables
-parser=$mpact/test9/VERAInExt/verain/scripts/react2xml.pl 
+parser=$mpact/MPACT/VERAInExt/verain/scripts/react2xml.pl 
 exe=$mpact/build/MPACT_Drivers/examples/MPACT/MPACT.exe
 
 export MPACT_DATA=$mpact/MPACT/MPACT_Extras/xslibs/
-
 pwd
 
 date
@@ -34,7 +34,6 @@ echo executable = $exe
 echo data = $MPACT_DATA
 echo
 
-
 # parse input 
 rm -f $case.xml
 echo "============================================="
@@ -43,8 +42,6 @@ echo "============================================="
 perl $parser --init $case.inp $case.xml
 ls -l $case.xml
 date
-
-export OMP_NUM_THREADS=1
 
 # run MPACT 
 echo "============================================="
