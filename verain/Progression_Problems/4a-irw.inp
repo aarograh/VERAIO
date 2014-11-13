@@ -344,9 +344,6 @@
       377.711
 
 [MPACT]
-  k_tolerance    1e-6
-  flux_tolerance 1e-6
-
   num_space      522
   num_angle      1
   num_threads    1
