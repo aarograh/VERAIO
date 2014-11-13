@@ -1,8 +1,8 @@
 #!/bin/bash
 #PBS -A nfi011
-#PBS -l nodes=14 
-#PBS -l walltime=00:30:00
-#PBS -o p5.stdout
+#PBS -l nodes=37 
+#PBS -l walltime=00:10:00
+#PBS -o 5c-2d.stdout
 #PBS -N MPACT_5c-2d
 #PBS -l gres=atlas1%atlas2
 #PBS -j oe
@@ -12,19 +12,19 @@
 
 cd $PBS_O_WORKDIR
 export LD_LIBRARY_PATH=${HDF5_DIR}/lib:$LD_LIBRARY_PATH
+export OMP_NUM_THREADS=1
 
-case=p5
-cores=448
-
-# set executables
-mpact=$PROJWORK/nfi011/agm/mpact/MPACT_11052014
+case=5c-2d
+cores=584
 
 # set executables
-parser=$mpact/test9/VERAInExt/verain/scripts/react2xml.pl 
+mpact=MPACT_BUILD
+
+# set executables
+parser=$mpact/MPACT/VERAInExt/verain/scripts/react2xml.pl 
 exe=$mpact/build/MPACT_Drivers/examples/MPACT/MPACT.exe
 
 export MPACT_DATA=$mpact/MPACT/MPACT_Extras/xslibs/
-
 pwd
 
 date
@@ -33,7 +33,6 @@ echo input = $case.inp
 echo executable = $exe
 echo data = $MPACT_DATA
 echo
-
 
 # parse input 
 rm -f $case.xml
@@ -44,11 +43,9 @@ perl $parser --init $case.inp $case.xml
 ls -l $case.xml
 date
 
-export OMP_NUM_THREADS=2
-
 # run MPACT 
 echo "============================================="
 echo "   Running MPACT Job on $cores cores"
 echo "============================================="
-aprun -n $cores -j2 $exe $case.xml
+aprun -n $cores $exe $case.xml
 date

@@ -593,15 +593,11 @@
       377.711
 
 [MPACT]
-  ray_spacing    0.1
-  k_tolerance    1e-5
-  flux_tolerance 1e-4
-
-  num_space      2784
+  num_space      4234
   num_angle      1
   num_threads    1
   par_method     EXPLICITFILE
-  par_file       part_p5-3d_48r_58z_2784np.txt
+  par_file       part_p5_73r_58z.txt
 
 [COBRATF]
   gridloss  END  0.9070

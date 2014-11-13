@@ -1,15 +1,16 @@
 [CASEID]
-  title 'CASL AMA Problem 9 - Watts Bar Unit 1 Cycle 1 Depletion - Public'
+  title 'CASL AMA Problem 7 - Watts Bar Unit 1 Cycle 1 HFP BOC - Public'
 
 [STATE]
-  title 'Case 1 - WBN1C1 BOC HZP'
-  power    0.0          ! %
-  tinlet   557.0 F 
+  title 'WBN1C1 HFP BOC Eq Xe - Bank D @ 215 steps'
+  power    100.0        ! %
+  tinlet   565 K 
   pressure 2250         ! psia
 
   sym      qtr  
   feedback on 
   search   boron
+  xenon    equil        ! equilibrium xenon
 
   rodbank SA 230
           SB 230
@@ -18,191 +19,11 @@
            A 230 
            B 230
            C 230 
-           D 186 
+           D 215 
 
-  boron    1300         ! ppm
-  tfuel    565 K 
-  modden   0.743        ! g/cc
-
-[STATE]
-  title  'Case 2*'
-  power        65.7
-  tinlet       557.6
-  rodbank    D 192
-  deplete EFPD 9.0
-[STATE]
-  title  'Case 3* - Full Power Operation#'
-  power        99.7
-  tinlet       558.1
-  rodbank    D 219
-  deplete EFPD 32.0
-[STATE]
-  title  'Case 4#'
-  power        98.0
-  tinlet       558.2
-  rodbank    D 218
-  deplete EFPD 50.0
-[STATE]
-  title  'Case 5'
-  power        100.0
-  tinlet       558.6
-  rodbank    D 219
-  deplete EFPD 64.0
-[STATE]
-  title  'Case 6#'
-  power        99.7
-  tinlet       558.7
-  rodbank    D 215
-  deplete EFPD 78.0
-[STATE]
-  title  'Case 7$'
-  power        99.7
-  tinlet       558.6
-  rodbank    D 217
-  deplete EFPD 92.7
-[STATE]
-  title  'Case 8#'
-  power        99.8
-  tinlet       558.8
-  rodbank    D 220
-  deplete EFPD 105.8
-[STATE]
-  title  'Case 9$'
-  power        99.8
-  tinlet       558.4
-  rodbank    D 220
-  deplete EFPD 120.9
-[STATE]
-  title  'Case 10#'
-  power        99.5
-  tinlet       557.9
-  rodbank    D 219
-  deplete EFPD 133.8
-[STATE]
-  title  'Case 11$'
-  power        98.0
-  tinlet       558.0
-  rodbank    D 214
-  deplete EFPD 148.4
-[STATE]
-  title  'Case 12$'
-  power        95.1
-  tinlet       557.9
-  rodbank    D 216
-  deplete EFPD 163.3
-[STATE]
-  title  'Case 13$'
-  power        94.8
-  tinlet       557.9
-  rodbank    D 214
-  deplete EFPD 182.2
-[STATE]
-  title  'Case 14#'
-  power        99.8
-  tinlet       557.8
-  rodbank    D 220
-  deplete EFPD 194.3
-[STATE]
-  title  'Case 15'
-  power        93.9
-  tinlet       557.5
-  rodbank    D 218
-  deplete EFPD 207.7
-[STATE]
-  title  'Case 16#'
-  power        100.1
-  tinlet       558.0
-  rodbank    D 222
-  deplete EFPD 221.1
-[STATE]
-  title  'Case 17$'
-  power        99.7
-  tinlet       557.7
-  rodbank    D 220
-  deplete EFPD 238.0
-[STATE]
-  title  'Case 18#'
-  power        100.2
-  tinlet       557.6
-  rodbank    D 222
-  deplete EFPD 250.0
-[STATE]
-  title  'Case 19$'
-  power        95.6
-  tinlet       557.9
-  rodbank    D 211
-  deplete EFPD 269.3
-[STATE]
-  title  'Case 20#'
-  power        96.4
-  tinlet       558.1
-  rodbank    D 215
-  deplete EFPD 282.3
-[STATE]
-  title  'Case 21$'
-  power        93.4
-  tinlet       557.4
-  rodbank    D 211
-  deplete EFPD 294.6
-[STATE]
-  title  'Case 22#'
-  power        99.7
-  tinlet       557.5
-  rodbank    D 217
-  deplete EFPD 312.1
-[STATE]
-  title  'Case 23#'
-  power        98.0
-  tinlet       557.6
-  rodbank    D 215
-  deplete EFPD 326.8
-[STATE]
-  title  'Case 24$'
-  power        99.4
-  tinlet       557.7
-  rodbank    D 220
-  deplete EFPD 347.8
-[STATE]
-  title  'Case 25#'
-  power        99.9
-  tinlet       557.8
-  rodbank    D 219
-  deplete EFPD 373.2
-[STATE]
-  title  'Case 25+ - step change to 87% FP'
-  power        86.9 
-  tinlet       556.7
-  rodbank    D 202
-[STATE]
-  title  'Case 26'
-  deplete EFPD 392.3
-[STATE]
-  title  'Case 26+ - step change back to 100% FP'
-  power        99.6
-  tinlet       558.0
-  rodbank    D 220
-[STATE]
-  title  'Case 27$'
-  deplete EFPD 398.6
-[STATE]
-  title  'Case 28* - Power Coastdown#'
-  power        89.9
-  tinlet       557.1
-  rodbank    D 224
-  deplete EFPD 410.7
-[STATE]
-  title  'Case 29*$'
-  power        78.8
-  tinlet       556.3
-  rodbank    D 228
-  deplete EFPD 423.6
-[STATE]
-  title  'Case 30* - WBN1C1 EOC'
-  op_data '9/6/1997'
-  power        64.5
-  tinlet       554.9
-  rodbank    D 230
-  deplete EFPD 441.0
+  boron    1200         ! ppm
+  tfuel    900 K 
+  modden   0.7          ! g/cc
 
 [CORE]
   size   15              ! assemblies across core
@@ -777,21 +598,22 @@
       377.711
 
 [MPACT]
-  ray_spacing     0.1
-  k_tolerance     1e-5
-  flux_tolerance  1e-4
-  coupling_method internal
+  scattering        TCP0
+  ray_spacing       0.1
+  azimuthals_octant 12
+  k_tolerance       1e-5
+  flux_tolerance    1e-4
 
-  num_space       2784
-  num_angle       1
-  num_threads     1
-  par_method      EXPLICITFILE
-  par_file        part_p5-3d_48r_58z_2784np.txt
+  num_space      4234
+  num_angle      1
+  num_threads    1
+  par_method     EXPLICITFILE
+  par_file       part_p5_73r_58z.txt
 
 [COBRATF]
   gridloss  END  0.9070
   gridloss  MID  0.9065
-  parallel       1
+  parallel       1  
 
 [SHIFT]
   transport             ce_mc       

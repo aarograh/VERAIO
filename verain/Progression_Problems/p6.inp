@@ -12,8 +12,8 @@
   feedback on 
   xenon    zero           ! no xenon
 
-  tfuel    600 K
-  modden   0.743          ! g/cc
+  tfuel    900 K
+  modden   0.7            ! g/cc
 
 [CORE]
   size   1              ! one assembly   
@@ -175,7 +175,7 @@
 [COBRATF]
   gridloss  END  0.9070
   gridloss  MID  0.9065
-  parallel       1
+  parallel       0
 
 [SHIFT]
   transport             ce_mc     

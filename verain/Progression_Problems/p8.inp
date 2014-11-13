@@ -24,224 +24,54 @@
   tfuel    565 K 
   modden   0.743        ! g/cc
 
-[STATE]
-  power         5.0
-  rodbank     B 198
-              C 70
-  deplete hours 1.0
-[STATE]
-  power         10.0
-  rodbank     B 208
-              C 80
-  deplete hours 2.0
-[STATE]
-  power         15.0
-  rodbank     B 218
-              C 90
-  deplete hours 3.0
-[STATE]
-  title 'WBN1C1 Low Power Test Plateau'
-  power         20.0
-  rodbank     B 228
-              C 100
-  deplete hours 4.0
-[STATE]
-  power         20.0
-  rodbank     B 230
-              C 108
-  deplete hours 5.0
-[STATE]
-  power         20.0
-  rodbank     C 114
-  deplete hours 6.0
-[STATE]
-  power         20.0
-  rodbank     C 120
-  deplete hours 7.0
-[STATE]
-  power         20.0
-  rodbank     C 126 
-  deplete hours 8.0
-[STATE]
-  power         20.0
-  rodbank     C 132
-              D 4
-  deplete hours 9.0
-[STATE]
-  power         20.0
-  rodbank     C 138 
-              D 10  
-  deplete hours 10.0
-[STATE]
-  power         20.0
-  rodbank     C 144
-              D 16 
-  deplete hours 11.0
-[STATE]
-  power         20.0
-  rodbank     C 150
-              D 22 
-  deplete hours 12.0
-[STATE]
-  power         20.0
-  rodbank     C 156
-              D 28  
-  deplete hours 13.0
-[STATE]
-  power         20.0
-  rodbank     C 162
-              D 34 
-  deplete hours 14.0
-[STATE]
-  power         20.0
-  rodbank     C 168
-              D 40 
-  deplete hours 15.0
-[STATE]
-  power         20.0
-  rodbank     C 174
-              D 46 
-  deplete hours 16.0
-[STATE]
-  power         20.0
-  rodbank     C 180
-              D 52 
-  deplete hours 17.0
-[STATE]
-  power         20.0
-  rodbank     C 186
-              D 58 
-  deplete hours 18.0
-[STATE]
-  power         20.0
-  rodbank     C 192 
-              D 64 
-  deplete hours 19.0
-[STATE]
-  power         20.0
-  rodbank     C 198
-              D 70
-  deplete hours 20.0
-[STATE]
-  power         20.0
-  rodbank     C 204
-              D 76  
-  deplete hours 21.0
-[STATE]
-  power         20.0
-  rodbank     C 210
-              D 82 
-  deplete hours 22.0
-[STATE]
-  power         25.0
-  rodbank     C 216
-              D 88 
-  deplete hours 23.0
-[STATE]
-  power         30.0
-  rodbank     C 222
-              D 94 
-  deplete hours 24.0
-[STATE]
-  power         35.0
-  rodbank     C 228
-              D 100
-  deplete hours 25.0
-[STATE]
-  power         40.0
-  rodbank     C 230
-              D 106
-  deplete hours 26.0
-[STATE]
-  power         45.0
-  rodbank     D 112
-  deplete hours 27.0
-[STATE]
-  title 'WBN1C1 Intermediate Power Test Plateau'
-  power         50.0
-  rodbank     D 118
-  deplete hours 28.0
-[STATE]
-  power         50.0
-  rodbank     D 120
-  deplete hours 29.0
-[STATE]
-  power         55.0
-  rodbank     D 128
-  deplete hours 30.0
-[STATE]
-  power         60.0
-  rodbank     D 136
-  deplete hours 31.0
-[STATE]
-  power         65.0
-  rodbank     D 144
-  deplete hours 32.0
-[STATE]
-  power         70.0
-  rodbank     D 152
-  deplete hours 33.0
-[STATE]
-  power         75.0
-  rodbank     D 160
-  deplete hours 34.0
-[STATE]
-  power         75.0
-  rodbank     D 162
-  deplete hours 35.0
-[STATE]
-  power         75.0
-  rodbank     D 164
-  deplete hours 36.0
-[STATE]
-  power         75.0
-  rodbank     D 166
-  deplete hours 37.0
-[STATE]
-  power         75.0
-  rodbank     D 168
-  deplete hours 38.0
-[STATE]
-  power         75.0
-  rodbank     D 170
-  deplete hours 39.0
-[STATE]
-  power         75.0
-  rodbank     D 171
-  deplete hours 40.0
-[STATE]
-  power         80.0
-  rodbank     D 173
-  deplete hours 41.0
-[STATE]
-  power         85.0
-  rodbank     D 175
-  deplete hours 42.0
-[STATE]
-  power         90.0
-  rodbank     D 177
-  deplete hours 43.0
-[STATE]
-  power         92.0
-  rodbank     D 185
-  deplete hours 44.0
-[STATE]
-  power         94.0
-  rodbank     D 193
-  deplete hours 45.0
-[STATE]
-  power         96.0
-  rodbank     D 201
-  deplete hours 46.0
-[STATE]
-  power         98.0
-  rodbank     D 209
-  deplete hours 47.0
-[STATE]
-  title 'WBN1C1 Full Power Test Plateau'
-  power         100.0
-  rodbank     D 215
-  deplete hours 48.0
+[STATE] power 5.0  ; rodbank B 198 C 70       ; deplete hours 1.0  
+[STATE] power 10.0 ; rodbank B 208 C 80       ; deplete hours 2.0 
+[STATE] power 15.0 ; rodbank B 218 C 90       ; deplete hours 3.0 
+[STATE] power 20.0 ; rodbank B 228 C 100      ; deplete hours 4.0; title 'Low Power Test Plateau'
+[STATE] power 20.0 ; rodbank B 230 C 108      ; deplete hours 5.0 
+[STATE] power 20.0 ; rodbank       C 114      ; deplete hours 6.0 
+[STATE] power 20.0 ; rodbank       C 120      ; deplete hours 7.0 
+[STATE] power 20.0 ; rodbank       C 126      ; deplete hours 8.0 
+[STATE] power 20.0 ; rodbank       C 132 D 4  ; deplete hours 9.0 
+[STATE] power 20.0 ; rodbank       C 138 D 10 ; deplete hours 10.0
+[STATE] power 20.0 ; rodbank       C 144 D 16 ; deplete hours 11.0
+[STATE] power 20.0 ; rodbank       C 150 D 22 ; deplete hours 12.0
+[STATE] power 20.0 ; rodbank       C 156 D 28 ; deplete hours 13.0
+[STATE] power 20.0 ; rodbank       C 162 D 34 ; deplete hours 14.0
+[STATE] power 20.0 ; rodbank       C 168 D 40 ; deplete hours 15.0
+[STATE] power 20.0 ; rodbank       C 174 D 46 ; deplete hours 16.0
+[STATE] power 20.0 ; rodbank       C 180 D 52 ; deplete hours 17.0
+[STATE] power 20.0 ; rodbank       C 186 D 58 ; deplete hours 18.0
+[STATE] power 20.0 ; rodbank       C 192 D 64 ; deplete hours 19.0
+[STATE] power 20.0 ; rodbank       C 198 D 70 ; deplete hours 20.0
+[STATE] power 20.0 ; rodbank       C 204 D 76 ; deplete hours 21.0
+[STATE] power 20.0 ; rodbank       C 210 D 82 ; deplete hours 22.0
+[STATE] power 25.0 ; rodbank       C 216 D 88 ; deplete hours 23.0
+[STATE] power 30.0 ; rodbank       C 222 D 94 ; deplete hours 24.0
+[STATE] power 35.0 ; rodbank       C 228 D 100; deplete hours 25.0
+[STATE] power 40.0 ; rodbank       C 230 D 106; deplete hours 26.0
+[STATE] power 45.0 ; rodbank             D 112; deplete hours 27.0
+[STATE] power 50.0 ; rodbank             D 118; deplete hours 28.0; title 'Intermediate Power Test Plateau'
+[STATE] power 50.0 ; rodbank             D 120; deplete hours 29.0
+[STATE] power 55.0 ; rodbank             D 128; deplete hours 30.0
+[STATE] power 60.0 ; rodbank             D 136; deplete hours 31.0
+[STATE] power 65.0 ; rodbank             D 144; deplete hours 32.0
+[STATE] power 70.0 ; rodbank             D 152; deplete hours 33.0
+[STATE] power 75.0 ; rodbank             D 160; deplete hours 34.0
+[STATE] power 75.0 ; rodbank             D 162; deplete hours 35.0
+[STATE] power 75.0 ; rodbank             D 164; deplete hours 36.0
+[STATE] power 75.0 ; rodbank             D 166; deplete hours 37.0
+[STATE] power 75.0 ; rodbank             D 168; deplete hours 38.0
+[STATE] power 75.0 ; rodbank             D 170; deplete hours 39.0
+[STATE] power 75.0 ; rodbank             D 171; deplete hours 40.0
+[STATE] power 80.0 ; rodbank             D 173; deplete hours 41.0
+[STATE] power 85.0 ; rodbank             D 175; deplete hours 42.0
+[STATE] power 90.0 ; rodbank             D 177; deplete hours 43.0
+[STATE] power 92.0 ; rodbank             D 185; deplete hours 44.0
+[STATE] power 94.0 ; rodbank             D 193; deplete hours 45.0
+[STATE] power 96.0 ; rodbank             D 201; deplete hours 46.0
+[STATE] power 98.0 ; rodbank             D 209; deplete hours 47.0
+[STATE] power 100.0; rodbank             D 215; deplete hours 48.0; title 'Full Power Test Plateau'
 
 [CORE]
   size   15              ! assemblies across core
@@ -816,16 +646,18 @@
       377.711
 
 [MPACT]
-  ray_spacing     0.1
-  k_tolerance     1e-5
-  flux_tolerance  1e-4
-  coupling_method internal
+  scattering        TCP0
+  ray_spacing       0.1
+  azimuthals_octant 12
+  k_tolerance       1e-5
+  flux_tolerance    1e-4
+  coupling_method   internal
 
-  num_space       2784
+  num_space       4234
   num_angle       1
   num_threads     1
   par_method      EXPLICITFILE
-  par_file        part_p5-3d_48r_58z_2784np.txt
+  par_file        part_p5_73r_58z.txt
 
 [COBRATF]
   gridloss  END  0.9070

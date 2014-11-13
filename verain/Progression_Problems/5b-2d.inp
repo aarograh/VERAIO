@@ -242,11 +242,11 @@
   axial  B  0.0  B4C 1.0
 
 [MPACT]
-  num_space      56
+  num_space      73
   num_angle      8
-  num_threads    2
+  num_threads    1
   par_method     EXPLICITFILE
-  par_file       part_p5-2d_56r_1z.txt
+  par_file       part_p5-2d_73r_1z.txt
 
 [SHIFT]
   transport            ce_mc       
