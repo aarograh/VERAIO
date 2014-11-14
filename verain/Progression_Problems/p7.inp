@@ -600,7 +600,7 @@
 [MPACT]
   scattering        TCP0
   ray_spacing       0.1
-  azimuthala_octant 12
+  azimuthals_octant 12
   k_tolerance       1e-5
   flux_tolerance    1e-4
 
