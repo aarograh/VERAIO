@@ -237,7 +237,7 @@
     num_groups    23
 
     mat_library casl_comp_r2.sh5
-    xs_library  lib252_hetbondoneabs-noabssigp
+    xs_library  v7-252
 
 !   pin_partitioning true
     num_blocks_i  4   
