@@ -25,18 +25,18 @@ MPACT:
         - copy MPACT/$valid_delim
       _content:
 
-    restart_mode:
+    checkpoint_mode:
       _pltype: parameter
       _type: string
       _do:
-        - copy MPACT/$restart_mode
+        - copy MPACT/$checkpoint_mode
       _content:
 
-    restart_file:
+    checkpoint_file:
       _pltype: parameter
       _type: string
       _do:
-        - copy MPACT/$restart_file
+        - copy MPACT/$checkpoint_file
       _content:
 
     vis_edits:

@@ -1456,13 +1456,13 @@ MPACT:
     _content:
     _check:
       - is_string()
-  restart_mode:
+  checkpoint_mode:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() T F W R RW
-  restart_file:
+  checkpoint_file:
     <<: *dtword
     _content:
     _check:
