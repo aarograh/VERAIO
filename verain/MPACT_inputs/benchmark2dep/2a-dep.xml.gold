@@ -445,6 +445,9 @@
       <Parameter name="num_outers" type="int" value="20"/>
       <Parameter name="solver" type="string" value="mgnode"/>
     </ParameterList>
+    <ParameterList name="depletion">
+      <Parameter name="dep_filename" type="string" value="MPACT.dpl"/>
+    </ParameterList>
     <ParameterList name="iteration_control">
       <Parameter name="flux_tolerance" type="double" value="1e-6"/>
       <Parameter name="k_tolerance" type="double" value="1e-6"/>
@@ -481,7 +484,6 @@
     <Parameter name="ray_spacing" type="double" value="0.05"/>
     <Parameter name="vis_edits" type="string" value="core"/>
     <ParameterList name="xs_library">
-      <Parameter name="dep_filename" type="string" value="MPACT.dpl"/>
       <Parameter name="subgroup_set" type="int" value="4"/>
       <Parameter name="xs_filename" type="string" value="declib60g02_e7.fmt"/>
       <Parameter name="xs_type" type="string" value="ORNL"/>

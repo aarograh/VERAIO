@@ -66,7 +66,7 @@ my @BLOCKS;
 $SCHEMA="${directory}Templates/Directory.yml";
 @BLOCKS=('CASEID','STATES','CORE','ASSEMBLIES',
 	 'CONTROLS','DETECTORS','INSERTS',
-	 'INSILICO','EDITS','COBRATF','COUPLING',
+	 'INSILICO','SHIFT','EDITS','COBRATF','COUPLING',
 	 'MPACT','MAMBA2D','PEREGRINE');
 
 #
@@ -101,7 +101,6 @@ my $INIT;
 	"debug"     => \$DEBUG,
 	"version"   => \$VERSION,
 	"help"      => \$HELP,
-
 	"notrim"    => \$NOTRIM,
 	"init"      => \$INIT
 
@@ -164,13 +163,7 @@ options:
 
 # initialization files
 if($INIT){
-    my @BLOCKINIT=(
-	'CORE',
-	'ASSEMBLIES',
-	'CONTROLS',
-	'DETECTORS',
-	'INSERTS');
-    foreach $iblock (@BLOCKINIT){
+    foreach $iblock (@BLOCKS){
 	my $finit="${directory}Init/${iblock}.ini";
 	if ( -e $finit ) {
 	    REACTOR::set_blockinit($iblock,$finit);
