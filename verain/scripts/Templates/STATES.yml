@@ -181,14 +181,14 @@ STATES:
           _pltype: array
           _type: string
           _do:
-            - copyarray STATE/(_loop)/@restart_shuffle,select=>odd
+            - copyarray STATE/(_loop)/@restart_shuffle,select=>even
           _content:
 
         restart_shuffle_label:
           _pltype: array
           _type: string
           _do:
-            - copyarray STATE/(_loop)/@restart_shuffle,select=>even
+            - copyarray STATE/(_loop)/@restart_shuffle,select=>odd
           _content:
 
         restart_write_file:
