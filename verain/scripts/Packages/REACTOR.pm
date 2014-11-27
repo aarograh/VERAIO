@@ -406,7 +406,24 @@ sub read_ascii {
 	$key eq 'command' && do {$command=$value;};   # open command
     }
 
-    open my($IFILE), $filename or die "Cannot open file $filename\n";
+    my($IFILE); 
+    if (-e $filename){
+      open $IFILE, $filename or die "Cannot open file $filename\n";
+    }
+    else{
+      use Cwd 'abs_path';
+      use File::Basename;
+      my $pscript=abs_path($0);
+      my $directory = dirname($pscript);
+      my $filename2="$directory/Init/$filename";
+      if (-e $filename2){
+        # print "Reading $filename from $directory\n";
+        open $IFILE, $filename2 or die "Cannot open file $filename2\n";
+      }
+      else{
+        die "$filename does not exist\n";
+      }
+    }
 
   READ: while (<$IFILE>) {       # main read loop
       s/^\s+//;
