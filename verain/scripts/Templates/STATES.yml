@@ -170,6 +170,13 @@ STATES:
             - copy STATE/(_loop)/$sym
           _content:
 
+        reset_sol:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy STATE/(_loop)/$reset_sol
+          _content:
+
         op_date:
           _pltype: parameter
           _type: string

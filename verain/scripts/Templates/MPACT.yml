@@ -67,6 +67,13 @@ MPACT:
         - copy MPACT/$grid_treatment
       _content:
 
+    axial_buckling:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MPACT/$axial_buckling
+      _content:
+
     db_entry:
       _pltype: list
       _do:
@@ -385,6 +392,13 @@ MPACT:
           _do:
             - copy MPACT/$cmfd_angle_decomp
           content:
+
+        cmfd_ur:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$cmfd_ur
+          _content:
 
     2d1d:
       _pltype: list

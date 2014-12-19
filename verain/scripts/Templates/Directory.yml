@@ -186,6 +186,12 @@ STATE:
     _check:
       - fall(sub{is_float(shift)},stride(1,1,()))
       - nth(0,())eq"GWDMT"||nth(0,())eq"MWDMT"||nth(0,())eq"EFPD"||nth(0,())eq"hours"
+  reset_sol:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false t f
 
   rodbank:
     <<: *dtlist
@@ -1479,6 +1485,11 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() homogenize equal_mass equal_thickness
+  axial_buckling:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
 
   meshing_method:
     <<: *dtword
@@ -1740,6 +1751,12 @@ MPACT:
     _check:
       - is_int()
       - is_gt() 0
+  cmfd_ur:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
   cmfd_angle_decomp:
     <<: *dtword
     _content:
