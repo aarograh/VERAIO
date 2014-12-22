@@ -46,7 +46,9 @@ use Exporter;
 	 'before_incl',
 	 'indexes',
 	 'lastval',
-	 'firstval'
+	 'firstval',
+	 'factorial',
+	 'diagsum'
     );
 
 {
@@ -342,5 +344,30 @@ sub firstval (&@) {
     }
     return undef;
 }
+
+sub factorial ($) {
+    my $num = shift;
+    my $fac = 1;
+
+    unless($num >= 0){
+	die "factorial: number not valid: $num\n";
+    }
+
+    $fac *= $num-- while $num > 0;
+    return $fac;
+}
+
+sub diagsum ($) {
+    my $num = shift;
+    my $fac = 0;
+
+    unless($num > 0){
+	die "diag: number not valid: $num\n";
+    }
+
+    $fac += $num-- while $num > 0;
+    return $fac;
+}
+
 
 1;
