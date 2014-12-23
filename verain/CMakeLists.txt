@@ -24,7 +24,7 @@ INSTALL(
   )
 
 INSTALL(
-  DIRECTORY scripts/Packages scripts/Templates
+  DIRECTORY scripts/Packages scripts/Templates scripts/Init
   DESTINATION "${${PROJECT_NAME}_INSTALL_RUNTIME_DIR}"
   COMPONENT ${PACKAGE_NAME}
   )  
