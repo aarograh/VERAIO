@@ -22,11 +22,13 @@ use Exporter;
 @EXPORT=('full_size',
 	 'oct_size',
 	 'qtr_size',
+	 'dia_size',
 	 'reflectOCT',
 	 'gen_oct_list',
 	 'gen_quad_list',
 	 'gen_oct_list_rot',
 	 'gen_quad_list_rot',
+	 'gen_dia_list',
 	 'fullcellmap',
 	 'fullcellmap_rot',
 	 'read_ascii',
@@ -110,6 +112,17 @@ sub qtr_size {
     }
 
     my $total=$size*$size;
+    return $total;
+}
+
+sub dia_size {
+    my $size=shift;
+
+    unless(is_int($size) && $size > 0){
+	die "dia_size: size not valid: $size\n";
+    }
+
+    my $total=diagsum($size);
     return $total;
 }
 
@@ -232,6 +245,33 @@ sub gen_quad_list_rot {
 	    push @b, $map4->($i,$j);
 	}
 	print "@a\n" if get_verbose();
+    }
+    return @b;
+}
+
+sub gen_dia_list {
+    my ($isize,@cellmap)=@_;
+    my ($i,$j);
+    my @a=();
+    my @b=();
+
+    my $ITLIMIT=$isize+3;
+
+    my $it = incrmf3($ITLIMIT, 1, 1);       # create iterator for partitioning
+    my @part = part { $it->($_) } @cellmap; # get list of references to array chunks
+
+    for($i=0; $i<$isize; $i++){
+	@a=();
+	for($j=0; $j<$isize; $j++){
+	    if($j<=$i){
+		push @a, $part[$i]->[$j];
+	    }
+	    else{
+		push @a, $part[$j]->[$i];
+	    }
+	}
+	print "@a\n" if get_verbose();
+	push @b, @a;
     }
     return @b;
 }
@@ -580,11 +620,11 @@ sub index_map {
 		$j=$t;
 	    }
 
-	    my $value= $map->[$i]->[$j];
-
 	    unless(defined($map->[$i]->[$j])){
 		die "index_map: undefined OCTANT $i $j\n";
 	    }
+
+	    my $value= $map->[$i]->[$j];
 
 #	    my $flag="$i$j";
 #	    $value = $value eq 0 ? 0 : $flag;
@@ -622,29 +662,23 @@ sub fullcellmap {
     my $qtrsize =qtr_size($npin);
     my $octsize =oct_size($npin);
     my $fullsize=full_size($npin);
+    my $diasize =dia_size($npin);
 
- #   if(is_odd($npin)){
-	if(@a == $qtrsize){
-	    @b=gen_quad_list($npin,@a);
-	}
-	elsif(@a == $octsize){
-	    @b=gen_oct_list($npin,@a);
-	}
-	elsif(@a == $fullsize){
-	    @b=@a;
-	}
-	else{
-	    die "fullcellmap: invalid map size ($fullsize) for map dimension (odd, $npin) [@a] $#a\n";
-	}
-#    }
-#    else{
-#	if(@a == $fullsize){
-#	    @b=@a;
-#	}
-#	else{
-#	    die "fullcellmap: invalid map size ($fullsize) for map dimension (even, $npin) [@a]\n";
-#	}
-#    }
+    if(@a == $qtrsize){
+	@b=gen_quad_list($npin,@a);
+    }
+    elsif(@a == $octsize){
+	@b=gen_oct_list($npin,@a);
+    }
+    elsif(@a == $diasize){
+	@b=gen_dia_list($npin,@a);
+    }
+    elsif(@a == $fullsize){
+	@b=@a;
+    }
+    else{
+	die "fullcellmap: invalid map size ($#a) for map dimension ($npin): $qtrsize, $octsize, $diasize, \n";
+    }
 
     return @b;
 }
