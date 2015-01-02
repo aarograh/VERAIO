@@ -956,12 +956,16 @@ namespace {
     double flowfrac=100.;
     GetOptional(stateParams, "flow", flowfrac);
     flowfrac *= 0.01;   // convert from % to fraction
+    double bypass=0.0;
+    GetOptional(stateParams, "bypass", bypass);
+    bypass *= 0.01;   // convert from % to fraction
 
     double flowrate;
     GetRequired(coreParams, "CORE", "rated_flow", flowrate);
     double tot_inlet_mass_flow_rate = flowfrac*flowrate;         // no unit conversion necessary
+    double active_inlet_mass_flow_rate = tot_inlet_mass_flow_rate*(1.0-bypass);
 
-    cntrl_data.ginit = tot_inlet_mass_flow_rate;
+    cntrl_data.ginit = active_inlet_mass_flow_rate;
     cntrl_data.trinit = tinlet;
 
     // Reference pressure
@@ -977,7 +981,7 @@ namespace {
     GetOptional(cobraParams, "dhfrac", cntrl_data.dhfrac);
     cntrl_data.ibound = 2;
     cntrl_data.obound = 1;
-    cntrl_data.gtot = tot_inlet_mass_flow_rate;
+    cntrl_data.gtot = active_inlet_mass_flow_rate;
     cntrl_data.hin = -tinlet;
     cntrl_data.hgin = 288.42;
     cntrl_data.p_bound_1 = 0.0;
