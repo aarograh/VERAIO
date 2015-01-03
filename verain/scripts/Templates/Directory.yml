@@ -121,6 +121,14 @@ STATE:
       - fall(sub{is_word(shift)},())
       - fall(sub{is_float(shift)},())
       - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
+  void:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{is_float(shift)},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
   tfuel:
     <<: *dtlist
     _content:
@@ -457,6 +465,12 @@ CORE:
       - fall(sub{is_geq(shift,0)},stride(2,3,()))
       - fall(sub{is_leq(shift,1)},stride(2,3,()))
 
+  bwr:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
 
 ASSEMBLY:
   title:
@@ -541,6 +555,23 @@ ASSEMBLY:
     _style: multi-line
     _check:
       - lc(nth(0,()))ne'mod'
+
+  gap:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - nth(0,())>=0
+      - nth(1,())>=0
+  channel:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==4
+      - nth(0,())>=0
+      - nth(1,())>=0
+      - nth(2,())>=0
+      - nth(3,())>=0
 
 CONTROL:
   title:
