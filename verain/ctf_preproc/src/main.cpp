@@ -616,10 +616,12 @@ namespace {
       // Note that it is possible to define multiple fuel rod types
       // If this is the case, enter the following block for each fuel rod type
       // and precede each block with a number in brackets, e.g.  {1}, {2}, etc.
+      //
+      // Scott 1/14/2015 - update default "nfuel" from 3 to 10 - see #3356
 
                pelletd=2.0*the_cell_radii[0] * conversion_cm2mm;
                assem_data.c_ptr_to_pelletd = &pelletd;
-               assem_data.pelletnodes = vera_xml.get_param_from_plist<int>( "COBRATF.nfuel", 3, false);
+               assem_data.pelletnodes = vera_xml.get_param_from_plist<int>( "COBRATF.nfuel", 10, false);
                cladid = 2.0*the_cell_radii[1] * conversion_cm2mm;
                cladod = 2.0*the_cell_radii[2] * conversion_cm2mm;
                assem_data.c_ptr_to_cladid = &cladid;
