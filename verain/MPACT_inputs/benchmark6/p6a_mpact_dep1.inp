@@ -49,6 +49,8 @@
 
 [STATE]
 
+  op_date 2000/01/01   ! should not be needed
+
   restart_write restart.h5 EXP6
 
 [CORE]
@@ -56,6 +58,8 @@
   rated 17.67   0.6824  ! MW, Mlbs/hr
   apitch 21.5
   height 406.328
+
+  op_date 2000/01/01   ! should not be needed
 
   core_shape
     1
@@ -236,70 +240,7 @@
           369.7898
           377.711
 
-[INSILICO]
-    mat_library casl_comp.sh5
-    xs_library  v7-252
-
-    max_delta_z   2.54
-    num_blocks_i  17
-    num_blocks_j  17
-    num_z_blocks  12
-    num_groups    23
-    num_sets      8
-
-    mesh          4
-    dimension     3
-    eq_set        sc
-    eigen_solver  arnoldi
-    tolerance     1e-6
-    Pn_order      0
-
-    cell_broadcast_size  289   ! set for larger problems
-
-!   eigenvalue_db:
-       k_tolerance   1e-4
-       L2_tolerance  1e-3
-       energy_dep_ev true
-
-!   quadrature_db:
-       quad_type          qr
-       azimuthals_octant  4
-       polars_octant      4
-
-!   silo_db:
-       silo_output  p6
-!      silo_out_power true
-
-!   upscatter_db:
-       upscatter_tolerance  1e-4
-
-    new_grp_bounds
-       8.2085e+05
-       1.1109e+05
-       5.5308e+03
-       1.8644e+02
-       3.7612e+01
-       3.5379e+01
-       2.7697e+01
-       2.1684e+01
-       2.0397e+01
-       1.5968e+01
-       7.1500e+00
-       6.7000e+00
-       6.3000e+00
-       1.0970e+00
-       1.0450e+00
-       9.5000e-01
-       3.5000e-01
-       2.0600e-01
-       1.0700e-01
-       5.8000e-02
-       2.5000e-02
-       1.0000e-02
-       1.0000e-05
-
 [COBRATF]
-  nfuel   3             ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction
   irfc    2             ! friction factor correlation default=2
   dhfrac  0.02          ! fraction of power deposited directly into coolant
@@ -350,14 +291,14 @@
   nodal_method      nem
 !  under_relax       1.0
 !TH
-  coupling_method   ctf_external
+  coupling_method   ctf
 !parallel
   num_space         30
   num_angle         1
   num_energy        1
   num_threads       1
 !xs_library
-  xs_filename       declib56g_e7_09042013_p0mixed.fmt
+  xs_filename       mpact47g_e70r0_TCP0.xsl
   xs_type           ORNL
   xs_shielder       t 
   subgroup_set      4
