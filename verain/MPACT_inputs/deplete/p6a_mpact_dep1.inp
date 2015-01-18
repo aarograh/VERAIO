@@ -45,13 +45,13 @@
   feedback on
   sym qtr
 
-  deplete GWDMT 0.0 0.1 0.5 1 2 3 4 6
+  deplete GWDMT 0.0 0.1 0.5 1
 
 [STATE]
 
   op_date 2000/01/01   ! should not be needed
 
-  restart_write restart.h5 EXP6
+  restart_write restart.h5 EXP1
 
 [CORE]
   size 1                ! 1x1 single-assembly

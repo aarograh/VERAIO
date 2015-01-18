@@ -5,7 +5,7 @@
   <ParameterList name="STATES">
     <ParameterList name="State_1">
       <Parameter name="boron" type="double" value="1300"/>
-      <Parameter name="deplete" type="Array(double)" value="{0.0,0.1,0.5,1,2,3,4,6}"/>
+      <Parameter name="deplete" type="Array(double)" value="{0.0,0.1,0.5,1}"/>
       <Parameter name="deplete_units" type="string" value="GWDMT"/>
       <Parameter name="feedback" type="string" value="on"/>
       <Parameter name="modden" type="double" value="0.743"/>
@@ -18,7 +18,7 @@
     <ParameterList name="State_2">
       <Parameter name="op_date" type="string" value="2000/01/01"/>
       <Parameter name="restart_write_file" type="string" value="restart.h5"/>
-      <Parameter name="restart_write_label" type="string" value="EXP6"/>
+      <Parameter name="restart_write_label" type="string" value="EXP1"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">
