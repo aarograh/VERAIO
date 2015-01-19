@@ -302,6 +302,7 @@ namespace {
             string cell_type = vera_xml.get_param_from_plist<string>( ppath_cell_type);
             cell_types[cell_name] = cell_type;
             ppath_cell_type = assembly_ppath+".Cells."+cell_name+".radii";
+            cout << "creating cell_radii " << cell_name << endl;
             cell_radii[cell_name] = vera_xml.get_param_from_plist<Array<double> >( ppath_cell_type);
             ppath_cell_type = assembly_ppath+".Cells."+cell_name+".mats";
             cell_mats[cell_name] = vera_xml.get_param_from_plist<Array<string> >( ppath_cell_type);
@@ -475,6 +476,7 @@ namespace {
             string cell_name = "Cell_" + citer->first;
             string ppath_cell_type = assembly_ppath+".Cells."+cell_name+".type";
             string cell_type = vera_xml.get_param_from_plist<string>( ppath_cell_type);
+            cout << cell_name << " " << cell_type << endl;
             if( "fuel" == cell_type )
             {
               num_fuel_rods[i] += citer->second;
@@ -583,6 +585,7 @@ namespace {
           map<string, int>::const_iterator             citer_cell_num_rings = cell_num_rings.begin();
           Array<double> the_cell_radii;
           int           the_cell_num_rings = -1;
+          cout << "Reading CellMap_"+axial_labels[i] << endl;
           for( ; citer_cell_types != cell_types.end(); ++citer_cell_types, ++citer_cell_radii, ++citer_cell_mats, ++citer_cell_num_rings )
           {
             if( found_fuel && ("fuel" == citer_cell_types->second) )
@@ -598,6 +601,7 @@ namespace {
               found_fuel = true;
             }
           }
+
           if( first_level && first_assm )
           {
             conversion_cm2mm  = 10.0; // cm to mm
@@ -651,8 +655,11 @@ namespace {
               // I'll assume this is the case and sanity check accordingly.
               citer_cell_types     = cell_types.begin();
               citer_cell_radii     = cell_radii.begin();
+              cout << "citer_cell_radii " << citer_cell_radii->first<< endl;
+              cout << "citer_cell_radii " << citer_cell_radii->second<< endl;
               citer_cell_mats      = cell_mats.begin();
               citer_cell_num_rings = cell_num_rings.begin();
+              cout << the_cell_radii << endl;
               for( ; citer_cell_types != cell_types.end(); ++citer_cell_types, ++citer_cell_radii, ++citer_cell_mats, ++citer_cell_num_rings )
               {
                 if( found_non_fuel && ("fuel" != citer_cell_types->second) )
@@ -662,14 +669,23 @@ namespace {
                   //    (the_cell_mats !=  citer_cell_mats->second ) ||
                   //    (the_cell_num_rings != citer_cell_num_rings->second) )
                   //  throw runtime_error("All non-fuel pellets are not the same in Assembly \""+assembly_name+"\".");
+               cout << " in this first one here" << endl;
                 }
                 else if( "fuel" != citer_cell_types->second )
                 {
                   the_cell_radii     = citer_cell_radii->second;
                   the_cell_num_rings = citer_cell_num_rings->second;
                   found_non_fuel = true;
+               cout << " in this other one there " << endl;
                 }
+                cout << the_cell_radii << endl;
               }
+              cout << "cell radii 0" << endl;
+              cout << the_cell_radii[0] << endl;
+              cout << "cell radii 1" << endl;
+              cout << the_cell_radii[1] << endl;
+              cout << "conversion" << endl;
+              cout << conversion_cm2mm  << endl;
               gt_wr_di = 2.0*the_cell_radii[0] * conversion_cm2mm;
               gt_wr_de = 2.0*the_cell_radii[1] * conversion_cm2mm;
 
@@ -1130,12 +1146,19 @@ namespace {
     string symopt = "full";
     GetOptional(stateParams, "sym", symopt);
 
-    if ( symopt == "full" )
+    if ( symopt == "full" ){
        geo_data.sym_opt = 1;
-    else if ( symopt == "qtr" )
-       geo_data.sym_opt = 4;
-    else
+    }else if ( symopt == "qtr" ){
+       string bc_symopt="rot";
+       GetOptional(stateParams, "bc_sym", bc_symopt);
+       if(bc_symopt=="rot"){
+          geo_data.sym_opt=5;
+       }else{
+          geo_data.sym_opt = 4;
+       }
+    }else{
       throw runtime_error("invalid STATE.sym value - must be full or qtr");
+    }
 
   // print core map
 
