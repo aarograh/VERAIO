@@ -230,9 +230,20 @@ namespace {
     ParameterList & pList = vera_common.get_vera_xml().get_pList();
     const ParameterList & editsParams = pList.sublist("EDITS");
     const ParameterList & assembliesParams = pList.sublist("ASSEMBLIES");
+    const ParameterList & coreParams = pList.sublist("CORE");
+    const ParameterList & cobraParams = pList.sublist("COBRATF");
 
     Array<double> edit_bounds;
     GetRequired(editsParams, "EDITS", "axial_edit_bounds", edit_bounds, false);
+
+    double apitch;
+    GetRequired(coreParams,"CORE","apitch", apitch);
+
+    double hgap=5678.3;
+    GetOptional(cobraParams, "hgap", hgap);
+
+    int nfuel=10;
+    GetOptional(cobraParams, "nfuel", nfuel);
 
     assem_struct assem_data;
 
@@ -317,7 +328,6 @@ namespace {
 
         int    num_pins= vera_xml.get_param_from_plist<int>( assembly_ppath+".num_pins");
         double ppitch = vera_xml.get_param_from_plist<double>( assembly_ppath+".ppitch") * conversion_cm2mm;
-        double apitch = vera_xml.get_param_from_plist<double>( "CORE.apitch") * conversion_cm2mm;
 
      // checks to make sure all assembly geometries are consistent
 
@@ -529,7 +539,7 @@ namespace {
             assem_data.assemgt = num_non_fuel_rods[i];
             assem_data.activelen = active_fuel_length*conversion_cm2mm;
             assem_data.active_start = (bottom_active_fuel-model_bottom)*conversion_cm2mm;
-            assem_data.bundlepitch = apitch;
+            assem_data.bundlepitch = apitch*conversion_cm2mm;
 
           }
           else
@@ -570,6 +580,10 @@ namespace {
     //  CASL: 2. If it is a fuel cell (type=fuel), find the radii corresponding to fuel and
     //  CASL:      inner and outer zirc.  The fuel pin may or may not contain a he gap.
     //  CASL: 3. Check to make sure all fuel pins have the same dimensions
+    //  CASL:
+    //  CASL: Update:
+    //  CASL: There may be pins with different number of rings for IFBA and/or annular fuel.
+    //  CASL: However, they should all have the same clad dimensions and same fuel OD. See #3586
     //  CASL:
     //----------------------------------------------------------------------------------------
 
@@ -621,20 +635,20 @@ namespace {
 
                pelletd=2.0*the_cell_radii[0] * conversion_cm2mm;
                assem_data.c_ptr_to_pelletd = &pelletd;
-               assem_data.pelletnodes = vera_xml.get_param_from_plist<int>( "COBRATF.nfuel", 10, false);
+               assem_data.pelletnodes = nfuel;
                cladid = 2.0*the_cell_radii[1] * conversion_cm2mm;
                cladod = 2.0*the_cell_radii[2] * conversion_cm2mm;
                assem_data.c_ptr_to_cladid = &cladid;
                assem_data.c_ptr_to_cladod = &cladod;
                assem_data.rodpitch = ppitch;
                assem_data.c_ptr_to_thdensity = &avg_thden;
-               assem_data.hgap = vera_xml.get_param_from_plist<double>( "COBRATF.hgap", 5678.3);
+               assem_data.hgap = hgap;
 
             }
 
-       // CASL: The previous section collected radii, etc. for fuel pins
-       // CASL: Do the same thing for non-fuel pins (i.e. guide tubes)
-       // CASL: Again, it is possible to define multiple guide tube types here, but we don't do it
+       // The previous section collected radii, etc. for fuel pins
+       // Do the same thing for non-fuel pins (i.e. guide tubes)
+       // Again, it is possible to define multiple guide tube types here, but we don't do it
 
             fuel_pin_map.resize(num_pins*num_pins);
             if( num_non_fuel_rods[i] == 0 )
