@@ -25,7 +25,7 @@ namespace
   void create_file_geo_inp(ParameterList &);
   void create_file_power_inp(const Array<double> & fuel_pin_map, VERAIn_XML_Common &);
 
-  // assembly data structure 
+  // assembly data structure
   struct assem_struct{
      int     assemrods;
      int     nrodsrow;
@@ -242,7 +242,7 @@ namespace {
     double hgap=5678.3;
     GetOptional(cobraParams, "hgap", hgap);
 
-    int nfuel=10;
+    int nfuel=10;           // on 1/14/2015 - update default "nfuel" from 3 to 10 - see #3356
     GetOptional(cobraParams, "nfuel", nfuel);
 
     assem_struct assem_data;
@@ -290,13 +290,20 @@ namespace {
         string assembly_name = assembliesParams.name(citer);
         string assembly_ppath = "ASSEMBLIES." + assembly_name;
 
-        // -----------------------------------------
-        // Obtain cell attributes to be used later
-        // -----------------------------------------
+        cout << "\n Reading assembly: " << assembly_name << endl;
+
+    // -----------------------------------------
+    // Obtain cell attributes to be used later
+    // -----------------------------------------
+
         map<string, string> cell_types;
         map<string, Array<double> > cell_radii;
         map<string, Array<string> > cell_mats;
         map<string, int> cell_num_rings;
+        map<string, double> cell_clad_od;
+        map<string, double> cell_clad_id;
+        map<string, double> cell_fuel_od;
+        map<string, double> cell_thden;
         const ParameterList & assem_cells_plist = assembliesParams.sublist(assembly_name).sublist("Cells");
         ParameterList::ConstIterator assem_cell_citer = assem_cells_plist.begin(),
           assem_cell_cend  = assem_cells_plist.end();
@@ -318,16 +325,70 @@ namespace {
             cell_mats[cell_name] = vera_xml.get_param_from_plist<Array<string> >( ppath_cell_type);
             ppath_cell_type = assembly_ppath+".Cells."+cell_name+".num_rings";
             cell_num_rings[cell_name] = vera_xml.get_param_from_plist<int>( ppath_cell_type);
+
+            if ( cell_num_rings[cell_name] > 0 )
+            {
+              cell_clad_od[cell_name]=cell_radii[cell_name][cell_num_rings[cell_name]-1];
+            }
+            else
+            {
+              cell_clad_od[cell_name]=0.0;
+            }
+
+            if ( cell_num_rings[cell_name] > 1 )
+            {
+              cell_clad_id[cell_name]=cell_radii[cell_name][cell_num_rings[cell_name]-2];
+            }
+            else
+            {
+              cell_clad_id[cell_name]=0.0;
+            }
+
+            cell_thden[cell_name]=0.0;   // initialize in case search doesn't work
+            cell_fuel_od[cell_name]=0.0;
+            if( "fuel" == cell_type )
+            {
+              int ifr=-2;
+              // Now figure out which material is the fuel and get its thden value for averaging
+              string cell_mats_path = assembly_ppath+".Cells."+cell_name+".mats";
+              Array<string> cell_mats = vera_xml.get_param_from_plist<Array<string> >( cell_mats_path);
+              for( unsigned m = 0; m < cell_mats.size(); ++m )    // loop over materials
+              {
+  // debug      cout << " cell mats: " << m << " " << cell_mats[m] << endl;
+                string mats_path = assembly_ppath+".Fuels.Fuel_"+cell_mats[m];
+                if( vera_xml.is_sublist(*param_list, mats_path) )
+                {
+                  ifr=m;      // save last ring number with fuel
+                  cell_thden[cell_name] = vera_xml.get_param_from_plist<double>( mats_path+".thden");
+                }
+              }
+              if (ifr < 0)
+              {
+                throw runtime_error("No fissionable material found in fuel cell");
+              }
+              else
+              {
+                cell_fuel_od[cell_name]=cell_radii[cell_name][ifr];
+              }
+            }
+   /*
+            cout << "assembly debug: cell " << cell_name << " Type: " << cell_type << endl;
+            cout << "assembly debug:    num rings "<< cell_num_rings[cell_name] << endl;
+            cout << "assembly debug:    radii     "<< cell_radii[cell_name]     << endl;
+            cout << "assembly debug:    clad_od   "<< cell_clad_od[cell_name]   << endl;
+            cout << "assembly debug:    clad_id   "<< cell_clad_id[cell_name]   << endl;
+            cout << "assembly debug:    fuel_od   "<< cell_fuel_od[cell_name]   << endl;
+            cout << "assembly debug:    thden     "<< cell_thden[cell_name]     << endl;
+   */
+
           }
         }
 
-        cout << "\n Reading assembly: " << assembly_name << endl;
-
         double conversion_cm2mm  = 10.0;  // convert cm to mm
-        double tol_geom          = 0.01;  // geometry tolerance (mm)
+        double tol_geom          = 0.001;  // geometry tolerance (cm)
 
         int    num_pins= vera_xml.get_param_from_plist<int>( assembly_ppath+".num_pins");
-        double ppitch = vera_xml.get_param_from_plist<double>( assembly_ppath+".ppitch") * conversion_cm2mm;
+        double ppitch = vera_xml.get_param_from_plist<double>( assembly_ppath+".ppitch");   // cm
 
      // checks to make sure all assembly geometries are consistent
 
@@ -371,39 +432,31 @@ namespace {
         Array<double> axial_elevations = vera_xml.get_param_from_plist<Array<double> >( assembly_ppath+".axial_elevations");
         map<string, bool> axial_levels_with_fuel;
 
+        // Loop over axial levels
+        // CTF requires one value of thden, so do a crude averaging 
+        // We could improve this by doing volume weighting
+
         for( unsigned i = 0; i < axial_labels.size(); ++i )
         {
           axial_level_done[axial_labels[i]] = false;
           double axial_level_length = axial_elevations[i+1] - axial_elevations[i];
           double axial_avg_thden = 0.0;
 
+          // Loop over cell map at this axial level
+
           string PL_entry = "ASSEMBLIES." + assembly_name + ".CellMaps.CellMap_" + axial_labels[i] + ".cell_map";
           Array<string> cell_map = vera_xml.get_param_from_plist<Array<string> >( PL_entry);
-          // Look for the presence of fuel and stop if found - we just need to know if this axial level has fuel
           bool axial_level_has_fuel = false;
           double num_fuel_pins = 0;
           for( int j = 0; j < cell_map.size(); ++j )
           {
             string cell_name = "Cell_" + cell_map[j];
-            string ppath_cell_type = assembly_ppath+".Cells."+cell_name+".type";
-            string cell_type = vera_xml.get_param_from_plist<string>( ppath_cell_type);
+            string cell_type = cell_types[cell_name];
             if( "fuel" == cell_type )
             {
               axial_level_has_fuel = true;
               num_fuel_pins++;
-
-              // Now figure out which material is the fuel and get its thden value for averaging
-              string cell_mats_path = assembly_ppath+".Cells."+cell_name+".mats";
-              Array<string> cell_mats = vera_xml.get_param_from_plist<Array<string> >( cell_mats_path);
-              for( unsigned m = 0; m < cell_mats.size(); ++m )
-              {
-                string mats_path = assembly_ppath+".Fuels.Fuel_"+cell_mats[m];
-                if( vera_xml.is_sublist(*param_list, mats_path) )
-                {
-                  double thden = vera_xml.get_param_from_plist<double>( mats_path+".thden");
-                  axial_avg_thden += thden;
-                }
-              }
+              axial_avg_thden += cell_thden[cell_name];
             }
           }
           if( axial_level_has_fuel )
@@ -555,7 +608,7 @@ namespace {
           // Sanity check
           if( 0 ) // disable this check for now to allow for "gap" regions
           {
-            // CASL: Also, every axial level with fuel should have the same number of fuel and non-fuel rods
+            //  Also, every axial level with fuel should have the same number of fuel and non-fuel rods
 
             for( int i = 1; i < axial_labels.size(); ++i )
               if( (num_fuel_rods[0] != num_fuel_rods[i]) || (num_fuel_rods[0] != num_fuel_rods[i]) )
@@ -572,19 +625,19 @@ namespace {
           }
 
     //----------------------------------------------------------------------------------------
-    //  CASL:
-    //  CASL: There may be multiple fuel cells defined in the problem, but they should
-    //  CASL:   all have the same fuel pellet diameter, clad diameters, etc.
-    //  CASL:   The cells may have different enrichments.
-    //  CASL: 1. Loop over all cells in assembly"
-    //  CASL: 2. If it is a fuel cell (type=fuel), find the radii corresponding to fuel and
-    //  CASL:      inner and outer zirc.  The fuel pin may or may not contain a he gap.
-    //  CASL: 3. Check to make sure all fuel pins have the same dimensions
-    //  CASL:
-    //  CASL: Update:
-    //  CASL: There may be pins with different number of rings for IFBA and/or annular fuel.
-    //  CASL: However, they should all have the same clad dimensions and same fuel OD. See #3586
-    //  CASL:
+    //  
+    //   There may be multiple fuel cells defined in the problem, but they should
+    //     all have the same fuel pellet diameter, clad diameters, etc.
+    //     The cells may have different enrichments.
+    //   1. Loop over all cells in assembly"
+    //   2. If it is a fuel cell (type=fuel), find the radii corresponding to fuel and
+    //        inner and outer zirc.  The fuel pin may or may not contain a he gap.
+    //   3. Check to make sure all fuel pins have the same dimensions
+    //  
+    //   Update:
+    //   There may be pins with different number of rings for IFBA and/or annular fuel.
+    //   However, they should all have the same clad dimensions and same fuel OD. See #3586
+    //  
     //----------------------------------------------------------------------------------------
 
 
@@ -622,7 +675,7 @@ namespace {
                assem_data.c_ptr_to_cladid = &cladid;
                cladod = vera_xml.get_param_from_plist<double>("COBRATF.heater_tube_od")*conversion_cm2mm;
                assem_data.c_ptr_to_cladod = &cladod;
-               assem_data.rodpitch =vera_xml.get_param_from_plist<double>("COBRATF.heater_tube_pitch")*conversion_cm2mm; 
+               assem_data.rodpitch =vera_xml.get_param_from_plist<double>("COBRATF.heater_tube_pitch")*conversion_cm2mm;
             }
             else
             {
@@ -630,8 +683,6 @@ namespace {
       // Note that it is possible to define multiple fuel rod types
       // If this is the case, enter the following block for each fuel rod type
       // and precede each block with a number in brackets, e.g.  {1}, {2}, etc.
-      //
-      // Scott 1/14/2015 - update default "nfuel" from 3 to 10 - see #3356
 
                pelletd=2.0*the_cell_radii[0] * conversion_cm2mm;
                assem_data.c_ptr_to_pelletd = &pelletd;
@@ -640,7 +691,7 @@ namespace {
                cladod = 2.0*the_cell_radii[2] * conversion_cm2mm;
                assem_data.c_ptr_to_cladid = &cladid;
                assem_data.c_ptr_to_cladod = &cladod;
-               assem_data.rodpitch = ppitch;
+               assem_data.rodpitch = ppitch*conversion_cm2mm;
                assem_data.c_ptr_to_thdensity = &avg_thden;
                assem_data.hgap = hgap;
 
@@ -731,18 +782,18 @@ namespace {
         cout << "  TAF     "<< top_active_fuel      << endl;
 
    //--------------------------------------------------------------------------------------------
-   // CASL: The grid elevations (grid_elev) in the PL are for the midpoints of the grids
-   // CASL: In our example, we have two grid types, \"END\" and \"MID\"
-   // CASL: Each one has a different height, given in the \"SpacerGrids\" sublist
-   // CASL: Use the midpoints and heights to calculate the initial and final heights below.
-   // CASL:
-   // CASL: Hardwire the loss coefficients for now
-   // CASL: Remember to convert the heights from cm to mm
-   // CASL:
-   // CASL: Important: spacer heights are relative to bottom of active fuel
-   // CASL:            elevations in PL are relative to bottom core plate
-   // CASL:            To convert, subtract the elevation of the bottom of the active fuel (calculated above)
-   // CASL:               from the grid elevations in the PL
+   //  The grid elevations (grid_elev) in the PL are for the midpoints of the grids
+   //  In our example, we have two grid types, \"END\" and \"MID\"
+   //  Each one has a different height, given in the \"SpacerGrids\" sublist
+   //  Use the midpoints and heights to calculate the initial and final heights below.
+   // 
+   //  Hardwire the loss coefficients for now
+   //  Remember to convert the heights from cm to mm
+   // 
+   //  Important: spacer heights are relative to bottom of active fuel
+   //             elevations in PL are relative to bottom core plate
+   //             To convert, subtract the elevation of the bottom of the active fuel (calculated above)
+   //                from the grid elevations in the PL
    //--------------------------------------------------------------------------------------------
 
         Array<double> grid_elev; // default to empty
@@ -759,7 +810,7 @@ namespace {
           if( grid_elev[ii-1] > grid_elev[ii] )
             throw runtime_error("ERROR: Grid elevations are not in increasing order");
 
-        // If the grid is above the top axial edit bounds, just 
+        // If the grid is above the top axial edit bounds, just
         // ignore it in the CTF model.
         for( size_t ii = 0; ii < ngrid; ++ii )
         {
@@ -795,7 +846,7 @@ namespace {
         {
           // fix - loop over all defined grid types, not grid types in XML file
           // Are there any other sublists besides "Grid_XXX" under "ASSEMBLIES.Assemblies_XXX.SpacerGrids" ? - RWH
-          data = spacer_grid_plist.name(spacer_grid_citer); 
+          data = spacer_grid_plist.name(spacer_grid_citer);
           std::transform(data.begin(), data.end(), data.begin(), ::tolower);
           if( spacer_grid_plist.entry(spacer_grid_citer).isList() &&  // is it a sublist
               (data.find("grid_") == 0) ) // and is it named "Grid_XXX"
@@ -883,7 +934,6 @@ namespace {
             gridend.at(n)   = grid2*conversion_cm2mm ;
             gridloss.at(n)  = grid_loss_coeffs[grid_map[n]];
 
-            
           }
         }
 
@@ -1092,7 +1142,7 @@ namespace {
     GetRequired(editsParams, "EDITS", "axial_edit_bounds", edit_bounds);
 
     const double conversion_factor = 10.0; // cm to mm
-    
+
     geo_struct geo_data;
 
 // calculate number of assemblies in core
@@ -1179,7 +1229,6 @@ namespace {
     }
 
     geo_data.ivar = num_edit-1;
-    
 
     geo_data.c_ptr_to_ztop = &geo_edit_bounds.at(1);
 
@@ -1216,7 +1265,7 @@ namespace {
 
     double cm2mm = 10.0; // cm to mm
 
-    // If num_pf_files is greater than 1, then we need to 
+    // If num_pf_files is greater than 1, then we need to
     // set the transient time for each step 1000 seconds longer
     // than the previous
     Array<double> stacked_case_times; // default to empty
@@ -1260,52 +1309,16 @@ namespace {
     vector<double> corepower(num_pf_files,power);
     power_data.c_ptr_to_corepower = &corepower.at(0);
 
-    /*
-       Note from Scott Palmtag:
-         The power profiles provide the starting guess for the powers in a coupled DENOVO calculation.
-         Note that the last entry in the table is the active core height
-         Note that the top of the table must be slightly taller than the active fuel height
-         Heights correspond to the beginning of active fuel (BAF)
-    */
-    double active_fuel_length = vera_common.get_total_fuel_length_in_cm(assembly_name); 
+    // The power profiles provide the starting guess for the powers in a coupled DENOVO calculation.
+    // The last entry in the table is the active core height
+    // The top of the table must be slightly taller than the active fuel height
+    // Heights correspond to the beginning of active fuel (BAF)
+
+    double active_fuel_length = vera_common.get_total_fuel_length_in_cm(assembly_name);
     cout << "debug: active_fuel_length = " << active_fuel_length  << endl;
 
-  /*  **** remove initial guess 20131018 - see ticket #3124
-      **** This table is not normalized to 1.0 **** 
-
-    if (fabs(active_fuel_length - 365.76) < 0.12) {
-      outfile << "24"                                                                   << endl;
-      outfile << "*  Height (mm)     Relative power"                                    << endl;
-      outfile << "  0.0000       0.42"                                                  << endl;
-      outfile << "  159.0696     0.47"                                                  << endl;
-      outfile << "  318.1391     0.56"                                                  << endl;
-      outfile << "  477.2087     0.67"                                                  << endl;
-      outfile << "  636.2783     0.8 "                                                  << endl;
-      outfile << "  795.3478     0.94"                                                  << endl;
-      outfile << "  954.4174     1.08"                                                  << endl;
-      outfile << "  1113.487     1.22"                                                  << endl;
-      outfile << "  1272.556     1.34"                                                  << endl;
-      outfile << "  1431.626     1.44"                                                  << endl;
-      outfile << "  1590.695     1.51"                                                  << endl;
-      outfile << "  1749.765     1.55"                                                  << endl;
-      outfile << "  1908.834     1.55"                                                  << endl;
-      outfile << "  2067.904     1.51"                                                  << endl;
-      outfile << "  2226.973     1.44"                                                  << endl;
-      outfile << "  2386.043     1.34"                                                  << endl;
-      outfile << "  2545.113     1.22"                                                  << endl;
-      outfile << "  2704.182     1.08"                                                  << endl;
-      outfile << "  2863.252     0.94"                                                  << endl;
-      outfile << "  3022.321     0.8 "                                                  << endl;
-      outfile << "  3181.391     0.67"                                                  << endl;
-      outfile << "  3340.460     0.56"                                                  << endl;
-      outfile << "  3499.530     0.47"                                                  << endl;
-      outfile << "  3658.600     0.42"                                                  << endl;
-    }
-    else {
-
- */
     vector<double> y(2*num_pf_files);
-    vector<double> axialz(2*num_pf_files,1.0); 
+    vector<double> axialz(2*num_pf_files,1.0);
     for(int pf_file=0;pf_file<2*num_pf_files;pf_file++){
        if (pf_file%2==0){
           y.at(pf_file)=0.0;
@@ -1318,8 +1331,6 @@ namespace {
     power_data.mnxn = 2;
     power_data.c_ptr_to_y = &y.at(0);
     power_data.c_ptr_to_axialz = &axialz.at(0);
-
- /* }  */
 
     int map_size;
     GetRequired(coreParams, "CORE", "core_size", map_size, false);
