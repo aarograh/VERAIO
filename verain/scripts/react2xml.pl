@@ -46,7 +46,7 @@ my $INPUT_DB;
 #
 my $MAIN_DB;
 
-my $pgnam=$0;                # program name
+my $pgnam=basename($0);                # program name
 my @VERSION=('major'=>3,
 	     'minor'=>3,
 	     'date'=>01242014);
@@ -155,6 +155,7 @@ if(@ARGV < 2){
 options:
   --xml=(on|off)
   --xslt=(on|off)
+  --init
   --verbose
   --debug
   --version
@@ -181,6 +182,8 @@ foreach $iblock (@BLOCKS){
 
 
 my ($ifile,$ofile)=@ARGV;
+
+die "$pgnam: input and output file are the same\n" if $ifile eq $ofile;
 
 #
 # Initiate configuration template for data structures
