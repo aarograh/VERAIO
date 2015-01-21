@@ -1150,7 +1150,7 @@ namespace {
        geo_data.sym_opt = 1;
     }else if ( symopt == "qtr" ){
        string bc_symopt="rot";
-       GetOptional(stateParams, "bc_sym", bc_symopt);
+       GetOptional(coreParams, "bc_sym", bc_symopt);
        if(bc_symopt=="rot"){
           geo_data.sym_opt=5;
        }else{
