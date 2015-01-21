@@ -257,6 +257,8 @@ namespace {
     double  save_fuel_od =-1.0;
     double  save_clad_od =-1.0;
     double  save_clad_id =-1.0;
+    double  save_guide_od =-1.0;
+    double  save_guide_id =-1.0;
 
     double conversion_cm2mm  = 10.0;  // convert cm to mm
     double tol_geom          = 0.001;  // geometry tolerance (cm)
@@ -430,13 +432,14 @@ namespace {
 
             }
 
-            cout << "  cell debug: Cell " << cell_name << " Type: " << cell_type << endl;
+        /*  cout << "  cell debug: Cell " << cell_name << " Type: " << cell_type << endl;
             cout << "  cell debug:    num rings "<< cell_num_rings[cell_name] << endl;
             cout << "  cell debug:    radii     "<< cell_radii[cell_name]     << endl;
             cout << "  cell debug:    clad_od   "<< cell_clad_od[cell_name]   << endl;
             cout << "  cell debug:    clad_id   "<< cell_clad_id[cell_name]   << endl;
             cout << "  cell debug:    fuel_od   "<< cell_fuel_od[cell_name]   << endl;
             cout << "  cell debug:    thden     "<< cell_thden[cell_name]     << endl;
+         */
 
           }
         }
@@ -613,7 +616,38 @@ namespace {
               cout << "    found fuel cell \"" << cell_name << "\"" << endl;
             }
             else
+            {
               num_non_fuel_rods[i] += citer->second;
+
+     // error check guide tube dimensions
+     // Note that this logic will use the first non-fuel region *in a fueled lattice* as the guide tube
+     // Before, the code was using the first non-fuel region on the XML file and this could cause an
+     // error if a plenum was used instead of a water rod.  See #3587
+ 
+              if (save_guide_od < 0.0 )
+                 save_guide_od=cell_clad_od[cell_name];
+              if (save_guide_id < 0.0 )
+                 save_guide_id=cell_clad_id[cell_name];
+
+              if ( abs(save_guide_id-cell_clad_id[cell_name]) > tol_geom)
+              {
+                 cout << "ERROR: guide tube inner radii is not consistent with other guide tubes" << endl;
+                 cout << "   cell name       " << cell_name                   << endl;
+                 cout << "   clad_id in cell " << cell_clad_id[cell_name]     << endl;
+                 cout << "   expecting       " << save_clad_id                << endl;
+                 throw runtime_error("Invalid guide tube inner radii");
+              }
+
+              if ( abs(save_guide_od-cell_clad_od[cell_name]) > tol_geom)
+              {
+                 cout << "ERROR: guide tube outer radii is not consistent with other guide tubes" << endl;
+                 cout << "   cell name       " << cell_name                   << endl;
+                 cout << "   cell_od in cell " << cell_clad_od[cell_name]     << endl;
+                 cout << "   expecting       " << save_clad_od                << endl;
+                 throw runtime_error("Invalid guide tube outer radii");
+              }
+
+            }
           }
 
           if( num_pins*num_pins != (num_fuel_rods[i]+num_non_fuel_rods[i]) )
@@ -641,7 +675,6 @@ namespace {
 
           if( first_level && first_assm )
           {
-   cout << "debug: Saving assembly data first level and first assm" << endl;
             assem_data.assemrods = num_fuel_rods[i];
             assem_data.nrodsrow = num_pins;
             assem_data.assemgt = num_non_fuel_rods[i];
@@ -672,61 +705,12 @@ namespace {
             continue;
           }
 
-  cout << "debug: should happen every level unless continue barfed me out" << endl;
-
-   // ***** The following will only be run for first_level and first_assm because of the continue statement in the else clause *************
-   // ***** The following will only be run for first_level and first_assm because of the continue statement in the else clause *************
-   // ***** The following will only be run for first_level and first_assm because of the continue statement in the else clause *************
-   // ***** The following will only be run for first_level and first_assm because of the continue statement in the else clause *************
-   // ***** The following will only be run for first_level and first_assm because of the continue statement in the else clause *************
-
     //----------------------------------------------------------------------------------------
-    //
-    //   There may be multiple fuel cells defined in the problem, but they should
-    //     all have the same fuel pellet diameter, clad diameters, etc.
-    //     The cells may have different enrichments.
-    //   1. Loop over all cells in assembly"
-    //   2. If it is a fuel cell (type=fuel), find the radii corresponding to fuel and
-    //        inner and outer zirc.  The fuel pin may or may not contain a he gap.
-    //   3. Check to make sure all fuel pins have the same dimensions
-    //
-    //   Update:
-    //   There may be pins with different number of rings for IFBA and/or annular fuel.
-    //   However, they should all have the same clad dimensions and same fuel OD. See #3586
-    //
+    //  The following will only be run for first_level and first_assm because of the continue statement in the else clause
     //----------------------------------------------------------------------------------------
-
-  // scott I think the following checks that all radii and number of rings are constant???
-
-          // Obtain fuel parameters and sanity check as we go
-          bool found_fuel = false;
-
-          map<string, string>::const_iterator          citer_cell_types     = cell_types.begin();
-          map<string, Array<double> >::const_iterator  citer_cell_radii     = cell_radii.begin();
-          map<string, Array<string> >::const_iterator  citer_cell_mats      = cell_mats.begin();
-          map<string, int>::const_iterator             citer_cell_num_rings = cell_num_rings.begin();
-          Array<double> the_cell_radii;
-          int           the_cell_num_rings = -1;
-          for( ; citer_cell_types != cell_types.end(); ++citer_cell_types, ++citer_cell_radii, ++citer_cell_mats, ++citer_cell_num_rings )
-          {
-            if( found_fuel && ("fuel" == citer_cell_types->second) )
-            {
-  //ifba      if( (the_cell_radii != citer_cell_radii->second) ||
-  //ifba          (the_cell_num_rings != citer_cell_num_rings->second) )
-  //ifba        throw runtime_error("All fuel pellets are not the same in Assembly \""+assembly_name+"\".");
-            }
-            else if( "fuel" == citer_cell_types->second )
-            {
-              the_cell_radii     = citer_cell_radii->second;
-              the_cell_num_rings = citer_cell_num_rings->second;
-              found_fuel = true;
-            }
-          }
-
 
           if( first_level && first_assm )
           {
-            conversion_cm2mm  = 10.0; // cm to mm
 
             if( 1 == heated_elements_type ) // 0=Nuclear Fuel Rods, 1=Electric Heater Tubes
             {
@@ -770,35 +754,12 @@ namespace {
             }
             else
             {
-              // Obtain non-fuel parameters and sanity check as we go
-              bool found_non_fuel = false;
 
-              // There are two types of non-fuel - guide tubes and plenums/plugs
-              // Guide tubes will have different (larger) diameters
-              // Plenums/plugs must match the fuel values
-              citer_cell_types     = cell_types.begin();
-              citer_cell_radii     = cell_radii.begin();
-              citer_cell_mats      = cell_mats.begin();
-              citer_cell_num_rings = cell_num_rings.begin();
-              for( ; citer_cell_types != cell_types.end(); ++citer_cell_types, ++citer_cell_radii, ++citer_cell_mats, ++citer_cell_num_rings )
-              {
-                if( found_non_fuel && ("fuel" != citer_cell_types->second) )
-                {
-                  // Skip this sanity check for now ... but this means that the last non-fuel, ie "other" cell type is the one used
-                  //if( (the_cell_radii != citer_cell_radii->second) ||
-                  //    (the_cell_mats !=  citer_cell_mats->second ) ||
-                  //    (the_cell_num_rings != citer_cell_num_rings->second) )
-                  //  throw runtime_error("All non-fuel pellets are not the same in Assembly \""+assembly_name+"\".");
-                }
-                else if( "fuel" != citer_cell_types->second )
-                {
-                  the_cell_radii     = citer_cell_radii->second;
-                  the_cell_num_rings = citer_cell_num_rings->second;
-                  found_non_fuel = true;
-                }
-              }
-              gt_wr_di = 2.0*the_cell_radii[0] * conversion_cm2mm;
-              gt_wr_de = 2.0*the_cell_radii[1] * conversion_cm2mm;
+  // debug    cout << "debug gt id " << save_guide_id << endl;
+  // debug    cout << "debug gt od " << save_guide_od << endl;
+
+              gt_wr_di = 2.0*save_guide_id * conversion_cm2mm;
+              gt_wr_de = 2.0*save_guide_od * conversion_cm2mm;
 
               assem_data.c_ptr_to_gt_wr_di = &gt_wr_di;
               assem_data.c_ptr_to_gt_wr_de = &gt_wr_de;
@@ -811,13 +772,18 @@ namespace {
               int gt = 0;
               for( int k = 0; k < num_pins; ++k ){
                  for( int m = 0; m < num_pins; ++m ){
-                    if( fuel_type_ids.end() == fuel_type_ids.find(cell_map[k*num_pins+m]) ){
+                    string cell_name = "Cell_" + cell_map[k*num_pins+m];
+                    string cell_type = cell_types[cell_name];
+                    if ("fuel" != cell_type)
+                    {
+  // debug             cout << "debug gt location " << cell_type << endl;
                        gt_wr_posx.at(gt) = k+1;
                        gt_wr_posy.at(gt) = m+1;
                        gt = gt + 1;
                        fuel_pin_map[k*num_pins+m] = 0.0;
                     }
-                    else{
+                    else
+                    {
                        fuel_pin_map[k*num_pins+m] = 1.0;
                     }
                  }
@@ -837,8 +803,8 @@ namespace {
           first_level = false;
         }   // END LOOP OVER AXIAL LEVELS
 
-        cout << "  Assembly BAF   "<< bottom_active_fuel   << endl;
-        cout << "  Assembly TAF   "<< top_active_fuel      << endl;
+        cout << "  Assembly BAF   "<< bottom_active_fuel << " cm" << endl;
+        cout << "  Assembly TAF   "<< top_active_fuel    << " cm" << endl;
 
    //--------------------------------------------------------------------------------------------
    //
