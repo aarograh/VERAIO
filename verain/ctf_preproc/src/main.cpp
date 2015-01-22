@@ -25,7 +25,7 @@ namespace
   void create_file_geo_inp(ParameterList &);
   void create_file_power_inp(const Array<double> & fuel_pin_map, VERAIn_XML_Common &);
 
-  // assembly data structure 
+  // assembly data structure
   struct assem_struct{
      int     assemrods;
      int     nrodsrow;
@@ -230,9 +230,23 @@ namespace {
     ParameterList & pList = vera_common.get_vera_xml().get_pList();
     const ParameterList & editsParams = pList.sublist("EDITS");
     const ParameterList & assembliesParams = pList.sublist("ASSEMBLIES");
+    const ParameterList & coreParams = pList.sublist("CORE");
+    const ParameterList & cobraParams = pList.sublist("COBRATF");
 
     Array<double> edit_bounds;
     GetRequired(editsParams, "EDITS", "axial_edit_bounds", edit_bounds, false);
+
+    double apitch;
+    GetRequired(coreParams,"CORE","apitch", apitch);
+
+    double hgap=5678.3;
+    GetOptional(cobraParams, "hgap", hgap);
+
+    int nfuel=10;           // on 1/14/2015 - update default "nfuel" from 3 to 10 - see #3356
+    GetOptional(cobraParams, "nfuel", nfuel);
+
+    int ctfnc=1;
+    GetOptional(cobraParams, "nc", ctfnc);
 
     assem_struct assem_data;
 
@@ -240,13 +254,16 @@ namespace {
 
     int     save_num_pins=-1;          // save values to check that all assemblies are consistent
     double  save_ppitch  =-1.0;
-//  double  save_fuel_od =-1.0;
-//  double  save_clad_od =-1.0;
-//  double  save_clad_id =-1.0;
+    double  save_fuel_od =-1.0;
+    double  save_clad_od =-1.0;
+    double  save_clad_id =-1.0;
+    double  save_guide_od =-1.0;
+    double  save_guide_id =-1.0;
+
+    double conversion_cm2mm  = 10.0;  // convert cm to mm
+    double tol_geom          = 0.001;  // geometry tolerance (cm)
 
     ParameterList * param_list = &pList;
-
-    bool   first_assm = true;
 
     // These variables will store data that is pointed to by the assem_data structure
     // These variables must exist throughout this function or else the pointer will
@@ -279,13 +296,38 @@ namespace {
         string assembly_name = assembliesParams.name(citer);
         string assembly_ppath = "ASSEMBLIES." + assembly_name;
 
-        // -----------------------------------------
-        // Obtain cell attributes to be used later
-        // -----------------------------------------
+        cout << "\n Reading assembly: " << assembly_name << endl;
+
+    // -----------------------------------------------------------------
+    //
+    // Obtain cell attributes to be used later
+    //
+    // Assumptions:
+    //   Clad OD is the outer radii
+    //   Clad ID is the next to outer radii
+    //   Fuel OD is the outermost radii with fuel material  
+    //   (this logic will work with IFBA and annular fuel and addresses ticket #3578)
+    //
+    // Check all fuel cells to make sure they have consistent Clad_OD, Clad_ID, and Fuel_ID
+    // Values for the fuel region are stored in save_fuel_od, save_clad_od, and save_clad_id
+    //
+    // We cannot check non-fuel regions here because we do not know if 
+    //    they are water rods or plenum regions
+    //
+    // We will check non-fuel regions later
+    //
+    // Also collect values of "thden" by cell type for averaging later
+    //
+    // -----------------------------------------------------------------
+
         map<string, string> cell_types;
         map<string, Array<double> > cell_radii;
         map<string, Array<string> > cell_mats;
         map<string, int> cell_num_rings;
+        map<string, double> cell_clad_od;
+        map<string, double> cell_clad_id;
+        map<string, double> cell_fuel_od;
+        map<string, double> cell_thden;
         const ParameterList & assem_cells_plist = assembliesParams.sublist(assembly_name).sublist("Cells");
         ParameterList::ConstIterator assem_cell_citer = assem_cells_plist.begin(),
           assem_cell_cend  = assem_cells_plist.end();
@@ -308,17 +350,103 @@ namespace {
             cell_mats[cell_name] = vera_xml.get_param_from_plist<Array<string> >( ppath_cell_type);
             ppath_cell_type = assembly_ppath+".Cells."+cell_name+".num_rings";
             cell_num_rings[cell_name] = vera_xml.get_param_from_plist<int>( ppath_cell_type);
+
+            if ( cell_num_rings[cell_name] > 0 )
+            {
+              cell_clad_od[cell_name]=cell_radii[cell_name][cell_num_rings[cell_name]-1];
+            }
+            else
+            {
+              cell_clad_od[cell_name]=0.0;
+            }
+
+            if ( cell_num_rings[cell_name] > 1 )
+            {
+              cell_clad_id[cell_name]=cell_radii[cell_name][cell_num_rings[cell_name]-2];
+            }
+            else
+            {
+              cell_clad_id[cell_name]=0.0;
+            }
+
+
+            cell_thden[cell_name]=0.0;   // initialize in case search doesn't work
+            cell_fuel_od[cell_name]=0.0;
+            if( "fuel" == cell_type )
+            {
+              int ifr=-2;
+              // Now figure out which material is the fuel and get its thden value for averaging
+              string cell_mats_path = assembly_ppath+".Cells."+cell_name+".mats";
+              Array<string> cell_mats = vera_xml.get_param_from_plist<Array<string> >( cell_mats_path);
+              for( unsigned m = 0; m < cell_mats.size(); ++m )    // loop over materials
+              {
+  // debug      cout << " cell mats: " << m << " " << cell_mats[m] << endl;
+                string mats_path = assembly_ppath+".Fuels.Fuel_"+cell_mats[m];
+                if( vera_xml.is_sublist(*param_list, mats_path) )
+                {
+                  ifr=m;      // save last ring number with fuel
+                  cell_thden[cell_name] = vera_xml.get_param_from_plist<double>( mats_path+".thden");
+                }
+              }
+              if (ifr < 0)
+              {
+                throw runtime_error("No fissionable material found in fuel cell");
+              }
+              else
+              {
+                cell_fuel_od[cell_name]=cell_radii[cell_name][ifr];
+              }
+
+              if (save_clad_od < 0.0 )
+                 save_clad_od=cell_clad_od[cell_name];
+              if (save_clad_id < 0.0 )
+                 save_clad_id=cell_clad_id[cell_name];
+              if (save_fuel_od < 0.0 )
+                 save_fuel_od=cell_fuel_od[cell_name];
+
+              if ( abs(save_fuel_od-cell_fuel_od[cell_name]) > tol_geom)
+              {
+                 cout << "ERROR: fuel outer radii is not consistent with other fuel cells" << endl;
+                 cout << "   cell name       " << cell_name                   << endl;
+                 cout << "   fuel_od in cell " << cell_fuel_od[cell_name]     << endl;
+                 cout << "   expecting       " << save_fuel_od                << endl;
+                 throw runtime_error("Invalid outer fuel radii");
+              }
+
+              if ( abs(save_clad_id-cell_clad_id[cell_name]) > tol_geom)
+              {
+                 cout << "ERROR: clad inner radii is not consistent with other fuel cells" << endl;
+                 cout << "   cell name       " << cell_name                   << endl;
+                 cout << "   clad_id in cell " << cell_clad_id[cell_name]     << endl;
+                 cout << "   expecting       " << save_clad_id                << endl;
+                 throw runtime_error("Invalid clad inner radii");
+              }
+
+              if ( abs(save_clad_od-cell_clad_od[cell_name]) > tol_geom)
+              {
+                 cout << "ERROR: clad Outer radii is not consistent with other fuel cells" << endl;
+                 cout << "   cell name       " << cell_name                   << endl;
+                 cout << "   clad_od in cell " << cell_clad_od[cell_name]     << endl;
+                 cout << "   expecting       " << save_clad_od                << endl;
+                 throw runtime_error("Invalid clad outer radii");
+              }
+
+            }
+
+        /*  cout << "  cell debug: Cell " << cell_name << " Type: " << cell_type << endl;
+            cout << "  cell debug:    num rings "<< cell_num_rings[cell_name] << endl;
+            cout << "  cell debug:    radii     "<< cell_radii[cell_name]     << endl;
+            cout << "  cell debug:    clad_od   "<< cell_clad_od[cell_name]   << endl;
+            cout << "  cell debug:    clad_id   "<< cell_clad_id[cell_name]   << endl;
+            cout << "  cell debug:    fuel_od   "<< cell_fuel_od[cell_name]   << endl;
+            cout << "  cell debug:    thden     "<< cell_thden[cell_name]     << endl;
+         */
+
           }
         }
 
-        cout << "\n Reading assembly: " << assembly_name << endl;
-
-        double conversion_cm2mm  = 10.0;  // convert cm to mm
-        double tol_geom          = 0.01;  // geometry tolerance (mm)
-
         int    num_pins= vera_xml.get_param_from_plist<int>( assembly_ppath+".num_pins");
-        double ppitch = vera_xml.get_param_from_plist<double>( assembly_ppath+".ppitch") * conversion_cm2mm;
-        double apitch = vera_xml.get_param_from_plist<double>( "CORE.apitch") * conversion_cm2mm;
+        double ppitch = vera_xml.get_param_from_plist<double>( assembly_ppath+".ppitch");   // cm
 
      // checks to make sure all assembly geometries are consistent
 
@@ -342,6 +470,10 @@ namespace {
 
     // ---------------------------------------------------------------------------------------------------
     //  Step 1. Loop over all axial levels (i.e. number of \"axial_labels\" in assembly)
+    //          and determine if axial level has fuel or not
+    //
+    //          Average thden in this loop because we evaluate every level
+    //          In the next step, we will skip duplicate levels
     // ---------------------------------------------------------------------------------------------------
 
         Array<string> axial_labels = vera_xml.get_param_from_plist<Array<string> >( assembly_ppath+".axial_labels");
@@ -362,39 +494,31 @@ namespace {
         Array<double> axial_elevations = vera_xml.get_param_from_plist<Array<double> >( assembly_ppath+".axial_elevations");
         map<string, bool> axial_levels_with_fuel;
 
+        // Loop over axial levels
+        // CTF requires one value of thden, so do a crude averaging
+        // We could improve this by doing volume weighting
+
         for( unsigned i = 0; i < axial_labels.size(); ++i )
         {
           axial_level_done[axial_labels[i]] = false;
           double axial_level_length = axial_elevations[i+1] - axial_elevations[i];
           double axial_avg_thden = 0.0;
 
+          // Loop over cell map at this axial level
+
           string PL_entry = "ASSEMBLIES." + assembly_name + ".CellMaps.CellMap_" + axial_labels[i] + ".cell_map";
           Array<string> cell_map = vera_xml.get_param_from_plist<Array<string> >( PL_entry);
-          // Look for the presence of fuel and stop if found - we just need to know if this axial level has fuel
           bool axial_level_has_fuel = false;
           double num_fuel_pins = 0;
           for( int j = 0; j < cell_map.size(); ++j )
           {
             string cell_name = "Cell_" + cell_map[j];
-            string ppath_cell_type = assembly_ppath+".Cells."+cell_name+".type";
-            string cell_type = vera_xml.get_param_from_plist<string>( ppath_cell_type);
+            string cell_type = cell_types[cell_name];
             if( "fuel" == cell_type )
             {
               axial_level_has_fuel = true;
               num_fuel_pins++;
-
-              // Now figure out which material is the fuel and get its thden value for averaging
-              string cell_mats_path = assembly_ppath+".Cells."+cell_name+".mats";
-              Array<string> cell_mats = vera_xml.get_param_from_plist<Array<string> >( cell_mats_path);
-              for( unsigned m = 0; m < cell_mats.size(); ++m )
-              {
-                string mats_path = assembly_ppath+".Fuels.Fuel_"+cell_mats[m];
-                if( vera_xml.is_sublist(*param_list, mats_path) )
-                {
-                  double thden = vera_xml.get_param_from_plist<double>( mats_path+".thden");
-                  axial_avg_thden += thden;
-                }
-              }
+              axial_avg_thden += cell_thden[cell_name];
             }
           }
           if( axial_level_has_fuel )
@@ -416,44 +540,55 @@ namespace {
         avg_thden /= active_fuel_length;
 
 
+    // ---------------------------------------------------------------------------------------------------
+    //  Step 2. Loop over all axial levels (i.e. number of \"axial_labels\" in assembly)
+    //          and for each axial label, loop over npin x npin \"cell_map\"
+    //
+    //          Skip duplicate levels and non-fueled levels
+    //
+    //  Notes on error checking:
+    //
+    //    We only check rod diameters in axial levels with fuel.
+    //    We assume that a non-fueled cell in a fuel level must be guide tubes.
+    //    The diameters of fueled cells have already been checked above in the cell calcs
+    //
+    //    We cannot check Non-fueled axial levels because the non-fuel cells might be plenums or guide tubes.
+    //    (The only way to improve this is to do an axial sweep of each rod, which we may have to implement)
+    //
+    //    Note that this logic will not work for B&W/SMR cores with BP's in fuel rod locations!
+    //    It will also not work for part length fuel rods (e.g. new BWR fuel)
+    //
+    // ---------------------------------------------------------------------------------------------------
+
         int num_axial_levels = axial_labels.size();
-        set<string> fuel_type_ids;
+        set<string> fuel_type_ids;                        // save locations for guide tube search
         vector<int> num_fuel_rods(num_axial_levels);
         vector<int> num_non_fuel_rods(num_axial_levels);
         int heated_elements_type;
-
-
-    // ---------------------------------------------------------------------------------------------------
-    //  Step 2. For each axial label, loop over npin x npin \"cell_map\"
-    // ---------------------------------------------------------------------------------------------------
 
         // For multiple axial fuels, we need to output only a single set of information to cobra.
         // For now, we use to first pass through.  We should allow additional passes to happen for the
         // purpose of verifying consistency among values that should agree.
         bool first_level = true;
+        bool first_assm  = true;
 
-        // We will check that the fuel material is consistent throughout.  We have to provide a single value
-        // to Cobra for theoretical density (THDEN).  If within a "FUELXX" axial region we find more than one
-        // "fuel" type, we will compute the arithmatic average and use that as the single value for Cobra.
-        // Later, we may need to keep track of where these axial regions are and thake the average at the midplane.
         vector<string> fuels_material_ids;
 
         for( unsigned i = 0; i < axial_labels.size(); ++i )
         {
-          // For now, skip the axial level if the name does not contain "fuel".  This may need to be made smarter
-          // by interrogating each axial level to determine those that actually contain any cell_type "fuel"
-
           cout << "  axial level: " << i << " " << axial_labels[i] << endl;
 
           if( !axial_levels_with_fuel[axial_labels[i]] )
           {
-            continue;
+            cout << "    non-fuel lattice" << endl;
+            continue;     // skip this axial level
           }
 
           if( axial_level_done[axial_labels[i]] )
           {
             // Do consistency checks ...
-            continue;
+            cout << "    duplicate lattice" << endl;
+            continue;     // skip this axial level
           }
 
           string PL_entry = "ASSEMBLIES." + assembly_name + ".CellMaps.CellMap_" + axial_labels[i] + ".cell_map";
@@ -474,39 +609,54 @@ namespace {
           for( size_t j = 0; j < rod_type_counts.size(); ++j, ++citer )
           {
             string cell_name = "Cell_" + citer->first;
-            string ppath_cell_type = assembly_ppath+".Cells."+cell_name+".type";
-            string cell_type = vera_xml.get_param_from_plist<string>( ppath_cell_type);
-            cout << cell_name << " " << cell_type << endl;
+            string cell_type = cell_types[cell_name];
             if( "fuel" == cell_type )
             {
               num_fuel_rods[i] += citer->second;
               fuel_type_ids.insert(citer->first);
-              // Obtain the fuels materials
-              string cell_mats_path = assembly_ppath+".Cells."+cell_name+".mats";
-              Array<string> cell_mats = vera_xml.get_param_from_plist<Array<string> >( cell_mats_path);
-              bool found_fuel = false;
-              for( unsigned m = 0; m < cell_mats.size(); ++m )
-              {
-                // Should we disallow more than one fuel type in a pin ?  We currently enforce this.
-                string mats_path = assembly_ppath+".Fuels.Fuel_"+cell_mats[m];
-                if( vera_xml.is_sublist(*param_list, mats_path) )
-                {
-                  if( found_fuel )
-                    throw runtime_error("More than one fuel found for \""+cell_name+"\"");
-                  cout << "    found fuel material \"" << cell_mats[m] << "\"" << endl;
-                  fuels_material_ids.push_back(cell_mats[m]);
-                  found_fuel = true;
-                }
-              }
+              cout << "    found fuel cell \"" << cell_name << "\"" << endl;
             }
             else
+            {
               num_non_fuel_rods[i] += citer->second;
+
+     // error check guide tube dimensions
+     // Note that this logic will use the first non-fuel region *in a fueled lattice* as the guide tube
+     // Before, the code was using the first non-fuel region on the XML file and this could cause an
+     // error if a plenum was used instead of a water rod.  See #3587
+ 
+              if (save_guide_od < 0.0 )
+                 save_guide_od=cell_clad_od[cell_name];
+              if (save_guide_id < 0.0 )
+                 save_guide_id=cell_clad_id[cell_name];
+
+              if ( abs(save_guide_id-cell_clad_id[cell_name]) > tol_geom)
+              {
+                 cout << "ERROR: guide tube inner radii is not consistent with other guide tubes" << endl;
+                 cout << "   cell name       " << cell_name                   << endl;
+                 cout << "   clad_id in cell " << cell_clad_id[cell_name]     << endl;
+                 cout << "   expecting       " << save_clad_id                << endl;
+                 throw runtime_error("Invalid guide tube inner radii");
+              }
+
+              if ( abs(save_guide_od-cell_clad_od[cell_name]) > tol_geom)
+              {
+                 cout << "ERROR: guide tube outer radii is not consistent with other guide tubes" << endl;
+                 cout << "   cell name       " << cell_name                   << endl;
+                 cout << "   cell_od in cell " << cell_clad_od[cell_name]     << endl;
+                 cout << "   expecting       " << save_clad_od                << endl;
+                 throw runtime_error("Invalid guide tube outer radii");
+              }
+
+            }
           }
 
           if( num_pins*num_pins != (num_fuel_rods[i]+num_non_fuel_rods[i]) )
             throw runtime_error("Num fuel rods ("+vera_xml.convert_value_to_string(num_fuel_rods[i])+") "
                 + "+ Num non-fuel rods (" + vera_xml.convert_value_to_string(num_non_fuel_rods[i])+") "
                 + "!= Num pins for Assembly \""+assembly_name+"\" ("+ vera_xml.convert_value_to_string(num_pins*num_pins) + ").");
+
+      // fix - the following will need to be updated if we want to model lower plenums!
 
           if( num_fuel_rods[i] > 0 && first_level && first_assm )
           {
@@ -522,16 +672,21 @@ namespace {
 
           }
 
+          cout << "    number of fuel and non-fuel rods " << num_fuel_rods[i] <<" " << num_non_fuel_rods[i] << endl;
 
           if( first_level && first_assm )
           {
-
             assem_data.assemrods = num_fuel_rods[i];
             assem_data.nrodsrow = num_pins;
             assem_data.assemgt = num_non_fuel_rods[i];
             assem_data.activelen = active_fuel_length*conversion_cm2mm;
             assem_data.active_start = (bottom_active_fuel-model_bottom)*conversion_cm2mm;
-            assem_data.bundlepitch = apitch;
+            assem_data.bundlepitch = apitch*conversion_cm2mm;
+
+            assem_data.wallflag = 0;
+            heated_elements_type = vera_xml.get_param_from_plist<int>( "COBRATF.heated_elements_type", 0, false);
+            assem_data.heater_types = heated_elements_type;
+            assem_data.nc = ctfnc;
 
           }
           else
@@ -541,70 +696,22 @@ namespace {
             //   * same size of fuel array
             //   * same number of guide tubes
             //   * same clad od, clad id, fuel pellet diameters
+            // Not all assemblies have the same number of fuel rods
+            // This will throw an error for B&W/SMR case with BP rods in fuel locations
+            //
+            if( num_fuel_rods[i] != assem_data.assemrods )
+                throw runtime_error("Num fuel rods is not consistent among all axial levels of Assembly \""+assembly_name+"\".");
+            if( num_non_fuel_rods[i] != assem_data.assemgt )
+                throw runtime_error("Num non-fuel rods is not consistent among all axial levels of Assembly \""+assembly_name+"\".");
             continue;
           }
 
-          // Sanity check
-          if( 0 ) // disable this check for now to allow for "gap" regions
-          {
-            // CASL: Also, every axial level with fuel should have the same number of fuel and non-fuel rods
-
-            for( int i = 1; i < axial_labels.size(); ++i )
-              if( (num_fuel_rods[0] != num_fuel_rods[i]) || (num_fuel_rods[0] != num_fuel_rods[i]) )
-                throw runtime_error("Num fuel rods and/or Num non-fuel rods is not consistent among all axial levels of Assembly \""+assembly_name+"\".");
-          }
+    //----------------------------------------------------------------------------------------
+    //  The following will only be run for first_level and first_assm because of the continue statement in the else clause
+    //----------------------------------------------------------------------------------------
 
           if( first_level && first_assm )
           {
-             assem_data.wallflag = 0;
-             heated_elements_type = vera_xml.get_param_from_plist<int>( "COBRATF.heated_elements_type", 0, false);
-             assem_data.heater_types = heated_elements_type;
-             assem_data.nc = vera_xml.get_param_from_plist<int>( "COBRATF.nc", 1, false);
-
-          }
-
-    //----------------------------------------------------------------------------------------
-    //  CASL:
-    //  CASL: There may be multiple fuel cells defined in the problem, but they should
-    //  CASL:   all have the same fuel pellet diameter, clad diameters, etc.
-    //  CASL:   The cells may have different enrichments.
-    //  CASL: 1. Loop over all cells in assembly"
-    //  CASL: 2. If it is a fuel cell (type=fuel), find the radii corresponding to fuel and
-    //  CASL:      inner and outer zirc.  The fuel pin may or may not contain a he gap.
-    //  CASL: 3. Check to make sure all fuel pins have the same dimensions
-    //  CASL:
-    //----------------------------------------------------------------------------------------
-
-
-          // Obtain fuel parameters and sanity check as we go
-          bool found_fuel = false;
-
-          map<string, string>::const_iterator          citer_cell_types     = cell_types.begin();
-          map<string, Array<double> >::const_iterator  citer_cell_radii     = cell_radii.begin();
-          map<string, Array<string> >::const_iterator  citer_cell_mats      = cell_mats.begin();
-          map<string, int>::const_iterator             citer_cell_num_rings = cell_num_rings.begin();
-          Array<double> the_cell_radii;
-          int           the_cell_num_rings = -1;
-          cout << "Reading CellMap_"+axial_labels[i] << endl;
-          for( ; citer_cell_types != cell_types.end(); ++citer_cell_types, ++citer_cell_radii, ++citer_cell_mats, ++citer_cell_num_rings )
-          {
-            if( found_fuel && ("fuel" == citer_cell_types->second) )
-            {
-              if( (the_cell_radii != citer_cell_radii->second) ||
-                  (the_cell_num_rings != citer_cell_num_rings->second) )
-                throw runtime_error("All fuel pellets are not the same in Assembly \""+assembly_name+"\".");
-            }
-            else if( "fuel" == citer_cell_types->second )
-            {
-              the_cell_radii     = citer_cell_radii->second;
-              the_cell_num_rings = citer_cell_num_rings->second;
-              found_fuel = true;
-            }
-          }
-
-          if( first_level && first_assm )
-          {
-            conversion_cm2mm  = 10.0; // cm to mm
 
             if( 1 == heated_elements_type ) // 0=Nuclear Fuel Rods, 1=Electric Heater Tubes
             {
@@ -612,7 +719,7 @@ namespace {
                assem_data.c_ptr_to_cladid = &cladid;
                cladod = vera_xml.get_param_from_plist<double>("COBRATF.heater_tube_od")*conversion_cm2mm;
                assem_data.c_ptr_to_cladod = &cladod;
-               assem_data.rodpitch =vera_xml.get_param_from_plist<double>("COBRATF.heater_tube_pitch")*conversion_cm2mm; 
+               assem_data.rodpitch =vera_xml.get_param_from_plist<double>("COBRATF.heater_tube_pitch")*conversion_cm2mm;
             }
             else
             {
@@ -621,22 +728,22 @@ namespace {
       // If this is the case, enter the following block for each fuel rod type
       // and precede each block with a number in brackets, e.g.  {1}, {2}, etc.
 
-               pelletd=2.0*the_cell_radii[0] * conversion_cm2mm;
+               pelletd=2.0*save_fuel_od * conversion_cm2mm;
                assem_data.c_ptr_to_pelletd = &pelletd;
-               assem_data.pelletnodes = vera_xml.get_param_from_plist<int>( "COBRATF.nfuel", 3, false);
-               cladid = 2.0*the_cell_radii[1] * conversion_cm2mm;
-               cladod = 2.0*the_cell_radii[2] * conversion_cm2mm;
+               assem_data.pelletnodes = nfuel;
+               cladid = 2.0*save_clad_id * conversion_cm2mm;
+               cladod = 2.0*save_clad_od * conversion_cm2mm;
                assem_data.c_ptr_to_cladid = &cladid;
                assem_data.c_ptr_to_cladod = &cladod;
-               assem_data.rodpitch = ppitch;
+               assem_data.rodpitch = ppitch*conversion_cm2mm;
                assem_data.c_ptr_to_thdensity = &avg_thden;
-               assem_data.hgap = vera_xml.get_param_from_plist<double>( "COBRATF.hgap", 5678.3);
+               assem_data.hgap = hgap;
 
             }
 
-       // CASL: The previous section collected radii, etc. for fuel pins
-       // CASL: Do the same thing for non-fuel pins (i.e. guide tubes)
-       // CASL: Again, it is possible to define multiple guide tube types here, but we don't do it
+       // The previous section collected radii, etc. for fuel pins
+       // Do the same thing for non-fuel pins (i.e. guide tubes)
+       // Again, it is possible to define multiple guide tube types here, but we don't do it
 
             fuel_pin_map.resize(num_pins*num_pins);
             if( num_non_fuel_rods[i] == 0 )
@@ -648,46 +755,12 @@ namespace {
             }
             else
             {
-              // Obtain non-fuel parameters and sanity check as we go
-              bool found_non_fuel = false;
 
-              // Should all non-fuel entries have the same properties? - RWH
-              // I'll assume this is the case and sanity check accordingly.
-              citer_cell_types     = cell_types.begin();
-              citer_cell_radii     = cell_radii.begin();
-              cout << "citer_cell_radii " << citer_cell_radii->first<< endl;
-              cout << "citer_cell_radii " << citer_cell_radii->second<< endl;
-              citer_cell_mats      = cell_mats.begin();
-              citer_cell_num_rings = cell_num_rings.begin();
-              cout << the_cell_radii << endl;
-              for( ; citer_cell_types != cell_types.end(); ++citer_cell_types, ++citer_cell_radii, ++citer_cell_mats, ++citer_cell_num_rings )
-              {
-                if( found_non_fuel && ("fuel" != citer_cell_types->second) )
-                {
-                  // Skip this sanity check for now ... but this means that the last non-fuel, ie "other" cell type is the one used
-                  //if( (the_cell_radii != citer_cell_radii->second) ||
-                  //    (the_cell_mats !=  citer_cell_mats->second ) ||
-                  //    (the_cell_num_rings != citer_cell_num_rings->second) )
-                  //  throw runtime_error("All non-fuel pellets are not the same in Assembly \""+assembly_name+"\".");
-               cout << " in this first one here" << endl;
-                }
-                else if( "fuel" != citer_cell_types->second )
-                {
-                  the_cell_radii     = citer_cell_radii->second;
-                  the_cell_num_rings = citer_cell_num_rings->second;
-                  found_non_fuel = true;
-               cout << " in this other one there " << endl;
-                }
-                cout << the_cell_radii << endl;
-              }
-              cout << "cell radii 0" << endl;
-              cout << the_cell_radii[0] << endl;
-              cout << "cell radii 1" << endl;
-              cout << the_cell_radii[1] << endl;
-              cout << "conversion" << endl;
-              cout << conversion_cm2mm  << endl;
-              gt_wr_di = 2.0*the_cell_radii[0] * conversion_cm2mm;
-              gt_wr_de = 2.0*the_cell_radii[1] * conversion_cm2mm;
+  // debug    cout << "debug gt id " << save_guide_id << endl;
+  // debug    cout << "debug gt od " << save_guide_od << endl;
+
+              gt_wr_di = 2.0*save_guide_id * conversion_cm2mm;
+              gt_wr_de = 2.0*save_guide_od * conversion_cm2mm;
 
               assem_data.c_ptr_to_gt_wr_di = &gt_wr_di;
               assem_data.c_ptr_to_gt_wr_de = &gt_wr_de;
@@ -697,17 +770,21 @@ namespace {
 
               gt_wr_posx.resize(assem_data.assemgt);
               gt_wr_posy.resize(assem_data.assemgt);
-              cout << "    number of pins = " << num_pins << endl;
               int gt = 0;
               for( int k = 0; k < num_pins; ++k ){
                  for( int m = 0; m < num_pins; ++m ){
-                    if( fuel_type_ids.end() == fuel_type_ids.find(cell_map[k*num_pins+m]) ){
+                    string cell_name = "Cell_" + cell_map[k*num_pins+m];
+                    string cell_type = cell_types[cell_name];
+                    if ("fuel" != cell_type)
+                    {
+  // debug             cout << "debug gt location " << cell_type << endl;
                        gt_wr_posx.at(gt) = k+1;
                        gt_wr_posy.at(gt) = m+1;
                        gt = gt + 1;
                        fuel_pin_map[k*num_pins+m] = 0.0;
                     }
-                    else{
+                    else
+                    {
                        fuel_pin_map[k*num_pins+m] = 1.0;
                     }
                  }
@@ -727,22 +804,24 @@ namespace {
           first_level = false;
         }   // END LOOP OVER AXIAL LEVELS
 
-        cout << "  BAF     "<< bottom_active_fuel   << endl;
-        cout << "  TAF     "<< top_active_fuel      << endl;
+        cout << "  Assembly BAF   "<< bottom_active_fuel << " cm" << endl;
+        cout << "  Assembly TAF   "<< top_active_fuel    << " cm" << endl;
 
    //--------------------------------------------------------------------------------------------
-   // CASL: The grid elevations (grid_elev) in the PL are for the midpoints of the grids
-   // CASL: In our example, we have two grid types, \"END\" and \"MID\"
-   // CASL: Each one has a different height, given in the \"SpacerGrids\" sublist
-   // CASL: Use the midpoints and heights to calculate the initial and final heights below.
-   // CASL:
-   // CASL: Hardwire the loss coefficients for now
-   // CASL: Remember to convert the heights from cm to mm
-   // CASL:
-   // CASL: Important: spacer heights are relative to bottom of active fuel
-   // CASL:            elevations in PL are relative to bottom core plate
-   // CASL:            To convert, subtract the elevation of the bottom of the active fuel (calculated above)
-   // CASL:               from the grid elevations in the PL
+   //
+   //  Start Grid Processing
+   //
+   //  The grid elevations (grid_elev) in the PL are for the midpoints of the grids
+   //  In our example, we have two grid types, \"END\" and \"MID\"
+   //  Each one has a different height, given in the \"SpacerGrids\" sublist
+   //  Use the midpoints and heights to calculate the initial and final heights below.
+   //
+   //  Remember to convert the heights from cm to mm
+   //
+   //  Important: In CTF, spacer heights are relative to bottom of active fuel
+   //             In PL, elevations are relative to bottom core plate
+   //             To convert, subtract the elevation of the bottom of the active fuel (calculated above)
+   //                from the grid elevations in the PL
    //--------------------------------------------------------------------------------------------
 
         Array<double> grid_elev; // default to empty
@@ -759,7 +838,7 @@ namespace {
           if( grid_elev[ii-1] > grid_elev[ii] )
             throw runtime_error("ERROR: Grid elevations are not in increasing order");
 
-        // If the grid is above the top axial edit bounds, just 
+        // If the grid is above the top axial edit bounds, just
         // ignore it in the CTF model.
         for( size_t ii = 0; ii < ngrid; ++ii )
         {
@@ -795,7 +874,7 @@ namespace {
         {
           // fix - loop over all defined grid types, not grid types in XML file
           // Are there any other sublists besides "Grid_XXX" under "ASSEMBLIES.Assemblies_XXX.SpacerGrids" ? - RWH
-          data = spacer_grid_plist.name(spacer_grid_citer); 
+          data = spacer_grid_plist.name(spacer_grid_citer);
           std::transform(data.begin(), data.end(), data.begin(), ::tolower);
           if( spacer_grid_plist.entry(spacer_grid_citer).isList() &&  // is it a sublist
               (data.find("grid_") == 0) ) // and is it named "Grid_XXX"
@@ -883,7 +962,6 @@ namespace {
             gridend.at(n)   = grid2*conversion_cm2mm ;
             gridloss.at(n)  = grid_loss_coeffs[grid_map[n]];
 
-            
           }
         }
 
@@ -1092,7 +1170,7 @@ namespace {
     GetRequired(editsParams, "EDITS", "axial_edit_bounds", edit_bounds);
 
     const double conversion_factor = 10.0; // cm to mm
-    
+
     geo_struct geo_data;
 
 // calculate number of assemblies in core
@@ -1186,7 +1264,6 @@ namespace {
     }
 
     geo_data.ivar = num_edit-1;
-    
 
     geo_data.c_ptr_to_ztop = &geo_edit_bounds.at(1);
 
@@ -1223,7 +1300,7 @@ namespace {
 
     double cm2mm = 10.0; // cm to mm
 
-    // If num_pf_files is greater than 1, then we need to 
+    // If num_pf_files is greater than 1, then we need to
     // set the transient time for each step 1000 seconds longer
     // than the previous
     Array<double> stacked_case_times; // default to empty
@@ -1267,52 +1344,16 @@ namespace {
     vector<double> corepower(num_pf_files,power);
     power_data.c_ptr_to_corepower = &corepower.at(0);
 
-    /*
-       Note from Scott Palmtag:
-         The power profiles provide the starting guess for the powers in a coupled DENOVO calculation.
-         Note that the last entry in the table is the active core height
-         Note that the top of the table must be slightly taller than the active fuel height
-         Heights correspond to the beginning of active fuel (BAF)
-    */
-    double active_fuel_length = vera_common.get_total_fuel_length_in_cm(assembly_name); 
+    // The power profiles provide the starting guess for the powers in a coupled DENOVO calculation.
+    // The last entry in the table is the active core height
+    // The top of the table must be slightly taller than the active fuel height
+    // Heights correspond to the beginning of active fuel (BAF)
+
+    double active_fuel_length = vera_common.get_total_fuel_length_in_cm(assembly_name);
     cout << "debug: active_fuel_length = " << active_fuel_length  << endl;
 
-  /*  **** remove initial guess 20131018 - see ticket #3124
-      **** This table is not normalized to 1.0 **** 
-
-    if (fabs(active_fuel_length - 365.76) < 0.12) {
-      outfile << "24"                                                                   << endl;
-      outfile << "*  Height (mm)     Relative power"                                    << endl;
-      outfile << "  0.0000       0.42"                                                  << endl;
-      outfile << "  159.0696     0.47"                                                  << endl;
-      outfile << "  318.1391     0.56"                                                  << endl;
-      outfile << "  477.2087     0.67"                                                  << endl;
-      outfile << "  636.2783     0.8 "                                                  << endl;
-      outfile << "  795.3478     0.94"                                                  << endl;
-      outfile << "  954.4174     1.08"                                                  << endl;
-      outfile << "  1113.487     1.22"                                                  << endl;
-      outfile << "  1272.556     1.34"                                                  << endl;
-      outfile << "  1431.626     1.44"                                                  << endl;
-      outfile << "  1590.695     1.51"                                                  << endl;
-      outfile << "  1749.765     1.55"                                                  << endl;
-      outfile << "  1908.834     1.55"                                                  << endl;
-      outfile << "  2067.904     1.51"                                                  << endl;
-      outfile << "  2226.973     1.44"                                                  << endl;
-      outfile << "  2386.043     1.34"                                                  << endl;
-      outfile << "  2545.113     1.22"                                                  << endl;
-      outfile << "  2704.182     1.08"                                                  << endl;
-      outfile << "  2863.252     0.94"                                                  << endl;
-      outfile << "  3022.321     0.8 "                                                  << endl;
-      outfile << "  3181.391     0.67"                                                  << endl;
-      outfile << "  3340.460     0.56"                                                  << endl;
-      outfile << "  3499.530     0.47"                                                  << endl;
-      outfile << "  3658.600     0.42"                                                  << endl;
-    }
-    else {
-
- */
     vector<double> y(2*num_pf_files);
-    vector<double> axialz(2*num_pf_files,1.0); 
+    vector<double> axialz(2*num_pf_files,1.0);
     for(int pf_file=0;pf_file<2*num_pf_files;pf_file++){
        if (pf_file%2==0){
           y.at(pf_file)=0.0;
@@ -1325,8 +1366,6 @@ namespace {
     power_data.mnxn = 2;
     power_data.c_ptr_to_y = &y.at(0);
     power_data.c_ptr_to_axialz = &axialz.at(0);
-
- /* }  */
 
     int map_size;
     GetRequired(coreParams, "CORE", "core_size", map_size, false);
