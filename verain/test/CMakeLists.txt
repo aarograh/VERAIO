@@ -88,6 +88,7 @@ ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test-short)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_full_core_wsym_even)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(smr-7x7)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(bwr-ge9)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(small_3x3rod_IFBA)
 
 
 #===========================================================
