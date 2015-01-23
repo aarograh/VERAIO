@@ -46,6 +46,7 @@
     <Parameter name="baffle_gap" type="double" value="0.19"/>
     <Parameter name="baffle_mat" type="string" value="ss"/>
     <Parameter name="baffle_thick" type="double" value="2.85"/>
+    <Parameter name="bc_sym" type="string" value="mir"/>
     <Parameter name="core_size" type="int" value="15"/>
     <Parameter name="height" type="double" value="406.337"/>
     <Parameter name="insert_map" type="Array(string)" value="{-,8,-,12,-,8,-,-,-,16,-,24,-,24,-,16,-,-,-,12,24,-,16,-,20,-,16,-,24,12,-,-,24,-,20,-,20,-,20,-,20,-,24,-,-,16,-,20,-,20,-,20,-,20,-,20,-,16,-,8,-,16,-,20,-,24,-,24,-,20,-,16,-,8,-,24,-,20,-,24,-,20,-,24,-,20,-,24,-,12,-,20,-,20,-,20,-,20,-,20,-,20,-,12,-,24,-,20,-,24,-,20,-,24,-,20,-,24,-,8,-,16,-,20,-,24,-,24,-,20,-,16,-,8,-,16,-,20,-,20,-,20,-,20,-,20,-,16,-,-,24,-,20,-,20,-,20,-,20,-,24,-,-,12,24,-,16,-,20,-,16,-,24,12,-,-,-,16,-,24,-,24,-,16,-,-,-,8,-,12,-,8,-}"/>

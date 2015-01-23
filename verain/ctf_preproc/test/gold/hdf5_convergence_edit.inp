@@ -14,8 +14,8 @@
 ***********************************************************************************************
 **NGR                                                                                          
    1                                                                                           
-**NGAS IRFC EDMD IMIX ISOL          GINIT NOTRN MESH MAPS IPRP MFLX NM12 NM13 NM14             
-     1    2    0    1    3  0.7433870E+01     1    1    1    0    0    0    0    0
+**NGAS IRFC EDMD IMIX ISOL          GINIT NOTRN MESH MAPS IPRP MFLX IBTM PPV  NM14             
+     1    2    0    1    3  0.7433870E+01     1    1    1    0    0    0    1    0
 *Card 1.2                                                                                      
 **         GTOT          AFLUX         DHFRAC          MFLUX                                   
   0.7433870E+01  0.1724628E+02  0.2000000E-01

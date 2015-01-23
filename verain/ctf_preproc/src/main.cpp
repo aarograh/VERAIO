@@ -344,6 +344,7 @@ namespace {
             string cell_type = vera_xml.get_param_from_plist<string>( ppath_cell_type);
             cell_types[cell_name] = cell_type;
             ppath_cell_type = assembly_ppath+".Cells."+cell_name+".radii";
+            cout << "creating cell_radii " << cell_name << endl;
             cell_radii[cell_name] = vera_xml.get_param_from_plist<Array<double> >( ppath_cell_type);
             ppath_cell_type = assembly_ppath+".Cells."+cell_name+".mats";
             cell_mats[cell_name] = vera_xml.get_param_from_plist<Array<string> >( ppath_cell_type);
@@ -1223,12 +1224,19 @@ namespace {
     string symopt = "full";
     GetOptional(stateParams, "sym", symopt);
 
-    if ( symopt == "full" )
+    if ( symopt == "full" ){
        geo_data.sym_opt = 1;
-    else if ( symopt == "qtr" )
-       geo_data.sym_opt = 4;
-    else
+    }else if ( symopt == "qtr" ){
+       string bc_symopt="rot";
+       GetOptional(coreParams, "bc_sym", bc_symopt);
+       if(bc_symopt=="rot"){
+          geo_data.sym_opt=5;
+       }else{
+          geo_data.sym_opt = 4;
+       }
+    }else{
       throw runtime_error("invalid STATE.sym value - must be full or qtr");
+    }
 
   // print core map
 
