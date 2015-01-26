@@ -308,13 +308,23 @@ namespace {
     //   Fuel OD is the outermost radii with fuel material  
     //   (this logic will work with IFBA and annular fuel and addresses ticket #3578)
     //
+    // Fuel cells:        (type "fuel")
+    // Fuel cells are defined by the "type" on the XML file
     // Check all fuel cells to make sure they have consistent Clad_OD, Clad_ID, and Fuel_ID
     // Values for the fuel region are stored in save_fuel_od, save_clad_od, and save_clad_id
     //
-    // We cannot check non-fuel regions here because we do not know if 
-    //    they are water rods or plenum regions
+    // Guide tube cells:  (type "tube")
+    // Guide tube cells are defined if the inner region of the cell contains "mod"
+    // Check all guide tube cells to make sure they have consistent Clad_OD, Clad_ID
+    // But only perform this check in axial regions with fuel!
+    // Note that some empty locations in the plenum will inadvertently be labeled as "tube"
     //
-    // We will check non-fuel regions later
+    // Other cells:       (type ("other)
+    // These are defined as not fuel and not guide tubes.  They can be plenum, plug, BPR, etc.
+    // Check that "other" cells have clad dimensions consistent with fuel
+    // But only perform this check in axial regions with fuel!
+    // No checks are performed on axial regions without fuel because we might have empty regions
+    // and/or plugs
     //
     // Also collect values of "thden" by cell type for averaging later
     //
@@ -344,7 +354,6 @@ namespace {
             string cell_type = vera_xml.get_param_from_plist<string>( ppath_cell_type);
             cell_types[cell_name] = cell_type;
             ppath_cell_type = assembly_ppath+".Cells."+cell_name+".radii";
-            cout << "creating cell_radii " << cell_name << endl;
             cell_radii[cell_name] = vera_xml.get_param_from_plist<Array<double> >( ppath_cell_type);
             ppath_cell_type = assembly_ppath+".Cells."+cell_name+".mats";
             cell_mats[cell_name] = vera_xml.get_param_from_plist<Array<string> >( ppath_cell_type);
@@ -369,6 +378,7 @@ namespace {
               cell_clad_id[cell_name]=0.0;
             }
 
+    // check if this cell is a fuel cell
 
             cell_thden[cell_name]=0.0;   // initialize in case search doesn't work
             cell_fuel_od[cell_name]=0.0;
@@ -431,28 +441,49 @@ namespace {
                  throw runtime_error("Invalid clad outer radii");
               }
 
-            }
+            }  // end check on fuel cells
 
-        /*  cout << "  cell debug: Cell " << cell_name << " Type: " << cell_type << endl;
-            cout << "  cell debug:    num rings "<< cell_num_rings[cell_name] << endl;
-            cout << "  cell debug:    radii     "<< cell_radii[cell_name]     << endl;
-            cout << "  cell debug:    clad_od   "<< cell_clad_od[cell_name]   << endl;
-            cout << "  cell debug:    clad_id   "<< cell_clad_id[cell_name]   << endl;
-            cout << "  cell debug:    fuel_od   "<< cell_fuel_od[cell_name]   << endl;
-            cout << "  cell debug:    thden     "<< cell_thden[cell_name]     << endl;
-         */
+    // check if this cell is a guide tube  (has "mod" in the inner region)
 
-          }
+            if( "other" == cell_type )
+            {
+              // figure out if inside material is "mod"
+              string cell_mats_path = assembly_ppath+".Cells."+cell_name+".mats";
+              Array<string> cell_mats = vera_xml.get_param_from_plist<Array<string> >( cell_mats_path);
+              if ("mod" == cell_mats[0])
+              {
+            //  cout << "  cell guide tube " << cell_name << endl;
+                cell_type="tube";
+                cell_types[cell_name]=cell_type;
+
+            // it would be nice to check all the guide tube dimensions here, but
+            // we can't distinguish guide tubes from "missing" regions in the plenum
+
+              }
+
+            }  // end check for guide tube cells
+
+    // edit cell debug information
+
+    /*      cout << "  cell debug: Cell " << cell_name << " Type: " << cell_type << endl;
+            cout << "  cell debug:    num rings   "<< cell_num_rings[cell_name] << endl;
+            cout << "  cell debug:    radii       "<< cell_radii[cell_name]     << endl;
+            cout << "  cell debug:    fuel/clad radii  " << cell_fuel_od[cell_name]
+                                                  << " " << cell_clad_id[cell_name]
+                                                  << " " << cell_clad_od[cell_name] << endl;
+            cout << "  cell debug:    thden       "<< cell_thden[cell_name]     << endl;
+    */
+          }   // end loop over cells
         }
+
+    // checks to make sure all assemblies are consistent
 
         int    num_pins= vera_xml.get_param_from_plist<int>( assembly_ppath+".num_pins");
         double ppitch = vera_xml.get_param_from_plist<double>( assembly_ppath+".ppitch");   // cm
 
-     // checks to make sure all assembly geometries are consistent
-
         if ( save_num_pins < 0 )
         {
-          save_num_pins=num_pins;    // save first value
+          save_num_pins=num_pins;    // save values for first assembly encountered
         }
         else if (save_num_pins != num_pins )
         {
@@ -461,7 +492,7 @@ namespace {
 
         if ( save_ppitch < 0.0 )
         {
-          save_ppitch=ppitch;    // save first value
+          save_ppitch=ppitch;    // save values for first assembly encountered
         }
         else if ( abs(save_ppitch-ppitch) > tol_geom )
         {
@@ -478,9 +509,6 @@ namespace {
 
         Array<string> axial_labels = vera_xml.get_param_from_plist<Array<string> >( assembly_ppath+".axial_labels");
 
-        // For multiple axial fuels, we need to output only a single set of information to cobra.
-        // For now, we do only a single pass of each type of axial level
-        // to verify consistency among values that should agree.
         map<string, bool> axial_level_done;
 
         const double bottom_active_fuel = vera_common.get_bottom_active_fuel_in_cm(assembly_name);
@@ -548,15 +576,14 @@ namespace {
     //
     //  Notes on error checking:
     //
-    //    We only check rod diameters in axial levels with fuel.
-    //    We assume that a non-fueled cell in a fuel level must be guide tubes.
-    //    The diameters of fueled cells have already been checked above in the cell calcs
+    //    Rod dimensions have already been checked for "fuel" and "tube" cells
+    //    Rod dimensions for "other" cells are only checked in axial levels with fuel.
     //
-    //    We cannot check Non-fueled axial levels because the non-fuel cells might be plenums or guide tubes.
+    //    We cannot check Non-fueled axial levels because the non-fuel cells might be plenums or empty location.
     //    (The only way to improve this is to do an axial sweep of each rod, which we may have to implement)
     //
-    //    Note that this logic will not work for B&W/SMR cores with BP's in fuel rod locations!
-    //    It will also not work for part length fuel rods (e.g. new BWR fuel)
+    //    Note that this logic will not work for BWR's with part length fuel, but
+    //    our current CTF input processor can't handle this anyway
     //
     // ---------------------------------------------------------------------------------------------------
 
@@ -605,50 +632,69 @@ namespace {
           }
 
           // Obtain fuel pin tally
+          // There are three types of cell at this point - "fuel", "tube", or "other"
           map<string, int>::const_iterator citer = rod_type_counts.begin();
           for( size_t j = 0; j < rod_type_counts.size(); ++j, ++citer )
           {
             string cell_name = "Cell_" + citer->first;
             string cell_type = cell_types[cell_name];
-            if( "fuel" == cell_type )
+            if( "tube" == cell_type )
+            {
+              num_non_fuel_rods[i] += citer->second;
+            }
+            else     // either "fuel" or "other".  ("other" could be BPR)
             {
               num_fuel_rods[i] += citer->second;
               fuel_type_ids.insert(citer->first);
               cout << "    found fuel cell \"" << cell_name << "\"" << endl;
             }
-            else
+
+           // check dimensions of guide tubes to make sure they are consistent
+           // We only perform this check in axial levels that have fuel because
+           // there might be plugs and/or empty regions.
+
+            if( "tube" == cell_type )
             {
-              num_non_fuel_rods[i] += citer->second;
+               if (save_guide_od < 0.0 )
+                   save_guide_od=cell_clad_od[cell_name];    // save dimensions for first guide tube found
+                if (save_guide_id < 0.0 )
+                   save_guide_id=cell_clad_id[cell_name];
 
-     // error check guide tube dimensions
-     // Note that this logic will use the first non-fuel region *in a fueled lattice* as the guide tube
-     // Before, the code was using the first non-fuel region on the XML file and this could cause an
-     // error if a plenum was used instead of a water rod.  See #3587
- 
-              if (save_guide_od < 0.0 )
-                 save_guide_od=cell_clad_od[cell_name];
-              if (save_guide_id < 0.0 )
-                 save_guide_id=cell_clad_id[cell_name];
+                if ( abs(save_guide_id-cell_clad_id[cell_name]) > tol_geom)
+                {
+                   cout << "ERROR: guide tube inner clad radii is not consistent with other guide tube cells" << endl;
+                   cout << "   cell name       " << cell_name                   << endl;
+                   cout << "   clad_id in cell " << cell_clad_id[cell_name]     << endl;
+                   cout << "   expecting       " << save_guide_id               << endl;
+                   throw runtime_error("Invalid guide tube inner clad radii");
+                }
 
-              if ( abs(save_guide_id-cell_clad_id[cell_name]) > tol_geom)
-              {
-                 cout << "ERROR: guide tube inner radii is not consistent with other guide tubes" << endl;
-                 cout << "   cell name       " << cell_name                   << endl;
-                 cout << "   clad_id in cell " << cell_clad_id[cell_name]     << endl;
-                 cout << "   expecting       " << save_clad_id                << endl;
-                 throw runtime_error("Invalid guide tube inner radii");
-              }
-
-              if ( abs(save_guide_od-cell_clad_od[cell_name]) > tol_geom)
-              {
-                 cout << "ERROR: guide tube outer radii is not consistent with other guide tubes" << endl;
-                 cout << "   cell name       " << cell_name                   << endl;
-                 cout << "   cell_od in cell " << cell_clad_od[cell_name]     << endl;
-                 cout << "   expecting       " << save_clad_od                << endl;
-                 throw runtime_error("Invalid guide tube outer radii");
-              }
-
+                if ( abs(save_guide_od-cell_clad_od[cell_name]) > tol_geom)
+                {
+                   cout << "ERROR: guide tube outer clad radii is not consistent with other guide tube cells" << endl;
+                   cout << "   cell name       " << cell_name                   << endl;
+                   cout << "   clad_od in cell " << cell_clad_od[cell_name]     << endl;
+                   cout << "   expecting       " << save_guide_od               << endl;
+                   throw runtime_error("Invalid guide tube outer clad radii");
+                }
             }
+
+           // check dimensions of "other" rods to make sure they match fuel
+           // We only perform this check in axial levels that have fuel because
+           // there might be plugs and/or empty regions.
+
+            if( "other" == cell_type )
+            {
+              if ( abs(save_clad_od-cell_clad_od[cell_name]) > tol_geom)
+              {
+                 cout << "ERROR: Outer radii of cell is not consistent with other fuel cells" << endl;
+                 cout << "   cell name       " << cell_name                   << endl;
+                 cout << "   clad_od in cell " << cell_clad_od[cell_name]     << endl;
+                 cout << "   expecting       " << save_clad_od                << endl;
+                 throw runtime_error("Invalid clad outer radii in fuel region");
+              }
+            }
+
           }
 
           if( num_pins*num_pins != (num_fuel_rods[i]+num_non_fuel_rods[i]) )
@@ -672,7 +718,7 @@ namespace {
 
           }
 
-          cout << "    number of fuel and non-fuel rods " << num_fuel_rods[i] <<" " << num_non_fuel_rods[i] << endl;
+          cout << "    number of fuel rods and guide tubes " << num_fuel_rods[i] <<" " << num_non_fuel_rods[i] << endl;
 
           if( first_level && first_assm )
           {
@@ -756,9 +802,6 @@ namespace {
             else
             {
 
-  // debug    cout << "debug gt id " << save_guide_id << endl;
-  // debug    cout << "debug gt od " << save_guide_od << endl;
-
               gt_wr_di = 2.0*save_guide_id * conversion_cm2mm;
               gt_wr_de = 2.0*save_guide_od * conversion_cm2mm;
 
@@ -775,9 +818,8 @@ namespace {
                  for( int m = 0; m < num_pins; ++m ){
                     string cell_name = "Cell_" + cell_map[k*num_pins+m];
                     string cell_type = cell_types[cell_name];
-                    if ("fuel" != cell_type)
+                    if ("tube" == cell_type)
                     {
-  // debug             cout << "debug gt location " << cell_type << endl;
                        gt_wr_posx.at(gt) = k+1;
                        gt_wr_posy.at(gt) = m+1;
                        gt = gt + 1;
@@ -804,6 +846,10 @@ namespace {
           first_level = false;
         }   // END LOOP OVER AXIAL LEVELS
 
+   // print final assembly dimensions
+
+        cout << "  Assembly fuel radii " << save_fuel_od << " " << save_clad_id << " " << save_clad_od << " cm" << endl;
+        cout << "  Assembly guide tube radii " << save_guide_id << " " << save_guide_od << " cm" << endl;
         cout << "  Assembly BAF   "<< bottom_active_fuel << " cm" << endl;
         cout << "  Assembly TAF   "<< top_active_fuel    << " cm" << endl;
 
@@ -1350,7 +1396,7 @@ namespace {
     // Heights correspond to the beginning of active fuel (BAF)
 
     double active_fuel_length = vera_common.get_total_fuel_length_in_cm(assembly_name);
-    cout << "debug: active_fuel_length = " << active_fuel_length  << endl;
+    cout << "  active_fuel_length = " << active_fuel_length << " cm" << endl;
 
     vector<double> y(2*num_pf_files);
     vector<double> axialz(2*num_pf_files,1.0);
