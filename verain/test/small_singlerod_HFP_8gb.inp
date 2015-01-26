@@ -12,13 +12,13 @@
 
 [STATE]
   power  100.0         ! %
-  tinlet 559.0 F         ! F
+  tinlet 559.0 F       ! F
   boron  1300          ! initial boron (ppm)
   kcrit  1.0           ! eigenvalue to search to
   search 'boron'       ! perform a boron search
   pressure 2250        ! psia
 
-  tfuel 900.0 K         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
+  tfuel  900.0 K       ! K - 600K  Not used with T/H feedback! set to 900K with feedback
   modden 0.743         ! g/cc      Not used with T/H feedback!
 
   feedback on
@@ -36,6 +36,9 @@
   assm_map
     A1
 
+  ! add material definitions for he, inc, ss, and zirc4.
+  include casl_comp_r3_full.ini
+
   lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
   upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
   lower_ref   mod 26.0 1.0
@@ -43,13 +46,6 @@
 
   bc_rad reflecting
 
-  mat he     0.000176
-  mat inc    8.19
-  mat ss     8.0
-  mat zirc   6.56 zirc4
-  mat aic   10.20
-  mat pyrex  2.23
-  mat b4c    6.56
 
 [ASSEMBLY]
   title "Westinghouse 17x17"
@@ -58,12 +54,12 @@
 
   fuel U31 10.257 95.0 / 3.1
 
-  cell 1     0.4096 0.418 0.475 / U31 he zirc
-  cell 100          0.561 0.602 / mod    zirc       ! guide tube
-  cell 200          0.561 0.602 / mod    zirc       ! instrument tube
-  cell 7            0.418 0.475 / mod    mod        ! empty location
-  cell 8            0.418 0.475 /     he zirc       ! plenum
-  cell 9                  0.475 /        zirc       ! pincap
+  cell 1     0.4096 0.418 0.475 / U31 he zirc4
+  cell 100          0.561 0.602 / mod    zirc4       ! guide tube
+  cell 200          0.561 0.602 / mod    zirc4       ! instrument tube
+  cell 7            0.418 0.475 / mod    mod         ! empty location
+  cell 8            0.418 0.475 /     he zirc4       ! plenum
+  cell 9                  0.475 /        zirc4       ! pincap
 
   lattice FUEL1
      1
@@ -85,8 +81,8 @@
       PCAP1 395.381
       LGAP1 397.501
 
-  grid END inc  3.519 3.866  ! *** mass scaled to 1x1 rod
-  grid MID zirc 3.028 3.810  ! *** mass scaled to 1x1 rod
+  grid END inc   3.519 3.866  ! *** mass scaled to 1x1 rod
+  grid MID zirc4 3.028 3.810  ! *** mass scaled to 1x1 rod
 
   grid_axial
       END  13.884
@@ -157,7 +153,6 @@
           377.711
 
 [INSILICO]
-    mat_library casl_comp_r2.sh5
     xs_library  test-8grp
 
     max_delta_z   2.54
