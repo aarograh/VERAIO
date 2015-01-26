@@ -108,5 +108,6 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD} Sample_p6a_parallel "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD} bypass "")
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD} small_3x3rod_IFBA "")
+   XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD} small_3x3rod_BProd "")
 
 ENDIF()
