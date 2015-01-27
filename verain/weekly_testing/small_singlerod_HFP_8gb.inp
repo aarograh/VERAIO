@@ -167,7 +167,7 @@
     eq_set        spn_fv
     SPN_order     3
 !!  cell_homogenize true  ! do not include for fast 8-group problem
-    tolerance     1e-6
+    tolerance     1e-7
     Pn_order      0
 
 !   silo_db:
@@ -204,7 +204,7 @@
 
 [COUPLING]
   epsk        2.0  ! pcm
-  eps_boron  10.0  ! boron convergence (ppm)
+  eps_boron   0.5  ! boron convergence (ppm)
   rlx_power   0.5
   rlx_tfuel   1.0
   rlx_den     1.0

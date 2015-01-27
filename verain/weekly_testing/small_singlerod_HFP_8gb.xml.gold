@@ -282,7 +282,7 @@
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p6"/>
     </ParameterList>
-    <Parameter name="tolerance" type="double" value="1e-6"/>
+    <Parameter name="tolerance" type="double" value="1e-7"/>
     <ParameterList name="upscatter_db">
       <Parameter name="tolerance" type="double" value="1e-4"/>
     </ParameterList>
@@ -317,7 +317,7 @@
     <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>
   <ParameterList name="COUPLING">
-    <Parameter name="eps_boron" type="double" value="10.0"/>
+    <Parameter name="eps_boron" type="double" value="0.5"/>
     <Parameter name="epsk" type="double" value="2.0"/>
     <Parameter name="maxiter" type="int" value="20"/>
     <Parameter name="rlx_den" type="double" value="1.0"/>
