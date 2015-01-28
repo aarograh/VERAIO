@@ -283,8 +283,17 @@ namespace {
     vector<double> gridend;
     vector<double> gridloss;
 
- // fix - should loop over all assemblies in "assm_map" instead of assemblies found on file
+  // Check that axial edit bounds are in increasing order
+     size_t num_edit  = edit_bounds.size();
+     for( size_t ii = 1; ii < num_edit; ++ii )
+        if( edit_bounds[ii-1] >= edit_bounds[ii] )
+          throw runtime_error("ERROR: Axial edit bounds are not in increasing order");
 
+  // ---------------------------------------------------------------------------------------------------
+  //    Loop over all assemblies
+  //    fix - should loop over all assemblies in "assm_map" instead of assemblies found on file
+  // ---------------------------------------------------------------------------------------------------
+    
     // Get Assemblies
     ParameterList::ConstIterator citer = assembliesParams.begin(),
                                  c_end = assembliesParams.end();
@@ -876,7 +885,6 @@ namespace {
         // just ignore it in the CTF model.
         size_t ng0=0;       // starting grid number
         size_t ng1=ngrid_orig;   // ending grid number
-        size_t num_edit  = edit_bounds.size();
         for( size_t ii = 0; ii < ngrid_orig; ++ii )
         {
           if (grid_elev[ii] < edit_bounds[0])     // both grid and edit_bounds are "unshifted"
@@ -986,7 +994,6 @@ namespace {
           // check to make sure the grid boundaries are included in the edit bounds
           ifgrd1=-2;
           ifgrd2=-2;
-          size_t num_edit = edit_bounds.size();
           for( size_t j=0; j< num_edit; ++j )
           {
             if(abs(grid1-edit_bounds[j]) < grid_geom_tol)
