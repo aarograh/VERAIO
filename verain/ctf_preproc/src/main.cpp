@@ -245,6 +245,9 @@ namespace {
     int nfuel=10;           // on 1/14/2015 - update default "nfuel" from 3 to 10 - see #3356
     GetOptional(cobraParams, "nfuel", nfuel);
 
+    int ctf_debug=0;        // debut edits
+    GetOptional(cobraParams, "debug", ctf_debug);
+
     int ctfnc=1;
     GetOptional(cobraParams, "nc", ctfnc);
 
@@ -465,14 +468,17 @@ namespace {
 
     // edit cell debug information
 
-    /*      cout << "  cell debug: Cell " << cell_name << " Type: " << cell_type << endl;
-            cout << "  cell debug:    num rings   "<< cell_num_rings[cell_name] << endl;
-            cout << "  cell debug:    radii       "<< cell_radii[cell_name]     << endl;
-            cout << "  cell debug:    fuel/clad radii  " << cell_fuel_od[cell_name]
-                                                  << " " << cell_clad_id[cell_name]
-                                                  << " " << cell_clad_od[cell_name] << endl;
-            cout << "  cell debug:    thden       "<< cell_thden[cell_name]     << endl;
-    */
+            if (ctf_debug > 0)
+            {
+              cout << "  cell debug: Cell " << cell_name << " Type: " << cell_type << endl;
+              cout << "  cell debug:    num rings   "<< cell_num_rings[cell_name] << endl;
+              cout << "  cell debug:    radii       "<< cell_radii[cell_name]     << endl;
+              cout << "  cell debug:    fuel/clad radii  " << cell_fuel_od[cell_name]
+                                                    << " " << cell_clad_id[cell_name]
+                                                    << " " << cell_clad_od[cell_name] << endl;
+              cout << "  cell debug:    thden       "<< cell_thden[cell_name]     << endl;
+            }
+      
           }   // end loop over cells
         }
 
@@ -512,7 +518,6 @@ namespace {
         map<string, bool> axial_level_done;
 
         const double bottom_active_fuel = vera_common.get_bottom_active_fuel_in_cm(assembly_name);
-        const double top_active_fuel = vera_common.get_top_active_fuel_in_cm(assembly_name);
         const double model_bottom = edit_bounds[0];
         Array<double> shifted_edit_bounds;
         shifted_edit_bounds.resize(edit_bounds.size());
@@ -702,20 +707,12 @@ namespace {
                 + "+ Num non-fuel rods (" + vera_xml.convert_value_to_string(num_non_fuel_rods[i])+") "
                 + "!= Num pins for Assembly \""+assembly_name+"\" ("+ vera_xml.convert_value_to_string(num_pins*num_pins) + ").");
 
-      // fix - the following will need to be updated if we want to model lower plenums!
-
           if( num_fuel_rods[i] > 0 && first_level && first_assm )
           {
-
-            // shift edit bounds so that BAF is zero
+            // shift edit bounds so that bottom of edit bounds is zero
             size_t num_edit = edit_bounds.size();
             for( size_t j=0; j< num_edit; ++j )
               shifted_edit_bounds[j]=edit_bounds[j]-model_bottom;
-
-            // check to make sure edit bounds include BAF and TAF
-            if(abs(shifted_edit_bounds[0] - model_bottom) < grid_geom_tol)
-              throw runtime_error("First axial_edit bounds is not equal to BAF");
-
           }
 
           cout << "    number of fuel rods and guide tubes " << num_fuel_rods[i] <<" " << num_non_fuel_rods[i] << endl;
@@ -850,8 +847,7 @@ namespace {
 
         cout << "  Assembly fuel radii " << save_fuel_od << " " << save_clad_id << " " << save_clad_od << " cm" << endl;
         cout << "  Assembly guide tube radii " << save_guide_id << " " << save_guide_od << " cm" << endl;
-        cout << "  Assembly BAF   "<< bottom_active_fuel << " cm" << endl;
-        cout << "  Assembly TAF   "<< top_active_fuel    << " cm" << endl;
+        cout << "  Assembly lower inactive region " << assem_data.active_start*10.0 << " cm" << endl;
 
    //--------------------------------------------------------------------------------------------
    //
@@ -877,29 +873,44 @@ namespace {
         if( grid_elev.size() != grid_map.size() )
           throw runtime_error("ERROR: Inconsistent number of entries for \"grid_elev\" and \"grid_map\"");
 
-        size_t ngrid = grid_elev.size(); // susceptible to change
+        size_t ngrid_orig = grid_elev.size(); // original number of grids, actual may be lower
+        size_t ngrid      = ngrid_orig;       // actual may decrease
 
         // Check that grids are in increasing order
         for( size_t ii = 1; ii < ngrid; ++ii )
           if( grid_elev[ii-1] > grid_elev[ii] )
             throw runtime_error("ERROR: Grid elevations are not in increasing order");
 
-        // If the grid is above the top axial edit bounds, just
-        // ignore it in the CTF model.
-        for( size_t ii = 0; ii < ngrid; ++ii )
+        // If the grid is above the top axial edit bounds or below the bottom axial edit bounds,
+        // just ignore it in the CTF model.
+        size_t ng0=0;       // starting grid number
+        size_t ng1=ngrid_orig;   // ending grid number
+        size_t num_edit  = edit_bounds.size();
+        for( size_t ii = 0; ii < ngrid_orig; ++ii )
         {
-          size_t num_edit  = shifted_edit_bounds.size();
-          if (grid_elev[ii]-model_bottom > shifted_edit_bounds[num_edit-1])
+          if (grid_elev[ii] < edit_bounds[0])     // both grid and edit_bounds are "unshifted"
+          {
+            cout << "  grid " << ii+1 << " is less than bottom axial edit bound... ignoring it in CTF model." << endl;
+            ng0 = ii+1;
+          }
+          if (grid_elev[ii] > edit_bounds[num_edit-1])
           {
             cout << "  grid " << ii+1 << " is greater than top axial edit bound... ignoring it in CTF model." << endl;
-            ngrid = ii;
+            ng1 = min(ii,ng1);
           }
         }
-
+        ngrid=ng1-ng0;
+        if (ctf_debug > 0)
+        {
+          cout << " ngrid original value           " << ngrid_orig << endl;
+          cout << " ngrid in calculated geometry   " << ngrid << endl;
+          cout << " grid starting number           " << ng0 << endl;
+          cout << " grid ending number             " << ng1 << endl;
+        }
 
         if ( first_assm )
         {
-          assem_data.n_grids = ngrid;
+          assem_data.n_grids = ngrid;     // actual number of grids in geometry
         }
         // else
         //  fix: check grid data for consistency between assemblies
@@ -955,7 +966,7 @@ namespace {
           grid_loss_coeffs[grid_types[ii]] = grid_losses[ii];
 
         // Sanity check that all grid_map types have a specified loss coefficient
-        for( size_t n = 0; n < ngrid; ++n )
+        for( size_t n = 0; n < ngrid_orig; ++n )
           if( grid_loss_coeffs.end() == grid_loss_coeffs.find(grid_map[n]) )
             throw runtime_error("Could not find a loss coefficient spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
 
@@ -967,7 +978,8 @@ namespace {
         gridstart.resize(ngrid);
         gridend.resize(ngrid);
         gridloss.resize(ngrid);
-        for( size_t n=0; n<ngrid; ++n )
+        size_t ng=-1;
+        for( size_t n=ng0; n<ng1; ++n )    // only loop over grids in actual geometry
         {
           map<string, double>::const_iterator grid_height_citer = spacer_grid_heights.find(grid_map[n]);
           if( grid_height_citer == spacer_grid_heights.end() )
@@ -986,14 +998,18 @@ namespace {
           size_t num_edit = shifted_edit_bounds.size();
           for( size_t j=0; j< num_edit; ++j )
           {
-
             if(abs(grid1-shifted_edit_bounds[j]) < grid_geom_tol)
               ifgrd1=j;
             if(abs(grid2-shifted_edit_bounds[j]) < grid_geom_tol)
               ifgrd2=j;
           }
-          //cout << "   ifgrd1    " << ifgrd1 << endl;
-          //cout << "   ifgrd2    " << ifgrd2 << endl;
+
+          if (ctf_debug > 0)
+          {
+            cout << "  grid level " << n << " " << grid_map[n] << " " << grid_elev[n] << endl;
+         // cout << "   ifgrd1    " << ifgrd1 << endl;
+         // cout << "   ifgrd2    " << ifgrd2 << endl;
+          }
 
           if (ifgrd1 < 0)
             throw runtime_error("Lower Grid elevation is not found in axial_edit_bounds list");
@@ -1004,12 +1020,15 @@ namespace {
           {
             // Need to format this in order to get perfect textual agreement (for diff comparisons)
             ostringstream oss1, oss2, oss3;
-            gridstart.at(n) = grid1*conversion_cm2mm;
-            gridend.at(n)   = grid2*conversion_cm2mm ;
-            gridloss.at(n)  = grid_loss_coeffs[grid_map[n]];
+            ng++;
+            gridstart.at(ng) = grid1*conversion_cm2mm;
+            gridend.at(ng)   = grid2*conversion_cm2mm ;
+            gridloss.at(ng)  = grid_loss_coeffs[grid_map[n]];
 
           }
         }
+        if (ng+1 != ngrid)
+          cout << "debug error ng ngrid " << ng+1 << " " << ngrid << endl;
 
         first_assm = false;
       }
