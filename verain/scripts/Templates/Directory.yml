@@ -1131,6 +1131,13 @@ COBRATF:
       - is_int()
       - is_gt() 0
 
+  debug:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_ge() 0
+
   irfc:
     <<: *dtint
     _content:
