@@ -519,8 +519,6 @@ namespace {
 
         const double bottom_active_fuel = vera_common.get_bottom_active_fuel_in_cm(assembly_name);
         const double model_bottom = edit_bounds[0];
-        Array<double> shifted_edit_bounds;
-        shifted_edit_bounds.resize(edit_bounds.size());
 
         double avg_thden = 0.0;
 
@@ -707,14 +705,6 @@ namespace {
                 + "+ Num non-fuel rods (" + vera_xml.convert_value_to_string(num_non_fuel_rods[i])+") "
                 + "!= Num pins for Assembly \""+assembly_name+"\" ("+ vera_xml.convert_value_to_string(num_pins*num_pins) + ").");
 
-          if( num_fuel_rods[i] > 0 && first_level && first_assm )
-          {
-            // shift edit bounds so that bottom of edit bounds is zero
-            size_t num_edit = edit_bounds.size();
-            for( size_t j=0; j< num_edit; ++j )
-              shifted_edit_bounds[j]=edit_bounds[j]-model_bottom;
-          }
-
           cout << "    number of fuel rods and guide tubes " << num_fuel_rods[i] <<" " << num_non_fuel_rods[i] << endl;
 
           if( first_level && first_assm )
@@ -848,6 +838,7 @@ namespace {
         cout << "  Assembly fuel radii " << save_fuel_od << " " << save_clad_id << " " << save_clad_od << " cm" << endl;
         cout << "  Assembly guide tube radii " << save_guide_id << " " << save_guide_od << " cm" << endl;
         cout << "  Assembly lower inactive region " << assem_data.active_start*10.0 << " cm" << endl;
+        cout << "  Assembly theoretical density (thden) " << avg_thden << " %" << endl;
 
    //--------------------------------------------------------------------------------------------
    //
@@ -985,8 +976,8 @@ namespace {
           if( grid_height_citer == spacer_grid_heights.end() )
             throw runtime_error("Could not find a height for spacer grid of type \""+grid_map[n]+"\"");
           half_height = grid_height_citer->second * 0.5;
-          grid1 = grid_elev[n] - model_bottom - half_height;
-          grid2 = grid_elev[n] - model_bottom + half_height;
+          grid1 = grid_elev[n] - half_height;
+          grid2 = grid_elev[n] + half_height;
 
           // Fix small round-off - grid can't extend below zero
           if(abs(grid1) < grid_geom_tol )
@@ -995,12 +986,12 @@ namespace {
           // check to make sure the grid boundaries are included in the edit bounds
           ifgrd1=-2;
           ifgrd2=-2;
-          size_t num_edit = shifted_edit_bounds.size();
+          size_t num_edit = edit_bounds.size();
           for( size_t j=0; j< num_edit; ++j )
           {
-            if(abs(grid1-shifted_edit_bounds[j]) < grid_geom_tol)
+            if(abs(grid1-edit_bounds[j]) < grid_geom_tol)
               ifgrd1=j;
-            if(abs(grid2-shifted_edit_bounds[j]) < grid_geom_tol)
+            if(abs(grid2-edit_bounds[j]) < grid_geom_tol)
               ifgrd2=j;
           }
 
@@ -1012,17 +1003,25 @@ namespace {
           }
 
           if (ifgrd1 < 0)
+          {
+            printf(" Need grid lower elevation %12.6f\n", grid1);
+            printf(" Need grid upper elevation %12.6f\n", grid2);
             throw runtime_error("Lower Grid elevation is not found in axial_edit_bounds list");
+          }
           if (ifgrd2 < 0)
+          {
+            printf(" Need grid lower elevation %12.6f\n", grid1);
+            printf(" Need grid upper elevation %12.6f\n", grid2);
             throw runtime_error("Upper Grid elevation is not found in axial_edit_bounds list");
+          }
 
           if ( first_assm )
           {
             // Need to format this in order to get perfect textual agreement (for diff comparisons)
             ostringstream oss1, oss2, oss3;
             ng++;
-            gridstart.at(ng) = grid1*conversion_cm2mm;
-            gridend.at(ng)   = grid2*conversion_cm2mm ;
+            gridstart.at(ng) = (grid1-model_bottom)*conversion_cm2mm;   // save shifted values
+            gridend.at(ng)   = (grid2-model_bottom)*conversion_cm2mm ;
             gridloss.at(ng)  = grid_loss_coeffs[grid_map[n]];
 
           }
