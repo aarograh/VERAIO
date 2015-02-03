@@ -101,3 +101,45 @@ ASSEMBLIES:
       _do:
         - gridmap Grid_,ASSEMBLY/%grid/*
       _content:
+
+    gapw:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@gap:0
+      _content:
+    gapn:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@gap:1
+      _content:
+
+    chanth:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@channel:0
+      _content:
+    chanrad:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@channel:1
+      _content:
+    cornerth:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@channel:2
+      _content:
+    cornerlen:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy ASSEMBLY/@channel:3
+      _content:
+
+
+
+

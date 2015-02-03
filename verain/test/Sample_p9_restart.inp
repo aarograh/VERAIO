@@ -8,6 +8,7 @@
   tfuel  565.0  K       ! K 
   boron  1285           ! ppmB
   modden 0.743          ! g/cc
+  pressure 2250.0       ! psia
   deplete EFPD 0
   search "boron"
   feedback on

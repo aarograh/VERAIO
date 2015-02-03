@@ -19,6 +19,9 @@
   core_shape
     1 
   
+  ! add material definitions for he, inc, ss, and zirc4.
+  include casl_comp_r3_full.ini
+
   assm_map
     ASSY
 
@@ -28,11 +31,6 @@
 
   bc_rad reflecting
 
-  mat he     0.0001786 
-  mat zirc   6.56 zirc4
-  mat inc    8.19
-  mat ss     8.0
-
 [ASSEMBLY]
   title "Westinghouse 17x17"
   npin 17 
@@ -40,10 +38,10 @@
   
   fuel U31 10.257 94.5 / 3.1 
 
-  cell 1     0.4096 0.418 0.475 / U31 he zirc
-  cell 3            0.561 0.602 / mod    zirc       ! guide/instrument tube
-  cell 4            0.418 0.475 /     he zirc       ! plenum
-  cell 5                  0.475 /        zirc       ! end plug
+  cell 1     0.4096 0.418 0.475 / U31 he zirc4
+  cell 3            0.561 0.602 / mod    zirc4       ! guide/instrument tube
+  cell 4            0.418 0.475 /     he zirc4       ! plenum
+  cell 5                  0.475 /        zirc4       ! end plug
 
   lattice FUEL  
        3
@@ -84,8 +82,8 @@
         PLEN 393.711 
         PLUG 395.381
 
-  grid END inc  1017 3.866
-  grid MID zirc 875  3.810
+  grid END inc   1017 3.866
+  grid MID zirc4 875  3.810
 
   grid_axial
       END  13.884
@@ -166,7 +164,6 @@
     max_delta_z   1.27
     num_groups    11
 
-    mat_library casl_comp_r2.sh5
     xs_library   v7-56
 
     pin_partitioning true

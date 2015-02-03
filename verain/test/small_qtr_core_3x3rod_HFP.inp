@@ -68,6 +68,7 @@
   upper_ref   mod 25.0 1.0
 
   bc_rad reflecting
+  bc_sym mir
 
   mat he     0.000176
   mat inc    8.19
