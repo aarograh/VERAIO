@@ -347,6 +347,13 @@ MPACT:
             - copy MPACT/$ith_hgap
           _content:
 
+        temptable_filename:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$temptable_filename
+          _content:
+
     cmfd:
       _pltype: list
       _content:

@@ -1701,6 +1701,11 @@ MPACT:
     _check:
       - is_float()
       - is_geq() 0
+  temptable_filename:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
 
   dep_edit:
     <<: *dtword
