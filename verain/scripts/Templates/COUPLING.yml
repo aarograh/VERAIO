@@ -94,6 +94,13 @@ COUPLING:
         - copy COUPLING/$solver
       _content:
 
+    run_transient:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy COUPLING/$run_transient
+      _content:
+
     conserve_power_in_tiamat_transfer:
       _pltype: parameter
       _type: bool
