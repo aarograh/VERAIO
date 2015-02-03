@@ -42,23 +42,8 @@
 
   bc_rad reflecting
 
-!  Old material format
-!
-!  he he 0.000176
-!  inc inc 8.19
-!  ss ss 8.0
-!  zirc zirc 6.56 
-!  aic aic 10.20
-!  pyrex pyrex 2.23
-!  b4c b4c 6.56
-
-  mat he     0.000176
-  mat inc    8.19
-  mat ss     8.0
-  mat zirc   6.56 
-  mat aic   10.20
-  mat pyrex  2.23
-  mat b4c    6.56
+  ! add material definitions for he, inc, ss, and zirc4.
+  include casl_comp_r3_full.ini
 
 ! ASSEMBLY description
 
@@ -70,12 +55,12 @@
 !  uo2 U31 10.257 / 3.1
   fuel U31 10.257 95.0 / 3.1
 
-  cell 1     0.4096 0.418 0.475 / U31 he zirc
-  cell 100          0.561 0.602 / mod    zirc       ! guide tube
-  cell 200          0.561 0.602 / mod    zirc       ! instrument tube
-  cell 7            0.418 0.475 / mod    mod        ! empty location
-  cell 8            0.418 0.475 /     he zirc       ! plenum
-  cell 9                  0.475 /        zirc       ! pincap
+  cell 1     0.4096 0.418 0.475 / U31 he zirc4
+  cell 100          0.561 0.602 / mod    zirc4       ! guide tube
+  cell 200          0.561 0.602 / mod    zirc4       ! instrument tube
+  cell 7            0.418 0.475 / mod    mod         ! empty location
+  cell 8            0.418 0.475 /     he zirc4       ! plenum
+  cell 9                  0.475 /        zirc4       ! pincap
 
   lattice FUEL1
      200
@@ -129,8 +114,8 @@
       PCAP1 395.381
       LGAP1 397.501
 
-  grid END inc  1017 3.866
-  grid MID zirc 875  3.810
+  grid END inc   1017 3.866
+  grid MID zirc4 875  3.810
 
   grid_axial
       END  13.884
@@ -145,18 +130,6 @@
   lower_nozzle  ss 6.05  6250.0  ! mat, height, mass (g)
   upper_nozzle  ss 8.827 6250.0  ! mat, height, mass (g)
 
- !! dancoff                   ! assembly_dancoff_map
- !!   0.000
- !!   0.287 0.315                            
- !!   0.287 0.315 0.315                        
- !!   0.000 0.287 0.286 0.000                        
- !!   0.287 0.316 0.316 0.284 0.299                
- !!   0.288 0.317 0.316 0.287 0.267 0.000
- !!   0.000 0.286 0.286 0.000 0.270 0.286 0.321        
- !!   0.287 0.319 0.319 0.286 0.315 0.335 0.333 0.337    
- !!   0.323 0.322 0.321 0.322 0.320 0.322 0.323 0.322 0.310
-
-  
 [EDITS]
 
 !  3in intervals in active fuel
@@ -224,7 +197,6 @@
         k_tolerance  0.0001
         L2_tolerance 0.001
         energy_dep_ev  false
-    mat_library   test_comp.sh5
     max_delta_z   2.54
     num_blocks_i  1
     num_blocks_j  1

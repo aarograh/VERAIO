@@ -3,11 +3,11 @@
 
 [STATE]
   power  100.0         ! %
-  tinlet 559.0 F         ! F
-  boron  600          ! ppmB
+  tinlet 559.0 F       ! F
+  boron  600           ! ppmB
   pressure 2250        ! psia
 
-  tfuel 900.0 K         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
+  tfuel 900.0 K        ! K - 600K  Not used with T/H feedback! set to 900K with feedback
   modden 0.743         ! g/cc      Not used with T/H feedback!
 
   feedback on
@@ -173,7 +173,7 @@
   num_threads       1
   par_method        PS
 !xs_library
-  xs_filename       declib56g_e7_09042013_p0mixed.fmt 
+  xs_filename       mpact47g_70s_v4.0_11032014.fmt
   xs_type           ORNL
   subgroup_set      4
 !mesh
@@ -243,7 +243,6 @@
                    25.0000
 
 [COBRATF]
-  nfuel   3             ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction
   irfc    2             ! friction factor correlation default=2
   dhfrac  0.02          ! fraction of power deposited directly into coolant

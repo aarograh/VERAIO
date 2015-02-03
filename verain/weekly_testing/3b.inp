@@ -24,16 +24,14 @@
   insert_map
    PY16
 
+  ! add material definitions for he, inc, ss, and zirc4.
+  include casl_comp_r3_full.ini
+
   lower_plate ss  5.0 0.5   ! mat, thickness, vol frac
   upper_plate ss  7.6 0.5 
   lower_ref  mod 20.0 1.0
 
   bc_rad reflecting
-
-  mat he     0.0001786 
-  mat zirc   6.56 zirc4
-  mat inc    8.19
-  mat ss     8.0
 
 [ASSEMBLY]
   title "Westinghouse 17x17"
@@ -42,10 +40,10 @@
   
   fuel U31 10.257 94.5 / 2.619 
 
-  cell 1     0.4096 0.418 0.475 / U31 he zirc
-  cell 3            0.561 0.602 / mod    zirc       ! guide/instrument tube
-  cell 4            0.418 0.475 /     he zirc       ! plenum
-  cell 5                  0.475 /        zirc       ! end plug
+  cell 1     0.4096 0.418 0.475 / U31 he zirc4
+  cell 3            0.561 0.602 / mod    zirc4       ! guide/instrument tube
+  cell 4            0.418 0.475 /     he zirc4       ! plenum
+  cell 5                  0.475 /        zirc4       ! end plug
 
   lattice FUEL  
        3
@@ -86,8 +84,8 @@
         PLEN 393.711 
         PLUG 395.381
 
-  grid END inc   1017 3.866
-  grid MID zirc  875  3.810
+  grid END inc    1017 3.866
+  grid MID zirc4  875  3.810
 
   grid_axial
       END  13.884
@@ -106,11 +104,7 @@
   title "Pyrex"
   npin 17
 
-  mat he     0.0001786
-  mat pyrx1  2.25 pyrex-vera
-  mat ss     8.0
-
-  cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrx1 he ss
+  cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrex-vera he ss
   cell 4            0.437 0.484 /     he ss      ! plenum
   cell 5                  0.484 /     ss         ! end plug
 
@@ -218,7 +212,6 @@
     max_delta_z   1.27
     num_groups    11
 
-    mat_library casl_comp_r2.sh5
     xs_library  v7-56
 
     pin_partitioning true

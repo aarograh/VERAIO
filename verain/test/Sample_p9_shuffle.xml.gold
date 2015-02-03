@@ -13,6 +13,7 @@
       <Parameter name="modden" type="double" value="0.743"/>
       <Parameter name="op_date" type="string" value="2014/11/05"/>
       <Parameter name="power" type="double" value="0.0"/>
+      <Parameter name="pressure" type="double" value="15.5132039025"/>
       <Parameter name="restart_shuffle_file" type="Array(string)" value="{p9_restart_cycl1.h5}"/>
       <Parameter name="restart_shuffle_label" type="Array(string)" value="{440EFPD_65POW_DOUT}"/>
       <Parameter name="search" type="string" value="boron"/>

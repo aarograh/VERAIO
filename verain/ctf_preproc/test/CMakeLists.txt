@@ -1,6 +1,4 @@
 
-
-
 FUNCTION(XML2CTF_PARALLEL_TEST DIR TEST_NAME NUM_DECKS)
   
    # The TEST_BLOCKS variable will be used to house the commands
@@ -15,22 +13,19 @@ FUNCTION(XML2CTF_PARALLEL_TEST DIR TEST_NAME NUM_DECKS)
    # file names that are always present.
    SET(TEST_BLOCKS ${TEST_BLOCKS}
     TEST_0
-      CMND ${CMAKE_COMMAND}
-      ARGS -E copy ${VERAIn_SOURCE_DIR}/test/${TEST_NAME}.inp ${TEST_NAME}.inp
-    TEST_1
       MESSAGE "Running XML Parser...."
       CMND ${PERL_EXECUTABLE}
       ARGS
-        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl ${TEST_NAME}.inp ${TEST_NAME}.xml
-    TEST_2
+        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl ${VERAIn_SOURCE_DIR}/test/${TEST_NAME}.inp ${TEST_NAME}.xml
+    TEST_1
        CMND ${PYTHON_EXECUTABLE}
        ARGS ${COBRA_TF_SOURCE_DIR}/utils/par_file_copy.py
             ${NUM_DECKS} ${TEST_NAME}  ${GOLDDIR} ${WORKDIR} .gold
-    TEST_3
+    TEST_2
       MESSAGE "Running xml2ctf..."
       CMND ${CMAKE_CURRENT_BINARY_DIR}/../src/xml2ctf
       ARGS --xmlfile=${TEST_NAME}.xml --inpfile=${TEST_NAME}.inp
-    TEST_4
+    TEST_3
       CMND ${PYTHON_EXECUTABLE}
       ARGS ${COBRA_TF_SOURCE_DIR}/utils/par_file_diff.py
               ${NUM_DECKS} ${TEST_NAME} ${COBRA_TF_SOURCE_DIR}/utils/filter_comments.py
@@ -52,32 +47,20 @@ FUNCTION(XML2CTF_SERIAL_TEST VERAINDIR GOLDDIR TEST_NAME OPTS)
     OVERALL_WORKING_DIRECTORY TEST_NAME
     OVERALL_NUM_MPI_PROCS 1
     TEST_0
-      CMND ${CMAKE_COMMAND} 
-      ARGS -E copy
-      ${VERAINDIR}/${TEST_NAME}.inp ${TEST_NAME}.inp
-    TEST_1
       CMND ${PERL_EXECUTABLE}
       ARGS
-        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl ${OPTS} ${TEST_NAME}.inp ${TEST_NAME}.xml
-    TEST_2
-      CMND ${CMAKE_COMMAND} 
-      ARGS -E copy
-      ${VERAINDIR}/${TEST_NAME}.xml.gold ${TEST_NAME}.xml.gold
-    TEST_3
+        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl ${OPTS} ${VERAINDIR}/${TEST_NAME}.inp ${TEST_NAME}.xml
+    TEST_1
       CMND diff 
-      ARGS ${TEST_NAME}.xml ${TEST_NAME}.xml.gold
-    TEST_4
+      ARGS ${VERAINDIR}/${TEST_NAME}.xml.gold ${TEST_NAME}.xml
+    TEST_2
       EXEC xml2ctf NOEXEPREFIX NOEXESUFFIX
       DIRECTORY ../src/
       ARGS --xmlfile=${TEST_NAME}.xml --inpfile=${TEST_NAME}.inp
-    TEST_5
-      CMND ${CMAKE_COMMAND} 
-      ARGS -E copy
-      ${GOLDDIR}/${TEST_NAME}.inp deck.inp.gold
-    TEST_6
+    TEST_3
       CMND ${PYTHON_EXECUTABLE}
       ARGS ${VERAIn_XML_SOURCE_DIR}/test/filter_comments_whitespace.py
-           ${TEST_NAME}.inp deck.inp.gold
+           ${TEST_NAME}.inp ${GOLDDIR}/${TEST_NAME}.inp
     )
 ENDFUNCTION()
 
@@ -123,5 +106,8 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD} mixing_coeff                   "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD} hdf5_convergence_edit "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD} Sample_p6a_parallel "")
+   XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD} bypass "")
+   XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD} small_3x3rod_IFBA "")
+   XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD} small_3x3rod_BProd "")
 
 ENDIF()
