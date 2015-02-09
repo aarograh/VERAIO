@@ -1129,7 +1129,7 @@ COBRATF:
     _content:
     _check:
       - is_int()
-      - is_gt() 0
+      - is_geq() 0
 
   debug:
     <<: *dtint
@@ -1455,6 +1455,13 @@ COUPLING:
       - is_string()
       - in_dictionary() jacobi gauss-seidel
 
+  run_transient:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
   conserve_power_in_tiamat_transfer:
     <<: *dtbool
     _content:
@@ -1739,6 +1746,11 @@ MPACT:
     _check:
       - is_float()
       - is_geq() 0
+  temptable_filename:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
 
   dep_edit:
     <<: *dtword
