@@ -80,13 +80,6 @@ COUPLING:
         - copy COUPLING/$read_restart
       _content:
 
-    LIME_xml:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy COUPLING/$LIME_xml
-      _content:
-
     solver:
       _pltype: parameter
       _type: string

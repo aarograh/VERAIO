@@ -1442,12 +1442,6 @@ COUPLING:
     _check:
       - is_string()
 
-  LIME_xml:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
-
   solver:
     <<: *dtstring
     _content:
