@@ -101,6 +101,8 @@ namespace
      int    property_evaluations;
      double k_void_drift;
      double beta_sp;
+     double *c_ptr_to_inlet_temp;
+     double *c_ptr_to_inlet_flow;
   };
 
   // geo data structure
@@ -112,7 +114,7 @@ namespace
      bool   model_shroud;
      double shroud_gap;
      int    sym_opt;
-     int    *c_ptr_to_assem_type;
+     int    *c_ptr_to_core_shape;
      int    ivar;
      double *c_ptr_to_ztop;
      int    *c_ptr_to_zondx;
@@ -134,8 +136,8 @@ namespace
 
   // Some input file creation methods corresponding to current (10-3-2012) cobra preprocessor requirements
   assem_struct create_file_assembly_info(Array<double> & fuel_pin_map, VERAIn_XML_Common &);
-  cntrl_struct create_file_control_inp(ParameterList &, string);
-  geo_struct create_file_geo_inp(ParameterList &);
+  cntrl_struct create_file_control_inp(ParameterList &, int, string);
+  geo_struct create_file_geo_inp(ParameterList &, int);
   power_struct create_file_power_inp(const Array<double> & fuel_pin_map, VERAIn_XML_Common &);
 
 
@@ -163,6 +165,8 @@ namespace
   Array<double> assempf;
   Array<int>    assempf_map;
   Array<double> local_pf;
+  Array<double> inlet_f;
+  Array<double> inlet_t;
 
 }
 
@@ -226,11 +230,24 @@ int main(int argc, char**argv)
   power_struct power_data;
   cntrl_struct cntrl_data;
 
+  // calculate number of assemblies in core
+  // only count non-zero entries in core shape map
+  const ParameterList & coreParams = pList.sublist("CORE");
+  GetRequired(coreParams, "CORE", "shape", core_shape);
+  int core_total_size = core_shape.size();   // NxN
+
+  int num_assm = 0;
+  for( int k = 0; k < core_total_size; ++k ){
+     if( core_shape[k] == 1 ){
+        num_assm++;
+     }
+  }
+
   // control.inp
-  cntrl_data=create_file_control_inp(pList, inp_file);
+  cntrl_data=create_file_control_inp(pList, num_assm, inp_file);
 
   // geo.inp
-  geo_data=create_file_geo_inp(pList);
+  geo_data=create_file_geo_inp(pList, num_assm);
 
   // Assembly spec file
   Array<double> fuel_pin_map;
@@ -807,6 +824,11 @@ namespace {
               for( int k = 0; k < num_pins; ++k )
                 for( int m = 0; m < num_pins; ++m )
                   fuel_pin_map[k*num_pins+m] = 1.0;
+
+              gt_wr_di=0.0;
+              gt_wr_de=0.0;
+              assem_data.c_ptr_to_gt_wr_di=&gt_wr_di;
+              assem_data.c_ptr_to_gt_wr_de=&gt_wr_de;
             }
             else
             {
@@ -1065,7 +1087,7 @@ namespace {
 //     Produce the control file for the COBRA pre-processor
 // -------------------------------------------------------------
 
-  cntrl_struct create_file_control_inp(ParameterList & pList, string inp_file)
+  cntrl_struct create_file_control_inp(ParameterList & pList, int num_assm, string inp_file)
   {
     ParameterList cobraParams = pList.sublist("COBRATF");
     ParameterList coreParams = pList.sublist("CORE");
@@ -1100,6 +1122,24 @@ namespace {
        cntrl_data.spec_titles=0;
     }
     strcpy(cntrl_data.vtk_hdf5_titles,maps_filename.c_str());
+
+    // Read in the inlet flow and temperature maps
+    GetOptional(stateParams,"inlet_temp",inlet_t);
+    if (inlet_t.size()==0){
+       // Map not found, make it all zeros
+       inlet_t.resize(num_assm,0.0);
+    }
+    // Convert inlet temp deltas from F to C
+    for(int k=0;k<inlet_t.size();k++){
+       inlet_t[k]=inlet_t[k]/1.8;
+    }
+    cntrl_data.c_ptr_to_inlet_temp=&inlet_t[0];
+    GetOptional(stateParams,"inlet_flow",inlet_f);
+    if (inlet_f.size()==0){
+       // Map not found, make it all ones
+       inlet_f.resize(num_assm,1.0);
+    }
+    cntrl_data.c_ptr_to_inlet_flow=&inlet_f[0];
 
 
     // stacked case option
@@ -1239,7 +1279,7 @@ namespace {
 //     Produce the geometry file for the COBRA pre-processor
 // -------------------------------------------------------------
 
-  geo_struct create_file_geo_inp(ParameterList & pList) {
+  geo_struct create_file_geo_inp(ParameterList & pList, int num_assm) {
     const ParameterList & coreParams = pList.sublist("CORE");
     const ParameterList & editsParams = pList.sublist("EDITS");
     const ParameterList & assembliesParams = pList.sublist("ASSEMBLIES");
@@ -1257,17 +1297,6 @@ namespace {
 
     geo_struct geo_data;
 
-// calculate number of assemblies in core
-// only count non-zero entries in core shape map
-    GetRequired(coreParams, "CORE", "shape", core_shape);
-    int core_total_size = core_shape.size();   // NxN
-
-    int num_assm = 0;
-    for( int k = 0; k < core_total_size; ++k ){
-       if( core_shape[k] == 1 ){
-          num_assm++;
-       }
-    }
 
     int map_size;
     GetRequired(coreParams, "CORE", "core_size", map_size);
@@ -1290,6 +1319,7 @@ namespace {
     cout << endl;
     cout << "debug: map  size = " << map_size  << endl;
     cout << "debug: num_assm  = " << num_assm  << endl;
+    int core_total_size=core_shape.size();
     cout << "debug: core size = " << core_total_size << endl;
     cout << endl;
 
@@ -1323,7 +1353,7 @@ namespace {
 
   // print core map
 
-    geo_data.c_ptr_to_assem_type = &core_shape[0];
+    geo_data.c_ptr_to_core_shape= &core_shape[0];
 
   // print axial mesh
 

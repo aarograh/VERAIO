@@ -109,5 +109,7 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     bypass "")
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     small_3x3rod_IFBA "")
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     small_3x3rod_BProd "")
+   XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     Sample_qtr_core_inlet_bc"")
+
 
 ENDIF()
