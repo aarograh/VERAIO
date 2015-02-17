@@ -1,10 +1,10 @@
 %*-------------------------------------------------------------------------*
-%*                 Copyright 2013-2014 Core Physics, Inc.                  *
+%*                 Copyright 2013-2015 Core Physics, Inc.                  *
 %*  Under terms of the contract to support CASL, there is a non-exclusive  *
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: state.tex,v 1.2 2014/03/28 14:18:30 Scott Exp $
+% @version CVS $Id: state.tex,v 1.4 2015/02/16 20:54:57 Scott Exp $
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{State Description}
@@ -81,7 +81,7 @@ can be calculated, and then the top and bottom elevations must be included
 in the {\it axial\_edit\_bounds}.
 
 For example, if a grid is defined with a centerline at 75.0 and a height of 2.5, then the
-{\it axial\_edit\_bounds} must include the points $75.0 \pm 1.25 $= 73.75 and 76.25.
+{\it axial\_edit\_bounds} must include the points $75.0 \pm 1.25 = 73.75$ and $76.25$.
 
 \begin{verbatim}
    [ASSEMBLY]
@@ -165,8 +165,6 @@ An example [COUPLING] input block is shown below.
      rlx_tfuel   1.0  ! fuel temperature relaxation factor
      rlx_den     1.0  ! density relaxation factor
      maxiter     20   ! maximum number of coupled iterations
-     ctf_iters_max    50  ! initial maximum number of CTF time-steps per coupled iteration
-     ctf_iters_growth 1.1 ! factor by which ctf_iters_max grows per coupled iteration
 \end{verbatim}
 
 A complete listing of all the input cards in the [COUPLING] block is located in Section~\ref{sec:couplingcards}.

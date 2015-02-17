@@ -1,13 +1,13 @@
 %*-------------------------------------------------------------------------*
-%*                 Copyright 2013-2014 Core Physics, Inc.                  *
+%*                 Copyright 2013-2015 Core Physics, Inc.                  *
 %*  Under terms of the contract to support CASL, there is a non-exclusive  *
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: materials.tex,v 1.18 2014/03/28 15:40:05 scott Exp $
+% @version CVS $Id: materials.tex,v 1.20 2015/02/13 20:46:11 Scott Exp $
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Materials Description}  \label{chap:materials}
+\chapter{Materials}  \label{chap:materials}
 
 This chapter contains a description of the material input.  There are two types of materials
 in the input file -- structural materials (input with a {\it mat} card) and fuel materials
@@ -87,13 +87,12 @@ the ``zirc'' can have different compositions in each of the assemblies.
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Composition File}
 
-All library materials must be included in a material composition file.
+When using Insilico, all library materials must be included in a material composition file.
 The composition file is a code-specific file which contains a list of all
 of the available library materials.
 
-In Insilico, the composition file is specified in the [INSILICO] block {\it mat\_library} card,
+The composition file is specified in the [INSILICO] block {\it mat\_library} card,
 and is usually named ``casl\_comp.sh5''.
-In MPACT, the composition file is specified in the [MPACT] block.
 
 Examples of typical library materials that are present on the composition file include:
 \begin{itemize}   % itemize = bullet list
