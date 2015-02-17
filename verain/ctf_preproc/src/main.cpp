@@ -103,6 +103,8 @@ namespace
      double beta_sp;
      double *c_ptr_to_inlet_temp;
      double *c_ptr_to_inlet_flow;
+     bool inlet_temp_set;
+     bool inlet_flow_set;
   };
 
   // geo data structure
@@ -1128,6 +1130,9 @@ namespace {
     if (inlet_t.size()==0){
        // Map not found, make it all zeros
        inlet_t.resize(num_assm,0.0);
+       cntrl_data.inlet_temp_set=false;
+    }else{
+       cntrl_data.inlet_temp_set=true;
     }
     // Convert inlet temp deltas from F to C
     for(int k=0;k<inlet_t.size();k++){
@@ -1138,6 +1143,9 @@ namespace {
     if (inlet_f.size()==0){
        // Map not found, make it all ones
        inlet_f.resize(num_assm,1.0);
+       cntrl_data.inlet_flow_set=false;
+    }else{
+       cntrl_data.inlet_flow_set=true;
     }
     cntrl_data.c_ptr_to_inlet_flow=&inlet_f[0];
 
