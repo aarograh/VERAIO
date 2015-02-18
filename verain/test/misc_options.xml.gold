@@ -439,9 +439,7 @@
     <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>
   <ParameterList name="COUPLING">
-    <Parameter name="conserve_power_in_tiamat_transfer" type="bool" value="true"/>
     <Parameter name="read_restart" type="string" value="my_restart_file"/>
-    <Parameter name="solver" type="string" value="jacobi"/>
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="TH">
@@ -451,5 +449,9 @@
   </ParameterList>
   <ParameterList name="PEREGRINE">
     <Parameter name="ramp_data_transfers" type="bool" value="true"/>
+  </ParameterList>
+  <ParameterList name="TIAMAT">
+    <Parameter name="conserve_power_in_tiamat_transfer" type="bool" value="true"/>
+    <Parameter name="solver" type="string" value="jacobi"/>
   </ParameterList>
 </ParameterList>
