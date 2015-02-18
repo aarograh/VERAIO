@@ -294,6 +294,8 @@
 
 [COUPLING] 
   read_restart  my_restart_file
+
+[TIAMAT] 
   solver jacobi
   conserve_power_in_tiamat_transfer true
 
