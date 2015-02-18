@@ -1,5 +1,5 @@
 
-FUNCTION(XML2CTF_PARALLEL_TEST DIR TEST_NAME NUM_DECKS)
+FUNCTION(XML2CTF_PARALLEL_TEST DIR GOLDDIR TEST_NAME NUM_DECKS)
   
    # The TEST_BLOCKS variable will be used to house the commands
    # for the Tribits advanced test.  It is initialized here.
@@ -7,7 +7,6 @@ FUNCTION(XML2CTF_PARALLEL_TEST DIR TEST_NAME NUM_DECKS)
 
    SET(TRIBITS_NAME xml2ctf_parallel_${TEST_NAME})
    SET(WORKDIR ${CMAKE_CURRENT_BINARY_DIR}/${PACKAGE_NAME}_${TRIBITS_NAME})
-   SET(GOLDDIR ${DIR})
 
    # Add the copy procedures to the TEST_BLOCKS variable for the
    # file names that are always present.
@@ -16,7 +15,7 @@ FUNCTION(XML2CTF_PARALLEL_TEST DIR TEST_NAME NUM_DECKS)
       MESSAGE "Running XML Parser...."
       CMND ${PERL_EXECUTABLE}
       ARGS
-        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl ${VERAIn_SOURCE_DIR}/test/${TEST_NAME}.inp ${TEST_NAME}.xml
+        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl ${DIR}/${TEST_NAME}.inp ${TEST_NAME}.xml
     TEST_1
        CMND ${PYTHON_EXECUTABLE}
        ARGS ${COBRA_TF_SOURCE_DIR}/utils/par_file_copy.py
@@ -70,8 +69,9 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    SET(VERAIN ${VERAIn_SOURCE_DIR}/test)
    SET(GOLD ${CMAKE_CURRENT_SOURCE_DIR}/gold)
 
-   XML2CTF_PARALLEL_TEST  (${PREPROC_REGRESSION} par_cross 5)
-   XML2CTF_PARALLEL_TEST  (${CMAKE_CURRENT_SOURCE_DIR} Sample_p7 56)
+   XML2CTF_PARALLEL_TEST  (${VERAIN}                   ${GOLD}     par_cross 5)
+   XML2CTF_PARALLEL_TEST  (${VERAIN}                   ${GOLD}     Sample_p7 56)
+   XML2CTF_PARALLEL_TEST  (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     par_qtr_core_inlet_bc 56)
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     cross_w_baffle                 "")
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     small_singlerod_HFP            "")
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     small_3x3rod_HFP               "")
