@@ -112,6 +112,7 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     Sample_qtr_core_inlet_bc "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     inlet_flow "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     inlet_temp "")
+   XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     inlet_bc_rot_sym "")
 
 
 ENDIF()
