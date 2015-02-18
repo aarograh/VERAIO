@@ -1,5 +1,5 @@
 %*-------------------------------------------------------------------------*
-%*                 Copyright 2013-2014 Core Physics, Inc.                  *
+%*                 Copyright 2013-2015 Core Physics, Inc.                  *
 %*  Under terms of the contract to support CASL, there is a non-exclusive  *
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
@@ -29,6 +29,11 @@
   \item[title]  Statepoint title
 \end{cardlist}
 
+{\bf op\_date} op\_date
+\begin{cardlist}
+  \item[op\_date]  Operating date of this statepoint.  Used when writing restart files. (``MM/DD/YYYY'' or ``YYYY/MM/DD'')
+\end{cardlist}
+
 {\bf power} power
 \begin{cardlist}
   \item[power]  Operating power (percent of rated power)
@@ -44,19 +49,21 @@
   \item[bypass]  Bypass flow (percent of rated flow)
 \end{cardlist}
 
-{\bf tinlet} tinlet
+{\bf tinlet} tinlet units
 \begin{cardlist}
-  \item[tinlet]  Inlet temperature (degrees F)
+  \item[tinlet]  Inlet temperature
+  \item[units]  (``F'', ``K'', or ``C'')
 \end{cardlist}
 
-{\bf tfuel} tfuel
+{\bf tfuel} tfuel units
 \begin{cardlist}
-  \item[tfuel]  Fixed fuel temperatures (degrees K) - Only used without T/H feedback
+  \item[tfuel]  Fixed fuel temperatures - Only used if feedback is turned OFF
+  \item[units]  (``F'', ``K'', or ``C'')
 \end{cardlist}
 
 {\bf modden} modden
 \begin{cardlist}
-  \item[modden]  Fixed moderator density (g/cc) - Only used without T/H feedback
+  \item[modden]  Fixed moderator density (g/cc) - Only used if feedback is turned OFF
 \end{cardlist}
 
 {\bf xenon} xenopt
@@ -74,6 +81,12 @@
   \item[boron]  Soluble boron concentration (ppm)
 \end{cardlist}
 
+{\bf b10} b10 b10\_depl
+\begin{cardlist}
+  \item[b10]  Boron-10 fraction in coolant (atom percent) (default is 19.9 atom percent)
+  \item[b10\_depl]  Flag to enable B-10 depletion in coolant (``on'' or ``off'', default is ``off'')
+\end{cardlist}
+
 {\bf kcrit} kcrit
 \begin{cardlist}
   \item[kcrit]  Critical eigenvalue used in boron search
@@ -89,13 +102,13 @@
   \item[pressure]  Core exit pressure (psia)
 \end{cardlist}
 
-{\bf deplete} deplete\_units, deplete
+{\bf deplete} deplete\_units deplete
 \begin{cardlist}
   \item[deplete\_units]  Depletion units (``EFPD'', ``GWDMT'', ``hours'')
   \item[deplete]  List of depletion exposure steps - only used with depletion
 \end{cardlist}
 
-{\bf rodbank} bank\_pos, bank\_labels
+{\bf rodbank} bank\_pos bank\_labels
 \begin{cardlist}
   \item[bank\_pos]  Steps withdrawn for each bank in list
   \item[bank\_labels]  List of control rod banks to position.  Labels correspond to crd\_map in CORE block.
@@ -111,6 +124,29 @@
   \item[sym]  Core fraction to run problem in (``full'' or ``qtr'')
 \end{cardlist}
 
+{\bf restart\_shuffle} restart\_shuffle\_file restart\_shuffle\_label
+\begin{cardlist}
+  \item[restart\_shuffle\_file]  List of restart files to search during core shuffle
+  \item[restart\_shuffle\_label]  List of user labels on restart files to search during core shuffle
+\end{cardlist}
+
+{\bf restart\_read} restart\_read\_file restart\_read\_label
+\begin{cardlist}
+  \item[restart\_read\_file]  Name of restart file to read
+  \item[restart\_read\_label]  User label on restart file to read
+\end{cardlist}
+
+{\bf restart\_write} restart\_write\_file restart\_write\_label
+\begin{cardlist}
+  \item[restart\_write\_file]  Name of restart file to write/create
+  \item[restart\_write\_label]  User label to use when writing restart file
+\end{cardlist}
+
+{\bf shuffle\_label} shuffle\_label
+\begin{cardlist}
+  \item[shuffle\_label]  Core map showing core shuffle instructions
+\end{cardlist}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Block CORE}
 \label{sec:corecards}
@@ -122,11 +158,19 @@
   \item[core\_name]  Name of the reactor core
 \end{cardlist}
 
-{\bf cycle} cycle\_num, cyc\_stdate, cyc\_edate
+{\bf cycle} cycle\_num
 \begin{cardlist}
-  \item[cycle\_num]  Cycle number
-  \item[cyc\_stdate]  Cycle startup date (YYYYMMDD)
-  \item[cyc\_edate]  Cycle end date (YYYYMMDD).  Enter zero if end date is not known.
+  \item[cycle\_num]  Cycle number (string)
+\end{cardlist}
+
+{\bf unit} unit
+\begin{cardlist}
+  \item[unit]   Reactor plant unit name. Only used for multi-unit sites with cross-unit shuffle. (string)
+\end{cardlist}
+
+{\bf op\_date} op\_date
+\begin{cardlist}
+  \item[op\_date]  Start-up date of core reload.  Only used when performing core shuffle. (``MM/DD/YYYY'' or ``YYYY/MM/DD'')
 \end{cardlist}
 
 {\bf size} core\_size
@@ -134,10 +178,15 @@
   \item[core\_size]  Number of assemblies across one axis in full-core geometry (required)
 \end{cardlist}
 
-{\bf rated} rated\_power, rated\_flow
+{\bf rated} rated\_power rated\_flow
 \begin{cardlist}
   \item[rated\_power]  Rated thermal power at 100\% power (MW)
   \item[rated\_flow]   Rated vessel flow at 100\% flow (Mlbs/hr)
+\end{cardlist}
+
+{\bf rcs\_volume} rcs\_volume
+\begin{cardlist}
+  \item[rcs\_volume]  Volume of the Reactor Coolant System (cubic ft) (only used with B-10 depletion)
 \end{cardlist}
 
 {\bf apitch} apitch
@@ -145,14 +194,14 @@
   \item[apitch]  Assembly pitch (cm)
 \end{cardlist}
 
-{\bf baffle} baffle\_mat, baffle\_gap, baffle\_thick
+{\bf baffle} baffle\_mat baffle\_gap baffle\_thick
 \begin{cardlist}
   \item[baffle\_mat]   Baffle material
   \item[baffle\_gap]   Gap between outside assembly (including assembly gap) and baffle (cm)
   \item[baffle\_thick]   Thickness of baffle (cm)
 \end{cardlist}
 
-{\bf vessel} vessel\_mats, vessel\_radii
+{\bf vessel} vessel\_mats vessel\_radii
 \begin{cardlist}
   \item[vessel\_mats]  Vessel materials
   \item[vessel\_radii]  Vessel radii (cm)
@@ -193,18 +242,18 @@
   \item[crd\_bank]  Core map of the control rod bank labels.  These labels are used to position groups of control rods by bank label.  Use a dash to specify assemblies with no control rods.
 \end{cardlist}
 
-{\bf lower\_plate} lower\_mat, lower\_thick, lower\_vfrac
+{\bf lower\_plate} lower\_mat lower\_thick lower\_vfrac
 \begin{cardlist}
   \item[lower\_mat]  Lower core plate material
   \item[lower\_thick]  Lower core plate thickness (cm)
-  \item[lower\_vfrac]  Lower core plate volume fraction.  Remainder of volume fraction will be filled with coolant.
+  \item[lower\_vfrac]  Lower core plate material volume fraction.  Remainder of volume fraction will be filled with coolant.
 \end{cardlist}
 
-{\bf upper\_plate} upper\_mat, upper\_thick, upper\_vfrac
+{\bf upper\_plate} upper\_mat upper\_thick upper\_vfrac
 \begin{cardlist}
   \item[upper\_mat]  Upper core plate material
   \item[upper\_thick]  Upper core plate thickness (cm)
-  \item[upper\_vfrac]  Upper core plate volume fraction.  Remainder of volume fraction will be filled with coolant.
+  \item[upper\_vfrac]  Upper core plate material volume fraction.  Remainder of volume fraction will be filled with coolant.
 \end{cardlist}
 
 {\bf bc\_sym} bc\_sym
@@ -247,14 +296,14 @@
   \item[mat]  See detailed Materials description.
 \end{cardlist}
 
-{\bf lower\_ref} lower\_refl\_mats, lower\_refl\_thicks, lower\_refl\_vfracs
+{\bf lower\_ref} lower\_refl\_mats lower\_refl\_thicks lower\_refl\_vfracs
 \begin{cardlist}
   \item[lower\_refl\_mats]  Lower reflector materials
   \item[lower\_refl\_thicks]  Lower reflector thicknesses (cm)
   \item[lower\_refl\_vfracs]  Lower reflector volume fractions
 \end{cardlist}
 
-{\bf upper\_ref} upper\_refl\_mats, upper\_refl\_thicks, upper\_refl\_vfracs
+{\bf upper\_ref} upper\_refl\_mats upper\_refl\_thicks upper\_refl\_vfracs
 \begin{cardlist}
   \item[upper\_refl\_mats]  Upper reflector materials
   \item[upper\_refl\_thicks]  Upper reflector thicknesses (cm)
@@ -279,7 +328,7 @@
 
 {\bf ppitch} ppitch
 \begin{cardlist}
-  \item[ppitch]  Cell pitch (cm)
+  \item[ppitch]  Pincell pitch (cm)
 \end{cardlist}
 
 {\bf cell} cell
@@ -287,13 +336,13 @@
   \item[cell]  Refer to the cell description given in the User's Manual.
 \end{cardlist}
 
-{\bf rodmap} axial\_label, cell\_map
+{\bf rodmap} axial\_label cell\_map
 \begin{cardlist}
   \item[axial\_label]  Label for this axial elevation description.
   \item[cell\_map]  Lattice map for this axial elevation.  Use a dash for an empty location.
 \end{cardlist}
 
-{\bf axial} label, axial\_labels, axial\_elevations
+{\bf axial} label axial\_labels axial\_elevations
 \begin{cardlist}
   \item[label]  Label for this assembly.  Label corresponds to assm\_map in CORE block.
   \item[axial\_labels]  List of axial labels for this assembly description.  Corrrespond to labels in lattice maps.
@@ -302,10 +351,10 @@
 
 {\bf dancoff} dancoff\_map
 \begin{cardlist}
-  \item[dancoff\_map]  Lattice map of dancoff factors (not currently used in the calculation).
+  \item[dancoff\_map]  Lattice map of Dancoff factors (not currently used).
 \end{cardlist}
 
-{\bf grid} label, material, mass, height
+{\bf grid} label material mass height
 \begin{cardlist}
   \item[label]  Grid label for a single grid type.
   \item[material]  Grid material for this grid type.
@@ -313,20 +362,20 @@
   \item[height]    Grid height for this grid type (cm).
 \end{cardlist}
 
-{\bf grid\_axial} grid\_map, grid\_elev
+{\bf grid\_axial} grid\_map grid\_elev
 \begin{cardlist}
   \item[grid\_map]   List of spacer grid labels for all grids in an assembly (labels correspond to grid card)
   \item[grid\_elev]  List of spacer grid elevations for all grids in an assembly (cm).  Elevations refer to the grid midpoint.
 \end{cardlist}
 
-{\bf lower\_nozzle} lower\_nozzle\_comp, lower\_nozzle\_height, lower\_nozzle\_mass
+{\bf lower\_nozzle} lower\_nozzle\_comp lower\_nozzle\_height lower\_nozzle\_mass
 \begin{cardlist}
   \item[lower\_nozzle\_comp]  Lower nozzle material.
   \item[lower\_nozzle\_height]  Lower nozzle height (cm)
   \item[lower\_nozzle\_mass]  Lower nozzle mass (g).  Code will calculate the volume of the nozzle given the nozzle mass, and use coolant for remaining volume.
 \end{cardlist}
 
-{\bf upper\_nozzle} upper\_nozzle\_comp, upper\_nozzle\_height, upper\_nozzle\_mass
+{\bf upper\_nozzle} upper\_nozzle\_comp upper\_nozzle\_height upper\_nozzle\_mass
 \begin{cardlist}
   \item[upper\_nozzle\_comp]  Upper nozzle material.
   \item[upper\_nozzle\_height]  Upper nozzle height (cm)
@@ -359,7 +408,7 @@
   \item[num\_pins]  The number of rods along the edge of an assembly.
 \end{cardlist}
 
-{\bf stroke} stroke, maxstep
+{\bf stroke} stroke maxstep
 \begin{cardlist}
   \item[stroke]  Control rod stroke - distance between full-insertion and full-withdrawal (cm)
   \item[maxstep]  Total number of steps between full-insertion and full-withdrawal
@@ -370,13 +419,13 @@
   \item[Cell]   Refer to the cell description given in the User's Manual.
 \end{cardlist}
 
-{\bf rodmap} label, cell\_map
+{\bf rodmap} label cell\_map
 \begin{cardlist}
   \item[label]  Label for this axial elevation description
   \item[cell\_map]  Lattice map for this axial elevation.  Use a dash for no control rod.
 \end{cardlist}
 
-{\bf axial} control\_label, axial\_labels, axial\_elevations
+{\bf axial} control\_label axial\_labels axial\_elevations
 \begin{cardlist}
   \item[control\_label]  Label for this control rod description.  Label corresponds to crd\_map in CORE block.
   \item[axial\_labels]  List of axial labels for this control rod description.  Corrrespond to labels in rod maps.
@@ -409,13 +458,13 @@
   \item[Cell]   Refer to the cell description given in the User's Manual.
 \end{cardlist}
 
-{\bf rodmap} label, cell\_map
+{\bf rodmap} label cell\_map
 \begin{cardlist}
   \item[label]  Label for this axial elevation description
   \item[cell\_map]  Lattice map for this axial elevation. Use a dash for no insert rod.
 \end{cardlist}
 
-{\bf axial} insert\_label, axial\_labels, axial\_elevations
+{\bf axial} insert\_label axial\_labels axial\_elevations
 \begin{cardlist}
   \item[insert\_label]  Label for this assembly insert description.  Label corresponds to insert\_map in CORE block.
   \item[axial\_labels]  List of axial labels for this assembly insert description.  Corrrespond to labels in rod maps.
@@ -448,13 +497,13 @@
   \item[Cell]   Refer to the cell description given in the User's Manual.
 \end{cardlist}
 
-{\bf rodmap} label, cell\_map
+{\bf rodmap} label cell\_map
 \begin{cardlist}
   \item[label]  Label for this axial elevation description
   \item[cell\_map]  Lattice map for this axial elevation. Use a dash for no detector rod.
 \end{cardlist}
 
-{\bf axial} detector\_label, axial\_labels, axial\_elevations
+{\bf axial} detector\_label axial\_labels axial\_elevations
 \begin{cardlist}
   \item[detector\_label]  Label for this detector description.  Label corresponds to det\_map in CORE block.
   \item[axial\_labels]  List of axial labels for this detector description.  Corrrespond to labels in rod maps.
@@ -498,6 +547,11 @@
   \item[nc]  Conduction option (see CTF Manual).
 \end{cardlist}
 
+{\bf debug} debug
+\begin{cardlist}
+  \item[debug]  Option to print additional debug information in xml2ctf processing  (1=on)
+\end{cardlist}
+
 {\bf irfc} irfc
 \begin{cardlist}
   \item[irfc]  Friction factor correlation number (see CTF Manual).
@@ -513,7 +567,7 @@
   \item[hgap]  Gap conductance (W/m$^2$ K)
 \end{cardlist}
 
-{\bf gridloss} gridlabel, gridloss
+{\bf gridloss} gridlabel gridloss
 \begin{cardlist}
   \item[gridlabel]  Spacer grid label (from ASSEMBLY block).
   \item[gridloss]  Spacer grid loss coefficient.
@@ -596,7 +650,7 @@
 
 {\bf parallel} parallel
 \begin{cardlist}
-  \item[parallel]  0=serial execution, 1=parallel exectution.  Parallelization is on a per-assembly basis.
+  \item[parallel]  0=serial execution, 1=parallel execution.  Parallelization is on a per-assembly basis.
 \end{cardlist}
 
 {\bf global\_energy\_balance} global\_energy\_balance
@@ -642,6 +696,36 @@
 {\bf edit\_dnb} edit\_dnb
 \begin{cardlist}
   \item[edit\_dnb]  Edit flag to turn on DNB output file (1=generate file)
+\end{cardlist}
+
+{\bf edit\_convergence} edit\_convergence
+\begin{cardlist}
+  \item[edit\_convergence]  Edit flag to generate a file displaying convergence parameters each iteration
+\end{cardlist}
+
+{\bf edit\_hdf5} edit\_hdf5
+\begin{cardlist}
+  \item[edit\_hdf5]  Option to generate the HDF5 file (1=generate file)
+\end{cardlist}
+
+{\bf boil\_ht\_cor} boil\_ht\_cor
+\begin{cardlist}
+  \item[boil\_ht\_cor]  Boiling heat transfer correlation
+\end{cardlist}
+
+{\bf property\_evaluations} property\_evaluations
+\begin{cardlist}
+  \item[property\_evaluations]  Source for fluid property evaluations (``asme'' for ASME-68, ``iapws'' for IAPWS-IF97)
+\end{cardlist}
+
+{\bf beta\_sp} beta\_sp
+\begin{cardlist}
+  \item[beta\_sp]  Turbulent mixing coefficient (used for both single-phase and two-phase mixing) (default=0.05)
+\end{cardlist}
+
+{\bf k\_void\_drift} k\_void\_drift
+\begin{cardlist}
+  \item[k\_void\_drift]   Equilibrium distribution weighting factor (void drift model coefficient) (default=1.4)
 \end{cardlist}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -708,10 +792,15 @@ Please refer to the MPACT documentation for a listing of all the cards in the [M
 
 {\bf read\_restart} read\_restart
 \begin{cardlist}
-  \item[read\_restart]  Name of restart file.  Leave blank for no restart.
+  \item[read\_restart]  Name of coupling restart file.  Leave blank for no coupling restart.
 \end{cardlist}
 
-{\bf LIME\_xml} LIME\_xml
+{\bf ctf\_iters\_max} ctf\_iters\_max
 \begin{cardlist}
-  \item[LIME\_xml]    Name of LIME XML file.  The use of this card is deprecated, the LIME XML file is now created automatically.  See the LIME Users Manual for more information.
+  \item[ctf\_iters\_max]  Maximum number of CTF time-steps per coupled iteration
+\end{cardlist}
+
+{\bf ctf\_iters\_growth} ctf\_iters\_growth
+\begin{cardlist}
+  \item[ctf\_iters\_growth]  Fractional change in ctf\_iters\_max by coupled iteration (1 is no change)
 \end{cardlist}

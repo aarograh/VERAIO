@@ -1,10 +1,10 @@
 %*-------------------------------------------------------------------------*
-%*                 Copyright 2013-2014 Core Physics, Inc.                  *
+%*                 Copyright 2013-2015 Core Physics, Inc.                  *
 %*  Under terms of the contract to support CASL, there is a non-exclusive  *
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: assemblies.tex,v 1.19 2014/03/28 15:40:05 scott Exp $
+% @version CVS $Id: assemblies.tex,v 1.21 2015/02/13 20:45:03 Scott Exp $
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Assembly Description}
@@ -321,7 +321,7 @@ A complete listing of all the input cards in the [CONTROL] block is located in S
 \label{sec:stroke}
 
 The difference between control rod descriptions and assembly descriptions is that
-the control rods moves during operation.  This movement is defined with a {\it stroke} card.
+the control rods move during operation.  This movement is defined with a {\it stroke} card.
 
 The first value on the {\it stroke} card is the total length of the control rod travel (stroke)
 from fully inserted to fully withdrawn.
@@ -366,7 +366,7 @@ during a core shuffle (by specifying a {\it insert\_map} card in the [CORE] bloc
 but cannot be moved during a cycle depletion.
 
 The insert and control rod descriptions are very similar, with the only difference being that the
-insert cannot change positions axially during a cycle depletion and a control rod moves axially
+insert cannot change position axially during a cycle depletion and a control rod moves axially
 during operations.
 
 The following example shows a definition of a Pyrex insert.

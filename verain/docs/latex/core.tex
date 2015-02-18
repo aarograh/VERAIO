@@ -1,10 +1,10 @@
 %*-------------------------------------------------------------------------*
-%*                 Copyright 2013-2014 Core Physics, Inc.                  *
+%*                 Copyright 2013-2015 Core Physics, Inc.                  *
 %*  Under terms of the contract to support CASL, there is a non-exclusive  *
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: core.tex,v 1.8 2014/03/28 14:18:30 Scott Exp $
+% @version CVS $Id: core.tex,v 1.10 2015/02/13 20:45:03 Scott Exp $
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Core Description}
@@ -13,7 +13,7 @@ The [CORE] block describes the nuclear reactor core configuration.  This block d
 the placement of nuclear fuel assemblies, control rods, detectors, inserts, and other core parameters
 that do not change during a cycle depletion.
 
-The geometric objects inside the core are defined in separate input blocks, the [CORE] block
+The geometric objects inside the core are defined in separate input blocks; the [CORE] block
 simply describes how all of these objects are placed together.
 
 \subsection{Core Geometry}
@@ -52,15 +52,13 @@ Once the core shape is defined, subsequent core maps only include entries for ac
 The {\it core\_shape} map is unique because it is square in shape and composed of the integers 1 and 0.
 The purpose of this map is to define the shape for subsequent core maps.
 
-Most physics codes support both calculations run in either full-core or quarter-core (qtr-core) symmetry.
-If a calculation is run in qtr-core symmetry,  the code must know if the symmetry is
-mirror symmetric or rotational symmetric.  The type of qtr-core symmetry is defined with the {\it bc\_sym}
+Most physics codes support both calculations run in either full-core or quarter-core symmetry.
+If a calculation is run in quarter-core symmetry,  the code must know if the symmetry is
+mirror symmetric or rotationally symmetric.  The type of quarter-core symmetry is defined with the {\it bc\_sym}
 input card.  The symmetry option is not used if the calculation is run in full-core.
 \begin{verbatim}
-  bc_sym mir    ! define qtr-core symmetry as mirror
+  bc_sym mir    ! define quarter-core symmetry as mirror
 \end{verbatim}
-(Note: rotational symmetry is supported by the input parser, but may not be supported in the
-physics codes at this time)
 
 \subsection{Core Maps}
 
@@ -269,7 +267,7 @@ The remainder of the volume fraction is filled with coolant.
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Small Cores Geometries}
+\subsection{Small Core Geometries}
 \label{sec:smallcoregeom}
 
 Even though the VERA input is designed for ``real'' core geometries, it can accommodate smaller
