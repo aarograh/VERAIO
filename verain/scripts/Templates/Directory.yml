@@ -54,6 +54,7 @@ _DIRECTORY:
   MPACT:
   PEREGRINE:
   MAMBA2D:
+  TIAMAT:
 
 CASEID:
   title:
@@ -1441,6 +1442,8 @@ COUPLING:
     _content:
     _check:
       - is_string()
+
+TIAMAT:
 
   solver:
     <<: *dtstring
