@@ -19,11 +19,6 @@ using namespace Teuchos;
 
 namespace
 {
-  // Some input file creation methods corresponding to current (10-3-2012) cobra preprocessor requirements
-  void create_file_assembly_info(Array<double> & fuel_pin_map, VERAIn_XML_Common &);
-  void create_file_control_inp(ParameterList &, string);
-  void create_file_geo_inp(ParameterList &);
-  void create_file_power_inp(const Array<double> & fuel_pin_map, VERAIn_XML_Common &);
 
   // assembly data structure
   struct assem_struct{
@@ -106,6 +101,10 @@ namespace
      int    property_evaluations;
      double k_void_drift;
      double beta_sp;
+     double *c_ptr_to_inlet_temp;
+     double *c_ptr_to_inlet_flow;
+     bool inlet_temp_set;
+     bool inlet_flow_set;
   };
 
   // geo data structure
@@ -117,7 +116,7 @@ namespace
      bool   model_shroud;
      double shroud_gap;
      int    sym_opt;
-     int    *c_ptr_to_assem_type;
+     int    *c_ptr_to_core_shape;
      int    ivar;
      double *c_ptr_to_ztop;
      int    *c_ptr_to_zondx;
@@ -137,16 +136,45 @@ namespace
      double *c_ptr_to_local_pf;
   };
 
+  // Some input file creation methods corresponding to current (10-3-2012) cobra preprocessor requirements
+  assem_struct create_file_assembly_info(Array<double> & fuel_pin_map, VERAIn_XML_Common &);
+  cntrl_struct create_file_control_inp(ParameterList &, int, string);
+  geo_struct create_file_geo_inp(ParameterList &, int);
+  power_struct create_file_power_inp(const Array<double> & fuel_pin_map, VERAIn_XML_Common &);
+
+
+  // Pointers will be assigned to this data in sub-functions
+  // The pointers are passed to preproc, so this data must be global
+  // so when the pointers are passed CTF, the data is still valid
+  double pelletd;
+  double cladod;
+  double cladid;
+  double avg_thden = 0.0;
+  vector<int> gt_wr_posx;
+  vector<int> gt_wr_posy;
+  double gt_wr_de;
+  double gt_wr_di;
+  vector<double> gridstart;
+  vector<double> gridend;
+  vector<double> gridloss;
+  Array<int> core_shape;
+  Array<double> geo_edit_bounds;
+  Array<int> zondx;
+  Array<double> power_dat_time;
+  Array<double> corepower;
+  Array<double> y;
+  Array<double> axialz;
+  Array<double> assempf;
+  Array<int>    assempf_map;
+  Array<double> local_pf;
+  Array<double> inlet_f;
+  Array<double> inlet_t;
 
 }
 
 // The interface routines for passing data into lib_ctf_pp
 extern "C" {
-   void cntrl_data_xfer(cntrl_struct*);
-   void geo_data_xfer(geo_struct*);
-   void assem_data_xfer(assem_struct*);
-   void power_data_xfer(power_struct*);
-   void gen_ctf_deck_driver();
+   void run_ctf_preproc(geo_struct*,cntrl_struct*,assem_struct*,power_struct*);
 }
 
 // -------------------------------------------------------------
@@ -199,21 +227,39 @@ int main(int argc, char**argv)
   // print values used.
   cout << "\n\nParameters used :" << endl;
 
+  assem_struct assem_data;
+  geo_struct geo_data;
+  power_struct power_data;
+  cntrl_struct cntrl_data;
+
+  // calculate number of assemblies in core
+  // only count non-zero entries in core shape map
+  const ParameterList & coreParams = pList.sublist("CORE");
+  GetRequired(coreParams, "CORE", "shape", core_shape);
+  int core_total_size = core_shape.size();   // NxN
+
+  int num_assm = 0;
+  for( int k = 0; k < core_total_size; ++k ){
+     if( core_shape[k] == 1 ){
+        num_assm++;
+     }
+  }
+
   // control.inp
-  create_file_control_inp(pList, inp_file);
+  cntrl_data=create_file_control_inp(pList, num_assm, inp_file);
 
   // geo.inp
-  create_file_geo_inp(pList);
+  geo_data=create_file_geo_inp(pList, num_assm);
 
   // Assembly spec file
   Array<double> fuel_pin_map;
-  create_file_assembly_info(fuel_pin_map, vera_common);
+  assem_data=create_file_assembly_info(fuel_pin_map, vera_common);
 
   //  power.inp
-  create_file_power_inp(fuel_pin_map, vera_common);
+  power_data=create_file_power_inp(fuel_pin_map, vera_common);
 
   // Execute the lib_ctf_pp routines needed to build the maps and write the CTF deck
-  gen_ctf_deck_driver();
+  run_ctf_preproc(&geo_data,&cntrl_data,&assem_data,&power_data);
 
   return 0;
 }
@@ -224,7 +270,7 @@ int main(int argc, char**argv)
 
 namespace {
 
-  void create_file_assembly_info(Array<double> & fuel_pin_map, VERAIn_XML_Common & vera_common)
+  assem_struct create_file_assembly_info(Array<double> & fuel_pin_map, VERAIn_XML_Common & vera_common)
   {
     VERAIn_XML vera_xml = vera_common.get_vera_xml();
     ParameterList & pList = vera_common.get_vera_xml().get_pList();
@@ -268,20 +314,6 @@ namespace {
 
     ParameterList * param_list = &pList;
 
-    // These variables will store data that is pointed to by the assem_data structure
-    // These variables must exist throughout this function or else the pointer will
-    // be invalid when it is passed to the preprocessor
-    // vectors for storing the guide tube locations
-    vector<int> gt_wr_posx;
-    vector<int> gt_wr_posy;
-    double cladod;
-    double cladid;
-    double gt_wr_de;
-    double gt_wr_di;
-    double pelletd;
-    vector<double> gridstart;
-    vector<double> gridend;
-    vector<double> gridloss;
 
   // Check that axial edit bounds are in increasing order
      size_t num_edit  = edit_bounds.size();
@@ -528,8 +560,8 @@ namespace {
 
         const double bottom_active_fuel = vera_common.get_bottom_active_fuel_in_cm(assembly_name);
         const double model_bottom = edit_bounds[0];
+        avg_thden=0.0;
 
-        double avg_thden = 0.0;
 
         Array<double> axial_elevations = vera_xml.get_param_from_plist<Array<double> >( assembly_ppath+".axial_elevations");
         map<string, bool> axial_levels_with_fuel;
@@ -794,6 +826,11 @@ namespace {
               for( int k = 0; k < num_pins; ++k )
                 for( int m = 0; m < num_pins; ++m )
                   fuel_pin_map[k*num_pins+m] = 1.0;
+
+              gt_wr_di=0.0;
+              gt_wr_de=0.0;
+              assem_data.c_ptr_to_gt_wr_di=&gt_wr_di;
+              assem_data.c_ptr_to_gt_wr_de=&gt_wr_de;
             }
             else
             {
@@ -1044,8 +1081,7 @@ namespace {
     assem_data.c_ptr_to_gridend   = &gridend[0];
     assem_data.c_ptr_to_gridloss  = &gridloss[0];
 
-    // Hand off the assembly data to lib_ctf_pp
-    assem_data_xfer(&assem_data);
+    return assem_data;
 
   }
 
@@ -1053,7 +1089,7 @@ namespace {
 //     Produce the control file for the COBRA pre-processor
 // -------------------------------------------------------------
 
-  void create_file_control_inp(ParameterList & pList, string inp_file)
+  cntrl_struct create_file_control_inp(ParameterList & pList, int num_assm, string inp_file)
   {
     ParameterList cobraParams = pList.sublist("COBRATF");
     ParameterList coreParams = pList.sublist("CORE");
@@ -1088,6 +1124,30 @@ namespace {
        cntrl_data.spec_titles=0;
     }
     strcpy(cntrl_data.vtk_hdf5_titles,maps_filename.c_str());
+
+    // Read in the inlet flow and temperature maps
+    GetOptional(stateParams,"inlet_temp",inlet_t);
+    if (inlet_t.size()==0){
+       // Map not found, make it all zeros
+       inlet_t.resize(num_assm,0.0);
+       cntrl_data.inlet_temp_set=false;
+    }else{
+       cntrl_data.inlet_temp_set=true;
+    }
+    // Convert inlet temp deltas from F to C
+    for(int k=0;k<inlet_t.size();k++){
+       inlet_t[k]=inlet_t[k]/1.8;
+    }
+    cntrl_data.c_ptr_to_inlet_temp=&inlet_t[0];
+    GetOptional(stateParams,"inlet_flow",inlet_f);
+    if (inlet_f.size()==0){
+       // Map not found, make it all ones
+       inlet_f.resize(num_assm,1.0);
+       cntrl_data.inlet_flow_set=false;
+    }else{
+       cntrl_data.inlet_flow_set=true;
+    }
+    cntrl_data.c_ptr_to_inlet_flow=&inlet_f[0];
 
 
     // stacked case option
@@ -1218,7 +1278,8 @@ namespace {
 
     // Hand off the control data to lib_ctf_pp
     cout<<"\n A number printed in CTF's contrl_data_xfer is:"<<endl;
-    cntrl_data_xfer(&cntrl_data);
+
+    return cntrl_data;
 
   }
 
@@ -1226,7 +1287,7 @@ namespace {
 //     Produce the geometry file for the COBRA pre-processor
 // -------------------------------------------------------------
 
-  void create_file_geo_inp(ParameterList & pList) {
+  geo_struct create_file_geo_inp(ParameterList & pList, int num_assm) {
     const ParameterList & coreParams = pList.sublist("CORE");
     const ParameterList & editsParams = pList.sublist("EDITS");
     const ParameterList & assembliesParams = pList.sublist("ASSEMBLIES");
@@ -1244,18 +1305,6 @@ namespace {
 
     geo_struct geo_data;
 
-// calculate number of assemblies in core
-// only count non-zero entries in core shape map
-    Array<int> core_shape;
-    GetRequired(coreParams, "CORE", "shape", core_shape);
-    int core_total_size = core_shape.size();   // NxN
-
-    int num_assm = 0;
-    for( int k = 0; k < core_total_size; ++k ){
-       if( core_shape[k] == 1 ){
-          num_assm++;
-       }
-    }
 
     int map_size;
     GetRequired(coreParams, "CORE", "core_size", map_size);
@@ -1278,6 +1327,7 @@ namespace {
     cout << endl;
     cout << "debug: map  size = " << map_size  << endl;
     cout << "debug: num_assm  = " << num_assm  << endl;
+    int core_total_size=core_shape.size();
     cout << "debug: core size = " << core_total_size << endl;
     cout << endl;
 
@@ -1311,7 +1361,7 @@ namespace {
 
   // print core map
 
-    geo_data.c_ptr_to_assem_type = &core_shape[0];
+    geo_data.c_ptr_to_core_shape= &core_shape[0];
 
   // print axial mesh
 
@@ -1329,7 +1379,7 @@ namespace {
 
     // Convert the bounds to mm, which is what lib_ctf_pp is expecting, and subtract
     // off the inactive portion of the fuel
-    vector<double> geo_edit_bounds(num_edit);
+    geo_edit_bounds.resize(num_edit);
     for (unsigned bound=0;bound<num_edit;bound++){
        geo_edit_bounds.at(bound)=(edit_bounds.at(bound)-model_bottom)*conversion_factor;
     }
@@ -1340,14 +1390,13 @@ namespace {
 
     strcpy(geo_data.fname, "17x17_VERA.inp");
 
-    vector<int> zondx(num_edit);
+    zondx.resize(num_edit);
     for(size_t i=0; i<num_edit; ++i)
        zondx.at(i) = 1;
 
     geo_data.c_ptr_to_zondx = &zondx.at(0);
 
-
-    geo_data_xfer(&geo_data);
+    return geo_data;
 
   }
 
@@ -1355,7 +1404,7 @@ namespace {
 //     Produce the power file for the COBRA pre-processor
 // -------------------------------------------------------------
 
-  void create_file_power_inp(const Array<double> & fuel_pin_map, VERAIn_XML_Common & vera_common)
+  power_struct create_file_power_inp(const Array<double> & fuel_pin_map, VERAIn_XML_Common & vera_common)
   {
     ParameterList pList = vera_common.get_vera_xml().get_pList();
     const ParameterList & coreParams = pList.sublist("CORE");
@@ -1381,7 +1430,7 @@ namespace {
     int num_pf_files = 1;
     if (stacked_case_times.size()>0) num_pf_files = stacked_case_times.size();
 
-    vector<double> power_dat_time(num_pf_files);
+    power_dat_time.resize(num_pf_files);
     for(int time=0; time<num_pf_files; time++){
        power_dat_time.at(time) = 1000.0*time;
     }
@@ -1412,7 +1461,7 @@ namespace {
     power *= statepow * 0.01;  // convert from percent
     // If running stacked case, set the power for each state point
     // Note that all powers are set to the same value
-    vector<double> corepower(num_pf_files,power);
+    corepower.resize(num_pf_files,power);
     power_data.c_ptr_to_corepower = &corepower.at(0);
 
     // The power profiles provide the starting guess for the powers in a coupled DENOVO calculation.
@@ -1423,8 +1472,8 @@ namespace {
     double active_fuel_length = vera_common.get_total_fuel_length_in_cm(assembly_name);
     cout << "  active_fuel_length = " << active_fuel_length << " cm" << endl;
 
-    vector<double> y(2*num_pf_files);
-    vector<double> axialz(2*num_pf_files,1.0);
+    y.resize(2*num_pf_files);
+    axialz.resize(2*num_pf_files,1.0);
     for(int pf_file=0;pf_file<2*num_pf_files;pf_file++){
        if (pf_file%2==0){
           y.at(pf_file)=0.0;
@@ -1444,8 +1493,8 @@ namespace {
     // Set the power factor of each assembly... always 1.0, 0.0 for blank areas
     // Set the assembly power factor map that each assembly should use... always 1 since we use
     // the same power factor map for every assembly.
-    vector<double> assempf(map_size*map_size*num_pf_files);
-    vector<int>    assempf_map(map_size*map_size*num_pf_files);
+    assempf.resize(map_size*map_size*num_pf_files);
+    assempf_map.resize(map_size*map_size*num_pf_files);
     int assem_counter=0;
 
     // Note that for stacked cases, the power factor maps will always
@@ -1483,7 +1532,7 @@ namespace {
 
 
     int num_pins = sqrt(fuel_pin_map.size());
-    vector<double> local_pf(num_pins*num_pins*num_pf_files);
+    local_pf.resize(num_pins*num_pins*num_pf_files);
 
     int map_count=0;
     power_data.num_pf_maps = 1;
@@ -1501,7 +1550,7 @@ namespace {
 
     power_data.c_ptr_to_local_pf = &local_pf.at(0);
 
-    power_data_xfer(&power_data);
+    return power_data;
 
   }
 
