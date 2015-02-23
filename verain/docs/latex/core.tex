@@ -4,7 +4,7 @@
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: core.tex,v 1.10 2015/02/13 20:45:03 Scott Exp $
+% @version CVS $Id: core.tex,v 1.12 2015/02/23 00:52:46 scott Exp $
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Core Description}
@@ -27,9 +27,9 @@ Note that the core shape map is the only ``square'' core map in the input, and i
 Once the core shape is defined, subsequent core maps only include entries for actual fuel assembly locations.
 
 \begin{verbatim}
-  size 15               ! number of assemblies across one axis
-  apitch 21.5           ! assembly pitch (cm)
-  height 406.337        ! distance from lower core plate to upper core plate (cm)
+  size 15            ! number of assemblies across one axis
+  apitch 21.5        ! assembly pitch (cm)
+  height 406.337     ! distance from lower core plate to upper core plate (cm)
 
   core_shape
     0 0 0 0 1 1 1 1 1 1 1 0 0 0 0
@@ -50,6 +50,7 @@ Once the core shape is defined, subsequent core maps only include entries for ac
 \end{verbatim}
 
 The {\it core\_shape} map is unique because it is square in shape and composed of the integers 1 and 0.
+The 1 represents a location with a fuel assembly, and a 0 is an unoccupied location.
 The purpose of this map is to define the shape for subsequent core maps.
 
 Most physics codes support both calculations run in either full-core or quarter-core symmetry.
@@ -87,7 +88,9 @@ The quadrant and octant that the parser is expecting is shown in Figure~\ref{fig
 
 If there is an empty location in the map (e.g. if there is no detector or no control rod
 in an assembly), enter a dash ``-'' for that location.  The dash is significant and signifies an
-empty location in the core map.
+empty location in the core map.  (The dash represents something is missing, but it is still
+a valid assembly location. The ``0'' in the {\it core\_shape} represents an invalid assembly location.)
+
 
 \clearpage
 
@@ -178,6 +181,7 @@ The control rod assemblies are described with two maps.  The {\it crd\_map}
 defines the control rod types and locations in the core.
 The {\it crd\_bank} map assigns control rod locations to control rod banks.
 The control rod maps are optional if no control rods are present in the core.
+In the following example, there is only one control rod type with label ``1''.
 \vfill   % don't split map
 \begin{verbatim}
   crd_map

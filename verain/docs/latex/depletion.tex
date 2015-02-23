@@ -4,7 +4,7 @@
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: depletion.tex,v 1.3 2015/02/16 20:54:57 Scott Exp $
+% @version CVS $Id: depletion.tex,v 1.7 2015/02/23 02:31:24 scott Exp $
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Depletion}  \label{chap:depletion}
@@ -33,7 +33,7 @@ Listing multiple statepoints on a single {\it deplete} card will deplete with al
 values in the [STATE] block held constant.  If the user wants to change a state parameter between
 depletion steps (power, flow, etc.), they can split the depletion over multiple [STATE] blocks.
 In the following example, the code depletes three statepoints at 50\% power, changes the power
-to 100\%, and depletes for four more statepoints.  The depletion step at 10 EFPD is run
+to 100\%, and depletes for four more statepoints.  The statepoint at 10 EFPD is run
 at both 50\% and 100\% power.
 \begin{verbatim}
   [STATE]
@@ -125,6 +125,17 @@ is read and a new calculation is performed with a different power and boron conc
 It is possible to write a statepoint in quarter-symmetry, then read the restart back in full-symmetry,
 or vice-versa.
 
+There is currently a restriction that a user should not include a {\it deplete} card in any 
+[STATE] block where a restart is read.  Instead, the user should split the restart read and depletion
+into separate blocks, like the following example shows:
+\begin{verbatim}
+  [STATE]
+    restart_read restart_cycx.h5 "EFPD30"  ! read restart at 30 EFPD
+  [STATE]
+    deplete EFPD 60 90 
+\end{verbatim}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Core Shuffling}
 
@@ -167,7 +178,7 @@ For example ``C3K-12'' refers to location ``K-12'' of cycle ``C3''.  If no cycle
 number is specified, it defaults to the previous cycle number (i.e. cycle N-1).
 
 New, fresh assemblies are defined by using a plus sign followed by the assembly type.
-For example ``+ASMA'' would signify a fresh fuel assembly of type ``ASMA''.
+For example ``+ASMA'' signifies a fresh fuel assembly of type ``ASMA''.
 
 Using these conventions, a new core loading pattern can be defined using a {\it shuffle\_label} map.
 The {\it shuffle\_label} map is a core map showing the the previous assembly locations and
@@ -176,11 +187,12 @@ new assemblies fuel types.
 The following example is the full-core loading pattern for cycle 2 of the BEAVRS benchmark.
 The cycle numbers are not used in the location labels because all of the assemblies
 were moved from the previous cycle (cycle 1), and the default behavior is to use
-the previous cycle number if no number is specified.
+the previous cycle number if no cycle is specified.
 \begin{verbatim}
   [CORE]
     cycle C2
     op_date 1996/03/02     ! cycle startup date
+  [STATE]
     shuffle_label
                        L-10 +X34 +X32 +X34 +X32 +X34 E-10
              G-10 +X32 +X32 L-02 P-12 N-03 B-12 E-02 +X32 +X32 J-10
@@ -206,6 +218,7 @@ cycles 8, 19, 20, and 21.  The fresh assemblies all have fuel type ``A12''.
   [CORE]
     cycle 22               ! new cycle number
     op_date 2012/10/02     ! cycle startup date
+  [STATE]
     shuffle_label
        8H-10  +A12  21E-03  +A12  21E-13 21G-02 21G-08 21N-04
        +A12  21O-08 20C-04 19L-07  +A12  21E-06  +A12  21K-03
@@ -217,7 +230,11 @@ cycles 8, 19, 20, and 21.  The fresh assemblies all have fuel type ``A12''.
       21D-04 21C-09 21G-01
 \end{verbatim}
 
-After the loading patterns have been defined, a list of restart files must be included to
+At this time, there is a restriction where the user must also include an {\it assm\_map} card
+in the input to specify the fresh fuel assemblies.  This restriction will be removed in the
+future so that the fresh assembly types specified on the {\it shuffle\_label} card will be used.
+
+In addition to the loading patterns, a list of restart files must be included to
 define the restart search path.  The order of the restart files is important and they
 must be in reverse chronological order.
 \begin{verbatim}
@@ -229,8 +246,8 @@ must be in reverse chronological order.
 \end{verbatim}
 The first restart file is used to define the ``previous'' cycle number.  The cycle number
 from this file will be used as the default cycle number in the shuffle map.
-If the assembly is not found on the first restart file, the code will go to the second 
-restart file, and so on.
+The code will search for the assembly on the first file. If the assembly is not found,
+the code will go to the second restart file, and so on.
 
 The next section gives an example of a core shuffle.
 
@@ -280,6 +297,7 @@ The following input is used to shuffle to Cycle 3:
     xlabel   R  P  N  M  L  K  J  H  G  F  E  D  C  B  A
     ylabel  01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
 
+  [STATE]
     shuffle_label
      1H-10 +ASMC  E-03 +ASMC  E-13  G-02  G-08  N-04
      +ASMC  O-08  C-04  L-07 +ASMC  E-06 +ASMC  K-03
@@ -295,8 +313,6 @@ The following input is used to shuffle to Cycle 3:
 
    ! All of the other assemblies came from cycle 2.  This is the default cycle,
    ! and the cycle number did not have to be prepended.
-
-  [STATE]
 
    ! restart using the EOC restart files from cycles 1 and 2
     restart_shuffle
@@ -348,11 +364,11 @@ in the {\it restart\_shuffle} card:
 The only ``trick'' is to get this list in the right chronological order because an
 assembly could theoretically go from U2:CYC3 to U1:CYC10 then back to U2:CYC6.  Therefore, the restarts
 must be in the correct chronological order.  Remember that the cycle numbers are arbitrary strings,
-go there really is no ``order'' to them.  The order is defined by the order specified in the in the
+so there really is no ``order'' to them.  The order is defined by the order specified in the
 {\it restart\_shuffle} input.
 
-The shutdown dates are written in each restart file so
-the shutdown decay will be correctly calculated for each assembly.
-It doesn’t matter what unit the assembly came from, the right shutdown dates will be used.
+The shutdown dates are written to each restart file so the shutdown decay will be correctly
+calculated for each assembly.
+It doesn't matter what unit the assembly came from, the right shutdown dates will be used.
 
 

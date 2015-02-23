@@ -4,7 +4,7 @@
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: assemblies.tex,v 1.21 2015/02/13 20:45:03 Scott Exp $
+% @version CVS $Id: assemblies.tex,v 1.23 2015/02/23 00:56:17 scott Exp $
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Assembly Description}
@@ -53,9 +53,9 @@ See Chapter~\ref{chap:materials} for a complete description of the material inpu
 \begin{verbatim}
   fuel U31 10.257 95.0 / 3.1   ! mat, density (g/cc), Theoretical density (%)
                                !    / U-235 enrichment (%)
-  mat inc  8.19                ! mat, density (g/cc)
-  mat ss   8.0
-  mat zirc 6.56
+  mat inc   8.19               ! mat, density (g/cc)
+  mat ss    8.0
+  mat zirc4 6.56
 \end{verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,12 +78,12 @@ After the slash is a list of materials that compose each ring.
 The cell ID's are used in the rod maps described in the next section.
 
 \begin{verbatim}
-  cell 1     0.4096 0.418 0.475 / U31 he zirc
-  cell GT           0.561 0.602 / mod    zirc       ! guide tube
-  cell IT           0.561 0.602 / mod    zirc       ! instrument tube
+  cell 1     0.4096 0.418 0.475 / U31 he zirc4
+  cell GT           0.561 0.602 / mod    zirc4      ! guide tube
+  cell IT           0.561 0.602 / mod    zirc4      ! instrument tube
   cell 7            0.418 0.475 / mod    mod        ! empty location
-  cell 8            0.418 0.475 /     he zirc       ! plenum
-  cell 9                  0.475 /        zirc       ! pincap
+  cell 8            0.418 0.475 /     he zirc4      ! plenum
+  cell 9                  0.475 /        zirc4      ! pincap
 \end{verbatim}
 
 In this example, in cell ``1'', the material ``U31'' extends from radius 0 to 0.4096.
@@ -195,8 +195,8 @@ All axial elevations are defined relative to the top of the lower core plate.
 Grid cards are used to define unique grid spacer types.
 The following example defines two grid types, ``END'' and ``MID''.
 \begin{verbatim}
-  grid END inc  1017  3.866   ! grid spacer material, mass(g), height(cm)
-  grid MID zirc  875  3.810
+  grid END inc   1017  3.866   ! grid spacer material, mass(g), height(cm)
+  grid MID zirc4  875  3.810
 \end{verbatim}
 
 The grid types are placed axially with the {\it grid\_axial} card:
@@ -327,7 +327,7 @@ The first value on the {\it stroke} card is the total length of the control rod 
 from fully inserted to fully withdrawn.
 
 The second value on the {\it stroke} card is the number of steps in the fully withdrawn position.
-Step 0 is the fully inserted position.  The number of strokes in the fully withdrawn position 
+Step 0 is the fully inserted position.  The number of steps in the fully withdrawn position 
 is specified by the user, but 228 steps is often used for typical Westinghouse PWR's.
 \begin{verbatim}
   stroke  360.0 228      ! stroke (cm), number of steps fully withdrawn

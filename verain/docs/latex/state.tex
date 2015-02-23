@@ -4,7 +4,7 @@
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: state.tex,v 1.4 2015/02/16 20:54:57 Scott Exp $
+% @version CVS $Id: state.tex,v 1.5 2015/02/17 03:26:30 Scott Exp $
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{State Description}
@@ -22,11 +22,11 @@ A complete listing of all the input cards in the [STATE] block is located in Sec
     power   98.0       ! % of rated power - rated values defined in [CORE] block
     flow   100.0       ! % of rated flow
     pressure 2250.0    ! psia
-    tinlet 557.33      ! F
+    tinlet 557.33 F    !
     feedback on        ! turn on T/H feedback
 
-    boron  1285        ! initial boron ppmB
-    search 'boron'     ! turn on boron search
+    boron   1285       ! initial boron ppmB
+    search  boron      ! turn on boron search
 
     sym qtr            ! run problem in qtr-symmetry
 

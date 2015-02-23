@@ -4,7 +4,7 @@
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: materials.tex,v 1.20 2015/02/13 20:46:11 Scott Exp $
+% @version CVS $Id: materials.tex,v 1.22 2015/02/23 00:56:17 scott Exp $
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Materials}  \label{chap:materials}
@@ -55,11 +55,11 @@ determine which library materials are available.
 
 Some example material cards are shown below.
 \begin{verbatim}
-  mat zirc 6.56                   ! library-name defaults to user-name 
-  mat zirx 6.56 zirc4 1.0         ! user-name does not equal to library-name
-  mat B10  12.0 boron 1.0
-  mat XYZ  6.0  zirc4 0.8 ss 0.2  ! define new mixture of 80% zirc4 and 20% ss
-  mat ABCD 8.0  zirc4 0.8 ss 0.15 b4c 0.05
+  mat zirc4 6.56                   ! library-name defaults to user-name 
+  mat zirx  6.56 zirc4 1.0         ! user-name does not equal to library-name
+  mat B10   12.0 boron 1.0
+  mat XYZ   6.0  zirc4 0.8 ss 0.2  ! define new mixture of 80% zirc4 and 20% ss
+  mat ABCD  8.0  zirc4 0.8 ss 0.15 b4c 0.05
 \end{verbatim}
 
 %% Fixed bug Andrew found below ~Feb 2014, atomic and weight were switched
@@ -102,7 +102,6 @@ Examples of typical library materials that are present on the composition file i
   \item inc (Inconel)
   \item he  (helium)
   \item ss  (stainless steel)
-  \item zirc (zirconium)
   \item zirc4 (Zircaloy-4)
 \end{itemize}
 Refer to the code-specific composition file for a complete list of valid library materials.
@@ -129,8 +128,12 @@ Where:
 
 \begin{itemize}   % itemize = bullet list
   \item {\it user-mat} is a user-defined fuel name. It is case sensitive. (No default)
-  \item {\it density} is the fuel material density in g/cc (No default)
-  \item {\it thden} is the percent of theoretical density in the pellet (\%) (No default)
+  \item {\it density} is the fuel material density in g/cc (No default).
+     The density is used to calculate number densities.
+  \item {\it thden} is the percent of theoretical density in the pellet (\%) (No default).
+   The theoretical density is only used to look up material properties in the fuel performance,
+   it is not used to calculate number densities.  There is no ``double counting'' between
+   {\it density} and {\it thden}.
   \item {\it U-235\_enrichment} is the U-235 enrichment in the fuel in weight \%  (No default).
   \begin{itemize}   % itemize = bullet list
     \item If U-234 and U-236 are not specified, they will automatically be added to the

@@ -4,7 +4,7 @@
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: verain.tex,v 1.38 2015/02/16 20:54:57 Scott Exp $
+% @version CVS $Id: verain.tex,v 1.40 2015/02/23 01:48:13 scott Exp $
 %
 \documentclass{report}
 %
@@ -149,7 +149,7 @@ CASL Challenge Problems such as CIPS, CILC, DNB, and PCI analyses.
 
 One important feature of the core simulator is that a single common input file is used to drive all
 of the different physics codes\footnote{The only exception to this is for CFD codes,
-which require a CAD drawing to perform any meaningful analysis.}.
+which generally require a detailed CAD file to support mesh generation and perform meaningful analysis.}.
 One benefit of using a single common input is that users only need to understand and be proficient with one input,
 instead of having to understand multiple inputs for multiple physics codes.
 Another benefit of using a single common input is that all codes work from a single
@@ -349,12 +349,14 @@ The first example is a complete input for a full-core problem.
 This problem is Problem 7 of the CASL Progression Benchmark Problems and
 is based upon the publicly available description of the Watts Bar reactors.
 
-More information on this example problem can be found in the following CASL reports:
+More information on the CASL Progression Benchmark Problems can be found in the following CASL report:
 \begin{itemize}
-\item Gehin, J., A. Godfrey, F. Franceschini, T. Evans, B. Collins, S. Hamilton, 
-``Operational Reactor Model Demonstration with VERA: Watts Bar Unit 1 Cycle 1 Zero Power Physics Test'', 
-CASL Technical Report: \href{http://www.casl.gov/docs/CASL-U-2013-0105-001.pdf}{CASL-U-2013-0105-001}, June 2013.
+\item A. Godfrey, ``VERA Core Physics Benchmark Progression Problem Specifications,''
+CASL Technical Report: \href{http://www.casl.gov/docs/CASL-U-2012-0131-004.pdf}{CASL-U-2012-0131-004}, August 2014.
+\end{itemize}
 
+More details on Problem 7 can be found in:
+\begin{itemize}
 \item ``Demonstration and Neutronics Coupled to Thermal-Hydraulics for a Full-Core Problem using VERA'',
 CASL Technical Report: \href{http://www.casl.gov/docs/CASL-U-2013-0196-000.pdf}{CASL-U-2013-0196-000}, December 2013.
 \end{itemize}
@@ -365,7 +367,11 @@ CASL Technical Report: \href{http://www.casl.gov/docs/CASL-U-2013-0196-000.pdf}{
 % Example 2
 \section{Example 2 -- Single-Assembly}
 The second example is a partial input for a single-assembly with T/H feedback.
-This problem is Problem 6 of the CASL Progression Benchmark Problems.
+This problem is Problem 6 of the CASL Progression Benchmark Problems.  See:
+\begin{itemize}
+\item A. Godfrey, ``VERA Core Physics Benchmark Progression Problem Specifications,''                                      
+CASL Technical Report: \href{http://www.casl.gov/docs/CASL-U-2012-0131-004.pdf}{CASL-U-2012-0131-004}, August 2014.
+\end{itemize}
 
 A single-assembly is defined by creating a core with one assembly in it, 
 as described in the small-core geometry discussion in Section~\ref{sec:smallcoregeom}.
@@ -382,7 +388,12 @@ example problem if the user wishes to run this problem.
 % Example 3
 \section{Example 3 -- 2D Lattice Geometry}
 The third example is a complete input for a 2D lattice.
-This problem is Problem 2A of the CASL Progression Benchmark Problems.
+This problem is Problem 2A of the CASL Progression Benchmark Problems. See:
+\begin{itemize}
+\item A. Godfrey, ``VERA Core Physics Benchmark Progression Problem Specifications,''                                      
+CASL Technical Report: \href{http://www.casl.gov/docs/CASL-U-2012-0131-004.pdf}{CASL-U-2012-0131-004}, August 2014.
+\end{itemize}
+
 
 A single-assembly is defined by creating a core with a one assembly in it,
 as described in the small-core geometry description in Section~\ref{sec:smallcoregeom}.
