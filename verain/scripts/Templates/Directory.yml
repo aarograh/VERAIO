@@ -1538,6 +1538,7 @@ MPACT:
     _content:
     _check:
       - is_word()
+      - in_dictionary() useraxialmesh matbound nonfuel all
   automesh_bounds:
     <<: *dtlist
     _content:
