@@ -487,7 +487,7 @@ sub read_ascii {
 	      next;
 	  };
 
-	  /^\[\s*(\w+)\s*\](.*)/ &&     # found new block
+	  /^\[\s*(.*)?\s*\](.*)/ &&     # found new block
 	      do{
 		  $name=$1;
 		  my $rest=$2;
@@ -514,7 +514,7 @@ sub read_ascii {
 		  next;
 	  };
 	  $block && !$command && do{      # block previously initialized, but no commands yet.
-	      /^(\w+)\s*(.*?)$/ && do{ # check if the first line is a command
+	      /^(\S+)\s*(.*?)$/ && do{ # check if the first line is a command
 		  $cname=$1;
 		  $ctext=($+[2]-$-[2]) ? $2 : '';
 		  $res=$block->is_command($cname) || 0;
@@ -532,7 +532,7 @@ sub read_ascii {
 	      };
 	  };
 	  $block && $command && do{    # new block initialized, multi-line command already started
-	      /^(\w+)\s*(.*)$/ && do{  # check if the new entry is a command
+	      /^(\S+)\s*(.*)$/ && do{  # check if the new entry is a command
 		  $cname=$1;
 		  $ctext=($+[2]-$-[2]) ? $2 : '';
 		  $res=$block->is_command($cname) || 0;
