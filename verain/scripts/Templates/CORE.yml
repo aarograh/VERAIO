@@ -290,10 +290,10 @@ CORE:
         - matmap Material_,CORE/%mat/*
       _content:
 
-    bwrflag:
+    reactor_type:
       _pltype: parameter
-      _type: bool
+      _type: string
       _do:
-        - copy CORE/$bwr
+        - copy CORE/$reactor_type
       _content:
 

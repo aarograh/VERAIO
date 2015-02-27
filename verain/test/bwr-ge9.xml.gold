@@ -14,6 +14,12 @@
   </ParameterList>
   <ParameterList name="CORE">
     <ParameterList name="Materials">
+      <ParameterList name="Material_zirc2">
+        <Parameter name="density" type="double" value="6.56"/>
+        <Parameter name="key_name" type="string" value="zirc2"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{zirc2}"/>
+      </ParameterList>
       <ParameterList name="Material_zirc4">
         <Parameter name="density" type="double" value="6.56"/>
         <Parameter name="key_name" type="string" value="zirc4"/>
@@ -26,11 +32,11 @@
     <Parameter name="bc_bot" type="string" value="reflecting"/>
     <Parameter name="bc_rad" type="string" value="reflecting"/>
     <Parameter name="bc_top" type="string" value="reflecting"/>
-    <Parameter name="bwrflag" type="bool" value="true"/>
     <Parameter name="core_size" type="int" value="1"/>
     <Parameter name="height" type="double" value="1.0"/>
     <Parameter name="rated_flow" type="double" value="1.259978"/>
     <Parameter name="rated_power" type="double" value="0.01"/>
+    <Parameter name="reactor_type" type="string" value="BWR"/>
     <Parameter name="shape" type="Array(int)" value="{1}"/>
   </ParameterList>
   <ParameterList name="ASSEMBLIES">
@@ -44,84 +50,84 @@
       <ParameterList name="Cells">
         <ParameterList name="Cell_1">
           <Parameter name="label" type="string" value="1"/>
-          <Parameter name="mats" type="Array(string)" value="{U16,zirc4}"/>
+          <Parameter name="mats" type="Array(string)" value="{U16,zirc2}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.53213,0.61341}"/>
           <Parameter name="type" type="string" value="fuel"/>
         </ParameterList>
         <ParameterList name="Cell_10">
           <Parameter name="label" type="string" value="10"/>
-          <Parameter name="mats" type="Array(string)" value="{U40,zirc4}"/>
+          <Parameter name="mats" type="Array(string)" value="{U40,zirc2}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.53213,0.61341}"/>
           <Parameter name="type" type="string" value="fuel"/>
         </ParameterList>
         <ParameterList name="Cell_2">
           <Parameter name="label" type="string" value="2"/>
-          <Parameter name="mats" type="Array(string)" value="{U20,zirc4}"/>
+          <Parameter name="mats" type="Array(string)" value="{U20,zirc2}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.53213,0.61341}"/>
           <Parameter name="type" type="string" value="fuel"/>
         </ParameterList>
         <ParameterList name="Cell_3">
           <Parameter name="label" type="string" value="3"/>
-          <Parameter name="mats" type="Array(string)" value="{U22,zirc4}"/>
+          <Parameter name="mats" type="Array(string)" value="{U22,zirc2}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.53213,0.61341}"/>
           <Parameter name="type" type="string" value="fuel"/>
         </ParameterList>
         <ParameterList name="Cell_4">
           <Parameter name="label" type="string" value="4"/>
-          <Parameter name="mats" type="Array(string)" value="{U24,zirc4}"/>
+          <Parameter name="mats" type="Array(string)" value="{U24,zirc2}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.53213,0.61341}"/>
           <Parameter name="type" type="string" value="fuel"/>
         </ParameterList>
         <ParameterList name="Cell_5">
           <Parameter name="label" type="string" value="5"/>
-          <Parameter name="mats" type="Array(string)" value="{U26,zirc4}"/>
+          <Parameter name="mats" type="Array(string)" value="{U26,zirc2}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.53213,0.61341}"/>
           <Parameter name="type" type="string" value="fuel"/>
         </ParameterList>
         <ParameterList name="Cell_51">
           <Parameter name="label" type="string" value="51"/>
-          <Parameter name="mats" type="Array(string)" value="{U40G,zirc4}"/>
+          <Parameter name="mats" type="Array(string)" value="{U40G,zirc2}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.53213,0.61341}"/>
           <Parameter name="type" type="string" value="fuel"/>
         </ParameterList>
         <ParameterList name="Cell_52">
           <Parameter name="label" type="string" value="52"/>
-          <Parameter name="mats" type="Array(string)" value="{U36G,zirc4}"/>
+          <Parameter name="mats" type="Array(string)" value="{U36G,zirc2}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.53213,0.61341}"/>
           <Parameter name="type" type="string" value="fuel"/>
         </ParameterList>
         <ParameterList name="Cell_6">
           <Parameter name="label" type="string" value="6"/>
-          <Parameter name="mats" type="Array(string)" value="{U28,zirc4}"/>
+          <Parameter name="mats" type="Array(string)" value="{U28,zirc2}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.53213,0.61341}"/>
           <Parameter name="type" type="string" value="fuel"/>
         </ParameterList>
         <ParameterList name="Cell_7">
           <Parameter name="label" type="string" value="7"/>
-          <Parameter name="mats" type="Array(string)" value="{U30,zirc4}"/>
+          <Parameter name="mats" type="Array(string)" value="{U30,zirc2}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.53213,0.61341}"/>
           <Parameter name="type" type="string" value="fuel"/>
         </ParameterList>
         <ParameterList name="Cell_8">
           <Parameter name="label" type="string" value="8"/>
-          <Parameter name="mats" type="Array(string)" value="{U36,zirc4}"/>
+          <Parameter name="mats" type="Array(string)" value="{U36,zirc2}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.53213,0.61341}"/>
           <Parameter name="type" type="string" value="fuel"/>
         </ParameterList>
         <ParameterList name="Cell_9">
           <Parameter name="label" type="string" value="9"/>
-          <Parameter name="mats" type="Array(string)" value="{U38,zirc4}"/>
+          <Parameter name="mats" type="Array(string)" value="{U38,zirc2}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.53213,0.61341}"/>
           <Parameter name="type" type="string" value="fuel"/>
@@ -130,7 +136,7 @@
           <Parameter name="label" type="string" value="WR"/>
           <Parameter name="mats" type="Array(string)" value="{mod,zirc4}"/>
           <Parameter name="num_rings" type="int" value="2"/>
-          <Parameter name="radii" type="Array(double)" value="{0.7109,0.8125}"/>
+          <Parameter name="radii" type="Array(double)" value="{1.60,1.62}"/>
           <Parameter name="type" type="string" value="other"/>
         </ParameterList>
       </ParameterList>
@@ -226,11 +232,12 @@
       </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{LAT}"/>
+      <Parameter name="chanmat" type="string" value="zirc4"/>
       <Parameter name="chanrad" type="double" value="0.9652"/>
       <Parameter name="chanth" type="double" value="0.2032"/>
       <Parameter name="cornerlen" type="double" value="0.0"/>
       <Parameter name="cornerth" type="double" value="0.0"/>
-      <Parameter name="gapn" type="double" value="0.47498"/>
+      <Parameter name="gapn" type="double" value=".47498"/>
       <Parameter name="gapw" type="double" value="0.9525"/>
       <Parameter name="label" type="string" value="ASSY"/>
       <Parameter name="num_pins" type="int" value="8"/>

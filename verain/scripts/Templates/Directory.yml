@@ -466,12 +466,12 @@ CORE:
       - fall(sub{is_geq(shift,0)},stride(2,3,()))
       - fall(sub{is_leq(shift,1)},stride(2,3,()))
 
-  bwr:
-    <<: *dtbool
+  reactor_type:
+    <<: *dtstring
     _content:
     _check:
       - is_word()
-      - in_dictionary() true false
+      - in_dictionary() BWR PWR
 
 ASSEMBLY:
   title:
@@ -494,6 +494,11 @@ ASSEMBLY:
   cell:
     <<: *dtlistnamed
     _check:
+  cell_large4:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   lattice:
     <<: *dtlistnamed
     _style: multi-line
@@ -564,15 +569,16 @@ ASSEMBLY:
       - arraysize()==2
       - nth(0,())>=0
       - nth(1,())>=0
-  channel:
+  channel_box:
     <<: *dtlist
     _content:
     _check:
-      - arraysize()==4
-      - nth(0,())>=0
+      - arraysize()==5
+      - is_string(nth(0,()))
       - nth(1,())>=0
       - nth(2,())>=0
       - nth(3,())>=0
+      - nth(4,())>=0
 
 CONTROL:
   title:
