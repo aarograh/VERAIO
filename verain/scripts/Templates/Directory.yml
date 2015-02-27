@@ -196,11 +196,11 @@ STATE:
       - fall(sub{is_float(shift)},stride(1,1,()))
       - nth(0,())eq"GWDMT"||nth(0,())eq"MWDMT"||nth(0,())eq"EFPD"||nth(0,())eq"hours"
   reset_sol:
-    <<: *dtword
+    <<: *dtbool
     _content:
     _check:
       - is_word()
-      - in_dictionary() true false t f
+      - in_dictionary() true false
 
   rodbank:
     <<: *dtlist
