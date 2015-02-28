@@ -569,6 +569,7 @@ ASSEMBLY:
       - arraysize()==2
       - nth(0,())>=0
       - nth(1,())>=0
+
   channel_box:
     <<: *dtlist
     _content:
@@ -617,6 +618,20 @@ CONTROL:
     _style: multi-line
     _check:
       - lc(nth(0,()))ne'mod'
+
+  blade:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==8
+      - nth(0,())>0
+      - is_string(nth(1,()))
+      - nth(2,())>0
+      - nth(3,())>0
+      - nth(4,())>0
+      - nth(5,())>0
+      - nth(6,())>0
+      - is_string(nth(7,()))
 
 INSERT:
   title:

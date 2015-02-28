@@ -244,6 +244,54 @@
       <Parameter name="ppitch" type="double" value="1.6256"/>
     </ParameterList>
   </ParameterList>
+  <ParameterList name="CONTROLS">
+    <ParameterList name="Control_BLADE">
+      <ParameterList name="CellMaps">
+        <ParameterList name="CellMap_EMPTY">
+          <Parameter name="cell_map" type="Array(string)" value="{TUBE,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="EMPTY"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Cells">
+        <ParameterList name="Cell_TUBE">
+          <Parameter name="label" type="string" value="TUBE"/>
+          <Parameter name="mats" type="Array(string)" value="{b4c,ss304}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.17526,0.23876}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Materials">
+        <ParameterList name="Material_b4c">
+          <Parameter name="density" type="double" value="4.62"/>
+          <Parameter name="key_name" type="string" value="b4c"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{b4c}"/>
+        </ParameterList>
+        <ParameterList name="Material_ss304">
+          <Parameter name="density" type="double" value="8.0"/>
+          <Parameter name="key_name" type="string" value="ss304"/>
+          <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+          <Parameter name="mat_names" type="Array(string)" value="{ss304}"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
+      <Parameter name="axial_labels" type="Array(string)" value="{EMPTY}"/>
+      <Parameter name="blademat" type="string" value="ss304"/>
+      <Parameter name="bladerad" type="double" value="0.39624"/>
+      <Parameter name="bladesheath" type="double" value="0.14224"/>
+      <Parameter name="bladespan" type="double" value="12.3825"/>
+      <Parameter name="bladeth" type="double" value="0.79248"/>
+      <Parameter name="bladewing" type="double" value="1.98501"/>
+      <Parameter name="label" type="string" value="BLADE"/>
+      <Parameter name="maxstep" type="int" value="48"/>
+      <Parameter name="ntube" type="integer" value="21"/>
+      <Parameter name="num_pins" type="int" value="8"/>
+      <Parameter name="stroke" type="double" value="365.76"/>
+      <Parameter name="title" type="string" value="GE OEM Control Blade"/>
+      <Parameter name="tubecell" type="string" value="TUBE"/>
+    </ParameterList>
+  </ParameterList>
   <ParameterList name="INSILICO">
     <Parameter name="num_blocks_i" type="int" value="4"/>
     <Parameter name="num_blocks_j" type="int" value="4"/>

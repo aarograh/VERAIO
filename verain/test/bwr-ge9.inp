@@ -105,6 +105,36 @@
 
   axial ASSY 0.0 LAT 1.0
 
+[CONTROL]
+  title "GE OEM Control Blade"
+  npin 8
+  stroke  365.76 48      ! 6in step size and 48 steps
+
+!*** 3D BWR control blades have not been designed yet.
+!*** How do we indicate control blades from bottom of core?
+!*** Do we need a rodmap and axial card?
+
+  mat ss304 8.0
+  mat b4c   4.62   ! ** check for 70% theoretical density
+
+  cell TUBE 0.17526 0.23876 / b4c ss304
+
+!       ntube     span   th       rad    sheath    wing   mat
+  blade 21 TUBE 12.3825 0.79248 0.39624 0.14224  1.98501  ss304
+
+!*** TUBE must be included in map, or it will be excluded from parameter list
+  rodmap  EMPTY
+     TUBE
+     - -
+     - - -
+     - - - -
+     - - - - -
+     - - - - - -
+     - - - - - - -
+     - - - - - - - -
+
+  axial BLADE 0.0 EMPTY 1.0
+
 [MPACT]
   num_space      1
   num_angle      8
