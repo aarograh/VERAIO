@@ -172,7 +172,7 @@ STATES:
 
         reset_sol:
           _pltype: parameter
-          _type: string
+          _type: bool
           _do:
             - copy STATE/(_loop)/$reset_sol
           _content:
