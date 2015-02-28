@@ -1,0 +1,90 @@
+[CASEID]
+  title 'BWR Peach Bottom 2 Design 1 7x7'
+
+!------------------------------------------------------------------------------
+!
+!  Design 1
+!  7x7 with 80 mil channel
+!  no Gad
+!  no water rods
+!
+! Reference:
+!   NEA/NSC/DOC(2001)1
+!   BOILING WATER REACTOR TURBINE TRIP (TT) BENCHMARK
+!   Volume I: Final Specifications
+!   February 2001
+!
+!------------------------------------------------------------------------------
+
+[STATE]
+  power    100.0
+  tinlet   575 F  ! *** average operating temperature, not inlet
+  tfuel    900 K
+  pressure 1040   ! psia
+  sym      full
+
+  void  
+    40.0
+
+!** at void 00,  rho=  0.736690 g/cc
+!** at void 40,  rho=  0.457023 g/cc
+!** at void 70,  rho=  0.247273 g/cc
+
+
+[CORE]
+  reactor_type BWR
+  size   1
+  apitch 15.24
+  height 1.0
+  rated  0.01 0.01   ! *** approximate
+
+  core_shape
+    1
+
+  assm_map
+    ASSY
+
+  bc_rad reflecting
+  bc_top reflecting
+  bc_bot reflecting
+
+  mat zirc2  6.5514 zirc4      ! zirc density p. 39
+  mat zirc4  6.5514 zirc4
+  mat he   0.000176 he
+  
+[ASSEMBLY]
+  npin   7
+  ppitch 1.87452         ! pin pitch - does not include channel gaps
+  
+!*** 80 mil design
+  gap    0.9525 .47498   ! wide and narrow channel gap (cm)
+  channel_box  zirc4 0.2032 0.9652 0.0 0.0   ! channel dimensions 
+
+!*** enrichments p. 16
+!*** density and materials p. 11
+  
+  fuel U133  10.34 94.5 / 1.33
+  fuel Unat  10.34 94.5 / 0.71
+ 
+  cell 1   0.61849 0.63373 0.71501 / U133 he zirc2
+  cell 2   0.61849 0.63373 0.71501 / Unat he zirc2
+ 
+  lattice LAT
+    2
+    1  1
+    1  1  2
+    1  2  2  2
+    1  1  2  2  2
+    1  1  2  2  2  1
+    1  1  1  1  1  1  1
+
+  axial ASSY 0.0 LAT 1.0
+
+[MPACT]
+  num_space      1
+  num_angle      8
+  num_threads    1
+
+[INSILICO]
+  num_blocks_i   4
+  num_blocks_j   4

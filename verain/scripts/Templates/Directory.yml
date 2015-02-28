@@ -196,11 +196,11 @@ STATE:
       - fall(sub{is_float(shift)},stride(1,1,()))
       - nth(0,())eq"GWDMT"||nth(0,())eq"MWDMT"||nth(0,())eq"EFPD"||nth(0,())eq"hours"
   reset_sol:
-    <<: *dtword
+    <<: *dtbool
     _content:
     _check:
       - is_word()
-      - in_dictionary() true false t f
+      - in_dictionary() true false
 
   rodbank:
     <<: *dtlist
@@ -466,12 +466,12 @@ CORE:
       - fall(sub{is_geq(shift,0)},stride(2,3,()))
       - fall(sub{is_leq(shift,1)},stride(2,3,()))
 
-  bwr:
-    <<: *dtbool
+  reactor_type:
+    <<: *dtstring
     _content:
     _check:
       - is_word()
-      - in_dictionary() true false
+      - in_dictionary() BWR PWR
 
 ASSEMBLY:
   title:
@@ -494,6 +494,11 @@ ASSEMBLY:
   cell:
     <<: *dtlistnamed
     _check:
+  cell_large4:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   lattice:
     <<: *dtlistnamed
     _style: multi-line
@@ -564,15 +569,17 @@ ASSEMBLY:
       - arraysize()==2
       - nth(0,())>=0
       - nth(1,())>=0
-  channel:
+
+  channel_box:
     <<: *dtlist
     _content:
     _check:
-      - arraysize()==4
-      - nth(0,())>=0
+      - arraysize()==5
+      - is_string(nth(0,()))
       - nth(1,())>=0
       - nth(2,())>=0
       - nth(3,())>=0
+      - nth(4,())>=0
 
 CONTROL:
   title:
@@ -611,6 +618,20 @@ CONTROL:
     _style: multi-line
     _check:
       - lc(nth(0,()))ne'mod'
+
+  blade:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==8
+      - nth(0,())>0
+      - is_string(nth(1,()))
+      - nth(2,())>0
+      - nth(3,())>0
+      - nth(4,())>0
+      - nth(5,())>0
+      - nth(6,())>0
+      - is_string(nth(7,()))
 
 INSERT:
   title:

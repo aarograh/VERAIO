@@ -1,0 +1,97 @@
+[CASEID]
+  title 'BWR Peach Bottom 2 Design 5 8x8'
+
+!------------------------------------------------------------------------------
+!
+!  Design 5
+!  8x8 with 100 mil channel
+!  2% gad
+!
+! Reference:
+!   NEA/NSC/DOC(2001)1
+!   BOILING WATER REACTOR TURBINE TRIP (TT) BENCHMARK
+!   Volume I: Final Specifications
+!   February 2001
+!
+!------------------------------------------------------------------------------
+
+[STATE]
+  power    100.0
+  tinlet   575 F  ! *** average operating temperature, not inlet
+  tfuel    900 K
+  pressure 1040   ! psia
+  sym      full
+
+  void  
+    40.0
+
+!** at void 00,  rho=  0.736690 g/cc
+!** at void 40,  rho=  0.457023 g/cc
+!** at void 70,  rho=  0.247273 g/cc
+
+
+[CORE]
+  reactor_type BWR
+  size   1
+  apitch 15.24
+  height 1.0
+  rated  0.01 0.01   ! *** approximate
+
+  core_shape
+    1
+
+  assm_map
+    ASSY
+
+  bc_rad reflecting
+  bc_top reflecting
+  bc_bot reflecting
+
+  mat zirc2  6.5514 zirc4      ! zirc density p. 39
+  mat zirc4  6.5514 zirc4
+  mat he   0.000176 he
+  
+[ASSEMBLY]
+  npin   8
+  ppitch 1.6256          ! pin pitch - does not include channel gaps
+  
+!*** 100 mil design
+  gap    0.9017 .42418   ! wide and narrow channel gap (cm)
+  channel_box  zirc4 0.254 0.9652 0.0 0.0   ! channel dimensions 
+
+!*** enrichments p. 17
+!*** density and materials p. 11
+  
+  fuel U301  10.32 94.5 / 3.01
+  fuel U222  10.32 94.5 / 2.22
+  fuel U187  10.32 94.5 / 1.87
+  fuel U145  10.32 94.5 / 1.45
+  fuel U3G   10.23 94.5 / 3.01 / gad=2.0
+ 
+  cell 1   0.52832 0.53975 0.62611 / U301 he zirc2
+  cell 2   0.52832 0.53975 0.62611 / U222 he zirc2
+  cell 3   0.52832 0.53975 0.62611 / U187 he zirc2
+  cell 4   0.52832 0.53975 0.62611 / U145 he zirc2
+  cell 5G  0.52832 0.53975 0.62611 / U3G  he zirc2
+  cell WR          0.53975 0.62611 /    mod  zirc2
+ 
+  lattice LAT
+    4
+    3  2
+    2  1  1
+    2  5G 1  1
+    2  1  1  1 WR
+    2  1  1  1  1  1
+    2  1  5G 1  1  1 5G
+    3  2  1  1  1  1  1  2
+
+  axial ASSY 0.0 LAT 1.0
+
+[MPACT]
+  num_space      1
+  num_angle      8
+  num_threads    1
+
+[INSILICO]
+  num_blocks_i   4
+  num_blocks_j   4

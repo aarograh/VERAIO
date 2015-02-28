@@ -115,29 +115,35 @@ ASSEMBLIES:
         - copy ASSEMBLY/@gap:1
       _content:
 
+    chanmat:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy ASSEMBLY/@channel_box:0
+      _content:
     chanth:
       _pltype: parameter
       _type: double
       _do:
-        - copy ASSEMBLY/@channel:0
+        - copy ASSEMBLY/@channel_box:1
       _content:
     chanrad:
       _pltype: parameter
       _type: double
       _do:
-        - copy ASSEMBLY/@channel:1
+        - copy ASSEMBLY/@channel_box:2
       _content:
     cornerth:
       _pltype: parameter
       _type: double
       _do:
-        - copy ASSEMBLY/@channel:2
+        - copy ASSEMBLY/@channel_box:3
       _content:
     cornerlen:
       _pltype: parameter
       _type: double
       _do:
-        - copy ASSEMBLY/@channel:3
+        - copy ASSEMBLY/@channel_box:4
       _content:
 
 
