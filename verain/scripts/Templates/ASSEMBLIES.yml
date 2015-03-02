@@ -33,12 +33,6 @@ ASSEMBLIES:
       _do:
         - copy ASSEMBLY/$ppitch
       _content:
-    dancoff_map:
-      _pltype: array
-      _type: double
-      _do:
-        - makemap ASSEMBLY/$npin,ASSEMBLY/@dancoff
-      _content:
 
     lower_nozzle_comp:
       _pltype: parameter
