@@ -233,11 +233,11 @@ STATES:
             - coremapmap CORE/$size,CORE/@core_shape,STATE/(_loop)/@shuffle_label,CORE/$bc_sym
           _content:
 
-        inlet_temp:
+        tinlet_dist:
           _pltype: array
           _type: double
           _do:
-            - coremapmap CORE/$size,CORE/@core_shape,STATE/(_loop)/@inlet_temp,CORE/$bc_sym
+            - coremapmap CORE/$size,CORE/@core_shape,STATE/(_loop)/@tinlet_dist,CORE/$bc_sym
           _content:
 
         void_map:
@@ -247,9 +247,9 @@ STATES:
             - coremapmap CORE/$size,CORE/@core_shape,STATE/(_loop)/@void,CORE/$bc_sym
           _content:
 
-        inlet_flow:
+        flow_dist:
           _pltype: array
           _type: double
           _do:
-            - coremapmap CORE/$size,CORE/@core_shape,STATE/(_loop)/@inlet_flow,CORE/$bc_sym
+            - coremapmap CORE/$size,CORE/@core_shape,STATE/(_loop)/@flow_dist,CORE/$bc_sym
           _content:

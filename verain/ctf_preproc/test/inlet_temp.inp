@@ -22,7 +22,7 @@
   feedback on
   sym full
 
-  inlet_temp
+  tinlet_dist
         1.0
   -1.0  0.0  1.0
        -1.0

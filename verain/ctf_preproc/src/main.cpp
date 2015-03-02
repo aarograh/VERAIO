@@ -1126,7 +1126,7 @@ namespace {
     strcpy(cntrl_data.vtk_hdf5_titles,maps_filename.c_str());
 
     // Read in the inlet flow and temperature maps
-    GetOptional(stateParams,"inlet_temp",inlet_t);
+    GetOptional(stateParams,"tinlet_dist",inlet_t);
     if (inlet_t.size()==0){
        // Map not found, make it all zeros
        inlet_t.resize(num_assm,0.0);
@@ -1139,7 +1139,7 @@ namespace {
        inlet_t[k]=inlet_t[k]/1.8;
     }
     cntrl_data.c_ptr_to_inlet_temp=&inlet_t[0];
-    GetOptional(stateParams,"inlet_flow",inlet_f);
+    GetOptional(stateParams,"flow_dist",inlet_f);
     if (inlet_f.size()==0){
        // Map not found, make it all ones
        inlet_f.resize(num_assm,1.0);
