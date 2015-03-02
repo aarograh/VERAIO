@@ -33,3 +33,53 @@ CONTROLS:
       _do:
         - copy CONTROL/@stroke:1
       _content:
+
+    ntube:
+      _pltype: parameter
+      _type: integer
+      _do:
+        - copy CONTROL/@blade:0
+      _content:
+    tubecell:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CONTROL/@blade:1
+      _content:
+    bladespan:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CONTROL/@blade:2
+      _content:
+    bladeth:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CONTROL/@blade:3
+      _content:
+    bladerad:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CONTROL/@blade:4
+      _content:
+    bladesheath:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CONTROL/@blade:5
+      _content:
+    bladewing:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CONTROL/@blade:6
+      _content:
+    blademat:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CONTROL/@blade:7
+      _content:
+

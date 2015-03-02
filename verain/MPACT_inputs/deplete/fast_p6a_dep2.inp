@@ -110,11 +110,6 @@
   lower_nozzle  ss 6.05  540.66  ! mat, height, mass (g)
   upper_nozzle  ss 8.827 540.66  ! mat, height, mass (g)
 
- !! dancoff                   ! assembly_dancoff_map
- !!   0.000
- !!   0.287 0.315
- !!   0.287 0.315 0.315
-
 [EDITS]
 
 !  3in intervals in active fuel
