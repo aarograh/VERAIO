@@ -92,7 +92,7 @@ STATE:
     _check:
       - is_float()
       - is_geq() 0
-  inlet_flow:
+  flow_dist:
     <<: *dtlist
     _style: multi-line
     _content:
@@ -114,7 +114,7 @@ STATE:
       - is_float(nth(0,()))
       - is_word(nth(1,()))
       - in_dictionary(nth(1,()),'F','C','K')
-  inlet_temp:
+  tinlet_dist:
     <<: *dtlist
     _style: multi-line
     _content:

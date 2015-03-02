@@ -168,7 +168,7 @@
       </xsl:if>
     </xsl:when>
 
-    <xsl:when test="@name = 'inlet_temp' or @name = 'inlet_flow'">
+    <xsl:when test="@name = 'tinlet_dist' or @name = 'flow_dist'">
       <xsl:variable name="num_pins" select="../../../ParameterList[@name = 'CORE']/Parameter[@name = 'core_size']/@value" />
       <xsl:variable name="shape"    select="../../../ParameterList[@name = 'CORE']/Parameter[@name = 'shape']/@value" />
       <xsl:variable name="map"      select="@value" />
