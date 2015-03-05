@@ -5993,7 +5993,7 @@ CASL Problem 3x3 HFP
  chan_edits         0
   rod_edits         0
   gap_edits         0
-  fluid_vtk         1
+  fluid_vtk         0
   dnb_edits         0
 convergence         1
 end 14

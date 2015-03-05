@@ -248,6 +248,19 @@ COBRATF:
         - copy COBRATF/$edit_hdf5
       _content:
 
+    edit_fluid_vtk:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_fluid_vtk
+      _content:
+
+    edit_rod_vtk:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_rod_vtk
+      _content:
 
     boil_ht_cor:
       _pltype: parameter
