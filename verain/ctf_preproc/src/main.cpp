@@ -1110,7 +1110,7 @@ namespace {
     GetOptional(pList, "case_id", title);
     strcpy(cntrl_data.title,title.c_str());
 
-    int parallel = 0;
+    int parallel = 1;
     GetOptional(cobraParams, "parallel", parallel);
     cntrl_data.run_parallel = parallel;
 
@@ -1175,7 +1175,6 @@ namespace {
     cntrl_data.mixmod = 1;
 
     cntrl_data.solver = 3;
-    if (cntrl_data.run_parallel) cntrl_data.solver = 5;
     GetOptional(cobraParams, "solver", cntrl_data.solver);
 
     double tinlet;

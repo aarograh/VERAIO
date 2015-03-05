@@ -15,7 +15,7 @@ CASL Problem 6a
 **NGR                                                                                          
    1                                                                                           
 **NGAS IRFC EDMD IMIX ISOL          GINIT NOTRN MESH MAPS IPRP MFLX IBTM PPV  NM14             
-     1    2    0    1    5  8.5980899E+01     1    1    1    0    0    0    1    0
+     1    2    0    1    3  8.5980899E+01     1    1    1    0    0    0    1    0
 *Card 1.2                                                                                      
 **         GTOT          AFLUX         DHFRAC          MFLUX                                   
   8.5980899E+01  1.6716390E+01  2.0000000E-02
