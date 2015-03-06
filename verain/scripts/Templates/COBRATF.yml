@@ -49,14 +49,14 @@ COBRATF:
       _pltype: array
       _type: string
       _do:
-        - copyhash COBRATF/%gridloss,select=>keys
+        - copyhash COBRATF/%gridloss,select=>keys,sort=>name_reverse
       _content:
 
     gridloss:
       _pltype: array
       _type: double
       _do:
-        - copyhash COBRATF/%gridloss,select=>values
+        - copyhash COBRATF/%gridloss,select=>values,sort=>name_reverse
       _content:
 
     epso:

@@ -667,6 +667,26 @@ sub copyhash{
     my $t=key_defined($SOURCE_DB,@path);
     return undef if ref $t ne 'HASH';
     @a=keys %{ $t };
+
+    if(exists($OPTIONS{sort})){
+	if(lc($OPTIONS{sort}) eq 'name'){
+	    @a=sort { $a cmp $b } @a;
+	}
+	elsif(lc($OPTIONS{sort}) eq 'name_reverse'){
+	    @a=sort { $b cmp $a } @a;
+	}
+	elsif(lc($OPTIONS{sort}) eq 'number'){
+	    @a=sort { $a <=> $b } @a;
+	}
+	elsif(lc($OPTIONS{sort}) eq 'number_reverse'){
+	    @a=sort { $b <=> $a } @a;
+	}
+	else{
+	    warn "copyhash: sort option $OPTIONS{sort} not valid\n";
+	    return undef;
+	}
+    }
+
     foreach $key (@a){
 	$value= $t->{$key}->{_content};
 	push @result, ($key,$value);
