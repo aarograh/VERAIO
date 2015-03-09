@@ -232,6 +232,7 @@
   edit_channels 0     ! Generate the channels.out file and print channel results
   edit_rods 0         ! Print rod results (found in deck.out)
   edit_dnb 0          ! Generate the dnb.out file
+  edit_fluid_vtk 1
 
 [COUPLING]
   epsk        2.0  ! pcm

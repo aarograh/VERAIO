@@ -15,7 +15,7 @@ CASL Problem 6a
 **NGR                                                                                          
    1                                                                                           
 **NGAS IRFC EDMD IMIX ISOL          GINIT NOTRN MESH MAPS IPRP MFLX IBTM PPV  NM14             
-     1    2    0    1    5  8.5980899E+01     1    1    1    0    0    0    1    0
+     1    2    0    1    3  8.5980899E+01     1    1    1    0    0    0    1    0
 *Card 1.2                                                                                      
 **         GTOT          AFLUX         DHFRAC          MFLUX                                   
   8.5980899E+01  1.6716390E+01  2.0000000E-02
@@ -3507,7 +3507,7 @@ CASL Problem 6a
 **NGR                                                                                          
    13                                                                                          
 *Card 13.1                                                                                     
-** NBND   NKBD NFUN NGBD NDM5 NDM6 NDM7 NDM8 NDM9 NM10 NM11 NM12 NM13 NM14                     
+** NBND   NKBD NFUN NGBD VBC  NDM6 NDM7 NDM8 NDM9 NM10 NM11 NM12 NM13 NM14                     
     648      0    0    0    0    0    0    0    0    0    0    0    0    0
 *Card 13.4                                                                                     
 **Inlet b.c. -------------------------------------------------------------                     
@@ -4172,7 +4172,7 @@ CASL Problem 6a
  chan_edits         1
   rod_edits         0
   gap_edits         0
-  fluid_vtk         1
+  fluid_vtk         0
   dnb_edits         0
 convergence         1
 end 14
