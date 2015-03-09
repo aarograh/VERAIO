@@ -34,7 +34,11 @@ filenames=['3x3_w_multistate',
            'iapws_singlerod',
            'rotational_5cross',
            'stacked_singlerod_HFP',
-           'test_cobra_edits']
+           'test_cobra_edits',
+           'inlet_temp',
+           'inlet_flow',
+           'inlet_bc_rot_sym',
+           'Sample_qtr_core_inlet_bc']
 
 verain_filenames=[
       'cross_w_baffle',
@@ -61,6 +65,9 @@ if not len(sys.argv)==2:
 preproc_path = sys.argv[1]
 
 for name in filenames:
+   print '==========================================================='
+   print 'Reblessing '+name
+   print '==========================================================='
    os.system(preproc_path+' --xmlfile='+name+".xml.gold")
    os.rename('deck.inp','gold/'+name+'.inp')
 

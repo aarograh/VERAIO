@@ -49,14 +49,14 @@ COBRATF:
       _pltype: array
       _type: string
       _do:
-        - copyhash COBRATF/%gridloss,select=>keys
+        - copyhash COBRATF/%gridloss,select=>keys,sort=>name_reverse
       _content:
 
     gridloss:
       _pltype: array
       _type: double
       _do:
-        - copyhash COBRATF/%gridloss,select=>values
+        - copyhash COBRATF/%gridloss,select=>values,sort=>name_reverse
       _content:
 
     epso:
@@ -248,6 +248,19 @@ COBRATF:
         - copy COBRATF/$edit_hdf5
       _content:
 
+    edit_fluid_vtk:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_fluid_vtk
+      _content:
+
+    edit_rod_vtk:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_rod_vtk
+      _content:
 
     boil_ht_cor:
       _pltype: parameter

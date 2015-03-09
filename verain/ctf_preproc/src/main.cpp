@@ -95,6 +95,8 @@ namespace
      int    edit_dnb;
      int    edit_hdf5;
      int    edit_convergence;
+     int    edit_fluid_vtk;
+     int    edit_rod_vtk;
      int    restart;
      char   restart_name[90];
      int    boil_ht_cor;
@@ -1108,7 +1110,7 @@ namespace {
     GetOptional(pList, "case_id", title);
     strcpy(cntrl_data.title,title.c_str());
 
-    int parallel = 0;
+    int parallel = 1;
     GetOptional(cobraParams, "parallel", parallel);
     cntrl_data.run_parallel = parallel;
 
@@ -1173,7 +1175,6 @@ namespace {
     cntrl_data.mixmod = 1;
 
     cntrl_data.solver = 3;
-    if (cntrl_data.run_parallel) cntrl_data.solver = 5;
     GetOptional(cobraParams, "solver", cntrl_data.solver);
 
     double tinlet;
@@ -1230,6 +1231,8 @@ namespace {
     cntrl_data.edit_dnb= 0;
     cntrl_data.edit_hdf5= 1;
     cntrl_data.edit_convergence= 1;
+    cntrl_data.edit_fluid_vtk= 0;
+    cntrl_data.edit_rod_vtk= 0;
     GetOptional(cobraParams, "dtmin", cntrl_data.dtmin);
     GetOptional(cobraParams, "dtmax", cntrl_data.dtmax);
     GetOptional(cobraParams, "tend", cntrl_data.tend);
@@ -1246,6 +1249,8 @@ namespace {
     GetOptional(cobraParams, "edit_dnb", cntrl_data.edit_dnb);
     GetOptional(cobraParams, "edit_hdf5", cntrl_data.edit_hdf5);
     GetOptional(cobraParams, "edit_convergence", cntrl_data.edit_convergence);
+    GetOptional(cobraParams, "edit_fluid_vtk", cntrl_data.edit_fluid_vtk);
+    GetOptional(cobraParams, "edit_rod_vtk", cntrl_data.edit_rod_vtk);
 
     string restart_name="NONE";
     GetOptional(couplingParams, "read_restart", restart_name);

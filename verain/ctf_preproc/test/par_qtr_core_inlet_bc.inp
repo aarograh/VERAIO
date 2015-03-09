@@ -265,5 +265,7 @@
   maxits  10000
   courant 0.8
   parallel 1
+  edit_fluid_vtk 1
+  
 
 

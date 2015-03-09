@@ -1353,6 +1353,18 @@ COBRATF:
     _check:
       - is_int()
 
+  edit_fluid_vtk:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
+  edit_rod_vtk:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
   boil_ht_cor:
     <<: *dtstring
     _content:
