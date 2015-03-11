@@ -6,7 +6,7 @@ use Exporter;
 	 'to_real','is_decimal','to_decimal','is_float','to_float','is_string',
 	 'to_string','is_eq','is_neq','is_geq','is_leq','is_gt','is_lt',
 	 'is_word','in_dictionary','not_in_dictionary','is_date','is_odd','is_even',
-    'is_regex');
+	 'is_regex','filesame');
 
 use Time::Local;
 
@@ -187,6 +187,33 @@ sub is_odd ($) {
 
 sub is_regex ($$) {
     return $_[0] =~ m/$_[1]/;
+}
+
+sub filesame {
+    use English;
+    use File::stat;
+    my $file1=shift;
+    my $file2=shift;
+    my $ret=0;
+
+    die "filesame: $file1 not a file.\n" unless -f $file1;
+    die "filesame: $file2 not a file.\n" unless -f $file2;
+
+    my $st1 = stat($file1) or die "filesame: $file1: $!";
+    my $st2 = stat($file2) or die "filesame: $file2: $!";
+
+    if($OSNAME eq 'MSWin32'){
+	if($file1 eq $file2){
+	    $ret=1;
+	}
+    }
+    else{
+	if(($st1->dev == $st2->dev) &&
+	   ($st1->ino == $st2->ino)){
+	    $ret=1;
+	}
+    }
+    return $ret;
 }
 
 1;

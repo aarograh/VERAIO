@@ -183,7 +183,14 @@ foreach $iblock (@BLOCKS){
 
 my ($ifile,$ofile)=@ARGV;
 
-die "$pgnam: input and output file are the same\n" if $ifile eq $ofile;
+die "$pgnam: input file $ifile does not exist or not readable.\n"
+    unless (-e $ifile && -r $ifile);
+if(-e $ofile){
+    die "$pgnam: files $ifile and $ofile files are the same\n"
+	if filesame($ifile, $ofile);
+}
+# simple check
+# die "$pgnam: input and output file are the same\n" if $ifile eq $ofile;
 
 #
 # Initiate configuration template for data structures
