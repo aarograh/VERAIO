@@ -493,12 +493,8 @@ ASSEMBLY:
       - is_gt() 0
   cell:
     <<: *dtlistnamed
+    _slash:
     _check:
-  cell_large4:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
   lattice:
     <<: *dtlistnamed
     _style: multi-line
@@ -595,6 +591,7 @@ CONTROL:
       - is_int(nth(1,()))
   cell:
     <<: *dtlistnamed
+    _slash:
     _check:
   rodmap:
     <<: *dtlistnamed
@@ -640,6 +637,7 @@ INSERT:
       - is_int()
   cell:
     <<: *dtlistnamed
+    _slash:
     _check:
   rodmap:
     <<: *dtlistnamed
@@ -672,6 +670,7 @@ DETECTOR:
       - is_gt() 0
   cell:
     <<: *dtlistnamed
+    _slash:
     _check:
   rodmap:
     <<: *dtlistnamed

@@ -137,7 +137,7 @@
           <Parameter name="mats" type="Array(string)" value="{mod,zirc4}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{1.60,1.62}"/>
-          <Parameter name="type" type="string" value="other"/>
+          <Parameter name="type" type="string" value="large4"/>
         </ParameterList>
       </ParameterList>
       <ParameterList name="Fuels">
