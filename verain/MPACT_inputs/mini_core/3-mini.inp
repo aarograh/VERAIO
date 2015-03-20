@@ -147,6 +147,7 @@
   num_space      58
   num_angle      1
   num_threads    1
+  xs_filename       mpact8g_70s_v4.0m0_02232015.fmt
 
 [COBRATF]
   gridloss  END  0.9070

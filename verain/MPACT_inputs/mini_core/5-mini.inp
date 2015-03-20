@@ -309,6 +309,7 @@
    ray_spacing       0.08
    azimuthals_octant 8
    polars_octant     1
+   xs_filename       mpact8g_70s_v4.0m0_02232015.fmt
 
 [COBRATF]
   gridloss  END  0.9070
