@@ -1044,6 +1044,7 @@ sub rodmap{
 #    my @MATS_RESERVED=('mod','vacuum');
 #    my @MATS_RESERVED =('vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3');
     my @MATS_RESERVED =('vacuum','mod');
+    my %CELL_TYPES_POSSIBLE=( 'large4' => 1 );
 
     my %OPTIONS=('basename'=>'List','mapname'=>'rodmap');
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
@@ -1194,52 +1195,59 @@ sub rodmap{
 	    $CELL_mats{$_} =['mod'];
 	}
 	else{
-	    if(@a%2 != 0){
-		die "rodmap: cell $_ @a has odd number of entries\n";
+
+# Per Scott's three commands in one
+	    my @slshs=indexes { $_ eq '/' } @a;
+	    if(@slshs < 1 && @slshs > 2){
+		die "rodmap: invalid number of slashes in command cell $_ @a\n";
 	    }
-	    else{
-		$CELL_radii{$_}=[fronthalf(\@a,0)];
-		my @cmats=endhalf(\@a,0);
 
-		# start mod
-		# have to search for available materials and fuels
-		# bomb if mat and fuel are at the same level
-		# if exists mat cell_type=other, if exists fuel =fuel
+	    my @part1=before {$_ eq '/'} @a;
+	    my @part2=after  {$_ eq '/'} @a;
+	    my @part3=();
+	    if(@slshs == 2){
+		@part3=after  {$_ eq '/'} @part2;
+		@part2=before {$_ eq '/'} @part2;
+	    }
+	    die "rodmap: unequal number of entries for radii and materials in cell $_ @a\n" if (@part1 != @part2);
+	    $CELL_radii{$_}=\@part1;
+	    my @cmats=@part2;
 
-		$CELL_TYPE{$_}='other';
+	    # start mod
+	    # have to search for available materials and fuels
+	    # bomb if mat and fuel are at the same level
+	    # if exists mat cell_type=other, if exists fuel =fuel
 
-		if(defined $OPTIONS{ matsearch }){
-		    foreach my $imat (@cmats){
-			print STDERR "    CELL mat $imat\n" if get_verbose();
+	    $CELL_TYPE{$_}='other';
+	    if(@part3){
+		die "rodmap: invalid cell type for cell $_ @a\n" unless exists( $CELL_TYPES_POSSIBLE{$part3[0]} );
+		$CELL_TYPE{$_}=$part3[0];
+	    }
 
-			next if in_dictionary($imat, @MATS_RESERVED);
+	    if(defined $OPTIONS{ matsearch }){
+		foreach my $imat (@cmats){
+		    print STDERR "    CELL mat $imat\n" if get_verbose();
 
-			if(exists($MATS_DB{ $imat })){
-			    if($MATS_DB{ $imat } eq 'fuel'){
-				$CELL_TYPE{$_}='fuel';
-				print STDERR "    \tCELL mat $imat is fuel\n" if get_verbose();
-			    }
-			}
-			else{
-			    die "rodmap: cell $_ has material $imat which is not defined\n";
+		    next if in_dictionary($imat, @MATS_RESERVED);
+
+		    if(exists($MATS_DB{ $imat })){
+			if($MATS_DB{ $imat } eq 'fuel'){
+			    die "rodmap: cell $_ @a type is $CELL_TYPE{$_} but it has fuel $imat\n"
+				if exists( $CELL_TYPES_POSSIBLE{ $CELL_TYPE{$_} } );
+			    $CELL_TYPE{$_}='fuel';
+			    print STDERR "    \tCELL mat $imat is fuel\n" if get_verbose();
 			}
 		    }
+		    else{
+			die "rodmap: cell $_ @a has material $imat which is not defined\n";
+		    }
 		}
-#		else{    # remove after update of input files with new definitions
-#		    if(fany(sub{m/(u)/i}, @cmats)){
-#			$CELL_TYPE{$_}='fuel';
-#		    }
-#		}
-#		else{
-#		    $CELL_TYPE{$_}='other';
-#		}
-		# end mod
-
-		$CELL_mats{$_} =[@cmats];
-		print STDERR "    CELL radii @{ $CELL_radii{$_} }\n" if get_verbose();
-		print STDERR "    CELL mats  @{ $CELL_mats{$_} }\n" if get_verbose();
-		print STDERR "    CELL type  $CELL_TYPE{$_}\n" if get_verbose();
 	    }
+
+	    $CELL_mats{$_} =[@cmats];
+	    print STDERR "    CELL radii @{ $CELL_radii{$_} }\n" if get_verbose();
+	    print STDERR "    CELL mats  @{ $CELL_mats{$_} }\n" if get_verbose();
+	    print STDERR "    CELL type  $CELL_TYPE{$_}\n" if get_verbose();
 	}
     }
 

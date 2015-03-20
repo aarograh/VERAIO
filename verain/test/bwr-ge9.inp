@@ -90,8 +90,8 @@
 !** water rod is smaller to fit in a pincell
 !** cell WR 1.6002 1.7018 / mod zirc4
 
-  cell WR 1.60 1.62 / mod zirc4
-  cell_large4 WR   ! specify a large 4x4 rod
+  cell WR 1.60 1.62 / mod zirc4 / large4
+!  cell WR 1.60 1.62 / mod U40 / large4
 
   lattice LAT
     1
