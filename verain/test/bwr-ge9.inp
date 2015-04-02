@@ -57,6 +57,7 @@
 !*** 80 mil design
   gap    0.9525 .47498   ! wide and narrow channel gap (cm)
   channel_box  zirc4 0.2032 0.9652 0.0 0.0   ! channel dimensions  
+!  channel_box  zirc42 0.2032 0.9652 0.0 0.0   ! channel dimensions  
 
 !** Note that the automatic addition of U-234 does not agree with the spec
 !** and we may need to add U-234 explicitly

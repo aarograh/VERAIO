@@ -44,7 +44,7 @@ CONTROLS:
       _pltype: parameter
       _type: string
       _do:
-        - copy CONTROL/@blade:1
+        - copy CONTROL/@blade:1,existspath=>CONTROL/%cell/*
       _content:
     bladespan:
       _pltype: parameter
@@ -80,6 +80,6 @@ CONTROLS:
       _pltype: parameter
       _type: string
       _do:
-        - copy CONTROL/@blade:7
+        - copy CONTROL/@blade:7,existspath=>CONTROL/%mat/*:CORE/%mat/*
       _content:
 

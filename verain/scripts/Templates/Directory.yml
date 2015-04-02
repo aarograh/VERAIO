@@ -1507,6 +1507,12 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  power_edit:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() fission FISSION kappa-fission KAPPA-FISSION
   jagged:
     <<: *dtbool
     _content:

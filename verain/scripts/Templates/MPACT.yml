@@ -10,6 +10,13 @@ MPACT:
       _do:
         - copy MPACT/$ray_spacing
       _content:
+    
+    power_edit:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$power_edit
+      _content:
 
     valid_on:
       _pltype: parameter

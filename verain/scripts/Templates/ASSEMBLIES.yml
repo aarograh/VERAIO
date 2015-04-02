@@ -113,7 +113,7 @@ ASSEMBLIES:
       _pltype: parameter
       _type: string
       _do:
-        - copy ASSEMBLY/@channel_box:0
+        - copy ASSEMBLY/@channel_box:0,existspath=>ASSEMBLY/%mat/*:CORE/%mat/*
       _content:
     chanth:
       _pltype: parameter

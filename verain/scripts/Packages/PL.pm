@@ -50,7 +50,7 @@ sub dispatch {
     my ($self,$version)=@_;
 
     $DISPATCH={
-	copy       => \&dbcopy1,
+	copy       => \&dbcopy2,
 	copyarray  => \&copyarray,
 	copyhash   => \&copyhash,
 	setdb      => \&setdb,
@@ -575,6 +575,72 @@ sub dbcopy1{
     else{
 	return $def ? $def->($t) : $t;
     }
+}
+
+sub dbcopy2{
+    my( $home, $path, %userparam ) = @_ ;
+    my %OPTIONS;
+    my @result;
+
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+    my $def=undef;
+    if(exists($OPTIONS{apply})){
+	$def = eval "sub { return $OPTIONS{apply};}";
+	die "dbcopy: invalid apply string $OPTIONS{apply}\n" unless ref $def eq 'CODE';
+    }
+
+    my @path=parse_path($path);
+    my $t=key_defined($SOURCE_DB,@path);
+
+    return $t unless defined($t);
+
+    my %AVAILABLE;
+    my @AVAILABLE;
+    my $_search;
+    if(defined $OPTIONS{ existspath }){
+	$_search=$OPTIONS{ existspath } ;
+	print STDERR "dbcopy2 search: $_search\n" if get_verbose();
+	my @_array=split(':',$_search);
+	print "dbcopy2 array @_array\n" if get_verbose();
+	foreach my $imat (@_array){
+	    my @apaths=find_keys($SOURCE_DB,$imat);
+	    if(@apaths){
+		print "\timat  : $imat\n" if get_verbose();
+		print "\t\tapaths: @apaths\n" if get_verbose();
+		foreach my $iapath (@apaths){
+		    print "\t\t\t @{ $iapath }\n" if get_verbose();
+		    my @_path=@{ $iapath };
+		    my $_name=pop @_path;
+		    $AVAILABLE{$_name}=$iapath;
+		}
+	    }
+	}
+	@AVAILABLE = keys %AVAILABLE;
+	die "dbcopy2: no entities found for path $_search\n" unless @AVAILABLE;
+    }
+
+
+    if(ref $t eq 'ARRAY'){
+	foreach (@{ $t }){
+	    die "dbcopy2: entity $_ not available in $_search\n"
+		if(@AVAILABLE && !exists($AVAILABLE{$_}));
+	    push @result, $def ? $def->($_) : $_;
+	}
+	return \@result;
+    }
+    elsif(ref $t eq 'HASH'){
+	die "dbcopy: HASH copy not supported\n";
+    }
+    else{
+	die "dbcopy2: entity $t not available in $_search\n"
+	    if(@AVAILABLE && !exists($AVAILABLE{$t}));
+	return $def ? $def->($t) : $t;
+    }
+
+
 }
 
 sub makemap {
