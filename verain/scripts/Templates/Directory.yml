@@ -1700,7 +1700,6 @@ MPACT:
     _content:
     _check:
       - is_int()
-      - is_gt() 0
   num_energy:
     <<: *dtint
     _content:
