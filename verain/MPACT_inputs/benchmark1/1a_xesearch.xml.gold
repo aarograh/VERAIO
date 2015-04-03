@@ -135,7 +135,7 @@
       </ParameterList>
     </ParameterList>
     <ParameterList name="parallel_env">
-      <Parameter name="num_angle" type="int" value="4"/>
+      <Parameter name="num_angle" type="int" value="-4"/>
       <Parameter name="num_energy" type="int" value="1"/>
       <Parameter name="num_space" type="int" value="1"/>
       <Parameter name="num_threads" type="int" value="1"/>
