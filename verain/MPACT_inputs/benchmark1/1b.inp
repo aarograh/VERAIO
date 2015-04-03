@@ -116,7 +116,7 @@
   cmfd_num_outers   20
 !parallel
   num_space         1
-  num_angle         4
+  num_angle        -4
   num_energy        1
   num_threads       1
 !xs_library
