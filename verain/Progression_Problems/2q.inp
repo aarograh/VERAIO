@@ -53,7 +53,7 @@
      
 [MPACT]
   num_space      1 
-  num_angle      8
+  num_angle     -8
   num_threads    1
 
 [SHIFT]
