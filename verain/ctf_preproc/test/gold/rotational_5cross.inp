@@ -426,12 +426,13 @@ end 14
    -3   -3    3    3    0    0    0
 {assem map}
 ** sym_opt  nassem_rows  nassem_cols
-        5            2            2
+        5            3            3
 **Assembly Map
-    1    2
-    3    0
+    0    2    0
+    2    1    2
+    0    2    0
 ***********************************************************************************************
-*GROUP 18 - Convergence Criteria for Steady State Solve                                        
+*GROUP 18 - convergence Criteria for Steady State Solve                                        
 ***********************************************************************************************
 **NGR                                                                                          
    18                                                                                          

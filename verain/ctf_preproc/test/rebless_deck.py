@@ -53,9 +53,11 @@ verain_filenames=[
       'small_3x3rod_BProd']
       
 
-partests=['Sample_p7']
+partests=['Sample_p7',
+      'par_qtr_core_inlet_bc']
 
-parfiles=[56]
+parfiles=[56,
+      56]
 
 if not len(sys.argv)==2:
    print 'You must specify xml2ctf executable path as an argument'
@@ -87,5 +89,5 @@ for index, name in enumerate(partests):
    for n in range(numfiles):
        suffix = '.'+str(numfiles)+'.'+str(n+1)+'.inp'
        fname = 'pdeck'+suffix
-       os.system('mv '+fname+' ./'+name+suffix)
-   os.system('mv pmaster.inp '+name+'_master.inp')
+       os.system('mv '+fname+' ./gold/'+name+suffix)
+   os.system('mv pmaster.inp gold/'+name+'.master.inp')

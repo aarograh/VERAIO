@@ -657,7 +657,7 @@ case5-03.hdf5                 case5-03.vtk
 **Assembly Map
     1
 ***********************************************************************************************
-*GROUP 18 - Convergence Criteria for Steady State Solve                                        
+*GROUP 18 - convergence Criteria for Steady State Solve                                        
 ***********************************************************************************************
 **NGR                                                                                          
    18                                                                                          
