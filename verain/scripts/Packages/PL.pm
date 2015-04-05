@@ -383,18 +383,14 @@ sub PLlist{
 	$trname=read_off_label($trref,'_name');
 	my $trcont=read_off_label($trref,'_content');
 
-	my @trpath=parse_path($trcont);
-	my $kr=key_defined($SOURCE_DB,@trpath);
-	my $krtype=ref($kr);
+	my @trpath=find_keys($SOURCE_DB,$trcont);
 
-	if($krtype eq 'HASH'){
-	    @trsubs=keys(%{ $kr });
-	}
-	elsif($krtype eq 'ARRAY'){
-	    @trsubs=@{ $kr };
-	}
-	else{
-#	    die "PLlist: error in translation expression, invalid $trcont expression.\n";
+	foreach my $ipath ( @trpath ){
+	    my @aipath = @{ $ipath };
+	    print "trPATH: @aipath\n"  if get_verbose();
+	    my $kr=key_defined($SOURCE_DB,@aipath);
+	    die "PLlist: error in translation expression, invalid $trcont expression.\n" unless $kr;
+	    push @trsubs, pop @aipath;
 	}
     }
 
