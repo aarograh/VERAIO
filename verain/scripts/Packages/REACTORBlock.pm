@@ -133,6 +133,9 @@ sub keyon
     my $store=$self->keytree();
     my $named=$self->named();
 
+    my $REF_LABEL='_key';
+    my $CONTENT_LABEL='_content';
+
 #    my @blocklabels=($block);
     if(defined($named) && $named ne '0'){
 
@@ -149,9 +152,11 @@ sub keyon
 #	print Dumper($store);
 #	push @blocklabels, $kr;
 
-	$MAIN_DB=new_key($MAIN_DB,$block);
+#	$MAIN_DB=new_key($MAIN_DB,$block);
+	$MAIN_DB=new_key($MAIN_DB,$block,$REF_LABEL,$named);
 #	$block=$kr;
-	$block=$named;
+#	$block=$named;
+	$block=$CONTENT_LABEL;
     }
 
     key_on($MAIN_DB,$block,$store);
