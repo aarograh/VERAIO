@@ -299,7 +299,7 @@
     <Parameter name="vis_edits" type="string" value="none"/>
     <ParameterList name="xs_library">
       <Parameter name="subgroup_set" type="int" value="4"/>
-      <Parameter name="xs_filename" type="string" value="mpact47g_e70r0_TCP0.xsl"/>
+      <Parameter name="xs_filename" type="string" value="mpact8g_70s_v4.0m0_02232015.fmt"/>
       <Parameter name="xs_type" type="string" value="ORNL"/>
       <Parameter name="xsshielder" type="string" value="t"/>
     </ParameterList>

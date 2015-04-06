@@ -230,7 +230,7 @@
   num_energy        1
   num_threads       1
 !xs_library
-  xs_filename       mpact47g_e70r0_TCP0.xsl
+  xs_filename       mpact8g_70s_v4.0m0_02232015.fmt
   xs_type           ORNL
   xs_shielder       t 
   subgroup_set      4
