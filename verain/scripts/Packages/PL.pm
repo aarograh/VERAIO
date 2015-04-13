@@ -3,6 +3,14 @@ package PL;
 # use Clone qw(clone);
 use ClonePP qw(clone);
 
+use Text::Balanced qw (
+                        extract_delimited
+                        extract_bracketed
+                        extract_quotelike
+                        extract_multiple
+                       );
+use Text::ParseWords;
+
 use KeyTree;
 use MiscUtils;
 use REACTOR;
@@ -44,6 +52,71 @@ our $DISPATCH;
 	$SOURCE_DB=$db;
     }
 
+    my %_VARS;
+    sub setvar{
+	my ($home,$name, $value, %userparam)=@_;
+	my %OPTIONS;
+	
+	while ( my ($key, $value) = each %userparam ) # to avoid perl bug of $$
+	{$OPTIONS{$key}=$value;}
+	my $def=undef;
+	if(exists($OPTIONS{apply})){
+	    $def = eval "sub { return $OPTIONS{apply};}";
+	    die "setvar: invalid apply string $OPTIONS{apply}\n" unless ref $def eq 'CODE';
+	}
+	
+	my @args=($value);
+	if(exists($OPTIONS{arg})){
+	    push @args, $OPTIONS{arg};
+	}
+	$_VARS{$name}= $def ? &$def(@args) : $value;
+	undef;
+    }
+
+    sub getvar{
+	my ($home, $name, %userparam)=@_;
+	my %OPTIONS;
+	
+	while ( my ($key, $value) = each %userparam ) # to avoid perl bug of $$
+	{$OPTIONS{$key}=$value;}
+	my $def=undef;
+	if(exists($OPTIONS{apply})){
+	    print "code: $OPTIONS{apply}\n";
+	    $def = eval "sub { $OPTIONS{apply};}";
+	    die "getvar: invalid apply string $OPTIONS{apply}\n" unless ref $def eq 'CODE';
+	}
+	die "getvar: variable $name does not exist.\n" unless exists($_VARS{$name});
+	my $value=$_VARS{$name};
+	my @args=($value);
+	if(exists($OPTIONS{arg})){
+	    push @args, $OPTIONS{arg};
+	}
+	$value = $def ? &$def(@args) : $value;
+
+	print "value: $value\n";
+
+	undef;
+#	return $value;
+    }
+
+    sub subvar{
+	my( $str, %userparam ) = @_ ;
+	my %OPTIONS;
+
+	while ( my ($key, $value) = each %userparam ) # to avoid perl bug of $$
+	{ $OPTIONS{$key}=$value;}
+
+	$str =~ s/^\s+//;
+	$str =~ s/\s+$//;
+	my @a=keys %_VARS;
+	foreach my $i (@a){
+	    my $v='\('.$i.'\)';
+	    my $s=$_VARS{$i};
+	    $str =~ s/$v/$s/g;
+	}
+	return $str;
+    }
+
 }
 
 sub dispatch {
@@ -64,7 +137,9 @@ sub dispatch {
 	coremapmap => \&coremapmap,
 	mpact_mesh => \&mpact_mesh,
 	mpact_db   => \&mpact_db,
-	tocelsius  => \&toCelsius
+	tocelsius  => \&toCelsius,
+	setvar     => \&setvar,
+	getvar     => \&getvar
     };
 
 #    if($version eq '007'){
@@ -82,16 +157,29 @@ sub PLdoarg{
 	$OPTIONS{$key}=$value;
     }
 
+    $str =~ s/^\s+//;
+    $str =~ s/\s+$//;
+    my $delim='\s+|,|\s|=>';
+    my $keep=0;
+    my @a = parse_line($delim, $keep, $str);
+
+    return @a;
+}
+
+sub PLdoarg_v0{
+    my( $str, %userparam ) = @_ ;
+    my %OPTIONS;
+
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+
     $str =~ s/=>/,/g;
     $str =~ s/,/ /g;
-
-#    $str =~ s/ //g;
-
     $str =~ s/^\s+//;
     $str =~ s/\s+$//;
     my @a=split / +/, $str;
-
-#    my @a = ($str =~ /(?:$RE{balanced}{-parens=>'[]'}|[^,])+/g);
 
     return @a;
 }
@@ -269,9 +357,10 @@ sub PLparameter{
 		key_on($ref,'_content',$val);
 	    }
 	}
-	if(defined($val)){
-	    key_on($ref,'_content',$val);
-	}
+# ssmod 150411 : why was this inserted since it would just reinsert the last one?
+#	if(defined($val)){
+#	    key_on($ref,'_content',$val);
+#	}
     }
 }
 
@@ -1183,7 +1272,7 @@ sub rodmap{
 		    print "\t\t\t @{ $iapath }\n" if get_verbose();
 		    my @mat_path=@{ $iapath };
 		    my @mat_flags = ($mat_path[$#mat_path],'other');
-		    if( @mat_path[1] =~ m/(fuel)/ ){
+		    if( @mat_path[-3] =~ m/(fuel)/ ){  # cheeky
 			$mat_flags[1]='fuel';
 		    }
 
@@ -1585,6 +1674,48 @@ sub toCelsius{
     $result = $def ? $def->($result) : $result;
 
     return $result;
+}
+
+sub pathfind{
+    my ($path, %userparam)=@_;
+    my %OPTIONS;
+    
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+
+    my @trpath=find_keys($SOURCE_DB,$path,undef,strings=>'true');
+    die "pathfind: path $path not found.\n" unless (@trpath);
+    die "pathfind: multiple values found for $path.\n" if (@trpath>1 && exists($OPTIONS{dieonmultiple}) );
+
+    print "pathfind: $path = @trpath\n" if exists $OPTIONS{debug};
+
+    my $val=shift @trpath;
+
+    return $val;
+}
+
+sub pathlevel{
+    my ($path, $level, %userparam)=@_;
+    my %OPTIONS;
+
+    $level=int $level;
+    die "pathlevel: level $level too low.\n" if $level <= 0;
+    
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+
+    my @trpath=split /\//, $path;
+    die "pathlevel: path $path cannot be split.\n" unless (@trpath);
+    die "pathlevel: path $path too short for level $level.\n" if $level > @trpath;
+
+    $level--;
+
+    $level = $trpath[$level];
+    return $level;
 }
 
 1;

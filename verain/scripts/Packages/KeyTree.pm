@@ -243,6 +243,7 @@ sub parse_path{
     $path=~s/\@(\w+)/$1\/_content/g;
     $path=~s/\:(\d+)/\/$1/g;
     $path=~s/\$([^\/]+)/$1\/_content/g;
+    $path=~s/\$\//_content\//g;
     my @a=split /\//, $path;
 
     if($a[0] eq ''){shift @a};
@@ -303,7 +304,10 @@ sub find_keys {
 		@loop=(0..$#{$refN});
 	    }
 	    else{
-		die "find_keys 2 [@pathN]: reference $refN is not valid\n";
+		print "find_keys: loop: @loop\n";
+		print "find_keys: path0: @path0\n";
+		print "find_keys: pathfind: @pathfind\n";
+		die "find_keys: 2 [@pathN]: reference $refN is not valid\n";
 	    }
 	    foreach (@loop){
 		push @newpathlist, [@pathfind,$_];

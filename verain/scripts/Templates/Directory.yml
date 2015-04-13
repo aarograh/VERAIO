@@ -474,6 +474,7 @@ CORE:
       - in_dictionary() BWR PWR
 
 ASSEMBLY:
+  <<: *dtblocknamed
   title:
     <<: *dtstring
     _content:

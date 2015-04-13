@@ -2,6 +2,9 @@ STATES:
   _pltype: list
   _do:
     - setdb MAIN_DB
+#    - setvar _path,%STATE/*/$/@rodbank,apply=>&pathfind
+#    - getvar _path,apply=>'my @value=split(/\//,shift @_); splice(@value,2,1)';
+#    - getvar _path,apply=>&pathlevel,arg=>3
 
   _tr:
     _name: _loop
