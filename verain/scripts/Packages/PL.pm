@@ -81,7 +81,7 @@ our $DISPATCH;
 	{$OPTIONS{$key}=$value;}
 	my $def=undef;
 	if(exists($OPTIONS{apply})){
-	    print "code: $OPTIONS{apply}\n";
+	    print "code: $OPTIONS{apply}\n" if exists $OPTIONS{debug};
 	    $def = eval "sub { $OPTIONS{apply};}";
 	    die "getvar: invalid apply string $OPTIONS{apply}\n" unless ref $def eq 'CODE';
 	}
@@ -92,8 +92,8 @@ our $DISPATCH;
 	    push @args, $OPTIONS{arg};
 	}
 	$value = $def ? &$def(@args) : $value;
-
-	print "value: $value\n";
+	$_VARS{$name} = $value;
+	print "value: $value\n" if exists $OPTIONS{debug};
 
 	undef;
 #	return $value;
@@ -139,7 +139,11 @@ sub dispatch {
 	mpact_db   => \&mpact_db,
 	tocelsius  => \&toCelsius,
 	setvar     => \&setvar,
-	getvar     => \&getvar
+	getvar     => \&getvar,
+	namesunique=> \&namesunique,
+	value      => \&value,
+	cellsmaps  => \&cellsmaps,
+	isinmaps   => \&listscompare
     };
 
 #    if($version eq '007'){
@@ -162,6 +166,11 @@ sub PLdoarg{
     my $delim='\s+|,|\s|=>';
     my $keep=0;
     my @a = parse_line($delim, $keep, $str);
+
+    foreach (@a){
+	$_=subvar($_);
+	print "subvar $_\n" if exists $OPTIONS{debug};
+    }
 
     return @a;
 }
@@ -473,7 +482,7 @@ sub PLlist{
 	my $trcont=read_off_label($trref,'_content');
 
 	my @trpath=find_keys($SOURCE_DB,$trcont);
-
+	return unless(@trpath);  # to avoid empty loops
 	foreach my $ipath ( @trpath ){
 	    my @aipath = @{ $ipath };
 	    print "trPATH: @aipath\n"  if get_verbose();
@@ -728,6 +737,21 @@ sub dbcopy2{
 
 }
 
+sub value{
+    my( $home, $value, %userparam ) = @_ ;
+    my %OPTIONS;
+
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {$OPTIONS{$key}=$value;}
+    my $def=undef;
+    if(exists($OPTIONS{apply})){
+	$def = eval "sub { return $OPTIONS{apply};}";
+	die "value: invalid apply string $OPTIONS{apply}\n" unless ref $def eq 'CODE';
+    }
+    my $result = $def ? $def->($value) : $value;
+    return $result;
+}
+
 sub makemap {
     my( $home, $npin_path, $cmap_path, %userparam ) = @_ ;
     my %OPTIONS;
@@ -881,6 +905,7 @@ sub gridmap{
     my @mats;
     my @mats_names;
     foreach my $ipath (@paths){
+#	print "gridmap ipath $ipath\n";
 	my @apaths=find_keys($SOURCE_DB,$ipath);
 	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
 	push @mats, @apaths if @apaths;
@@ -1214,7 +1239,7 @@ sub rodmap{
 
     if(exists($OPTIONS{coremap})){
 	# get unique ids for assemblies, 0 means missing
-	$coremap_path=$OPTIONS{coremap};
+	my $coremap_path=$OPTIONS{coremap};
 	my @coremap_path=parse_path($coremap_path);
 	my $coremap_ref=key_defined($SOURCE_DB,@coremap_path);
 	my @axials=unique(@{ $coremap_ref });    # labels of all unique axials
@@ -1696,6 +1721,24 @@ sub pathfind{
     return $val;
 }
 
+sub findfirst{
+    my ($path, %userparam)=@_;
+    my %OPTIONS;
+    
+    while ( my ($key, $value) = each %userparam )
+    {$OPTIONS{$key}=$value;}
+
+    my @trpath=find_defined($SOURCE_DB,$path,undef,strings=>'true');
+    die "findfirst: path $path not found.\n" unless (@trpath);
+    die "findfirst: multiple values found for $path.\n" if (@trpath>1 && exists($OPTIONS{dieonmultiple}) );
+
+    print "findfirst: $path = @trpath\n" if exists $OPTIONS{debug};
+
+    my $val=shift @trpath;
+
+    return $val;
+}
+
 sub pathlevel{
     my ($path, $level, %userparam)=@_;
     my %OPTIONS;
@@ -1716,6 +1759,360 @@ sub pathlevel{
 
     $level = $trpath[$level];
     return $level;
+}
+
+sub namesunique{
+    my ($home,$path, %userparam)=@_;
+    my %OPTIONS;
+    
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+
+    my @trpath=find_keys($SOURCE_DB,$path);
+    my @trsubs=();
+    print "namesunique: $path\n" if get_verbose();
+    foreach my $ipath ( @trpath ){
+	my @aipath = @{ $ipath };
+	print "namesunique: @aipath\n"  if get_verbose();
+	my $kr=key_defined($SOURCE_DB,@aipath);
+	die "namesunique: invalid reference for @aipath\n" unless $kr;
+	push @trsubs, pop @aipath;
+    }
+
+    print "namesunique: trsubs @trsubs\n" if get_verbose();
+    my @trtmp=@trsubs;
+    if(@trsubs){
+	die "namesunique: duplicate @trtmp.\n" unless unique(@trsubs);
+    }
+
+    undef;
+}
+
+sub cellsmaps{
+    my ($home,
+	$cellmap_path,
+	$cell_path,
+	$npin_path,
+	$axial_path,
+	%userparam)=@_;
+
+    my ($i,$j,$k,$m,$n);
+    my (@a,@b,@c,@d);
+
+    my @MATS_RESERVED =('vacuum','mod');
+    my %CELL_TYPES_POSSIBLE=( 'large4' => 1 );
+
+    my %OPTIONS=('cellmapname'=>'CellMap_',
+		 'cellname'=>'Cell_',
+		 'mapname'=>'rodmap');
+    while ( my ($key, $value) = each %userparam )
+    {$OPTIONS{$key}=$value;}
+
+    # get axial id and content
+    my @axial_rpath = parse_path($axial_path);
+    print STDERR "axial_rpath: @axial_rpath\n" if get_verbose();
+    my $axial_ref=key_defined($SOURCE_DB,@axial_rpath);
+    return unless $axial_ref;
+    my $axial_name=$axial_rpath[-2];
+    my @AXIAL_CONTENT = @{ $axial_ref };
+    @a=@AXIAL_CONTENT;
+    unless(@a%2){
+	    die "cellsmaps: axial $axial_name has even number of elements @a\n";
+    }
+    @b=even(\@a);
+    @c=odd(\@a);
+    my @AXIAL_LABELS = @c;
+    print STDERR "         content: @AXIAL_CONTENT\n" if get_verbose();
+    print STDERR "         heights: @b\n" if get_verbose();
+    print STDERR "         labels : @c\n" if get_verbose();
+
+    # get material paths
+    my %MATS_DB;
+    if(defined $OPTIONS{ matsearch }){
+	my $mat_search=$OPTIONS{ matsearch } ;
+	print STDERR "mat_search: $mat_search\n" if get_verbose();
+	my @mat_array=split(':',$mat_search);
+	print "mat_array @mat_array\n" if get_verbose();
+	foreach my $imat (@mat_array){
+	    my @apaths=find_keys($SOURCE_DB,$imat);
+	    my @names =find_keys($SOURCE_DB,$imat,undef,strings=>'true');
+	    if(@apaths){
+		print "\timat  : $imat\n" if get_verbose();
+		print "\t\tapaths: @apaths\n" if get_verbose();
+		print "\t\tnames : @names\n" if get_verbose();
+		foreach my $iapath (@apaths){
+		    print "\t\t\t @{ $iapath }\n" if get_verbose();
+		    my @mat_path=@{ $iapath };
+		    my @mat_flags = ($mat_path[$#mat_path],'other');
+		    if( @mat_path[-3] =~ m/(fuel)/ ){  # cheeky
+			$mat_flags[1]='fuel';
+		    }
+
+		    if(exists $MATS_DB{ $mat_flags[0] }){
+			my $mat_type=$MATS_DB{ $mat_flags[0] };
+			if($mat_type ne $mat_flags[1]){
+			    die "cellsmaps: material and fuel keyword use same identifiers.\n"
+			}
+		    }
+
+		    unless(exists $MATS_DB{ $mat_flags[0] }){
+			$MATS_DB{ $mat_flags[0] } = $mat_flags[1];
+			print "\t\t\t\tMATS_DB{$mat_flags[0]}=$mat_flags[1]\n" if get_verbose();
+		    }
+		}
+	    }
+	}
+    }
+
+    # get npin for setting the maps
+    my @npin_rpath=parse_path($npin_path);
+    print STDERR "npin_rpath: @npin_rpath\n" if get_verbose();
+    my $npin=key_defined($SOURCE_DB,@npin_rpath);
+    print STDERR "npin: $npin\n" if get_verbose();
+    return unless $npin;
+
+    # create hash of all cellmap ids and their values
+    my @cellmap_rpath = parse_path($cellmap_path);
+    print STDERR "cellmap_rpath: @cellmap_rpath\n" if get_verbose();
+    my $cellmap_ref=key_defined($SOURCE_DB,@cellmap_rpath);
+    return unless $cellmap_ref;
+    my @cellmap_available = keys_at($cellmap_ref);
+
+    my %CELLMAP_DEFS;
+    my %CELLMAP_CONTENT;
+    my %CELLMAP_CELLS;
+    foreach (@cellmap_available){
+	$CELLMAP_DEFS{$_} = key_exists($cellmap_ref,$_);
+	$CELLMAP_CONTENT{$_}=[@{ $CELLMAP_DEFS{$_}->{_content} }];
+	print STDERR "  CELLMAP_DEFS{$_}: $CELLMAP_DEFS{$_}\n" if get_verbose();
+
+	@a=@{ $CELLMAP_CONTENT{$_} };
+	@b=();
+	@c=unique(@a);   # why?
+#	@c=nonzero(@c);  # why?
+	@c=nonstring('-',@c);
+	$CELLMAP_CELLS{$_}=[@c];
+	print STDERR "  CELLMAP_CELLS{$_}: @c\n" if get_verbose();
+
+	@b=fullcellmap($npin,@a);
+	$CELLMAP_CONTENT{$_}=[@b];
+    }
+ 
+    # create hash of all cell ids and their values
+    my @cell_rpath = parse_path($cell_path);
+    print STDERR "cell_rpath: @cell_rpath\n" if get_verbose();
+    my $cell_ref=key_defined($SOURCE_DB,@cell_rpath);
+    my @cell_available = keys_at($cell_ref);
+    print STDERR "cell_rpath: @cell_rpath\n" if get_verbose();
+
+    my %CELL_DEFS;
+    my %CELL_CONTENT;
+    foreach (@cell_available){
+	$CELL_DEFS{$_} = key_exists($cell_ref,$_);
+	$CELL_CONTENT{$_}=[@{ $CELL_DEFS{$_}->{_content} }];
+	print STDERR "  CELL_DEFS{$_}: $CELL_DEFS{$_}\n" if get_verbose();
+	print STDERR "        content: @{ $CELL_CONTENT{$_} }\n" if get_verbose();
+
+	@a=@{$CELL_CONTENT{$_}};
+	if(@a==1){
+	    if($a[0] ne 'mod'){
+		die "cellmaps: cell $_ @a has one entry and is not a moderator\n";
+	    }
+	    $CELL_TYPE{$_}='mod';
+	    $CELL_radii{$_}=[];
+	    $CELL_mats{$_} =['mod'];
+	}
+	else{
+
+# Per Scott's three commands in one
+	    my @slshs=indexes { $_ eq '/' } @a;
+	    if(@slshs < 1 && @slshs > 2){
+		die "cellmaps: invalid number of slashes in command cell $_ @a\n";
+	    }
+
+	    my @part1=before {$_ eq '/'} @a;
+	    my @part2=after  {$_ eq '/'} @a;
+	    my @part3=();
+	    if(@slshs == 2){
+		@part3=after  {$_ eq '/'} @part2;
+		@part2=before {$_ eq '/'} @part2;
+	    }
+	    die "cellmaps: unequal number of entries for radii and materials in cell $_ @a\n" if (@part1 != @part2);
+	    $CELL_radii{$_}=\@part1;
+	    my @cmats=@part2;
+
+	    # start mod
+	    # have to search for available materials and fuels
+	    # bomb if mat and fuel are at the same level
+	    # if exists mat cell_type=other, if exists fuel =fuel
+
+	    $CELL_TYPE{$_}='other';
+	    if(@part3){
+		die "cellmaps: invalid cell type for cell $_ @a\n" unless exists( $CELL_TYPES_POSSIBLE{$part3[0]} );
+		$CELL_TYPE{$_}=$part3[0];
+	    }
+
+	    if(defined $OPTIONS{ matsearch }){
+		foreach my $imat (@cmats){
+		    print STDERR "    CELL mat $imat\n" if get_verbose();
+		    next if in_dictionary($imat, @MATS_RESERVED);
+		    if(exists($MATS_DB{ $imat })){
+			if($MATS_DB{ $imat } eq 'fuel'){
+			    die "rodmap: cell $_ @a type is $CELL_TYPE{$_} but it has fuel $imat\n"
+				if exists( $CELL_TYPES_POSSIBLE{ $CELL_TYPE{$_} } );
+			    $CELL_TYPE{$_}='fuel';
+			    print STDERR "    \tCELL mat $imat is fuel\n" if get_verbose();
+			}
+		    }
+		    else{
+			die "rodmap: cell $_ @a has material $imat which is not defined\n";
+		    }
+		}
+	    }
+
+	    $CELL_mats{$_} =[@cmats];
+	    print STDERR "    CELL radii @{ $CELL_radii{$_} }\n" if get_verbose();
+	    print STDERR "    CELL mats  @{ $CELL_mats{$_} }\n" if get_verbose();
+	    print STDERR "    CELL type  $CELL_TYPE{$_}\n" if get_verbose();
+	}
+    }
+
+    my ($iref, $jref, $a_ref, $cm_ref, $c_ref);
+
+    # see if we have all cellmaps needed
+    @b=unique( @AXIAL_LABELS  );
+    my @cellmap_common=intersection(\@b,\@cellmap_available);
+    unless($#cellmap_common == $#b){
+	print STDERR "axial labels needed   : [@b]\n";
+	print STDERR "$OPTIONS{mapname} labels available: [@cellmap_available]\n";
+	die   "missing $OPTIONS{mapname} definitions in $axial_path\n";
+    }
+
+    # Create CellMaps list in Assembly_X
+    $cm_ref=&key_on_list($home,'CellMaps');
+    @c=();
+    foreach $j (@b){
+	# Create CellMap in CellMaps list
+	$iref=&key_on_list($cm_ref,$OPTIONS{cellmapname}.$j);
+
+	&key_on_parameter($iref,'label','string',$j);
+	&key_on_array($iref,'cell_map','string',@{ $CELLMAP_CONTENT{$j} });
+	push @c, @{ $CELLMAP_CELLS{$j} }
+    }
+
+    @b=unique(@c);
+    # see if we have all cells needed
+    my @cell_common=intersection(\@b,\@cell_available);
+    unless($#cell_common == $#b){
+	print STDERR "cell labels needed   : [@b]\n";
+	print STDERR "cell labels available: [@cell_available]\n";
+	die   "cellsmaps: missing cell definitions in $axial_path\n";
+    }
+
+    # Create Cells list in Assembly_X
+    $c_ref=&key_on_list($home,'Cells');
+    foreach $j (@b){
+	# Create Cells in Cells list
+	$iref=&key_on_list($c_ref,$OPTIONS{cellname}.$j);
+
+	&key_on_parameter($iref,'label','string',$j);
+	&key_on_parameter($iref,'type','string',$CELL_TYPE{$j});
+	$k=@{ $CELL_radii{$j} };
+	&key_on_parameter($iref,'num_rings','int',$k);
+	&key_on_array($iref,'mats','string',@{ $CELL_mats{$j} });
+	&key_on_array($iref,'radii','double',@{ $CELL_radii{$j} });
+    }
+}
+
+sub listscompare{
+    my ($home,
+	$axial_path,
+	$coremap_path,
+	%userparam)=@_;
+
+    my ($i,$j,$k,$m,$n);
+    my (@a,@b,@c,@d);
+
+    my %OPTIONS=('compare'=>'eq','purge2'=>1);
+    while ( my ($key, $value) = each %userparam )
+    {$OPTIONS{$key}=$value;}
+
+#    my @apaths=find_keys($SOURCE_DB,$axial_path,undef,strings=>'true');
+#    my @cpaths=find_keys($SOURCE_DB,$coremap_path,undef,strings=>'true');
+
+    my @apaths=find_keys($SOURCE_DB,$axial_path);
+    my @cpaths=find_keys($SOURCE_DB,$coremap_path);
+
+    my @a1;
+    foreach my $ipath (@apaths){
+	my @p = @{ $ipath };
+	if($p[-2] eq '_key'){
+	    push @a1, $p[-1];
+	}
+	elsif($p[-2] eq '_content'){
+	    my $t=key_defined($SOURCE_DB,@p);
+	    die "listscompare: undefined value at @p\n" unless defined($t);
+	    push @a1, $t;
+	}
+	else{
+	    die "listscompare: invalid path @p\n";
+	}
+    }
+
+    my @a2;
+    foreach my $ipath (@cpaths){
+	my @p = @{ $ipath };
+	if($p[-2] eq '_key'){
+	    push @a2, $p[-1];
+	}
+	elsif($p[-2] eq '_content'){
+	    my $t=key_defined($SOURCE_DB,@p);
+	    die "listscompare: undefined value at @p\n" unless defined($t);
+	    push @a2, $t;
+	}
+	else{
+	    die "listscompare: invalid path @p\n";
+	}
+    }
+
+    @a1=unique(@a1);
+    @a2=unique(@a2);
+    if( exists($OPTIONS{purge2}) && $OPTIONS{purge2} ){
+	@a2=nonstring('0',@a2);
+	@a2=nonstring('-',@a2);
+    }
+    if( exists($OPTIONS{purge1}) && $OPTIONS{purge1} ){
+	@a1=nonstring('0',@a1);
+	@a1=nonstring('-',@a1);
+    }
+
+    my @acommon=intersection(\@a1,\@a2);
+
+    print "listscompare: have[$axial_path]: @a1\n"   if exists $OPTIONS{debug};
+    print "listscompare: need[$coremap_path]: @a2\n" if exists $OPTIONS{debug};
+    print "listscompare: common[".scalar(@acommon)."]: @acommon\n" if exists $OPTIONS{debug};
+
+    if($OPTIONS{compare} eq 'eq'){
+	unless($#a2 == $#acommon){
+	    print STDERR "needed   : @a2\n";
+	    print STDERR "available: @a1\n";
+	    die   "listscompare: mismatch in arrays\n";
+	}
+    }
+    elsif($OPTIONS{compare} eq 'geq'){
+	unless($#a2 >= $#acommon){
+	    print STDERR "need: @a2\n";
+	    print STDERR "have: @a1\n";
+	    die   "listscompare: mismatch in arrays\n";
+	}
+    }
+    else{
+	die   "listscompare: invalid comparison operator\n";
+    }
+    
+    undef;
 }
 
 1;

@@ -30,7 +30,8 @@ use Exporter;
 	 'keys_at',
 	 'values_at',
 	 'value_eq_at',
-	 'key_delete'
+	 'key_delete',
+	 'find_defined'
     );
 
 my $DIE_ON_UNDEF=1;
@@ -291,7 +292,7 @@ sub find_keys {
 	push @pathlist, [@path0,$_];
     }
 
-    for($i=0;$i<@a;$i++){
+    for(my $i=0;$i<@a;$i++){
 	my @pathN=parse_path($a[$i]);      # get new segment form path string
 	foreach $ipath (@pathlist){        # loop over found paths
 	    my @pathfind=(@{$ipath},@pathN);
@@ -526,6 +527,71 @@ sub counter {
     return sub {
 	return ++$n;
     };
+}
+
+sub find_defined {
+    my( $ref, $path, $fkey, %userparam ) = @_ ;
+    my @loop;
+    my $ipath;
+    my %OPTIONS;
+
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+
+    $fkey='*' unless defined $fkey;
+
+    my @a=split /\*/, $path;
+    my $path0=shift @a;
+    my @path0=parse_path($path0);
+    my $ref0=key_defined( $ref, @path0);
+
+    if( ref $ref0 eq 'HASH' ) {
+	@loop=keys(%{$ref0});
+    }
+    elsif( ref $ref0 eq 'ARRAY' ) {
+	@loop=(0..$#{$ref0});
+    }
+    else{
+	return ();
+    }
+
+    my @pathlist=();
+    my @newpathlist=();
+    foreach (@loop){
+	push @pathlist, [@path0,$_];
+    }
+
+    for(my $i=0;$i<@a;$i++){
+	my @pathN=parse_path($a[$i]);      # get new segment form path string
+	foreach $ipath (@pathlist){        # loop over found paths
+	    my @pathfind=(@{$ipath},@pathN);
+	    my $refN=key_defined( $ref, @pathfind);
+
+	    if($refN){
+		push @newpathlist, [@pathfind];
+	    }
+	}
+	@pathlist=@newpathlist;
+    }
+
+    my @outstring=();
+    my @outarray=();
+    foreach $ipath (@pathlist){
+	my $value=$ipath->[$#{$ipath}];
+	if($fkey eq '*' || $fkey eq $value){
+	    push @outstring, join('/',@{$ipath});
+	    push @outarray, [@{$ipath}];
+	}
+    }
+
+    if(exists($OPTIONS{strings}) && $OPTIONS{strings} eq 'true'){
+	return @outstring;
+    }
+    else{
+	return @outarray;
+    }
 }
 
 1;
