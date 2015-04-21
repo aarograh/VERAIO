@@ -1,0 +1,823 @@
+[CASEID]
+  title 'Watts Bar Unit 1 Cycle 1 - Public - Draft 4 - 6/27/2012'
+!-----------------------------------------------------------------------
+! This input file contains all the information needed to model
+! BOL Watts Bar Unit 1
+!
+! Parameter List Definitions can be found on WIKI page at:
+!  https://casl-dev.ornl.gov/wiki/index.php?title=Input_Parameter_List&printable=yes
+!
+!
+! Reference for Watts Bar:
+!
+! Watts Bar Unit 2 Final Safety Analysis Report (FSAR), Amendment 93, Section 4,
+!   ML091400651, April 30, 2009.
+! http://adamswebsearch2.nrc.gov/idmws/ViewDocByAccession.asp?AccessionNumber=ML091400651
+!
+!  *** NOTE: This input is still in draft format, all input needs to be checked ****
+!
+!  Draft 2 - 
+!    Changed maps to use dashes instead of "0" to signify blank space
+!    Changed crd_map and rodbank card to use bank names instead of numbers
+!    Added seperate ppitch card in [ASSEMBLY]
+!    Add [DETECTOR] block
+!
+!  Draft 3 -
+!    Fix missing [INSERT] types
+!
+!  Draft 4 -
+!    Update control rod maps "crd_map", "crd_bank"
+!
+!  Update 11/19/2012   
+!     * added explict lattice models for:
+!         * lower_nozzle_gap_height
+!         * lower_pincap_height
+!         * upper_nozzle_gap_height
+!         * upper_pincap_height
+!         * upper_plenum_height
+!
+!  Update 12/17/2012
+!     * update axial regions to include gaps
+!     * add plenum regions to pyrex rods
+!     * update axial edit bounds
+!     * add baffle
+!
+!-----------------------------------------------------------------------
+[STATE]
+  title 'HZP Statepoint BOL 1'            ! state_title
+  power 0.0                             ! state_power (%)
+  flow  100.0                           ! state_flow  (%)
+  bypass  8.98                          ! state_bypass (%)
+  tinlet 559.0 F                          ! state_tinlet (F)
+  xenon zero                            ! state_xenon
+  samar zero                            ! state_samarium
+  boron 1300                            ! state_boron (ppm)
+  kcrit  1.0
+  search 'boron'                        ! state_search
+  pressure 2250                         ! state_pressure (psia)
+  deplete GWDMT 0.0                     ! state_deplete  (MWD/MTU)
+  rodbank  A 228 B 216 C 228 D 228 SA 228 SB 228 SC 228 SD 228    ! state_bank_labels, state_bank_pos
+!  rodbank  B 216      ! only position bank B, keep other banks unchanged
+!  inlet_temp
+!     1.
+!     2. 1.
+!     1. 2. 1.
+!     2. 1. 2. 1.
+!     1. 2. 1. 2. 2.
+!     2. 1. 2. 1. 2. 3.
+!     1. 3. 1. 3. 3. 3.
+!     3. 3. 3. 3.
+!
+!  inlet_flow
+!     10.
+!     20. 10.
+!     10. 20. 10.
+!     20. 10. 20. 10.
+!     10. 20. 10. 20. 20.
+!     20. 10. 20. 10. 20. 30.
+!     10. 30. 10. 30. 30. 30.
+!     30. 30. 30. 30.
+
+[STATE]
+  title 'HZP Statepoint BOL 2'            ! state_title
+  power 0.0                             ! state_power (%)
+  flow  90.0                           ! state_flow  (%)
+  bypass  8.98                          ! state_bypass (%)
+  tinlet 559.0 F                          ! state_tinlet (F)
+  xenon zero                            ! state_xenon
+  samar zero                            ! state_samarium
+  boron 1300                            ! state_boron (ppm)
+  kcrit  1.0
+  search 'boron'                        ! state_search
+  pressure 2250                         ! state_pressure (psia)
+  deplete GWDMT 0.0                     ! state_deplete  (MWD/MTU)
+  rodbank  A 228 B 216 C 228 D 228 SA 228 SB 228 SC 228 SD 228    ! state_bank_labels, state_bank_pos
+!  rodbank  B 216      ! only position bank B, keep other banks unchanged
+
+!  inlet_temp
+!     -1.
+!     -2. -1.
+!     -1. -2. -1.
+!     -2. -1. -2. -1.
+!     -1. -2. -1. -2. -2.
+!     -2. -1. -2. -1. -2. -3.
+!     -1. -3. -1. -3. -3. -3.
+!     -3. -3. -3. -3.
+!
+!  inlet_flow
+!     -10.
+!     -20. -10.
+!     -10. -20. -10.
+!     -20. -10. -20. -10.
+!     -10. -20. -10. -20. -20.
+!     -20. -10. -20. -10. -20. -30.
+!     -10. -30. -10. -30. -30. -30.
+!     -30. -30. -30. -30.
+
+[CORE]
+  name "Watts Bar Unit 1"               ! core_name
+  cycle 1                               ! cycle number (string)
+  op_date 19970301                      ! operations date / start-up date ** check
+
+  size 15                               ! number of assemblies across the core
+  rated 3411.0 144.7                    ! core_rated_power(MW), core_rated_flow (Mlbs/hr)
+  apitch 21.5                           ! core_apitch (cm)
+
+  height 406.33                         ! distance from lower core plate to upper core plate
+
+!  Note that core maps are always "full-core", i.e. no symmetry
+
+   core_shape
+     0  0  0  0  1  1  1  1  1  1  1  0  0  0  0
+     0  0  1  1  1  1  1  1  1  1  1  1  1  0  0
+     0  1  1  1  1  1  1  1  1  1  1  1  1  1  0
+     0  1  1  1  1  1  1  1  1  1  1  1  1  1  0
+     1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+     1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+     1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+     1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+     1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+     1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+     1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+     0  1  1  1  1  1  1  1  1  1  1  1  1  1  0
+     0  1  1  1  1  1  1  1  1  1  1  1  1  1  0
+     0  0  1  1  1  1  1  1  1  1  1  1  1  0  0
+     0  0  0  0  1  1  1  1  1  1  1  0  0  0  0
+
+
+! assm_map
+!                 A3 A3 A3 A3 A3 A3 A3
+!           A3 A3 A3 A1 A3 A1 A3 A1 A3 A3 A3
+!        A3 A3 A2 A1 A2 A1 A2 A1 A2 A1 A2 A3 A3
+!        A3 A2 A2 A2 A1 A2 A1 A2 A1 A2 A2 A2 A3
+!     A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
+!     A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
+!     A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
+!     A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
+!     A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
+!     A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3
+!     A3 A3 A1 A2 A1 A2 A1 A2 A1 A2 A1 A2 A1 A3 A3
+!        A3 A2 A2 A2 A1 A2 A1 A2 A1 A2 A2 A2 A3
+!        A3 A3 A2 A1 A2 A1 A2 A1 A2 A1 A2 A3 A3
+!           A3 A3 A3 A1 A3 A1 A3 A1 A3 A3 A3
+!                 A3 A3 A3 A3 A3 A3 A3
+
+  assm_map
+     A1
+     A2 A1
+     A1 A2 A1
+     A2 A1 A2 A1
+     A1 A2 A1 A2 A2
+     A2 A1 A2 A1 A2 A3
+     A1 A3 A1 A3 A3 A3
+     A3 A3 A3 A3
+
+
+
+! *** Note that the following map ignores the source bundles:  BP23s and BP19s
+
+!  insert_map
+!                            -    BP8    -    BP12   -    BP8    -
+!                -     -    BP16   -    BP24   -    BP24   -    BP16   -     -
+!          -    BP12  BP24   -    BP16   -    BP20   -    BP16   -    BP24  BP12   -
+!          -    BP24   -    BP20   -    BP20   -    BP20   -    BP20   -    BP24   -
+!    -    BP16   -    BP20   -    BP20   -    BP20   -    BP20   -    BP20   -    BP16   -
+!   BP8    -    BP16   -    BP20   -    BP24   -    BP24   -    BP20   -    BP16   -    BP8
+!    -    BP24   -    BP20   -    BP24   -    BP20   -    BP24   -    BP20   -    BP24   -
+!   BP12   -    BP20   -    BP20   -    BP20   -    BP20   -    BP20   -    BP20   -    BP12
+!    -    BP24   -    BP20   -    BP24   -    BP20   -    BP24   -    BP20   -    BP24   -
+!   BP8    -    BP16   -    BP20   -    BP24   -    BP24   -    BP20   -    BP16   -    BP8
+!    -    BP16   -    BP20   -    BP20   -    BP20   -    BP20   -    BP20   -    BP16   -
+!          -    BP24   -    BP20   -    BP20   -    BP20   -    BP20   -    BP24   -
+!          -    BP12  BP24   -    BP16   -    BP20   -    BP16   -    BP24  BP12   -
+!                -     -    BP16   -    BP24   -    BP24   -    BP16   -     -
+!                            -    BP8    -    BP12   -    BP8    -
+
+  insert_map
+    -
+   BP20  -  
+    -   BP24  -   
+   BP20  -   BP20  - 
+    -   BP20  -   BP20  -  
+   BP20  -   BP16  -   BP24 BP12
+    -   BP24  -   BP16  -    -
+   BP12  -   BP8   -
+
+
+  det_map
+                 -  -  1  -  -  1  -
+           1  -  -  1  -  1  -  -  -  -  -
+        -  -  -  -  -  -  1  -  1  -  1  -  1
+        1  1  -  -  -  -  1  -  -  -  -  -  -
+     -  -  -  -  1  -  -  -  1  -  1  -  1  -  -
+     1  -  1  -  -  1  -  1  -  -  -  -  -  1  -
+     -  -  -  1  -  -  1  -  -  1  -  -  1  -  -
+     1  -  1  -  1  -  1  -  -  1  -  1  1  1  -
+     -  1  -  -  -  -  -  -  1  -  1  -  -  -  1
+     -  -  -  -  1  -  1  -  -  -  -  1  -  -  -
+     1  -  -  -  1  -  -  1  -  -  1  -  -  -  1
+        -  -  -  -  1  -  -  1  -  -  1  -  -
+        -  1  -  1  -  -  1  -  -  -  -  -  1
+           1  -  -  -  1  -  -  1  -  1  -
+                 1  -  -  1  -  -  -
+
+!  crd_bank
+!                 -  -  -  -  -  -  -
+!           - SA  -  B  -  C  -  B  - SA  -
+!        -  -  - SD  - SB  - SB  - SC  -  -  -
+!       SA  -  D  -  -  -  D  -  -  -  D  - SA
+!     -  - SC  -  A  -  -  -  -  -  A  - SD  -  -
+!     -  B  -  -  -  C  -  A  -  C  -  -  -  B  -
+!     -  - SB  -  -  -  -  -  -  -  -  - SB  -  -
+!     -  C  -  D  -  A  -  D  -  A  -  D  -  C  -
+!     -  - SB  -  -  -  -  -  -  -  -  - SB  -  -
+!     -  B  -  -  -  C  -  A  -  C  -  -  -  B  -
+!     -  - SD  -  A  -  -  -  -  -  A  - SC  -  -
+!       SA  -  D  -  -  -  D  -  -  -  D  - SA
+!        -  -  - SC  - SB  - SB  - SD  -  -  -
+!           - SA  -  B  -  C  -  B  - SA  -
+!                 -  -  -  -  -  -  -
+
+  crd_bank
+     D  -  A  -  D  -  C  -
+     -  -  -  -  - SB  -  -
+     A  -  C  -  -  -  B  -
+     -  -  -  A  - SC  -  -
+     D  -  -  -  D  - SA
+     - SB  - SD  -  -  -
+     C  -  B  - SA  -
+     -  -  -  -
+
+! crd_map
+!                 -  -  -  -  -  -  -
+!           -  1  -  1  -  1  -  1  -  1  -
+!        -  -  -  1  -  1  -  1  -  1  -  -  -
+!        1  -  1  -  -  -  1  -  -  -  1  -  1 
+!     -  -  1  -  1  -  -  -  -  -  1  -  1  -  -
+!     -  1  -  -  -  1  -  1  -  1  -  -  -  1  -
+!     -  -  1  -  -  -  -  -  -  -  -  -  1  -  -
+!     -  1  -  1  -  1  -  1  -  1  -  1  -  1  -
+!     -  -  1  -  -  -  -  -  -  -  -  -  1  -  -
+!     -  1  -  -  -  1  -  1  -  1  -  -  -  1  -
+!     -  -  1  -  1  -  -  -  -  -  1  -  1  -  -
+!        1  -  1  -  -  -  1  -  -  -  1  -  1
+!        -  -  -  1  -  1  -  1  -  1  -  -  -
+!           -  1  -  1  -  1  -  1  -  1  -
+!                 -  -  -  -  -  -  -
+
+crd_map
+    1
+    -  -
+    1  -  1
+    -  -  -  1
+    1  -  -  -  1
+    -  1  -  1  -  -
+    1  -  1  -  1  -
+    -  -  -  -
+
+
+! ** check plate information
+
+  lower_plate SS304  5.0  0.5   ! core_lower_mat, core_lower_thick, core_lower_vfrac
+  upper_plate SS304  7.6  0.5   ! core_upper_mat, core_upper_thick, core_upper_vfrac
+
+! ** check baffle dimensions
+
+  baffle SS304 0.19 1.26
+
+  xlabel   R  P  N  M  L  K  J  H  G  F  E  D  C  B  A    ! core_xlabel
+  ylabel   1  2  3  4  5  6  7  8  9 10 11 12 13 14 15    ! core_ylabel
+
+  mat he     0.000176
+  mat inc    8.19
+  mat SS304  8.0   ss 1.0
+  mat zirc   6.56  zirc4 1.0
+
+[ASSEMBLY]
+
+  title "Westinghouse VANTAGE-5H"                 ! assembly_title
+  npin   17                                       ! assembly_num_pins
+  ppitch 1.26                                     ! assembly_ppitch
+
+  mat ss 8.0
+ 
+  fuel    U21 10.257 95.0 / 2.11
+  fuel    U26 10.257 95.0 / 2.60
+  fuel    U31 10.257 95.0 / 3.10
+
+  cell 1   0.4096 0.418 0.475 / U21 he  zirc    ! low enriched pin cell
+  cell 2   0.4096 0.418 0.475 / U26 he  zirc    ! med enriched pin cell
+  cell 3   0.4096 0.418 0.475 / U31 he  zirc    ! hi  enriched pin cell
+
+  cell 4          0.561 0.602 / mod  zirc       ! guide tube
+  cell 6          0.559 0.605 / mod  zirc       ! instrument tube
+
+  cell 7                0.475 /      mod        ! empty location
+  cell 8          0.418 0.475 / he   zirc       ! plenum pin
+  cell 9                0.475 /      zirc       ! end plug
+
+  lattice FUEL1
+     6
+     1 1
+     1 1 1
+     4 1 1 4
+     1 1 1 1 1
+     1 1 1 1 1 4
+     4 1 1 4 1 1 1
+     1 1 1 1 1 1 1 1
+     1 1 1 1 1 1 1 1 1
+
+  lattice FUEL2
+     6
+     2 2
+     2 2 2
+     4 2 2 4
+     2 2 2 2 2
+     2 2 2 2 2 4
+     4 2 2 4 2 2 2
+     2 2 2 2 2 2 2 2
+     2 2 2 2 2 2 2 2 2
+
+  lattice FUEL3
+     6
+     3 3
+     3 3 3
+     4 3 3 4
+     3 3 3 3 3
+     3 3 3 3 3 4
+     4 3 3 4 3 3 3
+     3 3 3 3 3 3 3 3
+     3 3 3 3 3 3 3 3 3
+
+  lattice PGAP
+     6
+     7 7
+     7 7 7
+     4 7 7 4
+     7 7 7 7 7
+     7 7 7 7 7 4
+     4 7 7 4 7 7 7
+     7 7 7 7 7 7 7 7
+     7 7 7 7 7 7 7 7 7
+
+  lattice PLEN
+     6
+     8 8
+     8 8 8
+     4 8 8 4
+     8 8 8 8 8
+     8 8 8 8 8 4
+     4 8 8 4 8 8 8
+     8 8 8 8 8 8 8 8
+     8 8 8 8 8 8 8 8 8
+
+  lattice PLUG
+     6
+     9 9
+     9 9 9
+     9 9 9 4
+     9 9 9 9 9
+     9 9 9 9 9 4
+     4 9 9 4 9 9 9
+     9 9 9 9 9 9 9 9
+     9 9 9 9 9 9 9 9 9
+
+  axial A1  6.05 PGAP 10.28 PLUG 11.95 FUEL1 377.71 PLEN 393.71 PLUG  395.38 PGAP 397.50     ! FUEL1 2.1%
+!  axial A2  6.05 PGAP 10.28 PLUG 11.95 FUEL2 377.71 PLEN 393.71 PLUG  395.38 PGAP 397.50     ! FUEL2 2.6%
+!  axial A3  6.05 PGAP 10.28 PLUG 11.95 FUEL3 377.71 PLEN 393.71 PLUG  395.38 PGAP 397.50     ! FUEL3 3.1%
+
+! grid definitions
+
+  grid GINC  inc  1014  3.866
+  grid GZRC  zirc 875   3.81
+
+  grid_axial
+      GINC  13.883   ! bottom of grid lines up with BAF
+      GZRC  75.2
+      GZRC 127.4
+      GZRC 179.6
+      GZRC 231.8
+      GZRC 284.0
+      GZRC 336.2
+      GINC 388.2
+
+! Parser: lower_nozzle_comp, lower_nozzle_height, lower_nozzle_mass
+  lower_nozzle  ss  6.05  6250.0
+  upper_nozzle  ss  8.83  6250.0
+
+[ASSEMBLY]
+
+  title "Westinghouse VANTAGE-5H"                 ! assembly_title
+  npin   17                                       ! assembly_num_pins
+  ppitch 1.26                                     ! assembly_ppitch
+
+  mat ss 8.0
+ 
+  fuel    U21 10.257 95.0 / 2.11
+  fuel    U26 10.257 95.0 / 2.60
+  fuel    U31 10.257 95.0 / 3.10
+
+  cell 1   0.4096 0.418 0.475 / U21 he  zirc    ! low enriched pin cell
+  cell 2   0.4096 0.418 0.475 / U26 he  zirc    ! med enriched pin cell
+  cell 3   0.4096 0.418 0.475 / U31 he  zirc    ! hi  enriched pin cell
+
+  cell 4          0.561 0.602 / mod  zirc       ! guide tube
+  cell 6          0.559 0.605 / mod  zirc       ! instrument tube
+
+  cell 7                0.475 /      mod        ! empty location
+  cell 8          0.418 0.475 / he   zirc       ! plenum pin
+  cell 9                0.475 /      zirc       ! end plug
+
+  lattice FUEL1
+     6
+     1 1
+     1 1 1
+     4 1 1 4
+     1 1 1 1 1
+     1 1 1 1 1 4
+     4 1 1 4 1 1 1
+     1 1 1 1 1 1 1 1
+     1 1 1 1 1 1 1 1 1
+
+  lattice FUEL2
+     6
+     2 2
+     2 2 2
+     4 2 2 4
+     2 2 2 2 2
+     2 2 2 2 2 4
+     4 2 2 4 2 2 2
+     2 2 2 2 2 2 2 2
+     2 2 2 2 2 2 2 2 2
+
+  lattice FUEL3
+     6
+     3 3
+     3 3 3
+     4 3 3 4
+     3 3 3 3 3
+     3 3 3 3 3 4
+     4 3 3 4 3 3 3
+     3 3 3 3 3 3 3 3
+     3 3 3 3 3 3 3 3 3
+
+  lattice PGAP
+     6
+     7 7
+     7 7 7
+     4 7 7 4
+     7 7 7 7 7
+     7 7 7 7 7 4
+     4 7 7 4 7 7 7
+     7 7 7 7 7 7 7 7
+     7 7 7 7 7 7 7 7 7
+
+  lattice PLEN
+     6
+     8 8
+     8 8 8
+     4 8 8 4
+     8 8 8 8 8
+     8 8 8 8 8 4
+     4 8 8 4 8 8 8
+     8 8 8 8 8 8 8 8
+     8 8 8 8 8 8 8 8 8
+
+  lattice PLUG
+     6
+     9 9
+     9 9 9
+     9 9 9 4
+     9 9 9 9 9
+     9 9 9 9 9 4
+     4 9 9 4 9 9 9
+     9 9 9 9 9 9 9 9
+     9 9 9 9 9 9 9 9 9
+
+!  axial A1  6.05 PGAP 10.28 PLUG 11.95 FUEL1 377.71 PLEN 393.71 PLUG  395.38 PGAP 397.50     ! FUEL1 2.1%
+  axial A2  6.05 PGAP 10.28 PLUG 11.95 FUEL2 377.71 PLEN 393.71 PLUG  395.38 PGAP 397.50     ! FUEL2 2.6%
+  axial A3  6.05 PGAP 10.28 PLUG 11.95 FUEL3 377.71 PLEN 393.71 PLUG  395.38 PGAP 397.50     ! FUEL3 3.1%
+
+! grid definitions
+
+  grid GINC  inc  1014  3.866
+  grid GZRC  zirc 875   3.81
+
+  grid_axial
+      GINC  13.883   ! bottom of grid lines up with BAF
+      GZRC  75.2
+      GZRC 127.4
+      GZRC 179.6
+      GZRC 231.8
+      GZRC 284.0
+      GZRC 336.2
+      GINC 388.2
+
+! Parser: lower_nozzle_comp, lower_nozzle_height, lower_nozzle_mass
+  lower_nozzle  ss  6.05  6250.0
+  upper_nozzle  ss  8.83  6250.0
+
+[CONTROL]
+  title "B4C control rods with AIC tips"   ! control_title
+  npin 17                                  ! control_num_pins
+
+  mat aic   10.20
+  mat b4c    6.56
+  mat ss     8.0
+
+  stroke  360.0 228                        ! control_stroke, control_maxstep
+
+  cell 1  0.382 0.386 0.484 / aic he ss      ! AIC cell
+  cell 2  0.373 0.386 0.484 / b4c he ss      ! B4C cell
+
+  rodmap  AIC
+     -
+     - -
+     - - -
+     1 - - 1
+     - - - - -
+     - - - - - 1
+     1 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  B4C
+     -
+     - -
+     - - -
+     2 - - 2
+     - - - - -
+     - - - - - 2
+     2 - - 2 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+! Note: First "1" corresponds control rod type in "crd_map" in CORE block
+! ** check elevations
+
+  axial 1 15.76 AIC  376.44 B4C  394.3
+
+[INSERT]
+  title "Pyrex Inserts"  ! insert_title
+  npin 17                ! insert_num_pins
+
+  mat pyrex  2.23
+  mat ss     8.0
+
+! *** check cell cards
+  cell 1  0.214 0.230 0.241 0.427 0.437 0.484 / he ss he  pyrex he ss     ! radial pyrex geometry
+  cell 2                          0.437 0.484 /                 he ss     ! pyrex plenum
+  cell 3  0.538 / ss                                                      ! thimble plug
+
+  rodmap  PY8
+     -
+     - -
+     - - -
+     1 - - -
+     - - - - -
+     - - - - - 1
+     - - - - - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  PY12
+     -
+     - -
+     - - -
+     1 - - -
+     - - - - -
+     - - - - - -
+     - - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  PY16
+     -
+     - -
+     - - -
+     1 - - -
+     - - - - -
+     - - - - - 1
+     - - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  PY20
+     -
+     - -
+     - - -
+     1 - - -
+     - - - - -
+     - - - - - 1
+     1 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  PY24
+     -
+     - -
+     - - -
+     1 - - 1
+     - - - - -
+     - - - - - 1
+     1 - - 1 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+! *** add  PY19s - need full map   Fig 4.3-4b p. 174
+! *** add  PY23s - need full map   Fig 4.3-4b p. 174
+
+  rodmap  PLEN8
+     -
+     - -
+     - - -
+     2 - - -
+     - - - - -
+     - - - - - 2
+     - - - - - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  PLEN12
+     -
+     - -
+     - - -
+     2 - - -
+     - - - - -
+     - - - - - -
+     - - - 2 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  PLEN16
+     -
+     - -
+     - - -
+     2 - - -
+     - - - - -
+     - - - - - 2
+     - - - 2 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  PLEN20
+     -
+     - -
+     - - -
+     2 - - -
+     - - - - -
+     - - - - - 2
+     2 - - 2 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  rodmap  PLEN24
+     -
+     - -
+     - - -
+     2 - - 2
+     - - - - -
+     - - - - - 2
+     2 - - 2 - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  axial BP8  15.76 PY8  376.44 PLEN8  394.3
+  axial BP12 15.76 PY12 376.44 PLEN12 394.3
+  axial BP16 15.76 PY16 376.44 PLEN16 394.3
+  axial BP20 15.76 PY20 376.44 PLEN20 394.3
+  axial BP24 15.76 PY24 376.44 PLEN24 394.3
+
+[DETECTOR]
+  title "Sample Detector"
+  npin 17
+
+  mat ss 8.0
+
+  cell 1 0.258 0.382 / vacuum ss
+
+  rodmap DET
+     1
+     - -
+     - - -
+     - - - -
+     - - - - -
+     - - - - - -
+     - - - - - - -
+     - - - - - - - -
+     - - - - - - - - -
+
+  axial 1 0.0 DET 406.3
+
+
+[EDITS]
+  axial_edit_bounds
+      11.9500  ! BAF
+      15.8160
+      24.0273
+      32.2386
+      40.4499
+      48.6611
+      56.8724
+      65.0837
+      73.2950
+      77.1050
+      85.1700
+      93.2350
+     101.3000
+     109.3650
+     117.4300
+     125.4950
+     129.3050
+     137.3700
+     145.4350
+     153.5000
+     161.5650
+     169.6300
+     177.6950
+     181.5050
+     189.5700
+     197.6350
+     205.7000
+     213.7650
+     221.8300
+     229.8950
+     233.7050
+     241.7700
+     249.8350
+     257.9000
+     265.9650
+     274.0300
+     282.0950
+     285.9050
+     293.9700
+     302.0350
+     310.1000
+     318.1650
+     326.2300
+     334.2950
+     338.1050
+     346.0260
+     353.9470
+     361.8680
+     369.7890
+     377.7100   ! TAF
+
+[INSILICO]
+
+! To-Do: Add additional INSILICO parameters (see example PL)
+
+[PEREGRINE]
+
+  auxkernels_fast_neutron_flux_axial_power_profile = axial_peaking_factors
+  auxkernels_fast_neutron_flux_factor = 3.e13
+  auxkernels_fast_neutron_flux_rod_ave_lin_pow = power_profile
+  auxkernels_pelletid_a_lower = 0.00226
+  auxkernels_pelletid_a_upper = 0.5418
+  auxvariables_grain_radius_initial_condition = 3.0e-6
+  auxvariables_porosity_initial_condition = 0.07
+  bcs_plenumpressure_plenumpressure_initial_pressure = 2.0e6
+  bcs_plenumpressure_plenumpressure_startup_time = 1e4
+  bcs_pressure_coolantpressue_factor = 1.55e7
+  bcs_pressure_coolantpressue_function = pressure_ramp
+  burnup_burnup_rod_ave_lin_pow = power_profile
+  burnup_burnup_axial_power_profile = axial_peaking_factors
+  burnup_burnup_fuel_outer_radius = 0.0041
+  burnup_burnup_i_enrich = 0.031 0.969 0 0 0 0
+  coolantchannel_convective_clad_surface_inlet_temperature = 565
+  coolantchannel_convective_clad_surface_inlet_pressure = 1.55e7
+  coolantchannel_convective_clad_surface_inlet_massflux = 3800
+  coolantchannel_convective_clad_surface_rod_diameter = 0.0095
+  coolantchannel_convective_clad_surface_rod_pitch = 0.012
+  coolantchannel_convective_clad_surface_linear_heat_rate = power_profile
+  coolantchannel_convective_clad_surface_axial_power_profile = axial_peaking_factors
+  executioner_dt = 1.0e3
+  executioner_end_time = 6.0e7
+  executioner_num_steps = 2000
+  executioner_timestepper_time_dt = 1.0e3  1.0e5
+  executioner_timestepper_time_t = 0      1.0e5
+  globalparams_a_lower = 0.01676
+  globalparams_a_upper = 3.67436
+  globalparams_energy_per_fission = 3.2e-11
+  materials_clad_density_density = 6551.0
+  materials_clad_solid_mechanics_cold_work_factor = 0.01
+  materials_clad_solid_mechanics_oxygen_concentration = 0.0
+  materials_fission_gas_release_axial_power_profile = axial_peaking_factors
+  materials_fission_gas_release_file_name = powerhistory_RISO_AN8.csv
+  materials_fission_gas_release_grain_radius = 5.0e-6
+  materials_fission_gas_release_initial_grain_radius = 3.0e-6
+  materials_fission_gas_release_initial_porosity = 0.07
+  materials_fuel_mech_grain_radius = 5.0e-6
+  materials_fuel_relocation_q = q
+  materials_fuel_thermal_initial_porosity = 0.07
+  mesh_clad_bot_gap_height = 1.52e-3
+  nfuelrod = 8
+  output_file_base = output_RISO_AN8_bump
+  postprocessors_rod_input_power_scale_factor = 3.66
+  porosity = 0.2
+  thermalcontact_initial_gas_fractions = 1 0 0 0 0 0 0 0 0 0
+  thermalcontact_roughness_clad = 5.0e-7
+  thermalcontact_roughness_fuel = 1.0e-6
+  fuel_pin_input_file_template = bison.i.template
+  non_fuel_pin_input_file_template = guide_tube.moose.i.template
+  mesh_type = smeared_pellet

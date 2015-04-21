@@ -72,13 +72,7 @@ $SCHEMA="${directory}Templates/Directory.yml";
 #
 # Rethreads
 # PL for INSILICO requires repeating maps, axial, cells, etc
-#
-%RETHREAD=( 
-    'ASSEMBLIES' => 'Assembly_',
-    'CONTROLS'   => 'Control_',
-    'INSERTS'    => 'Insert_',
-    'DETECTORS'  => 'Detector_'
-    );
+# Now done in yml output templates
 
 # To have a bona fide XMl file
 my $XML_HEADER='<?xml version="1.0" encoding="UTF-8"?>';
@@ -246,7 +240,6 @@ PL->dispatch();
 
 $YAML::UseAliases=0;    # minimize references
 foreach $iblock (@BLOCKS){
-
     # Initiate each block
     ($SCH_PL{$iblock}) = YAML::LoadFile( $SCHEMA_PL{$iblock} );
     mergekeys_loop( $SCH_PL{$iblock} );   # needs fix to eliminate
@@ -254,13 +247,6 @@ foreach $iblock (@BLOCKS){
     # Process the block using commands in the block templates
     PLlist($SCH_PL{$iblock}->{$iblock});
     YAML::DumpFile("$iblock.dbg.yml",$SCH_PL{$iblock}) if $DEBUG;
-
-    # Used for repeating information in the PL, lattices, cells and such
-    if(exists($RETHREAD{$iblock})){
-	# Gum up the tree
-	rethread($SCH_PL{$iblock},$iblock,$RETHREAD{$iblock});
-	YAML::DumpFile("$iblock.ddbg.yml",$SCH_PL{$iblock}) if $DEBUG;
-    };
 }
 
 unless($NOTRIM){
