@@ -573,6 +573,8 @@ ASSEMBLY:
       - nth(4,())>=0
 
 CONTROL:
+  <<: *dtblocknamed
+  _maxid: 1
   title:
     <<: *dtstring
     _content:
@@ -626,6 +628,8 @@ CONTROL:
       - is_string(nth(7,()))
 
 INSERT:
+  <<: *dtblocknamed
+  _maxid: 1
   title:
     <<: *dtstring
     _content:
@@ -658,6 +662,8 @@ INSERT:
       - lc(nth(0,()))ne'mod'
 
 DETECTOR:
+  <<: *dtblocknamed
+  _maxid: 1
   title:
     <<: *dtstring
     _content:

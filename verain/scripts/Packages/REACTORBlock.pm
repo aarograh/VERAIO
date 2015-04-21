@@ -91,9 +91,15 @@ sub inp_db
 	$self->{keytree}=clone($dir_ref);               # create new instance of block db
 	my %args=%{ $self->{keytree} };
 	my $name_idx=$args{_named};
+	my $maxid=$args{_maxid};
+	my $bname=$self->name();
 
 	if(defined($name_idx) && $name_idx ne '0'){
-	    $BLOCK_COUNTERS{$self->name()}++;
+	    my $bnum=$BLOCK_COUNTERS{$self->name()}+1;
+	    if(defined($maxid) && $bnum > $maxid){
+		die "inp_db: max counter $maxid for the block $bname $bnum exceeded.\n";
+	    }
+	    $BLOCK_COUNTERS{$self->name()}=$bnum;
 	    $self->named($BLOCK_COUNTERS{$self->name()});
 #           In case we want to use id
 #	    $self->named($name_idx);
