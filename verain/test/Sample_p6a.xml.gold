@@ -223,6 +223,8 @@
     <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="edit_channels" type="int" value="1"/>
     <Parameter name="epso" type="double" value="0.001"/>
+    <Parameter name="gridbloc" type="Array(double)" value="{0.83,0.85}"/>
+    <Parameter name="gridbloclabel" type="Array(string)" value="{XND,MID}"/>
     <Parameter name="gridlabel" type="Array(string)" value="{MID,END}"/>
     <Parameter name="gridloss" type="Array(double)" value="{0.9065,0.9070}"/>
     <Parameter name="hgap" type="double" value="5678.3"/>

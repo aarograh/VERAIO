@@ -59,6 +59,20 @@ COBRATF:
         - copyhash COBRATF/%gridloss,select=>values,sort=>name_reverse
       _content:
 
+    gridbloclabel:
+      _pltype: array
+      _type: string
+      _do:
+        - copyhash COBRATF/%gridbloc,select=>keys,sort=>name_reverse
+      _content:
+
+    gridbloc:
+      _pltype: array
+      _type: double
+      _do:
+        - copyhash COBRATF/%gridbloc,select=>values,sort=>name_reverse
+      _content:
+
     epso:
       _pltype: parameter
       _type: double
