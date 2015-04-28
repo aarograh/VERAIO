@@ -1185,6 +1185,10 @@ COBRATF:
     <<: *dtdblnamed
     _check:
 
+  gridbloc:
+    <<: *dtdblnamed
+    _check:
+
   epso:
     <<: *dtdouble
     _content:
