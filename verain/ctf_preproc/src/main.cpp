@@ -1020,13 +1020,22 @@ namespace {
             throw runtime_error("Could not find a loss coefficient spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
 
         map<string, double> grid_bloc_ratio;
+        cout << gridblocs << endl;
         if (gridblocs[0]>=0.0){
            for( int ii=0; ii < gridbloc_types.size(); ++ii)
              grid_bloc_ratio[gridbloc_types[ii]] = gridblocs[ii];
            // Sanity check that all grid_map types have a specified loss coefficient
            for( size_t n = 0; n < ngrid_orig; ++n )
-             if( grid_loss_coeffs.end() == grid_bloc_ratio.find(grid_map[n]) )
+             if( grid_bloc_ratio.end() == grid_bloc_ratio.find(grid_map[n]) )
                throw runtime_error("Could not find a loss coefficient spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
+        }else{
+           for( int ii=0; ii < gridbloc_types.size(); ++ii)
+             grid_bloc_ratio[gridbloc_types[ii]] = -1.0;
+           // Sanity check that all grid_map types have a specified loss coefficient
+           for( size_t n = 0; n < ngrid_orig; ++n )
+             if( grid_bloc_ratio.end() == grid_bloc_ratio.find(grid_map[n]) )
+               throw runtime_error("Could not find a loss coefficient spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
+
         }
 
 
@@ -1092,12 +1101,12 @@ namespace {
             gridstart.at(ng) = (grid1-model_bottom)*conversion_cm2mm;   // save shifted values
             gridend.at(ng)   = (grid2-model_bottom)*conversion_cm2mm ;
             gridloss.at(ng)  = grid_loss_coeffs[grid_map[n]];
+            gridbloc.at(ng)  = grid_bloc_ratio[grid_map[n]];
+
             if (gridbloc.at(ng)<0.0){
                assem_data.model_grid_enhance=false;}
             else{
                assem_data.model_grid_enhance=true;}
-
-            gridbloc.at(ng)  = grid_bloc_ratio[grid_map[n]];
 
           }
         }
