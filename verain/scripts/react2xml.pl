@@ -67,7 +67,7 @@ $SCHEMA="${directory}Templates/Directory.yml";
 @BLOCKS=('CASEID','STATES','CORE','ASSEMBLIES',
 	 'CONTROLS','DETECTORS','INSERTS',
 	 'INSILICO','SHIFT','EDITS','COBRATF','COUPLING',
-	 'MPACT','MAMBA2D','PEREGRINE','TIAMAT');
+	 'MPACT','MAMBA2D','BISON','TIAMAT');
 
 #
 # Rethreads
@@ -122,7 +122,7 @@ if($VERSION){
 #    @BLOCKS=('CASEID','STATES','CORE','ASSEMBLIES',
 #	     'CONTROLS','DETECTORS','INSERTS',
 #	     'INSILICO','EDITS','COBRATF','COUPLING',
-#	     'MPACT','MAMBA2D','PEREGRINE');
+#	     'MPACT','MAMBA2D','BISON');
 # }
 
 #
@@ -133,7 +133,7 @@ if($VERSION){
 #    @BLOCKS=('CASEID','STATE','CORE','ASSEMBLIES',
 #	     'CONTROLS','DETECTORS','INSERTS',
 #	     'INSILICO','EDITS','COBRATF','COUPLING',
-#	     'MPACT','MAMBA2D','PEREGRINE');
+#	     'MPACT','MAMBA2D','BISON');
 # }
 
 # For formatted display in a browser.

@@ -217,7 +217,7 @@
   courant 0.8
   maps_filename = 3x3_HFP
 
-[PEREGRINE]
+[BISON]
 
   auxkernels_fast_neutron_flux_axial_power_profile = axial_peaking_factors
   auxkernels_fast_neutron_flux_factor = 3.e13
@@ -268,7 +268,7 @@
   thermalcontact_initial_gas_fractions = 1 0 0 0 0 0 0 0 0 0
   thermalcontact_roughness_clad = 5.0e-7
   thermalcontact_roughness_fuel = 1.0e-6
-  fuel_pin_input_file_template = small_3x3rod_Peregrine.i.template
+  fuel_pin_input_file_template = small_3x3rod_Bison.i.template
   non_fuel_pin_input_file_template = guide_tube.moose.i.template
   ramping_time -100.0 0.0 1.0e5
   ramping_factor 0.0 0.0 1.0

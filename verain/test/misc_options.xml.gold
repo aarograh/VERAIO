@@ -447,7 +447,7 @@
       <Parameter name="ith_hgap" type="double" value="5200.0"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="PEREGRINE">
+  <ParameterList name="BISON">
     <Parameter name="ramp_data_transfers" type="bool" value="true"/>
   </ParameterList>
   <ParameterList name="TIAMAT">

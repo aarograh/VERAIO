@@ -1,4 +1,4 @@
-PEREGRINE:
+BISON:
   _pltype: list
   _do:
     - setdb MAIN_DB
@@ -8,390 +8,390 @@ PEREGRINE:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$auxkernels_fast_neutron_flux_rod_ave_lin_pow
+        - copy BISON/$auxkernels_fast_neutron_flux_rod_ave_lin_pow
       _content:
 
     auxkernels_fast_neutron_flux_axial_power_profile:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$auxkernels_fast_neutron_flux_axial_power_profile
+        - copy BISON/$auxkernels_fast_neutron_flux_axial_power_profile
       _content:
 
     auxkernels_fast_neutron_flux_factor:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$auxkernels_fast_neutron_flux_factor
+        - copy BISON/$auxkernels_fast_neutron_flux_factor
       _content:
 
     auxkernels_pelletid_a_lower:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$auxkernels_pelletid_a_lower
+        - copy BISON/$auxkernels_pelletid_a_lower
       _content:
 
     auxkernels_pelletid_a_upper:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$auxkernels_pelletid_a_upper
+        - copy BISON/$auxkernels_pelletid_a_upper
       _content:
 
     auxvariables_grain_radius_initial_condition:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$auxvariables_grain_radius_initial_condition
+        - copy BISON/$auxvariables_grain_radius_initial_condition
       _content:
 
     auxvariables_porosity_initial_condition:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$auxvariables_porosity_initial_condition
+        - copy BISON/$auxvariables_porosity_initial_condition
       _content:
 
     bcs_plenumpressure_plenumpressure_initial_pressure:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$bcs_plenumpressure_plenumpressure_initial_pressure
+        - copy BISON/$bcs_plenumpressure_plenumpressure_initial_pressure
       _content:
 
     bcs_plenumpressure_plenumpressure_startup_time:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$bcs_plenumpressure_plenumpressure_startup_time
+        - copy BISON/$bcs_plenumpressure_plenumpressure_startup_time
       _content:
 
     bcs_pressure_coolantpressue_factor:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$bcs_pressure_coolantpressue_factor
+        - copy BISON/$bcs_pressure_coolantpressue_factor
       _content:
 
     bcs_pressure_coolantpressue_function:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$bcs_pressure_coolantpressue_function
+        - copy BISON/$bcs_pressure_coolantpressue_function
       _content:
 
     burnup_burnup_rod_ave_lin_pow:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$burnup_burnup_rod_ave_lin_pow
+        - copy BISON/$burnup_burnup_rod_ave_lin_pow
       _content:
 
     burnup_burnup_axial_power_profile:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$burnup_burnup_axial_power_profile
+        - copy BISON/$burnup_burnup_axial_power_profile
       _content:
 
     burnup_burnup_fuel_outer_radius:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$burnup_burnup_fuel_outer_radius
+        - copy BISON/$burnup_burnup_fuel_outer_radius
       _content:
 
     burnup_burnup_i_enrich:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$burnup_burnup_i_enrich
+        - copy BISON/$burnup_burnup_i_enrich
       _content:
 
     coolantchannel_convective_clad_surface_inlet_temperature:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$coolantchannel_convective_clad_surface_inlet_temperature
+        - copy BISON/$coolantchannel_convective_clad_surface_inlet_temperature
       _content:
 
     coolantchannel_convective_clad_surface_inlet_pressure:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$coolantchannel_convective_clad_surface_inlet_pressure
+        - copy BISON/$coolantchannel_convective_clad_surface_inlet_pressure
       _content:
 
     coolantchannel_convective_clad_surface_inlet_massflux:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$coolantchannel_convective_clad_surface_inlet_massflux
+        - copy BISON/$coolantchannel_convective_clad_surface_inlet_massflux
       _content:
 
     coolantchannel_convective_clad_surface_rod_diameter:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$coolantchannel_convective_clad_surface_rod_diameter
+        - copy BISON/$coolantchannel_convective_clad_surface_rod_diameter
       _content:
 
     coolantchannel_convective_clad_surface_rod_pitch:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$coolantchannel_convective_clad_surface_rod_pitch
+        - copy BISON/$coolantchannel_convective_clad_surface_rod_pitch
       _content:
 
     coolantchannel_convective_clad_surface_linear_heat_rate:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$coolantchannel_convective_clad_surface_linear_heat_rate
+        - copy BISON/$coolantchannel_convective_clad_surface_linear_heat_rate
       _content:
 
     coolantchannel_convective_clad_surface_axial_power_profile:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$coolantchannel_convective_clad_surface_axial_power_profile
+        - copy BISON/$coolantchannel_convective_clad_surface_axial_power_profile
       _content:
 
     executioner_dt:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$executioner_dt
+        - copy BISON/$executioner_dt
       _content:
 
     executioner_end_time:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$executioner_end_time
+        - copy BISON/$executioner_end_time
       _content:
 
     executioner_num_steps:
       _pltype: parameter
       _type: int
       _do:
-        - copy PEREGRINE/$executioner_num_steps
+        - copy BISON/$executioner_num_steps
       _content:
 
     executioner_timestepper_time_dt:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$executioner_timestepper_time_dt
+        - copy BISON/$executioner_timestepper_time_dt
       _content:
 
     executioner_timestepper_time_t:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$executioner_timestepper_time_t
+        - copy BISON/$executioner_timestepper_time_t
       _content:
 
     globalparams_a_lower:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$globalparams_a_lower
+        - copy BISON/$globalparams_a_lower
       _content:
 
     globalparams_a_upper:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$globalparams_a_upper
+        - copy BISON/$globalparams_a_upper
       _content:
 
     globalparams_energy_per_fission:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$globalparams_energy_per_fission
+        - copy BISON/$globalparams_energy_per_fission
       _content:
 
     materials_clad_density_density:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$materials_clad_density_density
+        - copy BISON/$materials_clad_density_density
       _content:
 
     materials_clad_solid_mechanics_cold_work_factor:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$materials_clad_solid_mechanics_cold_work_factor
+        - copy BISON/$materials_clad_solid_mechanics_cold_work_factor
       _content:
 
     materials_clad_solid_mechanics_oxygen_concentration:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$materials_clad_solid_mechanics_oxygen_concentration
+        - copy BISON/$materials_clad_solid_mechanics_oxygen_concentration
       _content:
 
     materials_fission_gas_release_axial_power_profile:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$materials_fission_gas_release_axial_power_profile
+        - copy BISON/$materials_fission_gas_release_axial_power_profile
       _content:
 
     materials_fission_gas_release_file_name:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$materials_fission_gas_release_file_name
+        - copy BISON/$materials_fission_gas_release_file_name
       _content:
 
     materials_fission_gas_release_grain_radius:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$materials_fission_gas_release_grain_radius
+        - copy BISON/$materials_fission_gas_release_grain_radius
       _content:
 
     materials_fission_gas_release_initial_grain_radius:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$materials_fission_gas_release_initial_grain_radius
+        - copy BISON/$materials_fission_gas_release_initial_grain_radius
       _content:
 
     materials_fission_gas_release_initial_porosity:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$materials_fission_gas_release_initial_porosity
+        - copy BISON/$materials_fission_gas_release_initial_porosity
       _content:
 
     materials_fuel_mech_grain_radius:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$materials_fuel_mech_grain_radius
+        - copy BISON/$materials_fuel_mech_grain_radius
       _content:
 
     materials_fuel_relocation_q:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$materials_fuel_relocation_q
+        - copy BISON/$materials_fuel_relocation_q
       _content:
 
     materials_fuel_thermal_initial_porosity:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$materials_fuel_thermal_initial_porosity
+        - copy BISON/$materials_fuel_thermal_initial_porosity
       _content:
 
     mesh_clad_bot_gap_height:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$mesh_clad_bot_gap_height
+        - copy BISON/$mesh_clad_bot_gap_height
       _content:
 
     nfuelrod:
       _pltype: parameter
       _type: int
       _do:
-        - copy PEREGRINE/$nfuelrod
+        - copy BISON/$nfuelrod
       _content:
 
     output_file_base:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$output_file_base
+        - copy BISON/$output_file_base
       _content:
 
     postprocessors_rod_input_power_scale_factor:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$postprocessors_rod_input_power_scale_factor
+        - copy BISON/$postprocessors_rod_input_power_scale_factor
       _content:
 
     porosity:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$porosity
+        - copy BISON/$porosity
       _content:
 
     thermalcontact_initial_gas_fractions:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$thermalcontact_initial_gas_fractions
+        - copy BISON/$thermalcontact_initial_gas_fractions
       _content:
 
     thermalcontact_roughness_clad:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$thermalcontact_roughness_clad
+        - copy BISON/$thermalcontact_roughness_clad
       _content:
 
     thermalcontact_roughness_fuel:
       _pltype: parameter
       _type: double
       _do:
-        - copy PEREGRINE/$thermalcontact_roughness_fuel
+        - copy BISON/$thermalcontact_roughness_fuel
       _content:
 
     fuel_pin_input_file_template:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$fuel_pin_input_file_template
+        - copy BISON/$fuel_pin_input_file_template
       _content:
 
     non_fuel_pin_input_file_template:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$non_fuel_pin_input_file_template
+        - copy BISON/$non_fuel_pin_input_file_template
       _content:
 
     ramping_time:
       _pltype: array
       _type: double
       _do:
-        - copy PEREGRINE/@ramping_time
+        - copy BISON/@ramping_time
       _content:
 
     ramping_factor:
       _pltype: array
       _type: double
       _do:
-        - copy PEREGRINE/@ramping_factor
+        - copy BISON/@ramping_factor
       _content:
 
     ramp_data_transfers:
       _pltype: parameter
       _type: bool
       _do:
-        - copy PEREGRINE/$ramp_data_transfers
+        - copy BISON/$ramp_data_transfers
       _content:
 
     mesh_type:
       _pltype: parameter
       _type: string
       _do:
-        - copy PEREGRINE/$mesh_type
+        - copy BISON/$mesh_type
       _content:
 
     output_average_axial_values:
       _pltype: parameter
       _type: bool
       _do:
-        - copy PEREGRINE/$output_average_axial_values
+        - copy BISON/$output_average_axial_values
       _content:
