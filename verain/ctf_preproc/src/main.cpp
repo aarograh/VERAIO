@@ -46,6 +46,8 @@ namespace
      double  *c_ptr_to_gridstart;
      double  *c_ptr_to_gridend;
      double  *c_ptr_to_gridloss;
+     double  *c_ptr_to_gridbloc;
+     bool    model_grid_enhance;
   };
 
   // control data structure
@@ -159,6 +161,7 @@ namespace
   vector<double> gridstart;
   vector<double> gridend;
   vector<double> gridloss;
+  vector<double> gridbloc;
   Array<int> core_shape;
   Array<double> geo_edit_bounds;
   Array<int> zondx;
@@ -994,11 +997,19 @@ namespace {
         Array<string> grid_types;
         grid_types.push_back("MID");
         grid_types.push_back("END");
+        Array<string> gridbloc_types;
+        gridbloc_types.push_back("MID");
+        gridbloc_types.push_back("END");
         Array<double> grid_losses;  // default to empty
         grid_losses.push_back(0.9065);
         grid_losses.push_back(0.9070);
+        Array<double> gridblocs;
+        gridblocs.push_back(-1.0);
+        gridblocs.push_back(-1.0);
         grid_types = vera_xml.get_param_from_plist<Array<string> >( "COBRATF.gridlabel", grid_types);
         grid_losses = vera_xml.get_param_from_plist<Array<double> >( "COBRATF.gridloss", grid_losses);
+        gridbloc_types = vera_xml.get_param_from_plist<Array<string> >( "COBRATF.gridbloclabel", gridbloc_types);
+        gridblocs = vera_xml.get_param_from_plist<Array<double> >( "COBRATF.gridbloc", gridblocs);
         map<string, double> grid_loss_coeffs;
         for( int ii = 0; ii < grid_types.size(); ++ii )
           grid_loss_coeffs[grid_types[ii]] = grid_losses[ii];
@@ -1008,6 +1019,26 @@ namespace {
           if( grid_loss_coeffs.end() == grid_loss_coeffs.find(grid_map[n]) )
             throw runtime_error("Could not find a loss coefficient spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
 
+        map<string, double> grid_bloc_ratio;
+        cout << gridblocs << endl;
+        if (gridblocs[0]>=0.0){
+           for( int ii=0; ii < gridbloc_types.size(); ++ii)
+             grid_bloc_ratio[gridbloc_types[ii]] = gridblocs[ii];
+           // Sanity check that all grid_map types have a specified loss coefficient
+           for( size_t n = 0; n < ngrid_orig; ++n )
+             if( grid_bloc_ratio.end() == grid_bloc_ratio.find(grid_map[n]) )
+               throw runtime_error("Could not find a loss coefficient spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
+        }else{
+           for( int ii=0; ii < gridbloc_types.size(); ++ii)
+             grid_bloc_ratio[gridbloc_types[ii]] = -1.0;
+           // Sanity check that all grid_map types have a specified loss coefficient
+           for( size_t n = 0; n < ngrid_orig; ++n )
+             if( grid_bloc_ratio.end() == grid_bloc_ratio.find(grid_map[n]) )
+               throw runtime_error("Could not find a loss coefficient spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
+
+        }
+
+
         int ifgrd1;
         int ifgrd2;
         double half_height;
@@ -1016,6 +1047,7 @@ namespace {
         gridstart.resize(ngrid);
         gridend.resize(ngrid);
         gridloss.resize(ngrid);
+        gridbloc.resize(ngrid);
         size_t ng=-1;
         for( size_t n=ng0; n<ng1; ++n )    // only loop over grids in actual geometry
         {
@@ -1069,6 +1101,12 @@ namespace {
             gridstart.at(ng) = (grid1-model_bottom)*conversion_cm2mm;   // save shifted values
             gridend.at(ng)   = (grid2-model_bottom)*conversion_cm2mm ;
             gridloss.at(ng)  = grid_loss_coeffs[grid_map[n]];
+            gridbloc.at(ng)  = grid_bloc_ratio[grid_map[n]];
+
+            if (gridbloc.at(ng)<0.0){
+               assem_data.model_grid_enhance=false;}
+            else{
+               assem_data.model_grid_enhance=true;}
 
           }
         }
@@ -1082,6 +1120,8 @@ namespace {
     assem_data.c_ptr_to_gridstart = &gridstart[0];
     assem_data.c_ptr_to_gridend   = &gridend[0];
     assem_data.c_ptr_to_gridloss  = &gridloss[0];
+    assem_data.c_ptr_to_gridbloc  = &gridbloc[0];
+
 
     return assem_data;
 
