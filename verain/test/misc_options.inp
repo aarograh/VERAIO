@@ -321,5 +321,5 @@
   ith_hgap   5200.0   ! internal t/h option
   ith_dhfrac 0.02     ! internal t/h option
 
-[PEREGRINE]
+[BISON]
   ramp_data_transfers = true

@@ -229,7 +229,7 @@
     <Parameter name="rlx_power" type="double" value="0.5"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
-  <ParameterList name="PEREGRINE">
+  <ParameterList name="BISON">
     <Parameter name="auxkernels_fast_neutron_flux_axial_power_profile" type="string" value="axial_peaking_factors"/>
     <Parameter name="auxkernels_fast_neutron_flux_factor" type="double" value="3.e13"/>
     <Parameter name="auxkernels_fast_neutron_flux_rod_ave_lin_pow" type="string" value="power_profile"/>
@@ -257,7 +257,7 @@
     <Parameter name="executioner_num_steps" type="int" value="2000"/>
     <Parameter name="executioner_timestepper_time_dt" type="string" value="1.0e3 1.0e5"/>
     <Parameter name="executioner_timestepper_time_t" type="string" value="0 1.0e5"/>
-    <Parameter name="fuel_pin_input_file_template" type="string" value="small_3x3rod_Peregrine.i.template"/>
+    <Parameter name="fuel_pin_input_file_template" type="string" value="small_3x3rod_Bison.i.template"/>
     <Parameter name="globalparams_a_lower" type="double" value="0.01676"/>
     <Parameter name="globalparams_a_upper" type="double" value="3.67436"/>
     <Parameter name="globalparams_energy_per_fission" type="double" value="3.2e-11"/>

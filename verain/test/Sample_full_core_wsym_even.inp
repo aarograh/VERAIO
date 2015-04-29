@@ -607,7 +607,7 @@
 
 ! To-Do: Add additional INSILICO parameters (see example PL)
 
-[PEREGRINE]
+[BISON]
 
   auxkernels_fast_neutron_flux_axial_power_profile = axial_peaking_factors
   auxkernels_fast_neutron_flux_factor = 3.e13

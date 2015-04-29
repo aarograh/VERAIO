@@ -52,7 +52,7 @@ _DIRECTORY:
   COBRATF:
   COUPLING:
   MPACT:
-  PEREGRINE:
+  BISON:
   MAMBA2D:
   TIAMAT:
 
@@ -2090,7 +2090,7 @@ MAMBA2D:
       - fall(sub{is_float(shift)},())
       - fall(sub{is_geq(shift,0)},())
 
-PEREGRINE:
+BISON:
 
   auxkernels_fast_neutron_flux_rod_ave_lin_pow:
     <<: *dtstring
