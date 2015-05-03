@@ -17,6 +17,13 @@ COBRATF:
         - copy COBRATF/$nc
       _content:
 
+    chf:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$chf
+      _content:
+
     debug:
       _pltype: parameter
       _type: int
