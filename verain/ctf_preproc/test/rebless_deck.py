@@ -51,7 +51,9 @@ verain_filenames=[
       'small_qtr_core_3x3rod_HFP',
       'chen_3x3',
       'small_3x3rod_IFBA',
-      'small_3x3rod_BProd']
+      'small_3x3rod_BProd',
+      'grid_enhance',
+      'VTK_on']
       
 
 partests=['Sample_p7',
