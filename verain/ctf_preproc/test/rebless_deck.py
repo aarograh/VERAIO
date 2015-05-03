@@ -38,7 +38,8 @@ filenames=['3x3_w_multistate',
            'inlet_temp',
            'inlet_flow',
            'inlet_bc_rot_sym',
-           'Sample_qtr_core_inlet_bc']
+           'Sample_qtr_core_inlet_bc',
+           'w3_correlation']
 
 verain_filenames=[
       'cross_w_baffle',
@@ -50,7 +51,9 @@ verain_filenames=[
       'small_qtr_core_3x3rod_HFP',
       'chen_3x3',
       'small_3x3rod_IFBA',
-      'small_3x3rod_BProd']
+      'small_3x3rod_BProd',
+      'grid_enhance',
+      'VTK_on']
       
 
 partests=['Sample_p7',

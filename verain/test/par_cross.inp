@@ -207,6 +207,7 @@
 [COBRATF]
   nfuel   3             ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction
+  chf     2             ! User Biasi CHF model
   irfc    2             ! friction factor correlation default=2
   dhfrac  0.02          ! fraction of power deposited directly into coolant
   hgap    5678.3        ! gap conductance

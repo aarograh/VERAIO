@@ -31,6 +31,7 @@ namespace
      int     wallflag;
      int     heater_types;
      int     nc;
+     int     chf;
      double  *c_ptr_to_pelletd;
      int     pelletnodes;
      double  *c_ptr_to_cladid;
@@ -301,6 +302,9 @@ namespace {
 
     int ctfnc=1;
     GetOptional(cobraParams, "nc", ctfnc);
+
+    int chf=0;
+    GetOptional(cobraParams,"chf",chf);
 
     assem_struct assem_data;
 
@@ -766,6 +770,7 @@ namespace {
             heated_elements_type = vera_xml.get_param_from_plist<int>( "COBRATF.heated_elements_type", 0, false);
             assem_data.heater_types = heated_elements_type;
             assem_data.nc = ctfnc;
+            assem_data.chf=chf;
 
           }
           else

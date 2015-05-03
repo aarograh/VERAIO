@@ -1152,6 +1152,12 @@ COBRATF:
     _check:
       - is_int()
       - is_geq() 0
+  chf:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
 
   debug:
     <<: *dtint
