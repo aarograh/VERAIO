@@ -1502,6 +1502,27 @@ TIAMAT:
       - is_word()
       - in_dictionary() true false
 
+  two_level_solver:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
+  inner_solver:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() jacobi gauss-seidel
+
+  inner_evaluator:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() BisonNeutronics BisonCTF NeutronicsCTF
+
   conserve_power_in_tiamat_transfer:
     <<: *dtbool
     _content:
