@@ -1849,7 +1849,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() 1gsweep mgnode mggroup
+      - in_dictionary() 1gsweep mgnode mggroup mgrbsor
   k_shift:
     <<: *dtdouble
     _content:
