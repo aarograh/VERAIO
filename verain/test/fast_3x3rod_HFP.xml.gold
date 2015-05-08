@@ -331,7 +331,7 @@
   </ParameterList>
   <ParameterList name="COUPLING">
     <Parameter name="ctf_iters_growth" type="double" value="1.2"/>
-    <Parameter name="ctf_iters_max" type="int" value="100"/>
+    <Parameter name="ctf_iters_max" type="int" value="200"/>
     <Parameter name="eps_boron" type="double" value="2.0"/>
     <Parameter name="epsk" type="double" value="2.0"/>
     <Parameter name="maxiter" type="int" value="20"/>
