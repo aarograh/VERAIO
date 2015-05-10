@@ -260,12 +260,12 @@
   ray_spacing       0.05
 !quad_set
   quad_type         CHEBYSHEV-GAUSS
-  polars_octant     4
+  polars_octant     2
   azimuthals_octant 16
 !iteration_control
-  flux_tolerance    1e-4
+  flux_tolerance    1e-5
   num_inners        3
-  k_tolerance       1e-4
+  k_tolerance       1e-5
   up_scatter        2
   num_outers        100
   scattering        LTCP0
