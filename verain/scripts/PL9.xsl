@@ -54,6 +54,7 @@
 	border-width: 1px 1px 0 0;
 	width: 20px;
 	text-align: center;
+	white-space:nowrap;
 	}
 	tr:nth-child(even) td:nth-child(odd)
 	{
