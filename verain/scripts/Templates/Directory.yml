@@ -1602,6 +1602,17 @@ MPACT:
     _content:
     _check:
       - is_float()
+  uniform_crud:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==3
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+      - nth(0,())>=0
+      - nth(1,())>=0
+      - nth(2,())>=0
 
   meshing_method:
     <<: *dtword
@@ -1621,6 +1632,15 @@ MPACT:
     _content:
     _check:
       - fall(sub{is_float(shift)},())
+  crud_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_int(nth(1,()))
+      - nth(0,())>0
+      - nth(1,())>0
 
   quad_type:
     <<: *dtword

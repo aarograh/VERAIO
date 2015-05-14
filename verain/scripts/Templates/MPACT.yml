@@ -10,7 +10,7 @@ MPACT:
       _do:
         - copy MPACT/$ray_spacing
       _content:
-    
+
     power_edit:
       _pltype: parameter
       _type: string
@@ -81,6 +81,30 @@ MPACT:
         - copy MPACT/$axial_buckling
       _content:
 
+    uniform_crud:
+      _pltype:  list
+      _content:
+        crud_thickness:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$uniform_crud:0
+          _content:
+
+        crud_mass:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$uniform_crud:1
+          _content:
+
+        boron_mass:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$uniform_crud:2
+          _content:
+
     db_entry:
       _pltype: list
       _do:
@@ -125,14 +149,14 @@ MPACT:
           _pltype: parameter
           _type: double
           _do:
-            - copy MPACT/@automesh_bounds:0
+            - copy MPACT/$automesh_bounds:0
           _content:
 
         automesh_bounds_max:
           _pltype: parameter
           _type: double
           _do:
-            - copy MPACT/@automesh_bounds:1
+            - copy MPACT/$automesh_bounds:1
           _content:
 
         meshing_method:
@@ -147,6 +171,20 @@ MPACT:
           _type: double
           _do:
             - copy MPACT/$axial_mesh
+          _content:
+
+        crud_mesh_thickness:
+          _pltype: array
+          _type: double
+          _do:
+            - copy MPACT/$crud_mesh:0
+          _content:
+
+        crud_mesh_div:
+          _pltype: array
+          _type: int
+          _do:
+            - copy MPACT/$crud_mesh:1
           _content:
 
     parallel_env:
