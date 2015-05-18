@@ -88,21 +88,21 @@ MPACT:
           _pltype: parameter
           _type: double
           _do:
-            - copy MPACT/$uniform_crud:0
+            - copy MPACT/@uniform_crud:0
           _content:
 
         crud_mass:
           _pltype: parameter
           _type: double
           _do:
-            - copy MPACT/$uniform_crud:1
+            - copy MPACT/@uniform_crud:1
           _content:
 
         boron_mass:
           _pltype: parameter
           _type: double
           _do:
-            - copy MPACT/$uniform_crud:2
+            - copy MPACT/@uniform_crud:2
           _content:
 
     db_entry:
@@ -174,17 +174,17 @@ MPACT:
           _content:
 
         crud_mesh_thickness:
-          _pltype: array
+          _pltype: parameter
           _type: double
           _do:
-            - copy MPACT/$crud_mesh:0
+            - copy MPACT/@crud_mesh:0
           _content:
 
         crud_mesh_div:
-          _pltype: array
+          _pltype: parameter
           _type: int
           _do:
-            - copy MPACT/$crud_mesh:1
+            - copy MPACT/@crud_mesh:1
           _content:
 
     parallel_env:
