@@ -54,6 +54,7 @@
 	border-width: 1px 1px 0 0;
 	width: 20px;
 	text-align: center;
+	white-space:nowrap;
 	}
 	tr:nth-child(even) td:nth-child(odd)
 	{
@@ -168,7 +169,7 @@
       </xsl:if>
     </xsl:when>
 
-    <xsl:when test="@name = 'tinlet_dist' or @name = 'flow_dist'">
+    <xsl:when test="@name = 'tinlet_dist' or @name = 'flow_dist' or @name = 'shuffle_label'">
       <xsl:variable name="num_pins" select="../../../ParameterList[@name = 'CORE']/Parameter[@name = 'core_size']/@value" />
       <xsl:variable name="shape"    select="../../../ParameterList[@name = 'CORE']/Parameter[@name = 'shape']/@value" />
       <xsl:variable name="map"      select="@value" />
