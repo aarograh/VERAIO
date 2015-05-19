@@ -1,140 +1,59 @@
 [CASEID]
-  title 'ama_ornl_xml_1c'
+  title 'CASL AMA Benchmark Problem 1C - Pin Cell- Public'
 
 [STATE]
-  power 0.0                             ! %
-  tinlet 620.33 F                         ! F - 600K
-  tfuel 900 K                             ! K
-  modden 0.661                          ! g/cc
-  boron 1300                            ! ppm
-  sym qtr  
+  power    0.0
+  tinlet   600 K
+  tfuel    900 K
+  modden   0.661         ! g/cc
+  boron    1300          ! ppm
+  sym      full          ! full symmetry
+  feedback off
 
 [CORE]
-  size 1
-  apitch 1.26 
+  size   1
+  apitch 1.26
+  rated  0.01 0.01
   height 1.0
-  rated 0.01 0.01
 
   core_shape
     1
 
   assm_map
-    ASSY
-
+    ASSY1
 
   bc_rad reflecting
   bc_top reflecting
   bc_bot reflecting
-  
+
 [ASSEMBLY]
+  title "pin cell"
   npin 1
   ppitch 1.26
-  
+
   fuel U31 10.257 94.5 / 3.1
-  mat he 0.000176
-  mat zirc 6.56 zirc4
-  
-  mat crud 0.00 Ni-00  5.7097361419E-03
-                Fe-00  1.1419472284E-02
-                 O-16  3.6464561202E-02
-                Li-07  3.1651818928E-04
-                 B-10  1.3137218785E-04
-                 B-11  5.2875588826E-04
-                 H-01  2.5035605945E-02
 
+  cell PIN1 0.4096 0.418 0.475 / U31 he zirc4
 
-  cell 1 0.4096 0.418 0.475 0.484 / U31 he zirc crud
+  lattice LAT1
+     PIN1
 
-  lattice LAT
-    1
-
-  axial ASSY 0.0 LAT 1.0 
-
-[EDITS]
-     
-[INSILICO]
-  silo_output 'p2' 
-  dimension 2
-
-  eq_set bld_2d
-  eigen_solver power_iteration
-  tolerance 1e-5
-  Pn_order 1
-  k_tolerance 1e-5
-  L2_tolerance 0.001
-  energy_dep_ev true 
-  upscatter_tolerance 1e-5 
-  
-  mesh 16
-  num_groups 23
-  
-  num_blocks_i 4 
-  num_blocks_j 4  
-  num_sets 2
-  
-  quad_type qr
-  azimuthals_octant 4
-  polars_octant 4
-  
-  mat_library casl_comp_r1_draft_03092013.sh5  
-  xs_library v7-252
-  
-  new_grp_bounds
-    8.2085e+05
-    1.1109e+05
-    5.5308e+03
-    1.8644e+02
-    3.7612e+01
-    3.5379e+01
-    2.7697e+01
-    2.1684e+01
-    2.0397e+01
-    1.5968e+01
-    7.1500e+00
-    6.7000e+00
-    6.3000e+00
-    1.0970e+00
-    1.0450e+00
-    9.5000e-01
-    3.5000e-01
-    2.0600e-01
-    1.0700e-01
-    5.8000e-02
-    2.5000e-02
-    1.0000e-02
-    1.0000e-05
+  axial ASSY1 0.0 LAT1 1.0
 
 [MPACT]
-  vis_edits         core
-  ray_spacing       0.05
-!quad_set
-  quad_type         CHEBYSHEV-YAMAMOTO
-  polars_octant     2
-  azimuthals_octant 16
-!iteration_control
-  flux_tolerance    1e-6
-  num_inners        2
-  k_tolerance       1e-6
-  up_scatter        2
-  num_outers        500
-  scattering        TCP0
-!cmfd
-  cmfd              cmfd
-  cmfd_solver       mgnode
-  k_shift           1.5
-  cmfd_num_outers   20
-!parallel
-  num_space         1
-  num_angle        -4
-  num_energy        1
-  num_threads       1
-!xs_library
-  xs_filename       declib56g_e7_09042013_p0mixed.fmt
-  xs_type           ORNL
-  subgroup_set      4
-!mesh
+  num_space      1 
+  num_angle     -8
+  num_threads    1
 
-  mesh fuel         3 1 1 / 8 8 8 8 8 8
-  mesh gtube        3 1   / 8 8 8 8 8
+  crud_mesh 100.0 1
+  uniform_crud 90 20 0.4
+ 
+[SHIFT]
+  transport            ce_mc       
+  num_cycles           1100
+  num_inactive_cycles  100
+  Np                   100000  
 
-  axial_mesh        1.0000
+[INSILICO]
+  num_blocks_i   1
+  num_blocks_j   1
