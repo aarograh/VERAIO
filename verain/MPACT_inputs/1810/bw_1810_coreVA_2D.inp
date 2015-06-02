@@ -8,7 +8,7 @@
   tinlet 25 C
   modden 0.997048  ! [g/cc] water at STP
   boron  1191.3  ! ppm
-  b10 0.1978 false
+  b10 0.199 false
   sym qtr
 
 [CORE]
