@@ -8,7 +8,7 @@
   tinlet 25 C
   modden 0.997048  ! [g/cc] water at STP
   boron  1155.8  ! ppm
-  b10 0.1978 false
+  b10 0.199 false
   sym qtr
 
 [CORE]
@@ -41,7 +41,7 @@
   mat rh103 12.41 Rh-103 1.0
   mat b4c 1.281 B-10 1.4542912E-01
                 B-11 6.4361958E-01
-                O-16 2.1095335E-01
+                C-00 2.1095335E-01
 
   core_shape
     1 1 1 1 1 1 1 1 1 1 1
