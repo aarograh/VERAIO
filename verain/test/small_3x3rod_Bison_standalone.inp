@@ -1,0 +1,290 @@
+[CASEID]
+  title 'CASL Problem 3x3 HFP'
+!================================================================================
+!  Sample input for small 3x3 Problem
+!
+!  Updated 3/18/2013 to be consistent with Problem 6 T/H
+!
+!  To process:
+!     ./react2xml.pl [file].inp [file].xml
+!
+!================================================================================
+
+[STATE]
+  power  100.0         ! %
+  tinlet 559.0 F         ! F
+  boron  1300          ! ppmB
+  pressure 2250        ! psia
+
+  tfuel 900.0 K         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
+  modden 0.743         ! g/cc      Not used with T/H feedback!
+
+  feedback on
+  sym full
+
+[CORE]
+  size 1                ! 1x1 single-assembly
+  rated 0.53545 0.02125 ! MW, Mlbs/hr  *** scaled to 3x3
+  apitch 3.78           ! *** scaled to 3x3, no gap
+  height 406.328
+
+  core_shape
+    1
+
+  assm_map
+    A1
+
+  lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
+  upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
+  lower_ref   mod 26.0 1.0
+  upper_ref   mod 25.0 1.0
+
+  bc_rad reflecting
+
+  mat he     0.000176
+  mat inc    8.19
+  mat ss     8.0
+  mat zirc   6.56 zirc4
+  mat aic   10.20
+  mat pyrex  2.23
+  mat b4c    6.56
+
+[ASSEMBLY]
+  title "Westinghouse 17x17"
+  npin 3    ! *** scaled to 3x3
+  ppitch 1.260
+
+  fuel U31 10.257 95.0 / 3.1
+
+  cell 1     0.4096 0.418 0.475 / U31 he zirc
+  cell 100          0.561 0.602 / mod    zirc       ! guide tube
+  cell 200          0.561 0.602 / mod    zirc       ! instrument tube
+  cell 7            0.418 0.475 / mod    mod        ! empty location
+  cell 8            0.418 0.475 /     he zirc       ! plenum
+  cell 9                  0.475 /        zirc       ! pincap
+
+  lattice FUEL1
+     200
+       1 1
+
+  lattice LGAP1
+     200
+       7 7
+
+  lattice PLEN1
+     200
+       8 8
+
+  lattice PCAP1
+     200
+       9 9
+
+  axial A1    6.050
+      LGAP1  10.281
+      PCAP1  11.951
+      FUEL1 377.711
+      PLEN1 393.711
+      PCAP1 395.381
+      LGAP1 397.501
+
+  grid END inc  31.67 3.866  ! *** mass scaled to 3x3
+  grid MID zirc 27.25 3.810  ! *** mass scaled to 3x3
+
+  grid_axial
+      END  13.884
+      MID  75.2
+      MID 127.4
+      MID 179.6
+      MID 231.8
+      MID 284.0
+      MID 336.2
+      END 388.2
+
+  lower_nozzle  ss 6.05  194.64  ! mat, height, mass (g)  *** mass scaled to 3x3
+  upper_nozzle  ss 8.827 194.64  ! mat, height, mass (g)  *** mass scaled to 3x3
+
+[EDITS]
+
+!  3in intervals in active fuel
+  axial_edit_bounds
+          11.951
+          15.817
+          24.028
+          32.239
+          40.45
+          48.662
+          56.873
+          65.084
+          73.295
+          77.105
+          85.17
+          93.235
+          101.3
+          109.365
+          117.43
+          125.495
+          129.305
+          137.37
+          145.435
+          153.5
+          161.565
+          169.63
+          177.695
+          181.505
+          189.57
+          197.635
+          205.7
+          213.765
+          221.83
+          229.895
+          233.705
+          241.77
+          249.835
+          257.9
+          265.965
+          274.03
+          282.095
+          285.905
+          293.97
+          302.035
+          310.1
+          318.165
+          326.23
+          334.295
+          338.105
+          346.0262
+          353.9474
+          361.8686
+          369.7898
+          377.711
+
+[INSILICO]
+    mat_library casl_comp_r2.sh5
+    xs_library  v7-56
+
+    max_delta_z   2.54
+    num_blocks_i  3
+    num_blocks_j  3
+    num_z_blocks  1
+    num_groups    11
+    num_sets      1
+
+    mesh          2
+    dimension     3
+    eq_set        spn_fv
+    SPN_order     3
+    cell_homogenize true
+    tolerance     1e-6
+    Pn_order      0
+
+!   silo_db:
+       silo_output  p6
+!      silo_out_power true
+
+!   upscatter_db:
+       upscatter_tolerance  1e-4
+
+!   ** 11-group
+    new_grp_bounds
+       7.5000E+05
+       1.7000E+04
+       6.7500E+01
+       2.1750E+01
+       2.0500E+01
+       7.0000E+00
+       6.2500E-01
+       3.5000E-01
+       2.0000E-01
+       1.0000E-01
+       1.0000E-05
+
+[COBRATF]
+  nfuel   3             ! number of fuel rings in conduction model
+  nc      1             ! conduction option - radial conduction
+  irfc    2             ! friction factor correlation default=2
+  dhfrac  0.02          ! fraction of power deposited directly into coolant
+  hgap    5678.3        ! gap conductance
+  epso    0.001
+  oitmax  5
+  iitmax  40
+  gridloss END 0.9070   ! spacer grid loss coefficient
+  gridloss MID 0.9065   ! spacer grid loss coefficient
+  dtmin   0.000001
+  dtmax   0.1
+  tend    0.1
+  rtwfp   1000.0
+  maxits  10000
+  courant 0.8
+  maps_filename = 3x3_HFP
+
+[BISON]
+  solve_type standalone
+  auxkernels_fast_neutron_flux_axial_power_profile = axial_peaking_factors
+  auxkernels_fast_neutron_flux_factor = 3.e13
+  auxkernels_fast_neutron_flux_rod_ave_lin_pow = power_profile
+  auxkernels_pelletid_a_lower = 0.00226
+  auxkernels_pelletid_a_upper = 0.5418
+  auxvariables_grain_radius_initial_condition = 3.0e-6
+  auxvariables_porosity_initial_condition = 0.07
+  bcs_plenumpressure_plenumpressure_initial_pressure = 2.0e6
+  bcs_plenumpressure_plenumpressure_startup_time = 1e4
+  bcs_pressure_coolantpressue_factor = 1.55e7
+  bcs_pressure_coolantpressue_function = coolant_pressure_ramp
+  burnup_burnup_rod_ave_lin_pow = power_profile
+  burnup_burnup_axial_power_profile = axial_peaking_factors
+  burnup_burnup_fuel_outer_radius = 0.0041
+  burnup_burnup_i_enrich = 0.031 0.969 0 0 0 0
+  coolantchannel_convective_clad_surface_inlet_temperature = 565
+  coolantchannel_convective_clad_surface_inlet_pressure = 1.55e7
+  coolantchannel_convective_clad_surface_inlet_massflux = 3800
+  coolantchannel_convective_clad_surface_rod_diameter = 0.0095
+  coolantchannel_convective_clad_surface_rod_pitch = 0.012
+  coolantchannel_convective_clad_surface_linear_heat_rate = power_profile
+  coolantchannel_convective_clad_surface_axial_power_profile = axial_peaking_factors
+  executioner_dt = 1.0e3
+  executioner_end_time = 6.0e7
+  executioner_num_steps = 2000
+  executioner_timestepper_time_dt = 1.0e3  1.0e5
+  executioner_timestepper_time_t = 0      1.0e5
+  globalparams_a_lower = 0.01676
+  globalparams_a_upper = 3.67436
+  globalparams_energy_per_fission = 3.2e-11
+  materials_clad_density_density = 6551.0
+  materials_clad_solid_mechanics_cold_work_factor = 0.01
+  materials_clad_solid_mechanics_oxygen_concentration = 0.0
+  materials_fission_gas_release_axial_power_profile = axial_peaking_factors
+  materials_fission_gas_release_file_name = powerhistory_RISO_AN8.csv
+  materials_fission_gas_release_grain_radius = 5.0e-6
+  materials_fission_gas_release_initial_grain_radius = 3.0e-6
+  materials_fission_gas_release_initial_porosity = 0.07
+  materials_fuel_mech_grain_radius = 5.0e-6
+  materials_fuel_relocation_q = q
+  materials_fuel_thermal_initial_porosity = 0.07
+  mesh_clad_bot_gap_height = 1.52e-3
+  nfuelrod = 8
+  output_file_base = output_RISO_AN8_bump
+  postprocessors_rod_input_power_scale_factor = 3.66
+  porosity = 0.2
+  thermalcontact_initial_gas_fractions = 1 0 0 0 0 0 0 0 0 0
+  thermalcontact_roughness_clad = 5.0e-7
+  thermalcontact_roughness_fuel = 1.0e-6
+  fuel_pin_input_file_template = small_3x3rod_Bison.i.template
+  non_fuel_pin_input_file_template = guide_tube.moose.i.template
+  ramping_time -100.0 0.0 1.0e5
+  ramping_factor 0.0 0.0 1.0
+  mesh_type smeared_pellet
+  ramp_data_transfers = true
+  output_average_axial_values = true
+
+[COUPLING]
+  epsk        5.0  ! pcm
+  rlx_power   0.5
+  rlx_tfuel   1.0
+  rlx_den     1.0
+  maxiter     100
+
+[TIAMAT] 
+  solver jacobi
+  run_transient false
+  conserve_power_in_tiamat_transfer true
+  num_subcycle_iterations_before_tiamat_ramping 0
