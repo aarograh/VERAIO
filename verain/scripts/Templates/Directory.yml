@@ -2349,6 +2349,26 @@ BISON:
     _check:
       - is_int()
       - is_gt() 0
+  executioner_timestepper_type:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  executioner_timestepper_dt:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_string()
+  executioner_timestepper_optimal_iterations:
+    <<: *dtint
+    _content:
+    _check:
+      - is_string()
+  executioner_timestepper_linear_iteration_ratio:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_string()
   executioner_timestepper_time_dt:
     <<: *dtstring
     _content:

@@ -298,6 +298,34 @@ BISON:
         - copy BISON/$executioner_num_steps
       _content:
 
+    executioner_timestepper_type:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$executioner_timestepper_type
+      _content:
+
+    executioner_timestepper_dt:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$executioner_timestepper_dt
+      _content:
+
+    executioner_timestepper_optimal_iterations:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$executioner_timestepper_optimal_iterations
+      _content:
+
+    executioner_timestepper_linear_iteration_ratio:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$executioner_timestepper_linear_iteration_ratio
+      _content:
+
     executioner_timestepper_time_dt:
       _pltype: parameter
       _type: string
