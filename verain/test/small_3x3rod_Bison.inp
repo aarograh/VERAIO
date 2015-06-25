@@ -229,7 +229,7 @@
   bcs_plenumpressure_plenumpressure_initial_pressure = 2.0e6
   bcs_plenumpressure_plenumpressure_startup_time = 1e4
   bcs_pressure_coolantpressue_factor = 1.55e7
-  bcs_pressure_coolantpressue_function = pressure_ramp
+  bcs_pressure_coolantpressue_function = coolant_pressure_ramp
   burnup_burnup_rod_ave_lin_pow = power_profile
   burnup_burnup_axial_power_profile = axial_peaking_factors
   burnup_burnup_fuel_outer_radius = 0.0041

@@ -608,7 +608,7 @@
 ! To-Do: Add additional INSILICO parameters (see example PL)
 
 [BISON]
-
+  solve_type standalone
   auxkernels_fast_neutron_flux_axial_power_profile = axial_peaking_factors
   auxkernels_fast_neutron_flux_factor = 3.e13
   auxkernels_fast_neutron_flux_rod_ave_lin_pow = power_profile
@@ -634,8 +634,12 @@
   executioner_dt = 1.0e3
   executioner_end_time = 6.0e7
   executioner_num_steps = 2000
+  executioner_timestepper_type = IterationAdaptiveDT
+  executioner_timestepper_dt = 1.0e2
   executioner_timestepper_time_dt = 1.0e3  1.0e5
   executioner_timestepper_time_t = 0      1.0e5
+  executioner_timestepper_optimal_iterations = 8
+  executioner_timestepper_linear_iteration_ratio = 100
   globalparams_a_lower = 0.01676
   globalparams_a_upper = 3.67436
   globalparams_energy_per_fission = 3.2e-11
@@ -645,7 +649,7 @@
   materials_fission_gas_release_axial_power_profile = axial_peaking_factors
   materials_fission_gas_release_file_name = powerhistory_RISO_AN8.csv
   materials_fission_gas_release_grain_radius = 5.0e-6
-  materials_fission_gas_release_initial_grain_radius = 3.0e-6
+  materials_fission_gas_release_initial_grain_radius = 3.5e-6
   materials_fission_gas_release_initial_porosity = 0.07
   materials_fuel_mech_grain_radius = 5.0e-6
   materials_fuel_relocation_q = q
@@ -661,3 +665,5 @@
   fuel_pin_input_file_template = bison.i.template
   non_fuel_pin_input_file_template = guide_tube.moose.i.template
   mesh_type = smeared_pellet
+  functions_axial_peaking_factors_type = ParsedFunction
+  functions_axial_peaking_factors_value = 1

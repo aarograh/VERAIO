@@ -4,6 +4,27 @@ BISON:
     - setdb MAIN_DB
   _content:
 
+    auxkernels_pelletid_a_lower:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$auxkernels_pelletid_a_lower
+      _content:
+
+    auxkernels_pelletid_a_upper:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$auxkernels_pelletid_a_upper
+      _content:
+      
+    auxkernels_fissionrateaux_value:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$fissionrateaux_value
+      _content:
+      
     auxkernels_fast_neutron_flux_rod_ave_lin_pow:
       _pltype: parameter
       _type: string
@@ -24,19 +45,33 @@ BISON:
       _do:
         - copy BISON/$auxkernels_fast_neutron_flux_factor
       _content:
-
-    auxkernels_pelletid_a_lower:
+      
+    auxvariables_htcl_initial_condition:
       _pltype: parameter
       _type: double
       _do:
-        - copy BISON/$auxkernels_pelletid_a_lower
+        - copy BISON/$auxvariables_htcl_initial_condition
       _content:
-
-    auxkernels_pelletid_a_upper:
+      
+    auxvariables_htcv_initial_condition:
       _pltype: parameter
       _type: double
       _do:
-        - copy BISON/$auxkernels_pelletid_a_upper
+        - copy BISON/$auxvariables_htcv_initial_condition
+      _content:
+      
+    auxvariables_Tl_initial_condition:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$auxvariables_Tl_initial_condition
+      _content:
+      
+    auxvariables_Tv_initial_condition:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$auxvariables_Tv_initial_condition
       _content:
 
     auxvariables_grain_radius_initial_condition:
@@ -45,12 +80,33 @@ BISON:
       _do:
         - copy BISON/$auxvariables_grain_radius_initial_condition
       _content:
+      
+    auxvariables_casl_clad_surface_temperature:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$auxvariables_casl_clad_surface_temperature
+      _content:
 
     auxvariables_porosity_initial_condition:
       _pltype: parameter
       _type: double
       _do:
         - copy BISON/$auxvariables_porosity_initial_condition
+      _content:
+      
+    bcs_no_y_fuel_bottom_boundary:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$bcs_no_y_fuel_bottom_boundary
+      _content:
+
+    bcs_plenumpressure_plenumpressure_boundary:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$bcs_plenumpressure_plenumpressure_boundary
       _content:
 
     bcs_plenumpressure_plenumpressure_initial_pressure:
@@ -94,6 +150,13 @@ BISON:
       _do:
         - copy BISON/$burnup_burnup_axial_power_profile
       _content:
+      
+    burnup_burnup_fuel_inner_radius:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$burnup_burnup_fuel_inner_radius
+      _content:
 
     burnup_burnup_fuel_outer_radius:
       _pltype: parameter
@@ -101,12 +164,68 @@ BISON:
       _do:
         - copy BISON/$burnup_burnup_fuel_outer_radius
       _content:
+      
+    burnup_burnup_fuel_volume_ratio:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$burnup_burnup_fuel_volume_ratio
+      _content:
 
     burnup_burnup_i_enrich:
       _pltype: parameter
       _type: string
       _do:
         - copy BISON/$burnup_burnup_i_enrich
+      _content:
+      
+    burnup_burnup_num_radial:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$burnup_burnup_num_radial
+      _content:
+      
+    burnup_burnup_num_axial:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$burnup_burnup_num_axial
+      _content:
+      
+    pellet_clad_mechanical_penalty:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$pellet_clad_mechanical_penalty
+      _content:
+      
+    pellet_clad_mechanical_tangential_tolerance:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$pellet_clad_mechanical_tangential_tolerance
+      _content:
+      
+    pellet_clad_mechanical_normal_smoothing_distance:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$pellet_clad_mechanical_normal_smoothing_distance
+      _content:
+      
+    pellet_clad_mechanical_model:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$pellet_clad_mechanical_model
+      _content:
+      
+    pellet_clad_mechanical_formulation:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$pellet_clad_mechanical_formulation
       _content:
 
     coolantchannel_convective_clad_surface_inlet_temperature:
@@ -179,6 +298,34 @@ BISON:
         - copy BISON/$executioner_num_steps
       _content:
 
+    executioner_timestepper_type:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$executioner_timestepper_type
+      _content:
+
+    executioner_timestepper_dt:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$executioner_timestepper_dt
+      _content:
+
+    executioner_timestepper_optimal_iterations:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$executioner_timestepper_optimal_iterations
+      _content:
+
+    executioner_timestepper_linear_iteration_ratio:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$executioner_timestepper_linear_iteration_ratio
+      _content:
+
     executioner_timestepper_time_dt:
       _pltype: parameter
       _type: string
@@ -191,6 +338,41 @@ BISON:
       _type: string
       _do:
         - copy BISON/$executioner_timestepper_time_t
+      _content:
+      
+    functions_coolant_pressure_ramp_x:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_coolant_pressure_ramp_x
+      _content:  
+      
+    functions_axial_peaking_factors_type:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_axial_peaking_factors_type
+      _content:      
+      
+    functions_axial_peaking_factors_data_file:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_axial_peaking_factors_data_file
+      _content:  
+      
+    functions_axial_peaking_factors_value:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_axial_peaking_factors_value
+      _content:
+
+    globalparams_order:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$globalparams_order
       _content:
 
     globalparams_a_lower:
@@ -221,6 +403,69 @@ BISON:
         - copy BISON/$materials_clad_density_density
       _content:
 
+    materials_clad_solid_mechanics_absolute_tolerance:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$materials_clad_solid_mechanics_absolute_tolerance
+      _content:
+
+    materials_clad_solid_mechanics_relative_tolerance:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$materials_clad_solid_mechanics_relative_tolerance
+      _content:
+
+    materials_clad_solid_mechanics_stress_free_temperature:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$materials_clad_solid_mechanics_stress_free_temperature
+      _content:
+
+    materials_clad_solid_mechanics_model_primary_creep:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_clad_solid_mechanics_model_primary_creep
+      _content:
+      
+    materials_clad_solid_mechanics_model_thermal_creep:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_clad_solid_mechanics_model_thermal_creep
+      _content:
+      
+    materials_clad_solid_mechanics_model_irradiation_creep:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_clad_solid_mechanics_model_irradiation_creep
+      _content:
+
+    materials_clad_solid_mechanics_model_irradiation_growth:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_clad_solid_mechanics_model_irradiation_growth
+      _content:
+
+    materials_clad_solid_mechanics_model_thermal_expansion:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_clad_solid_mechanics_model_thermal_expansion
+      _content:
+
+    materials_clad_solid_mechanics_model_elastic_modulus:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_clad_solid_mechanics_model_elastic_modulus
+      _content:
+      
     materials_clad_solid_mechanics_cold_work_factor:
       _pltype: parameter
       _type: double
@@ -235,6 +480,13 @@ BISON:
         - copy BISON/$materials_clad_solid_mechanics_oxygen_concentration
       _content:
 
+    materials_fission_gas_release_end_densification_burnup:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$materials_fission_gas_release_end_densification_burnup
+      _content:
+      
     materials_fission_gas_release_axial_power_profile:
       _pltype: parameter
       _type: string
@@ -256,6 +508,13 @@ BISON:
         - copy BISON/$materials_fission_gas_release_grain_radius
       _content:
 
+    materials_fission_gas_release_hydrostatic_stress:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$materials_fission_gas_release_hydrostatic_stress
+      _content:
+      
     materials_fission_gas_release_initial_grain_radius:
       _pltype: parameter
       _type: double
@@ -269,19 +528,33 @@ BISON:
       _do:
         - copy BISON/$materials_fission_gas_release_initial_porosity
       _content:
-
-    materials_fuel_mech_grain_radius:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy BISON/$materials_fuel_mech_grain_radius
-      _content:
-
-    materials_fuel_relocation_q:
+      
+    materials_fission_gas_release_pellet_brittle_zone:
       _pltype: parameter
       _type: string
       _do:
-        - copy BISON/$materials_fuel_relocation_q
+        - copy BISON/$materials_fission_gas_release_pellet_brittle_zone
+      _content:
+      
+    materials_fission_gas_release_pellet_id:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_fission_gas_release_pellet_brittle_zone
+      _content:
+      
+    materials_fission_gas_release_rod_ave_lin_pow:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_fission_gas_release_rod_ave_lin_pow
+      _content:
+
+    materials_fission_gas_release_total_densification:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$materials_fission_gas_release_total_densification
       _content:
 
     materials_fuel_thermal_initial_porosity:
@@ -290,12 +563,138 @@ BISON:
       _do:
         - copy BISON/$materials_fuel_thermal_initial_porosity
       _content:
+    
+    materials_fuel_swelling_total_densification:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$materials_fuel_swelling_total_densification
+      _content:
 
+    materials_fuel_mech_grain_radius:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$materials_fuel_mech_grain_radius
+      _content:
+
+    materials_fuel_mech_max_its:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$materials_fuel_mech_max_its
+      _content:
+
+    materials_fuel_mech_output_iteration_info:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_fuel_mech_output_iteration_info
+      _content:
+
+    materials_fuel_mech_model_swelling:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_fuel_mech_model_swelling
+      _content:
+
+    materials_fuel_mech_name_swelling_model:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_fuel_mech_name_swelling_model
+      _content:
+
+    materials_fuel_mech_model_creep:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_fuel_mech_model_creep
+      _content:
+
+    materials_fuel_relocation_q:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_fuel_relocation_q
+      _content:
+      
+    materials_fuel_relocation_relocation_activation1:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$materials_fuel_relocation_relocation_activation1
+      _content:
+      
+    materials_fuel_relocation_burnup_relocation_stop:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$materials_fuel_relocation_burnup_relocation_stop
+      _content:
+
+    mesh_file:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$mesh_file
+      _content:
+      
+    mesh_patch_size:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$mesh_patch_size
+      _content:
+      
     mesh_clad_bot_gap_height:
       _pltype: parameter
       _type: double
       _do:
         - copy BISON/$mesh_clad_bot_gap_height
+      _content:
+      
+    mesh_nx_p:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$mesh_nx_p
+      _content:
+
+    mesh_ny_p:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$mesh_ny_p
+      _content:
+    
+    mesh_nx_c:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$mesh_nx_c
+      _content:
+      
+    mesh_ny_c:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$mesh_ny_c
+      _content:
+      
+    mesh_elem_type:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$mesh_elem_type
+      _content:
+
+    variables_temp_initial_condition:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$variables_temp_initial_condition
       _content:
 
     nfuelrod:
@@ -325,12 +724,26 @@ BISON:
       _do:
         - copy BISON/$porosity
       _content:
-
-    thermalcontact_initial_gas_fractions:
+      
+    executioner_quadrature_order:
       _pltype: parameter
       _type: string
       _do:
-        - copy BISON/$thermalcontact_initial_gas_fractions
+        - copy BISON/$executioner_quadrature_order
+      _content:
+      
+    thermalcontact_roughness_coef:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$thermalcontact_roughness_coef
+      _content:
+
+    thermalcontact_roughness_fuel:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$thermalcontact_roughness_fuel
       _content:
 
     thermalcontact_roughness_clad:
@@ -340,11 +753,32 @@ BISON:
         - copy BISON/$thermalcontact_roughness_clad
       _content:
 
-    thermalcontact_roughness_fuel:
+    thermalcontact_initial_gas_fractions:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$thermalcontact_initial_gas_fractions
+      _content:
+
+    thermalcontact_tangential_tolerance:
       _pltype: parameter
       _type: double
       _do:
-        - copy BISON/$thermalcontact_roughness_fuel
+        - copy BISON/$thermalcontact_tangential_tolerance
+      _content:
+      
+    thermalcontact_quadrature:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$thermalcontact_quadrature
+      _content:
+      
+    thermalcontact_order:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$thermalcontact_order
       _content:
 
     fuel_pin_input_file_template:
@@ -394,4 +828,11 @@ BISON:
       _type: bool
       _do:
         - copy BISON/$output_average_axial_values
+      _content:
+      
+    solve_type:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$solve_type
       _content:
