@@ -800,9 +800,15 @@
     <Parameter name="executioner_dt" type="double" value="1.0e3"/>
     <Parameter name="executioner_end_time" type="double" value="6.0e7"/>
     <Parameter name="executioner_num_steps" type="int" value="2000"/>
+    <Parameter name="executioner_timestepper_dt" type="double" value="100"/>
+    <Parameter name="executioner_timestepper_linear_iteration_ratio" type="double" value="100"/>
+    <Parameter name="executioner_timestepper_optimal_iterations" type="int" value="8"/>
     <Parameter name="executioner_timestepper_time_dt" type="string" value="1.0e3 1.0e5"/>
     <Parameter name="executioner_timestepper_time_t" type="string" value="0 1.0e5"/>
+    <Parameter name="executioner_timestepper_type" type="string" value="IterationAdaptiveDT"/>
     <Parameter name="fuel_pin_input_file_template" type="string" value="bison.i.template"/>
+    <Parameter name="functions_axial_peaking_factors_type" type="string" value="ParsedFunction"/>
+    <Parameter name="functions_axial_peaking_factors_value" type="string" value="1"/>
     <Parameter name="globalparams_a_lower" type="double" value="0.01676"/>
     <Parameter name="globalparams_a_upper" type="double" value="3.67436"/>
     <Parameter name="globalparams_energy_per_fission" type="double" value="3.2e-11"/>
@@ -812,7 +818,7 @@
     <Parameter name="materials_fission_gas_release_axial_power_profile" type="string" value="axial_peaking_factors"/>
     <Parameter name="materials_fission_gas_release_file_name" type="string" value="powerhistory_RISO_AN8.csv"/>
     <Parameter name="materials_fission_gas_release_grain_radius" type="double" value="5.0e-6"/>
-    <Parameter name="materials_fission_gas_release_initial_grain_radius" type="double" value="3.0e-6"/>
+    <Parameter name="materials_fission_gas_release_initial_grain_radius" type="double" value="3.5e-6"/>
     <Parameter name="materials_fission_gas_release_initial_porosity" type="double" value="0.07"/>
     <Parameter name="materials_fuel_mech_grain_radius" type="double" value="5.0e-6"/>
     <Parameter name="materials_fuel_relocation_q" type="string" value="q"/>
@@ -824,6 +830,7 @@
     <Parameter name="output_file_base" type="string" value="output_RISO_AN8_bump"/>
     <Parameter name="porosity" type="double" value="0.2"/>
     <Parameter name="postprocessors_rod_input_power_scale_factor" type="double" value="3.66"/>
+    <Parameter name="solve_type" type="string" value="standalone"/>
     <Parameter name="thermalcontact_initial_gas_fractions" type="string" value="1 0 0 0 0 0 0 0 0 0"/>
     <Parameter name="thermalcontact_roughness_clad" type="double" value="5.0e-7"/>
     <Parameter name="thermalcontact_roughness_fuel" type="double" value="1.0e-6"/>
