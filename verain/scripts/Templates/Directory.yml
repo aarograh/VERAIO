@@ -1876,6 +1876,12 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  cmfd_num_inners:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   cmfd_num_outers:
     <<: *dtint
     _content:

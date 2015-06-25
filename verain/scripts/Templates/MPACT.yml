@@ -431,6 +431,13 @@ MPACT:
             - copy MPACT/$cmfd_num_outers
           _content:
 
+        num_inners:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$cmfd_num_inners
+          _content:
+
         up_scatter:
           _pltype: parameter
           _type: int
