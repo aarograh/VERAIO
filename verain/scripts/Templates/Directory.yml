@@ -1792,7 +1792,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() ctf internal ctf_external none
+      - in_dictionary() ctf simplified ctf_external none
   shielder_th:
     <<: *dtlist
     _content:
@@ -2713,7 +2713,7 @@ BISON:
     _content:
     _check:
       - is_string()
-      - in_dictionary() kinematic penalty 
+      - in_dictionary() kinematic penalty
   postprocessors_rod_input_power_scale_factor:
     <<: *dtdouble
     _content:
@@ -2767,13 +2767,13 @@ BISON:
     _content:
     _check:
       - is_string()
-      - in_dictionary() true false TRUE FALSE 
+      - in_dictionary() true false TRUE FALSE
   thermalcontact_order:
     <<: *dtstring
     _content:
     _check:
       - is_string()
-      - in_dictionary() first second FIRST SECOND 
+      - in_dictionary() first second FIRST SECOND
   fuel_pin_input_file_template:
     <<: *dtstring
     _content:
