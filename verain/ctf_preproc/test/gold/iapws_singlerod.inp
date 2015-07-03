@@ -15,7 +15,7 @@ CASL Problem Singlerod HFP
 **NGR                                                                                          
    1                                                                                           
 **NGAS IRFC EDMD IMIX ISOL          GINIT NOTRN MESH MAPS IPRP MFLX IBTM PPV  NM14             
-     1    2    0    1    3  3.2759428E-01     1    1    1    1    0    0    1    0
+     1    2    0    1    3  3.2759428E-01     1    1    1    1    0    0    2    0
 *Card 1.2                                                                                      
 **         GTOT          AFLUX         DHFRAC          MFLUX                                   
   3.2759428E-01  1.8299431E+01  2.0000000E-02
@@ -129,10 +129,10 @@ CASL Problem Singlerod HFP
 ** NRRD   NSRD    NC  NRTB  NRAD  NLTY  NSTA   NXF  NCAN  RADF    W3 IHTC  NDM13 NDM14         
       1      0     1     1     0     0     1     1     0     0    -1     1     0     0
 *Card 8.2                                                                                      
-**    N   IFTY   IAXP   NRND DAXMIN  RMULT        HGAP  ISECR  HTAMB   TAMB                    
+**    N   IFTY   IAXP   NRND DAXMIN  RMULT        HGAP  ISECR  HTAMB   TAMB  SYMROD            
 *Card 8.3                                                                                      
 **NSCH   PIE  NSCH   PIE  NSCH   PIE  NSCH   PIE  NSCH   PIE  NSCH   PIE  NSCH   PIE NSCH   PIE
-      1      1      1      0      0  1.000 5.67830E+03      1  0.000  0.000
+      1      1      1      0      0  1.000 5.67830E+03      1  0.000  0.000   1.000
      3 0.250     4 0.250     1 0.250     2 0.250     0 0.000     0 0.000     0 0.000     0 0.000
 *Card 8.6                                                                                      
 **    I   NRT1   NST1   NRX1                                                                   
