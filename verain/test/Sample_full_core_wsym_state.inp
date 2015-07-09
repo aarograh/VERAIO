@@ -700,7 +700,7 @@ crd_map
   materials_fuel_thermal_initial_porosity = 0.07
   mesh_clad_bot_gap_height = 1.52e-3
   nfuelrod = 8
-  output_file_base = output_RISO_AN8_bump
+  outputs_file_base = output_RISO_AN8_bump
   postprocessors_rod_input_power_scale_factor = 3.66
   porosity = 0.2
   thermalcontact_initial_gas_fractions = 1 0 0 0 0 0 0 0 0 0

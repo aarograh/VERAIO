@@ -610,14 +610,14 @@
 [BISON]
   solve_type standalone
   auxkernels_fast_neutron_flux_axial_power_profile = axial_peaking_factors
-  auxkernels_fast_neutron_flux_factor = 3.e13
+  auxkernels_fast_neutron_flux_factor = 1.6e12
   auxkernels_fast_neutron_flux_rod_ave_lin_pow = power_profile
   auxkernels_pelletid_a_lower = 0.00226
   auxkernels_pelletid_a_upper = 0.5418
   auxvariables_grain_radius_initial_condition = 3.0e-6
   auxvariables_porosity_initial_condition = 0.07
   bcs_plenumpressure_plenumpressure_initial_pressure = 2.0e6
-  bcs_plenumpressure_plenumpressure_startup_time = 1e4
+  bcs_plenumpressure_plenumpressure_startup_time = 0
   bcs_pressure_coolantpressue_factor = 1.55e7
   bcs_pressure_coolantpressue_function = pressure_ramp
   burnup_burnup_rod_ave_lin_pow = power_profile
@@ -633,19 +633,23 @@
   coolantchannel_convective_clad_surface_axial_power_profile = axial_peaking_factors
   executioner_dt = 1.0e3
   executioner_end_time = 6.0e7
-  executioner_num_steps = 2000
   executioner_timestepper_type = IterationAdaptiveDT
   executioner_timestepper_dt = 1.0e2
   executioner_timestepper_time_dt = 1.0e3  1.0e5
   executioner_timestepper_time_t = 0      1.0e5
   executioner_timestepper_optimal_iterations = 8
   executioner_timestepper_linear_iteration_ratio = 100
+  executioner_num_steps = 2000
+  executioner_dtmin = 1000
+  executioner_dtmax = 1000
   globalparams_a_lower = 0.01676
   globalparams_a_upper = 3.67436
   globalparams_energy_per_fission = 3.2e-11
   materials_clad_density_density = 6551.0
   materials_clad_solid_mechanics_cold_work_factor = 0.01
   materials_clad_solid_mechanics_oxygen_concentration = 0.0
+  materials_clad_solid_mechanics_relative_tolerance = 1e-3
+  materials_clad_solid_mechanics_stress_free_temperature = 297
   materials_fission_gas_release_axial_power_profile = axial_peaking_factors
   materials_fission_gas_release_file_name = powerhistory_RISO_AN8.csv
   materials_fission_gas_release_grain_radius = 5.0e-6
@@ -656,7 +660,7 @@
   materials_fuel_thermal_initial_porosity = 0.07
   mesh_clad_bot_gap_height = 1.52e-3
   nfuelrod = 8
-  output_file_base = output_RISO_AN8_bump
+  outputs_file_base = output_RISO_AN8_bump
   postprocessors_rod_input_power_scale_factor = 3.66
   porosity = 0.2
   thermalcontact_initial_gas_fractions = 1 0 0 0 0 0 0 0 0 0
