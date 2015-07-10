@@ -776,14 +776,14 @@
   </ParameterList>
   <ParameterList name="BISON">
     <Parameter name="auxkernels_fast_neutron_flux_axial_power_profile" type="string" value="axial_peaking_factors"/>
-    <Parameter name="auxkernels_fast_neutron_flux_factor" type="double" value="3.e13"/>
+    <Parameter name="auxkernels_fast_neutron_flux_factor" type="double" value="1.6e12"/>
     <Parameter name="auxkernels_fast_neutron_flux_rod_ave_lin_pow" type="string" value="power_profile"/>
     <Parameter name="auxkernels_pelletid_a_lower" type="double" value="0.00226"/>
     <Parameter name="auxkernels_pelletid_a_upper" type="double" value="0.5418"/>
     <Parameter name="auxvariables_grain_radius_initial_condition" type="double" value="3.0e-6"/>
     <Parameter name="auxvariables_porosity_initial_condition" type="double" value="0.07"/>
     <Parameter name="bcs_plenumpressure_plenumpressure_initial_pressure" type="double" value="2.0e6"/>
-    <Parameter name="bcs_plenumpressure_plenumpressure_startup_time" type="double" value="1e4"/>
+    <Parameter name="bcs_plenumpressure_plenumpressure_startup_time" type="double" value="0"/>
     <Parameter name="bcs_pressure_coolantpressue_factor" type="double" value="1.55e7"/>
     <Parameter name="bcs_pressure_coolantpressue_function" type="string" value="pressure_ramp"/>
     <Parameter name="burnup_burnup_axial_power_profile" type="string" value="axial_peaking_factors"/>
@@ -798,6 +798,8 @@
     <Parameter name="coolantchannel_convective_clad_surface_rod_diameter" type="double" value="0.0095"/>
     <Parameter name="coolantchannel_convective_clad_surface_rod_pitch" type="double" value="0.012"/>
     <Parameter name="executioner_dt" type="double" value="1.0e3"/>
+    <Parameter name="executioner_dtmax" type="double" value="1000"/>
+    <Parameter name="executioner_dtmin" type="double" value="1000"/>
     <Parameter name="executioner_end_time" type="double" value="6.0e7"/>
     <Parameter name="executioner_num_steps" type="int" value="2000"/>
     <Parameter name="executioner_timestepper_dt" type="double" value="100"/>
@@ -815,6 +817,8 @@
     <Parameter name="materials_clad_density_density" type="double" value="6551.0"/>
     <Parameter name="materials_clad_solid_mechanics_cold_work_factor" type="double" value="0.01"/>
     <Parameter name="materials_clad_solid_mechanics_oxygen_concentration" type="double" value="0.0"/>
+    <Parameter name="materials_clad_solid_mechanics_relative_tolerance" type="double" value="1e-3"/>
+    <Parameter name="materials_clad_solid_mechanics_stress_free_temperature" type="double" value="297"/>
     <Parameter name="materials_fission_gas_release_axial_power_profile" type="string" value="axial_peaking_factors"/>
     <Parameter name="materials_fission_gas_release_file_name" type="string" value="powerhistory_RISO_AN8.csv"/>
     <Parameter name="materials_fission_gas_release_grain_radius" type="double" value="5.0e-6"/>
@@ -827,7 +831,7 @@
     <Parameter name="mesh_type" type="string" value="smeared_pellet"/>
     <Parameter name="nfuelrod" type="int" value="8"/>
     <Parameter name="non_fuel_pin_input_file_template" type="string" value="guide_tube.moose.i.template"/>
-    <Parameter name="output_file_base" type="string" value="output_RISO_AN8_bump"/>
+    <Parameter name="outputs_file_base" type="string" value="output_RISO_AN8_bump"/>
     <Parameter name="porosity" type="double" value="0.2"/>
     <Parameter name="postprocessors_rod_input_power_scale_factor" type="double" value="3.66"/>
     <Parameter name="solve_type" type="string" value="standalone"/>

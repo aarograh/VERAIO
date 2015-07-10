@@ -25,6 +25,13 @@ BISON:
         - copy BISON/$fissionrateaux_value
       _content:
       
+    auxkernels_fissionrateaux_function:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_fissionrateaux_function
+      _content:
+      
     auxkernels_fast_neutron_flux_rod_ave_lin_pow:
       _pltype: parameter
       _type: string
@@ -44,6 +51,69 @@ BISON:
       _type: double
       _do:
         - copy BISON/$auxkernels_fast_neutron_flux_factor
+      _content:
+
+    auxkernels_fuel_porosity_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_fuel_porosity_execute_on
+      _content:
+
+    auxkernels_hydrostatic_stress_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_hydrostatic_stress_execute_on
+      _content:
+
+    auxkernels_grain_radius_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_grain_radius_execute_on
+      _content:
+
+    auxkernels_hoop_stress_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_hoop_stress_execute_on
+      _content:
+
+    auxkernels_hoop_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_hoop_execute_on
+      _content:
+
+    auxkernels_radial_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_radial_execute_on
+      _content:
+
+    auxkernels_axial_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_axial_execute_on
+      _content:
+
+    auxkernels_vonmises_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_vonmises_execute_on
+      _content:
+
+    auxkernels_creep_strain_mag_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_creep_strain_mag_execute_on
       _content:
       
     auxvariables_htcl_initial_condition:
@@ -227,6 +297,13 @@ BISON:
       _do:
         - copy BISON/$pellet_clad_mechanical_formulation
       _content:
+      
+    pellet_clad_mechanical_system:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$pellet_clad_mechanical_system
+      _content:
 
     coolantchannel_convective_clad_surface_inlet_temperature:
       _pltype: parameter
@@ -277,11 +354,39 @@ BISON:
         - copy BISON/$coolantchannel_convective_clad_surface_axial_power_profile
       _content:
 
+    dampers_limitt_max_increment:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$dampers_limitt_max_increment
+      _content:
+
+    executioner_start_time:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$executioner_start_time
+      _content:
+
     executioner_dt:
       _pltype: parameter
       _type: double
       _do:
         - copy BISON/$executioner_dt
+      _content:
+
+    executioner_dtmin:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$executioner_dtmin
+      _content:
+
+    executioner_dtmax:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$executioner_dtmax
       _content:
 
     executioner_end_time:
@@ -296,6 +401,41 @@ BISON:
       _type: int
       _do:
         - copy BISON/$executioner_num_steps
+      _content:
+      
+    executioner_l_max_its:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$executioner_l_max_its
+      _content:
+
+    executioner_nl_tol:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$executioner_l_tol
+      _content:
+
+    executioner_nl_max_its:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$executioner_nl_max_its
+      _content:
+
+    executioner_nl_rel_tol:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$executioner_nl_rel_tol
+      _content:
+
+    executioner_nl_abs_tol:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$executioner_nl_abs_tol
       _content:
 
     executioner_timestepper_type:
@@ -366,6 +506,20 @@ BISON:
       _type: string
       _do:
         - copy BISON/$functions_axial_peaking_factors_value
+      _content:
+
+    functions_coolant_temperature_data_file:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_coolant_temperature_data_file
+      _content:
+
+    functions_q_functions:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_q_functions
       _content:
 
     globalparams_order:
@@ -486,6 +640,13 @@ BISON:
       _do:
         - copy BISON/$materials_fission_gas_release_end_densification_burnup
       _content:
+
+    materials_fission_gas_release_file_name:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_fission_gas_release_file_name
+      _content:
       
     materials_fission_gas_release_axial_power_profile:
       _pltype: parameter
@@ -510,7 +671,7 @@ BISON:
 
     materials_fission_gas_release_hydrostatic_stress:
       _pltype: parameter
-      _type: double
+      _type: string
       _do:
         - copy BISON/$materials_fission_gas_release_hydrostatic_stress
       _content:
@@ -540,7 +701,7 @@ BISON:
       _pltype: parameter
       _type: string
       _do:
-        - copy BISON/$materials_fission_gas_release_pellet_brittle_zone
+        - copy BISON/$materials_fission_gas_release_pellet_id
       _content:
       
     materials_fission_gas_release_rod_ave_lin_pow:
@@ -613,6 +774,13 @@ BISON:
         - copy BISON/$materials_fuel_mech_model_creep
       _content:
 
+    materials_fuel_mech_matpro_youngs_modulus:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_fuel_mech_matpro_youngs_modulus
+      _content:
+
     materials_fuel_relocation_q:
       _pltype: parameter
       _type: string
@@ -622,7 +790,7 @@ BISON:
       
     materials_fuel_relocation_relocation_activation1:
       _pltype: parameter
-      _type: int
+      _type: double
       _do:
         - copy BISON/$materials_fuel_relocation_relocation_activation1
       _content:
@@ -704,11 +872,11 @@ BISON:
         - copy BISON/$nfuelrod
       _content:
 
-    output_file_base:
+    outputs_file_base:
       _pltype: parameter
       _type: string
       _do:
-        - copy BISON/$output_file_base
+        - copy BISON/$outputs_file_base
       _content:
 
     postprocessors_rod_input_power_scale_factor:
@@ -835,4 +1003,11 @@ BISON:
       _type: string
       _do:
         - copy BISON/$solve_type
+      _content:
+
+    userobjects_pbz_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$userobjects_pbz_execute_on
       _content:
