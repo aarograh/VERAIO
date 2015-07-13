@@ -310,3 +310,10 @@ COBRATF:
       _do:
         - copy COBRATF/$beta_sp
       _content:
+
+    crud:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$crud
+      _content:
