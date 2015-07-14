@@ -2180,6 +2180,11 @@ BISON:
     _check:
       - is_float()
       - is_gt() 0
+  auxkernels_fissionrateaux_function:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   auxkernels_fast_neutron_flux_rod_ave_lin_pow:
     <<: *dtstring
     _content:
@@ -2196,6 +2201,51 @@ BISON:
     _check:
       - is_float()
       - is_gt() 0
+  auxkernels_fuel_porosity_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  auxkernels_hydrostatic_stress_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  auxkernels_grain_radius_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  auxkernels_hoop_stress_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  auxkernels_hoop_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  auxkernels_radial_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  auxkernels_axial_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  auxkernels_vonmises_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  auxkernels_creep_strain_mag_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   auxvariables_htcl_initial_condition:
     <<: *dtdouble
     _content:
@@ -2259,7 +2309,6 @@ BISON:
     _content:
     _check:
       - is_float()
-      - is_gt() 0
   bcs_pressure_coolantpressue_factor:
     <<: *dtdouble
     _content:
@@ -2354,7 +2403,29 @@ BISON:
     _content:
     _check:
       - is_string()
+  dampers_limitt_max_increment:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  executioner_start_time:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
   executioner_dt:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  executioner_dtmin:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  executioner_dtmax:
     <<: *dtdouble
     _content:
     _check:
@@ -2371,6 +2442,36 @@ BISON:
     _content:
     _check:
       - is_int()
+      - is_gt() 0
+  executioner_l_max_its:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  executioner_l_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  executioner_nl_max_its:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  executioner_nl_rel_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  executioner_nl_abs_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
       - is_gt() 0
   executioner_timestepper_type:
     <<: *dtstring
@@ -2418,6 +2519,16 @@ BISON:
     _check:
       - is_int()
   functions_axial_peaking_factors_data_file:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  functions_coolant_temperature_data_file:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  functions_q_functions:
     <<: *dtstring
     _content:
     _check:
@@ -2541,11 +2652,10 @@ BISON:
       - is_float()
       - is_gt() 0
   materials_fission_gas_release_hydrostatic_stress:
-    <<: *dtdouble
+    <<: *dtstring
     _content:
     _check:
-      - is_float()
-      - is_gt() 0
+      - is_string()
   materials_fission_gas_release_initial_grain_radius:
     <<: *dtdouble
     _content:
@@ -2625,6 +2735,12 @@ BISON:
     _check:
       - is_string()
       - in_dictionary() true false
+  materials_fuel_mech_matpro_youngs_modulus:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() true false
   materials_fuel_relocation_q:
     <<: *dtstring
     _content:
@@ -2632,10 +2748,10 @@ BISON:
       - is_string()
       - in_dictionary() q linear_heat_generation_rate
   materials_fuel_relocation_relocation_activation1:
-    <<: *dtint
+    <<: *dtdouble
     _content:
     _check:
-      - is_int()
+      - is_float()
       - is_gt() 0
   materials_fuel_relocation_burnup_relocation_stop:
     <<: *dtdouble
@@ -2696,7 +2812,7 @@ BISON:
     _check:
       - is_int()
       - is_gt() 0
-  output_file_base:
+  outputs_file_base:
     <<: *dtstring
     _content:
     _check:
@@ -2730,7 +2846,12 @@ BISON:
     _content:
     _check:
       - is_string()
-      - in_dictionary() kinematic penalty
+      - in_dictionary() kinematic penalty 
+  pellet_clad_mechanical_system:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   postprocessors_rod_input_power_scale_factor:
     <<: *dtdouble
     _content:
@@ -2843,3 +2964,8 @@ BISON:
     _check:
       - is_float()
       - is_gt() 0
+  userobjects_pbz_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
