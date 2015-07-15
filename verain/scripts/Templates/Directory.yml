@@ -247,6 +247,17 @@ STATE:
     _check:
       - fall(sub{is_word(shift)},())
       - fall(sub{not_in_dictionary(shift,'0')},())
+  cool_chem:
+    <<: *dtlist
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())
+      - arraysize()==5
+      - nth(0,())>=0
+      - nth(1,())>=0
+      - nth(2,())>=0
+      - nth(3,())>=0
+      - nth(4,())>=0
 
 CORE:
   name:
@@ -629,7 +640,6 @@ CONTROL:
 
 INSERT:
   <<: *dtblocknamed
-  _maxid: 1
   title:
     <<: *dtstring
     _content:
@@ -1404,6 +1414,13 @@ COBRATF:
     _content:
     _check:
       - is_float()
+
+  crud:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none internal MAMBA
 
 COUPLING:
 

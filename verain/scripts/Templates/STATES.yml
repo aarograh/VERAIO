@@ -256,3 +256,39 @@ STATES:
           _do:
             - coremapmap CORE/$size,CORE/@core_shape,%STATE/$(_loop)/@flow_dist,CORE/$bc_sym
           _content:
+
+        h_conc:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$coolchem:0
+          _content:
+
+        li_conc:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$coolchem:1
+          _content:
+
+        ni_sol:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$coolchem:2
+          _content:
+
+        ni_par:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$coolchem:3
+          _content:
+
+        fe_sol:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$coolchem:4
+          _content:
+
