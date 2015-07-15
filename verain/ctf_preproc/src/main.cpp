@@ -1003,16 +1003,17 @@ namespace {
         grid_types.push_back("MID");
         grid_types.push_back("END");
         Array<string> gridbloc_types;
-        gridbloc_types.push_back("MID");
-        gridbloc_types.push_back("END");
         Array<double> grid_losses;  // default to empty
         grid_losses.push_back(0.9065);
         grid_losses.push_back(0.9070);
         Array<double> gridblocs;
-        gridblocs.push_back(-1.0);
-        gridblocs.push_back(-1.0);
         grid_types = vera_xml.get_param_from_plist<Array<string> >( "COBRATF.gridlabel", grid_types);
         grid_losses = vera_xml.get_param_from_plist<Array<double> >( "COBRATF.gridloss", grid_losses);
+        // default the gridbloc types to the gridloss labels
+        for( int ii=0; ii < grid_types.size(); ++ii){
+           gridbloc_types.push_back(grid_types[ii]);
+           gridblocs.push_back(-1.0);
+        }
         gridbloc_types = vera_xml.get_param_from_plist<Array<string> >( "COBRATF.gridbloclabel", gridbloc_types);
         gridblocs = vera_xml.get_param_from_plist<Array<double> >( "COBRATF.gridbloc", gridblocs);
         map<string, double> grid_loss_coeffs;
@@ -1029,17 +1030,17 @@ namespace {
         if (gridblocs[0]>=0.0){
            for( int ii=0; ii < gridbloc_types.size(); ++ii)
              grid_bloc_ratio[gridbloc_types[ii]] = gridblocs[ii];
-           // Sanity check that all grid_map types have a specified loss coefficient
+           // Sanity check that all grid_map types have a specified grid blockage ratio
            for( size_t n = 0; n < ngrid_orig; ++n )
              if( grid_bloc_ratio.end() == grid_bloc_ratio.find(grid_map[n]) )
-               throw runtime_error("Could not find a loss coefficient spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
+               throw runtime_error("Could not find a grid blockage ratio spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
         }else{
            for( int ii=0; ii < gridbloc_types.size(); ++ii)
-             grid_bloc_ratio[gridbloc_types[ii]] = -1.0;
+             grid_bloc_ratio[gridbloc_types[ii]] = gridblocs[ii];
            // Sanity check that all grid_map types have a specified loss coefficient
            for( size_t n = 0; n < ngrid_orig; ++n )
              if( grid_bloc_ratio.end() == grid_bloc_ratio.find(grid_map[n]) )
-               throw runtime_error("Could not find a loss coefficient spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
+               throw runtime_error("Could not find a grid blockage ratio spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
 
         }
 
