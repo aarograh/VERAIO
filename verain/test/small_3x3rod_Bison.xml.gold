@@ -240,12 +240,18 @@
     <Parameter name="bcs_plenumpressure_plenumpressure_startup_time" type="double" value="1e4"/>
     <Parameter name="bcs_pressure_coolantpressue_factor" type="double" value="1.55e7"/>
     <Parameter name="bcs_pressure_coolantpressue_function" type="string" value="coolant_pressure_ramp"/>
+    <Parameter name="burnup_burnup_i_enrich" type="string" value="3.100e-02 9.690e-01 0.0000e+00 0.0000e+00 0.0000e+00 0.0000e+00"/>
+    <Parameter name="burnup_burnup_num_axial" type="int" value="48"/>
+    <Parameter name="burnup_burnup_num_radial" type="int" value="6"/>
     <Parameter name="executioner_dt" type="double" value="1.0e3"/>
     <Parameter name="executioner_end_time" type="double" value="6.0e7"/>
     <Parameter name="executioner_num_steps" type="int" value="2000"/>
     <Parameter name="executioner_timestepper_time_dt" type="string" value="1.0e3 1.0e5"/>
     <Parameter name="executioner_timestepper_time_t" type="string" value="0 1.0e5"/>
     <Parameter name="fuel_pin_input_file_template" type="string" value="small_3x3rod_Bison.i.template"/>
+    <Parameter name="functions_coolant_temperature_type" type="string" value="PiecewiseLinear"/>
+    <Parameter name="functions_coolant_temperature_x" type="string" value="-100 0"/>
+    <Parameter name="functions_coolant_temperature_y" type="string" value="293 565"/>
     <Parameter name="globalparams_a_lower" type="double" value="0.01676"/>
     <Parameter name="globalparams_a_upper" type="double" value="3.67436"/>
     <Parameter name="globalparams_energy_per_fission" type="double" value="3.2e-11"/>
@@ -271,6 +277,7 @@
     <Parameter name="ramp_data_transfers" type="bool" value="true"/>
     <Parameter name="ramping_factor" type="Array(double)" value="{0.0,0.0,1.0}"/>
     <Parameter name="ramping_time" type="Array(double)" value="{-100.0,0.0,1.0e5}"/>
+    <Parameter name="solve_type" type="string" value="tiamat"/>
     <Parameter name="thermalcontact_initial_gas_fractions" type="string" value="1 0 0 0 0 0 0 0 0 0"/>
     <Parameter name="thermalcontact_roughness_clad" type="double" value="5.0e-7"/>
     <Parameter name="thermalcontact_roughness_fuel" type="double" value="1.0e-6"/>

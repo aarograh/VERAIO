@@ -221,7 +221,6 @@
   solve_type standalone
   auxkernels_fast_neutron_flux_axial_power_profile = axial_peaking_factors
   auxkernels_fast_neutron_flux_factor = 3.e13
-  auxkernels_fast_neutron_flux_rod_ave_lin_pow = power_profile
   auxkernels_pelletid_a_lower = 0.00226
   auxkernels_pelletid_a_upper = 0.5418
   auxvariables_grain_radius_initial_condition = 3.0e-6
@@ -230,17 +229,12 @@
   bcs_plenumpressure_plenumpressure_startup_time = 1e4
   bcs_pressure_coolantpressue_factor = 1.55e7
   bcs_pressure_coolantpressue_function = coolant_pressure_ramp
-  burnup_burnup_rod_ave_lin_pow = power_profile
-  burnup_burnup_axial_power_profile = axial_peaking_factors
-  burnup_burnup_fuel_outer_radius = 0.0041
-  burnup_burnup_i_enrich = 0.031 0.969 0 0 0 0
-  coolantchannel_convective_clad_surface_inlet_temperature = 565
-  coolantchannel_convective_clad_surface_inlet_pressure = 1.55e7
-  coolantchannel_convective_clad_surface_inlet_massflux = 3800
-  coolantchannel_convective_clad_surface_rod_diameter = 0.0095
-  coolantchannel_convective_clad_surface_rod_pitch = 0.012
-  coolantchannel_convective_clad_surface_linear_heat_rate = power_profile
-  coolantchannel_convective_clad_surface_axial_power_profile = axial_peaking_factors
+  functions_coolant_temperature_type = PiecewiseLinear
+  functions_coolant_temperature_x = -100 0
+  functions_coolant_temperature_y = 293 565
+  burnup_burnup_num_radial = 6
+  burnup_burnup_num_axial = 48
+  burnup_burnup_i_enrich = '3.100e-02 9.690e-01 0.0000e+00 0.0000e+00 0.0000e+00 0.0000e+00'
   executioner_dt = 1.0e3
   executioner_end_time = 6.0e7
   executioner_num_steps = 2000
