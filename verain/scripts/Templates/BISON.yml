@@ -81,6 +81,20 @@ BISON:
         - copy BISON/$auxkernels_hoop_stress_execute_on
       _content:
 
+    auxkernels_radial_stress_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_radial_stress_execute_on
+      _content:
+
+    auxkernels_axial_stress_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_axial_stress_execute_on
+      _content:
+
     auxkernels_hoop_execute_on:
       _pltype: parameter
       _type: string
@@ -114,6 +128,20 @@ BISON:
       _type: string
       _do:
         - copy BISON/$auxkernels_creep_strain_mag_execute_on
+      _content:
+
+    auxkernels_creep_strain_radial_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_creep_strain_radial_execute_on
+      _content:
+
+    auxkernels_creep_strain_axial_execute_on:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$auxkernels_creep_strain_axial_execute_on
       _content:
       
     auxvariables_htcl_initial_condition:
@@ -438,6 +466,27 @@ BISON:
         - copy BISON/$executioner_nl_abs_tol
       _content:
 
+    executioner_petsc_options:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$executioner_petsc_options
+      _content:
+      
+    executioner_petsc_options_iname:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$executioner_petsc_options_iname
+      _content:
+      
+    executioner_petsc_options_value:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$executioner_petsc_options_value
+      _content:
+
     executioner_timestepper_type:
       _pltype: parameter
       _type: string
@@ -487,6 +536,13 @@ BISON:
         - copy BISON/$functions_coolant_pressure_ramp_x
       _content:  
       
+    functions_coolant_pressure_ramp_y:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_coolant_pressure_ramp_y
+      _content:  
+      
     functions_axial_peaking_factors_type:
       _pltype: parameter
       _type: string
@@ -508,11 +564,67 @@ BISON:
         - copy BISON/$functions_axial_peaking_factors_value
       _content:
 
+    functions_coolant_temperature_type:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_coolant_temperature_type
+      _content:
+
     functions_coolant_temperature_data_file:
       _pltype: parameter
       _type: string
       _do:
         - copy BISON/$functions_coolant_temperature_data_file
+      _content:
+
+    functions_coolant_temperature_x:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_coolant_temperature_x
+      _content:
+
+    functions_coolant_temperature_y:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_coolant_temperature_y
+      _content:
+
+    functions_linear_heat_rate_profile_x:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_linear_heat_rate_profile_x
+      _content:
+
+    functions_linear_heat_rate_profile_y:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_linear_heat_rate_profile_y
+      _content:
+
+    functions_linear_heat_rate_profile_data_file:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_linear_heat_rate_profile_data_file
+      _content:
+
+    functions_linear_heat_rate_profile_format:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_linear_heat_rate_profile_format
+      _content:
+
+    functions_linear_heat_rate_profile_scale_factor:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_linear_heat_rate_profile_scale_factor
       _content:
 
     functions_q_functions:

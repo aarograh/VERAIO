@@ -2221,6 +2221,16 @@ BISON:
     _content:
     _check:
       - is_string()
+  auxkernels_radial_stress_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  auxkernels_axial_stress_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   auxkernels_hoop_execute_on:
     <<: *dtstring
     _content:
@@ -2242,6 +2252,16 @@ BISON:
     _check:
       - is_string()
   auxkernels_creep_strain_mag_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  auxkernels_creep_strain_radial_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  auxkernels_creep_strain_axial_execute_on:
     <<: *dtstring
     _content:
     _check:
@@ -2473,6 +2493,21 @@ BISON:
     _check:
       - is_float()
       - is_gt() 0
+  executioner_petsc_options:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  executioner_petsc_options_iname:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  executioner_petsc_options_value:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   executioner_timestepper_type:
     <<: *dtstring
     _content:
@@ -2508,6 +2543,11 @@ BISON:
     _content:
     _check:
       - is_string()
+  functions_coolant_pressure_ramp_y:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   functions_axial_peaking_factors_type:
     <<: *dtstring
     _content:
@@ -2523,7 +2563,47 @@ BISON:
     _content:
     _check:
       - is_string()
+  functions_coolant_temperature_type:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   functions_coolant_temperature_data_file:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  functions_coolant_temperature_x:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  functions_coolant_temperature_y:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()      
+  functions_linear_heat_rate_profile_x:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  functions_linear_heat_rate_profile_y:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  functions_linear_heat_rate_profile_data_file:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  functions_linear_heat_rate_profile_format:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  functions_linear_heat_rate_profile_scale_factor:
     <<: *dtstring
     _content:
     _check:
