@@ -261,34 +261,34 @@ STATES:
           _pltype: parameter
           _type: double
           _do:
-            - copy %STATE/$(_loop)/$coolchem:0
+            - copy %STATE/$(_loop)/$cool_chem:0
           _content:
 
         li_conc:
           _pltype: parameter
           _type: double
           _do:
-            - copy %STATE/$(_loop)/$coolchem:1
+            - copy %STATE/$(_loop)/$cool_chem:1
           _content:
 
         ni_sol:
           _pltype: parameter
           _type: double
           _do:
-            - copy %STATE/$(_loop)/$coolchem:2
+            - copy %STATE/$(_loop)/$cool_chem:2
           _content:
 
         ni_par:
           _pltype: parameter
           _type: double
           _do:
-            - copy %STATE/$(_loop)/$coolchem:3
+            - copy %STATE/$(_loop)/$cool_chem:3
           _content:
 
         fe_sol:
           _pltype: parameter
           _type: double
           _do:
-            - copy %STATE/$(_loop)/$coolchem:4
+            - copy %STATE/$(_loop)/$cool_chem:4
           _content:
 

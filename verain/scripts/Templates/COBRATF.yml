@@ -315,5 +315,5 @@ COBRATF:
       _pltype: parameter
       _type: string
       _do:
-        - copy MPACT/$crud
+        - copy COBRATF/$crud
       _content:
