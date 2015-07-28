@@ -285,7 +285,7 @@
       <Parameter name="bladewing" type="double" value="1.98501"/>
       <Parameter name="label" type="string" value="BLADE"/>
       <Parameter name="maxstep" type="int" value="48"/>
-      <Parameter name="ntube" type="integer" value="21"/>
+      <Parameter name="ntube" type="int" value="21"/>
       <Parameter name="num_pins" type="int" value="8"/>
       <Parameter name="stroke" type="double" value="365.76"/>
       <Parameter name="title" type="string" value="GE OEM Control Blade"/>

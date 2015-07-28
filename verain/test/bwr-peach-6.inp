@@ -48,9 +48,9 @@
   bc_top reflecting
   bc_bot reflecting
 
-  mat zirc2  6.5514 zirc4      ! zirc density p. 39
+  mat zirc2  6.5514 zirc2      ! zirc density p. 39
   mat zirc4  6.5514 zirc4
-  mat he   0.000176 he
+  mat he   0.000176 he-4
    
 [ASSEMBLY]
   npin   8
