@@ -1630,7 +1630,15 @@ MPACT:
       - nth(0,())>=0
       - nth(1,())>=0
       - nth(2,())>=0
-
+  crud_depletion:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_word(nth(0,()))
+      - is_float(nth(1,()))
+      - in_dictionary(nth(0,()),'true','false')
+      - nth(1,())>=0
   meshing_method:
     <<: *dtword
     _content:
