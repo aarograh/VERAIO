@@ -18,13 +18,13 @@
         <Parameter name="density" type="double" value="0.000176"/>
         <Parameter name="key_name" type="string" value="he"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-        <Parameter name="mat_names" type="Array(string)" value="{he}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{he-4}"/>
       </ParameterList>
       <ParameterList name="Material_zirc2">
         <Parameter name="density" type="double" value="6.5514"/>
         <Parameter name="key_name" type="string" value="zirc2"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-        <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{zirc2}"/>
       </ParameterList>
       <ParameterList name="Material_zirc4">
         <Parameter name="density" type="double" value="6.5514"/>

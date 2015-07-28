@@ -77,7 +77,7 @@ CONTROLS:
 
         ntube:
           _pltype: parameter
-          _type: integer
+          _type: int
           _do:
             - copy %CONTROL/$(_path)/@blade:0
           _content:
