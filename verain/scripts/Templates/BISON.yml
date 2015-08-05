@@ -1075,6 +1075,14 @@ BISON:
         - copy BISON/$non_fuel_pin_input_file_template
       _content:
 
+    power_file:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$power_file
+      _content:
+
+
     ramping_time:
       _pltype: array
       _type: double
