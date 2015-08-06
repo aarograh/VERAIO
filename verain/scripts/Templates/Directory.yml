@@ -3010,6 +3010,11 @@ BISON:
     _content:
     _check:
       - is_string()
+  power_file:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   ramping_time:
     <<: *dtlist
     _style: multi-line
