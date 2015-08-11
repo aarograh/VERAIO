@@ -234,7 +234,6 @@
   functions_coolant_temperature_y = 293 565
   burnup_burnup_num_radial = 6
   burnup_burnup_num_axial = 48
-  burnup_burnup_i_enrich = '3.100e-02 9.690e-01 0.0000e+00 0.0000e+00 0.0000e+00 0.0000e+00'
   executioner_dt = 1.0e3
   executioner_end_time = 6.0e7
   executioner_num_steps = 2000

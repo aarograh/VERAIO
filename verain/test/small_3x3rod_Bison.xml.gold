@@ -240,7 +240,6 @@
     <Parameter name="bcs_plenumpressure_plenumpressure_startup_time" type="double" value="1e4"/>
     <Parameter name="bcs_pressure_coolantpressue_factor" type="double" value="1.55e7"/>
     <Parameter name="bcs_pressure_coolantpressue_function" type="string" value="coolant_pressure_ramp"/>
-    <Parameter name="burnup_burnup_i_enrich" type="string" value="3.100e-02 9.690e-01 0.0000e+00 0.0000e+00 0.0000e+00 0.0000e+00"/>
     <Parameter name="burnup_burnup_num_axial" type="int" value="48"/>
     <Parameter name="burnup_burnup_num_radial" type="int" value="6"/>
     <Parameter name="executioner_dt" type="double" value="1.0e3"/>
