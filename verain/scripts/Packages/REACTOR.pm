@@ -54,6 +54,14 @@ our %BLOCKINIT=();
     sub get_debug  {$_DEBUG;}
     sub set_debug { $_DEBUG = 1; }
 
+    my $_FILE;
+    my $_INPUT_LINE_NUMBER;
+    my $_INPUT_LINE;
+    sub set_input_log {($_FILE,$_INPUT_LINE_NUMBER,$_INPUT_LINE)=@_;}
+    sub print_input_log {
+	print STDERR "Last input line [$_FILE] $_INPUT_LINE_NUMBER: $_INPUT_LINE\n";
+    }
+
 }
 
 sub full_size {
@@ -447,8 +455,9 @@ sub read_ascii {
     }
 
     my($IFILE); 
-    if (-e $filename){
-      open $IFILE, $filename or die "Cannot open file $filename\n";
+    if (-f $filename){
+      print STDERR "Opennng file with name: $filename\n" if get_verbose();
+      open $IFILE, $filename or ( &print_input_log() &&  die "Cannot open file $filename\n");
     }
     else{
       use Cwd 'abs_path';
@@ -456,12 +465,14 @@ sub read_ascii {
       my $pscript=abs_path($0);
       my $directory = dirname($pscript);
       my $filename2="$directory/Init/$filename";
-      if (-e $filename2){
+      if (-f $filename2){
         # print "Reading $filename from $directory\n";
-        open $IFILE, $filename2 or die "Cannot open file $filename2\n";
+        print STDERR "Opennng file with path: $filename2\n" if get_verbose();
+        open $IFILE, $filename2 or ( &print_input_log() && die "Cannot open file $filename2\n" );
       }
       else{
-        die "$filename does not exist\n";
+        &print_input_log();
+        die "$filename2 does not exist\n";
       }
     }
 
@@ -469,6 +480,7 @@ sub read_ascii {
       s/^\s+//;
       s/\s+$//;
       next READ if /^$/;        # skip empty lines
+      &set_input_log($filename,$.,$_);
       &clean_line(\$_);
 
       my $split_exp=';';
