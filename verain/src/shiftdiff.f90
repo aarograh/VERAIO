@@ -176,7 +176,7 @@
       real(8)            :: xktol=5000.0d0 ! eigenvalue tolerance (pcm)
 
       real(8)            :: xmax           ! max pin difference (%)
-      real(8)            :: pintol=0.5d0   ! pin power tolerance (%)
+      real(8)            :: pintol=10.d0   ! pin power tolerance (%)
 
       character(len=80)  :: dataset
       character(len=12)  :: statename
