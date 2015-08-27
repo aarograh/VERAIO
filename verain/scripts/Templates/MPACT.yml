@@ -489,6 +489,20 @@ MPACT:
             - copy MPACT/$cmfd_ur
           _content:
 
+        subplane_target:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$subplane_target
+          _content:
+
+        subplane_max:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$subplane_max
+          _content:
+
     2d1d:
       _pltype: list
       _content:

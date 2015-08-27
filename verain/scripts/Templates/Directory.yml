@@ -1957,6 +1957,18 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  subplane_target:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  subplane_max:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
   cmfd_angle_decomp:
     <<: *dtword
     _content:
