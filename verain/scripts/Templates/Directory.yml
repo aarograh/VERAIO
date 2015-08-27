@@ -1878,6 +1878,17 @@ MPACT:
     _check:
       - is_float()
       - is_geq() 0
+  ith_channeltype:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+  ith_avgpin:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   temptable_filename:
     <<: *dtword
     _content:

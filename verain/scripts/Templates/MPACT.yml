@@ -422,6 +422,20 @@ MPACT:
             - copy MPACT/$ith_hgap
           _content:
 
+        ith_channeltype:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$ith_channeltype
+          _content:
+
+        ith_avgpin:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$ith_avgpin
+          _content:
+
         temptable_filename:
           _pltype: parameter
           _type: string
