@@ -3011,10 +3011,11 @@ BISON:
     _check:
       - is_string()
   power_file:
-    <<: *dtstring
+    <<: *dtlist
+    _style: multi-line
     _content:
     _check:
-      - is_string()
+      - fall(sub{is_string(shift)},())
   ramping_time:
     <<: *dtlist
     _style: multi-line
@@ -3062,3 +3063,9 @@ BISON:
     _content:
     _check:
       - is_string()
+  cycle_outage_time_days:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())
