@@ -1076,12 +1076,11 @@ BISON:
       _content:
 
     power_file:
-      _pltype: parameter
+      _pltype: array
       _type: string
       _do:
         - copy BISON/$power_file
       _content:
-
 
     ramping_time:
       _pltype: array
@@ -1130,4 +1129,11 @@ BISON:
       _type: string
       _do:
         - copy BISON/$userobjects_pbz_execute_on
+      _content:
+      
+    cycle_outage_time_days:
+      _pltype: array
+      _type: double
+      _do:
+        - copy BISON/$cycle_outage_time_days
       _content:

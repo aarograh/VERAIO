@@ -601,7 +601,7 @@ crd_map
 ! To-Do: Add additional INSILICO parameters (see example PL)
 
 [BISON]
-  solve_type standalone
+  solve_type tiamat
   auxkernels_fast_neutron_flux_axial_power_profile = axial_peaking_factors
   auxkernels_fast_neutron_flux_factor = 1.6e12
   auxkernels_fast_neutron_flux_rod_ave_lin_pow = power_profile
