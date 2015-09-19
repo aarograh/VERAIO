@@ -292,7 +292,7 @@ CORE:
     _check:
       - fall(sub{is_float(shift)},())
       - arraysize()==2
-      - nth(0,())>0
+      - nth(0,())>=0
       - nth(1,())>=0
   rcs_volume:
     <<: *dtdouble
