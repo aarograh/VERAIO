@@ -342,6 +342,19 @@ MPACT:
             - copy MPACT/$depl_time_method
           _content:
 
+        include_depl_mats:
+          _pltype: array
+          _type: string
+          _do:
+            - copy MPACT/$include_depl_mats
+          _content:
+
+        exclude_depl_mats:
+          _pltype: array
+          _type: string
+          _do:
+            - copy MPACT/$exclude_depl_mats
+          _content:
     TH:
       _pltype: list
       _content:

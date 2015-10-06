@@ -323,6 +323,7 @@
 [MPACT]
   ith_hgap   5200.0   ! internal t/h option
   ith_dhfrac 0.02     ! internal t/h option
-
+  exclude_depl_mats U31 U32 b4c
+  include_depl_mats U32 U33 aic he
 [BISON]
   ramp_data_transfers = true
