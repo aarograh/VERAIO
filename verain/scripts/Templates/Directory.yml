@@ -195,6 +195,10 @@ STATE:
     _check:
       - fall(sub{is_float(shift)},stride(1,1,()))
       - nth(0,())eq"GWDMT"||nth(0,())eq"MWDMT"||nth(0,())eq"EFPD"||nth(0,())eq"hours"
+  edit:
+    <<: *dtlist
+    _content:
+    _check:
   reset_sol:
     <<: *dtbool
     _content:
@@ -718,6 +722,10 @@ EDITS:
     _content:
     _check:
       - is_float()
+  edit_group:
+    <<: *dtlistnamed
+    _content:
+    _check:
 
 INSILICO:
   problem_name:
