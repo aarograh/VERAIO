@@ -1890,6 +1890,18 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() internal origen
+  include_depl_mats:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+  exclude_depl_mats:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
 
   cmfd:
     <<: *dtword
