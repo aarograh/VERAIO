@@ -53,14 +53,18 @@ verain_filenames=[
       'small_3x3rod_IFBA',
       'small_3x3rod_BProd',
       'grid_enhance',
-      'VTK_on']
+      'VTK_on',
+      'four_grid_types']
       
 
 partests=['Sample_p7',
-      'par_qtr_core_inlet_bc']
+      'par_qtr_core_inlet_bc',
+      'par_cross']
 
 parfiles=[56,
-      56]
+      56,
+      5]
+
 
 if not len(sys.argv)==2:
    print 'You must specify xml2ctf executable path as an argument'
