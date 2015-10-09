@@ -450,7 +450,11 @@ CORE:
     <<: *dtlistnamed
     _style: multi-line
     _check:
+      - arraysize()>1
+      - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
+    _defaults:
+      _path: CORE/%(_keyword)/$(_id)
 
   lower_ref:
     <<: *dtlist
@@ -562,7 +566,11 @@ ASSEMBLY:
     <<: *dtlistnamed
     _style: multi-line
     _check:
+      - arraysize()>1
+      - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
+    _defaults:
+      _path: CORE/%(_keyword)/$(_id)
 
   gap:
     <<: *dtlist
@@ -622,7 +630,11 @@ CONTROL:
     <<: *dtlistnamed
     _style: multi-line
     _check:
+      - arraysize()>1
+      - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
+    _defaults:
+      _path: CORE/%(_keyword)/$(_id)
 
   blade:
     <<: *dtlist
@@ -669,7 +681,11 @@ INSERT:
     <<: *dtlistnamed
     _style: multi-line
     _check:
+      - arraysize()>1
+      - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
+    _defaults:
+      _path: CORE/%(_keyword)/$(_id)
 
 DETECTOR:
   <<: *dtblocknamed
@@ -704,7 +720,11 @@ DETECTOR:
     <<: *dtlistnamed
     _style: multi-line
     _check:
+      - arraysize()>1
+      - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
+    _defaults:
+      _path: CORE/%(_keyword)/$(_id)
 
 EDITS:
   axial_edit_bounds:
