@@ -31,26 +31,132 @@ sub new
     my $self={
 	keyword => $arg{keyword} || croak("missing keyword"),
 	keytree => $arg{keytree} || croak("missing keytree"),
-	ctext   => exists($arg{ctext}) ? $arg{ctext} : undef,
-#	ctext   =>$arg{ctext} || undef,
-	file    => exists($arg{file})  ? $arg{file} : undef,
-	line    => exists($arg{line})  ? $arg{line} : undef,
-    };
+	out_db  => $arg{out_db}  || croak("missing out_db"),
 
-#    print STDERR "ctext $arg{ctext}\n";
+	ctext   => exists($arg{ctext})   ? $arg{ctext}  : undef,
+	tlist   => exists($arg{tlist})   ? $arg{tlist}  : undef,
+
+	id      => exists($arg{id})      ? $arg{id}  : undef,
+	idx     => exists($arg{idx})     ? $arg{idx}  : undef,
+
+	defpath => exists($arg{defpath}) ? $arg{defpath}: undef,
+	defval  => exists($arg{defval})  ? $arg{defval} : undef,
+
+	file    => exists($arg{file})    ? $arg{file}   : undef,
+	line    => exists($arg{line})    ? $arg{line}   : undef,
+    };
 
     bless $self, $class;
 }
 
-sub argvalue
+sub ctokens
 {
-    my ($self,$argument)=@_;
+    my ($self,$idx)=@_;
+    my $myfun=(caller(0))[3];
+
+    my @a;
+#   Split the command text into tokens
+    unless(defined($self->{tlist})){
+	my $dtx=$self->ctext();
+	my $split_exp='\s+|=';
+	@a=quotewords($split_exp, 0, $dtx);
+	@a = grep {defined && $_ ne ''} @a;
+	unless($self->argexists('_slash')){
+	    @a = grep {defined && $_ ne '/'} @a;
+	}
+	foreach my $data (@a){
+	    txt2xml(\$data);
+	}
+	$self->{tlist}=\@a;
+    }
+
+    if(@_ > 1){
+	my $n=splice(@{ $self->{tlist} },$idx-1,1);
+	croak "Bad index $idx to $myfun" unless defined($n);
+    }
+
+    return @{ $self->{tlist} };
+}
+
+sub defaults
+{
+    my ($self,$aref)=@_;
+    my $myfun=(caller(0))[3];
+
+    my $defpath = $self->argvalue('_defaults','_path');
+    my $defval  = $self->argvalue('_defaults','_value');
+
+    my $line=$self->line();
+    my $file=$self->file();
+    my $dtx =$self->ctext();
+
+    if($defpath){ # TODO: logic for defval
+	my $keyword=$self->keyword();
+	my $id=$self->id();
+
+	$defpath =~ s/\(_keyword\)/$keyword/g;
+	$defpath =~ s/\(_id\)/$id/g if defined($id);
+	$self->defpath($defpath);
+	$self->defval($defval) if(defined($defval));
+
+	my @path=parse_path($defpath);
+	my $SOURCE_DB=$self->out_db();
+	my $t=key_defined($SOURCE_DB,@path);
+
+	# TODO: hardwired for array
+	return undef if ref $t ne 'ARRAY';
+
+	my @b=@{ $t };
+	my @a=$self->ctokens();
+	my @b0=@b;
+
+	my $done;
+	for ($keyword) {
+	    if (/^mat$/) { # Andrew's logic
+		@a != 1 && do {@b=@a; $done='mat overwrite'; last;}; # a has new definition, erase old
+		@a == 1 &&
+		(($b[0] == 0 && $a[0] != 0) || 
+		 ($b[0] != 0 && $a[0] == 0)) && do {
+		     &error_report($keyword,$dtx,$file,$line,
+				   "Incompatible densities: default $b[0], new $a[0]");
+		     die "$myfun illegal switch of material densities\n";
+		};
+		@a == 1 && do {$b[0]=$a[0]; $done='mat density'; last;}; # a has new definition, erase old
+	    }
+	    else{ # default: overwrite b with a as far a goes
+		$done='default';
+		for(my $i=0; $i<@a; $i++){
+		    $b[$i]=$a[$i];
+		}
+		last;
+	    }
+	}
+
+	print "result: $done [@b0][@a] ===> [@b]\n"  if get_verbose();
+	$self->{tlist}=\@b;
+    }
+}
+
+sub argexists
+{
+    my ($self,@argument)=@_;
     my $myfun=(caller(0))[3];
 
     croak "Too few arguments to $myfun" if @_ < 2;
 
     my $tree=$self->keytree();
-    return key_defined($tree,$argument);
+    return key_exists($tree,@argument);
+}
+
+sub argvalue
+{
+    my ($self,@argument)=@_;
+    my $myfun=(caller(0))[3];
+
+    croak "Too few arguments to $myfun" if @_ < 2;
+
+    my $tree=$self->keytree();
+    return key_defined($tree,@argument);
 }
 
 sub is_multiline
@@ -69,13 +175,13 @@ sub is_multiline
 
 sub argarray
 {
-    my ($self,$argument)=@_;
+    my ($self,@argument)=@_;
     my $myfun=(caller(0))[3];
 
     croak "Too few arguments to $myfun" if @_ < 2;
 
     my $tree=$self->keytree();
-    return values_at($tree,$argument);
+    return values_at($tree,@argument);
 }
 
 sub ctext
@@ -133,6 +239,59 @@ sub keyword
     return $self->{keyword};
 }
 
+sub out_db
+{
+    my ($self, $newval) = @_;
+    my $myfun=(caller(0))[3];
+
+    croak "Too many arguments to $myfun" if @_ > 2;
+    $self->{out_db}= $newval if @_ > 1;
+    croak "$myfun undefined" unless defined($self->{out_db});
+    return $self->{out_db};
+}
+
+sub defpath
+{
+    my ($self, $newval) = @_;
+    my $myfun=(caller(0))[3];
+
+    croak "Too many arguments to $myfun" if @_ > 2;
+    $self->{defpath}= $newval if @_ > 1;
+    croak "$myfun undefined" unless defined($self->{defpath});
+    return $self->{defpath};
+}
+
+sub defval
+{
+    my ($self, $newval) = @_;
+    my $myfun=(caller(0))[3];
+
+    croak "Too many arguments to $myfun" if @_ > 2;
+    $self->{defval}= $newval if @_ > 1;
+    croak "$myfun undefined" unless defined($self->{defval});
+    return $self->{defval};
+}
+
+sub id
+{
+    my ($self, $newval) = @_;
+    my $myfun=(caller(0))[3];
+
+    croak "Too many arguments to $myfun" if @_ > 2;
+    $self->{id}= $newval if @_ > 1;
+    return $self->{id};
+}
+
+sub idx
+{
+    my ($self, $newval) = @_;
+    my $myfun=(caller(0))[3];
+
+    croak "Too many arguments to $myfun" if @_ > 2;
+    $self->{idx}= $newval if @_ > 1;
+    return $self->{idx};
+}
+
 sub cleanline ($$$) {
     my $lineref=shift;
     my $what=shift;
@@ -146,11 +305,11 @@ sub keyin{
     my $myfun=(caller(0))[3];
 
     my ($name_idx, $name);
-    my @a;
     my $result;
     my $errmsg;
 
     my $dtx=$self->ctext();
+    my $dtxs;
     my $line=$self->line();
     my $file=$self->file();
 
@@ -160,74 +319,52 @@ sub keyin{
     my $LINE_LABEL='_line';
 
     my $templ=$self->keytree();
-    my $templ0=$templ;
-    my %args=%{ $templ };
+    my @sr=$self->argarray('_check');
+    my $parse = $self->argvalue('_parse');
+    my $type = $self->argvalue('_type');
 
-    my $split_exp='\s+|=';
-    @a=quotewords($split_exp, 0, $dtx);
-    @a = grep {defined && $_ ne ''} @a;
-
-    unless(exists($args{_slash})){
-	@a = grep {defined && $_ ne '/'} @a;
-    }
-
-    foreach my $data (@a){
-	$data =~ s/&/&amp;/g;
-	$data =~ s/</&lt;/g;
-#	$data =~ s/>/&gt;/g;
-	# should this trigger error, like unbalanced quotes?
-	$data =~ s/'/&apos;/g;
-	$data =~ s/"/&quot;/g;
-    }
-
+#   Split the command text into tokens
+    my @a=$self->ctokens();
     my @a0=@a;
-# SSMOD: Decide on case
-#    my @a = map { lc } @a;
-#    my @a = map { uc } @a;
-    $name_idx=$args{_named};
-    if($name_idx){
-	$name=splice(@a,$name_idx-1,1);
-	unless(defined($name)){
-	    die "keyin: parameter does not have key name defined, input line $dtx\n";
-	}
 
-# In case we want to use _content instead of _default. Then must
-# change all entries in Directory.yml, _default -> _content, and use
-# content to define default value. Otherwise, use _default and make a
-# map from _default to create _content.
-#
-#	key_delete($templ,$CONTENT_LABEL) if key_exists($templ,$CONTENT_LABEL);
-#
+# redefining reference if the keyword is named
+    $name_idx=$self->argvalue('_named');
+    if($name_idx){
+	$name=$a[$name_idx-1];
+	unless(defined($name)){
+	    &error_report($self->keyword(),$dtx,$file,$line,$errmsg);
+	    die "keyin: named parameter does not have key name defined.\n";
+	}
+	$self->id($name);
+	$self->idx($name_idx);
+	@a=$self->ctokens($name_idx);
+
 	$templ=new_key($templ,$REF_LABEL,$name);
     }
 
-#  $^#%@#$^!!!
-    my @sr=values_at($templ0,'_check');
+# run defaults 
+    $self->defaults();
+    @a=$self->ctokens();
+
+#   Run checks and keyon data
     $result=0;
-    if($args{_parse} eq 'scalar'){
-#	$dtx=$args{_type} eq 'string' ? $dtx : $a[0];
-	if($args{_type} eq 'string'){
-	    # this assumes there is no named scalar string
-	    # ok for now, but may be needed later
-#	    $dtx=~s/["']//g;
-	    $dtx =~ s/&/&amp;/g;
-	    $dtx =~ s/</&lt;/g;
-#	    $dtx =~ s/>/&gt;/g;
-	    $dtx =~ s/'/&apos;/g;
-	    $dtx =~ s/"/&quot;/g;
+    if($parse eq 'scalar'){
+	# Also works with named scalar string that is not allowed yet
+	if($type eq 'string'){
+#	    txt2xml(\$dtx);
 	    if(@a){
-		$dtx=join(' ',@a);
+		$dtxs=join(' ',@a);
 	    }
 	}
 	else{
-	    $dtx=$a[0];
+	    $dtxs=$a[0];
 	}
-	$result=&apply_evals(\$dtx,\@sr,\$errmsg);
-	key_on($templ,$CONTENT_LABEL,$dtx);
+	$result=&apply_evals(\$dtxs,\@sr,\$errmsg,$self);
+	key_on($templ,$CONTENT_LABEL,$dtxs) if $result;
     }
-    elsif($args{_parse} eq 'list'){
-	$result=&apply_evals(\@a0,\@sr,\$errmsg);
-	key_on($templ,$CONTENT_LABEL,[@a]);
+    elsif($parse eq 'list'){
+	$result=&apply_evals(\@a0,\@sr,\$errmsg,$self);
+	key_on($templ,$CONTENT_LABEL,[@a]) if $result;
     }
     else{
 	croak "$myfun invalid parse type";
@@ -251,9 +388,13 @@ sub error_report
 }
 
 sub apply_evals {
-    my ($data_ref,$eval_ref,$errmsg_ref)=@_;
+    my ($data_ref,$eval_ref,$errmsg_ref,$command)=@_;
     my $ieval;
     my $dtype=ref $data_ref;
+
+    my $keyword=$command->keyword();
+    my $id=$command->id();
+    my $out_db=$command->out_db();
 
     foreach $ieval (@{$eval_ref}){
 	$$errmsg_ref="$ieval";
@@ -286,6 +427,10 @@ sub apply_evals {
 	print STDERR "--------- check $dtype: [$ieval]\n" if get_verbose();;
 	$cmdc =~ s/\(\)/\($exa\)/g;
 	$cmdc =~ s/\[\]/\[$exa\]/g;
+
+	$cmdc =~ s/\(_keyword\)/$keyword/g;
+	$cmdc =~ s/\(_id\)/$id/g if defined($id);
+
 	my $expr="$cmdc";
 	print STDERR "--------------- $expr\n" if get_verbose();;
 	my $result=eval $expr || 0;
