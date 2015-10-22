@@ -3083,7 +3083,7 @@ BISON:
     _content:
     _check:
       - is_string()
-      - in_dictionary() standalone tiamat STANDALONE TIAMAT
+      - in_dictionary() standalone tiamat tiamat_inline STANDALONE TIAMAT TIAMAT_INLINE
   variables_temp_initial_condition:
     <<: *dtdouble
     _content:
