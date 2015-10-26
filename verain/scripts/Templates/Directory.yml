@@ -1866,24 +1866,24 @@ MPACT:
     _content:
     _check:
       - is_word()
-  ith_dhfrac:
+  sth_dhfrac:
     <<: *dtfloat
     _content:
     _check:
       - is_float()
       - is_geq() 0
-  ith_hgap:
+  sth_hgap:
     <<: *dtfloat
     _content:
     _check:
       - is_float()
       - is_geq() 0
-  ith_channeltype:
+  sth_channeltype:
     <<: *dtword
     _content:
     _check:
       - is_word()
-  ith_avgpin:
+  sth_avgpin:
     <<: *dtbool
     _content:
     _check:
