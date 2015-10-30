@@ -534,7 +534,8 @@ sub read_ascii {
 		  print STDERR "[$filename:$.] New command: $cname $ctext\n"  if get_verbose();
 		  $cname=$block->command_name($cname);
 
-		  $command=REACTORCommand->new(keyword=>$cname,keytree=>$res,ctext=>$ctext,file=>$filename,line=>$.);
+		  $command=REACTORCommand->new(keyword=>$cname,keytree=>$res,out_db=>$MAIN_DB,
+					       ctext=>$ctext,file=>$filename,line=>$.);
 		  unless($command->is_multiline()){
 		      print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
 		      $command->keyin();
@@ -556,7 +557,8 @@ sub read_ascii {
 
 		      print STDERR "[$filename:$.] New command: $cname $ctext\n"  if get_verbose();
 		      $cname=$block->command_name($cname);
-		      $command=REACTORCommand->new(keyword=>$cname,keytree=>$res,ctext=>$ctext,file=>$filename,line=>$.);
+		      $command=REACTORCommand->new(keyword=>$cname,keytree=>$res,out_db=>$MAIN_DB,
+						   ctext=>$ctext,file=>$filename,line=>$.);
 		      unless($command->is_multiline()){
 			  print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
 			  $command->keyin();
