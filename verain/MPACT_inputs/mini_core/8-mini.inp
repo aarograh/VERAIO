@@ -36,7 +36,7 @@
 include Asy_Ins_CR_Det_Edit.ini
  
 [MPACT]
-  include MPACT.ini
+  include mpact_mini.ini
 
 [COBRATF]
   gridloss  END  0.9070
