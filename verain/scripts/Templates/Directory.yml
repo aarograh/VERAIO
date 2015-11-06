@@ -3048,6 +3048,18 @@ BISON:
     _content:
     _check:
       - fall(sub{is_string(shift)},())
+  cycle_xml:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
+  shuffle_xml:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
   ramping_time:
     <<: *dtlist
     _style: multi-line
