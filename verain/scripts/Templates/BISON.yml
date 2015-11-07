@@ -1081,6 +1081,20 @@ BISON:
       _do:
         - copy BISON/$power_file
       _content:
+      
+    cycle_xml:
+      _pltype: array
+      _type: string
+      _do:
+        - copy BISON/$cycle_xml
+      _content:
+      
+    shuffle_xml:
+      _pltype: array
+      _type: string
+      _do:
+        - copy BISON/$shuffle_xml
+      _content:
 
     ramping_time:
       _pltype: array
