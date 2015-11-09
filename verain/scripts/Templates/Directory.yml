@@ -1866,18 +1866,29 @@ MPACT:
     _content:
     _check:
       - is_word()
-  ith_dhfrac:
+  sth_dhfrac:
     <<: *dtfloat
     _content:
     _check:
       - is_float()
       - is_geq() 0
-  ith_hgap:
+  sth_hgap:
     <<: *dtfloat
     _content:
     _check:
       - is_float()
       - is_geq() 0
+  sth_channeltype:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+  sth_avgpin:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   temptable_filename:
     <<: *dtword
     _content:
@@ -1952,6 +1963,18 @@ MPACT:
       - is_int()
       - is_gt() 0
   cmfd_ur:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  subplane_target:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  subplane_max:
     <<: *dtdouble
     _content:
     _check:
