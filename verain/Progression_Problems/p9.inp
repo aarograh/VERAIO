@@ -645,6 +645,7 @@
 [COBRATF]
   gridloss  END  0.9070
   gridloss  MID  0.9065
+  beta_sp   0.005
   parallel       1
 
 [SHIFT]
