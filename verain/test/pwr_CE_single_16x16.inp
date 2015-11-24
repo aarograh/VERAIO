@@ -1,0 +1,218 @@
+[CASEID]
+  title 'Single Assembly 3D 16x16 Problem'
+!================================================================================
+!  PWR
+!  16x16 Fuel Assembly
+!  CE Design
+!
+!================================================================================
+
+[STATE]
+  power  100.0         ! %
+  tinlet 559.0 F       ! F
+  boron  1300          ! ppmB
+  pressure 2250        ! psia
+
+  tfuel 900.0 K        ! K - 600K  Not used with T/H feedback! set to 900K with feedback
+  modden 0.743         ! g/cc      Not used with T/H feedback!
+
+  feedback on
+  sym full
+
+[CORE]
+  size 1                ! 1x1 single-assembly
+  rated 17.67   0.6824  ! MW, Mlbs/hr
+  apitch 20.64
+  height 406.328
+
+  core_shape
+    1
+
+  assm_map
+    A1
+
+  lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
+  upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
+  lower_ref   mod 26.0 1.0
+  upper_ref   mod 25.0 1.0
+
+  bc_rad reflecting
+
+  mat he     0.000176
+  mat inc    8.19
+  mat ss     8.0
+  mat zirc   6.56 zirc4
+  mat aic   10.20
+  mat pyrex  2.23
+  mat b4c    6.56
+
+[ASSEMBLY]
+  title "CE 16x16"
+  npin 16
+  ppitch 1.28524
+
+  fuel U31 10.257 95.0 / 3.1
+
+
+!  "large4" at end of cell card specifies that this is a large 2x2 rod
+
+  cell 1 0.41339 0.42164 0.48514 / U31 he zirc
+  cell 2         1.24    1.28    / mod    zirc / large4   ! large WR
+! cell 2         0.43    0.55    / mod    zirc            ! small WRs
+
+
+  cell 7         0.42164 0.48514 / mod    mod        ! empty location
+  cell 8         0.42164 0.48514 /     he zirc       ! plenum
+  cell 9                 0.48514 /        zirc       ! pincap
+
+
+  lattice FUEL1
+       2
+       1 1
+       1 1 1
+       1 1 1 2
+       1 1 1 2 2
+       1 1 1 1 1 1
+       1 1 1 1 1 1 1
+       1 1 1 1 1 1 1 1
+
+  lattice LGAP1
+       2
+       7 7
+       7 7 7
+       7 7 7 2
+       7 7 7 2 2
+       7 7 7 7 7 7
+       7 7 7 7 7 7 7
+       7 7 7 7 7 7 7 7
+
+  lattice PLEN1
+       2
+       8 8
+       8 8 8
+       8 8 8 2
+       8 8 8 2 2
+       8 8 8 8 8 8
+       8 8 8 8 8 8 8
+       8 8 8 8 8 8 8 8
+
+  lattice PCAP1
+       2
+       9 9
+       9 9 9
+       9 9 9 2
+       9 9 9 2 2
+       9 9 9 9 9 9
+       9 9 9 9 9 9 9
+       9 9 9 9 9 9 9 9
+
+  axial A1    6.050
+      LGAP1  10.281
+      PCAP1  11.951
+      FUEL1 377.711
+      PLEN1 393.711
+      PCAP1 395.381
+      LGAP1 397.501
+
+  grid END inc  1017 3.866
+  grid MID zirc 875  3.810
+
+  grid_axial
+      END  13.884
+      MID  75.2
+      MID 127.4
+      MID 179.6
+      MID 231.8
+      MID 284.0
+      MID 336.2
+      END 388.2
+
+  lower_nozzle  ss 6.05  6250.0  ! mat, height, mass (g)
+  upper_nozzle  ss 8.827 6250.0  ! mat, height, mass (g)
+
+[EDITS]
+
+!  3in intervals in active fuel
+  axial_edit_bounds
+          11.951
+          15.817
+          24.028
+          32.239
+          40.45
+          48.662
+          56.873
+          65.084
+          73.295
+          77.105
+          85.17
+          93.235
+          101.3
+          109.365
+          117.43
+          125.495
+          129.305
+          137.37
+          145.435
+          153.5
+          161.565
+          169.63
+          177.695
+          181.505
+          189.57
+          197.635
+          205.7
+          213.765
+          221.83
+          229.895
+          233.705
+          241.77
+          249.835
+          257.9
+          265.965
+          274.03
+          282.095
+          285.905
+          293.97
+          302.035
+          310.1
+          318.165
+          326.23
+          334.295
+          338.105
+          346.0262
+          353.9474
+          361.8686
+          369.7898
+          377.711
+
+[COBRATF]
+  nfuel   8             ! number of fuel rings in conduction model
+  nc      1             ! conduction option - radial conduction
+  irfc    2             ! friction factor correlation default=2
+  dhfrac  0.02          ! fraction of power deposited directly into coolant
+  hgap    5678.3        ! gap conductance
+  epso    0.001
+  oitmax  5
+  iitmax  40
+  gridloss END 0.9070   ! spacer grid loss coefficient
+  gridloss MID 0.9065   ! spacer grid loss coefficient
+  dtmin   0.000001
+  dtmax   0.1
+  tend    0.1
+  rtwfp   1000.0
+  maxits  10000
+  courant 0.8
+! edit_channels 1
+
+[COUPLING]
+  epsk        5.0  ! pcm
+  epsp        1.0e-4
+  rlx_power   0.6
+  rlx_tfuel   1.0
+  rlx_den     1.0
+  maxiter     100
+
+
+
+
+
