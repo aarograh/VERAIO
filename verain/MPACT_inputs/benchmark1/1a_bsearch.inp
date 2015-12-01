@@ -26,16 +26,17 @@
   bc_rad reflecting
   bc_top reflecting
   bc_bot reflecting
+  include mpact_test_mats.ini
   
 [ASSEMBLY]
   npin 1
   ppitch 1.26
   
   fuel U31 10.257 94.5 / 3.1
-  mat he 0.000176
-  mat zirc 6.56 zirc4
+!  mat he 0.000176
+!  mat zirc 6.56 zirc4
 
-  cell 1 0.4096 0.418 0.475 / U31 he zirc
+  cell 1 0.4096 0.418 0.475 / U31 he zirc4
 
   lattice LAT
     1

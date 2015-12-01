@@ -1866,18 +1866,29 @@ MPACT:
     _content:
     _check:
       - is_word()
-  ith_dhfrac:
+  sth_dhfrac:
     <<: *dtfloat
     _content:
     _check:
       - is_float()
       - is_geq() 0
-  ith_hgap:
+  sth_hgap:
     <<: *dtfloat
     _content:
     _check:
       - is_float()
       - is_geq() 0
+  sth_channeltype:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+  sth_avgpin:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   temptable_filename:
     <<: *dtword
     _content:
@@ -1952,6 +1963,18 @@ MPACT:
       - is_int()
       - is_gt() 0
   cmfd_ur:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  subplane_target:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  subplane_max:
     <<: *dtdouble
     _content:
     _check:
@@ -3048,6 +3071,18 @@ BISON:
     _content:
     _check:
       - fall(sub{is_string(shift)},())
+  cycle_xml:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
+  shuffle_xml:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
   ramping_time:
     <<: *dtlist
     _style: multi-line
@@ -3083,7 +3118,7 @@ BISON:
     _content:
     _check:
       - is_string()
-      - in_dictionary() standalone tiamat STANDALONE TIAMAT
+      - in_dictionary() standalone tiamat tiamat_inline STANDALONE TIAMAT TIAMAT_INLINE
   variables_temp_initial_condition:
     <<: *dtdouble
     _content:
