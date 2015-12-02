@@ -214,7 +214,7 @@
           <Parameter name="height" type="double" value="1.0"/>
           <Parameter name="label" type="string" value="MID"/>
           <Parameter name="mass" type="double" value="229.66"/>
-          <Parameter name="material" type="string" value="zirc"/>
+          <Parameter name="material" type="string" value="zirc4"/>
         </ParameterList>
       </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
