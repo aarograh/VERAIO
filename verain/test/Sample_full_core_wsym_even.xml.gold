@@ -71,8 +71,8 @@
     <Parameter name="upper_mat" type="string" value="SS304"/>
     <Parameter name="upper_thick" type="double" value="7.6"/>
     <Parameter name="upper_vfrac" type="double" value="0.5"/>
-    <Parameter name="xlabel" type="Array(string)" value="{R,P,N,M,L,K,J,H,G,F,E,D,C,B,A}"/>
-    <Parameter name="ylabel" type="Array(string)" value="{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}"/>
+    <Parameter name="xlabel" type="Array(string)" value="{S,R,P,N,M,L,K,J,H,G,F,E,D,C,B,A}"/>
+    <Parameter name="ylabel" type="Array(string)" value="{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}"/>
   </ParameterList>
   <ParameterList name="ASSEMBLIES">
     <ParameterList name="Assembly_A1">
