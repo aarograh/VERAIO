@@ -130,12 +130,6 @@
         <Parameter name="mat_fracs" type="Array(double)" value="{8.000000E-04,1.000000E-02,4.500000E-04,7.930003E-03,1.590288E-01,1.837982E-02,4.661392E-03,2.000000E-02,3.860150E-02,6.283767E-01,1.477152E-02,2.000272E-03,6.383782E-02,2.543717E-02,1.124191E-03,3.643081E-03,9.577431E-04}"/>
         <Parameter name="mat_names" type="Array(string)" value="{c-00,si-00,p-31,cr-50,cr-52,cr-53,cr-54,mn-55,fe-54,fe-56,fe-57,fe-58,ni-58,ni-60,ni-61,ni-62,ni-64}"/>
       </ParameterList>
-      <ParameterList name="Material_tungsten">
-        <Parameter name="density" type="double" value="19.3"/>
-        <Parameter name="key_name" type="string" value="tungsten"/>
-        <Parameter name="mat_fracs" type="Array(double)" value="{2.652984E-01,1.433120E-01,3.067881E-01,2.846015E-01}"/>
-        <Parameter name="mat_names" type="Array(string)" value="{w-182,w-183,w-184,w-186}"/>
-      </ParameterList>
       <ParameterList name="Material_waba">
         <Parameter name="density" type="double" value="3.65"/>
         <Parameter name="key_name" type="string" value="waba"/>
