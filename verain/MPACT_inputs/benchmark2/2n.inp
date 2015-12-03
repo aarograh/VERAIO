@@ -36,6 +36,7 @@
   bc_rad reflecting
   bc_top reflecting
   bc_bot reflecting
+  include mpact_test_mats.ini
   
 [ASSEMBLY]
   title 'ifba assemblies'
@@ -43,16 +44,16 @@
   ppitch 1.26
   
   fuel U31 10.257 94.5 / 3.1
-  mat he 0.000176
-  mat zirc 6.56 zirc4
-  mat b10 1.0 b-10
-  mat b11 1.0 b-11
-  mat zr  1.0 zr   
-  mat ifba 3.85 zr 0.81306 b10 0.09347 b11 0.09347
+!  mat he 0.000176
+!  mat zirc 6.56 zirc4
+!  mat b10 1.0 b-10
+!  mat b11 1.0 b-11
+!  mat zr  1.0 zr   
+!  mat ifba 3.85 zr 0.81306 b10 0.09347 b11 0.09347
 
-  cell 1 0.4096        0.418 0.475 / U31      he zirc
-  cell X 0.4096 0.4106 0.418 0.475 / U31 ifba he zirc
-  cell O               0.561 0.602 / mod zirc
+  cell 1 0.4096        0.418 0.475 / U31      he zirc4
+  cell X 0.4096 0.4106 0.418 0.475 / U31 ifba he zirc4
+  cell O               0.561 0.602 / mod zirc4
 
   lattice LAT80 
     O
@@ -95,13 +96,13 @@
   title "waba"
   npin 17
 
-  mat he     0.0001786 
-  mat b4c 1.0
-  mat al2o3 1.0 al2o3
-  mat waba   3.65 b4c 0.0949 al2o3 0.9051 
-  mat zirc 6.56 zirc4
+!  mat he     0.0001786 
+!  mat b4c 1.0
+!  mat al2o3 1.0 al2o3
+!  mat waba   3.65 b4c 0.0949 al2o3 0.9051 
+!  mat zirc 6.56 zirc4
 
-  cell 1  0.286 0.339 0.353 0.404 0.418 0.484 / mod zirc he waba he zirc
+  cell 1  0.286 0.339 0.353 0.404 0.418 0.484 / mod zirc4 he waba he zirc4
 
   rodmap  LAT8 
      -
@@ -169,10 +170,10 @@
   npin 17
   stroke  1.0 1           ! 1 step for in/out
 
-  mat he     0.0001786 
-  mat ss     8.0
-  mat aic   10.2 
-  mat b4c    1.76
+!  mat he     0.0001786 
+!  mat ss     8.0
+!  mat aic   10.2 
+!  mat b4c    1.76
 
   cell 1  0.382 0.386 0.484 / aic he ss
   cell 2  0.373 0.386 0.484 / b4c he ss
@@ -206,8 +207,8 @@
   title "Incore instrument thimble"
   npin 17
 
-  mat he 0.0001786 
-  mat ss 8.0
+!  mat he 0.0001786 
+!  mat ss 8.0
 
   cell 1  0.258 0.382 / he ss
 

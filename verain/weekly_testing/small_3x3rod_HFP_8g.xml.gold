@@ -7,7 +7,7 @@
       <Parameter name="boron" type="double" value="1300"/>
       <Parameter name="feedback" type="string" value="on"/>
       <Parameter name="modden" type="double" value="0.743"/>
-      <Parameter name="power" type="double" value="100.0"/>
+      <Parameter name="power" type="double" value="10.0"/>
       <Parameter name="pressure" type="double" value="15.5132039025"/>
       <Parameter name="sym" type="string" value="full"/>
       <Parameter name="tfuel" type="double" value="900"/>
@@ -287,7 +287,7 @@
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p6"/>
     </ParameterList>
-    <Parameter name="tolerance" type="double" value="1e-6"/>
+    <Parameter name="tolerance" type="double" value="1e-8"/>
     <ParameterList name="upscatter_db">
       <Parameter name="tolerance" type="double" value="1e-4"/>
     </ParameterList>
@@ -319,7 +319,7 @@
     <Parameter name="epsk" type="double" value="5.0"/>
     <Parameter name="maxiter" type="int" value="1000"/>
     <Parameter name="rlx_den" type="double" value="1.0"/>
-    <Parameter name="rlx_power" type="double" value="0.7"/>
+    <Parameter name="rlx_power" type="double" value="0.5"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
 </ParameterList>

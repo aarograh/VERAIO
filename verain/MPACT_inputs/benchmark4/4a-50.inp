@@ -47,11 +47,12 @@
   ylabel  7 8 9
 
   bc_rad reflecting
+  include mpact_test_mats.ini
 
-  mat he     0.0001786 
-  mat inc    8.19
-  mat ss     8.0
-  mat zirc   6.56 zirc4
+!  mat he     0.0001786 
+!  mat inc    8.19
+!  mat ss     8.0
+!  mat zirc   6.56 zirc4
 !!! Added spring material for upper plenum, 5% stainless steel
   mat spring 0.4 ss 0.05 he 0.95
 !!! Hand mixing upper and lower plug
@@ -132,7 +133,7 @@
   axial A26 6.053 LPLUG 11.951 LAT26 377.711 PLEN 393.711 UPLUG 397.510
 
   grid END inc  1017 3.866
-  grid MID zirc 875  3.810
+  grid MID zirc5 875  3.810
 
   grid_axial
       END  13.884
@@ -151,9 +152,9 @@
   title "Pyrex"
   npin 17
 
-  mat pyrx1 2.25 pyrex-vera
+!  mat pyrx1 2.25 pyrex-vera
 
-  cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrx1 he ss
+  cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrex-vera he ss
   cell 2                          0.437 0.484 /            spring ss    ! plenum  using spring
   cell 3                                0.484 /                   ss    ! plug  
 
@@ -200,8 +201,8 @@
   npin 17
   stroke  365.125 230     ! approx for 1.5875 step sizes and 230 max stroke
 
-  mat aic 10.2 
-  mat b4c 1.76
+!  mat aic 10.2 
+!  mat b4c 1.76
 
   cell 1  0.382 0.386 0.484 / aic he ss
   cell 2  0.373 0.386 0.484 / b4c he ss

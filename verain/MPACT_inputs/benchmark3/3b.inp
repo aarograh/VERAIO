@@ -31,11 +31,12 @@
   upper_ref  mod 20.0 1.0
 
   bc_rad reflecting
+  include mpact_test_mats.ini
 
-  mat he     0.0001786 
-  mat zirc   6.56 zirc4
-  mat inc    8.19
-  mat ss     8.0
+!  mat he     0.0001786 
+!  mat zirc   6.56 zirc4
+!  mat inc    8.19
+!  mat ss     8.0
 !!! Added spring material for upper plenum, 5% stainless steel
   mat spring 0.4 ss 0.05 he 0.95
 !!! Hand mixing upper and lower plug
@@ -106,7 +107,7 @@ axial ASSY     6.053
        UPLUG 397.510
 
   grid END inc  1017 3.866
-  grid MID zirc 875  3.810
+  grid MID zirc4 875  3.810
 
   grid_axial
       END  13.884
@@ -125,11 +126,11 @@ axial ASSY     6.053
   title "Pyrex"
   npin 17
 
-  mat he     0.0001786
-  mat pyrx1  2.25 pyrex-vera
-  mat ss     8.0
+!  mat he     0.0001786
+!  mat pyrx1  2.25 pyrex-vera
+!  mat ss     8.0
 
-  cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrx1 he ss
+  cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrex-vera he ss
   cell 4            0.437 0.484 / spring ss      ! plenum with spring
   cell 5                  0.484 /     ss         ! end plug
 

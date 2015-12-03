@@ -48,7 +48,8 @@ use Exporter;
 	 'lastval',
 	 'firstval',
 	 'factorial',
-	 'diagsum'
+	 'diagsum',
+	 'txt2xml'
     );
 
 {
@@ -369,5 +370,32 @@ sub diagsum ($) {
     return $fac;
 }
 
+sub txt2xml {
+    my $r = shift;
+
+    if (ref($r) eq "SCALAR") {
+	$$r =~ s/&/&amp;/g;
+	$$r =~ s/</&lt;/g;
+#	$$r =~ s/>/&gt;/g;
+#       should this trigger error, like unbalanced quotes?
+	$$r =~ s/'/&apos;/g;
+	$$r =~ s/"/&quot;/g;
+	return 1;
+    }
+    elsif (ref($r) eq "ARRAY") {
+	for (my $i = 0; $i <= $#$r; $i++) {
+	    $r->[$i];
+	    $r->[$i] =~ s/&/&amp;/g;
+	    $r->[$i] =~ s/</&lt;/g;
+#	    $r->[$i] =~ s/>/&gt;/g;
+	    $r->[$i] =~ s/'/&apos;/g;
+	    $r->[$i] =~ s/"/&quot;/g;
+	}
+	return 1;
+    }
+    else{
+	die "txt2xml: incorrect data reference type\n";
+    }
+}
 
 1;

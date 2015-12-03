@@ -2293,8 +2293,8 @@ CASL AMA Problem 7 - Watts Bar Unit 1 Cycle 1 - Public
 **NGR                                                                                          
     8                                                                                          
 *Card 8.1                                                                                      
-** NRRD   NSRD    NC  NRTB  NRAD  NLTY  NSTA   NXF  NCAN  RADF    W3 IHTC  NDM13 NDM14         
-    170      0     1     1     0     0     1     1     0     0    -1     1     0     0
+** NRRD   NSRD    NC  NRTB  NRAD  NLTY  NSTA   NXF  NCAN  RADF    W3 IHTC  DNBCHK NDM14        
+    170      0     1     1     0     0     1     1     0     0    -1     1     1     0
 *Card 8.2                                                                                      
 **    N   IFTY   IAXP   NRND DAXMIN  RMULT        HGAP  ISECR  HTAMB   TAMB  SYMROD            
 *Card 8.3                                                                                      

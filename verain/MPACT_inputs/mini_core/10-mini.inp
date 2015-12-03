@@ -1,0 +1,52 @@
+[CASEID]
+  title 'Mini Core - using 7x7 assemblies'
+
+[STATE]
+  power    0.0
+  tinlet   600 K
+  tfuel    600 K
+  boron    1300           ! ppmB
+  modden   0.743          ! g/cc
+  sym      qtr  
+  feedback off
+  rodbank  A 230 
+           B 230
+           C 230 
+           D 167 
+
+  restart_shuffle 9-mini_restart.h5 EOC
+  
+  shuffle_label
+          +3  +3  +3  +3  +3
+      +3 J-7 C-6 B-8 C-4 J-3  +3
+  +3 G-9 E-2 J-6 D-5 J-4 B-5 G-1 +3
+  +3 D-3 F-9 B-7 E-9 G-8 F-1 D-7 +3
+  +3 B-2 E-4 A-5 G-2 J-5 E-6 H-8 +3
+  +3 F-3 D-9 C-2 E-1 H-3 D-1 F-4 +3
+  +3 C-9 H-5 A-6 F-5 A-4 E-8 C-1 +3
+      +3 A-7 G-4 H-2 G-6 A-3  +3
+          +3  +3  +3  +3  +3
+
+[CORE]
+  include full_core.ini
+  
+  assm_map
+    1
+    2 1
+    1 2 1
+    2 1 2 3
+    3 3 3 
+
+  cycle 2
+  op_date 3/1/2015
+
+![Assembly]/[Insert]/[Control]/[Edits]
+include Asy_Ins_CR_Det_Edit.ini
+ 
+[MPACT]
+  include mpact_mini.ini
+
+[COBRATF]
+  gridloss  END  0.9070
+  gridloss  MID  0.9065
+  parallel  0

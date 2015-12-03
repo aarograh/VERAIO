@@ -443,8 +443,8 @@
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="TH">
-      <Parameter name="ith_dhfrac" type="double" value="0.02"/>
-      <Parameter name="ith_hgap" type="double" value="5200.0"/>
+      <Parameter name="sth_dhfrac" type="double" value="0.02"/>
+      <Parameter name="sth_hgap" type="double" value="5200.0"/>
     </ParameterList>
     <ParameterList name="depletion">
       <Parameter name="exclude_depl_mats" type="Array(string)" value="{U31,U32,b4c}"/>
