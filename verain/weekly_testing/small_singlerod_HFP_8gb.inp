@@ -11,7 +11,7 @@
 !================================================================================
 
 [STATE]
-  power  100.0         ! %
+  power   10.0         ! %
   tinlet 559.0 F       ! F
   boron  1300          ! initial boron (ppm)
   kcrit  1.0           ! eigenvalue to search to

@@ -24,17 +24,18 @@
   bc_rad reflecting
   bc_top reflecting
   bc_bot reflecting
+  include mpact_test_mats.ini
   
 [ASSEMBLY]
   npin 17
   ppitch 1.26
   
   fuel U31 10.257 94.5 / 3.1
-  mat he 0.000176
-  mat zirc 6.56 zirc4
+!  mat he 0.000176
+!  mat zirc 6.56 zirc4
 
-  cell 1 0.4096 0.418 0.475 / U31 he zirc
-  cell 2        0.561 0.602 /    mod zirc
+  cell 1 0.4096 0.418 0.475 / U31 he zirc4
+  cell 2        0.561 0.602 /    mod zirc4
 
   lattice LAT
     2
@@ -49,7 +50,7 @@
 
   axial ASSY 0.0 LAT 1.0 
 
-  grid MID zirc 229.66 1.0
+  grid MID zirc4 229.66 1.0
 
   grid_axial
       MID  0.5 

@@ -2,7 +2,7 @@
   title '5 3x3 bundle cross, modeled qtr symmetry, using parallel cobra'
 
 [STATE]
-  power  100.0         ! %
+  power   10.0         ! %
   tinlet 559.0 F         ! F
   boron  1300          ! ppmB
   pressure 2250        ! psia

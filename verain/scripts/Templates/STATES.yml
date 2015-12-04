@@ -145,6 +145,13 @@ STATES:
             - copy %STATE/$(_loop)/@deplete:0
           _content:
 
+        edit:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray %STATE/$(_loop)/$edit
+          _content:
+
         tfuel:
           _pltype: parameter
           _type: double

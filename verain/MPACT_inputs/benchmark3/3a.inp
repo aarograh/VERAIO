@@ -29,11 +29,12 @@
   upper_ref  mod 20.0 1.0
 
   bc_rad reflecting
+  include mpact_test_mats.ini
 
-  mat he     0.0001786 
-  mat zirc   6.56 zirc4
-  mat inc    8.19
-  mat ss     8.0
+!  mat he     0.0001786 
+!  mat zirc   6.56 zirc4
+!  mat inc    8.19
+!  mat ss     8.0
 !!! Added spring material for upper plenum, 5% stainless steel
   mat spring 0.4 ss 0.05 he 0.95
 !!! Hand mixing upper and lower plug
@@ -104,7 +105,7 @@ axial ASSY     6.053
        UPLUG 397.510
 
   grid END inc  1017 3.866
-  grid MID zirc 875  3.810
+  grid MID zirc4 875  3.810
 
   grid_axial
       END  13.884
