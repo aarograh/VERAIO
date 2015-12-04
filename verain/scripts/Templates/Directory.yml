@@ -197,6 +197,7 @@ STATE:
       - nth(0,())eq"GWDMT"||nth(0,())eq"MWDMT"||nth(0,())eq"EFPD"||nth(0,())eq"hours"
   edit:
     <<: *dtlist
+    _style: multi-line
     _content:
     _check:
   reset_sol:
@@ -744,6 +745,7 @@ EDITS:
       - is_float()
   edit_group:
     <<: *dtlistnamed
+    _style: multi-line
     _content:
     _check:
 
