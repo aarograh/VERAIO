@@ -6,7 +6,7 @@ use Exporter;
 	 'to_real','is_decimal','to_decimal','is_float','to_float','is_string',
 	 'to_string','is_eq','is_neq','is_geq','is_leq','is_gt','is_lt',
 	 'is_word','in_dictionary','not_in_dictionary','is_date','is_odd','is_even',
-	 'is_regex','filesame');
+	 'is_regex','filesame','is_number');
 
 use Time::Local;
 
@@ -215,5 +215,10 @@ sub filesame {
     }
     return $ret;
 }
+
+sub is_number ($) {
+    return ($_[0] =~ /^([+-]?)(?=\d|\.\d)\d*(\.\d*)?([Ee]([+-]?\d+))?$/) ? 1 : 0;
+}
+
 
 1;
