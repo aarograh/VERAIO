@@ -195,6 +195,12 @@ STATE:
     _check:
       - fall(sub{is_float(shift)},stride(1,1,()))
       - nth(0,())eq"GWDMT"||nth(0,())eq"MWDMT"||nth(0,())eq"EFPD"||nth(0,())eq"hours"
+      - is_strictlyincreasing(stride(1,1,()))
+  edit:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
   reset_sol:
     <<: *dtbool
     _content:
@@ -738,6 +744,11 @@ EDITS:
     _content:
     _check:
       - is_float()
+  edit_group:
+    <<: *dtlistnamed
+    _style: multi-line
+    _content:
+    _check:
 
 INSILICO:
   problem_name:
@@ -2022,6 +2033,56 @@ MPACT:
     <<: *dtlistnamed
     _slash:
     _check:
+
+  prompt:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
+  accel:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
+  transmethod:
+    <<: *dtlist
+    _content:
+    _check:
+      - is_word(nth(0,()))
+      - in_dictionary(nth(0,()),'theta','bdf')
+      - is_float(nth(1,()))
+      - is_geq(nth(1,()),0)
+
+  timestep:
+    <<: *dtlist
+    _content:
+    _check:
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+      - nth(0,())>0
+      - nth(1,())>0
+      - nth(2,())>0
+
+  perturb:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%6==0
+      - fall(sub{is_float(shift)},stride(0,6,()))
+      - fall(sub{is_geq(shift,0)},stride(0,6,()))
+      - fall(sub{is_float(shift)},stride(1,6,()))
+      - fall(sub{is_geq(shift,0)},stride(1,6,()))
+      - fall(sub{is_word(shift)},stride(2,6,()))
+      - fall(sub{in_dictionary(shift,'step','const','ramp')},stride(2,6,()))
+      - fall(sub{is_word(shift)},stride(3,6,()))
+      - fall(sub{is_word(shift)},stride(4,6,()))
+      - fall(sub{is_word(shift)},stride(5,6,()))
 
 MAMBA2D:
   problem_name:

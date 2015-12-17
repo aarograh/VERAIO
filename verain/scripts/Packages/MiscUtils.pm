@@ -49,7 +49,11 @@ use Exporter;
 	 'firstval',
 	 'factorial',
 	 'diagsum',
-	 'txt2xml'
+	 'txt2xml',
+	 'is_increasing',
+	 'is_strictlyincreasing',
+	 'is_decreasing',
+	 'is_strictlydecreasing'
     );
 
 {
@@ -236,7 +240,7 @@ sub stride ($$@) {
 
     my @c=splice @a, $offset;
     my $b=shift @c;
-    @b=grep {not ++$i % $n} @c;
+    my @b=grep {not ++$i % $n} @c;
 
     return ($b,@b);
 }
@@ -397,5 +401,52 @@ sub txt2xml {
 	die "txt2xml: incorrect data reference type\n";
     }
 }
+
+sub is_increasing (@) {    # assumes number validation for the array in previous rule
+    my @a=@_;
+    my @s=sort { $a <=> $b } @a;
+
+    for(my $i=0;$i<@a;$i++){
+	return 0 if $a[$i] != $s[$i];
+    }
+    return 1;
+}
+
+sub is_strictlyincreasing (@) {    # assumes number validation for the array in previous rule
+    my @a=@_;
+    my @s=sort { $a <=> $b } @a;
+
+    @s=&unique(@s);
+    return 0 if @a != @s;
+    
+    for(my $i=0;$i<@a;$i++){
+	return 0 if $a[$i] != $s[$i];
+    }
+    return 1;
+}
+
+sub is_decreasing (@) {    # assumes number validation for the array in previous rule
+    my @a=@_;
+    my @s=sort { $a <=> $b } @a;
+
+    for(my $i=0;$i<@a;$i++){
+	return 0 if $a[$i] != $s[$i];
+    }
+    return 1;
+}
+
+sub is_strictlydecreasing (@) {    # assumes number validation for the array in previous rule
+    my @a=@_;
+    my @s=sort { $b <=> $a } @a;
+
+    @s=&unique(@s);
+    return 0 if @a != @s;
+    
+    for(my $i=0;$i<@a;$i++){
+	return 0 if $a[$i] != $s[$i];
+    }
+    return 1;
+}
+
 
 1;
