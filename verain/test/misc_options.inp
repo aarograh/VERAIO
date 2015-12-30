@@ -36,8 +36,13 @@
 
 [STATE]  power  60.0;   tinlet_dist       2. -1.       -1.   
 
+! This map is not rotationally symmetric
+!  flow_dist 
+!     50. -20.5
+!    -10. 
+
   flow_dist 
-     50. -20.5
+     50. -10.
     -10. 
 
 [STATE];  power  50.0

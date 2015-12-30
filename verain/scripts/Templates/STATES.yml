@@ -240,7 +240,7 @@ STATES:
           _pltype: array
           _type: string
           _do:
-            - coremapmap CORE/$size,CORE/@core_shape,%STATE/$(_loop)/@shuffle_label,CORE/$bc_sym
+            - coremapmap CORE/$size,CORE/@core_shape,%STATE/$(_loop)/@shuffle_label,CORE/$bc_sym,expand=>0
           _content:
 
         tinlet_dist:

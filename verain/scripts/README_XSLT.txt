@@ -30,5 +30,5 @@ Try Firefox first.
 
 Chrome requires switch:
 --allow-file-access-from-files
-Run Chroma in Mac OS X as:
+Run Chrome in Mac OS X as:
 /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --allow-file-access-from-files
