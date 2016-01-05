@@ -15,7 +15,8 @@ use REACTORBlock;
 use PL;
 use XMLPack;
 use ClonePP qw(clone);
-use TypeUtils;";
+use TypeUtils;
+use Cellmaps";
 
 sub GetPaths()
 {
@@ -209,6 +210,7 @@ REACTORBlock->set_verbose()   if $VERBOSE;
 REACTORCommand->set_verbose() if $VERBOSE;
 PL->set_verbose()             if $VERBOSE;
 XMLPack->set_verbose()        if $VERBOSE;
+Cellmaps->set_verbose()        if $VERBOSE;
 
 #
 # Initiate CASEID directly because it is the root node
@@ -234,7 +236,6 @@ YAML::DumpFile("$ifile.dbg.yml",$MAIN_DB) if $DEBUG;
 # Currently, setting the main database in the PL yml files is
 # just a placeholder for multiple blocks
 PL->set_sourcedb($MAIN_DB);
-PL->dispatch($_UPDATE);
 # PL->dispatch($_UPDATE);
 PL->dispatch();
 

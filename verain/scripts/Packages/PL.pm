@@ -14,6 +14,7 @@ use Text::ParseWords;
 use KeyTree;
 use MiscUtils;
 use REACTOR;
+use Cellmaps;
 use TypeUtils;
 use Data::Dumper ;
 
@@ -127,8 +128,8 @@ sub dispatch {
 	copyarray  => \&copyarray,
 	copyhash   => \&copyhash,
 	setdb      => \&setdb,
-	matmap     => \&matmap007,
-	fuelmap    => \&fuelmap007,
+	matmap     => \&matmap,
+	fuelmap    => \&fuelmap,
 	rodmap     => \&rodmap,
 	makemap    => \&makemap,
 	echos      => \&echos,
@@ -171,24 +172,6 @@ sub PLdoarg{
 	$_=subvar($_);
 	print "subvar $_\n" if exists $OPTIONS{debug};
     }
-
-    return @a;
-}
-
-sub PLdoarg_v0{
-    my( $str, %userparam ) = @_ ;
-    my %OPTIONS;
-
-    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
-    {
-	$OPTIONS{$key}=$value;
-    }
-
-    $str =~ s/=>/,/g;
-    $str =~ s/,/ /g;
-    $str =~ s/^\s+//;
-    $str =~ s/\s+$//;
-    my @a=split / +/, $str;
 
     return @a;
 }
@@ -773,7 +756,8 @@ sub makemap {
     die "makemap: cm_ref not valid [$cmap_path] [@cmap_path] [$cm_ref]\n" 
 	unless ref $cm_ref eq 'ARRAY';
 
-    my @a=fullcellmap($npin,@{ $cm_ref });
+#    my @a=fullcellmap($npin,@{ $cm_ref });
+    my @a=fullcellmap($npin,$cm_ref);
 
     return \@a;
 }
@@ -807,12 +791,10 @@ sub copyarray{
 
     if(exists($OPTIONS{select})){
 	if(lc($OPTIONS{select}) eq 'odd'){
-#	    @a=@{ $t };
 	    @a=@result;
 	    @result=odd(\@a);
 	}
 	elsif(lc($OPTIONS{select}) eq 'even'){
-#	    @a=@{ $t };
 	    @a=@result;
 	    @result=even(\@a);	    
 	}
@@ -900,12 +882,9 @@ sub setdb{
 sub gridmap{
     my ($home,$basename,@paths)=@_;
 
-#    my $flagref=key_defined($home,'_content');
-#    key_on($flagref,'FLAG','I was here');
     my @mats;
     my @mats_names;
     foreach my $ipath (@paths){
-#	print "gridmap ipath $ipath\n";
 	my @apaths=find_keys($SOURCE_DB,$ipath);
 	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
 	push @mats, @apaths if @apaths;
@@ -926,7 +905,7 @@ sub gridmap{
     }
 }
 
-sub matmap2{
+sub matmap{
     my ($home,$basename,@paths)=@_;
 
     my @mats;
@@ -946,154 +925,7 @@ sub matmap2{
 	my @keypath=@{ $imat_path };
 	$keyname=$keypath[$#keypath];
 	unless($keypath[$#keypath-2] eq 'mat'){
-	    die "matmap2: invalid material type: @keypath\n";
-	}
-
-	my $enrichable=0;
-	my $fissionable='false';
-	my $depletable= 'false';
-	my $enrichment;
-	my $thdensity=0;
-	my @mat_names=();
-	my @mat_fracs=();
-
-	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
-	my $density=shift @content;
-
-	if(@content > 1){
-	    if(@content%2){
-		die "matmap2: material $keyname error, mixture map size is not an even number\n";
-	    }
-	    @mat_names=even(\@content);
-	    @mat_fracs=odd(\@content);
-	}
-	else{
-	    $mattype=shift(@content) || $keyname;
-	    push @mat_names, $mattype;
-	    push @mat_fracs, 1.0;
-	}
-
-	my $mat_ref=&key_on_list($home,$basename.$keyname);
-	&key_on_parameter($mat_ref,'density','double',$density);
-	&key_on_parameter($mat_ref,'fissionable','bool',$fissionable);
-	&key_on_parameter($mat_ref,'key_name','string',$keyname);
-
-	&key_on_array($mat_ref,'mat_names','string', @mat_names);
-	&key_on_array($mat_ref,'mat_fracs','double', @mat_fracs);
-
-    }
-}
-
-sub fuelmap{
-    my ($home,$basename,@paths)=@_;
-
-    my @mats;
-    my @mats_names;
-
-    my $keyname;
-    my $mattype;
-
-    foreach my $ipath (@paths){
-	my @apaths=find_keys($SOURCE_DB,$ipath);
-	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
-	push @mats, @apaths if @apaths;
-	push @mats_names, @names if @names;
-    }
-
-    foreach my $imat_path (@mats){
-	my @keypath=@{ $imat_path };
-	$keyname=$keypath[$#keypath];
-	unless($keypath[$#keypath-2] eq 'fuel'){
-	    die "fuelmap: invalid material type: @keypath\n";
-	}
-
-	my $enrichable=1;
-	my $fissionable='true';
-	my $depletable= 'true';
-	my $enrichment;
-	my $thdensity=0;
-	my @mat_names=();
-	my @mat_fracs=();
-	my $gad_mat;
-	my $gad_frac;
-	my $use_gad=0;
-
-	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
-
-# Per Scott's three commands in one
-	my @slshs=indexes { $_ eq '/' } @content;
-	if(@slshs < 1 && @slshs > 2){
-	    die "fuelmap: invalid number of slashes in command fuel @content\n";
-	}
-
-	my @part1=before {$_ eq '/'} @content;
-	my @part2=after  {$_ eq '/'} @content;
-	my @part3=();
-	if(@slshs == 2){
-	    @part3=after  {$_ eq '/'} @part2;
-	    @part2=before {$_ eq '/'} @part2;
-	}
-	
-# until the 1st slash
-	my $density=shift @part1;
-	$thdensity=shift @part1 || 0;
-
-# after the 1st slash until 2nd slash
-
-	if(is_float($part2[0])){
-	    unshift @part2, 'uo2';
-	}
-	($mattype,$enrichment)=@part2;
-	push @mat_names, $mattype;
-	push @mat_fracs, 1.0;
-
-# 2nd slash to the end
-	if(@part3){
-	    $use_gad=1;
-	    $gad_mat=shift  @part3;
-	    $gad_frac=shift @part3;
-	}
-
-	my $mat_ref=&key_on_list($home,$basename.$keyname);
-	&key_on_parameter($mat_ref,'density','double',$density);
-	&key_on_parameter($mat_ref,'thden','double',$thdensity) if $thdensity;
-	&key_on_parameter($mat_ref,'fissionable','bool',$fissionable);
-	&key_on_parameter($mat_ref,'depletable','bool',$depletable)   if $enrichable;
-	&key_on_parameter($mat_ref,'enrichment','double',$enrichment) if $enrichable;
-	&key_on_parameter($mat_ref,'key_name','string',$keyname);
-
-	if($use_gad){
-	    &key_on_parameter($mat_ref,'gad_mat','string',$gad_mat);
-	    &key_on_parameter($mat_ref,'gad_frac','double',$gad_frac);
-	}
-
-	&key_on_array($mat_ref,'mat_names','string', @mat_names);
-	&key_on_array($mat_ref,'mat_fracs','double', @mat_fracs);
-
-    }
-}
-
-sub matmap007{
-    my ($home,$basename,@paths)=@_;
-
-    my @mats;
-    my @mats_names;
-
-    my $keyname;
-    my $mattype;
-
-    foreach my $ipath (@paths){
-	my @apaths=find_keys($SOURCE_DB,$ipath);
-	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
-	push @mats, @apaths if @apaths;
-	push @mats_names, @names if @names;
-    }
-
-    foreach my $imat_path (@mats){
-	my @keypath=@{ $imat_path };
-	$keyname=$keypath[$#keypath];
-	unless($keypath[$#keypath-2] eq 'mat'){
-	    die "matmap2: invalid material type: @keypath\n";
+	    die "matmap: invalid material type: @keypath\n";
 	}
 
 	my $enrichable=0;
@@ -1127,7 +959,7 @@ sub matmap007{
     }
 }
 
-sub fuelmap007{
+sub fuelmap{
     my ($home,$basename,@paths)=@_;
 
     my @mats;
@@ -1345,7 +1177,7 @@ sub rodmap{
 	$CELLMAP_CELLS{$_}=[@c];
 	print STDERR "  CELLMAP_CELLS{$_}: @c\n" if get_verbose();
 
-	@b=fullcellmap($npin,@a);
+	@b=fullcellmap($npin,\@a);
 	$CELLMAP_CONTENT{$_}=[@b];
     }
  
@@ -1549,7 +1381,7 @@ sub coremapmap {
 	$bc_sym='rot';
     }
 
-    my @a=core_map($cm_ref,$mm_ref,$csize,$bc_sym);
+    my @a=core_map($cm_ref,$mm_ref,$csize,$bc_sym,%userparam);
 
     return \@a;
 }
@@ -1896,7 +1728,7 @@ sub cellsmaps{
 	$CELLMAP_CELLS{$_}=[@c];
 	print STDERR "  CELLMAP_CELLS{$_}: @c\n" if get_verbose();
 
-	@b=fullcellmap($npin,@a);
+	@b=fullcellmap($npin,\@a);
 	$CELLMAP_CONTENT{$_}=[@b];
     }
  

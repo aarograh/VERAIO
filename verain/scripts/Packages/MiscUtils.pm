@@ -53,7 +53,11 @@ use Exporter;
 	 'is_increasing',
 	 'is_strictlyincreasing',
 	 'is_decreasing',
-	 'is_strictlydecreasing'
+	 'is_strictlydecreasing',
+	 'times_in_array',
+	 'fillin',
+	 'purge_array',
+	 'replace_in_array'
     );
 
 {
@@ -446,6 +450,46 @@ sub is_strictlydecreasing (@) {    # assumes number validation for the array in 
 	return 0 if $a[$i] != $s[$i];
     }
     return 1;
+}
+
+sub times_in_array{
+    my ($ary,$symbol)=@_;
+
+    my $n=0;
+    foreach (@{ $ary }){
+	$n++ if $_ eq $symbol;
+    }
+    return $n;
+}
+
+sub fillin{
+    my ($ary1, $ary2, $valid)=@_;
+    my @result;
+    my $i;
+
+    @result= map { $_ eq $valid ? $ary2->[$i++] : '_EMPTY_' } @{ $ary1 };
+
+    return  wantarray ? @result : \@result;
+}
+
+sub purge_array{
+    my ($ary, $invalid)=@_;
+    my @result;
+    my $i;
+
+    @result= grep { $_ ne $invalid } @{ $ary };
+
+    return  wantarray ? @result : \@result;
+}
+
+sub replace_in_array ($$$) {
+    my ($ary,$from,$to)=@_;
+
+    my $n=0;
+    foreach (@{ $ary }){
+	$n++ if s/$from/$to/g;
+    }
+    return $n;
 }
 
 
