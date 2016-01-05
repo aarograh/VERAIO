@@ -67,16 +67,16 @@ parfiles=[56,
 
 
 if not len(sys.argv)==2:
-   print 'You must specify xml2ctf executable path as an argument'
-   print 'to the script.'
+   print('You must specify xml2ctf executable path as an argument')
+   print('to the script.')
    exit(1)
 
 preproc_path = sys.argv[1]
 
 for name in filenames:
-   print '==========================================================='
-   print 'Reblessing '+name
-   print '==========================================================='
+   print('===========================================================')
+   print('Reblessing '+name)
+   print('===========================================================')
    os.system(preproc_path+' --xmlfile='+name+".xml.gold")
    os.rename('deck.inp','gold/'+name+'.inp')
 
@@ -88,8 +88,8 @@ for name in verain_filenames:
 # loop over the cases with parallel output files
 for index, name in enumerate(partests):
 
-   print '==========================================================='
-   print 'Running: '+name
+   print('===========================================================')
+   print('Running: '+name)
 
    os.system(preproc_path+' --xmlfile='+name+".xml.gold")
    numfiles = parfiles[index]
