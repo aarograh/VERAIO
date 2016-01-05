@@ -1323,7 +1323,7 @@ namespace {
     }
 
     cntrl_data.k_void_drift = 1.4;
-    cntrl_data.beta_sp = 0.05;
+    cntrl_data.beta_sp = 0.005;
     GetOptional(cobraParams, "k_void_drift", cntrl_data.k_void_drift);
     GetOptional(cobraParams, "beta_sp", cntrl_data.beta_sp);
 
