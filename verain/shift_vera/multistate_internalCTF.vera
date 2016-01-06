@@ -28,11 +28,12 @@
   assm_map
     A1
 
+  include CORE.ini
+
   lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
   upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
   lower_ref   mod 26.0 1.0
   upper_ref   mod 25.0 1.0
-
 
   bc_rad reflecting
 
