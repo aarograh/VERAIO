@@ -191,7 +191,7 @@ sub gen_quad_list_rot {
     my @part = part { $it->($_) } @cellmap;
 
     unless(&is_quartermap_rot(\@part)){
-	print "<<WARNING>>: gen_quad_list_rot: quarter map @cellmap is not rotational\n";
+	print "gen_quad_list_rot: quarter map @cellmap is not rotational\n"  if get_verbose();
     }
     
     my $map4=index_map_rotational(\@part,'QUARTER');
@@ -486,13 +486,18 @@ sub core_map{
 
     print STDERR "core_map: $bc_sym\n"  if get_verbose();;
 
+    my $IGNORE='-';
+    if(exists($OPTIONS{ignore})){
+	$IGNORE=$OPTIONS{ignore};
+    }
+    
   MAPS: { 
       if($nmmap == $noct){
 	  @ccmap=@core_map_o;
 	  @resmap=fillin(\@ccmap, $mmap, '_USED_');
 
 	  if(exists($OPTIONS{expand}) && $OPTIONS{expand} == 0){
-	      replace_in_array(\@fullm,'_USED_','-');
+	      replace_in_array(\@fullm,'_USED_',$IGNORE);
 	      map_on_core(\@fullm,$n,$n,\@resmap,'OCTANT');
 	      last MAPS;
 	  }
@@ -510,7 +515,7 @@ sub core_map{
 	  @resmap=fillin(\@ccmap, $mmap, '_USED_');
 
 	  if(exists($OPTIONS{expand}) && $OPTIONS{expand} == 0){
-	      replace_in_array(\@fullm,'_USED_','-');
+	      replace_in_array(\@fullm,'_USED_',$IGNORE);
 	      map_on_core(\@fullm,$n,$n,\@resmap,'QUARTER');
 	      last MAPS;
 	  }
