@@ -1,0 +1,93 @@
+[CASEID]
+  title 'Region 3 Single Assembly AP1000 Benchmark'
+
+[STATE]
+  power    100
+  tinlet   600 K
+  tfuel    900 K
+  modden   0.7441292       ! g/cc
+  boron    1321            ! ppm
+  sym      qtr
+  feedback off
+  deplete  GWDMT 0.0 0.1 0.5 <1..70> 
+
+[CORE]
+  size   1
+  apitch 21.50
+  height 1.0
+  rated  0.05075  0.01      !MW
+
+  core_shape
+    1
+
+  assm_map
+    320E0I
+
+  insert_map
+    -
+
+  bc_rad reflecting
+  bc_top reflecting
+  bc_bot reflecting
+
+[ASSEMBLY]
+  title 'Region 1'
+  npin 17
+  ppitch 1.26
+
+  fuel U320 10.28 94.354 / 3.20   u-234=0.0277  u-236=0.0006
+
+  mat zirlo     6.55       o-16  1.20000E-03 ! WEC public paper run through SCALE
+                          fe-54  5.64554E-05 ! Effect of Concentration Ratios of Ni/Fe Ions on the Fuel Crud Deposition
+                          fe-56  9.19009E-04
+                          fe-57  2.16036E-05
+                          fe-58  2.92547E-06
+                          zr-90  4.95805E-01
+                          zr-91  1.09327E-01
+                          zr-92  1.68945E-01
+                          zr-94  1.74939E-01
+                          zr-96  2.87844E-02
+                          nb-93  9.99966E-03
+                          sn-112 9.14389E-05
+                          sn-114 6.33271E-05
+                          sn-115 3.29096E-05
+                          sn-116 1.41960E-03
+                          sn-117 7.56311E-04
+                          sn-118 2.40551E-03
+                          sn-119 8.60399E-04
+                          sn-120 3.29071E-03
+                          sn-122 4.75454E-04
+                          sn-124 6.04340E-04
+
+  cell 2 0.409575            0.417830  0.474980 / U320      he   zirlo    
+  cell 3                     0.561340  0.612140 /           mod  zirlo    !GT above dashpot
+  cell 4                     0.561340  0.612140 /           mod  zirlo    !IT
+
+  lattice FUELLAT
+    4
+    2 2
+    2 2 2
+    3 2 2 3
+    2 2 2 2 2
+    2 2 2 2 2 3
+    3 2 2 3 2 2 2
+    2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2
+
+  axial 320E0I  0.0 FUELLAT 1.0
+
+
+[MPACT]
+  num_angle      -8
+
+[SHIFT]
+  transport            ce_mc
+  num_cycles           1100
+  num_inactive_cycles  100
+  Np                   1000000
+
+[INSILICO]
+  num_blocks_i   4
+  num_blocks_j   4
+
+
