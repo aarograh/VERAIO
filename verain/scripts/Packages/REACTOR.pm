@@ -26,6 +26,9 @@ use Exporter;
 # it gets used on every invocation of new block
 our %BLOCKINIT=();
 
+our $block;
+our $command;
+
 {
     sub set_blockinit { $BLOCKINIT{$_[0]} = $_[1]; }
 
@@ -112,15 +115,13 @@ sub clean_line{
 
 sub read_ascii {
     my ($filename, $INPUT_DB, $MAIN_DB, %userparam) = @_;
-    # temporary references to store data while building the db
-    my ($block,$command,$cname,$ctext);
+    my ($cname,$ctext);
     my ($name,$res);
 
-    $block=$command=undef;
+    my $incl = 0;
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
     {
-	$key eq 'block'   && do {$block=$value;};     # current open block
-	$key eq 'command' && do {$command=$value;};   # open command
+	$key eq 'incl'   && do {$incl=$value;};     # include flag
     }
 
     my($IFILE); 
@@ -135,7 +136,6 @@ sub read_ascii {
       my $directory = dirname($pscript);
       my $filename2="$directory/Init/$filename";
       if (-f $filename2){
-        # print "Reading $filename from $directory\n";
         print STDERR "Opennng file with path: $filename2\n" if get_verbose();
         open $IFILE, $filename2 or ( &print_input_log() && die "Cannot open file $filename2\n" );
       }
@@ -164,7 +164,7 @@ sub read_ascii {
 	      my $ifile=$1;
 	      print STDERR "[$filename:$.] Include file: $ifile\n" if get_verbose();
 	      read_ascii($ifile,$INPUT_DB, $MAIN_DB, 
-			 'block'=>$block, 'command'=>$command);
+			 'incl'=>1);
 	      next;
 	  };
 
@@ -175,11 +175,13 @@ sub read_ascii {
 		  die "Error on block definition: $_.\n" if $rest;
 		  if($block){        # old block that needs to be put into the main tree
 		      if($command){  # old command to complete
-			  print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+			  print STDERR "[$filename:$.] End command on new block: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
 			  $command->keyin();
+			  $command=undef;
 		      }
 		      print STDERR "[$filename:$.] End block: ", $block->name(), "\n"  if get_verbose();
 		      $block->keyon();
+		      $block=undef;
 		  }
 		  print STDERR "[$filename:$.] New block: $name\n"  if get_verbose();
 		  die "[$filename:$.] Bad block name.\n" unless key_exists($INPUT_DB,$name);
@@ -188,13 +190,13 @@ sub read_ascii {
 
 		  if(exists($REACTOR::BLOCKINIT{$name})){
 		      print STDERR "Initialize block $name with file $BLOCKINIT{$name}\n" if get_verbose();
-		      read_ascii($BLOCKINIT{$name}, $INPUT_DB, $MAIN_DB, 'block'=>$block);
+		      read_ascii($REACTOR::BLOCKINIT{$name}, $INPUT_DB, $MAIN_DB, 'incl'=>1);
 		  }
 
 		  $command=undef;
 		  next;
 	  };
-	  $block && !$command && do{      # block previously initialized, but no commands yet.
+	  $block && !$command && do{   # block previously initialized, but no commands yet.
 	      /^(\S+)\s*(.*?)$/ && do{ # check if the first line is a command
 		  $cname=$1;
 		  $ctext=($+[2]-$-[2]) ? $2 : '';
@@ -202,11 +204,10 @@ sub read_ascii {
 		  die "[$filename:$.] invalid keyword $cname in block ", $block->name(), "\n" unless $res;
 		  print STDERR "[$filename:$.] New command: $cname $ctext\n"  if get_verbose();
 		  $cname=$block->command_name($cname);
-
 		  $command=REACTORCommand->new(keyword=>$cname,keytree=>$res,out_db=>$MAIN_DB,
 					       ctext=>$ctext,file=>$filename,line=>$.);
 		  unless($command->is_multiline()){
-		      print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+		      print STDERR "[$filename:$.] End command on single line: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
 		      $command->keyin();
 		      $command=undef;
 		  }
@@ -220,7 +221,7 @@ sub read_ascii {
 		  $res=$block->is_command($cname) || 0;
 
 		  if($res){   # complete old command
-		      print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+		      print STDERR "[$filename:$.] End command on new command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
 		      $command->keyin();
 		      $command=undef;
 
@@ -241,13 +242,17 @@ sub read_ascii {
       }  # end of multiple command loop
   }
     # file ended, check for uncompleted commands
-    if($block || $command){
-	if($command){
-	    print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
-	    $command->keyin();
-	}
-	print STDERR "[$filename:$.] End block: ", $block->name(), "\n"  if get_verbose();
+    if($command){
+	print STDERR "[$filename:$.] End command on file exit: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+	$command->keyin();
+	$command=undef;
+    }
+
+    # file ended, close last block if main file
+    if($block && $incl == 0){
+	print STDERR "[$filename:$.] End block on end of input: ", $block->name(), "\n"  if get_verbose();
 	$block->keyon();
+	$block=undef;
     }
 
     return 1;
