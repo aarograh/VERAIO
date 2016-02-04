@@ -1,5 +1,5 @@
 
-FUNCTION(XML2CTF_PARALLEL_TEST DIR GOLDDIR TEST_NAME NUM_DECKS)
+FUNCTION(XML2CTF_PARALLEL_TEST DIR GOLDDIR TEST_NAME NUM_DECKS MAXTIME)
   
    # The TEST_BLOCKS variable will be used to house the commands
    # for the Tribits advanced test.  It is initialized here.
@@ -35,6 +35,7 @@ FUNCTION(XML2CTF_PARALLEL_TEST DIR GOLDDIR TEST_NAME NUM_DECKS)
       ${TRIBITS_NAME}
       OVERAL_NUM_MPI_PROCS 1
       OVERALL_WORKING_DIRECTORY TEST_NAME
+      TIMEOUT ${MAXTIME}
       ${TEST_BLOCKS}
       )
 
@@ -69,9 +70,9 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    SET(VERAIN ${VERAIn_SOURCE_DIR}/test)
    SET(GOLD ${CMAKE_CURRENT_SOURCE_DIR}/gold)
 
-   XML2CTF_PARALLEL_TEST  (${VERAIN}                   ${GOLD}     par_cross 5)
-   XML2CTF_PARALLEL_TEST  (${VERAIN}                   ${GOLD}     Sample_p7 56)
-   XML2CTF_PARALLEL_TEST  (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     par_qtr_core_inlet_bc 56)
+   XML2CTF_PARALLEL_TEST  (${VERAIN}                   ${GOLD}     par_cross 5 60)
+   XML2CTF_PARALLEL_TEST  (${VERAIN}                   ${GOLD}     Sample_p7 56 1200)
+   XML2CTF_PARALLEL_TEST  (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}      par_qtr_core_inlet_bc 56 1200)
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     cross_w_baffle                 "")
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     small_singlerod_HFP            "")
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     small_3x3rod_HFP               "")
