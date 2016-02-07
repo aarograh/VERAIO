@@ -34,7 +34,7 @@
   npin 1
   ppitch 1.26
 
-  fuel UXX 10.257 94.5 / 4.1
+  fuel UXX 10.257 94.5 / 4.1 u-234 0.035671
 
   cell PIN1 0.39218  0.40005 0.4572 / UXX he zirc
 
