@@ -227,6 +227,55 @@ COBRATF:
         - copy COBRATF/$mass_storage
       _content:
 
+    Tcool_criteria:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$Tcool_criteria
+      _content:
+
+    Tsolid_criteria:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$Tsolid_criteria
+      _content:
+
+    void_criteria:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$void_criteria
+      _content:
+
+    pressure_criteria:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$pressure_criteria
+      _content:
+
+    vliq_criteria:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$vliq_criteria
+      _content:
+
+    vvap_criteria:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$vvap_criteria
+      _content:
+
+    vdrop_criteria:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$vdrop_criteria
+      _content:
+
     edit_gaps:
       _pltype: parameter
       _type: int
