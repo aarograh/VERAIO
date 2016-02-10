@@ -34,7 +34,7 @@
   npin 1
   ppitch 1.2319     ! krsko 16x16
 
-  fuel UXX 10.257 94.5 / 3.1
+  fuel UXX 10.257 94.5 / 3.1 u-234 0.026347
 
   cell PIN1 0.4096 0.418 0.475 / UXX he zirc
 
