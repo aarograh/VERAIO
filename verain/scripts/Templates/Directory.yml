@@ -1593,6 +1593,12 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  moc_kernel:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() 1g mg 1G MG
   power_edit:
     <<: *dtstring
     _content:
