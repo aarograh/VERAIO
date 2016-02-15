@@ -97,6 +97,7 @@ ADD_REACTOR_AWARE_INPUT_PARSER_TEST(bwr-peach-5)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(bwr-peach-6)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(small_3x3rod_IFBA)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(small_3x3rod_BProd)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(ctf_convergence_terms)
 
 
 #===========================================================
