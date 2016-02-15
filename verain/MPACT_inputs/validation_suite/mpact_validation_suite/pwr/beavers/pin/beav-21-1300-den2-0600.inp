@@ -27,7 +27,7 @@
   bc_bot reflecting
 
   mat he 0.000176 he-4
-  mat zirc 6.56 zr    ! use natural Zr
+  mat zirc 6.506 zr    ! use natural Zr
 
 [ASSEMBLY]
   title "pin cell"
