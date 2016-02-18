@@ -31,7 +31,7 @@
   [STATE] deplete EFPD 550.0; power  50.0  ! days, %
 
 ! std::vector<double> times={   0,  2,  3,  7,188,369,550,554}; // days
-! std::vector<double> power={3e-4,150,150,300,300,300,300,150}; // W/cc
+! std::vector<double> power={3e-6,150,150,300,300,300,300,150}; // W/cc
 ! double fuelArea=PI()*0.41719775*0.41719775; // 0.546807 cm^2 to compute LHGR
 
 [CORE]
