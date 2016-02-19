@@ -1942,6 +1942,7 @@ MPACT:
     _content:
     _check:
       - is_word()
+      - in_dictionary() assem node chan
   sth_avgpin:
     <<: *dtbool
     _content:
