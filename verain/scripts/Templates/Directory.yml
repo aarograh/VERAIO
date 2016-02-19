@@ -1943,6 +1943,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() assem node chan
+  sth_tabletype:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() ctf simplified
   sth_avgpin:
     <<: *dtbool
     _content:
