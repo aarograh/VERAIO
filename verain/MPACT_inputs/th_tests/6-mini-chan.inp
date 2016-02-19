@@ -1,0 +1,46 @@
+[CASEID]
+  title 'Mini Assembly - 7x7'
+
+[STATE]
+  power    100.0
+  tinlet   600 K
+  tfuel    600 K
+  boron    1300           ! ppmB
+  modden   0.743          ! g/cc
+  pressure 2250           ! psia
+  sym      qtr  
+  feedback on
+
+[CORE]
+  size   1              ! one assembly   
+  rated  2.9450 0.1157  ! MW, Mlbs/hr 
+  apitch 8.9
+  height 249.737
+
+  core_shape
+    1 
+  
+  assm_map
+    2
+
+!  lower_plate ss  5.0 0.5   ! mat, thickness, vol frac
+!  upper_plate ss  7.6 0.5 
+
+  bc_rad reflecting
+
+
+![Assembly]/[Insert]/[Control]/[Edits]
+include Asy_Ins_CR_Det_Edit.ini
+ 
+[MPACT]
+  coupling_method simplified
+  sth_channeltype chan
+  sth_tabletype   simplified
+  include mpact_mini.ini
+  num_space 8
+
+[COBRATF]
+  gridloss  END  0.9070
+  gridloss  MID  0.9065
+  beta_sp   0.005
+  parallel  0
