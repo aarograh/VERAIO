@@ -1997,7 +1997,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() cmfd ycmfd none
+      - in_dictionary() cmfd ycmfd adcmfd none
   cmfd_solver:
     <<: *dtword
     _content:
