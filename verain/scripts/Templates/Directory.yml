@@ -2004,6 +2004,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() 1gsweep mgnode mggroup mgrbsor
+  cmfd_eigen_solver:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() power jd gd arnoldi slepc_power
   k_shift:
     <<: *dtdouble
     _content:
@@ -2761,7 +2767,7 @@ BISON:
     <<: *dtstring
     _content:
     _check:
-      - is_string()      
+      - is_string()
   functions_linear_heat_rate_profile_x:
     <<: *dtstring
     _content:
@@ -3105,7 +3111,7 @@ BISON:
     _content:
     _check:
       - is_string()
-      - in_dictionary() kinematic penalty 
+      - in_dictionary() kinematic penalty
   pellet_clad_mechanical_system:
     <<: *dtstring
     _content:
