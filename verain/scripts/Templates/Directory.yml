@@ -1774,6 +1774,11 @@ MPACT:
     _content:
     _check:
       - is_word()
+  ce_filename:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()    
   shield_method:
     <<: *dtword
     _content:
@@ -1786,6 +1791,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() t f true false
+  quasi_1D:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() t f true false    
   dep_filename:
     <<: *dtword
     _content:

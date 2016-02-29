@@ -587,7 +587,14 @@ MPACT:
           _do:
             - copy MPACT/$xs_filename
           _content:
-
+        
+        ce_filename:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$ce_filename
+          _content:  
+        
         shield_method:
           _pltype: parameter
           _type: string
@@ -600,6 +607,13 @@ MPACT:
           _type: string
           _do:
             - copy MPACT/$xs_shielder
+          _content:
+          
+        quasi_1D:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$quasi_1D
           _content:
 
         mats_file:
