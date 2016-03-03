@@ -71,7 +71,7 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    SET(GOLD ${CMAKE_CURRENT_SOURCE_DIR}/gold)
 
    XML2CTF_PARALLEL_TEST  (${VERAIN}                   ${GOLD}     par_cross 5 6)
-   XML2CTF_PARALLEL_TEST  (${VERAIN}                   ${GOLD}     Sample_p7 56 200)
+   XML2CTF_PARALLEL_TEST  (${VERAIN}                   ${GOLD}     Sample_p7 56 400)
    XML2CTF_PARALLEL_TEST  (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     par_qtr_core_inlet_bc 56 6)
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     cross_w_baffle                 "")
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     small_singlerod_HFP            "")
@@ -118,6 +118,8 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     rotational_5cross "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     grid_enhance      "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     four_grid_types   "")
+   XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     new_conv_metrics_defaults "")
+   XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     new_conv_metrics_one_term "")
 
 
 ENDIF()

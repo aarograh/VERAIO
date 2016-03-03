@@ -1416,6 +1416,12 @@ COBRATF:
     _check:
       - is_float()
 
+  use_sol_stop_crit:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
   edit_gaps:
     <<: *dtint
     _content:
