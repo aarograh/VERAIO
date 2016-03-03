@@ -110,6 +110,14 @@ namespace
      double *c_ptr_to_inlet_flow;
      bool inlet_temp_set;
      bool inlet_flow_set;
+     bool use_new_crit;
+     double void_criteria;
+     double pressure_criteria;
+     double Tcool_criteria;
+     double Tsolid_criteria;
+     double vliq_criteria;
+     double vvap_criteria;
+     double vdrop_criteria;
   };
 
   // geo data structure
@@ -1217,6 +1225,7 @@ namespace {
     GetOptional(cobraParams, "iitmax", cntrl_data.iitmax);
     GetOptional(cobraParams, "courant", cntrl_data.courant);
     GetOptional(cobraParams, "irfc", cntrl_data.rfmod);
+
     cntrl_data.entmod = 0;
     cntrl_data.mixmod = 1;
 
@@ -1327,8 +1336,58 @@ namespace {
     GetOptional(cobraParams, "k_void_drift", cntrl_data.k_void_drift);
     GetOptional(cobraParams, "beta_sp", cntrl_data.beta_sp);
 
+    // new convergence metrics
+    // If none are provided in COBRA-TF block, revert to the old metrics
+    double void_criteria=-1.0;
+    double Tcool_criteria=-1.0;
+    double Tsolid_criteria=-1.0;
+    double pressure_criteria=-1.0;
+    double vliq_criteria=-1.0;
+    double vvap_criteria=-1.0;
+    double vdrop_criteria=-1.0;
+    bool use_new_crit=false;
+    GetOptional(cobraParams,"void_criteria",void_criteria);
+    if (void_criteria>0.0) use_new_crit=true;
+    GetOptional(cobraParams,"Tcool_criteria",Tcool_criteria);
+    if (Tcool_criteria>0.0) use_new_crit=true;
+    GetOptional(cobraParams,"Tsolid_criteria",Tsolid_criteria);
+    if (Tsolid_criteria>0.0) use_new_crit=true;
+    GetOptional(cobraParams,"pressure_criteria",pressure_criteria);
+    if (pressure_criteria>0.0) use_new_crit=true;
+    GetOptional(cobraParams,"vliq_criteria",vliq_criteria);
+    if (vliq_criteria>0.0) use_new_crit=true;
+    GetOptional(cobraParams,"vvap_criteria",vvap_criteria);
+    if (vvap_criteria>0.0) use_new_crit=true;
+    GetOptional(cobraParams,"vdrop_criteria",vdrop_criteria);
+    if (vdrop_criteria>0.0) use_new_crit=true;
+    int res_met=-9873;
+    GetOptional(cobraParams,"use_sol_stop_crit",res_met);
+    if (res_met==1){
+       use_new_crit=true;
+    }else if (res_met==0){
+       use_new_crit=false;
+    }
+    // if using the new convergence metrics, set them to either the user supplied
+    // value or a default
+    if (void_criteria<0.0)     void_criteria    =1e-5;
+    if (pressure_criteria<0.0) pressure_criteria=1e-5;
+    if (Tcool_criteria<0.0)    Tcool_criteria   =1e-5;
+    if (Tsolid_criteria<0.0)   Tsolid_criteria  =1e-5;
+    if (vliq_criteria<0.0)     vliq_criteria    =1e-5;
+    if (vvap_criteria<0.0)     vvap_criteria    =1e-5;
+    if (vdrop_criteria<0.0)    vdrop_criteria   =1e-5;
+    cntrl_data.use_new_crit=use_new_crit;
+    cntrl_data.void_criteria=void_criteria;
+    cntrl_data.pressure_criteria=pressure_criteria;
+    cntrl_data.Tcool_criteria=Tcool_criteria;
+    cntrl_data.Tsolid_criteria=Tsolid_criteria;
+    cntrl_data.vliq_criteria=vliq_criteria;
+    cntrl_data.vvap_criteria=vvap_criteria;
+    cntrl_data.vdrop_criteria=vdrop_criteria;
+
     // Hand off the control data to lib_ctf_pp
     cout<<"\n A number printed in CTF's contrl_data_xfer is:"<<endl;
+
 
     return cntrl_data;
 

@@ -118,6 +118,8 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     rotational_5cross "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     grid_enhance      "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     four_grid_types   "")
+   XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     new_conv_metrics_defaults "")
+   XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     new_conv_metrics_one_term "")
 
 
 ENDIF()

@@ -276,6 +276,13 @@ COBRATF:
         - copy COBRATF/$vdrop_criteria
       _content:
 
+    use_sol_stop_crit:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$use_sol_stop_crit
+      _content:
+
     edit_gaps:
       _pltype: parameter
       _type: int
