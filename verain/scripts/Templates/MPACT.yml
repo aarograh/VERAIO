@@ -468,6 +468,13 @@ MPACT:
             - copy MPACT/$cmfd
           _content:
 
+        prolongation:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$prolongation
+          _content:
+
         solver:
           _pltype: parameter
           _type: string
@@ -587,14 +594,14 @@ MPACT:
           _do:
             - copy MPACT/$xs_filename
           _content:
-        
+
         ce_filename:
           _pltype: parameter
           _type: string
           _do:
             - copy MPACT/$ce_filename
-          _content:  
-        
+          _content:
+
         shield_method:
           _pltype: parameter
           _type: string
@@ -608,7 +615,7 @@ MPACT:
           _do:
             - copy MPACT/$xs_shielder
           _content:
-          
+
         quasi_1D:
           _pltype: parameter
           _type: string
