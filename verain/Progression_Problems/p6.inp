@@ -171,6 +171,7 @@
   num_space      29
   num_angle      1
   num_threads    1
+  num_inners     2
 
 [COBRATF]
   gridloss  END  0.9070

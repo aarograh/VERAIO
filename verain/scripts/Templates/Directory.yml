@@ -1790,7 +1790,7 @@ MPACT:
     <<: *dtword
     _content:
     _check:
-      - is_word()    
+      - is_word()
   shield_method:
     <<: *dtword
     _content:
@@ -1808,7 +1808,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() t f true false    
+      - in_dictionary() t f true false
   dep_filename:
     <<: *dtword
     _content:
@@ -2021,6 +2021,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() cmfd ycmfd adcmfd none
+  prolongation:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() linear flat
   cmfd_solver:
     <<: *dtword
     _content:
