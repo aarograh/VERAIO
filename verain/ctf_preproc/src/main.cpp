@@ -118,6 +118,7 @@ namespace
      double vliq_criteria;
      double vvap_criteria;
      double vdrop_criteria;
+     int    proc_per_assem;
   };
 
   // geo data structure
@@ -1388,6 +1389,9 @@ namespace {
     // Hand off the control data to lib_ctf_pp
     cout<<"\n A number printed in CTF's contrl_data_xfer is:"<<endl;
 
+    int ppa=1;
+    GetOptional(cobraParams,"proc_per_assem",ppa);
+    cntrl_data.proc_per_assem=ppa;
 
     return cntrl_data;
 

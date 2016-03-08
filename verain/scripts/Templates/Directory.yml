@@ -1422,6 +1422,12 @@ COBRATF:
     _check:
       - is_int()
 
+  proc_per_assem:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+
   edit_gaps:
     <<: *dtint
     _content:

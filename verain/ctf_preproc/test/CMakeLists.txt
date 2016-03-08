@@ -73,6 +73,13 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    XML2CTF_PARALLEL_TEST  (${VERAIN}                   ${GOLD}     par_cross 5 6)
    XML2CTF_PARALLEL_TEST  (${VERAIN}                   ${GOLD}     Sample_p7 56 400)
    XML2CTF_PARALLEL_TEST  (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     par_qtr_core_inlet_bc 56 6)
+     
+   # This test creates a model of a 13 assembly model modeled at quarter
+   # mirror symmetry.  This is a parallel CTF model, but it is broken down
+   # into 4 solution domains per assembly isntead of 1, leading to 13 input
+   # decks instead of just 6.
+   XML2CTF_PARALLEL_TEST  (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     refined_dom 13 6)
+
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     cross_w_baffle                 "")
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     small_singlerod_HFP            "")
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     small_3x3rod_HFP               "")

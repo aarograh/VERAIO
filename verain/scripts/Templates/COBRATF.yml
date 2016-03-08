@@ -339,6 +339,13 @@ COBRATF:
         - copy COBRATF/$edit_rod_vtk
       _content:
 
+    proc_per_assem:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$proc_per_assem
+      _content:
+
     boil_ht_cor:
       _pltype: parameter
       _type: string
