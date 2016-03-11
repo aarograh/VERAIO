@@ -1,3 +1,11 @@
+! Author: Bob Salko
+! Date:   3/10/2016
+! Description:
+!    Uses 'use_sol_stop_crit' to turn on the l-infinity stopping criteria in CTF
+!    Ensures that Card 19 gets written in CTF input deck and that all tolerances
+!    get set to their default values.  Note this deck is not run in the test.  The
+!    XML file is pre-generated from it.
+
 [CASEID]
   title 'CASL Problem 6a'
 !================================================================================

@@ -1,3 +1,11 @@
+! Author: Bob Salko
+! Date: 3/10/2016
+! Descriptions:
+!    Specifies some of the CTF Card 19 stopping criteria, but then specifies
+!    'use_sol_stop_crit' to 'off'.  ensures that the preprocessor prints 
+!    Card 18 instead of Card 19 even though new stopping criteira are specified
+!    in the COBRATF block.
+
 [CASEID]
   title 'CASL Problem 6a'
 !================================================================================

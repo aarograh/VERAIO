@@ -1,3 +1,10 @@
+! Author: Bob Salko
+! Date: 3/10/2016
+! Description:
+!    Specifies one tolerance for the Card 19 stopping criteria.  Ensures that
+!    Card 19 gets turned on as a result of including only one tolerance term
+!    and that that custom tolerance correctly makes it through to Card 19
+!    of the CTF input deck.
 [CASEID]
   title 'CASL Problem 6a'
 !================================================================================

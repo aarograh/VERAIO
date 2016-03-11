@@ -1,14 +1,12 @@
+! Author: Bob Salko
+! Date: 3/10/2016
+! Description:
+!   Model of a 13 assembly model of 3x3 assmeblies.  This is modeled at quarter
+!   mirror symmetry.  The option 'proc_per_assem' is set to 4 in the COBRATF block,
+!   which breaks up the model into 4 solution domains per full assembly.  This test
+!   ensures the CTF input deck is correctly generated for this option.
 [CASEID]
   title 'CASL Problem 3x3 HFP'
-!================================================================================
-!  Sample input for small 3x3 Problem
-!
-!  Added 3/25/2013 in order to test multi-assembly capabilities of COBRA
-!
-!  To process:
-!     ./react2xml.pl [file].inp [file].xml
-!
-!================================================================================
 
 [STATE]
   power  100.0         ! %
