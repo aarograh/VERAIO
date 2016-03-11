@@ -1866,7 +1866,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() p-c semip-c
+      - in_dictionary() p-c semip-c semip-c_postcorr
 
   num_space:
     <<: *dtint
