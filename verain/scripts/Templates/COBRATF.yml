@@ -276,6 +276,48 @@ COBRATF:
         - copy COBRATF/$vdrop_criteria
       _content:
 
+    Tcoola_criteria:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$Tcoola_criteria
+      _content:
+
+    Tsolida_criteria:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$Tsolida_criteria
+      _content:
+
+    pressurea_criteria:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$pressurea_criteria
+      _content:
+
+    vliqa_criteria:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$vliqa_criteria
+      _content:
+
+    vvapa_criteria:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$vvapa_criteria
+      _content:
+
+    vdropa_criteria:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$vdropa_criteria
+      _content:
+
     use_sol_stop_crit:
       _pltype: parameter
       _type: int

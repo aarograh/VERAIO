@@ -4244,21 +4244,32 @@ end 14
 ***********************************************************************************************
 **NGR                                                                                          
    19                                                                                          
-*Card 19.1                                                                                     
-*** Normalized l-infinity of these solution terms must go below these values for case to be    
-** considered steady state.  Normalization is done in the code as follows:                     
-**    1. Void l-infinity is not normalized                                                     
-**    2. Pressure l-infinity is normalized to the reference pressure in Card 1.3               
-**    3. Coolant temperature l-infinity is normalized to the initial coolant temperature       
-**       obtained from enthalpy or temperature provided on Card 1.3                            
-**    4. Solid temperatuer l-infinity is normalized to the same value as coolant temperature   
-**    5. Liquid velocity, vapor velocity, and droplet velocity is normalize to initial system  
-**       velocity obtained from mass flux given by GINIT in Card 1.1                           
-**  LIVOID   LIPRESS   LITCOOL  LITSOLID      LIVL      LIVV      LIVD                         
- 1.000E-05 1.000E-05 1.000E-05 1.000E-05 1.000E-05 1.000E-05 1.000E-05
-*Card 19.2                                                                                     
+** Normalized l-infinity of checked solution terms must go below these tolerances for the case 
+** to be considered steady state.  The code converges if the following is true for each checked
+** solution term:                                                                              
+**                                                                                             
+**   abs((X-Xn))<=max(rtol*abs(Xn),atol)                                                       
+**                                                                                             
+** In this equation, "X" is a vector of the checked solution terms from the current checkpoint 
+** and "Xn" is the vector of the same solution terms, but from the previous checkpoint.  Checks
+** are made every 0.05 seconds in the transient.  The relative tolerances are defined on Card  
+** 19.1 and the absolute tolerances are defined on Card 19.2.  This check is done for pressure,
+** fluid temperature, solid temperature, and the three components of axial velocity.  There is 
+** also a check on void, but it does not invole the relative check because void is a           
+** dimensionless value; only the absolute check is done.                                       
+**                                                                                             
+** The final check involves checking that the mass and energy balance over the system is below 
+** a tolerance as well.                                                                        
 ** Balance of mass ((mass_in-mass_out)/mass_in) and balance of energy ((energy_in-energy_out)/ 
-** energy_in) must go below these values for case to be considered steady state.  These        
-** criteria are in units of percent.                                                           
+** energy_in) must go below tolerance values defined on Card 19.3 for case to be considered    
+** steady state.                                                                               
+*Card 19.1 - relative stopping criteria [unitless]                                             
+**  LIPRESS   LITCOOL  LITSOLID      LIVL      LIVV      LIVD                                  
+ 1.000E-05 1.000E-05 1.000E-05 1.000E-05 1.000E-05 1.000E-05
+*Card 19.2 - absolute stopping criteria [pressure in psia|bar, velocity in ft/s|m/s,           
+** and temperature in F|C]                                                                     
+**  LIAVOID    LIAPRESS  LIATCOOL   LIATSOLID   LIAVL   LIAVV    LIAVD                         
+ 1.000E-05 1.000E-05 1.000E-05 1.000E-05 1.000E-05 1.000E-05 1.000E-05
+*Card 19.2   [%]                                                                        
 ** ENERGYBAL     MASSBAL                                                                       
    1.000E-02   1.000E-02
