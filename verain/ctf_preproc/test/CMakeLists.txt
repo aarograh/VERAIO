@@ -127,6 +127,9 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     four_grid_types   "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     new_conv_metrics_defaults "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     new_conv_metrics_one_term "")
+   # Specifies a different value for each stopping criteria that goes to CTF
+   # Card Group 19 and ensures they make it through in tact.
+   XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     card19 "")
 
 
 ENDIF()

@@ -118,6 +118,12 @@ namespace
      double vliq_criteria;
      double vvap_criteria;
      double vdrop_criteria;
+     double pressurea_criteria;
+     double Tcoola_criteria;
+     double Tsolida_criteria;
+     double vliqa_criteria;
+     double vvapa_criteria;
+     double vdropa_criteria;
      int    proc_per_assem;
   };
 
@@ -1346,9 +1352,16 @@ namespace {
     double vliq_criteria=-1.0;
     double vvap_criteria=-1.0;
     double vdrop_criteria=-1.0;
+    double Tcoola_criteria=-1.0;
+    double Tsolida_criteria=-1.0;
+    double pressurea_criteria=-1.0;
+    double vliqa_criteria=-1.0;
+    double vvapa_criteria=-1.0;
+    double vdropa_criteria=-1.0;
     bool use_new_crit=false;
-    GetOptional(cobraParams,"void_criteria",void_criteria);
-    if (void_criteria>0.0) use_new_crit=true;
+    // If any one of the following terms are present, CTF will
+    // use the new stopping criteria instead of the old ones
+    // Relative stopping criteria
     GetOptional(cobraParams,"Tcool_criteria",Tcool_criteria);
     if (Tcool_criteria>0.0) use_new_crit=true;
     GetOptional(cobraParams,"Tsolid_criteria",Tsolid_criteria);
@@ -1361,6 +1374,25 @@ namespace {
     if (vvap_criteria>0.0) use_new_crit=true;
     GetOptional(cobraParams,"vdrop_criteria",vdrop_criteria);
     if (vdrop_criteria>0.0) use_new_crit=true;
+    // Absolute stopping criteria
+    GetOptional(cobraParams,"void_criteria",void_criteria);
+    if (void_criteria>0.0) use_new_crit=true;
+    GetOptional(cobraParams,"Tcoola_criteria",Tcoola_criteria);
+    if (Tcool_criteria>0.0) use_new_crit=true;
+    GetOptional(cobraParams,"Tsolida_criteria",Tsolida_criteria);
+    if (Tsolid_criteria>0.0) use_new_crit=true;
+    GetOptional(cobraParams,"pressurea_criteria",pressurea_criteria);
+    if (pressurea_criteria>0.0) use_new_crit=true;
+    GetOptional(cobraParams,"vliqa_criteria",vliqa_criteria);
+    if (vliqa_criteria>0.0) use_new_crit=true;
+    GetOptional(cobraParams,"vvapa_criteria",vvapa_criteria);
+    if (vvapa_criteria>0.0) use_new_crit=true;
+    GetOptional(cobraParams,"vdropa_criteria",vdropa_criteria);
+    if (vdropa_criteria>0.0) use_new_crit=true;
+
+    // If the user explicitly tells xml2ctf to use the new stopping
+    // criteria, it will use them even if no actual tolerances were
+    // specified; everything will be the default
     int res_met=-9873;
     GetOptional(cobraParams,"use_sol_stop_crit",res_met);
     if (res_met==1){
@@ -1370,21 +1402,33 @@ namespace {
     }
     // if using the new convergence metrics, set them to either the user supplied
     // value or a default
-    if (void_criteria<0.0)     void_criteria    =1e-5;
     if (pressure_criteria<0.0) pressure_criteria=1e-5;
     if (Tcool_criteria<0.0)    Tcool_criteria   =1e-5;
     if (Tsolid_criteria<0.0)   Tsolid_criteria  =1e-5;
     if (vliq_criteria<0.0)     vliq_criteria    =1e-5;
     if (vvap_criteria<0.0)     vvap_criteria    =1e-5;
     if (vdrop_criteria<0.0)    vdrop_criteria   =1e-5;
+    if (void_criteria<0.0)     void_criteria    =1e-5;
+    if (pressurea_criteria<0.0) pressurea_criteria=1e-5;
+    if (Tcoola_criteria<0.0)    Tcoola_criteria   =1e-5;
+    if (Tsolida_criteria<0.0)   Tsolida_criteria  =1e-5;
+    if (vliqa_criteria<0.0)     vliqa_criteria    =1e-5;
+    if (vvapa_criteria<0.0)     vvapa_criteria    =1e-5;
+    if (vdropa_criteria<0.0)    vdropa_criteria   =1e-5;
     cntrl_data.use_new_crit=use_new_crit;
-    cntrl_data.void_criteria=void_criteria;
     cntrl_data.pressure_criteria=pressure_criteria;
     cntrl_data.Tcool_criteria=Tcool_criteria;
     cntrl_data.Tsolid_criteria=Tsolid_criteria;
     cntrl_data.vliq_criteria=vliq_criteria;
     cntrl_data.vvap_criteria=vvap_criteria;
     cntrl_data.vdrop_criteria=vdrop_criteria;
+    cntrl_data.void_criteria=void_criteria;
+    cntrl_data.pressurea_criteria=pressurea_criteria;
+    cntrl_data.Tcoola_criteria=Tcoola_criteria;
+    cntrl_data.Tsolida_criteria=Tsolida_criteria;
+    cntrl_data.vliqa_criteria=vliqa_criteria;
+    cntrl_data.vvapa_criteria=vvapa_criteria;
+    cntrl_data.vdropa_criteria=vdropa_criteria;
 
     // Hand off the control data to lib_ctf_pp
     cout<<"\n A number printed in CTF's contrl_data_xfer is:"<<endl;

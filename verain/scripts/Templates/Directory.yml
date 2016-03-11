@@ -1416,6 +1416,42 @@ COBRATF:
     _check:
       - is_float()
 
+  pressurea_criteria:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  Tcoola_criteria:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  Tsolida_criteria:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vliqa_criteria:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vvapa_criteria:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vdropa_criteria:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
   use_sol_stop_crit:
     <<: *dtint
     _content:
