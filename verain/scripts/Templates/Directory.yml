@@ -1914,7 +1914,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() p-c semip-c semip-c_postcorr
+      - in_dictionary() p-c semip-c postcorrector
 
   num_space:
     <<: *dtint
