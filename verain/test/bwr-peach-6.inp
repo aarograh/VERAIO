@@ -48,8 +48,8 @@
   bc_top reflecting
   bc_bot reflecting
 
-  mat zirc2  6.5514 zirc2      ! zirc density p. 39
-  mat zirc4  6.5514 zirc4
+  mat zr2  6.5514 zirc2      ! zirc density p. 39
+  mat zr4  6.5514 zirc4
   mat he   0.000176 he-4
    
 [ASSEMBLY]
@@ -58,7 +58,7 @@
   
 !*** 100 mil design
   gap    0.9017 .42418   ! wide and narrow channel gap (cm)
-  channel_box zirc4 0.254 0.9652 0.0 0.0   ! channel dimensions 
+  channel_box zr4 0.254 0.9652 0.0 0.0   ! channel dimensions 
 
 !*** enrichments p. 18
 !*** density and materials p. 12
@@ -69,12 +69,12 @@
   fuel U145  10.32 94.5 / 1.45
   fuel U3G   10.23 94.5 / 3.01 / gad=2.0
  
-  cell 1   0.5207 0.53213 0.61341 / U301 he zirc2
-  cell 2   0.5207 0.53213 0.61341 / U222 he zirc2
-  cell 3   0.5207 0.53213 0.61341 / U187 he zirc2
-  cell 4   0.5207 0.53213 0.61341 / U145 he zirc2
-  cell 5G  0.5207 0.53213 0.61341 / U3G  he zirc2
-  cell WR         0.67437 0.75057 /    mod  zirc2  ! large WR
+  cell 1   0.5207 0.53213 0.61341 / U301 he zr2
+  cell 2   0.5207 0.53213 0.61341 / U222 he zr2
+  cell 3   0.5207 0.53213 0.61341 / U187 he zr2
+  cell 4   0.5207 0.53213 0.61341 / U145 he zr2
+  cell 5G  0.5207 0.53213 0.61341 / U3G  he zr2
+  cell WR         0.67437 0.75057 /    mod  zr2  ! large WR
  
   lattice LAT
     4
@@ -90,7 +90,7 @@
 
 [MPACT]
   num_space      1
-  num_angle      8
+  num_angle     -8
   num_threads    1
 
 [INSILICO]

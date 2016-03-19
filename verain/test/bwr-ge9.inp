@@ -47,8 +47,8 @@
   bc_top reflecting
   bc_bot reflecting
 
-  mat zirc2  6.56 zirc2
-  mat zirc4  6.56 zirc4
+  mat zr2  6.56 zirc2
+  mat zr4  6.56 zirc4
 
 [ASSEMBLY]
   npin   8
@@ -56,8 +56,8 @@
   
 !*** 80 mil design
   gap    0.9525 .47498   ! wide and narrow channel gap (cm)
-  channel_box  zirc4 0.2032 0.9652 0.0 0.0   ! channel dimensions  
-!  channel_box  zirc42 0.2032 0.9652 0.0 0.0   ! channel dimensions  
+  channel_box  zr4 0.2032 0.9652 0.0 0.0   ! channel dimensions  
+!  channel_box  zr42 0.2032 0.9652 0.0 0.0   ! channel dimensions  
 
 !** Note that the automatic addition of U-234 does not agree with the spec
 !** and we may need to add U-234 explicitly
@@ -75,23 +75,23 @@
   fuel U40  10.0642 94.5 / 3.95
   fuel U40G  9.939  94.5 / 3.95 / gad=4.0
 
-  cell  1 0.53213 0.61341 / U16  zirc2
-  cell  2 0.53213 0.61341 / U20  zirc2
-  cell  3 0.53213 0.61341 / U22  zirc2
-  cell  4 0.53213 0.61341 / U24  zirc2
-  cell  5 0.53213 0.61341 / U26  zirc2
-  cell  6 0.53213 0.61341 / U28  zirc2
-  cell  7 0.53213 0.61341 / U30  zirc2
-  cell  8 0.53213 0.61341 / U36  zirc2
-  cell  9 0.53213 0.61341 / U38  zirc2
-  cell 10 0.53213 0.61341 / U40  zirc2
-  cell 51 0.53213 0.61341 / U40G zirc2
-  cell 52 0.53213 0.61341 / U36G zirc2
+  cell  1 0.53213 0.61341 / U16  zr2
+  cell  2 0.53213 0.61341 / U20  zr2
+  cell  3 0.53213 0.61341 / U22  zr2
+  cell  4 0.53213 0.61341 / U24  zr2
+  cell  5 0.53213 0.61341 / U26  zr2
+  cell  6 0.53213 0.61341 / U28  zr2
+  cell  7 0.53213 0.61341 / U30  zr2
+  cell  8 0.53213 0.61341 / U36  zr2
+  cell  9 0.53213 0.61341 / U38  zr2
+  cell 10 0.53213 0.61341 / U40  zr2
+  cell 51 0.53213 0.61341 / U40G zr2
+  cell 52 0.53213 0.61341 / U36G zr2
 
 !** water rod is smaller to fit in a pincell
-!** cell WR 1.6002 1.7018 / mod zirc4
+!** cell WR 1.6002 1.7018 / mod zr4
 
-  cell WR 1.60 1.62 / mod zirc4 / large4
+  cell WR 1.60 1.62 / mod zr4 / large4
 !  cell WR 1.60 1.62 / mod U40 / large4
 
   lattice LAT
@@ -115,10 +115,10 @@
 !*** How do we indicate control blades from bottom of core?
 !*** Do we need a rodmap and axial card?
 
-  mat ss304 8.0
-  mat b4c   4.62   ! ** check for 70% theoretical density
+  mat ss304 8.0  ss
+  mat abs   4.62 b4c  ! ** check for 70% theoretical density
 
-  cell TUBE 0.17526 0.23876 / b4c ss304
+  cell TUBE 0.17526 0.23876 / abs ss304
 
 !       ntube     span   th       rad    sheath    wing   mat
   blade 21 TUBE 12.3825 0.79248 0.39624 0.14224  1.98501  ss304
@@ -138,7 +138,7 @@
 
 [MPACT]
   num_space      1
-  num_angle      8
+  num_angle     -8
   num_threads    1
 
 [INSILICO]

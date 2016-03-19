@@ -48,8 +48,8 @@
   bc_top reflecting
   bc_bot reflecting
 
-  mat zirc2  6.5514 zirc2      ! zirc density p. 39
-  mat zirc4  6.5514 zirc4
+  mat zr2  6.5514 zirc2      ! zirc density p. 39
+  mat zr4  6.5514 zirc4
   mat he   0.000176 he-4
   
 [ASSEMBLY]
@@ -58,7 +58,7 @@
   
 !*** 80 mil design
   gap    0.9525 .47498   ! wide and narrow channel gap (cm)
-  channel_box  zirc4 0.2032 0.9652 0.0 0.0   ! channel dimensions 
+  channel_box  zr4 0.2032 0.9652 0.0 0.0   ! channel dimensions 
 
 !*** enrichments p. 15
 !*** density and materials p. 10
@@ -73,14 +73,14 @@
   fuel U8D   10.19 94.5 / 1.94 / gad=4.0
   
   
-  cell 1   0.60579 0.62103 0.71501 / U293 he zirc2
-  cell 2   0.60579 0.62103 0.71501 / U194 he zirc2
-  cell 3   0.60579 0.62103 0.71501 / U169 he zirc2
-  cell 4   0.60579 0.62103 0.71501 / U133 he zirc2
-  cell 5A  0.60579 0.62103 0.71501 / U2A  he zirc2
-  cell 6C  0.60579 0.62103 0.71501 / U2C  he zirc2
-  cell 7E  0.60579 0.62103 0.71501 / U2E  he zirc2
-  cell 8D  0.60579 0.62103 0.71501 / U8D  he zirc2
+  cell 1   0.60579 0.62103 0.71501 / U293 he zr2
+  cell 2   0.60579 0.62103 0.71501 / U194 he zr2
+  cell 3   0.60579 0.62103 0.71501 / U169 he zr2
+  cell 4   0.60579 0.62103 0.71501 / U133 he zr2
+  cell 5A  0.60579 0.62103 0.71501 / U2A  he zr2
+  cell 6C  0.60579 0.62103 0.71501 / U2C  he zr2
+  cell 7E  0.60579 0.62103 0.71501 / U2E  he zr2
+  cell 8D  0.60579 0.62103 0.71501 / U8D  he zr2
   
   lattice LAT
     4
@@ -96,7 +96,7 @@
 
 [MPACT]
   num_space      1
-  num_angle      8
+  num_angle     -8
   num_threads    1
 
 [INSILICO]
