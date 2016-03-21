@@ -936,8 +936,14 @@ sub matmap{
 	my @mat_fracs=();
 
 	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
-	my $density=shift @content;
+	my @rpath=@keypath[0..$#keypath-2];  # path to find options
+	my %opk=%{ key_defined($SOURCE_DB,@rpath,'_options') };
+	my @ak=keys %opk;
 
+	my @opmat=extract_options(\@content); # options in input
+	my %opths=@opmat if @opmat;
+
+	my $density=shift @content;
 	if(@content > 1){
 	    @mat_names=even(\@content);
 	    @mat_fracs=odd(\@content);
@@ -952,6 +958,15 @@ sub matmap{
 	&key_on_parameter($mat_ref,'density','double',$density);
 	&key_on_parameter($mat_ref,'depletable','bool',$depletable) if ($depletable eq 'true');
 	&key_on_parameter($mat_ref,'key_name','string',$keyname);
+
+	foreach my $iop (keys(%opths)){
+	    if(exists($opk{$iop})){
+		&key_on_parameter($mat_ref,$iop,$opk{$iop}, $opths{$iop});
+	    }
+	    else{
+		die "matmap: Invalid material option $iop in @content / @opmat\n";
+	    }
+	}
 
 	&key_on_array($mat_ref,'mat_names','string', @mat_names);
 	&key_on_array($mat_ref,'mat_fracs','double', @mat_fracs);
@@ -1946,5 +1961,7 @@ sub listscompare{
     
     undef;
 }
+
+
 
 1;

@@ -455,10 +455,14 @@ CORE:
   mat:
     <<: *dtlistnamed
     _style: multi-line
+    _slash:
     _check:
       - arraysize()>1
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
+    _options:
+      thexp: float
+      thcnd: float
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
@@ -571,10 +575,14 @@ ASSEMBLY:
   mat:
     <<: *dtlistnamed
     _style: multi-line
+    _slash:
     _check:
       - arraysize()>1
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
+    _options:
+      thexp: float
+      thcnd: float
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
@@ -635,10 +643,14 @@ CONTROL:
   mat:
     <<: *dtlistnamed
     _style: multi-line
+    _slash:
     _check:
       - arraysize()>1
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
+    _options:
+      thexp: float
+      thcnd: float
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
@@ -686,10 +698,14 @@ INSERT:
   mat:
     <<: *dtlistnamed
     _style: multi-line
+    _slash:
     _check:
       - arraysize()>1
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
+    _options:
+      thexp: float
+      thcnd: float
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
@@ -725,10 +741,14 @@ DETECTOR:
   mat:
     <<: *dtlistnamed
     _style: multi-line
+    _slash:
     _check:
       - arraysize()>1
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
+    _options:
+      thexp: float
+      thcnd: float
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 

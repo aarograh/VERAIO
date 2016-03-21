@@ -105,15 +105,29 @@ sub defaults
 
 	# TODO: hardwired for array
 	return undef if ref $t ne 'ARRAY';
-
+	
 	my @b=@{ $t };
 	my @a=$self->ctokens();
 	my @b0=@b;
 
 	my $done;
+	my @opta;
+	my @optb;
 	for ($keyword) {
-	    if (/^mat$/) { # Andrew's logic
-		@a != 1 && do {@b=@a; $done='mat overwrite'; last;}; # a has new definition, erase old
+	    if (/^mat$/) { # Andrew's logic for mats, will need to be
+			   # moved to separate sub if other commands
+			   # are to have have options
+
+		if($self->argexists('_options')){
+		    @opta=extract_options(\@a); # save options of a, remove them from a
+		    @optb=extract_options(\@b); # save options of b, remove them from b
+		}
+
+		@a != 1 && do {
+		    @b=@a;
+		    $done='mat overwrite';
+		    append_options(\@b,@opta) if @opta;
+		    last;}; # a has new definition, erase old
 		@a == 1 &&
 		(($b[0] == 0 && $a[0] != 0) || 
 		 ($b[0] != 0 && $a[0] == 0)) && do {
@@ -121,9 +135,14 @@ sub defaults
 				   "Incompatible densities: default $b[0], new $a[0]");
 		     die "$myfun illegal switch of material densities\n";
 		};
-		@a == 1 && do {$b[0]=$a[0]; $done='mat density'; last;}; # a has new definition, erase old
+		@a == 1 && do { # a inherits definition of b, erase old b density with a
+		    $b[0]=$a[0];
+		    append_options(\@b,@opta) if @opta;
+		    append_options(\@b,@optb) unless @opta;
+		    $done='mat density';
+		    last;};
 	    }
-	    else{ # default: overwrite b with a as far a goes
+	    else{ # default, everything except mat: overwrite b with a as far a goes
 		$done='default';
 		for(my $i=0; $i<@a; $i++){
 		    $b[$i]=$a[$i];
@@ -444,5 +463,6 @@ sub apply_evals {
     }
     return 1;
 }
+
 
 1;

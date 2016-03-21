@@ -57,7 +57,9 @@ use Exporter;
 	 'times_in_array',
 	 'fillin',
 	 'purge_array',
-	 'replace_in_array'
+	 'replace_in_array',
+	 'extract_options',
+	 'append_options'
     );
 
 {
@@ -492,5 +494,34 @@ sub replace_in_array ($$$) {
     return $n;
 }
 
+sub extract_options{
+    my $contref = shift @_;
+
+    my @content=@{ $contref };
+    my @slshs=indexes { $_ eq '/' } @content;
+    if(@slshs > 1){
+	die "extract_options: invalid number of slashes in @content\n";
+    }
+
+    my @part2=();
+    if(@slshs == 1){
+	my @part1=before {$_ eq '/'} @content;
+	@part2=after  {$_ eq '/'} @content;
+	@{ $contref }= @part1;
+    }
+
+    return @part2;
+}
+
+sub append_options{
+    my ($contref,@opts)=@_;
+
+    if(@opts){
+	push @{ $contref }, '/';
+	push @{ $contref }, @opts;
+	return 1;
+    }
+    return 0;
+}
 
 1;
