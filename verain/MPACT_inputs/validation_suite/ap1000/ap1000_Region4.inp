@@ -90,8 +90,8 @@
   title "waba"
   npin 17
 
-  mat waba      3.65        b4c 0.0949
-                          al2o3 0.9051 
+!  mat waba      3.65        b4c 0.0949
+!                          al2o3 0.9051 
 
   cell 61   0.29   0.34  0.35  0.40386  0.41783  0.48387  / mod zirc4 he waba he zirc4 !Short WABA
   cell 62   0.29   0.34  0.35  0.40386  0.41783  0.48387  / mod zirc4 he waba he zirc4 !Long  WABA
