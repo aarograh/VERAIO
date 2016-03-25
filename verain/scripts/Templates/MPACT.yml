@@ -18,6 +18,13 @@ MPACT:
         - copy MPACT/$moc_kernel
       _content:
 
+    shield_moc_kernel:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$shield_moc_kernel
+      _content:
+
     power_edit:
       _pltype: parameter
       _type: string
@@ -157,6 +164,13 @@ MPACT:
           _type: int
           _do:
             - copy MPACT/$azimuthals_octant
+          _content:
+
+        shield_azimuthals_octant:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$shield_azimuthals_octant
           _content:
 
     mesh:
@@ -607,6 +621,13 @@ MPACT:
           _type: string
           _do:
             - copy MPACT/$shield_method
+          _content:
+
+        shield_nbatch:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$shield_nbatch
           _content:
 
         xsshielder:
