@@ -1703,6 +1703,12 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  shield_ray_spacing:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
   moc_kernel:
     <<: *dtstring
     _content:
@@ -1825,6 +1831,11 @@ MPACT:
     _content:
     _check:
       - is_word()
+  shield_quad_type:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
   azimuthals_octant:
     <<: *dtint
     _content:
@@ -1838,6 +1849,12 @@ MPACT:
       - is_int()
       - is_gt() 0
   shield_azimuthals_octant:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  shield_polars_octant:
     <<: *dtint
     _content:
     _check:
