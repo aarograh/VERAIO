@@ -11,11 +11,25 @@ MPACT:
         - copy MPACT/$ray_spacing
       _content:
 
+    shield_ray_spacing:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MPACT/$shield_ray_spacing
+      _content:
+
     moc_kernel:
       _pltype: parameter
       _type: string
       _do:
         - copy MPACT/$moc_kernel
+      _content:
+
+    shield_moc_kernel:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$shield_moc_kernel
       _content:
 
     power_edit:
@@ -145,6 +159,13 @@ MPACT:
             - copy MPACT/$quad_type
           _content:
 
+        shield_quad_type:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$shield_quad_type
+          _content:
+
         polars_octant:
           _pltype: parameter
           _type: int
@@ -157,6 +178,20 @@ MPACT:
           _type: int
           _do:
             - copy MPACT/$azimuthals_octant
+          _content:
+
+        shield_azimuthals_octant:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$shield_azimuthals_octant
+          _content:
+
+        shield_polars_octant:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$shield_polars_octant
           _content:
 
     mesh:
@@ -607,6 +642,13 @@ MPACT:
           _type: string
           _do:
             - copy MPACT/$shield_method
+          _content:
+
+        shield_nbatch:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$shield_nbatch
           _content:
 
         xsshielder:
