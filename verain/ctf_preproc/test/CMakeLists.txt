@@ -80,6 +80,14 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    # decks instead of just 6.
    XML2CTF_PARALLEL_TEST  (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     refined_dom 13 20)
 
+   # Creates a parallel model of 4 5x5 assemblies at 4X refimenment, resulting
+   # in 16 CTF input files being created.  Model is created at full-symmetry.
+   # This test protects the capability for the preprocessor to make CTF models
+   # of a full-symmetry core at 4X refinement per assembly.  The results of
+   # this model were compared to the same model built at 1X refinement and the
+   # results were identical, thus verifying the approach is correct.
+   XML2CTF_PARALLEL_TEST  (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     full_sym_4x 16 20)
+
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     cross_w_baffle                 "")
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     small_singlerod_HFP            "")
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     small_3x3rod_HFP               "")
