@@ -2629,6 +2629,12 @@ BISON:
     _check:
       - is_float()
       - is_gt() 0
+  bcs_plenumpressure_plenumpressure_initial_pressure_ifba:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
   bcs_plenumpressure_plenumpressure_startup_time:
     <<: *dtdouble
     _content:
