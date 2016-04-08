@@ -1103,6 +1103,13 @@ BISON:
         - copy BISON/$shuffle_xml
       _content:
 
+    only_cycle:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$only_cycle
+      _content:
+
     ramping_time:
       _pltype: array
       _type: double
