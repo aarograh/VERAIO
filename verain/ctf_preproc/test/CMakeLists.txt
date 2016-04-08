@@ -19,7 +19,7 @@ FUNCTION(XML2CTF_PARALLEL_TEST DIR GOLDDIR TEST_NAME NUM_DECKS MAXTIME)
     TEST_1
        CMND ${PYTHON_EXECUTABLE}
        ARGS ${COBRA_TF_SOURCE_DIR}/utils/par_file_copy.py
-            ${NUM_DECKS} ${TEST_NAME}  ${GOLDDIR} ${WORKDIR} .gold
+            ${NUM_DECKS} ${TEST_NAME}  ${GOLDDIR} ${WORKDIR} --ext=.gold
     TEST_2
       MESSAGE "Running xml2ctf..."
       CMND ${CMAKE_CURRENT_BINARY_DIR}/../src/xml2ctf
@@ -87,6 +87,14 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    # this model were compared to the same model built at 1X refinement and the
    # results were identical, thus verifying the approach is correct.
    XML2CTF_PARALLEL_TEST  (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     full_sym_4x 16 20)
+   
+   # Creates a parallel model of a 5 assembly cross of 5x5 rod bundles.  The
+   # model is created at 4x refinement.  This test ensures that the 4x
+   # refinement feature of the preprocessor gets the jagged edge geometry
+   # corret when building the model.  When this model is run using 1x or 4x
+   # refinement, the answers come out identical, acting as a verification of
+   # the feature.
+   XML2CTF_PARALLEL_TEST  (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     cross_4x_refine 20 20)
 
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     cross_w_baffle                 "")
    XML2CTF_SERIAL_TEST    (${VERAIN}                   ${GOLD}     small_singlerod_HFP            "")
