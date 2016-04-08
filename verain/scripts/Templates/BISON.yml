@@ -214,6 +214,13 @@ BISON:
         - copy BISON/$bcs_plenumpressure_plenumpressure_initial_pressure
       _content:
 
+    bcs_plenumpressure_plenumpressure_initial_pressure_ifba:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$bcs_plenumpressure_plenumpressure_initial_pressure_ifba
+      _content:
+
     bcs_plenumpressure_plenumpressure_startup_time:
       _pltype: parameter
       _type: double
