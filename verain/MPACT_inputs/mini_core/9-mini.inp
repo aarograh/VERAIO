@@ -7,31 +7,32 @@
   tfuel    600 K
   boron    1300           ! ppmB
   modden   0.743          ! g/cc
-  sym      qtr  
+  sym      qtr
   pressure 2250           ! psia
   feedback on
   search   boron
   kcrit    0.89500
   xenon    equil
-  rodbank  A 230 
+  rodbank  A 230
            B 230
-           C 230 
+           C 230
            D 215
-  deplete EFPD 0 30 60 90 120 150 200 250 300 
-  
+  deplete EFPD 0 30 60 90 120 150 200 250 300
+
   op_date 01/01/2015
   restart_write 9-mini_restart.h5 EOC
-  
+
 [CORE]
   include full_core.ini
 
 ![Assembly]/[Insert]/[Control]/[Edits]
 include Asy_Ins_CR_Det_Edit.ini
- 
+
 [MPACT]
   include mpact_mini.ini
-  k_tolerance       5e-5
-  flux_tolerance    1e-4
+  k_tolerance       1e-5
+  flux_tolerance    5e-5
+  dep_substep       3
 
 [COBRATF]
   gridloss  END  0.9070

@@ -3331,6 +3331,12 @@ BISON:
     _content:
     _check:
       - fall(sub{is_string(shift)},())
+  only_cycle:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   ramping_time:
     <<: *dtlist
     _style: multi-line
