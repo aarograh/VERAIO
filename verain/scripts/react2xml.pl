@@ -48,9 +48,9 @@ my $INPUT_DB;
 my $MAIN_DB;
 
 my $pgnam=basename($0);                # program name
-my @VERSION=('major'=>3,
-	     'minor'=>3,
-	     'date'=>01242014);
+my @VERSION=('major'=>2,               # open sourced
+	     'minor'=>0,
+	     'date'=>20160415);
 
 #
 # Input schema to initiate INPUT_DB
@@ -62,26 +62,34 @@ my $SCHEMA;
 my @BLOCKS;
 
 #
+# REGULAR DEVELOPER SECTION
+#
 # Data trees, default
+# To add new INPUT block, add new block section in FILE Templates/Directory.yml
+# To add new OUTPUT block, add new block YAML file in DIRECTORY
+# Templates/ that has the same basename as the block. Then add the
+# block name to array @BLOCKS below.
 #
 $SCHEMA="${directory}Templates/Directory.yml";
 @BLOCKS=('CASEID','STATES','CORE','ASSEMBLIES',
 	 'CONTROLS','DETECTORS','INSERTS',
 	 'INSILICO','SHIFT','EDITS','COBRATF','COUPLING',
 	 'MPACT','MAMBA2D','BISON','TIAMAT');
-
 #
+# END REGULAR DEVELOPER SECTION
+# Regular developers should not edit below.
+#
+
 # Rethreads
-# PL for INSILICO requires repeating maps, axial, cells, etc
 # Now done in yml output templates
 
-# To have a bona fide XMl file
+# To have a bona fide XML file
 my $XML_HEADER='<?xml version="1.0" encoding="UTF-8"?>';
 
 #
 # Process the command line
 #
-# my $_UPDATE='007';
+# my $_UPDATE='007';        # hidden updates
 my $DEBUG=0;
 my ($VERBOSE,$HELP,$VERSION);
 my $XML='on';
@@ -99,7 +107,7 @@ my $INIT;
 	"notrim"    => \$NOTRIM,
 	"init"      => \$INIT
 
-#	"update=s"  => \$_UPDATE
+#	"update=s"  => \$_UPDATE         # hidden updates
 	);
 }
 (&help_print() && exit) if $HELP;;
@@ -108,36 +116,12 @@ if($VERSION){
     exit;
 }
 
-#
-# hidden update, 1
-#
-# if($_UPDATE eq '007'){
+# if($_UPDATE eq '007'){        # hidden updates
 #    $SCHEMA_PL{ASSEMBLIES} = "${directory}Templates/ASSEMBLIES007.yml";
 #}
 
-#
-# hidden update, 2
-#
-# if($MULTI){
-#    $SCHEMA="${directory}Templates/DirectoryMulti.yml";
-#    @BLOCKS=('CASEID','STATES','CORE','ASSEMBLIES',
-#	     'CONTROLS','DETECTORS','INSERTS',
-#	     'INSILICO','EDITS','COBRATF','COUPLING',
-#	     'MPACT','MAMBA2D','BISON');
-# }
 
-#
-# hidden update, 3
-#
-# if($SINGLE){
-#    $SCHEMA="${directory}Templates/DirectorySingle.yml";
-#    @BLOCKS=('CASEID','STATE','CORE','ASSEMBLIES',
-#	     'CONTROLS','DETECTORS','INSERTS',
-#	     'INSILICO','EDITS','COBRATF','COUPLING',
-#	     'MPACT','MAMBA2D','BISON');
-# }
-
-# For formatted display in a browser.
+# For formatted display of XML file in a browser.
 my $XSLT_FILE='PL9.xsl';
 if($XSLT ne 'on' && $XSLT ne 'off'){
    $XSLT_FILE=$XSLT; 
@@ -157,7 +141,7 @@ options:
   --help\n";
 }
 
-# initialization files
+# Use initialization files for --init switch
 if($INIT){
     foreach $iblock (@BLOCKS){
 	my $finit="${directory}Init/${iblock}.ini";
@@ -184,8 +168,6 @@ if(-e $ofile){
     die "$pgnam: files $ifile and $ofile files are the same\n"
 	if filesame($ifile, $ofile);
 }
-# simple check
-# die "$pgnam: input and output file are the same\n" if $ifile eq $ofile;
 
 #
 # Initiate configuration template for data structures
@@ -193,7 +175,7 @@ if(-e $ofile){
 $YAML::UseAliases=0;    # minimize references
 ($INPUT_DB) = YAML::LoadFile( $SCHEMA );
 # Clean up the inner references in the tree
-# Need to fix
+# Need to fix in YAML package
 mergekeys_loop( $INPUT_DB );
 
 #
@@ -210,10 +192,11 @@ REACTORBlock->set_verbose()   if $VERBOSE;
 REACTORCommand->set_verbose() if $VERBOSE;
 PL->set_verbose()             if $VERBOSE;
 XMLPack->set_verbose()        if $VERBOSE;
-Cellmaps->set_verbose()        if $VERBOSE;
+Cellmaps->set_verbose()       if $VERBOSE;
 
 #
-# Initiate CASEID directly because it is the root node
+# Initiate CASEID directly because it is the root node without block
+# marker in input file
 #
 my $block=REACTORBlock->new( name=>'CASEID', inp_db=>$INPUT_DB, out_db=>$MAIN_DB );
 $block->keyon();
@@ -236,14 +219,14 @@ YAML::DumpFile("$ifile.dbg.yml",$MAIN_DB) if $DEBUG;
 # Currently, setting the main database in the PL yml files is
 # just a placeholder for multiple blocks
 PL->set_sourcedb($MAIN_DB);
-# PL->dispatch($_UPDATE);
+# PL->dispatch($_UPDATE);        # hidden updates
 PL->dispatch();
 
 $YAML::UseAliases=0;    # minimize references
 foreach $iblock (@BLOCKS){
     # Initiate each block
     ($SCH_PL{$iblock}) = YAML::LoadFile( $SCHEMA_PL{$iblock} );
-    mergekeys_loop( $SCH_PL{$iblock} );   # needs fix to eliminate
+    mergekeys_loop( $SCH_PL{$iblock} );   # needs fix in YAML package
 
     # Process the block using commands in the block templates
     PLlist($SCH_PL{$iblock}->{$iblock});
@@ -287,7 +270,7 @@ print $OFILE "</ParameterList>\n";
 close $OFILE;
 
 #
-# User manual
+# User manual of sorts, will add pod
 #
 sub help_print{
     print STDERR <<EOF
