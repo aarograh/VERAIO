@@ -14,7 +14,7 @@ use REACTOR;
 use REACTORBlock;
 use PL;
 use XMLPack;
-use ClonePP qw(clone);
+use Clone::PP qw(clone);
 use TypeUtils;
 use Cellmaps";
 
@@ -48,9 +48,9 @@ my $INPUT_DB;
 my $MAIN_DB;
 
 my $pgnam=basename($0);                # program name
-my @VERSION=('major'=>3,
-	     'minor'=>3,
-	     'date'=>01242014);
+my @VERSION=('major'=>2,               # open sourced
+	     'minor'=>0,
+	     'date'=>20160415);
 
 #
 # Input schema to initiate INPUT_DB
@@ -62,7 +62,15 @@ my $SCHEMA;
 my @BLOCKS;
 
 #
-# Data trees, default
+# REGULAR DEVELOPER SECTION
+#
+# Data trees, default To add new INPUT block, add new block section in
+# FILE Templates/Directory.yml
+#
+# To add new OUTPUT block, add new block YAML file in DIRECTORY
+# Templates/ that has the same basename as the block. Then add the
+# block name to array @BLOCKS below. Also add entry to $SCH_PL hash
+# below with #include line and follow syntax of other entries.
 #
 $SCHEMA="${directory}Templates/Directory.yml";
 @BLOCKS=('CASEID','STATES','CORE','ASSEMBLIES',
@@ -70,18 +78,66 @@ $SCHEMA="${directory}Templates/Directory.yml";
 	 'INSILICO','SHIFT','EDITS','COBRATF','COUPLING',
 	 'MPACT','MAMBA2D','BISON','TIAMAT');
 
+$SCH_PL{ 'CASEID' } = (
+#include pyml/CASEID.pyml
+)[0];
+$SCH_PL{ 'STATES' } = (
+#include pyml/STATES.pyml
+)[0];
+$SCH_PL{ 'CORE' } = (
+#include pyml/CORE.pyml
+)[0];
+$SCH_PL{ 'ASSEMBLIES' } = (
+#include pyml/ASSEMBLIES.pyml
+)[0];
+$SCH_PL{ 'CONTROLS' } = (
+#include pyml/CONTROLS.pyml
+)[0];
+$SCH_PL{ 'DETECTORS' } = (
+#include pyml/DETECTORS.pyml
+)[0];
+$SCH_PL{ 'INSERTS' } = (
+#include pyml/INSERTS.pyml
+)[0];
+$SCH_PL{ 'INSILICO' } = (
+#include pyml/INSILICO.pyml
+)[0];
+$SCH_PL{ 'SHIFT' } = (
+#include pyml/SHIFT.pyml
+)[0];
+$SCH_PL{ 'EDITS' } = (
+#include pyml/EDITS.pyml
+)[0];
+$SCH_PL{ 'COBRATF' } = (
+#include pyml/COBRATF.pyml
+)[0];
+$SCH_PL{ 'COUPLING' } = (
+#include pyml/COUPLING.pyml
+)[0];
+$SCH_PL{ 'MPACT' } = (
+#include pyml/MPACT.pyml
+)[0];
+$SCH_PL{ 'MAMBA2D' } = (
+#include pyml/MAMBA2D.pyml
+)[0];
+$SCH_PL{ 'BISON' } = (
+#include pyml/BISON.pyml
+)[0];
+$SCH_PL{ 'TIAMAT' } = (
+#include pyml/TIAMAT.pyml
+)[0];
 #
-# Rethreads
-# PL for INSILICO requires repeating maps, axial, cells, etc
-# Now done in yml output templates
+# END REGULAR DEVELOPER SECTION
+# Regular developers should not edit below.
+#
 
-# To have a bona fide XMl file
+# To have a bona fide XML file
 my $XML_HEADER='<?xml version="1.0" encoding="UTF-8"?>';
 
 #
 # Process the command line
 #
-# my $_UPDATE='007';
+# my $_UPDATE='007';        # hidden updates
 my $DEBUG=0;
 my ($VERBOSE,$HELP,$VERSION);
 my $XML='on';
@@ -99,7 +155,7 @@ my $INIT;
 	"notrim"    => \$NOTRIM,
 	"init"      => \$INIT
 
-#	"update=s"  => \$_UPDATE
+#	"update=s"  => \$_UPDATE         # hidden updates
 	);
 }
 (&help_print() && exit) if $HELP;;
@@ -108,36 +164,12 @@ if($VERSION){
     exit;
 }
 
-#
-# hidden update, 1
-#
-# if($_UPDATE eq '007'){
+# if($_UPDATE eq '007'){        # hidden updates
 #    $SCHEMA_PL{ASSEMBLIES} = "${directory}Templates/ASSEMBLIES007.yml";
 #}
 
-#
-# hidden update, 2
-#
-# if($MULTI){
-#    $SCHEMA="${directory}Templates/DirectoryMulti.yml";
-#    @BLOCKS=('CASEID','STATES','CORE','ASSEMBLIES',
-#	     'CONTROLS','DETECTORS','INSERTS',
-#	     'INSILICO','EDITS','COBRATF','COUPLING',
-#	     'MPACT','MAMBA2D','BISON');
-# }
 
-#
-# hidden update, 3
-#
-# if($SINGLE){
-#    $SCHEMA="${directory}Templates/DirectorySingle.yml";
-#    @BLOCKS=('CASEID','STATE','CORE','ASSEMBLIES',
-#	     'CONTROLS','DETECTORS','INSERTS',
-#	     'INSILICO','EDITS','COBRATF','COUPLING',
-#	     'MPACT','MAMBA2D','BISON');
-# }
-
-# For formatted display in a browser.
+# For formatted display of XML file in a browser.
 my $XSLT_FILE='PL9.xsl';
 if($XSLT ne 'on' && $XSLT ne 'off'){
    $XSLT_FILE=$XSLT; 
@@ -157,7 +189,7 @@ options:
   --help\n";
 }
 
-# initialization files
+# Use initialization files for --init switch
 if($INIT){
     foreach $iblock (@BLOCKS){
 	my $finit="${directory}Init/${iblock}.ini";
@@ -184,18 +216,22 @@ if(-e $ofile){
     die "$pgnam: files $ifile and $ofile files are the same\n"
 	if filesame($ifile, $ofile);
 }
-# simple check
-# die "$pgnam: input and output file are the same\n" if $ifile eq $ofile;
 
 #
 # Initiate configuration template for data structures
 #
-$YAML::UseAliases=0;    # minimize references
-($INPUT_DB) = YAML::LoadFile( $SCHEMA );
-# Clean up the inner references in the tree
-# Need to fix
-mergekeys_loop( $INPUT_DB );
 
+$INPUT_DB = (
+#include pyml/Directory.pyml
+)[0];
+
+unless ( $INPUT_DB ){    
+    $YAML::UseAliases=0;    # minimize references
+    ($INPUT_DB) = YAML::LoadFile( $SCHEMA );
+# Clean up the inner references in the tree
+# Need to fix in YAML package
+    mergekeys_loop( $INPUT_DB );
+}
 #
 # Initiate main directory tree for storage of input data
 #
@@ -210,10 +246,11 @@ REACTORBlock->set_verbose()   if $VERBOSE;
 REACTORCommand->set_verbose() if $VERBOSE;
 PL->set_verbose()             if $VERBOSE;
 XMLPack->set_verbose()        if $VERBOSE;
-Cellmaps->set_verbose()        if $VERBOSE;
+Cellmaps->set_verbose()       if $VERBOSE;
 
 #
-# Initiate CASEID directly because it is the root node
+# Initiate CASEID directly because it is the root node without block
+# marker in input file
 #
 my $block=REACTORBlock->new( name=>'CASEID', inp_db=>$INPUT_DB, out_db=>$MAIN_DB );
 $block->keyon();
@@ -236,15 +273,16 @@ YAML::DumpFile("$ifile.dbg.yml",$MAIN_DB) if $DEBUG;
 # Currently, setting the main database in the PL yml files is
 # just a placeholder for multiple blocks
 PL->set_sourcedb($MAIN_DB);
-# PL->dispatch($_UPDATE);
+# PL->dispatch($_UPDATE);        # hidden updates
 PL->dispatch();
 
 $YAML::UseAliases=0;    # minimize references
 foreach $iblock (@BLOCKS){
     # Initiate each block
-    ($SCH_PL{$iblock}) = YAML::LoadFile( $SCHEMA_PL{$iblock} );
-    mergekeys_loop( $SCH_PL{$iblock} );   # needs fix to eliminate
-
+    unless( $SCH_PL{$iblock} ){
+	($SCH_PL{$iblock}) = YAML::LoadFile( $SCHEMA_PL{$iblock} );
+	mergekeys_loop( $SCH_PL{$iblock} );   # needs fix in YAML package
+    }
     # Process the block using commands in the block templates
     PLlist($SCH_PL{$iblock}->{$iblock});
     YAML::DumpFile("$iblock.dbg.yml",$SCH_PL{$iblock}) if $DEBUG;
@@ -287,7 +325,7 @@ print $OFILE "</ParameterList>\n";
 close $OFILE;
 
 #
-# User manual
+# User manual of sorts, will add pod
 #
 sub help_print{
     print STDERR <<EOF

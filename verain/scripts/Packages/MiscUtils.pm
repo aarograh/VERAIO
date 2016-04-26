@@ -1,20 +1,16 @@
 package MiscUtils;
 
+use List::MoreUtils::PP;
+
 use Exporter;
 @ISA = ('Exporter');
 @EXPORT=('nonzero',
 	 'unique',
-	 'any',
 	 'fany',
-	 'all',
 	 'fall',
-	 'none',
 	 'fnone',
-	 'notall',
 	 'fnotall',
-	 'true',
 	 'ftrue',
-	 'false',
 	 'ffalse',
 	 'odd',
 	 'even',
@@ -22,15 +18,11 @@ use Exporter;
 	 'endhalf',
 	 'min',
 	 'max',
-	 'minmax',
 	 'compare_arrays',
 	 'union',
 	 'intersection',
 	 'difference',
 	 'nonstring',
-	 'part',
-	 'apply',
-	 'natatime',
 	 'arraysize',
 	 'first',
 	 'last',
@@ -40,13 +32,6 @@ use Exporter;
 	 'everynth',
 	 'skipeverynth',
 	 'stride',
-	 'after',
-	 'after_incl',
-	 'before',
-	 'before_incl',
-	 'indexes',
-	 'lastval',
-	 'firstval',
 	 'factorial',
 	 'diagsum',
 	 'txt2xml',
@@ -79,52 +64,27 @@ sub nonstring { # remove strings from array entry
     return @_;
 }
 
-sub unique (@) {
+sub unique (@) { # return unique entries from an array
     my %saw = ();
     grep { not $saw{$_}++ } @_;
 }
 
-sub part (&@) {
-    my ($code, @list) = @_;
-    my @parts=();
-    push @{ $parts[ $code->($_) ] }, $_  foreach @list;
-    return @parts;
-}
-
-#
-#    my $it = natatime 3, @x;
-#    while (my @vals = $it->())
-#
-sub natatime ($@) {
-    my $n    = shift;
-    my @list = @_;
-    return sub {
-        return splice @list, 0, $n;
-    }
-}
-
 # One argument is true, f* uses function for evaluation
-sub any  {                   $_  && return 1 for @_; 0 }
 sub fany (&@) { my $f=shift; $f->($_) && return 1 for @_; 0 }
 
 # All arguments are true
-sub all  {                   $_  || return 0 for @_; 1 }
 sub fall (&@) { my $f=shift; $f->($_) || return 0 for @_; 1 }
 
 # All arguments are false
-sub none  {                   $_  && return 0 for @_; 1 }
 sub fnone (&@) { my $f=shift; $f->($_) && return 0 for @_; 1 }
 
 # One argument is false
-sub notall  {                   $_  || return 1 for @_; 0 }
 sub fnotall (&@) { my $f=shift; $f->($_) || return 1 for @_; 0 }
 
 # How many elements are true
-sub true  {              scalar grep { $_       } @_ }
 sub ftrue (&@) { my $f=shift; scalar grep { $f->($_) } @_ }
 
 # How many elements are false
-sub false  {              scalar grep { !$_       } @_ }
 sub ffalse (&@) { my $f=shift; scalar grep { !$f->($_) } @_ }
 
 # get elements with odd indices, 1,3,5,7,
@@ -139,27 +99,12 @@ sub fronthalf {my ($aref,$offset)=@_; return @{$aref}[$offset..int(($#{$aref}+$o
 # get end half of an array 
 sub endhalf {my ($aref,$offset)=@_; return @{$aref}[int(($#{$aref}+$offset)/2)+1..$#{$aref}];}
 
-# apply block to array
-sub apply {
-    my $action = shift;
-    my @values=@_;
-    foreach (@values) {
-	$_=$action->($_);
-    }
-    return wantarray ? @values : $values[-1];
-}
-
-sub min{
+sub min{ # minimum value
     (sort { $a <=> $b } @_)[0];
 }
 
-sub max{
+sub max{ # maximum value
     (sort { $b <=> $a } @_)[0];
-}
-
-sub minmax {
-    my @a=sort { $a <=> $b } @_;
-    return ($a[0], $a[$#a]);
 }
 
 sub compare_arrays {
@@ -173,7 +118,7 @@ sub compare_arrays {
 } 
 
 # must add prototypes
-sub aryop {
+sub aryop { # various operations on arrays
     my ($first,$second,$OPERATOR)=@_;
 
     my @array1=@{ $first };
@@ -291,70 +236,6 @@ sub transpose {
     return \@result;
 }
 
-
-sub after (&@) {
-    my $test = shift;
-    my $started;
-    my $lag;
-    grep $started ||= do {
-        my $x = $lag;
-        $lag = $test->();
-        $x
-    }, @_;
-}
-
-sub after_incl (&@) {
-    my $test = shift;
-    my $started;
-    grep $started ||= $test->(), @_;
-}
-
-sub before (&@) {
-    my $test = shift;
-    my $more = 1;
-    grep $more &&= ! $test->(), @_;
-}
-
-sub before_incl (&@) {
-    my $test = shift;
-    my $more = 1;
-    my $lag  = 1;
-    grep $more &&= do {
-        my $x = $lag;
-        $lag = ! $test->();
-        $x
-    }, @_;
-}
-
-sub indexes (&@) {
-    my $test = shift;
-    grep {
-        local *_ = \$_[$_];
-        $test->()
-    } 0 .. $#_;
-}
-
-sub lastval (&@) {
-    my $test = shift;
-    my $ix;
-    for ( $ix = $#_; $ix >= 0; $ix-- ) {
-        local *_ = \$_[$ix];
-        my $testval = $test->();
-
-        # Simulate $_ as alias
-        $_[$ix] = $_;
-        return $_ if $testval;
-    }
-    return undef;
-}
-
-sub firstval (&@) {
-    my $test = shift;
-    foreach ( @_ ) {
-        return $_ if $test->();
-    }
-    return undef;
-}
 
 sub factorial ($) {
     my $num = shift;

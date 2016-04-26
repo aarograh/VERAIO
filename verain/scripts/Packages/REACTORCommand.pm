@@ -2,6 +2,9 @@ package REACTORCommand;
 use Carp;
 use Text::ParseWords;
 
+use Data::Types qw(:all);
+use List::MoreUtils::PP;
+
 use REACTORBlock;
 
 use KeyTree;

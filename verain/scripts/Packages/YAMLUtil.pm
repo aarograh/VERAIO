@@ -1,5 +1,8 @@
 package YAMLUtil;
 
+# fix from
+# http://www.perlmonks.org/index.pl/www.slashcode.org?node_id=813726
+
 use Exporter;
 @ISA = ('Exporter');
 @EXPORT=('mergekeys_loop',
