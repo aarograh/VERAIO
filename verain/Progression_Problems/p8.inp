@@ -651,7 +651,7 @@
   azimuthals_octant 12
   k_tolerance       1e-5
   flux_tolerance    1e-4
-  coupling_method   internal
+  coupling_method   simplified
 
   num_space       4234
   num_angle       1

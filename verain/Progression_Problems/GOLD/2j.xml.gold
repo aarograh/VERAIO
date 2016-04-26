@@ -194,8 +194,8 @@
       <ParameterList name="Fuels">
         <ParameterList name="Fuel_U31">
           <Parameter name="density" type="double" value="10.257"/>
-          <Parameter name="enrichments" type="Array(double)" value="{3.1}"/>
-          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
+          <Parameter name="enrichments" type="Array(double)" value="{3.1,0.026347}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235,u-234}"/>
           <Parameter name="key_name" type="string" value="U31"/>
           <Parameter name="thden" type="double" value="94.5"/>
         </ParameterList>
@@ -391,20 +391,27 @@
     </ParameterList>
     <ParameterList name="TH">
       <Parameter name="coupling_method" type="string" value="ctf"/>
+      <Parameter name="sth_dhfrac" type="double" value="0.02"/>
+      <Parameter name="sth_hgap" type="double" value="4500"/>
     </ParameterList>
     <ParameterList name="cmfd">
-      <Parameter name="cmfd" type="string" value="cmfd"/>
+      <Parameter name="cmfd" type="string" value="adcmfd"/>
       <Parameter name="k_shift" type="double" value="1.5"/>
       <Parameter name="num_outers" type="int" value="20"/>
+      <Parameter name="prolongation" type="string" value="flat"/>
       <Parameter name="solver" type="string" value="mgnode"/>
     </ParameterList>
     <ParameterList name="depletion">
       <Parameter name="dep_edit" type="string" value="false"/>
+      <Parameter name="dep_filename" type="string" value="origen_data_paths_casl2.0.txt"/>
+      <Parameter name="dep_kernel" type="string" value="origen"/>
+      <Parameter name="dep_substep" type="int" value="3"/>
     </ParameterList>
+    <Parameter name="grid_treatment" type="string" value="equal_mass"/>
     <ParameterList name="iteration_control">
       <Parameter name="flux_tolerance" type="double" value="1e-6"/>
       <Parameter name="k_tolerance" type="double" value="1e-6"/>
-      <Parameter name="num_inners" type="int" value="2"/>
+      <Parameter name="num_inners" type="int" value="1"/>
       <Parameter name="num_outers" type="int" value="500"/>
       <Parameter name="scattering" type="string" value="TCP0"/>
       <Parameter name="up_scatter" type="int" value="1"/>
@@ -426,8 +433,9 @@
         </ParameterList>
       </ParameterList>
     </ParameterList>
+    <Parameter name="moc_kernel" type="string" value="mg"/>
     <ParameterList name="parallel_env">
-      <Parameter name="num_angle" type="int" value="8"/>
+      <Parameter name="num_angle" type="int" value="-8"/>
       <Parameter name="num_energy" type="int" value="1"/>
       <Parameter name="num_space" type="int" value="1"/>
       <Parameter name="num_threads" type="int" value="1"/>
