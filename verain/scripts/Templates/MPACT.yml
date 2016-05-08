@@ -692,6 +692,13 @@ MPACT:
           _do:
             - copy MPACT/$subgroup_set
           _content:
+          
+        cat_onegroup:
+          _pltype: array
+          _type: int
+          _do:
+            - copy MPACT/$cat_onegroup
+          _content:  
 
         mod_mat:
           _pltype: parameter
