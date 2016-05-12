@@ -1030,12 +1030,12 @@ namespace {
         map<string, double> grid_loss_coeffs;
         if (not grid_loss_found){
            Array<double> grid_losses;  // default to empty
-           grid_types = vera_xml.get_param_from_plist<Array<string> >( "COBRATF.gridlabel", grid_types);
            grid_types.push_back("MID");
            grid_types.push_back("END");
-           grid_losses = vera_xml.get_param_from_plist<Array<double> >( "COBRATF.gridloss", grid_losses);
            grid_losses.push_back(0.9065);
            grid_losses.push_back(0.9070);
+           grid_types = vera_xml.get_param_from_plist<Array<string> >( "COBRATF.gridlabel", grid_types);
+           grid_losses = vera_xml.get_param_from_plist<Array<double> >( "COBRATF.gridloss", grid_losses);
 
            for( int ii = 0; ii < grid_types.size(); ++ii )
              grid_loss_coeffs[grid_types[ii]] = grid_losses[ii];
