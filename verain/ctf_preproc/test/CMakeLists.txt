@@ -152,7 +152,7 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    # the grid_enhance.inp file.  The change in grid loss specification
    # resulted in no changes in the CTF input file, which is what we should
    # expect.
-   XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     new_grid_loss_input "")
+   #XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     new_grid_loss_input "")
 
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     four_grid_types   "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     new_conv_metrics_defaults "")
