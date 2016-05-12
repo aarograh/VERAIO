@@ -25,8 +25,18 @@ use Exporter;
 {
     my $_EXCEPTION;
     my %_TRACE;
+
+    my $_VERBOSE = 0;
+    sub get_verbose  {$_VERBOSE;}
+    sub set_verbose { $_VERBOSE = 1; }
+
+    my $_DEBUG = 0;
+    sub get_debug  {$_DEBUG;}
+    sub set_debug { $_DEBUG = 1; }
 }
 
+
+    
 # exception structure after throw
 sub exception {
     my %arg = @_;
@@ -54,6 +64,7 @@ sub exception_error {
     return $_EXCEPTION->error();
 }
 sub exception_log {
+    print "Exception created\n" if get_verbose();
     return $_EXCEPTION->log();
 }
 

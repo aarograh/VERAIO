@@ -32,6 +32,20 @@ MPACT:
         - copy MPACT/$shield_moc_kernel
       _content:
 
+    volume_corr:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$volume_corr
+      _content:
+
+    modular_rays:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$modular_rays
+      _content:
+
     power_edit:
       _pltype: parameter
       _type: string
