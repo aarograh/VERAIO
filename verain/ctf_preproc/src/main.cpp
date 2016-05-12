@@ -984,7 +984,9 @@ namespace {
         map<string, string> spacer_grid_plist_name;
         map<string, double> spacer_grid_masses;
         map<string, double> spacer_grid_heights;
+        map<string, double> spacer_grid_losses;
         map<string, string> spacer_grid_materials;
+        bool grid_loss_found = true; // will be set to false if they are not present in assembly block
         const ParameterList & spacer_grid_plist = pList.sublist("ASSEMBLIES").sublist(assembly_name).sublist("SpacerGrids");
         ParameterList::ConstIterator spacer_grid_citer = spacer_grid_plist.begin(),
           spacer_grid_cend  = spacer_grid_plist.end();
@@ -1006,6 +1008,13 @@ namespace {
             spacer_grid_masses[spacer_grid_label] = vera_xml.get_param_from_plist<double>( ppath_spacer_grid);
             ppath_spacer_grid = assembly_ppath+".SpacerGrids."+grid_plist_name+".height";
             spacer_grid_heights[spacer_grid_label] = vera_xml.get_param_from_plist<double>( ppath_spacer_grid);
+            ppath_spacer_grid = assembly_ppath+".SpacerGrids."+grid_plist_name+".gridloss";
+            try{
+               spacer_grid_losses[spacer_grid_label] = vera_xml.get_param_from_plist<double>( ppath_spacer_grid);
+            }catch(...){
+               spacer_grid_losses[spacer_grid_label] = -1.0;
+               grid_loss_found=false;
+            }
             ppath_spacer_grid = assembly_ppath+".SpacerGrids."+grid_plist_name+".material";
             spacer_grid_materials[spacer_grid_label] = vera_xml.get_param_from_plist<string>( ppath_spacer_grid);
 
@@ -1013,17 +1022,35 @@ namespace {
           }
         }
 
-        // Get grid loss info from cobra block; these will be applied to each spacer grid
+        // Get grid loss info from cobra block if they were not already found in the ASSEMBLIES block
+        // Original approach was to get loss from COBRATF block, but we have since moved the grid
+        // losses to the actual ASSEMBLIES block.  First look in the ASSEMBLIES block and if it's not there,
+        // look in the COBRATF block for backwards compatibility.
         Array<string> grid_types;
-        grid_types.push_back("MID");
-        grid_types.push_back("END");
+        map<string, double> grid_loss_coeffs;
+        if (not grid_loss_found){
+           Array<double> grid_losses;  // default to empty
+           grid_types = vera_xml.get_param_from_plist<Array<string> >( "COBRATF.gridlabel", grid_types);
+           grid_types.push_back("MID");
+           grid_types.push_back("END");
+           grid_losses = vera_xml.get_param_from_plist<Array<double> >( "COBRATF.gridloss", grid_losses);
+           grid_losses.push_back(0.9065);
+           grid_losses.push_back(0.9070);
+
+           for( int ii = 0; ii < grid_types.size(); ++ii )
+             grid_loss_coeffs[grid_types[ii]] = grid_losses[ii];
+
+           // Sanity check that all grid_map types have a specified loss coefficient
+           for( size_t n = 0; n < ngrid_orig; ++n )
+             if( grid_loss_coeffs.end() == grid_loss_coeffs.find(grid_map[n]) )
+               throw runtime_error("Could not find a loss coefficient spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
+        }else{
+           grid_loss_coeffs=spacer_grid_losses;
+
+        }
+
         Array<string> gridbloc_types;
-        Array<double> grid_losses;  // default to empty
-        grid_losses.push_back(0.9065);
-        grid_losses.push_back(0.9070);
         Array<double> gridblocs;
-        grid_types = vera_xml.get_param_from_plist<Array<string> >( "COBRATF.gridlabel", grid_types);
-        grid_losses = vera_xml.get_param_from_plist<Array<double> >( "COBRATF.gridloss", grid_losses);
         // default the gridbloc types to the gridloss labels
         for( int ii=0; ii < grid_types.size(); ++ii){
            gridbloc_types.push_back(grid_types[ii]);
@@ -1031,14 +1058,7 @@ namespace {
         }
         gridbloc_types = vera_xml.get_param_from_plist<Array<string> >( "COBRATF.gridbloclabel", gridbloc_types);
         gridblocs = vera_xml.get_param_from_plist<Array<double> >( "COBRATF.gridbloc", gridblocs);
-        map<string, double> grid_loss_coeffs;
-        for( int ii = 0; ii < grid_types.size(); ++ii )
-          grid_loss_coeffs[grid_types[ii]] = grid_losses[ii];
 
-        // Sanity check that all grid_map types have a specified loss coefficient
-        for( size_t n = 0; n < ngrid_orig; ++n )
-          if( grid_loss_coeffs.end() == grid_loss_coeffs.find(grid_map[n]) )
-            throw runtime_error("Could not find a loss coefficient spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
 
         map<string, double> grid_bloc_ratio;
         cout << gridblocs << endl;
