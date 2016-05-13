@@ -1,0 +1,33 @@
+###############################################################################
+# VERAout: Repository of codes to process VERAout data.
+###############################################################################
+
+##---------------------------------------------------------------------------##
+## BUILDING VERAout
+##---------------------------------------------------------------------------##
+
+VERAout is a TriBITS package within VERA that is compiled with cmake.
+
+To build the distribution do the following:
+
+> git clone git@casl-dev:VERA
+> git clone git@casl-dev:TriBITS VERA/TriBITS
+> git clone git@casl-dev:VERAIn  VERA/VERAIn
+> export PATH_TO_VERA=${PWD}/VERA
+> mkdir build
+> cd build
+> cmake -D VERA_EXTRA_REPOSITORIES:STRING=TriBITS,VERAInExt \
+        -D HDF5_PATH:PATH="Path to HDF5 folder" \
+        -D SILO_PATH:PATH="Path to SILO folder" \
+        -D CMAKE_INSTALL_PREFIX:PATH="Path to desired installation folder" \
+        -D VERA_ENABLE_VERAout:BOOL=ON \
+        ${PATH_TO_VERA}
+> make install
+
+Alternatively, this can be configured with a VERA options file:
+
+> cmake -D VERA_EXTRA_REPOSITORIES:STRING=TriBITS,VERAInExt \
+        -D VERA_CONFIGURE_OPTIONS_FILE:FILEPATH=${PATH_TO_VERA}'/cmake/ctest/drivers/fissile4/mpi-release-debug-shared-gcc-4.8.3-options.cmake' \
+        -D CMAKE_INSTALL_PREFIX:PATH="Path to desired installation folder" \
+        -D VERA_ENABLE_VERAout:BOOL=ON \
+        ${PATH_TO_VERA}
