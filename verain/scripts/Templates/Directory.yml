@@ -2154,6 +2154,12 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  cmfd_shift_method:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none constant adaptive sdws-ips
   cmfd_num_inners:
     <<: *dtint
     _content:
