@@ -545,6 +545,13 @@ MPACT:
             - copy MPACT/$k_shift
           _content:
 
+        cmfd_shift_method:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$cmfd_shift_method
+          _content:
+
         num_outers:
           _pltype: parameter
           _type: int
@@ -692,6 +699,13 @@ MPACT:
           _do:
             - copy MPACT/$subgroup_set
           _content:
+          
+        cat_onegroup:
+          _pltype: array
+          _type: int
+          _do:
+            - copy MPACT/$cat_onegroup
+          _content:  
 
         mod_mat:
           _pltype: parameter
