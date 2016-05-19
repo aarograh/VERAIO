@@ -233,12 +233,14 @@
       </ParameterList>
       <ParameterList name="SpacerGrids">
         <ParameterList name="Grid_GINC">
+          <Parameter name="gridloss" type="double" value="0.91"/>
           <Parameter name="height" type="double" value="3.866"/>
           <Parameter name="label" type="string" value="GINC"/>
           <Parameter name="mass" type="double" value="1014"/>
           <Parameter name="material" type="string" value="inc"/>
         </ParameterList>
         <ParameterList name="Grid_GZRC">
+          <Parameter name="gridloss" type="double" value="0.90"/>
           <Parameter name="height" type="double" value="3.81"/>
           <Parameter name="label" type="string" value="GZRC"/>
           <Parameter name="mass" type="double" value="875"/>
@@ -411,12 +413,14 @@
       </ParameterList>
       <ParameterList name="SpacerGrids">
         <ParameterList name="Grid_GINC">
+          <Parameter name="gridloss" type="double" value="0.91"/>
           <Parameter name="height" type="double" value="3.866"/>
           <Parameter name="label" type="string" value="GINC"/>
           <Parameter name="mass" type="double" value="1014"/>
           <Parameter name="material" type="string" value="inc"/>
         </ParameterList>
         <ParameterList name="Grid_GZRC">
+          <Parameter name="gridloss" type="double" value="0.90"/>
           <Parameter name="height" type="double" value="3.81"/>
           <Parameter name="label" type="string" value="GZRC"/>
           <Parameter name="mass" type="double" value="875"/>
@@ -589,12 +593,14 @@
       </ParameterList>
       <ParameterList name="SpacerGrids">
         <ParameterList name="Grid_GINC">
+          <Parameter name="gridloss" type="double" value="0.91"/>
           <Parameter name="height" type="double" value="3.866"/>
           <Parameter name="label" type="string" value="GINC"/>
           <Parameter name="mass" type="double" value="1014"/>
           <Parameter name="material" type="string" value="inc"/>
         </ParameterList>
         <ParameterList name="Grid_GZRC">
+          <Parameter name="gridloss" type="double" value="0.90"/>
           <Parameter name="height" type="double" value="3.81"/>
           <Parameter name="label" type="string" value="GZRC"/>
           <Parameter name="mass" type="double" value="875"/>
