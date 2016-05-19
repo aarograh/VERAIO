@@ -7,10 +7,10 @@
   tfuel    600 K
   boron    1300           ! ppmB
   modden   0.743          ! g/cc
-  sym      qtr  
+  sym      qtr
   pressure 2250           ! psia
   feedback on
-  rodbank  A 230 
+  rodbank  A 230
            B 178
            C 50
            D 0
@@ -28,19 +28,17 @@
 [STATE] power 75.0 ; rodbank             D 171; deplete hours 40.0
 [STATE] power 90.0 ; rodbank             D 177; deplete hours 43.0
 [STATE] power 100.0; rodbank             D 215; deplete hours 48.0; title 'Full Power Test Plateau'
-  
+
 [CORE]
   include full_core.ini
 
 ![Assembly]/[Insert]/[Control]/[Edits]
 include Asy_Ins_CR_Det_Edit.ini
- 
+
 [MPACT]
   include mpact_mini.ini
 
 [COBRATF]
-  gridloss  END  0.9070
-  gridloss  MID  0.9065
   beta_sp   0.005
   parallel  1
 

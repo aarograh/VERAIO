@@ -1250,10 +1250,6 @@ COBRATF:
       - is_float()
       - is_gt() 0
 
-  gridloss:
-    <<: *dtdblnamed
-    _check:
-
   gridbloc:
     <<: *dtdblnamed
     _check:

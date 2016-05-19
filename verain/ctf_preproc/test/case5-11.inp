@@ -13,7 +13,7 @@
 
 ! tfuel  600.0         ! K - 600K  Not used with T/H feedback!
 ! modden 0.743         ! g/cc      Not used with T/H feedback!
-  
+
   feedback on
 
 [CORE]
@@ -32,7 +32,7 @@
 
   core_shape
     1
-  
+
   assm_map
     A1
 
@@ -53,20 +53,20 @@
   title "5x5 Rod Assembly"
   npin 5
   ppitch 1.26
-  
+
   fuel U31 10.257 95.0 / 3.1
 
 !=== material label, key_name, density
   mat he    0.000176
   mat inc   8.19
   mat ss    8.0
-  mat zirc  6.56 
+  mat zirc  6.56
 
   cell 1     0.4096 0.418 0.475   / U31 he zirc       ! fuel rod
   cell 2            0.561 0.602   / mod    zirc       ! instrument tube
   cell 8            0.418 0.475   /     he zirc       ! plenum
   cell 9                  0.475   /        zirc       ! pincap
-  
+
   lattice FUEL1
       2
       1 1
@@ -94,8 +94,8 @@
 !    END = 1017*(5*5)/(17*17)=87.98
 !    MID =  875*(5*5)/(17*17)=75.69
 
-  grid END inc  87.98 3.866    ! material, mass, height (cm)
-  grid MID zirc 75.69 3.810
+  grid END inc   3.866  87.98  0.9070   ! grid height (cm), mass (g), loss coef
+  grid MID zirc  3.810  75.69  0.9065   ! grid height (cm), mass (g), loss coef
 
   grid_axial     ! centerline elevations
       END  13.884
@@ -116,56 +116,56 @@
 [EDITS]
 
 !  3in intervals in active fuel + grid
-  axial_edit_bounds 
+  axial_edit_bounds
           11.951
-          15.817 
-          24.028 
-          32.239 
-          40.45 
-          48.662 
-          56.873 
-          65.084 
-          73.295 
-          77.105 
-          85.17 
-          93.235 
-          101.3 
-          109.365 
-          117.43 
-          125.495 
-          129.305 
-          137.37 
-          145.435 
-          153.5 
-          161.565 
-          169.63 
-          177.695 
-          181.505 
-          189.57 
-          197.635 
-          205.7 
-          213.765 
-          221.83 
-          229.895 
-          233.705 
-          241.77 
-          249.835 
-          257.9 
-          265.965 
-          274.03 
-          282.095 
-          285.905 
-          293.97 
-          302.035 
-          310.1 
-          318.165 
-          326.23 
-          334.295 
-          338.105 
-          346.0262 
-          353.9474 
-          361.8686 
-          369.7898 
+          15.817
+          24.028
+          32.239
+          40.45
+          48.662
+          56.873
+          65.084
+          73.295
+          77.105
+          85.17
+          93.235
+          101.3
+          109.365
+          117.43
+          125.495
+          129.305
+          137.37
+          145.435
+          153.5
+          161.565
+          169.63
+          177.695
+          181.505
+          189.57
+          197.635
+          205.7
+          213.765
+          221.83
+          229.895
+          233.705
+          241.77
+          249.835
+          257.9
+          265.965
+          274.03
+          282.095
+          285.905
+          293.97
+          302.035
+          310.1
+          318.165
+          326.23
+          334.295
+          338.105
+          346.0262
+          353.9474
+          361.8686
+          369.7898
           377.711
 
 [COBRATF]
@@ -174,8 +174,8 @@
   epso    0.001
   oitmax  5
   iitmax  40
-  gridloss END 0.9070
-  gridloss MID 0.95     ! *** increase
+
+
   dtmin   0.000001
   dtmax   0.1
   tend    0.1

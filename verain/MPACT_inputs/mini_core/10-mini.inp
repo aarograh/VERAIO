@@ -7,15 +7,15 @@
   tfuel    600 K
   boron    1300           ! ppmB
   modden   0.743          ! g/cc
-  sym      qtr  
+  sym      qtr
   feedback off
-  rodbank  A 230 
+  rodbank  A 230
            B 230
-           C 230 
-           D 167 
+           C 230
+           D 167
 
   restart_shuffle 9-mini_restart.h5 EOC
-  
+
   shuffle_label
           +3  +3  +3  +3  +3
       +3 J-7 C-6 B-8 C-4 J-3  +3
@@ -29,26 +29,24 @@
 
 [CORE]
   include full_core.ini
-  
+
   assm_map
     1
     2 1
     1 2 1
     2 1 2 3
-    3 3 3 
+    3 3 3
 
   cycle 2
   op_date 3/1/2015
 
 ![Assembly]/[Insert]/[Control]/[Edits]
 include Asy_Ins_CR_Det_Edit.ini
- 
+
 [MPACT]
   include mpact_mini.ini
   num_space 16
 
 [COBRATF]
-  gridloss  END  0.9070
-  gridloss  MID  0.9065
   beta_sp   0.005
   parallel  0

@@ -7,23 +7,21 @@
   tfuel    600 K
   boron    1300           ! ppmB
   modden   0.743          ! g/cc
-  sym      qtr  
+  sym      qtr
   feedback off
-  rodbank  A 230 
+  rodbank  A 230
            B 230
-           C 230 
-           D 167 
+           C 230
+           D 167
 
 [CORE]
   include full_core.ini
 
 ![Assembly]/[Insert]/[Control]/[Edits]
 include Asy_Ins_CR_Det_Edit.ini
- 
+
 [MPACT]
   include mpact_mini.ini
 
 [COBRATF]
-  gridloss  END  0.9070
-  gridloss  MID  0.9065
   parallel  0
