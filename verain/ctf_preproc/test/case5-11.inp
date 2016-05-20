@@ -95,7 +95,7 @@
 !    MID =  875*(5*5)/(17*17)=75.69
 
   grid END inc   3.866  87.98  0.9070   ! grid height (cm), mass (g), loss coef
-  grid MID zirc  3.810  75.69  0.9065   ! grid height (cm), mass (g), loss coef
+  grid MID zirc  3.810  75.69  0.9500   ! grid height (cm), mass (g), loss coef *** increase loss coef
 
   grid_axial     ! centerline elevations
       END  13.884
