@@ -5,8 +5,6 @@
   <ParameterList name="STATES">
     <ParameterList name="State_1">
       <Parameter name="boron" type="double" value="1300"/>
-      <Parameter name="deplete" type="Array(double)" value="{1}"/>
-      <Parameter name="deplete_units" type="string" value="GWDMT"/>
       <Parameter name="feedback" type="string" value="on"/>
       <Parameter name="modden" type="double" value="0.743"/>
       <Parameter name="power" type="double" value="100.0"/>
