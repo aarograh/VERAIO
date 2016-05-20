@@ -990,6 +990,10 @@ namespace {
         const ParameterList & spacer_grid_plist = pList.sublist("ASSEMBLIES").sublist(assembly_name).sublist("SpacerGrids");
         ParameterList::ConstIterator spacer_grid_citer = spacer_grid_plist.begin(),
           spacer_grid_cend  = spacer_grid_plist.end();
+
+        Array<string> grid_types;
+
+        int i=0;
         for( ; spacer_grid_cend != spacer_grid_citer; ++spacer_grid_citer )
         {
           // fix - loop over all defined grid types, not grid types in XML file
@@ -1011,6 +1015,8 @@ namespace {
             ppath_spacer_grid = assembly_ppath+".SpacerGrids."+grid_plist_name+".gridloss";
             try{
                spacer_grid_losses[spacer_grid_label] = vera_xml.get_param_from_plist<double>( ppath_spacer_grid);
+               grid_types[i]=spacer_grid_label;
+               i=i+1;
             }catch(...){
                spacer_grid_losses[spacer_grid_label] = -1.0;
                grid_loss_found=false;
@@ -1026,7 +1032,6 @@ namespace {
         // Original approach was to get loss from COBRATF block, but we have since moved the grid
         // losses to the actual ASSEMBLIES block.  First look in the ASSEMBLIES block and if it's not there,
         // look in the COBRATF block for backwards compatibility.
-        Array<string> grid_types;
         map<string, double> grid_loss_coeffs;
         if (not grid_loss_found){
            Array<double> grid_losses;  // default to empty
@@ -1059,24 +1064,25 @@ namespace {
         gridbloc_types = vera_xml.get_param_from_plist<Array<string> >( "COBRATF.gridbloclabel", gridbloc_types);
         gridblocs = vera_xml.get_param_from_plist<Array<double> >( "COBRATF.gridbloc", gridblocs);
 
-
         map<string, double> grid_bloc_ratio;
-        cout << gridblocs << endl;
-        if (gridblocs[0]>=0.0){
-           for( int ii=0; ii < gridbloc_types.size(); ++ii)
-             grid_bloc_ratio[gridbloc_types[ii]] = gridblocs[ii];
-           // Sanity check that all grid_map types have a specified grid blockage ratio
-           for( size_t n = 0; n < ngrid_orig; ++n )
-             if( grid_bloc_ratio.end() == grid_bloc_ratio.find(grid_map[n]) )
-               throw runtime_error("Could not find a grid blockage ratio spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
-        }else{
-           for( int ii=0; ii < gridbloc_types.size(); ++ii)
-             grid_bloc_ratio[gridbloc_types[ii]] = gridblocs[ii];
-           // Sanity check that all grid_map types have a specified loss coefficient
-           for( size_t n = 0; n < ngrid_orig; ++n )
-             if( grid_bloc_ratio.end() == grid_bloc_ratio.find(grid_map[n]) )
-               throw runtime_error("Could not find a grid blockage ratio spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
+        if (gridblocs.size()>0){
+           cout << gridblocs << endl;
+           if (gridblocs[0]>=0.0){
+              for( int ii=0; ii < gridbloc_types.size(); ++ii)
+                grid_bloc_ratio[gridbloc_types[ii]] = gridblocs[ii];
+              // Sanity check that all grid_map types have a specified grid blockage ratio
+              for( size_t n = 0; n < ngrid_orig; ++n )
+                if( grid_bloc_ratio.end() == grid_bloc_ratio.find(grid_map[n]) )
+                  throw runtime_error("Could not find a grid blockage ratio spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
+           }else{
+              for( int ii=0; ii < gridbloc_types.size(); ++ii)
+                grid_bloc_ratio[gridbloc_types[ii]] = gridblocs[ii];
+              // Sanity check that all grid_map types have a specified loss coefficient
+              for( size_t n = 0; n < ngrid_orig; ++n )
+                if( grid_bloc_ratio.end() == grid_bloc_ratio.find(grid_map[n]) )
+                  throw runtime_error("Could not find a grid blockage ratio spec (in [COBRATF] block) for grid_map type \""+grid_map[n]+"\"");
 
+           }
         }
 
 
