@@ -155,12 +155,14 @@
       </ParameterList>
       <ParameterList name="SpacerGrids">
         <ParameterList name="Grid_END">
+          <Parameter name="gridloss" type="double" value="0.9070"/>
           <Parameter name="height" type="double" value="3.866"/>
           <Parameter name="label" type="string" value="END"/>
           <Parameter name="mass" type="double" value="1017"/>
           <Parameter name="material" type="string" value="inc"/>
         </ParameterList>
         <ParameterList name="Grid_MID">
+          <Parameter name="gridloss" type="double" value="0.9065"/>
           <Parameter name="height" type="double" value="3.810"/>
           <Parameter name="label" type="string" value="MID"/>
           <Parameter name="mass" type="double" value="875"/>
@@ -224,8 +226,6 @@
     <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="global_energy_balance" type="double" value="8e-4"/>
     <Parameter name="global_mass_balance" type="double" value="7e-4"/>
-    <Parameter name="gridlabel" type="Array(string)" value="{MID,END}"/>
-    <Parameter name="gridloss" type="Array(double)" value="{0.9065,0.9070}"/>
     <Parameter name="maxits" type="int" value="10000"/>
     <Parameter name="pressure_criteria" type="double" value="1e-4"/>
     <Parameter name="pressurea_criteria" type="double" value="1e-5"/>

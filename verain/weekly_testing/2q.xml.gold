@@ -199,6 +199,7 @@
       </ParameterList>
       <ParameterList name="SpacerGrids">
         <ParameterList name="Grid_MID">
+          <Parameter name="gridloss" type="double" value="0.90"/>
           <Parameter name="height" type="double" value="1.0"/>
           <Parameter name="label" type="string" value="MID"/>
           <Parameter name="mass" type="double" value="229.66"/>

@@ -544,7 +544,9 @@ ASSEMBLY:
     _style:
     _check:
       - nth(2,())>0
+      - nth(2,())<5
       - nth(3,())>0
+      - nth(4,())>0
   grid_axial:
     <<: *dtlist
     _style: multi-line
@@ -1247,10 +1249,6 @@ COBRATF:
     _check:
       - is_float()
       - is_gt() 0
-
-  gridloss:
-    <<: *dtdblnamed
-    _check:
 
   gridbloc:
     <<: *dtdblnamed

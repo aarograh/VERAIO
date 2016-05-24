@@ -155,15 +155,17 @@
       </ParameterList>
       <ParameterList name="SpacerGrids">
         <ParameterList name="Grid_END">
+          <Parameter name="gridloss" type="double" value="0.9070"/>
           <Parameter name="height" type="double" value="3.866"/>
           <Parameter name="label" type="string" value="END"/>
-          <Parameter name="mass" type="double" value="1017"/>
+          <Parameter name="mass" type="double" value="1017.0"/>
           <Parameter name="material" type="string" value="inc"/>
         </ParameterList>
         <ParameterList name="Grid_MID">
+          <Parameter name="gridloss" type="double" value="0.9065"/>
           <Parameter name="height" type="double" value="3.810"/>
           <Parameter name="label" type="string" value="MID"/>
-          <Parameter name="mass" type="double" value="875"/>
+          <Parameter name="mass" type="double" value="875.0"/>
           <Parameter name="material" type="string" value="zirc"/>
         </ParameterList>
       </ParameterList>
@@ -233,8 +235,6 @@
     <Parameter name="fluid_energy_storage" type="double" value="0.5"/>
     <Parameter name="global_energy_balance" type="double" value="0.01"/>
     <Parameter name="global_mass_balance" type="double" value="0.01"/>
-    <Parameter name="gridlabel" type="Array(string)" value="{MID,END}"/>
-    <Parameter name="gridloss" type="Array(double)" value="{0.9065,0.9070}"/>
     <Parameter name="hgap" type="double" value="5678.3"/>
     <Parameter name="iitmax" type="int" value="40"/>
     <Parameter name="irfc" type="int" value="2"/>

@@ -167,12 +167,14 @@
       </ParameterList>
       <ParameterList name="SpacerGrids">
         <ParameterList name="Grid_END">
+          <Parameter name="gridloss" type="double" value="0.8"/>
           <Parameter name="height" type="double" value="3.866"/>
           <Parameter name="label" type="string" value="END"/>
           <Parameter name="mass" type="double" value="63.700"/>
           <Parameter name="material" type="string" value="inc"/>
         </ParameterList>
         <ParameterList name="Grid_MID">
+          <Parameter name="gridloss" type="double" value="0.9065"/>
           <Parameter name="height" type="double" value="3.810"/>
           <Parameter name="label" type="string" value="MID"/>
           <Parameter name="mass" type="double" value="77.066"/>
@@ -233,8 +235,6 @@
   </ParameterList>
   <ParameterList name="COBRATF">
     <Parameter name="epso" type="double" value="0.001"/>
-    <Parameter name="gridlabel" type="Array(string)" value="{MID,END}"/>
-    <Parameter name="gridloss" type="Array(double)" value="{0.9065,0.8}"/>
     <Parameter name="iitmax" type="int" value="40"/>
     <Parameter name="irfc" type="int" value="2"/>
     <Parameter name="nfuel" type="int" value="3"/>

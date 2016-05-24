@@ -340,8 +340,8 @@
 
 ! grid definitions
 
-  grid GINC  inc  1014  3.866
-  grid GZRC  zirc 875   3.81
+  grid GINC  inc   3.866  1014  0.91   ! grid height (cm), mass (g), loss coef
+  grid GZRC  zirc  3.81    875  0.90   ! grid height (cm), mass (g), loss coef
 
   grid_axial
       GINC  13.883   ! bottom of grid lines up with BAF

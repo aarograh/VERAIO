@@ -152,8 +152,8 @@
       PCAP1 395.381
       LGAP1 397.501
 
-  grid END inc  1017 3.866
-  grid MID zirc4 875  3.810
+  grid END inc   3.866  1017   0.9070   ! grid height (cm), mass (g), loss coef
+  grid MID zirc4 3.810  875    0.9065   ! grid height (cm), mass (g), loss coef
 
   grid_axial
       END  13.884
@@ -231,8 +231,8 @@
   epso    0.001
   oitmax  5
   iitmax  40
-  gridloss END 0.9070   ! spacer grid loss coefficient
-  gridloss MID 0.9065   ! spacer grid loss coefficient
+
+
   dtmin   0.000001
   dtmax   0.1
   tend    0.1
@@ -247,7 +247,7 @@
   rlx_power   0.6
   rlx_tfuel   1.0
   rlx_den     1.0
-  maxiter     15 
+  maxiter     15
 
 [MPACT]
   vis_edits         none
@@ -283,13 +283,13 @@
 !xs_library
   xs_filename       mpact47g_e70r0_TCP0.xsl
   xs_type           ORNL
-  xs_shielder       t 
+  xs_shielder       t
   subgroup_set      4
   dep_filename      MPACT.dpl
 
 !mesh
-  
+
   mesh fuel  3 1 1 / 8 8 8 8 8 8
   mesh gtube 3 1   / 8 8 8 8 8
-  meshing_method   matbound 
+  meshing_method   matbound
   automesh_bounds  2.0 20.0
