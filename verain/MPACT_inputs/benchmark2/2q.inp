@@ -50,7 +50,7 @@
 
   axial ASSY 0.0 LAT 1.0 
 
-  grid MID zirc4 229.66 1.0
+  grid MID zirc4 1.0 229.66 0.9065
 
   grid_axial
       MID  0.5 

@@ -162,8 +162,8 @@
   axial  2  11.951 LAT18 24.028 LAT26 197.635 LAT18 211.951 PLEN 227.951
   axial  3  11.951 LAT18 24.028 LAT31 197.635 LAT18 211.951 PLEN 227.951
 
-  grid END inc  1017 3.866
-  grid MID zirc 875  3.810
+  grid END inc  3.866 1017 0.9070   ! grid height (cm), mass (g), loss coef
+  grid MID zirc 3.810  875 0.9065   ! grid height (cm), mass (g), loss coef
 
   grid_axial
       END  13.884
@@ -408,8 +408,6 @@
   epso    0.001
   oitmax  5
   iitmax  40
-  gridloss END 0.9070   ! spacer grid loss coefficient
-  gridloss MID 0.9065   ! spacer grid loss coefficient
   dtmin   0.000001
   dtmax   0.1
   tend    0.1

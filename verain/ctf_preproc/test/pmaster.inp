@@ -1,10 +1,10 @@
-**Number of channels in the model       
+**Number of channels in the model
           37
-**Number of gaps in the model           
+**Number of gaps in the model
           58
-**Number of rods in the model           
+**Number of rods in the model
           37
-**Mesh data                             
+**Mesh data
 **Chan      XLOC[m]      YLOC[m]      XSIZ[m]      YSIZ[m]
      1  0.63000E-02 -0.63000E-02  0.12600E-01  0.12600E-01
      2  0.18900E-01 -0.63000E-02  0.12600E-01  0.12600E-01

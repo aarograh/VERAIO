@@ -1,7 +1,7 @@
 ! Author: Bob Salko
 ! Date: 3/10/2016
 ! Description:
-!   Tests that the PWR preprocessor correctly reads the stopping criteria from 
+!   Tests that the PWR preprocessor correctly reads the stopping criteria from
 !   the XML file and delivers them to the CTF input deck.
 
 [STATE]
@@ -110,8 +110,8 @@
       PCAP1 395.381
       LGAP1 397.501
 
-  grid END inc  1017 3.866
-  grid MID zirc 875  3.810
+  grid END inc   3.866  1017   0.9070   ! grid height (cm), mass (g), loss coef
+  grid MID zirc  3.810  875    0.9065   ! grid height (cm), mass (g), loss coef
 
   grid_axial
       END  13.884
@@ -241,8 +241,8 @@
 
 [COBRATF]
   dhfrac  0.02          ! fraction of power deposited directly into coolant
-  gridloss END 0.9070   ! spacer grid loss coefficient
-  gridloss MID 0.9065   ! spacer grid loss coefficient
+
+
   maxits  10000
 
   pressure_criteria     1e-4
@@ -260,5 +260,5 @@
   vvapa_criteria         6e-5
   vdropa_criteria        7e-5
 
-  global_mass_balance   7e-4 
-  global_energy_balance 8e-4 
+  global_mass_balance   7e-4
+  global_energy_balance 8e-4
