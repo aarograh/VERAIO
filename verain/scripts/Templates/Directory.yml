@@ -2142,6 +2142,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() 1gsweep mgnode mggroup mgrbsor
+  cmfd_linear_solver:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() petsc trilinos
   cmfd_eigen_solver:
     <<: *dtword
     _content:

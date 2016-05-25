@@ -531,6 +531,13 @@ MPACT:
             - copy MPACT/$cmfd_solver
           _content:
 
+        linear_solver:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$cmfd_linear_solver
+          _content:
+
         eigen_solver:
           _pltype: parameter
           _type: string
@@ -699,13 +706,13 @@ MPACT:
           _do:
             - copy MPACT/$subgroup_set
           _content:
-          
+
         cat_onegroup:
           _pltype: array
           _type: int
           _do:
             - copy MPACT/$cat_onegroup
-          _content:  
+          _content:
 
         mod_mat:
           _pltype: parameter
