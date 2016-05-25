@@ -83,8 +83,8 @@
       PCAP1 395.381
       LGAP1 397.501
 
-  grid END inc  3.519 3.866  ! *** mass scaled to 1x1
-  grid MID zirc 3.028 3.810  ! *** mass scaled to 1x1
+  grid END inc   3.866 3.519 0.9070 ! grid height (cm), mass (g), loss coef *** mass scaled to 1x1 rod
+  grid MID zirc  3.810 3.028 0.9065 ! grid height (cm), mass (g), loss coef *** mass scaled to 1x1 rod
 
   grid_axial
       END  13.884
@@ -203,8 +203,6 @@
   epso    0.001
   oitmax  5
   iitmax  40
-  gridloss END 0.9070   ! spacer grid loss coefficient
-  gridloss MID 0.9065   ! spacer grid loss coefficient
   dtmin   0.000001
   dtmax   0.1
   tend    0.1

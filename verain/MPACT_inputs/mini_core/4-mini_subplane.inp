@@ -1,3 +1,53 @@
+[CASEID]
+  title 'Mini Colorset - 3x3 array of 7x7 assemblies'
+
+[STATE]
+  power    0.0
+  tinlet   600 K
+  tfuel    600 K
+  boron    1300           ! ppmB
+  modden   0.743          ! g/cc
+  rodbank  D 0            ! Bank D
+  sym      qtr  
+  feedback off
+[STATE] rodbank D  46
+[STATE] rodbank D  92
+[STATE] rodbank D 138
+[STATE] rodbank D 184
+[STATE] rodbank D 230
+  
+[CORE]
+  size   3              ! one assembly   
+  rated  26.5167 1.0410 ! MW, Mlbs/hr 
+  apitch 8.9
+  height 406.337
+
+  core_shape
+    1 1 1
+    1 1 1
+    1 1 1
+  
+  assm_map
+    1
+    2 1
+  insert_map
+    -  
+   04 TP
+
+  crd_map
+    1
+    - -
+ 
+  crd_bank
+    D
+    - -
+
+!  lower_plate ss  5.0 0.5   ! mat, thickness, vol frac
+!  upper_plate ss  7.6 0.5 
+
+  bc_rad reflecting
+
+![Assembly]/[Insert]/[Control]/[Edits]
 [ASSEMBLY]
   title "Mini 7x7"
   npin 7 
@@ -55,8 +105,8 @@
   axial  2  6.053 GAP 10.281 PLUG 11.951 LAT26 221.111 PLEN 237.111 PLUG 238.781 GAP 240.91
   axial  3  6.053 GAP 10.281 PLUG 11.951 LAT31 221.111 PLEN 237.111 PLUG 238.781 GAP 240.91
 
-  grid END inc   172.43 3.866
-  grid MID zirc4 148.36 3.810
+  grid END inc   3.866 172.43 0.9070
+  grid MID zirc4 3.810 148.36 0.9065
 
   grid_axial
       END  13.884
@@ -167,32 +217,38 @@
 
 [EDITS]
   axial_edit_bounds 
-        11.9510
-        15.8170
-        24.0280
-        32.2390
-        40.4500
-        48.6620
-        56.8730
-        65.0840
-        73.2950
-        77.1050
-        85.1700
-        93.2350
-       101.3000
-       109.3650
-       117.4300
-       125.4950
-       129.3050
-       137.3700
-       145.4350
-       153.5000
-       161.5650
-       169.6300
-       177.6950
-       181.5050
-       189.4262
-       197.3474
-       205.2686
-       213.1898
-       221.1110
+     11.951
+     15.817
+     73.295
+     77.105
+    125.495
+    129.305
+    177.695
+    181.505
+    221.111
+
+ 
+[MPACT]
+  include mpact_mini.ini
+  num_space  15
+  subplane_max   9.0
+  meshing_method useraxialmesh
+  axial_mesh
+    6.053
+    5.898
+    3.866
+    57.478
+    3.81
+    48.39
+    3.81
+    48.39
+    3.81
+    39.606
+    8.556
+    3.866
+    3.578
+    3.799
+    8.827
+
+[COBRATF]
+  parallel  0

@@ -145,8 +145,8 @@
   axial A1 10.3 PLUG 11.951 FUEL1 377.71 PLEN 393.71 PLUG 395.4
   axial A2 10.3 PLUG 11.951 FUEL2 377.71 PLEN 393.71 PLUG 395.4
 
-  grid END inc  1017 3.866
-  grid MID zirc 875  3.810
+  grid END inc  3.866 1017 0.9070 ! grid height (cm), mass (g), loss coef
+  grid MID zirc 3.810  875 0.9065 ! grid height (cm), mass (g), loss coef
 
   grid_axial
       END  13.88

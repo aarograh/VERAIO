@@ -48,7 +48,7 @@
 [CORE]
   size 1                ! 1x1 assemblies
   rated 0.5355   0.0213  ! MW, Mlbs/hr
-  apitch 3.86 
+  apitch 3.86
   height 406.328
 
   core_shape
@@ -75,7 +75,7 @@
 
 [ASSEMBLY]
   title "Westinghouse 3x3"
-  npin 3 
+  npin 3
   ppitch 1.260
 
   fuel U31 10.257 95.0 / 3.1
@@ -104,7 +104,7 @@
   lattice PLEN1
      200
        8 8
-  
+
   lattice PCAP1
      200
        9 9
@@ -115,8 +115,8 @@
       PLEN1 393.711
       LGAP1 397.501
 
-  grid END inc  31.67 3.866
-  grid MID zirc4 27.25 3.810
+  grid END inc   3.866  31.67  0.9070   ! grid height (cm), mass (g), loss coef
+  grid MID zirc4 3.810  27.25  0.9065   ! grid height (cm), mass (g), loss coef
 
   grid_axial
       END  13.884
@@ -295,8 +295,8 @@
   epso    0.001
   oitmax  5
   iitmax  40
-  gridloss END 0.9070   ! spacer grid loss coefficient
-  gridloss MID 0.9065   ! spacer grid loss coefficient
+
+
   dtmin   0.000001
   dtmax   0.1
   tend    0.1
@@ -304,7 +304,7 @@
   maxits  10000
   courant 0.8
   parallel 0
-  
+
 [COUPLING]
   epsk        5.0  ! pcm
   epsp        1.0e-4

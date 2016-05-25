@@ -140,6 +140,20 @@ IF (${PROJECT_NAME}_ENABLE_VERAIn)
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     VTK_on "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     rotational_5cross "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     grid_enhance      "")
+
+   # Ticket #4153 changed where the grid loss coefficient should be specified
+   # in the VERAIn file.  Moved from COBRATF block to ASSEMBLY block on the
+   # grid card.  This test makes sure this new move works in the preprocessor.
+   # Backwards compatibility was retained, so all other tests make sure that
+   # is working.  This test also includes the grid enhancement model,
+   # demonstrating there is no conflict with between the two grid data
+   # specifications.  This model is a duplicate of the grid_enhance input.
+   # Verificaiton of the output file was done by showing it is identical to
+   # the grid_enhance.inp file.  The change in grid loss specification
+   # resulted in no changes in the CTF input file, which is what we should
+   # expect.
+   #XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     new_grid_loss_input "")
+
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     four_grid_types   "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     new_conv_metrics_defaults "")
    XML2CTF_SERIAL_TEST    (${CMAKE_CURRENT_SOURCE_DIR} ${GOLD}     new_conv_metrics_one_term "")

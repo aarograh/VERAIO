@@ -157,14 +157,14 @@ ASSEMBLIES:
                   _pltype: parameter
                   _type: double
                   _do:
-                    - copy %ASSEMBLY/$(_path)/%grid/@(_lgrid):1
+                    - copy %ASSEMBLY/$(_path)/%grid/@(_lgrid):2
                   _content:
 
                 height:
                   _pltype: parameter
                   _type: double
                   _do:
-                    - copy %ASSEMBLY/$(_path)/%grid/@(_lgrid):2
+                    - copy %ASSEMBLY/$(_path)/%grid/@(_lgrid):1
                   _content:
 
                 gridloss:
