@@ -20,6 +20,10 @@
 !
 !  2016-03-01 - code for Milestone
 !  2016-04-07 - update to expand everything except fuel at moderator temperature
+!  2016-06-01 - updates for Andrew
+!               a) do not require tfuel in input if specified on command line
+!               b) use *first* occurence of tinlet in XML file instead of *last*
+!               c) update HZP logic
 !
 !  Usage:
 !   expandxml.exe {-replace} {-tf910.0} {-tm560.0} {-3d} [file(s).xml]
@@ -52,8 +56,8 @@
 !
 !=======================================================================
 
-      integer, parameter :: maxlen=1000    ! max line length in xml file
-      integer, parameter :: maxline=2000   ! increase for P7
+      integer, parameter :: maxlen=2200    ! max line length in xml file
+      integer, parameter :: maxline=3000   ! increase for P7
 
       character(len=maxlen) :: line(maxline)
       character(len=200)    :: fname
@@ -157,7 +161,7 @@
 
         tfuel=0.0d0
         tmod =583.0d0   ! use value from P6 CTF calculation
-        tinlet=565.0d0  ! use value from P6 CTF calculation
+        tinlet=-1.0d0
 
         ltfuel=0
         npins=0
@@ -174,16 +178,16 @@
           endif
 
           kk=index(line(n),'"tinlet"')
-          if (kk.gt.0) then
+          if (kk.gt.0 .and. tinlet.lt.0.0d0) then
             call read_value(line(n), 'tinlet', k1, k2)
             read (line(n)(k1:k2),*) tinlet
             tinlet=tinlet+273.15d0
 !d          write (*,*) 'tinlet =', tinlet
           endif
 
-          kk=index(line(n),'"thexp_mod"')         ! optional input
+          kk=index(line(n),'"thexp_tmod"')         ! optional input
           if (kk.gt.0) then
-            call read_value(line(n), 'thexp_mod', k1, k2)
+            call read_value(line(n), 'thexp_tmod', k1, k2)
             read (line(n)(k1:k2),*) tmod          ! read moderator value
 !d          write (*,*) 'tmod =', tmod
           endif
@@ -197,16 +201,22 @@
 
         enddo
 
-        if (abs(tinlet-tfuel).lt.1.0d0) then
-          tmod=tfuel
+        if (tinlet.lt.0.0d0) tinlet=565.0d0    ! set to default value
+
+        if (tfuelin.gt.0.0d0) then             ! use command line value override
+          tfuel=tfuelin
+          ltfuel=99        ! set value for check below
+        endif
+        if (tmodin .gt.0.0d0) tmod =tmodin     ! use command line value override
+
+        if (tfuel .le. tmod+0.5d0) then        ! place after override
+          write (*,*) 'tfuel is less then tmod'
           write (*,*) 'detected HZP case - setting tmod to tfuel'
+          tmod=tfuel
         endif
 
         if (ltfuel.eq.0) stop 'fuel temperature not found in xml file'
         if (npins .eq.0) stop 'num_pins not found in xml file'
-
-        if (tfuelin.gt.0.0d0) tfuel=tfuelin    ! use command line value overwrite
-        if (tmodin .gt.0.0d0) tmod =tmodin     ! use command line value overwrite
 
         if (tfuel.le.299.0d0) then
           write (*,*) 'skipping thermal expansion for cold case'
