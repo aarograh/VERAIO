@@ -221,6 +221,36 @@ STATE:
     _content:
     _check:
       - is_word()
+  thexp:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off
+  thexp_tfuel:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_word(nth(1,()))
+      - in_dictionary(nth(1,()),'F','C','K')
+  thexp_tclad:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_word(nth(1,()))
+      - in_dictionary(nth(1,()),'F','C','K')
+  thexp_tmod:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_word(nth(1,()))
+      - in_dictionary(nth(1,()),'F','C','K')
   sym:
     <<: *dtword
     _content:

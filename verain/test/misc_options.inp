@@ -18,6 +18,11 @@
   search 'boron';  kcrit  1.02   
   pressure 2250   ;     ! psia
 
+  thexp  on
+  thexp_tfuel 875.0 K
+  thexp_tclad 350.0 C
+  thexp_tmod  559.0 F
+
   tfuel 900.0 K         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
   modden 0.743         ! g/cc      Not used with T/H feedback!
 
