@@ -57,14 +57,14 @@
         <Parameter name="key_name" type="string" value="inc"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
         <Parameter name="mat_names" type="Array(string)" value="{inc}"/>
-        <Parameter name="thexp" type="float" value="100"/>
+        <Parameter name="thexp" type="double" value="100"/>
       </ParameterList>
       <ParameterList name="Material_zirc">
         <Parameter name="density" type="double" value="6.56"/>
         <Parameter name="key_name" type="string" value="zirc"/>
         <Parameter name="mat_fracs" type="Array(double)" value="{1.0}"/>
         <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
-        <Parameter name="thexp" type="float" value="10"/>
+        <Parameter name="thexp" type="double" value="10"/>
       </ParameterList>
     </ParameterList>
     <Parameter name="apitch" type="double" value="21.5"/>
@@ -186,8 +186,8 @@
           <Parameter name="key_name" type="string" value="inc"/>
           <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
           <Parameter name="mat_names" type="Array(string)" value="{inc}"/>
-          <Parameter name="thcnd" type="float" value="30"/>
-          <Parameter name="thexp" type="float" value="20"/>
+          <Parameter name="thcnd" type="double" value="30"/>
+          <Parameter name="thexp" type="double" value="20"/>
         </ParameterList>
         <ParameterList name="Material_ss">
           <Parameter name="density" type="double" value="8.0"/>

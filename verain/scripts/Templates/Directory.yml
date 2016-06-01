@@ -461,8 +461,8 @@ CORE:
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
     _options:
-      thexp: float
-      thcnd: float
+      thexp: double
+      thcnd: double
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
@@ -583,8 +583,8 @@ ASSEMBLY:
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
     _options:
-      thexp: float
-      thcnd: float
+      thexp: double
+      thcnd: double
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
@@ -651,8 +651,8 @@ CONTROL:
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
     _options:
-      thexp: float
-      thcnd: float
+      thexp: double
+      thcnd: double
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
@@ -706,8 +706,8 @@ INSERT:
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
     _options:
-      thexp: float
-      thcnd: float
+      thexp: double
+      thcnd: double
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
@@ -749,8 +749,8 @@ DETECTOR:
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
     _options:
-      thexp: float
-      thcnd: float
+      thexp: double
+      thcnd: double
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
