@@ -24,6 +24,7 @@
 !               a) do not require tfuel in input if specified on command line
 !               b) use *first* occurence of tinlet in XML file instead of *last*
 !               c) update HZP logic
+!  2016-06-02 - add MPACT axial_mesh card
 !
 !  Usage:
 !   expandxml.exe {-replace} {-tf910.0} {-tm560.0} {-3d} [file(s).xml]
@@ -325,6 +326,11 @@
             kk=index(line(n),'"axial_edit_bounds"')
             if (kk.gt.0) then
               call update_list(line(n), 'axial_edit_bounds', ftef)
+            endif
+
+            kk=index(line(n),'"axial_mesh"')      ! MPACT input
+            if (kk.gt.0) then
+              call update_list(line(n), 'axial_mesh', ftef)
             endif
 
             kk=index(line(n),'"axial_elevations"')   ! assembly elevations
