@@ -25,6 +25,7 @@
 !               b) use *first* occurence of tinlet in XML file instead of *last*
 !               c) update HZP logic
 !  2016-06-02 - add MPACT axial_mesh card
+!  2016-06-05 - increase output from 5 to 8 decimal places, volume of IFBA was not being preserved
 !
 !  Usage:
 !   expandxml.exe {-replace} {-tf910.0} {-tm560.0} {-3d} [file(s).xml]
@@ -410,18 +411,14 @@
 
       integer :: k1, k2
       real(8) :: dold            ! old value
-      character(len=10) cc
+      character(len=13) cc
 
       call read_value(line, target, k1, k2)
 
       read (line(k1:k2),*) dold       ! read density value
       dold=dold*dfact
 
-      if (dold.lt.0.01d0) then
-        write (cc,'(f10.7)') dold    ! gas density
-      else
-        write (cc,'(f10.5)') dold
-      endif
+      write (cc,'(f13.8)') dold
       cc=adjustl(cc)
 
       line(k1:)=trim(cc)//'"/>         '    ! add trailing blanks
@@ -582,17 +579,17 @@
 
       do k=1, nval
         if     (radii(k).lt.10.0d0) then
-          write (line(k1:),'(f7.5,",")') radii(k)
-          k1=k1+8
-        elseif (radii(k).lt.100.0d0) then
-          write (line(k1:),'(f8.5,",")') radii(k)
-          k1=k1+9
-        elseif (radii(k).lt.1000.0d0) then
-          write (line(k1:),'(f9.5,",")') radii(k)
-          k1=k1+10
-        else
-          write (line(k1:),'(f10.5,",")') radii(k)
+          write (line(k1:),'(f10.8,",")') radii(k)
           k1=k1+11
+        elseif (radii(k).lt.100.0d0) then
+          write (line(k1:),'(f11.8,",")') radii(k)
+          k1=k1+12
+        elseif (radii(k).lt.1000.0d0) then
+          write (line(k1:),'(f12.8,",")') radii(k)
+          k1=k1+13
+        else
+          write (line(k1:),'(f13.8,",")') radii(k)
+          k1=k1+14
         endif
       enddo
       k1=k1-1   ! remove last comma
@@ -651,17 +648,17 @@
 
       do k=1, nval
         if     (radii(k).lt.10.0d0) then
-          write (line(k1:),'(f7.5,",")') radii(k)
-          k1=k1+8
-        elseif (radii(k).lt.100.0d0) then
-          write (line(k1:),'(f8.5,",")') radii(k)
-          k1=k1+9
-        elseif (radii(k).lt.1000.0d0) then
-          write (line(k1:),'(f9.5,",")') radii(k)
-          k1=k1+10
-        else
-          write (line(k1:),'(f10.5,",")') radii(k)
+          write (line(k1:),'(f10.8,",")') radii(k)
           k1=k1+11
+        elseif (radii(k).lt.100.0d0) then
+          write (line(k1:),'(f11.8,",")') radii(k)
+          k1=k1+12
+        elseif (radii(k).lt.1000.0d0) then
+          write (line(k1:),'(f12.8,",")') radii(k)
+          k1=k1+13
+        else
+          write (line(k1:),'(f13.8,",")') radii(k)
+          k1=k1+14
         endif
       enddo
       k1=k1-1   ! remove last comma
