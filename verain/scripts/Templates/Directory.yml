@@ -818,6 +818,24 @@ INSILICO:
     _content:
     _check:
       - is_word()
+  temp_correction:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none oned all
+  global_log:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() debug diagnostic status info warning error critical
+  local_log:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() debug diagnostic status info warning error critical
   mat_library:
     <<: *dtword
     _content:
