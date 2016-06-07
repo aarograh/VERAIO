@@ -679,7 +679,7 @@ MPACT:
             - copy MPACT/$shield_nbatch
           _content:
 
-        xsshielder:
+        xs_shielder:
           _pltype: parameter
           _type: string
           _do:
