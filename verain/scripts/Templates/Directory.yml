@@ -1198,6 +1198,11 @@ SHIFT:
     _content:
     _check:
       - is_word()
+  global_log:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
   do_transport:
     <<: *dtbool
     _content:
