@@ -2,7 +2,6 @@
   title 'Single pin calculation for testing mpact with an embedded COBRA-TF'
 
 [STATE]
-  power  0.000001      ! %
   tinlet 559.0 F       ! F
   boron  600           ! ppmB
   pressure 2250        ! psia
@@ -12,10 +11,10 @@
 
   feedback on
   sym full
-[STATE] power 0.0001
-[STATE] power 0.010
-[STATE] power 1.000
-[STATE] power 100.0
+
+                            power  0.000001
+[STATE] deplete EFPD 100.0; power 100.0
+[STATE]                     power  0.000001
 
 [CORE]
   size 1                ! 1x1 assemblies
@@ -28,16 +27,46 @@
   assm_map
     A1
 
-  include CORE.ini
-
-  lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
-  upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
+  lower_plate zirc4 5.0 0.5   ! mat, thickness, vol frac
+  upper_plate zirc4 7.6 0.5   ! mat, thickness, vol frac
   lower_ref   mod 26.0 1.0
   upper_ref   mod 25.0 1.0
 
+
   bc_rad reflecting
 
-  mat ss     8.0
+   mat he     0.17860E-03  o-16   1.0          ! MPACT Default
+   mat zirc4       6.56    cr-50   4.173685E-05 !MPACT Default
+                           cr-52   8.369935E-04
+                           cr-53   9.673587E-05
+                           cr-54   2.453364E-05
+                           fe-54   1.185567E-04
+                           fe-56   1.929932E-03
+                           fe-57   4.536773E-05
+                           fe-58   6.143432E-06
+                           hf-174  1.559258E-07
+                           hf-176  5.185040E-06
+                           hf-177  1.843933E-05
+                           hf-178  2.719727E-05
+                           hf-179  1.365516E-05
+                           hf-180  3.536726E-05
+                           sn-112  1.325870E-04
+                           sn-114  9.182450E-05
+                           sn-115  4.771906E-05
+                           sn-116  2.058423E-03
+                           sn-117  1.096647E-03
+                           sn-118  3.487981E-03
+                           sn-119  1.247577E-03
+                           sn-120  4.771540E-03
+                           sn-122  6.894095E-04
+                           sn-124  8.762916E-04
+                           zr-90   4.980862E-01
+                           zr-91   1.098299E-01
+                           zr-92   1.697228E-01
+                           zr-94   1.757443E-01
+                           zr-96   2.891684E-02
+
+!  mat ss     8.0
 
 [ASSEMBLY]
   title "Westinghouse 1x1"
@@ -47,15 +76,15 @@
   fuel U31 10.257 95.0 / 3.1
 
 !=== material label, key_name, density (lib_name defaults to key_name)
-  mat he   0.000176
-  mat inc  8.19
-  mat ss   8.0
-  mat zirc 6.56 zirc4
+!  mat he   0.000176
+!  mat inc  8.19
+!  mat ss   8.0
+!  mat zirc 6.56 zirc4
 
-  cell 1     0.4096 0.418 0.475 / U31 he zirc
-  cell 7            0.418 0.475 / mod    mod        ! empty location
-  cell 8            0.418 0.475 /     he zirc       ! plenum
-  cell 9                  0.475 /        zirc       ! pincap
+  cell 1     0.4096 0.418 0.475 / U31 he zirc4
+  cell 7            0.418 0.475 / mod    mod         ! empty location
+  cell 8            0.418 0.475 /     he zirc4       ! plenum
+  cell 9                  0.475 /        zirc4       ! pincap
 
   lattice FUEL1
      1
@@ -75,8 +104,8 @@
       PLEN1 393.711
       LGAP1 397.501
 
-  grid END inc   3.866 4.67 0.9070
-  grid MID zirc  3.810 3.25 0.9065
+  grid END zirc4 3.866  4.67  0.9070
+  grid MID zirc4 3.810  3.25  0.9065
 
   grid_axial
       END  13.884
@@ -88,8 +117,8 @@
       MID 336.2
       END 388.2
 
-  lower_nozzle  ss 6.05   25.0  ! mat, height, mass (g)
-  upper_nozzle  ss 8.827  25.0  ! mat, height, mass (g)
+  lower_nozzle  zirc4 6.05   25.0  ! mat, height, mass (g)
+  upper_nozzle  zirc4 8.827  25.0  ! mat, height, mass (g)
 
 [EDITS]
 
@@ -146,31 +175,64 @@
           369.7898
           377.711
 [MPACT]
-  vis_edits         none
-  ray_spacing       0.1
-!quad_set
-  quad_type         CHEBYSHEV-GAUSS
-  polars_octant     2
-  azimuthals_octant 2
+   vis_edits         none
+   rod_treatment     true
+   grid_treatment    equal_mass
+
+!T/H
+   coupling_method   ctf
+   sth_hgap          4500
+   sth_dhfrac        0.02
+
+!moc
+   moc_kernel        mg
+   ray_spacing       0.05
+   azimuthals_octant 16
+   polars_octant     2
+   quad_type         CHEBYSHEV-YAMAMOTO
+
 !iteration_control
-  flux_tolerance    1e-5
-  num_inners        3
-  k_tolerance       1e-5
-  up_scatter        2
-  num_outers        100
-  scattering        LTCP0
+   k_tolerance       1e-5
+   flux_tolerance    1e-4
+   num_inners        3
+   num_outers        500
+   up_scatter        2
+   scattering        TCP0
+
 !cmfd
-  cmfd              cmfd
-  cmfd_solver       mgnode
-  k_shift           1.5
-  cmfd_num_outers   20
+   cmfd              adcmfd
+   cmfd_solver       mgnode  !1gsweep
+   !cmfd_eigen_solver jd      !power
+   k_shift           1.5
+   cmfd_num_outers   20
+   prolongation      flat
+
 !2D1D
-  split_TL          true
-  TL_treatment      lflat
-  nodal_method      nem
-!  under_relax       1.0
-!TH
-  coupling_method   ctf
+   split_TL          true
+   TL_treatment      lflat
+   nodal_method      sp3
+ ! under_relax       1.0
+
+!parallel
+   num_space         1
+   num_angle         1
+   num_energy        1
+   num_threads       1
+ ! par_method        EXPLICITFILE
+ ! par_file          partition.txt
+
+!xs_library
+ ! xs_filename       mpact47g_70s_v3.1_11032014.fmt
+   xs_filename       mpact47g_70s_v4.0_11032014.fmt
+   xs_type           ORNL
+   subgroup_set      4
+   dep_kernel        origen
+   dep_filename      origen_data_paths_casl2.0.txt
+   dep_substep       3
+   dep_edit          false
+
+  polars_octant     2
+  azimuthals_octant 16
 !parallel
   num_space         1
   num_angle         1
@@ -179,8 +241,6 @@
   par_method        PS
 !xs_library
   xs_filename       mpact8g_70s_v4.0m0_02232015.fmt
-  xs_type           ORNL
-  subgroup_set      4
 !mesh
   !meshing_method    useraxialmesh
   !automesh_bounds   2.0 20.0
@@ -262,11 +322,15 @@
   maxits  10000
   courant 0.8
   parallel 0
-  global_energy_balance    0.001 !%
-  global_mass_balance      0.001 !%
-  fluid_energy_storage     0.05  !%
-  solid_energy_storage     0.05  !%
-  mass_storage             0.05  !%
+  pressure_criteria     1e-4
+  void_criteria         1e-4
+  Tcool_criteria        1e-4
+  Tsolid_criteria       1e-4
+  vliq_criteria         1e-4
+  vvap_criteria         1e-4
+  global_mass_balance   1e-4 ! %
+  global_energy_balance 1e-4 ! %
+
   
 [COUPLING]
   epsk        5.0  ! pcm
@@ -276,7 +340,7 @@
   rlx_den     1.0
   maxiter     10
 
-[SHIFT]
+[INSILICO]
   transport           ce_mc
   !seed                45352213
   !global_log          diagnostic
