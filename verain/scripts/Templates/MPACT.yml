@@ -608,6 +608,13 @@ MPACT:
             - copy MPACT/$subplane_max
           _content:
 
+        num_subplanes:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$num_subplanes
+          _content:
+
     2d1d:
       _pltype: list
       _content:
