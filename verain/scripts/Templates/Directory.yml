@@ -221,6 +221,36 @@ STATE:
     _content:
     _check:
       - is_word()
+  thexp:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off
+  thexp_tfuel:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_word(nth(1,()))
+      - in_dictionary(nth(1,()),'F','C','K')
+  thexp_tclad:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_word(nth(1,()))
+      - in_dictionary(nth(1,()),'F','C','K')
+  thexp_tmod:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_word(nth(1,()))
+      - in_dictionary(nth(1,()),'F','C','K')
   sym:
     <<: *dtword
     _content:
@@ -461,8 +491,8 @@ CORE:
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
     _options:
-      thexp: float
-      thcnd: float
+      thexp: double
+      thcnd: double
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
@@ -583,8 +613,8 @@ ASSEMBLY:
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
     _options:
-      thexp: float
-      thcnd: float
+      thexp: double
+      thcnd: double
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
@@ -651,8 +681,8 @@ CONTROL:
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
     _options:
-      thexp: float
-      thcnd: float
+      thexp: double
+      thcnd: double
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
@@ -706,8 +736,8 @@ INSERT:
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
     _options:
-      thexp: float
-      thcnd: float
+      thexp: double
+      thcnd: double
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
@@ -749,8 +779,8 @@ DETECTOR:
       - nth(1,())>=0
       - lc(nth(0,()))ne'mod'
     _options:
-      thexp: float
-      thcnd: float
+      thexp: double
+      thcnd: double
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
@@ -788,6 +818,24 @@ INSILICO:
     _content:
     _check:
       - is_word()
+  temp_correction:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none oned all
+  global_log:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() debug diagnostic status info warning error critical
+  local_log:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() debug diagnostic status info warning error critical
   mat_library:
     <<: *dtword
     _content:
@@ -2200,6 +2248,12 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  num_subplanes:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   cmfd_angle_decomp:
     <<: *dtword
     _content:

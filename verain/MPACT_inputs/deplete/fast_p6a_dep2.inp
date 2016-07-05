@@ -14,7 +14,7 @@
   sym qtr
 
   restart_read restart.h5 EXP1
-  deplete GWDMT 1
+  !deplete GWDMT 1
 
 [CORE]
   size 1                ! 1x1 single-assembly
