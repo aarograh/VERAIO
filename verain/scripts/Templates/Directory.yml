@@ -544,7 +544,7 @@ ASSEMBLY:
     _style:
     _check:
       - nth(2,())>0
-      - nth(2,())<5
+      - nth(2,())<6
       - nth(3,())>0
       - nth(4,())>0
   grid_axial:
