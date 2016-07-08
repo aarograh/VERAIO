@@ -1,0 +1,218 @@
+!
+!  This input deck is used to test the MPACT-CTF coupling at BWR Conditions
+!  See results in Story #4237
+!
+!  To generate this input deck, I started with the GE9 single assembly input deck and:
+!  * removed the channel box  (not supported in 3D calcs)
+!  * added BWR T/H conditions (power, flow, tinlet, etc.)
+!  * adjusted the pin pitch so the outer gaps were not too big
+!  * added the 3D description from the P6 PWR problem (including grids)
+!  * adjusted the grid and nozzle masses because of the smaller assembly pitch
+!
+!
+!  ***** You must use the --init option to run this input deck *****
+!
+!
+[CASEID]
+  title 'Sample 3D GE9 BWR Lattice *** with no channel'
+
+[STATE]
+  power     70.0
+  flow     100.0
+  tinlet   532 F
+  tfuel    900 K
+  pressure 1040   ! psia
+
+  sym      full
+  feedback on
+  xenon    zero
+
+[CORE]
+  size   1            ! single assembly
+  apitch 15.24
+  rated  4.31 0.1315  ! MW, Mlbs/hr
+  height 406.337
+
+  core_shape
+    1
+
+  assm_map
+    ASSY
+
+  bc_rad reflecting
+
+  lower_plate ss  5.0 0.5   ! mat, thickness, vol frac
+  upper_plate ss  7.6 0.5
+
+[ASSEMBLY]
+  npin   8
+! ppitch 1.6256          ! pin pitch - does not include channel gaps
+  ppitch 1.90        ! spread pins out
+  
+!** Note that the automatic addition of U-234 does not agree with the spec
+!** and we may need to add U-234 explicitly
+
+  fuel U16  10.0642 94.5 / 1.6
+  fuel U20  10.0642 94.5 / 2.0
+  fuel U22  10.0642 94.5 / 2.2
+  fuel U24  10.0642 94.5 / 2.4
+  fuel U26  10.0642 94.5 / 2.6
+  fuel U28  10.0642 94.5 / 2.8
+  fuel U30  10.0642 94.5 / 3.0
+  fuel U36  10.0642 94.5 / 3.6
+  fuel U36G  9.939  94.5 / 3.6 / gad=4.0
+  fuel U38  10.0642 94.5 / 3.8
+  fuel U40  10.0642 94.5 / 3.95
+  fuel U40G  9.939  94.5 / 3.95 / gad=4.0
+
+  cell  1 0.53213 0.61341 / U16  zirc4
+  cell  2 0.53213 0.61341 / U20  zirc4
+  cell  3 0.53213 0.61341 / U22  zirc4
+  cell  4 0.53213 0.61341 / U24  zirc4
+  cell  5 0.53213 0.61341 / U26  zirc4
+  cell  6 0.53213 0.61341 / U28  zirc4
+  cell  7 0.53213 0.61341 / U30  zirc4
+  cell  8 0.53213 0.61341 / U36  zirc4
+  cell  9 0.53213 0.61341 / U38  zirc4
+  cell 10 0.53213 0.61341 / U40  zirc4
+  cell 51 0.53213 0.61341 / U40G zirc4
+  cell 52 0.53213 0.61341 / U36G zirc4
+
+  cell 80 0.53213 0.61341 / he   zirc4   ! plen
+  cell 82         0.61341 /      zirc4   ! plug
+  cell 99         0.61341 /      mod     ! empty
+
+!** water rod is smaller to fit in a pincell
+!** cell WR 1.6002 1.7018 / mod zirc4
+
+  cell WR 1.60 1.62 / mod zirc4 / large4
+
+  lattice FUEL
+    1
+    2  6
+    4  8 10
+    6 10 52 WR
+    6 10 10 WR WR
+    6 10 51 10 10 10
+    5  9 10 51 10 51 10
+    3  7  9 10 10 10  9  6
+
+  lattice PLEN
+   80
+   80 80
+   80 80 80
+   80 80 80 WR
+   80 80 80 WR WR
+   80 80 80 80 80 80
+   80 80 80 80 80 80 80
+   80 80 80 80 80 80 80 80
+
+  lattice PLUG
+   82
+   82 82
+   82 82 82
+   82 82 82 WR
+   82 82 82 WR WR
+   82 82 82 82 82 82
+   82 82 82 82 82 82 82
+   82 82 82 82 82 82 82 82
+
+  lattice GAP
+   99
+   99 99
+   99 99 99
+   99 99 99 WR
+   99 99 99 WR WR
+   99 99 99 99 99 99
+   99 99 99 99 99 99 99
+   99 99 99 99 99 99 99 99
+
+  axial ASSY   6.053
+        GAP   10.281
+        PLUG  11.951
+        FUEL 377.711
+        PLEN 393.711
+        PLUG 395.381
+        GAP  397.51
+
+! *** artificially reduced grid mass
+  grid END inc    3.866 350  0.9070 ! grid height (cm), mass (g), loss coef
+  grid MID zirc4  3.810 300  0.9065 ! grid height (cm), mass (g), loss coef
+
+  grid_axial
+      END  13.884
+      MID  75.2
+      MID 127.4
+      MID 179.6
+      MID 231.8
+      MID 284.0
+      MID 336.2
+      END 388.2
+
+! *** artificially reduced nozzle mass
+  lower_nozzle  ss 6.053 1500.0  ! mat, height, mass (g)
+  upper_nozzle  ss 8.827 1500.0  ! mat, height, mass (g)
+
+[EDITS]
+  axial_edit_bounds
+      11.951
+      15.817
+      24.028
+      32.239
+      40.45
+      48.662
+      56.873
+      65.084
+      73.295
+      77.105
+      85.17
+      93.235
+      101.3
+      109.365
+      117.43
+      125.495
+      129.305
+      137.37
+      145.435
+      153.5
+      161.565
+      169.63
+      177.695
+      181.505
+      189.57
+      197.635
+      205.7
+      213.765
+      221.83
+      229.895
+      233.705
+      241.77
+      249.835
+      257.9
+      265.965
+      274.03
+      282.095
+      285.905
+      293.97
+      302.035
+      310.1
+      318.165
+      326.23
+      334.295
+      338.105
+      346.0262
+      353.9474
+      361.8686
+      369.7898
+      377.711
+
+[MPACT]
+  num_space     29
+  num_angle      1
+  num_threads    1
+  num_inners     2
+
+[COBRATF]
+  beta_sp   0.005
+  parallel       0
+

@@ -47,18 +47,18 @@ INSTALL(
 
 # Install COBRA-TF/VERAIn examples
 
-IF (${PACKAGE_NAME}_ENABLE_VERAIn_CTF)
-
-  INSTALL(
-    FILES test/small_singlerod_HFP.inp
-    DESTINATION "share/COBRA-TF/example/small_singlerod_HFP"
-    COMPONENT ${PACKAGE_NAME}
-  )
-  # NOTE: We have to install the VERA input parser examples for COBRA-TF here
-  # because the COBRA_TF packages does not know anything about the VERAIn
-  # input parser.
-
-ENDIF()
+#IF (${PACKAGE_NAME}_ENABLE_VERAIn_CTF)
+#
+#  INSTALL(
+#    FILES test/small_singlerod_HFP.inp
+#    DESTINATION "share/COBRA-TF/example/small_singlerod_HFP"
+#    COMPONENT ${PACKAGE_NAME}
+#  )
+#  # NOTE: We have to install the VERA input parser examples for COBRA-TF here
+#  # because the COBRA_TF packages does not know anything about the VERAIn
+#  # input parser.
+#
+#ENDIF()
 
 
 TRIBITS_PACKAGE_POSTPROCESS()
