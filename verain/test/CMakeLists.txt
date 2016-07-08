@@ -31,7 +31,7 @@ TRIBITS_ADD_EXECUTABLE(
 
 FUNCTION(ADD_REACTOR_AWARE_INPUT_PARSER_TEST FILE_NAME)
   ASSERT_DEFINED(VERAIn_SOURCE_DIR)
-  TRIBITS_COPY_FILES_TO_BINARY_DIR(CopyScriptFiles_${FILE_NAME}
+  TRIBITS_COPY_FILES_TO_BINARY_DIR(ReactAware_CopyScriptFiles_${FILE_NAME}
     SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
     SOURCE_FILES
       ${FILE_NAME}.inp ${FILE_NAME}.xml.gold
@@ -159,3 +159,45 @@ TRIBITS_ADD_ADVANCED_TEST( veradiff_fail
       "FAIL - eigenvalue difference exceeds tolerance"
   OVERALL_NUM_MPI_PROCS 1
   )
+
+#===========================================================
+#
+#            Test thermal expansion
+#
+#===========================================================
+
+FUNCTION(ADD_THERMAL_EXPANSION_TEST FILE_NAME)
+  ASSERT_DEFINED(VERAIn_SOURCE_DIR)
+  TRIBITS_COPY_FILES_TO_BINARY_DIR(ThermalExpCopyScriptFiles_${FILE_NAME}
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
+    SOURCE_FILES
+      ${FILE_NAME}.inp ${FILE_NAME}.xml.gold ${FILE_NAME}.xml2.gold
+    )
+  TRIBITS_ADD_ADVANCED_TEST(
+    xmlthexp_${FILE_NAME}
+    OVERALL_WORKING_DIRECTORY TEST_NAME
+    OVERALL_NUM_MPI_PROCS 1
+    TEST_0
+      CMND ${CMAKE_COMMAND}
+      ARGS -E remove *.xml *.yml *.xml2
+    TEST_1
+      CMND ${PERL_EXECUTABLE}
+      ARGS
+        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl
+        ../${FILE_NAME}.inp  ${FILE_NAME}.xml
+    TEST_2
+      CMND diff ARGS ${FILE_NAME}.xml ../${FILE_NAME}.xml.gold
+    TEST_3
+      CMND ${XMLTHEXP_EXE}
+      ARGS
+       -3d ${FILE_NAME}.xml
+    TEST_4
+      CMND diff ARGS ../${FILE_NAME}.xml2.gold ${FILE_NAME}.xml2
+    )
+ENDFUNCTION()
+
+#
+# Run the thermal expansion test cases
+#
+ADD_THERMAL_EXPANSION_TEST(Sample_p6a)
+
