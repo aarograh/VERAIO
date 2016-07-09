@@ -3454,7 +3454,7 @@ BISON:
     _content:
     _check:
       - is_string()
-      - in_dictionary() standalone tiamat tiamat_inline STANDALONE TIAMAT TIAMAT_INLINE
+      - in_dictionary() standalone tiamat tiamat_inline temp_table STANDALONE TIAMAT TIAMAT_INLINE TEMP_TABLE
   variables_temp_initial_condition:
     <<: *dtdouble
     _content:
