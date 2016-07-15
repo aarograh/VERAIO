@@ -176,7 +176,7 @@
           377.711
 [MPACT]
    vis_edits         none
-   rod_treatment     true
+   rod_treatment     polynomial
    grid_treatment    equal_mass
 
 !T/H
