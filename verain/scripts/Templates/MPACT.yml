@@ -90,7 +90,7 @@ MPACT:
 
     rod_treatment:
       _pltype: parameter
-      _type: bool
+      _type: string
       _do:
         - copy MPACT/$rod_treatment
       _content:

@@ -647,7 +647,7 @@
       <Parameter name="quad_type" type="string" value="CHEBYSHEV-YAMAMOTO"/>
     </ParameterList>
     <Parameter name="ray_spacing" type="double" value="0.05"/>
-    <Parameter name="rod_treatment" type="bool" value="true"/>
+    <Parameter name="rod_treatment" type="string" value="polynomial"/>
     <Parameter name="vis_edits" type="string" value="none"/>
     <ParameterList name="xs_library">
       <Parameter name="subgroup_set" type="int" value="4"/>

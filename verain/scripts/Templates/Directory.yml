@@ -1792,11 +1792,11 @@ MPACT:
       - is_word()
       - in_dictionary() true false
   rod_treatment:
-    <<: *dtbool
+    <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() true false
+      - in_dictionary() none polynomial 1dcpm 2dmoc
   valid_on:
     <<: *dtbool
     _content:
@@ -2217,7 +2217,7 @@ MPACT:
     _content:
     _check:
       - is_int()
-      - is_gt() 0
+      - is_gt() -1
   cmfd_num_outers:
     <<: *dtint
     _content:
