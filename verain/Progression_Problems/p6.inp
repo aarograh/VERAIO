@@ -15,12 +15,6 @@
   tfuel    900 K
   modden   0.7            ! g/cc
 
-[STATE]
-  flow 150.0
-
-[STATE]
-  flow 30.0
-
 [CORE]
   size   1              ! one assembly   
   rated  17.67 0.6823   ! MW, Mlbs/hr 
@@ -174,15 +168,10 @@
       377.711
 
 [MPACT]
-  ray_spacing    0.08
-  azimuthals_octant 4
-  polars_octant  1
-  num_space      58
+  num_space      29
   num_angle      1
   num_threads    1
   num_inners     2
-  coupling_method simplified
-  sth_channeltype assem
 
 [COBRATF]
   beta_sp   0.005
