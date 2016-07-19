@@ -1,0 +1,315 @@
+[CASEID]
+  title 'Single pin calculation for testing mpact with no TH feedback'
+
+[STATE]
+  tinlet 559.0 F       ! F
+  boron  600           ! ppmB
+  pressure 2250        ! psia
+
+  tfuel 900.0 K        ! K - 600K  Not used with T/H feedback! set to 900K with feedback
+  modden 0.743         ! g/cc      Not used with T/H feedback!
+
+  feedback off
+  sym full
+
+                            power  0.000001
+[STATE] deplete EFPD   0.5; power 100.0
+[STATE]                     power  0.000001
+[STATE]                     power 100.0
+[STATE] deplete EFPD 100.0; power 100.0
+[STATE]                     power  0.000001
+
+[CORE]
+  size 1                ! 1x1 assemblies
+  rated 0.0670   0.0024  ! MW, Mlbs/hr
+  apitch 1.26 
+  height 406.328
+
+  core_shape
+    1
+  assm_map
+    A1
+
+  lower_plate zirc4 5.0 0.5   ! mat, thickness, vol frac
+  upper_plate zirc4 7.6 0.5   ! mat, thickness, vol frac
+  lower_ref   mod 26.0 1.0
+  upper_ref   mod 25.0 1.0
+
+
+  bc_rad reflecting
+
+   mat he     0.17860E-03  o-16   1.0          ! MPACT Default
+   mat zirc4       6.56    cr-50   4.173685E-05 !MPACT Default
+                           cr-52   8.369935E-04
+                           cr-53   9.673587E-05
+                           cr-54   2.453364E-05
+                           fe-54   1.185567E-04
+                           fe-56   1.929932E-03
+                           fe-57   4.536773E-05
+                           fe-58   6.143432E-06
+                           hf-174  1.559258E-07
+                           hf-176  5.185040E-06
+                           hf-177  1.843933E-05
+                           hf-178  2.719727E-05
+                           hf-179  1.365516E-05
+                           hf-180  3.536726E-05
+                           sn-112  1.325870E-04
+                           sn-114  9.182450E-05
+                           sn-115  4.771906E-05
+                           sn-116  2.058423E-03
+                           sn-117  1.096647E-03
+                           sn-118  3.487981E-03
+                           sn-119  1.247577E-03
+                           sn-120  4.771540E-03
+                           sn-122  6.894095E-04
+                           sn-124  8.762916E-04
+                           zr-90   4.980862E-01
+                           zr-91   1.098299E-01
+                           zr-92   1.697228E-01
+                           zr-94   1.757443E-01
+                           zr-96   2.891684E-02
+
+!  mat ss     8.0
+
+[ASSEMBLY]
+  title "Westinghouse 1x1"
+  npin 1 
+  ppitch 1.260
+
+  fuel U31 10.257 95.0 / 3.1
+
+!=== material label, key_name, density (lib_name defaults to key_name)
+!  mat he   0.000176
+!  mat inc  8.19
+!  mat ss   8.0
+!  mat zirc 6.56 zirc4
+
+  cell 1     0.4096 0.418 0.475 / U31 he zirc4
+  cell 7            0.418 0.475 / mod    mod         ! empty location
+  cell 8            0.418 0.475 /     he zirc4       ! plenum
+  cell 9                  0.475 /        zirc4       ! pincap
+
+  lattice FUEL1
+     1
+
+  lattice LGAP1
+     7
+
+  lattice PLEN1
+     8
+  
+  lattice PCAP1
+     9
+
+  axial A1    6.050
+      LGAP1  11.951
+      FUEL1 377.711
+      PLEN1 393.711
+      LGAP1 397.501
+
+  grid END zirc4 3.866  4.67  0.9070
+  grid MID zirc4 3.810  3.25  0.9065
+
+  grid_axial
+      END  13.884
+      MID  75.2
+      MID 127.4
+      MID 179.6
+      MID 231.8
+      MID 284.0
+      MID 336.2
+      END 388.2
+
+  lower_nozzle  zirc4 6.05   25.0  ! mat, height, mass (g)
+  upper_nozzle  zirc4 8.827  25.0  ! mat, height, mass (g)
+
+[EDITS]
+
+!  3in intervals in active fuel
+  axial_edit_bounds
+          11.951
+          15.817
+          24.028
+          32.239
+          40.45
+          48.662
+          56.873
+          65.084
+          73.295
+          77.105
+          85.17
+          93.235
+          101.3
+          109.365
+          117.43
+          125.495
+          129.305
+          137.37
+          145.435
+          153.5
+          161.565
+          169.63
+          177.695
+          181.505
+          189.57
+          197.635
+          205.7
+          213.765
+          221.83
+          229.895
+          233.705
+          241.77
+          249.835
+          257.9
+          265.965
+          274.03
+          282.095
+          285.905
+          293.97
+          302.035
+          310.1
+          318.165
+          326.23
+          334.295
+          338.105
+          346.0262
+          353.9474
+          361.8686
+          369.7898
+          377.711
+[MPACT]
+   vis_edits         none
+   rod_treatment     polynomial
+   grid_treatment    equal_mass
+
+!moc
+   moc_kernel        mg
+   ray_spacing       0.05
+   azimuthals_octant 16
+   polars_octant     2
+   quad_type         CHEBYSHEV-YAMAMOTO
+
+!iteration_control
+   k_tolerance       1e-5
+   flux_tolerance    1e-4
+   num_inners        3
+   num_outers        500
+   up_scatter        2
+   scattering        TCP0
+
+!cmfd
+   cmfd              adcmfd
+   cmfd_solver       mgnode  !1gsweep
+   !cmfd_eigen_solver jd      !power
+   k_shift           1.5
+   cmfd_num_outers   20
+   prolongation      flat
+
+!2D1D
+   split_TL          true
+   TL_treatment      lflat
+   nodal_method      sp3
+ ! under_relax       1.0
+
+!parallel
+   num_space         1
+   num_angle         1
+   num_energy        1
+   num_threads       1
+ ! par_method        EXPLICITFILE
+ ! par_file          partition.txt
+
+!xs_library
+ ! xs_filename       mpact47g_70s_v3.1_11032014.fmt
+   xs_filename       mpact47g_70s_v4.0_11032014.fmt
+   xs_type           ORNL
+   subgroup_set      4
+   dep_kernel        origen
+   dep_filename      origen_data_paths_casl2.0.txt
+   dep_substep       3
+   dep_edit          false
+
+  polars_octant     2
+  azimuthals_octant 16
+!parallel
+  num_space         1
+  num_angle         1
+  num_energy        1
+  num_threads       1
+  par_method        PS
+!xs_library
+  xs_filename       mpact8g_70s_v4.0m0_02232015.fmt
+!mesh
+  !meshing_method    useraxialmesh
+  !automesh_bounds   2.0 20.0
+  mesh fuel  1 1 1 / 4 4 4 4
+  mesh gtube 1 1   / 4 4 4
+  axial_mesh       26.0000
+                    5.0000
+                    6.0500
+                    5.9010
+                    3.8660
+                    8.2110
+                    8.2110
+                    8.2110
+                    8.2120
+                    8.2110
+                    8.2110
+                    8.2110
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    8.0650
+                    3.8100
+                    7.9212
+                    7.9212
+                    7.9212
+                    7.9212
+                    7.9212
+                    8.5560
+                    3.8660
+                    3.5780
+                    3.7900
+                    8.8270
+                    7.6000
+                   25.0000
+
+[INSILICO]
+  transport           ce_mc
+  !seed                45352213
+  !global_log          diagnostic
+  num_cycles          10
+  num_inactive_cycles 5
+  !k_init              1.0
+  Np                  1000
