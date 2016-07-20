@@ -2342,7 +2342,7 @@ MPACT:
       - fall(sub{is_float(shift)},stride(1,6,()))
       - fall(sub{is_geq(shift,0)},stride(1,6,()))
       - fall(sub{is_word(shift)},stride(2,6,()))
-      - fall(sub{in_dictionary(shift,'step','const','ramp')},stride(2,6,()))
+      - fall(sub{in_dictionary(shift,'step','const','ramp','mvcr')},stride(2,6,()))
       - fall(sub{is_word(shift)},stride(3,6,()))
       - fall(sub{is_word(shift)},stride(4,6,()))
       - fall(sub{is_word(shift)},stride(5,6,()))
