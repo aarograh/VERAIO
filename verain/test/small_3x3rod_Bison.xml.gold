@@ -248,9 +248,6 @@
     <Parameter name="executioner_timestepper_time_dt" type="string" value="1.0e3 1.0e5"/>
     <Parameter name="executioner_timestepper_time_t" type="string" value="0 1.0e5"/>
     <Parameter name="fuel_pin_input_file_template" type="string" value="small_3x3rod_Bison.i.template"/>
-    <Parameter name="functions_coolant_temperature_type" type="string" value="PiecewiseLinear"/>
-    <Parameter name="functions_coolant_temperature_x" type="string" value="-100 0"/>
-    <Parameter name="functions_coolant_temperature_y" type="string" value="293 565"/>
     <Parameter name="globalparams_a_lower" type="double" value="0.01676"/>
     <Parameter name="globalparams_a_upper" type="double" value="3.67436"/>
     <Parameter name="globalparams_energy_per_fission" type="double" value="3.2e-11"/>
