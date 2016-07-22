@@ -217,6 +217,7 @@
 
 [BISON]
   solve_type standalone
+  bc_type bulk_cool
   auxkernels_fast_neutron_flux_axial_power_profile = axial_peaking_factors
   auxkernels_fast_neutron_flux_factor = 3.e13
   auxkernels_pelletid_a_lower = 0.00226

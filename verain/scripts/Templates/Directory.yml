@@ -3455,6 +3455,12 @@ BISON:
     _check:
       - is_string()
       - in_dictionary() standalone tiamat tiamat_inline temp_table STANDALONE TIAMAT TIAMAT_INLINE TEMP_TABLE
+  bc_type:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() clad_outer bulk_cool CLAD_OUTER BULK_COOL
   variables_temp_initial_condition:
     <<: *dtdouble
     _content:
