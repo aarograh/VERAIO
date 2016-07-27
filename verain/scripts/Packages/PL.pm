@@ -836,7 +836,12 @@ sub copyarray{
 	    return undef;
 	}
     }
-    return \@result;
+    if(@result == 0){
+	return undef;
+    }
+    else{
+	return \@result;
+    }
 }
 
 sub copyhash{
