@@ -352,7 +352,15 @@ CORE:
       - is_float(nth(2,()))
       - nth(1,())>=0
       - nth(2,())>=0
-
+  pad:
+    <<: *dtlist
+    _content:
+    _check:
+      - is_word(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+      - nth(1,())>=0
+      - nth(2,())>=0
   vessel:
     <<: *dtlist
     _style: multi-line
