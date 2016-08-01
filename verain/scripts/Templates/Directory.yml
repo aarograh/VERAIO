@@ -1775,6 +1775,12 @@ MPACT:
     _check:
       - is_string()
       - in_dictionary() 1g mg 1G MG
+  moc_mg_data_passing:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   volume_corr:
     <<: *dtstring
     _content:
