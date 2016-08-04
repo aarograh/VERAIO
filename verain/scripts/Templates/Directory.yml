@@ -1810,7 +1810,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none polynomial 1dcpm 2dmoc
+      - in_dictionary() none polynomial 1dcpm 2dmoc subplane true false
   valid_on:
     <<: *dtbool
     _content:
