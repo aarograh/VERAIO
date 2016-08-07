@@ -340,10 +340,10 @@
   rlx_den     1.0
   maxiter     10
 
-[INSILICO]
+[SHIFT]
   transport           ce_mc
   !seed                45352213
-  !global_log          diagnostic
+  global_log          diagnostic
   num_cycles          10
   num_inactive_cycles 5
   !k_init              1.0
