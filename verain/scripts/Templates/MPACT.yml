@@ -24,6 +24,13 @@ MPACT:
       _do:
         - copy MPACT/$moc_kernel
       _content:
+    
+    moc_mg_data_passing:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy MPACT/$moc_mg_data_passing
+      _content:
 
     shield_moc_kernel:
       _pltype: parameter
@@ -88,9 +95,16 @@ MPACT:
         - copy MPACT/$vis_edits
       _content:
 
+    rr_edits:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$rr_edits
+      _content:
+
     rod_treatment:
       _pltype: parameter
-      _type: bool
+      _type: string
       _do:
         - copy MPACT/$rod_treatment
       _content:

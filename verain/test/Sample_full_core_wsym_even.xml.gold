@@ -788,6 +788,7 @@
     <Parameter name="auxkernels_pelletid_a_upper" type="double" value="0.5418"/>
     <Parameter name="auxvariables_grain_radius_initial_condition" type="double" value="3.0e-6"/>
     <Parameter name="auxvariables_porosity_initial_condition" type="double" value="0.07"/>
+    <Parameter name="bc_type" type="string" value="bulk_cool"/>
     <Parameter name="bcs_plenumpressure_plenumpressure_initial_pressure" type="double" value="2.0e6"/>
     <Parameter name="bcs_plenumpressure_plenumpressure_startup_time" type="double" value="0"/>
     <Parameter name="bcs_pressure_coolantpressue_factor" type="double" value="1.55e7"/>

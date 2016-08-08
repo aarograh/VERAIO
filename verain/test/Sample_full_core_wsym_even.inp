@@ -609,6 +609,7 @@
 
 [BISON]
   solve_type tiamat
+  bc_type bulk_cool
   auxkernels_fast_neutron_flux_axial_power_profile = axial_peaking_factors
   auxkernels_fast_neutron_flux_factor = 1.6e12
   auxkernels_fast_neutron_flux_rod_ave_lin_pow = power_profile

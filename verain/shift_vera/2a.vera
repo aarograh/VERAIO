@@ -1,14 +1,13 @@
 [CASEID]
-  title 'CASL AMA Benchmark Problem 2A - Fuel Lattice - Public'
+  title 'ama_ornl_xml_2a'
 
 [STATE]
-  power 0.0				! %
-  pressure 2250        ! psia
-  tinlet 557.33 F			! F
-  tfuel 565 K				! K
-  modden 0.743				! g/cc
-  boron 1300				! ppm
-  rodbank A 1				! rod fully withdrawn
+  power 0.0                             ! %
+  tinlet 557.33 F                         ! F
+  tfuel 565 K                             ! K
+  modden 0.743                          ! g/cc
+  boron 1300                            ! ppm
+  rodbank A 1                           ! rod fully withdrawn
   sym qtr
 
 [CORE]
@@ -38,18 +37,18 @@
   bc_rad reflecting
   bc_top reflecting
   bc_bot reflecting
-
-  ! add material definitions for he, inc, ss, and zirc4.
-  include casl_comp_r3_full.ini
+  include mpact_test_mats.ini
 
 [ASSEMBLY]
   npin 17
   ppitch 1.26
 
   fuel U31 10.257 94.5 / 3.1
+!  mat he 0.000176
+!  mat zirc 6.56 zirc4
 
   cell 1 0.4096 0.418 0.475 / U31 he zirc4
-  cell 2	0.561 0.602 / mod zirc4
+  cell 2        0.561 0.602 / mod zirc4
 
   lattice LAT
     2
@@ -67,6 +66,10 @@
 [INSERT]
   title "Pyrex"
   npin 17
+
+!  mat he     0.0001786
+!  mat pyrex  2.25 pyrex-vera
+!  mat ss     8.0
 
   cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrex-vera he ss
 
@@ -125,7 +128,7 @@
      - - - - - - - -
      - - - - - - - - -
 
-  axial PY8   0.0 LAT8	1.0
+  axial PY8   0.0 LAT8  1.0
   axial PY12  0.0 LAT12 1.0
   axial PY16  0.0 LAT16 1.0
   axial PY20  0.0 LAT20 1.0
@@ -134,7 +137,12 @@
 [CONTROL]
   title "B4C and AIC RCCAs"
   npin 17
-  stroke  1.0 1		  ! 1 step for in/out
+  stroke  1.0 1           ! 1 step for in/out
+
+!  mat he     0.0001786
+!  mat ss     8.0
+!  mat aic   10.2
+!  mat b4c    1.76
 
   cell 1  0.382 0.386 0.484 / aic he ss
   cell 2  0.373 0.386 0.484 / b4c he ss
@@ -168,6 +176,9 @@
   title "Incore instrument thimble"
   npin 17
 
+!  mat he 0.0001786
+!  mat ss 8.0
+
   cell 1  0.258 0.382 / he ss
 
   rodmap  LAT
@@ -185,94 +196,44 @@
 
 [EDITS]
 
-[INSILICO]
-  silo_output 'p2'
-  dimension 3
-
-  cell_homogenize true
-  eq_set spn_fv
-  SPN_order 3
-  Pn_order 1
-  tolerance 1e-6
-  Pn_correction true
-
-  mesh 2
-  num_groups 23
-
-  num_blocks_i 2
-  num_blocks_j 2
-  num_sets 1
-  max_delta_z 1.0
-
-  quad_type qr
-  azimuthals_octant 4
-  polars_octant 4
-
-  xs_library v7-252
-
-  new_grp_bounds
-    8.2085e+05
-    1.1109e+05
-    5.5308e+03
-    1.8644e+02
-    3.7612e+01
-    3.5379e+01
-    2.7697e+01
-    2.1684e+01
-    2.0397e+01
-    1.5968e+01
-    7.1500e+00
-    6.7000e+00
-    6.3000e+00
-    1.0970e+00
-    1.0450e+00
-    9.5000e-01
-    3.5000e-01
-    2.0600e-01
-    1.0700e-01
-    5.8000e-02
-    2.5000e-02
-    1.0000e-02
-    1.0000e-05
-
 [MPACT]
-  vis_edits	    core
-  ray_spacing	    0.05
+  vis_edits         core
+  ray_spacing       0.05
 !quad_set
-  quad_type	    CHEBYSHEV-YAMAMOTO
-  polars_octant	    2
+  quad_type         CHEBYSHEV-YAMAMOTO
+  polars_octant     2
   azimuthals_octant 16
 !iteration_control
   flux_tolerance    1e-6
-  num_inners	    2
-  k_tolerance	    1e-6
-  up_scatter	    2
-  num_outers	    500
+  num_inners        2
+  k_tolerance       1e-6
+  up_scatter        2
+  num_outers        500
 !cmfd
-  cmfd		    cmfd
-  cmfd_solver	    mgnode
-  k_shift	    1.5
+  cmfd              cmfd
+  cmfd_solver       mgnode
+  k_shift           1.5
   cmfd_num_outers   20
 !parallel
-  num_space	    1
-  num_angle	    8
-  num_energy	    1
-  num_threads	    1
+  num_space         1
+  num_angle        -4
+  num_energy        1
+  num_threads       1
 !xs_library
-  xs_filename	    declib60g02_e7.fmt
-  xs_type	    ORNL
-  subgroup_set	    4
+  xs_filename       declib56g_e7_09042013_p0mixed.fmt
+  xs_type           ORNL
+  subgroup_set      4
 !mesh
 
-  mesh fuel	    3 1 1 / 8 8 8 8 8 8
-  mesh gtube	    3 1	  / 8 8 8 8 8
+  mesh fuel         3 1 1 / 8 8 8 8 8 8
+  mesh gtube        3 1   / 8 8 8 8 8
 
-  axial_mesh	    1.0000
+  axial_mesh        1.0000
 
 [SHIFT]
   transport           ce_mc
   !seed                45352213
-  !global_log          diagnostic
+  global_log          diagnostic
   num_cycles          10
   num_inactive_cycles 5
   !k_init              1.0

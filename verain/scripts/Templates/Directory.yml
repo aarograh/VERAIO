@@ -352,7 +352,15 @@ CORE:
       - is_float(nth(2,()))
       - nth(1,())>=0
       - nth(2,())>=0
-
+  pad:
+    <<: *dtlist
+    _content:
+    _check:
+      - is_word(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+      - nth(1,())>=0
+      - nth(2,())>=0
   vessel:
     <<: *dtlist
     _style: multi-line
@@ -1190,6 +1198,11 @@ SHIFT:
     _content:
     _check:
       - is_word()
+  global_log:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
   do_transport:
     <<: *dtbool
     _content:
@@ -1767,6 +1780,12 @@ MPACT:
     _check:
       - is_string()
       - in_dictionary() 1g mg 1G MG
+  moc_mg_data_passing:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   volume_corr:
     <<: *dtstring
     _content:
@@ -1792,11 +1811,11 @@ MPACT:
       - is_word()
       - in_dictionary() true false
   rod_treatment:
-    <<: *dtbool
+    <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() true false
+      - in_dictionary() none polynomial 1dcpm 2dmoc subplane true false
   valid_on:
     <<: *dtbool
     _content:
@@ -1825,6 +1844,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() none core fsr
+  rr_edits:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none hdf5 out both
   grid_treatment:
     <<: *dtword
     _content:
@@ -2217,7 +2242,7 @@ MPACT:
     _content:
     _check:
       - is_int()
-      - is_gt() 0
+      - is_gt() -1
   cmfd_num_outers:
     <<: *dtint
     _content:
@@ -2342,7 +2367,7 @@ MPACT:
       - fall(sub{is_float(shift)},stride(1,6,()))
       - fall(sub{is_geq(shift,0)},stride(1,6,()))
       - fall(sub{is_word(shift)},stride(2,6,()))
-      - fall(sub{in_dictionary(shift,'step','const','ramp')},stride(2,6,()))
+      - fall(sub{in_dictionary(shift,'step','const','ramp','mvcr')},stride(2,6,()))
       - fall(sub{is_word(shift)},stride(3,6,()))
       - fall(sub{is_word(shift)},stride(4,6,()))
       - fall(sub{is_word(shift)},stride(5,6,()))
@@ -3455,6 +3480,12 @@ BISON:
     _check:
       - is_string()
       - in_dictionary() standalone tiamat tiamat_inline temp_table STANDALONE TIAMAT TIAMAT_INLINE TEMP_TABLE
+  bc_type:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() clad_outer bulk_cool CLAD_OUTER BULK_COOL
   variables_temp_initial_condition:
     <<: *dtdouble
     _content:
