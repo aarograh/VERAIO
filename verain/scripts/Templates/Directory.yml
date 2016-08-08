@@ -1844,6 +1844,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() none core fsr
+  rr_edits:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none hdf5 out both
   grid_treatment:
     <<: *dtword
     _content:
