@@ -2100,6 +2100,23 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() ctf simplified ctf_external none
+  th_nonlinear_solver:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() picard anderson
+  anderson_options:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==3
+      - is_int(nth(0,()))
+      - is_float(nth(1,()))
+      - is_int(nth(2,()))
+      - nth(0,())>=0
+      - nth(1,())>0
+      - nth(2,())>0
   shielder_th:
     <<: *dtlist
     _content:
