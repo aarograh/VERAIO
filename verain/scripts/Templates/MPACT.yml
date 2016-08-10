@@ -24,7 +24,7 @@ MPACT:
       _do:
         - copy MPACT/$moc_kernel
       _content:
-    
+
     moc_mg_data_passing:
       _pltype: parameter
       _type: bool
@@ -436,6 +436,13 @@ MPACT:
             - copy MPACT/$coupling_method
           _content:
 
+        nonlinear_solver:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$th_nonlinear_solver
+          _content:
+
         average_ftemp:
           _pltype: parameter
           _type: bool
@@ -469,6 +476,27 @@ MPACT:
           _type: int
           _do:
             - copy MPACT/$outers_per_TH
+          _content:
+
+        depthAnderson:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$anderson_options:0
+          _content:
+
+        mixAnderson:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$anderson_options:1
+          _content:
+
+        startAnderson:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$anderson_options:2
           _content:
 
         ctf_basename:
