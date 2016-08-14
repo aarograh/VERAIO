@@ -1768,6 +1768,12 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  refl_no_added_modules:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   moc_kernel:
     <<: *dtstring
     _content:
