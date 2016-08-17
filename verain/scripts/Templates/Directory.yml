@@ -1769,10 +1769,10 @@ MPACT:
       - is_float()
       - is_gt() 0.0
   refl_no_added_modules:
-    <<: *dtbool
+    <<: *dtstring
     _content:
     _check:
-      - is_word()
+      - is_string()
       - in_dictionary() true false
   moc_kernel:
     <<: *dtstring

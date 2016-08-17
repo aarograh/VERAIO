@@ -20,7 +20,7 @@ MPACT:
 
     refl_no_added_modules:
       _pltype: parameter
-      _type: bool
+      _type: string
       _do:
         - copy MPACT/$refl_no_added_modules
       _content:
