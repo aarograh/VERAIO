@@ -748,7 +748,14 @@ MPACT:
           _do:
             - copy MPACT/$quasi_1D
           _content:
-
+          
+        res_upscat:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$res_upscat
+          _content:
+          
         mats_file:
           _pltype: parameter
           _type: string
