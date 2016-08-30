@@ -613,7 +613,7 @@ ASSEMBLY:
     _style: multi-line
     _slash:
     _check:
-      - nth(1,())>0
+      - nth(1,())>=0
       - nth(2,())eq'/'||nth(3,())eq'/'
       - (nth(2,())eq'/'&&(nth(3,())>=0))||(nth(3,())eq'/'&&(nth(4,())>=0))
 
