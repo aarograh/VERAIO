@@ -1994,6 +1994,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() t f true false
+  res_upscat:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() t f true false
   dep_filename:
     <<: *dtword
     _content:
