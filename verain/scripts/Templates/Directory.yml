@@ -181,7 +181,12 @@ STATE:
     _content:
     _check:
       - is_word()
-      - in_dictionary() keff boron
+      - in_dictionary() keff boron rod
+  search_bank:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
   pressure:
     <<: *dtdouble
     _content:
@@ -1984,6 +1989,12 @@ MPACT:
       - is_word()
       - in_dictionary() t f true false
   quasi_1D:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() t f true false
+  res_upscat:
     <<: *dtword
     _content:
     _check:

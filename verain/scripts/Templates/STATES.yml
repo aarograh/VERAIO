@@ -124,6 +124,13 @@ STATES:
             - copy %STATE/$(_loop)/$search
           _content:
 
+        search_bank:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %STATE/$(_loop)/$search_bank
+          _content:
+
         kcrit:
           _pltype: parameter
           _type: double
