@@ -246,10 +246,6 @@
   edit_dnb 0          ! Generate the dnb.out file
 
 
-[MAMBA2D]
-  Nx   50
-  Ny   40
-  tmax 400.0
 
 [COUPLING]
   epsk        5.0  ! pcm

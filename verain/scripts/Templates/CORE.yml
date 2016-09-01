@@ -270,6 +270,13 @@ CORE:
         - copy CORE/@ylabel
       _content:
 
+    label_format:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/@label_format
+      _content:
+
     height:
       _pltype: parameter
       _type: double
