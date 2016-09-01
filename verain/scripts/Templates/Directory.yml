@@ -489,6 +489,12 @@ CORE:
     _content:
     _check:
       - fall(sub{is_word(shift)},())
+  label_format:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() x-y y-x
   height:
     <<: *dtdouble
     _content:
