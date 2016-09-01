@@ -231,9 +231,4 @@
     <Parameter name="rlx_power" type="double" value="0.5"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
-  <ParameterList name="MAMBA2D">
-    <Parameter name="Nx" type="int" value="50"/>
-    <Parameter name="Ny" type="int" value="40"/>
-    <Parameter name="tmax" type="double" value="400.0"/>
-  </ParameterList>
 </ParameterList>

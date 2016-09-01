@@ -216,10 +216,6 @@
   maps_filename = 3x3_HFP
   boil_ht_cor chen ! Use the Chen correlation for subcooled/saturated boiling heat transfer
 
-[MAMBA2D]
-  Nx   50
-  Ny   40
-  tmax 400.0
 
 [COUPLING]
   epsk        5.0  ! pcm
