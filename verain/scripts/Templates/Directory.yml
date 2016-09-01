@@ -762,6 +762,12 @@ DETECTOR:
     _content:
     _check:
       - is_string()
+  type:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() u235 v rh
   npin:
     <<: *dtint
     _content:
