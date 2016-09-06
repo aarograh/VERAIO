@@ -2006,12 +2006,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() t f true false
-  res_upscat:
+  res_up_scatter:
     <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() t f true false
+      - in_dictionary() true false
   dep_filename:
     <<: *dtword
     _content:

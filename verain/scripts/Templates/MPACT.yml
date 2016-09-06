@@ -749,11 +749,11 @@ MPACT:
             - copy MPACT/$quasi_1D
           _content:
           
-        res_upscat:
+        res_up_scatter:
           _pltype: parameter
           _type: string
           _do:
-            - copy MPACT/$res_upscat
+            - copy MPACT/$res_up_scatter
           _content:
           
         mats_file:
