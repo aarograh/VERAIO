@@ -53,7 +53,7 @@ _DIRECTORY:
   COUPLING:
   MPACT:
   BISON:
-  MAMBA2D:
+  MAMBA1D:
   TIAMAT:
 
 CASEID:
@@ -181,7 +181,12 @@ STATE:
     _content:
     _check:
       - is_word()
-      - in_dictionary() keff boron
+      - in_dictionary() keff boron rod
+  search_bank:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
   pressure:
     <<: *dtdouble
     _content:
@@ -484,6 +489,12 @@ CORE:
     _content:
     _check:
       - fall(sub{is_word(shift)},())
+  label_format:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() x-y y-x
   height:
     <<: *dtdouble
     _content:
@@ -608,7 +619,7 @@ ASSEMBLY:
     _style: multi-line
     _slash:
     _check:
-      - nth(1,())>0
+      - nth(1,())>=0
       - nth(2,())eq'/'||nth(3,())eq'/'
       - (nth(2,())eq'/'&&(nth(3,())>=0))||(nth(3,())eq'/'&&(nth(4,())>=0))
 
@@ -757,6 +768,12 @@ DETECTOR:
     _content:
     _check:
       - is_string()
+  type:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() u235 v rh
   npin:
     <<: *dtint
     _content:
@@ -1768,6 +1785,12 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  refl_no_added_modules:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() true false
   moc_kernel:
     <<: *dtstring
     _content:
@@ -1983,6 +2006,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() t f true false
+  res_up_scatter:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   dep_filename:
     <<: *dtword
     _content:
@@ -2100,6 +2129,23 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() ctf simplified ctf_external none
+  th_nonlinear_solver:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() picard anderson
+  anderson_options:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==3
+      - is_int(nth(0,()))
+      - is_float(nth(1,()))
+      - is_int(nth(2,()))
+      - nth(0,())>=0
+      - nth(1,())>0
+      - nth(2,())>0
   shielder_th:
     <<: *dtlist
     _content:
@@ -2372,205 +2418,36 @@ MPACT:
       - fall(sub{is_word(shift)},stride(4,6,()))
       - fall(sub{is_word(shift)},stride(5,6,()))
 
-MAMBA2D:
-  problem_name:
+MAMBA1D:
+  noBoilnoCrud:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 0
+      - is_int()
+  Bthresh:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  Bfract:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  interface:
     <<: *dtstring
     _content:
     _check:
       - is_string()
-  Nx:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-  Ny:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-  deltaX:
+  constantTsat:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
-  deltaY:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  deltat:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  tmax:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  imod:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-  HFprod:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-  Tsat:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  C_por:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  C_den:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  Cp:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  C_k:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  Hc:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  Nc:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  rc:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  Db:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  jm:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-  Wden:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-  ksnb:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-  ksnbp:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-  npar:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-  AFe:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  EFe:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  nsol:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-  AB:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  EB:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-
-  nbnd:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-  C_NiFe2O4c:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_geq() 0
-  C_NiFe2O4s:
-    <<: *dtlist
-    _content:
-    _check:
-      - fall(sub{is_float(shift)},())
-      - fall(sub{is_geq(shift,0)},())
-  nint:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-  C_Bc:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_geq() 0
-  C_Bs:
-    <<: *dtlist
-    _content:
-    _check:
-      - fall(sub{is_float(shift)},())
-      - fall(sub{is_geq(shift,0)},())
 
 BISON:
 

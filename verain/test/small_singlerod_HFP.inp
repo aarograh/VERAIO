@@ -212,10 +212,6 @@
   edit_channels 1
   maps_filename = single_rod_HFP
 
-[MAMBA2D]
-  Nx   50
-  Ny   40
-  tmax 400.0
 
 [COUPLING]
   epsk        5.0  ! pcm

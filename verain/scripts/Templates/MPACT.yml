@@ -18,13 +18,20 @@ MPACT:
         - copy MPACT/$shield_ray_spacing
       _content:
 
+    refl_no_added_modules:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$refl_no_added_modules
+      _content:
+
     moc_kernel:
       _pltype: parameter
       _type: string
       _do:
         - copy MPACT/$moc_kernel
       _content:
-    
+
     moc_mg_data_passing:
       _pltype: parameter
       _type: bool
@@ -436,6 +443,13 @@ MPACT:
             - copy MPACT/$coupling_method
           _content:
 
+        nonlinear_solver:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$th_nonlinear_solver
+          _content:
+
         average_ftemp:
           _pltype: parameter
           _type: bool
@@ -469,6 +483,27 @@ MPACT:
           _type: int
           _do:
             - copy MPACT/$outers_per_TH
+          _content:
+
+        depthAnderson:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$anderson_options:0
+          _content:
+
+        mixAnderson:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$anderson_options:1
+          _content:
+
+        startAnderson:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$anderson_options:2
           _content:
 
         ctf_basename:
@@ -713,7 +748,14 @@ MPACT:
           _do:
             - copy MPACT/$quasi_1D
           _content:
-
+          
+        res_up_scatter:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$res_up_scatter
+          _content:
+          
         mats_file:
           _pltype: parameter
           _type: string
