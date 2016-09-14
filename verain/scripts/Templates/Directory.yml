@@ -3362,6 +3362,12 @@ BISON:
     _check:
       - is_string()
       - in_dictionary() clad_outer bulk_cool CLAD_OUTER BULK_COOL
+  axial_shape:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() midpoint constant MIDPOINT CONSTANT
   variables_temp_initial_condition:
     <<: *dtdouble
     _content:
