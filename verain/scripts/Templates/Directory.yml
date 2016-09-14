@@ -593,7 +593,6 @@ ASSEMBLY:
     _style:
     _check:
       - nth(2,())>0
-      - nth(2,())<6
       - nth(3,())>0
       - nth(4,())>0
   grid_axial:
@@ -3363,6 +3362,12 @@ BISON:
     _check:
       - is_string()
       - in_dictionary() clad_outer bulk_cool CLAD_OUTER BULK_COOL
+  axial_shape:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() midpoint constant MIDPOINT CONSTANT
   variables_temp_initial_condition:
     <<: *dtdouble
     _content:

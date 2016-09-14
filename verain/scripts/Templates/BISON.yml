@@ -1158,6 +1158,13 @@ BISON:
       _do:
         - copy BISON/$bc_type
       _content:
+      
+    axial_shape:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$axial_shape
+      _content:
 
     userobjects_pbz_execute_on:
       _pltype: parameter
