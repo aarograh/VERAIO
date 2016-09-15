@@ -209,12 +209,14 @@
   maps_filename = single_rod_HFP
 
 [MAMBA1D]
-  noBoilnoCrud 0   ! 0-crud will be deposited in non-boiling regions
-                   ! 1-crud will only be deposited where boiling occurs
-  Bthresh  0.005   ! The threshold for boron precipitation in the crud layer
-  Bfract   0.16    ! The threshold for fraction of crud that is precipitate
-  interface old    ! The old one is mamba_cfd and will not pass Tsat in
-                   ! The new one is mambasolve and will pass Tsat in
+  noBoilnoCrud 0     ! 0-crud will be deposited in non-boiling regions
+                     ! 1-crud will only be deposited where boiling occurs
+  onlyBoronPrecip 0  ! 0-boron deposited will include boron in solution and precipitate
+                     ! 1-boron deposited will only be boron that has precipitated
+  Bthresh  0.005     ! The threshold for boron precipitation in the crud layer
+  Bfract   0.16      ! The threshold for fraction of crud that is precipitate
+  interface old      ! The old one is mamba_cfd and will not pass Tsat in
+                     ! The new one is mambasolve and will pass Tsat in
   constantTsat  618.698 ! K.  The constant saturation temperature to use in MAMBA
 
 
