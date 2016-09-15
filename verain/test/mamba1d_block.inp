@@ -213,8 +213,6 @@
                    ! 1-crud will only be deposited where boiling occurs
   Bthresh  0.005   ! The threshold for boron precipitation in the crud layer
   Bfract   0.16    ! The threshold for fraction of crud that is precipitate
-  interface old    ! The old one is mamba_cfd and will not pass Tsat in
-                   ! The new one is mambasolve and will pass Tsat in
   constantTsat  618.698 ! K.  The constant saturation temperature to use in MAMBA
 
 

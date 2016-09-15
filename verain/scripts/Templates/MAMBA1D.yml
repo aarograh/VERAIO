@@ -24,13 +24,6 @@ MAMBA1D:
         - copy MAMBA1D/$Bfract
       _content:
 
-    interface:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy MAMBA1D/$interface
-      _content:
-
     constantTsat:
       _pltype: parameter
       _type: double

@@ -228,7 +228,6 @@
     <Parameter name="Bfract" type="double" value="0.16"/>
     <Parameter name="Bthresh" type="double" value="0.005"/>
     <Parameter name="constantTsat" type="double" value="618.698"/>
-    <Parameter name="interface" type="string" value="old"/>
     <Parameter name="noBoilnoCrud" type="int" value="0"/>
   </ParameterList>
 </ParameterList>
