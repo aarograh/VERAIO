@@ -10,6 +10,14 @@ MAMBA1D:
         - copy MAMBA1D/$noBoilnoCrud
       _content:
 
+    onlyBoronPrecip:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MAMBA1D/$onlyBoronPrecip
+      _content:
+
+
     Bthresh:
       _pltype: parameter
       _type: double 
