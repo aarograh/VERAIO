@@ -230,5 +230,6 @@
     <Parameter name="constantTsat" type="double" value="618.698"/>
     <Parameter name="interface" type="string" value="old"/>
     <Parameter name="noBoilnoCrud" type="int" value="0"/>
+    <Parameter name="onlyBoronPrecip" type="int" value="0"/>
   </ParameterList>
 </ParameterList>
