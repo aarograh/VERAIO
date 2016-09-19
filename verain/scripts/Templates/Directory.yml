@@ -593,7 +593,7 @@ ASSEMBLY:
     _style:
     _check:
       - nth(2,())>0
-      - nth(2,())<6
+      - nth(2,())<10
       - nth(3,())>0
       - nth(4,())>0
   grid_axial:
@@ -2448,6 +2448,12 @@ MAMBA1D:
     _check:
       - is_float()
       - is_gt() 0
+  onlyBoronPrecip:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 0
+      - is_int()
 
 BISON:
 

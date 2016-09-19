@@ -229,5 +229,6 @@
     <Parameter name="Bthresh" type="double" value="0.005"/>
     <Parameter name="constantTsat" type="double" value="618.698"/>
     <Parameter name="noBoilnoCrud" type="int" value="0"/>
+    <Parameter name="onlyBoronPrecip" type="int" value="0"/>
   </ParameterList>
 </ParameterList>
