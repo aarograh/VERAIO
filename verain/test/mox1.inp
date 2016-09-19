@@ -36,6 +36,9 @@
   npin   17
   ppitch 1.26
 
+  mat he    0.000176 he-4
+  mat zirc  6.56 zirc4
+
 !
 !  Sample MOX enrichments from VENUS-2 specification
 !
@@ -56,10 +59,10 @@
   fuel MOX2 10.11 94.5 / 0.17116 u-234 0 u-236 0  pu-238 0.30453 pu-239  7.85890 pu-240 3.60497 pu-241 1.34102 pu-242 0.92281 am-241 0.38939   ! med
   fuel MOX3 10.11 94.5 / 0.18501 u-234 0 u-236 0  pu-238 0.15828 pu-239  4.10027 pu-240 1.88088 pu-241 0.69961 pu-242 0.48150 am-241 0.20315   ! lo
 
-  cell 1 0.4096 0.418 0.475 / MOX1 he zirc4
-  cell 2 0.4096 0.418 0.475 / MOX2 he zirc4
-  cell 3 0.4096 0.418 0.475 / MOX3 he zirc4
-  cell T        0.561 0.602 /    mod zirc4
+  cell 1 0.4096 0.418 0.475 / MOX1 he zirc
+  cell 2 0.4096 0.418 0.475 / MOX2 he zirc
+  cell 3 0.4096 0.418 0.475 / MOX3 he zirc
+  cell T        0.561 0.602 /    mod zirc
 
   lattice LAT
     T
