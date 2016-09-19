@@ -1,0 +1,90 @@
+[CASEID]
+  title 'Sample MOX Assembly'
+!
+!  This is a sample MOX PWR assembly with three different plutonium enrichment zones
+!  MOX enrichments are based on the VENUS-2 benchmark specification
+!
+!  9/19/2016: MPACT currently cannot run MOX cases.  See Story #4378 and #4381
+!
+
+[STATE]
+  power    0.0
+  tinlet   565 K
+  tfuel    565 K
+  modden   0.743      ! g/cc
+  boron    1300       ! ppm
+  sym      qtr  
+  feedback off
+
+[CORE]
+  size   1
+  apitch 21.50 
+  height 1.0
+  rated  0.01 0.01
+
+  core_shape
+    1
+
+  assm_map
+    ASSY
+
+  bc_rad reflecting
+  bc_top reflecting
+  bc_bot reflecting
+
+[ASSEMBLY]
+  npin   17
+  ppitch 1.26
+
+!
+!  Sample MOX enrichments from VENUS-2 specification
+!
+!    Heavy Metal enrichments (%)
+!          Low Pu   Middle Pu  High Pu
+! U-235    0.18501   0.17116   0.16174
+! Pu-238   0.15828   0.30453   0.40232
+! Pu-239   4.10027   7.85890  10.42187
+! Pu-240   1.88088   3.60497   4.78046
+! Pu-241   0.69961   1.34102   1.77834
+! Pu-242   0.48150   0.92281   1.22383
+! Am-241   0.20315   0.38939   0.51632
+!
+
+! Fuel enrichments are specified as weight percents.  U-238 is added to bring the final sum to 100%
+
+  fuel MOX1 10.11 94.5 / 0.16174 u-234 0 u-236 0  pu-238 0.40232 pu-239 10.42187 pu-240 4.78046 pu-241 1.77834 pu-242 1.22383 am-241 0.51632   ! hi
+  fuel MOX2 10.11 94.5 / 0.17116 u-234 0 u-236 0  pu-238 0.30453 pu-239  7.85890 pu-240 3.60497 pu-241 1.34102 pu-242 0.92281 am-241 0.38939   ! med
+  fuel MOX3 10.11 94.5 / 0.18501 u-234 0 u-236 0  pu-238 0.15828 pu-239  4.10027 pu-240 1.88088 pu-241 0.69961 pu-242 0.48150 am-241 0.20315   ! lo
+
+  cell 1 0.4096 0.418 0.475 / MOX1 he zirc4
+  cell 2 0.4096 0.418 0.475 / MOX2 he zirc4
+  cell 3 0.4096 0.418 0.475 / MOX3 he zirc4
+  cell T        0.561 0.602 /    mod zirc4
+
+  lattice LAT
+    T
+    1 1
+    1 1 1
+    T 1 1 T
+    1 1 1 1 1
+    1 1 1 1 1 T
+    T 1 1 T 1 2 1
+    2 2 2 2 2 2 2 3
+    3 3 3 3 3 3 3 3 3
+
+  axial ASSY 0.0 LAT 1.0 
+
+[MPACT]
+  num_space      1 
+  num_angle     -8
+  num_threads    1
+
+[SHIFT]
+  transport            ce_mc       
+  num_cycles           1100
+  num_inactive_cycles  100
+  Np                   1000000  
+
+[INSILICO]
+  num_blocks_i   4
+  num_blocks_j   4
