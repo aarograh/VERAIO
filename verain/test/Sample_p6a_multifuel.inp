@@ -16,11 +16,11 @@
 
 [STATE]
   power  100.0         ! %
-  tinlet 559.0 F         ! F
+  tinlet 559.0 F       ! F
   boron  1300          ! ppmB
   pressure 2250        ! psia
 
-  tfuel 900.0 K         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
+  tfuel 900.0 K        ! K         Not used with T/H feedback! set to 900K with feedback
   modden 0.743         ! g/cc      Not used with T/H feedback!
 
   feedback on
@@ -46,13 +46,8 @@
 
   bc_rad reflecting
 
-  mat he     0.000176
-  mat inc    8.19
-  mat ss     8.0
+  include CORE.ini   ! load default materials
   mat zirc   6.56 zirc4
-  mat aic   10.20
-  mat pyrex  2.23
-  mat b4c    6.56
 
 [ASSEMBLY]
   title "Westinghouse 17x17"
@@ -64,10 +59,7 @@
   fuel UGX 10.157 92.5 / 4.9 / gxx=4.5
   fuel U31 10.257 95.0 / 3.1
 
-!=== material label, key_name, density (lib_name defaults to key_name)
-  mat he   0.000176
-  mat inc  8.19
-  mat ss   8.0
+  include CORE.ini   ! load default materials
   mat zirc 6.56 zirc4
 
   cell 1     0.4096 0.418 0.475 / U31 he zirc

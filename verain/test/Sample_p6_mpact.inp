@@ -18,8 +18,8 @@
 
 [STATE]
   power  100           ! %
-  tinlet 620.33 F        ! F - 600K
-  tfuel 600.0 K         ! K - 600K
+  tinlet 620.33 F      ! F
+  tfuel 600.0 K        ! K
   boron  1300          ! ppmB
   modden 0.743         ! g/cc
 
@@ -42,23 +42,8 @@
 
   bc_rad reflecting
 
-!  Old material format
-!
-!  he he 0.000176
-!  inc inc 8.19
-!  ss ss 8.0
-!  zirc zirc 6.56
-!  aic aic 10.20
-!  pyrex pyrex 2.23
-!  b4c b4c 6.56
-
-  mat he     0.000176
-  mat inc    8.19
-  mat ss     8.0
-  mat zirc   6.56
-  mat aic   10.20
-  mat pyrex  2.23
-  mat b4c    6.56
+  include CORE.ini   ! load default materials
+  mat zirc   6.56 zirc4
 
 ! ASSEMBLY description
 
