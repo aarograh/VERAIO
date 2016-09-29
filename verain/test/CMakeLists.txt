@@ -1,5 +1,3 @@
-
-
 #===========================================================
 #
 #            Test the perl VERA input parser
@@ -139,7 +137,7 @@ TRIBITS_ADD_ADVANCED_TEST( veradiff_match
     ARGS ${WEEKLY_TEST_DIR}/2a.h5.gold ${WEEKLY_TEST_DIR}/2a.h5.gold
     PASS_REGULAR_EXPRESSION_ALL
       "reading h5 file: .+/verain/weekly_testing/2a.h5.gold"
-      "reading dataset: keff"
+      "reading dataset: STATE_0001/keff"
       "keff1"
       "keff2"
       "diff .+ 0.00 pcm"
@@ -154,7 +152,7 @@ TRIBITS_ADD_ADVANCED_TEST( veradiff_fail
     PASS_REGULAR_EXPRESSION_ALL
       "reading h5 file: .+/verain/weekly_testing/2a.h5.gold"
       "reading h5 file: .+/verain/weekly_testing/2b.h5.gold"
-      "reading dataset: keff"
+      "reading dataset: STATE_0001/keff"
       "keff1"
       "keff2"
       "tol .+ 10.00 pcm"
@@ -202,4 +200,3 @@ ENDFUNCTION()
 # Run the thermal expansion test cases
 #
 ADD_THERMAL_EXPANSION_TEST(Sample_p6a)
-
