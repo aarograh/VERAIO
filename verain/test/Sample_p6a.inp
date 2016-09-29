@@ -291,6 +291,11 @@
   rlx_den     1.0
   maxiter     100
 
+[MPACT]
+  include MPACT.ini
+  num_space      29
+  num_angle      1
+  num_threads    1
 
 
 

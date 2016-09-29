@@ -315,3 +315,8 @@
   maxiter     100
 ! read_restart cobra_denovo_restart.out
 
+[MPACT]
+  num_space      29
+  num_angle      1
+  num_threads    1
+

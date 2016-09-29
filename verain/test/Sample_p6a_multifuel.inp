@@ -54,13 +54,10 @@
   npin 17
   ppitch 1.260
 
-  mat gxx 7.407 gd203       ! define gad
+  mat gxx 7.407 gad    ! define gad
 
   fuel UGX 10.157 92.5 / 4.9 / gxx=4.5
   fuel U31 10.257 95.0 / 3.1
-
-  include CORE.ini   ! load default materials
-  mat zirc 6.56 zirc4
 
   cell 1     0.4096 0.418 0.475 / U31 he zirc
   cell 2     0.4096 0.418 0.475 / UGX he zirc
@@ -282,4 +279,16 @@
   maxits  10000
   courant 0.8
 
+[COUPLING]
+  epsk        5.0  ! pcm
+  epsp        1.0e-4
+  rlx_power   0.6
+  rlx_tfuel   1.0
+  rlx_den     1.0
+  maxiter     100
+
+[MPACT]
+  num_space      29
+  num_angle      1
+  num_threads    1
 

@@ -368,4 +368,11 @@
     <Parameter name="rlx_power" type="double" value="0.6"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
+  <ParameterList name="MPACT">
+    <ParameterList name="parallel_env">
+      <Parameter name="num_angle" type="int" value="1"/>
+      <Parameter name="num_space" type="int" value="29"/>
+      <Parameter name="num_threads" type="int" value="1"/>
+    </ParameterList>
+  </ParameterList>
 </ParameterList>
