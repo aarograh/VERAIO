@@ -24,14 +24,6 @@
     <ParameterList name="State_4">
       <Parameter name="power" type="double" value="100.0"/>
     </ParameterList>
-    <ParameterList name="State_5">
-      <Parameter name="deplete" type="Array(double)" value="{100.0}"/>
-      <Parameter name="deplete_units" type="string" value="EFPD"/>
-      <Parameter name="power" type="double" value="100.0"/>
-    </ParameterList>
-    <ParameterList name="State_6">
-      <Parameter name="power" type="double" value="0.000001"/>
-    </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">
     <ParameterList name="Materials">
@@ -296,7 +288,7 @@
   <ParameterList name="SHIFT">
     <Parameter name="celib_file" type="string" value="ce_v7.0_endf.xml"/>
     <Parameter name="do_transport" type="bool" value="true"/>
-    <Parameter name="global_log" type="string" value="diagnostic"/>
+    <Parameter name="global_log" type="string" value="debug"/>
     <ParameterList name="kcode_db">
       <Parameter name="Np" type="int" value="1000"/>
       <Parameter name="num_cycles" type="int" value="10"/>
