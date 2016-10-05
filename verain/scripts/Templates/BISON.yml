@@ -1165,6 +1165,13 @@ BISON:
       _do:
         - copy BISON/$axial_shape
       _content:
+      
+    element_order:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$element_order
+      _content:
 
     userobjects_pbz_execute_on:
       _pltype: parameter

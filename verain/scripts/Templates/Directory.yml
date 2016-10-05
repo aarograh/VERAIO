@@ -3375,6 +3375,12 @@ BISON:
     _check:
       - is_string()
       - in_dictionary() midpoint constant MIDPOINT CONSTANT
+  element_order:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() linear quadratic LINEAR QUADRATIC
   variables_temp_initial_condition:
     <<: *dtdouble
     _content:
