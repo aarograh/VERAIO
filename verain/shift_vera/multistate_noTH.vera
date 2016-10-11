@@ -306,7 +306,7 @@
                    25.0000
 
 [SHIFT]
-  transport           ce_mc
+  transport           ce
   !seed                45352213
   global_log          debug
   num_cycles          10
