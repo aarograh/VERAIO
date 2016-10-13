@@ -19,7 +19,7 @@
 [CORE]
   size 1                ! 1x1 assemblies
   rated 0.0670   0.0024  ! MW, Mlbs/hr
-  apitch 1.26 
+  apitch 1.26
   height 406.328
 
   core_shape
@@ -70,7 +70,7 @@
 
 [ASSEMBLY]
   title "Westinghouse 1x1"
-  npin 1 
+  npin 1
   ppitch 1.260
 
   fuel U31 10.257 95.0 / 3.1
@@ -94,7 +94,7 @@
 
   lattice PLEN1
      8
-  
+
   lattice PCAP1
      9
 
@@ -331,7 +331,7 @@
   global_mass_balance   1e-4 ! %
   global_energy_balance 1e-4 ! %
 
-  
+
 [COUPLING]
   epsk        5.0  ! pcm
   epsp        1.0e-4

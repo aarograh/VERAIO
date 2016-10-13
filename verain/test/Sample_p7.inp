@@ -26,8 +26,8 @@
   pressure 2250.0
   feedback on
 
-  tinlet 557.33 F         ! F - 565K
-  tfuel 900.0 K          ! K     (HFP value)
+  tinlet 557.33 F       ! F - 565K
+  tfuel 900.0 K         ! K     (HFP value)
   boron  1285           ! ppmB
   modden 0.743          ! g/cc
   sym qtr          ! ***
@@ -135,9 +135,7 @@
   xlabel  R P N M L K J H G  F  E  D  C  B  A
   ylabel  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
 
-  mat he     0.0001786
-  mat inc    8.19
-  mat ss     8.0
+  include CORE.ini   ! load default materials
   mat zirc   6.56 zirc4
 
 [ASSEMBLY]
