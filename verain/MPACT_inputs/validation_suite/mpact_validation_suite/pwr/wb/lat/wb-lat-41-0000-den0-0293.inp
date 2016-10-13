@@ -57,7 +57,7 @@
   k_shift        1.8    ! *** fix convergence
 
 [SHIFT]
-  transport            ce_mc       
+  transport            ce       
   num_cycles           1100
   num_inactive_cycles  100
   Np                   1000000  

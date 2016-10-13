@@ -291,7 +291,6 @@
       <Parameter name="num_cycles" type="int" value="10"/>
       <Parameter name="num_inactive_cycles" type="int" value="5"/>
     </ParameterList>
-    <Parameter name="mesh" type="int" value="1"/>
     <Parameter name="output_geometry" type="bool" value="true"/>
     <Parameter name="thermal_energy_cutoff" type="double" value="10.0"/>
     <Parameter name="transport" type="string" value="ce"/>
