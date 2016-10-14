@@ -66,6 +66,13 @@ SHIFT:
         - copy SHIFT/$thermal_energy_cutoff
       _content:
 
+    Np:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy SHIFT/$Np
+      _content:
+
     kcode_db:
       _pltype: list
       _content:
