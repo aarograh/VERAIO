@@ -231,10 +231,11 @@
   axial_mesh        1.0000
 
 [SHIFT]
-  transport           ce_mc
+  transport           ce
   !seed                45352213
-  global_log          diagnostic
+  global_log          debug
   num_cycles          10
   num_inactive_cycles 5
   !k_init              1.0
   Np                  1000
+  output_fission_source true

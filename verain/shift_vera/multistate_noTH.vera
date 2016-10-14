@@ -16,13 +16,13 @@
 [STATE] deplete EFPD   0.5; power 100.0
 [STATE]                     power  0.000001
 [STATE]                     power 100.0
-[STATE] deplete EFPD 100.0; power 100.0
-[STATE]                     power  0.000001
+![STATE] deplete EFPD 100.0; power 100.0
+![STATE]                     power  0.000001
 
 [CORE]
   size 1                ! 1x1 assemblies
   rated 0.0670   0.0024  ! MW, Mlbs/hr
-  apitch 1.26 
+  apitch 1.26
   height 406.328
 
   core_shape
@@ -73,7 +73,7 @@
 
 [ASSEMBLY]
   title "Westinghouse 1x1"
-  npin 1 
+  npin 1
   ppitch 1.260
 
   fuel U31 10.257 95.0 / 3.1
@@ -97,7 +97,7 @@
 
   lattice PLEN1
      8
-  
+
   lattice PCAP1
      9
 
@@ -306,9 +306,9 @@
                    25.0000
 
 [SHIFT]
-  transport           ce_mc
+  transport           ce
   !seed                45352213
-  global_log          diagnostic
+  global_log          debug
   num_cycles          10
   num_inactive_cycles 5
   !k_init              1.0

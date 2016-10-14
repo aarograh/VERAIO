@@ -1,0 +1,121 @@
+[CASEID]
+  title 'Mini Colorset - 3x3 array of 7x7 assemblies'
+
+[STATE]
+  power    0.01         ! %
+  tinlet   560.0 F      ! Not well documented but used in [r1 p.63]
+  tfuel    556.4 F      ! Tin  only for initialization
+  boron    1000         ! ppm  only for initialization
+  modden   0.744        ! g/cc only for initialization
+  pressure 2250         ! [r1 p.3]
+!  bypass    5.0         ! [r1 p.3]  already removed bypass from active flow
+  search   boron
+  xenon    equil
+  feedback off
+  sym qtr  
+
+
+  power 1.00E-02;  deplete EFPD 304.40; restart_read 4-mini-2d_cy1_restart.h5 3rd_outage
+[STATE]  power 8.41E+01;  deplete EFPD 305.50; 
+[STATE]  power 8.45E+01;  deplete EFPD 309.72; restart_write 4-mini-2d_cy1_fm_restart_2.h5 fm14
+[STATE]  power 8.49E+01;  deplete EFPD 319.17
+[STATE]  power 7.00E+01;  deplete EFPD 321.60
+[STATE]  power 6.99E+01;  deplete EFPD 326.23; restart_write 4-mini-2d_cy1_fm_restart_2.h5 fm15
+[STATE]  power 1.00E-02;  deplete EFPD 327.20; restart_write 4-mini-2d_cy1_restart_2.h5 EOC1; op_date 01/01/1985
+
+[CORE]
+  size   3              ! one assembly
+  rated  0.127 1.0410 ! MW, Mlbs/hr
+  apitch 8.9
+  height 1.0
+
+  core_shape
+    1 1 1
+    1 1 1
+    1 1 1
+
+  assm_map
+    1
+    2 1
+  insert_map
+    -
+   04 -
+
+
+  xlabel   C  B  A  ! [r1 p.31]
+  ylabel  01 02 03  ! [r1 p.31]
+  bc_rad reflecting
+  bc_top reflecting
+  bc_bot reflecting
+
+[ASSEMBLY]
+  title "Mini 7x7"
+  npin 7 
+  ppitch 1.26
+  
+  fuel U21 10.257 94.5 / 2.110
+  fuel U26 10.257 94.5 / 2.619
+  fuel U31 10.257 94.5 / 3.100 
+
+  cell 1     0.4096 0.418 0.475 / U21 he zirc4
+  cell 2     0.4096 0.418 0.475 / U26 he zirc4
+  cell 3     0.4096 0.418 0.475 / U31 he zirc4
+  cell 4            0.561 0.602 / mod    zirc4      ! guide/instrument tube
+  cell 5            0.418 0.475 /     he zirc4      ! plenum
+  cell 6                  0.475 /        zirc4      ! plug
+  cell 7                  0.475 /        mod        ! empty
+
+  lattice LAT21 
+       4
+       1 1
+       1 1 4
+       1 1 1 1
+
+  lattice LAT26  
+       4
+       2 2
+       2 2 4
+       2 2 2 2
+
+  lattice LAT31 
+       4
+       3 3
+       3 3 4
+       3 3 3 3
+
+  axial  1  0.0 LAT21 1.0
+  axial  2  0.0 LAT26 1.0
+  axial  3  0.0 LAT31 1.0
+
+[INSERT]
+  title "Pyrex"
+  npin 7
+
+  cell 1  0.214 0.231 0.241 0.427 0.437 0.484 / he ss he pyrex-vera he ss
+  cell 2                          0.437 0.484 /                     he ss  ! plenum
+  cell 3                                0.484 /                        ss  ! plug  
+  cell 4                                0.538 /                        ss  ! thimble plug
+
+  rodmap  PY04
+     -
+     - -
+     - - 1
+     - - - -
+
+
+  axial 04     0.0 
+          PY04 1.0
+
+[MPACT]
+  include mpact_mini.ini
+!  num_space   1
+  num_space  3
+  !par_method       ASSEMBLY
+  par_method        EXPLICITRADIAL
+  par_file          part_3r.txt
+  dep_filename      MPACT.dpl
+  dep_kernel        internal
+
+[COBRATF]
+  parallel  0
+

@@ -48,6 +48,9 @@
   npin   8
 ! ppitch 1.6256          ! pin pitch - does not include channel gaps
   ppitch 1.90        ! spread pins out
+
+  mat he    0.000176 he-4
+  mat zirc  6.56 zirc4
   
 !** Note that the automatic addition of U-234 does not agree with the spec
 !** and we may need to add U-234 explicitly
@@ -65,27 +68,27 @@
   fuel U40  10.0642 94.5 / 3.95
   fuel U40G  9.939  94.5 / 3.95 / gad=4.0
 
-  cell  1 0.53213 0.61341 / U16  zirc4
-  cell  2 0.53213 0.61341 / U20  zirc4
-  cell  3 0.53213 0.61341 / U22  zirc4
-  cell  4 0.53213 0.61341 / U24  zirc4
-  cell  5 0.53213 0.61341 / U26  zirc4
-  cell  6 0.53213 0.61341 / U28  zirc4
-  cell  7 0.53213 0.61341 / U30  zirc4
-  cell  8 0.53213 0.61341 / U36  zirc4
-  cell  9 0.53213 0.61341 / U38  zirc4
-  cell 10 0.53213 0.61341 / U40  zirc4
-  cell 51 0.53213 0.61341 / U40G zirc4
-  cell 52 0.53213 0.61341 / U36G zirc4
+  cell  1 0.53213 0.61341 / U16  zirc
+  cell  2 0.53213 0.61341 / U20  zirc
+  cell  3 0.53213 0.61341 / U22  zirc
+  cell  4 0.53213 0.61341 / U24  zirc
+  cell  5 0.53213 0.61341 / U26  zirc
+  cell  6 0.53213 0.61341 / U28  zirc
+  cell  7 0.53213 0.61341 / U30  zirc
+  cell  8 0.53213 0.61341 / U36  zirc
+  cell  9 0.53213 0.61341 / U38  zirc
+  cell 10 0.53213 0.61341 / U40  zirc
+  cell 51 0.53213 0.61341 / U40G zirc
+  cell 52 0.53213 0.61341 / U36G zirc
 
-  cell 80 0.53213 0.61341 / he   zirc4   ! plen
-  cell 82         0.61341 /      zirc4   ! plug
+  cell 80 0.53213 0.61341 / he   zirc   ! plen
+  cell 82         0.61341 /      zirc   ! plug
   cell 99         0.61341 /      mod     ! empty
 
 !** water rod is smaller to fit in a pincell
-!** cell WR 1.6002 1.7018 / mod zirc4
+!** cell WR 1.6002 1.7018 / mod zirc
 
-  cell WR 1.60 1.62 / mod zirc4 / large4
+  cell WR 1.60 1.62 / mod zirc / large4
 
   lattice FUEL
     1
@@ -137,7 +140,7 @@
 
 ! *** artificially reduced grid mass
   grid END inc    3.866 350  0.9070 ! grid height (cm), mass (g), loss coef
-  grid MID zirc4  3.810 300  0.9065 ! grid height (cm), mass (g), loss coef
+  grid MID zirc  3.810 300  0.9065 ! grid height (cm), mass (g), loss coef
 
   grid_axial
       END  13.884
