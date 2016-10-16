@@ -1244,6 +1244,13 @@ SHIFT:
       - is_word()
       - in_dictionary() eigenvalue forward
 
+  mode:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() n np
+
   output_geometry:
     <<: *dtbool
     _content:

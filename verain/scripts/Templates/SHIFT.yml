@@ -17,6 +17,13 @@ SHIFT:
         - copy SHIFT/$problem_mode
       _content:
 
+    mode:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$mode
+      _content:
+
     celib_file:
       _pltype: parameter
       _type: string

@@ -237,3 +237,4 @@
   Np                  1000
   output_fission_source true
   problem_mode        forward
+  mode                np

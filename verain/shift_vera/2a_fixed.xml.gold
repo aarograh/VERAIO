@@ -431,6 +431,7 @@
       <Parameter name="num_cycles" type="int" value="1000"/>
       <Parameter name="num_inactive_cycles" type="int" value="100"/>
     </ParameterList>
+    <Parameter name="mode" type="string" value="np"/>
     <Parameter name="output_fission_source" type="bool" value="true"/>
     <Parameter name="output_geometry" type="bool" value="true"/>
     <Parameter name="problem_mode" type="string" value="forward"/>
