@@ -422,18 +422,19 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="SHIFT">
+    <Parameter name="Np" type="int" value="1000"/>
     <Parameter name="celib_file" type="string" value="ce_v7.0_endf.xml"/>
     <Parameter name="do_transport" type="bool" value="true"/>
-    <Parameter name="global_log" type="string" value="diagnostic"/>
+    <Parameter name="global_log" type="string" value="debug"/>
     <ParameterList name="kcode_db">
       <Parameter name="Np" type="int" value="1000"/>
       <Parameter name="num_cycles" type="int" value="10"/>
       <Parameter name="num_inactive_cycles" type="int" value="5"/>
     </ParameterList>
-    <Parameter name="mesh" type="int" value="1"/>
+    <Parameter name="output_fission_source" type="bool" value="true"/>
     <Parameter name="output_geometry" type="bool" value="true"/>
     <Parameter name="thermal_energy_cutoff" type="double" value="10.0"/>
-    <Parameter name="transport" type="string" value="ce_mc"/>
+    <Parameter name="transport" type="string" value="ce"/>
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="2d1d">

@@ -1188,27 +1188,6 @@ INSILICO:
       - is_word()
       - in_dictionary() true false
 
-  transport:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() deterministic ce_mc mg_mc
-
-  output_geometry:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
-
-  thermal_energy_cutoff:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-
 SHIFT:
   celib_file:
     <<: *dtword
@@ -1232,12 +1211,6 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
-  mesh:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
   num_cycles:
     <<: *dtint
     _content:
@@ -1262,9 +1235,30 @@ SHIFT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() deterministic ce_mc mg_mc
+      - in_dictionary() ce mg
+
+  problem_mode:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() eigenvalue forward
+
+  mode:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() n np
 
   output_geometry:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
+  output_fission_source:
     <<: *dtbool
     _content:
     _check:

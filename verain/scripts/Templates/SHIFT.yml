@@ -10,6 +10,20 @@ SHIFT:
         - copy SHIFT/$transport
       _content:
 
+    problem_mode:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$problem_mode
+      _content:
+
+    mode:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$mode
+      _content:
+
     celib_file:
       _pltype: parameter
       _type: string
@@ -45,11 +59,25 @@ SHIFT:
         - copy SHIFT/$output_geometry
       _content:
 
+    output_fission_source:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$output_fission_source
+      _content:
+
     thermal_energy_cutoff:
       _pltype: parameter
       _type: double
       _do:
         - copy SHIFT/$thermal_energy_cutoff
+      _content:
+
+    Np:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy SHIFT/$Np
       _content:
 
     kcode_db:
