@@ -40,3 +40,9 @@ MAMBA1D:
       _content:
 
     
+    modelTKEEnhance:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$modelTKEEnhance
+      _content:
