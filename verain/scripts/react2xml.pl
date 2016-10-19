@@ -153,7 +153,7 @@ my $INIT;
 	"version"   => \$VERSION,
 	"help"      => \$HELP,
 	"notrim"    => \$NOTRIM,
-	"init"      => \$INIT
+	"xinit"      => \$INIT
 
 #	"update=s"  => \$_UPDATE         # hidden updates
 	);
@@ -182,15 +182,15 @@ if(@ARGV < 2){
 options:
   --xml=(on|off)
   --xslt=(on|off)
-  --init
+  --xinit
   --verbose
   --debug
   --version
   --help\n";
 }
 
-# Use initialization files for --init switch
-if($INIT){
+# Do not use initialization files for --xinit switch
+unless($INIT){
     foreach $iblock (@BLOCKS){
 	my $finit="${directory}Init/${iblock}.ini";
 	if ( -e $finit ) {
