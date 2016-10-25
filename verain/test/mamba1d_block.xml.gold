@@ -205,6 +205,8 @@
     <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="edit_channels" type="int" value="1"/>
     <Parameter name="epso" type="double" value="0.001"/>
+    <Parameter name="gridbloc" type="Array(double)" value="{0.5,0.9}"/>
+    <Parameter name="gridbloclabel" type="Array(string)" value="{MID,END}"/>
     <Parameter name="hgap" type="double" value="5678.3"/>
     <Parameter name="iitmax" type="int" value="40"/>
     <Parameter name="irfc" type="int" value="2"/>
@@ -215,8 +217,6 @@
     <Parameter name="oitmax" type="int" value="5"/>
     <Parameter name="rtwfp" type="double" value="1000.0"/>
     <Parameter name="tend" type="double" value="0.1"/>
-    <Parameter name="gridbloc" type="Array(double)" value="{0.9,0.5}"/>
-    <Parameter name="gridbloclabel" type="Array(string)" value="{END,MID}"/>
   </ParameterList>
   <ParameterList name="COUPLING">
     <Parameter name="eps_temp" type="double" value="1.0"/>
@@ -230,8 +230,8 @@
     <Parameter name="Bfract" type="double" value="0.16"/>
     <Parameter name="Bthresh" type="double" value="0.005"/>
     <Parameter name="constantTsat" type="double" value="618.698"/>
+    <Parameter name="modelTKEEnhance" type="int" value="1"/>
     <Parameter name="noBoilnoCrud" type="int" value="0"/>
     <Parameter name="onlyBoronPrecip" type="int" value="0"/>
-    <Parameter name="modelTKEEnhance" type="int" value="1"/>
   </ParameterList>
 </ParameterList>

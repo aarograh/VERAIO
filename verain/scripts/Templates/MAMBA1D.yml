@@ -39,10 +39,9 @@ MAMBA1D:
         - copy MAMBA1D/$constantTsat
       _content:
 
-    
     modelTKEEnhance:
       _pltype: parameter
       _type: int
       _do:
-        - copy COBRATF/$modelTKEEnhance
+        - copy MAMBA1D/$modelTKEEnhance
       _content:

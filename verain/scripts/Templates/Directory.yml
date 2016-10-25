@@ -2448,6 +2448,12 @@ MAMBA1D:
     _check:
       - is_geq() 0
       - is_int()
+  modelTKEEnhance:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 0
+      - is_int() 
 
 BISON:
 
