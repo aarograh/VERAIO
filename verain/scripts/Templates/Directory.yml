@@ -156,6 +156,13 @@ STATE:
     _check:
       - is_word()
       - in_dictionary() zero dep equil peak
+  rlx_xesm:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_leq() 1.0
   boron:
     <<: *dtdouble
     _content:
