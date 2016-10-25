@@ -44,7 +44,7 @@ FUNCTION(ADD_REACTOR_AWARE_INPUT_PARSER_TEST FILE_NAME)
     TEST_1
       CMND ${PERL_EXECUTABLE}
       ARGS
-        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl
+        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl --xInit
         ../${FILE_NAME}.inp  ${FILE_NAME}.xml
     TEST_2
       CMND diff ARGS ${FILE_NAME}.xml ../${FILE_NAME}.xml.gold
@@ -181,7 +181,7 @@ FUNCTION(ADD_THERMAL_EXPANSION_TEST FILE_NAME)
     TEST_1
       CMND ${PERL_EXECUTABLE}
       ARGS
-        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl
+        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl --xInit
         ../${FILE_NAME}.inp  ${FILE_NAME}.xml
     TEST_2
       CMND diff ARGS ${FILE_NAME}.xml ../${FILE_NAME}.xml.gold
