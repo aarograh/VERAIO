@@ -33,6 +33,8 @@
   * xenopt Xenon option ("zero", "dep", or "equil")
   samar
   * samopt Samarium option ("zero", "dep", "equil", or "peak")
+  rlx_xesm
+  * Xenon / Samarium Equilibrium relaxation factor.  Recommend 1.0.
   boron
   * boron Soluble boron concentration (ppm)
   b10

@@ -68,6 +68,13 @@ STATES:
             - copy %STATE/$(_loop)/$samar
           _content:
 
+        rlx_xesm:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$rlx_xesm
+          _content:
+
         bank_labels:
           _pltype: array
           _type: string
