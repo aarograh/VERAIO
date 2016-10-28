@@ -845,11 +845,6 @@ INSILICO:
     _content:
     _check:
       - is_word()
-  celib_file:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
   temp_correction:
     <<: *dtword
     _content:
@@ -868,11 +863,6 @@ INSILICO:
     _check:
       - is_word()
       - in_dictionary() debug diagnostic status info warning error critical
-  mat_library:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
   dimension:
     <<: *dtint
     _content:
@@ -934,24 +924,6 @@ INSILICO:
     _check:
       - is_int()
       - is_gt() 0
-  num_cycles:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-  num_inactive_cycles:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-  Np:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
   radial_geom_eps:
     <<: *dtdouble
     _content:
@@ -981,13 +953,13 @@ INSILICO:
     _content:
     _check:
       - is_word()
-  mg_solver:
+  upscatter_solver:
     <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() Krylov Gauss-Seidel
-  eigen_solver:
+      - in_dictionary() gmres gauss_seidel
+  solver:
     <<: *dtword
     _content:
     _check:
@@ -1017,13 +989,19 @@ INSILICO:
     _check:
       - is_int()
       - is_geq() 0
-  aztec_kspace:
+  subspace_size:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
   max_itr:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  upscatter_max_itr:
     <<: *dtint
     _content:
     _check:
@@ -1042,6 +1020,18 @@ INSILICO:
     _check:
       - is_word()
       - in_dictionary() sc ld bld bld_2d spn_fv
+  verbosity:
+    <<: *dtword
+    _content:
+    _check:
+    - is_word()
+    - in_dictionary() none low medium high
+  upscatter_verbosity:
+    <<: *dtword
+    _content:
+    _check:
+    - is_word()
+    - in_dictionary() none low medium high
   new_grp_bounds:
     <<: *dtlist
     _style: multi-line
@@ -1049,7 +1039,6 @@ INSILICO:
     _check:
       - fall(sub{is_float(shift)},())
       - fall(sub{is_gt(shift,0)},())
-
   quad_type:
     <<: *dtword
     _content:
@@ -1074,14 +1063,6 @@ INSILICO:
     _check:
       - is_int()
       - is_gt() 0
-
-  init_tolerance:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-      - is_lt() 1
   k_tolerance:
     <<: *dtdouble
     _content:
@@ -1089,45 +1070,12 @@ INSILICO:
       - is_float()
       - is_gt() 0
       - is_lt() 1
-  L2_tolerance:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-      - is_lt() 1
-  arnoldi_kspace:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-  arnoldi_restarts:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-  diagnostic_level:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_geq() 0
-      - is_lt() 3
   energy_dep_ev:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
-  preconditioner:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() Ifpack ML
-
   upscatter_tolerance:
     <<: *dtdouble
     _content:
@@ -1135,59 +1083,41 @@ INSILICO:
       - is_float()
       - is_gt() 0
       - is_lt() 1
-  aztec_diag:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_geq() 0
-  aztec_output:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_geq() 0
-
   silo_output:
     <<: *dtword
     _content:
     _check:
-      - is_word()
+      - is_word()      
   mixing_table:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
-
   cell_homogenize:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
-
   SPN_matrix_type:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() mat_free
-
   SPN_order:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - in_dictionary() 1 3 5 7
-
   Pn_correction:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
-
   pin_partitioning:
     <<: *dtbool
     _content:
