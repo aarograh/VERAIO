@@ -298,21 +298,21 @@ INSILICO:
               _pltype: parameter
               _type: string
               _do:
-                - copy INSILICO/$solver
+                - copy INSILICO/$upscatter_solver
               _content:
 
             max_itr:
               _pltype: parameter
               _type: int
               _do:
-                - copy INSILICO/$max_itr
+                - copy INSILICO/$upscatter_max_itr
               _content:
 
             verbosity:
               _pltype: parameter
               _type: string
               _do:
-                - copy INSILICO/$verbosity
+                - copy INSILICO/$upscatter_verbosity
               _content:
 
             iterate_downscatter:
