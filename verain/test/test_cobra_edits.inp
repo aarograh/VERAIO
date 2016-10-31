@@ -165,7 +165,6 @@
           377.711
 
 [INSILICO]
-    mat_library casl_comp.sh5
     xs_library  v7-252
 
     max_delta_z   2.54
@@ -178,13 +177,12 @@
     mesh          4
     dimension     3
     eq_set        sc
-    eigen_solver  arnoldi
-    tolerance     1e-6
     Pn_order      0
 
-!   eigenvalue_db:
+!   solver_db:
+       solver        arnoldi
        k_tolerance   1e-4
-       L2_tolerance  1e-3
+       tolerance     1e-3
        energy_dep_ev true
 
 !   quadrature_db:

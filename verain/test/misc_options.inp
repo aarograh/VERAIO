@@ -15,7 +15,7 @@
   power  100.0         ! %
   tinlet 559.0 F         ! F
   boron  1300          ! ppmB
-  search 'boron';  kcrit  1.02   
+  search 'boron';  kcrit  1.02
   pressure 2250   ;     ! psia
 
   thexp  on
@@ -34,21 +34,21 @@
 [STATE]
   power  80.0     ! added multistate 1/30/2014 , must use --multistate command line option
 
-  tinlet_dist       0.    -2. 0. 2.        0. ;  flow_dist          20.    -20.  0  20         -20.    
+  tinlet_dist       0.    -2. 0. 2.        0. ;  flow_dist          20.    -20.  0  20         -20.
 
 
 [STATE];  power  70.0
 
-[STATE]  power  60.0;   tinlet_dist       2. -1.       -1.   
+[STATE]  power  60.0;   tinlet_dist       2. -1.       -1.
 
 ! This map is not rotationally symmetric
-!  flow_dist 
+!  flow_dist
 !     50. -20.5
-!    -10. 
+!    -10.
 
-  flow_dist 
+  flow_dist
      50. -10.
-    -10. 
+    -10.
 
 [STATE];  power  50.0
 [STATE];  power  40.0
@@ -67,9 +67,9 @@
     0 1 0
 
   assm_map
-       A1   
+       A1
     A1 A1 A1
-       A1   
+       A1
 
   rotate_map
       2
@@ -265,7 +265,6 @@
           377.711
 
 [INSILICO]
-    mat_library casl_comp.sh5
     xs_library  test-8grp
 
     max_delta_z   2.54
@@ -280,14 +279,12 @@
     mesh          4
     dimension     3
     eq_set        spn_fv
-    eigen_solver  arnoldi
-    preconditioner Ifpack
-    tolerance     1e-6
     Pn_order      0
 
-!   eigenvalue_db:
+!   solver_db:
+       solver        arnoldi
        k_tolerance   1e-7
-       L2_tolerance  1e-6
+       tolerance     1e-6
        energy_dep_ev true
 
 !   quadrature_db:
@@ -302,10 +299,10 @@
 !   upscatter_db:
        upscatter_tolerance  1e-4
 
-[COUPLING] 
+[COUPLING]
   read_restart  my_restart_file
 
-[TIAMAT] 
+[TIAMAT]
   solver jacobi
   conserve_power_in_tiamat_transfer true
   two_level_solver false

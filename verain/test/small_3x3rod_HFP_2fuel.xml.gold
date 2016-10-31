@@ -319,7 +319,6 @@
     <Parameter name="cell_homogenize" type="bool" value="true"/>
     <Parameter name="dimension" type="int" value="3"/>
     <Parameter name="eq_set" type="string" value="spn_fv"/>
-    <Parameter name="mat_library" type="string" value="casl_comp_r2.sh5"/>
     <Parameter name="max_delta_z" type="double" value="2.54"/>
     <Parameter name="mesh" type="int" value="2"/>
     <Parameter name="new_grp_bounds" type="Array(double)" value="{7.5000E+05,1.7000E+04,6.7500E+01,2.1750E+01,2.0500E+01,7.0000E+00,6.2500E-01,3.5000E-01,2.0000E-01,1.0000E-01,1.0000E-05}"/>
@@ -331,9 +330,11 @@
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p6"/>
     </ParameterList>
-    <Parameter name="tolerance" type="double" value="1e-6"/>
-    <ParameterList name="upscatter_db">
-      <Parameter name="tolerance" type="double" value="1e-4"/>
+    <ParameterList name="solver_db">
+      <Parameter name="tolerance" type="double" value="1e-6"/>
+      <ParameterList name="upscatter_db">
+        <Parameter name="tolerance" type="double" value="1e-4"/>
+      </ParameterList>
     </ParameterList>
     <Parameter name="xs_library" type="string" value="v7-56"/>
   </ParameterList>

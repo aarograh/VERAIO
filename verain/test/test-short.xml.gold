@@ -253,12 +253,6 @@
     <Parameter name="Pn_order" type="int" value="0"/>
     <Parameter name="dimension" type="int" value="3"/>
     <Parameter name="do_transport" type="bool" value="false"/>
-    <Parameter name="eigen_solver" type="string" value="arnoldi"/>
-    <ParameterList name="eigenvalue_db">
-      <Parameter name="L2_tolerance" type="double" value="1e-5"/>
-      <Parameter name="energy_dep_ev" type="bool" value="true"/>
-      <Parameter name="k_tolerance" type="double" value="1e-5"/>
-    </ParameterList>
     <Parameter name="eq_set" type="string" value="sc"/>
     <Parameter name="max_delta_z" type="double" value="2.54"/>
     <Parameter name="mesh" type="int" value="4"/>
@@ -276,9 +270,13 @@
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p6"/>
     </ParameterList>
-    <Parameter name="tolerance" type="double" value="1e-6"/>
-    <ParameterList name="upscatter_db">
-      <Parameter name="tolerance" type="double" value="1e-4"/>
+    <ParameterList name="solver_db">
+      <Parameter name="energy_dep_ev" type="bool" value="true"/>
+      <Parameter name="k_tolerance" type="double" value="1e-5"/>
+      <Parameter name="tolerance" type="double" value="1e-5"/>
+      <ParameterList name="upscatter_db">
+        <Parameter name="tolerance" type="double" value="1e-4"/>
+      </ParameterList>
     </ParameterList>
     <Parameter name="xs_library" type="string" value="v7-252"/>
   </ParameterList>

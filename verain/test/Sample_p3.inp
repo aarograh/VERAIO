@@ -6,7 +6,7 @@
 !  Draft 2 - 6/28/2012 - updated with minor changes from Andrew (Wiki PL also updated)
 !  Draft 3 - 11/2/2012 - moved assembly description to include file (Scott)
 !
-!  Update 11/19/2012   
+!  Update 11/19/2012
 !     * added explicit lattice models for:
 !         * lower_nozzle_gap_height
 !         * lower_pincap_height
@@ -22,7 +22,7 @@
   tfuel 600.0 K         ! K - 600K
   boron  1300          ! ppmB
   modden 0.743         ! g/cc
-  
+
   feedback off
 
 [CORE]
@@ -33,7 +33,7 @@
 
   core_shape
     1
-  
+
   assm_map
     A1
 
@@ -47,7 +47,7 @@
 !  he he 0.000176
 !  inc inc 8.19
 !  ss ss 8.0
-!  zirc zirc 6.56 
+!  zirc zirc 6.56
 !  aic aic 10.20
 !  pyrex pyrex 2.23
 !  b4c b4c 6.56
@@ -55,7 +55,7 @@
   mat he     0.000176
   mat inc    8.19
   mat ss     8.0
-  mat zirc   6.56 
+  mat zirc   6.56
   mat aic   10.20
   mat pyrex  2.23
   mat b4c    6.56
@@ -64,9 +64,9 @@
 
 [ASSEMBLY]
   title "Westinghouse 17x17"
-  npin 17 
+  npin 17
   ppitch 1.260
-  
+
 !  uo2 U31 10.257 / 3.1
   fuel U31 10.257 95.0 / 3.1
 
@@ -148,70 +148,68 @@
 [EDITS]
 
 !  3in intervals in active fuel
-  axial_edit_bounds 
+  axial_edit_bounds
           11.951
-          15.817 
-          24.028 
-          32.239 
-          40.45 
-          48.662 
-          56.873 
-          65.084 
-          73.295 
-          77.105 
-          85.17 
-          93.235 
-          101.3 
-          109.365 
-          117.43 
-          125.495 
-          129.305 
-          137.37 
-          145.435 
-          153.5 
-          161.565 
-          169.63 
-          177.695 
-          181.505 
-          189.57 
-          197.635 
-          205.7 
-          213.765 
-          221.83 
-          229.895 
-          233.705 
-          241.77 
-          249.835 
-          257.9 
-          265.965 
-          274.03 
-          282.095 
-          285.905 
-          293.97 
-          302.035 
-          310.1 
-          318.165 
-          326.23 
-          334.295 
-          338.105 
-          346.0262 
-          353.9474 
-          361.8686 
-          369.7898 
+          15.817
+          24.028
+          32.239
+          40.45
+          48.662
+          56.873
+          65.084
+          73.295
+          77.105
+          85.17
+          93.235
+          101.3
+          109.365
+          117.43
+          125.495
+          129.305
+          137.37
+          145.435
+          153.5
+          161.565
+          169.63
+          177.695
+          181.505
+          189.57
+          197.635
+          205.7
+          213.765
+          221.83
+          229.895
+          233.705
+          241.77
+          249.835
+          257.9
+          265.965
+          274.03
+          282.095
+          285.905
+          293.97
+          302.035
+          310.1
+          318.165
+          326.23
+          334.295
+          338.105
+          346.0262
+          353.9474
+          361.8686
+          369.7898
           377.711
 
 [INSILICO]
     eq_set        ld
-    eigen_solver  arnoldi
-    tolerance     1e-06
     Pn_order      1
     dimension     3
     mesh          4
-!    eigenvalue_db:
+!    solver_db:
+        solver       arnoldi
         k_tolerance  0.0001
-        L2_tolerance 0.001
+        tolerance    0.001
         energy_dep_ev  false
-    mat_library   test_comp.sh5
     max_delta_z   2.54
     num_blocks_i  40
     num_blocks_j  40
@@ -227,27 +225,27 @@
 !    upscatter_db:
         upscatter_tolerance  1e-05
     xs_library     "v7-238ir"
-   new_grp_bounds 
-       8.2085e+05 
-       1.1109e+05 
-       5.5308e+03 
-       1.8644e+02 
-       3.7612e+01 
+   new_grp_bounds
+       8.2085e+05
+       1.1109e+05
+       5.5308e+03
+       1.8644e+02
+       3.7612e+01
        3.5379e+01
-       2.7697e+01 
-       2.1684e+01 
-       2.0397e+01 
-       1.5968e+01 
+       2.7697e+01
+       2.1684e+01
+       2.0397e+01
+       1.5968e+01
        7.1500e+00
        6.7000e+00
-       6.3000e+00 
-       1.0970e+00 
-       1.0450e+00 
-       9.5000e-01 
-       3.5000e-01 
+       6.3000e+00
+       1.0970e+00
+       1.0450e+00
+       9.5000e-01
+       3.5000e-01
        2.0600e-01
-       1.0700e-01 
-       5.8000e-02 
-       2.5000e-02 
-       1.0000e-02 
+       1.0700e-01
+       5.8000e-02
+       2.5000e-02
+       1.0000e-02
        1.0000e-05

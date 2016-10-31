@@ -155,7 +155,6 @@
           377.711
 
 [INSILICO]
-    mat_library casl_comp_r2.sh5
     xs_library  v7-56
 
     max_delta_z   2.54

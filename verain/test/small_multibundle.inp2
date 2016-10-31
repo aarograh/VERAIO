@@ -120,13 +120,11 @@
     mesh          1
     dimension     3
     eq_set        spn_fv
-    eigen_solver  arnoldi
-    tolerance     1e-9
     Pn_order      0
 
-!   eigenvalue_db:
+!   solver_db:
        k_tolerance   1e-4
-       L2_tolerance  1e-4
+       tolerance     1e-4
        energy_dep_ev true
 
 !   quadrature_db:

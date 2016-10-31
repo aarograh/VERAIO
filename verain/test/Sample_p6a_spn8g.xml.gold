@@ -312,14 +312,7 @@
     <Parameter name="cell_broadcast_size" type="int" value="289"/>
     <Parameter name="cell_homogenize" type="bool" value="true"/>
     <Parameter name="dimension" type="int" value="3"/>
-    <Parameter name="eigen_solver" type="string" value="arnoldi"/>
-    <ParameterList name="eigenvalue_db">
-      <Parameter name="L2_tolerance" type="double" value="1e-3"/>
-      <Parameter name="energy_dep_ev" type="bool" value="true"/>
-      <Parameter name="k_tolerance" type="double" value="1e-4"/>
-    </ParameterList>
     <Parameter name="eq_set" type="string" value="spn_fv"/>
-    <Parameter name="mat_library" type="string" value="casl_comp_r2.sh5"/>
     <Parameter name="max_delta_z" type="double" value="2.54"/>
     <Parameter name="mesh" type="int" value="2"/>
     <Parameter name="new_grp_bounds" type="Array(double)" value="{8.200e+05,1.700e+04,1.000e+02,3.000e+00,6.250e-01,1.500e-01,4.000e-02,1.000e-05}"/>
@@ -337,9 +330,14 @@
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p6"/>
     </ParameterList>
-    <Parameter name="tolerance" type="double" value="1e-6"/>
-    <ParameterList name="upscatter_db">
-      <Parameter name="tolerance" type="double" value="1e-4"/>
+    <ParameterList name="solver_db">
+      <Parameter name="energy_dep_ev" type="bool" value="true"/>
+      <Parameter name="k_tolerance" type="double" value="1e-4"/>
+      <Parameter name="solver" type="string" value="arnoldi"/>
+      <Parameter name="tolerance" type="double" value="1e-3"/>
+      <ParameterList name="upscatter_db">
+        <Parameter name="tolerance" type="double" value="1e-6"/>
+      </ParameterList>
     </ParameterList>
     <Parameter name="xs_library" type="string" value="test-8grp"/>
   </ParameterList>

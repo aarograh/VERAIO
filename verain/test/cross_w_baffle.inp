@@ -35,11 +35,11 @@
     0 1 0
 
   assm_map
-       A1   
+       A1
     A1 A1 A1
-       A1   
+       A1
 
-  baffle ss 0.19 2.85 
+  baffle ss 0.19 2.85
   lower_plate ss 5.0 0.5   ! mat, thickness, vol frac
   upper_plate ss 7.6 0.5   ! mat, thickness, vol frac
   lower_ref   mod 26.0 1.0
@@ -171,7 +171,6 @@
           377.711
 
 [INSILICO]
-    mat_library casl_comp.sh5
     xs_library  test-8grp
 
     max_delta_z   2.54
@@ -184,13 +183,12 @@
     mesh          2
     dimension     3
     eq_set        spn_fv
-    eigen_solver  arnoldi
-    tolerance     1e-6
     Pn_order      0
 
-!   eigenvalue_db:
+!   solver_db:
+       solver        arnoldi
        k_tolerance   1e-4
-       L2_tolerance  1e-4
+       tolerance     1e-4
        energy_dep_ev true
 
 !   quadrature_db:
@@ -235,5 +233,3 @@
   rlx_tfuel   1.0
   rlx_den     1.0
   maxiter     20
-
-

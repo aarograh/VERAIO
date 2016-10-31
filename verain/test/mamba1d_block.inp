@@ -151,7 +151,6 @@
           377.711
 
 [INSILICO]
-    mat_library casl_comp_r2.sh5
     xs_library  v7-56
 
     max_delta_z   2.54
@@ -166,8 +165,10 @@
     eq_set        spn_fv
     SPN_order     3
     cell_homogenize true
-    tolerance     1e-6
     Pn_order      0
+
+!   solver_db:
+      tolerance     1e-6
 
 !   silo_db:
        silo_output  p6
@@ -229,4 +230,3 @@
   rlx_tfuel   1.0
   rlx_den     1.0
   maxiter     100
-
