@@ -1024,14 +1024,14 @@ INSILICO:
     <<: *dtword
     _content:
     _check:
-    - is_word()
-    - in_dictionary() none low medium high
+      - is_word()
+      - in_dictionary() none low medium high
   upscatter_verbosity:
     <<: *dtword
     _content:
     _check:
-    - is_word()
-    - in_dictionary() none low medium high
+      - is_word()
+      - in_dictionary() none low medium high
   new_grp_bounds:
     <<: *dtlist
     _style: multi-line
