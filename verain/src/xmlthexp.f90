@@ -34,7 +34,7 @@
 !     -tfxxx   overwrite fuel temperature (K)
 !     -tmxxx   overwrite moderator temperature (K)
 !
-!  Assumptions: 
+!  Assumptions:
 !  1. Fuel is at "tfuel", all other materials are at average mod temperature
 !      (ignore increased temperature of clad)
 !  2. In the radial direction, all non-fuel material densities are expanded like clad,
@@ -58,8 +58,8 @@
 !
 !=======================================================================
 
-      integer, parameter :: maxlen=2200    ! max line length in xml file
-      integer, parameter :: maxline=3000   ! increase for P7
+      integer, parameter :: maxlen=5000    ! max line length in xml file
+      integer, parameter :: maxline=15000  ! increase for WB cycle 7
 
       character(len=maxlen) :: line(maxline)
       character(len=200)    :: fname
@@ -227,7 +227,7 @@
 
 !--- calculate expansion factors
 
-  ! **** read factors from input??? 
+  ! **** read factors from input???
 
         ftef=te_martin(tfuel)        ! fuel   TE factor
         ctef=te_zirc_diam(tmod)      ! clad   TE factor
@@ -673,7 +673,7 @@
 !  Thermal expansion coefficient of UO2 from Martin 1988
 !  (Also in Fink 2000)
 !
-! Martin, D. G., 
+! Martin, D. G.,
 ! “The Thermal Expansion of Solid UO2 and (U, Pu) Mixed Oxides: A Review and Recommendations.”,
 ! J Nucl Mater,  152, 94–101 (1988).
 !
@@ -729,7 +729,7 @@
 !
 !  From:
 !  "Thermal Linear Expansion of Nine Selected AISI Stainless Steels",
-!  CINDAS Report 51, April (1978).  
+!  CINDAS Report 51, April (1978).
 !  http://www.dtic.mil/dtic/tr/fulltext/u2/a129159.pdf
 !
 !  Report has additional values below 293 and above 1000K
@@ -759,7 +759,7 @@
       ii=1     ! lower value in table
       do j=1, ntab-1
         if (t.gt.tk(j)) ii=j
-      enddo 
+      enddo
 !dbg  write (0,*) 'temp ', t
 !dbg  write (0,*) 'table bounds' , ii, tk(ii), tk(ii+1)
 
