@@ -26,6 +26,8 @@
 !               c) update HZP logic
 !  2016-06-02 - add MPACT axial_mesh card
 !  2016-06-05 - increase output from 5 to 8 decimal places, volume of IFBA was not being preserved
+!  2016-11-08 - (Ben) Increased maxline to 15000
+!  2016-11-09 - Make number of lines allocatable
 !
 !  Usage:
 !   expandxml.exe {-replace} {-tf910.0} {-tm560.0} {-3d} [file(s).xml]
@@ -59,9 +61,8 @@
 !=======================================================================
 
       integer, parameter :: maxlen=5000    ! max line length in xml file
-      integer, parameter :: maxline=15000  ! increase for WB cycle 7
 
-      character(len=maxlen) :: line(maxline)
+      character(len=maxlen), allocatable :: line(:)
       character(len=200)    :: fname
 
       integer :: numfile
@@ -135,20 +136,30 @@
 
         write (*,'(2a)') ' processing file ', trim(fname)
 
-!--- read file and store in buffer
+!--- read file once to find number of lines
 
         open (12,file=fname,status='old')
 
         nline=0
         do
-          read (12,'(a)',end=100) line(nline+1)
+          read (12,'(a)',end=100)
           nline=nline+1
-          if (nline.ge.maxline) stop 'max line number exceeded'
-          mlen=max(mlen,len_trim(line(nline)))
         enddo
    100  continue
 
         write (*,*) 'number of lines     in xml = ', nline
+
+        allocate (line(nline))
+
+!--- read file again and store each line in a buffer
+
+        rewind (12)
+
+        do n=1, nline
+          read (12,'(a)',end=100) line(n)
+          mlen=max(mlen,len_trim(line(n)))
+        enddo
+
         write (*,*) 'maximum line length in xml = ', mlen
         if (mlen.gt.maxlen-10) write (0,*) '*** possible line truncation'
 
