@@ -290,3 +290,4 @@
   fluid_energy_storage     0.02  !%
   solid_energy_storage     0.02  !%
   mass_storage             0.02  !%
+  proc_per_assem 1

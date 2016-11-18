@@ -316,6 +316,7 @@
   maxits  10000
   courant 0.8
   parallel 1
+  proc_per_assem 1
   
 [COUPLING]
   epsk        5.0  ! pcm
