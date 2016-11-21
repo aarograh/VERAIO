@@ -423,7 +423,7 @@
   </ParameterList>
   <ParameterList name="SHIFT">
     <Parameter name="Np" type="int" value="1000"/>
-    <Parameter name="celib_file" type="string" value="ce_v7.0_endf.xml"/>
+    <Parameter name="celib_file" type="string" value="ce_v7.1_endf.xml"/>
     <Parameter name="do_transport" type="bool" value="true"/>
     <Parameter name="global_log" type="string" value="debug"/>
     <ParameterList name="kcode_db">
