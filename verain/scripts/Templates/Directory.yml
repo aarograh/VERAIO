@@ -1770,6 +1770,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() none polynomial 1dcpm 2dmoc subplane true false
+  ppm_method:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() 1 2
   valid_on:
     <<: *dtbool
     _content:
