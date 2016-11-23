@@ -37,3 +37,6 @@ include Asy_Ins_CR_Det_Edit.ini
 [COBRATF]
   beta_sp   0.005
   parallel  1
+  iitmax 10000
+  epso 0.00001
+  proc_per_assem 1

@@ -61,6 +61,9 @@ sub ctokens
 #   Split the command text into tokens
     unless(defined($self->{tlist})){
 	my $dtx=$self->ctext();
+	if($self->argexists('_slash')){
+	    $dtx =~ s/\// \/ /g;
+	}
 	my $split_exp='\s+|=';
 	@a=quotewords($split_exp, 0, $dtx);
 	@a = grep {defined && $_ ne ''} @a;

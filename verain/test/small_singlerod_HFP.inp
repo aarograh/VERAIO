@@ -209,6 +209,7 @@
   courant 0.8
   edit_channels 1
   maps_filename = single_rod_HFP
+  parallel 0
 
 
 [COUPLING]

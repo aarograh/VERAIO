@@ -108,9 +108,6 @@ sub clean_line{
 	$transl=$text;     # there were no quotes nor comments in the string
 	$transl =~ s/(\d+)\s*\*\s*(\w+)/"$2 " x $1/ge; # expand fortran expressions
 	$transl =~ s/[,]/ /g;               # remove commas and such
-	$transl=~s/\// \/ /g if ($transl=~m/^\s*mat\s/i ||
-				 $transl=~m/^\s*fuel\s/i)
-	    ; # hardwired slashes for Andrew #TODO
     }
     $transl=~s/^\s+//;           # just in case
     $transl=~s/\s+$//;
