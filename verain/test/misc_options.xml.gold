@@ -54,10 +54,11 @@
   <ParameterList name="CORE">
     <ParameterList name="Materials">
       <ParameterList name="Material_aic">
-        <Parameter name="density" type="double" value="10.20"/>
+        <Parameter name="density" type="double" value="10.17"/>
         <Parameter name="key_name" type="string" value="aic"/>
-        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
-        <Parameter name="mat_names" type="Array(string)" value="{aic}"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{4.11010E-01,3.88990E-01,6.32772E-03,1.43672E-01,5.00000E-02}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{ag-107,ag-109,in-113,in-115,cd-00}"/>
+        <Parameter name="thexp" type="double" value="6.9"/>
       </ParameterList>
       <ParameterList name="Material_b4c">
         <Parameter name="density" type="double" value="6.56"/>
