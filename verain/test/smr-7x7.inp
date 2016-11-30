@@ -337,17 +337,13 @@
     eq_set        spn_fv
     SPN_order     3
     Pn_order      0     ! ** loose
-    tolerance     1e-6
+    upscatter_tolerance     1e-6
     dimension     3
     mesh          2
     max_delta_z   2.54  ! ** loose
 
-    mat_library casl_comp_r2.sh5
 !   xs_library  v7-252
     xs_library  test-8grp
-
-!   preconditioner Ifpack  !
-    preconditioner ML      ! *** evaluation
 
     pin_partitioning true
     num_blocks_i  30

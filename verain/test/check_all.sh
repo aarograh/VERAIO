@@ -10,7 +10,7 @@ foreach i ( *.xml.gold )
 	   echo _${l}.xml exists
 	   exit 1
 	endif
-        ../scripts/react2xml.pl ${l}.inp _${l}.xml
+        ../scripts/react2xml.pl --xinit ${l}.inp _${l}.xml
         diff _${l}.xml  ${l}.xml.gold
 	if ( $status ) then
            echo false

@@ -151,7 +151,6 @@
           377.711
 
 [INSILICO]
-    mat_library casl_comp_r2.sh5
     xs_library  v7-56
 
     max_delta_z   2.54
@@ -166,8 +165,10 @@
     eq_set        spn_fv
     SPN_order     3
     cell_homogenize true
-    tolerance     1e-6
     Pn_order      0
+
+!   solver_db:
+      tolerance     1e-6
 
 !   silo_db:
        silo_output  p6
@@ -208,6 +209,9 @@
   edit_channels 1
   maps_filename = single_rod_HFP
 
+  gridbloc MID 0.5     ! spacer grid blockage coefficient
+  gridbloc END 0.9     ! spacer grid blockage coefficient
+
 [MAMBA1D]
   noBoilnoCrud 0     ! 0-crud will be deposited in non-boiling regions
                      ! 1-crud will only be deposited where boiling occurs
@@ -216,6 +220,7 @@
   Bthresh  0.005     ! The threshold for boron precipitation in the crud layer
   Bfract   0.16      ! The threshold for fraction of crud that is precipitate
   constantTsat  618.698 ! K.  The constant saturation temperature to use in MAMBA
+  modelTKEEnhance 1
 
 
 [COUPLING]
@@ -225,4 +230,3 @@
   rlx_tfuel   1.0
   rlx_den     1.0
   maxiter     100
-

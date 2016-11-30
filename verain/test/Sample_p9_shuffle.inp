@@ -590,7 +590,6 @@
     mesh          2
     max_delta_z   7.62
 
-    mat_library casl_comp_r2.sh5
     xs_library  v7-252
 
 !   pin_partitioning true

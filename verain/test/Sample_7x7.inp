@@ -362,16 +362,12 @@
     eq_set        spn_fv
     SPN_order     3
     Pn_order      0     ! ** 7x7
-    tolerance     1e-6
+    upscatter_tolerance     1e-6
     dimension     3
     mesh          2
     max_delta_z   2.54  ! ** decrease for 7x7
 
-    mat_library casl_comp_r2.sh5
     xs_library  v7-252
-!!  xs_library  test-8grp
-
-    preconditioner ML  ! *** add for 7x7
 
     pin_partitioning true
     num_blocks_i  119
@@ -448,4 +444,3 @@
   rlx_den     1.0
   maxiter     100
 ! read_restart cobra_denovo_restart.out
-

@@ -26,6 +26,8 @@
 !               c) update HZP logic
 !  2016-06-02 - add MPACT axial_mesh card
 !  2016-06-05 - increase output from 5 to 8 decimal places, volume of IFBA was not being preserved
+!  2016-11-08 - (Ben) Increased maxline to 15000
+!  2016-11-09 - Make number of lines allocatable
 !
 !  Usage:
 !   expandxml.exe {-replace} {-tf910.0} {-tm560.0} {-3d} [file(s).xml]
@@ -34,7 +36,7 @@
 !     -tfxxx   overwrite fuel temperature (K)
 !     -tmxxx   overwrite moderator temperature (K)
 !
-!  Assumptions: 
+!  Assumptions:
 !  1. Fuel is at "tfuel", all other materials are at average mod temperature
 !      (ignore increased temperature of clad)
 !  2. In the radial direction, all non-fuel material densities are expanded like clad,
@@ -58,10 +60,9 @@
 !
 !=======================================================================
 
-      integer, parameter :: maxlen=2200    ! max line length in xml file
-      integer, parameter :: maxline=3000   ! increase for P7
+      integer, parameter :: maxlen=5000    ! max line length in xml file
 
-      character(len=maxlen) :: line(maxline)
+      character(len=maxlen), allocatable :: line(:)
       character(len=200)    :: fname
 
       integer :: numfile
@@ -135,20 +136,30 @@
 
         write (*,'(2a)') ' processing file ', trim(fname)
 
-!--- read file and store in buffer
+!--- read file once to find number of lines
 
         open (12,file=fname,status='old')
 
         nline=0
         do
-          read (12,'(a)',end=100) line(nline+1)
+          read (12,'(a)',end=100)
           nline=nline+1
-          if (nline.ge.maxline) stop 'max line number exceeded'
-          mlen=max(mlen,len_trim(line(nline)))
         enddo
    100  continue
 
         write (*,*) 'number of lines     in xml = ', nline
+
+        allocate (line(nline))
+
+!--- read file again and store each line in a buffer
+
+        rewind (12)
+
+        do n=1, nline
+          read (12,'(a)',end=100) line(n)
+          mlen=max(mlen,len_trim(line(n)))
+        enddo
+
         write (*,*) 'maximum line length in xml = ', mlen
         if (mlen.gt.maxlen-10) write (0,*) '*** possible line truncation'
 
@@ -227,7 +238,7 @@
 
 !--- calculate expansion factors
 
-  ! **** read factors from input??? 
+  ! **** read factors from input???
 
         ftef=te_martin(tfuel)        ! fuel   TE factor
         ctef=te_zirc_diam(tmod)      ! clad   TE factor
@@ -673,7 +684,7 @@
 !  Thermal expansion coefficient of UO2 from Martin 1988
 !  (Also in Fink 2000)
 !
-! Martin, D. G., 
+! Martin, D. G.,
 ! “The Thermal Expansion of Solid UO2 and (U, Pu) Mixed Oxides: A Review and Recommendations.”,
 ! J Nucl Mater,  152, 94–101 (1988).
 !
@@ -729,7 +740,7 @@
 !
 !  From:
 !  "Thermal Linear Expansion of Nine Selected AISI Stainless Steels",
-!  CINDAS Report 51, April (1978).  
+!  CINDAS Report 51, April (1978).
 !  http://www.dtic.mil/dtic/tr/fulltext/u2/a129159.pdf
 !
 !  Report has additional values below 293 and above 1000K
@@ -759,7 +770,7 @@
       ii=1     ! lower value in table
       do j=1, ntab-1
         if (t.gt.tk(j)) ii=j
-      enddo 
+      enddo
 !dbg  write (0,*) 'temp ', t
 !dbg  write (0,*) 'table bounds' , ii, tk(ii), tk(ii+1)
 

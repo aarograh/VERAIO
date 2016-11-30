@@ -211,7 +211,6 @@
           377.711
 
 [INSILICO]
-    mat_library casl_comp_r2.sh5
     xs_library  v7-252
 
     max_delta_z   1.26
@@ -219,15 +218,16 @@
     num_blocks_j  17
     num_groups    23
     pin_partitioning true
-
     dimension     3
-    eigen_solver  arnoldi
-    tolerance     1e-6
 
-!   eigenvalue_db:
+!   solver_db:
+       solver        arnoldi
        k_tolerance   1e-5
-       L2_tolerance  1e-5
+       tolerance     1e-5
        energy_dep_ev true
+
+!   upscatter_db:
+       upscatter_tolerance  1e-5
 
 !   quadrature_db:
        quad_type          qr
@@ -238,11 +238,8 @@
        silo_output  p6
 !      silo_out_power true
 
-!   upscatter_db:
-       upscatter_tolerance  1e-5
-
 !** SPN options (overwrite previous values)
- 
+
     cell_homogenize  true
     eq_set           spn_fv
     SPN_order        3     !  (or 1 or 5, etc).
@@ -250,7 +247,7 @@
     num_sets         1
     num_z_blocks     1
     mesh             2
-    tolerance     1e-8
+    upscatter_tolerance     1e-8
 
     new_grp_bounds
        8.2085e+05
@@ -306,11 +303,5 @@
   rlx_power   0.5
   rlx_tfuel   1.0
   rlx_den     1.0
-  maxiter     20 
+  maxiter     20
   eps_temp    1.0  ! 1 deg C
-  
-
-
-
-
-

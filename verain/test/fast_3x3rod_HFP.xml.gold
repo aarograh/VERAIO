@@ -277,11 +277,6 @@
   <ParameterList name="INSILICO">
     <Parameter name="Pn_order" type="int" value="0"/>
     <Parameter name="dimension" type="int" value="3"/>
-    <Parameter name="eigen_solver" type="string" value="arnoldi"/>
-    <ParameterList name="eigenvalue_db">
-      <Parameter name="energy_dep_ev" type="bool" value="true"/>
-      <Parameter name="tolerance" type="double" value="1e-2"/>
-    </ParameterList>
     <Parameter name="eq_set" type="string" value="spn_fv"/>
     <Parameter name="max_delta_z" type="double" value="500."/>
     <Parameter name="mesh" type="int" value="1"/>
@@ -298,9 +293,12 @@
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p6"/>
     </ParameterList>
-    <Parameter name="tolerance" type="double" value="1e-9"/>
-    <ParameterList name="upscatter_db">
-      <Parameter name="tolerance" type="double" value="1e-4"/>
+    <ParameterList name="solver_db">
+      <Parameter name="energy_dep_ev" type="bool" value="true"/>
+      <Parameter name="tolerance" type="double" value="1e-9"/>
+      <ParameterList name="upscatter_db">
+        <Parameter name="tolerance" type="double" value="1e-4"/>
+      </ParameterList>
     </ParameterList>
     <Parameter name="xs_library" type="string" value="test-8grp"/>
   </ParameterList>

@@ -50,11 +50,11 @@
   dimension 2
 
   eq_set bld_2d
-  eigen_solver power_iteration
-  tolerance 1e-5
+
+  solver power_iteration
   Pn_order 1
   k_tolerance 1e-5
-  L2_tolerance 0.001
+  tolerance 1e-5
   energy_dep_ev true 
   upscatter_tolerance 1e-5 
   
@@ -69,7 +69,6 @@
   azimuthals_octant 4
   polars_octant 4
   
-  mat_library casl_comp_r1_draft_03092013.sh5  
   xs_library v7-252
   
   new_grp_bounds

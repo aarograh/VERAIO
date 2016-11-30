@@ -189,16 +189,14 @@
  
 [INSILICO]
     eq_set        sc
-    eigen_solver  arnoldi
-    tolerance     1e-06
     Pn_order      0
     dimension     3
     mesh          4
-!    eigenvalue_db:
+!    solver_db:
+        solver       arnoldi
         k_tolerance  0.0001
-        L2_tolerance 0.001
+        tolerance    0.001
         energy_dep_ev  true
-    mat_library   casl_comp.sh5
     max_delta_z   2.54
     num_blocks_i  2 
     num_blocks_j  2  

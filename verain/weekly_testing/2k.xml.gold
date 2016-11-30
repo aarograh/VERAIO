@@ -428,7 +428,9 @@
     <ParameterList name="silo_db">
       <Parameter name="silo_output" type="string" value="p2"/>
     </ParameterList>
-    <Parameter name="tolerance" type="double" value="1e-6"/>
+    <ParameterList name="solver_db">
+      <Parameter name="tolerance" type="double" value="1e-6"/>
+    </ParameterList>
     <Parameter name="xs_library" type="string" value="v7-252"/>
   </ParameterList>
   <ParameterList name="MPACT">

@@ -413,14 +413,13 @@
     eq_set        spn_fv
     SPN_order     3
     Pn_order      1
-    tolerance     1e-6
+    upscatter_tolerance 1e-6
     dimension     3
     mesh          2
     max_delta_z   7.62
-    preconditioner ML
+
     SPN_matrix_type mat_free
 
-    mat_library casl_comp_r2.sh5
 !   xs_library  v7-252
 !   xs_library  test-8grp
     xs_library  v7-56
@@ -514,4 +513,3 @@
   rlx_den     1.0
   maxiter     100
 ! read_restart cobra_denovo_restart.out
-

@@ -107,13 +107,11 @@
     mesh          4
     dimension     3
     eq_set        sc
-    eigen_solver  arnoldi
-    tolerance     1e-6
     Pn_order      0
 
-!   eigenvalue_db:
+!   solver_db:
        k_tolerance   1e-5
-       L2_tolerance  1e-5
+       tolerance     1e-5
        energy_dep_ev true
 
 !   quadrature_db:
