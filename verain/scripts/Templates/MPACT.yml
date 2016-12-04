@@ -334,6 +334,13 @@ MPACT:
             - copy MPACT/$par_file
           _content:
 
+        par_values:
+          _pltype: array
+          _type: int
+          _do:
+            - copyarray MPACT/@par_values
+          _content:
+
     iteration_control:
       _pltype: list
       _content:

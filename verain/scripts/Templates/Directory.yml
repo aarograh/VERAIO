@@ -2059,7 +2059,11 @@ MPACT:
     _content:
     _check:
       - is_word()
-
+  par_values:
+    <<: *dtlist
+    _style: multi-line
+    _check:
+      - fall(sub{is_int(shift)},())
   coupling_method:
     <<: *dtbool
     _content:
