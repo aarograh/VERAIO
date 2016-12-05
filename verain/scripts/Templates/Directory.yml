@@ -2059,7 +2059,17 @@ MPACT:
     _content:
     _check:
       - is_word()
-  par_values:
+  par_xdim:
+    <<: *dtword
+    _content:
+    _check:
+      - is_int()
+  par_ydim:
+    <<: *dtword
+    _content:
+    _check:
+      - is_int()
+  par_map:
     <<: *dtlist
     _style: multi-line
     _check:

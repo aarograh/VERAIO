@@ -333,12 +333,26 @@ MPACT:
           _do:
             - copy MPACT/$par_file
           _content:
+          
+        par_xdim:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$par_xdim
+          _content:
+          
+        par_ydim:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$par_ydim
+          _content:
 
-        par_values:
+        par_map:
           _pltype: array
           _type: int
           _do:
-            - copyarray MPACT/@par_values
+            - copyarray MPACT/@par_map
           _content:
 
     iteration_control:
