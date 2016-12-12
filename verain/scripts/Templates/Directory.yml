@@ -1209,6 +1209,12 @@ SHIFT:
       - is_float()
       - is_gt() 0
 
+  excore_filebase:
+    <<: *dtword
+    _content:
+    _check:
+     - is_word()
+
 COBRATF:
 
   nfuel:
