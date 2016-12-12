@@ -1166,6 +1166,13 @@ BISON:
         - copy BISON/$axial_shape
       _content:
       
+    fast_flux:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy BISON/$fast_flux
+      _content:
+
     element_order:
       _pltype: parameter
       _type: string
