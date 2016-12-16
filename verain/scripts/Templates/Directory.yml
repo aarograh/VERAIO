@@ -2234,6 +2234,12 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  cmfd_relaxation:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
   cmfd_shift_method:
     <<: *dtword
     _content:

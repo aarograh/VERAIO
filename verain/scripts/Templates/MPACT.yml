@@ -636,6 +636,13 @@ MPACT:
             - copy MPACT/$cmfd_shift_method
           _content:
 
+        cmfd_relaxation:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$cmfd_relaxation
+          _content:
+
         num_outers:
           _pltype: parameter
           _type: int
