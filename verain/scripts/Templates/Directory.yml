@@ -1131,11 +1131,18 @@ SHIFT:
     _content:
     _check:
       - is_word()
+  temp_interpolation:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() all none pin pin_plus_clad
   global_log:
     <<: *dtword
     _content:
     _check:
       - is_word()
+      - in_dictionary() debug diagnostic status info warning error critical
   do_transport:
     <<: *dtbool
     _content:
