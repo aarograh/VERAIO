@@ -1142,7 +1142,7 @@ SHIFT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() all none pin pin_plus_clad
+      - in_dictionary() all none pin
   global_log:
     <<: *dtword
     _content:
