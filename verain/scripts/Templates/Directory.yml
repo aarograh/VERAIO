@@ -1131,7 +1131,13 @@ SHIFT:
     _content:
     _check:
       - is_word()
-  temp_interpolation:
+  temp_correction:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none oned all
+  temp_transfer:
     <<: *dtword
     _content:
     _check:

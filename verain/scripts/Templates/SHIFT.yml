@@ -31,11 +31,18 @@ SHIFT:
         - copy SHIFT/$celib_file
       _content:
 
-    temp_interpolation
+    temp_correction
       _pltype: parameter
       _type: string
       _do:
-        - copy SHIFT/$temp_interpolation
+        - copy SHIFT/$temp_correction
+      _content:
+
+    temp_transfer
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$temp_transfer
       _content:
 
     global_log:
