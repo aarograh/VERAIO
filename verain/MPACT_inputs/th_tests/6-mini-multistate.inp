@@ -3,7 +3,7 @@
 
 [STATE]
   power    100.0
-  tinlet   600 K
+  tinlet   565 K
   tfuel    600 K
   boron    1300           ! ppmB
   modden   0.743          ! g/cc
@@ -13,8 +13,8 @@
   flow 100.0
 [STATE]    power  50.0
 [STATE]    power 100.0
-[STATE]   tinlet 580 K
-[STATE]   tinlet 600 K
+[STATE]   tinlet 570 K
+[STATE]   tinlet 565 K
 [STATE] pressure 2000
 [STATE] pressure 2250
 [STATE]     flow  80.0
@@ -23,7 +23,7 @@
 
 [CORE]
   size   1              ! one assembly
-  rated  2.9450 0.1157  ! MW, Mlbs/hr
+  rated  1.6565 0.1157  ! MW, Mlbs/hr
   apitch 8.9
   height 249.737
 
