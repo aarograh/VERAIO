@@ -2085,7 +2085,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() ctf simplified ctf_external none
+      - in_dictionary() ctf simplified ctf_external tiamat none
   th_nonlinear_solver:
     <<: *dtbool
     _content:
