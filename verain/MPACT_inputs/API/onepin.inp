@@ -180,7 +180,7 @@
    grid_treatment    equal_mass
 
 !T/H
-   coupling_method   ctf
+   coupling_method   tiamat
    sth_hgap          4500
    sth_dhfrac        0.02
 

@@ -190,7 +190,7 @@
       <Parameter name="splitTL" type="bool" value="true"/>
     </ParameterList>
     <ParameterList name="TH">
-      <Parameter name="coupling_method" type="string" value="ctf"/>
+      <Parameter name="coupling_method" type="string" value="tiamat"/>
       <Parameter name="sth_dhfrac" type="double" value="0.02"/>
       <Parameter name="sth_hgap" type="double" value="4500"/>
     </ParameterList>
