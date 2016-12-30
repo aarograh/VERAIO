@@ -31,6 +31,20 @@ SHIFT:
         - copy SHIFT/$celib_file
       _content:
 
+    temp_correction:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$temp_correction
+      _content:
+
+    temp_transfer:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$temp_transfer
+      _content:
+
     global_log:
       _pltype: parameter
       _type: string
@@ -80,11 +94,11 @@ SHIFT:
         - copy SHIFT/$Np
       _content:
 
-    excore_basefile:
+    excore_filebase:
       _pltype: parameter
       _type: string
       _do:
-        - copy SHIFT/$excore_basefile
+        - copy SHIFT/$excore_filebase
       _content:
 
     kcode_db:
