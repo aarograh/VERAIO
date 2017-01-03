@@ -3,7 +3,7 @@
 
 [STATE]
   power     0.0
-  tinlet   600 K
+  tinlet   565 K
   tfuel    600 K
   boron    1300           ! ppmB
   modden   0.743          ! g/cc

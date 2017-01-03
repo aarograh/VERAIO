@@ -11,7 +11,7 @@ for CASE in $LIST; do
   echo "========================================"
   echo "    Running case $CASE"
   echo "========================================"
-  ../scripts/react2xml.pl $CASE.inp $CASE.xml
+  ../scripts/react2xml.pl --xinit $CASE.inp $CASE.xml
   diff $CASE.xml.gold $CASE.xml
 done
 
