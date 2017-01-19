@@ -1228,6 +1228,30 @@ SHIFT:
     _check:
      - is_word()
 
+  x_bnd_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+
+  y_bnd_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+
+  z_bnd_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+
 COBRATF:
 
   nfuel:

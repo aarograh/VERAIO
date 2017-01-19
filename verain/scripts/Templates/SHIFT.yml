@@ -125,3 +125,28 @@ SHIFT:
           _do:
             - copy SHIFT/$num_inactive_cycles
           _content:
+
+    boundary_mesh_db:
+      _pltype: list
+      _content:
+
+        x_bnd_mesh:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$x_bnd_mesh
+          _content:
+
+        y_bnd_mesh:
+          _pltype: array
+          _type: double
+          _do:
+            - copy SHIFT/$y_bnd_mesh
+          _content:
+
+        z_bnd_mesh:
+          _pltype: array
+          _type: double
+          _do:
+            - copy SHIFT/$z_bnd_mesh
+          _content:
