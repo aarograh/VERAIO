@@ -49,6 +49,7 @@
 
 [MPACT]
   ray_spacing    0.005
+  shield_ray_spacing 0.005
   num_space      1 
   num_angle     -8
   num_threads    1
