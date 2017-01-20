@@ -2174,6 +2174,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+  temptable_boundary:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() clad_outer bulk_cool
   temptable_filename:
     <<: *dtword
     _content:
