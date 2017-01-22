@@ -1995,6 +1995,12 @@ MPACT:
     _content:
     _check:
       - fall(sub{is_int(shift)},())
+  shld_range:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_int(shift)},())
 
   k_tolerance:
     <<: *dtdouble

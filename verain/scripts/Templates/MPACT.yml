@@ -850,6 +850,13 @@ MPACT:
           _do:
             - copy MPACT/$cat_onegroup
           _content:
+          
+        shld_range:
+          _pltype: array
+          _type: int
+          _do:
+            - copy MPACT/$shld_range
+          _content:
 
         mod_mat:
           _pltype: parameter
