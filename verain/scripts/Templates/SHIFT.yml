@@ -94,11 +94,18 @@ SHIFT:
         - copy SHIFT/$Np
       _content:
 
-    excore_filebase:
+    excore_filename:
       _pltype: parameter
       _type: string
       _do:
-        - copy SHIFT/$excore_filebase
+        - copy SHIFT/$excore_filename
+      _content:
+
+    core_translate:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray SHIFT/$core_translate:
       _content:
 
     kcode_db:
@@ -129,6 +136,13 @@ SHIFT:
     boundary_mesh_db:
       _pltype: list
       _content:
+
+        bc_bnd_mesh:
+	  _pltype: array
+	  _type: string
+	  _do:
+	    - copyarray SHIFT/$bc_bnd_mesh
+	  _content:
 
         x_bnd_mesh:
           _pltype: array

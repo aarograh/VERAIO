@@ -1222,11 +1222,29 @@ SHIFT:
       - is_float()
       - is_gt() 0
 
-  excore_filebase:
+  excore_filename:
     <<: *dtword
     _content:
     _check:
      - is_word()
+
+  bc_bnd_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==6
+      - is_word(nth(0,()))
+      - in_dictionary(nth(0,()),'reflect','vacuum')
+      - is_word(nth(1,()))
+      - in_dictionary(nth(1,()),'reflect','vacuum')
+      - is_word(nth(2,()))
+      - in_dictionary(nth(2,()),'reflect','vacuum')
+      - is_word(nth(3,()))
+      - in_dictionary(nth(3,()),'reflect','vacuum')
+      - is_word(nth(4,()))
+      - in_dictionary(nth(4,()),'reflect','vacuum')
+      - is_word(nth(5,()))
+      - in_dictionary(nth(5,()),'reflect','vacuum')
 
   x_bnd_mesh:
     <<: *dtlist
@@ -1251,6 +1269,15 @@ SHIFT:
       - arraysize()==2
       - is_float(nth(0,()))
       - is_float(nth(1,()))
+
+  core_translate:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==3
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
 
 COBRATF:
 
