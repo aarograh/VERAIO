@@ -105,7 +105,7 @@ SHIFT:
       _pltype: array
       _type: double
       _do:
-        - copyarray SHIFT/$core_translate:
+        - copyarray SHIFT/$core_translate
       _content:
 
     kcode_db:
