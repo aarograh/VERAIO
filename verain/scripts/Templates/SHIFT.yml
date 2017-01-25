@@ -108,6 +108,13 @@ SHIFT:
         - copyarray SHIFT/$core_translate
       _content:
 
+    create_unique_pins:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$create_unique_pins
+      _content:
+
     kcode_db:
       _pltype: list
       _content:
