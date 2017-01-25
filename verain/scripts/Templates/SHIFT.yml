@@ -138,11 +138,11 @@ SHIFT:
       _content:
 
         bc_bnd_mesh:
-	  _pltype: array
-	  _type: string
-	  _do:
-	    - copyarray SHIFT/$bc_bnd_mesh
-	  _content:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray SHIFT/$bc_bnd_mesh
+          _content:
 
         x_bnd_mesh:
           _pltype: array
