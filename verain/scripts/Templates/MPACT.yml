@@ -288,6 +288,20 @@ MPACT:
             - copy MPACT/@crud_mesh:1
           _content:
 
+        moderator_mesh_radii:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/@fuel_pin_mod_mesh:0
+          _content:
+
+        moderator_mesh_ndiv:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/@fuel_pin_mod_mesh:1
+          _content:
+
     parallel_env:
       _pltype: list
       _content:
