@@ -614,6 +614,13 @@ MPACT:
               _do:
                 - copyarray MPACT/@temptable_polynomial,start=>2,stride=>3
               _content:
+              
+            boundary:
+              _pltype: parameter
+              _type: string
+              _do:
+                - copy MPACT/$temptable_boundary
+              _content:
 
     cmfd:
       _pltype: list
@@ -842,6 +849,13 @@ MPACT:
           _type: int
           _do:
             - copy MPACT/$cat_onegroup
+          _content:
+          
+        shld_range:
+          _pltype: array
+          _type: int
+          _do:
+            - copy MPACT/$shld_range
           _content:
 
         mod_mat:

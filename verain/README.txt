@@ -17,7 +17,6 @@ Here are some instructions to help find your way.
    Look in the following directories:
 
      test           - main example directory
-     MPACT_inputs   - the MPACT guys are "special" and need their own directory
      AMA_benchmarks - contain the AMA benchmark inputs
      weekly_testing - this directory contains "large" problems used in our weekly testing
 

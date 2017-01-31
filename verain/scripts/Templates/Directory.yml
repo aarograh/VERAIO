@@ -1179,54 +1179,99 @@ SHIFT:
     _check:
       - is_int()
       - is_gt() 0
-
   transport:
     <<: *dtstring
     _content:
     _check:
       - is_word()
       - in_dictionary() ce mg
-
   problem_mode:
     <<: *dtstring
     _content:
     _check:
       - is_word()
       - in_dictionary() eigenvalue forward
-
   mode:
     <<: *dtstring
     _content:
     _check:
       - is_word()
       - in_dictionary() n np
-
   output_geometry:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
-
   output_fission_source:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
-
   thermal_energy_cutoff:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
-
-  excore_filebase:
+  excore_filename:
     <<: *dtword
     _content:
     _check:
      - is_word()
+  bc_bnd_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==6
+      - is_word(nth(0,()))
+      - in_dictionary(nth(0,()),'reflect','vacuum')
+      - is_word(nth(1,()))
+      - in_dictionary(nth(1,()),'reflect','vacuum')
+      - is_word(nth(2,()))
+      - in_dictionary(nth(2,()),'reflect','vacuum')
+      - is_word(nth(3,()))
+      - in_dictionary(nth(3,()),'reflect','vacuum')
+      - is_word(nth(4,()))
+      - in_dictionary(nth(4,()),'reflect','vacuum')
+      - is_word(nth(5,()))
+      - in_dictionary(nth(5,()),'reflect','vacuum')
+  x_bnd_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+  y_bnd_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+  z_bnd_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+  core_translate:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==3
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+  create_unique_pins:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
 
 COBRATF:
 
@@ -1995,6 +2040,12 @@ MPACT:
     _content:
     _check:
       - fall(sub{is_int(shift)},())
+  shld_range:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_int(shift)},())
 
   k_tolerance:
     <<: *dtdouble
@@ -2174,6 +2225,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+  temptable_boundary:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() clad_outer bulk_cool
   temptable_filename:
     <<: *dtword
     _content:

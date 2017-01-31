@@ -1,3 +1,4 @@
+  temptable_boundary bulk_cool
 ! HEADER: 
 !  This is the initial fuel temperature table 
 !  The goal of this table is to provide fuel temperatures as a function of power 
