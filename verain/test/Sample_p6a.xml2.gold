@@ -433,7 +433,7 @@
     <Parameter name="vis_edits" type="string" value="none"/>
     <ParameterList name="xs_library">
       <Parameter name="subgroup_set" type="int" value="4"/>
-      <Parameter name="xs_filename" type="string" value="mpact47g_70s_v4.0_11032014.fmt"/>
+      <Parameter name="xs_filename" type="string" value="mpact51g_71_v4.2m5_12062016_sph.fmt"/>
       <Parameter name="xs_type" type="string" value="ORNL"/>
     </ParameterList>
   </ParameterList>
