@@ -1220,6 +1220,22 @@ SHIFT:
     _content:
     _check:
      - is_word()
+  radial_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+  num_theta:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  num_axial:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   bc_bnd_mesh:
     <<: *dtlist
     _content:
