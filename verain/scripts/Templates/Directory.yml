@@ -1923,6 +1923,16 @@ MPACT:
     _content:
     _check:
       - fall(sub{is_float(shift)},())
+  fuel_pin_mod_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_int(nth(1,()))
+      - nth(0,())>0
+      - nth(1,())>0
+
   crud_mesh:
     <<: *dtlist
     _content:
