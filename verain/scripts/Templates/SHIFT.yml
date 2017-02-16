@@ -165,6 +165,20 @@ SHIFT:
             - copy SHIFT/$num_axial
           _content:
 
+        neutron_bounds:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$neutron_bounds
+          _content:
+
+        photon_bounds:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$photon_bounds
+          _content:
+
     boundary_mesh_db:
       _pltype: list
       _content:
