@@ -2307,6 +2307,18 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() petsc trilinos
+  petsc_linear_solver_method:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() gmres bicgstab
+  preconditioner:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() default ilu bilu bjacobi_ilu mg eisenstat none
   cmfd_eigen_solver:
     <<: *dtword
     _content:
