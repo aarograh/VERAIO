@@ -668,6 +668,20 @@ MPACT:
             - copy MPACT/$cmfd_linear_solver
           _content:
 
+        petsc_linear_solver_method:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$petsc_linear_solver_method
+          _content:
+
+        preconditioner:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$preconditioner
+          _content:
+
         eigen_solver:
           _pltype: parameter
           _type: string
