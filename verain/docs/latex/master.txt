@@ -300,7 +300,7 @@
   nc
   * nc Conduction option (see CTF Manual).
   chf
-  * chf CHF model option (0 - disabled (post-CHF not allowed, TCHF set to huge number), 1 - W-3 with Tong factor, 2 - Biasi, 2 - Bowring, 3 - Groeneveld)
+  * chf Used to select the CHF modeling option (0 = Do only post-simulation calculation of CHF using W-3 correlation, 1 = Do CHF check during simulation using W-3, 2 = No CHF model)
   debug
   * debug Option to print additional debug information in xml2ctf processing  (1=on)
   irfc
