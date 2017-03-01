@@ -20,14 +20,14 @@
   flow
   * flow  Operating flow  (percent of rated flow)
   flow_dist
-  * 
+  * flow_dist 2-D array that must match the shape of assm_map in [CORE].  Gives a multiplier that will be applied to nominal flow in each assembly.
   bypass
   * bypass Bypass flow (percent of rated flow)
   tinlet
   * tinlet Inlet temperature
   * units ("F", "K", or "C")
   tinlet_dist
-  * TBD
+  * tinlet_dist 2-D array that much match the shape of assm_map in [CORE].  Gives a positive or negative number that will be added to the nominal inlet temperature of each assembly.
   void
   * void Assembly-wise radial void distribution in percent. BWR only.
   tfuel
@@ -178,7 +178,7 @@
   cell
   * cell Refer to the cell description given in the User's Manual.
   lattice
-  * TBD
+  * lattice Obsolete alias for "rodmap".  use "rodmap" instead.
   rodmap
   * axial_label Label for this axial elevation description.
   * cell_map Lattice map for this axial elevation.  Use a dash for an empty location.
@@ -300,7 +300,7 @@
   nc
   * nc Conduction option (see CTF Manual).
   chf
-  * TBD
+  * chf Used to select the CHF modeling option (0 = Do only post-simulation calculation of CHF using W-3 correlation, 1 = Do CHF check during simulation using W-3, 2 = No CHF model)
   debug
   * debug Option to print additional debug information in xml2ctf processing  (1=on)
   irfc
@@ -310,7 +310,7 @@
   hgap
   * hgap Gap conductance (W/m^2 K)
   gridbloc
-  * TBD
+  * gridbloc The ratio between blocked flow area in the grid (axial direction) and open flow area in the non-grid region.  Used for spacer grid enhancement model (larger blockage ratio leads to more grid heat transfer enhancement).  Must enter one value for each grid label specified in 'gridbloclabel'.
   epso
   * epso Inactive option - ignored by code.
   oitmax
@@ -354,35 +354,35 @@
   mass_storage
   * mass_storage Steady-state convergence criteria for transient storage of mass in fluid
   pressure_criteria
-  * TBD
+  * pressure_criteria Relative tolerance for L-infinity of pressure.  (default=1e-5)
   Tcool_criteria
-  * TBD
+  * Tcool_criteria Relative tolerance for L-infinity of coolant temperature.  (default=1e-5)
   Tsolid_criteria
-  * TBD
+  * Tsolid_criteria Relative tolerance for L-infinity of solid temperature.  (default=1e-5)
   void_criteria
-  * TBD
+  * void_criteria Absolute tolerance for L-infinity of void.  (default=1e-5)
   vliq_criteria
-  * TBD
+  * vliq_criteria Relative tolerance for L-infinity of axial liquid velocity.  (default=1e-5)
   vvap_criteria
-  * TBD
+  * vvap_criteria Relative tolerance for L-infinity of axial vapor velocity.  (default=1e-5)
   vdrop_criteria
-  * TBD
+  * vdrop_criteria Relative tolerance for L-infinity of axial droplet velocity.  (default=1e-5)
   pressurea_criteria
-  * TBD
+  * pressurea_criteria Absolute tolerance for L-infinity of pressure [bar].  (default=1e-5)
   Tcoola_criteria
-  * TBD
+  * Tcoola_criteria Absolute tolerance for L-infinity of coolant temperature [K].  (default=1e-5)
   Tsolida_criteria
-  * TBD
+  * Tsolida_criteria Absolute tolerance for L-infinity of solid temperature [K].  (default=1e-5)
   vliqa_criteria
-  * TBD
+  * vliqa_criteria Absolute tolerance for L-infinity of axial liquid velocity [m/s].  (default=1e-5)
   vvapa_criteria
-  * TBD
+  * vvapa_criteria Absolute tolerance for L-infinity of axial vapor velocity [m/s].  (default=1e-5)
   vdropa_criteria
-  * TBD
+  * vdropa_criteria Absolute tolerance for L-infinity of axial droplet velocity [m/s].  (default=1e-5)
   use_sol_stop_crit
-  * TBD
+  * use_sol_stop_crit Set to 1 to use the L-infinity based convergence metrics in CTF.  Set to zero to use the original convergence metrics.  Default is original convergence metrics.
   proc_per_assem
-  * TBD
+  * proc_per_assem Number of processors to use for each assembly in the parallel model.  Enter 1 or 4.
   edit_gaps
   * edit_gaps Edit flag to turn on gap output file (1=generate file)
   edit_channels
@@ -396,9 +396,9 @@
   edit_hdf5
   * edit_hdf5 Option to generate the HDF5 file (1=generate file)
   edit_fluid_vtk
-  * TBD
+  * edit_fluid_vtk Option to print fluid VTK output file (1=generate file)
   edit_rod_vtk
-  * TBD
+  * edit_rod_vtk Option to rod VTK output file (1=generate file)
   boil_ht_cor
   * boil_ht_cor Boiling heat transfer correlation
   property_evaluations
