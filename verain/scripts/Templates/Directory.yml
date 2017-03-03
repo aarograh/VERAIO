@@ -2324,7 +2324,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() cmfd ycmfd adcmfd mlcmfd none
+      - in_dictionary() cmfd ycmfd adcmfd scmfd mlcmfd none
   prolongation:
     <<: *dtword
     _content:
