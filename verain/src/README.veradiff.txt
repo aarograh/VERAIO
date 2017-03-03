@@ -56,7 +56,7 @@ Compare two different HDF files:
    1
 
 
-The "reference" vera HDF files are in the directory $VERA/VERAInExt/verain/weekly_testing
+The "reference" vera HDF files are in the directory $VERA/VERAInExt/verain/Progression_Problems/GOLD
 
 
 
