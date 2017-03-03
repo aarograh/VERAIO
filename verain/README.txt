@@ -17,8 +17,6 @@ Here are some instructions to help find your way.
    Look in the following directories:
 
      test           - main example directory
-     AMA_benchmarks - contain the AMA benchmark inputs
-     weekly_testing - this directory contains "large" problems used in our weekly testing
 
 3. Add additional input parameters to input
 
