@@ -277,6 +277,7 @@
   maxits  10000
   courant 0.8
   edit_channels 1
+  edit_fluid_vtk 1
 
   gridbloc MID 0.85     ! spacer grid blockage coefficient
   gridbloc XND 0.83     ! spacer grid blockage coefficient

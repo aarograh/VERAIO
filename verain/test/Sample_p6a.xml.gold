@@ -343,6 +343,7 @@
     <Parameter name="dtmax" type="double" value="0.1"/>
     <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="edit_channels" type="int" value="1"/>
+    <Parameter name="edit_fluid_vtk" type="int" value="1"/>
     <Parameter name="epso" type="double" value="0.001"/>
     <Parameter name="gridbloc" type="Array(double)" value="{0.83,0.85}"/>
     <Parameter name="gridbloclabel" type="Array(string)" value="{XND,MID}"/>
