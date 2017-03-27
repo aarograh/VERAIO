@@ -613,7 +613,18 @@ ASSEMBLY:
       - nth(2,())>0
       - nth(2,())<10
       - nth(3,())>0
-      - nth(4,())>0
+    _parameters:
+      loss:
+        <<: *dtdouble
+        _check:
+          - is_float()
+          - is_geq() 0
+      blockage:
+        <<: *dtdouble
+        _check:
+          - is_float()
+          - is_geq() 0
+
   grid_axial:
     <<: *dtlist
     _style: multi-line
@@ -1383,10 +1394,6 @@ COBRATF:
     _check:
       - is_float()
       - is_gt() 0
-
-  gridbloc:
-    <<: *dtdblnamed
-    _check:
 
   epso:
     <<: *dtdouble

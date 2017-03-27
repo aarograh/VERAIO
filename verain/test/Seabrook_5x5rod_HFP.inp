@@ -107,8 +107,8 @@
 
 ! grid masses reduced for small problem
 
-  grid END inc  3.866  63.700  0.8    ! grid material, height (cm), mass (g), loss coef
-  grid MID zirc 3.810  77.066  0.9065
+  grid END inc 3.866 63.700 / loss=0.8 ! grid material, height (cm), mass (g), loss coef
+  grid MID zirc 3.810 77.066 / loss=0.9065
 
   grid_axial     ! centerline elevations
       END  12.8880

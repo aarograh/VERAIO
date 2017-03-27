@@ -139,8 +139,8 @@
       PCAP1 395.381
       LGAP1 397.501
 
-  grid END inc  3.866 1017.0  0.9070 ! height (cm), mass (g), loss coef
-  grid MID zirc 3.810  875.0  0.9065 ! height (cm), mass (g), loss coef
+  grid END inc 3.866 1017.0 / loss=0.9070 ! height (cm), mass (g), loss coef
+  grid MID zirc 3.810 875.0 / loss=0.9065 blockage=0.85 ! height (cm), mass (g), loss coef
 
   grid_axial
       END  13.884
@@ -283,8 +283,6 @@
   courant 0.8
   edit_channels 1
 
-  gridbloc MID 0.85     ! spacer grid blockage coefficient
-  gridbloc XND 0.83     ! spacer grid blockage coefficient
 
   pressure_criteria     1e-4
   void_criteria         1e-4

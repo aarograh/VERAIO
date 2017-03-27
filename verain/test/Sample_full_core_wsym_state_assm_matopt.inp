@@ -389,8 +389,8 @@ crd_map
 
 ! grid definitions
 
-  grid GINC  inc   3.866  1014  0.91   ! grid height (cm), mass (g), loss coef
-  grid GZRC  zirc  3.81    875  0.90   ! grid height (cm), mass (g), loss coef
+  grid GINC inc 3.866 1014 / loss=0.91 ! grid height (cm), mass (g), loss coef
+  grid GZRC zirc 3.81 875 / loss=0.90 ! grid height (cm), mass (g), loss coef
 
   grid_axial
       GINC  13.883   ! bottom of grid lines up with BAF
@@ -501,8 +501,8 @@ crd_map
 
 ! grid definitions
 
-  grid GINC  inc   3.866  1014  0.91   ! grid height (cm), mass (g), loss coef
-  grid GZRC  zirc  3.81    875  0.90   ! grid height (cm), mass (g), loss coef
+  grid GINC inc 3.866 1014 / loss=0.91 ! grid height (cm), mass (g), loss coef
+  grid GZRC zirc 3.81 875 / loss=0.90 ! grid height (cm), mass (g), loss coef
 
   grid_axial
       GINC  13.883   ! bottom of grid lines up with BAF
