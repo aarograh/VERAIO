@@ -2380,7 +2380,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none constant adaptive sdws-ips
+      - in_dictionary() none constant adaptive sdws-ips sdws-ileps sdws-ilaps
   cmfd_num_inners:
     <<: *dtint
     _content:
