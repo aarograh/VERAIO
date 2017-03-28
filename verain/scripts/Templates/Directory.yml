@@ -554,6 +554,16 @@ CORE:
       - is_word()
       - in_dictionary() BWR PWR
 
+  source:
+    <<: *dtlistnamed
+    _style: multi-line
+    _slash:
+    _check:
+      - arraysize()>1
+    _defaults:
+      _path: CORE/%(_keyword)/$(_id)
+
+
 ASSEMBLY:
   <<: *dtblocknamed
   title:
