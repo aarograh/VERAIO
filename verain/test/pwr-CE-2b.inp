@@ -36,6 +36,8 @@
   bc_top reflecting
   bc_bot reflecting
 
+  include CORE.ini   ! load default materials
+
   mat he 0.000176 he-4
   mat zirc 6.56 zr    ! **** natural Zr, but shoudld be Zirlo
 
@@ -74,6 +76,26 @@
     3 3 3 3 3 3 3 E
 
   axial ASSY 0.0 LAT 1.0
+
+[CONTROL]
+  npin   16
+  stroke 1.0 1
+
+  mat b4cp 1.84 b4c    ! powder
+
+  cell C 0.936 0.94742 1.03632  / b4cp he inc / large4
+
+  rodmap  LAT
+    -
+    - -
+    - - -
+    - - - C
+    - - - C C
+    - - - - - -
+    - - - - - - -
+    - - - - - - - -
+
+  axial CC 0.0 LAT  1.0
 
 [MPACT]
   num_space      1
