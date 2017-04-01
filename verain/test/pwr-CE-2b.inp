@@ -9,6 +9,8 @@
 !  Meeting with US NRC
 !  ML050240096.pdf
 !
+!  3/31/2017 - minor updates to match CASL-U-2017-1300-000
+!
 [STATE]
   power    0.0
   tinlet   600 K
@@ -20,9 +22,9 @@
 
 [CORE]
   size   1
-  apitch 20.64
+  apitch 20.7772
   height 1.0
-  rated  0.01 0.01
+  rated  0.042324 0.01
 
   core_shape
     1
@@ -35,7 +37,7 @@
   bc_bot reflecting
 
   mat he 0.000176 he-4
-  mat zirc 6.56 zr    ! use natural Zr
+  mat zirc 6.56 zr    ! **** natural Zr, but shoudld be Zirlo
 
   mat erbia      8.64     er-162 1.17689E-03  ! SCALE 6.2 Er2O3
                           er-164 1.37228E-02  ! density from matweb.com
@@ -49,12 +51,10 @@
   npin   16
   ppitch 1.28524
 
-  fuel UHI 10.257 94.5 / 4.29
-  fuel UMD 10.257 94.5 / 3.99
-  fuel ULO 10.257 94.5 / 3.79
-  fuel UER 10.257 94.5 / 3.79 / erbia=2.0
-
-! CE large water rods at inlet density
+  fuel UHI 10.43  96.5 / 4.29
+  fuel UMD 10.43  96.5 / 3.99
+  fuel ULO 10.43  96.5 / 3.79
+  fuel UER 10.43  96.5 / 3.79 / erbia=2.1
 
   cell 1 0.41339 0.42164 0.48514 / UHI he zirc
   cell 2 0.41339 0.42164 0.48514 / UMD he zirc
@@ -77,7 +77,7 @@
 
 [MPACT]
   num_space      1
-  num_angle     -8
+  num_angle      1
   num_threads    1
   xs_filename    mpact51g_71_v4.2m5_12062016_sph.fmt
 
