@@ -2010,6 +2010,18 @@ MPACT:
     _check:
       - is_string()
       - in_dictionary() decart two three cactus ratfrac DECART TWO THREE CACTUS RATFRAC
+  radial_src_order:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+  axial_src_order:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
   power_edit:
     <<: *dtstring
     _content:
