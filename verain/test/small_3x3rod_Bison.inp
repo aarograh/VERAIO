@@ -212,7 +212,6 @@
 
 [BISON]
   solve_type tiamat
-  auxkernels_fast_neutron_flux_axial_power_profile = axial_peaking_factors
   auxkernels_fast_neutron_flux_factor = 3.e13
   auxkernels_pelletid_a_lower = 0.00226
   auxkernels_pelletid_a_upper = 0.5418
@@ -238,7 +237,6 @@
   materials_clad_density_density = 6551.0
   materials_clad_solid_mechanics_cold_work_factor = 0.01
   materials_clad_solid_mechanics_oxygen_concentration = 0.0
-  materials_fission_gas_release_axial_power_profile = axial_peaking_factors
   materials_fission_gas_release_file_name = powerhistory_RISO_AN8.csv
   materials_fission_gas_release_grain_radius = 5.0e-6
   materials_fission_gas_release_initial_grain_radius = 3.0e-6
