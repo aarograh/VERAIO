@@ -1390,8 +1390,23 @@ sub sourcemap{
 
         my $mat_ref=&key_on_list($home,$basename.$keyname);
 
+        my @slshs=indexes { $_ eq '/' } @content;
+        if(!(@slshs==1)){
+            die "sourcemap: invalid number of slashes in command source @content\n";
+        }
+
+        my @part1=before {$_ eq '/'} @content;
+        my @part2=after  {$_ eq '/'} @content;
+
+        if(($#part1+1)==2){
+            $stt_str=$part1[0];
+            $src_mult=$part1[1];
+            &key_on_parameter($mat_ref,'init_strength','double',$stt_str);
+            &key_on_parameter($mat_ref,'strength_mult','double',$src_mult);
+        } 
+
         &key_on_parameter($mat_ref,'key_name','string',$keyname);
-        &key_on_array($mat_ref,'spectrum','double',@content);
+        &key_on_array($mat_ref,'spectrum','double',@part2);
     }
 }
 

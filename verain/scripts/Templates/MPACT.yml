@@ -408,6 +408,13 @@ MPACT:
             - copy MPACT/$up_scatter
           _content:
 
+        num_extsrc_itrs:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$num_extsrc_itrs
+          _content:
+
         scattering:
           _pltype: parameter
           _type: string
