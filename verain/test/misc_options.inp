@@ -305,6 +305,9 @@
 !   upscatter_db:
        upscatter_tolerance  1e-4
 
+   do_transport     false     ! needed to create SHIFT files
+   geometry_output  true      ! needed to create SHIFT files
+
 [COUPLING]
   read_restart  my_restart_file
 

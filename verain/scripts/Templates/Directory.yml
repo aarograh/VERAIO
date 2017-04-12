@@ -911,6 +911,12 @@ INSILICO:
     _check:
       - is_word()
       - in_dictionary() true false
+  geometry_output:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   mesh:
     <<: *dtint
     _content:
@@ -2408,7 +2414,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none constant adaptive sdws-ips
+      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps
   cmfd_num_inners:
     <<: *dtint
     _content:
