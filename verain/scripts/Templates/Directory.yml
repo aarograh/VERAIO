@@ -555,6 +555,16 @@ CORE:
       - is_word()
       - in_dictionary() BWR PWR
 
+  source:
+    <<: *dtlistnamed
+    _style: multi-line
+    _slash:
+    _check:
+      - arraysize()>1
+    _defaults:
+      _path: CORE/%(_keyword)/$(_id)
+
+
 ASSEMBLY:
   <<: *dtblocknamed
   title:
@@ -829,6 +839,18 @@ EDITS:
     _content:
     _check:
       - is_float()
+  points:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%4==0
+      - fall(sub{is_string(shift)},stride(0,4,()))
+      - fall(sub{is_float(shift)},stride(1,4,()))
+      - fall(sub{is_float(shift)},stride(2,4,()))
+      - fall(sub{is_float(shift)},stride(3,4,()))
+
+
   edit_group:
     <<: *dtlistnamed
     _style: multi-line
@@ -2115,6 +2137,12 @@ MPACT:
       - is_int()
       - is_gt() 0
   up_scatter:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  num_extsrc_itrs:
     <<: *dtint
     _content:
     _check:
