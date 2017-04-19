@@ -38,6 +38,13 @@ SHIFT:
         - copy SHIFT/$temp_correction
       _content:
 
+    transfer:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$transfer
+      _content:
+
     temp_transfer:
       _pltype: parameter
       _type: string

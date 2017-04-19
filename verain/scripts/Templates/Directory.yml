@@ -1166,6 +1166,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() none oned all
+  transfer:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() all fiss_src isotopics temps
   temp_transfer:
     <<: *dtword
     _content:
