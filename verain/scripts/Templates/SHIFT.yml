@@ -96,7 +96,7 @@ SHIFT:
 
     Np:
       _pltype: parameter
-      _type: int
+      _type: double
       _do:
         - copy SHIFT/$Np
       _content:
@@ -128,7 +128,7 @@ SHIFT:
 
         Np:
           _pltype: parameter
-          _type: int
+          _type: double
           _do:
             - copy SHIFT/$Np
           _content:

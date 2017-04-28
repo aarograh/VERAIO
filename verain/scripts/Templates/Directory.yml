@@ -1220,10 +1220,10 @@ SHIFT:
       - is_int()
       - is_gt() 0
   Np:
-    <<: *dtint
+    <<: *dtdouble
     _content:
     _check:
-      - is_int()
+      - is_float()
       - is_gt() 0
   transport:
     <<: *dtstring
