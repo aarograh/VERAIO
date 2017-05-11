@@ -1991,15 +1991,18 @@ MPACT:
     _content:
     _check:
       - fall(sub{is_float(shift)},())
-  fuel_pin_mod_mesh:
+
+  pin_cell_mod_mesh:
     <<: *dtlist
     _content:
     _check:
-      - arraysize()==2
+      - arraysize()==3
       - is_float(nth(0,()))
       - is_int(nth(1,()))
+      - is_word(nth(2,()))
       - nth(0,())>0
       - nth(1,())>0
+      - in_dictionary(nth(2,()),'fuel','nonfuel','both')
 
   crud_mesh:
     <<: *dtlist

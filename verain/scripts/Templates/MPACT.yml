@@ -292,14 +292,21 @@ MPACT:
           _pltype: parameter
           _type: double
           _do:
-            - copy MPACT/@fuel_pin_mod_mesh:0
+            - copy MPACT/@pin_cell_mod_mesh:0
           _content:
 
         moderator_mesh_ndiv:
           _pltype: parameter
           _type: int
           _do:
-            - copy MPACT/@fuel_pin_mod_mesh:1
+            - copy MPACT/@pin_cell_mod_mesh:1
+          _content:
+
+        moderator_mesh_pins:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/@pin_cell_mod_mesh:2
           _content:
 
     parallel_env:

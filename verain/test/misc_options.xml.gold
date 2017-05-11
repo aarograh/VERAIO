@@ -454,6 +454,11 @@
       <Parameter name="exclude_depl_mats" type="Array(string)" value="{U31,U32,b4c}"/>
       <Parameter name="include_depl_mats" type="Array(string)" value="{U32,U33,aic,he}"/>
     </ParameterList>
+    <ParameterList name="mesh">
+      <Parameter name="moderator_mesh_ndiv" type="int" value="3"/>
+      <Parameter name="moderator_mesh_pins" type="string" value="both"/>
+      <Parameter name="moderator_mesh_radii" type="double" value="0.8"/>
+    </ParameterList>
   </ParameterList>
   <ParameterList name="BISON">
     <Parameter name="ramp_data_transfers" type="bool" value="true"/>
