@@ -710,6 +710,13 @@ MPACT:
             - copy MPACT/$k_shift
           _content:
 
+        k_shift_1G:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$k_shift_1G
+          _content:
+
         cmfd_shift_method:
           _pltype: parameter
           _type: string
@@ -717,11 +724,46 @@ MPACT:
             - copy MPACT/$cmfd_shift_method
           _content:
 
+        cmfd_shift_method_1G:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$cmfd_shift_method_1G
+          _content:
+
+        cmfd_shift_c0:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$cmfd_shift_c0
+          _content:
+
         cmfd_relaxation:
           _pltype: parameter
           _type: double
           _do:
             - copy MPACT/$cmfd_relaxation
+          _content:
+
+        ktol_1G:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$ktol_1G
+          _content:
+
+        flxtol_1G:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$flxtol_1G
+          _content:
+
+        max_1G_eig_its:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$max_1G_eig_its
           _content:
 
         num_outers:
@@ -736,6 +778,13 @@ MPACT:
           _type: int
           _do:
             - copy MPACT/$cmfd_num_inners
+          _content:
+
+        num_inners_1G:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$cmfd_num_inners_1G
           _content:
 
         up_scatter:

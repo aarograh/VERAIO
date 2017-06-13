@@ -2376,7 +2376,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() cmfd ycmfd adcmfd scmfd mlcmfd none
+      - in_dictionary() cmfd ycmfd adcmfd scmfd mlcmfd msed none
   prolongation:
     <<: *dtword
     _content:
@@ -2419,7 +2419,19 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  k_shift_1G:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
   cmfd_relaxation:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  cmfd_shift_c0:
     <<: *dtdouble
     _content:
     _check:
@@ -2431,7 +2443,37 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps
+  cmfd_shift_method_1G:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps
+  ktol_1G:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  flxtol_1G:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  max_1G_eig_its:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() -1
   cmfd_num_inners:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() -1
+  cmfd_num_inners_1G:
     <<: *dtint
     _content:
     _check:
