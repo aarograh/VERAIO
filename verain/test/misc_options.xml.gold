@@ -393,7 +393,9 @@
     <Parameter name="Pn_order" type="int" value="0"/>
     <Parameter name="axial_geom_eps" type="double" value="1.1e-3"/>
     <Parameter name="dimension" type="int" value="3"/>
+    <Parameter name="do_transport" type="bool" value="false"/>
     <Parameter name="eq_set" type="string" value="spn_fv"/>
+    <Parameter name="geometry_output" type="bool" value="true"/>
     <Parameter name="max_delta_z" type="double" value="2.54"/>
     <Parameter name="mesh" type="int" value="4"/>
     <Parameter name="num_blocks_i" type="int" value="2"/>
@@ -451,6 +453,11 @@
     <ParameterList name="depletion">
       <Parameter name="exclude_depl_mats" type="Array(string)" value="{U31,U32,b4c}"/>
       <Parameter name="include_depl_mats" type="Array(string)" value="{U32,U33,aic,he}"/>
+    </ParameterList>
+    <ParameterList name="mesh">
+      <Parameter name="moderator_mesh_ndiv" type="int" value="3"/>
+      <Parameter name="moderator_mesh_pins" type="string" value="both"/>
+      <Parameter name="moderator_mesh_radii" type="double" value="0.8"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="BISON">

@@ -81,8 +81,8 @@
       PCAP1 395.381
       LGAP1 397.501
 
-  grid END inc   3.866 3.519 0.9070 ! grid height (cm), mass (g), loss coef *** mass scaled to 1x1 rod
-  grid MID zirc4 3.810 3.028 0.9065 ! grid height (cm), mass (g), loss coef *** mass scaled to 1x1 rod
+  grid END inc 3.866 3.519 / loss=0.9070 ! grid height (cm), mass (g), loss coef *** mass scaled to 1x1 rod
+  grid MID zirc4 3.810 3.028 / loss=0.9065 ! grid height (cm), mass (g), loss coef *** mass scaled to 1x1 rod
 
   grid_axial
       END  13.884

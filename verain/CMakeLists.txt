@@ -27,7 +27,7 @@ INSTALL(
   DIRECTORY scripts/Packages scripts/Templates scripts/Init
   DESTINATION "${${PROJECT_NAME}_INSTALL_RUNTIME_DIR}"
   COMPONENT ${PACKAGE_NAME}
-  )  
+  )
 
 # Install documentation
 
@@ -42,6 +42,14 @@ INSTALL(
 INSTALL(
   FILES install/README.VERAIn
   DESTINATION "."
+  COMPONENT ${PACKAGE_NAME}
+  )
+
+# Install Progression Problems
+
+INSTALL(
+  DIRECTORY Progression_Problems/
+  DESTINATION "share/VERAIn/Progression_Problems"
   COMPONENT ${PACKAGE_NAME}
   )
 

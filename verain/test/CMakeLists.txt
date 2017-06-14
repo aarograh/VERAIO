@@ -54,6 +54,7 @@ ENDFUNCTION()
 #
 # Run the different test cases
 #
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(apr1400-cyc1)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(bwr-ge9)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(bwr-peach-1)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(bwr-peach-2)
@@ -129,14 +130,14 @@ ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test-short)
 #===========================================================
 
 
-SET(WEEKLY_TEST_DIR ${${PACKAGE_NAME}_SOURCE_DIR}/weekly_testing)
+SET(VERAIn_TEST_DIR ${${PACKAGE_NAME}_SOURCE_DIR}/test)
 
 
 TRIBITS_ADD_ADVANCED_TEST( veradiff_match
   TEST_0 CMND ${VERADIFF_EXE}
-    ARGS ${WEEKLY_TEST_DIR}/2a.h5.gold ${WEEKLY_TEST_DIR}/2a.h5.gold
+    ARGS ${VERAIn_TEST_DIR}/Sample_2a.h5 ${VERAIn_TEST_DIR}/Sample_2a.h5
     PASS_REGULAR_EXPRESSION_ALL
-      "reading h5 file: .+/verain/weekly_testing/2a.h5.gold"
+      "reading h5 file: .+/verain/test/Sample_2a.h5"
       "reading dataset: STATE_0001/keff"
       "keff1"
       "keff2"
@@ -148,10 +149,10 @@ TRIBITS_ADD_ADVANCED_TEST( veradiff_match
 
 TRIBITS_ADD_ADVANCED_TEST( veradiff_fail
   TEST_0 CMND ${VERADIFF_EXE}
-    ARGS ${WEEKLY_TEST_DIR}/2a.h5.gold ${WEEKLY_TEST_DIR}/2b.h5.gold
+    ARGS ${VERAIn_TEST_DIR}/Sample_2a.h5 ${VERAIn_TEST_DIR}/Sample_2b.h5
     PASS_REGULAR_EXPRESSION_ALL
-      "reading h5 file: .+/verain/weekly_testing/2a.h5.gold"
-      "reading h5 file: .+/verain/weekly_testing/2b.h5.gold"
+      "reading h5 file: .+/verain/test/Sample_2a.h5"
+      "reading h5 file: .+/verain/test/Sample_2b.h5"
       "reading dataset: STATE_0001/keff"
       "keff1"
       "keff2"

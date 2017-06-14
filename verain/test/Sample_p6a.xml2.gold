@@ -283,6 +283,7 @@
           <Parameter name="material" type="string" value="inc"/>
         </ParameterList>
         <ParameterList name="Grid_MID">
+          <Parameter name="gridblock" type="double" value="0.85"/>
           <Parameter name="gridloss" type="double" value="0.9065"/>
           <Parameter name="height" type="double" value="3.83309449"/>
           <Parameter name="label" type="string" value="MID"/>
@@ -343,9 +344,8 @@
     <Parameter name="dtmax" type="double" value="0.1"/>
     <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="edit_channels" type="int" value="1"/>
+    <Parameter name="edit_fluid_vtk" type="int" value="1"/>
     <Parameter name="epso" type="double" value="0.001"/>
-    <Parameter name="gridbloc" type="Array(double)" value="{0.83,0.85}"/>
-    <Parameter name="gridbloclabel" type="Array(string)" value="{XND,MID}"/>
     <Parameter name="hgap" type="double" value="5678.3"/>
     <Parameter name="iitmax" type="int" value="40"/>
     <Parameter name="irfc" type="int" value="2"/>
@@ -433,7 +433,7 @@
     <Parameter name="vis_edits" type="string" value="none"/>
     <ParameterList name="xs_library">
       <Parameter name="subgroup_set" type="int" value="4"/>
-      <Parameter name="xs_filename" type="string" value="mpact47g_70s_v4.0_11032014.fmt"/>
+      <Parameter name="xs_filename" type="string" value="mpact51g_71_v4.2m5_12062016_sph.fmt"/>
       <Parameter name="xs_type" type="string" value="ORNL"/>
     </ParameterList>
   </ParameterList>

@@ -339,3 +339,9 @@ CORE:
         - copy CORE/$reactor_type
       _content:
 
+    Sources:
+      _pltype: list
+      _do:
+        - sourcemap Source_,CORE/%source/*
+      _content:
+

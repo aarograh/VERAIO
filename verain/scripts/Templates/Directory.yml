@@ -233,6 +233,7 @@ STATE:
     _content:
     _check:
       - is_word()
+      - in_dictionary() on off
   thexp:
     <<: *dtword
     _content:
@@ -554,6 +555,16 @@ CORE:
       - is_word()
       - in_dictionary() BWR PWR
 
+  source:
+    <<: *dtlistnamed
+    _style: multi-line
+    _slash:
+    _check:
+      - arraysize()>1
+    _defaults:
+      _path: CORE/%(_keyword)/$(_id)
+
+
 ASSEMBLY:
   <<: *dtblocknamed
   title:
@@ -602,7 +613,18 @@ ASSEMBLY:
       - nth(2,())>0
       - nth(2,())<10
       - nth(3,())>0
-      - nth(4,())>0
+    _parameters:
+      loss:
+        <<: *dtdouble
+        _check:
+          - is_float()
+          - is_geq() 0
+      blockage:
+        <<: *dtdouble
+        _check:
+          - is_float()
+          - is_geq() 0
+
   grid_axial:
     <<: *dtlist
     _style: multi-line
@@ -828,6 +850,18 @@ EDITS:
     _content:
     _check:
       - is_float()
+  points:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%4==0
+      - fall(sub{is_string(shift)},stride(0,4,()))
+      - fall(sub{is_float(shift)},stride(1,4,()))
+      - fall(sub{is_float(shift)},stride(2,4,()))
+      - fall(sub{is_float(shift)},stride(3,4,()))
+
+
   edit_group:
     <<: *dtlistnamed
     _style: multi-line
@@ -883,6 +917,12 @@ INSILICO:
       - is_word()
       - in_dictionary() true false
   do_output:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  geometry_output:
     <<: *dtbool
     _content:
     _check:
@@ -1137,6 +1177,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() none oned all
+  transfer:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() all fiss_src isotopics temps
   temp_transfer:
     <<: *dtword
     _content:
@@ -1174,10 +1220,10 @@ SHIFT:
       - is_int()
       - is_gt() 0
   Np:
-    <<: *dtint
+    <<: *dtdouble
     _content:
     _check:
-      - is_int()
+      - is_float()
       - is_gt() 0
   transport:
     <<: *dtstring
@@ -1220,6 +1266,32 @@ SHIFT:
     _content:
     _check:
      - is_word()
+  radial_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+  num_theta:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  num_axial:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  neutron_bounds:
+    <<: *dtlist
+    _content:
+    _check:
+      - is_strictlydecreasing(stride(1,1,()))
+  photon_bounds:
+    <<: *dtlist
+    _content:
+    _check:
+      - is_strictlydecreasing(stride(1,1,()))
   bc_bnd_mesh:
     <<: *dtlist
     _content:
@@ -1322,10 +1394,6 @@ COBRATF:
     _check:
       - is_float()
       - is_gt() 0
-
-  gridbloc:
-    <<: *dtdblnamed
-    _check:
 
   epso:
     <<: *dtdouble
@@ -1923,6 +1991,19 @@ MPACT:
     _content:
     _check:
       - fall(sub{is_float(shift)},())
+
+  pin_cell_mod_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==3
+      - is_float(nth(0,()))
+      - is_int(nth(1,()))
+      - is_word(nth(2,()))
+      - nth(0,())>0
+      - nth(1,())>0
+      - in_dictionary(nth(2,()),'fuel','nonfuel','both')
+
   crud_mesh:
     <<: *dtlist
     _content:
@@ -2077,6 +2158,12 @@ MPACT:
     _check:
       - is_int()
       - is_gt() 0
+  num_extsrc_itrs:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   scattering:
     <<: *dtword
     _content:
@@ -2124,6 +2211,7 @@ MPACT:
     _content:
     _check:
       - is_word()
+      - in_dictionary() EXPLICITRADIAL EXPLICITFILE ASSEMBLY PS
   par_file:
     <<: *dtword
     _content:
@@ -2288,7 +2376,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() cmfd ycmfd adcmfd none
+      - in_dictionary() cmfd ycmfd adcmfd scmfd mlcmfd msed none
   prolongation:
     <<: *dtword
     _content:
@@ -2307,6 +2395,18 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() petsc trilinos
+  petsc_linear_solver_method:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() gmres bicgstab
+  preconditioner:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() default ilu bilu bjacobi_ilu mg eisenstat none
   cmfd_eigen_solver:
     <<: *dtword
     _content:
@@ -2319,7 +2419,19 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  k_shift_1G:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
   cmfd_relaxation:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  cmfd_shift_c0:
     <<: *dtdouble
     _content:
     _check:
@@ -2330,8 +2442,38 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none constant adaptive sdws-ips
+      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps
+  cmfd_shift_method_1G:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps
+  ktol_1G:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  flxtol_1G:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  max_1G_eig_its:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() -1
   cmfd_num_inners:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() -1
+  cmfd_num_inners_1G:
     <<: *dtint
     _content:
     _check:
@@ -2397,7 +2539,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() nem sanm nem-mg sp1 sp3 sp5 hysp3 sn-0 sn-1 sn-2 sn-3 none
+      - in_dictionary() nem sanm nem-mg sp1 sp3 sp5 hysp3 p1 p2 p3 hyp3 sn-0 sn-1 sn-2 sn-3 none
   under_relax:
     <<: *dtdouble
     _content:

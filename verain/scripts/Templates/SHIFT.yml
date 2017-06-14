@@ -38,6 +38,13 @@ SHIFT:
         - copy SHIFT/$temp_correction
       _content:
 
+    transfer:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$transfer
+      _content:
+
     temp_transfer:
       _pltype: parameter
       _type: string
@@ -89,7 +96,7 @@ SHIFT:
 
     Np:
       _pltype: parameter
-      _type: int
+      _type: double
       _do:
         - copy SHIFT/$Np
       _content:
@@ -121,7 +128,7 @@ SHIFT:
 
         Np:
           _pltype: parameter
-          _type: int
+          _type: double
           _do:
             - copy SHIFT/$Np
           _content:
@@ -138,6 +145,45 @@ SHIFT:
           _type: int
           _do:
             - copy SHIFT/$num_inactive_cycles
+          _content:
+
+    tally_db:
+      _pltype: list
+      _content:
+
+        radial_mesh:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$radial_mesh
+          _content:
+
+        num_theta:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy SHIFT/$num_theta
+          _content:
+
+        num_axial:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy SHIFT/$num_axial
+          _content:
+
+        neutron_bounds:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$neutron_bounds
+          _content:
+
+        photon_bounds:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$photon_bounds
           _content:
 
     boundary_mesh_db:

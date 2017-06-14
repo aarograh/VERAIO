@@ -112,9 +112,9 @@
     <Parameter name="num_blocks_j" type="int" value="4"/>
   </ParameterList>
   <ParameterList name="SHIFT">
-    <Parameter name="Np" type="int" value="1000000"/>
+    <Parameter name="Np" type="double" value="1000000"/>
     <ParameterList name="kcode_db">
-      <Parameter name="Np" type="int" value="1000000"/>
+      <Parameter name="Np" type="double" value="1000000"/>
       <Parameter name="num_cycles" type="int" value="1100"/>
       <Parameter name="num_inactive_cycles" type="int" value="100"/>
     </ParameterList>

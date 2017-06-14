@@ -199,8 +199,8 @@
       PCAP1 395.381
       LGAP1 397.501
 
-  grid END inc  3.866  31.67  0.9070 ! height (cm), mass (g), loss coef  *** scaled to 3x3
-  grid MID zirc 3.810  27.25  0.9065 ! height (cm), mass (g), loss coef  *** scaled to 3x3
+  grid END inc 3.866 31.67 / loss=0.9070 ! height (cm), mass (g), loss coef *** scaled to 3x3
+  grid MID zirc 3.810 27.25 / loss=0.9065 ! height (cm), mass (g), loss coef *** scaled to 3x3
 
   grid_axial
       END  13.884
@@ -305,6 +305,9 @@
 !   upscatter_db:
        upscatter_tolerance  1e-4
 
+   do_transport     false     ! needed to create SHIFT files
+   geometry_output  true      ! needed to create SHIFT files
+
 [COUPLING]
   read_restart  my_restart_file
 
@@ -336,5 +339,6 @@
   sth_dhfrac 0.02     ! internal t/h option
   exclude_depl_mats U31 U32 b4c
   include_depl_mats U32 U33 aic he
+  pin_cell_mod_mesh  0.8 3 both
 [BISON]
   ramp_data_transfers = true

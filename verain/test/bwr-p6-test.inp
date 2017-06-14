@@ -139,8 +139,8 @@
         GAP  397.51
 
 ! *** artificially reduced grid mass
-  grid END inc    3.866 350  0.9070 ! grid height (cm), mass (g), loss coef
-  grid MID zirc  3.810 300  0.9065 ! grid height (cm), mass (g), loss coef
+  grid END inc 3.866 350 / loss=0.9070 ! grid height (cm), mass (g), loss coef
+  grid MID zirc 3.810 300 / loss=0.9065 ! grid height (cm), mass (g), loss coef
 
   grid_axial
       END  13.884

@@ -79,8 +79,8 @@
       PCAP1 395.381
       LGAP1 397.501
 
-  grid END inc   3.866 3.519 0.9070 ! grid height (cm), mass (g), loss coef *** mass scaled to 1x1 rod
-  grid MID zirc  3.810 3.028 0.9065 ! grid height (cm), mass (g), loss coef *** mass scaled to 1x1 rod
+  grid END inc 3.866 3.519 / loss=0.9070 blockage=0.9 ! grid height (cm), mass (g), loss coef *** mass scaled to 1x1 rod
+  grid MID zirc 3.810 3.028 / loss=0.9065 blockage=0.5 ! grid height (cm), mass (g), loss coef *** mass scaled to 1x1 rod
 
   grid_axial
       END  13.884
@@ -209,8 +209,6 @@
   edit_channels 1
   maps_filename = single_rod_HFP
 
-  gridbloc MID 0.5     ! spacer grid blockage coefficient
-  gridbloc END 0.9     ! spacer grid blockage coefficient
 
 [MAMBA1D]
   noBoilnoCrud 0     ! 0-crud will be deposited in non-boiling regions
