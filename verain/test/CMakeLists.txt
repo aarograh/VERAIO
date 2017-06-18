@@ -149,9 +149,6 @@ FUNCTION(ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST FILE_NAME)
         ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl --xInit
         ../${FILE_NAME}.inp  ${FILE_NAME}.xml
       WILL_FAIL
-    TEST_2
-      CMND ls ARGS ${FILE_NAME}.xml
-      PASS_REGULAR_EXPRESSION "ls: cannot access ${FILE_NAME}.xml: No such file or directory"
     )
 ENDFUNCTION()
 
