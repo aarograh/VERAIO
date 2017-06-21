@@ -11,7 +11,6 @@
 !================================================================================
 
 [STATE]
-  power  100.0         ! %
   tinlet 559.0 F       ! F
   boron  1300          ! ppmB
   pressure 2250        ! psia
@@ -21,6 +20,9 @@
 
   feedback on
   sym full
+
+                            power 0.00001 ! Hot Zero Power
+  [STATE] deplete EFPD   1; power     100 ! Ramp to HFP in 2 days
 
 [CORE]
   size 1                ! 1x1 single-assembly
@@ -211,7 +213,8 @@
   maps_filename = 3x3_HFP
 
 [BISON]
-  solve_type tiamat
+  executioner_start_time = -100
+  solve_type tiamat_inline
   auxkernels_fast_neutron_flux_factor = 3.e13
   auxkernels_pelletid_a_lower = 0.00226
   auxkernels_pelletid_a_upper = 0.5418
