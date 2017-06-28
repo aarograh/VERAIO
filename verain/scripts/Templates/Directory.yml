@@ -2313,6 +2313,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+  temptable_shape:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   temptable_boundary:
     <<: *dtword
     _content:
