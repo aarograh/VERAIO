@@ -383,7 +383,15 @@ CORE:
       - fall(sub{is_string(shift)},stride(0,2,()))
       - fall(sub{is_float(shift)},stride(1,2,()))
       - fall(sub{is_geq(shift,0)},stride(1,2,()))
-
+  hole:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%2==0
+      - fall(sub{is_float(shift)},stride(0,3,()))
+      - fall(sub{is_float(shift)},stride(1,3,()))
+      - fall(sub{is_float(shift)},stride(2,3,()))
   core_shape:
     <<: *dtlist
     _style: multi-line
@@ -2170,6 +2178,11 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() P0 P1 P2 P3 P4 P5 Pn0 TCP0 LTCP0 ITCP0
+  trim_Pn_moments:
+    <<: *dtbool
+    _content:
+    _check:
+      - in_dictionary() true false
   boundary_update:
     <<: *dtword
     _content:
