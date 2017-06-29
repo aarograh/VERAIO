@@ -1215,6 +1215,14 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
+  micro_zaids:
+    <<: *dtlist
+    _content:
+    _check:
+  micro_rxns:
+    <<: *dtlist
+    _content:
+    _check:
   num_cycles:
     <<: *dtint
     _content:
@@ -1258,6 +1266,12 @@ SHIFT:
       - is_word()
       - in_dictionary() true false
   output_fission_source:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  output_micro_tally:
     <<: *dtbool
     _content:
     _check:
@@ -1458,7 +1472,19 @@ COBRATF:
     _check:
       - is_int()
       - is_gt() 0
-
+  
+  micro_zaids:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+  
+  micro_rxns:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+  
   courant:
     <<: *dtdouble
     _content:
@@ -1696,6 +1722,7 @@ COBRATF:
     <<: *dtdouble
     _content:
     _check:
+
       - is_float()
 
   k_void_drift:

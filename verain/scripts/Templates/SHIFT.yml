@@ -80,6 +80,13 @@ SHIFT:
         - copy SHIFT/$output_geometry
       _content:
 
+    output_micro_tally:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$output_micro_tally
+          _content:
+
     output_fission_source:
       _pltype: parameter
       _type: bool
@@ -172,18 +179,32 @@ SHIFT:
             - copy SHIFT/$num_axial
           _content:
 
-        neutron_bounds:
+        n_bounds:
           _pltype: array
           _type: double
           _do:
             - copyarray SHIFT/$neutron_bounds
           _content:
 
-        photon_bounds:
+        p_bounds:
           _pltype: array
           _type: double
           _do:
             - copyarray SHIFT/$photon_bounds
+          _content:
+        
+        micro_zaids:
+          _pltype: array
+          _type: int
+          _do:
+            - copyarray SHIFT/$micro_zaids
+          _content:
+       
+        micro_rxns:
+          _pltype: array
+          _type: int 
+          _do:
+            - copyarray SHIFT/$micro_rxns
           _content:
 
     boundary_mesh_db:
