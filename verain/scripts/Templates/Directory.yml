@@ -1215,6 +1215,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
+  gamma_flux:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   num_cycles:
     <<: *dtint
     _content:
