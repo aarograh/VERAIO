@@ -1690,6 +1690,7 @@ COBRATF:
     _content:
     _check:
       - is_string()
+      - in_dictionary() asme iapws iapws_v2 flibe
 
   beta_sp:
     <<: *dtdouble
