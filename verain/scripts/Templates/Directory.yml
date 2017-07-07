@@ -1943,7 +1943,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none core fsr
+      - in_dictionary() none core fsr fsrvtu
   rr_edits:
     <<: *dtword
     _content:
