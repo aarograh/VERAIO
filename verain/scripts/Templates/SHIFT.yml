@@ -81,11 +81,11 @@ SHIFT:
       _content:
 
     output_micro_tally:
-          _pltype: parameter
-          _type: bool
-          _do:
-            - copy SHIFT/$output_micro_tally
-          _content:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$output_micro_tally
+      _content:
 
     output_fission_source:
       _pltype: parameter
