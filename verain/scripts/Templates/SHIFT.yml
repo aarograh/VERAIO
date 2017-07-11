@@ -183,14 +183,14 @@ SHIFT:
           _pltype: array
           _type: double
           _do:
-            - copyarray SHIFT/$neutron_bounds
+            - copyarray SHIFT/$n_bounds
           _content:
 
         p_bounds:
           _pltype: array
           _type: double
           _do:
-            - copyarray SHIFT/$photon_bounds
+            - copyarray SHIFT/$p_bounds
           _content:
         
         micro_zaids:

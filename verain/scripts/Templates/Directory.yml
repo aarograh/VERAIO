@@ -1310,12 +1310,12 @@ SHIFT:
     _check:
       - is_int()
       - is_gt() 0
-  neutron_bounds:
+  n_bounds:
     <<: *dtlist
     _content:
     _check:
       - is_strictlydecreasing(stride(1,1,()))
-  photon_bounds:
+  p_bounds:
     <<: *dtlist
     _content:
     _check:
