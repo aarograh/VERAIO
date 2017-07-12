@@ -31,13 +31,6 @@ SHIFT:
         - copy SHIFT/$celib_file
       _content:
 
-    temp_correction:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$temp_correction
-      _content:
-
     transfer:
       _pltype: parameter
       _type: string
@@ -152,6 +145,38 @@ SHIFT:
           _type: int
           _do:
             - copy SHIFT/$num_inactive_cycles
+          _content:
+
+    broaden_db:
+      _pltype: list
+      _content:
+
+        temperature_tol:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$temperature_tol
+          _content:
+
+        union_energy:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$union_energy
+          _content:
+
+        delta_t:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$delta_t
+          _content:
+
+        energy_tol:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$energy_tol
           _content:
 
     tally_db:
