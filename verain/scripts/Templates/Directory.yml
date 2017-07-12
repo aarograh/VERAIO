@@ -1191,6 +1191,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() all none pin
+  broaden_xs:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   temperature_tol:
     <<: *dtdouble
     _content:

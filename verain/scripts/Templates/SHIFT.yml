@@ -147,6 +147,13 @@ SHIFT:
             - copy SHIFT/$num_inactive_cycles
           _content:
 
+    broaden_xs:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$broaden_xs
+      _content:
+
     broaden_db:
       _pltype: list
       _content:
