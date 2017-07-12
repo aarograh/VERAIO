@@ -1179,12 +1179,6 @@ SHIFT:
     _content:
     _check:
       - is_word()
-  temp_correction:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() none oned all
   transfer:
     <<: *dtword
     _content:
@@ -1197,6 +1191,29 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() all none pin
+  temperature_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+  union_energy:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  delta_t:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+  energy_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_lt() 1
   global_log:
     <<: *dtword
     _content:
