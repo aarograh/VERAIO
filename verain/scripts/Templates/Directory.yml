@@ -1220,6 +1220,12 @@ SHIFT:
       - is_float()
       - is_gt() 0
       - is_lt() 1
+  dbrc:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   global_log:
     <<: *dtword
     _content:
