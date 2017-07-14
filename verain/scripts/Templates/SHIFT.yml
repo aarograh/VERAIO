@@ -154,7 +154,7 @@ SHIFT:
             - copy SHIFT/$num_inactive_cycles
           _content:
 
-    dbrc
+    dbrc:
       _pltype: parameter
       _type: bool
       _do:
