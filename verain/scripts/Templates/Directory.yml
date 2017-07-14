@@ -1401,6 +1401,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
+  track_isotopes:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() short full
 
 COBRATF:
 
