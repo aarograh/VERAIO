@@ -2977,6 +2977,11 @@ BISON:
     _content:
     _check:
       - is_int()
+  outputs_console_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   coolantchannel_convective_clad_surface_inlet_temperature:
     <<: *dtdouble
     _content:
