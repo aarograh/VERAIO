@@ -122,6 +122,9 @@ ADD_REACTOR_AWARE_INPUT_PARSER_TEST(smr-7x7)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_cobra_edits_inimat)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_cobra_edits)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test-short)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_3a)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_3a_forward)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_4mini_nonunique)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(with-dash)
 
 #===========================================================
@@ -156,7 +159,7 @@ ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(front-dash)
 
 #===========================================================
 #
-#               Test the verdiff program!
+#               Test the veradiff program!
 #
 #===========================================================
 
