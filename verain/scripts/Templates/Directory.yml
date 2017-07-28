@@ -614,6 +614,7 @@ ASSEMBLY:
     _style: multi-line
     _check:
       - fall(sub{is_geq(shift,0)},stride(1,2,()))
+      - is_strictlyincreasing(stride(1,2,()))
   grid:
     <<: *dtlistnamed
     _style:
