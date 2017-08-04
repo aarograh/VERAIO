@@ -360,6 +360,13 @@ COBRATF:
         - copy COBRATF/$proc_per_assem
       _content:
 
+    gap_model:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy COBRATF/$gap_model
+      _content:
+
     boil_ht_cor:
       _pltype: parameter
       _type: string

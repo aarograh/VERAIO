@@ -1747,6 +1747,12 @@ COBRATF:
     _check:
       - is_int()
 
+  gap_model:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+
   boil_ht_cor:
     <<: *dtstring
     _content:
