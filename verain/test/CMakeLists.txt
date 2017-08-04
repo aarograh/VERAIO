@@ -156,6 +156,7 @@ FUNCTION(ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST FILE_NAME)
 ENDFUNCTION()
 
 ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(front-dash)
+ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(decreasing-axial)
 
 #===========================================================
 #
