@@ -457,7 +457,6 @@
     <ParameterList name="mesh">
       <Parameter name="moderator_mesh_ndiv" type="int" value="3"/>
       <Parameter name="moderator_mesh_pins" type="string" value="both"/>
-      <Parameter name="moderator_mesh_radii" type="double" value="0.8"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="BISON">
