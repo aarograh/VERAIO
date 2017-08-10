@@ -10,6 +10,13 @@ COBRATF:
         - copy COBRATF/$nfuel
       _content:
 
+    imox:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$imox
+      _content:
+
     nc:
       _pltype: parameter
       _type: int
