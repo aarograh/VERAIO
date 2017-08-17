@@ -2033,6 +2033,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() none hdf5 out both
+  rr_edits_opt:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
   grid_treatment:
     <<: *dtword
     _content:

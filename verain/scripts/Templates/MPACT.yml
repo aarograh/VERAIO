@@ -109,6 +109,13 @@ MPACT:
         - copy MPACT/$rr_edits
       _content:
 
+    rr_edits_opt:
+      _pltype: array
+      _type: string
+      _do:
+        - copy MPACT/$rr_edits_opt
+      _content:
+
     rod_treatment:
       _pltype: parameter
       _type: string
