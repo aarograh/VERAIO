@@ -31,13 +31,6 @@ SHIFT:
         - copy SHIFT/$celib_file
       _content:
 
-    temp_correction:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$temp_correction
-      _content:
-
     transfer:
       _pltype: parameter
       _type: string
@@ -78,6 +71,13 @@ SHIFT:
       _type: bool
       _do:
         - copy SHIFT/$output_geometry
+      _content:
+
+    output_micro_tally:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$output_micro_tally
       _content:
 
     output_fission_source:
@@ -122,6 +122,13 @@ SHIFT:
         - copy SHIFT/$create_unique_pins
       _content:
 
+    track_isotopes:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$track_isotopes
+      _content:
+
     kcode_db:
       _pltype: list
       _content:
@@ -145,6 +152,52 @@ SHIFT:
           _type: int
           _do:
             - copy SHIFT/$num_inactive_cycles
+          _content:
+
+    dbrc:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$dbrc
+      _content:
+
+    broaden_xs:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$broaden_xs
+      _content:
+
+    broaden_db:
+      _pltype: list
+      _content:
+
+        temperature_tol:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$temperature_tol
+          _content:
+
+        union_energy:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$union_energy
+          _content:
+
+        delta_t:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$delta_t
+          _content:
+
+        energy_tol:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$energy_tol
           _content:
 
     tally_db:
@@ -172,18 +225,39 @@ SHIFT:
             - copy SHIFT/$num_axial
           _content:
 
-        neutron_bounds:
+        n_bounds:
           _pltype: array
           _type: double
           _do:
-            - copyarray SHIFT/$neutron_bounds
+            - copyarray SHIFT/$n_bounds
           _content:
 
-        photon_bounds:
+        p_bounds:
           _pltype: array
           _type: double
           _do:
-            - copyarray SHIFT/$photon_bounds
+            - copyarray SHIFT/$p_bounds
+          _content:
+        
+        micro_zaids:
+          _pltype: array
+          _type: int
+          _do:
+            - copyarray SHIFT/$micro_zaids
+          _content:
+       
+        micro_rxns:
+          _pltype: array
+          _type: int 
+          _do:
+            - copyarray SHIFT/$micro_rxns
+          _content:
+
+        gamma_flux:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$gamma_flux
           _content:
 
     boundary_mesh_db:

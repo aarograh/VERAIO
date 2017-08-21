@@ -1,0 +1,198 @@
+[CASEID]
+  title 'CASL AMA Problem 3a - Single 17x17 Assembly - Public'
+
+[STATE]
+  power    0.0
+  tinlet   600 K
+  tfuel    600 K
+  boron    1300           ! ppmB
+  modden   0.743          ! g/cc
+  sym      qtr  
+  feedback off
+
+[CORE]
+  size   1              ! one assembly   
+  rated  17.67 0.6823   ! MW, Mlbs/hr 
+  apitch 21.5
+  height 406.337
+
+  core_shape
+    1 
+
+  assm_map
+    ASSY
+
+  lower_plate ss  5.0 0.5   ! mat, thickness, vol frac
+  upper_plate ss  7.6 0.5 
+ !lower_ref  mod 20.0 1.0   ! not needed
+
+  bc_rad reflecting
+
+  include casl_comp_r3_full.ini
+
+[ASSEMBLY]
+  title "Westinghouse 17x17"
+  npin 17 
+  ppitch 1.26
+
+  fuel U31 10.257 94.5 / 3.1 u-234 0.026347 
+
+  cell 1     0.4096 0.418 0.475 / U31 he zirc4
+  cell 3            0.561 0.602 / mod    zirc4      ! guide/instrument tube
+  cell 4            0.418 0.475 /     he zirc4      ! plenum
+  cell 5                  0.475 /        zirc4      ! end plug
+  cell 6                  0.475 /        mod        ! empty    
+
+  lattice FUEL  
+       3
+       1 1
+       1 1 1
+       3 1 1 3
+       1 1 1 1 1
+       1 1 1 1 1 3
+       3 1 1 3 1 1 1
+       1 1 1 1 1 1 1 1
+       1 1 1 1 1 1 1 1 1
+
+  lattice PLEN
+       3
+       4 4
+       4 4 4
+       3 4 4 3
+       4 4 4 4 4
+       4 4 4 4 4 3
+       3 4 4 3 4 4 4
+       4 4 4 4 4 4 4 4
+       4 4 4 4 4 4 4 4 4
+
+  lattice PLUG 
+       3
+       5 5
+       5 5 5
+       3 5 5 3
+       5 5 5 5 5
+       5 5 5 5 5 3
+       3 5 5 3 5 5 5
+       5 5 5 5 5 5 5 5
+       5 5 5 5 5 5 5 5 5
+
+  lattice GAP  
+       3
+       6 6
+       6 6 6
+       3 6 6 3
+       6 6 6 6 6
+       6 6 6 6 6 3
+       3 6 6 3 6 6 6
+       6 6 6 6 6 6 6 6
+       6 6 6 6 6 6 6 6 6
+
+  axial ASSY   6.053
+        GAP   10.281 
+        PLUG  11.951 
+        FUEL 377.711 
+        PLEN 393.711 
+        PLUG 395.381
+        GAP  397.51
+
+  grid END inc    3.866 1017 0.9070 ! grid height (cm), mass (g), loss coef
+  grid MID zirc4  3.810 875  0.9065 ! grid height (cm), mass (g), loss coef
+
+  grid_axial
+      END  13.884
+      MID  75.2
+      MID 127.4
+      MID 179.6
+      MID 231.8
+      MID 284.0
+      MID 336.2
+      END 388.2
+
+  lower_nozzle  ss 6.053 6250.0  ! mat, height, mass (g)
+  upper_nozzle  ss 8.827 6250.0  ! mat, height, mass (g)
+
+[EDITS]
+  axial_edit_bounds 
+      11.951
+      15.817 
+      24.028 
+      32.239 
+      40.45 
+      48.662 
+      56.873 
+      65.084 
+      73.295 
+      77.105 
+      85.17 
+      93.235 
+      101.3 
+      109.365 
+      117.43 
+      125.495 
+      129.305 
+      137.37 
+      145.435 
+      153.5 
+      161.565 
+      169.63 
+      177.695 
+      181.505 
+      189.57 
+      197.635 
+      205.7 
+      213.765 
+      221.83 
+      229.895 
+      233.705 
+      241.77 
+      249.835 
+      257.9 
+      265.965 
+      274.03 
+      282.095 
+      285.905 
+      293.97 
+      302.035 
+      310.1 
+      318.165 
+      326.23 
+      334.295 
+      338.105 
+      346.0262 
+      353.9474 
+      361.8686 
+      369.7898 
+      377.711
+
+[MPACT]
+  num_space      8
+  num_angle      1
+  num_threads    1
+  ray_spacing        0.08
+  shield_ray_spacing 0.08
+  azimuthals_octant 4
+  shield_azimuthals_octant 4
+  polars_octant     1
+  xs_filename       mpact8g_70s_v4.0m0_02232015.fmt
+  res_up_scatter    false
+
+[SHIFT]
+  transport             ce  
+  Np                    1000
+  num_cycles            10
+  num_inactive_cycles   5
+  do_output             true
+  output_fission_source true
+  output_geometry       false
+  output_micro_tally    true
+  global_log            debug
+  problem_mode          eigenvalue
+  mode                  n
+  do_transport          false
+  thermal_energy_cutoff 10.0
+  dbrc                  false
+  broaden_xs            false
+! tally_db
+  n_bounds              2.0e7 1.0e6 1.0e4 1.0e2
+  micro_zaids           92238 92235 94239
+  micro_rxns            1 18 27

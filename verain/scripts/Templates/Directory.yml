@@ -614,6 +614,7 @@ ASSEMBLY:
     _style: multi-line
     _check:
       - fall(sub{is_geq(shift,0)},stride(1,2,()))
+      - is_strictlyincreasing(stride(1,2,()))
   grid:
     <<: *dtlistnamed
     _style:
@@ -1179,12 +1180,6 @@ SHIFT:
     _content:
     _check:
       - is_word()
-  temp_correction:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() none oned all
   transfer:
     <<: *dtword
     _content:
@@ -1197,6 +1192,41 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() all none pin
+  broaden_xs:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  temperature_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+  union_energy:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  delta_t:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+  energy_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_lt() 1
+  dbrc:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   global_log:
     <<: *dtword
     _content:
@@ -1210,6 +1240,20 @@ SHIFT:
       - is_word()
       - in_dictionary() true false
   do_output:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  micro_zaids:
+    <<: *dtlist
+    _content:
+    _check:
+  micro_rxns:
+    <<: *dtlist
+    _content:
+    _check:
+  gamma_flux:
     <<: *dtbool
     _content:
     _check:
@@ -1263,6 +1307,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
+  output_micro_tally:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   thermal_energy_cutoff:
     <<: *dtdouble
     _content:
@@ -1290,12 +1340,12 @@ SHIFT:
     _check:
       - is_int()
       - is_gt() 0
-  neutron_bounds:
+  n_bounds:
     <<: *dtlist
     _content:
     _check:
       - is_strictlydecreasing(stride(1,1,()))
-  photon_bounds:
+  p_bounds:
     <<: *dtlist
     _content:
     _check:
@@ -1352,6 +1402,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
+  track_isotopes:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() short full
 
 COBRATF:
 
@@ -1361,6 +1417,13 @@ COBRATF:
     _check:
       - is_int()
       - is_gt() 0
+
+  imox:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
 
   nc:
     <<: *dtint
@@ -1458,7 +1521,19 @@ COBRATF:
     _check:
       - is_int()
       - is_gt() 0
-
+  
+  micro_zaids:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+  
+  micro_rxns:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+  
   courant:
     <<: *dtdouble
     _content:
@@ -1679,6 +1754,12 @@ COBRATF:
     _check:
       - is_int()
 
+  gap_model:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+
   boil_ht_cor:
     <<: *dtstring
     _content:
@@ -1696,6 +1777,7 @@ COBRATF:
     <<: *dtdouble
     _content:
     _check:
+
       - is_float()
 
   k_void_drift:
@@ -1951,6 +2033,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() none hdf5 out both
+  rr_edits_opt:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
   grid_treatment:
     <<: *dtword
     _content:
@@ -2005,13 +2093,11 @@ MPACT:
     <<: *dtlist
     _content:
     _check:
-      - arraysize()==3
-      - is_float(nth(0,()))
-      - is_int(nth(1,()))
-      - is_word(nth(2,()))
+      - arraysize()==2
+      - is_int(nth(0,()))
+      - is_word(nth(1,()))
       - nth(0,())>0
-      - nth(1,())>0
-      - in_dictionary(nth(2,()),'fuel','nonfuel','both')
+      - in_dictionary(nth(1,()),'fuel','nonfuel','both')
 
   crud_mesh:
     <<: *dtlist
@@ -2559,7 +2645,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() nem sanm nem-mg sp1 sp3 sp5 hysp3 p1 p2 p3 hyp3 sn-0 sn-1 sn-2 sn-3 none
+      - in_dictionary() nem sanm nem-mg sp1 sp3 sp5 hysp3 fhp3 p1 p2 p3 hyp3 sn-0 sn-1 sn-2 sn-3 none
   under_relax:
     <<: *dtdouble
     _content:
@@ -2591,7 +2677,14 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
-
+  
+  tml:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+ 
   transmethod:
     <<: *dtlist
     _content:
@@ -2617,16 +2710,18 @@ MPACT:
     _style: multi-line
     _content:
     _check:
-      - arraysize()%6==0
-      - fall(sub{is_float(shift)},stride(0,6,()))
-      - fall(sub{is_geq(shift,0)},stride(0,6,()))
-      - fall(sub{is_float(shift)},stride(1,6,()))
-      - fall(sub{is_geq(shift,0)},stride(1,6,()))
-      - fall(sub{is_word(shift)},stride(2,6,()))
-      - fall(sub{in_dictionary(shift,'step','const','ramp','mvcr')},stride(2,6,()))
-      - fall(sub{is_word(shift)},stride(3,6,()))
-      - fall(sub{is_word(shift)},stride(4,6,()))
-      - fall(sub{is_word(shift)},stride(5,6,()))
+      - arraysize()%7==0
+      - fall(sub{is_float(shift)},stride(0,7,()))
+      - fall(sub{is_geq(shift,0)},stride(0,7,()))
+      - fall(sub{is_float(shift)},stride(1,7,()))
+      - fall(sub{is_geq(shift,0)},stride(1,7,()))
+      - fall(sub{is_float(shift)},stride(2,7,()))
+      - fall(sub{is_geq(shift,0)},stride(2,7,()))
+      - fall(sub{is_word(shift)},stride(3,7,()))
+      - fall(sub{in_dictionary(shift,'step','const','ramp','mvcr')},stride(3,7,()))
+      - fall(sub{is_word(shift)},stride(4,7,()))
+      - fall(sub{is_word(shift)},stride(5,7,()))
+      - fall(sub{is_word(shift)},stride(6,7,()))
 
   mat_emit_src:
     <<: *dtbool
@@ -2907,6 +3002,11 @@ BISON:
     _content:
     _check:
       - is_int()
+  outputs_console_execute_on:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
   coolantchannel_convective_clad_surface_inlet_temperature:
     <<: *dtdouble
     _content:
