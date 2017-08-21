@@ -144,6 +144,13 @@ MPACT:
         - copy MPACT/$axial_buckling
       _content:
 
+    mat_emit_src:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy MPACT/$mat_emit_src
+      _content:
+
     uniform_crud:
       _pltype:  list
       _content:

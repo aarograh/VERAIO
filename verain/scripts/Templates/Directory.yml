@@ -2628,6 +2628,13 @@ MPACT:
       - fall(sub{is_word(shift)},stride(4,6,()))
       - fall(sub{is_word(shift)},stride(5,6,()))
 
+  mat_emit_src:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
 MAMBA1D:
   noBoilnoCrud:
     <<: *dtint
