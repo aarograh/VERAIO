@@ -1980,7 +1980,7 @@ MPACT:
     _content:
     _check:
       - is_string()
-      - in_dictionary() fission FISSION kappa-fission KAPPA-FISSION
+      - in_dictionary() fission FISSION kappa-fission KAPPA-FISSION gamma-smeared GAMMA-SMEARED 
   jagged:
     <<: *dtbool
     _content:
