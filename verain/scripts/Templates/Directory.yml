@@ -888,12 +888,6 @@ INSILICO:
     _content:
     _check:
       - is_word()
-  temp_correction:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() none oned all
   global_log:
     <<: *dtword
     _content:
@@ -926,12 +920,6 @@ INSILICO:
       - is_word()
       - in_dictionary() true false
   do_output:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
-  geometry_output:
     <<: *dtbool
     _content:
     _check:
@@ -1288,7 +1276,7 @@ SHIFT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() eigenvalue forward
+      - in_dictionary() cadis eigenvalue forward
   mode:
     <<: *dtstring
     _content:
@@ -1408,7 +1396,232 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() short full
-
+  xs_library:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+  dimension:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 2
+      - is_leq() 3
+  mesh:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  output_adjoint:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  num_blocks_i:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  num_blocks_j:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  num_z_blocks:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  num_sets:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  num_groups:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  max_delta_z:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  partition_upscatter:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  store_fulcrum_string:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+  upscatter_solver:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() gmres
+  solver:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() power_iteration arnoldi
+  iterate_downscatter:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  downscatter:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  Pn_order:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+  subspace_size:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  max_itr:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  upscatter_max_itr:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  tolerance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_lt() 1
+  eq_set:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() sc ld bld bld_2d spn_fv
+  verbosity:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none low medium high
+  upscatter_verbosity:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none low medium high
+  new_grp_bounds:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())
+      - fall(sub{is_gt(shift,0)},())
+  quad_type:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() qr levelsym galerkin glproduct ldfe
+  polars_octant:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  azimuthals_octant:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  Sn_order:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  k_tolerance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_lt() 1
+  energy_dep_ev:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  upscatter_tolerance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_lt() 1
+  cell_homogenize:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  SPN_matrix_type:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() mat_free
+  SPN_order:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 1 3 5 7
+  Pn_correction:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  pin_partitioning:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+      
 COBRATF:
 
   nfuel:
