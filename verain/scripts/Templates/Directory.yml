@@ -925,6 +925,12 @@ INSILICO:
     _check:
       - is_word()
       - in_dictionary() true false
+  output_geometry:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   mesh:
     <<: *dtint
     _content:
