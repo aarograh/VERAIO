@@ -52,6 +52,13 @@ SHIFT:
         - copy SHIFT/$global_log
       _content:
 
+    local_log:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$local_log
+      _content:
+
     mesh:
       _pltype: parameter
       _type: int
@@ -64,6 +71,13 @@ SHIFT:
       _type: bool
       _do:
         - copy SHIFT/$do_transport
+      _content:
+
+    do_output:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$do_output
       _content:
 
     output_geometry:
@@ -308,13 +322,6 @@ SHIFT:
           _type: string
           _do:
             - copy SHIFT/$xs_library
-          _content:
-
-        global_log:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy SHIFT/$global_log
           _content:
 
         mesh:

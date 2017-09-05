@@ -645,9 +645,6 @@
     <Parameter name="create_unique_pins" type="bool" value="false"/>
     <Parameter name="excore_filename" type="string" value="bleh.inp.omn"/>
     <Parameter name="global_log" type="string" value="debug"/>
-    <ParameterList name="hybrid_db">
-      <Parameter name="global_log" type="string" value="debug"/>
-    </ParameterList>
     <ParameterList name="kcode_db">
       <Parameter name="Np" type="double" value="1000"/>
     </ParameterList>
