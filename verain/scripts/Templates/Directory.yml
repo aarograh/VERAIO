@@ -1234,7 +1234,7 @@ SHIFT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() true false      
+      - in_dictionary() true false
   upscatter_solver:
     <<: *dtword
     _content:
@@ -1402,7 +1402,7 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
-      
+
 COBRATF:
 
   nfuel:
@@ -1523,19 +1523,19 @@ COBRATF:
     _check:
       - is_int()
       - is_gt() 0
-  
+
   micro_zaids:
     <<: *dtlist
     _content:
     _check:
       - arraysize()==2
-  
+
   micro_rxns:
     <<: *dtlist
     _content:
     _check:
       - arraysize()==2
-  
+
   courant:
     <<: *dtdouble
     _content:
@@ -2001,7 +2001,7 @@ MPACT:
     _content:
     _check:
       - is_string()
-      - in_dictionary() fission FISSION kappa-fission KAPPA-FISSION gamma-smeared GAMMA-SMEARED 
+      - in_dictionary() fission FISSION kappa-fission KAPPA-FISSION gamma-smeared GAMMA-SMEARED
   jagged:
     <<: *dtbool
     _content:
@@ -2722,21 +2722,28 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
-  
+
   delayenergy:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
-  
+
+  rx_components:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
   tml:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
- 
+
   transmethod:
     <<: *dtlist
     _content:
