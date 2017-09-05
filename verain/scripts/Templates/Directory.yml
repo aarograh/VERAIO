@@ -1420,6 +1420,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
+  adjoint:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   num_blocks_i:
     <<: *dtint
     _content:

@@ -352,6 +352,13 @@ SHIFT:
             - copy SHIFT/$output_adjoint
           _content:
 
+        adjoint:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$adjoint
+          _content:
+
         num_blocks_i:
           _pltype: parameter
           _type: int
