@@ -1038,6 +1038,12 @@ INSILICO:
     _check:
       - is_int()
       - is_gt() 0
+  upscatter_subspace_size:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   max_itr:
     <<: *dtint
     _content:
@@ -1326,6 +1332,7 @@ SHIFT:
      - is_word()
   radial_mesh:
     <<: *dtlist
+    _style: multi-line
     _content:
     _check:
   num_theta:
@@ -1342,16 +1349,19 @@ SHIFT:
       - is_gt() 0
   n_bounds:
     <<: *dtlist
+    _style: multi-line
     _content:
     _check:
       - is_strictlydecreasing(stride(1,1,()))
   p_bounds:
     <<: *dtlist
+    _style: multi-line
     _content:
     _check:
       - is_strictlydecreasing(stride(1,1,()))
   bc_bnd_mesh:
     <<: *dtlist
+    _style: multi-line
     _content:
     _check:
       - arraysize()==6
@@ -1521,6 +1531,12 @@ SHIFT:
     _check:
       - is_int()
       - is_gt() 0
+  upscatter_subspace_size:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   max_itr:
     <<: *dtint
     _content:
@@ -1565,6 +1581,13 @@ SHIFT:
     _check:
       - fall(sub{is_float(shift)},())
       - fall(sub{is_gt(shift,0)},())
+  grp_collapse_src:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())
+      - fall(sub{is_geq(shift,0)},())
   quad_type:
     <<: *dtword
     _content:

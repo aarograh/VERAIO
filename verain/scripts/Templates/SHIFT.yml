@@ -440,7 +440,14 @@ SHIFT:
           _pltype: array
           _type: double
           _do:
-            - copyarray SHIFT/@new_grp_bounds
+            - copyarray SHIFT/$new_grp_bounds
+          _content:
+
+        grp_collapse_src:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$grp_collapse_src
           _content:
 
         cell_homogenize:
@@ -579,6 +586,13 @@ SHIFT:
                   _type: int
                   _do:
                     - copy SHIFT/$upscatter_max_itr
+                  _content:
+
+                subspace_size:
+                  _pltype: parameter
+                  _type: int
+                  _do:
+                    - copy SHIFT/$upscatter_subspace_size
                   _content:
 
                 verbosity:
