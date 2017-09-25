@@ -17,13 +17,6 @@ INSILICO:
         - copy INSILICO/$xs_library
       _content:
 
-    temp_correction:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy INSILICO/$temp_correction
-      _content:
-
     global_log:
       _pltype: parameter
       _type: string
@@ -73,11 +66,11 @@ INSILICO:
         - copy INSILICO/$do_output
       _content:
 
-    geometry_output:
+    output_geometry:
       _pltype: parameter
       _type: bool
       _do:
-        - copy INSILICO/$geometry_output
+        - copy INSILICO/$output_geometry
       _content:
 
     num_blocks_i:
