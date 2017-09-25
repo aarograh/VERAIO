@@ -277,8 +277,13 @@
     </ParameterList>
     <Parameter name="broaden_xs" type="bool" value="true"/>
     <Parameter name="dbrc" type="bool" value="true"/>
+    <Parameter name="do_output" type="bool" value="false"/>
     <Parameter name="do_transport" type="bool" value="true"/>
     <Parameter name="global_log" type="string" value="debug"/>
+    <ParameterList name="hybrid_db">
+      <Parameter name="do_output" type="bool" value="false"/>
+      <Parameter name="do_transport" type="bool" value="true"/>
+    </ParameterList>
     <ParameterList name="kcode_db">
       <Parameter name="Np" type="double" value="1000"/>
     </ParameterList>
