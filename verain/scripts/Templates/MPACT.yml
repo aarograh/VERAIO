@@ -1063,6 +1063,13 @@ MPACT:
           _do:
             - copy MPACT/$accel
           _content:
+          
+        delayenergy:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$delayenergy
+          _content:
 
         transmethod:
           _pltype: parameter
