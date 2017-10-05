@@ -1049,6 +1049,12 @@ MPACT:
           _do:
             - copy MPACT/$tml
           _content:
+        
+        tmllevel:
+          _pltype: array
+          _type: int
+          _do:
+            - copy MPACT/$tmllevel
 
         prompt:
           _pltype: parameter
