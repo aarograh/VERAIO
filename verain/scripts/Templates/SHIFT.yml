@@ -410,14 +410,14 @@ SHIFT:
 
         store_fulcrum_string:
           _pltype: parameter
-          _type: string
+          _type: bool
           _do:
             - copy SHIFT/$store_fulcrum_string
           _content:
 
         downscatter:
           _pltype: parameter
-          _type: string
+          _type: bool
           _do:
             - copy SHIFT/$downscatter
           _content:

@@ -992,10 +992,11 @@ INSILICO:
       - is_word()
       - in_dictionary() true false
   store_fulcrum_string:
-    <<: *dtword
+    <<: *dtbool
     _content:
     _check:
       - is_word()
+      - in_dictionary() true false      
   upscatter_solver:
     <<: *dtword
     _content:
@@ -1491,10 +1492,11 @@ SHIFT:
       - is_word()
       - in_dictionary() true false
   store_fulcrum_string:
-    <<: *dtword
+    <<: *dtbool
     _content:
     _check:
       - is_word()
+      - in_dictionary() true false      
   upscatter_solver:
     <<: *dtword
     _content:
