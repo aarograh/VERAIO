@@ -93,7 +93,3 @@
   num_space      1
   num_angle     -8
   num_threads    1
-
-[INSILICO]
-  num_blocks_i   4
-  num_blocks_j   4

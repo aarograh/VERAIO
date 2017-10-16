@@ -270,44 +270,6 @@
           369.7898
           377.711
 
-[INSILICO]
-    xs_library  test-8grp
-
-    max_delta_z   2.54
-    radial_geom_eps   1.1e-4
-    axial_geom_eps    1.1e-3
-    num_blocks_i  2
-    num_blocks_j  2
-    num_z_blocks  1
-    num_groups    8
-    num_sets      1
-
-    mesh          4
-    dimension     3
-    eq_set        spn_fv
-    Pn_order      0
-
-!   solver_db:
-       solver        arnoldi
-       k_tolerance   1e-7
-       tolerance     1e-6
-       energy_dep_ev true
-
-!   quadrature_db:
-       quad_type          qr
-       azimuthals_octant  4
-       polars_octant      4
-
-!   silo_db:
-       silo_output  p6
-!      silo_out_power true
-
-!   upscatter_db:
-       upscatter_tolerance  1e-4
-
-   do_transport     false     ! needed to create SHIFT files
-   output_geometry  true      ! needed to create SHIFT files
-
 [COUPLING]
   read_restart  my_restart_file
 

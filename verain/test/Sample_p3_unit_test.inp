@@ -184,29 +184,3 @@
           361.8686 
           369.7898 
           377.711
-
-[INSILICO]
-    do_transport  false
-    eq_set        ld
-    Pn_order      1
-    dimension     3
-    mesh          4
-!    solver_db:
-        k_tolerance  0.0001
-        tolerance    0.001
-        energy_dep_ev  false
-    max_delta_z   2.54
-    num_blocks_i  1
-    num_blocks_j  1
-    num_z_blocks  1
-    num_groups    8
-    num_sets      1
-!    quadrature_db:
-        azimuthals_octant  4
-        polars_octant      4
-        quad_type          qr
-!    silo_db:
-        silo_output  vera
-!    upscatter_db:
-        upscatter_tolerance  1e-05
-    xs_library     "test-8grp"

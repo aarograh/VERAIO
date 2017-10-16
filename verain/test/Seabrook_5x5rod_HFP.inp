@@ -186,56 +186,6 @@
          360.934
          368.554
          376.0749 
- 
-[INSILICO]
-    eq_set        sc
-    Pn_order      0
-    dimension     3
-    mesh          4
-!    solver_db:
-        solver       arnoldi
-        k_tolerance  0.0001
-        tolerance    0.001
-        energy_dep_ev  true
-    max_delta_z   2.54
-    num_blocks_i  2 
-    num_blocks_j  2  
-    num_z_blocks  9  
-    num_groups    23
-    num_sets      4
-!    quadrature_db:
-        azimuthals_octant  4
-        polars_octant      4
-        quad_type          qr
-!    silo_db:
-        silo_output  vera
-!    upscatter_db:
-        upscatter_tolerance  1e-05
-    xs_library     "v7-238ir"
-   new_grp_bounds 
-       8.2085e+05 
-       1.1109e+05 
-       5.5308e+03 
-       1.8644e+02 
-       3.7612e+01 
-       3.5379e+01
-       2.7697e+01 
-       2.1684e+01 
-       2.0397e+01 
-       1.5968e+01 
-       7.1500e+00
-       6.7000e+00
-       6.3000e+00 
-       1.0970e+00 
-       1.0450e+00 
-       9.5000e-01 
-       3.5000e-01 
-       2.0600e-01
-       1.0700e-01 
-       5.8000e-02 
-       2.5000e-02 
-       1.0000e-02 
-       1.0000e-05
 
 [COBRATF]
   nfuel   3          ! number of rings in fuel temp calc
