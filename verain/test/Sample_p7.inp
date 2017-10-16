@@ -14,7 +14,6 @@
 !      * remove detectors
 !      * remove control rods
 !      * modify insert axial boundaries to line up with axial edit bounds
-!      * modified Insilico options to use ML
 !      * modify to use 11-groups
 !      * add cobra parallel option
 !
