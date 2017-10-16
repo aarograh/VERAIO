@@ -274,34 +274,6 @@
       <Parameter name="upper_nozzle_mass" type="double" value="194.64"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="INSILICO">
-    <Parameter name="Pn_order" type="int" value="0"/>
-    <Parameter name="dimension" type="int" value="3"/>
-    <Parameter name="eq_set" type="string" value="spn_fv"/>
-    <Parameter name="max_delta_z" type="double" value="500."/>
-    <Parameter name="mesh" type="int" value="1"/>
-    <Parameter name="num_blocks_i" type="int" value="2"/>
-    <Parameter name="num_blocks_j" type="int" value="2"/>
-    <Parameter name="num_groups" type="int" value="8"/>
-    <Parameter name="num_sets" type="int" value="1"/>
-    <Parameter name="num_z_blocks" type="int" value="1"/>
-    <ParameterList name="quadrature_db">
-      <Parameter name="azimuthals_octant" type="int" value="4"/>
-      <Parameter name="polars_octant" type="int" value="4"/>
-      <Parameter name="quad_type" type="string" value="qr"/>
-    </ParameterList>
-    <ParameterList name="silo_db">
-      <Parameter name="silo_output" type="string" value="p6"/>
-    </ParameterList>
-    <ParameterList name="solver_db">
-      <Parameter name="energy_dep_ev" type="bool" value="true"/>
-      <Parameter name="tolerance" type="double" value="1e-9"/>
-      <ParameterList name="upscatter_db">
-        <Parameter name="tolerance" type="double" value="1e-4"/>
-      </ParameterList>
-    </ParameterList>
-    <Parameter name="xs_library" type="string" value="test-8grp"/>
-  </ParameterList>
   <ParameterList name="EDITS">
     <Parameter name="axial_edit_bounds" type="Array(double)" value="{6.05,10.967,14.833,125.495,129.305,377.711,386.267,390.133,397.5}"/>
   </ParameterList>

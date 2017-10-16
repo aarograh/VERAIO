@@ -107,10 +107,6 @@
       <Parameter name="ppitch" type="double" value="1.26"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="INSILICO">
-    <Parameter name="num_blocks_i" type="int" value="4"/>
-    <Parameter name="num_blocks_j" type="int" value="4"/>
-  </ParameterList>
   <ParameterList name="SHIFT">
     <Parameter name="Np" type="double" value="1000000"/>
     <ParameterList name="kcode_db">
