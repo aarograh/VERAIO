@@ -2737,6 +2737,13 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 
+  sep_flux_comp:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
   tml:
     <<: *dtbool
     _content:
