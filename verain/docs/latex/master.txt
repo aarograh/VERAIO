@@ -290,8 +290,6 @@
   edit_group
   * TBD
 
-[INSILICO]
-
 [SHIFT]
 
 [COBRATF]

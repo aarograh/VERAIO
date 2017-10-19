@@ -596,10 +596,6 @@ crd_map
      369.7890
      377.7100   ! TAF
 
-[INSILICO]
-
-! To-Do: Add additional INSILICO parameters (see example PL)
-
 [BISON]
   solve_type tiamat
   bc_type bulk_cool

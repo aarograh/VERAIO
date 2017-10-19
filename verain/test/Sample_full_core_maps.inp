@@ -455,8 +455,3 @@ crd_map
      377.71    ! top of active fuel
      406.30
 
-
-[INSILICO]
-
-! To-Do: Add additional INSILICO parameters (see example PL)
-

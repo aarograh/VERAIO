@@ -572,8 +572,3 @@ upper_ref  mod  2.2 1.0   ! mat, thickness, vol frac
      361.8680
      369.7890
      377.7100   ! TAF
-
-[INSILICO]
-
-! To-Do: Add additional INSILICO parameters (see example PL)
-
