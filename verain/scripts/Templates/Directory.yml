@@ -2266,7 +2266,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() EXPLICITRADIAL EXPLICITFILE ASSEMBLY PS
+      - in_dictionary() EXPLICITRADIAL EXPLICITFILE ASSEMBLY PS GRAPH
   par_file:
     <<: *dtword
     _content:
@@ -2287,6 +2287,24 @@ MPACT:
     _style: multi-line
     _check:
       - fall(sub{is_int(shift)},())
+  graph_part_method:
+    <<: *dtlist
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{in_dictionary(shift,'RSB','RIB','REB')},())
+  graph_refn_method:
+    <<: *dtlist
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{in_dictionary(shift,'none','NONE','KL','SKL')},())
+  graph_cond:
+    <<: *dtlist
+    _content:
+    _check:
+      - fall(sub{is_int(shift)},())
+      - fall(sub{is_gt(shift,0)},())
   coupling_method:
     <<: *dtbool
     _content:

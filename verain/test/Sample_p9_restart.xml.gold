@@ -989,8 +989,12 @@
       </ParameterList>
     </ParameterList>
     <ParameterList name="parallel_env">
-      <Parameter name="filename" type="string" value="part_p5-3d_48r_60z_2880np.txt"/>
-      <Parameter name="method" type="string" value="EXPLICITFILE"/>
+      <ParameterList name="graph">
+        <Parameter name="conditions" type="Array(int)" value="{500}"/>
+        <Parameter name="decomposition" type="Array(string)" value="{REB,RSB}"/>
+        <Parameter name="refinement" type="Array(string)" value="{SKL}"/>
+      </ParameterList>
+      <Parameter name="method" type="string" value="GRAPH"/>
       <Parameter name="num_angle" type="int" value="1"/>
       <Parameter name="num_energy" type="int" value="1"/>
       <Parameter name="num_space" type="int" value="2880"/>

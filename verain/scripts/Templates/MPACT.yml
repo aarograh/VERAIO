@@ -383,6 +383,31 @@ MPACT:
             - copyarray MPACT/@par_map
           _content:
 
+        graph:
+          _pltype: list
+          _content:
+
+            decomposition:
+              _pltype: array
+              _type: string
+              _do:
+                - copyarray MPACT/@graph_part_method
+              _content:
+
+            refinement:
+              _pltype: array
+              _type: string
+              _do:
+                - copyarray MPACT/@graph_refn_method
+              _content:
+
+            conditions:
+              _pltype: array
+              _type: int
+              _do:
+                - copyarray MPACT/@graph_cond
+              _content:
+
     iteration_control:
       _pltype: list
       _content:
