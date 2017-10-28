@@ -1880,6 +1880,13 @@ TIAMAT:
       - is_int()
       - is_gt() -1
 
+  coupling_approach:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() coupled inline
+
 MPACT:
 
   ray_spacing:
