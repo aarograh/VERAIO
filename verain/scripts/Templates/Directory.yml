@@ -939,6 +939,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() debug diagnostic status info warning error critical
+  do_micro_tally:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   do_transport:
     <<: *dtbool
     _content:
