@@ -189,6 +189,7 @@
   problem_mode          eigenvalue
   mode                  n
   do_transport          false
+  do_micro_tally        false
   thermal_energy_cutoff 10.0
   dbrc                  false
   broaden_xs            false
