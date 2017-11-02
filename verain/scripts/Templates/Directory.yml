@@ -373,6 +373,10 @@ CORE:
       - is_float(nth(2,()))
       - nth(1,())>=0
       - nth(2,())>=0
+  pad_nonuniform_arc:
+    <<: *dtlist
+    _content:
+    _check:
   vessel:
     <<: *dtlist
     _style: multi-line
@@ -1902,6 +1906,12 @@ MPACT:
       - is_float()
       - is_gt() 0.0
   refl_no_added_modules:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() true false
+  refl_highres:
     <<: *dtstring
     _content:
     _check:
