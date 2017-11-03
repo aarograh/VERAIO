@@ -1414,6 +1414,14 @@ COBRATF:
       - is_float()
       - is_geq() 0
 
+  beta_htc:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_leq() 1
+
   hgap:
     <<: *dtdouble
     _content:
