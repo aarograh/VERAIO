@@ -66,6 +66,13 @@ SHIFT:
         - copy SHIFT/$mesh
       _content:
 
+    do_micro_tally:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$do_micro_tally
+      _content:
+
     do_transport:
       _pltype: parameter
       _type: bool
