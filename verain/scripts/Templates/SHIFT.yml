@@ -287,6 +287,31 @@ SHIFT:
           _do:
             - copy SHIFT/$gamma_flux
           _content:
+    
+    homog_db:
+      _pltype: list
+      _content:
+
+        ring_levels:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$ring_levels
+          _content:
+        
+        homog_type:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy SHIFT/$homog_type
+          _content:
+
+        pin_rings:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$pin_rings
+          _content:
 
     boundary_mesh_db:
       _pltype: list

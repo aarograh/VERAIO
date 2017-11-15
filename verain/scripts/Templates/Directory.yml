@@ -1074,6 +1074,24 @@ SHIFT:
     _content:
     _check:
       - is_strictlydecreasing(stride(1,1,()))
+  homog_type:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() assem rings
+  ring_levels:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - is_strictlyincreasing(stride(1,1,()))
+  pin_rings:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   bc_bnd_mesh:
     <<: *dtlist
     _style: multi-line
