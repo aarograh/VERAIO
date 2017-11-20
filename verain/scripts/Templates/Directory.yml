@@ -1080,13 +1080,13 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() assem rings
-  ring_levels:
+  homog_ring_radii:
     <<: *dtlist
     _style: multi-line
     _content:
     _check:
       - is_strictlyincreasing(stride(1,1,()))
-  pin_rings:
+  homog_pin_rings:
     <<: *dtbool
     _content:
     _check:

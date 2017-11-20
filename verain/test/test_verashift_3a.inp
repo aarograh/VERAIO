@@ -199,5 +199,5 @@
   micro_rxns            1 18 27
 ! homog_db
   homog_type            rings
-  ring_levels           0.5 1.5 2.5
-  pin_rings             false
+  homog_ring_radii      0.5 1.5 2.5
+  homog_pin_rings       false
