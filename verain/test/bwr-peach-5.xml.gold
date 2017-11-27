@@ -150,10 +150,6 @@
       <Parameter name="ppitch" type="double" value="1.6256"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="INSILICO">
-    <Parameter name="num_blocks_i" type="int" value="4"/>
-    <Parameter name="num_blocks_j" type="int" value="4"/>
-  </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="parallel_env">
       <Parameter name="num_angle" type="int" value="-8"/>

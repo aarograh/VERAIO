@@ -227,7 +227,7 @@ The VERA input blocks are:
 
 In addition to the blocks listed above, there are additional code-specific blocks that contain
 options specific to each physics code.
-Examples of code-specific blocks are {\bf COBRATF}, {\bf INSILICO}, and {\bf MPACT}.
+Examples of code-specific blocks are {\bf COBRATF}, {\bf MPACT}, and {\bf SHIFT}.
 Additional code-specific input blocks can be added as new physics codes are added to the core simulator.
 
 The following sections in this chapter describe the most common concepts and features of each input block.
@@ -377,7 +377,7 @@ CASL Technical Report: \href{http://www.casl.gov/docs/CASL-U-2012-0131-004.pdf}{
 A single-assembly is defined by creating a core with one assembly in it, 
 as described in the small-core geometry discussion in Section~\ref{sec:smallcoregeom}.
 
-This input is also used to demonstrate the modular structure of the input.  The [ASSEMBLY],  [EDITS], [INSILICO],
+This input is also used to demonstrate the modular structure of the input.  The [ASSEMBLY],  [EDITS],
 [COBRATF], and [COUPLING] blocks are identical to Example Problem~1, and show how blocks
 can be re-used in different input decks.  
 These blocks are not included here, but can be copied directly from the first

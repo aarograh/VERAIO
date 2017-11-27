@@ -207,37 +207,6 @@
       <Parameter name="title" type="string" value="B4C"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="INSILICO">
-    <Parameter name="Pn_order" type="int" value="1"/>
-    <Parameter name="dimension" type="int" value="3"/>
-    <Parameter name="do_transport" type="bool" value="false"/>
-    <Parameter name="eq_set" type="string" value="ld"/>
-    <Parameter name="max_delta_z" type="double" value="2.54"/>
-    <Parameter name="mesh" type="int" value="4"/>
-    <Parameter name="num_blocks_i" type="int" value="1"/>
-    <Parameter name="num_blocks_j" type="int" value="1"/>
-    <Parameter name="num_groups" type="int" value="8"/>
-    <Parameter name="num_sets" type="int" value="1"/>
-    <Parameter name="num_z_blocks" type="int" value="1"/>
-    <ParameterList name="quadrature_db">
-      <Parameter name="azimuthals_octant" type="int" value="4"/>
-      <Parameter name="polars_octant" type="int" value="4"/>
-      <Parameter name="quad_type" type="string" value="qr"/>
-    </ParameterList>
-    <ParameterList name="silo_db">
-      <Parameter name="silo_output" type="string" value="vera"/>
-    </ParameterList>
-    <ParameterList name="solver_db">
-      <Parameter name="energy_dep_ev" type="bool" value="false"/>
-      <Parameter name="k_tolerance" type="double" value="0.0001"/>
-      <Parameter name="solver" type="string" value="arnoldi"/>
-      <Parameter name="tolerance" type="double" value="1e-06"/>
-      <ParameterList name="upscatter_db">
-        <Parameter name="tolerance" type="double" value="1e-05"/>
-      </ParameterList>
-    </ParameterList>
-    <Parameter name="xs_library" type="string" value="test-8grp"/>
-  </ParameterList>
   <ParameterList name="EDITS">
     <Parameter name="axial_edit_bounds" type="Array(double)" value="{11.951,15.817,24.028,32.239,40.45,48.662,56.873,65.084,73.295,77.105,85.17,93.235,101.3,109.365,117.43,125.495,129.305,137.37,145.435,153.5,161.565,169.63,177.695,181.505,189.57,197.635,205.7,213.765,221.83,229.895,233.705,241.77,249.835,257.9,265.965,274.03,282.095,285.905,293.97,302.035,310.1,318.165,326.23,334.295,338.105,346.0262,353.9474,361.8686,369.7898,377.711}"/>
   </ParameterList>

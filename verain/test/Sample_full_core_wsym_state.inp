@@ -651,10 +651,6 @@ crd_map
      369.7890
      377.7100   ! TAF
 
-[INSILICO]
-
-! To-Do: Add additional INSILICO parameters (see example PL)
-
 [BISON]
 
   auxkernels_fast_neutron_flux_axial_power_profile = axial_peaking_factors

@@ -307,34 +307,6 @@
       <Parameter name="upper_nozzle_mass" type="double" value="6250.0"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="INSILICO">
-    <Parameter name="Pn_order" type="int" value="1"/>
-    <Parameter name="SPN_order" type="int" value="3"/>
-    <Parameter name="cell_homogenize" type="bool" value="true"/>
-    <Parameter name="dimension" type="int" value="3"/>
-    <Parameter name="eq_set" type="string" value="spn_fv"/>
-    <Parameter name="max_delta_z" type="double" value="2.54"/>
-    <Parameter name="mesh" type="int" value="2"/>
-    <Parameter name="new_grp_bounds" type="Array(double)" value="{8.2085e+05,1.1109e+05,5.5308e+03,1.8644e+02,3.7612e+01,3.5379e+01,2.7697e+01,2.1684e+01,2.0397e+01,1.5968e+01,7.1500e+00,6.7000e+00,6.3000e+00,1.0970e+00,1.0450e+00,9.5000e-01,3.5000e-01,2.0600e-01,1.0700e-01,5.8000e-02,2.5000e-02,1.0000e-02,1.0000e-05}"/>
-    <Parameter name="num_blocks_i" type="int" value="17"/>
-    <Parameter name="num_blocks_j" type="int" value="17"/>
-    <Parameter name="num_groups" type="int" value="23"/>
-    <Parameter name="num_sets" type="int" value="1"/>
-    <Parameter name="num_z_blocks" type="int" value="1"/>
-    <Parameter name="pin_partitioning" type="bool" value="true"/>
-    <ParameterList name="silo_db">
-      <Parameter name="silo_output" type="string" value="p6"/>
-    </ParameterList>
-    <ParameterList name="solver_db">
-      <Parameter name="energy_dep_ev" type="bool" value="true"/>
-      <Parameter name="k_tolerance" type="double" value="1e-4"/>
-      <Parameter name="tolerance" type="double" value="1e-3"/>
-      <ParameterList name="upscatter_db">
-        <Parameter name="tolerance" type="double" value="1e-4"/>
-      </ParameterList>
-    </ParameterList>
-    <Parameter name="xs_library" type="string" value="v7-252"/>
-  </ParameterList>
   <ParameterList name="EDITS">
     <Parameter name="axial_edit_bounds" type="Array(double)" value="{12.02344154,15.91287548,24.17364684,32.43441819,40.69518955,48.95696697,57.21773833,65.47850968,73.73928104,77.57237553,85.68626190,93.80014827,101.91403464,110.02792102,118.14180739,126.25569376,130.08878825,138.20267462,146.31656099,154.43044736,162.54433373,170.65822011,178.77210648,182.60520097,190.71908734,198.83297371,206.94686008,215.06074645,223.17463282,231.28851920,235.12161369,243.23550006,251.34938643,259.46327280,267.57715917,275.69104554,283.80493191,287.63802641,295.75191278,303.86579915,311.97968552,320.09357189,328.20745826,336.32134463,340.15443913,348.12365385,356.09286857,364.06208329,372.03129801,380.00051273}"/>
   </ParameterList>
@@ -372,19 +344,18 @@
     </ParameterList>
     <ParameterList name="TH">
       <Parameter name="coupling_method" type="string" value="ctf"/>
-      <Parameter name="sth_dhfrac" type="double" value="0.02"/>
-      <Parameter name="sth_hgap" type="double" value="4500"/>
+      <Parameter name="sth_dhfrac" type="double" value="0.026"/>
+      <Parameter name="sth_hgap" type="double" value="5678.3"/>
     </ParameterList>
     <ParameterList name="cmfd">
       <Parameter name="cmfd" type="string" value="adcmfd"/>
       <Parameter name="k_shift" type="double" value="1.5"/>
       <Parameter name="num_outers" type="int" value="20"/>
-      <Parameter name="prolongation" type="string" value="flat"/>
       <Parameter name="solver" type="string" value="mgnode"/>
     </ParameterList>
     <ParameterList name="depletion">
       <Parameter name="dep_edit" type="string" value="false"/>
-      <Parameter name="dep_filename" type="string" value="origen_data_paths_casl2.0.txt"/>
+      <Parameter name="dep_filename" type="string" value="origen_data_paths_casl2.1.txt"/>
       <Parameter name="dep_kernel" type="string" value="origen"/>
       <Parameter name="dep_substep" type="int" value="3"/>
     </ParameterList>
@@ -432,6 +403,7 @@
     <Parameter name="shield_ray_spacing" type="double" value="0.05"/>
     <Parameter name="vis_edits" type="string" value="none"/>
     <ParameterList name="xs_library">
+      <Parameter name="res_up_scatter" type="string" value="true"/>
       <Parameter name="subgroup_set" type="int" value="4"/>
       <Parameter name="xs_filename" type="string" value="mpact51g_71_v4.2m5_12062016_sph.fmt"/>
       <Parameter name="xs_type" type="string" value="ORNL"/>

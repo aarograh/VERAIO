@@ -197,37 +197,6 @@
       <Parameter name="upper_nozzle_mass" type="double" value="600.0"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="INSILICO">
-    <Parameter name="Pn_order" type="int" value="0"/>
-    <Parameter name="dimension" type="int" value="3"/>
-    <Parameter name="eq_set" type="string" value="sc"/>
-    <Parameter name="max_delta_z" type="double" value="2.54"/>
-    <Parameter name="mesh" type="int" value="4"/>
-    <Parameter name="new_grp_bounds" type="Array(double)" value="{8.2085e+05,1.1109e+05,5.5308e+03,1.8644e+02,3.7612e+01,3.5379e+01,2.7697e+01,2.1684e+01,2.0397e+01,1.5968e+01,7.1500e+00,6.7000e+00,6.3000e+00,1.0970e+00,1.0450e+00,9.5000e-01,3.5000e-01,2.0600e-01,1.0700e-01,5.8000e-02,2.5000e-02,1.0000e-02,1.0000e-05}"/>
-    <Parameter name="num_blocks_i" type="int" value="2"/>
-    <Parameter name="num_blocks_j" type="int" value="2"/>
-    <Parameter name="num_groups" type="int" value="23"/>
-    <Parameter name="num_sets" type="int" value="4"/>
-    <Parameter name="num_z_blocks" type="int" value="9"/>
-    <ParameterList name="quadrature_db">
-      <Parameter name="azimuthals_octant" type="int" value="4"/>
-      <Parameter name="polars_octant" type="int" value="4"/>
-      <Parameter name="quad_type" type="string" value="qr"/>
-    </ParameterList>
-    <ParameterList name="silo_db">
-      <Parameter name="silo_output" type="string" value="vera"/>
-    </ParameterList>
-    <ParameterList name="solver_db">
-      <Parameter name="energy_dep_ev" type="bool" value="true"/>
-      <Parameter name="k_tolerance" type="double" value="0.0001"/>
-      <Parameter name="solver" type="string" value="arnoldi"/>
-      <Parameter name="tolerance" type="double" value="0.001"/>
-      <ParameterList name="upscatter_db">
-        <Parameter name="tolerance" type="double" value="1e-05"/>
-      </ParameterList>
-    </ParameterList>
-    <Parameter name="xs_library" type="string" value="v7-238ir"/>
-  </ParameterList>
   <ParameterList name="EDITS">
     <Parameter name="axial_edit_bounds" type="Array(double)" value="{10.3149,10.9550,14.8210,22.441,30.061,37.681,45.301,52.921,60.541,68.161,73.2790,77.0890,84.709,92.329,99.949,107.569,115.189,122.809,125.4760,129.2860,136.906,144.526,152.146,159.766,167.386,175.006,177.6730,181.4830,189.103,196.723,204.323,211.963,219.583,227.203,229.8700,233.6800,241.300,248.920,256.540,264.160,271.780,279.400,282.0670,285.8770,293.497,301.117,308.737,316.357,323.977,331.597,334.2640,338.0740,345.694,353.314,360.934,368.554,376.0749}"/>
   </ParameterList>

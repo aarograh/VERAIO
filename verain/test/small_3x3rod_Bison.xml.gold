@@ -7,11 +7,16 @@
       <Parameter name="boron" type="double" value="1300"/>
       <Parameter name="feedback" type="string" value="on"/>
       <Parameter name="modden" type="double" value="0.743"/>
-      <Parameter name="power" type="double" value="100.0"/>
+      <Parameter name="power" type="double" value="0.00001"/>
       <Parameter name="pressure" type="double" value="15.5132039025"/>
       <Parameter name="sym" type="string" value="full"/>
       <Parameter name="tfuel" type="double" value="900"/>
       <Parameter name="tinlet" type="double" value="292.777777777778"/>
+    </ParameterList>
+    <ParameterList name="State_2">
+      <Parameter name="deplete" type="Array(double)" value="{1}"/>
+      <Parameter name="deplete_units" type="string" value="EFPD"/>
+      <Parameter name="power" type="double" value="100"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">
@@ -299,31 +304,6 @@
       <Parameter name="upper_nozzle_mass" type="double" value="194.64"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="INSILICO">
-    <Parameter name="Pn_order" type="int" value="0"/>
-    <Parameter name="SPN_order" type="int" value="3"/>
-    <Parameter name="cell_homogenize" type="bool" value="true"/>
-    <Parameter name="dimension" type="int" value="3"/>
-    <Parameter name="eq_set" type="string" value="spn_fv"/>
-    <Parameter name="max_delta_z" type="double" value="2.54"/>
-    <Parameter name="mesh" type="int" value="2"/>
-    <Parameter name="new_grp_bounds" type="Array(double)" value="{7.5000E+05,1.7000E+04,6.7500E+01,2.1750E+01,2.0500E+01,7.0000E+00,6.2500E-01,3.5000E-01,2.0000E-01,1.0000E-01,1.0000E-05}"/>
-    <Parameter name="num_blocks_i" type="int" value="3"/>
-    <Parameter name="num_blocks_j" type="int" value="3"/>
-    <Parameter name="num_groups" type="int" value="11"/>
-    <Parameter name="num_sets" type="int" value="1"/>
-    <Parameter name="num_z_blocks" type="int" value="1"/>
-    <ParameterList name="silo_db">
-      <Parameter name="silo_output" type="string" value="p6"/>
-    </ParameterList>
-    <ParameterList name="solver_db">
-      <Parameter name="tolerance" type="double" value="1e-6"/>
-      <ParameterList name="upscatter_db">
-        <Parameter name="tolerance" type="double" value="1e-4"/>
-      </ParameterList>
-    </ParameterList>
-    <Parameter name="xs_library" type="string" value="v7-56"/>
-  </ParameterList>
   <ParameterList name="EDITS">
     <Parameter name="axial_edit_bounds" type="Array(double)" value="{11.951,15.817,24.028,32.239,40.45,48.662,56.873,65.084,73.295,77.105,85.17,93.235,101.3,109.365,117.43,125.495,129.305,137.37,145.435,153.5,161.565,169.63,177.695,181.505,189.57,197.635,205.7,213.765,221.83,229.895,233.705,241.77,249.835,257.9,265.965,274.03,282.095,285.905,293.97,302.035,310.1,318.165,326.23,334.295,338.105,346.0262,353.9474,361.8686,369.7898,377.711}"/>
   </ParameterList>
@@ -366,6 +346,7 @@
     <Parameter name="executioner_dt" type="double" value="1.0e3"/>
     <Parameter name="executioner_end_time" type="double" value="6.0e7"/>
     <Parameter name="executioner_num_steps" type="int" value="2000"/>
+    <Parameter name="executioner_start_time" type="double" value="-100"/>
     <Parameter name="executioner_timestepper_time_dt" type="string" value="1.0e3 1.0e5"/>
     <Parameter name="executioner_timestepper_time_t" type="string" value="0 1.0e5"/>
     <Parameter name="fuel_pin_input_file_template" type="string" value="small_3x3rod_Bison.i.template"/>
@@ -393,7 +374,7 @@
     <Parameter name="ramp_data_transfers" type="bool" value="true"/>
     <Parameter name="ramping_factor" type="Array(double)" value="{0.0,0.0,1.0}"/>
     <Parameter name="ramping_time" type="Array(double)" value="{-100.0,0.0,1.0e5}"/>
-    <Parameter name="solve_type" type="string" value="tiamat"/>
+    <Parameter name="solve_type" type="string" value="tiamat_inline"/>
     <Parameter name="thermalcontact_initial_gas_fractions" type="string" value="1 0 0 0 0 0 0 0 0 0"/>
     <Parameter name="thermalcontact_roughness_clad" type="double" value="5.0e-7"/>
     <Parameter name="thermalcontact_roughness_fuel" type="double" value="1.0e-6"/>

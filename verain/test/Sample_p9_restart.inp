@@ -588,8 +588,10 @@
   num_angle         1
   num_energy        1
   num_threads       1
-  par_method        EXPLICITFILE
-  par_file          part_p5-3d_48r_60z_2880np.txt
+  par_method        GRAPH    !Use graph-based decomposition
+  graph_part_method REB RSB  !
+  graph_refn_method SKL
+  graph_cond        500
 !xs_library
   xs_filename       declib56g_e7_09042013_p0mixed.fmt
   xs_type           ORNL

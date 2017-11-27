@@ -96,8 +96,6 @@ ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_p4)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_p4_mpact)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_p6a)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_p6a_multifuel)
-ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_p6a_sn23g)
-ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_p6a_spn8g)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_p7)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_p9_restart)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(Sample_p9_shuffle)
@@ -122,10 +120,46 @@ ADD_REACTOR_AWARE_INPUT_PARSER_TEST(smr-7x7)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_cobra_edits_inimat)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_cobra_edits)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test-short)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_3a)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_3a_forward)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_3a_cadis)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_4mini_nonunique)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(with-dash)
 
 #===========================================================
 #
-#               Test the verdiff program!
+#               Test for the expected faiures.
+#
+#===========================================================
+
+FUNCTION(ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST FILE_NAME)
+  ASSERT_DEFINED(VERAIn_SOURCE_DIR)
+  TRIBITS_COPY_FILES_TO_BINARY_DIR(ReactAware_CopyScriptFiles_${FILE_NAME}
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
+    SOURCE_FILES ${FILE_NAME}.inp
+    )
+  TRIBITS_ADD_ADVANCED_TEST(
+    react2xml_${FILE_NAME}
+    OVERALL_WORKING_DIRECTORY TEST_NAME
+    OVERALL_NUM_MPI_PROCS 1
+    TEST_0
+      CMND ${CMAKE_COMMAND}
+      ARGS -E remove *.xml *.yml
+    TEST_1
+      CMND ${PERL_EXECUTABLE}
+      ARGS
+        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl --xInit
+        ../${FILE_NAME}.inp  ${FILE_NAME}.xml
+      WILL_FAIL
+    )
+ENDFUNCTION()
+
+ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(front-dash)
+ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(decreasing-axial)
+
+#===========================================================
+#
+#               Test the veradiff program!
 #
 #===========================================================
 
