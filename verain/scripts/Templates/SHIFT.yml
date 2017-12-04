@@ -129,6 +129,13 @@ SHIFT:
         - copy SHIFT/$excore_filename
       _content:
 
+    raytrace_levels:
+      _pltype: array
+      _type: double
+      _do:
+        _ copyarray SHIFT/$raytrace_levels
+      _content:
+
     core_translate:
       _pltype: array
       _type: double

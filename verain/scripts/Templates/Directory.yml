@@ -1040,6 +1040,11 @@ SHIFT:
     _content:
     _check:
      - is_word()
+  raytrace_levels:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    -check:
   radial_mesh:
     <<: *dtlist
     _style: multi-line
