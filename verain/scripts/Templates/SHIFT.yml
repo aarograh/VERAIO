@@ -133,7 +133,7 @@ SHIFT:
       _pltype: array
       _type: double
       _do:
-        _ copyarray SHIFT/$raytrace_levels
+        - copyarray SHIFT/$raytrace_levels
       _content:
 
     core_translate:

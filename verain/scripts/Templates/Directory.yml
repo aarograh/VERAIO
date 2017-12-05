@@ -1044,7 +1044,7 @@ SHIFT:
     <<: *dtlist
     _style: multi-line
     _content:
-    -check:
+    _check:
   radial_mesh:
     <<: *dtlist
     _style: multi-line
