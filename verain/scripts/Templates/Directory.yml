@@ -2036,6 +2036,12 @@ MPACT:
     _content:
     _check:
       - fall(sub{is_word(shift)},())
+  nodal_edits:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   grid_treatment:
     <<: *dtword
     _content:
