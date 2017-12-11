@@ -1040,6 +1040,11 @@ SHIFT:
     _content:
     _check:
      - is_word()
+  raytrace_levels:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
   radial_mesh:
     <<: *dtlist
     _style: multi-line
@@ -1069,6 +1074,24 @@ SHIFT:
     _content:
     _check:
       - is_strictlydecreasing(stride(1,1,()))
+  homog_type:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() assem rings
+  homog_ring_radii:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - is_strictlyincreasing(stride(1,1,()))
+  homog_pin_rings:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   bc_bnd_mesh:
     <<: *dtlist
     _style: multi-line
@@ -1919,6 +1942,12 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  log_message:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() debug warn basic
   refl_no_added_modules:
     <<: *dtstring
     _content:
@@ -2025,6 +2054,12 @@ MPACT:
     _content:
     _check:
       - fall(sub{is_word(shift)},())
+  nodal_edits:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   grid_treatment:
     <<: *dtword
     _content:

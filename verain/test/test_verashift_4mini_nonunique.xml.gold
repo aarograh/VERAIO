@@ -651,6 +651,7 @@
     <Parameter name="output_fission_source" type="bool" value="true"/>
     <Parameter name="output_geometry" type="bool" value="true"/>
     <Parameter name="problem_mode" type="string" value="forward"/>
+    <Parameter name="raytrace_levels" type="Array(double)" value="{10.0,200.0}"/>
     <ParameterList name="tally_db">
       <Parameter name="num_axial" type="int" value="20"/>
       <Parameter name="num_theta" type="int" value="5"/>

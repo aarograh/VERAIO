@@ -275,6 +275,11 @@
     <Parameter name="do_output" type="bool" value="true"/>
     <Parameter name="do_transport" type="bool" value="false"/>
     <Parameter name="global_log" type="string" value="debug"/>
+    <ParameterList name="homog_db">
+      <Parameter name="homog_pin_rings" type="bool" value="false"/>
+      <Parameter name="homog_ring_radii" type="Array(double)" value="{0.5,1.5,2.5}"/>
+      <Parameter name="homog_type" type="string" value="rings"/>
+    </ParameterList>
     <ParameterList name="hybrid_db">
       <Parameter name="do_output" type="bool" value="true"/>
       <Parameter name="do_transport" type="bool" value="false"/>

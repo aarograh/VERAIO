@@ -197,3 +197,7 @@
   n_bounds              2.0e7 1.0e6 1.0e4 1.0e2
   micro_zaids           92238 92235 94239
   micro_rxns            1 18 27
+! homog_db
+  homog_type            rings
+  homog_ring_radii      0.5 1.5 2.5
+  homog_pin_rings       false
