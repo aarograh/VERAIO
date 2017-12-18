@@ -1092,6 +1092,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
+  homog_explicit_pins:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
   bc_bnd_mesh:
     <<: *dtlist
     _style: multi-line
