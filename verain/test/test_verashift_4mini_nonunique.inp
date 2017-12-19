@@ -103,8 +103,8 @@
   axial  2  10.281 PLUG 11.951 LAT26 221.111 PLEN 237.111
   axial  3  10.281 PLUG 11.951 LAT31 221.111 PLEN 237.111
 
-  grid END inc   3.866 172.43 0.9070
-  grid MID zirc4 3.810 148.36 0.9065
+  grid END inc   3.866 172.43 / loss=0.9070
+  grid MID zirc4 3.810 148.36 / loss=0.9065
 
   grid_axial
       END  13.884
