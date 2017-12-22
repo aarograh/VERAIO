@@ -1934,6 +1934,13 @@ TIAMAT:
       - is_string()
       - in_dictionary() coupled inline
 
+  overlap_procs:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
 MPACT:
 
   ray_spacing:
