@@ -624,7 +624,7 @@ ASSEMBLY:
     _check:
       - nth(2,())>0
       - nth(2,())<10
-      - nth(3,())>0
+      - arraysize()==4
     _parameters:
       loss:
         <<: *dtdouble
