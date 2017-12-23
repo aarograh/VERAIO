@@ -1044,7 +1044,7 @@ MPACT:
           _type: double
           _do:
             - copyarray MPACT/@perturb,start=>2,stride=>7
-          _content: 
+          _content:
         perturb_type:
           _pltype: array
           _type: string
@@ -1115,6 +1115,27 @@ MPACT:
           _type: bool
           _do:
             - copy MPACT/$delayenergy
+          _content:
+
+        rx_components:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$rx_components
+          _content:
+
+        rx_components:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$rx_components
+          _content:
+
+        sep_flux_comp:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$sep_flux_comp
           _content:
 
         transmethod:

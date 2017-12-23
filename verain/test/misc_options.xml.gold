@@ -425,6 +425,9 @@
       <Parameter name="moderator_mesh_ndiv" type="int" value="3"/>
       <Parameter name="moderator_mesh_pins" type="string" value="both"/>
     </ParameterList>
+    <ParameterList name="transient">
+      <Parameter name="rx_components" type="bool" value="false"/>
+    </ParameterList>
   </ParameterList>
   <ParameterList name="BISON">
     <Parameter name="ramp_data_transfers" type="bool" value="true"/>
