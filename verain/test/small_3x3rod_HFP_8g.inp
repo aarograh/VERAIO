@@ -153,31 +153,6 @@
           369.7898
           377.711
 
-[INSILICO]
-    xs_library  test-8grp
-
-    max_delta_z   2.54
-    num_blocks_i  1
-    num_blocks_j  1
-    num_z_blocks  1
-    num_groups    8
-    num_sets      1
-
-    mesh          2
-    dimension     3
-    eq_set        spn_fv
-    SPN_order     3
-!!  cell_homogenize true   ! do not include for fast 8g problem
-    tolerance     1e-8
-    Pn_order      0
-
-!   silo_db:
-       silo_output  p6
-!      silo_out_power true
-
-!   upscatter_db:
-       upscatter_tolerance  1e-4
-
 [COBRATF]
   nfuel   3             ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction

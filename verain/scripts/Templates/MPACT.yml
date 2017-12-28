@@ -18,11 +18,25 @@ MPACT:
         - copy MPACT/$shield_ray_spacing
       _content:
 
+    log_message:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$log_message
+      _content:
+
     refl_no_added_modules:
       _pltype: parameter
       _type: string
       _do:
         - copy MPACT/$refl_no_added_modules
+      _content:
+
+    refl_highres:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$refl_highres
       _content:
 
     moc_kernel:
@@ -114,6 +128,13 @@ MPACT:
       _type: string
       _do:
         - copy MPACT/$rr_edits_opt
+      _content:
+
+    nodal_edits:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy MPACT/$nodal_edits
       _content:
 
     rod_treatment:
@@ -382,6 +403,31 @@ MPACT:
           _do:
             - copyarray MPACT/@par_map
           _content:
+
+        graph:
+          _pltype: list
+          _content:
+
+            decomposition:
+              _pltype: array
+              _type: string
+              _do:
+                - copyarray MPACT/@graph_part_method
+              _content:
+
+            refinement:
+              _pltype: array
+              _type: string
+              _do:
+                - copyarray MPACT/@graph_refn_method
+              _content:
+
+            conditions:
+              _pltype: array
+              _type: int
+              _do:
+                - copyarray MPACT/@graph_cond
+              _content:
 
     iteration_control:
       _pltype: list
@@ -998,7 +1044,7 @@ MPACT:
           _type: double
           _do:
             - copyarray MPACT/@perturb,start=>2,stride=>7
-          _content: 
+          _content:
         perturb_type:
           _pltype: array
           _type: string
@@ -1075,6 +1121,27 @@ MPACT:
           _type: bool
           _do:
             - copy MPACT/$delayenergy
+          _content:
+
+        rx_components:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$rx_components
+          _content:
+
+        rx_components:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$rx_components
+          _content:
+
+        sep_flux_comp:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$sep_flux_comp
           _content:
 
         transmethod:

@@ -95,8 +95,8 @@
         PLUG 395.381
         GAP  397.51
 
-  grid END inc    3.866 1017 0.9070 ! grid height (cm), mass (g), loss coef
-  grid MID zirc4  3.810 875  0.9065 ! grid height (cm), mass (g), loss coef
+  grid END inc    3.866 1017 / loss=0.9070 ! grid height (cm), mass (g), loss coef
+  grid MID zirc4  3.810 875  / loss=0.9065 ! grid height (cm), mass (g), loss coef
 
   grid_axial
       END  13.884
@@ -189,6 +189,7 @@
   problem_mode          eigenvalue
   mode                  n
   do_transport          false
+  do_micro_tally        false
   thermal_energy_cutoff 10.0
   dbrc                  false
   broaden_xs            false
@@ -196,3 +197,8 @@
   n_bounds              2.0e7 1.0e6 1.0e4 1.0e2
   micro_zaids           92238 92235 94239
   micro_rxns            1 18 27
+! homog_db
+  homog_type            rings
+  homog_ring_radii      0.5 1.5 2.5
+  homog_pin_rings       false
+  homog_explicit_pins   1

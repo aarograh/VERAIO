@@ -331,68 +331,6 @@
 
 ! ** adjust top edit boundary to match fuel height
 
-[INSILICO]
-    cell_homogenize true
-    Pn_correction true
-    eq_set        spn_fv
-    SPN_order     3
-    Pn_order      0     ! ** loose
-    upscatter_tolerance     1e-6
-    dimension     3
-    mesh          2
-    max_delta_z   2.54  ! ** loose
-
-!   xs_library  v7-252
-    xs_library  test-8grp
-
-    pin_partitioning true
-    num_blocks_i  30
-    num_blocks_j  30
-    num_z_blocks  1
-    num_groups    8
-    num_sets      1
-
-    azimuthals_octant  4
-    polars_octant      4
-    quad_type          qr
-
-    silo_output  p6silo
-
-!   new_grp_bounds
-!      8.2085e+05
-!      1.1109e+05
-!      5.5308e+03
-!      1.8644e+02
-!      3.7612e+01
-!      3.5379e+01
-!      2.7697e+01
-!      2.1684e+01
-!      2.0397e+01
-!      1.5968e+01
-!      7.1500e+00
-!      6.7000e+00
-!      6.3000e+00
-!      1.0970e+00
-!      1.0450e+00
-!      9.5000e-01
-!      3.5000e-01
-!      2.0600e-01
-!      1.0700e-01
-!      5.8000e-02
-!      2.5000e-02
-!      1.0000e-02
-!      1.0000e-05
-
-    new_grp_bounds
-       8.200e+05
-       1.700e+04
-       1.000e+02
-       3.000e+00
-       6.250e-01
-       1.500e-01
-       4.000e-02
-       1.000e-05
-
 [COBRATF]
   nfuel   8             ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction
