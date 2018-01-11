@@ -86,7 +86,9 @@
   * restart_write_file Name of restart file to write/create
   * restart_write_label User label to use when writing restart file
   shuffle_label
-  * shuffle_label Core map showing core shuffle instructions
+  * shuffle_label Core map showing core shuffle instructions for assemblies
+  insert_shuffle_label
+  * insert_shuffle_label Core map showing core shuffle instructions for assembly inserts
   cool_chem
   * TBD
 
