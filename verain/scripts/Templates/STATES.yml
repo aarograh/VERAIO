@@ -285,6 +285,13 @@ STATES:
             - coremapmap CORE/$size,CORE/@core_shape,%STATE/$(_loop)/@shuffle_label,CORE/$bc_sym,expand=>0,ignore=>'-'
           _content:
 
+        insert_shuffle_label:
+          _pltype: array
+          _type: string
+          _do:
+            - coremapmap CORE/$size,CORE/@core_shape,%STATE/$(_loop)/@insert_shuffle_label,CORE/$bc_sym,expand=>0,ignore=>'-'
+          _content:
+
         tinlet_dist:
           _pltype: array
           _type: double

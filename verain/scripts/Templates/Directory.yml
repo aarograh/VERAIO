@@ -295,6 +295,13 @@ STATE:
     _check:
       - fall(sub{is_word(shift)},())
       - fall(sub{not_in_dictionary(shift,'0')},())
+  insert_shuffle_label:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
   cool_chem:
     <<: *dtlist
     _content:
