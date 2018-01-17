@@ -305,5 +305,6 @@
   rst_compress      none !none or 0-9
   log_message debug
   rx_components false
+  kmul.beta 0.5
 [BISON]
   ramp_data_transfers = true

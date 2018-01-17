@@ -427,6 +427,7 @@
     </ParameterList>
     <Parameter name="rst_compress" type="string" value="none"/>
     <ParameterList name="transient">
+      <Parameter name="kmul.beta" type="double" value="0.5"/>
       <Parameter name="rx_components" type="bool" value="false"/>
     </ParameterList>
   </ParameterList>
