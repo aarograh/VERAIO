@@ -302,6 +302,7 @@
   exclude_depl_mats U31 U32 b4c
   include_depl_mats U32 U33 aic he
   pin_cell_mod_mesh  3 both
+  rst_compress      none !none or 0-9
   log_message debug
   rx_components false
 [BISON]
