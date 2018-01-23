@@ -53,6 +53,7 @@ _DIRECTORY:
   MPACT:
   BISON:
   MAMBA1D:
+  MAMBA:
   TIAMAT:
 
 CASEID:
@@ -712,6 +713,21 @@ ASSEMBLY:
       - nth(2,())>=0
       - nth(3,())>=0
       - nth(4,())>=0
+
+  temptable:
+    <<: *dtlistnamed
+    _style: multi-line
+    _check:
+      - arraysize()>1
+      - arraysize()%3==0
+      - is_word(nth(0,()))
+      - is_word(nth(1,()))
+      - nth(1,())eq'temptable_boundary'
+      - is_word(nth(3,()))
+      - nth(3,())eq'temptable_qprime'
+      - is_float(nth(4,()))
+      - nth(5,())eq'temptable_polynomial'
+      - fall(sub{is_float(shift)},stride(6,1,()))
 
 CONTROL:
   <<: *dtblocknamed
@@ -2019,6 +2035,18 @@ MPACT:
     _check:
       - is_string()
       - in_dictionary() decart two three cactus ratfrac DECART TWO THREE CACTUS RATFRAC
+  radial_src_order:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+  axial_src_order:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
   power_edit:
     <<: *dtstring
     _content:
@@ -2065,6 +2093,12 @@ MPACT:
     _content:
     _check:
       - is_word()
+  rst_compress:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none 0 1 2 3 4 5 6 7 8 9
   vis_edits:
     <<: *dtword
     _content:
@@ -2866,6 +2900,128 @@ MAMBA1D:
     _check:
       - is_geq() 0
       - is_int()
+
+MAMBA:
+  A_NiFe2O4_out:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  E_NiFe2O4_out:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  A_NiFe2O4_in:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  E_NiFe2O4_in:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  ksnb_Fe2O4:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  D_Ni:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  D_Fe:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  D_BOH3:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  D_Li:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  D_H2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  CRUD_porosity:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  CRUD_solid_dens:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  chimney_htc:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  chimney_dens:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  chimney_rad:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  CRUD_therm_cond:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  CRUD_heat_capacity:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0y
+  tke_scale:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  src_mult_A:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  src_mult_E:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
 
 BISON:
 

@@ -74,6 +74,20 @@ MPACT:
         - copy MPACT/$modular_rays
       _content:
 
+    radial_src_order:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MPACT/$radial_src_order
+      _content:
+
+    axial_src_order:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MPACT/$axial_src_order
+      _content:
+
     power_edit:
       _pltype: parameter
       _type: string
@@ -107,6 +121,13 @@ MPACT:
       _type: string
       _do:
         - copy MPACT/$checkpoint_file
+      _content:
+
+    rst_compress:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$rst_compress
       _content:
 
     vis_edits:

@@ -417,9 +417,21 @@ crd_map
   fuel    U26 10.257 95.0 / 2.60
   fuel    U31 10.257 95.0 / 3.10
 
-  cell 1   0.4096 0.418 0.475 / U21 he  zirc    ! low enriched pin cell
-  cell 2   0.4096 0.418 0.475 / U26 he  zirc    ! med enriched pin cell
-  cell 3   0.4096 0.418 0.475 / U31 he  zirc    ! hi  enriched pin cell
+  temptable TU26 
+  include ../u26_table_tavg_rev0.tab
+
+  temptable TU31
+  include ../u31_table_tavg_rev0.tab
+
+  temptable TG182
+  include ../g182_table_tavg_rev0.tab
+
+  temptable TG185
+  include ../g185_table_tavg_rev0.tab
+
+  cell 1   0.4096 0.418 0.475 / U21 he  zirc / TG182 ! low enriched pin cell
+  cell 2   0.4096 0.418 0.475 / U26 he  zirc / TU26  ! med enriched pin cell
+  cell 3   0.4096 0.418 0.475 / U31 he  zirc / TU31  ! hi  enriched pin cell
 
   cell 4          0.561 0.602 / mod  zirc       ! guide tube
   cell 6          0.559 0.605 / mod  zirc       ! instrument tube

@@ -157,6 +157,13 @@ SHIFT:
         - copy SHIFT/$track_isotopes
       _content:
 
+    verbosity:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$verbosity
+      _content:
+
     kcode_db:
       _pltype: list
       _content:

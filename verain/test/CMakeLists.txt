@@ -157,6 +157,19 @@ ENDFUNCTION()
 ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(front-dash)
 ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(decreasing-axial)
 
+# copy temperature table files for Sample_full_core_wsym_state_assm
+TRIBITS_COPY_FILES_TO_BINARY_DIR(Temp_Table_Files
+  SOURCE_FILES 
+    g182_table_tavg_rev0.tab
+    g185_table_tavg_rev0.tab
+    u26_table_tavg_rev0.tab
+    u31_table_tavg_rev0.tab
+  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
+  DEST_DIR
+    ${CMAKE_CURRENT_BINARY_DIR}
+  )
+
+
 #===========================================================
 #
 #               Test the veradiff program!

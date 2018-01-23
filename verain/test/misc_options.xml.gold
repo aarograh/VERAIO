@@ -425,6 +425,7 @@
       <Parameter name="moderator_mesh_ndiv" type="int" value="3"/>
       <Parameter name="moderator_mesh_pins" type="string" value="both"/>
     </ParameterList>
+    <Parameter name="rst_compress" type="string" value="none"/>
     <ParameterList name="transient">
       <Parameter name="rx_components" type="bool" value="false"/>
     </ParameterList>
