@@ -128,3 +128,17 @@ MAMBA1D:
       _do:
         - copy MAMBA/$tke_scale
       _content:
+
+    src_mult_A:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA/$src_mult_A
+      _content:
+
+    src_mult_E:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA/$src_mult_E
+      _content:
