@@ -2981,6 +2981,18 @@ MAMBA:
     _check:
       - is_float()
       - is_gt() 0
+  src_mult_A:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  src_mult_E:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
 
 BISON:
 
