@@ -242,6 +242,7 @@
           <Parameter name="mats" type="Array(string)" value="{U26,he,zirc}"/>
           <Parameter name="num_rings" type="int" value="3"/>
           <Parameter name="radii" type="Array(double)" value="{0.4096,0.418,0.475}"/>
+          <Parameter name="table_label" type="string" value="TU26"/>
           <Parameter name="type" type="string" value="fuel"/>
         </ParameterList>
         <ParameterList name="Cell_4">
@@ -325,6 +326,36 @@
           <Parameter name="label" type="string" value="GZRC"/>
           <Parameter name="mass" type="double" value="875"/>
           <Parameter name="material" type="string" value="zirc"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Temperature_Tables">
+        <ParameterList name="TG182">
+          <Parameter name="a_linear" type="Array(double)" value="{1.82920235,1.72317832}"/>
+          <Parameter name="b_quadratic" type="Array(double)" value="{-0.00192506,0.00033787}"/>
+          <Parameter name="boundary" type="string" value="bulk_cool"/>
+          <Parameter name="burnup" type="Array(double)" value="{0.00,10.00}"/>
+          <Parameter name="qprime" type="double" value="0.974"/>
+        </ParameterList>
+        <ParameterList name="TG185">
+          <Parameter name="a_linear" type="Array(double)" value="{1.85920235,1.72317832}"/>
+          <Parameter name="b_quadratic" type="Array(double)" value="{-0.00192506,0.00033787}"/>
+          <Parameter name="boundary" type="string" value="bulk_cool"/>
+          <Parameter name="burnup" type="Array(double)" value="{0.00,10.00}"/>
+          <Parameter name="qprime" type="double" value="0.974"/>
+        </ParameterList>
+        <ParameterList name="TU26">
+          <Parameter name="a_linear" type="Array(double)" value="{2.64920235,1.72317832}"/>
+          <Parameter name="b_quadratic" type="Array(double)" value="{-0.00192506,0.00033787}"/>
+          <Parameter name="boundary" type="string" value="bulk_cool"/>
+          <Parameter name="burnup" type="Array(double)" value="{0.00,10.00}"/>
+          <Parameter name="qprime" type="double" value="0.974"/>
+        </ParameterList>
+        <ParameterList name="TU31">
+          <Parameter name="a_linear" type="Array(double)" value="{3.14920235,1.72317832}"/>
+          <Parameter name="b_quadratic" type="Array(double)" value="{-0.00192506,0.00033787}"/>
+          <Parameter name="boundary" type="string" value="bulk_cool"/>
+          <Parameter name="burnup" type="Array(double)" value="{0.00,10.00}"/>
+          <Parameter name="qprime" type="double" value="0.974"/>
         </ParameterList>
       </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{6.05,10.28,11.95,377.71,393.71,395.38,397.50}"/>
@@ -367,6 +398,7 @@
           <Parameter name="mats" type="Array(string)" value="{U31,he,zirc}"/>
           <Parameter name="num_rings" type="int" value="3"/>
           <Parameter name="radii" type="Array(double)" value="{0.4096,0.418,0.475}"/>
+          <Parameter name="table_label" type="string" value="TU31"/>
           <Parameter name="type" type="string" value="fuel"/>
         </ParameterList>
         <ParameterList name="Cell_4">
@@ -450,6 +482,36 @@
           <Parameter name="label" type="string" value="GZRC"/>
           <Parameter name="mass" type="double" value="875"/>
           <Parameter name="material" type="string" value="zirc"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Temperature_Tables">
+        <ParameterList name="TG182">
+          <Parameter name="a_linear" type="Array(double)" value="{1.82920235,1.72317832}"/>
+          <Parameter name="b_quadratic" type="Array(double)" value="{-0.00192506,0.00033787}"/>
+          <Parameter name="boundary" type="string" value="bulk_cool"/>
+          <Parameter name="burnup" type="Array(double)" value="{0.00,10.00}"/>
+          <Parameter name="qprime" type="double" value="0.974"/>
+        </ParameterList>
+        <ParameterList name="TG185">
+          <Parameter name="a_linear" type="Array(double)" value="{1.85920235,1.72317832}"/>
+          <Parameter name="b_quadratic" type="Array(double)" value="{-0.00192506,0.00033787}"/>
+          <Parameter name="boundary" type="string" value="bulk_cool"/>
+          <Parameter name="burnup" type="Array(double)" value="{0.00,10.00}"/>
+          <Parameter name="qprime" type="double" value="0.974"/>
+        </ParameterList>
+        <ParameterList name="TU26">
+          <Parameter name="a_linear" type="Array(double)" value="{2.64920235,1.72317832}"/>
+          <Parameter name="b_quadratic" type="Array(double)" value="{-0.00192506,0.00033787}"/>
+          <Parameter name="boundary" type="string" value="bulk_cool"/>
+          <Parameter name="burnup" type="Array(double)" value="{0.00,10.00}"/>
+          <Parameter name="qprime" type="double" value="0.974"/>
+        </ParameterList>
+        <ParameterList name="TU31">
+          <Parameter name="a_linear" type="Array(double)" value="{3.14920235,1.72317832}"/>
+          <Parameter name="b_quadratic" type="Array(double)" value="{-0.00192506,0.00033787}"/>
+          <Parameter name="boundary" type="string" value="bulk_cool"/>
+          <Parameter name="burnup" type="Array(double)" value="{0.00,10.00}"/>
+          <Parameter name="qprime" type="double" value="0.974"/>
         </ParameterList>
       </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{6.05,10.28,11.95,377.71,393.71,395.38,397.50}"/>

@@ -705,6 +705,21 @@ ASSEMBLY:
       - nth(3,())>=0
       - nth(4,())>=0
 
+  temptable:
+    <<: *dtlistnamed
+    _style: multi-line
+    _check:
+      - arraysize()>1
+      - arraysize()%3==0
+      - is_word(nth(0,()))
+      - is_word(nth(1,()))
+      - nth(1,())eq'temptable_boundary'
+      - is_word(nth(3,()))
+      - nth(3,())eq'temptable_qprime'
+      - is_float(nth(4,()))
+      - nth(5,())eq'temptable_polynomial'
+      - fall(sub{is_float(shift)},stride(6,1,()))
+
 CONTROL:
   <<: *dtblocknamed
   _maxid: 1
