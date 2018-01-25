@@ -2117,6 +2117,12 @@ MPACT:
     _content:
     _check:
       - fall(sub{is_word(shift)},())
+  xe135m_opt:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() ignore combine explicit
   nodal_edits:
     <<: *dtbool
     _content:
