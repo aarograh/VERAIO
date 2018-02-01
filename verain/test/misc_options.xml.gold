@@ -9,6 +9,7 @@
       <Parameter name="deplete_units" type="string" value="GWDMT"/>
       <Parameter name="feedback" type="string" value="on"/>
       <Parameter name="kcrit" type="double" value="1.02"/>
+      <Parameter name="kmul_beta" type="double" value="0.95"/>
       <Parameter name="modden" type="double" value="0.743"/>
       <Parameter name="power" type="double" value="100.0"/>
       <Parameter name="pressure" type="double" value="15.5132039025"/>
@@ -427,7 +428,6 @@
     </ParameterList>
     <Parameter name="rst_compress" type="string" value="none"/>
     <ParameterList name="transient">
-      <Parameter name="kmul.beta" type="double" value="0.5"/>
       <Parameter name="rx_components" type="bool" value="false"/>
     </ParameterList>
   </ParameterList>
