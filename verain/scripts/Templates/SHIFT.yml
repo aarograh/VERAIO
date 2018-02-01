@@ -143,6 +143,13 @@ SHIFT:
         - copyarray SHIFT/$core_translate
       _content:
 
+    hybrid_tally_names:
+      _pltype: array
+      _type: string
+      _do:
+        - copyarray SHIFT/$hybrid_tally_names
+      _content:
+
     create_unique_pins:
       _pltype: parameter
       _type: bool
