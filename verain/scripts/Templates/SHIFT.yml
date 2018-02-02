@@ -150,6 +150,13 @@ SHIFT:
         - copyarray SHIFT/$hybrid_tally_names
       _content:
 
+    hybrid_multiplier_names:
+      _pltype: array
+      _type: string
+      _do:
+        - copyarray SHIFT/$hybrid_multiplier_names
+      _content:
+
     create_unique_pins:
       _pltype: parameter
       _type: bool
