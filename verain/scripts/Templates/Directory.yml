@@ -2818,6 +2818,13 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 
+  summary_edits:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
   tml:
     <<: *dtbool
     _content:
