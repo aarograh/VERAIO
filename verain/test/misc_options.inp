@@ -306,5 +306,6 @@
   rst_compress      none !none or 0-9
   log_message debug
   rx_components false
+  summary_edits true
 [BISON]
   ramp_data_transfers = true

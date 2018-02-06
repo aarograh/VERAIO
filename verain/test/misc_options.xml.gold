@@ -429,6 +429,7 @@
     <Parameter name="rst_compress" type="string" value="none"/>
     <ParameterList name="transient">
       <Parameter name="rx_components" type="bool" value="false"/>
+      <Parameter name="summary_edits" type="bool" value="true"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="BISON">
