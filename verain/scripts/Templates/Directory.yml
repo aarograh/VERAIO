@@ -1083,6 +1083,12 @@ SHIFT:
     _style: multi-line
     _content:
     _check:
+  raytrace_resolution:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   hybrid_tally_names:
     <<: *dtlist
     _style: multi-line

@@ -303,6 +303,7 @@
   excore_filename "bleh.inp.omn"
   core_translate  2.0 2.0 0.0
   raytrace_levels 10.0 200.0
+  raytrace_resolution 2048
   hybrid_tally_names      "tally1" "tally2"
   hybrid_multiplier_names "flux" "fission"
 ! tally_db

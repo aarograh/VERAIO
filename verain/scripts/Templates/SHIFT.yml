@@ -136,6 +136,13 @@ SHIFT:
         - copyarray SHIFT/$raytrace_levels
       _content:
 
+    raytrace_resolution:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy SHIFT/$raytrace_resolution
+      _content:
+
     core_translate:
       _pltype: array
       _type: double
