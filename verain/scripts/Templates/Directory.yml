@@ -598,6 +598,56 @@ CORE:
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 
+  scram_type:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - is_word(nth(0,()))
+      - fall(sub{is_float(shift)},stride(1,1,()))
+      - arraysize()%2!=0
+
+  scram_lock:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+
+  trip_time:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+
+  trip_power:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==4
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+      - is_int(nth(3,()))
+      - nth(0,())>0
+      - nth(1,())>=0
+      - nth(2,())>0
+      - nth(3,())>=0
+
+  trip_rate:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==4
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+      - is_int(nth(3,()))
+      - nth(0,())>0
+      - nth(1,())>=0
+      - nth(2,())>0
+      - nth(3,())>=0
 
 ASSEMBLY:
   <<: *dtblocknamed
