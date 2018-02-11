@@ -1734,6 +1734,84 @@ COBRATF:
     _check:
       - is_float()
 
+  pressure_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  Tcool_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  Tsolid_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  void_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vliq_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vvap_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vdrop_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  pressurea_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  Tcoola_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  Tsolida_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vliqa_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vvapa_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vdropa_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
   use_sol_stop_crit:
     <<: *dtint
     _content:
