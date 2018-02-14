@@ -3997,6 +3997,12 @@ BISON:
     _check:
       - is_int()
       - is_gt() 0
+  only_assemblies:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
   ramping_time:
     <<: *dtlist
     _style: multi-line
