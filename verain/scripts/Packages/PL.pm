@@ -1508,22 +1508,36 @@ sub mpact_mesh{
 
 # count slashes
 	my @slshs=indexes { $_ eq '/' } @content;
-	if(@slshs != 1){
-	    die "mpact_mesh: invalid number of slashes in MPACT command mesh @content\n";
-	}
+  if(@slshs == 1){
+      my @part1=before {$_ eq '/'} @content;
+      my @part2=after {$_ eq '/'} @content;
 
-	my @part1=before {$_ eq '/'} @content;
-	my @part2=after  {$_ eq '/'} @content;
-	
-# template
-	my @num_rad = @part1;
-	my @num_theta = @part2;
+      # template
+      my @num_rad = @part1;
+      my @num_theta = @part2;
 
-	my $mat_ref=&key_on_list($home,$basename.$keyname);
-	&key_on_parameter($mat_ref,'label','string',$keyname);
-	&key_on_array($mat_ref,'num_rad','int', @num_rad);
-	&key_on_array($mat_ref,'num_theta','int', @num_theta);
+      my $mat_ref=&key_on_list($home,$basename.$keyname);
+      &key_on_parameter($mat_ref,'label','string',$keyname);
+      &key_on_array($mat_ref,'num_rad','int', @num_rad);
+      &key_on_array($mat_ref,'num_theta','int', @num_theta);
+  }elsif(@slshs == 0){
+      my @part1=@content;
+      my $np1=@part1;
+      if($np1 != 2){
+        die "mpact_mesh: must specify nx and ny for rectangular mesh! @content\n";
+      }
 
+      # template
+      my $nx=@content[0];
+      my $ny=@content[1];
+
+      my $mat_ref=&key_on_list($home,$basename.$keyname);
+      &key_on_parameter($mat_ref,'label','string',$keyname);
+      &key_on_parameter($mat_ref,'nx','int', $nx);
+      &key_on_parameter($mat_ref,'ny','int', $ny);
+  }else{
+    die "mpact_mesh: invalid number of slashes in MPACT command mesh @content\n";
+  }
     }
 }
 
