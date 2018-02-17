@@ -536,7 +536,7 @@ CORE:
     _content:
     _check:
       - is_word()
-      - in_dictionary() x-y y-x
+      - in_dictionary() x-y y-x .x-y .y-x
   height:
     <<: *dtdouble
     _content:
