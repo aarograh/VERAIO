@@ -1179,7 +1179,7 @@ MPACT:
           _do:
             - copy MPACT/$accel
           _content:
-          
+
         delayenergy:
           _pltype: parameter
           _type: bool
@@ -1194,18 +1194,18 @@ MPACT:
             - copy MPACT/$rx_components
           _content:
 
-        rx_components:
-          _pltype: parameter
-          _type: bool
-          _do:
-            - copy MPACT/$rx_components
-          _content:
-
         sep_flux_comp:
           _pltype: parameter
           _type: bool
           _do:
             - copy MPACT/$sep_flux_comp
+          _content:
+
+        summary_edits:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$summary_edits
           _content:
 
         transmethod:
