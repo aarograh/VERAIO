@@ -222,6 +222,13 @@ STATES:
             - copy %STATE/$(_loop)/$sym
           _content:
 
+        kmul_beta:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$kmul_beta
+          _content:
+
         reset_sol:
           _pltype: parameter
           _type: bool

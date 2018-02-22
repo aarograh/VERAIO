@@ -270,6 +270,12 @@ STATE:
     _check:
       - is_word()
       - in_dictionary() full qtr
+  kmul_beta:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_gt() 0
+      - is_leq()  1
 
   restart_shuffle:
     <<: *dtlist
@@ -530,7 +536,7 @@ CORE:
     _content:
     _check:
       - is_word()
-      - in_dictionary() x-y y-x
+      - in_dictionary() x-y y-x .x-y .y-x
   height:
     <<: *dtdouble
     _content:
@@ -1077,6 +1083,22 @@ SHIFT:
     _style: multi-line
     _content:
     _check:
+  raytrace_resolution:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  hybrid_tally_names:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+  hybrid_multiplier_names:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:    
   radial_mesh:
     <<: *dtlist
     _style: multi-line
@@ -1723,6 +1745,84 @@ COBRATF:
       - is_float()
 
   vdropa_criteria:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  pressure_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  Tcool_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  Tsolid_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  void_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vliq_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vvap_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vdrop_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  pressurea_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  Tcoola_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  Tsolida_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vliqa_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vvapa_criteria_l2:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+
+  vdropa_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
@@ -2842,6 +2942,13 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 
+  summary_edits:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
   tml:
     <<: *dtbool
     _content:
@@ -3936,6 +4043,12 @@ BISON:
     _check:
       - is_int()
       - is_gt() 0
+  only_assemblies:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
   ramping_time:
     <<: *dtlist
     _style: multi-line
