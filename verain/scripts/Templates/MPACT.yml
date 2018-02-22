@@ -4,6 +4,20 @@ MPACT:
     - setdb MAIN_DB
   _content:
 
+    transport_method:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$transport_method
+      _content:
+
+    sn_numcart:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MPACT/$sn_numcart
+      _content:
+
     ray_spacing:
       _pltype: parameter
       _type: double
@@ -563,6 +577,20 @@ MPACT:
             - copy MPACT/$depl_time_method
           _content:
 
+        depl_pred_order:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$depl_pred_order
+          _content:
+
+        depl_corr_order:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$depl_corr_order
+          _content:
+
         depl_origen_solver:
           _pltype: parameter
           _type: string
@@ -845,6 +873,13 @@ MPACT:
           _type: double
           _do:
             - copy MPACT/$cmfd_relaxation
+          _content:
+
+        cmfd_dhat_relaxation:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$cmfd_dhat_relaxation
           _content:
 
         ktol_1G:

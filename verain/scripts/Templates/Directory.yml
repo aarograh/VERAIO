@@ -1975,6 +1975,18 @@ TIAMAT:
 
 MPACT:
 
+  transport_method:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() MOC Sn
+  sn_numcart:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   ray_spacing:
     <<: *dtdouble
     _content:
@@ -2372,6 +2384,18 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() p-c semip-c postcorrector
+  depl_pred_order:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  depl_corr_order:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   depl_origen_solver:
     <<: *dtword
     _content:
@@ -2650,6 +2674,12 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+  cmfd_dhat_relaxation:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0.0
   cmfd_shift_c0:
     <<: *dtdouble
     _content:
