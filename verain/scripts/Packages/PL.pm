@@ -1391,7 +1391,7 @@ sub sourcemap{
         my $mat_ref=&key_on_list($home,$basename.$keyname);
 
         my @slshs=indexes { $_ eq '/' } @content;
-        if(!(@slshs<3)){
+        if((@slshs<1) || !(@slshs<3)){
             die "sourcemap: invalid number of slashes in command source @content\n";
         }
 
@@ -1410,25 +1410,20 @@ sub sourcemap{
             @part2=before {$_ eq '/'} @part2;
         }
 
-        if(($#part1+1)>=1){
-          $iso_id=$part1[0];
-          &key_on_parameter($mat_ref,'iso_id','string',$iso_id);
+        if(@part1){
           if(($#part1+1)==2){           
+            $iso_id=$part1[0];
+            &key_on_parameter($mat_ref,'iso_id','string',$iso_id);
             $iso_scal=$part1[1];
             &key_on_parameter($mat_ref,'iso_scaling_factor','string',$iso_scal);
-            if(@slshs > 0){
-              &key_on_array($mat_ref,'fractional_spectrum','double',@part2);
-            } 
-            else{
-              die "sourcemap: no fractional spectrum provided when requires in command source @content\n";
-            }
+            &key_on_array($mat_ref,'fractional_spectrum','double',@part2);
           }
-          if(($#part1+1)>2){
+          else{
             die "sourcemap: number of entries in first part exceeds 2 in command source @content\n";
           }
         }
 
-        if(!(@part1) && (@slshs >= 1)){
+        if(!(@part1)){
           &key_on_array($mat_ref,'absolute_spectrum','double',@part2);
         } 
 
