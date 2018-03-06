@@ -136,11 +136,32 @@ SHIFT:
         - copyarray SHIFT/$raytrace_levels
       _content:
 
+    raytrace_resolution:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy SHIFT/$raytrace_resolution
+      _content:
+
     core_translate:
       _pltype: array
       _type: double
       _do:
         - copyarray SHIFT/$core_translate
+      _content:
+
+    hybrid_tally_names:
+      _pltype: array
+      _type: string
+      _do:
+        - copyarray SHIFT/$hybrid_tally_names
+      _content:
+
+    hybrid_multiplier_names:
+      _pltype: array
+      _type: string
+      _do:
+        - copyarray SHIFT/$hybrid_multiplier_names
       _content:
 
     create_unique_pins:
@@ -155,6 +176,13 @@ SHIFT:
       _type: string
       _do:
         - copy SHIFT/$track_isotopes
+      _content:
+
+    verbosity:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$verbosity
       _content:
 
     kcode_db:

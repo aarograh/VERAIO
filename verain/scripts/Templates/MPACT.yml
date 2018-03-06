@@ -4,6 +4,20 @@ MPACT:
     - setdb MAIN_DB
   _content:
 
+    transport_method:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$transport_method
+      _content:
+
+    sn_numcart:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MPACT/$sn_numcart
+      _content:
+
     ray_spacing:
       _pltype: parameter
       _type: double
@@ -74,6 +88,20 @@ MPACT:
         - copy MPACT/$modular_rays
       _content:
 
+    radial_src_order:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MPACT/$radial_src_order
+      _content:
+
+    axial_src_order:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MPACT/$axial_src_order
+      _content:
+
     power_edit:
       _pltype: parameter
       _type: string
@@ -109,6 +137,13 @@ MPACT:
         - copy MPACT/$checkpoint_file
       _content:
 
+    rst_compress:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$rst_compress
+      _content:
+
     vis_edits:
       _pltype: parameter
       _type: string
@@ -128,6 +163,13 @@ MPACT:
       _type: string
       _do:
         - copy MPACT/$rr_edits_opt
+      _content:
+
+    xe135m_opt:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$xe135m_opt
       _content:
 
     nodal_edits:
@@ -535,6 +577,27 @@ MPACT:
             - copy MPACT/$depl_time_method
           _content:
 
+        depl_pred_order:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$depl_pred_order
+          _content:
+
+        depl_corr_order:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$depl_corr_order
+          _content:
+
+        depl_origen_solver:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$depl_origen_solver
+          _content:
+
         include_depl_mats:
           _pltype: array
           _type: string
@@ -812,6 +875,13 @@ MPACT:
             - copy MPACT/$cmfd_relaxation
           _content:
 
+        cmfd_dhat_relaxation:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$cmfd_dhat_relaxation
+          _content:
+
         ktol_1G:
           _pltype: parameter
           _type: int
@@ -1044,7 +1114,7 @@ MPACT:
           _type: double
           _do:
             - copyarray MPACT/@perturb,start=>2,stride=>7
-          _content: 
+          _content:
         perturb_type:
           _pltype: array
           _type: string
@@ -1109,12 +1179,33 @@ MPACT:
           _do:
             - copy MPACT/$accel
           _content:
-          
+
         delayenergy:
           _pltype: parameter
           _type: bool
           _do:
             - copy MPACT/$delayenergy
+          _content:
+
+        rx_components:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$rx_components
+          _content:
+
+        sep_flux_comp:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$sep_flux_comp
+          _content:
+
+        summary_edits:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$summary_edits
           _content:
 
         transmethod:
