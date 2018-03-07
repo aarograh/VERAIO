@@ -1415,7 +1415,7 @@ sub sourcemap{
             $iso_id=$part1[0];
             &key_on_parameter($mat_ref,'iso_id','string',$iso_id);
             $iso_scal=$part1[1];
-            &key_on_parameter($mat_ref,'iso_scaling_factor','string',$iso_scal);
+            &key_on_parameter($mat_ref,'iso_scaling_factor','double',$iso_scal);
             &key_on_array($mat_ref,'fractional_spectrum','double',@part2);
           }
           else{
