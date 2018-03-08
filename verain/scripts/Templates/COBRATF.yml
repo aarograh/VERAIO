@@ -59,6 +59,13 @@ COBRATF:
         - copy COBRATF/$dhfrac
       _content:
 
+    guide_tube_coefficient:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/guide_tube_coefficient$
+      _content:
+
     beta_htc:
       _pltype: parameter
       _type: double
