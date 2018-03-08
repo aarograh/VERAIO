@@ -1466,6 +1466,13 @@ COBRATF:
       - is_int()
       - is_gt() 0
 
+  min_steps:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+
   imox:
     <<: *dtint
     _content:
