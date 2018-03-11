@@ -307,16 +307,16 @@ STATE:
       - arraysize()==4
       - is_float(nth(0,()))&&nth(0,())>0
       - is_float(nth(1,()))&&nth(1,())>=0
-      - is_float(nth(2,()))&&nth(2,())>0
+      - is_float(nth(2,()))&&nth(2,())>=0
       - (is_int(nth(3,()))||nth(3,())==0)&&nth(3,())>=0
   trip_rate:
     <<: *dtlist
     _content:
     _check:
       - arraysize()==4
-      - is_float(nth(0,()))&&nth(0,())>0
-      - is_float(nth(1,()))&&nth(1,())>=0
-      - is_float(nth(2,()))&&nth(2,())>0
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))&&nth(2,())>=0
       - (is_int(nth(3,()))||nth(3,())==0)&&nth(3,())>=0
 
   restart_shuffle:
