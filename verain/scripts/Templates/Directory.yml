@@ -1472,6 +1472,13 @@ COBRATF:
       - is_int()
       - is_gt() 0
 
+  min_steps:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+
   imox:
     <<: *dtint
     _content:
@@ -1512,6 +1519,14 @@ COBRATF:
     _check:
       - is_float()
       - is_geq() 0
+
+  guide_tube_coefficient:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0.0
+      - is_leq() 1.0
 
   beta_htc:
     <<: *dtdouble

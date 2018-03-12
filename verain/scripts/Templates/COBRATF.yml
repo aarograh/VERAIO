@@ -10,6 +10,13 @@ COBRATF:
         - copy COBRATF/$nfuel
       _content:
 
+    min_steps:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$min_steps
+      _content:
+
     imox:
       _pltype: parameter
       _type: int
@@ -50,6 +57,13 @@ COBRATF:
       _type: double
       _do:
         - copy COBRATF/$dhfrac
+      _content:
+
+    guide_tube_coefficient:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/guide_tube_coefficient$
       _content:
 
     beta_htc:
