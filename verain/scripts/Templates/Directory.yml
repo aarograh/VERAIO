@@ -1061,6 +1061,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
+  output_ww:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   output_micro_tally:
     <<: *dtbool
     _content:
