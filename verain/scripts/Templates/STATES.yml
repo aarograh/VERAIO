@@ -446,3 +446,10 @@ STATES:
             - copy %STATE/$(_loop)/$cool_chem:4
           _content:
 
+        cleanup_flow:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$cleanup_flow
+          _content:
+
