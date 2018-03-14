@@ -2921,6 +2921,13 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 
+  1gaccel:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
   delayenergy:
     <<: *dtbool
     _content:
