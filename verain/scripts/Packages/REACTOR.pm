@@ -130,7 +130,7 @@ sub read_ascii {
 
     my($IFILE); 
     if (-f $filename){
-      print STDERR "Opennng file with name: $filename\n" if get_verbose();
+      print "Opennng file with name: $filename\n" if get_verbose();
       open $IFILE, $filename or ( &print_input_log() &&  die "Cannot open file $filename\n");
     }
     else{
@@ -140,7 +140,7 @@ sub read_ascii {
       my $directory = dirname($pscript);
       my $filename2="$directory/Init/$filename";
       if (-f $filename2){
-        print STDERR "Opennng file with path: $filename2\n" if get_verbose();
+        print "Opennng file with path: $filename2\n" if get_verbose();
         open $IFILE, $filename2 or ( &print_input_log() && die "Cannot open file $filename2\n" );
       }
       else{
@@ -174,7 +174,7 @@ sub read_ascii {
 	      else{
 		  &print_input_log() && die "Invalid include syntax.\n";
 	      }
-	      print STDERR "[$filename:$.] Include file: $ifile\n" if get_verbose();
+	      print "[$filename:$.] Include file: $ifile\n" if get_verbose();
 	      read_ascii($ifile,$INPUT_DB, $MAIN_DB, 
 			 'incl'=>1);
 	      next;
@@ -187,21 +187,21 @@ sub read_ascii {
 		  die "Error on block definition: $_.\n" if $rest;
 		  if($block){        # old block that needs to be put into the main tree
 		      if($command){  # old command to complete
-			  print STDERR "[$filename:$.] End command on new block: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+			  print "[$filename:$.] End command on new block: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
 			  $command->keyin();
 			  $command=undef;
 		      }
-		      print STDERR "[$filename:$.] End block: ", $block->name(), "\n"  if get_verbose();
+		      print "[$filename:$.] End block: ", $block->name(), "\n"  if get_verbose();
 		      $block->keyon();
 		      $block=undef;
 		  }
-		  print STDERR "[$filename:$.] New block: $name\n"  if get_verbose();
+		  print "[$filename:$.] New block: $name\n"  if get_verbose();
 		  die "[$filename:$.] Bad block name.\n" unless key_exists($INPUT_DB,$name);
 		  $block=REACTORBlock->new( name=>$name, out_db=>$MAIN_DB );
 		  $block->inp_db($INPUT_DB);  # INPUT_DB is root of Directory.yml
 
 		  if(exists($REACTOR::BLOCKINIT{$name})){
-		      print STDERR "Initialize block $name with file $BLOCKINIT{$name}\n" if get_verbose();
+		      print  "Initialize block $name with file $BLOCKINIT{$name}\n" if get_verbose();
 		      read_ascii($REACTOR::BLOCKINIT{$name}, $INPUT_DB, $MAIN_DB, 'incl'=>1);
 		  }
 
@@ -214,12 +214,15 @@ sub read_ascii {
 		  $ctext=($+[2]-$-[2]) ? $2 : '';
 		  $res=$block->is_command($cname) || 0;
 		  die "[$filename:$.] invalid keyword $cname in block ", $block->name(), "\n" unless $res;
-		  print STDERR "[$filename:$.] New command: $cname $ctext\n"  if get_verbose();
+		  print  "[$filename:$.] New command: $cname $ctext\n"  if get_verbose();
 		  $cname=$block->command_name($cname);
-		  $command=REACTORCommand->new(keyword=>$cname,keytree=>$res,out_db=>$MAIN_DB,
+		  $command=REACTORCommand->new(keyword=>$cname,
+					       keytree=>$res,
+					       out_db=>$MAIN_DB,
+					       block=>$block,
 					       ctext=>$ctext,file=>$filename,line=>$.);
 		  unless($command->is_multiline()){
-		      print STDERR "[$filename:$.] End command on single line: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+		      print  "[$filename:$.] End command on single line: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
 		      $command->keyin();
 		      $command=undef;
 		  }
@@ -233,16 +236,19 @@ sub read_ascii {
 		  $res=$block->is_command($cname) || 0;
 
 		  if($res){   # complete old command
-		      print STDERR "[$filename:$.] End command on new command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+		      print  "[$filename:$.] End command on new command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
 		      $command->keyin();
 		      $command=undef;
 
-		      print STDERR "[$filename:$.] New command: $cname $ctext\n"  if get_verbose();
+		      print  "[$filename:$.] New command: $cname $ctext\n"  if get_verbose();
 		      $cname=$block->command_name($cname);
-		      $command=REACTORCommand->new(keyword=>$cname,keytree=>$res,out_db=>$MAIN_DB,
+		      $command=REACTORCommand->new(keyword=>$cname,
+						   keytree=>$res,
+						   out_db=>$MAIN_DB,
+						   block=>$block,
 						   ctext=>$ctext,file=>$filename,line=>$.);
 		      unless($command->is_multiline()){
-			  print STDERR "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+			  print  "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
 			  $command->keyin();
 			  $command=undef;
 		      }
@@ -255,14 +261,14 @@ sub read_ascii {
   }
     # file ended, check for uncompleted commands
     if($command){
-	print STDERR "[$filename:$.] End command on file exit: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
+	print  "[$filename:$.] End command on file exit: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
 	$command->keyin();
 	$command=undef;
     }
 
     # file ended, close last block if main file
     if($block && $incl == 0){
-	print STDERR "[$filename:$.] End block on end of input: ", $block->name(), "\n"  if get_verbose();
+	print  "[$filename:$.] End block on end of input: ", $block->name(), "\n"  if get_verbose();
 	$block->keyon();
 	$block=undef;
     }

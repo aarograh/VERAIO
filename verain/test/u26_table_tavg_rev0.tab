@@ -1,0 +1,19 @@
+  temptable_boundary  bulk_cool
+! HEADER: 
+!  This is the initial fuel temperature table 
+!  The goal of this table is to provide fuel temperatures as a function of power 
+!  an burnup as follows: 
+!    Tfuel = Tmod + a * P  + b * P^2  where a and b are functions of burnup and P is the linear heat flux 
+! 
+!  The structure of this file is very basic.  A header will give the number of burnup points and the linear 
+!  heat rate used to generate the file.  (this is so the data can be fit using normalized powers, if actual 
+!  linear heat rates are used in the computation of a and b, enter 1.0 for the LHR. 
+!  The header is followed by a list of a and b for each burnup point (in GWD/MT) 
+! 
+!                    LHR (W/cm) 
+  temptable_qprime     0.974
+!  list of temperature coefficients 
+!  Bu (GWD/MT)    a (K)        b (K)
+  temptable_polynomial
+      0.00     2.64920235   -0.00192506
+     10.00     1.72317832    0.00033787

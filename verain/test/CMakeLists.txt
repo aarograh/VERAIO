@@ -65,6 +65,7 @@ ADD_REACTOR_AWARE_INPUT_PARSER_TEST(bwr-peach-6)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(chen_3x3)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(cross_w_baffle)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(ctf_convergence_terms)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(default_density_change)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(fast_3x3rod_HFP)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(mamba1d_block)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(misc_options)
@@ -156,6 +157,19 @@ ENDFUNCTION()
 
 ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(front-dash)
 ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(decreasing-axial)
+
+# copy temperature table files for Sample_full_core_wsym_state_assm
+TRIBITS_COPY_FILES_TO_BINARY_DIR(Temp_Table_Files
+  SOURCE_FILES 
+    g182_table_tavg_rev0.tab
+    g185_table_tavg_rev0.tab
+    u26_table_tavg_rev0.tab
+    u31_table_tavg_rev0.tab
+  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
+  DEST_DIR
+    ${CMAKE_CURRENT_BINARY_DIR}
+  )
+
 
 #===========================================================
 #

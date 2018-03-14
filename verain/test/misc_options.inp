@@ -22,6 +22,7 @@
   thexp_tfuel 875.0 K
   thexp_tclad 350.0 C
   thexp_tmod  559.0 F
+  kmul_beta   0.95
 
   tfuel 900.0 K         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
   modden 0.743         ! g/cc      Not used with T/H feedback!
@@ -302,7 +303,9 @@
   exclude_depl_mats U31 U32 b4c
   include_depl_mats U32 U33 aic he
   pin_cell_mod_mesh  3 both
+  rst_compress      none !none or 0-9
   log_message debug
   rx_components false
+  summary_edits true
 [BISON]
   ramp_data_transfers = true

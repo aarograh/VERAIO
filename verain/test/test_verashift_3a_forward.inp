@@ -184,6 +184,7 @@
   output_geometry       false
   output_micro_tally    false
   global_log            debug
+  verbosity             high
   problem_mode          forward
   mode                  np
   do_transport          true

@@ -645,6 +645,8 @@
     <Parameter name="create_unique_pins" type="bool" value="false"/>
     <Parameter name="excore_filename" type="string" value="bleh.inp.omn"/>
     <Parameter name="global_log" type="string" value="debug"/>
+    <Parameter name="hybrid_multiplier_names" type="Array(string)" value="{flux,fission}"/>
+    <Parameter name="hybrid_tally_names" type="Array(string)" value="{tally1,tally2}"/>
     <ParameterList name="kcode_db">
       <Parameter name="Np" type="double" value="1000"/>
     </ParameterList>
@@ -652,6 +654,7 @@
     <Parameter name="output_geometry" type="bool" value="true"/>
     <Parameter name="problem_mode" type="string" value="forward"/>
     <Parameter name="raytrace_levels" type="Array(double)" value="{10.0,200.0}"/>
+    <Parameter name="raytrace_resolution" type="int" value="2048"/>
     <ParameterList name="tally_db">
       <Parameter name="num_axial" type="int" value="20"/>
       <Parameter name="num_theta" type="int" value="5"/>
