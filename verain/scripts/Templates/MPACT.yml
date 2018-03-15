@@ -991,6 +991,41 @@ MPACT:
             - copy MPACT/$nodal_method
           _content:
 
+        sntype:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$sntype
+          _content:
+
+        rtltype:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$rtltype
+          _content:
+
+        atltype:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$atltype
+          _content:
+
+        homtype:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$homtype
+          _content:
+
+        rtlmom:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$rtlmom
+          _content:
+
         under_relax:
           _pltype: parameter
           _type: double
