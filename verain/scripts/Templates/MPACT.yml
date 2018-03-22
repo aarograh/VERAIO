@@ -924,6 +924,20 @@ MPACT:
             - copy MPACT/$cmfd_num_inners_1G
           _content:
 
+        linear_solver_tol:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$linear_solver_tol
+          _content:
+
+        linear_solver_tol_1G:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$linear_solver_tol_1G
+          _content:
+
         up_scatter:
           _pltype: parameter
           _type: int
