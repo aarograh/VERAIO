@@ -2906,13 +2906,13 @@ MPACT:
       - is_int()
       - is_gt() -1
   linear_solver_tol:
-    <<: *dtint
+    <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
   linear_solver_tol_1G:
-    <<: *dtint
+    <<: *dtdouble
     _content:
     _check:
       - is_float()
