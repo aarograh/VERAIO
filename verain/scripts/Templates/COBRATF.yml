@@ -10,6 +10,13 @@ COBRATF:
         - copy COBRATF/$nfuel
       _content:
 
+    min_steps:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$min_steps
+      _content:
+
     imox:
       _pltype: parameter
       _type: int
@@ -50,6 +57,13 @@ COBRATF:
       _type: double
       _do:
         - copy COBRATF/$dhfrac
+      _content:
+
+    guide_tube_coefficient:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/guide_tube_coefficient$
       _content:
 
     beta_htc:
@@ -444,6 +458,13 @@ COBRATF:
         - copy COBRATF/$edit_hdf5
       _content:
 
+    edit_native_hdf5:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_native_hdf5
+      _content:
+
     edit_fluid_vtk:
       _pltype: parameter
       _type: int
@@ -463,6 +484,27 @@ COBRATF:
       _type: int
       _do:
         - copy COBRATF/$proc_per_assem
+      _content:
+
+    hi2lo_sub_axial:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$hi2lo_sub_axial
+      _content:
+
+    hi2lo_sub_theta:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$hi2lo_sub_theta
+      _content:
+
+    model_corrosion:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$model_corrosion
       _content:
 
     gap_model:

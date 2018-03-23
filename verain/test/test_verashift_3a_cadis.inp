@@ -183,6 +183,7 @@
   output_fission_source false
   output_geometry       false
   output_micro_tally    false
+  output_ww             false
   global_log            debug
   problem_mode          cadis
   mode                  np

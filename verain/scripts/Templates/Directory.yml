@@ -665,6 +665,10 @@ ASSEMBLY:
         _check:
           - is_float()
           - is_geq() 0
+      gridmap:
+        <<: *dtstring
+        _check:
+          - is_string()
 
   grid_axial:
     <<: *dtlist
@@ -1073,6 +1077,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
+  output_ww:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   thermal_energy_cutoff:
     <<: *dtdouble
     _content:
@@ -1472,6 +1482,13 @@ COBRATF:
       - is_int()
       - is_gt() 0
 
+  min_steps:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+
   imox:
     <<: *dtint
     _content:
@@ -1512,6 +1529,14 @@ COBRATF:
     _check:
       - is_float()
       - is_geq() 0
+
+  guide_tube_coefficient:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0.0
+      - is_leq() 1.0
 
   beta_htc:
     <<: *dtdouble
@@ -1846,53 +1871,105 @@ COBRATF:
     _check:
       - is_int()
 
+  grid_hi2lo:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+      - is_leq() 1
+
   edit_gaps:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_channels:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_rods:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_dnb:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_convergence:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_hdf5:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
+
+  edit_native_hdf5:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_fluid_vtk:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_rod_vtk:
     <<: *dtint
     _content:
     _check:
       - is_int()
+
+  hi2lo_sub_axial:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 1
+
+  hi2lo_sub_theta:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 1
+
+  model_corrosion:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   gap_model:
     <<: *dtstring
@@ -2834,6 +2911,18 @@ MPACT:
     _check:
       - is_int()
       - is_gt() -1
+  linear_solver_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  linear_solver_tol_1G:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
   cmfd_num_outers:
     <<: *dtint
     _content:
@@ -2883,6 +2972,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+  split_RTL:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   TL_treatment:
     <<: *dtword
     _content:
@@ -2894,7 +2989,37 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() nem sanm nem-mg sp1 sp3 sp5 hysp3 fhp3 p1 p2 p3 hyp3 sn-0 sn-1 sn-2 sn-3 none
+      - in_dictionary() nem sanm nem-mg sp1 sp3 sp5 hysp3 fhp3 p1 p2 p3 hyp3 sn-0 sn-1 sn-2 sn-3 p3-mom none
+  sntype:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() isotropic aziint explicit moment p3-moment none
+  rtltype:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() isotropic aziint explicit moment p3-moment p3-quad p3-quadratic p3-even sym none
+  atltype:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() isotropic aziint explicit moment azi exp mom sym none
+  rtlmom:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+  homtype:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() isotropic polar moment explicit symmetric none
   under_relax:
     <<: *dtdouble
     _content:
