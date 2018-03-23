@@ -276,6 +276,12 @@ STATE:
     _check:
       - is_gt() 0
       - is_leq()  1
+  kmul_doppler:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_gt() 0
+      - is_leq() 1
 
   restart_shuffle:
     <<: *dtlist
