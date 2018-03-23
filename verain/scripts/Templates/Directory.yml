@@ -659,6 +659,10 @@ ASSEMBLY:
         _check:
           - is_float()
           - is_geq() 0
+      gridmap:
+        <<: *dtstring
+        _check:
+          - is_string()
 
   grid_axial:
     <<: *dtlist
@@ -1861,53 +1865,105 @@ COBRATF:
     _check:
       - is_int()
 
+  grid_hi2lo:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+      - is_leq() 1
+
   edit_gaps:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_channels:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_rods:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_dnb:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_convergence:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_hdf5:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
+
+  edit_native_hdf5:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_fluid_vtk:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   edit_rod_vtk:
     <<: *dtint
     _content:
     _check:
       - is_int()
+
+  hi2lo_sub_axial:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 1
+
+  hi2lo_sub_theta:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 1
+
+  model_corrosion:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+      - is_leq() 1
 
   gap_model:
     <<: *dtstring
@@ -2849,6 +2905,18 @@ MPACT:
     _check:
       - is_int()
       - is_gt() -1
+  linear_solver_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  linear_solver_tol_1G:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
   cmfd_num_outers:
     <<: *dtint
     _content:
