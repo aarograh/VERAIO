@@ -150,7 +150,7 @@ CORE:
       _do:
         - copyarray CORE/@hole,start=>0,stride=>3
       _content:
-      
+
     hole_y:
       _pltype: array
       _type: double
@@ -379,4 +379,3 @@ CORE:
       _do:
         - sourcemap Source_,CORE/%source/*
       _content:
-
