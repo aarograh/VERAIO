@@ -2607,13 +2607,13 @@ MPACT:
     _content:
     _check:
       - is_int()
-      - is_gt() 0
+      - is_geq() 0
   depl_corr_order:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_gt() 0
+      - is_geq() 0
   depl_origen_solver:
     <<: *dtword
     _content:
