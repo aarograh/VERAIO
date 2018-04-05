@@ -236,6 +236,13 @@ STATES:
             - copy %STATE/$(_loop)/$kmul_doppler
           _content:
 
+        kmul_modtemp:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$kmul_modtemp
+          _content:
+
         scram_type:
           _pltype: parameter
           _type: string

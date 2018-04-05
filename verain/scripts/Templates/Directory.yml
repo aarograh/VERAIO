@@ -282,6 +282,12 @@ STATE:
     _check:
       - is_gt() 0
       - is_leq() 1
+  kmul_modtemp:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_gt() 0
+      - is_leq() 1
 
   scram_type:
     <<: *dtlist
