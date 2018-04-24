@@ -2563,6 +2563,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() t f true false
+  spatial_essm:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() t f true false
   quasi_1D:
     <<: *dtword
     _content:
