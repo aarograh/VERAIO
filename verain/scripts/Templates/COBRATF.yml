@@ -549,3 +549,16 @@ COBRATF:
         - copy COBRATF/$crud
       _content:
 
+    trans_dnb:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$trans_dnb
+      _content:
+
+    cross_flow:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$cross_flow
+      _content:

@@ -363,6 +363,14 @@ STATE:
       - nth(3,())>=0
       - nth(4,())>=0
 
+  cleanup_flow:
+    <<: *dtfloat
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+      - is_leq() 100
+
 CORE:
   name:
     <<: *dtstring
@@ -639,6 +647,47 @@ CORE:
       - arraysize()>1
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
+
+  steam_generator:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==4
+      - is_word(nth(0,()))
+      - is_int(nth(1,()))
+      - is_float(nth(2,()))
+      - is_float(nth(3,()))
+      - nth(0,())eq'oncethrough'||nth(0,())eq'utube'
+      - nth(1,())==600||nth(1,())==690||nth(1,())==800||nth(1,())==304
+      - nth(2,())>=0
+      - nth(3,())>=0&&nth(3,())<=1
+
+  hot_leg_piping:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_int(nth(0,()))
+      - is_float(nth(1,()))
+      - nth(0,())==600||nth(0,())==690||nth(0,())==800||nth(0,())==304
+      - nth(1,())>=0
+
+  cold_leg_piping:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_int(nth(0,()))
+      - is_float(nth(1,()))
+      - nth(0,())==600||nth(0,())==690||nth(0,())==800||nth(0,())==304
+      - nth(1,())>=0
+
+  cleanup_rated_flow:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
 
 ASSEMBLY:
   <<: *dtblocknamed
@@ -2045,6 +2094,23 @@ COBRATF:
       - is_word()
       - in_dictionary() none internal MAMBA
 
+  trans_dnb:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+      - is_leq() 1
+
+  cross_flow:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+      - is_leq() 1
+
+
 COUPLING:
 
   epsk:
@@ -2492,6 +2558,12 @@ MPACT:
       - is_int()
       - is_gt() 0
   xs_shielder:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() t f true false
+  spatial_essm:
     <<: *dtword
     _content:
     _check:
@@ -3209,6 +3281,32 @@ MAMBA1D:
     _check:
       - is_geq() 0
       - is_int()
+  steam_generator_age:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+  piping_age:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+
+  chem_mass_bal:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 0
+      - is_int()
+
+  model_erosion:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 0
+      - is_int()
 
 MAMBA:
   A_NiFe2O4_out:
@@ -3331,6 +3429,32 @@ MAMBA:
     _check:
       - is_float()
       - is_gt() 0
+  steam_generator_age:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+  piping_age:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+
+  chem_mass_bal:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 0
+      - is_int()
+
+  erosion_model:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 0
+      - is_int()
 
 BISON:
 
