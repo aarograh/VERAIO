@@ -652,7 +652,7 @@ SHIFT:
                   _pltype: parameter
                   _type: double
                   _do:
-                    - copy SHIFT/$witihin_group_tolerance
+                    - copy SHIFT/$within_group_tolerance
                   _content:
 
                 solver:
