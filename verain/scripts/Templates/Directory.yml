@@ -1107,6 +1107,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
+  lost_particle_error_tolerance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
   num_cycles:
     <<: *dtint
     _content:
