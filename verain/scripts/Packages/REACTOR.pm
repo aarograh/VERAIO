@@ -21,6 +21,9 @@ use Text::Balanced qw (
                        );
 use List::Maker 'range';
 use Text::ParseWords;
+use Cwd 'abs_path';
+use File::Basename;
+use File::Spec::Functions;
 
 use Exporter;
 @ISA = ('Exporter');
@@ -122,25 +125,38 @@ sub read_ascii {
     my ($cname,$ctext);
     my ($name,$res);
 
-    my $incl = 0;
+    my $incl   = 0;
+    my $follow = undef;
+    my $fname  = undef;
+    my $fdir   = undef;
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
     {
-	$key eq 'incl'   && do {$incl=$value;};     # include flag
+	$key eq 'incl'   && do {$incl  =$value;};     # include flag
+	$key eq 'follow' && do {$follow=$value;};     # follow path
+    }
+
+    ($fname, $fdir) = fileparse($filename);
+    $fdir = canonpath( $fdir );
+
+#    if($follow){
+    if($follow){
+#	print "follow  : $follow $filename : $fdir\n";
+	$fdir = catdir( ($follow, $fdir) );
+	$filename = catfile( ( $fdir ), $fname );
+#	print "follow_2: $filename\n";
     }
 
     my($IFILE); 
     if (-f $filename){
-      print "Opennng file with name: $filename\n" if get_verbose();
+      print "Openning file with name: $filename\n" if get_verbose();
       open $IFILE, $filename or ( &print_input_log() &&  die "Cannot open file $filename\n");
     }
     else{
-      use Cwd 'abs_path';
-      use File::Basename;
-      my $pscript=abs_path($0);
+      my $pscript   = abs_path($0);
       my $directory = dirname($pscript);
-      my $filename2="$directory/Init/$filename";
+      my $filename2 = catfile(("$directory/Init"), $fname);
       if (-f $filename2){
-        print "Opennng file with path: $filename2\n" if get_verbose();
+        print "Openning file with path: $filename2\n" if get_verbose();
         open $IFILE, $filename2 or ( &print_input_log() && die "Cannot open file $filename2\n" );
       }
       else{
@@ -175,8 +191,16 @@ sub read_ascii {
 		  &print_input_log() && die "Invalid include syntax.\n";
 	      }
 	      print "[$filename:$.] Include file: $ifile\n" if get_verbose();
+
+	      if($follow){
+		  ($ifile, $fdir) = fileparse($ifile);
+		  $fdir = canonpath( $fdir );
+		  $followinc = catdir( ($follow, $fdir) );
+#		  print "FOLLOW2: $ifile $follow\n";
+	      }
+	      
 	      read_ascii($ifile,$INPUT_DB, $MAIN_DB, 
-			 'incl'=>1);
+			 'incl'=>1, 'follow'=>$followinc);
 	      next;
 	  };
 
