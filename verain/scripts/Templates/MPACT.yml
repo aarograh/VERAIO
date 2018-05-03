@@ -577,20 +577,6 @@ MPACT:
             - copy MPACT/$depl_time_method
           _content:
 
-        depl_pred_order:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy MPACT/$depl_pred_order
-          _content:
-
-        depl_corr_order:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy MPACT/$depl_corr_order
-          _content:
-
         depl_origen_solver:
           _pltype: parameter
           _type: string
