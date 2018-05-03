@@ -1119,6 +1119,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
+  lost_particle_error_tolerance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
   num_cycles:
     <<: *dtint
     _content:
@@ -1407,6 +1413,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() gmres
+  within_group_solver:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() gmres
   solver:
     <<: *dtword
     _content:
@@ -1443,6 +1455,12 @@ SHIFT:
     _check:
       - is_int()
       - is_gt() 0
+  within_group_subspace_size:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   max_itr:
     <<: *dtint
     _content:
@@ -1450,6 +1468,12 @@ SHIFT:
       - is_int()
       - is_gt() 0
   upscatter_max_itr:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  within_group_max_itr:
     <<: *dtint
     _content:
     _check:
@@ -1475,6 +1499,12 @@ SHIFT:
       - is_word()
       - in_dictionary() none low medium high
   upscatter_verbosity:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none low medium high
+  within_group_verbosity:
     <<: *dtword
     _content:
     _check:
@@ -1538,6 +1568,13 @@ SHIFT:
       - is_float()
       - is_gt() 0
       - is_lt() 1
+  within_group_tolerance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_lt() 1      
   cell_homogenize:
     <<: *dtbool
     _content:

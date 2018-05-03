@@ -207,4 +207,9 @@
 ! hybrid_db/solver_db/upscatter_db
   upscatter_tolerance   1.0e-6
   upscatter_verbosity   high
-  
+  upscatter_max_itr     5
+  upscatter_subspace_size 10
+! hybrid_db/solver_db/within_group_db
+  within_group_tolerance   1.0e-6
+  within_group_verbosity   high
+  within_group_max_itr     4
