@@ -1204,7 +1204,7 @@ SHIFT:
     <<: *dtlist
     _style: multi-line
     _content:
-    _check:    
+    _check:
   radial_mesh:
     <<: *dtlist
     _style: multi-line
@@ -1562,7 +1562,7 @@ SHIFT:
     _check:
       - is_float()
       - is_gt() 0
-      - is_lt() 1      
+      - is_lt() 1
   cell_homogenize:
     <<: *dtbool
     _content:
