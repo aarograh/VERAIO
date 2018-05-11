@@ -75,6 +75,20 @@ STATES:
             - copy %STATE/$(_loop)/$rlx_xesm
           _content:
 
+        pred_order:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy %STATE/$(_loop)/$pred_order
+          _content:
+
+        corr_order:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy %STATE/$(_loop)/$corr_order
+          _content:
+
         bank_labels:
           _pltype: array
           _type: string
@@ -227,6 +241,20 @@ STATES:
           _type: double
           _do:
             - copy %STATE/$(_loop)/$kmul_beta
+          _content:
+
+        kmul_doppler:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$kmul_doppler
+          _content:
+
+        kmul_modtemp:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$kmul_modtemp
           _content:
 
         scram_type:

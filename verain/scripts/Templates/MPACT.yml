@@ -577,20 +577,6 @@ MPACT:
             - copy MPACT/$depl_time_method
           _content:
 
-        depl_pred_order:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy MPACT/$depl_pred_order
-          _content:
-
-        depl_corr_order:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy MPACT/$depl_corr_order
-          _content:
-
         depl_origen_solver:
           _pltype: parameter
           _type: string
@@ -819,6 +805,13 @@ MPACT:
             - copy MPACT/$petsc_linear_solver_method
           _content:
 
+        petsc_linear_solver_method_1G:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$petsc_linear_solver_method_1G
+          _content:
+
         preconditioner:
           _pltype: parameter
           _type: string
@@ -979,6 +972,112 @@ MPACT:
           _do:
             - copy MPACT/$num_subplanes
           _content:
+
+        multigrid:
+          _pltype: list
+          _content:
+
+            cg_solver:
+              _pltype: parameter
+              _type: string
+              _do:
+                - copy MPACT/$multigrid_cg_solver
+              _content:
+
+            cg_solver_its:
+              _pltype: parameter
+              _type: int
+              _do:
+                - copy MPACT/$multigrid_cg_solver_its
+              _content:
+
+            cg_tol:
+              _pltype: parameter
+              _type: double
+              _do:
+                - copy MPACT/$multigrid_cg_tol
+              _content:
+
+            smoother:
+              _pltype: parameter
+              _type: string
+              _do:
+                - copy MPACT/$multigrid_smoother
+              _content:
+
+            num_smooth:
+              _pltype: parameter
+              _type: int
+              _do:
+                - copy MPACT/$multigrid_num_smooth
+              _content:
+
+            log_flag:
+              _pltype: parameter
+              _type: string
+              _do:
+                - copy MPACT/$multigrid_log_flag
+              _content:
+
+            precond_flag:
+              _pltype: parameter
+              _type: string
+              _do:
+                - copy MPACT/$multigrid_precond_flag
+              _content:
+
+        multigrid_1G:
+          _pltype: list
+          _content:
+
+            cg_solver:
+              _pltype: parameter
+              _type: string
+              _do:
+                - copy MPACT/$multigrid_cg_solver_1G
+              _content:
+
+            cg_solver_its:
+              _pltype: parameter
+              _type: int
+              _do:
+                - copy MPACT/$multigrid_cg_solver_its_1G
+              _content:
+
+            cg_tol:
+              _pltype: parameter
+              _type: double
+              _do:
+                - copy MPACT/$multigrid_cg_tol_1G
+              _content:
+
+            smoother:
+              _pltype: parameter
+              _type: string
+              _do:
+                - copy MPACT/$multigrid_smoother_1G
+              _content:
+
+            num_smooth:
+              _pltype: parameter
+              _type: int
+              _do:
+                - copy MPACT/$multigrid_num_smooth_1G
+              _content:
+
+            log_flag:
+              _pltype: parameter
+              _type: string
+              _do:
+                - copy MPACT/$multigrid_log_flag_1G
+              _content:
+
+            precond_flag:
+              _pltype: parameter
+              _type: string
+              _do:
+                - copy MPACT/$multigrid_precond_flag_1G
+              _content:
 
     2d1d:
       _pltype: list

@@ -192,6 +192,13 @@ SHIFT:
         - copy SHIFT/$verbosity
       _content:
 
+    error_tolerance:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy SHIFT/$lost_particle_error_tolerance
+      _content:
+
     kcode_db:
       _pltype: list
       _content:
