@@ -1228,7 +1228,7 @@ SHIFT:
     <<: *dtlist
     _style: multi-line
     _content:
-    _check:    
+    _check:
   radial_mesh:
     <<: *dtlist
     _style: multi-line
@@ -1586,7 +1586,7 @@ SHIFT:
     _check:
       - is_float()
       - is_gt() 0
-      - is_lt() 1      
+      - is_lt() 1
   cell_homogenize:
     <<: *dtbool
     _content:
@@ -2970,7 +2970,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() 1gsweep mgnode mggroup mgrbsor
+      - in_dictionary() 1gsweep mgnode mggroup mgrbsor reducedmg
   cmfd_linear_solver:
     <<: *dtword
     _content:
@@ -2982,7 +2982,97 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() gmres bicgstab
+      - in_dictionary() gmres bicgstab multigrid
+  petsc_linear_solver_method_1G:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() gmres bicgstab multigrid
+  multigrid_cg_solver:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() sor bjacobi gmres bicgstab lu
+  multigrid_cg_solver_its:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  multigrid_cg_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  multigrid_cg_solver_1G:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() sor bjacobi gmres bicgstab lu
+  multigrid_cg_solver_its_1G:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  multigrid_cg_tol_1G:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  multigrid_smoother:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() sor bjacobi
+  multigrid_num_smooth:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  multigrid_smoother_1G:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() sor bjacobi
+  multigrid_num_smooth_1G:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  multigrid_log_flag:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  multigrid_log_flag_1G:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  multigrid_precond_flag:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  multigrid_precond_flag_1G:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   preconditioner:
     <<: *dtword
     _content:
@@ -3000,13 +3090,13 @@ MPACT:
     _content:
     _check:
       - is_float()
-      - is_gt() 0.0
+      - is_geq() 0.0
   k_shift_1G:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-      - is_gt() 0.0
+      - is_geq() 0.0
   cmfd_relaxation:
     <<: *dtdouble
     _content:
@@ -3030,13 +3120,13 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps
+      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps sdws-laps
   cmfd_shift_method_1G:
     <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps
+      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps sdws-laps
   ktol_1G:
     <<: *dtdouble
     _content:
@@ -3054,13 +3144,13 @@ MPACT:
     _content:
     _check:
       - is_int()
-      - is_gt() -1
+      - is_gt() 0
   cmfd_num_inners:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_gt() -1
+      - is_gt() 0
   cmfd_num_inners_1G:
     <<: *dtint
     _content:
