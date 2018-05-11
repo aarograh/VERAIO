@@ -3196,6 +3196,13 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+      
+  kinetics_data:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() scale keepin tuttle jeff3 santamarina library spert70f spert250f spert500f
 
   rx_components:
     <<: *dtbool
