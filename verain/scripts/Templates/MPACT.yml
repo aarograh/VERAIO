@@ -1341,14 +1341,14 @@ MPACT:
           _do:
             - copy MPACT/$delayenergy
           _content:
-          
+
         kinetics_data:
           _pltype: parameter
           _type: string
           _do:
             - copy MPACT/$kinetics_data
           _content:
-          
+
         rx_components:
           _pltype: parameter
           _type: bool

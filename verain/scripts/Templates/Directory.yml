@@ -3304,7 +3304,7 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
-      
+
   kinetics_data:
     <<: *dtword
     _content:
