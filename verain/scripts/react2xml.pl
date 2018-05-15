@@ -33,7 +33,9 @@ sub GetPaths()
 use warnings ;
 use Data::Dumper ;
 use Getopt::Long;
+use Cwd 'abs_path';
 use File::Basename;
+use File::Spec::Functions;
 
 #
 # Data structure with reactor file input commands
@@ -143,6 +145,7 @@ my $XSLT='on';
 my $NOTRIM;
 my $INIT;
 my $XINIT;
+my $FOLLOW;
 { # process options
     GetOptions(
 	"xml=s"     => \$XML,
@@ -153,8 +156,9 @@ my $XINIT;
 	"help"      => \$HELP,
 	"notrim"    => \$NOTRIM,
 	"init"      => \$INIT,
-	"xinit"     => \$XINIT
+	"xinit"     => \$XINIT,
 
+	"fpath"     => \$FOLLOW          # hidden option for path following
 #	"update=s"  => \$_UPDATE         # hidden updates
 	);
 }
@@ -167,7 +171,6 @@ if($VERSION){
 # if($_UPDATE eq '007'){        # hidden updates
 #    $SCHEMA_PL{ASSEMBLIES} = "${directory}Templates/ASSEMBLIES007.yml";
 #}
-
 
 # For formatted display of XML file in a browser.
 my $XSLT_FILE='PL9.xsl';
@@ -224,6 +227,13 @@ if(-e $ofile){
 	if filesame($ifile, $ofile);
 }
 
+# Follow file paths for include commands
+if($FOLLOW){
+    $fpath = abs_path($ifile);
+    ($ifile, $FOLLOW) = fileparse($fpath);
+    $FOLLOW = canonpath( $FOLLOW );
+}
+
 #
 # Initiate configuration template for data structures
 #
@@ -265,7 +275,7 @@ $block->keyon();
 #
 # Read input file into main_db
 #
-read_ascii($ifile,$INPUT_DB,$MAIN_DB);
+read_ascii($ifile,$INPUT_DB,$MAIN_DB, 'follow'=>$FOLLOW);
 
 print STDERR "\nFile $ifile read.\n\n"    if $VERBOSE;
 YAML::DumpFile("$ifile.dbg.yml",$MAIN_DB) if $DEBUG;

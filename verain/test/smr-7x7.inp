@@ -13,21 +13,25 @@
 !
 !  All other dimensions, loading pattern, etc. are nominal values based on Watts Bar design
 !
+!  2018/04/26 - updated file so it will run in MPACT
+!      * fixed missing GAP region
+!      * used default CTF and MPACT options when applicable
+!      * 37 axial regions
 !
 [CASEID]
   title 'Nominal SMR 7x7 design'
 
 [STATE]
   power  100.0         ! %
-  tinlet 425.2 F         ! F
+  tinlet 425.2 F       ! F
   boron   600          ! ppmB
   pressure 1850        ! psia
 
-  tfuel 900.0 K         ! K - 600K  Not used with T/H feedback! set to 900K with feedback
+  tfuel 900.0 K        ! K - 600K  Not used with T/H feedback! set to 900K with feedback
   modden 0.743         ! g/cc      Not used with T/H feedback!
 
   feedback on
-  sym full
+  sym qtr
 
 ! rodbank A 230 B 230
 
@@ -100,6 +104,7 @@
   cell 3     0.4096 0.418 0.475 / U31 he zirc
   cell G            0.561 0.602 / mod    zirc       ! guide/instrument tube
   cell 5            0.418 0.475 /     he zirc       ! plenum
+  cell 7                  0.475 /   mod             ! gap
 
   lattice LAT18
        G
@@ -156,9 +161,20 @@
        5 5 5 5 5 5 5 5
        5 5 5 5 5 5 5 5 5
 
-  axial  1  11.951 LAT18 24.028 LAT21 197.635 LAT18 211.951 PLEN 227.951
-  axial  2  11.951 LAT18 24.028 LAT26 197.635 LAT18 211.951 PLEN 227.951
-  axial  3  11.951 LAT18 24.028 LAT31 197.635 LAT18 211.951 PLEN 227.951
+  lattice GAP
+       G
+       7 7
+       7 7 7
+       G 7 7 G
+       7 7 7 7 7
+       7 7 7 7 7 G
+       G 7 7 G 7 7 7
+       7 7 7 7 7 7 7 7
+       7 7 7 7 7 7 7 7 7
+
+  axial  1  6.053 GAP 11.951 LAT18 24.028 LAT21 197.635 LAT18 211.951 PLEN 227.951
+  axial  2  6.053 GAP 11.951 LAT18 24.028 LAT26 197.635 LAT18 211.951 PLEN 227.951
+  axial  3  6.053 GAP 11.951 LAT18 24.028 LAT31 197.635 LAT18 211.951 PLEN 227.951
 
   grid END inc 3.866 1017 / loss=0.9070 ! grid height (cm), mass (g), loss coef
   grid MID zirc 3.810 875 / loss=0.9065 ! grid height (cm), mass (g), loss coef
@@ -332,28 +348,10 @@
 ! ** adjust top edit boundary to match fuel height
 
 [COBRATF]
-  nfuel   8             ! number of fuel rings in conduction model
-  nc      1             ! conduction option - radial conduction
-  irfc    2             ! friction factor correlation default=2
-  dhfrac  0.0           ! fraction of power deposited directly into coolant
-  hgap    5678.3        ! gap conductance
-  epso    0.001
-  oitmax  5
-  iitmax  40
-  dtmin   0.000001
-  dtmax   0.1
-  tend    0.1
-  rtwfp   1000.0
-  maxits  10000
-  courant 0.8
+  nfuel   8           ! number of fuel rings in conduction model
+  nc      1           ! conduction option - radial conduction
   parallel 1          ! ** parallel CTF
 
-[COUPLING]
-  epsk        5.0  ! pcm
-  epsp        1.0e-4
-  eps_boron   2.0
-  rlx_power   0.5
-  rlx_tfuel   1.0
-  rlx_den     1.0
-  maxiter     20
-! read_restart cobra_denovo_restart.out
+[MPACT]
+  num_space      37   ! 
+
