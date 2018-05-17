@@ -257,6 +257,27 @@ STATES:
             - copy %STATE/$(_loop)/$kmul_modtemp
           _content:
 
+        bank_wd_name:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %STATE/$(_loop)/@bank_wd:0
+          _content:
+
+        bank_wd_times:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray %STATE/$(_loop)/@bank_wd,start=>1,stride=>2
+          _content:
+
+        bank_wd_steps:
+          _pltype: array
+          _type: int
+          _do:
+            - copyarray %STATE/$(_loop)/@bank_wd,start=>2,stride=>2
+          _content:
+
         scram_type:
           _pltype: parameter
           _type: string
@@ -480,4 +501,3 @@ STATES:
           _do:
             - copy %STATE/$(_loop)/$cleanup_flow
           _content:
-
