@@ -327,7 +327,10 @@ STATES:
             - copy %STATE/$(_loop)/@trip_rate:3
           _content:
 
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> master
         reset_sol:
           _pltype: parameter
           _type: bool

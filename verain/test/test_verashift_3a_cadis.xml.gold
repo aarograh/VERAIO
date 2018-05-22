@@ -300,6 +300,7 @@
     <Parameter name="output_fission_source" type="bool" value="false"/>
     <Parameter name="output_geometry" type="bool" value="false"/>
     <Parameter name="output_micro_tally" type="bool" value="false"/>
+    <Parameter name="output_ww" type="bool" value="false"/>
     <Parameter name="problem_mode" type="string" value="cadis"/>
     <Parameter name="thermal_energy_cutoff" type="double" value="10.0"/>
     <Parameter name="track_isotopes" type="string" value="full"/>
