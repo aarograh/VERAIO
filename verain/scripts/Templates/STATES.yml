@@ -75,6 +75,20 @@ STATES:
             - copy %STATE/$(_loop)/$rlx_xesm
           _content:
 
+        pred_order:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy %STATE/$(_loop)/$pred_order
+          _content:
+
+        corr_order:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy %STATE/$(_loop)/$corr_order
+          _content:
+
         bank_labels:
           _pltype: array
           _type: string
@@ -234,6 +248,41 @@ STATES:
           _type: double
           _do:
             - copy %STATE/$(_loop)/$kmul_crw
+
+        kmul_doppler:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$kmul_doppler
+          _content:
+
+        kmul_modtemp:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$kmul_modtemp
+          _content:
+
+        bank_wd_name:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %STATE/$(_loop)/@bank_wd:0
+          _content:
+
+        bank_wd_times:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray %STATE/$(_loop)/@bank_wd,start=>1,stride=>2
+          _content:
+
+        bank_wd_steps:
+          _pltype: array
+          _type: int
+          _do:
+            - copyarray %STATE/$(_loop)/@bank_wd,start=>2,stride=>2
+>>>>>>> master
           _content:
 
         scram_type:
@@ -457,3 +506,9 @@ STATES:
             - copy %STATE/$(_loop)/$cool_chem:4
           _content:
 
+        cleanup_flow:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$cleanup_flow
+          _content:

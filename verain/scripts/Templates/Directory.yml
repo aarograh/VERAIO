@@ -163,6 +163,18 @@ STATE:
       - is_float()
       - is_gt() 0
       - is_leq() 1.0
+  pred_order:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+  corr_order:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
   boron:
     <<: *dtdouble
     _content:
@@ -282,6 +294,18 @@ STATE:
     _check:
       - is_gt() 0
 
+  kmul_doppler:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_gt() 0
+      - is_leq() 1
+  kmul_modtemp:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_gt() 0
+      - is_leq() 1
 
   scram_type:
     <<: *dtlist
@@ -294,6 +318,17 @@ STATE:
       - fall(sub{is_float(shift)},stride(2,2,()))
       - fall(sub{is_gt(shift,0)},stride(2,2,()))
       - arraysize()%2!=0
+  bank_wd:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - is_word(nth(0,()))
+      - fall(sub{is_float(shift)},stride(1,2,()))
+      - fall(sub{is_geq(shift,0)},stride(1,2,()))
+      - fall(sub{is_int(shift)},stride(2,2,()))
+      - fall(sub{is_gt(shift,0)},stride(2,2,()))
+      - arraysize()%2==1
   scram_lock:
     <<: *dtlist
     _style: multi-line
@@ -368,6 +403,14 @@ STATE:
       - nth(2,())>=0
       - nth(3,())>=0
       - nth(4,())>=0
+
+  cleanup_flow:
+    <<: *dtfloat
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+      - is_leq() 100
 
 CORE:
   name:
@@ -645,6 +688,47 @@ CORE:
       - arraysize()>1
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
+
+  steam_generator:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==4
+      - is_word(nth(0,()))
+      - is_int(nth(1,()))
+      - is_float(nth(2,()))
+      - is_float(nth(3,()))
+      - nth(0,())eq'oncethrough'||nth(0,())eq'utube'
+      - nth(1,())==600||nth(1,())==690||nth(1,())==800||nth(1,())==304
+      - nth(2,())>=0
+      - nth(3,())>=0&&nth(3,())<=1
+
+  hot_leg_piping:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_int(nth(0,()))
+      - is_float(nth(1,()))
+      - nth(0,())==600||nth(0,())==690||nth(0,())==800||nth(0,())==304
+      - nth(1,())>=0
+
+  cold_leg_piping:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_int(nth(0,()))
+      - is_float(nth(1,()))
+      - nth(0,())==600||nth(0,())==690||nth(0,())==800||nth(0,())==304
+      - nth(1,())>=0
+
+  cleanup_rated_flow:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
 
 ASSEMBLY:
   <<: *dtblocknamed
@@ -1064,6 +1148,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
+  lost_particle_error_tolerance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
   num_cycles:
     <<: *dtint
     _content:
@@ -1155,7 +1245,7 @@ SHIFT:
     <<: *dtlist
     _style: multi-line
     _content:
-    _check:    
+    _check:
   radial_mesh:
     <<: *dtlist
     _style: multi-line
@@ -1352,6 +1442,12 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() gmres
+  within_group_solver:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() gmres
   solver:
     <<: *dtword
     _content:
@@ -1388,6 +1484,12 @@ SHIFT:
     _check:
       - is_int()
       - is_gt() 0
+  within_group_subspace_size:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   max_itr:
     <<: *dtint
     _content:
@@ -1395,6 +1497,12 @@ SHIFT:
       - is_int()
       - is_gt() 0
   upscatter_max_itr:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  within_group_max_itr:
     <<: *dtint
     _content:
     _check:
@@ -1420,6 +1528,12 @@ SHIFT:
       - is_word()
       - in_dictionary() none low medium high
   upscatter_verbosity:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none low medium high
+  within_group_verbosity:
     <<: *dtword
     _content:
     _check:
@@ -1477,6 +1591,13 @@ SHIFT:
       - is_word()
       - in_dictionary() true false
   upscatter_tolerance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_lt() 1
+  within_group_tolerance:
     <<: *dtdouble
     _content:
     _check:
@@ -2051,6 +2172,23 @@ COBRATF:
       - is_word()
       - in_dictionary() none internal MAMBA
 
+  trans_dnb:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+      - is_leq() 1
+
+  cross_flow:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+      - is_leq() 1
+
+
 COUPLING:
 
   epsk:
@@ -2503,6 +2641,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() t f true false
+  spatial_essm:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() t f true false
   quasi_1D:
     <<: *dtword
     _content:
@@ -2608,18 +2752,6 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() p-c semip-c postcorrector
-  depl_pred_order:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_geq() 0
-  depl_corr_order:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_geq() 0
   depl_origen_solver:
     <<: *dtword
     _content:
@@ -2855,7 +2987,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() 1gsweep mgnode mggroup mgrbsor
+      - in_dictionary() 1gsweep mgnode mggroup mgrbsor reducedmg
   cmfd_linear_solver:
     <<: *dtword
     _content:
@@ -2867,7 +2999,97 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() gmres bicgstab
+      - in_dictionary() gmres bicgstab multigrid
+  petsc_linear_solver_method_1G:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() gmres bicgstab multigrid
+  multigrid_cg_solver:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() sor bjacobi gmres bicgstab lu
+  multigrid_cg_solver_its:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  multigrid_cg_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  multigrid_cg_solver_1G:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() sor bjacobi gmres bicgstab lu
+  multigrid_cg_solver_its_1G:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  multigrid_cg_tol_1G:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+  multigrid_smoother:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() sor bjacobi
+  multigrid_num_smooth:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  multigrid_smoother_1G:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() sor bjacobi
+  multigrid_num_smooth_1G:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  multigrid_log_flag:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  multigrid_log_flag_1G:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  multigrid_precond_flag:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  multigrid_precond_flag_1G:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   preconditioner:
     <<: *dtword
     _content:
@@ -2885,13 +3107,13 @@ MPACT:
     _content:
     _check:
       - is_float()
-      - is_gt() 0.0
+      - is_geq() 0.0
   k_shift_1G:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-      - is_gt() 0.0
+      - is_geq() 0.0
   cmfd_relaxation:
     <<: *dtdouble
     _content:
@@ -2915,13 +3137,13 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps
+      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps sdws-laps
   cmfd_shift_method_1G:
     <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps
+      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps sdws-laps
   ktol_1G:
     <<: *dtdouble
     _content:
@@ -2939,13 +3161,13 @@ MPACT:
     _content:
     _check:
       - is_int()
-      - is_gt() -1
+      - is_gt() 0
   cmfd_num_inners:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_gt() -1
+      - is_gt() 0
   cmfd_num_inners_1G:
     <<: *dtint
     _content:
@@ -3114,6 +3336,13 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 
+  kinetics_data:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() scale keepin tuttle jeff3 santamarina library spert70f spert250f spert500f
+
   rx_components:
     <<: *dtbool
     _content:
@@ -3231,6 +3460,32 @@ MAMBA1D:
       - is_geq() 0
       - is_int()
   modelTKEEnhance:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 0
+      - is_int()
+  steam_generator_age:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+  piping_age:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+
+  chem_mass_bal:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 0
+      - is_int()
+
+  model_erosion:
     <<: *dtint
     _content:
     _check:
@@ -3358,6 +3613,32 @@ MAMBA:
     _check:
       - is_float()
       - is_gt() 0
+  steam_generator_age:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+  piping_age:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+
+  chem_mass_bal:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 0
+      - is_int()
+
+  erosion_model:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 0
+      - is_int()
 
 BISON:
 
