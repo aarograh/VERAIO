@@ -3315,7 +3315,7 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 
-  1gtr:
+  1gacceltr:
     <<: *dtbool
     _content:
     _check:
