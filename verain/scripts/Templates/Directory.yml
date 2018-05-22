@@ -276,6 +276,12 @@ STATE:
     _check:
       - is_gt() 0
       - is_leq()  1
+  kmul_crw:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_gt() 0
+
 
   restart_shuffle:
     <<: *dtlist
@@ -2915,6 +2921,13 @@ MPACT:
       - in_dictionary() true false
 
   accel:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
+  1gtr:
     <<: *dtbool
     _content:
     _check:
