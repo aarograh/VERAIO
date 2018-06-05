@@ -257,6 +257,13 @@ STATES:
             - copy %STATE/$(_loop)/$kmul_modtemp
           _content:
 
+        kmul_crw:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$kmul_crw
+          _content:
+
         bank_wd_name:
           _pltype: parameter
           _type: string
