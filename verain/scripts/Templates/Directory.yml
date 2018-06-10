@@ -2198,6 +2198,34 @@ COBRATF:
       - is_word()
       - in_dictionary() none internal MAMBA
 
+  cicada_outer_radial_zone_num_cells_r:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+
+  cicada_inner_radial_zone_num_cells_r:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+
+  cicada_outer_radial_zone_thickness:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+
+  cicada_dimensions:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 1 3
+
   trans_dnb:
     <<: *dtint
     _content:
