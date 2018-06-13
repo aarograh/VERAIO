@@ -300,6 +300,12 @@ STATE:
     _check:
       - is_gt() 0
       - is_leq() 1
+  kmul_crw:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_gt() 0
+      - is_leq() 100
 
   scram_type:
     <<: *dtlist
