@@ -577,6 +577,13 @@ COBRATF:
         - copy COBRATF/$cicada_dimensions
       _content:
 
+    enable_corrosion_lithium:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$enable_corrosion_lithium
+      _content:
+
     trans_dnb:
       _pltype: parameter
       _type: int

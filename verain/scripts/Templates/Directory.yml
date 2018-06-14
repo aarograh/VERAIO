@@ -2226,6 +2226,13 @@ COBRATF:
       - is_int()
       - in_dictionary() 1 3
 
+  enable_corrosion_lithium:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+
   trans_dnb:
     <<: *dtint
     _content:
