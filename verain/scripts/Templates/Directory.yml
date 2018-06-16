@@ -313,7 +313,7 @@ STATE:
     _content:
     _check:
       - is_word(nth(0,()))
-      - fall(sub{is_int(shift)},stride(1,2,()))
+      - fall(sub{is_float(shift)},stride(1,2,()))
       - fall(sub{is_geq(shift,0)},stride(1,2,()))
       - fall(sub{is_float(shift)},stride(2,2,()))
       - fall(sub{is_gt(shift,0)},stride(2,2,()))
