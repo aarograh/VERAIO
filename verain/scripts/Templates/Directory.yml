@@ -2137,6 +2137,13 @@ COBRATF:
     _check:
       - is_int()
 
+  edit_rod_htc:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+
   hi2lo_sub_axial:
     <<: *dtint
     _content:

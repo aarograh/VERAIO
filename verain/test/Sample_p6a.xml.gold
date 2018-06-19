@@ -317,6 +317,7 @@
     <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="edit_channels" type="int" value="1"/>
     <Parameter name="edit_fluid_vtk" type="int" value="1"/>
+    <Parameter name="edit_rod_htc" type="int" value="0"/>
     <Parameter name="epso" type="double" value="0.001"/>
     <Parameter name="hgap" type="double" value="5678.3"/>
     <Parameter name="iitmax" type="int" value="40"/>
