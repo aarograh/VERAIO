@@ -3355,6 +3355,20 @@ MPACT:
       - is_word()
       - in_dictionary() scale keepin tuttle jeff3 santamarina library spert70f spert250f spert500f
 
+  kinetics_lambda:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() isotopic fissweight precursorconsv
+
+  kinetics_otfbeta:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
   rx_components:
     <<: *dtbool
     _content:
