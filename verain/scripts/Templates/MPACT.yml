@@ -1349,6 +1349,20 @@ MPACT:
             - copy MPACT/$kinetics_data
           _content:
 
+        kinetics_lambda:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$kinetics_lambda
+          _content:
+
+        kinetics_otfbeta:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$kinetics_otfbeta
+          _content:
+
         rx_components:
           _pltype: parameter
           _type: bool
