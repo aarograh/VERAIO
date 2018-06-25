@@ -223,7 +223,6 @@
   courant 0.8
   edit_channels 1
   edit_fluid_vtk 1
-  edit_rod_htc 0
 
 
 [COUPLING]

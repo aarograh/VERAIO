@@ -172,6 +172,7 @@
   solid_energy_storage     0.5  !%
   mass_storage             0.5  !%
   guide_tube_coefficient   0.0
+  edit_rod_htc             0
 
 [COUPLING]
   epsk        2.0  ! pcm
