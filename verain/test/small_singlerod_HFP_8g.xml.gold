@@ -280,6 +280,7 @@
     <Parameter name="fluid_energy_storage" type="double" value="0.5"/>
     <Parameter name="global_energy_balance" type="double" value="0.01"/>
     <Parameter name="global_mass_balance" type="double" value="0.01"/>
+    <Parameter name="guide_tube_coefficient" type="double" value="0.0"/>
     <Parameter name="hgap" type="double" value="5678.3"/>
     <Parameter name="iitmax" type="int" value="40"/>
     <Parameter name="irfc" type="int" value="2"/>
