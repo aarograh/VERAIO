@@ -563,6 +563,20 @@ MPACT:
             - copy MPACT/$dep_substep
           _content:
 
+        dep_substep_pred:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$dep_substep_pred
+          _content:
+
+        dep_substep_corr:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$dep_substep_corr
+          _content:
+
         dep_kernel:
           _pltype: parameter
           _type: string
