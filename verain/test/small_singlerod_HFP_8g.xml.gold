@@ -276,10 +276,12 @@
     <Parameter name="dtmax" type="double" value="0.1"/>
     <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="edit_channels" type="int" value="1"/>
+    <Parameter name="edit_rod_htc" type="int" value="0"/>
     <Parameter name="epso" type="double" value="0.001"/>
     <Parameter name="fluid_energy_storage" type="double" value="0.5"/>
     <Parameter name="global_energy_balance" type="double" value="0.01"/>
     <Parameter name="global_mass_balance" type="double" value="0.01"/>
+    <Parameter name="guide_tube_coefficient" type="double" value="0.0"/>
     <Parameter name="hgap" type="double" value="5678.3"/>
     <Parameter name="iitmax" type="int" value="40"/>
     <Parameter name="irfc" type="int" value="2"/>
