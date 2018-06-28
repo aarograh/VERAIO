@@ -3019,6 +3019,18 @@ MPACT:
     _check:
       - is_int()
       - is_gt() 0
+  dep_substep_pred:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  dep_substep_corr:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
   dep_kernel:
     <<: *dtword
     _content:
