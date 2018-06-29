@@ -23,7 +23,7 @@ use List::Maker 'range';
 use Text::ParseWords;
 use Cwd 'abs_path';
 use File::Basename;
-use File::Spec::Functions;
+use File::Spec::Functions qw(:ALL);
 
 use Exporter;
 @ISA = ('Exporter');
@@ -127,23 +127,22 @@ sub read_ascii {
 
     my $incl   = 0;
     my $follow = undef;
+    my $ispath = undef;
     my $fname  = undef;
     my $fdir   = undef;
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
     {
 	$key eq 'incl'   && do {$incl  =$value;};     # include flag
 	$key eq 'follow' && do {$follow=$value;};     # follow path
+	$key eq 'ispath' && do {$ispath=$value;};     # path defined in include command
     }
 
-    ($fname, $fdir) = fileparse($filename);
+    ($fvolume, $fdir, $fname) = splitpath($filename);
     $fdir = canonpath( $fdir );
 
-#    if($follow){
     if($follow){
-#	print "follow  : $follow $filename : $fdir\n";
 	$fdir = catdir( ($follow, $fdir) );
 	$filename = catfile( ( $fdir ), $fname );
-#	print "follow_2: $filename\n";
     }
 
     my($IFILE); 
@@ -151,7 +150,10 @@ sub read_ascii {
       print "Openning file with name: $filename\n" if get_verbose();
       open $IFILE, $filename or ( &print_input_log() &&  die "Cannot open file $filename\n");
     }
-    else{
+    elsif($ispath){  # path is defined in the include command
+	die "Cannot open file $filename\n";
+    }
+    else{  # try init if path not defined
       my $pscript   = abs_path($0);
       my $directory = dirname($pscript);
       my $filename2 = catfile(("$directory/Init"), $fname);
@@ -192,15 +194,23 @@ sub read_ascii {
 	      }
 	      print "[$filename:$.] Include file: $ifile\n" if get_verbose();
 
+	      my @INCOPT=('incl' => 1);
 	      if($follow){
-		  ($ifile, $fdir) = fileparse($ifile);
+		  ($fvolume, $fdir, $ifile) = splitpath($ifile);
+		  if($fdir){
+		      print "$ifile has path.\n" if get_verbose();
+		      push @INCOPT, ('ispath' => 1);
+		  }
+		  else{
+		      print "$ifile has no path.\n" if get_verbose();
+		  }
+
 		  $fdir = canonpath( $fdir );
 		  $followinc = catdir( ($follow, $fdir) );
-#		  print "FOLLOW2: $ifile $follow\n";
+		  push @INCOPT, ('follow' => $followinc);
 	      }
-	      
-	      read_ascii($ifile,$INPUT_DB, $MAIN_DB, 
-			 'incl'=>1, 'follow'=>$followinc);
+
+	      read_ascii($ifile,$INPUT_DB, $MAIN_DB, @INCOPT);
 	      next;
 	  };
 
@@ -300,5 +310,6 @@ sub read_ascii {
     return 1;
 }
     
+ 
 
 1;
