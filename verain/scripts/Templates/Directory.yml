@@ -2184,7 +2184,7 @@ COBRATF:
     _content:
     _check:
       - is_string()
-      - in_dictionary() asme iapws iapws_v2 flibe
+      - in_dictionary() asme asme1968 iapws iapws1997_direct iapws_v2 iapws1997_lookup flibe
 
   beta_sp:
     <<: *dtdouble

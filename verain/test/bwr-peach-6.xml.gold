@@ -150,6 +150,9 @@
       <Parameter name="ppitch" type="double" value="1.6256"/>
     </ParameterList>
   </ParameterList>
+  <ParameterList name="COBRATF">
+    <Parameter name="property_evaluations" type="string" value="asme1968"/>
+  </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="parallel_env">
       <Parameter name="num_angle" type="int" value="-8"/>

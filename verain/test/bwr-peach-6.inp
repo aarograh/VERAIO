@@ -8,6 +8,9 @@
 !  2 water rods
 !  2% gad
 !
+!  6/29/2018 - Set COBRATF properties to asme1968 to prevent results change after changing
+!              default
+
 ! Reference:
 !   NEA/NSC/DOC(2001)1
 !   BOILING WATER REACTOR TURBINE TRIP (TT) BENCHMARK
@@ -92,3 +95,6 @@
   num_space      1
   num_angle     -8
   num_threads    1
+
+[COBRATF]
+  property_evaluations asme1968
