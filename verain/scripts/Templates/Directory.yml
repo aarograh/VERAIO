@@ -2854,7 +2854,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() EXPLICITRADIAL EXPLICITFILE ASSEMBLY PS GRAPH
+      - in_dictionary() explicitradial EXPLICITRADIAL explicitfile EXPLICITFILE assembly ASSEMBLY ps PS graph GRAPH
   par_file:
     <<: *dtword
     _content:
