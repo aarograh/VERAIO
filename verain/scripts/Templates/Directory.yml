@@ -1854,6 +1854,7 @@ COBRATF:
     _content:
     _check:
       - is_int()
+      - in_dictionary() 0 3 5 6 7 8
 
   parallel:
     <<: *dtint
@@ -3014,6 +3015,18 @@ MPACT:
       - is_word()
       - in_dictionary() true false
   dep_substep:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  dep_substep_pred:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+  dep_substep_corr:
     <<: *dtint
     _content:
     _check:
