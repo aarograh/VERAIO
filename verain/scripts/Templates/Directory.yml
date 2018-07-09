@@ -56,13 +56,32 @@ _DIRECTORY:
   MAMBA:
   TIAMAT:
 
+#>
+#> \section{Block CASEID}
+#> \label{sec:caseidcards}
 CASEID:
+#>
+#>   {\bf title} case\_name
+#>   \VERAInputTable{
+#>     name={title},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Problem name},
+#>     notes={}
+#>   }
   title:
     <<: *dtstring
     _content: default
     _check:
       - is_string()
-
+#>
+#> \section{Block STATE}
+#> \label{sec:statecards}
 STATE:
   <<: *dtblocknamed
   id:
@@ -70,28 +89,98 @@ STATE:
     _content:
     _check:
       - is_string()
+#>
+#>   {\bf title} state\_name
+#>   \VERAInputTable{
+#>     name={title},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={State name},
+#>     notes={}
+#>   }
   title:
     <<: *dtstring
     _content:
     _check:
       - is_string()
+#>
+#>   {\bf op\_date} op\_date
+#>   \VERAInputTable{
+#>     name={op\_date},
+#>     type={Character String (``MM/DD/YYYY'' or ``YYYY/MM/DD'')},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Operating date of this statepoint.  Used when writing restart files.},
+#>     notes={}
+#>   }
   op_date:
     <<: *dtdate
     _content:
     _check:
       - is_string()
+#>
+#>   {\bf power} power
+#>   \VERAInputTable{
+#>     name={power},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Percent of rated power},
+#>     unitsother={},
+#>     valuedefault={1e-8},
+#>     valuesapplicable={$>=0$},
+#>     limitations={},
+#>     description={Operating power},
+#>     notes={}
+#>   }
   power:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_geq() 0
+#>
+#>   {\bf flow} flow
+#>   \VERAInputTable{
+#>     name={flow},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Percent of rated flow},
+#>     unitsother={},
+#>     valuedefault={1e-8},
+#>     valuesapplicable={$>=0$},
+#>     limitations={},
+#>     description={Operating flow},
+#>     notes={}
+#>   }
   flow:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_geq() 0
+#>
+#>   {\bf flow\_dist} flow\_dist
+#>   \VERAInputTable{
+#>     name={flow\_dist},
+#>     type={2D Float Map},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={2-D array that must match the shape of assm\_map in [CORE].  Gives a multiplier that will be applied to nominal flow in each assembly.}},
+#>     notes={}
+#>   }
   flow_dist:
     <<: *dtlist
     _style: multi-line
@@ -100,12 +189,40 @@ STATE:
       - fall(sub{is_word(shift)},())
       - fall(sub{is_float(shift)},())
       - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
+#>
+#>   {\bf bypass} bypass
+#>   \VERAInputTable{
+#>     name={bypass},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Percent of flow},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={$>=0$},
+#>     limitations={},
+#>     description={Bypass flow fraction \hl{current manual says rated flow}},
+#>     notes={}
+#>   }
   bypass:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_geq() 0
+#>
+#>   {\bf bypass} bypass
+#>   \VERAInputTable{
+#>     name={bypass},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Percent of flow},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={$>=0$},
+#>     limitations={},
+#>     description={Bypass flow fraction \hl{current manual says rated flow}},
+#>     notes={}
+#>   }
   tinlet:
     <<: *dtlist
     _content:
@@ -1854,6 +1971,7 @@ COBRATF:
     _content:
     _check:
       - is_int()
+      - in_dictionary() 0 3 5 6 7 8
 
   parallel:
     <<: *dtint
@@ -2854,7 +2972,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() EXPLICITRADIAL EXPLICITFILE ASSEMBLY PS GRAPH
+      - in_dictionary() explicitradial EXPLICITRADIAL explicitfile EXPLICITFILE assembly ASSEMBLY ps PS graph GRAPH
   par_file:
     <<: *dtword
     _content:
