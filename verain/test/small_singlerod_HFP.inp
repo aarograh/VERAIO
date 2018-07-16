@@ -178,6 +178,7 @@
   cicada_outer_radial_zone_thickness 80.0e-6
   cicada_dimensions 3
   enable_corrosion_lithium 0
+  property_evaluations asme1968
 
 
 

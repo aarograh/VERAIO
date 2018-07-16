@@ -218,4 +218,5 @@
 [COBRATF]
   beta_sp   0.005
   parallel       0
+  property_evaluations asme1968
 
