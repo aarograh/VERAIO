@@ -3519,7 +3519,7 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 
-  1gtr:
+  1gacceltr:
     <<: *dtbool
     _content:
     _check:
@@ -3527,6 +3527,13 @@ MPACT:
       - in_dictionary() true false
 
   1gaccel:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
+  tml1gmg:
     <<: *dtbool
     _content:
     _check:
@@ -3588,10 +3595,10 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
-  
+
   tmllevel:
     <<: *dtlist
-    _content: 
+    _content:
     _check:
       - fall(sub{is_int(shift)})
       - fall(sub{is_geq(shift,0)})

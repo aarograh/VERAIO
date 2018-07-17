@@ -1334,7 +1334,7 @@ MPACT:
           _do:
             - copy MPACT/$tml
           _content:
-        
+
         tmllevel:
           _pltype: array
           _type: int
@@ -1366,7 +1366,14 @@ MPACT:
           _pltype: parameter
           _type: bool
           _do:
-            - copy MPACT/$1gtr
+            - copy MPACT/$1gacceltr
+          _content:
+
+        tml1gmg:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$tml1gmg
           _content:
 
         delayenergy:
