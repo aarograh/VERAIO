@@ -63,7 +63,7 @@ COBRATF:
       _pltype: parameter
       _type: double
       _do:
-        - copy COBRATF/guide_tube_coefficient$
+        - copy COBRATF/$guide_tube_coefficient
       _content:
 
     beta_htc:
@@ -479,6 +479,13 @@ COBRATF:
         - copy COBRATF/$edit_rod_vtk
       _content:
 
+    edit_rod_htc:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_rod_htc
+      _content:
+
     proc_per_assem:
       _pltype: parameter
       _type: int
@@ -547,6 +554,41 @@ COBRATF:
       _type: string
       _do:
         - copy COBRATF/$crud
+      _content:
+
+    cicada_outer_radial_zone_num_cells_r:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$cicada_outer_radial_zone_num_cells_r
+      _content:
+
+    cicada_inner_radial_zone_num_cells_r:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$cicada_inner_radial_zone_num_cells_r
+      _content:
+
+    cicada_outer_radial_zone_thickness:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$cicada_outer_radial_zone_thickness
+      _content:
+
+    cicada_dimensions:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$cicada_dimensions
+      _content:
+
+    enable_corrosion_lithium:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$enable_corrosion_lithium
       _content:
 
     trans_dnb:

@@ -563,6 +563,20 @@ MPACT:
             - copy MPACT/$dep_substep
           _content:
 
+        dep_substep_pred:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$dep_substep_pred
+          _content:
+
+        dep_substep_corr:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$dep_substep_corr
+          _content:
+
         dep_kernel:
           _pltype: parameter
           _type: string
@@ -1367,6 +1381,20 @@ MPACT:
           _type: string
           _do:
             - copy MPACT/$kinetics_data
+          _content:
+
+        kinetics_lambda:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$kinetics_lambda
+          _content:
+
+        kinetics_otfbeta:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$kinetics_otfbeta
           _content:
 
         rx_components:
