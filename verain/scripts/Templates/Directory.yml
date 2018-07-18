@@ -2360,6 +2360,20 @@ COBRATF:
       - is_int()
       - in_dictionary() 0 1
 
+  crud_details:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+
+  clad_corrosion_model:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 1 2 3
+
   trans_dnb:
     <<: *dtint
     _content:

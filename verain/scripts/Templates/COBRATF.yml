@@ -591,6 +591,20 @@ COBRATF:
         - copy COBRATF/$enable_corrosion_lithium
       _content:
 
+    crud_details:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$crud_details
+      _content:
+
+    clad_corrosion_model:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$clad_corrosion_model
+      _content:
+
     trans_dnb:
       _pltype: parameter
       _type: int
