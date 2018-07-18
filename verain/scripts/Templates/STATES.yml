@@ -243,12 +243,6 @@ STATES:
             - copy %STATE/$(_loop)/$kmul_beta
           _content:
 
-        kmul_crw:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy %STATE/$(_loop)/$kmul_crw
-
         kmul_doppler:
           _pltype: parameter
           _type: double
