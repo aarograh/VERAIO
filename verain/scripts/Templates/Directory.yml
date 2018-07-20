@@ -55,6 +55,7 @@ _DIRECTORY:
   MAMBA1D:
   MAMBA:
   TIAMAT:
+  RUN:
 
 #>
 #> \section{Block CASEID}
@@ -4821,3 +4822,87 @@ BISON:
     _content:
     _check:
       - fall(sub{is_float(shift)},())
+
+#>
+#> \section{Block RUN}
+RUN:
+#>
+#>   {\bf email} list\_of\_emails
+#>   \VERAInputTable{
+#>     name={email},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={Default email is the users system email},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Email that is used to inform user of job status.  %
+#>        A list of emails can be input by comma seperating the emails.},
+#>     notes={}
+#>   }
+  email:
+    <<: *dtstring
+    _content: default
+    _check:
+      - is_string()
+#>
+#>   {\bf pmem} memory per processor
+#>   \VERAInputTable{
+#>     name={pmem},
+#>     type={Floating-point Number},
+#>     need={Optional},
+#>     unitsdefault={GB},
+#>     unitsother={},
+#>     valuedefault={System memory per processor},
+#>     valuesapplicable={Greter than 0},
+#>     limitations={},
+#>     description={Memory per processor},
+#>     notes={}
+#>   }
+  pmem:
+    <<: *dtstring
+    _content: default
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf ppn} processors per node
+#>   \VERAInputTable{
+#>     name={ppn},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={System processors per node},
+#>     valuesapplicable={Greater than 0},
+#>     limitations={},
+#>     description={Number of processors that will be used per node},
+#>     notes={}
+#>   }
+  ppn:
+    <<: *dtstring
+    _content: default
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf walltime} maximum expected runtime
+#>   \VERAInputTable{
+#>     name={walltime},
+#>     type={Floating-point Number},
+#>     need={Optional},
+#>     unitsdefault={hours},
+#>     unitsother={},
+#>     valuedefault={24 hours},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The walltime that is used for pbs submission},
+#>     notes={}
+#>   }
+  walltime:
+    <<: *dtstring
+    _content: default
+    _check:
+      - is_float()
+      - is_gt() 0
