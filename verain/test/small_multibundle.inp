@@ -5,6 +5,7 @@
 !
 !  03/25/2013 - added case to test multi-assembly capabilities of COBRA
 !  10/09/2013 - added gap and COUPLING block
+!  06/29/2018 - Set non-default property_evaluations in COBRA-TF block
 !
 !  To process:
 !     ./react2xml.pl [file].inp [file].xml
@@ -130,6 +131,7 @@
   solid_energy_storage     0.02  !%
   mass_storage             0.05  !%
   parallel 0
+  property_evaluations iapws1997_direct
 
 [COUPLING]
   read_restart cobra_denovo_restart.out  ! generated when run the first time.
