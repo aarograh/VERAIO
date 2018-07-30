@@ -201,4 +201,4 @@
   homog_type            rings
   homog_ring_radii      0.5 1.5 2.5
   homog_pin_rings       false
-  homog_explicit_pins   1
+  homog_explicit_ring   1.0
