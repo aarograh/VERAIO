@@ -4,7 +4,7 @@
 !  This is a sample MOX PWR assembly with three different plutonium enrichment zones
 !  MOX enrichments are based on the VENUS-2 benchmark specification
 !
-!  9/19/2016: MPACT currently cannot run MOX cases.  See Story #4378 and #4381
+!  This test case originally added to test stories #4378 and #4381
 !
 
 [STATE]
