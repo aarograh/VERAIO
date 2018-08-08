@@ -394,6 +394,33 @@ STATE:
       - is_float(nth(0,()))
       - is_word(nth(1,()))
       - in_dictionary(nth(1,()),'F','C','K')
+  expand3D:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  thexp_outfile:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  thexp_info:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+  apitch_tec:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+  ppitch_tec:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
   sym:
     <<: *dtword
     _content:
