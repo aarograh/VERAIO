@@ -315,6 +315,7 @@
   x_bnd_mesh    -100.0 100.0
   y_bnd_mesh    -100.0 100.0
   z_bnd_mesh    0.0 300.0
+  vera_pressure_vessel true
 
 [COBRATF]
   parallel  0

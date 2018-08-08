@@ -1235,6 +1235,26 @@ SHIFT:
       - is_word()
       - in_dictionary() all none pin
 #>
+#>   {\bf verbosity} verbosity
+#>   \VERAInputTable{
+#>     name={verbosity},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={none},
+#>     valuesapplicable={none, low, medium, high},
+#>     limitations={},
+#>     description={How often to print about particles being transported},
+#>     notes={}
+#>   }
+  verbosity:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none low medium high
+#>
 #>   {\bf broaden\_xs} broaden\_xs
 #>   \VERAInputTable{
 #>     name={broaden\_xs},
@@ -1312,6 +1332,7 @@ SHIFT:
     _content:
     _check:
       - is_float()
+      - is_gt() 0
 #>
 #>   {\bf energy\_tol} energy\_tol
 #>   \VERAInputTable{
@@ -1384,7 +1405,7 @@ SHIFT:
 #>     valuedefault={error},
 #>     valuesapplicable={debug, diagnostic, status, info, warning, error, critical},
 #>     limitations={},
-#>     description={Level of local log information},
+#>     description={Level of local node log information},
 #>     notes={}
 #>   }
   local_log:
@@ -1404,8 +1425,8 @@ SHIFT:
 #>     valuedefault={false},
 #>     valuesapplicable={},
 #>     limitations={},
-#>     description={},
-#>     notes={}
+#>     description={Tally micro reactions in eigenvalue mode},
+#>     notes={Eigenvalue mode only}
 #>   }
   do_micro_tally:
     <<: *dtbool
@@ -1465,7 +1486,7 @@ SHIFT:
 #>     valuesapplicable={},
 #>     limitations={},
 #>     description={Nuclides to tally micro reactions in eigenvalue mode},
-#>     notes={}
+#>     notes={Eigenvalue mode only}
 #>   }
   micro_zaids:
     <<: *dtlist
@@ -1483,7 +1504,7 @@ SHIFT:
 #>     valuesapplicable={},
 #>     limitations={},
 #>     description={MT of micro reactions to tally in eigenvalue mode},
-#>     notes={}
+#>     notes={Eigenvalue mode only}
 #>   }
   micro_rxns:
     <<: *dtlist
@@ -1510,20 +1531,20 @@ SHIFT:
       - is_word()
       - in_dictionary() true false
 #>
-#>   {\bf lost\_particle\_error\_tolerance} lost\_particle\_error\_tolerance 
+#>   {\bf lost\_particle\_error\_tol} lost\_particle\_error\_tol
 #>   \VERAInputTable{
-#>     name={lost\_particle\_error\_tolerance},
+#>     name={lost\_particle\_error\_tol},
 #>     type={double},
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={},
+#>     valuedefault={1E-06},
 #>     valuesapplicable={$>0$},
 #>     limitations={},
-#>     description={},
+#>     description={Fraction of lost particles to tolerate before aborting},
 #>     notes={}
 #>   }
-  lost_particle_error_tolerance:
+  lost_particle_error_tol:
     <<: *dtdouble
     _content:
     _check:
@@ -1754,7 +1775,7 @@ SHIFT:
 #>   \VERAInputTable{
 #>     name={excore\_filename},
 #>     type={string},
-#>     need={Required},
+#>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={},
@@ -1808,6 +1829,26 @@ SHIFT:
       - is_int()
       - is_gt() 0
 #>
+#>   {\bf vera_pressure_vessel} vera_pressure_vessel
+#>   \VERAInputTable{
+#>     name={vera_pressure_vessel},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Pull in the pressure vessel from the VERA geometry},
+#>     notes={Applicable to excore only}
+#>   }
+  vera_pressure_vessel:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf hybrid\_tally\_names} hybrid\_tally\_names
 #>   \VERAInputTable{
 #>     name={hybrid\_tally\_names},
@@ -1819,7 +1860,7 @@ SHIFT:
 #>     valuesapplicable={},
 #>     limitations={},
 #>     description={Excore tally name to optimize for CADIS},
-#>     notes={}
+#>     notes={Applicable to hybrid simulations}
 #>   }
   hybrid_tally_names:
     <<: *dtlist
@@ -1838,7 +1879,7 @@ SHIFT:
 #>     valuesapplicable={},
 #>     limitations={},
 #>     description={Excore tally multipliers to optimize for CADIS},
-#>     notes={}
+#>     notes={Applicable to hybrid simulations}
 #>   }
   hybrid_multiplier_names:
     <<: *dtlist
@@ -1992,7 +2033,7 @@ SHIFT:
 #>     name={n\_bounds},
 #>     type={array of decreasing doubles},
 #>     need={Optional},
-#>     unitsdefault={},
+#>     unitsdefault={eV},
 #>     unitsother={},
 #>     valuedefault={},
 #>     valuesapplicable={},
@@ -2012,7 +2053,7 @@ SHIFT:
 #>     name={p\_bounds},
 #>     type={array of decreasing doubles},
 #>     need={Optional},
-#>     unitsdefault={},
+#>     unitsdefault={eV},
 #>     unitsother={},
 #>     valuedefault={},
 #>     valuesapplicable={},
@@ -2276,7 +2317,7 @@ SHIFT:
 #>     valuesapplicable={},
 #>     limitations={},
 #>     description={Name of SCALE MG data library file},
-#>     notes={}
+#>     notes={Applicable to hybrid simulations}
 #>   }
   xs_library:
     <<: *dtword
@@ -2288,13 +2329,13 @@ SHIFT:
 #>   \VERAInputTable{
 #>     name={dimension},
 #>     type={integer},
-#>     need={},
+#>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={},
+#>     valuedefault={3},
 #>     valuesapplicable={2, 3},
 #>     limitations={},
-#>     description={},
+#>     description={Spatial dimension of the problem},
 #>     notes={}
 #>   }
   dimension:
@@ -2316,7 +2357,7 @@ SHIFT:
 #>     valuesapplicable={$>0$},
 #>     limitations={},
 #>     description={Number of mesh cells per pincell},
-#>     notes={}
+#>     notes={Applicable to hybrid simulations}
 #>   }
   mesh:
     <<: *dtint
@@ -2412,7 +2453,7 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={},
+#>     valuedefault={depends on mesh},
 #>     valuesapplicable={$>0$},
 #>     limitations={},
 #>     description={Number of pipelining blocks in z},
@@ -2449,7 +2490,7 @@ SHIFT:
 #>   \VERAInputTable{
 #>     name={num\_groups},
 #>     type={integer},
-#>     need={Required},
+#>     need={Required for hybrid},
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={},
@@ -2492,10 +2533,10 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={},
+#>     valuedefault={false},
 #>     valuesapplicable={},
 #>     limitations={},
-#>     description={},
+#>     description={Partition energy over upscatter groups only},
 #>     notes={Applicable to hybrid simulations}
 #>   }
   partition_upscatter:
@@ -2552,7 +2593,7 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={},
+#>     valuedefault={gmres},
 #>     valuesapplicable={gmres},
 #>     limitations={},
 #>     description={Which within group solver to use},
@@ -2564,26 +2605,6 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() gmres
-#>
-#>   {\bf solver} solver
-#>   \VERAInputTable{
-#>     name={solver},
-#>     type={string},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={arnoldi},
-#>     valuesapplicable={power_iteration, arnoldi},
-#>     limitations={},
-#>     description={Which eigenvalue solver to use},
-#>     notes={Applicable to hybrid simulations}
-#>   }
-  solver:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() power_iteration arnoldi
 #>
 #>   {\bf iterate\_downscatter} iterate\_downscatter
 #>   \VERAInputTable{
@@ -2645,26 +2666,6 @@ SHIFT:
       - is_int()
       - is_geq() 0
 #>
-#>   {\bf subspace\_size} subspace\_size
-#>   \VERAInputTable{
-#>     name={subspace\_size},
-#>     type={integer},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={Max subspace size for solver},
-#>     notes={Applicable when solver is arnoldi}
-#>   }
-  subspace_size:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-#>
 #>   {\bf upscatter\_subspace\_size} upscatter\_subspace\_size
 #>   \VERAInputTable{
 #>     name={upscatter\_subspace\_size},
@@ -2672,10 +2673,10 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={100},
+#>     valuedefault={100 if eq_set is spn_fv, 30 otherwise},
 #>     valuesapplicable={$>0$},
 #>     limitations={},
-#>     description={Max subspace size for upscatter solver},
+#>     description={Maximum subspace size for upscatter solver},
 #>     notes={Applicable when upscatter\_solver is gmres}
 #>   }
   upscatter_subspace_size:
@@ -2692,33 +2693,13 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={},
+#>     valuedefault={20},
 #>     valuesapplicable={$>0$},
 #>     limitations={},
-#>     description={Max subspace size for within group solver},
+#>     description={Maximum subspace size for within group solver},
 #>     notes={Applicable when within\_group\_solver is gmres}
 #>   }
   within_group_subspace_size:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-#>
-#>   {\bf max\_itr} max\_itr
-#>   \VERAInputTable{
-#>     name={max\_itr},
-#>     type={integer},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={Max number of solver iterations},
-#>     notes={Applicable to hybrid simulations}
-#>   }
-  max_itr:
     <<: *dtint
     _content:
     _check:
@@ -2732,10 +2713,10 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={3},
+#>     valuedefault={1000},
 #>     valuesapplicable={$>0$},
 #>     limitations={},
-#>     description={Maximum number of iterations for deterministic solve},
+#>     description={Maximum number of iterations for upscatter solve},
 #>     notes={Applicable to hybrid simulations}
 #>   }
   upscatter_max_itr:
@@ -2752,10 +2733,10 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={},
+#>     valuedefault={1000},
 #>     valuesapplicable={$>0$},
 #>     limitations={},
-#>     description={Maximum number of iterations for deterministic solve},
+#>     description={Maximum number of iterations for within group solve},
 #>     notes={Applicable to hybrid simulations}
 #>   }
   within_group_max_itr:
@@ -2764,27 +2745,6 @@ SHIFT:
     _check:
       - is_int()
       - is_gt() 0
-#>
-#>   {\bf tolerance} tolerance
-#>   \VERAInputTable{
-#>     name={tolerance},
-#>     type={double},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={1E-05},
-#>     valuesapplicable={(0,1)},
-#>     limitations={},
-#>     description={Solver convergence tolerance},
-#>     notes={Applicable to hybrid simulations}
-#>   }
-  tolerance:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-      - is_lt() 1
 #>
 #>   {\bf eq\_set} eq\_set
 #>   \VERAInputTable{
@@ -2806,26 +2766,6 @@ SHIFT:
       - is_word()
       - in_dictionary() sc ld bld bld_2d spn_fv
 #>
-#>   {\bf verbosity} verbosity
-#>   \VERAInputTable{
-#>     name={verbosity},
-#>     type={string},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={none},
-#>     valuesapplicable={none, low, medium, high},
-#>     limitations={},
-#>     description={Log verbosity},
-#>     notes={}
-#>   }
-  verbosity:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() none low medium high
-#>
 #>   {\bf upscatter\_verbosity} upscatter\_verbosity
 #>   \VERAInputTable{
 #>     name={upscatter\_verbosity},
@@ -2833,10 +2773,10 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={none},
+#>     valuedefault={low},
 #>     valuesapplicable={none, low, medium, high},
 #>     limitations={},
-#>     description={Log verbosity},
+#>     description={Solver verbosity},
 #>     notes={Applicable to hybrid simulations}
 #>   }
   upscatter_verbosity:
@@ -2853,10 +2793,10 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={none},
+#>     valuedefault={low},
 #>     valuesapplicable={none, low, medium, high},
 #>     limitations={},
-#>     description={Log verbosity},
+#>     description={Solver verbosity},
 #>     notes={Applicable to hybrid simulations}
 #>   }
   within_group_verbosity:
@@ -2871,7 +2811,7 @@ SHIFT:
 #>     name={new\_grp\_bounds},
 #>     type={array of decreasing doubles},
 #>     need={Optional},
-#>     unitsdefault={},
+#>     unitsdefault={eV},
 #>     unitsother={},
 #>     valuedefault={},
 #>     valuesapplicable={$>0.0$},
@@ -2988,47 +2928,6 @@ SHIFT:
       - is_int()
       - is_gt() 0
 #>
-#>   {\bf k\_tolerance} k\_tolerance
-#>   \VERAInputTable{
-#>     name={k\_tolerance},
-#>     type={double},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={(0,1)},
-#>     limitations={},
-#>     description={Tolerance for relative error of k-eff eigenvalue},
-#>     notes={}
-#>   }
-  k_tolerance:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-      - is_lt() 1
-#>
-#>   {\bf energy\_dep\_ev} energy\_dep\_ev
-#>   \VERAInputTable{
-#>     name={energy\_dep\_ev},
-#>     type={bool},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={},
-#>     notes={}
-#>   }
-  energy_dep_ev:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
-#>
 #>   {\bf upscatter\_tolerance} upscatter\_tolerance
 #>   \VERAInputTable{
 #>     name={upscatter\_tolerance},
@@ -3036,7 +2935,7 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={1E-05},
+#>     valuedefault={1E-04},
 #>     valuesapplicable={(0,1)},
 #>     limitations={},
 #>     description={Upscatter solver convergence tolerance},
@@ -3057,7 +2956,7 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={},
+#>     valuedefault={1E-04},
 #>     valuesapplicable={(0,1)},
 #>     limitations={},
 #>     description={Within group solver convergence tolerance},

@@ -285,7 +285,9 @@
       <Parameter name="do_output" type="bool" value="false"/>
       <Parameter name="do_transport" type="bool" value="true"/>
       <ParameterList name="solver_db">
-        <Parameter name="verbosity" type="string" value="high"/>
+        <ParameterList name="within_group_db">
+          <Parameter name="verbosity" type="string" value="high"/>
+        </ParameterList>
       </ParameterList>
     </ParameterList>
     <ParameterList name="kcode_db">

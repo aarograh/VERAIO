@@ -185,6 +185,7 @@
   output_micro_tally    false
   global_log            debug
   verbosity             high
+  within_group_verbosity high
   problem_mode          forward
   mode                  np
   do_transport          true
@@ -194,7 +195,7 @@
   transfer              all
   temp_transfer         none
   track_isotopes        full
-  lost_particle_error_tolerance 1.0e-3
+  lost_particle_error_tol 1.0e-3
 ! these really only apply when doing coupling with CTF
   temperature_tol       5.0
   union_energy          true

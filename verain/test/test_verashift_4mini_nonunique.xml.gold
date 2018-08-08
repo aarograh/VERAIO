@@ -662,6 +662,7 @@
     </ParameterList>
     <Parameter name="transfer" type="string" value="fiss_src"/>
     <Parameter name="transport" type="string" value="ce"/>
+    <Parameter name="vera_pressure_vessel" type="bool" value="true"/>
   </ParameterList>
   <ParameterList name="EDITS">
     <Parameter name="axial_edit_bounds" type="Array(double)" value="{11.9510,15.8170,24.0280,32.2390,40.4500,48.6620,56.8730,65.0840,73.2950,77.1050,85.1700,93.2350,101.3000,109.3650,117.4300,125.4950,129.3050,137.3700,145.4350,153.5000,161.5650,169.6300,177.6950,181.5050,189.4262,197.3474,205.2686,213.1898,221.1110}"/>
