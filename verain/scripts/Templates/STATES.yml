@@ -229,6 +229,41 @@ STATES:
             - tocelsius %STATE/$(_loop)/@thexp_tmod,apply=>($_[0]+273.15)
           _content:
 
+        expand3D:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy %STATE/$(_loop)/$expand3D
+          _content:
+
+        thexp_outfile:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %STATE/$(_loop)/$thexp_outfile
+          _content:
+
+        thexp_info:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy %STATE/$(_loop)/$thexp_info
+          _content:
+
+        apitch_tec:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$apitch_tec
+          _content:
+
+        ppitch_tec:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$ppitch_tec
+          _content:
+
         sym:
           _pltype: parameter
           _type: string
