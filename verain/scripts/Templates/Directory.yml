@@ -1171,46 +1171,161 @@ EDITS:
     _content:
     _check:
 
+#>
+#> \section{Block SHIFT}
+#> \label{sec:shiftcards}
 SHIFT:
+#>
+#>   {\bf celib\_file} celib\_file
+#>   \VERAInputTable{
+#>     name={celib\_file},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={ce_v7.1\_endf.xml},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Name of SCALE CE data library file},
+#>     notes={}
+#>   }
   celib_file:
     <<: *dtword
     _content:
     _check:
       - is_word()
+#>
+#>   {\bf transfer} transfer
+#>   \VERAInputTable{
+#>     name={transfer},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={Depends on coupling},
+#>     valuesapplicable={all, fiss\_src, isotopics, temps},
+#>     limitations={},
+#>     description={What to transfer with VERA-CS},
+#>     notes={}
+#>   }
   transfer:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() all fiss_src isotopics temps
+#>
+#>   {\bf temp\_transfer} temp\_transfer
+#>   \VERAInputTable{
+#>     name={temp\_transfer},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={all},
+#>     valuesapplicable={all, none, pin},
+#>     limitations={},
+#>     description={Which temperatures to couple with CTF},
+#>     notes={}
+#>   }
   temp_transfer:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() all none pin
+#>
+#>   {\bf broaden\_xs} broaden\_xs
+#>   \VERAInputTable{
+#>     name={broaden\_xs},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Cross-section doppler broadening for temperature},
+#>     notes={}
+#>   }
   broaden_xs:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf temperature\_tol} temperature\_tol
+#>   \VERAInputTable{
+#>     name={temperature\_tol},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={K},
+#>     unitsother={},
+#>     valuedefault={4.0},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Tolerance for reusing existing broadened cross sections},
+#>     notes={}
+#>   }
   temperature_tol:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
+#>
+#>   {\bf union\_energy} union\_energy
+#>   \VERAInputTable{
+#>     name={union\_energy},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Unionize lower and upper library temperature energy grids},
+#>     notes={}
+#>   }
   union_energy:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf delta_\t} delta\_t
+#>   \VERAInputTable{
+#>     name={delta\_t},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Finite difference grid spacing for Leal-Hwang temperature interpolation of cross sections},
+#>     notes={}
+#>   }
   delta_t:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
+#>
+#>   {\bf energy\_tol} energy\_tol
+#>   \VERAInputTable{
+#>     name={energy\_tol},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0E-10},
+#>     valuesapplicable={(0,1)},
+#>     limitations={},
+#>     description={Relative difference for considering two energy points equal},
+#>     notes={}
+#>   }
   energy_tol:
     <<: *dtdouble
     _content:
@@ -1218,154 +1333,532 @@ SHIFT:
       - is_float()
       - is_gt() 0
       - is_lt() 1
+#>
+#>   {\bf dbrc} dbrc
+#>   \VERAInputTable{
+#>     name={dbrc},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Apply doppler broadening resonance correction},
+#>     notes={}
+#>   }
   dbrc:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf global\_log} global\_log
+#>   \VERAInputTable{
+#>     name={global\_log},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={info},
+#>     valuesapplicable={debug, diagnostic, status, info, warning, error, critical},
+#>     limitations={},
+#>     description={Level of global log information},
+#>     notes={}
+#>   }
   global_log:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() debug diagnostic status info warning error critical
+#>
+#>   {\bf local\_log} local\_log 
+#>   \VERAInputTable{
+#>     name={local\_log},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={error},
+#>     valuesapplicable={debug, diagnostic, status, info, warning, error, critical},
+#>     limitations={},
+#>     description={Level of local log information},
+#>     notes={}
+#>   }
   local_log:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() debug diagnostic status info warning error critical
+#>
+#>   {\bf do\_micro\_tally} do\_micro\_tally 
+#>   \VERAInputTable{
+#>     name={do\_micro\_tally},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={},
+#>     notes={}
+#>   }
   do_micro_tally:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf do\_transport} do\_transport 
+#>   \VERAInputTable{
+#>     name={do\_transport},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Perform MC transport},
+#>     notes={}
+#>   }
   do_transport:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf do\_output} do\_output
+#>   \VERAInputTable{
+#>     name={do\_output},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Do Shift output},
+#>     notes={}
+#>   }
   do_output:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf micro\_zaids} micro\_zaids
+#>   \VERAInputTable{
+#>     name={micro\_zaids},
+#>     type={Array of integers},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={92235, 92238},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Nuclides to tally micro reactions in eigenvalue mode},
+#>     notes={}
+#>   }
   micro_zaids:
     <<: *dtlist
     _content:
     _check:
+#>
+#>   {\bf micro\_rxns} micro\_rxns
+#>   \VERAInputTable{
+#>     name={micro\_rxns},
+#>     type={Array of integers},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={18, 102},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={MT of micro reactions to tally in eigenvalue mode},
+#>     notes={}
+#>   }
   micro_rxns:
     <<: *dtlist
     _content:
     _check:
+#>
+#>   {\bf gamma\_flux} gamma\_flux
+#>   \VERAInputTable{
+#>     name={gamma\_flux},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Tally the photon flux in each pincell},
+#>     notes={}
+#>   }
   gamma_flux:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf lost\_particle\_error\_tolerance} lost\_particle\_error\_tolerance 
+#>   \VERAInputTable{
+#>     name={lost\_particle\_error\_tolerance},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={},
+#>     notes={}
+#>   }
   lost_particle_error_tolerance:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf num\_cycles} num\_cycles
+#>   \VERAInputTable{
+#>     name={num\_cycles},
+#>     type={integer},
+#>     need={},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={50},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of eigenvalue cycles},
+#>     notes={}
+#>   }
   num_cycles:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf num\_inactive\_cycles} num\_inactive\_cycles
+#>   \VERAInputTable{
+#>     name={num\_inactive\_cycles},
+#>     type={integer},
+#>     need={},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={10},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of inactive eigenvalue cycles},
+#>     notes={}
+#>   }
   num_inactive_cycles:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf Np} Np
+#>   \VERAInputTable{
+#>     name={Np},
+#>     type={double},
+#>     need={},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1000},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of particles to transport},
+#>     notes={}
+#>   }
   Np:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf transport} transport
+#>   \VERAInputTable{
+#>     name={transport},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={ce},
+#>     valuesapplicable={ce, mg},
+#>     limitations={},
+#>     description={Type of physics},
+#>     notes={}
+#>   }
   transport:
     <<: *dtstring
     _content:
     _check:
       - is_word()
       - in_dictionary() ce mg
+#>
+#>   {\bf problem\_mode} problem\_mode
+#>   \VERAInputTable{
+#>     name={problem\_mode},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={eigenvalue},
+#>     valuesapplicable={cadis, eigenvalue, forward},
+#>     limitations={},
+#>     description={Run mode},
+#>     notes={}
+#>   }
   problem_mode:
     <<: *dtstring
     _content:
     _check:
       - is_word()
       - in_dictionary() cadis eigenvalue forward
+#>
+#>   {\bf mode} mode
+#>   \VERAInputTable{
+#>     name={mode},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={n (eigenvalue), np (forward)},
+#>     valuesapplicable={n, np},
+#>     limitations={},
+#>     description={Type of particles to transport},
+#>     notes={}
+#>   }
   mode:
     <<: *dtstring
     _content:
     _check:
       - is_word()
       - in_dictionary() n np
+#>
+#>   {\bf output\_geometry} output\_geometry
+#>   \VERAInputTable{
+#>     name={output\_geometry},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Output HDF5 files of raytraced geometry (initial) and compositions (each state)},
+#>     notes={}
+#>   }
   output_geometry:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf output\_fission\_source} output\_fission\_source
+#>   \VERAInputTable{
+#>     name={output\_fission\_source},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Output the initial fission source for each state},
+#>     notes={}
+#>   }
   output_fission_source:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf output\_micro\_tally} output\_micro\_tally
+#>   \VERAInputTable{
+#>     name={output\_micro\_tally},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Output micro reaction tallies},
+#>     notes={}
+#>   }
   output_micro_tally:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf output\_ww} output\_ww
+#>   \VERAInputTable{
+#>     name={output\_ww},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Output the weight windows, if used},
+#>     notes={}
+#>   }
   output_ww:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf thermal\_energy\_cutoff} thermal\_energy\_cutoff
+#>   \VERAInputTable{
+#>     name={thermal\_energy\_cutoff},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={eV},
+#>     unitsother={},
+#>     valuedefault={10.0},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Cutoff for treatment of thermal neutrons},
+#>     notes={}
+#>   }
   thermal_energy_cutoff:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf excore\_filename} excore\_filename
+#>   \VERAInputTable{
+#>     name={excore\_filename},
+#>     type={string},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Name of Omnibus XML file with excore features and tallies},
+#>     notes={}
+#>   }
   excore_filename:
     <<: *dtword
     _content:
     _check:
      - is_word()
+#>
+#>   {\bf raytrace\_levels} raytrace\_levels
+#>   \VERAInputTable{
+#>     name={raytrace\_levels},
+#>     type={array of doubles},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={midpoint of active fuel},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Z levels to raytrace geometry and output},
+#>     notes={}
+#>   }
   raytrace_levels:
     <<: *dtlist
     _style: multi-line
     _content:
     _check:
+#>
+#>   {\bf raytrace\_resolution} raytrace\_resolution
+#>   \VERAInputTable{
+#>     name={raytrace\_resolution},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1024},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Resolution for geometry raytrace},
+#>     notes={}
+#>   }
   raytrace_resolution:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf hybrid\_tally\_names} hybrid\_tally\_names
+#>   \VERAInputTable{
+#>     name={hybrid\_tally\_names},
+#>     type={array of strings},
+#>     need={Required if problem mode is CADIS},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Excore tally name to optimize for CADIS},
+#>     notes={}
+#>   }
   hybrid_tally_names:
     <<: *dtlist
     _style: multi-line
     _content:
     _check:
+#>
+#>   {\bf hybrid\_multiplier\_names} hybrid\_multiplier\_names
+#>   \VERAInputTable{
+#>     name={hybrid\_multiplier\_names},
+#>     type={array of strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Excore tally multipliers to optimize for CADIS},
+#>     notes={}
+#>   }
   hybrid_multiplier_names:
     <<: *dtlist
     _style: multi-line
     _content:
     _check:
+#>
+#>   {\bf src\_disc\_l2\_error} src\_disc\_l2\_error
+#>   \VERAInputTable{
+#>     name={src\_disc\_l2\_error},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.01},
+#>     valuesapplicable={(0,1)},
+#>     limitations={},
+#>     description={Maximum L2 error for point-sampling discretization},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   src_disc_l2_error:
     <<: *dtdouble
     _content:
@@ -1373,6 +1866,20 @@ SHIFT:
       - is_float()
       - is_gt() 0
       - is_lt() 1
+#>
+#>   {\bf src\_disc\_max\_error} src\_disc\_max\_error
+#>   \VERAInputTable{
+#>     name={src\_disc\_max\_error},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.05},
+#>     valuesapplicable={(0,1)},
+#>     limitations={},
+#>     description={Maximum voxel error for point-sampling discretization},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   src_disc_max_error:
     <<: *dtdouble
     _content:
@@ -1380,71 +1887,240 @@ SHIFT:
       - is_float()
       - is_gt() 0
       - is_lt() 1
+#>
+#>   {\bf src\_disc\_samples\_per\_batch} src\_disc\_samples\_per\_batch
+#>   \VERAInputTable{
+#>     name={src\_disc\_samples\_per\_batch},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1E05},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of sammples per point-sampling batch},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   src_disc_samples_per_batch:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf src\_disc\_max\_samples} src\_disc\_max\_samples
+#>   \VERAInputTable{
+#>     name={src\_disc\_max\_samples},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1E10},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Maximum number of discretization samples},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   src_disc_max_samples:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf radial\_mesh} radial\_mesh
+#>   \VERAInputTable{
+#>     name={radial\_mesh},
+#>     type={array of doubles},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={vessel radii},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Radii for flux tally},
+#>     notes={}
+#>   }
   radial_mesh:
     <<: *dtlist
     _style: multi-line
     _content:
     _check:
+#>
+#>   {\bf num\_theta} num\_theta
+#>   \VERAInputTable{
+#>     name={num\_theta},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of theta divisions for flux tallies in $[0,2\pi]$},
+#>     notes={}
+#>   }
   num_theta:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf num\_axial} num\_axial
+#>   \VERAInputTable{
+#>     name={num\_axial},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of axial levels for flux tallies},
+#>     notes={}
+#>   }
   num_axial:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf n\_bounds} n\_bounds
+#>   \VERAInputTable{
+#>     name={n\_bounds},
+#>     type={array of decreasing doubles},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Neutron energy bounds for tallies},
+#>     notes={}
+#>   }
   n_bounds:
     <<: *dtlist
     _style: multi-line
     _content:
     _check:
       - is_strictlydecreasing(stride(1,1,()))
+#>
+#>   {\bf p\_bounds} p\_bounds
+#>   \VERAInputTable{
+#>     name={p\_bounds},
+#>     type={array of decreasing doubles},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Photon energy bounds for tallies},
+#>     notes={}
+#>   }
   p_bounds:
     <<: *dtlist
     _style: multi-line
     _content:
     _check:
       - is_strictlydecreasing(stride(1,1,()))
+#>
+#>   {\bf homog\_type} homog\_type
+#>   \VERAInputTable{
+#>     name={homog\_type},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={assem, rings},
+#>     limitations={},
+#>     description={If using homogenization, homogenize each assembly or in rings},
+#>     notes={Experimental capability}
+#>   }
   homog_type:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() assem rings
+#>
+#>   {\bf homog\_ring\_radii} homog\_ring\_radii
+#>   \VERAInputTable{
+#>     name={homog\_ring\_radii},
+#>     type={},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={Depends on create_unique_pins},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Radii of rings for homogenization},
+#>     notes={Applicable if homog_type is rings; Experimental capability}
+#>   }
   homog_ring_radii:
     <<: *dtlist
     _style: multi-line
     _content:
     _check:
       - is_strictlyincreasing(stride(1,1,()))
+#>
+#>   {\bf homog\_pin\_rings} homog\_pin\_rings
+#>   \VERAInputTable{
+#>     name={homog\_pin\_rings},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Homogenize according to pin locations or assembly locations},
+#>     notes={Applicable when homog_type is rings; Experimental capability}
+#>   }
   homog_pin_rings:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
-  homog_explicit_pins:
-    <<: *dtint
+#>
+#>   {\bf homog\_explicit\_ring} homog\_explicit\_ring
+#>   \VERAInputTable{
+#>     name={homog\_explicit\_ring},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>=0$},
+#>     limitations={},
+#>     description={Radius to homogenize within and have explicit pins outside of},
+#>     notes={Experimental capability}
+#>   }
+  homog_explicit_ring:
+    <<: *dtdouble
     _content:
     _check:
-      - is_int()
+      - is_float()
       - is_geq() 0
+#>
+#>   {\bf bc\_bnd\_mesh} bc\_bnd\_mesh
+#>   \VERAInputTable{
+#>     name={bc\_bnd\_mesh},
+#>     type={array of 6 strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={vacuum, vacuum, vacuum, vacuum, vacuum, vacuum},
+#>     valuesapplicable={vacuum, reflect},
+#>     limitations={},
+#>     description={Boundary mesh boundary conditions on 
+#>                  -x, +x, -y, +y, -z, +z},
+#>     notes={}
+#>   }
   bc_bnd_mesh:
     <<: *dtlist
     _style: multi-line
@@ -1463,6 +2139,20 @@ SHIFT:
       - in_dictionary(nth(4,()),'reflect','vacuum')
       - is_word(nth(5,()))
       - in_dictionary(nth(5,()),'reflect','vacuum')
+#>
+#>   {\bf x\_bnd\_mesh} x\_bnd\_mesh
+#>   \VERAInputTable{
+#>     name={x\_bnd\_mesh},
+#>     type={array of 2 doubles},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Boundary mesh x-axis limits},
+#>     notes={}
+#>   }
   x_bnd_mesh:
     <<: *dtlist
     _content:
@@ -1470,6 +2160,20 @@ SHIFT:
       - arraysize()==2
       - is_float(nth(0,()))
       - is_float(nth(1,()))
+#>
+#>   {\bf y\_bnd\_mesh} y\_bnd\_mesh
+#>   \VERAInputTable{
+#>     name={y\_bnd\_mesh},
+#>     type={array of 2 doubles},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Boundary mesh y-axis limits},
+#>     notes={}
+#>   }
   y_bnd_mesh:
     <<: *dtlist
     _content:
@@ -1477,6 +2181,20 @@ SHIFT:
       - arraysize()==2
       - is_float(nth(0,()))
       - is_float(nth(1,()))
+#>
+#>   {\bf z\_bnd\_mesh} z\_bnd\_mesh
+#>   \VERAInputTable{
+#>     name={z\_bnd\_mesh},
+#>     type={array of 2 doubles},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Boundary mesh z-axis limits},
+#>     notes={}
+#>   }
   z_bnd_mesh:
     <<: *dtlist
     _content:
@@ -1484,6 +2202,20 @@ SHIFT:
       - arraysize()==2
       - is_float(nth(0,()))
       - is_float(nth(1,()))
+#>
+#>   {\bf core\_translate} core\_translate
+#>   \VERAInputTable{
+#>     name={core\_translate},
+#>     type={array of 3 doubles},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={0.0, 0.0, 0.0},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Position to translate center of core},
+#>     notes={}
+#>   }
   core_translate:
     <<: *dtlist
     _content:
@@ -1492,23 +2224,79 @@ SHIFT:
       - is_float(nth(0,()))
       - is_float(nth(1,()))
       - is_float(nth(2,()))
+#>
+#>   {\bf create\_unique\_pins} create\_unique\_pins
+#>   \VERAInputTable{
+#>     name={create\_unique\_pins},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Make all pincells unique compositions},
+#>     notes={}
+#>   }
   create_unique_pins:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf track\_isotopes} track\_isotopes
+#>   \VERAInputTable{
+#>     name={track\_isotopes},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={short},
+#>     valuesapplicable={short, full},
+#>     limitations={},
+#>     description={Which set of isotopes to transfer},
+#>     notes={}
+#>   }
   track_isotopes:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() short full
+#>
+#>   {\bf xs\_library} xs\_library
+#>   \VERAInputTable{
+#>     name={xs\_library},
+#>     type={string},
+#>     need={Required if problem mode is CADIS},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Name of SCALE MG data library file},
+#>     notes={}
+#>   }
   xs_library:
     <<: *dtword
     _content:
     _check:
       - is_word()
+#>
+#>   {\bf dimension} dimension 
+#>   \VERAInputTable{
+#>     name={dimension},
+#>     type={integer},
+#>     need={},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={2, 3},
+#>     limitations={},
+#>     description={},
+#>     notes={}
+#>   }
   dimension:
     <<: *dtint
     _content:
@@ -1516,144 +2304,480 @@ SHIFT:
       - is_int()
       - is_geq() 2
       - is_leq() 3
+#>
+#>   {\bf mesh} mesh
+#>   \VERAInputTable{
+#>     name={mesh},
+#>     type={integer},
+#>     need={},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of mesh cells per pincell},
+#>     notes={}
+#>   }
   mesh:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf output\_adjoint} output\_adjoint
+#>   \VERAInputTable{
+#>     name={output\_adjoint},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Output adjoint flux to Shift HDF5 file and adjoint source to a separate HDF5 file},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   output_adjoint:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf adjoint} adjoint
+#>   \VERAInputTable{
+#>     name={adjoint},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Perform adjoint solve},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   adjoint:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf num\_blocks\_i} num\_blocks\_i
+#>   \VERAInputTable{
+#>     name={num\_blocks\_i},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={depends on number of processors},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of partitions (processors) in x},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   num_blocks_i:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf num\_blocks\_j} num\_blocks\_j
+#>   \VERAInputTable{
+#>     name={num\_blocks\_j},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={depends on number of processors},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of partitions (processors) in y},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   num_blocks_j:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf num\_z\_blocks} num\_z\_blocks
+#>   \VERAInputTable{
+#>     name={num\_z\_blocks},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of pipelining blocks in z},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   num_z_blocks:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf num\_sets} num\_sets
+#>   \VERAInputTable{
+#>     name={num\_sets},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of energy sets},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   num_sets:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf num\_groups} num\_groups
+#>   \VERAInputTable{
+#>     name={num\_groups},
+#>     type={integer},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of energy groups},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   num_groups:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf max\_delta\_z} max\_delta\_z
+#>   \VERAInputTable{
+#>     name={max\_delta\_z},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={},
+#>     description={Maximum mesh size in z},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   max_delta_z:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf partition\_upscatter} partition\_upscatter
+#>   \VERAInputTable{
+#>     name={partition\_upscatter},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   partition_upscatter:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf store\_fulcrum\_string} store\_fulcrum\_string
+#>   \VERAInputTable{
+#>     name={store\_fulcrum\_string},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true if using 35 nodes or fewer},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Save fulcrum string as file},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   store_fulcrum_string:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf upscatter\_solver} upscatter\_solver
+#>   \VERAInputTable{
+#>     name={upscatter\_solver},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={gauss_seidel},
+#>     valuesapplicable={gauss_seidel, gmres},
+#>     limitations={},
+#>     description={Which upscatter solver to use},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   upscatter_solver:
     <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() gmres
+      - in_dictionary() gauss_seidel gmres
+#>
+#>   {\bf within\_group\_solver} within\_group\_solver
+#>   \VERAInputTable{
+#>     name={within\_group\_solver},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={gmres},
+#>     limitations={},
+#>     description={Which within group solver to use},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   within_group_solver:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() gmres
+#>
+#>   {\bf solver} solver
+#>   \VERAInputTable{
+#>     name={solver},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={arnoldi},
+#>     valuesapplicable={power_iteration, arnoldi},
+#>     limitations={},
+#>     description={Which eigenvalue solver to use},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   solver:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() power_iteration arnoldi
+#>
+#>   {\bf iterate\_downscatter} iterate\_downscatter
+#>   \VERAInputTable{
+#>     name={iterate\_downscatter},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Iterate over downscatter groups},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   iterate_downscatter:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf downscatter} downscatter
+#>   \VERAInputTable{
+#>     name={downscatter},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Downscatter only},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   downscatter:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf Pn\_order} Pn\_order
+#>   \VERAInputTable{
+#>     name={Pn\_order},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Order of moments},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   Pn_order:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_geq() 0
+#>
+#>   {\bf subspace\_size} subspace\_size
+#>   \VERAInputTable{
+#>     name={subspace\_size},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Max subspace size for solver},
+#>     notes={Applicable when solver is arnoldi}
+#>   }
   subspace_size:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf upscatter\_subspace\_size} upscatter\_subspace\_size
+#>   \VERAInputTable{
+#>     name={upscatter\_subspace\_size},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={100},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Max subspace size for upscatter solver},
+#>     notes={Applicable when upscatter\_solver is gmres}
+#>   }
   upscatter_subspace_size:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf within\_group\_subspace\_size} within\_group\_subspace\_size
+#>   \VERAInputTable{
+#>     name={within\_group\_subspace\_size},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Max subspace size for within group solver},
+#>     notes={Applicable when within\_group\_solver is gmres}
+#>   }
   within_group_subspace_size:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf max\_itr} max\_itr
+#>   \VERAInputTable{
+#>     name={max\_itr},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Max number of solver iterations},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   max_itr:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf upscatter\_max\_itr} upscatter\_max\_itr
+#>   \VERAInputTable{
+#>     name={upscatter\_max\_itr},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={3},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Maximum number of iterations for deterministic solve},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   upscatter_max_itr:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf within\_group\_max\_itr} within\_group\_max\_itr
+#>   \VERAInputTable{
+#>     name={within\_group\_max\_itr},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Maximum number of iterations for deterministic solve},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   within_group_max_itr:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf tolerance} tolerance
+#>   \VERAInputTable{
+#>     name={tolerance},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1E-05},
+#>     valuesapplicable={(0,1)},
+#>     limitations={},
+#>     description={Solver convergence tolerance},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   tolerance:
     <<: *dtdouble
     _content:
@@ -1661,30 +2785,100 @@ SHIFT:
       - is_float()
       - is_gt() 0
       - is_lt() 1
+#>
+#>   {\bf eq\_set} eq\_set
+#>   \VERAInputTable{
+#>     name={eq\_set},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={sc},
+#>     valuesapplicable={bld, bld_2d, ld, sc, spn_fv},
+#>     limitations={},
+#>     description={Solution method or spatial discretization},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   eq_set:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() sc ld bld bld_2d spn_fv
+#>
+#>   {\bf verbosity} verbosity
+#>   \VERAInputTable{
+#>     name={verbosity},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={none},
+#>     valuesapplicable={none, low, medium, high},
+#>     limitations={},
+#>     description={Log verbosity},
+#>     notes={}
+#>   }
   verbosity:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() none low medium high
+#>
+#>   {\bf upscatter\_verbosity} upscatter\_verbosity
+#>   \VERAInputTable{
+#>     name={upscatter\_verbosity},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={none},
+#>     valuesapplicable={none, low, medium, high},
+#>     limitations={},
+#>     description={Log verbosity},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   upscatter_verbosity:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() none low medium high
+#>
+#>   {\bf within\_group\_verbosity} within\_group\_verbosity
+#>   \VERAInputTable{
+#>     name={within\_group\_verbosity},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={none},
+#>     valuesapplicable={none, low, medium, high},
+#>     limitations={},
+#>     description={Log verbosity},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   within_group_verbosity:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() none low medium high
+#>
+#>   {\bf new\_grp\_bounds}  new\_grp\_bounds
+#>   \VERAInputTable{
+#>     name={new\_grp\_bounds},
+#>     type={array of decreasing doubles},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={},
+#>     description={Collapsed group boundaries},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   new_grp_bounds:
     <<: *dtlist
     _style: multi-line
@@ -1692,6 +2886,20 @@ SHIFT:
     _check:
       - fall(sub{is_float(shift)},())
       - fall(sub{is_gt(shift,0)},())
+#>
+#>   {\bf grp\_collapse\_src}  grp\_collapse\_src
+#>   \VERAInputTable{
+#>     name={grp\_collapse\_src},
+#>     type={array of doubles},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={depends on xs_library},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Source to do group collapse},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   grp_collapse_src:
     <<: *dtlist
     _style: multi-line
@@ -1699,30 +2907,100 @@ SHIFT:
     _check:
       - fall(sub{is_float(shift)},())
       - fall(sub{is_geq(shift,0)},())
+#>
+#>   {\bf quad\_type} quad\_type
+#>   \VERAInputTable{
+#>     name={quad\_type},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={qr},
+#>     valuesapplicable={qr, levelsym, galerkin, glproduct, ldfe},
+#>     limitations={},
+#>     description={Type of $S_N$ quadrature},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   quad_type:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() qr levelsym galerkin glproduct ldfe
+#>
+#>   {\bf polars\_octant} polars\_octant 
+#>   \VERAInputTable{
+#>     name={polars\_octant},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={6 (2 if adjoint)},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of polar angles per octant for $S_N$ quadrature},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   polars_octant:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf azimuthals\_octant} azimuthals\_octant
+#>   \VERAInputTable{
+#>     name={azimuthals\_octant},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={8 (4 if adjoint)},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of azimuthal angles per octant for $S_N$ quadrature},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   azimuthals_octant:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf Sn\_order} Sn\_order
+#>   \VERAInputTable{
+#>     name={Sn\_order},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={4},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Level-symmetric quadrature set order},
+#>     notes={Applicable to hybrid simulations}
+#>   }
   Sn_order:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf k\_tolerance} k\_tolerance
+#>   \VERAInputTable{
+#>     name={k\_tolerance},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={(0,1)},
+#>     limitations={},
+#>     description={Tolerance for relative error of k-eff eigenvalue},
+#>     notes={}
+#>   }
   k_tolerance:
     <<: *dtdouble
     _content:
@@ -1730,12 +3008,40 @@ SHIFT:
       - is_float()
       - is_gt() 0
       - is_lt() 1
+#>
+#>   {\bf energy\_dep\_ev} energy\_dep\_ev
+#>   \VERAInputTable{
+#>     name={energy\_dep\_ev},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={},
+#>     notes={}
+#>   }
   energy_dep_ev:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf upscatter\_tolerance} upscatter\_tolerance
+#>   \VERAInputTable{
+#>     name={upscatter\_tolerance},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1E-05},
+#>     valuesapplicable={(0,1)},
+#>     limitations={},
+#>     description={Upscatter solver convergence tolerance},
+#>     notes={}
+#>   }
   upscatter_tolerance:
     <<: *dtdouble
     _content:
@@ -1743,6 +3049,20 @@ SHIFT:
       - is_float()
       - is_gt() 0
       - is_lt() 1
+#>
+#>   {\bf within\_group\_tolerance} within\_group\_tolerance
+#>   \VERAInputTable{
+#>     name={within\_group\_tolerance},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={(0,1)},
+#>     limitations={},
+#>     description={Within group solver convergence tolerance},
+#>     notes={}
+#>   }
   within_group_tolerance:
     <<: *dtdouble
     _content:
@@ -1750,30 +3070,100 @@ SHIFT:
       - is_float()
       - is_gt() 0
       - is_lt() 1
+#>
+#>   {\bf cell\_homogenize} cell\_homogenize
+#>   \VERAInputTable{
+#>     name={cell\_homogenize},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Homogenize material in cells},
+#>     notes={}
+#>   }
   cell_homogenize:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf SPN\_matrix\_type} SPN\_matrix\_type
+#>   \VERAInputTable{
+#>     name={SPN\_matrix\_type},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={mat_free},
+#>     limitations={},
+#>     description={Type of $SP_N$ matrix solve},
+#>     notes={}
+#>   }
   SPN_matrix_type:
     <<: *dtword
     _content:
     _check:
       - is_word()
       - in_dictionary() mat_free
+#>
+#>   {\bf SPN\_order} SPN\_order
+#>   \VERAInputTable{
+#>     name={SPN\_order},
+#>     type={integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={1, 3, 5, 7},
+#>     limitations={},
+#>     description={Order of $SP_N$ solve},
+#>     notes={}
+#>   }
   SPN_order:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - in_dictionary() 1 3 5 7
+#>
+#>   {\bf Pn\_correction} Pn\_correction
+#>   \VERAInputTable{
+#>     name={Pn\_correction},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Use outscatter-corrected diffusion coefficient to reduce memory in solve},
+#>     notes={}
+#>   }
   Pn_correction:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf pin\_partitioning} pin\_partitioning
+#>   \VERAInputTable{
+#>     name={pin\_partitioning},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Partition mesh over pincells},
+#>     notes={}
+#>   }
   pin_partitioning:
     <<: *dtbool
     _content:

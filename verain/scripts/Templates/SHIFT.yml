@@ -383,11 +383,11 @@ SHIFT:
             - copy SHIFT/$homog_pin_rings
           _content:
 
-        homog_explicit_pins:
+        homog_explicit_ring:
           _pltype: parameter
-          _type: int
+          _type: double
           _do:
-            - copy SHIFT/$homog_explicit_pins
+            - copy SHIFT/$homog_explicit_ring
           _content:
 
     boundary_mesh_db:
