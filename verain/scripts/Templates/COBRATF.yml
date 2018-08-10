@@ -80,6 +80,13 @@ COBRATF:
         - copy COBRATF/$hgap
       _content:
 
+    clad_material:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy COBRATF/$clad_material
+      _content:
+
     epso:
       _pltype: parameter
       _type: double
