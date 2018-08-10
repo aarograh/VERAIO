@@ -3177,6 +3177,13 @@ COBRATF:
       - is_float()
       - is_gt() 0
 
+  clad_material:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() zirc ss sic
+
   epso:
     <<: *dtdouble
     _content:

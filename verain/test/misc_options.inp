@@ -297,6 +297,7 @@
   rtwfp   1000.0
   maxits  10000
   courant 0.8
+  clad_material zirc
 
 [MPACT]
   sth_hgap   5200.0   ! internal t/h option
