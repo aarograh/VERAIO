@@ -309,7 +309,7 @@
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{LAT}"/>
       <Parameter name="label" type="string" value="CC"/>
-      <Parameter name="maxstep" type="int" value="1"/>
+      <Parameter name="maxstep" type="double" value="1"/>
       <Parameter name="num_pins" type="int" value="16"/>
       <Parameter name="stroke" type="double" value="1.0"/>
     </ParameterList>

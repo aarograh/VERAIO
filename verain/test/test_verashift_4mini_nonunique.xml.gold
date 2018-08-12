@@ -5,7 +5,7 @@
   <ParameterList name="STATES">
     <ParameterList name="State_1">
       <Parameter name="bank_labels" type="Array(string)" value="{D}"/>
-      <Parameter name="bank_pos" type="Array(int)" value="{0}"/>
+      <Parameter name="bank_pos" type="Array(double)" value="{0}"/>
       <Parameter name="boron" type="double" value="1300"/>
       <Parameter name="feedback" type="string" value="off"/>
       <Parameter name="modden" type="double" value="0.743"/>
@@ -16,7 +16,7 @@
     </ParameterList>
     <ParameterList name="State_2">
       <Parameter name="bank_labels" type="Array(string)" value="{D}"/>
-      <Parameter name="bank_pos" type="Array(int)" value="{46}"/>
+      <Parameter name="bank_pos" type="Array(double)" value="{46}"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">
@@ -524,7 +524,7 @@
       <Parameter name="axial_elevations" type="Array(double)" value="{16.2875,18.1875,76.21185,224.1740,230.2848}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{PLUG,AIC,B4C,PLEN}"/>
       <Parameter name="label" type="string" value="1"/>
-      <Parameter name="maxstep" type="int" value="230"/>
+	<Parameter name="maxstep" type="double" value="230"/>
       <Parameter name="num_pins" type="int" value="7"/>
       <Parameter name="stroke" type="double" value="208.525"/>
       <Parameter name="title" type="string" value="B4C with AIC tips"/>
