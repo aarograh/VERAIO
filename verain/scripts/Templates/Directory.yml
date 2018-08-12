@@ -356,7 +356,7 @@ STATE:
     _content:
     _check:
       - fall(sub{is_word(shift)},())
-      - fall(sub{is_int(shift)},odd([]))
+      - fall(sub{is_float(shift)},odd([]))
       - fall(sub{is_geq(shift,0)},odd([]))
   feedback:
     <<: *dtword
@@ -1036,7 +1036,7 @@ CONTROL:
     _content:
     _check:
       - is_float(nth(0,()))
-      - is_int(nth(1,()))
+      - is_float(nth(1,()))
   cell:
     <<: *dtlistnamed
     _slash:

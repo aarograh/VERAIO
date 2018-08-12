@@ -98,7 +98,7 @@ STATES:
 
         bank_pos:
           _pltype: array
-          _type: int
+          _type: double
           _do:
             - copyarray %STATE/$(_loop)/@rodbank,select=>odd
           _content:
