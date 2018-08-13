@@ -376,7 +376,7 @@
       <Parameter name="axial_elevations" type="Array(double)" value="{17.031,118.631,377.711}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{AIC,B4C}"/>
       <Parameter name="label" type="string" value="1"/>
-	      <Parameter name="maxstep" type="double" value="230"/>
+      <Parameter name="maxstep" type="double" value="230"/>
       <Parameter name="num_pins" type="int" value="17"/>
       <Parameter name="stroke" type="double" value="365.125"/>
       <Parameter name="title" type="string" value="B4C with AIC tips"/>
