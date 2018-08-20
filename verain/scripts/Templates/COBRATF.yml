@@ -430,6 +430,13 @@ COBRATF:
         - copy COBRATF/$edit_gaps
       _content:
 
+    edit_main_text_output:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_main_text_output
+      _content:
+
     edit_channels:
       _pltype: parameter
       _type: int
