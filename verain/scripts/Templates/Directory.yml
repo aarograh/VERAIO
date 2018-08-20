@@ -1041,6 +1041,13 @@ CONTROL:
     <<: *dtlistnamed
     _slash:
     _check:
+  lattice:
+    <<: *dtlistnamed
+    _style: multi-line
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},stride(1,1,()))
+    _alias: rodmap
   rodmap:
     <<: *dtlistnamed
     _style: multi-line
@@ -1096,6 +1103,13 @@ INSERT:
     <<: *dtlistnamed
     _slash:
     _check:
+  lattice:
+    <<: *dtlistnamed
+    _style: multi-line
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},stride(1,1,()))
+    _alias: rodmap
   rodmap:
     <<: *dtlistnamed
     _style: multi-line
@@ -1145,6 +1159,13 @@ DETECTOR:
     <<: *dtlistnamed
     _slash:
     _check:
+  lattice:
+    <<: *dtlistnamed
+    _style: multi-line
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},stride(1,1,()))
+    _alias: rodmap
   rodmap:
     <<: *dtlistnamed
     _style: multi-line
