@@ -3564,6 +3564,13 @@ COBRATF:
       - is_geq() 0
       - is_leq() 1
 
+  edit_dnb_text_file:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+
   edit_convergence:
     <<: *dtint
     _content:

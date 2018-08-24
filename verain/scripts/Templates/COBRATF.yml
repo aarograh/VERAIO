@@ -451,6 +451,13 @@ COBRATF:
         - copy COBRATF/$edit_dnb
       _content:
 
+    edit_dnb_text_file:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_dnb_text_file
+      _content:
+
     edit_convergence:
       _pltype: parameter
       _type: int
