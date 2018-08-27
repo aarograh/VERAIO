@@ -3523,6 +3523,7 @@ COBRATF:
     _content:
     _check:
       - is_int()
+      - in_dictionary() 1 4 9 16
 
   grid_hi2lo:
     <<: *dtint
