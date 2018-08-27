@@ -4213,6 +4213,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+  subgr_temp_average:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() pin plane
   dep_filename:
     <<: *dtword
     _content:

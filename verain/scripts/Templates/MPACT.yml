@@ -1227,6 +1227,13 @@ MPACT:
             - copy MPACT/$res_up_scatter
           _content:
 
+        subgr_temp_average:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$subgr_temp_average
+          _content:
+
         mats_file:
           _pltype: parameter
           _type: string
