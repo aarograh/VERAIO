@@ -539,6 +539,19 @@ STATE:
     _check:
       - fall(sub{is_word(shift)},())
       - fall(sub{not_in_dictionary(shift,'0')},())
+  crud_cleaning:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
+  crud_removal:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
   cool_chem:
     <<: *dtlist
     _content:

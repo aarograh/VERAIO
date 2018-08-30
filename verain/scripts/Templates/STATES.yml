@@ -481,6 +481,20 @@ STATES:
             - coremapmap CORE/$size,CORE/@core_shape,%STATE/$(_loop)/@insert_shuffle_label,CORE/$bc_sym,expand=>0,ignore=>'-'
           _content:
 
+        crud_cleaning:
+          _pltype: array
+          _type: string
+          _do:
+            - coremapmap CORE/$size,CORE/@core_shape,%STATE/$(_loop)/@crud_cleaning,CORE/$bc_sym,expand=>0,ignore=>'-'
+          _content:
+
+        crud_removal:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$crud_removal
+          _content:
+
         tinlet_dist:
           _pltype: array
           _type: double
