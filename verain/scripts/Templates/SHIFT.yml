@@ -213,13 +213,6 @@ SHIFT:
         - copy SHIFT/$src_disc_l2_error
       _content:
 
-    src_disc_max_error:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy SHIFT/$src_disc_max_error
-      _content:
-
     src_disc_samples_per_batch:
       _pltype: parameter
       _type: int

@@ -1969,27 +1969,6 @@ SHIFT:
       - is_gt() 0
       - is_lt() 1
 #>
-#>   {\bf src\_disc\_max\_error} src\_disc\_max\_error
-#>   \VERAInputTable{
-#>     name={src\_disc\_max\_error},
-#>     type={double},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={0.05},
-#>     valuesapplicable={(0,1)},
-#>     limitations={},
-#>     description={Maximum voxel error for point-sampling discretization},
-#>     notes={Applicable to hybrid simulations}
-#>   }
-  src_disc_max_error:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-      - is_lt() 1
-#>
 #>   {\bf src\_disc\_samples\_per\_batch} src\_disc\_samples\_per\_batch
 #>   \VERAInputTable{
 #>     name={src\_disc\_samples\_per\_batch},
