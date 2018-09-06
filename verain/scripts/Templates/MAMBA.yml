@@ -1,4 +1,4 @@
-MAMBA1D:
+MAMBA:
   _pltype: list
   _do:
     - setdb MAIN_DB
@@ -169,4 +169,18 @@ MAMBA1D:
       _type: int
       _do:
         - copy MAMBA/$model_erosion
+      _content:
+
+    b_conc:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray MAMBA/@li_table,start=>0,stride=>2
+      _content:
+
+    li_conc:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray MAMBA/@li_table,start=>1,stride=>2
       _content:
