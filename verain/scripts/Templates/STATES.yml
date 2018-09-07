@@ -551,6 +551,20 @@ STATES:
             - copy %STATE/$(_loop)/$cool_chem:4
           _content:
 
+        vh2:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$vh2
+          _content:
+          
+        ni_s:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$ni_s
+          _content:
+
         cleanup_flow:
           _pltype: parameter
           _type: double
