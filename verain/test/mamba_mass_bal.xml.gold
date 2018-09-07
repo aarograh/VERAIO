@@ -240,10 +240,4 @@
     <Parameter name="rlx_power" type="double" value="0.5"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
-  <ParameterList name="MAMBA1D">
-    <Parameter name="chem_mass_bal" type="int" value="1"/>
-    <Parameter name="model_erosion" type="int" value="1"/>
-    <Parameter name="piping_age" type="double" value="0.0"/>
-    <Parameter name="sg_age" type="double" value="0.0"/>
-  </ParameterList>
 </ParameterList>
