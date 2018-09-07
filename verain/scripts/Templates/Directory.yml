@@ -52,7 +52,6 @@ _DIRECTORY:
   COUPLING:
   MPACT:
   BISON:
-  MAMBA1D:
   MAMBA:
   TIAMAT:
   RUN:
@@ -563,7 +562,18 @@ STATE:
       - nth(2,())>=0
       - nth(3,())>=0
       - nth(4,())>=0
-
+  vh2:
+    <<: *dtfloat
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+  ni_s:
+    <<: *dtfloat
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
   cleanup_flow:
     <<: *dtfloat
     _content:
@@ -5017,75 +5027,6 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 
-MAMBA1D:
-  noBoilnoCrud:
-    <<: *dtint
-    _content:
-    _check:
-      - is_geq() 0
-      - is_int()
-  Bthresh:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  Bfract:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  interface:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
-  constantTsat:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-  onlyBoronPrecip:
-    <<: *dtint
-    _content:
-    _check:
-      - is_geq() 0
-      - is_int()
-  modelTKEEnhance:
-    <<: *dtint
-    _content:
-    _check:
-      - is_geq() 0
-      - is_int()
-  steam_generator_age:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_geq() 0
-  piping_age:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_geq() 0
-
-  chem_mass_bal:
-    <<: *dtint
-    _content:
-    _check:
-      - is_geq() 0
-      - is_int()
-
-  model_erosion:
-    <<: *dtint
-    _content:
-    _check:
-      - is_geq() 0
-      - is_int()
-
 MAMBA:
   A_NiFe2O4_out:
     <<: *dtdouble
@@ -5219,20 +5160,28 @@ MAMBA:
     _check:
       - is_float()
       - is_geq() 0
-
   chem_mass_bal:
     <<: *dtint
     _content:
     _check:
       - is_geq() 0
       - is_int()
-
-  erosion_model:
+  model_erosion:
     <<: *dtint
     _content:
     _check:
       - is_geq() 0
       - is_int()
+  li_table:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%2==0
+      - fall(sub{is_float(shift)},stride(0,2,()))
+      - fall(sub{is_float(shift)},stride(1,2,()))
+      - fall(sub{is_geq(shift,0)},stride(0,2,()))
+      - fall(sub{is_geq(shift,0)},stride(1,2,()))
 
 BISON:
 
