@@ -194,12 +194,6 @@
 
   crud MAMBA
 
-[MAMBA1D]
-  steam_generator_age 0.0
-  piping_age 0.0
-  chem_mass_bal 1
-  model_erosion 1
-
 [COUPLING]
   epsk        5.0  ! pcm
   eps_temp    1.0  ! temperature convergence in C
