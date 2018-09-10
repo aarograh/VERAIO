@@ -2437,7 +2437,7 @@ SHIFT:
       - is_int()
       - is_gt() 0
 #>
-#>   {\bf mesh} refl\_mesh\_size
+#>   {\bf refl\_mesh\_size} refl\_mesh\_size
 #>   \VERAInputTable{
 #>     name={refl\_mesh\_size},
 #>     type={double},
@@ -2450,14 +2450,14 @@ SHIFT:
 #>     description={Radial reflector region mesh size},
 #>     notes={Applicable to hybrid simulations}
 #>   }
-  mesh:
+  refl_mesh_size:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
 #>
-#>   {\bf mesh} extend\_axial\_mesh\_size
+#>   {\bf extend\_axial\_mesh\_size} extend\_axial\_mesh\_size
 #>   \VERAInputTable{
 #>     name={extend\_axial\_mesh\_size},
 #>     type={double},
@@ -2470,7 +2470,7 @@ SHIFT:
 #>     description={Axial excore region mesh size},
 #>     notes={Applicable to hybrid simulations}
 #>   }
-  mesh:
+  extend_axial_mesh_size:
     <<: *dtdouble
     _content:
     _check:
