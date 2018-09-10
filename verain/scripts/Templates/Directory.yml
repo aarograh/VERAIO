@@ -363,6 +363,24 @@ STATE:
     _check:
       - is_word()
       - in_dictionary() on off
+  fuel_performance:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off inline
+  crud:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off
+  excore_transport:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off
   thexp:
     <<: *dtword
     _content:

@@ -12,6 +12,9 @@
   deplete EFPD 0
   search "boron"
   feedback on
+  fuel_performance on
+  crud on
+  excore_transport on
   sym qtr
 
   rodbank SA 230
@@ -29,6 +32,9 @@
   deplete EFPD 25 40 60 80 120 160
   b10 0.199 true
   restart_write  p9_restart_cycl1.h5 160EFPD
+  fuel_performance off
+  crud off
+  excore_transport off
 [STATE]
   power    100.0
   deplete EFPD 160 200 240 250
