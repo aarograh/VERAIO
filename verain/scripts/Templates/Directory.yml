@@ -1278,20 +1278,20 @@ EDITS:
 #> \label{sec:shiftcards}
 SHIFT:
 #>
-#>   {\bf celib\_file} celib\_file
+#>   {\bf ce\_lib\_path} ce\_lib\_path
 #>   \VERAInputTable{
-#>     name={celib\_file},
+#>     name={ce\_lib\_path},
 #>     type={String},
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={ce_v7.1\_endf.xml},
+#>     valuedefault={ce_v7.1\_endf.h5},
 #>     valuesapplicable={},
 #>     limitations={},
-#>     description={Name of SCALE CE data library file},
+#>     description={Path to SCALE CE data library file},
 #>     notes={}
 #>   }
-  celib_file:
+  ce_lib_path:
     <<: *dtword
     _content:
     _check:
