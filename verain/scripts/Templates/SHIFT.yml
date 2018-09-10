@@ -157,6 +157,13 @@ SHIFT:
         - copy SHIFT/$vera_pressure_vessel
       _content:
     
+    use_mpact_spectrum:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$use_mpact_spectrum
+      _content:
+
     core_translate:
       _pltype: array
       _type: double
