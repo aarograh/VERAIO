@@ -193,7 +193,6 @@
   track_isotopes        full
   create_unique_pins    true
   src_disc_l2_error     0.1
-  src_disc_max_error    0.5
   src_disc_samples_per_batch 1000
   src_disc_max_samples  100000
 ! hybrid_db

@@ -309,7 +309,6 @@
     <Parameter name="output_ww" type="bool" value="false"/>
     <Parameter name="problem_mode" type="string" value="cadis"/>
     <Parameter name="src_disc_l2_error" type="double" value="0.1"/>
-    <Parameter name="src_disc_max_error" type="double" value="0.5"/>
     <Parameter name="src_disc_max_samples" type="int" value="100000"/>
     <Parameter name="src_disc_samples_per_batch" type="int" value="1000"/>
     <Parameter name="thermal_energy_cutoff" type="double" value="10.0"/>
