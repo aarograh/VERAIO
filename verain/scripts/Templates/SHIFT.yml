@@ -454,6 +454,20 @@ SHIFT:
             - copy SHIFT/$mesh
           _content:
 
+        refl_mesh_size:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$refl_mesh_size
+          _content:
+
+        extend_axial_mesh_size:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$extend_axial_mesh_size
+          _content:
+
         dimension:
           _pltype: parameter
           _type: int

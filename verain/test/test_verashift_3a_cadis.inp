@@ -205,6 +205,9 @@
   num_groups            8
   num_blocks_i          2
   num_blocks_j          2
+  mesh                  1
+  refl_mesh_size        5.0
+  extend_axial_mesh_size 10.0
 ! hybrid_db/solver_db/
   verbosity             high
 ! hybrid_db/solver_db/upscatter_db
