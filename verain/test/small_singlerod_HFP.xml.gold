@@ -179,25 +179,16 @@
     <Parameter name="cicada_inner_radial_zone_num_cells_r" type="int" value="20"/>
     <Parameter name="cicada_outer_radial_zone_num_cells_r" type="int" value="10"/>
     <Parameter name="cicada_outer_radial_zone_thickness" type="double" value="80.0e-6"/>
-    <Parameter name="courant" type="double" value="0.8"/>
     <Parameter name="dhfrac" type="double" value="0.02"/>
-    <Parameter name="dtmax" type="double" value="0.1"/>
-    <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="edit_channels" type="int" value="1"/>
     <Parameter name="enable_corrosion_lithium" type="int" value="0"/>
-    <Parameter name="epso" type="double" value="0.001"/>
     <Parameter name="hgap" type="double" value="5678.3"/>
-    <Parameter name="iitmax" type="int" value="40"/>
     <Parameter name="irfc" type="int" value="2"/>
     <Parameter name="maps_filename" type="string" value="single_rod_HFP"/>
-    <Parameter name="maxits" type="int" value="10000"/>
     <Parameter name="nc" type="int" value="1"/>
     <Parameter name="nfuel" type="int" value="3"/>
-    <Parameter name="oitmax" type="int" value="5"/>
     <Parameter name="parallel" type="int" value="0"/>
     <Parameter name="property_evaluations" type="string" value="asme1968"/>
-    <Parameter name="rtwfp" type="double" value="1000.0"/>
-    <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>
   <ParameterList name="COUPLING">
     <Parameter name="eps_temp" type="double" value="1.0"/>
