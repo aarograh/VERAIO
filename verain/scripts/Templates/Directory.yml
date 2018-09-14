@@ -2057,6 +2057,26 @@ SHIFT:
       - is_int()
       - is_gt() 0
 #>
+#>   {\bf ww\_decomp} ww\_decomp
+#>   \VERAInputTable{
+#>     name={ww\_decomp},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={separable},
+#>     valuesapplicable={full, separable},
+#>     limitations={},
+#>     description={Whether the weight window adjoint flux should be decomposed},
+#>     notes={Applicable to hybrid simulations}
+#>   }
+  ww_decomp:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() full separable
+#>
 #>   {\bf radial\_mesh} radial\_mesh
 #>   \VERAInputTable{
 #>     name={radial\_mesh},

@@ -608,6 +608,13 @@ SHIFT:
             - copy SHIFT/$SPN_order
           _content:
 
+        flux_decomposition:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy SHIFT/$ww_decomp
+          _content:
+
         quadrature_db:
           _pltype: list
           _content:
