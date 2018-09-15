@@ -157,6 +157,13 @@ SHIFT:
         - copy SHIFT/$vera_pressure_vessel
       _content:
     
+    use_mpact_spectrum:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$use_mpact_spectrum
+      _content:
+
     core_translate:
       _pltype: array
       _type: double
@@ -211,13 +218,6 @@ SHIFT:
       _type: double
       _do:
         - copy SHIFT/$src_disc_l2_error
-      _content:
-
-    src_disc_max_error:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy SHIFT/$src_disc_max_error
       _content:
 
     src_disc_samples_per_batch:
@@ -452,6 +452,20 @@ SHIFT:
           _type: int
           _do:
             - copy SHIFT/$mesh
+          _content:
+
+        refl_mesh_size:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$refl_mesh_size
+          _content:
+
+        extend_axial_mesh_size:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$extend_axial_mesh_size
           _content:
 
         dimension:
