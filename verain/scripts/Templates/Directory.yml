@@ -363,6 +363,24 @@ STATE:
     _check:
       - is_word()
       - in_dictionary() on off
+  fuel_performance:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off inline
+  crud:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off
+  excore_transport:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off
   thexp:
     <<: *dtword
     _content:
@@ -1920,6 +1938,26 @@ SHIFT:
       - is_word()
       - in_dictionary() true false
 #>
+#>   {\bf use_mpact_spectrum} use_mpact_spectrum
+#>   \VERAInputTable{
+#>     name={use_mpact_spectrum},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Use the fission source spectrum provided by MPACT},
+#>     notes={}
+#>   }
+  use_mpact_spectrum:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf hybrid\_tally\_names} hybrid\_tally\_names
 #>   \VERAInputTable{
 #>     name={hybrid\_tally\_names},
@@ -1972,27 +2010,6 @@ SHIFT:
 #>     notes={Applicable to hybrid simulations}
 #>   }
   src_disc_l2_error:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-      - is_lt() 1
-#>
-#>   {\bf src\_disc\_max\_error} src\_disc\_max\_error
-#>   \VERAInputTable{
-#>     name={src\_disc\_max\_error},
-#>     type={double},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={0.05},
-#>     valuesapplicable={(0,1)},
-#>     limitations={},
-#>     description={Maximum voxel error for point-sampling discretization},
-#>     notes={Applicable to hybrid simulations}
-#>   }
-  src_disc_max_error:
     <<: *dtdouble
     _content:
     _check:
@@ -2435,6 +2452,46 @@ SHIFT:
     _content:
     _check:
       - is_int()
+      - is_gt() 0
+#>
+#>   {\bf refl\_mesh\_size} refl\_mesh\_size
+#>   \VERAInputTable{
+#>     name={refl\_mesh\_size},
+#>     type={double},
+#>     need={},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={},
+#>     description={Radial reflector region mesh size},
+#>     notes={Applicable to hybrid simulations}
+#>   }
+  refl_mesh_size:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf extend\_axial\_mesh\_size} extend\_axial\_mesh\_size
+#>   \VERAInputTable{
+#>     name={extend\_axial\_mesh\_size},
+#>     type={double},
+#>     need={},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={},
+#>     description={Axial excore region mesh size},
+#>     notes={Applicable to hybrid simulations}
+#>   }
+  extend_axial_mesh_size:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
       - is_gt() 0
 #>
 #>   {\bf output\_adjoint} output\_adjoint
