@@ -586,6 +586,13 @@ STATES:
             - copy %STATE/$(_loop)/$ni_s
           _content:
 
+        ni_p:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$ni_p
+          _content:
+
         cleanup_flow:
           _pltype: parameter
           _type: double

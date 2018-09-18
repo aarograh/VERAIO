@@ -592,6 +592,12 @@ STATE:
     _check:
       - is_float()
       - is_geq() 0
+  ni_p:
+    <<: *dtfloat
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
   cleanup_flow:
     <<: *dtfloat
     _content:
