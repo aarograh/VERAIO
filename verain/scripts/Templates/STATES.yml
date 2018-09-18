@@ -557,7 +557,7 @@ STATES:
           _do:
             - copy %STATE/$(_loop)/$vh2
           _content:
-          
+
         ni_s:
           _pltype: parameter
           _type: double
@@ -570,4 +570,18 @@ STATES:
           _type: double
           _do:
             - copy %STATE/$(_loop)/$cleanup_flow
+          _content:
+
+        temp_mult:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/@temp_pert:0
+          _content:
+
+        temp_adder:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/@temp_pert:1
           _content:

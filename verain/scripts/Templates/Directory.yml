@@ -581,6 +581,13 @@ STATE:
       - is_float()
       - is_geq() 0
       - is_leq() 100
+  temp_pert:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
 
 CORE:
   name:
@@ -1466,7 +1473,7 @@ SHIFT:
       - is_word()
       - in_dictionary() debug diagnostic status info warning error critical
 #>
-#>   {\bf local\_log} local\_log 
+#>   {\bf local\_log} local\_log
 #>   \VERAInputTable{
 #>     name={local\_log},
 #>     type={string},
@@ -1486,7 +1493,7 @@ SHIFT:
       - is_word()
       - in_dictionary() debug diagnostic status info warning error critical
 #>
-#>   {\bf do\_micro\_tally} do\_micro\_tally 
+#>   {\bf do\_micro\_tally} do\_micro\_tally
 #>   \VERAInputTable{
 #>     name={do\_micro\_tally},
 #>     type={bool},
@@ -1506,7 +1513,7 @@ SHIFT:
       - is_word()
       - in_dictionary() true false
 #>
-#>   {\bf do\_transport} do\_transport 
+#>   {\bf do\_transport} do\_transport
 #>   \VERAInputTable{
 #>     name={do\_transport},
 #>     type={bool},
@@ -2229,7 +2236,7 @@ SHIFT:
 #>     valuedefault={vacuum, vacuum, vacuum, vacuum, vacuum, vacuum},
 #>     valuesapplicable={vacuum, reflect},
 #>     limitations={},
-#>     description={Boundary mesh boundary conditions on 
+#>     description={Boundary mesh boundary conditions on
 #>                  -x, +x, -y, +y, -z, +z},
 #>     notes={}
 #>   }
@@ -2396,7 +2403,7 @@ SHIFT:
     _check:
       - is_word()
 #>
-#>   {\bf dimension} dimension 
+#>   {\bf dimension} dimension
 #>   \VERAInputTable{
 #>     name={dimension},
 #>     type={integer},
@@ -2939,7 +2946,7 @@ SHIFT:
       - is_word()
       - in_dictionary() qr levelsym galerkin glproduct ldfe
 #>
-#>   {\bf polars\_octant} polars\_octant 
+#>   {\bf polars\_octant} polars\_octant
 #>   \VERAInputTable{
 #>     name={polars\_octant},
 #>     type={integer},
