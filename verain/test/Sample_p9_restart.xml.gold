@@ -7,9 +7,12 @@
       <Parameter name="bank_labels" type="Array(string)" value="{SA,SB,SC,SD,A,B,C,D}"/>
       <Parameter name="bank_pos" type="Array(double)" value="{230,230,230,230,230,230,230,220}"/>
       <Parameter name="boron" type="double" value="1285"/>
+      <Parameter name="crud" type="string" value="on"/>
       <Parameter name="deplete" type="Array(double)" value="{0}"/>
       <Parameter name="deplete_units" type="string" value="EFPD"/>
+      <Parameter name="excore_transport" type="string" value="on"/>
       <Parameter name="feedback" type="string" value="on"/>
+      <Parameter name="fuel_performance" type="string" value="on"/>
       <Parameter name="modden" type="double" value="0.743"/>
       <Parameter name="op_date" type="string" value="2014/11/05"/>
       <Parameter name="power" type="double" value="0.0"/>
@@ -24,8 +27,11 @@
     <ParameterList name="State_2">
       <Parameter name="b10" type="double" value="0.199"/>
       <Parameter name="b10_depl" type="bool" value="true"/>
+      <Parameter name="crud" type="string" value="off"/>
       <Parameter name="deplete" type="Array(double)" value="{25,40,60,80,120,160}"/>
       <Parameter name="deplete_units" type="string" value="EFPD"/>
+      <Parameter name="excore_transport" type="string" value="off"/>
+      <Parameter name="fuel_performance" type="string" value="off"/>
       <Parameter name="op_date" type="string" value="04/15/2015"/>
       <Parameter name="power" type="double" value="100.0"/>
       <Parameter name="restart_write_file" type="string" value="p9_restart_cycl1.h5"/>
