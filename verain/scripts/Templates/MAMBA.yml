@@ -87,6 +87,13 @@ MAMBA:
         - copy MAMBA/$CRUD_solid_dens
       _content:
 
+    CRUD_dep_frac:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA/$CRUD_dep_frac
+      _content:
+
     chimney_htc:
       _pltype: parameter
       _type: double

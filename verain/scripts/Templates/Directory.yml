@@ -5191,6 +5191,12 @@ MAMBA:
     _check:
       - is_float()
       - is_gt() 0
+  CRUD_dep_frac:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
   chimney_htc:
     <<: *dtdouble
     _content:
