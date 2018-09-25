@@ -580,6 +580,27 @@ STATE:
       - nth(2,())>=0
       - nth(3,())>=0
       - nth(4,())>=0
+#>
+#>   {\bf crud_sub_steps} crud_sub_steps
+#>   \VERAInputTable{
+#>     name={crud_sub_steps},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of substeps in a crud grow}
+#>     notes={}
+#>   }
+  crud_sub_steps:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 1
+
   vh2:
     <<: *dtfloat
     _content:
@@ -3820,6 +3841,27 @@ COBRATF:
     _check:
       - is_int()
       - in_dictionary() 0 1
+#>
+#>   {\bf oxide\_thermal\_conductivity} oxide\_thermal\_conductivity
+#>   \VERAInputTable{
+#>     name={oxide\_thermal\_conductivity},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={W/cm/K},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={Greater than or equal to 0.0},
+#>     limitations={},
+#>     description={The thermal conductivity of the clad oxide layer},
+#>     notes={}
+#>   }
+
+  oxide_thermal_conductivity:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0.0
 
   clad_corrosion_model:
     <<: *dtint

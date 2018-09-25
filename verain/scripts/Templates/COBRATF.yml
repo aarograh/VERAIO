@@ -619,6 +619,14 @@ COBRATF:
         - copy COBRATF/$crud_details
       _content:
 
+    oxide_thermal_conductivity:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$oxide_thermal_conductivity
+      _content:
+
+
     clad_corrosion_model:
       _pltype: parameter
       _type: int

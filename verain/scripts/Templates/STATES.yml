@@ -537,6 +537,13 @@ STATES:
             - coremapmap CORE/$size,CORE/@core_shape,%STATE/$(_loop)/@flow_dist,CORE/$bc_sym
           _content:
 
+        crud_sub_steps:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy %STATE/$(_loop)/$crud_sub_steps
+          _content:
+
         h_conc:
           _pltype: parameter
           _type: double
