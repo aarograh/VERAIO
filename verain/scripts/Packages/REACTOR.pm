@@ -138,16 +138,18 @@ sub read_ascii {
     }
 
     ($fvolume, $fdir, $fname) = splitpath($filename);
-    $fdir = canonpath( $fdir );
+    $fdir = canonpath( $fdir );   # clean up path
 
     if($follow){
-	$fdir = catdir( ($follow, $fdir) );
+	unless(file_name_is_absolute( $fdir )){
+	    $fdir = catdir( ($follow, $fdir) );
+	}
 	$filename = catfile( ( $fdir ), $fname );
     }
 
     my($IFILE); 
     if (-f $filename){
-      print "Openning file with name: $filename\n" if get_verbose();
+      print "Opening file with name: $filename\n" if get_verbose();
       open $IFILE, $filename or ( &print_input_log() &&  die "Cannot open file $filename\n");
     }
     elsif($ispath){  # path is defined in the include command
@@ -158,12 +160,13 @@ sub read_ascii {
       my $directory = dirname($pscript);
       my $filename2 = catfile(("$directory/Init"), $fname);
       if (-f $filename2){
-        print "Openning file with path: $filename2\n" if get_verbose();
-        open $IFILE, $filename2 or ( &print_input_log() && die "Cannot open file $filename2\n" );
+	  print "Opening file with path: $filename2\n" if get_verbose();
+	  open $IFILE, $filename2 or ( &print_input_log() && die "Cannot open file $filename2\n" );
+	  $filename=$filename2;
       }
       else{
-        &print_input_log();
-        die "$filename2 does not exist\n";
+	  &print_input_log();
+	  die "$filename2 does not exist\n";
       }
     }
 
@@ -205,8 +208,13 @@ sub read_ascii {
 		      print "$ifile has no path.\n" if get_verbose();
 		  }
 
-		  $fdir = canonpath( $fdir );
-		  $followinc = catdir( ($follow, $fdir) );
+		  $fdir = canonpath( $fdir );   # clean up path
+		  if(file_name_is_absolute( $fdir )){
+		      $followinc = $fdir;
+		  }
+		  else{
+		      $followinc = catdir( ($follow, $fdir) );
+		  }
 		  push @INCOPT, ('follow' => $followinc);
 	      }
 

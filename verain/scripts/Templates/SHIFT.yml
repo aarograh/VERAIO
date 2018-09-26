@@ -24,11 +24,11 @@ SHIFT:
         - copy SHIFT/$mode
       _content:
 
-    celib_file:
+    ce_lib_path:
       _pltype: parameter
       _type: string
       _do:
-        - copy SHIFT/$celib_file
+        - copy SHIFT/$ce_lib_path
       _content:
 
     transfer:
