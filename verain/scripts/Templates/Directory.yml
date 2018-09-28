@@ -580,27 +580,6 @@ STATE:
       - nth(2,())>=0
       - nth(3,())>=0
       - nth(4,())>=0
-#>
-#>   {\bf crud_sub_steps} crud_sub_steps
-#>   \VERAInputTable{
-#>     name={crud_sub_steps},
-#>     type={int},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={Number of substeps in a crud grow}
-#>     notes={}
-#>   }
-  crud_sub_steps:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_geq() 1
-
   vh2:
     <<: *dtfloat
     _content:
@@ -3798,7 +3777,27 @@ COBRATF:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none internal MAMBA
+      - in_dictionary() none internal MAMBA cicada
+#>
+#>   {\bf max_crud_step_size} max_crud_step_size
+#>   \VERAInputTable{
+#>     name={max_crud_step_size},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={day},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Maximum number of days in a crud grow.  Setting this smaller than the depletion step size will result in multiple crud grows being made during the depletion step with source term data being updated during each substep.},
+#>     notes={}
+#>   }
+  max_crud_step_size:
+    <<: *dtfloat
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
 
   cicada_outer_radial_zone_num_cells_r:
     <<: *dtint
