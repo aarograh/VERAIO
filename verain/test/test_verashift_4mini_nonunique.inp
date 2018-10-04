@@ -299,6 +299,7 @@
   transport ce
   create_unique_pins false
   transfer fiss_src
+  use_mpact_spectrum true
 ! some parameters for external excore input
   excore_filename "bleh.inp.omn"
   core_translate  2.0 2.0 0.0
@@ -308,7 +309,7 @@
   hybrid_multiplier_names "flux" "fission"
 ! tally_db
   radial_mesh   10.0 12.0 13.0 20.0
-  num_theta     5 
+  num_theta     5
   num_axial     20
 ! boundary_mesh_db
   bc_bnd_mesh   reflect vacuum reflect vacuum vacuum vacuum
