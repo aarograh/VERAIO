@@ -231,6 +231,20 @@ STATE:
       - is_float(nth(0,()))
       - is_word(nth(1,()))
       - in_dictionary(nth(1,()),'F','C','K')
+#>
+#>   {\bf tinlet_dist} tinlet_dist
+#>   \VERAInputTable{
+#>     name={tinlet\_dist},
+#>     type={2D Float Map},
+#>     need={Optional},
+#>     unitsdefault={F},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={2-D array that must match the shape of assm\_map in [CORE].  Gives an adder that will be applied to nominal inlet temperature in each assembly.}},
+#>     notes={}
+#>   }
   tinlet_dist:
     <<: *dtlist
     _style: multi-line
@@ -1336,6 +1350,18 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() all none pin
+
+  micro_zaids:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+
+  micro_rxns:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
 #>
 #>   {\bf verbosity} verbosity
 #>   \VERAInputTable{
@@ -3233,61 +3259,204 @@ SHIFT:
 
 COBRATF:
 
+#>
+#>   {\bf nfuel} nfuel
+#>   \VERAInputTable{
+#>     name={nfuel},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={10},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={The number of rings in the fuel rod pellet (only effective when nc>0).},
+#>     notes={}
+#>   }
   nfuel:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
-
+#>
+#>   {\bf min_steps} min_steps
+#>   \VERAInputTable{
+#>     name={min_steps},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={4},
+#>     valuesapplicable={>=0},
+#>     limitations={},
+#>     description={The minimum number of iterations CTF should take during a solve},
+#>     notes={}
+#>   }
   min_steps:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_geq() 0
-
+#>
+#>   {\bf imox} imox
+#>   \VERAInputTable{
+#>     name={imox},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0, 1, 2, 3, 4, 5},
+#>     limitations={},
+#>     description={The fuel thermal conductivity model to use in CTF (only effective when nc>0). Options are:
+#>        0 - MATPRO-11
+#>        1 - Modified NFI (UO2)
+#>        2 - Halden (UO2)
+#>        3 - Duriez/Modified NFI (MOX)
+#>        4 - Halden (MOX)
+#>        5 - Amaya (MOX)},
+#>     notes={}
+#>   }
   imox:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-
+      - in_dictionary() 0 1 2 3 4 5
+#>
+#>   {\bf nc} nc 
+#>   \VERAInputTable{
+#>     name={nfuel},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={0, 1, 2, 3},
+#>     limitations={},
+#>     description={The fuel rod conduction model.  Options are: (0) No conduction, power is supplied as a 
+#>       surface heat flux (can lead to numerical stability issues), (1) Conduction in the radial direction
+#>       only, (2) Conduction in the radial and azimuthal directions, (3) Conduction in the radial, azimuthal
+#>       and axial directions.},
+#>     notes={}
+#>   }
   nc:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
+      - in_dictionary() 0 1 2 3
+#>
+#>   {\bf chf} chf
+#>   \VERAInputTable{
+#>     name={chf},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={0, 1, 2},
+#>     limitations={},
+#>     description={
+#>       CHF model option.  Options are:
+#>        0 - No CHF check during transient (post-sim check using W-3)
+#>        1 - Check CHF during transient using W-3 
+#>        2 - No CHF check during or after simulation (set CHF to infinity)},
+#>     notes={}
+#>   }
   chf:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-
+      - in_dictionary() 0 1 2
+#>
+#>   {\bf debug} debug
+#>   \VERAInputTable{
+#>     name={debug},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0, 1},
+#>     limitations={},
+#>     description={Setting to 1 will cause CTF to print every power distribution it receives to a separate
+#>       HDF5 file.  This can be used to run CTF standalone on a power distribution that causes it to crash.},
+#>     notes={}
+#>   }
   debug:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf irfc} irfc
+#>   \VERAInputTable{
+#>     name={irfc},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={2},
+#>     valuesapplicable={1, 2, 3, 4},
+#>     limitations={},
+#>     description={
+#>        Friction model:
+#>        1 - original CTF model
+#>        2 - new CTF model
+#>        3 - Colebrook
+#>        4 - Sylvester},
+#>     notes={}
+#>   }
   irfc:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_gt() 0
-
+      - in_dictionary() 1 2 3 4
+#>
+#>   {\bf dhfrac} dhfrac
+#>   \VERAInputTable{
+#>     name={dhfrac},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.026},
+#>     valuesapplicable={>=0.0},
+#>     limitations={},
+#>     description={Percentage of rod heat directly deposited into fluid (gamma heating)},
+#>     notes={}
+#>   }
   dhfrac:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_geq() 0
-
+#>
+#>   {\bf guide_tube_coefficient} guide_tube_coefficient
+#>   \VERAInputTable{
+#>     name={guide_tube_coefficient},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={0.0<=guide_tube_coefficient<=1.0},
+#>     limitations={},
+#>     description={Used to determine the temperature rise in guide tubes using the following:
+#>           T_guide_tube(z) = (T_fluid(z)-T_inlet)*guide_tube_coefficient+T_inlet
+#>        where T_guide_tube is the temperature in the guide tube, T_fluid is the temperature in the channels
+#>        adjacent to the guide tube, and T_inlet is the inlet temperature.  0.0 means the guide tube outlet
+#>        temperature will be the same as the inlet temperature and 1.0 means it will be equal to the fluid side
+#>        outlet temperature.},
+#>     notes={}
+#>   }
   guide_tube_coefficient:
     <<: *dtdouble
     _content:
@@ -3295,509 +3464,1549 @@ COBRATF:
       - is_float()
       - is_geq() 0.0
       - is_leq() 1.0
-
+#>
+#>   {\bf beta_htc} beta_htc
+#>   \VERAInputTable{
+#>     name={beta_htc},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.2},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={The boiling heat transfer coefficient under-relaxation coefficient.  Because of the semi-implicit
+#>        coupling of the fluid and energy equations in the CTF numerical solution, it is necessary to under-relax the
+#>        heat transfer coefficient in time for numerical stability.  For some boiling cases, it may be necessary to increase the
+#>        under-relaxation.},
+#>     notes={}
+#>   }
   beta_htc:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-      - is_gt() 0
-      - is_leq() 1
-
+      - is_ge() 0
+#>
+#>   {\bf hgap} hgap
+#>   \VERAInputTable{
+#>     name={hgap},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={W/m**2/K},
+#>     unitsother={},
+#>     valuedefault={5678.3},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets the gap conductance in the fuel rod gap (only applicable when using a constant gap conductance fuel rod model).},
+#>     notes={}
+#>   }
   hgap:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
-
+#>
+#>   {\bf clad_material} clad_material
+#>   \VERAInputTable{
+#>     name={clad_material},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={zirc},
+#>     valuesapplicable={zirc, ss, sic},
+#>     limitations={},
+#>     description={Sets the clad material properties.  Currently has no effect in CTF.  Cladding material properties always default to Zircaloy.},
+#>     notes={}
+#>   }
   clad_material:
     <<: *dtstring
     _content:
     _check:
       - is_string()
       - in_dictionary() zirc ss sic
-
+#>
+#>   {\bf epso} epso
+#>   \VERAInputTable{
+#>     name={epso},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-4},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Relative tolerance for the linear solver (pressure matrix solve).  Only applicable when using
+#>        an iterative solver.  Setting too high can lead to numerical instability.},
+#>     notes={}
+#>   }
   epso:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
-
-  oitmax:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-
+#>
+#>   {\bf iitmax} iitmax
+#>   \VERAInputTable{
+#>     name={iitmax},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={160},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Maximum number of iterations to take in the linear solve (pressure matrix solve).  Only
+#>        applicable when using an iterative solver.  Setting too low can lead to numerical instabilities.},
+#>     notes={}
+#>   }
   iitmax:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
-
+#>
+#>   {\bf dtmin} dtmin
+#>   \VERAInputTable{
+#>     name={dtmin},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={s},
+#>     unitsother={},
+#>     valuedefault={1e-6},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Sets the minimum allowable timestep size.  Used for both transients and steady state (because CTF
+#>        solves a transient to get to steady state).  If the timestep size needs to be reduced smaller than this value,
+#>        the code will crash with a "cannot reduce timestep size" error.},
+#>     notes={}
+#>   }
   dtmin:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
-
+#>
+#>   {\bf dtmax} dtmax
+#>   \VERAInputTable{
+#>     name={dtmax},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={s},
+#>     unitsother={},
+#>     valuedefault={0.1},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Sets the maximum allowable timestep size.  Used for both transients and steady state (because CTF
+#>        solves a transient to get to steady state).  CTF uses dynamic timestep selection which is mainly a function
+#>        of the Courant number.  This puts a ceiling on the dynamic timestep size to prevent numerical instability.},
+#>     notes={}
+#>   }
   dtmax:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
-
-  tend:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-
+#>
+#>   {\bf rtwfp} rtwfp
+#>   \VERAInputTable{
+#>     name={rtwfp},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={100.0},
+#>     valuesapplicable={>=1.0},
+#>     limitations={},
+#>     description={Sets the ratio between the conduction and fluid timestep sizes.  For steady state problems,
+#>        the timestep sizes of the conduction equation can be set larger than the fluid timestep sizes to reduce
+#>        computational time.  For transients, CTF will override this to be 1.0.  Setting this too high can lead
+#>        to numerical instability.},
+#>     notes={}
+#>   }
   rtwfp:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-      - is_gt() 0
-
+      - is_ge() 1
+#>
+#>   {\bf maxits} maxits
+#>   \VERAInputTable{
+#>     name={maxits},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={10000},
+#>     valuesapplicable={>=1},
+#>     limitations={},
+#>     description={Sets the maximum number of iterations CTF will take during any individual steady state solve.
+#>        If the iterations go over this maximum value, CTF will crash on an unable to converge exception.},
+#>     notes={}
+#>   }
   maxits:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_gt() 0
-
-  micro_zaids:
-    <<: *dtlist
-    _content:
-    _check:
-      - arraysize()==2
-
-  micro_rxns:
-    <<: *dtlist
-    _content:
-    _check:
-      - arraysize()==2
-
+      - is_ge() 1
+#>
+#>   {\bf courant} courant 
+#>   \VERAInputTable{
+#>     name={courant},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.8},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets the Courant number to use when setting timesteps size.  Setting this value lower will
+#>        lead to overall smaller timestep sizes being used in CTF and setting it larger will lead to overall
+#>        larger timestep sizes being used.  It is not recommended that the user adjust this value as it typically
+#>        is not an effective means of improving CTF convergence.},
+#>     notes={}
+#>   }
   courant:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
-
-  maps_filename:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
-
-  heated_elements_type:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-
-  heater_tube_id:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-
-  heater_tube_od:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-
-  heater_tube_pitch:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-
+#>
+#>   {\bf solver} solver
+#>   \VERAInputTable{
+#>     name={solver},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={3/5},
+#>     valuesapplicable={0, 3, 5, 6, 7, 8},
+#>     limitations={},
+#>     description={Selects the linear solver to use for the pressure matrix solve.  Options are:
+#>        0 - Direct (Gaussian elimination)     (serial runs only)
+#>        3 - Internal Krylov solver (BiCGStab) (serial runs only, default for serial run)
+#>        5 - PETSc BiCGStab (default for parallel run)
+#>        6 - PETSc with pressure matrix reduced to root and solved in serial (used only for parallel verification cases, do not use for production parallel runs)
+#>        7 - PETSc BiCGStab using block Jacobi preconditioner
+#>        8 - Trillinos BiCGStab solver},
+#>     notes={}
+#>   }
   solver:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - in_dictionary() 0 3 5 6 7 8
-
+#>
+#>   {\bf parallel} parallel
+#>   \VERAInputTable{
+#>     name={parallel},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={0, 1},
+#>     limitations={},
+#>     description={Instructs CTF to run in serial (0) or in parallel (1)},
+#>     notes={}
+#>   }
   parallel:
     <<: *dtint
     _content:
     _check:
       - is_int()
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf global_energy_balance} global_energy_balance
+#>   \VERAInputTable{
+#>     name={global_energy_balance},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={percent},
+#>     unitsother={},
+#>     valuedefault={0.01},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets tolerance for energy balance (energy in minus energy out normalized to energy in) for steady state runs.},
+#>     notes={}
+#>   }
   global_energy_balance:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf global_mass_balance} global_mass_balance
+#>   \VERAInputTable{
+#>     name={global_mass_balance},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={percent},
+#>     unitsother={},
+#>     valuedefault={0.01},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets tolerance for mass balance (mass in minus mass out normalized to mass in) for steady state runs.},
+#>     notes={}
+#>   }
   global_mass_balance:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf fluid_energy_storage} fluid_energy_storage
+#>   \VERAInputTable{
+#>     name={fluid_energy_storage},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={percent},
+#>     unitsother={},
+#>     valuedefault={0.5},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets tolerance for energy storage in the fluid (change in energy over a timestep) for steady state runs.  
+#>        Only applicable when using the storage-based convergence criteria (specify fluid_energy_storage/solid_energy_storage/mass_storage).
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   fluid_energy_storage:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf solid_energy_storage} solid_energy_storage
+#>   \VERAInputTable{
+#>     name={solid_energy_storage},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={percent},
+#>     unitsother={},
+#>     valuedefault={0.5},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets tolerance for energy storage in the solid (change in energy over a timestep) for steady state runs.  
+#>        Only applicable when using the storage-based convergence criteria (specify fluid_energy_storage/solid_energy_storage/mass_storage).
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   solid_energy_storage:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf mass_storage} mass_storage
+#>   \VERAInputTable{
+#>     name={mass_storage},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={percent},
+#>     unitsother={},
+#>     valuedefault={0.5},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets tolerance for mass storage in the fluid (change in mass in system over a timestep) for steady state runs.  
+#>        Only applicable when using the storage-based convergence criteria (specify fluid_energy_storage/solid_energy_storage/mass_storage).
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   mass_storage:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf pressure_criteria} pressure_criteria
+#>   \VERAInputTable{
+#>     name={pressure_criteria},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-4},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets tolerance on l-infinity of pressure change for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   pressure_criteria:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf Tcool_criteria} Tcool_criteria
+#>   \VERAInputTable{
+#>     name={Tcool_criteria},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-3},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets tolerance on l-infinity of coolant temperature for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   Tcool_criteria:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf Tsolid_criteria} Tsolid_criteria
+#>   \VERAInputTable{
+#>     name={Tsolid_criteria},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-3},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets tolerance on l-infinity of solid temperature for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   Tsolid_criteria:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf void_criteria} void_criteria
+#>   \VERAInputTable{
+#>     name={void_criteria},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-4},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets tolerance on l-infinity of void for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.  Not checked for single phase runs.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   void_criteria:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf vliq_criteria} vliq_criteria
+#>   \VERAInputTable{
+#>     name={vliq_criteria},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-3},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets tolerance on l-infinity of liquid velocity for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.  
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   vliq_criteria:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf vvap_criteria} vvap_criteria
+#>   \VERAInputTable{
+#>     name={vvap_criteria},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-2},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets tolerance on l-infinity of vapor velocity for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.  Not checked for single phase runs. 
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   vvap_criteria:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf vdrop_criteria} vdrop_criteria
+#>   \VERAInputTable{
+#>     name={vdrop_criteria},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-2},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets tolerance on l-infinity of droplet velocity for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.  Not checked for single phase runs. 
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   vdrop_criteria:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf pressurea_criteria} pressurea_criteria
+#>   \VERAInputTable{
+#>     name={pressurea_criteria},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={bar},
+#>     unitsother={},
+#>     valuedefault={1e-3},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets absolute tolerance on l-infinity of pressure for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   pressurea_criteria:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf Tcoola_criteria} Tcoola_criteria
+#>   \VERAInputTable{
+#>     name={Tcoola_criteria},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={K},
+#>     unitsother={},
+#>     valuedefault={1e-3},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets absolute tolerance on l-infinity of coolant temperature for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   Tcoola_criteria:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf Tsolida_criteria} Tsolida_criteria
+#>   \VERAInputTable{
+#>     name={Tsolida_criteria},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={K},
+#>     unitsother={},
+#>     valuedefault={1e-3},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets absolute tolerance on l-infinity of solid temperature for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   Tsolida_criteria:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf vliqa_criteria} vliqa_criteria
+#>   \VERAInputTable{
+#>     name={vliqa_criteria},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={m/s},
+#>     unitsother={},
+#>     valuedefault={1e-3},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets absolute tolerance on l-infinity of liquid velocity for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   vliqa_criteria:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf vvapa_criteria} vvapa_criteria
+#>   \VERAInputTable{
+#>     name={vvapa_criteria},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={m/s},
+#>     unitsother={},
+#>     valuedefault={1e-2},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets absolute tolerance on l-infinity of vapor velocity for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional. Not used for single-phase runs.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   vvapa_criteria:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf vdropa_criteria} vdropa_criteria
+#>   \VERAInputTable{
+#>     name={vdropa_criteria},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={m/s},
+#>     unitsother={},
+#>     valuedefault={1e-2},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets absolute tolerance on l-infinity of droplet velocity for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional. Not used for single-phase runs.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   vdropa_criteria:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf pressure_criteria_l2} pressure_criteria_l2
+#>   \VERAInputTable{
+#>     name={pressure_criteria_l2},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-5},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets relative tolerance on l-2 of pressure for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional. 
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   pressure_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf Tcool_criteria_l2} Tcool_criteria_l2
+#>   \VERAInputTable{
+#>     name={Tcool_criteria_l2},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-4},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets relative tolerance on l-2 of coolant temperature for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional. 
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   Tcool_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf Tsolid_criteria_l2} Tsolid_criteria_l2
+#>   \VERAInputTable{
+#>     name={Tsolid_criteria_l2},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-4},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets relative tolerance on l-2 of solid temperature for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional. 
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   Tsolid_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf void_criteria_l2} void_criteria_l2
+#>   \VERAInputTable{
+#>     name={void_criteria_l2},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-5},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets absolute tolerance on l-2 of void for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional. Not used in single phase runs.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   void_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf vliq_criteria_l2} vliq_criteria_l2
+#>   \VERAInputTable{
+#>     name={vliq_criteria_l2},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-4},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets relative tolerance on l-2 of liquid velocity for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional. 
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   vliq_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf vvap_criteria_l2} vvap_criteria_l2
+#>   \VERAInputTable{
+#>     name={vvap_criteria_l2},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-4},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets relative tolerance on l-2 of vapor velocity for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.  Not used for single-phase runs.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   vvap_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf vdrop_criteria_l2} vdrop_criteria_l2
+#>   \VERAInputTable{
+#>     name={vdrop_criteria_l2},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-4},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets relative tolerance on l-2 of droplet velocity for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.  Not used for single-phase runs.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   vdrop_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf pressure_criteria_l2} pressure_criteria_l2
+#>   \VERAInputTable{
+#>     name={pressure_criteria_l2},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1e-5},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets relative tolerance on l-2 of pressure for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   pressurea_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf Tcoola_criteria_l2} Tcoola_criteria_l2
+#>   \VERAInputTable{
+#>     name={Tcoola_criteria_l2},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={K},
+#>     unitsother={},
+#>     valuedefault={1e-5},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets absolute tolerance on l-2 of coolant temperature for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   Tcoola_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf Tsolida_criteria_l2} Tsolida_criteria_l2
+#>   \VERAInputTable{
+#>     name={Tsolida_criteria_l2},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={K},
+#>     unitsother={},
+#>     valuedefault={1e-5},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets absolute tolerance on l-2 of solid temperature for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   Tsolida_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf vliqa_criteria_l2} vliqa_criteria_l2
+#>   \VERAInputTable{
+#>     name={vliqa_criteria_l2},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={m/s},
+#>     unitsother={},
+#>     valuedefault={1e-5},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets absolute tolerance on l-2 of liquid velocity for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   vliqa_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf vvpaa_criteria_l2} vvapa_criteria_l2
+#>   \VERAInputTable{
+#>     name={vvapa_criteria_l2},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={m/s},
+#>     unitsother={},
+#>     valuedefault={1e-4},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets absolute tolerance on l-2 of vapor velocity for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.  Not used for single-phase runs.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   vvapa_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf vdropa_criteria_l2} vdropa_criteria_l2
+#>   \VERAInputTable{
+#>     name={vdropa_criteria_l2},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={m/s},
+#>     unitsother={},
+#>     valuedefault={1e-4},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets absolute tolerance on l-2 of droplet velocity for steady state runs.
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
+#>        Note that when using the change-based criteria, all criteria are optional.  Not used for single-phase runs.
+#>        See CTF User Manual for more details.},
+#>     notes={}
+#>   }
   vdropa_criteria_l2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_gt() 0.0
+#>
+#>   {\bf use_sol_stop_crit} use_sol_stop_crit
+#>   \VERAInputTable{
+#>     name={use_sol_stop_crit},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Selects the stopping criteria to use for steady state runs.  Options are:
+#>        0 - storage-based criteria (global_energy_balance, global_mass_balance, fluid_energy_storage, solid_energy_storage, mass_storage)
+#>        1 - change-based criteria (global_energy_balance, global_mass_balance, pressure_criteria, pressurea_criteria, 
+#>            Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>            vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
+#>            Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>            vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2)
+#>        All criteria are optional with defaults.}
+#>     notes={}
+#>   }
   use_sol_stop_crit:
     <<: *dtint
     _content:
     _check:
       - is_int()
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf proc_per_assem} proc_per_assem
+#>   \VERAInputTable{
+#>     name={proc_per_assem},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={1 4 9 16},
+#>     limitations={},
+#>     description={Sets the number of domains to divide each full assembly into for parallel runs.
+#>        Only applicable for parallel runs.  The higher the number, the more cores CTF will use and the faster
+#>        it will run in a parallel model.  However, the number of cores required by CTF must be less than or
+#>        equal to the number required by VERA-CS and the number of cores available on the system.},
+#>     notes={}
+#>   }
   proc_per_assem:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - in_dictionary() 1 4 9 16
-
-  grid_hi2lo:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_geq() 0
-      - is_leq() 1
-
+#>
+#>   {\bf edit_gaps} edit_gaps
+#>   \VERAInputTable{
+#>     name={edit_gaps},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to write an output file from CTF specifying gap (lateral flow path) solution data.
+#>        This file will be large for full-core models.},
+#>     notes={}
+#>   }
   edit_gaps:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-      - is_leq() 1
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf edit_main_text_output} edit_main_text_output
+#>   \VERAInputTable{
+#>     name={edit_main_text_output},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to write the main text output file from CTF summarizing solution data.
+#>        This file will be large for full-core models.},
+#>     notes={}
+#>   }
   edit_main_text_output:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-      - is_leq() 1
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf edit_channels} edit_channels
+#>   \VERAInputTable{
+#>     name={edit_channels},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to write the channel text output file from CTF summarizing solution data.
+#>        This file will be large for full-core models.},
+#>     notes={}
+#>   }
   edit_channels:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-      - is_leq() 1
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf edit_rods} edit_rods
+#>   \VERAInputTable{
+#>     name={edit_rods},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to write rod data to the main text output file from CTF.
+#>        This file will be large for full-core models.},
+#>     notes={}
+#>   }
   edit_rods:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-      - is_leq() 1
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf edit_dnb} edit_dnb
+#>   \VERAInputTable{
+#>     name={edit_dnb},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to write DNB data to the VERA-CS HDF5 file.},
+#>     notes={}
+#>   }
   edit_dnb:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-      - is_leq() 1
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf edit_dnb_text_file} edit_dnb_text_file
+#>   \VERAInputTable{
+#>     name={edit_dnb_text_file},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to write the DNB text file.  This file will be large for full core models.},
+#>     notes={}
+#>   }
   edit_dnb_text_file:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - in_dictionary() 0 1
-
+#>
+#>   {\bf edit_convergence} edit_convergence
+#>   \VERAInputTable{
+#>     name={edit_convergence},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to write the convergence information output file from CTF.},
+#>     notes={}
+#>   }
   edit_convergence:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-      - is_leq() 1
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf edit_hdf5} edit_hdf5
+#>   \VERAInputTable{
+#>     name={edit_hdf5},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to write CTF data to the VERA-CS HDF5 file.}
+#>     notes={}
+#>   }
   edit_hdf5:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-      - is_leq() 1
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf edit_native_hdf5} edit_native_hdf5
+#>   \VERAInputTable{
+#>     name={edit_native_hdf5},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to write the CTF native HDF5 file.  This file writes information for all
+#>        pins in the model in a more arbitrary way than the VERA-CS HDF5 file, which is organized by
+#>        assembly and core location.  This file contains more detailed information than the VERA-CS HDF5 file.
+#>        This file can currently only be printed for serial runs.},
+#>     notes={}
+#>   }
   edit_native_hdf5:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-      - is_leq() 1
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf edit_fluid_vtk} edit_fluid_vtk
+#>   \VERAInputTable{
+#>     name={edit_fluid_vtk},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to write the CTF fluid VTK file.  This allows the user to visualize solution
+#>        results using a VTK reader, but this file will be large for full core models.},
+#>     notes={}
+#>   }
   edit_fluid_vtk:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-      - is_leq() 1
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf edit_rod_vtk} edit_rod_vtk
+#>   \VERAInputTable{
+#>     name={edit_rod_vtk},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to write the CTF rod VTK file.  This allows the user to visualize solution
+#>        results using a VTK reader, but this file will be large for full core models.},
+#>     notes={}
+#>   }
   edit_rod_vtk:
     <<: *dtint
     _content:
     _check:
       - is_int()
-
-  edit_rod_htc:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
       - in_dictionary() 0 1
-
+#>
+#>   {\bf hi2lo_sub_axial} hi2lo_sub_axial
+#>   \VERAInputTable{
+#>     name={hi2lo_sub_axial},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Use to set the number of sub-levels to divide each CTF axial level into when forming
+#>        the coupling mesh with MAMBA.  Only applicable when using ROTHCON to reconstruct rod surface temperatures
+#>        and TKE.},
+#>     notes={}
+#>   }
   hi2lo_sub_axial:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_geq() 1
-
+#>
+#>   {\bf hi2lo_sub_theta} hi2lo_sub_theta
+#>   \VERAInputTable{
+#>     name={hi2lo_sub_theta},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Use to set the number of sub-sectors to divide each CTF rod sector into when forming
+#>        the coupling mesh with MAMBA.  Only applicable when using ROTHCON to reconstruct rod surface temperatures
+#>        and TKE.},
+#>     notes={}
+#>   }
   hi2lo_sub_theta:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_geq() 1
-
+#>
+#>   {\bf model_corrosion} model_corrosion
+#>   \VERAInputTable{
+#>     name={model_corrosion},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to turn on the clad corrosion model in CTF.  Only applicable for crud simulations.},
+#>     notes={}
+#>   }
   model_corrosion:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-      - is_leq() 1
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf gap_model} gap_model
+#>   \VERAInputTable{
+#>     name={gap_model},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={constant},
+#>     valuesapplicable={constant dynamic},
+#>     limitations={},
+#>     description={Sets the fuel rod pellet/clad gap thermal conductivity model.  Can either be constant (user-specified value) or dynamic (CTF will calculate based on thermal expansion and burnup effects).},
+#>     notes={}
+#>   }
   gap_model:
     <<: *dtstring
     _content:
     _check:
       - is_string()
-
+      - in_dictionary() constant dynamic
+#>
+#>   {\bf boil_ht_cor} boil_ht_cor
+#>   \VERAInputTable{
+#>     name={boil_ht_cor},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Sets the boiling heat transfer model.  Options are:
+#>        0 - Chen
+#>        1 - Thom},
+#>     notes={}
+#>   }
   boil_ht_cor:
     <<: *dtstring
     _content:
     _check:
       - is_string()
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf property_evaluations} property_evaluations
+#>   \VERAInputTable{
+#>     name={property_evaluations},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={iapws1997_lookup},
+#>     valuesapplicable={asme1968 iapws1997_direct iapws1997_lookup flibe},
+#>     limitations={},
+#>     description={Sets the equation of state source to use for fluid properties.  Options are:
+#>        asme1968 - ASME 1968 tabls
+#>        iapws1997_direct - IAPWS 1997 standard using direct correlation evaluations (will be computationally slower)
+#>        iapws1997_lookup - IAPWS 1997 standard lookup tables built from the direct correlation evaluations during initialization (computationally faster to evaluate)
+#>        flibe - Generic properties for FLiBe salt coolant},
+#>     notes={}
+#>   }
   property_evaluations:
     <<: *dtstring
     _content:
     _check:
       - is_string()
       - in_dictionary() asme asme1968 iapws iapws1997_direct iapws_v2 iapws1997_lookup flibe
-
+#>
+#>   {\bf beta_sp} beta_sp
+#>   \VERAInputTable{
+#>     name={beta_sp},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.005},
+#>     valuesapplicable={>=0.0},
+#>     limitations={},
+#>     description={Sets the strength of turbulent mixing causing lateral cross-flow in CTF.  The default
+#>        is currently 0.005, but it has been found that 0.037 is more reasonable for bundles with mixing
+#>        vane grids (will be updated in the future).},
+#>     notes={}
+#>   }
   beta_sp:
     <<: *dtdouble
     _content:
     _check:
-
       - is_float()
-
+      - is_ge() 0.0
+#>
+#>   {\bf k_void_drift} k_void_drift
+#>   \VERAInputTable{
+#>     name={k_void_drift},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.4},
+#>     valuesapplicable={>=0.0},
+#>     limitations={},
+#>     description={Sets the equilibrium distribution weighting factor in the void drift model.  Decreasing
+#>        this value leads to less void drift and increasing it leads to more.},
+#>     notes={}
+#>   }
   k_void_drift:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-
+      - is_ge() 0.0
+#>
+#>   {\bf crud} crud
+#>   \VERAInputTable{
+#>     name={crud},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={MAMBA},
+#>     valuesapplicable={MAMBA cicada none},
+#>     limitations={},
+#>     description={Sets the crud modeling tool.  Only applicable during a crud simulation.},
+#>     notes={}
+#>   }
   crud:
     <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() none internal MAMBA cicada
+      - in_dictionary() none MAMBA cicada
+
 #>
 #>   {\bf max_crud_step_size} max_crud_step_size
 #>   \VERAInputTable{
@@ -3834,7 +5043,6 @@ COBRATF:
 #>                  Defaults to 1. }, 
 #>     notes={}
 #>   }
-     
   crud_dT_feedback:
     <<: *dtword
     _content:
@@ -3842,41 +5050,126 @@ COBRATF:
       - is_int()
       - in_dictionary() 0 1
 
+#>
+#>   {\bf cicada_outer_radial_zone_num_cells_r} cicada_outer_radial_zone_num_cells_r
+#>   \VERAInputTable{
+#>     name={cicada_outer_radial_zone_num_cells_r},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={100},
+#>     valuesapplicable={>=1},
+#>     limitations={},
+#>     description={Sets the number of rings in the oxide region of the clad for Cicada runs.  Only
+#>        applicable when Cicada used as the crud tool.  Only applicable when cicada_dimension=3.},
+#>     notes={}
+#>   }
   cicada_outer_radial_zone_num_cells_r:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
-
+#>
+#>   {\bf cicada_inner_radial_zone_num_cells_r} cicada_inner_radial_zone_num_cells_r
+#>   \VERAInputTable{
+#>     name={cicada_inner_radial_zone_num_cells_r},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={20},
+#>     valuesapplicable={>=1},
+#>     limitations={},
+#>     description={Sets the number of rings in the clad region of the clad for Cicada runs.  Only
+#>        applicable when Cicada used as the crud tool.  Only applicable when cicada_dimension=3.},
+#>     notes={}
+#>   }
   cicada_inner_radial_zone_num_cells_r:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
-
+#>
+#>   {\bf cicada_outer_radial_zone_thickness} cicada_outer_radial_zone_thickness
+#>   \VERAInputTable{
+#>     name={cicada_outer_radial_zone_thickness},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={100e-6},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets the thickness of the oxide modeling region of the clad.  Only applicable for
+#>        crud simulations where Cicada is being used as the modeling tool.  Only applicable when cicada_dimension=3.},
+#>     notes={}
+#>   }
   cicada_outer_radial_zone_thickness:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0.0
-
+#>
+#>   {\bf cicada_dimensions} cicada_dimension
+#>   \VERAInputTable{
+#>     name={cicada_dimensions},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={1 3},
+#>     limitations={},
+#>     description={Chooses the dimensions of the clad/oxide conduction solution in Cicada.  Only applicable
+#>        when doing a crud simulation using Cicada as the crud tool.  Can either be 1 for radial conduction
+#>        only or 3 for radial/axial/azimuthal conduction.},
+#>     notes={}
+#>   }
   cicada_dimensions:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - in_dictionary() 1 3
-
+#>
+#>   {\bf enable_corrosion_lithium} enable_corrosion_lithium
+#>   \VERAInputTable{
+#>     name={enable_corrosion_lithium},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to turn on the lithium effect on clad corrosion.  Only has an effect when modeling
+#>        a crud simulation using MAMBA as the crud code.},
+#>     notes={}
+#>   }
   enable_corrosion_lithium:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - in_dictionary() 0 1
-
+#>
+#>   {\bf crud_details} crud_details
+#>   \VERAInputTable{
+#>     name={crud_details},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to turn on additional edits to the VERA-CS HDF5 file related to the crud simulation.},
+#>     notes={}
+#>   }
   crud_details:
     <<: *dtint
     _content:
@@ -3891,7 +5184,7 @@ COBRATF:
 #>     need={Optional},
 #>     unitsdefault={W/cm/K},
 #>     unitsother={},
-#>     valuedefault={},
+#>     valuedefault={1.5},
 #>     valuesapplicable={Greater than or equal to 0.0},
 #>     limitations={},
 #>     description={The thermal conductivity of the clad oxide layer},
@@ -3905,28 +5198,68 @@ COBRATF:
       - is_float()
       - is_geq() 0.0
 
+#>   {\bf clad_corrosion_model} clad_corrosion_model
+#>   \VERAInputTable{
+#>     name={clad_corrosion_model},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={1 2 3},
+#>     limitations={},
+#>     description={Selects the corrosion model to use.  The corrosion model is based on the clad material.  Options include:
+#>        1 - Zirc 4
+#>        2 - M5
+#>        3 - ZIRLO
+#>     notes={}
+#>   }
   clad_corrosion_model:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - in_dictionary() 1 2 3
-
+#>
+#>   {\bf trans_dnb} trans_dnb
+#>   \VERAInputTable{
+#>     name={trans_dnb},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to enable the transient CHF model.  Only applicable for transients.},
+#>     notes={}
+#>   }
   trans_dnb:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-      - is_leq() 1
-
+      - in_dictionary() 0 1
+#>
+#>   {\bf cross_flow} cross_flow
+#>   \VERAInputTable{
+#>     name={cross_flow},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 0 to shut off lateral cross flow in CTF.},
+#>     notes={}
+#>   }
   cross_flow:
     <<: *dtint
     _content:
     _check:
       - is_int()
-      - is_geq() 0
-      - is_leq() 1
+      - in_dictionary() 0 1
 
 
 COUPLING:
