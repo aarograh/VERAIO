@@ -191,7 +191,6 @@
   nfuel   3          ! number of rings in fuel temp calc
   irfc    2
   epso    0.001
-  oitmax  5       
   iitmax  40
 
 

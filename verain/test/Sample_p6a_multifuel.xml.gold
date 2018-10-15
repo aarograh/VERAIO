@@ -348,9 +348,7 @@
     <Parameter name="maxits" type="int" value="10000"/>
     <Parameter name="nc" type="int" value="1"/>
     <Parameter name="nfuel" type="int" value="3"/>
-    <Parameter name="oitmax" type="int" value="5"/>
     <Parameter name="rtwfp" type="double" value="1000.0"/>
-    <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>
   <ParameterList name="COUPLING">
     <Parameter name="epsk" type="double" value="5.0"/>

@@ -451,13 +451,6 @@ COBRATF:
         - copy COBRATF/$edit_rod_vtk
       _content:
 
-    edit_rod_htc:
-      _pltype: parameter
-      _type: int
-      _do:
-        - copy COBRATF/$edit_rod_htc
-      _content:
-
     proc_per_assem:
       _pltype: parameter
       _type: int

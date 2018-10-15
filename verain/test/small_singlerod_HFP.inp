@@ -161,7 +161,6 @@
   dhfrac  0.02          ! fraction of power deposited directly into coolant
   hgap    5678.3        ! gap conductance
   edit_channels 1
-  maps_filename = single_rod_HFP
   parallel 0
   ! Following is not used in this simulation, but just here for testing
   cicada_outer_radial_zone_num_cells_r 10

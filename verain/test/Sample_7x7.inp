@@ -363,11 +363,9 @@
   dhfrac  0.0           ! fraction of power deposited directly into coolant *** remove for 7x7
   hgap    5678.3        ! gap conductance
   epso    0.001
-  oitmax  5
   iitmax  40
   dtmin   0.000001
   dtmax   0.1
-  tend    0.1
   rtwfp   1000.0
   maxits  10000
   courant 0.8

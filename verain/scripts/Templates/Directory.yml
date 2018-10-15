@@ -1351,17 +1351,6 @@ SHIFT:
       - is_word()
       - in_dictionary() all none pin
 
-  micro_zaids:
-    <<: *dtlist
-    _content:
-    _check:
-      - arraysize()==2
-
-  micro_rxns:
-    <<: *dtlist
-    _content:
-    _check:
-      - arraysize()==2
 #>
 #>   {\bf verbosity} verbosity
 #>   \VERAInputTable{
@@ -3486,7 +3475,7 @@ COBRATF:
     _content:
     _check:
       - is_float()
-      - is_ge() 0
+      - is_geq() 0
 #>
 #>   {\bf hgap} hgap
 #>   \VERAInputTable{
@@ -3635,7 +3624,7 @@ COBRATF:
     _content:
     _check:
       - is_float()
-      - is_ge() 1
+      - is_geq() 1
 #>
 #>   {\bf maxits} maxits
 #>   \VERAInputTable{
@@ -3656,7 +3645,7 @@ COBRATF:
     _content:
     _check:
       - is_int()
-      - is_ge() 1
+      - is_geq() 1
 #>
 #>   {\bf courant} courant 
 #>   \VERAInputTable{
@@ -4901,16 +4890,14 @@ COBRATF:
 #>   {\bf boil_ht_cor} boil_ht_cor
 #>   \VERAInputTable{
 #>     name={boil_ht_cor},
-#>     type={int},
+#>     type={string},
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={1},
-#>     valuesapplicable={0 1},
+#>     valuedefault={thom},
+#>     valuesapplicable={chen thom},
 #>     limitations={},
-#>     description={Sets the boiling heat transfer model.  Options are:
-#>        0 - Chen
-#>        1 - Thom},
+#>     description={Sets the boiling heat transfer model.  Options are chen or thom.},
 #>     notes={}
 #>   }
   boil_ht_cor:
@@ -4918,7 +4905,7 @@ COBRATF:
     _content:
     _check:
       - is_string()
-      - in_dictionary() 0 1
+      - in_dictionary() chen thom
 #>
 #>   {\bf property_evaluations} property_evaluations
 #>   \VERAInputTable{
@@ -4964,7 +4951,7 @@ COBRATF:
     _content:
     _check:
       - is_float()
-      - is_ge() 0.0
+      - is_geq() 0.0
 #>
 #>   {\bf k_void_drift} k_void_drift
 #>   \VERAInputTable{
@@ -4985,7 +4972,7 @@ COBRATF:
     _content:
     _check:
       - is_float()
-      - is_ge() 0.0
+      - is_geq() 0.0
 #>
 #>   {\bf crud} crud
 #>   \VERAInputTable{
@@ -5260,6 +5247,18 @@ COBRATF:
     _check:
       - is_int()
       - in_dictionary() 0 1
+
+  micro_zaids:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+
+  micro_rxns:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
 
 
 COUPLING:
