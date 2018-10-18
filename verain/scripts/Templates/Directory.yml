@@ -3797,7 +3797,27 @@ COBRATF:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none internal MAMBA
+      - in_dictionary() none internal MAMBA cicada
+#>
+#>   {\bf max_crud_step_size} max_crud_step_size
+#>   \VERAInputTable{
+#>     name={max_crud_step_size},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={day},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Maximum number of days in a crud grow.  Setting this smaller than the depletion step size will result in multiple crud grows being made during the depletion step with source term data being updated during each substep.},
+#>     notes={}
+#>   }
+  max_crud_step_size:
+    <<: *dtfloat
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
 
   cicada_outer_radial_zone_num_cells_r:
     <<: *dtint
@@ -3840,6 +3860,27 @@ COBRATF:
     _check:
       - is_int()
       - in_dictionary() 0 1
+#>
+#>   {\bf oxide\_thermal\_conductivity} oxide\_thermal\_conductivity
+#>   \VERAInputTable{
+#>     name={oxide\_thermal\_conductivity},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={W/cm/K},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={Greater than or equal to 0.0},
+#>     limitations={},
+#>     description={The thermal conductivity of the clad oxide layer},
+#>     notes={}
+#>   }
+
+  oxide_thermal_conductivity:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0.0
 
   clad_corrosion_model:
     <<: *dtint
