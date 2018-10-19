@@ -280,6 +280,7 @@
       <Parameter name="do_transport" type="bool" value="true"/>
       <Parameter name="eq_set" type="string" value="spn_fv"/>
       <Parameter name="extend_axial_mesh_size" type="double" value="10.0"/>
+      <Parameter name="flux_decomposition" type="string" value="full"/>
       <Parameter name="max_delta_z" type="double" value="1.0"/>
       <Parameter name="mesh" type="int" value="1"/>
       <Parameter name="num_blocks_i" type="int" value="2"/>

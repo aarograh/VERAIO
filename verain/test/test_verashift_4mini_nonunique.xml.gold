@@ -662,6 +662,7 @@
     </ParameterList>
     <Parameter name="transfer" type="string" value="fiss_src"/>
     <Parameter name="transport" type="string" value="ce"/>
+    <Parameter name="use_mpact_spectrum" type="bool" value="true"/>
     <Parameter name="vera_pressure_vessel" type="bool" value="true"/>
   </ParameterList>
   <ParameterList name="EDITS">

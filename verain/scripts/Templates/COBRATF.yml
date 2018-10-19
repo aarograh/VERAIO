@@ -577,6 +577,13 @@ COBRATF:
         - copy COBRATF/$crud
       _content:
 
+    max_crud_step_size:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$max_crud_step_size
+      _content:
+
     cicada_outer_radial_zone_num_cells_r:
       _pltype: parameter
       _type: int
@@ -618,6 +625,14 @@ COBRATF:
       _do:
         - copy COBRATF/$crud_details
       _content:
+
+    oxide_thermal_conductivity:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$oxide_thermal_conductivity
+      _content:
+
 
     clad_corrosion_model:
       _pltype: parameter

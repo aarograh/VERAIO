@@ -7,23 +7,23 @@
   tfuel    600 K
   boron    1300           ! ppmB
   modden   0.743          ! g/cc
-  sym      qtr  
+  sym      qtr
   feedback off
 
 [CORE]
-  size   1              ! one assembly   
-  rated  17.67 0.6823   ! MW, Mlbs/hr 
+  size   1              ! one assembly
+  rated  17.67 0.6823   ! MW, Mlbs/hr
   apitch 21.5
   height 406.337
 
   core_shape
-    1 
+    1
 
   assm_map
     ASSY
 
   lower_plate ss  5.0 0.5   ! mat, thickness, vol frac
-  upper_plate ss  7.6 0.5 
+  upper_plate ss  7.6 0.5
  !lower_ref  mod 20.0 1.0   ! not needed
 
   bc_rad reflecting
@@ -32,18 +32,18 @@
 
 [ASSEMBLY]
   title "Westinghouse 17x17"
-  npin 17 
+  npin 17
   ppitch 1.26
-  
-  fuel U31 10.257 94.5 / 3.1 u-234 0.026347 
+
+  fuel U31 10.257 94.5 / 3.1 u-234 0.026347
 
   cell 1     0.4096 0.418 0.475 / U31 he zirc4
   cell 3            0.561 0.602 / mod    zirc4      ! guide/instrument tube
   cell 4            0.418 0.475 /     he zirc4      ! plenum
   cell 5                  0.475 /        zirc4      ! end plug
-  cell 6                  0.475 /        mod        ! empty    
+  cell 6                  0.475 /        mod        ! empty
 
-  lattice FUEL  
+  lattice FUEL
        3
        1 1
        1 1 1
@@ -65,7 +65,7 @@
        4 4 4 4 4 4 4 4
        4 4 4 4 4 4 4 4 4
 
-  lattice PLUG 
+  lattice PLUG
        3
        5 5
        5 5 5
@@ -76,7 +76,7 @@
        5 5 5 5 5 5 5 5
        5 5 5 5 5 5 5 5 5
 
-  lattice GAP  
+  lattice GAP
        3
        6 6
        6 6 6
@@ -88,10 +88,10 @@
        6 6 6 6 6 6 6 6 6
 
   axial ASSY   6.053
-        GAP   10.281 
-        PLUG  11.951 
-        FUEL 377.711 
-        PLEN 393.711 
+        GAP   10.281
+        PLUG  11.951
+        FUEL 377.711
+        PLEN 393.711
         PLUG 395.381
         GAP  397.51
 
@@ -112,56 +112,56 @@
   upper_nozzle  ss 8.827 6250.0  ! mat, height, mass (g)
 
 [EDITS]
-  axial_edit_bounds 
+  axial_edit_bounds
       11.951
-      15.817 
-      24.028 
-      32.239 
-      40.45 
-      48.662 
-      56.873 
-      65.084 
-      73.295 
-      77.105 
-      85.17 
-      93.235 
-      101.3 
-      109.365 
-      117.43 
-      125.495 
-      129.305 
-      137.37 
-      145.435 
-      153.5 
-      161.565 
-      169.63 
-      177.695 
-      181.505 
-      189.57 
-      197.635 
-      205.7 
-      213.765 
-      221.83 
-      229.895 
-      233.705 
-      241.77 
-      249.835 
-      257.9 
-      265.965 
-      274.03 
-      282.095 
-      285.905 
-      293.97 
-      302.035 
-      310.1 
-      318.165 
-      326.23 
-      334.295 
-      338.105 
-      346.0262 
-      353.9474 
-      361.8686 
-      369.7898 
+      15.817
+      24.028
+      32.239
+      40.45
+      48.662
+      56.873
+      65.084
+      73.295
+      77.105
+      85.17
+      93.235
+      101.3
+      109.365
+      117.43
+      125.495
+      129.305
+      137.37
+      145.435
+      153.5
+      161.565
+      169.63
+      177.695
+      181.505
+      189.57
+      197.635
+      205.7
+      213.765
+      221.83
+      229.895
+      233.705
+      241.77
+      249.835
+      257.9
+      265.965
+      274.03
+      282.095
+      285.905
+      293.97
+      302.035
+      310.1
+      318.165
+      326.23
+      334.295
+      338.105
+      346.0262
+      353.9474
+      361.8686
+      369.7898
       377.711
 
 [MPACT]
@@ -177,7 +177,7 @@
   res_up_scatter    false
 
 [SHIFT]
-  transport             ce  
+  transport             ce
   Np                    1000
   do_output             true
   output_fission_source false
@@ -195,6 +195,7 @@
   src_disc_l2_error     0.1
   src_disc_samples_per_batch 1000
   src_disc_max_samples  100000
+  ww_decomp             full
 ! hybrid_db
   output_adjoint        true
   eq_set                spn_fv
