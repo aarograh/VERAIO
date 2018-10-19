@@ -577,6 +577,13 @@ COBRATF:
         - copy COBRATF/$crud
       _content:
 
+    crud_dT_feedback:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$crud_dT_feedback
+      _content:
+
     max_crud_step_size:
       _pltype: parameter
       _type: double

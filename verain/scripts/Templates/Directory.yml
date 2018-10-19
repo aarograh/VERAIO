@@ -3818,6 +3818,29 @@ COBRATF:
     _check:
       - is_float()
       - is_gt() 0.0
+#>
+#>   {\bf crud_dT_feedback} crud_dT_feedback
+#>   \VERAInputTable{
+#>     name={crud_dT_feedback},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={0, 1},
+#>     limitations={},
+#>     description={Set to 0 to shut off the crud thermal resistance effect on the rod internal temperaure calculation.
+#>                  Note that the crud thermal resistance will still affect the corrosion growth calculation.
+#>                  Defaults to 1. }, 
+#>     notes={}
+#>   }
+     
+  crud_dT_feedback:
+    <<: *dtword
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
 
   cicada_outer_radial_zone_num_cells_r:
     <<: *dtint

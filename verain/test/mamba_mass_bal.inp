@@ -191,6 +191,7 @@
   courant 0.8
   edit_channels 1
   maps_filename = single_rod_HFP
+  crud_dT_feedback 0
 
   crud MAMBA
 
