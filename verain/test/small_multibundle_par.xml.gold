@@ -293,11 +293,9 @@
     <Parameter name="maxits" type="int" value="100000"/>
     <Parameter name="nc" type="int" value="1"/>
     <Parameter name="nfuel" type="int" value="3"/>
-    <Parameter name="oitmax" type="int" value="15"/>
     <Parameter name="parallel" type="int" value="1"/>
     <Parameter name="rtwfp" type="double" value="1000.0"/>
     <Parameter name="solid_energy_storage" type="double" value="0.02"/>
-    <Parameter name="tend" type="double" value="0.1"/>
   </ParameterList>
   <ParameterList name="COUPLING">
     <Parameter name="eps_boron" type="double" value="2.0"/>

@@ -156,16 +156,13 @@
   dhfrac  0.02          ! fraction of power deposited directly into coolant
   hgap    5678.3        ! gap conductance
   epso    0.001
-  oitmax  5
   iitmax  40
   dtmin   0.000001
   dtmax   0.1
-  tend    0.1
   rtwfp   1000.0
   maxits  10000
   courant 0.8
   edit_channels 1
-  maps_filename = single_rod_HFP
   global_energy_balance    0.01 !%
   global_mass_balance      0.01 !%
   fluid_energy_storage     0.5  !%
@@ -173,7 +170,6 @@
   mass_storage             0.5  !%
   property_evaluations iapws1997_direct
   guide_tube_coefficient   0.0
-  edit_rod_htc             0
 
 [COUPLING]
   epsk        2.0  ! pcm

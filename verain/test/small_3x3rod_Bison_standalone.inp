@@ -160,15 +160,12 @@
   dhfrac  0.02          ! fraction of power deposited directly into coolant
   hgap    5678.3        ! gap conductance
   epso    0.001
-  oitmax  5
   iitmax  40
   dtmin   0.000001
   dtmax   0.1
-  tend    0.1
   rtwfp   1000.0
   maxits  10000
   courant 0.8
-  maps_filename = 3x3_HFP
 
 [BISON]
   solve_type standalone

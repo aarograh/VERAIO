@@ -184,7 +184,6 @@
     <Parameter name="enable_corrosion_lithium" type="int" value="0"/>
     <Parameter name="hgap" type="double" value="5678.3"/>
     <Parameter name="irfc" type="int" value="2"/>
-    <Parameter name="maps_filename" type="string" value="single_rod_HFP"/>
     <Parameter name="nc" type="int" value="1"/>
     <Parameter name="nfuel" type="int" value="3"/>
     <Parameter name="parallel" type="int" value="0"/>
