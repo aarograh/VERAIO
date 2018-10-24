@@ -10298,6 +10298,12 @@ BISON:
     _check:
       - is_string()
       - in_dictionary() QUAD4 QUAD8
+  mesh_bx_p:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
   mesh_clad_bot_gap_height:
     <<: *dtdouble
     _content:
