@@ -379,6 +379,11 @@
           <Parameter name="num_rad" type="Array(int)" value="{3,1,1}"/>
           <Parameter name="num_theta" type="Array(int)" value="{8,8,8,8,8,8}"/>
         </ParameterList>
+        <ParameterList name="pinmesh_gad">
+          <Parameter name="label" type="string" value="gad"/>
+          <Parameter name="num_rad" type="Array(int)" value="{10,1,1}"/>
+          <Parameter name="num_theta" type="Array(int)" value="{8,8,8,8,8,8,8,8,8,8,8,8,8}"/>
+        </ParameterList>
         <ParameterList name="pinmesh_gtube">
           <Parameter name="label" type="string" value="gtube"/>
           <Parameter name="num_rad" type="Array(int)" value="{3,1}"/>
