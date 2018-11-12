@@ -992,7 +992,6 @@ ASSEMBLY:
     _style:
     _check:
       - nth(2,())>0
-      - nth(2,())<10
       - arraysize()==4
     _parameters:
       loss:
@@ -5551,7 +5550,7 @@ MPACT:
     _content:
     _check:
       - is_string()
-      - in_dictionary() 1g mg 1G MG
+      - in_dictionary() 1g mg 1G MG kokkos
 #>
 #>   {\bf shield\_moc\_kernel} shield\_moc\_kernel
 #>   \VERAInputTable{
@@ -6819,7 +6818,7 @@ MPACT:
     _content:
     _check:
       - is_int()
-      - is_gt() 0
+      - is_gt() -1
 #>
 #>   {\bf cmfd\_num\_inners} cmfd\_num\_inners
 #>   \VERAInputTable{
