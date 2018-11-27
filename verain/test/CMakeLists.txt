@@ -5,25 +5,6 @@
 #===========================================================
 
 #
-# Test the Reactor-aware PL validator
-#
-TRIBITS_ADD_EXECUTABLE(
-  ReactorAwareParameterListValidator_UnitTests
-  SOURCES
-    VERA_ReactorAwareParameterListValidator_UnitTests.cpp
-    ${TEUCHOS_STD_UNIT_TEST_MAIN}
-  #NUM_MPI_PROCS 1
-  #STANDARD_PASS_OUTPUT
-
-  )
-
-#===========================================================
-#
-#            Test the perl VERA input parser
-#
-#===========================================================
-
-#
 # Function to copy test files and run test for a given test case
 #
 
