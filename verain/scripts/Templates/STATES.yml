@@ -502,6 +502,13 @@ STATES:
             - coremapmap CORE/$size,CORE/@core_shape,%STATE/$(_loop)/@insert_shuffle_label,CORE/$bc_sym,expand=>0,ignore=>'-'
           _content:
 
+        shuffle_homog:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %STATE/$(_loop)/$shuffle_homog
+          _content:
+
         crud_cleaning:
           _pltype: array
           _type: string

@@ -570,6 +570,12 @@ STATE:
     _check:
       - fall(sub{is_word(shift)},())
       - fall(sub{not_in_dictionary(shift,'0')},())
+  shuffle_homog:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none center all
   crud_cleaning:
     <<: *dtlist
     _style: multi-line
