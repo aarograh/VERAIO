@@ -797,6 +797,10 @@
     <Parameter name="parallel" type="int" value="1"/>
   </ParameterList>
   <ParameterList name="MPACT">
+    <ParameterList name="cmfd">
+      <Parameter name="multilevel" type="string" value="space"/>
+      <Parameter name="subgrid_spacers" type="bool" value="true"/>
+    </ParameterList>
     <ParameterList name="parallel_env">
       <Parameter name="num_space" type="int" value="37"/>
     </ParameterList>

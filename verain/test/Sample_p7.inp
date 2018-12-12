@@ -429,3 +429,7 @@
   rlx_den     1.0
   maxiter     100
 ! read_restart cobra_denovo_restart.out
+
+[MPACT]
+  multilevel      energy
+  subgrid_spacers false

@@ -353,5 +353,7 @@
   parallel 1          ! ** parallel CTF
 
 [MPACT]
-  num_space      37   ! 
+  num_space       37   !
+  multilevel      space
+  subgrid_spacers true
 
