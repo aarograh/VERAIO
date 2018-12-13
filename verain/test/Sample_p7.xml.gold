@@ -737,4 +737,10 @@
     <Parameter name="rlx_power" type="double" value="0.6"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
+  <ParameterList name="MPACT">
+    <ParameterList name="cmfd">
+      <Parameter name="multilevel" type="string" value="energy"/>
+      <Parameter name="subgrid_spacers" type="bool" value="false"/>
+    </ParameterList>
+  </ParameterList>
 </ParameterList>

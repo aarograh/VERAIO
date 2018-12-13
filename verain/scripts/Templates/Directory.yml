@@ -3320,7 +3320,7 @@ COBRATF:
       - is_int()
       - in_dictionary() 0 1 2 3 4 5
 #>
-#>   {\bf nc} nc 
+#>   {\bf nc} nc
 #>   \VERAInputTable{
 #>     name={nfuel},
 #>     type={int},
@@ -3330,7 +3330,7 @@ COBRATF:
 #>     valuedefault={1},
 #>     valuesapplicable={0, 1, 2, 3},
 #>     limitations={},
-#>     description={The fuel rod conduction model.  Options are: (0) No conduction, power is supplied as a 
+#>     description={The fuel rod conduction model.  Options are: (0) No conduction, power is supplied as a
 #>       surface heat flux (can lead to numerical stability issues), (1) Conduction in the radial direction
 #>       only, (2) Conduction in the radial and azimuthal directions, (3) Conduction in the radial, azimuthal
 #>       and axial directions.},
@@ -3356,7 +3356,7 @@ COBRATF:
 #>     description={
 #>       CHF model option.  Options are:
 #>        0 - No CHF check during transient (post-sim check using W-3)
-#>        1 - Check CHF during transient using W-3 
+#>        1 - Check CHF during transient using W-3
 #>        2 - No CHF check during or after simulation (set CHF to infinity)},
 #>     notes={}
 #>   }
@@ -3652,7 +3652,7 @@ COBRATF:
       - is_int()
       - is_geq() 1
 #>
-#>   {\bf courant} courant 
+#>   {\bf courant} courant
 #>   \VERAInputTable{
 #>     name={courant},
 #>     type={float},
@@ -3771,7 +3771,7 @@ COBRATF:
 #>     valuedefault={0.5},
 #>     valuesapplicable={>0.0},
 #>     limitations={},
-#>     description={Sets tolerance for energy storage in the fluid (change in energy over a timestep) for steady state runs.  
+#>     description={Sets tolerance for energy storage in the fluid (change in energy over a timestep) for steady state runs.
 #>        Only applicable when using the storage-based convergence criteria (specify fluid_energy_storage/solid_energy_storage/mass_storage).
 #>        See CTF User Manual for more details.},
 #>     notes={}
@@ -3793,7 +3793,7 @@ COBRATF:
 #>     valuedefault={0.5},
 #>     valuesapplicable={>0.0},
 #>     limitations={},
-#>     description={Sets tolerance for energy storage in the solid (change in energy over a timestep) for steady state runs.  
+#>     description={Sets tolerance for energy storage in the solid (change in energy over a timestep) for steady state runs.
 #>        Only applicable when using the storage-based convergence criteria (specify fluid_energy_storage/solid_energy_storage/mass_storage).
 #>        See CTF User Manual for more details.},
 #>     notes={}
@@ -3815,7 +3815,7 @@ COBRATF:
 #>     valuedefault={0.5},
 #>     valuesapplicable={>0.0},
 #>     limitations={},
-#>     description={Sets tolerance for mass storage in the fluid (change in mass in system over a timestep) for steady state runs.  
+#>     description={Sets tolerance for mass storage in the fluid (change in mass in system over a timestep) for steady state runs.
 #>        Only applicable when using the storage-based convergence criteria (specify fluid_energy_storage/solid_energy_storage/mass_storage).
 #>        See CTF User Manual for more details.},
 #>     notes={}
@@ -3838,10 +3838,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets tolerance on l-infinity of pressure change for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
@@ -3865,10 +3865,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets tolerance on l-infinity of coolant temperature for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
@@ -3892,10 +3892,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets tolerance on l-infinity of solid temperature for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
@@ -3919,10 +3919,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets tolerance on l-infinity of void for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.  Not checked for single phase runs.
 #>        See CTF User Manual for more details.},
@@ -3946,12 +3946,12 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets tolerance on l-infinity of liquid velocity for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
-#>        Note that when using the change-based criteria, all criteria are optional.  
+#>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
 #>     notes={}
 #>   }
@@ -3973,12 +3973,12 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets tolerance on l-infinity of vapor velocity for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
-#>        Note that when using the change-based criteria, all criteria are optional.  Not checked for single phase runs. 
+#>        Note that when using the change-based criteria, all criteria are optional.  Not checked for single phase runs.
 #>        See CTF User Manual for more details.},
 #>     notes={}
 #>   }
@@ -4000,12 +4000,12 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets tolerance on l-infinity of droplet velocity for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
-#>        Note that when using the change-based criteria, all criteria are optional.  Not checked for single phase runs. 
+#>        Note that when using the change-based criteria, all criteria are optional.  Not checked for single phase runs.
 #>        See CTF User Manual for more details.},
 #>     notes={}
 #>   }
@@ -4027,10 +4027,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets absolute tolerance on l-infinity of pressure for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
@@ -4054,10 +4054,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets absolute tolerance on l-infinity of coolant temperature for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
@@ -4081,10 +4081,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets absolute tolerance on l-infinity of solid temperature for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
@@ -4108,10 +4108,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets absolute tolerance on l-infinity of liquid velocity for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
@@ -4135,10 +4135,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets absolute tolerance on l-infinity of vapor velocity for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional. Not used for single-phase runs.
 #>        See CTF User Manual for more details.},
@@ -4162,10 +4162,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets absolute tolerance on l-infinity of droplet velocity for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional. Not used for single-phase runs.
 #>        See CTF User Manual for more details.},
@@ -4189,12 +4189,12 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets relative tolerance on l-2 of pressure for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
-#>        Note that when using the change-based criteria, all criteria are optional. 
+#>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
 #>     notes={}
 #>   }
@@ -4216,12 +4216,12 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets relative tolerance on l-2 of coolant temperature for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
-#>        Note that when using the change-based criteria, all criteria are optional. 
+#>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
 #>     notes={}
 #>   }
@@ -4243,12 +4243,12 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets relative tolerance on l-2 of solid temperature for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
-#>        Note that when using the change-based criteria, all criteria are optional. 
+#>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
 #>     notes={}
 #>   }
@@ -4270,10 +4270,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets absolute tolerance on l-2 of void for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional. Not used in single phase runs.
 #>        See CTF User Manual for more details.},
@@ -4297,12 +4297,12 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets relative tolerance on l-2 of liquid velocity for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
-#>        Note that when using the change-based criteria, all criteria are optional. 
+#>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
 #>     notes={}
 #>   }
@@ -4324,10 +4324,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets relative tolerance on l-2 of vapor velocity for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.  Not used for single-phase runs.
 #>        See CTF User Manual for more details.},
@@ -4351,10 +4351,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets relative tolerance on l-2 of droplet velocity for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.  Not used for single-phase runs.
 #>        See CTF User Manual for more details.},
@@ -4378,10 +4378,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets relative tolerance on l-2 of pressure for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
@@ -4405,10 +4405,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets absolute tolerance on l-2 of coolant temperature for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
@@ -4432,10 +4432,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets absolute tolerance on l-2 of solid temperature for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
@@ -4459,10 +4459,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets absolute tolerance on l-2 of liquid velocity for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.
 #>        See CTF User Manual for more details.},
@@ -4486,10 +4486,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets absolute tolerance on l-2 of vapor velocity for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.  Not used for single-phase runs.
 #>        See CTF User Manual for more details.},
@@ -4513,10 +4513,10 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets absolute tolerance on l-2 of droplet velocity for steady state runs.
-#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria, 
-#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        Only applicable when using the change-based convergence criteria (specify pressure_criteria, pressurea_criteria,
+#>        Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>        vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>        Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>        vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2).
 #>        Note that when using the change-based criteria, all criteria are optional.  Not used for single-phase runs.
 #>        See CTF User Manual for more details.},
@@ -4541,10 +4541,10 @@ COBRATF:
 #>     limitations={},
 #>     description={Selects the stopping criteria to use for steady state runs.  Options are:
 #>        0 - storage-based criteria (global_energy_balance, global_mass_balance, fluid_energy_storage, solid_energy_storage, mass_storage)
-#>        1 - change-based criteria (global_energy_balance, global_mass_balance, pressure_criteria, pressurea_criteria, 
-#>            Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria, 
+#>        1 - change-based criteria (global_energy_balance, global_mass_balance, pressure_criteria, pressurea_criteria,
+#>            Tcool_criteria, Tcoola_criteria, Tsolid_criteria, Tsolida_criteria, void_criteria, vliq_criteria, vliqa_criteria,
 #>            vvap_criteria, vvapa_criteria, vdrop_criteria, vdropa_criteria, void_criteria_l2, Tcool_criteria_l2,
-#>            Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2, 
+#>            Tcoola_criteria_l2, Tsolid_criteria_l2, Tsolida_criteria_l2, pressure_criteria_l2, pressurea_criteria_l2,
 #>            vliq_criteria_l2, vliqa_criteria_l2, vvap_criteria_l2, vvapa_criteria_l2, vdrop_criteria_l2, vdropa_criteria_l2)
 #>        All criteria are optional with defaults.}
 #>     notes={}
@@ -5032,7 +5032,7 @@ COBRATF:
 #>     limitations={},
 #>     description={Set to 0 to shut off the crud thermal resistance effect on the rod internal temperaure calculation.
 #>                  Note that the crud thermal resistance will still affect the corrosion growth calculation.
-#>                  Defaults to 1. }, 
+#>                  Defaults to 1. },
 #>     notes={}
 #>   }
   crud_dT_feedback:
@@ -7872,6 +7872,29 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() cmfd ycmfd adcmfd scmfd mlcmfd msed none
+
+#>
+#>   {\bf multilevel} multilevel
+#>   \VERAInputTable{
+#>     name={multilevel},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={energy},
+#>     valuesapplicable={energy,space},
+#>     limitations={},
+#>     description={This card is used to specify whether space or energy multilevel CMFD is used},
+#>     notes={Only active when mlcmfd is specified.}
+#>   }
+#
+  multilevel:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() energy space
+
   prolongation:
     <<: *dtword
     _content:
@@ -8758,6 +8781,29 @@ MPACT:
     _check:
       - is_float()
       - is_gt() 0.0
+
+#>
+#>   {\bf subgrid\_spacers} subgrid\_spacers
+#>   \VERAInputTable{
+#>     name={subgrid\_spacers},
+#>     type={Logical},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true,false},
+#>     limitations={},
+#>     description={This card is used to designate whether or not spacer grids are       %
+#>       used in subgrid solver setup,
+#>     notes={}
+#>   }
+  subgrid_spacers:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
 #>
 #>   {\bf num\_subplanes} num\_subplanes
 #>   \VERAInputTable{
