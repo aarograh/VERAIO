@@ -184,6 +184,8 @@
   output_geometry       false
   output_micro_tally    false
   output_ww             false
+  local_log             info
+  ce_lib_path           "dummy.inp"
   global_log            debug
   problem_mode          cadis
   mode                  np
@@ -209,14 +211,33 @@
   mesh                  1
   refl_mesh_size        5.0
   extend_axial_mesh_size 10.0
+  cell_homogenize       true
+  dimension             2
+  downscatter           true
+  grp_collapse_src      5.0 4.0 3.0
+  new_grp_bounds        6.0653E+06 3.6788E+06 2.3457E+06
+  num_sets              2
+  num_z_blocks          4
+  pin_partitioning      true
+  Pn_correction         true
+  Pn_order              1
+  SPN_matrix_type       mat_free
+  store_fulcrum_string  false
+! hybrid_db/quadrature_db
+  quad_type             levelsym
 ! hybrid_db/solver_db/
   verbosity             high
+  partition_upscatter   true
 ! hybrid_db/solver_db/upscatter_db
   upscatter_tolerance   1.0e-6
   upscatter_verbosity   high
   upscatter_max_itr     5
   upscatter_subspace_size 10
+  upscatter_solver      gmres
+  iterate_downscatter   true
 ! hybrid_db/solver_db/within_group_db
   within_group_tolerance   1.0e-6
   within_group_verbosity   high
   within_group_max_itr     4
+  within_group_solver      gmres
+  within_group_subspace_size 10
