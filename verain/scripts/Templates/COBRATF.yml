@@ -577,6 +577,13 @@ COBRATF:
         - copy COBRATF/$crud_details
       _content:
 
+    rod_details:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$rod_details
+      _content:
+
     oxide_thermal_conductivity:
       _pltype: parameter
       _type: double

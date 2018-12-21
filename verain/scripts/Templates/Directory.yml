@@ -5169,6 +5169,26 @@ COBRATF:
       - is_int()
       - in_dictionary() 0 1
 #>
+#>   {\bf rod_details} rod_details
+#>   \VERAInputTable{
+#>     name={rod_details},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0 1},
+#>     limitations={},
+#>     description={Set to 1 to turn on additional edits to the VERA-CS HDF5 file related to the rod solution.},
+#>     notes={}
+#>   }
+  rod_details:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+#>
 #>   {\bf oxide\_thermal\_conductivity} oxide\_thermal\_conductivity
 #>   \VERAInputTable{
 #>     name={oxide\_thermal\_conductivity},
