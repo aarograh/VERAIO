@@ -269,43 +269,65 @@
   </ParameterList>
   <ParameterList name="SHIFT">
     <Parameter name="Np" type="double" value="1000"/>
+    <Parameter name="ce_lib_path" type="string" value="dummy.inp"/>
     <Parameter name="create_unique_pins" type="bool" value="true"/>
     <Parameter name="do_output" type="bool" value="true"/>
     <Parameter name="do_transport" type="bool" value="true"/>
     <Parameter name="global_log" type="string" value="debug"/>
     <ParameterList name="hybrid_db">
+      <Parameter name="Pn_correction" type="bool" value="true"/>
+      <Parameter name="Pn_order" type="int" value="1"/>
       <Parameter name="SPN_order" type="int" value="1"/>
       <Parameter name="adjoint" type="bool" value="true"/>
+      <Parameter name="cell_homogenize" type="bool" value="true"/>
+      <Parameter name="dimension" type="int" value="2"/>
       <Parameter name="do_output" type="bool" value="true"/>
       <Parameter name="do_transport" type="bool" value="true"/>
+      <Parameter name="downscatter" type="bool" value="true"/>
       <Parameter name="eq_set" type="string" value="spn_fv"/>
       <Parameter name="extend_axial_mesh_size" type="double" value="10.0"/>
       <Parameter name="flux_decomposition" type="string" value="full"/>
+      <Parameter name="grp_collapse_src" type="Array(double)" value="{5.0,4.0,3.0}"/>
       <Parameter name="max_delta_z" type="double" value="1.0"/>
       <Parameter name="mesh" type="int" value="1"/>
+      <Parameter name="new_grp_bounds" type="Array(double)" value="{6.0653E+06,3.6788E+06,2.3457E+06}"/>
       <Parameter name="num_blocks_i" type="int" value="2"/>
       <Parameter name="num_blocks_j" type="int" value="2"/>
       <Parameter name="num_groups" type="int" value="8"/>
+      <Parameter name="num_sets" type="int" value="2"/>
+      <Parameter name="num_z_blocks" type="int" value="4"/>
       <Parameter name="output_adjoint" type="bool" value="true"/>
+      <Parameter name="pin_partitioning" type="bool" value="true"/>
+      <ParameterList name="quadrature_db">
+        <Parameter name="quad_type" type="string" value="levelsym"/>
+      </ParameterList>
       <Parameter name="refl_mesh_size" type="double" value="5.0"/>
       <ParameterList name="solver_db">
+        <Parameter name="partition_upscatter" type="bool" value="true"/>
         <ParameterList name="upscatter_db">
+          <Parameter name="iterate_downscatter" type="bool" value="true"/>
           <Parameter name="max_itr" type="int" value="5"/>
+          <Parameter name="solver" type="string" value="gmres"/>
           <Parameter name="subspace_size" type="int" value="10"/>
           <Parameter name="tolerance" type="double" value="1.0e-6"/>
           <Parameter name="verbosity" type="string" value="high"/>
         </ParameterList>
         <ParameterList name="within_group_db">
           <Parameter name="max_itr" type="int" value="4"/>
+          <Parameter name="solver" type="string" value="gmres"/>
+          <Parameter name="subspace_size" type="int" value="10"/>
           <Parameter name="tolerance" type="double" value="1.0e-6"/>
           <Parameter name="verbosity" type="string" value="high"/>
         </ParameterList>
       </ParameterList>
+      <Parameter name="spn_matrix_type" type="string" value="mat_free"/>
+      <Parameter name="store_fulcrum_string" type="bool" value="false"/>
       <Parameter name="xs_library" type="string" value="test-8grp"/>
     </ParameterList>
     <ParameterList name="kcode_db">
       <Parameter name="Np" type="double" value="1000"/>
     </ParameterList>
+    <Parameter name="local_log" type="string" value="info"/>
     <Parameter name="mesh" type="int" value="1"/>
     <Parameter name="mode" type="string" value="np"/>
     <Parameter name="output_fission_source" type="bool" value="false"/>
