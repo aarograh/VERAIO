@@ -180,6 +180,10 @@
   <ParameterList name="MPACT">
     <ParameterList name="cmfd">
       <Parameter name="cmfd" type="string" value="msed"/>
+      <Parameter name="cmfd_flxtol_1G" type="double" value="1.0e-4"/>
+      <Parameter name="cmfd_ktol" type="double" value="1.0e-4"/>
+      <Parameter name="cmfd_ktol_1G" type="double" value="1.0e-4"/>
+      <Parameter name="cmfd_rtol" type="double" value="0.5"/>
       <Parameter name="max_1G_eig_its" type="int" value="10"/>
       <ParameterList name="multigrid">
         <Parameter name="cg_solver" type="string" value="gmres"/>

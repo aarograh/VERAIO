@@ -1039,8 +1039,11 @@ ASSEMBLY:
     _slash:
     _check:
       - nth(1,())>=0
-      - nth(2,())eq'/'||nth(3,())eq'/'
-      - (nth(2,())eq'/'&&(nth(3,())>=0))||(nth(3,())eq'/'&&(nth(4,())>=0))
+      - nth(2,())eq'/'||nth(3,())eq'/'||nth(4,())eq'/'
+      - (nth(2,())eq'/'&&(nth(3,())>=0))||(nth(3,())eq'/'&&(nth(4,())>=0))||(nth(4,())eq'/'&&(nth(5,())>=0))
+    _options:
+      form: string
+      thexp: double
 
   mat:
     <<: *dtlistnamed
@@ -8547,10 +8550,53 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps sdws-laps
+
 #>
-#>   {\bf ktol\_1G} ktol\_1G
+#>   {\bf cmfd\_ktol} cmfd\_ktol
 #>   \VERAInputTable{
-#>     name={ktol\_1G},
+#>    name={cmfd\_ktol},
+#>    type={Floating Point Number},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={1.e-6},
+#>    valuesapplicable={Any positive value.},
+#>    limitations={},
+#>    description={This card is used to specify the tolerance for the                    %
+#>      convergence of k in the overall CMFD eigenavlue problem.},
+#>   }
+  cmfd_ktol:
+      <<: *dtdouble
+      _content:
+      _check:
+        - is_float()
+        - is_gt() 0.0
+
+#>
+#>   {\bf cmfd\_rtol} cmfd\_rtol
+#>   \VERAInputTable{
+#>    name={cmfd\_rtol},
+#>    type={Floating Point Number},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={1.e-6},
+#>    valuesapplicable={Any positive value.},
+#>    limitations={},
+#>    description={This card is used to specify the tolerance for the                    %
+#>      relative residual reduction in a CMFD linear system solved each power iteration.},
+#>   }
+  cmfd_rtol:
+      <<: *dtdouble
+      _content:
+      _check:
+        - is_float()
+        - is_gt() 0.0
+
+#>
+#>   {\bf cmfd\_ktol\_1G} cmfd\_ktol\_1G
+#>   \VERAInputTable{
+#>    name={cmfd\_ktol\_1G},
 #>    type={Floating Point Number},
 #>    need={Optional},
 #>    unitsdefault={},
@@ -8561,16 +8607,16 @@ MPACT:
 #>    description={This card is used to specify the tolerance for the                    %
 #>      convergence of k in the 1G CMFD eigenavlue problem in MSED.},
 #>   }
-  ktol_1G:
+  cmfd_ktol_1G:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0.0
 #>
-#>   {\bf flxtol\_1G} flxtol\_1G
+#>   {\bf cmfd\_flxtol\_1G} cmfd\_flxtol\_1G
 #>   \VERAInputTable{
-#>     name={flxtol\_1G},
+#>    name={cmfd\_flxtol\_1G},
 #>    type={Floating Point Number},
 #>    need={Optional},
 #>    unitsdefault={},
@@ -8581,7 +8627,7 @@ MPACT:
 #>    description={This card is used to specify the tolerance for the                    %
 #>       convergence of the flux in the 1G CMFD eigenavlue problem in MSED.},
 #>   }
-  flxtol_1G:
+  cmfd_flxtol_1G:
     <<: *dtdouble
     _content:
     _check:

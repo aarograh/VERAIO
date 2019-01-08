@@ -169,6 +169,10 @@
   cmfd_num_inners                 25
   cmfd_num_inners_1G              5
   cmfd_num_outers                 20
+  cmfd_ktol                       1.0e-4
+  cmfd_rtol                       0.5
+  cmfd_ktol_1G                    1.0e-4
+  cmfd_flxtol_1G                  1.0e-4
   max_1G_eig_its                  10
   cmfd_solver                     reducedmg
   multigrid_cg_solver             gmres

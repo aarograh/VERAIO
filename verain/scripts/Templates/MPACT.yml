@@ -896,18 +896,32 @@ MPACT:
             - copy MPACT/$cmfd_dhat_relaxation
           _content:
 
-        ktol_1G:
+        cmfd_ktol:
           _pltype: parameter
-          _type: int
+          _type: double
           _do:
-            - copy MPACT/$ktol_1G
+            - copy MPACT/$cmfd_ktol
           _content:
 
-        flxtol_1G:
+        cmfd_rtol:
           _pltype: parameter
-          _type: int
+          _type: double
           _do:
-            - copy MPACT/$flxtol_1G
+            - copy MPACT/$cmfd_rtol
+          _content:
+
+        cmfd_ktol_1G:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$cmfd_ktol_1G
+          _content:
+
+        cmfd_flxtol_1G:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$cmfd_flxtol_1G
           _content:
 
         max_1G_eig_its:
