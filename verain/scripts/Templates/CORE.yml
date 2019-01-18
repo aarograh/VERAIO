@@ -442,3 +442,10 @@ CORE:
       _do:
         - copy CORE/$cleanup_rated_flow
       _content:
+
+    material_perturbation_file:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/$material_perturbation_file
+      _content:

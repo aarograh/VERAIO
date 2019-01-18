@@ -951,6 +951,12 @@ CORE:
       - is_float()
       - is_geq() 0
 
+  material_perturbation_file:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+
 ASSEMBLY:
   <<: *dtblocknamed
   title:
