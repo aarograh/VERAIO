@@ -866,6 +866,7 @@ CORE:
     _options:
       thexp: double
       thcnd: double
+      form:  string
     _defaults:
       _path: CORE/%(_keyword)/$(_id)
 

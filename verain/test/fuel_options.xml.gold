@@ -27,6 +27,13 @@
         <Parameter name="mat_names" type="Array(string)" value="{b4c}"/>
         <Parameter name="thexp" type="double" value="7.5"/>
       </ParameterList>
+      <ParameterList name="Material_fecral">
+        <Parameter name="density" type="double" value="7.1"/>
+        <Parameter name="form" type="string" value="kanthal"/>
+        <Parameter name="key_name" type="string" value="fecral"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{-0.7020544,-0.201073,-0.096872}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{Fe-00,Cr-00,Al-27}"/>
+      </ParameterList>
       <ParameterList name="Material_he">
         <Parameter name="density" type="double" value="0.000176"/>
         <Parameter name="key_name" type="string" value="he"/>

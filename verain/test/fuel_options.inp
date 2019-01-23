@@ -59,6 +59,10 @@
   mat aic   10.20
   mat pyrex  2.23
   mat b4c    6.56 / thexp=7.5
+  mat fecral 7.1  Fe-00 -0.7020544
+                  Cr-00 -0.201073
+                  Al-27 -0.096872
+                  / form=kanthal
 
 ! ASSEMBLY description
 
