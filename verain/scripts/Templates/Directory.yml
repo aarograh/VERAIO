@@ -7330,6 +7330,27 @@ MPACT:
       - is_word()
       - in_dictionary() ctf simplified ctf_external tiamat none
 #>
+#>   {\bf extend\_coupling\_mesh} extend\_coupling\_mesh
+#>   \VERAInputTable{
+#>     name={extend\_coupling\_mesh},
+#>     type={Logical},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={\texttt{true}},
+#>     valuesapplicable={\texttt{false}},
+#>     limitations={},
+#>     description={This card is used to specify whether to enable coupling             %
+#>                  above and below the active fuel when using CTF.},
+#>     notes={}
+#>   }
+  extend_coupling_mesh:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf th\_nonlinear\_solver} th\_nonlinear\_solver
 #>   \VERAInputTable{
 #>     name={th\_nonlinear\_solver},
