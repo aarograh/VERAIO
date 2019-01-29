@@ -622,11 +622,11 @@ MPACT:
             - copy MPACT/$coupling_method
           _content:
 
-        coupling_mesh:
+        extend_coupling_mesh:
           _pltype: parameter
           _type: bool
           _do:
-            - copy MPACT/$coupling_mesh
+            - copy MPACT/$extend_coupling_mesh
           _content:
 
         nonlinear_solver:
