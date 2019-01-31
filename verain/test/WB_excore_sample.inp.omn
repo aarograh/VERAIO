@@ -1,0 +1,1195 @@
+! ===========================================================
+! **************  DETAILED EX-CORE DETECTOR  ****************
+! ===========================================================
+
+! *********************  DEFINE SHAPES  **********************
+
+[GEOMETRY]
+global "excore"
+
+! Reactor core from Vera Input inserted into this universe
+[UNIVERSE=core reactor]
+
+! ============================================================
+!   UNIVERSE: POWER RANGE DETECTOR - NE QUADRANT
+! ============================================================
+
+[UNIVERSE=general pr_detector_ne]
+boundary detector_ne
+
+! *******  SHAPE DEFINITIONS FOR POWER-RANGE DETECOR IN NE QUAD  *******
+
+! Detector Well - NE QUAD
+[UNIVERSE][SHAPE=cuboid det_well_ne]
+faces -37.5 37.5 -11.5 11.5 -15.08 413.937
+
+[UNIVERSE][SHAPE=hopper det_well_hopper_ne]
+euler    0.25  0.75  0
+extents  0  12.8
+lo       11.5  225.9685
+hi       20.0  224.4685
+origin   -24.7 0 199.4685
+
+! Detector loading tube - NE Quad - top
+[UNIVERSE][SHAPE=cyl det_tube_od_ne_top]
+radius 9.5
+extents 194.831 347.231
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cyl det_tube_id_ne_top]
+radius 8.75
+extents 194.831 347.231
+origin -27 0 0
+axis z
+
+! Detector loading tube - NE Quad - bottom
+[UNIVERSE][SHAPE=cyl det_tube_od_ne_bot]
+radius 9.5
+extents 42.431 194.831
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cyl det_tube_id_ne_bot]
+radius 8.75
+extents 42.431 194.831
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cuboid detector_ne]
+faces -37.5 37.5 -20 20 -15.08 413.937
+
+! ******************  POWER-RANGE DETECTOR IN THE NE QUADRANT  ********************
+
+[UNIVERSE][CELL detector_well_ne]
+comp air
+shapes -det_well_ne +det_tube_od_ne_top +det_tube_od_ne_bot
+
+[UNIVERSE][CELL detector_well_hopper_ne]
+comp air
+shapes -det_well_hopper_ne +det_well_ne -detector_ne
+
+[UNIVERSE][CELL detector_tube_ne_top]
+comp cs
+shapes +det_tube_id_ne_top -det_tube_od_ne_top
+
+[UNIVERSE][CELL detector_ne_top]
+comp void
+shapes -det_tube_id_ne_top
+
+[UNIVERSE][CELL detector_tube_ne_bot]
+comp cs
+shapes +det_tube_id_ne_bot -det_tube_od_ne_bot
+
+[UNIVERSE][CELL detector_ne_bot]
+comp void
+shapes -det_tube_id_ne_bot
+
+[UNIVERSE][CELL outside_detector_ne]
+comp concrete
+shapes -detector_ne +det_well_ne +det_well_hopper_ne
+
+[UNIVERSE][CELL hole_boundary_ne]
+comp concrete
+shapes -detector_ne
+
+! ============================================================
+!   UNIVERSE: POWER RANGE DETECTOR - NW QUADRANT
+! ============================================================
+
+[UNIVERSE=general pr_detector_nw]
+boundary detector_nw
+
+! *******  SHAPE DEFINITIONS FOR POWER-RANGE DETECOR IN NW QUAD  *******
+
+! Detector Well - NW QUAD
+[UNIVERSE][SHAPE=cuboid det_well_nw]
+faces -37.5 37.5 -11.5 11.5 -15.08 413.937
+
+[UNIVERSE][SHAPE=hopper det_well_hopper_nw]
+euler    0.25  0.75  0
+extents  0  12.8
+lo       11.5  225.9685
+hi       20.0  224.4685
+origin   -24.7 0 199.4685
+
+! Detector loading tube - NW Quad - top
+[UNIVERSE][SHAPE=cyl det_tube_od_nw_top]
+radius 9.5
+extents 194.831 347.231
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cyl det_tube_id_nw_top]
+radius 8.75
+extents 194.831 347.231
+origin -27 0 0
+axis z
+
+! Detector loading tube - NW Quad - bottom
+[UNIVERSE][SHAPE=cyl det_tube_od_nw_bot]
+radius 9.5
+extents 42.431 194.831
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cyl det_tube_id_nw_bot]
+radius 8.75
+extents 42.431 194.831
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cuboid detector_nw]
+faces -37.5 37.5 -20 20 -15.08 413.937
+
+! ******************  POWER-RANGE DETECTOR IN THE NW QUADRANT  ********************
+
+[UNIVERSE][CELL detector_well_nw]
+comp air
+shapes -det_well_nw +det_tube_od_nw_top +det_tube_od_nw_bot
+
+[UNIVERSE][CELL detector_well_hopper_nw]
+comp air
+shapes -det_well_hopper_nw +det_well_nw -detector_nw
+
+[UNIVERSE][CELL detector_tube_nw_top]
+comp cs
+shapes +det_tube_id_nw_top -det_tube_od_nw_top
+
+[UNIVERSE][CELL detector_nw_top]
+comp void
+shapes -det_tube_id_nw_top
+
+[UNIVERSE][CELL detector_tube_nw_bot]
+comp cs
+shapes +det_tube_id_nw_bot -det_tube_od_nw_bot
+
+[UNIVERSE][CELL detector_nw_bot]
+comp void
+shapes -det_tube_id_nw_bot
+
+[UNIVERSE][CELL outside_detector_nw]
+comp concrete
+shapes -detector_nw +det_well_nw +det_well_hopper_nw
+
+[UNIVERSE][CELL hole_boundary_nw]
+comp concrete
+shapes -detector_nw
+
+! ============================================================
+!   UNIVERSE: POWER RANGE DETECTOR - SW QUADRANT
+! ============================================================
+
+[UNIVERSE=general pr_detector_sw]
+boundary detector_sw
+
+! *******  SHAPE DEFINITIONS FOR POWER-RANGE DETECOR IN SW QUAD  *******
+
+! Detector Well - SW QUAD
+[UNIVERSE][SHAPE=cuboid det_well_sw]
+faces -37.5 37.5 -11.5 11.5 -15.08 413.937
+
+[UNIVERSE][SHAPE=hopper det_well_hopper_sw]
+euler    0.25  0.75  0
+extents  0  12.8
+lo       11.5  225.9685
+hi       20.0  224.4685
+origin   -24.7 0 199.4685
+
+! Detector loading tube - SW Quad - top
+[UNIVERSE][SHAPE=cyl det_tube_od_sw_top]
+radius 9.5
+extents 194.831 347.231
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cyl det_tube_id_sw_top]
+radius 8.75
+extents 194.831 347.231
+origin -27 0 0
+axis z
+
+! Detector loading tube - SW Quad - bottom
+[UNIVERSE][SHAPE=cyl det_tube_od_sw_bot]
+radius 9.5
+extents 42.431 194.831
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cyl det_tube_id_sw_bot]
+radius 8.75
+extents 42.431 194.831
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cuboid detector_sw]
+faces -37.5 37.5 -20 20 -15.08 413.937
+
+! ******************  POWER-RANGE DETECTOR IN THE SW QUADRANT  ********************
+
+[UNIVERSE][CELL detector_well_sw]
+comp air
+shapes -det_well_sw +det_tube_od_sw_top +det_tube_od_sw_bot
+
+[UNIVERSE][CELL detector_well_hopper_sw]
+comp air
+shapes -det_well_hopper_sw +det_well_sw -detector_sw
+
+[UNIVERSE][CELL detector_tube_sw_top]
+comp cs
+shapes +det_tube_id_sw_top -det_tube_od_sw_top
+
+[UNIVERSE][CELL detector_sw_top]
+comp void
+shapes -det_tube_id_sw_top
+
+[UNIVERSE][CELL detector_tube_sw_bot]
+comp cs
+shapes +det_tube_id_sw_bot -det_tube_od_sw_bot
+
+[UNIVERSE][CELL detector_sw_bot]
+comp void
+shapes -det_tube_id_sw_bot
+
+[UNIVERSE][CELL outside_detector_sw]
+comp concrete
+shapes -detector_sw +det_well_sw +det_well_hopper_sw
+
+[UNIVERSE][CELL hole_boundary_sw]
+comp concrete
+shapes -detector_sw
+
+! ============================================================
+!   UNIVERSE: POWER RANGE DETECTOR - SE QUADRANT
+! ============================================================
+
+[UNIVERSE=general pr_detector_se]
+boundary detector_se
+
+! *******  SHAPE DEFINITIONS FOR POWER-RANGE DETECOR IN SE QUAD  *******
+
+! Detector Well - SE QUAD
+[UNIVERSE][SHAPE=cuboid det_well_se]
+faces -37.5 37.5 -11.5 11.5 -15.08 413.937
+
+[UNIVERSE][SHAPE=hopper det_well_hopper_se]
+euler    0.25  0.75  0
+extents  0  12.8
+lo       11.5  225.9685
+hi       20.0  224.4685
+origin   -24.7 0 199.4685
+
+! Detector loading tube - SE Quad - top
+[UNIVERSE][SHAPE=cyl det_tube_od_se_top]
+radius 9.5
+extents 194.831 347.231
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cyl det_tube_id_se_top]
+radius 8.75
+extents 194.831 347.231
+origin -27 0 0
+axis z
+
+! Detector loading tube - SE Quad - bottom
+[UNIVERSE][SHAPE=cyl det_tube_od_se_bot]
+radius 9.5
+extents 42.431 194.831
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cyl det_tube_id_se_bot]
+radius 8.75
+extents 42.431 194.831
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cuboid detector_se]
+faces -37.5 37.5 -20 20 -15.08 413.937
+
+! ******************  POWER-RANGE DETECTOR IN THE SE QUADRANT  ********************
+
+[UNIVERSE][CELL detector_well_se]
+comp air
+shapes -det_well_se +det_tube_od_se_top +det_tube_od_se_bot
+
+[UNIVERSE][CELL detector_well_hopper_se]
+comp air
+shapes -det_well_hopper_se +det_well_se -detector_se
+
+[UNIVERSE][CELL detector_tube_se_top]
+comp cs
+shapes +det_tube_id_se_top -det_tube_od_se_top
+
+[UNIVERSE][CELL detector_se_top]
+comp void
+shapes -det_tube_id_se_top
+
+[UNIVERSE][CELL detector_tube_se_bot]
+comp cs
+shapes +det_tube_id_se_bot -det_tube_od_se_bot
+
+[UNIVERSE][CELL detector_se_bot]
+comp void
+shapes -det_tube_id_se_bot
+
+[UNIVERSE][CELL outside_detector_se]
+comp concrete
+shapes -detector_se +det_well_se +det_well_hopper_se
+
+[UNIVERSE][CELL hole_boundary_se]
+comp concrete
+shapes -detector_se
+
+! ============================================================
+!   UNIVERSE: SOURCE RANGE DETECTOR 1
+! ============================================================
+
+[UNIVERSE=general sr_detector_1]
+boundary detector_sr1
+
+! *******  SHAPE DEFINITIONS FOR SOURCE-RANGE DETECOR 1  *******
+
+! Detector Well 
+[UNIVERSE][SHAPE=cuboid det_well_sr1]
+faces -37.5 37.5 -11.5 11.5 -15.08 413.937
+
+[UNIVERSE][SHAPE=hopper det_well_hopper_sr1]
+euler    0.25  0.75  0
+extents  0  12.8
+lo       11.5  225.9685
+hi       20.0  224.4685
+origin   -24.7 0 199.4685
+
+! Detector loading tube 
+[UNIVERSE][SHAPE=cyl det_tube_od_sr1]
+radius 8.89
+extents 120.8154 268.8466
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cyl det_tube_id_sr1]
+radius 7.0612
+extents 120.8154 268.8466
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cuboid detector_sr1]
+faces -37.5 37.5 -20 20 -15.08 413.937
+
+! ******************  SOURCE-RANGE DETECTOR 1  ********************
+
+[UNIVERSE][CELL detector_well_sr1]
+comp air
+shapes -det_well_sr1 +det_tube_od_sr1
+
+[UNIVERSE][CELL detector_well_hopper_sr1]
+comp air
+shapes -det_well_hopper_sr1 +det_well_sr1 -detector_sr1
+
+[UNIVERSE][CELL detector_tube_sr1]
+comp cs
+shapes +det_tube_id_sr1 -det_tube_od_sr1
+
+[UNIVERSE][CELL detector_sr1]
+comp void
+shapes -det_tube_id_sr1
+
+[UNIVERSE][CELL outside_detector_sr1]
+comp concrete
+shapes -detector_sr1 +det_well_sr1 +det_well_hopper_sr1
+
+[UNIVERSE][CELL hole_boundary_sr1]
+comp concrete
+shapes -detector_sr1
+
+! ============================================================
+!   UNIVERSE: SOURCE RANGE DETECTOR 2
+! ============================================================
+
+[UNIVERSE=general sr_detector_2]
+boundary detector_sr2
+
+! *******  SHAPE DEFINITIONS FOR SOURCE-RANGE DETECOR 2  *******
+
+! Detector Well 
+[UNIVERSE][SHAPE=cuboid det_well_sr2]
+faces -37.5 37.5 -11.5 11.5 -15.08 413.937
+
+[UNIVERSE][SHAPE=hopper det_well_hopper_sr2]
+euler    0.25  0.75  0
+extents  0  12.8
+lo       11.5  225.9685
+hi       20.0  224.4685
+origin   -24.7 0 199.4685
+
+! Detector loading tube 
+[UNIVERSE][SHAPE=cyl det_tube_od_sr2]
+radius 8.89
+extents 120.8154 268.8466
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cyl det_tube_id_sr2]
+radius 7.0612
+extents 120.8154 268.8466
+origin -27 0 0
+axis z
+
+[UNIVERSE][SHAPE=cuboid detector_sr2]
+faces -37.5 37.5 -20 20 -15.08 413.937
+
+! ******************  SOURCE-RANGE DETECTOR 2  ********************
+
+[UNIVERSE][CELL detector_well_sr2]
+comp air
+shapes -det_well_sr2 +det_tube_od_sr2
+
+[UNIVERSE][CELL detector_well_hopper_sr2]
+comp air
+shapes -det_well_hopper_sr2 +det_well_sr2 -detector_sr2
+
+[UNIVERSE][CELL detector_tube_sr2]
+comp cs
+shapes +det_tube_id_sr2 -det_tube_od_sr2
+
+[UNIVERSE][CELL detector_sr2]
+comp void
+shapes -det_tube_id_sr2
+
+[UNIVERSE][CELL outside_detector_sr2]
+comp concrete
+shapes -detector_sr2 +det_well_sr2 +det_well_hopper_sr2
+
+[UNIVERSE][CELL hole_boundary_sr2]
+comp concrete
+shapes -detector_sr2
+
+! ============================================================
+!                       UNIVERSE: EX-CORE 
+! ============================================================
+
+! *****************  DEFINE PROBLEM BOUNDARY  ****************
+
+! Define the problem boundary
+[UNIVERSE=general excore]
+boundary "box"
+
+! boundary box
+[UNIVERSE][SHAPE=cuboid box]
+faces -520 520 -520 520 -20 415
+
+! *********************  DEFINE SHAPES  **********************
+
+! Barrel
+[UNIVERSE][SHAPE=cyl outer_barrel]
+radius 193.68
+extents -15.08 413.937
+origin 0 0 0
+axis z
+
+! Pads
+[UNIVERSE][SHAPE=cylsegment pad_ne]
+angle 0.06944444
+inner_radius 194.64
+outer_radius 201.63
+arc 0.08888889
+extents -15.08 413.937
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment pad_nw]
+angle 0.33472222
+inner_radius 194.64
+outer_radius 201.63
+arc 0.08888889
+extents -15.08 413.937
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment pad_sw]
+angle 0.56944444
+inner_radius 194.64
+outer_radius 201.63
+arc 0.08888889
+extents -15.08 413.937
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment pad_se]
+angle 0.83472222
+inner_radius 194.64
+outer_radius 201.63
+arc 0.08888889
+extents -15.08 413.937
+origin 0 0 0
+
+! RPV Liner
+[UNIVERSE][SHAPE=cyl inner_liner]
+radius 219.15
+extents -15.08 413.937
+origin 0 0 0
+axis z
+
+! RPV
+[UNIVERSE][SHAPE=cyl inner_vessel]
+radius 219.71
+extents -15.08 413.937
+origin 0 0 0
+axis z
+
+[UNIVERSE][SHAPE=cyl outer_vessel]
+radius 241.70
+extents -15.08 413.937
+origin 0 0 0
+axis z
+
+! Air gap between RPV and RPV Insulation 
+[UNIVERSE][SHAPE=cyl agap_od]
+radius 243.70
+extents -15.08 413.937
+origin 0 0 0
+axis z
+
+! RPV Insulation 
+[UNIVERSE][SHAPE=cyl insulation_od]
+radius 251.70
+extents -15.08 413.937
+origin 0 0 0
+axis z
+
+! Air gap between RPV Insulation and cavity liner plate
+[UNIVERSE][SHAPE=cyl liner_id]
+radius 257.70
+extents -15.08 413.937
+origin 0 0 0
+axis z
+
+! Cavity liner plate
+[UNIVERSE][SHAPE=cyl liner_od]
+radius 258.20
+extents -15.08 413.937
+origin 0 0 0
+axis z
+
+! Concrete bioshield
+[UNIVERSE][SHAPE=cyl shield_od]
+radius 518.16
+extents -15.08 413.937
+origin 0 0 0
+axis z
+
+! *******  SHAPE DEFINITIONS FOR DUAL SURVEILLANCE CAPSULE GEOMETRY IN THE NE QUADRANT  *******
+
+[UNIVERSE][SHAPE=cylsegment sliver_water_ne]
+angle 0.084722222
+inner_radius 201.63
+outer_radius 203.33
+arc 0.0125
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_piece1_ne]
+angle 0.0819444444
+inner_radius 201.63
+outer_radius 206.67
+arc 0.018055555
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_piece2_ne]
+angle 0.0819444444
+inner_radius 206.67
+outer_radius 208.33
+arc 0.00833333
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_piece3_ne]
+angle 0.09166667
+inner_radius 206.67
+outer_radius 208.33
+arc 0.00833333
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_piece4_ne]
+angle 0.08472222
+inner_radius 208.33
+outer_radius 210.0
+arc 0.0055556
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_piece5_ne]
+angle 0.09166667
+inner_radius 208.33
+outer_radius 210.0
+arc 0.0055556
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_holder1_ne]
+angle 0.092361111
+inner_radius 205.0
+outer_radius 209.17
+arc 0.004166667
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_holder2_ne]
+angle 0.085416667
+inner_radius 205.0
+outer_radius 209.17
+arc 0.004166667
+extents 134.831 254.831
+origin 0 0 0
+
+! *******  SHAPE DEFINITIONS FOR DUAL SURVEILLANCE CAPSULE GEOMETRY IN THE SW QUADRANT  *******
+
+[UNIVERSE][SHAPE=cylsegment sliver_water_sw]
+angle 0.584722222
+inner_radius 201.63
+outer_radius 203.33
+arc 0.0125
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_piece1_sw]
+angle 0.5819444444
+inner_radius 201.63
+outer_radius 206.67
+arc 0.018055555
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_piece2_sw]
+angle 0.5819444444
+inner_radius 206.67
+outer_radius 208.33
+arc 0.00833333
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_piece3_sw]
+angle 0.59166667
+inner_radius 206.67
+outer_radius 208.33
+arc 0.00833333
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_piece4_sw]
+angle 0.58472222
+inner_radius 208.33
+outer_radius 210.0
+arc 0.0055556
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_piece5_sw]
+angle 0.59166667
+inner_radius 208.33
+outer_radius 210.0
+arc 0.0055556
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_holder1_sw]
+angle 0.592361111
+inner_radius 205.0
+outer_radius 209.17
+arc 0.004166667
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment dsc_holder2_sw]
+angle 0.585416667
+inner_radius 205.0
+outer_radius 209.17
+arc 0.004166667
+extents 134.831 254.831
+origin 0 0 0
+
+! *******  SHAPE DEFINITIONS FOR SINGLE SURVEILLANCE CAPSULE GEOMETRY IN THE NW QUADRANT  *******
+
+[UNIVERSE][SHAPE=cylsegment sliver_water_nw]
+angle 0.4027778
+inner_radius 201.63
+outer_radius 204.13
+arc 0.005556
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment ssc_piece1_nw]
+angle 0.4
+inner_radius 201.63
+outer_radius 208.297
+arc 0.01388889
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment ssc_piece2_nw]
+angle 0.4027778
+inner_radius 208.297
+outer_radius 209.96
+arc 0.005556
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment ssc_holder_nw]
+angle 0.403472222
+inner_radius 206.2135
+outer_radius 209.1285
+arc 0.004166667
+extents 134.831 254.831
+origin 0 0 0
+
+! *******  SHAPE DEFINITIONS FOR SINGLE SURVEILLANCE CAPSULE GEOMETRY IN THE SE QUADRANT  *******
+
+[UNIVERSE][SHAPE=cylsegment sliver_water_se]
+angle 0.9027778
+inner_radius 201.63
+outer_radius 204.13
+arc 0.005556
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment ssc_piece1_se]
+angle 0.9
+inner_radius 201.63
+outer_radius 208.297
+arc 0.01388889
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment ssc_piece2_se]
+angle 0.9027778
+inner_radius 208.297
+outer_radius 209.96
+arc 0.005556
+extents 134.831 254.831
+origin 0 0 0
+
+[UNIVERSE][SHAPE=cylsegment ssc_holder_se]
+angle 0.903472222
+inner_radius 206.2135
+outer_radius 209.1285
+arc 0.004166667
+extents 134.831 254.831
+origin 0 0 0
+
+! Cobalt
+[UNIVERSE][SHAPE=cyl co]
+axis z
+extents 134.831 254.831
+radius 0.25 
+origin 171.4033226 -117.2524851 0.0
+
+! Iron
+[UNIVERSE][SHAPE=cyl fe]
+axis z
+extents 134.831 254.831
+radius 0.25 
+origin 172.1670617 -116.1281495 0.0
+
+! Copper
+[UNIVERSE][SHAPE=cyl cu]
+axis z
+extents 134.831 254.831
+radius 0.25 
+origin 172.9234258 -114.9988394 0.0
+
+! **********************  CREATE HOLES AND FILL WITH UNIVERSES  **********************
+
+! The Inner Barrel Radius is 187.96 cm
+! The bottom left corner of the core is at 0,0,0
+! It must be translated except when performing a raytrace
+[UNIVERSE][HOLE thecore]
+fill reactor
+translate -193.68 -193.68  0.0
+
+[UNIVERSE][HOLE power_range_det_ne]
+fill pr_detector_ne
+rotate 0.7071067811865476 -0.7071067811865476 0
+       0.707106781186547   0.707106781186547  0
+       0                   0                  1
+translate 208.030815 208.030815 0.0
+
+[UNIVERSE][HOLE power_range_det_nw]
+fill pr_detector_nw
+rotate -0.7071067811865476 -0.7071067811865476 0
+        0.707106781186547  -0.707106781186547  0
+        0                   0                  1
+translate -208.030815 208.030815 0.0
+
+[UNIVERSE][HOLE power_range_det_sw]
+fill pr_detector_sw
+rotate -0.7071067811865476  0.7071067811865476 0
+       -0.707106781186547  -0.707106781186547  0
+        0                   0                  1
+translate -208.030815 -208.030815 0.0
+
+[UNIVERSE][HOLE power_range_det_se]
+fill pr_detector_se
+rotate  0.7071067811865476  0.7071067811865476 0
+       -0.707106781186547   0.707106781186547  0
+        0                   0                  1
+translate 208.030815 -208.030815 0.0
+
+[UNIVERSE][HOLE source_range_det1]
+fill sr_detector_1
+rotate   0  -1   0
+         1   0   0
+         0   0   1
+translate 0.0 294.2 0.0
+
+[UNIVERSE][HOLE source_range_det2]
+fill sr_detector_2
+rotate   0   1   0
+        -1   0   0
+         0   0   1
+translate 0.0 -294.2 0.0
+
+! **********************************  DEFINE CELLS  **********************************
+
+! [UNIVERSE][CELL barrel]
+! comp ss
+! shapes +thecore -outer_barrel
+
+[UNIVERSE][CELL moderator]
+comp mod
+shapes +thecore  -inner_liner     +pad_ne          +pad_nw          +pad_sw 
+       +pad_se        +sliver_water_ne +dsc_piece1_ne   +dsc_piece2_ne   +dsc_piece3_ne 
+       +dsc_piece4_ne +dsc_piece5_ne   +sliver_water_sw +dsc_piece1_sw   +dsc_piece2_sw 
+       +dsc_piece3_sw +dsc_piece4_sw   +dsc_piece5_sw   +sliver_water_nw +ssc_piece1_nw
+       +ssc_piece2_nw +sliver_water_se +ssc_piece1_se   +ssc_piece2_se 
+
+[UNIVERSE][CELL pad_ne_quad]
+comp ss
+shapes -pad_ne 
+
+[UNIVERSE][CELL pad_nw_quad]
+comp ss
+shapes -pad_nw
+
+[UNIVERSE][CELL pad_sw_quad]
+comp ss
+shapes -pad_sw
+
+[UNIVERSE][CELL pad_se_quad]
+comp ss
+shapes -pad_se
+
+[UNIVERSE][CELL rpv_liner]
+comp ss
+shapes +inner_liner -inner_vessel
+
+[UNIVERSE][CELL rpv]
+comp cs
+shapes +inner_vessel -outer_vessel
+
+[UNIVERSE][CELL airgap1]
+comp air
+shapes +outer_vessel -agap_od
+
+[UNIVERSE][CELL rpv_insulation]
+comp rpv_mat
+shapes +agap_od -insulation_od
+
+[UNIVERSE][CELL airgap2]
+comp air
+shapes +insulation_od -liner_id +power_range_det_ne +power_range_det_nw +power_range_det_sw
+       +power_range_det_se +source_range_det1 +source_range_det2
+
+[UNIVERSE][CELL shield_liner]
+comp ss
+shapes +liner_id -liner_od +power_range_det_ne +power_range_det_nw +power_range_det_sw 
+       +power_range_det_se +source_range_det1 +source_range_det2
+
+[UNIVERSE][CELL bioshield]
+comp concrete
+shapes +liner_od -shield_od +power_range_det_ne +power_range_det_nw +power_range_det_sw
+       +power_range_det_se +source_range_det1 +source_range_det2
+
+[UNIVERSE][CELL airgap3]
+comp air
+shapes +shield_od -box
+
+! ************ DUAL SURVEILLANCE CAPSULE IN THE NE QUADRANT **************
+
+[UNIVERSE][CELL capsule_water_ne]
+comp mod
+shapes -sliver_water_ne 
+
+[UNIVERSE][CELL cs_double_capsule_ne]
+comp cs
+shapes -dsc_piece1_ne +sliver_water_ne +dsc_holder1_ne +dsc_holder2_ne
+
+[UNIVERSE][CELL cs_double_capsule2_ne]
+comp cs
+shapes -dsc_piece2_ne +dsc_holder1_ne +dsc_holder2_ne
+
+[UNIVERSE][CELL cs_double_capsule3_ne]
+comp cs
+shapes -dsc_piece3_ne +dsc_holder1_ne +dsc_holder2_ne
+
+[UNIVERSE][CELL cs_double_capsule4_ne]
+comp cs
+shapes -dsc_piece4_ne +dsc_holder1_ne +dsc_holder2_ne
+
+[UNIVERSE][CELL cs_double_capsule5_ne]
+comp cs
+shapes -dsc_piece5_ne +dsc_holder1_ne +dsc_holder2_ne
+
+[UNIVERSE][CELL double_capsule_holder1_ne]
+comp cs
+shapes -dsc_holder1_ne
+
+[UNIVERSE][CELL double_capsule_holder2_ne]
+comp cs
+shapes -dsc_holder2_ne
+
+! ************ DUAL SURVEILLANCE CAPSULE IN THE SW QUADRANT **************
+
+[UNIVERSE][CELL capsule_water_sw]
+comp mod
+shapes -sliver_water_sw 
+
+[UNIVERSE][CELL cs_double_capsule_sw]
+comp cs
+shapes -dsc_piece1_sw +sliver_water_sw +dsc_holder1_sw +dsc_holder2_sw
+
+[UNIVERSE][CELL cs_double_capsule2_sw]
+comp cs
+shapes -dsc_piece2_sw +dsc_holder1_sw +dsc_holder2_sw
+
+[UNIVERSE][CELL cs_double_capsule3_sw]
+comp cs
+shapes -dsc_piece3_sw +dsc_holder1_sw +dsc_holder2_sw
+
+[UNIVERSE][CELL cs_double_capsule4_sw]
+comp cs
+shapes -dsc_piece4_sw +dsc_holder1_sw +dsc_holder2_sw
+
+[UNIVERSE][CELL cs_double_capsule5_sw]
+comp cs
+shapes -dsc_piece5_sw +dsc_holder1_sw +dsc_holder2_sw
+
+[UNIVERSE][CELL double_capsule_holder1_sw]
+comp cs
+shapes -dsc_holder1_sw
+
+[UNIVERSE][CELL double_capsule_holder2_sw]
+comp cs
+shapes -dsc_holder2_sw
+
+! ************ SINGLE SURVEILLANCE CAPSULE IN THE SW QUADRANT **************
+
+[UNIVERSE][CELL capsule_water_nw]
+comp mod
+shapes -sliver_water_nw 
+
+[UNIVERSE][CELL cs_single_capsule_nw]
+comp cs
+shapes -ssc_piece1_nw +sliver_water_nw +ssc_holder_nw
+
+[UNIVERSE][CELL cs_single_capsule2_nw]
+comp cs
+shapes -ssc_piece2_nw +ssc_holder_nw
+
+[UNIVERSE][CELL cs_single_holder_nw]
+comp cs
+shapes -ssc_holder_nw
+
+! ************ SINGLE SURVEILLANCE CAPSULE IN THE SE QUADRANT **************
+
+[UNIVERSE][CELL capsule_water_se]
+comp mod
+shapes -sliver_water_se 
+
+[UNIVERSE][CELL cs_single_capsule_se]
+comp cs
+shapes -ssc_piece1_se +sliver_water_se +ssc_holder_se
+
+[UNIVERSE][CELL cs_single_capsule2_se]
+comp cs
+shapes -ssc_piece2_se +ssc_holder_se
+
+[UNIVERSE][CELL cs_single_holder_se]
+comp cs
+shapes -ssc_holder_se +co +fe +cu
+
+[UNIVERSE][CELL co_coupon]
+comp co
+shapes -co
+
+[UNIVERSE][CELL fe_coupon]
+comp fe
+shapes -fe
+
+[UNIVERSE][CELL cu_coupon]
+comp cu
+shapes -cu
+
+! ============================================================
+!                   DEFINE THE COMPOSITIONS
+! ============================================================
+
+[COMP]
+
+[COMP][MATERIAL void]
+matid 0
+temperature 293
+zaid --
+nd --
+
+[COMP][MATERIAL air]
+matid 1
+temperature 293
+zaid   6012 6013 7014 7015 8016 8017 18036 18038 18040
+nd     7.39933E-09 8.30564E-11 3.89846E-05 1.44779E-07 1.04874E-05 
+       2.52303E-08 7.92196E-10 1.39801E-10 2.32069E-07
+
+!    Concrete, Oak Ridge (ORNL), 2.300000 g/cm3
+!    material data from PNNL 15870 Rev 1
+!    The above density is estimated to be accurate to 2 significant digits.
+!    Uncertainties are not addressed. The following data were calculated
+!    from the input weight
+!    Converted to number densities by Eva Davidson
+
+[COMP][MATERIAL concrete]
+matid 2
+temperature 293
+zaid  1001  1002  6012  6013  8016  8017  11023 12024 12025 12026
+      13027 14028 14029 14030 19039 19040 19041 20040 20042 20043 
+      20044 20048 26054 26056 26057 26058
+nd    8.49996E-03 1.70019E-06 1.99790E-02 2.24257E-04 3.54247E-02 
+      8.52237E-05 1.63354E-05 1.46966E-03 1.86056E-04 2.04848E-04 
+      5.55961E-04 1.56827E-03 7.95785E-05 5.25422E-05 3.76029E-05 
+      4.03217E-09 2.71356E-06 1.07627E-02 7.21657E-05 1.55434E-05
+      2.32041E-04 2.10946E-05 1.12950E-05 1.77148E-04  4.09321E-06 
+      5.40617E-07
+
+! from page 114 of CASL progression problems (CASL-U-2012-0131-004) 
+[COMP][MATERIAL ss]
+matid 3
+temperature 293
+zaid  6000 14028 14029 14030 15031 24050 24052 24053 24054 25055 
+     26054 26056 26057 26058 28058 28060 28061 28062 28064 
+nd   3.20895E-04 1.58197E-03 8.03653E-05 5.30394E-05 6.99938E-05 
+     7.64915E-04 1.47506E-02 1.67260E-03 4.16346E-04 1.75387E-03 
+     3.44776E-03 5.41225E-02 1.24992E-03 1.66342E-04 5.30854E-03 
+     2.04484E-03 8.88879E-05 2.83413E-04 7.21770E-05 
+
+! from page 114 of CASL progression problems (CASL-U-2012-0131-004)
+[COMP][MATERIAL cs]
+matid 4
+temperature 293
+zaid 6000 26054 26056 26057 26058
+nd   3.93598E-03 4.89841E-03 7.68945E-02 1.77583E-03 2.36330E-04
+
+! from page 114 of CASL progression problems (CASL-U-2012-0131-004)
+[COMP][MATERIAL mod]
+matid 5
+temperature 293
+zaid 1001 8016 5010 5011
+nd   6.667279121238251E-02  3.333639560619125E-02 3.325516211867062E-05
+     1.338562053118350E-04
+
+! 97% air and 3% ss (%volume)
+[COMP][MATERIAL rpv_mat]
+matid 6
+temperature 293
+zaid  6012  6013  7014  7015  8016  8017 18036 18038 18040 14028 
+     14029 14030 15031 24050 24052 24053 24054 25055 26054 26056
+     26057 26058 28058 28060 28061 28062 28064
+nd   9.63403E-06 8.05647E-11 3.78150E-05 1.40435E-07 1.01728E-05 
+     2.44734E-08 7.68430E-10 1.35607E-10 2.25107E-07 4.74591E-05 
+     2.41096E-06 1.59118E-06 2.09981E-06 2.29475E-05 4.42518E-04
+     5.01780E-05 1.24904E-05 5.26161E-05 1.03433E-04 1.62368E-03
+     3.74976E-05 4.99026E-06 1.59256E-04 6.13452E-05 2.66664E-06 
+     8.50239E-06 2.16531E-06
+     
+! Co
+[COMP][MATERIAL co]
+matid 7
+temperature 293
+zaid 27059
+nd   1.0
+
+! Fe
+[COMP][MATERIAL fe]
+matid 8
+temperature 293
+zaid 26054 26056 26057 26058
+nd   5.13834E-03 7.77836E-02 1.76480E-03 2.30817E-04
+
+! Cu
+[COMP][MATERIAL cu]
+matid 9
+temperature 293
+zaid 29063 29065
+nd   5.92920E-02 2.56380E-02
+
+!################################ RESPONSES ##############################
+
+[RESPONSE=xs]
+name       U235resp
+mt         N_FISSION
+nuclide    92235
+physics    ce
+particle_type n
+tmp           293
+
+[RESPONSE=xs]
+name       B10_mt101
+mt         101
+nuclide    5010
+physics    ce
+particle_type n
+tmp           293
+
+! ============================================================
+!                      DEFINE THE TALLIES
+! ============================================================
+[TALLY]
+
+! Cell flux tally
+[TALLY][CELL flux_tally]
+reactions flux 
+cells detector_ne_top  detector_ne_bot
+nbins 20e6 1e6 1e5 1e3 10 1 1e-5
+
+! U-235 response tally
+[TALLY][CELL src_detectors_u235]
+cells detector_sr1 detector_sr2
+responses U235resp
+
+[TALLY][CELL pr_detectors_u235]
+cells detector_ne_top detector_ne_bot detector_nw_top detector_nw_bot
+      detector_se_top detector_se_bot detector_sw_top detector_sw_bot
+responses U235resp
+
+! B-10 response tally
+[TALLY][CELL src_detectors_b10]
+cells detector_sr1 detector_sr2
+responses B10_mt101
+
+[TALLY][CELL pr_detectors_b10]
+cells detector_ne_top detector_ne_bot detector_nw_top detector_nw_bot
+      detector_se_top detector_se_bot detector_sw_top detector_sw_bot
+responses B10_mt101
+
+! coupon cell flux tally
+[TALLY][CELL coupons]
+reactions flux
+cells co_coupon  fe_coupon  cu_coupon
+nbins 20e6 1e6 1e5 1e3 10 1 1e-5
+
+! cylindrical mesh tally 
+[TALLY][CYLMESH vessel_tally]
+r 0.0 219.71 5i 241.70
+theta 0 16i 1.0
+z -5 20i 413.937
+nbins 20e6 1e6 1e5 1e3 10 1 1e-5
+
+
