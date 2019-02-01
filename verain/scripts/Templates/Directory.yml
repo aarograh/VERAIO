@@ -1843,6 +1843,26 @@ SHIFT:
       - is_word()
       - in_dictionary() true false
 #>
+#>   {\bf output\_external\_source} output\_external\_source
+#>   \VERAInputTable{
+#>     name={output\_external\_source},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Output the external source for each state},
+#>     notes={}
+#>   }
+  output_external_source:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf output\_micro\_tally} output\_micro\_tally
 #>   \VERAInputTable{
 #>     name={output\_micro\_tally},
@@ -1995,6 +2015,46 @@ SHIFT:
 #>     notes={}
 #>   }
   use_mpact_spectrum:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf use_fission_source} use_fission_source
+#>   \VERAInputTable{
+#>     name={use_fission_source},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Use the fission source provided by MPACT},
+#>     notes={}
+#>   }
+  use_fission_source:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf use_external_source} use_external_source
+#>   \VERAInputTable{
+#>     name={use_external_source},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Use the external source provided by MPACT},
+#>     notes={}
+#>   }
+  use_external_source:
     <<: *dtbool
     _content:
     _check:

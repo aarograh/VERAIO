@@ -108,6 +108,13 @@ SHIFT:
         - copy SHIFT/$output_fission_source
       _content:
 
+    output_external_source:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$output_external_source
+      _content:
+
     output_ww:
       _pltype: parameter
       _type: bool
@@ -162,6 +169,20 @@ SHIFT:
       _type: bool
       _do:
         - copy SHIFT/$use_mpact_spectrum
+      _content:
+
+    use_fission_source:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$use_fission_source
+      _content:
+
+    use_external_source:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$use_external_source
       _content:
 
     core_translate:
