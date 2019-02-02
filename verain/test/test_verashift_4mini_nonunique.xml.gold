@@ -650,8 +650,8 @@
     <ParameterList name="kcode_db">
       <Parameter name="Np" type="double" value="1000"/>
     </ParameterList>
-    <Parameter name="output_fission_source" type="bool" value="true"/>
     <Parameter name="output_external_source" type="bool" value="false"/>
+    <Parameter name="output_fission_source" type="bool" value="true"/>
     <Parameter name="output_geometry" type="bool" value="true"/>
     <Parameter name="problem_mode" type="string" value="forward"/>
     <Parameter name="raytrace_levels" type="Array(double)" value="{10.0,200.0}"/>
@@ -663,9 +663,9 @@
     </ParameterList>
     <Parameter name="transfer" type="string" value="fiss_src"/>
     <Parameter name="transport" type="string" value="ce"/>
-    <Parameter name="use_mpact_spectrum" type="bool" value="true"/>
-    <Parameter name="use_fission_source" type="bool" value="true"/>
     <Parameter name="use_external_source" type="bool" value="false"/>
+    <Parameter name="use_fission_source" type="bool" value="true"/>
+    <Parameter name="use_mpact_spectrum" type="bool" value="true"/>
     <Parameter name="vera_pressure_vessel" type="bool" value="true"/>
   </ParameterList>
   <ParameterList name="EDITS">
