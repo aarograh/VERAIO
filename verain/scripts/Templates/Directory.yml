@@ -5049,20 +5049,20 @@ COBRATF:
       - is_float()
       - is_geq() 0.0
 #>
-#>   {\bf crud} crud
+#>   {\bf crud_tool} crud_tool
 #>   \VERAInputTable{
-#>     name={crud},
+#>     name={crud_tool},
 #>     type={string},
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={MAMBA},
-#>     valuesapplicable={MAMBA cicada none},
+#>     valuesapplicable={MAMBA cicada},
 #>     limitations={},
 #>     description={Sets the crud modeling tool.  Only applicable during a crud simulation.},
 #>     notes={}
 #>   }
-  crud:
+  crud_tool:
     <<: *dtword
     _content:
     _check:

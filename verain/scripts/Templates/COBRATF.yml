@@ -514,11 +514,11 @@ COBRATF:
         - copy COBRATF/$beta_sp
       _content:
 
-    crud:
+    crud_tool:
       _pltype: parameter
       _type: string
       _do:
-        - copy COBRATF/$crud
+        - copy COBRATF/$crud_tool
       _content:
 
     crud_dT_feedback:
