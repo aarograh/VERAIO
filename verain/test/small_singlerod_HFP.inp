@@ -159,6 +159,7 @@
   nc      1             ! conduction option - radial conduction
   irfc    2             ! friction factor correlation default=2
   dhfrac  0.02          ! fraction of power deposited directly into coolant
+  chf     3
   hgap    5678.3        ! gap conductance
   edit_channels 1
   parallel 0
