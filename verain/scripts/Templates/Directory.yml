@@ -3420,14 +3420,15 @@ COBRATF:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={1},
-#>     valuesapplicable={0, 1, 2},
+#>     valuedefault={0},
+#>     valuesapplicable={0, 1, 2, 3},
 #>     limitations={},
 #>     description={
 #>       CHF model option.  Options are:
 #>        0 - No CHF check during transient (post-sim check using W-3)
 #>        1 - Check CHF during transient using W-3
 #>        2 - No CHF check during or after simulation (set CHF to infinity)},
+#>        3 - No CHF check during transient (post-sim check using Groeneveld lookup tables)
 #>     notes={}
 #>   }
   chf:
@@ -3435,7 +3436,7 @@ COBRATF:
     _content:
     _check:
       - is_int()
-      - in_dictionary() 0 1 2
+      - in_dictionary() 0 1 2 3
 #>
 #>   {\bf debug} debug
 #>   \VERAInputTable{
