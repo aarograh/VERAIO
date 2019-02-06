@@ -189,8 +189,7 @@
   courant 0.8
   edit_channels 1
   crud_dT_feedback 0
-
-  crud MAMBA
+  crud_tool MAMBA
 
 [COUPLING]
   epsk        5.0  ! pcm

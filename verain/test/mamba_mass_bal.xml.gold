@@ -215,8 +215,8 @@
   </ParameterList>
   <ParameterList name="COBRATF">
     <Parameter name="courant" type="double" value="0.8"/>
-    <Parameter name="crud" type="string" value="MAMBA"/>
     <Parameter name="crud_dT_feedback" type="int" value="0"/>
+    <Parameter name="crud_tool" type="string" value="MAMBA"/>
     <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="dtmax" type="double" value="0.1"/>
     <Parameter name="dtmin" type="double" value="0.000001"/>
