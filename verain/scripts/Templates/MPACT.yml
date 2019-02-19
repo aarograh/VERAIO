@@ -171,6 +171,13 @@ MPACT:
       _do:
         - copy MPACT/$xe135m_opt
       _content:
+      
+    explicit_erg_deposit:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy MPACT/$explicit_erg_deposit
+      _content:
 
     nodal_edits:
       _pltype: parameter

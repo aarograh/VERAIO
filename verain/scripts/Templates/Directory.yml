@@ -6093,6 +6093,12 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() ignore combine explicit
+  explicit_erg_deposit:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
   nodal_edits:
     <<: *dtbool
     _content:
