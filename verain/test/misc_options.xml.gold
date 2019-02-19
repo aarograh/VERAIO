@@ -4,20 +4,26 @@
   <Parameter name="case_id" type="string" value="Test Misc options"/>
   <ParameterList name="STATES">
     <ParameterList name="State_1">
+      <Parameter name="apitch_tec" type="double" value="2.0"/>
+      <Parameter name="axial_tec" type="double" value="1.75"/>
       <Parameter name="boron" type="double" value="1300"/>
       <Parameter name="deplete" type="Array(double)" value="{0.0,1.0,2.0,3.5,4.5}"/>
       <Parameter name="deplete_units" type="string" value="GWDMT"/>
+      <Parameter name="expand3D" type="bool" value="true"/>
       <Parameter name="feedback" type="string" value="on"/>
       <Parameter name="kcrit" type="double" value="1.02"/>
       <Parameter name="kmul_beta" type="double" value="0.95"/>
       <Parameter name="kmul_crw" type="double" value="3.00"/>
       <Parameter name="modden" type="double" value="0.743"/>
       <Parameter name="power" type="double" value="100.0"/>
+      <Parameter name="ppitch_tec" type="double" value="1.5"/>
       <Parameter name="pressure" type="double" value="15.5132039025"/>
       <Parameter name="search" type="string" value="boron"/>
       <Parameter name="sym" type="string" value="full"/>
       <Parameter name="tfuel" type="double" value="900"/>
       <Parameter name="thexp" type="string" value="on"/>
+      <Parameter name="thexp_info" type="bool" value="true"/>
+      <Parameter name="thexp_outfile" type="string" value="misc_options.texml.out"/>
       <Parameter name="thexp_tclad" type="double" value="623.15"/>
       <Parameter name="thexp_tfuel" type="double" value="875"/>
       <Parameter name="thexp_tmod" type="double" value="565.927777777778"/>

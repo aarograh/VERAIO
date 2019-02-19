@@ -452,6 +452,11 @@ STATE:
     _content:
     _check:
       - is_float()
+  axial_tec:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
   sym:
     <<: *dtword
     _content:

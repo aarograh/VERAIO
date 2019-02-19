@@ -285,6 +285,13 @@ STATES:
             - copy %STATE/$(_loop)/$ppitch_tec
           _content:
 
+        axial_tec:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$axial_tec
+          _content:
+
         sym:
           _pltype: parameter
           _type: string

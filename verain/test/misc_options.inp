@@ -22,6 +22,12 @@
   thexp_tfuel 875.0 K
   thexp_tclad 350.0 C
   thexp_tmod  559.0 F
+  expand3D      true
+  thexp_outfile "misc_options.texml.out"
+  thexp_info    true
+  apitch_tec    2.0  !micrometer/meter, gets *10^-6
+  ppitch_tec    1.5  !micrometer/meter, gets *10^-6
+  axial_tec     1.75 !micrometer/meter, gets *10^-6
   kmul_beta   0.95
   kmul_crw    3.00
 
