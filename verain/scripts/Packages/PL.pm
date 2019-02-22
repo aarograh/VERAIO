@@ -692,6 +692,11 @@ sub dbcopy2{
     my( $home, $path, %userparam ) = @_ ;
     my %OPTIONS;
     my @result;
+    my @ary;
+    my @aryw;
+    my $istart=0;
+    my $section=-1;
+    my $isection=0;
 
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
     {
@@ -735,7 +740,46 @@ sub dbcopy2{
 
 
     if(ref $t eq 'ARRAY'){
-	foreach (@{ $t }){
+	@ary = @{ $t };
+	
+	if(exists($OPTIONS{section})){      # for selection of data between /-s
+	    $section=$OPTIONS{section};
+	}
+
+	if(exists($OPTIONS{isection})){     # for selection of data between /-s
+	    $isection=$OPTIONS{isection};
+	}
+
+	if($section >= 0){                  # for selection of data between /-s
+	    @aryw=partarray($section,$isection,'/',@ary);
+	    @ary=@aryw;
+	}
+
+	if(exists($OPTIONS{start})){
+	    $istart=$OPTIONS{start};
+	}
+
+	if(exists($OPTIONS{stride})){
+	    @aryw=stride($istart,$OPTIONS{stride},@ary);
+	    @ary=@aryw;
+	}
+
+	if(exists($OPTIONS{select})){
+	    if(lc($OPTIONS{select}) eq 'odd'){
+		@aryw=odd(\@ary);
+		@ary=@aryw;
+	    }
+	    elsif(lc($OPTIONS{select}) eq 'even'){
+		@aryw=even(\@ary);	    
+		@ary=@aryw;
+	    }
+	    else{
+		warn "dbcopy2: select option $OPTIONS{select} not valid\n";
+		return undef;
+	    }
+	}
+
+	foreach ( @ary ){
 	    die "dbcopy2: entity $_ not available in $_search\n"
 		if(@AVAILABLE && !exists($AVAILABLE{$_}));
 	    push @result, $def ? $def->($_) : $_;
