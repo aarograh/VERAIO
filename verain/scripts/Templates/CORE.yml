@@ -449,3 +449,101 @@ CORE:
       _do:
         - copy CORE/$material_perturbation_file
       _content:
+
+    bioshield_mats:
+      _pltype: array
+      _type: string
+      _do:
+        - copy CORE/@bioshield,start=>0,stride=>2,existspath=>CORE/%mat/*
+      _content:
+
+    bioshield_radii:
+      _pltype: array
+      _type: double
+      _do:
+        - copy CORE/@bioshield,start=>1,stride=>2
+      _content:
+
+    det_label_locs:
+      _pltype: array
+      _type: string
+      _do:
+        - copy CORE/@det_locations,start=>0,stride=>4,existspath=>CORE/%det
+      _content:
+
+    det_rad_locs:
+      _pltype: array
+      _type: double
+      _do:
+        - copy CORE/@det_locations,start=>1,stride=>4
+      _content:
+
+    det_azi_locs:
+      _pltype: array
+      _type: double
+      _do:
+        - copy CORE/@det_locations,start=>2,stride=>4
+      _content:
+
+    det_elev_locs:
+      _pltype: array
+      _type: double
+      _do:
+        - copy CORE/@det_locations,start=>3,stride=>4
+      _content:
+
+    Excore_Detectors:
+      _pltype: list
+
+      _tr:
+        _name: _ldet
+        _content: CORE/%det
+
+      _content:
+
+        Excore_Detector_(_ldet):
+          _pltype: list
+          _content:
+            
+            label:
+              _pltype: parameter
+              _type: string
+              _do:
+                - value (_ldet)
+              _content:
+
+            mats:
+              _pltype: array
+              _type: string
+              _do:
+                - copy CORE/%det/@(_ldet),section=>1
+              _content:
+
+            radii:
+              _pltype: array
+              _type: double
+              _do:
+                - copy CORE/%det/@(_ldet),section=>0,isection=>1
+              _content:
+
+            type:
+              _pltype: parameter
+              _type: string
+              _do:
+                - copy CORE/%det/@(_ldet):0
+              _content:
+
+            heights:
+              _pltype: array
+              _type: double
+              _do:
+                - copy CORE/%det/@(_ldet),section=>2
+              _content:
+
+            response:
+              _pltype: array
+              _type: string
+              _do:
+                - copy CORE/%det/@(_ldet),section=>3
+              _content:
+

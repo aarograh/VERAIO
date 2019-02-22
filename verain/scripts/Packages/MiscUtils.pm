@@ -51,7 +51,8 @@ use Exporter;
 	 'split_string_at',
 	 'cut_string_at',
 	 'trim_space',
-	 'match_all_equalities'
+	 'match_all_equalities',
+	 'partarray'
     );
 
 {
@@ -491,6 +492,42 @@ sub trim_space {
     $str =~ s/^\s+//;
     $str =~ s/\s+$//;
     return $str;
+}
+
+# partition array by separator
+# extract zone 1, local start index 0, separator /
+# @d=&partarray(1,0,'/',\@content);
+sub partarray{
+    my $zone =shift;
+    my $start=shift;
+    my $separator=shift;
+#    my $contref  =shift;
+    my @content  =@_;
+
+#    print STDERR "content @content\n";
+    
+#    my @content=@{ $contref };
+    my @zidx=indexes { $_ eq $separator } @content;
+
+    my $j=0;
+    my @c;
+    foreach my $i ( @zidx ){
+	push @c, [ @content[$j..$i-1] ];
+	$j=$i+1;
+    }
+    push @c, [ @content[$j..$#content] ] if $j<@content;
+
+
+    if($zone > $#c){
+	die "partarray: invalid region $zone, maximum $#c\n";
+    }
+    if($start > $#{$c[$zone]}){
+	die "partarray: invalid start $start, maximum $#{$c[$zone]}\n";
+    }
+
+#    print STDERR "out @{ $c[$zone] }[$start..$#{$c[$zone]}]\n";
+
+    return @{ $c[$zone] }[$start..$#{$c[$zone]}];
 }
 
 1;
