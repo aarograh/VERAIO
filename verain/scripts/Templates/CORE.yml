@@ -454,7 +454,7 @@ CORE:
       _pltype: array
       _type: string
       _do:
-        - copy CORE/@bioshield,start=>0,stride=>2,existspath=>CORE/%mat/*
+        - copy CORE/@bioshield,start=>0,stride=>2
       _content:
 
     bioshield_radii:
@@ -544,6 +544,13 @@ CORE:
               _pltype: array
               _type: string
               _do:
-                - copy CORE/%det/@(_ldet),section=>3
+                - copy CORE/%det/@(_ldet),section=>3,select=>even
+              _content:
+
+            well_type:
+              _pltype: array
+              _type: string
+              _do:
+                - copy CORE/%det/@(_ldet),section=>3,select=>odd
               _content:
 
