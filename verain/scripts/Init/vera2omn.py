@@ -61,37 +61,40 @@ class DetectorType(object):
 class VERAOmnibusGenerator(object):
 
     def __init__(self, basename, script_dir):
-        self.infile          = basename + ".xml"
-        self.outfile         = basename + ".omn"
-        self.template_file   = script_dir + "Init/omnibus_template.txt"
-        self.cell_file       = script_dir + "Init/cell_template.txt"
-        self.shape_file      = script_dir + "Init/shape_template.txt"
-        self.tally_file      = script_dir + "Init/tally_template.txt"
-        self.bioshield_mats  = None
-        self.bioshield_radii = None
-        self.vessel_rads     = None
-        self.height          = 0.0
-        self.lower_refl      = 0.0
-        self.upper_refl      = 0.0
-        self.lower_plate     = 0.0
-        self.upper_plate     = 0.0
-        self.det_type_list   = []
-        self.detectors       = []
-        self.det_label_locs  = []
-        self.det_rad_locs    = []
-        self.det_azi_locs    = []
-        self.det_elev_locs   = []
-        self.translate       = [0.0, 0.0, 0.0]
-        self.materials       = []
+        self.infile           = basename + ".xml"
+        self.outfile          = basename + ".omn"
+        self.xml_data         = None
+        self.xml_shift        = None
+        self.template_file    = script_dir + "Init/omnibus_template.txt"
+        self.cell_file        = script_dir + "Init/cell_template.txt"
+        self.shape_file       = script_dir + "Init/shape_template.txt"
+        self.tally_file       = script_dir + "Init/tally_template.txt"
+        self.bioshield_mats   = None
+        self.bioshield_radii  = None
+        self.vessel_rads      = None
+        self.height           = 0.0
+        self.lower_refl       = 0.0
+        self.upper_refl       = 0.0
+        self.lower_plate      = 0.0
+        self.upper_plate      = 0.0
+        self.det_type_list    = []
+        self.detectors        = []
+        self.det_label_locs   = []
+        self.det_rad_locs     = []
+        self.det_azi_locs     = []
+        self.det_elev_locs    = []
+        self.translate        = [0.0, 0.0, 0.0]
+        self.materials        = []
+        self.tally_cells      = []
 
     def load(self):
         print("Loading ", self.infile)
 
         core_block = None
-        shift_block = None
 
         # Load the xml file
-        xml_root = etree.parse(self.infile).getroot()
+        self.xml_data = etree.parse(self.infile)
+        xml_root = self.xml_data.getroot()
 
         # Look for the CORE block
         for child in xml_root:
@@ -182,8 +185,8 @@ class VERAOmnibusGenerator(object):
                                 [float(i) for i in self.det_elev_locs]
 
             if child.attrib['name'] == 'SHIFT':
-                shift_block = child
-                for shift_child in shift_block:
+                self.xml_shift = child
+                for shift_child in self.xml_shift:
                     if shift_child.attrib['name'] == 'core_translate':
                         trans_str = re.sub(r"[{}]", "",
                                 shift_child.attrib['value'])
@@ -194,7 +197,7 @@ class VERAOmnibusGenerator(object):
         # it must contain bioshield materials, bioshield radii, and vessel
         # radii. There also must be a SHIFT block.
         if (core_block == None or
-                shift_block == None or
+                self.xml_shift == None or
                 self.bioshield_mats == None or
                 self.bioshield_radii == None or
                 self.vessel_rads == None):
@@ -224,9 +227,6 @@ class VERAOmnibusGenerator(object):
                 min_z, max_z]
         bnds = [str(i) for i in bnds]
 
-        # Detector tally cells, if we have them
-        tally_cells = []
-
         # Get a list of template materials
         self._get_template_materials()
 
@@ -245,7 +245,7 @@ class VERAOmnibusGenerator(object):
                     self._write_bioshield_cells(outfile,
                             det_outers)
                 elif "OMN_DETECTOR_CELLS" in line:
-                    tally_cells = self._write_detector_cells(outfile)
+                    self._write_detector_cells(outfile)
                 elif "OMN_CORE_TRANSLATION" in line:
                     line_filled = re.sub(r'OMN_CORE_TRANSLATION',
                             ' '.join([str(i) for i in self.translate]), line)
@@ -258,8 +258,8 @@ class VERAOmnibusGenerator(object):
                     outfile.write(line)
 
             # If we have detectors, we need to make tallies for them
-            if len(tally_cells) > 0:
-                self._write_detector_tallies(outfile, tally_cells)
+            if len(self.tally_cells) > 0:
+                self._write_detector_tallies(outfile)
 
     def _write_bioshield_shapes(self, outfile):
         # Determine bounds
@@ -427,9 +427,6 @@ class VERAOmnibusGenerator(object):
         return det_outers
 
     def _write_detector_cells(self, outfile):
-        # Store the detector cells that we will tally in
-        tally_cells = []
-
         # Loop over the detectors
         for d in range(len(self.det_label_locs)):
             # Get the type for this detector
@@ -471,11 +468,11 @@ class VERAOmnibusGenerator(object):
                             else:
                                 outfile.write(cell_line)
                     if r == det_type.radii[0]:
-                        tally_cells.append([cell_label, det_type.response])
+                        self.tally_cells.append([cell_label, det_type.response,
+                            det_type.label])
                     label_num += 1
-        return tally_cells
 
-    def _write_detector_tallies(self, outfile, tally_cells):
+    def _write_detector_tallies(self, outfile):
         outfile.write(
                 "! =========================================================\n")
         outfile.write(
@@ -483,7 +480,7 @@ class VERAOmnibusGenerator(object):
         outfile.write(
                 "! =========================================================\n")
         outfile.write("[TALLY]\n")
-        for t in tally_cells:
+        for t in self.tally_cells:
             outfile.write("\n")
             with open(self.tally_file, 'r') as tally_file:
                 for tally_line in tally_file:
@@ -506,6 +503,77 @@ class VERAOmnibusGenerator(object):
             self.materials = re.findall(r'^\[COMP\]\[MATERIAL\s+([\w.-]+)',
                     temp_file.read(), re.M)
 
+    def update_vera_xml(self):
+        if len(self.tally_cells) == 0:
+            return
+
+        # See if we have hybrid tally names and multipliers
+        xml_hybrid_tally = None
+        xml_hybrid_mult  = None
+        for shift_child in self.xml_shift:
+            if shift_child.attrib['name'] == 'hybrid_tally_names':
+                xml_hybrid_tally = shift_child
+            if shift_child.attrib['name'] == 'hybrid_multiplier_names':
+                xml_hybrid_mult = shift_child
+
+        # If the hybrid tally name(s) was not given in the VERA input,
+        # we optimize for all tally cells
+        if xml_hybrid_tally == None:
+            tally_name_list = []
+            tally_mult_list = []
+            for t in self.tally_cells:
+                tally_name_list.append(t[0])
+                tally_mult_list.appen('flux')
+            tally_names = '{' + ','.join(tally_name_list) + '}'
+            tally_mults = '{' + ','.join(tally_mult_list) + '}'
+
+            tally_tag = etree.SubElement(self.xml_shift, 'Parameter')
+            tally_tag.attrib['name'] = 'hybrid_tally_names'
+            tally_tag.attrib['type'] = 'Array(string)'
+            tally_tag.attrib['value'] = tally_names
+
+            mult_tag = etree.SubElement(self.xml_shift, 'Parameter')
+            mult_tag.attrib['name'] = 'hybrid_multiplier_names'
+            mult_tag.attrib['type'] = 'Array(string)'
+            mult_tag.attrib['value'] = tally_mults
+
+        # If the hybrid tally names are given we need to see if we have
+        # detector types or specific tallies. We also need to update
+        # the tally multipliers to match.
+        else:
+            tally_name_list = []
+            tally_mult_list = []
+            tally_str = re.sub(r"[{}]", "",
+                    xml_hybrid_tally.attrib['value'])
+            tally_types = tally_str.strip().split(',')
+            for t in self.tally_cells:
+                if t[2] in tally_types:
+                    tally_name_list.append(t[0])
+                    tally_mult_list.append('flux')
+            tally_names = '{' + ','.join(tally_name_list) + '}'
+            tally_mults = '{' + ','.join(tally_mult_list) + '}'
+
+            # If the specified tally name does not match any of the
+            # detector types, leave it.
+            if len(tally_name_list) == 0:
+                return
+
+            xml_hybrid_tally.set('value', tally_names)
+
+            # If no multiplier tag was given, add it. Otherwise, replace the
+            # values to match the number of tallies.
+            if xml_hybrid_mult == None:
+                mult_tag = etree.SubElement(self.xml_shift, 'Parameter')
+                mult_tag.attrib['name'] = 'hybrid_multiplier_names'
+                mult_tag.attrib['type'] = 'Array(string)'
+                mult_tag.attrib['value'] = tally_mults
+            else:
+                xml_hybrid_mult.set('value', tally_mults)
+
+        # Write back to file
+        self.xml_data.write(self.infile)
+
+
 ###############################################################################
 # main
 ###############################################################################
@@ -526,6 +594,9 @@ def main(argv=None):
     # Write the Omnibus excore file
     print("Writing Omnibus excore input file")
     generator.write()
+
+    # Update VERA xml input file with tallies to optimize for
+    generator.update_vera_xml()
 
 #-----------------------------------------------------------------------------#
 if __name__ == "__main__":
