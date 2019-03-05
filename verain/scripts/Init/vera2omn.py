@@ -88,7 +88,6 @@ class VERAOmnibusGenerator(object):
         self.tally_cells      = []
 
     def load(self):
-        print("Loading ", self.infile)
 
         core_block = None
 
@@ -523,7 +522,7 @@ class VERAOmnibusGenerator(object):
             tally_mult_list = []
             for t in self.tally_cells:
                 tally_name_list.append(t[0])
-                tally_mult_list.appen('flux')
+                tally_mult_list.append('flux')
             tally_names = '{' + ','.join(tally_name_list) + '}'
             tally_mults = '{' + ','.join(tally_mult_list) + '}'
 

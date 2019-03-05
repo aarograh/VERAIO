@@ -189,6 +189,10 @@ if(@ARGS == 1){
     $ARGS[1]=$dirs.$filename.".xml";
     $filebase=$dirs.$filename;
 }
+else{
+    my($filename, $dirs, $suffix) = fileparse($ARGS[1],qr/\.[^.]*/);
+    $filebase=$dirs.$filename;
+}
 
 
 if(@ARGS < 2){
