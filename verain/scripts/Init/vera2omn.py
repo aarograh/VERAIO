@@ -32,6 +32,8 @@ class DetectorType(object):
         self.response  = ''
         self.well_type = ''
 
+###############################################################################
+
     def load(self, block):
         for child in block:
             if child.attrib["name"] == "label":
@@ -87,6 +89,8 @@ class VERAOmnibusGenerator(object):
         self.materials        = []
         self.tally_cells      = []
 
+###############################################################################
+
     def load(self):
 
         core_block = None
@@ -128,15 +132,15 @@ class VERAOmnibusGenerator(object):
                     if core_child.attrib['name'] == 'height':
                         self.height = float(core_child.attrib['value'].strip())
 
-                    # Get the lower plate thickeness
+                    # Get the lower plate thickness
                     if core_child.attrib['name'] == 'lower_thick':
                         self.lower_plate = float(core_child.attrib['value'].strip())
 
-                    # Get the upper plate thickeness
+                    # Get the upper plate thickness
                     if core_child.attrib['name'] == 'upper_thick':
                         self.upper_plate = float(core_child.attrib['value'].strip())
 
-                    # Get the lower reflector thickeness
+                    # Get the lower reflector thickness
                     if core_child.attrib['name'] == 'lower_refl_thicks':
                         refl_str = re.sub(r"[{}]", "",
                                 core_child.attrib['value'])
@@ -144,7 +148,7 @@ class VERAOmnibusGenerator(object):
                         refl_thicks = [float(i) for i in refl_thicks]
                         self.lower_refl = sum(refl_thicks)
 
-                    # Get the upper reflector thickeness
+                    # Get the upper reflector thickness
                     if core_child.attrib['name'] == 'upper_refl_thicks':
                         refl_str = re.sub(r"[{}]", "",
                                 core_child.attrib['value'])
@@ -212,6 +216,8 @@ class VERAOmnibusGenerator(object):
 
         return True
 
+###############################################################################
+
     def write(self):
 
         # Read in the Omnibus template file
@@ -260,6 +266,8 @@ class VERAOmnibusGenerator(object):
             if len(self.tally_cells) > 0:
                 self._write_detector_tallies(outfile)
 
+###############################################################################
+
     def _write_bioshield_shapes(self, outfile):
         # Determine bounds
         min_z = 0.0 - self.lower_refl - self.lower_plate
@@ -299,6 +307,8 @@ class VERAOmnibusGenerator(object):
                     else:
                         outfile.write(shape_line)
 
+###############################################################################
+
     def _write_bioshield_cells(self, outfile, det_outers):
 
         # Loop over the bioshield radii
@@ -322,8 +332,6 @@ class VERAOmnibusGenerator(object):
                             exit()
                     elif "OMN_DEFINE_CELL" in cell_line:
                         cell_def = ' +thecore'
-                        #for c in range(bio_num):
-                        #    cell_def += " +bioshield_" + str(c)
                         if bio_num > 0:
                             cell_def += " +bioshield_" + str(bio_num - 1)
                         cell_def += " -bioshield_" + str(bio_num)
@@ -361,6 +369,7 @@ class VERAOmnibusGenerator(object):
                             cell_def, cell_line)
                     outfile.write(line_filled)
 
+###############################################################################
 
     def _write_detector_shapes(self, outfile):
         # Store the outermost detector shapes for defining bioshield cells
@@ -425,6 +434,8 @@ class VERAOmnibusGenerator(object):
                 min_z += h
         return det_outers
 
+###############################################################################
+
     def _write_detector_cells(self, outfile):
         # Loop over the detectors
         for d in range(len(self.det_label_locs)):
@@ -471,6 +482,8 @@ class VERAOmnibusGenerator(object):
                             det_type.label])
                     label_num += 1
 
+###############################################################################
+
     def _write_detector_tallies(self, outfile):
         outfile.write(
                 "! =========================================================\n")
@@ -496,11 +509,15 @@ class VERAOmnibusGenerator(object):
                                 t[1], tally_line)
                         outfile.write(line_filled)
 
+###############################################################################
+
     def _get_template_materials(self):
         # Read in the Omnibus template file
         with open(self.template_file, 'r') as temp_file:
             self.materials = re.findall(r'^\[COMP\]\[MATERIAL\s+([\w.-]+)',
                     temp_file.read(), re.M)
+
+###############################################################################
 
     def update_vera_xml(self):
         if len(self.tally_cells) == 0:
