@@ -183,9 +183,15 @@ if($XSLT ne 'on' && $XSLT ne 'off'){
 my $XSLT_HEADER="<?xml-stylesheet version=\"1.0\" type=\"text/xsl\" href=\"$XSLT_FILE\"?>";
 
 my @ARGS=@ARGV;
+my $filebase;
 if(@ARGS == 1){
     my($filename, $dirs, $suffix) = fileparse($ARGS[0],qr/\.[^.]*/);
     $ARGS[1]=$dirs.$filename.".xml";
+    $filebase=$dirs.$filename;
+}
+else{
+    my($filename, $dirs, $suffix) = fileparse($ARGS[1],qr/\.[^.]*/);
+    $filebase=$dirs.$filename;
 }
 
 
@@ -343,6 +349,10 @@ foreach $iblock (@BLOCKS){
 print $OFILE "</ParameterList>\n";
 
 close $OFILE;
+
+# Generate an Omnibus excore input
+my $VERA2OMN = "${directory}Init/vera2omn.py";
+system ("python", $VERA2OMN, $filebase, $directory) == 0 or die "VERA2OMN failed\n";
 
 #
 # User manual of sorts, will add pod

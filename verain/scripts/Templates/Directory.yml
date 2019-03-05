@@ -963,6 +963,21 @@ CORE:
     _check:
       - is_word()
 
+#>
+#>   {\bf bioshield} bioshield
+#>   \VERAInputTable{
+#>     name={bioshield},
+#>     type={Strings and doubles},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={None},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Bioshield materials and radii beyond the vessel used to 
+#                   automatically generate an Omnibus excore input},
+#>     notes={Materials must be defined in the Omnibus template input}
+#>   }
   bioshield:
     <<: *dtlist
     _style: multi-line
@@ -973,6 +988,21 @@ CORE:
       - fall(sub{is_float(shift)},stride(1,2,()))
       - fall(sub{is_geq(shift,0)},stride(1,2,()))
     
+#>
+#>   {\bf det} det
+#>   \VERAInputTable{
+#>     name={det},
+#>     type={Strings and doubles},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={None},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Defined detector types for automatic generation of an
+#                   Omnibus excore input. Requires bioshield card.},
+#>     notes={Materials must be defined in the Omnibus template input}
+#>   }
   det:
     <<: *dtlistnamed
     _style: multi-line
@@ -981,7 +1011,27 @@ CORE:
       - arraysize()>1
       - arraysize(partarray(0,2,'/',()))==arraysize(partarray(1,0,'/',()))
       - arraysize(partarray(2,0,'/',()))>=1
+      - is_word(nth(0,()))
+      - is_word(nth(3,()))
+      - in_dictionary(nth(1,()),'source','power')
+      - in_dictionary(nth(-2,()),'u235','b10')
+      - in_dictionary(nth(-1,()),'none')
 
+#>
+#>   {\bf det_locations} det_locations
+#>   \VERAInputTable{
+#>     name={det_locations},
+#>     type={Strings and doubles},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={None},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Defined detector locations for automatic generation of an
+#                   Omnibus excore input. Requires bioshield and det cards.},
+#>     notes={Materials must be defined in the Omnibus template input}
+#>   }
   det_locations:
     <<: *dtlist
     _style: multi-line

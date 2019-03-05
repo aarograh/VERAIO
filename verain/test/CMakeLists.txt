@@ -109,6 +109,7 @@ ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_3a)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_3a_forward)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_3a_cadis)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_4mini_nonunique)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_4mini_nonunique_bioshield)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(with-dash)
 
 #===========================================================
@@ -144,7 +145,7 @@ ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(decreasing-axial)
 
 # copy temperature table files for Sample_full_core_wsym_state_assm
 TRIBITS_COPY_FILES_TO_BINARY_DIR(Temp_Table_Files
-  SOURCE_FILES 
+  SOURCE_FILES
     g182_table_tavg_rev0.tab
     g185_table_tavg_rev0.tab
     u26_table_tavg_rev0.tab
