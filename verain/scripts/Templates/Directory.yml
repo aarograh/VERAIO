@@ -9730,7 +9730,7 @@ MAMBA:
 #>
 #>   {\bf D_Fe} diffusion\_coefficient
 #>   \VERAInputTable{
-#>     name={D_Ni},
+#>     name={D_Fe},
 #>     type={Floating-point Real Number},
 #>     need={Optional},
 #>     unitsdefault={cm^2/s},
@@ -9750,7 +9750,7 @@ MAMBA:
 #>
 #>   {\bf D_BOH3} diffusion\_coefficient
 #>   \VERAInputTable{
-#>     name={D_Ni},
+#>     name={D_BOH3},
 #>     type={Floating-point Real Number},
 #>     need={Optional},
 #>     unitsdefault={cm^2/s},
@@ -9770,7 +9770,7 @@ MAMBA:
 #>
 #>   {\bf D_Li} diffusion\_coefficient
 #>   \VERAInputTable{
-#>     name={D_Ni},
+#>     name={D_Li},
 #>     type={Floating-point Real Number},
 #>     need={Optional},
 #>     unitsdefault={cm^2/s},
@@ -9790,7 +9790,7 @@ MAMBA:
 #>
 #>   {\bf D_H2} diffusion\_coefficient
 #>   \VERAInputTable{
-#>     name={D_Ni},
+#>     name={D_H2},
 #>     type={Floating-point Real Number},
 #>     need={Optional},
 #>     unitsdefault={cm^2/s},
@@ -10098,8 +10098,13 @@ MAMBA:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={????},
-#>     valuesapplicable={????},
+#>     valuedefault={0},
+#>     valuesapplicable={The options are:  %
+#>       \begin{enumerate}
+#>         \item 0 --- no mass balance enabled (user must specify particulate NiFe2O4 concentration)        %
+#>         \item 1 --- unused %
+#>         \item 2 --- Internal CTF mass balance using MAMBA source term   %
+#>       \end{enumerate}},
 #>     limitations={},
 #>     description={Option to select mass balance model},
 #>     notes={}
@@ -10118,8 +10123,13 @@ MAMBA:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={????},
-#>     valuesapplicable={????},
+#>     valuedefault={2},
+#>     valuesapplicable={The options are:  %
+#>       \begin{enumerate}
+#>         \item 0 --- no crud erosion model        %
+#>         \item 1 --- calculate from shear so that average TKE is 0.1 J/kg %
+#>         \item 2 --- use the Bradshaw model to calculate TKE from shear   %
+#>       \end{enumerate}},
 #>     limitations={},
 #>     description={Option to select erosion model},
 #>     notes={}
