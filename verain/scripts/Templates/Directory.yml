@@ -9604,103 +9604,343 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 
+#>
+#> \section{Block MAMBA}
 MAMBA:
+#>
+#>   {\bf A_NiFe2O4_out} surface\_prefactor
+#>   \VERAInputTable{
+#>     name={A_NiFe2O4_out},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Prefactor for NiFe2O4 surface growth},
+#>     notes={}
+#>   }
   A_NiFe2O4_out:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf E_NiFe2O4_out} surface\_activation\_energy
+#>   \VERAInputTable{
+#>     name={E_NiFe2O4_out},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Activation energy for NiFe2O4 surface growth},
+#>     notes={}
+#>   }
   E_NiFe2O4_out:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf A_NiFe2O4_in} nucleation\_prefactor
+#>   \VERAInputTable{
+#>     name={A_NiFe2O4_in},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Prefactor for NiFe2O4 nucleation},
+#>     notes={}
+#>   }
   A_NiFe2O4_in:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf E_NiFe2O4_in} nucleation\_activation\_energy
+#>   \VERAInputTable{
+#>     name={E_NiFe2O4_in},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Activation energy for NiFe2O4 nucleation},
+#>     notes={}
+#>   }
   E_NiFe2O4_in:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf ksnb_Fe2O4} boiling\_growth\_rate
+#>   \VERAInputTable{
+#>     name={ksnb_Fe2O4},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Boiling enhanced surface growth rate},
+#>     notes={}
+#>   }
   ksnb_Fe2O4:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf D_Ni} diffusion\_coefficient
+#>   \VERAInputTable{
+#>     name={D_Ni},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm^2/s},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Diffusion coefficient for Ni},
+#>     notes={}
+#>   }
   D_Ni:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf D_Fe} diffusion\_coefficient
+#>   \VERAInputTable{
+#>     name={D_Ni},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm^2/s},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Diffusion coefficient for Fe},
+#>     notes={}
+#>   }
   D_Fe:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf D_BOH3} diffusion\_coefficient
+#>   \VERAInputTable{
+#>     name={D_Ni},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm^2/s},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Diffusion coefficient for Boric Acid},
+#>     notes={}
+#>   }
   D_BOH3:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf D_Li} diffusion\_coefficient
+#>   \VERAInputTable{
+#>     name={D_Ni},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm^2/s},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Diffusion coefficient for Li},
+#>     notes={}
+#>   }
   D_Li:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf D_H2} diffusion\_coefficient
+#>   \VERAInputTable{
+#>     name={D_Ni},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm^2/s},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Diffusion coefficient for H$_2$},
+#>     notes={}
+#>   }
   D_H2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf CRUD_porosity} porosity
+#>   \VERAInputTable{
+#>     name={CRUD_porosity},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.7},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Initial porosity of CRUD layer},
+#>     notes={}
+#>   }
   CRUD_porosity:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf CRUD_solid_dens} density
+#>   \VERAInputTable{
+#>     name={CRUD_solid_dens},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={g/cm^3},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Density of solid NiFe2O4},
+#>     notes={}
+#>   }
   CRUD_solid_dens:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf dep_frac} fraction
+#>   \VERAInputTable{
+#>     name={dep_frac},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.25},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Fraction of the B-10 reaction rate applied to depletion},
+#>     notes={}
+#>   }
   CRUD_dep_frac:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf chimney_htc} htc
+#>   \VERAInputTable{
+#>     name={chimney_htc},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={W/cm^2-K},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Heat transfer coefficient inside a chimney},
+#>     notes={}
+#>   }
   chimney_htc:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf chimney_dens} dens
+#>   \VERAInputTable{
+#>     name={chimney_dens},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={#/cm^2},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Surface density of chimney},
+#>     notes={}
+#>   }
   chimney_dens:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf chimney_rad} radius
+#>   \VERAInputTable{
+#>     name={chimney_rad},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Radius of average chimney},
+#>     notes={}
+#>   }
   chimney_rad:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf chimney_vf} void\_fraction
+#>   \VERAInputTable{
+#>     name={chimney_vf},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0, <1},
+#>     limitations={},
+#>     description={Void fraction of steam exiting chimney},
+#>     notes={}
+#>   }
   chimney_vf:
     <<: *dtdouble
     _content:
@@ -9708,60 +9948,203 @@ MAMBA:
       - is_float()
       - is_gt() 0
       - is_lt() 1
+#>
+#>   {\bf CRUD_therm_cond} k\_crud
+#>   \VERAInputTable{
+#>     name={CRUD_therm_cond},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={W/cm-K},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Thermal conductivity of precipitate in CRUD},
+#>     notes={}
+#>   }
   CRUD_therm_cond:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf CRUD_heat_capacity} Cp
+#>   \VERAInputTable{
+#>     name={CRUD_heat_capacity},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={J/g-K},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Heat capacity for the CRUD skelaton},
+#>     notes={Currently Cp is unused}
+#>   }
   CRUD_heat_capacity:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-      - is_gt() 0y
+      - is_gt() 0
+#>
+#>   {\bf tke_scale} factor
+#>   \VERAInputTable{
+#>     name={tke_scale},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0E-12},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Scaling factor to convert from TKE to errosion},
+#>     notes={}
+#>   }
   tke_scale:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf src_mult_A} multiplier
+#>   \VERAInputTable{
+#>     name={src_mult_A},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Multiplier for prefactor for source term model},
+#>     notes={}
+#>   }
   src_mult_A:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf src_mult_E} multiplier
+#>   \VERAInputTable{
+#>     name={src_mult_E},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Multiplier for activiation energy for source term model},
+#>     notes={}
+#>   }
   src_mult_E:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf steam_generator_age} age
+#>   \VERAInputTable{
+#>     name={steam_generator_age},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={years},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={>=0},
+#>     limitations={},
+#>     description={Initial age of the steam generator},
+#>     notes={This is only needed for the first cycle simulated or for a steam generator replacement, %
+#>             default behavior is to retrieve this data from the restart file.}
+#>   }
   steam_generator_age:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_geq() 0
+#>
+#>   {\bf piping_age} age
+#>   \VERAInputTable{
+#>     name={piping_age},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={years},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={>=0},
+#>     limitations={},
+#>     description={Initial age of the hot and cold leg},
+#>     notes={This is only needed for the first cycle simulated , %
+#>             default behavior is to retrieve this data from the restart file.}
+#>   }
   piping_age:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_geq() 0
+#>
+#>   {\bf chem_mass_bal} option
+#>   \VERAInputTable{
+#>     name={chem_mass_bal},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={????},
+#>     valuesapplicable={????},
+#>     limitations={},
+#>     description={Option to select mass balance model},
+#>     notes={}
+#>   }
   chem_mass_bal:
     <<: *dtint
     _content:
     _check:
       - is_geq() 0
       - is_int()
+#>
+#>   {\bf model_erosion} option
+#>   \VERAInputTable{
+#>     name={model_erosion},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={????},
+#>     valuesapplicable={????},
+#>     limitations={},
+#>     description={Option to select erosion model},
+#>     notes={}
+#>   }
   model_erosion:
     <<: *dtint
     _content:
     _check:
       - is_geq() 0
       - is_int()
+#>
+#>   {\bf li_table} boron  lithium
+#>   \VERAInputTable{
+#>     name={li_table},
+#>     type={List of Two Floating-point Real Numbers},
+#>     need={Optional},
+#>     unitsdefault={ppm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Table of boron then lithium concentrations to define %
+#>                  the lithium concentration based on boron concentration},
+#>     notes={}
+#>   }
   li_table:
     <<: *dtlist
     _style: multi-line
