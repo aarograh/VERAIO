@@ -1174,6 +1174,34 @@ ASSEMBLY:
       - nth(3,())>=0
       - nth(4,())>=0
 
+#>
+#>   {\bf temptable} table\_tag
+#>   \VERAInputTable{
+#>     name={temptable,
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={requires a temperature table file to be included below},
+#>     description={This flag defines a temperature table in the assembly block
+#                   that can be used in the cell definitions; each cell can have 
+#                   a separate table if desired.},
+#>     notes={Tables as generated through the Bison temperature table process, 
+#                   which define temptable\_boundary, temptable\_qprime, and 
+#                   temptable\_polynomial can be included after the tag is specified.
+#                   See the below example for usage with specification in the cell flag:
+#
+#                   temptable U26
+#                   include u26.tab
+#                   temptable GAD
+#                   include ug3.tab
+#
+#                   cell 2     0.4096 0.418 0.475 / U26 he zirc4 / U26
+#                   cell 3     0.4096 0.418 0.475 / UG3 he zirc4 / GAD}
+#>   }
+#
   temptable:
     <<: *dtlistnamed
     _style: multi-line
