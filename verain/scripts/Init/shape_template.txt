@@ -1,0 +1,6 @@
+[UNIVERSE][SHAPE=cyl OMN_SHAPE_ID]
+radius OMN_RADIUS
+extents OMN_Z_LOWER OMN_Z_UPPER
+origin OMN_ORIGIN
+axis z
+
