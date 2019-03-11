@@ -24,6 +24,20 @@ RUN:
         - copy RUN/$ppn
       _content:
 
+    nprocs:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy RUN/$nprocs
+      _content:
+
+    exe_mode:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy RUN/$exe_mode
+      _content:
+
     walltime:
       _pltype: parameter
       _type: double
