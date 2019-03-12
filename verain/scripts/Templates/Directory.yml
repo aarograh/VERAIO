@@ -6427,8 +6427,7 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={cm},
 #>     unitsother={},
-#>     valuedefault={\texttt{max\_radii} = \texttt{0.75*(pitch*0.5 - r\_last)+r\_last},  %
-#>       \texttt{num\_rings} = 1, and \texttt{pin\_cell\_type} = fuel},
+#>     valuedefault={\texttt{num\_rings} = 1, and \texttt{pin\_cell\_type} = fuel},
 #>     valuesapplicable={                                                                %
 #>       \begin{itemize}                                                                 %
 #>         \item \texttt{num\_rings} --- positive integers. Practially less than 10.     %
@@ -6441,7 +6440,13 @@ MPACT:
 #>       The radius of the outermost moderator ring is fixed at 0.95*sqrt(2)/2*pitch %
 #>       This gives more refined meshing in the pin cell corners which improves accuracy %
 #>       of calculations at room temperature},
-#>     notes={}
+#>     notes={When this card is not specified, the following value is used for the 1     %
+#>       default moderator radius:                                                       %
+#>       \texttt{max\_radii} = \texttt{0.75*(pitch*0.5 - r\_last)+r\_last}\ ,            %
+#>       When this card is specified, that value changes to the following:               %
+#>       \texttt{max\_radii} = \texttt{0.95*(0.5*pitch*\sqrt(2))}\ ,                     %
+#>       which is equal to 95\% of the way from the pin cell center to the corner.}
+}
 #>   }
   pin_cell_mod_mesh:
     <<: *dtlist
