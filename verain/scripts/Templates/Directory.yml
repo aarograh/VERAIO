@@ -190,6 +190,29 @@ STATE:
       - fall(sub{is_float(shift)},())
       - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
 #>
+#>   {\bf pout\_dist} pout\_dist
+#>   \VERAInputTable{
+#>     name={pout\_dist},
+#>     type={2D Float Map},
+#>     need={Optional},
+#>     unitsdefault={psi},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={Any float},
+#>     limitations={},
+#>     description={2-D array that must match the shape of assm\_map in [CORE].  Gives an adder that will be added to nominal outlet pressure in each assembly.}},
+#>     notes={}
+#>   }
+  pout_dist:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{is_float(shift)},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
+
+#>
 #>   {\bf bypass} bypass
 #>   \VERAInputTable{
 #>     name={bypass},
