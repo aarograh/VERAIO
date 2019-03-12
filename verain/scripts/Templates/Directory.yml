@@ -10859,7 +10859,7 @@ RUN:
     _check:
       - is_string()
 
- exe_mode:
+  exe_mode:
     <<: *dtstring
     _content:
     _check:
