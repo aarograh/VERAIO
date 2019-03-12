@@ -42,21 +42,35 @@
 [STATE]
   power  80.0     ! added multistate 1/30/2014 , must use --multistate command line option
 
-  tinlet_dist       0.    -2. 0. 2.        0. ;  flow_dist          20.    -20.  0  20         -20.
+  tinlet_dist       
+      1. -2.
+     -2.
+
+  flow_dist
+     1.1 1.0
+     1.0
+
+   pout_dist
+      1.0 2.1
+      2.1
+
 
 
 [STATE];  power  70.0
 
-[STATE]  power  60.0;   tinlet_dist       2. -1.       -1.
+[STATE]  power  60.0
 
-! This map is not rotationally symmetric
-!  flow_dist
-!     50. -20.5
-!    -10.
+  tinlet_dist       
+     2. -1.
+     -1.
 
   flow_dist
-     50. -10.
-    -10.
+     1.0 1.1
+     1.1
+
+   pout_dist
+      0.0 1.1
+      1.1
 
 [STATE];  power  50.0
 [STATE];  power  40.0

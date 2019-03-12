@@ -551,6 +551,13 @@ STATES:
             - coremapmap CORE/$size,CORE/@core_shape,%STATE/$(_loop)/@flow_dist,CORE/$bc_sym
           _content:
 
+        pout_dist:
+          _pltype: array
+          _type: double
+          _do:
+            - coremapmap CORE/$size,CORE/@core_shape,%STATE/$(_loop)/@pout_dist,CORE/$bc_sym
+          _content:
+
         h_conc:
           _pltype: parameter
           _type: double
