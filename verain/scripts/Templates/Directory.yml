@@ -6450,7 +6450,6 @@ MPACT:
 #>       When this card is specified, that value changes to the following:               %
 #>       \texttt{max\_radii} = \texttt{0.95*(0.5*pitch*\sqrt(2))}\ ,                     %
 #>       which is equal to 95\% of the way from the pin cell center to the corner.}
-}
 #>   }
   pin_cell_mod_mesh:
     <<: *dtlist
