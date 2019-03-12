@@ -10905,7 +10905,20 @@ RUN:
     _check:
       - is_int()
       - is_gt() 0
-
+#>
+##>   {\bf nprocs} number of processors
+##>   \VERAInputTable{
+##>     name={nprocs},
+##>     type={Integer},
+##>     need={Optional},
+##>     unitsdefault={},
+##>     unitsother={},
+##>     valuedefault={Total number of system processors},
+##>     valuesapplicable={Greater than 0},
+##>     limitations={},
+##>     description={Total number of processors that will be used},
+##>     notes={}
+##>   }
   nprocs:
     <<: *dtstring
     _content:
