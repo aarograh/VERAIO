@@ -3509,8 +3509,8 @@ COBRATF:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={0},
-#>     valuesapplicable={0, 1, 2, 3},
+#>     valuedefault={1},
+#>     valuesapplicable={0, 1, 2 },
 #>     limitations={},
 #>     description={
 #>       CHF model option.  Options are:
@@ -10855,9 +10855,16 @@ RUN:
 #>   }
   email:
     <<: *dtstring
-    _content: default
+    _content:
     _check:
       - is_string()
+
+ exe_mode:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+
 #>
 #>   {\bf pmem} memory per processor
 #>   \VERAInputTable{
@@ -10874,7 +10881,7 @@ RUN:
 #>   }
   pmem:
     <<: *dtstring
-    _content: default
+    _content: 
     _check:
       - is_float()
       - is_gt() 0
@@ -10894,7 +10901,27 @@ RUN:
 #>   }
   ppn:
     <<: *dtstring
-    _content: default
+    _content: 
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+##>   {\bf nprocs} number of processors
+##>   \VERAInputTable{
+##>     name={nprocs},
+##>     type={Integer},
+##>     need={Optional},
+##>     unitsdefault={},
+##>     unitsother={},
+##>     valuedefault={Total number of system processors},
+##>     valuesapplicable={Greater than 0},
+##>     limitations={},
+##>     description={Total number of processors that will be used},
+##>     notes={}
+##>   }
+  nprocs:
+    <<: *dtstring
+    _content:
     _check:
       - is_int()
       - is_gt() 0
@@ -10914,7 +10941,7 @@ RUN:
 #>   }
   walltime:
     <<: *dtstring
-    _content: default
+    _content:
     _check:
       - is_float()
       - is_gt() 0
