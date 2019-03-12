@@ -3586,10 +3586,14 @@ COBRATF:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={0},
-#>     valuesapplicable={0, 1},
+#>     valuesapplicable={0, 1, 2},
 #>     limitations={},
-#>     description={Setting to 1 will cause CTF to print every power distribution it receives to a separate
-#>       HDF5 file.  This can be used to run CTF standalone on a power distribution that causes it to crash.},
+#>     description={Setting to 1 will cause CTF to print every power distribution it receives before 
+#>        doing the solve to a separate
+#>        HDF5 file.  Setting to 2 will cause CTF to print every power distribution it receives similar to
+#>        Option 1, but will also print the solution after the solve.  
+#>        This can be used to run CTF standalone on a power distribution that causes it to crash or may be
+#>        used to observe coupled convergence behavior.},
 #>     notes={}
 #>   }
   debug:
@@ -3597,7 +3601,7 @@ COBRATF:
     _content:
     _check:
       - is_int()
-      - in_dictionary() 0 1
+      - in_dictionary() 0 1 2
 #>
 #>   {\bf irfc} irfc
 #>   \VERAInputTable{
