@@ -7521,18 +7521,20 @@ MPACT:
 #>    unitsother={},
 #>    valuedefault={\texttt{simplified} (if not configured with COBRA-TF)                %
 #>      \emph{or} \texttt{ctf} (if configured with COBRA-TF)},
-#>    valuesapplicable={\texttt{ctf\_external}, \texttt{none}                            %
+#>    valuesapplicable={\texttt{ctf\_external}, texttt{user\_defined}, \texttt{none}     %
 #>      \newline\newline                                                                 %
 #>      The \texttt{simplified} option uses MPACT's internal TH solver.  The             %
 #>      \texttt{ctf} option internally couples COBRA-TF to MPACT, and                    %
 #>      \texttt{ctf\_external} couples MPACT and COBRA-TF through the lime               %
-#>      interface. The \texttt{none} option will use parameters from the                 %
+#>      interface. The \texttt{user_defined} option uses TH conditions defined in        %
+#>      the HDF5 file specified by the texttt{user\_defined\_th\_filename} card in the   %
+#>      texttt{MPACT} block. The \texttt{none} option will use parameters from the       %
 #>      \texttt{STATE} block: fuel temperatures will be constant and equal to            %
 #>      \texttt{tfuel}, moderator temperatures will be constant and equal to             %
 #>      \texttt{tinlet}, and moderator densities will be constant and equal to           %
 #>      \texttt{modden}. },
 #>    limitations={The \texttt{feedback} card in the \texttt{STATE} block                %
-#>      must be set to \texttt{on} for any of the three TH coupling methods},
+#>      must be set to \texttt{on} for any of the TH coupling methods},
 #>    description={This card is used to indicate which TH coupling method                %
 #>      should be used.},
 #>    notes={For either the \texttt{ctf} or \texttt{ctf\_external} options,              %
@@ -7544,7 +7546,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() ctf simplified ctf_external tiamat none
+      - in_dictionary() ctf simplified ctf_external tiamat user_defined none
 #>
 #>   {\bf extend\_coupling\_mesh} extend\_coupling\_mesh
 #>   \VERAInputTable{
@@ -7964,6 +7966,39 @@ MPACT:
       - fall(sub{is_float(shift)},stride(1,3,()))
       - fall(sub{is_float(shift)},stride(2,3,()))
       - fall(sub{is_geq(shift,0)},stride(0,3,()))
+#>
+#>   {\bf user\_defined\_th\_filename} user\_defined\_th\_filename
+#>   \VERAInputTable{
+#>     name={user\_defined\_th\_filename},
+#>    type={Free-Form Character String, Max. Length = 200},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={N/A},
+#>    valuesapplicable={Filename of any valid HDF5 file with user defined TH conditions},
+#>    limitations={If the card is present, TH conditions defined for each state and      %
+#>      pincell will be used to set the TH variables of each pincell in the model        %
+#>      instead of calculating the TH condition using the internal TH solver or CTF},    %
+#>    description={This card is used to indicate the name of the file                    %
+#>      containing the pin-wise TH conditions for each state.},
+#>    notes={The format of the HDF5 file must follow the same format as the HDF5 output  %
+#>      edits.  The head dataset of the file must contain STATE datasets following the   %
+#>      \textit{STATE_****} nomenclature, which are populated with pin-wise data with    %
+#>      the same names as their output edit counterparts.  Currently supported dataset   %
+#>      name are \textit{pin\_fuel\_temp}, \textit{pin\_clad\_temp},                     %
+#>      \textit{pin\_mod\_temp}, \textit{pin\_mod\_dens}, \textit{pin\_gtube\_temp}, and %
+#>      \textit{pin\_gtube\_dens}.  The TH datasets must have the same      %
+#>      shape as their corresponding output counterparts.  Users are not required        %
+#>      to provide the TH conditions for all states and TH variables, and those which    %
+#>      are absent will be populated based on the global state variables such as         %
+#       \texttt{tinlet}.}
+#>   }
+  user_defined_th_filename:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+#>
 #>
 #>   {\bf dep\_edit} dep\_edit
 #>   \VERAInputTable{
