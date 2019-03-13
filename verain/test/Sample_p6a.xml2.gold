@@ -347,6 +347,7 @@
       <Parameter name="sth_dhfrac" type="double" value="0.026"/>
       <Parameter name="sth_hgap" type="double" value="5678.3"/>
       <Parameter name="temptable_shape" type="bool" value="true"/>
+      <Parameter name="user_defined_th_filename" type="string" value="th_file.h5"/>
     </ParameterList>
     <ParameterList name="cmfd">
       <Parameter name="cmfd" type="string" value="adcmfd"/>
