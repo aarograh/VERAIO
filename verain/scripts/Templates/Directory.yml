@@ -565,7 +565,41 @@ STATE:
       - is_float(nth(1,()))
       - is_float(nth(2,()))&&nth(2,())>=0
       - (is_int(nth(3,()))||nth(3,())==0)&&nth(3,())>=0
-
+#>
+#>   {\bf restart\_jumpin} restart\_jumpin
+#>   \VERAInputTable{
+#>     name={restart\_jumpin},
+#>     type={Array of Strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={None},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={This card is used to specify sets of assembly isotopic data for      %
+#>       assembly batches that do not have a full simulation history. These assemblies   %
+#>       have an approximated history so that a user can "jump in" to any later cycle    %
+#>       without explicitly simulating all previous cycles. The user is required to      %
+#>       specify all of the following parameters.                                        %`
+#>       \begin{itemize}                                                                 %
+#>         \item \texttt{target_location} --- Location to load isotopics in current      %
+#>                                            model                                      %
+#>         \item \texttt{restart_file}    --- The end time of perturbation               %
+#>         \item \texttt{restart_label}   --- Restart label in restart file with assembly%
+#>                                            data                                       %
+#>         \item \texttt{source_location} --- core label coordinate for assembly position%
+#>                                            when restart data was written              %
+#>       \end{itemize}                                                                   %
+#>       },
+#>     notes={This is a multiline input so multiple entries may be given.}
+#>   }
+  restart_jumpin:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%4==0
+      - fall(sub{is_word(shift)},())
   restart_shuffle:
     <<: *dtlist
     _style: multi-line
