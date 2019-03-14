@@ -280,7 +280,6 @@
       <Parameter name="SPN_order" type="int" value="1"/>
       <Parameter name="adjoint" type="bool" value="true"/>
       <Parameter name="cell_homogenize" type="bool" value="true"/>
-      <Parameter name="dimension" type="int" value="2"/>
       <Parameter name="do_output" type="bool" value="true"/>
       <Parameter name="do_transport" type="bool" value="true"/>
       <Parameter name="downscatter" type="bool" value="true"/>

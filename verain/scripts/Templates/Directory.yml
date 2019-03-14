@@ -997,7 +997,7 @@ CORE:
 #>     valuedefault={None},
 #>     valuesapplicable={},
 #>     limitations={},
-#>     description={Bioshield materials and radii beyond the vessel used to 
+#>     description={Bioshield materials and radii beyond the vessel used to
 #                   automatically generate an Omnibus excore input},
 #>     notes={Materials must be defined in the Omnibus template input}
 #>   }
@@ -1010,7 +1010,7 @@ CORE:
       - fall(sub{is_word(shift)},())
       - fall(sub{is_float(shift)},stride(1,2,()))
       - fall(sub{is_geq(shift,0)},stride(1,2,()))
-    
+
 #>
 #>   {\bf det} det
 #>   \VERAInputTable{
@@ -1209,10 +1209,10 @@ ASSEMBLY:
 #>     valuesapplicable={},
 #>     limitations={requires a temperature table file to be included below},
 #>     description={This flag defines a temperature table in the assembly block
-#                   that can be used in the cell definitions; each cell can have 
+#                   that can be used in the cell definitions; each cell can have
 #                   a separate table if desired.},
-#>     notes={Tables as generated through the Bison temperature table process, 
-#                   which define temptable\_boundary, temptable\_qprime, and 
+#>     notes={Tables as generated through the Bison temperature table process,
+#                   which define temptable\_boundary, temptable\_qprime, and
 #                   temptable\_polynomial can be included after the tag is specified.
 #                   See the below example for usage with specification in the cell flag:
 #
@@ -2676,27 +2676,6 @@ SHIFT:
     _check:
       - is_word()
 #>
-#>   {\bf dimension} dimension
-#>   \VERAInputTable{
-#>     name={dimension},
-#>     type={integer},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={3},
-#>     valuesapplicable={2, 3},
-#>     limitations={},
-#>     description={Spatial dimension of the problem},
-#>     notes={}
-#>   }
-  dimension:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_geq() 2
-      - is_leq() 3
-#>
 #>   {\bf mesh} mesh
 #>   \VERAInputTable{
 #>     name={mesh},
@@ -3588,10 +3567,10 @@ COBRATF:
 #>     valuedefault={0},
 #>     valuesapplicable={0, 1, 2},
 #>     limitations={},
-#>     description={Setting to 1 will cause CTF to print every power distribution it receives before 
+#>     description={Setting to 1 will cause CTF to print every power distribution it receives before
 #>        doing the solve to a separate
 #>        HDF5 file.  Setting to 2 will cause CTF to print every power distribution it receives similar to
-#>        Option 1, but will also print the solution after the solve.  
+#>        Option 1, but will also print the solution after the solve.
 #>        This can be used to run CTF standalone on a power distribution that causes it to crash or may be
 #>        used to observe coupled convergence behavior.},
 #>     notes={}

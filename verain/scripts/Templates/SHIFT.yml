@@ -163,7 +163,7 @@ SHIFT:
       _do:
         - copy SHIFT/$vera_pressure_vessel
       _content:
-    
+
     use_mpact_spectrum:
       _pltype: parameter
       _type: bool
@@ -364,17 +364,17 @@ SHIFT:
           _do:
             - copyarray SHIFT/$p_bounds
           _content:
-        
+
         micro_zaids:
           _pltype: array
           _type: int
           _do:
             - copyarray SHIFT/$micro_zaids
           _content:
-       
+
         micro_rxns:
           _pltype: array
-          _type: int 
+          _type: int
           _do:
             - copyarray SHIFT/$micro_rxns
           _content:
@@ -385,7 +385,7 @@ SHIFT:
           _do:
             - copy SHIFT/$gamma_flux
           _content:
-    
+
     homog_db:
       _pltype: list
       _content:
@@ -396,7 +396,7 @@ SHIFT:
           _do:
             - copyarray SHIFT/$homog_ring_radii
           _content:
-        
+
         homog_type:
           _pltype: parameter
           _type: string
@@ -487,13 +487,6 @@ SHIFT:
           _type: double
           _do:
             - copy SHIFT/$extend_axial_mesh_size
-          _content:
-
-        dimension:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy SHIFT/$dimension
           _content:
 
         do_transport:
