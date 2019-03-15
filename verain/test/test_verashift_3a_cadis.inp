@@ -212,7 +212,6 @@
   refl_mesh_size        5.0
   extend_axial_mesh_size 10.0
   cell_homogenize       true
-  dimension             2
   downscatter           true
   grp_collapse_src      5.0 4.0 3.0
   new_grp_bounds        6.0653E+06 3.6788E+06 2.3457E+06
