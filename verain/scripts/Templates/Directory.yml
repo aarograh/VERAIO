@@ -190,6 +190,29 @@ STATE:
       - fall(sub{is_float(shift)},())
       - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
 #>
+#>   {\bf pout\_dist} pout\_dist
+#>   \VERAInputTable{
+#>     name={pout\_dist},
+#>     type={2D Float Map},
+#>     need={Optional},
+#>     unitsdefault={psi},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={Any float},
+#>     limitations={},
+#>     description={2-D array that must match the shape of assm\_map in [CORE].  Gives an adder that will be added to nominal outlet pressure in each assembly.}},
+#>     notes={}
+#>   }
+  pout_dist:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{is_float(shift)},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
+
+#>
 #>   {\bf bypass} bypass
 #>   \VERAInputTable{
 #>     name={bypass},
@@ -1174,6 +1197,34 @@ ASSEMBLY:
       - nth(3,())>=0
       - nth(4,())>=0
 
+#>
+#>   {\bf temptable} table\_tag
+#>   \VERAInputTable{
+#>     name={temptable,
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={requires a temperature table file to be included below},
+#>     description={This flag defines a temperature table in the assembly block
+#                   that can be used in the cell definitions; each cell can have 
+#                   a separate table if desired.},
+#>     notes={Tables as generated through the Bison temperature table process, 
+#                   which define temptable\_boundary, temptable\_qprime, and 
+#                   temptable\_polynomial can be included after the tag is specified.
+#                   See the below example for usage with specification in the cell flag:
+#
+#                   temptable U26
+#                   include u26.tab
+#                   temptable GAD
+#                   include ug3.tab
+#
+#                   cell 2     0.4096 0.418 0.475 / U26 he zirc4 / U26
+#                   cell 3     0.4096 0.418 0.475 / UG3 he zirc4 / GAD}
+#>   }
+#
   temptable:
     <<: *dtlistnamed
     _style: multi-line
@@ -3535,10 +3586,14 @@ COBRATF:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={0},
-#>     valuesapplicable={0, 1},
+#>     valuesapplicable={0, 1, 2},
 #>     limitations={},
-#>     description={Setting to 1 will cause CTF to print every power distribution it receives to a separate
-#>       HDF5 file.  This can be used to run CTF standalone on a power distribution that causes it to crash.},
+#>     description={Setting to 1 will cause CTF to print every power distribution it receives before 
+#>        doing the solve to a separate
+#>        HDF5 file.  Setting to 2 will cause CTF to print every power distribution it receives similar to
+#>        Option 1, but will also print the solution after the solve.  
+#>        This can be used to run CTF standalone on a power distribution that causes it to crash or may be
+#>        used to observe coupled convergence behavior.},
 #>     notes={}
 #>   }
   debug:
@@ -3546,7 +3601,7 @@ COBRATF:
     _content:
     _check:
       - is_int()
-      - in_dictionary() 0 1
+      - in_dictionary() 0 1 2
 #>
 #>   {\bf irfc} irfc
 #>   \VERAInputTable{
@@ -6376,8 +6431,7 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={cm},
 #>     unitsother={},
-#>     valuedefault={\texttt{max\_radii} = \texttt{0.75*(pitch*0.5 - r\_last)+r\_last},  %
-#>       \texttt{num\_rings} = 1, and \texttt{pin\_cell\_type} = fuel},
+#>     valuedefault={\texttt{num\_rings} = 1, and \texttt{pin\_cell\_type} = fuel},
 #>     valuesapplicable={                                                                %
 #>       \begin{itemize}                                                                 %
 #>         \item \texttt{num\_rings} --- positive integers. Practially less than 10.     %
@@ -6390,7 +6444,12 @@ MPACT:
 #>       The radius of the outermost moderator ring is fixed at 0.95*sqrt(2)/2*pitch %
 #>       This gives more refined meshing in the pin cell corners which improves accuracy %
 #>       of calculations at room temperature},
-#>     notes={}
+#>     notes={When this card is not specified, the following value is used for the 1     %
+#>       default moderator radius:                                                       %
+#>       \texttt{max\_radii} = \texttt{0.75*(pitch*0.5 - r\_last)+r\_last}\ ,            %
+#>       When this card is specified, that value changes to the following:               %
+#>       \texttt{max\_radii} = \texttt{0.95*(0.5*pitch*\sqrt(2))}\ ,                     %
+#>       which is equal to 95\% of the way from the pin cell center to the corner.}
 #>   }
   pin_cell_mod_mesh:
     <<: *dtlist
@@ -7461,18 +7520,20 @@ MPACT:
 #>    unitsother={},
 #>    valuedefault={\texttt{simplified} (if not configured with COBRA-TF)                %
 #>      \emph{or} \texttt{ctf} (if configured with COBRA-TF)},
-#>    valuesapplicable={\texttt{ctf\_external}, \texttt{none}                            %
+#>    valuesapplicable={\texttt{ctf\_external}, texttt{user\_defined}, \texttt{none}     %
 #>      \newline\newline                                                                 %
 #>      The \texttt{simplified} option uses MPACT's internal TH solver.  The             %
 #>      \texttt{ctf} option internally couples COBRA-TF to MPACT, and                    %
 #>      \texttt{ctf\_external} couples MPACT and COBRA-TF through the lime               %
-#>      interface. The \texttt{none} option will use parameters from the                 %
+#>      interface. The \texttt{user_defined} option uses TH conditions defined in        %
+#>      the HDF5 file specified by the texttt{user\_defined\_th\_filename} card in the   %
+#>      texttt{MPACT} block. The \texttt{none} option will use parameters from the       %
 #>      \texttt{STATE} block: fuel temperatures will be constant and equal to            %
 #>      \texttt{tfuel}, moderator temperatures will be constant and equal to             %
 #>      \texttt{tinlet}, and moderator densities will be constant and equal to           %
 #>      \texttt{modden}. },
 #>    limitations={The \texttt{feedback} card in the \texttt{STATE} block                %
-#>      must be set to \texttt{on} for any of the three TH coupling methods},
+#>      must be set to \texttt{on} for any of the TH coupling methods},
 #>    description={This card is used to indicate which TH coupling method                %
 #>      should be used.},
 #>    notes={For either the \texttt{ctf} or \texttt{ctf\_external} options,              %
@@ -7484,7 +7545,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() ctf simplified ctf_external tiamat none
+      - in_dictionary() ctf simplified ctf_external tiamat user_defined none
 #>
 #>   {\bf extend\_coupling\_mesh} extend\_coupling\_mesh
 #>   \VERAInputTable{
@@ -7904,6 +7965,39 @@ MPACT:
       - fall(sub{is_float(shift)},stride(1,3,()))
       - fall(sub{is_float(shift)},stride(2,3,()))
       - fall(sub{is_geq(shift,0)},stride(0,3,()))
+#>
+#>   {\bf user\_defined\_th\_filename} user\_defined\_th\_filename
+#>   \VERAInputTable{
+#>     name={user\_defined\_th\_filename},
+#>    type={Free-Form Character String, Max. Length = 200},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={N/A},
+#>    valuesapplicable={Filename of any valid HDF5 file with user defined TH conditions},
+#>    limitations={If the card is present, TH conditions defined for each state and      %
+#>      pincell will be used to set the TH variables of each pincell in the model        %
+#>      instead of calculating the TH condition using the internal TH solver or CTF},    %
+#>    description={This card is used to indicate the name of the file                    %
+#>      containing the pin-wise TH conditions for each state.},
+#>    notes={The format of the HDF5 file must follow the same format as the HDF5 output  %
+#>      edits.  The head dataset of the file must contain STATE datasets following the   %
+#>      \textit{STATE_****} nomenclature, which are populated with pin-wise data with    %
+#>      the same names as their output edit counterparts.  Currently supported dataset   %
+#>      name are \textit{pin\_fuel\_temp}, \textit{pin\_clad\_temp},                     %
+#>      \textit{pin\_mod\_temp}, \textit{pin\_mod\_dens}, \textit{pin\_gtube\_temp}, and %
+#>      \textit{pin\_gtube\_dens}.  The TH datasets must have the same      %
+#>      shape as their corresponding output counterparts.  Users are not required        %
+#>      to provide the TH conditions for all states and TH variables, and those which    %
+#>      are absent will be populated based on the global state variables such as         %
+#       \texttt{tinlet}.}
+#>   }
+  user_defined_th_filename:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+#>
 #>
 #>   {\bf dep\_edit} dep\_edit
 #>   \VERAInputTable{
@@ -9699,103 +9793,343 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 
+#>
+#> \section{Block MAMBA}
 MAMBA:
+#>
+#>   {\bf A_NiFe2O4_out} surface\_prefactor
+#>   \VERAInputTable{
+#>     name={A_NiFe2O4_out},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Prefactor for NiFe2O4 surface growth},
+#>     notes={}
+#>   }
   A_NiFe2O4_out:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf E_NiFe2O4_out} surface\_activation\_energy
+#>   \VERAInputTable{
+#>     name={E_NiFe2O4_out},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Activation energy for NiFe2O4 surface growth},
+#>     notes={}
+#>   }
   E_NiFe2O4_out:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf A_NiFe2O4_in} nucleation\_prefactor
+#>   \VERAInputTable{
+#>     name={A_NiFe2O4_in},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Prefactor for NiFe2O4 nucleation},
+#>     notes={}
+#>   }
   A_NiFe2O4_in:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf E_NiFe2O4_in} nucleation\_activation\_energy
+#>   \VERAInputTable{
+#>     name={E_NiFe2O4_in},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Activation energy for NiFe2O4 nucleation},
+#>     notes={}
+#>   }
   E_NiFe2O4_in:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf ksnb_Fe2O4} boiling\_growth\_rate
+#>   \VERAInputTable{
+#>     name={ksnb_Fe2O4},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Boiling enhanced surface growth rate},
+#>     notes={}
+#>   }
   ksnb_Fe2O4:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf D_Ni} diffusion\_coefficient
+#>   \VERAInputTable{
+#>     name={D_Ni},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm^2/s},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Diffusion coefficient for Ni},
+#>     notes={}
+#>   }
   D_Ni:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf D_Fe} diffusion\_coefficient
+#>   \VERAInputTable{
+#>     name={D_Fe},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm^2/s},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Diffusion coefficient for Fe},
+#>     notes={}
+#>   }
   D_Fe:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf D_BOH3} diffusion\_coefficient
+#>   \VERAInputTable{
+#>     name={D_BOH3},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm^2/s},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Diffusion coefficient for Boric Acid},
+#>     notes={}
+#>   }
   D_BOH3:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf D_Li} diffusion\_coefficient
+#>   \VERAInputTable{
+#>     name={D_Li},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm^2/s},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Diffusion coefficient for Li},
+#>     notes={}
+#>   }
   D_Li:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf D_H2} diffusion\_coefficient
+#>   \VERAInputTable{
+#>     name={D_H2},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm^2/s},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Diffusion coefficient for H$_2$},
+#>     notes={}
+#>   }
   D_H2:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf CRUD_porosity} porosity
+#>   \VERAInputTable{
+#>     name={CRUD_porosity},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.7},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Initial porosity of CRUD layer},
+#>     notes={}
+#>   }
   CRUD_porosity:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf CRUD_solid_dens} density
+#>   \VERAInputTable{
+#>     name={CRUD_solid_dens},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={g/cm^3},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Density of solid NiFe2O4},
+#>     notes={}
+#>   }
   CRUD_solid_dens:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf dep_frac} fraction
+#>   \VERAInputTable{
+#>     name={dep_frac},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.25},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Fraction of the B-10 reaction rate applied to depletion},
+#>     notes={}
+#>   }
   CRUD_dep_frac:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf chimney_htc} htc
+#>   \VERAInputTable{
+#>     name={chimney_htc},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={W/cm^2-K},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Heat transfer coefficient inside a chimney},
+#>     notes={}
+#>   }
   chimney_htc:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf chimney_dens} dens
+#>   \VERAInputTable{
+#>     name={chimney_dens},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={#/cm^2},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Surface density of chimney},
+#>     notes={}
+#>   }
   chimney_dens:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf chimney_rad} radius
+#>   \VERAInputTable{
+#>     name={chimney_rad},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Radius of average chimney},
+#>     notes={}
+#>   }
   chimney_rad:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf chimney_vf} void\_fraction
+#>   \VERAInputTable{
+#>     name={chimney_vf},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0, <1},
+#>     limitations={},
+#>     description={Void fraction of steam exiting chimney},
+#>     notes={}
+#>   }
   chimney_vf:
     <<: *dtdouble
     _content:
@@ -9803,60 +10137,213 @@ MAMBA:
       - is_float()
       - is_gt() 0
       - is_lt() 1
+#>
+#>   {\bf CRUD_therm_cond} k\_crud
+#>   \VERAInputTable{
+#>     name={CRUD_therm_cond},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={W/cm-K},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Thermal conductivity of precipitate in CRUD},
+#>     notes={}
+#>   }
   CRUD_therm_cond:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf CRUD_heat_capacity} Cp
+#>   \VERAInputTable{
+#>     name={CRUD_heat_capacity},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={J/g-K},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Heat capacity for the CRUD skelaton},
+#>     notes={Currently Cp is unused}
+#>   }
   CRUD_heat_capacity:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
-      - is_gt() 0y
+      - is_gt() 0
+#>
+#>   {\bf tke_scale} factor
+#>   \VERAInputTable{
+#>     name={tke_scale},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0E-12},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Scaling factor to convert from TKE to errosion},
+#>     notes={}
+#>   }
   tke_scale:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf src_mult_A} multiplier
+#>   \VERAInputTable{
+#>     name={src_mult_A},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Multiplier for prefactor for source term model},
+#>     notes={}
+#>   }
   src_mult_A:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf src_mult_E} multiplier
+#>   \VERAInputTable{
+#>     name={src_mult_E},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Multiplier for activiation energy for source term model},
+#>     notes={}
+#>   }
   src_mult_E:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf steam_generator_age} age
+#>   \VERAInputTable{
+#>     name={steam_generator_age},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={years},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={>=0},
+#>     limitations={},
+#>     description={Initial age of the steam generator},
+#>     notes={This is only needed for the first cycle simulated or for a steam generator replacement, %
+#>             default behavior is to retrieve this data from the restart file.}
+#>   }
   steam_generator_age:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_geq() 0
+#>
+#>   {\bf piping_age} age
+#>   \VERAInputTable{
+#>     name={piping_age},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={years},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={>=0},
+#>     limitations={},
+#>     description={Initial age of the hot and cold leg},
+#>     notes={This is only needed for the first cycle simulated , %
+#>             default behavior is to retrieve this data from the restart file.}
+#>   }
   piping_age:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_geq() 0
+#>
+#>   {\bf chem_mass_bal} option
+#>   \VERAInputTable{
+#>     name={chem_mass_bal},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={The options are:  %
+#>       \begin{enumerate}
+#>         \item 0 --- no mass balance enabled (user must specify particulate NiFe2O4 concentration)        %
+#>         \item 1 --- unused %
+#>         \item 2 --- Internal CTF mass balance using MAMBA source term   %
+#>       \end{enumerate}},
+#>     limitations={},
+#>     description={Option to select mass balance model},
+#>     notes={}
+#>   }
   chem_mass_bal:
     <<: *dtint
     _content:
     _check:
       - is_geq() 0
       - is_int()
+#>
+#>   {\bf model_erosion} option
+#>   \VERAInputTable{
+#>     name={model_erosion},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={2},
+#>     valuesapplicable={The options are:  %
+#>       \begin{enumerate}
+#>         \item 0 --- no crud erosion model        %
+#>         \item 1 --- calculate from shear so that average TKE is 0.1 J/kg %
+#>         \item 2 --- use the Bradshaw model to calculate TKE from shear   %
+#>       \end{enumerate}},
+#>     limitations={},
+#>     description={Option to select erosion model},
+#>     notes={}
+#>   }
   model_erosion:
     <<: *dtint
     _content:
     _check:
       - is_geq() 0
       - is_int()
+#>
+#>   {\bf li_table} boron  lithium
+#>   \VERAInputTable{
+#>     name={li_table},
+#>     type={List of Two Floating-point Real Numbers},
+#>     need={Optional},
+#>     unitsdefault={ppm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Table of boron then lithium concentrations to define %
+#>                  the lithium concentration based on boron concentration},
+#>     notes={}
+#>   }
   li_table:
     <<: *dtlist
     _style: multi-line
