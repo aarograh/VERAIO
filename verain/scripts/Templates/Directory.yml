@@ -7691,6 +7691,48 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 #>
+#>   {\bf radial\_power\_ctf\_coupling} radial\_power\_ctf\_coupling
+#>   \VERAInputTable{
+#>     name={radial\_power\_ctf\_coupling},
+#>    type={Fixed Character String},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={\texttt{false}},
+#>    valuesapplicable={\texttt{true}},
+#>    limitations={},
+#>    description={If true, this card calculates the radial power Zernike                %
+#>      coefficients to pass to CTF. If false, no coefficients are calculated.},
+#>    notes={}
+#>   }
+  radial_power_ctf_coupling:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf radial\_burnup\_ctf\_coupling} radial\_burnup\_ctf\_coupling
+#>   \VERAInputTable{
+#>     name={radial\_burnup\_ctf\_coupling},
+#>    type={Fixed Character String},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={\texttt{false}},
+#>    valuesapplicable={\texttt{true}},
+#>    limitations={},
+#>    description={If true, this card calculates the radial burnup Zernike               %
+#>      coefficients to pass to CTF. If false, no coefficients are calculated.},
+#>    notes={}
+#>   }
+  radial_burnup_ctf_coupling:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf ctf\_basename} ctf\_basename
 #>   \VERAInputTable{
 #>     name={ctf\_basename},
@@ -11347,7 +11389,7 @@ RUN:
 #>   }
   pmem:
     <<: *dtstring
-    _content: 
+    _content:
     _check:
       - is_float()
       - is_gt() 0
@@ -11367,7 +11409,7 @@ RUN:
 #>   }
   ppn:
     <<: *dtstring
-    _content: 
+    _content:
     _check:
       - is_int()
       - is_gt() 0
