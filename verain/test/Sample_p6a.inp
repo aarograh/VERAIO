@@ -238,3 +238,4 @@
   num_angle      1
   num_threads    1
   user_defined_th_filename th_file.h5
+  nodal_data_filename nodal_file.h5

@@ -171,7 +171,7 @@ MPACT:
       _do:
         - copy MPACT/$xe135m_opt
       _content:
-      
+
     explicit_erg_deposit:
       _pltype: parameter
       _type: bool
@@ -184,6 +184,13 @@ MPACT:
       _type: bool
       _do:
         - copy MPACT/$nodal_edits
+      _content:
+
+    nodal_data_filename:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$nodal_data_filename
       _content:
 
     rod_treatment:
@@ -648,6 +655,20 @@ MPACT:
           _type: bool
           _do:
             - copy MPACT/$average_ftemp
+          _content:
+
+        radial_power_ctf_coupling:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$radial_power_ctf_coupling
+          _content:
+
+        radial_burnup_ctf_coupling:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$radial_burnup_ctf_coupling
           _content:
 
         shield_max_outers:

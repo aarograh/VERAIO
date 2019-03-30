@@ -5642,8 +5642,9 @@ MPACT:
 #>     valuedefault={MOC},
 #>     valuesapplicable={},
 #>     limitations={},
-#>     description={This card is used to specify whether Method of Characteristics or    %
-#>       Sn transport methods are used for the global problem solution method.},
+#>     description={This card is used to specify whether Method of Characteristics, Sn,  %
+#>       or Nodal Diffusion transport methods are used for the global problem solution   %
+#>       method.},
 #>     notes={}
 #>   }
   transport_method:
@@ -5651,7 +5652,7 @@ MPACT:
     _content:
     _check:
       - is_string()
-      - in_dictionary() MOC Sn
+      - in_dictionary() MOC Sn NODAL
 #>
 #>   {\bf sn\_numcart} sn\_numcart
 #>   \VERAInputTable{
@@ -6189,6 +6190,34 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf nodal\_data\_filename} nodal\_data\_filename
+#>   \VERAInputTable{
+#>     name={nodal\_data\_filename},
+#>    type={Free-Form Character String, Max. Length = 200},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={N/A},
+#>    valuesapplicable={Filename of any valid HDF5 file with user defined nodal data},
+#>    limitations={This card must be present if using the Nodal transport method and     %
+#>      nodal data must be provided for every state},
+#>    description={This card is used to indicate the name of the file                    %
+#>      containing the nodal data for each state.},
+#>    notes={The format of the HDF5 file must follow the same format as the HDF5 output  %
+#>      nodal edits.  The head dataset of the file must contain STATE datasets following %
+#>      the \textit{STATE_****} nomenclature, which are populated with NODAL\_XS         %
+#>      datasets.  NODAL\_XS must have within it \textit{ADF}, \textit{CHI},             %
+#>      \textit{KXSF}, \textit{NXSF}, \textit{XSF}, \textit{XSRM}, \textit{XSS}, and     %
+#>      \textit{XSTR}.  These nodal dataset must have the same shape as their            %
+#>      as their corresponding output counterparts.}                                     %
+#>   }
+  nodal_data_filename:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+#>
 #>
 #>   {\bf grid\_treatment} grid\_treatment
 #>   \VERAInputTable{
@@ -7685,6 +7714,48 @@ MPACT:
 #>    notes={}
 #>   }
   average_ftemp:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf radial\_power\_ctf\_coupling} radial\_power\_ctf\_coupling
+#>   \VERAInputTable{
+#>     name={radial\_power\_ctf\_coupling},
+#>    type={Fixed Character String},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={\texttt{false}},
+#>    valuesapplicable={\texttt{true}},
+#>    limitations={},
+#>    description={If true, this card calculates the radial power Zernike                %
+#>      coefficients to pass to CTF. If false, no coefficients are calculated.},
+#>    notes={}
+#>   }
+  radial_power_ctf_coupling:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf radial\_burnup\_ctf\_coupling} radial\_burnup\_ctf\_coupling
+#>   \VERAInputTable{
+#>     name={radial\_burnup\_ctf\_coupling},
+#>    type={Fixed Character String},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={\texttt{false}},
+#>    valuesapplicable={\texttt{true}},
+#>    limitations={},
+#>    description={If true, this card calculates the radial burnup Zernike               %
+#>      coefficients to pass to CTF. If false, no coefficients are calculated.},
+#>    notes={}
+#>   }
+  radial_burnup_ctf_coupling:
     <<: *dtbool
     _content:
     _check:
@@ -11347,7 +11418,7 @@ RUN:
 #>   }
   pmem:
     <<: *dtstring
-    _content: 
+    _content:
     _check:
       - is_float()
       - is_gt() 0
@@ -11367,7 +11438,7 @@ RUN:
 #>   }
   ppn:
     <<: *dtstring
-    _content: 
+    _content:
     _check:
       - is_int()
       - is_gt() 0
