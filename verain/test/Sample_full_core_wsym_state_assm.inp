@@ -418,16 +418,16 @@ crd_map
   fuel    U31 10.257 95.0 / 3.10
 
   temptable TU26 
-  include ../u26_table_tavg_rev0.tab
+  include u26_table_tavg_rev0.tab
 
   temptable TU31
-  include ../u31_table_tavg_rev0.tab
+  include u31_table_tavg_rev0.tab
 
   temptable TG182
-  include ../g182_table_tavg_rev0.tab
+  include g182_table_tavg_rev0.tab
 
   temptable TG185
-  include ../g185_table_tavg_rev0.tab
+  include g185_table_tavg_rev0.tab
 
   cell 1   0.4096 0.418 0.475 / U21 he  zirc / TG182 ! low enriched pin cell
   cell 2   0.4096 0.418 0.475 / U26 he  zirc / TU26  ! med enriched pin cell
