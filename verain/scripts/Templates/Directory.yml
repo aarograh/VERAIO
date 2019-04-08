@@ -5652,7 +5652,7 @@ MPACT:
     _content:
     _check:
       - is_string()
-      - in_dictionary() MOC Sn NODAL
+      - in_dictionary() MOC MoC moc SN Sn sn NODAL Nodal nodal
 #>
 #>   {\bf sn\_numcart} sn\_numcart
 #>   \VERAInputTable{
