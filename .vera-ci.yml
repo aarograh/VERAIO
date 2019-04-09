@@ -1,0 +1,80 @@
+stages:
+   - testing
+   - deploy
+ 
+before_script:
+    - echo "start"
+    - source /projects/vera/gcc-5.4.0/load_dev_env.sh
+    - /projects/vera/common_tools/gitdist pull
+    - SRC_DIR=${PWD}
+    - SRC_BASE_DIR=${SRC_DIR}/..
+    - cd /localhome/gitlab-runner
+    - PACKAGE_TEST=VERAInExt
+    - (if [[ ! -d "builds" ]]; then mkdir builds; fi)
+    - cd builds
+    - (if [[ ! -d "VERA" ]]; then git clone git@code-int.ornl.gov:CASL/VERA; fi)
+    - cd VERA
+    - git pull
+    - BASE_VERA_DIR=${PWD}
+    - (if [[ ! -d "TriBITS" ]]; then git clone git@code-int.ornl.gov:CASL/TriBITS; fi)
+    - env VERA_INCL_CEData=ON cmake/tribits/ci_support/clone_extra_repos.py
+    - /projects/vera/common_tools/gitdist pull
+    - cd VERAData/CEData
+    - /projects/vera/gcc-5.4.0/common_tools/git-lfs pull
+    - cd ${BASE_VERA_DIR}
+    - echo ${BASE_VERA_DIR}
+    - ls -lrt 
+    - (if [[ -d "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)
+    - (if [[ ! -L "${PACKAGE_TEST}" ]]; then ln -s ${SRC_DIR} VERAInExt; fi)
+    
+.testing_base_setup: &testing_base_setup
+    stage: testing
+    only:
+        refs:
+           - web
+           - schedules
+           - pipelines
+        variables:
+            - $CI_RUN_ONLY == null
+            - $CI_RUN_ONLY == ""
+            - $CI_RUN_ONLY == $CI_JOB_NAME
+ 
+gnu-debug:
+    <<: *testing_base_setup
+    variables:
+        CTEST_BUILD_FLAGS: -j32
+        CTEST_PARALLEL_LEVEL: "32"
+        DART_TESTING_TIMEOUT: "3600"
+        BLD_NAME: "gnu_release_debug"
+    script:
+    - SRC_DIR=`pwd`
+    - BLD_DIR=/localhome/gitlab-runner/builds/VERAInExt
+    - (if [[  -d "${BUILD_DIR}" ]]; then rm -rf ${BLD_DIR}; fi)
+    - mkdir -p ${BLD_DIR}
+    - cd $BLD_DIR
+    - rm -rf do-configure
+    - ln -s ${SRC_DIR}/cmake/std/gcc-5.4.0/do-configure.MPI_RELEASE_DEBUG_SHARED do-configure
+    - rm -rf CMake*
+    - ./do-configure -DVERA_ENABLE_VERAInExt:BOOL=ON
+    - env CTEST_BUILD_FLAGS=-j28 CTEST_PARALLEL_LEVEL=28 make dashboard
+    - cd ${BASE_VERA_DIR}
+    - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)    
+ 
+    tags:
+        - linux
+ 
+trigger_build:
+    <<: *testing_base_setup
+    stage: deploy
+    tags:
+        - linux
+    variables:
+        CI_JOB_NAME: "HEAVY"
+    script:
+        - echo "CI_JOB_TOKEN=${CI_JOB_TOKEN}"
+        - echo "CI_REPOSITORY_URL=${CI_REPOSITORY_URL}"
+        - echo "REF_CI_BUILD_REF_NAME=${CI_BUILD_REF_NAME}"
+        - echo "REF_CI_COMMIT_SHA=${CI_COMMIT_SHA}"
+        - echo "REF_NAME=${CI_PROJECT_NAME}"
+        - curl -X POST -F token=${CI_JOB_TOKEN} -F ref=test-ci -F "variables[REF_CI_REPOSITORY_URL]=${CI_REPOSITORY_URL}" -F "variables[REF_CI_BUILD_REF_NAME]=${CI_BUILD_REF_NAME}" -F "variables[REF_CI_COMMIT_SHA]=${CI_COMMIT_SHA}" -F "variables[REF_NAME]=${CI_PROJECT_NAME}" -F "variables[CI_RUN_ONLY]=HEAVY" https://code-int.ornl.gov/api/v4/projects/3204/trigger/pipeline
+
