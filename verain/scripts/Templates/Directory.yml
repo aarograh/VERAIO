@@ -10383,6 +10383,46 @@ MAMBA:
       - is_float()
       - is_geq() 0
 #>
+#>   {\bf sg_mult} multiplier
+#>   \VERAInputTable{
+#>     name={sg_mult},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={>=0},
+#>     limitations={},
+#>     description={Multiplier on steam generator source term},
+#>     notes={This is required to scale the source term model to smaller reactor geometries, i.e. single asm.}
+#>   }
+  sg_mult:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+#>
+#>   {\bf mass_mult} multiplier
+#>   \VERAInputTable{
+#>     name={mass_mult},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={>=0},
+#>     limitations={},
+#>     description={Multiplier on crud deposition mass term in the mass balance},
+#>     notes={This is required to scale the source term model to smaller reactor geometries, i.e. single asm.}
+#>   }
+  mass_mult:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+#>
 #>   {\bf piping_age} age
 #>   \VERAInputTable{
 #>     name={piping_age},

@@ -164,6 +164,20 @@ MAMBA:
         - copy MAMBA/$steam_generator_age
       _content:
 
+    sg_mult:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA/$sg_mult
+      _content:
+
+    mass_mult:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA/$mass_mult
+      _content:
+
     piping_age:
       _pltype: parameter
       _type: double
