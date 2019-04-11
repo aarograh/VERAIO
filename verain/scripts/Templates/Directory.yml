@@ -2141,25 +2141,25 @@ SHIFT:
       - is_word()
       - in_dictionary() true false
 #>
-#>   {\bf use_mpact_spectrum} use_mpact_spectrum
+#>   {\bf fiss_src_spectrum} fiss_src_spectrum
 #>   \VERAInputTable{
-#>     name={use_mpact_spectrum},
-#>     type={bool},
+#>     name={fiss_src_spectrum},
+#>     type={String},
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuedefault={u235watt},
+#>     valuesapplicable={u235_watt,mpact,nuclide_watt},
 #>     limitations={},
-#>     description={Use the fission source spectrum provided by MPACT},
+#>     description={The type of fission source spectrum to use},
 #>     notes={}
 #>   }
-  use_mpact_spectrum:
-    <<: *dtbool
+  fiss_src_spectrum:
+    <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() true false
+      - in_dictionary() u235_watt mpact nuclide_watt
 #>
 #>   {\bf use_fission_source} use_fission_source
 #>   \VERAInputTable{

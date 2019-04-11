@@ -164,11 +164,11 @@ SHIFT:
         - copy SHIFT/$vera_pressure_vessel
       _content:
 
-    use_mpact_spectrum:
+    fiss_src_spectrum:
       _pltype: parameter
-      _type: bool
+      _type: string
       _do:
-        - copy SHIFT/$use_mpact_spectrum
+        - copy SHIFT/$fiss_src_spectrum
       _content:
 
     use_fission_source:
