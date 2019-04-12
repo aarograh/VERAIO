@@ -685,6 +685,13 @@ MPACT:
             - copy MPACT/$radial_burnup_ctf_coupling
           _content:
 
+        radial_temp_ctf_coupling:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$radial_temp_ctf_coupling
+          _content:
+
         shield_max_outers:
           _pltype: parameter
           _type: int

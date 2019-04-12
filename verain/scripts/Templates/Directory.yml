@@ -7836,6 +7836,29 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 #>
+#>   {\bf radial\_temp\_ctf\_coupling} radial\_temp\_ctf\_coupling
+#>   \VERAInputTable{
+#>     name={radial\_temp\_ctf\_coupling},
+#>    type={Fixed Character String},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={\texttt{false}},
+#>    valuesapplicable={\texttt{true}},
+#>    limitations={},
+#>    description={If true, this card will use the radial fuel temperature               %
+#>      Zernike coefficients from CTF to set the fuel temps in MPACT. If false,          %
+#>      the coefficents are not used and the volume averaged fuel temp is used           %
+#>      in all fuel rings.},
+#>    notes={}
+#>   }
+  radial_temp_ctf_coupling:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf ctf\_basename} ctf\_basename
 #>   \VERAInputTable{
 #>     name={ctf\_basename},
