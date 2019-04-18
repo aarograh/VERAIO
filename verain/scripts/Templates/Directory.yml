@@ -233,17 +233,17 @@ STATE:
       - is_float()
       - is_geq() 0
 #>
-#>   {\bf bypass} bypass
+#>   {\bf tinlet} tinlet
 #>   \VERAInputTable{
-#>     name={bypass},
+#>     name={tinlet},
 #>     type={Float},
 #>     need={Optional},
-#>     unitsdefault={Percent of flow},
-#>     unitsother={},
-#>     valuedefault={0},
-#>     valuesapplicable={$>=0$},
+#>     unitsdefault={C}
+#>     unitsother={F, C, K},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
 #>     limitations={},
-#>     description={Bypass flow fraction \hl{current manual says rated flow}},
+#>     description={Core inlet temperature}
 #>     notes={}
 #>   }
   tinlet:
@@ -3581,6 +3581,31 @@ COBRATF:
     _check:
       - is_int()
       - in_dictionary() 0 1 2
+#>
+#>   {\bf disable\_xml2ctf} disable\_xml2ctf
+#>   \VERAInputTable{
+#>     name={disable\_xml2ctf},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0, 1},
+#>     limitations={},
+#>     description={Setting to 0 will allow xml2ctf to run during code initialization and generate the
+#>        CTF input file.  This is the normal VERA behavior.  If set to 1, xml2ctf will not run.  In this
+#>        case, it is up to the user to ensure a CTF input file called "deck.inp" is present in the simulation
+#>        directory and that that model is consistent with the MPACT model.  This option is provided so that
+#>        a user may customize the CTF input file with options not provided through xml2ctf.},
+#>     notes={}
+#>   }
+  disable_xml2ctf:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+
 #>
 #>   {\bf irfc} irfc
 #>   \VERAInputTable{
