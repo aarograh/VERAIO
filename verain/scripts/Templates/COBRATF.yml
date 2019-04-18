@@ -45,6 +45,13 @@ COBRATF:
         - copy COBRATF/$debug
       _content:
 
+    disable_xml2ctf:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$disable_xml2ctf
+      _content:
+
     irfc:
       _pltype: parameter
       _type: int
