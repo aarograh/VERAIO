@@ -10423,6 +10423,34 @@ MAMBA:
       - is_float()
       - is_geq() 0
 #>
+#>   {\bf edit_scrape} scrape
+#>   \VERAInputTable{
+#>     name={edit_scrape},
+#>     type={},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Crud scrape edit info},
+#>     notes={This is only needed for specifying crud scrape locations.}
+#>   }
+  edit_scrape:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%8==0
+      - fall(sub{is_int(shift)},stride(0,8,()))
+      - fall(sub{is_int(shift)},stride(1,8,()))
+      - fall(sub{is_int(shift)},stride(2,8,()))
+      - fall(sub{is_int(shift)},stride(3,8,()))
+      - fall(sub{is_float(shift)},stride(4,8,()))
+      - fall(sub{is_float(shift)},stride(5,8,()))
+      - fall(sub{is_float(shift)},stride(6,8,()))
+      - fall(sub{is_float(shift)},stride(7,8,()))
+#>
 #>   {\bf piping_age} age
 #>   \VERAInputTable{
 #>     name={piping_age},

@@ -178,6 +178,62 @@ MAMBA:
         - copy MAMBA/$mass_mult
       _content:
 
+    scrape_id:
+      _pltype: array
+      _type: int
+      _do:
+        - copyarray MAMBA/@edit_scrape,start=>0,stride=>8
+      _content:
+
+    scrape_ida:
+      _pltype: array
+      _type: int
+      _do:
+        - copyarray MAMBA/@edit_scrape,start=>1,stride=>8
+      _content:
+
+    scrape_idx:
+      _pltype: array
+      _type: int
+      _do:
+        - copyarray MAMBA/@edit_scrape,start=>2,stride=>8
+      _content:
+
+    scrape_idy:
+      _pltype: array
+      _type: int
+      _do:
+        - copyarray MAMBA/@edit_scrape,start=>3,stride=>8
+      _content:
+
+    scrape_min_th:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray MAMBA/@edit_scrape,start=>4,stride=>8
+      _content:
+
+    scrape_max_th:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray MAMBA/@edit_scrape,start=>5,stride=>8
+      _content:
+
+    scrape_min_z:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray MAMBA/@edit_scrape,start=>6,stride=>8
+      _content:
+
+    scrape_max_z:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray MAMBA/@edit_scrape,start=>7,stride=>8
+      _content:
+
     piping_age:
       _pltype: parameter
       _type: double
