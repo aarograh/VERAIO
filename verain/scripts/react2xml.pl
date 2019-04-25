@@ -161,7 +161,6 @@ my $FOLLOW;
 	"init"      => \$INIT,
 	"xinit"     => \$XINIT,
 
-	"fpath"     => \$FOLLOW          # hidden option for path following
 #	"update=s"  => \$_UPDATE         # hidden updates
 	);
 }
@@ -237,11 +236,9 @@ if(-e $ofile){
 }
 
 # Follow file paths for include commands
-if($FOLLOW){
-    $fpath = abs_path($ifile);
-    ($ifile, $FOLLOW) = fileparse($fpath);
-    $FOLLOW = canonpath( $FOLLOW );
-}
+$fpath = abs_path($ifile);
+($ifile, $FOLLOW) = fileparse($fpath);
+$FOLLOW = canonpath( $FOLLOW );
 
 #
 # Initiate configuration template for data structures

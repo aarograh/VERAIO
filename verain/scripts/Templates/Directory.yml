@@ -233,17 +233,17 @@ STATE:
       - is_float()
       - is_geq() 0
 #>
-#>   {\bf bypass} bypass
+#>   {\bf tinlet} tinlet
 #>   \VERAInputTable{
-#>     name={bypass},
+#>     name={tinlet},
 #>     type={Float},
 #>     need={Optional},
-#>     unitsdefault={Percent of flow},
-#>     unitsother={},
-#>     valuedefault={0},
-#>     valuesapplicable={$>=0$},
+#>     unitsdefault={C}
+#>     unitsother={F, C, K},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
 #>     limitations={},
-#>     description={Bypass flow fraction \hl{current manual says rated flow}},
+#>     description={Core inlet temperature}
 #>     notes={}
 #>   }
   tinlet:
@@ -3616,6 +3616,31 @@ COBRATF:
       - is_int()
       - in_dictionary() 0 1 2
 #>
+#>   {\bf disable\_xml2ctf} disable\_xml2ctf
+#>   \VERAInputTable{
+#>     name={disable\_xml2ctf},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={0, 1},
+#>     limitations={},
+#>     description={Setting to 0 will allow xml2ctf to run during code initialization and generate the
+#>        CTF input file.  This is the normal VERA behavior.  If set to 1, xml2ctf will not run.  In this
+#>        case, it is up to the user to ensure a CTF input file called "deck.inp" is present in the simulation
+#>        directory and that that model is consistent with the MPACT model.  This option is provided so that
+#>        a user may customize the CTF input file with options not provided through xml2ctf.},
+#>     notes={}
+#>   }
+  disable_xml2ctf:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+
+#>
 #>   {\bf irfc} irfc
 #>   \VERAInputTable{
 #>     name={irfc},
@@ -5676,8 +5701,9 @@ MPACT:
 #>     valuedefault={MOC},
 #>     valuesapplicable={},
 #>     limitations={},
-#>     description={This card is used to specify whether Method of Characteristics or    %
-#>       Sn transport methods are used for the global problem solution method.},
+#>     description={This card is used to specify whether Method of Characteristics, Sn,  %
+#>       or Nodal Diffusion transport methods are used for the global problem solution   %
+#>       method.},
 #>     notes={}
 #>   }
   transport_method:
@@ -5685,7 +5711,7 @@ MPACT:
     _content:
     _check:
       - is_string()
-      - in_dictionary() MOC Sn
+      - in_dictionary() MOC MoC moc SN Sn sn NODAL Nodal nodal
 #>
 #>   {\bf sn\_numcart} sn\_numcart
 #>   \VERAInputTable{
@@ -6217,7 +6243,109 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf nodal\_edits} nodal\_edits
+#>   \VERAInputTable{
+#>     name={nodal\_edits},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true, false. These are described as:                            %
+#>       \begin{enumerate}                                                               %
+#>         \item \texttt{true} --- enables MPACT nodal cross section edits               %
+#>         \item \texttt{false} --- disables MPACT nodal cross section edits             %
+#>       \end{enumerate}},
+#>     limitations={},
+#>     description={This card is used to enable or disable MPACT's nodal cross section   %
+#>       capability.  If enabled, node-averaged cross sections, flux moments, kinetics   %
+#>       data, TH data, discontinuity factors, and other information will be written     %
+#>       to each block of the HDF5 file.},
+#>     notes={}
+#>   }
   nodal_edits:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf nodal\_edits\_energy\_cutoff} nodal\_edits\_energy\_cutoff
+#>   \VERAInputTable{
+#>     name={nodal\_edits\_energy\_cutoff},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={eV},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={Any energy greater than 0.0 that is also an energy boundary     %
+#>       in the transport library used for the calculation.},
+#>     limitations={},
+#>     description={This card is used to set the energy cut-off between the two groups   %
+#>       when generating nodal data.  The default cut-off is the energy between the      %
+#>       last group with no up-scatter and the first group with up-scatter.  This value  %
+#>       is library-dependent and automatically determined during the calculation.  The  %
+#>       user may specify any of the energy group boundaries defined by the transport    %
+#>       library as an input to this card.},
+#>     notes={}
+#>   }
+  nodal_edits_energy_cutoff:
+    <<: *dtfloat
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+#>
+#>   {\bf nodal\_data\_filename} nodal\_data\_filename
+#>   \VERAInputTable{
+#>     name={nodal\_data\_filename},
+#>    type={Free-Form Character String, Max. Length = 200},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={N/A},
+#>    valuesapplicable={Filename of any valid HDF5 file with user defined nodal data},
+#>    limitations={This card must be present if using the Nodal transport method and     %
+#>      nodal data must be provided for every state},
+#>    description={This card is used to indicate the name of the file                    %
+#>      containing the nodal data for each state.},
+#>    notes={The format of the HDF5 file must follow the same format as the HDF5 output  %
+#>      nodal edits.  The head dataset of the file must contain STATE datasets following %
+#>      the \textit{STATE_****} nomenclature, which are populated with NODAL\_XS         %
+#>      datasets.  NODAL\_XS must have within it \textit{ADF}, \textit{CHI},             %
+#>      \textit{KXSF}, \textit{NXSF}, \textit{XSF}, \textit{XSRM}, \textit{XSS}, and     %
+#>      \textit{XSTR}.  These nodal dataset must have the same shape as their            %
+#>      as their corresponding output counterparts.}                                     %
+#>   }
+  nodal_data_filename:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+#>
+#>   {\bf nodal\_edits\_adapt\_adf} nodal\_edits\_adapt\_adf
+#>   \VERAInputTable{
+#>     name={nodal\_edits\_adapt\_adf},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true, false. These are described as:                            %
+#>       \begin{enumerate}                                                               %
+#>         \item \texttt{true} --- enables MPACT adaptive ADF calculations               %
+#>         \item \texttt{false} --- disables MPACT adaptive ADF calculations             %
+#>       \end{enumerate}},
+#>     limitations={},
+#>     description={This card is used to enable or disable MPACT's adaptive ADF          %
+#>       calculations.  When enabled, MPACT will adjust the outgoing current on vacuum   %
+#>       boundaries until the ADF is equal to 1.0.  The removal cross section will then  %
+#>       be modified to preserve neutrons, and the diffusion cross section will be       %
+#>       modified to be consistent with the removal cross section.},
+#>     notes={Has no effect if \texttt{nodal\_edits} is set to \texttt{false}.}
+#>   }
+  nodal_edits_adapt_adf:
     <<: *dtbool
     _content:
     _check:
@@ -7719,6 +7847,71 @@ MPACT:
 #>    notes={}
 #>   }
   average_ftemp:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf radial\_power\_ctf\_coupling} radial\_power\_ctf\_coupling
+#>   \VERAInputTable{
+#>     name={radial\_power\_ctf\_coupling},
+#>    type={Fixed Character String},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={\texttt{false}},
+#>    valuesapplicable={\texttt{true}},
+#>    limitations={},
+#>    description={If true, this card calculates the radial power Zernike                %
+#>      coefficients to pass to CTF. If false, no coefficients are calculated.},
+#>    notes={}
+#>   }
+  radial_power_ctf_coupling:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf radial\_burnup\_ctf\_coupling} radial\_burnup\_ctf\_coupling
+#>   \VERAInputTable{
+#>     name={radial\_burnup\_ctf\_coupling},
+#>    type={Fixed Character String},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={\texttt{false}},
+#>    valuesapplicable={\texttt{true}},
+#>    limitations={},
+#>    description={If true, this card calculates the radial burnup Zernike               %
+#>      coefficients to pass to CTF. If false, no coefficients are calculated.},
+#>    notes={}
+#>   }
+  radial_burnup_ctf_coupling:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf radial\_temp\_ctf\_coupling} radial\_temp\_ctf\_coupling
+#>   \VERAInputTable{
+#>     name={radial\_temp\_ctf\_coupling},
+#>    type={Fixed Character String},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={\texttt{false}},
+#>    valuesapplicable={\texttt{true}},
+#>    limitations={},
+#>    description={If true, this card will use the radial fuel temperature               %
+#>      Zernike coefficients from CTF to set the fuel temps in MPACT. If false,          %
+#>      the coefficents are not used and the volume averaged fuel temp is used           %
+#>      in all fuel rings.},
+#>    notes={}
+#>   }
+  radial_temp_ctf_coupling:
     <<: *dtbool
     _content:
     _check:
@@ -10272,6 +10465,46 @@ MAMBA:
       - is_float()
       - is_geq() 0
 #>
+#>   {\bf sg_mult} multiplier
+#>   \VERAInputTable{
+#>     name={sg_mult},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={>=0},
+#>     limitations={},
+#>     description={Multiplier on steam generator source term},
+#>     notes={This is required to scale the source term model to smaller reactor geometries, i.e. single asm.}
+#>   }
+  sg_mult:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+#>
+#>   {\bf mass_mult} multiplier
+#>   \VERAInputTable{
+#>     name={mass_mult},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={>=0},
+#>     limitations={},
+#>     description={Multiplier on crud deposition mass term in the mass balance},
+#>     notes={This is required to scale the source term model to smaller reactor geometries, i.e. single asm.}
+#>   }
+  mass_mult:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+#>
 #>   {\bf piping_age} age
 #>   \VERAInputTable{
 #>     name={piping_age},
@@ -11381,7 +11614,7 @@ RUN:
 #>   }
   pmem:
     <<: *dtstring
-    _content: 
+    _content:
     _check:
       - is_float()
       - is_gt() 0
@@ -11401,7 +11634,7 @@ RUN:
 #>   }
   ppn:
     <<: *dtstring
-    _content: 
+    _content:
     _check:
       - is_int()
       - is_gt() 0
