@@ -495,6 +495,35 @@ STATES:
             - copy %STATE/$(_loop)/@restart_read:1
           _content:
 
+        restart_jumpin_target_loc:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray %STATE/$(_loop)/@restart_jumpin,start=>0,stride=>4
+          _content:
+
+        restart_jumpin_file:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray %STATE/$(_loop)/@restart_jumpin,start=>1,stride=>4
+          _content:
+
+        restart_jumpin_label:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray %STATE/$(_loop)/@restart_jumpin,start=>2,stride=>4
+          _content:
+
+        restart_jumpin_source_loc:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray %STATE/$(_loop)/@restart_jumpin,start=>3,stride=>4
+          _content:
+
+
         shuffle_label:
           _pltype: array
           _type: string
