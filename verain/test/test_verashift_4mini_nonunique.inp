@@ -300,7 +300,7 @@
   transport ce
   create_unique_pins false
   transfer fiss_src
-  use_mpact_spectrum true
+  fiss_src_spectrum nuclide_watt
   use_fission_source true
   use_external_source false
 ! some parameters for external excore input

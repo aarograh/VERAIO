@@ -670,6 +670,7 @@
     <Parameter name="core_translate" type="Array(double)" value="{2.0,2.0,0.0}" />
     <Parameter name="create_unique_pins" type="bool" value="false" />
     <Parameter name="excore_filename" type="string" value="bleh.inp.omn" />
+    <Parameter name="fiss_src_spectrum" type="string" value="mpact" />
     <Parameter name="global_log" type="string" value="debug" />
     <ParameterList name="kcode_db">
       <Parameter name="Np" type="double" value="1000" />
@@ -689,7 +690,6 @@
     <Parameter name="transport" type="string" value="ce" />
     <Parameter name="use_external_source" type="bool" value="false" />
     <Parameter name="use_fission_source" type="bool" value="true" />
-    <Parameter name="use_mpact_spectrum" type="bool" value="true" />
     <Parameter name="vera_pressure_vessel" type="bool" value="true" />
   <Parameter name="hybrid_tally_names" type="Array(string)" value="{detector_0_0,detector_0_2,detector_1_0}" /><Parameter name="hybrid_multiplier_names" type="Array(string)" value="{flux,flux,flux}" /></ParameterList>
   <ParameterList name="EDITS">
