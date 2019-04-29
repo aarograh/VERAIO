@@ -2148,7 +2148,7 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={u235watt},
+#>     valuedefault={u235_watt},
 #>     valuesapplicable={u235_watt,mpact,nuclide_watt},
 #>     limitations={},
 #>     description={The type of fission source spectrum to use},
