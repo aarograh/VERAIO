@@ -646,6 +646,12 @@
     <Parameter name="excore_filename" type="string" value="bleh.inp.omn"/>
     <Parameter name="fiss_src_spectrum" type="string" value="nuclide_watt"/>
     <Parameter name="global_log" type="string" value="debug"/>
+    <ParameterList name="hybrid_db">
+      <Parameter name="create_unique_pins" type="bool" value="false"/>
+      <Parameter name="excore_filename" type="string" value="bleh.inp.omn"/>
+      <Parameter name="problem_mode" type="string" value="forward"/>
+      <Parameter name="vera_pressure_vessel" type="bool" value="true"/>
+    </ParameterList>
     <Parameter name="hybrid_multiplier_names" type="Array(string)" value="{flux,fission}"/>
     <Parameter name="hybrid_tally_names" type="Array(string)" value="{tally1,tally2}"/>
     <ParameterList name="kcode_db">
