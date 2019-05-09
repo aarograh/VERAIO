@@ -1481,6 +1481,26 @@ EDITS:
 #> \label{sec:shiftcards}
 SHIFT:
 #>
+#>   {\bf num_threads} num_threads
+#>   \VERAInputTable{
+#>     name={num_threads},
+#>     type={integer},
+#>     need={},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of threads per FPU},
+#>     notes={Applicable to threaded machines}
+#>   }
+  num_threads:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
 #>   {\bf ce\_lib\_path} ce\_lib\_path
 #>   \VERAInputTable{
 #>     name={ce\_lib\_path},
@@ -3393,46 +3413,6 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() true false
-#>
-#>   {\bf SPN\_matrix\_type} SPN\_matrix\_type
-#>   \VERAInputTable{
-#>     name={SPN\_matrix\_type},
-#>     type={string},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={mat_free},
-#>     limitations={},
-#>     description={Type of $SP_N$ matrix solve},
-#>     notes={}
-#>   }
-  SPN_matrix_type:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() mat_free
-#>
-#>   {\bf SPN\_order} SPN\_order
-#>   \VERAInputTable{
-#>     name={SPN\_order},
-#>     type={integer},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={1},
-#>     valuesapplicable={1, 3, 5, 7},
-#>     limitations={},
-#>     description={Order of $SP_N$ solve},
-#>     notes={}
-#>   }
-  SPN_order:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - in_dictionary() 1 3 5 7
 #>
 #>   {\bf Pn\_correction} Pn\_correction
 #>   \VERAInputTable{

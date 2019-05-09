@@ -3,420 +3,6 @@ SHIFT:
   _do:
     - setdb MAIN_DB
   _content:
-    transport:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$transport
-      _content:
-
-    problem_mode:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$problem_mode
-      _content:
-
-    mode:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$mode
-      _content:
-
-    ce_lib_path:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$ce_lib_path
-      _content:
-
-    transfer:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$transfer
-      _content:
-
-    temp_transfer:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$temp_transfer
-      _content:
-
-    global_log:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$global_log
-      _content:
-
-    local_log:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$local_log
-      _content:
-
-    mesh:
-      _pltype: parameter
-      _type: int
-      _do:
-        - copy SHIFT/$mesh
-      _content:
-
-    do_micro_tally:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$do_micro_tally
-      _content:
-
-    do_transport:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$do_transport
-      _content:
-
-    do_output:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$do_output
-      _content:
-
-    output_geometry:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$output_geometry
-      _content:
-
-    output_micro_tally:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$output_micro_tally
-      _content:
-
-    output_fission_source:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$output_fission_source
-      _content:
-
-    output_external_source:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$output_external_source
-      _content:
-
-    output_ww:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$output_ww
-      _content:
-
-    thermal_energy_cutoff:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy SHIFT/$thermal_energy_cutoff
-      _content:
-
-    Np:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy SHIFT/$Np
-      _content:
-
-    excore_filename:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$excore_filename
-      _content:
-
-    raytrace_levels:
-      _pltype: array
-      _type: double
-      _do:
-        - copyarray SHIFT/$raytrace_levels
-      _content:
-
-    raytrace_resolution:
-      _pltype: parameter
-      _type: int
-      _do:
-        - copy SHIFT/$raytrace_resolution
-      _content:
-
-    vera_pressure_vessel:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$vera_pressure_vessel
-      _content:
-
-    fiss_src_spectrum:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$fiss_src_spectrum
-      _content:
-
-    use_fission_source:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$use_fission_source
-      _content:
-
-    use_external_source:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$use_external_source
-      _content:
-
-    core_translate:
-      _pltype: array
-      _type: double
-      _do:
-        - copyarray SHIFT/$core_translate
-      _content:
-
-    hybrid_tally_names:
-      _pltype: array
-      _type: string
-      _do:
-        - copyarray SHIFT/$hybrid_tally_names
-      _content:
-
-    hybrid_multiplier_names:
-      _pltype: array
-      _type: string
-      _do:
-        - copyarray SHIFT/$hybrid_multiplier_names
-      _content:
-
-    create_unique_pins:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$create_unique_pins
-      _content:
-
-    track_isotopes:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$track_isotopes
-      _content:
-
-    verbosity:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy SHIFT/$verbosity
-      _content:
-
-    error_tolerance:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy SHIFT/$lost_particle_error_tol
-      _content:
-
-    src_disc_l2_error:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy SHIFT/$src_disc_l2_error
-      _content:
-
-    src_disc_samples_per_batch:
-      _pltype: parameter
-      _type: int
-      _do:
-        - copy SHIFT/$src_disc_samples_per_batch
-      _content:
-
-    src_disc_max_samples:
-      _pltype: parameter
-      _type: int
-      _do:
-        - copy SHIFT/$src_disc_max_samples
-      _content:
-
-    kcode_db:
-      _pltype: list
-      _content:
-
-        Np:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy SHIFT/$Np
-          _content:
-
-        num_cycles:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy SHIFT/$num_cycles
-          _content:
-
-        num_inactive_cycles:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy SHIFT/$num_inactive_cycles
-          _content:
-
-    dbrc:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$dbrc
-      _content:
-
-    broaden_xs:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$broaden_xs
-      _content:
-
-    broaden_db:
-      _pltype: list
-      _content:
-
-        temperature_tol:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy SHIFT/$temperature_tol
-          _content:
-
-        union_energy:
-          _pltype: parameter
-          _type: bool
-          _do:
-            - copy SHIFT/$union_energy
-          _content:
-
-        delta_t:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy SHIFT/$delta_t
-          _content:
-
-        energy_tol:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy SHIFT/$energy_tol
-          _content:
-
-    tally_db:
-      _pltype: list
-      _content:
-
-        radial_mesh:
-          _pltype: array
-          _type: double
-          _do:
-            - copyarray SHIFT/$radial_mesh
-          _content:
-
-        num_theta:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy SHIFT/$num_theta
-          _content:
-
-        num_axial:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy SHIFT/$num_axial
-          _content:
-
-        n_bounds:
-          _pltype: array
-          _type: double
-          _do:
-            - copyarray SHIFT/$n_bounds
-          _content:
-
-        p_bounds:
-          _pltype: array
-          _type: double
-          _do:
-            - copyarray SHIFT/$p_bounds
-          _content:
-
-        micro_zaids:
-          _pltype: array
-          _type: int
-          _do:
-            - copyarray SHIFT/$micro_zaids
-          _content:
-
-        micro_rxns:
-          _pltype: array
-          _type: int
-          _do:
-            - copyarray SHIFT/$micro_rxns
-          _content:
-
-        gamma_flux:
-          _pltype: parameter
-          _type: bool
-          _do:
-            - copy SHIFT/$gamma_flux
-          _content:
-
-    homog_db:
-      _pltype: list
-      _content:
-
-        homog_ring_radii:
-          _pltype: array
-          _type: double
-          _do:
-            - copyarray SHIFT/$homog_ring_radii
-          _content:
-
-        homog_type:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy SHIFT/$homog_type
-          _content:
-
-        homog_pin_rings:
-          _pltype: parameter
-          _type: bool
-          _do:
-            - copy SHIFT/$homog_pin_rings
-          _content:
-
-        homog_explicit_ring:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy SHIFT/$homog_explicit_ring
-          _content:
 
     boundary_mesh_db:
       _pltype: list
@@ -450,50 +36,170 @@ SHIFT:
             - copy SHIFT/$z_bnd_mesh
           _content:
 
+    broaden_db:
+      _pltype: list
+      _content:
+
+        delta_t:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$delta_t
+          _content:
+
+        energy_tol:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$energy_tol
+          _content:
+
+        temperature_tol:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$temperature_tol
+          _content:
+
+        union_energy:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$union_energy
+          _content:
+
+    broaden_xs:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$broaden_xs
+      _content:
+
+    ce_lib_path:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$ce_lib_path
+      _content:
+
+    core_translate:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray SHIFT/$core_translate
+      _content:
+
+    create_unique_pins:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$create_unique_pins
+      _content:
+
+    dbrc:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$dbrc
+      _content:
+
+    do_micro_tally:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$do_micro_tally
+      _content:
+
+    do_output:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$do_output
+      _content:
+
+    do_transport:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$do_transport
+      _content:
+
+    error_tolerance:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy SHIFT/$lost_particle_error_tol
+      _content:
+
+    excore_filename:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$excore_filename
+      _content:
+
+    fiss_src_spectrum:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$fiss_src_spectrum
+      _content:
+
+    global_log:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$global_log
+      _content:
+
+    homog_db:
+      _pltype: list
+      _content:
+
+        homog_explicit_ring:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$homog_explicit_ring
+          _content:
+
+        homog_pin_rings:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$homog_pin_rings
+          _content:
+
+        homog_ring_radii:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$homog_ring_radii
+          _content:
+
+        homog_type:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy SHIFT/$homog_type
+          _content:
+
     hybrid_db:
       _pltype: list
       _content:
 
-        problem_name:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy SHIFT/$problem_name
-          _content:
-
-        xs_library:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy SHIFT/$xs_library
-          _content:
-
-        mesh:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy SHIFT/$mesh
-          _content:
-
-        refl_mesh_size:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy SHIFT/$refl_mesh_size
-          _content:
-
-        extend_axial_mesh_size:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy SHIFT/$extend_axial_mesh_size
-          _content:
-
-        do_transport:
+        adjoint:
           _pltype: parameter
           _type: bool
           _do:
-            - copy SHIFT/$do_transport
+            - copy SHIFT/$adjoint
+          _content:
+
+        cell_homogenize:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$cell_homogenize
           _content:
 
         do_output:
@@ -503,18 +209,67 @@ SHIFT:
             - copy SHIFT/$do_output
           _content:
 
-        output_adjoint:
+        do_transport:
           _pltype: parameter
           _type: bool
           _do:
-            - copy SHIFT/$output_adjoint
+            - copy SHIFT/$do_transport
           _content:
 
-        adjoint:
+        downscatter:
           _pltype: parameter
           _type: bool
           _do:
-            - copy SHIFT/$adjoint
+            - copy SHIFT/$downscatter
+          _content:
+
+        eq_set:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy SHIFT/$eq_set
+          _content:
+
+        extend_axial_mesh_size:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$extend_axial_mesh_size
+          _content:
+
+        flux_decomposition:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy SHIFT/$ww_decomp
+          _content:
+
+        grp_collapse_src:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$grp_collapse_src
+          _content:
+
+        max_delta_z:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$max_delta_z
+          _content:
+
+        mesh:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy SHIFT/$mesh
+          _content:
+
+        new_grp_bounds:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$new_grp_bounds
           _content:
 
         num_blocks_i:
@@ -531,11 +286,11 @@ SHIFT:
             - copy SHIFT/$num_blocks_j
           _content:
 
-        num_z_blocks:
+        num_groups:
           _pltype: parameter
           _type: int
           _do:
-            - copy SHIFT/$num_z_blocks
+            - copy SHIFT/$num_groups
           _content:
 
         num_sets:
@@ -545,32 +300,32 @@ SHIFT:
             - copy SHIFT/$num_sets
           _content:
 
-        num_groups:
+        num_z_blocks:
           _pltype: parameter
           _type: int
           _do:
-            - copy SHIFT/$num_groups
+            - copy SHIFT/$num_z_blocks
           _content:
 
-        max_delta_z:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy SHIFT/$max_delta_z
-          _content:
-
-        store_fulcrum_string:
+        output_adjoint:
           _pltype: parameter
           _type: bool
           _do:
-            - copy SHIFT/$store_fulcrum_string
+            - copy SHIFT/$output_adjoint
           _content:
 
-        downscatter:
+        pin_partitioning:
           _pltype: parameter
           _type: bool
           _do:
-            - copy SHIFT/$downscatter
+            - copy SHIFT/$pin_partitioning
+          _content:
+
+        Pn_correction:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$Pn_correction
           _content:
 
         Pn_order:
@@ -580,58 +335,23 @@ SHIFT:
             - copy SHIFT/$Pn_order
           _content:
 
-        eq_set:
+        problem_name:
           _pltype: parameter
           _type: string
           _do:
-            - copy SHIFT/$eq_set
-          _content:
-
-        new_grp_bounds:
-          _pltype: array
-          _type: double
-          _do:
-            - copyarray SHIFT/$new_grp_bounds
-          _content:
-
-        grp_collapse_src:
-          _pltype: array
-          _type: double
-          _do:
-            - copyarray SHIFT/$grp_collapse_src
-          _content:
-
-        cell_homogenize:
-          _pltype: parameter
-          _type: bool
-          _do:
-            - copy SHIFT/$cell_homogenize
-          _content:
-
-        spn_matrix_type:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy SHIFT/$SPN_matrix_type
-          _content:
-
-        SPN_order:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy SHIFT/$SPN_order
-          _content:
-
-        flux_decomposition:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy SHIFT/$ww_decomp
+            - copy SHIFT/$problem_name
           _content:
 
         quadrature_db:
           _pltype: list
           _content:
+
+            azimuthals_octant:
+              _pltype: parameter
+              _type: int
+              _do:
+                - copy SHIFT/$azimuthals_octant
+              _content:
 
             quad_type:
               _pltype: parameter
@@ -647,19 +367,19 @@ SHIFT:
                 - copy SHIFT/$polars_octant
               _content:
 
-            azimuthals_octant:
-              _pltype: parameter
-              _type: int
-              _do:
-                - copy SHIFT/$azimuthals_octant
-              _content:
-
             Sn_order:
               _pltype: parameter
               _type: int
               _do:
                 - copy SHIFT/$Sn_order
               _content:
+
+        refl_mesh_size:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$refl_mesh_size
+          _content:
 
         solver_db:
           _pltype: list
@@ -672,61 +392,15 @@ SHIFT:
                 - copy SHIFT/$partition_upscatter
               _content:
 
-            within_group_db:
-              _pltype: list
-              _content:
-
-                tolerance:
-                  _pltype: parameter
-                  _type: double
-                  _do:
-                    - copy SHIFT/$within_group_tolerance
-                  _content:
-
-                solver:
-                  _pltype: parameter
-                  _type: string
-                  _do:
-                    - copy SHIFT/$within_group_solver
-                  _content:
-
-                max_itr:
-                  _pltype: parameter
-                  _type: int
-                  _do:
-                    - copy SHIFT/$within_group_max_itr
-                  _content:
-
-                subspace_size:
-                  _pltype: parameter
-                  _type: int
-                  _do:
-                    - copy SHIFT/$within_group_subspace_size
-                  _content:
-
-                verbosity:
-                  _pltype: parameter
-                  _type: string
-                  _do:
-                    - copy SHIFT/$within_group_verbosity
-                  _content:
-
             upscatter_db:
               _pltype: list
               _content:
 
-                tolerance:
+                iterate_downscatter:
                   _pltype: parameter
-                  _type: double
+                  _type: bool
                   _do:
-                    - copy SHIFT/$upscatter_tolerance
-                  _content:
-
-                solver:
-                  _pltype: parameter
-                  _type: string
-                  _do:
-                    - copy SHIFT/$upscatter_solver
+                    - copy SHIFT/$iterate_downscatter
                   _content:
 
                 max_itr:
@@ -736,11 +410,25 @@ SHIFT:
                     - copy SHIFT/$upscatter_max_itr
                   _content:
 
+                solver:
+                  _pltype: parameter
+                  _type: string
+                  _do:
+                    - copy SHIFT/$upscatter_solver
+                  _content:
+
                 subspace_size:
                   _pltype: parameter
                   _type: int
                   _do:
                     - copy SHIFT/$upscatter_subspace_size
+                  _content:
+
+                tolerance:
+                  _pltype: parameter
+                  _type: double
+                  _do:
+                    - copy SHIFT/$upscatter_tolerance
                   _content:
 
                 verbosity:
@@ -750,23 +438,329 @@ SHIFT:
                     - copy SHIFT/$upscatter_verbosity
                   _content:
 
-                iterate_downscatter:
+            within_group_db:
+              _pltype: list
+              _content:
+
+                max_itr:
                   _pltype: parameter
-                  _type: bool
+                  _type: int
                   _do:
-                    - copy SHIFT/$iterate_downscatter
+                    - copy SHIFT/$within_group_max_itr
                   _content:
 
-        Pn_correction:
+                solver:
+                  _pltype: parameter
+                  _type: string
+                  _do:
+                    - copy SHIFT/$within_group_solver
+                  _content:
+
+                subspace_size:
+                  _pltype: parameter
+                  _type: int
+                  _do:
+                    - copy SHIFT/$within_group_subspace_size
+                  _content:
+
+                tolerance:
+                  _pltype: parameter
+                  _type: double
+                  _do:
+                    - copy SHIFT/$within_group_tolerance
+                  _content:
+
+                verbosity:
+                  _pltype: parameter
+                  _type: string
+                  _do:
+                    - copy SHIFT/$within_group_verbosity
+                  _content:
+
+        store_fulcrum_string:
           _pltype: parameter
           _type: bool
           _do:
-            - copy SHIFT/$Pn_correction
+            - copy SHIFT/$store_fulcrum_string
           _content:
 
-        pin_partitioning:
+        xs_library:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy SHIFT/$xs_library
+          _content:
+
+    hybrid_multiplier_names:
+      _pltype: array
+      _type: string
+      _do:
+        - copyarray SHIFT/$hybrid_multiplier_names
+      _content:
+
+    hybrid_tally_names:
+      _pltype: array
+      _type: string
+      _do:
+        - copyarray SHIFT/$hybrid_tally_names
+      _content:
+
+    kcode_db:
+      _pltype: list
+      _content:
+
+        Np:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$Np
+          _content:
+
+        num_cycles:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy SHIFT/$num_cycles
+          _content:
+
+        num_inactive_cycles:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy SHIFT/$num_inactive_cycles
+          _content:
+
+    local_log:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$local_log
+      _content:
+
+    mesh:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy SHIFT/$mesh
+      _content:
+
+    mode:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$mode
+      _content:
+
+    Np:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy SHIFT/$Np
+      _content:
+
+    num_threads:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy SHIFT/$num_threads
+      _content:
+
+    output_external_source:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$output_external_source
+      _content:
+
+    output_fission_source:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$output_fission_source
+      _content:
+
+    output_geometry:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$output_geometry
+      _content:
+
+    output_micro_tally:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$output_micro_tally
+      _content:
+
+    output_ww:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$output_ww
+      _content:
+
+    problem_mode:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$problem_mode
+      _content:
+
+    raytrace_levels:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray SHIFT/$raytrace_levels
+      _content:
+
+    raytrace_resolution:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy SHIFT/$raytrace_resolution
+      _content:
+
+    src_disc_l2_error:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy SHIFT/$src_disc_l2_error
+      _content:
+
+    src_disc_max_samples:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy SHIFT/$src_disc_max_samples
+      _content:
+
+    src_disc_samples_per_batch:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy SHIFT/$src_disc_samples_per_batch
+      _content:
+
+    tally_db:
+      _pltype: list
+      _content:
+
+        gamma_flux:
           _pltype: parameter
           _type: bool
           _do:
-            - copy SHIFT/$pin_partitioning
+            - copy SHIFT/$gamma_flux
           _content:
+
+        micro_rxns:
+          _pltype: array
+          _type: int
+          _do:
+            - copyarray SHIFT/$micro_rxns
+          _content:
+
+        micro_zaids:
+          _pltype: array
+          _type: int
+          _do:
+            - copyarray SHIFT/$micro_zaids
+          _content:
+
+        n_bounds:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$n_bounds
+          _content:
+
+        num_axial:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy SHIFT/$num_axial
+          _content:
+
+        num_theta:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy SHIFT/$num_theta
+          _content:
+
+        p_bounds:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$p_bounds
+          _content:
+
+        radial_mesh:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray SHIFT/$radial_mesh
+          _content:
+
+    temp_transfer:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$temp_transfer
+      _content:
+
+    thermal_energy_cutoff:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy SHIFT/$thermal_energy_cutoff
+      _content:
+
+    track_isotopes:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$track_isotopes
+      _content:
+
+    transfer:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$transfer
+      _content:
+
+    transport:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$transport
+      _content:
+
+    use_external_source:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$use_external_source
+      _content:
+
+    use_fission_source:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$use_fission_source
+      _content:
+
+    vera_pressure_vessel:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$vera_pressure_vessel
+      _content:
+
+    verbosity:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy SHIFT/$verbosity
+      _content:
