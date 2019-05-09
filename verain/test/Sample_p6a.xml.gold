@@ -395,6 +395,10 @@
     <Parameter name="moc_kernel" type="string" value="mg"/>
     <Parameter name="nodal_data_filename" type="string" value="nodal_file.h5"/>
     <ParameterList name="parallel_env">
+      <ParameterList name="graph">
+        <Parameter name="decomposition" type="Array(string)" value="{REB}"/>
+      </ParameterList>
+      <Parameter name="method" type="string" value="GRAPH"/>
       <Parameter name="num_angle" type="int" value="1"/>
       <Parameter name="num_energy" type="int" value="1"/>
       <Parameter name="num_space" type="int" value="29"/>
