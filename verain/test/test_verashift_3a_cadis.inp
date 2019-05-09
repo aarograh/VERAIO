@@ -184,6 +184,7 @@
   output_geometry       false
   output_micro_tally    false
   output_ww             false
+  num_threads           1
   local_log             info
   ce_lib_path           "dummy.inp"
   global_log            debug

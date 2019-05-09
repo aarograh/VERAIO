@@ -330,6 +330,7 @@
     <Parameter name="local_log" type="string" value="info"/>
     <Parameter name="mesh" type="int" value="1"/>
     <Parameter name="mode" type="string" value="np"/>
+    <Parameter name="num_threads" type="int" value="1"/>
     <Parameter name="output_fission_source" type="bool" value="false"/>
     <Parameter name="output_geometry" type="bool" value="false"/>
     <Parameter name="output_micro_tally" type="bool" value="false"/>
