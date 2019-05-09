@@ -202,7 +202,6 @@
   output_adjoint        true
   eq_set                spn_fv
   adjoint               true
-  SPN_order             1
   max_delta_z           1.0
   xs_library            test-8grp
   num_groups            8
@@ -220,7 +219,6 @@
   pin_partitioning      true
   Pn_correction         true
   Pn_order              1
-  SPN_matrix_type       mat_free
   store_fulcrum_string  false
 ! hybrid_db/quadrature_db
   quad_type             levelsym

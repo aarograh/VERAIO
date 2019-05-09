@@ -277,9 +277,9 @@
     <ParameterList name="hybrid_db">
       <Parameter name="Pn_correction" type="bool" value="true"/>
       <Parameter name="Pn_order" type="int" value="1"/>
-      <Parameter name="SPN_order" type="int" value="1"/>
       <Parameter name="adjoint" type="bool" value="true"/>
       <Parameter name="cell_homogenize" type="bool" value="true"/>
+      <Parameter name="create_unique_pins" type="bool" value="true"/>
       <Parameter name="do_output" type="bool" value="true"/>
       <Parameter name="do_transport" type="bool" value="true"/>
       <Parameter name="downscatter" type="bool" value="true"/>
@@ -296,7 +296,9 @@
       <Parameter name="num_sets" type="int" value="2"/>
       <Parameter name="num_z_blocks" type="int" value="4"/>
       <Parameter name="output_adjoint" type="bool" value="true"/>
+      <Parameter name="output_ww" type="bool" value="false"/>
       <Parameter name="pin_partitioning" type="bool" value="true"/>
+      <Parameter name="problem_mode" type="string" value="cadis"/>
       <ParameterList name="quadrature_db">
         <Parameter name="quad_type" type="string" value="levelsym"/>
       </ParameterList>
@@ -319,7 +321,6 @@
           <Parameter name="verbosity" type="string" value="high"/>
         </ParameterList>
       </ParameterList>
-      <Parameter name="spn_matrix_type" type="string" value="mat_free"/>
       <Parameter name="store_fulcrum_string" type="bool" value="false"/>
       <Parameter name="xs_library" type="string" value="test-8grp"/>
     </ParameterList>
@@ -332,7 +333,6 @@
     <Parameter name="output_fission_source" type="bool" value="false"/>
     <Parameter name="output_geometry" type="bool" value="false"/>
     <Parameter name="output_micro_tally" type="bool" value="false"/>
-    <Parameter name="output_ww" type="bool" value="false"/>
     <Parameter name="problem_mode" type="string" value="cadis"/>
     <Parameter name="src_disc_l2_error" type="double" value="0.1"/>
     <Parameter name="src_disc_max_samples" type="int" value="100000"/>

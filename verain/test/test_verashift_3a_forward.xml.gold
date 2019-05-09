@@ -284,6 +284,7 @@
     <ParameterList name="hybrid_db">
       <Parameter name="do_output" type="bool" value="false"/>
       <Parameter name="do_transport" type="bool" value="true"/>
+      <Parameter name="problem_mode" type="string" value="forward"/>
       <ParameterList name="solver_db">
         <ParameterList name="within_group_db">
           <Parameter name="verbosity" type="string" value="high"/>
