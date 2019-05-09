@@ -202,6 +202,13 @@ SHIFT:
             - copy SHIFT/$cell_homogenize
           _content:
 
+        create_unique_pins:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$create_unique_pins
+          _content:
+
         do_output:
           _pltype: parameter
           _type: bool
@@ -221,6 +228,13 @@ SHIFT:
           _type: bool
           _do:
             - copy SHIFT/$downscatter
+          _content:
+
+        excore_filename:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy SHIFT/$excore_filename
           _content:
 
         eq_set:
@@ -314,6 +328,13 @@ SHIFT:
             - copy SHIFT/$output_adjoint
           _content:
 
+        output_ww:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$output_ww
+          _content:
+
         pin_partitioning:
           _pltype: parameter
           _type: bool
@@ -333,6 +354,13 @@ SHIFT:
           _type: int
           _do:
             - copy SHIFT/$Pn_order
+          _content:
+
+        problem_mode:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy SHIFT/$problem_mode
           _content:
 
         problem_name:
@@ -484,6 +512,13 @@ SHIFT:
             - copy SHIFT/$store_fulcrum_string
           _content:
 
+        vera_pressure_vessel:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$vera_pressure_vessel
+          _content:
+
         xs_library:
           _pltype: parameter
           _type: string
@@ -591,13 +626,6 @@ SHIFT:
       _type: bool
       _do:
         - copy SHIFT/$output_micro_tally
-      _content:
-
-    output_ww:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy SHIFT/$output_ww
       _content:
 
     problem_mode:
