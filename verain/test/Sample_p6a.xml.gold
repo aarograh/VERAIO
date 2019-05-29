@@ -344,6 +344,9 @@
     <ParameterList name="TH">
       <Parameter name="average_ftemp" type="bool" value="false"/>
       <Parameter name="coupling_method" type="string" value="ctf"/>
+      <Parameter name="radial_burnup_ctf_coupling" type="bool" value="true"/>
+      <Parameter name="radial_power_ctf_coupling" type="bool" value="true"/>
+      <Parameter name="radial_temp_ctf_coupling" type="bool" value="true"/>
       <Parameter name="sth_dhfrac" type="double" value="0.026"/>
       <Parameter name="sth_hgap" type="double" value="5678.3"/>
       <Parameter name="temptable_shape" type="bool" value="true"/>
