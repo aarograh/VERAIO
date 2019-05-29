@@ -7840,7 +7840,7 @@ MPACT:
 #>    need={Optional},
 #>    unitsdefault={},
 #>    unitsother={},
-#>    valuedefault={\texttt{false}},
+#>    valuedefault={\texttt{true}},
 #>    valuesapplicable={\texttt{true}},
 #>    limitations={},
 #>    description={If true, this card calculates the radial power Zernike                %
@@ -7861,7 +7861,7 @@ MPACT:
 #>    need={Optional},
 #>    unitsdefault={},
 #>    unitsother={},
-#>    valuedefault={\texttt{false}},
+#>    valuedefault={\texttt{true}},
 #>    valuesapplicable={\texttt{true}},
 #>    limitations={},
 #>    description={If true, this card calculates the radial burnup Zernike               %
@@ -7882,7 +7882,7 @@ MPACT:
 #>    need={Optional},
 #>    unitsdefault={},
 #>    unitsother={},
-#>    valuedefault={\texttt{false}},
+#>    valuedefault={\texttt{true}},
 #>    valuesapplicable={\texttt{true}},
 #>    limitations={},
 #>    description={If true, this card will use the radial fuel temperature               %
