@@ -11,3 +11,8 @@
 
 # Ignore Panassas temp files
 .panfs.*
+
+# Mac garbage
+.DS_Store
+*.dSYM
+
