@@ -220,6 +220,34 @@ sub is_multiline
     return 0;
 }
 
+sub is_nooverwrite
+{
+    my ($self)=@_;
+    my $myfun=(caller(0))[3];
+
+    croak "Too many arguments to $myfun" if @_ > 1;
+
+    my $keyw_style=$self->argvalue('_overwrite') || 0;
+    if($keyw_style eq 'no'){
+	return 1;
+    }
+    return 0;
+}
+
+sub is_argvalue
+{
+    my ($self,$arg,$value)=@_;
+    my $myfun=(caller(0))[3];
+
+    croak "Invalid number of arguments to $myfun" if @_ != 3;
+
+    my $keyw_style=$self->argvalue($arg) || 0;
+    if($keyw_style eq $value){
+	return 1;
+    }
+    return 0;
+}
+
 sub argarray
 {
     my ($self,@argument)=@_;
@@ -430,6 +458,16 @@ sub keyin{
     $self->defaults();
     @a=$self->ctokens();
 
+#   Ticket 5883: Check for duplicates
+#   Eliminate overwrite by adding in Directory.yml 
+#   _overwrite: no
+    my $is_filled = key_defined($templ,$CONTENT_LABEL) || 0;
+    if($is_filled && $self->is_argvalue('_overwrite','no')){
+        $errmsg="Duplicate command";
+        &error_report($self->keyword,$dtx,$file,$line,$errmsg);
+	die "Multiple entries for a command that does not allow for overwrite.\n";
+    }
+
 #   Run checks and keyon data
     $result=0;
 #    print "parse: $parse\n";
@@ -467,6 +505,9 @@ sub keyin{
 	die "$myfun parameter check fail\n";
     }
 
+#   TODO: Error messages in PL
+    key_on($templ,$FILE_LABEL,$file);
+    key_on($templ,$LINE_LABEL,$line);
     return $result;
 }
 
