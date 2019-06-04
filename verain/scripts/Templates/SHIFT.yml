@@ -779,6 +779,13 @@ SHIFT:
         - copy SHIFT/$use_fission_source
       _content:
 
+    use_pole_data:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$use_pole_data
+      _content:
+
     vera_pressure_vessel:
       _pltype: parameter
       _type: bool

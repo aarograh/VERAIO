@@ -2215,6 +2215,26 @@ SHIFT:
       - is_word()
       - in_dictionary() u235_watt mpact nuclide_watt
 #>
+#>   {\bf use_pole_data} use_pole_data
+#>   \VERAInputTable{
+#>     name={use_pole_data},
+#>     type={bool},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Use the pole data for on-the-fly doppler broadening},
+#>     notes={}
+#>   }
+  use_pole_data:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf use_fission_source} use_fission_source
 #>   \VERAInputTable{
 #>     name={use_fission_source},
