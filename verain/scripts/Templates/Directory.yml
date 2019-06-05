@@ -603,6 +603,7 @@ STATE:
   restart_shuffle:
     <<: *dtlist
     _style: multi-line
+    _overwrite: no
     _content:
     _check:
       - fall(sub{is_word(shift)},())
