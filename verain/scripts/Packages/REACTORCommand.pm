@@ -505,9 +505,9 @@ sub keyin{
 	die "$myfun parameter check fail\n";
     }
 
-#   TODO: Error messages in PL
     key_on($templ,$FILE_LABEL,$file);
     key_on($templ,$LINE_LABEL,$line);
+
     return $result;
 }
 
