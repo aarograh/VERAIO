@@ -21,6 +21,7 @@ use REACTOR;
 use Cellmaps;
 use TypeUtils;
 use Data::Dumper ;
+use ErrHandler;
 
 use Exporter;
 @ISA = ('Exporter');
@@ -40,6 +41,8 @@ use Exporter;
     );
 
 our $DISPATCH;
+our $FILE_LABEL='_file';
+our $LINE_LABEL='_line';
 
 {
     my $_VERBOSE = 0;
@@ -1560,9 +1563,43 @@ sub coremapmap {
 	$bc_sym='rot';
     }
 
+    $PATH_CM = source_from_path(@cmap_path);
+    $PATH_MM = source_from_path(@mmap_path);
+    $NAME_CM = name_from_path(@cmap_path);
+    $NAME_MM = name_from_path(@mmap_path);
+#    print "\nP1: $NAME_CM $PATH_CM\nP2: $NAME_MM $PATH_MM\n";
+    
+    err_set('PATH', $PATH_CM);
+    err_set('PATH', $PATH_MM);
+    err_set('NAME', $NAME_CM);
+    err_set('NAME', $NAME_MM);
     my @a=core_map($cm_ref,$mm_ref,$csize,$bc_sym,%userparam);
+    err_flushkey('PATH');
+    err_flushkey('NAME');
 
     return \@a;
+}
+
+sub file_from_path{
+    return key_defined($SOURCE_DB,@_[-@_ .. -2], $FILE_LABEL);
+}
+sub line_from_path{
+    return key_defined($SOURCE_DB,@_[-@_ .. -2], $LINE_LABEL);
+}
+sub name_from_path{
+    return @_[-2];
+}
+sub fileline_from_path{
+    my ($file, $line);
+    $file = key_defined($SOURCE_DB,@_[-@_ .. -2], $FILE_LABEL);
+    $line = key_defined($SOURCE_DB,@_[-@_ .. -2], $LINE_LABEL);
+    return ($file, $line);
+}
+sub source_from_path{
+    my ($file, $line);
+    $file = key_defined($SOURCE_DB,@_[-@_ .. -2], $FILE_LABEL);
+    $line = key_defined($SOURCE_DB,@_[-@_ .. -2], $LINE_LABEL);
+    return join(":line ", $file, $line);
 }
 
 sub mpact_mesh{

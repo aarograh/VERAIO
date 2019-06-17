@@ -5,6 +5,7 @@ use List::MoreUtils::PP;
 
 use MiscUtils;
 use TypeUtils;
+use ErrHandler;
 
 use Exporter;
 @ISA = ('Exporter');
@@ -534,6 +535,17 @@ sub core_map{
 	  @fullm=@{ $mmap };
       }
       else{
+          my $CPATH=err_get('PATH');
+          my $MPATH=err_get('PATH');
+          my $CNAME=err_get('NAME');
+          my $MNAME=err_get('NAME');
+          print STDERR "Error in generating of map $MNAME using map $CNAME\n";
+          print STDERR "Map $MNAME starts at $MPATH\n";
+          print STDERR "Map $CNAME starts at $CPATH\n";
+          print STDERR "Map $MNAME has $nmmap entries, and it should have:\n";
+          print STDERR "   $noct entries for OCTAGONAL symmetry\n";
+          print STDERR "   $nquad entries for QUAD symmetry\n";
+          print STDERR "   $nfull entries for FULL map\n";
 	  die "core_map: invalid map, map=$nmmap, octant=$noct, quarter=$nquad, full=$nfull\n";
       }
     }
