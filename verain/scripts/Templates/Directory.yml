@@ -10538,8 +10538,7 @@ MAMBA:
 #>     valuesapplicable={The options are:  %
 #>       \begin{enumerate}
 #>         \item 0 --- no mass balance enabled (user must specify particulate NiFe2O4 concentration)        %
-#>         \item 1 --- unused %
-#>         \item 2 --- Internal CTF mass balance using MAMBA source term   %
+#>         \item 1 --- Mass balance will be calculated by MAMBA
 #>       \end{enumerate}},
 #>     limitations={},
 #>     description={Option to select mass balance model},
@@ -10549,8 +10548,7 @@ MAMBA:
     <<: *dtint
     _content:
     _check:
-      - is_geq() 0
-      - is_int()
+      - in_dictionary() 0 1
 #>
 #>   {\bf model_erosion} option
 #>   \VERAInputTable{
