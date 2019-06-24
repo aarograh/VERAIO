@@ -182,56 +182,63 @@ MAMBA:
       _pltype: array
       _type: int
       _do:
-        - copyarray MAMBA/@edit_scrape,start=>0,stride=>8
+        - copyarray MAMBA/@edit_scrape,start=>0,stride=>9
       _content:
 
-    scrape_ida:
+    scrape_ida_col:
       _pltype: array
-      _type: int
+      _type: string
       _do:
-        - copyarray MAMBA/@edit_scrape,start=>1,stride=>8
+        - copyarray MAMBA/@edit_scrape,start=>1,stride=>9
+      _content:
+
+    scrape_ida_row:
+      _pltype: array
+      _type: string
+      _do:
+        - copyarray MAMBA/@edit_scrape,start=>2,stride=>9
       _content:
 
     scrape_idx:
       _pltype: array
       _type: int
       _do:
-        - copyarray MAMBA/@edit_scrape,start=>2,stride=>8
+        - copyarray MAMBA/@edit_scrape,start=>3,stride=>9
       _content:
 
     scrape_idy:
       _pltype: array
       _type: int
       _do:
-        - copyarray MAMBA/@edit_scrape,start=>3,stride=>8
+        - copyarray MAMBA/@edit_scrape,start=>4,stride=>9
       _content:
 
     scrape_min_th:
       _pltype: array
       _type: double
       _do:
-        - copyarray MAMBA/@edit_scrape,start=>4,stride=>8
+        - copyarray MAMBA/@edit_scrape,start=>5,stride=>9
       _content:
 
     scrape_max_th:
       _pltype: array
       _type: double
       _do:
-        - copyarray MAMBA/@edit_scrape,start=>5,stride=>8
+        - copyarray MAMBA/@edit_scrape,start=>6,stride=>9
       _content:
 
     scrape_min_z:
       _pltype: array
       _type: double
       _do:
-        - copyarray MAMBA/@edit_scrape,start=>6,stride=>8
+        - copyarray MAMBA/@edit_scrape,start=>7,stride=>9
       _content:
 
     scrape_max_z:
       _pltype: array
       _type: double
       _do:
-        - copyarray MAMBA/@edit_scrape,start=>7,stride=>8
+        - copyarray MAMBA/@edit_scrape,start=>8,stride=>9
       _content:
 
     piping_age:

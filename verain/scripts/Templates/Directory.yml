@@ -10441,15 +10441,16 @@ MAMBA:
     _style: multi-line
     _content:
     _check:
-      - arraysize()%8==0
-      - fall(sub{is_int(shift)},stride(0,8,()))
-      - fall(sub{is_int(shift)},stride(1,8,()))
-      - fall(sub{is_int(shift)},stride(2,8,()))
-      - fall(sub{is_int(shift)},stride(3,8,()))
-      - fall(sub{is_float(shift)},stride(4,8,()))
-      - fall(sub{is_float(shift)},stride(5,8,()))
-      - fall(sub{is_float(shift)},stride(6,8,()))
-      - fall(sub{is_float(shift)},stride(7,8,()))
+      - arraysize()%9==0
+      - fall(sub{is_int(shift)},stride(0,9,()))
+      - fall(sub{is_string(shift)},stride(1,9,()))
+      - fall(sub{is_string(shift)},stride(2,9,()))
+      - fall(sub{is_int(shift)},stride(3,9,()))
+      - fall(sub{is_int(shift)},stride(4,9,()))
+      - fall(sub{is_float(shift)},stride(5,9,()))
+      - fall(sub{is_float(shift)},stride(6,9,()))
+      - fall(sub{is_float(shift)},stride(7,9,()))
+      - fall(sub{is_float(shift)},stride(8,9,()))
 #>
 #>   {\bf piping_age} age
 #>   \VERAInputTable{
