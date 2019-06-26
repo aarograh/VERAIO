@@ -1441,6 +1441,35 @@ EDITS:
     _style: multi-line
     _content:
     _check:
+#>
+#>   {\bf edit_scrape} scrape
+#>   \VERAInputTable{
+#>     name={edit_scrape},
+#>     type={},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Crud scrape edit info},
+#>     notes={This is only needed for specifying crud scrape locations.}
+#>   }
+  edit_scrape:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%9==0
+      - fall(sub{is_int(shift)},stride(0,9,()))
+      - fall(sub{is_string(shift)},stride(1,9,()))
+      - fall(sub{is_string(shift)},stride(2,9,()))
+      - fall(sub{is_int(shift)},stride(3,9,()))
+      - fall(sub{is_int(shift)},stride(4,9,()))
+      - fall(sub{is_float(shift)},stride(5,9,()))
+      - fall(sub{is_float(shift)},stride(6,9,()))
+      - fall(sub{is_float(shift)},stride(7,9,()))
+      - fall(sub{is_float(shift)},stride(8,9,()))
 
 #>
 #> \section{Block SHIFT}
@@ -10422,35 +10451,6 @@ MAMBA:
     _check:
       - is_float()
       - is_geq() 0
-#>
-#>   {\bf edit_scrape} scrape
-#>   \VERAInputTable{
-#>     name={edit_scrape},
-#>     type={},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={Crud scrape edit info},
-#>     notes={This is only needed for specifying crud scrape locations.}
-#>   }
-  edit_scrape:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - arraysize()%9==0
-      - fall(sub{is_int(shift)},stride(0,9,()))
-      - fall(sub{is_string(shift)},stride(1,9,()))
-      - fall(sub{is_string(shift)},stride(2,9,()))
-      - fall(sub{is_int(shift)},stride(3,9,()))
-      - fall(sub{is_int(shift)},stride(4,9,()))
-      - fall(sub{is_float(shift)},stride(5,9,()))
-      - fall(sub{is_float(shift)},stride(6,9,()))
-      - fall(sub{is_float(shift)},stride(7,9,()))
-      - fall(sub{is_float(shift)},stride(8,9,()))
 #>
 #>   {\bf piping_age} age
 #>   \VERAInputTable{
