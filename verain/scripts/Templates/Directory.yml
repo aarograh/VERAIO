@@ -1442,15 +1442,29 @@ EDITS:
     _content:
     _check:
 #>
-#>   {\bf edit_scrape} scrape
+#>   {\bf edit\_scrape} edit\_scrape
 #>   \VERAInputTable{
-#>     name={edit_scrape},
-#>     type={},
+#>     name={edit\_scrape},
+#>     type={Table of string, doubles and ints. Each row in the table has length 8},
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={},
-#>     valuesapplicable={},
+#>     valuesapplicable={  This card specifies an area on the specified rod %
+#          surface over which a crud scrape is generated.  The scrape location %
+#          is specified as follows: %
+#          \begin{itemize}  %
+#              \item \texttt{<scrape_id>} --- String.  Unique scrape identifier %
+#              \item \texttt{<asm_col_row>} --- String.  Assembly label. Dashed delimited %
+#                 ex: `H-2' %
+#              \item \texttt{<pin_row>} --- Int.  CTF pin row in assembly %
+#              \item \texttt{<pin_col>} --- Int.  CTF pin column in assembly %
+#              \item \texttt{<min_th>} --- Float. Minimum azimuthal scrape angle in degrees. %
+#                  0 degrees points due east. %
+#              \item \texttt{<max_th>} --- Float. Maximum azimuthal scrape angle in degrees. %
+#              \item \texttt{<min_z>} --- Float. Minimum axial scrape location in cm. %
+#              \item \texttt{<max_z>} --- Float. Maximum axial scrape location in cm. %
+#          \end{itemize}},
 #>     limitations={},
 #>     description={Crud scrape edit info},
 #>     notes={This is only needed for specifying crud scrape locations.}
@@ -1461,7 +1475,7 @@ EDITS:
     _content:
     _check:
       - arraysize()%8==0
-      - fall(sub{is_int(shift)},stride(0,8,()))
+      - fall(sub{is_string(shift)},stride(0,8,()))
       - fall(sub{is_string(shift)},stride(1,8,()))
       - fall(sub{is_int(shift)},stride(2,8,()))
       - fall(sub{is_int(shift)},stride(3,8,()))

@@ -77,7 +77,7 @@ EDITS:
 
     scrape_id:
       _pltype: array
-      _type: int
+      _type: string
       _do:
         - copyarray EDITS/@edit_scrape,start=>0,stride=>8
       _content:
