@@ -73,6 +73,13 @@ COBRATF:
         - copy COBRATF/$guide_tube_coefficient
       _content:
 
+    rothcon_temp_beta:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$rothcon_temp_beta
+      _content:
+
     beta_htc:
       _pltype: parameter
       _type: double
