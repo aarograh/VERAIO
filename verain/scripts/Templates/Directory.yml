@@ -3778,6 +3778,31 @@ COBRATF:
       - is_float()
       - is_geq() 0
 #>
+#>   {\bf rothcon_temp_beta} rothcon_temp_beta
+#>   \VERAInputTable{
+#>     name={rothcon_temp_beta},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.3},
+#>     valuesapplicable={>0.0 and <1.0},
+#>     limitations={},
+#>     description={The under-relaxation coefficient used when calculating rod surface temperatures on the
+#>        rod surface coupling mesh set up by CTF for coupling to MAMBA.  It may be necessary to reduce
+#>        this value if many iterations are failing during the temperature reconstruction process when
+#>        using the ROTHCON grid files.}
+#>     notes={}
+#>   }
+  rothcon_temp_beta:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+      - is_lt() 1.0
+
+#>
 #>   {\bf hgap} hgap
 #>   \VERAInputTable{
 #>     name={hgap},
