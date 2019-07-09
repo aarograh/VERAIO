@@ -299,6 +299,7 @@
     <Parameter name="output_geometry" type="bool" value="false"/>
     <Parameter name="output_micro_tally" type="bool" value="false"/>
     <Parameter name="problem_mode" type="string" value="forward"/>
+    <Parameter name="seed" type="int" value="123456"/>
     <ParameterList name="tally_db">
       <Parameter name="gamma_flux" type="bool" value="true"/>
       <Parameter name="p_bounds" type="Array(double)" value="{2.0e7,1.0e5,1.0e4}"/>

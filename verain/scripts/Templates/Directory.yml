@@ -1544,6 +1544,26 @@ SHIFT:
       - is_int()
       - is_gt() 0
 #>
+#>   {\bf seed} seed
+#>   \VERAInputTable{
+#>     name={seed},
+#>     type={integer},
+#>     need={},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={121434},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Initial seed for random number generator (global)},
+#>     notes={}
+#>   }
+  seed:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
 #>   {\bf ce\_lib\_path} ce\_lib\_path
 #>   \VERAInputTable{
 #>     name={ce\_lib\_path},

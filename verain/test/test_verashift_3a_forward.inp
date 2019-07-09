@@ -196,6 +196,7 @@
   temp_transfer         none
   track_isotopes        full
   lost_particle_error_tol 1.0e-3
+  seed                  123456
 ! these really only apply when doing coupling with CTF
   temperature_tol       5.0
   union_energy          true
