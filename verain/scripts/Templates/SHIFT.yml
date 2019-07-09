@@ -649,6 +649,13 @@ SHIFT:
         - copy SHIFT/$raytrace_resolution
       _content:
 
+    seed:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy SHIFT/$seed
+      _content:
+
     src_disc_l2_error:
       _pltype: parameter
       _type: double
