@@ -1073,7 +1073,7 @@ CORE:
       - is_word(nth(3,()))
       - in_dictionary(nth(1,()),'source','power')
       - in_dictionary(nth(-2,()),'u235','b10')
-      - in_dictionary(nth(-1,()),'none')
+      - in_dictionary(nth(-1,()),'none','wedge')
 
 #>
 #>   {\bf det_locations} det_locations
