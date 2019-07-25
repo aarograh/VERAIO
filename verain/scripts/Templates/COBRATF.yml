@@ -549,6 +549,34 @@ COBRATF:
         - copy COBRATF/$max_crud_step_size
       _content:
 
+    cicada_outer_radial_zone_num_cells_r:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$cicada_outer_radial_zone_num_cells_r
+      _content:
+
+    cicada_inner_radial_zone_num_cells_r:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$cicada_inner_radial_zone_num_cells_r
+      _content:
+
+    cicada_outer_radial_zone_thickness:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$cicada_outer_radial_zone_thickness
+      _content:
+
+    cicada_dimensions:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$cicada_dimensions
+      _content:
+
     enable_corrosion_lithium:
       _pltype: parameter
       _type: int

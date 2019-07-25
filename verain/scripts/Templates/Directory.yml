@@ -5328,7 +5328,7 @@ COBRATF:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={MAMBA},
-#>     valuesapplicable={MAMBA},
+#>     valuesapplicable={MAMBA cicada},
 #>     limitations={},
 #>     description={Sets the crud modeling tool.  Only applicable during a crud simulation.},
 #>     notes={}
@@ -5338,7 +5338,7 @@ COBRATF:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none MAMBA
+      - in_dictionary() none MAMBA cicada
 
 #>
 #>   {\bf max_crud_step_size} max_crud_step_size
@@ -5383,6 +5383,91 @@ COBRATF:
       - is_int()
       - in_dictionary() 0 1
 
+#>
+#>   {\bf cicada_outer_radial_zone_num_cells_r} cicada_outer_radial_zone_num_cells_r
+#>   \VERAInputTable{
+#>     name={cicada_outer_radial_zone_num_cells_r},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={100},
+#>     valuesapplicable={>=1},
+#>     limitations={},
+#>     description={Sets the number of rings in the oxide region of the clad for Cicada runs.  Only
+#>        applicable when Cicada used as the crud tool.  Only applicable when cicada_dimension=3.},
+#>     notes={}
+#>   }
+  cicada_outer_radial_zone_num_cells_r:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf cicada_inner_radial_zone_num_cells_r} cicada_inner_radial_zone_num_cells_r
+#>   \VERAInputTable{
+#>     name={cicada_inner_radial_zone_num_cells_r},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={20},
+#>     valuesapplicable={>=1},
+#>     limitations={},
+#>     description={Sets the number of rings in the clad region of the clad for Cicada runs.  Only
+#>        applicable when Cicada used as the crud tool.  Only applicable when cicada_dimension=3.},
+#>     notes={}
+#>   }
+  cicada_inner_radial_zone_num_cells_r:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf cicada_outer_radial_zone_thickness} cicada_outer_radial_zone_thickness
+#>   \VERAInputTable{
+#>     name={cicada_outer_radial_zone_thickness},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={100e-6},
+#>     valuesapplicable={>0.0},
+#>     limitations={},
+#>     description={Sets the thickness of the oxide modeling region of the clad.  Only applicable for
+#>        crud simulations where Cicada is being used as the modeling tool.  Only applicable when cicada_dimension=3.},
+#>     notes={}
+#>   }
+  cicada_outer_radial_zone_thickness:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+#>
+#>   {\bf cicada_dimensions} cicada_dimension
+#>   \VERAInputTable{
+#>     name={cicada_dimensions},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={1 3},
+#>     limitations={},
+#>     description={Chooses the dimensions of the clad/oxide conduction solution in Cicada.  Only applicable
+#>        when doing a crud simulation using Cicada as the crud tool.  Can either be 1 for radial conduction
+#>        only or 3 for radial/axial/azimuthal conduction.},
+#>     notes={}
+#>   }
+  cicada_dimensions:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 1 3
 #>
 #>   {\bf enable_corrosion_lithium} enable_corrosion_lithium
 #>   \VERAInputTable{
