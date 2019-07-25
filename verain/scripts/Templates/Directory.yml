@@ -5330,7 +5330,8 @@ COBRATF:
 #>     valuedefault={MAMBA},
 #>     valuesapplicable={MAMBA cicada},
 #>     limitations={},
-#>     description={Sets the crud modeling tool.  Only applicable during a crud simulation.},
+#>     description={Sets the crud modeling tool.  Only applicable during a crud simulation.
+#>        Note that Cicada is an experimental feature.},
 #>     notes={}
 #>   }
   crud_tool:
@@ -5395,7 +5396,8 @@ COBRATF:
 #>     valuesapplicable={>=1},
 #>     limitations={},
 #>     description={Sets the number of rings in the oxide region of the clad for Cicada runs.  Only
-#>        applicable when Cicada used as the crud tool.  Only applicable when cicada_dimension=3.},
+#>        applicable when Cicada used as the crud tool.  Only applicable when cicada_dimension=3.  Note
+#>        that Cicada is an experimental feature.},
 #>     notes={}
 #>   }
   cicada_outer_radial_zone_num_cells_r:
@@ -5416,7 +5418,8 @@ COBRATF:
 #>     valuesapplicable={>=1},
 #>     limitations={},
 #>     description={Sets the number of rings in the clad region of the clad for Cicada runs.  Only
-#>        applicable when Cicada used as the crud tool.  Only applicable when cicada_dimension=3.},
+#>        applicable when Cicada used as the crud tool.  Only applicable when cicada_dimension=3.
+#>        Note that Cicada is an experimental feature.},
 #>     notes={}
 #>   }
   cicada_inner_radial_zone_num_cells_r:
@@ -5437,7 +5440,8 @@ COBRATF:
 #>     valuesapplicable={>0.0},
 #>     limitations={},
 #>     description={Sets the thickness of the oxide modeling region of the clad.  Only applicable for
-#>        crud simulations where Cicada is being used as the modeling tool.  Only applicable when cicada_dimension=3.},
+#>        crud simulations where Cicada is being used as the modeling tool.  Only applicable when cicada_dimension=3.
+#>        Note that Cicada is an experimental feature.},
 #>     notes={}
 #>   }
   cicada_outer_radial_zone_thickness:
@@ -5459,7 +5463,7 @@ COBRATF:
 #>     limitations={},
 #>     description={Chooses the dimensions of the clad/oxide conduction solution in Cicada.  Only applicable
 #>        when doing a crud simulation using Cicada as the crud tool.  Can either be 1 for radial conduction
-#>        only or 3 for radial/axial/azimuthal conduction.},
+#>        only or 3 for radial/axial/azimuthal conduction. Note that Cicada is an experimental feature.},
 #>     notes={}
 #>   }
   cicada_dimensions:
