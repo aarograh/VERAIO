@@ -30,7 +30,7 @@ class DetectorType(object):
         self.radii     = []
         self.heights   = []
         self.response  = ''
-        self.well_type = ''
+        self.well_type = 'none'
 
 ###############################################################################
 
@@ -54,7 +54,7 @@ class DetectorType(object):
             elif child.attrib["name"] == "response":
                 self.response = re.sub(r"[{}]", "", child.attrib["value"])
             elif child.attrib["name"] == "well_type":
-                self.well_type = child.attrib["value"]
+                self.well_type = re.sub(r"[{}]", "", child.attrib["value"])
 
 ###############################################################################
 # VERAOmnibusGenerator
@@ -247,8 +247,7 @@ class VERAOmnibusGenerator(object):
                 elif "OMN_DETECTOR_SHAPES" in line:
                     det_outers = self._write_detector_shapes(outfile)
                 elif "OMN_BIOSHIELD_CELLS" in line:
-                    self._write_bioshield_cells(outfile,
-                            det_outers)
+                    self._write_bioshield_cells(outfile, det_outers)
                 elif "OMN_DETECTOR_CELLS" in line:
                     self._write_detector_cells(outfile)
                 elif "OMN_CORE_TRANSLATION" in line:
@@ -338,14 +337,15 @@ class VERAOmnibusGenerator(object):
                         line_filled = re.sub(r'OMN_DEFINE_CELL',
                                 cell_def, cell_line)
                         outfile.write(line_filled)
-                        det_num = 0
-                        det_shape_str = '        '
+                        det_num = 1
+                        det_shape_str = '       '
                         for d in det_outers:
+                            det_shape_str += ' ' + d
                             if det_num%4 == 0:
                                 det_shape_str += '\n        '
-                            det_shape_str += ' ' + d
                             det_num += 1
                         outfile.write(det_shape_str)
+                        outfile.write("\n")
                     else:
                         outfile.write(cell_line)
 
@@ -367,12 +367,13 @@ class VERAOmnibusGenerator(object):
                     cell_def += " -box"
                     line_filled = re.sub(r'OMN_DEFINE_CELL',
                             cell_def, cell_line)
-                    outfile.write(line_filled)
+                    outfile.write(line_filled + "\n")
 
 ###############################################################################
 
     def _write_detector_shapes(self, outfile):
         # Store the outermost detector shapes for defining bioshield cells
+        # and wells
         det_outers = []
 
         # Loop over the detectors
@@ -432,6 +433,43 @@ class VERAOmnibusGenerator(object):
                         det_outers.append("+" + shape_label)
                     shape_num += 1
                 min_z += h
+
+            # Write out the well shape, if applicable
+            if det_type.well_type == "wedge":
+                # Calculate well dimensions
+                azi = self.det_azi_locs[d]
+                a = 2.0 * det_type.radii[-1] / (2.0 - np.sqrt(2.0))
+                height = min_z - self.det_elev_locs[d]
+                xo = self.det_rad_locs[d] - det_type.radii[-1]
+                yo = - a * np.sqrt(2) / 2.0
+                well_pos = [xo * np.cos(np.deg2rad(-azi)) -
+                            yo * np.sin(np.deg2rad(-azi)),
+                            xo * np.sin(np.deg2rad(-azi)) +
+                            yo * np.cos(np.deg2rad(-azi)),
+                            self.det_elev_locs[d]]
+                rot = 0.125 - (azi / 360.0)
+                if rot < 0.0:
+                    rot = rot + 1.0
+
+                # Write out the well shape
+                outfile.write("! Detector " + str(d) + " well\n")
+                outfile.write("[UNIVERSE][SHAPE=" + det_type.well_type +
+                        " well_" + str(d) + "]\n")
+                outfile.write("corner_pt " + str(a) + " " + str(a) + "\n")
+                outfile.write("height " + str(height) + "\n")
+                outfile.write("origin " + str(well_pos[0]) + " " +
+                                          str(well_pos[1]) + " " +
+                                          str(well_pos[2]) + "\n")
+                outfile.write("xbase " + str(a) + "\n")
+                outfile.write("euler " + str(rot) + " 0.0 0.0\n\n")
+
+                # Append the well shape to use with bioshield cell definitions
+                det_outers.append("+well_" + str(d))
+
+            elif det_type.well_type != "none":
+                print("Warning: well type must be wedge or none." +
+                      " Assuming no detector well.")
+
         return det_outers
 
 ###############################################################################
@@ -446,6 +484,7 @@ class VERAOmnibusGenerator(object):
 
             # Write out a cell for each radius and height
             label_num = 0
+            det_outer = ""
             for h in det_type.heights:
                 for r,m in zip(det_type.radii,det_type.mats):
                     outfile.write("! Detector " + str(d) + " cell (" +
@@ -480,7 +519,22 @@ class VERAOmnibusGenerator(object):
                     if r == det_type.radii[0]:
                         self.tally_cells.append([cell_label, det_type.response,
                             det_type.label])
+                    elif r == det_type.radii[-1]:
+                        det_outer += \
+                            " +detector_" + str(d) + "_" + str(label_num)
                     label_num += 1
+            # Write out the cell for each detector well
+            if det_type.well_type == "wedge":
+                # Write out the well cell
+                outfile.write("! Detector " + str(d) + " well shape\n")
+                outfile.write("[UNIVERSE][CELL " + " well_" + str(d) + "]\n")
+                outfile.write("comp void\n")
+                outfile.write("shapes " + "-well_" + str(d) + det_outer + " \n\n")
+
+            elif det_type.well_type != "none":
+                print("Warning: well type must be wedge or none." +
+                      " Assuming no detector well.")
+
 
 ###############################################################################
 
