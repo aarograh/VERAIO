@@ -26,7 +26,7 @@
         <Parameter name="radii" type="Array(double)" value="{5.5,6.5}" />
         <Parameter name="response" type="Array(string)" value="{u235}" />
         <Parameter name="type" type="string" value="power" />
-        <Parameter name="well_type" type="Array(string)" value="{none}" />
+        <Parameter name="well_type" type="Array(string)" value="{wedge}" />
       </ParameterList>
       <ParameterList name="Excore_Detector_SRC">
         <Parameter name="heights" type="Array(double)" value="{48.0}" />
