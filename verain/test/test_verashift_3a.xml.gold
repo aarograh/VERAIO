@@ -293,9 +293,10 @@
     </ParameterList>
     <Parameter name="mode" type="string" value="n"/>
     <Parameter name="output_fission_source" type="bool" value="true"/>
-    <Parameter name="output_geometry" type="bool" value="false"/>
+    <Parameter name="output_geometry" type="bool" value="true"/>
     <Parameter name="output_micro_tally" type="bool" value="true"/>
     <Parameter name="problem_mode" type="string" value="eigenvalue"/>
+    <Parameter name="rtk_output_format" type="string" value="xml"/>
     <ParameterList name="tally_db">
       <Parameter name="micro_rxns" type="Array(int)" value="{1,18,27}"/>
       <Parameter name="micro_zaids" type="Array(int)" value="{92238,92235,94239}"/>

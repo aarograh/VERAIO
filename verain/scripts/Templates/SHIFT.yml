@@ -652,7 +652,7 @@ SHIFT:
     rtk_output_format:
       _pltype: parameter
       _type: string
-      -do:
+      _do:
         - copy SHIFT/$rtk_output_format
       _content:
 
