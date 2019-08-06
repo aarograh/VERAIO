@@ -2278,6 +2278,28 @@ SHIFT:
       - is_word()
       - in_dictionary() u235_watt mpact nuclide_watt
 #>
+#>   {\bf rtk_output_format} rtk_output_format
+#>   \VERAInputTable{
+#>     name={rtk_output_format},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={hdf5},
+#>     valuesapplicable={hdf5,xml},
+#>     limitations={},
+#>     description={The type of file format for the core dumped
+#>                  geometry description},
+#>     notes={Applicable to eigenvalue and cadis modes with
+#>            output_geometry on}
+#>   }
+  rtk_output_format:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() hdf5 xml
+#>
 #>   {\bf use_pole_data} use_pole_data
 #>   \VERAInputTable{
 #>     name={use_pole_data},

@@ -649,6 +649,13 @@ SHIFT:
         - copy SHIFT/$raytrace_resolution
       _content:
 
+    rtk_output_format:
+      _pltype: parameter
+      _type: string
+      -do:
+        - copy SHIFT/$rtk_output_format
+      _content:
+
     seed:
       _pltype: parameter
       _type: int
