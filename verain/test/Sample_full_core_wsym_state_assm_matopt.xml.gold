@@ -858,7 +858,5 @@
     <Parameter name="porosity" type="double" value="0.2"/>
     <Parameter name="postprocessors_rod_input_power_scale_factor" type="double" value="3.66"/>
     <Parameter name="thermalcontact_initial_gas_fractions" type="string" value="1 0 0 0 0 0 0 0 0 0"/>
-    <Parameter name="thermalcontact_roughness_clad" type="double" value="5.0e-7"/>
-    <Parameter name="thermalcontact_roughness_fuel" type="double" value="1.0e-6"/>
   </ParameterList>
 </ParameterList>

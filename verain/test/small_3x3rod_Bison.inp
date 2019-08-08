@@ -211,8 +211,6 @@
   postprocessors_rod_input_power_scale_factor = 3.66
   porosity = 0.2
   thermalcontact_initial_gas_fractions = 1 0 0 0 0 0 0 0 0 0
-  thermalcontact_roughness_clad = 5.0e-7
-  thermalcontact_roughness_fuel = 1.0e-6
   fuel_pin_input_file_template = small_3x3rod_Bison.i.template
   non_fuel_pin_input_file_template = guide_tube.moose.i.template
   ramping_time -100.0 0.0 1.0e5
@@ -228,7 +226,7 @@
   rlx_den     1.0
   maxiter     100
 
-[TIAMAT] 
+[TIAMAT]
   solver jacobi
   run_transient false
   conserve_power_in_tiamat_transfer true
