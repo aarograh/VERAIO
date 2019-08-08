@@ -16,7 +16,7 @@
 !
 !  *** NOTE: This input is still in draft format, all input needs to be checked ****
 !
-!  Draft 2 - 
+!  Draft 2 -
 !    Changed maps to use dashes instead of "0" to signify blank space
 !    Changed crd_map and rodbank card to use bank names instead of numbers
 !    Added seperate ppitch card in [ASSEMBLY]
@@ -28,7 +28,7 @@
 !  Draft 4 -
 !    Update control rod maps "crd_map", "crd_bank"
 !
-!  Update 11/19/2012   
+!  Update 11/19/2012
 !     * added explict lattice models for:
 !         * lower_nozzle_gap_height
 !         * lower_pincap_height
@@ -195,10 +195,10 @@
 
   insert_map
     -
-   BP20  -  
-    -   BP24  -   
-   BP20  -   BP20  - 
-    -   BP20  -   BP20  -  
+   BP20  -
+    -   BP24  -
+   BP20  -   BP20  -
+    -   BP20  -   BP20  -
    BP20  -   BP16  -   BP24 BP12
     -   BP24  -   BP16  -    -
    BP12  -   BP8   -
@@ -252,7 +252,7 @@
 !                 -  -  -  -  -  -  -
 !           -  1  -  1  -  1  -  1  -  1  -
 !        -  -  -  1  -  1  -  1  -  1  -  -  -
-!        1  -  1  -  -  -  1  -  -  -  1  -  1 
+!        1  -  1  -  -  -  1  -  -  -  1  -  1
 !     -  -  1  -  1  -  -  -  -  -  1  -  1  -  -
 !     -  1  -  -  -  1  -  1  -  1  -  -  -  1  -
 !     -  -  1  -  -  -  -  -  -  -  -  -  1  -  -
@@ -300,7 +300,7 @@ crd_map
   ppitch 1.26                                     ! assembly_ppitch
 
   mat ss 8.0
- 
+
   fuel    U21 10.257 95.0 / 2.11
   fuel    U26 10.257 95.0 / 2.60
   fuel    U31 10.257 95.0 / 3.10
@@ -718,8 +718,6 @@ crd_map
   postprocessors_rod_input_power_scale_factor = 3.66
   porosity = 0.2
   thermalcontact_initial_gas_fractions = 1 0 0 0 0 0 0 0 0 0
-  thermalcontact_roughness_clad = 5.0e-7
-  thermalcontact_roughness_fuel = 1.0e-6
   fuel_pin_input_file_template = bison.i.template
   non_fuel_pin_input_file_template = guide_tube.moose.i.template
   mesh_type = smeared_pellet

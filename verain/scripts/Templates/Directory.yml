@@ -8830,6 +8830,73 @@ COUPLING:
     _check:
       - is_string()
 #>
+#> \section{Block TIAMAT}
+#> \label{sec:tiamatcards}
+TIAMAT:
+
+  solver:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() jacobi gauss-seidel
+
+  run_transient:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
+  two_level_solver:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
+  inner_solver:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() jacobi gauss-seidel
+
+  inner_evaluator:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() BisonNeutronics BisonCTF NeutronicsCTF
+
+  conserve_power_in_tiamat_transfer:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
+  num_subcycle_iterations_before_tiamat_ramping:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() -1
+
+  coupling_approach:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() coupled inline
+
+  overlap_procs:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #> \section{Block MPACT}
 #> \label{sec:mpactcards}
 MPACT:

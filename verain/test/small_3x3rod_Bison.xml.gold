@@ -373,8 +373,6 @@
     <Parameter name="ramping_time" type="Array(double)" value="{-100.0,0.0,1.0e5}"/>
     <Parameter name="solve_type" type="string" value="tiamat_inline"/>
     <Parameter name="thermalcontact_initial_gas_fractions" type="string" value="1 0 0 0 0 0 0 0 0 0"/>
-    <Parameter name="thermalcontact_roughness_clad" type="double" value="5.0e-7"/>
-    <Parameter name="thermalcontact_roughness_fuel" type="double" value="1.0e-6"/>
   </ParameterList>
   <ParameterList name="TIAMAT">
     <Parameter name="conserve_power_in_tiamat_transfer" type="bool" value="true"/>
