@@ -7,7 +7,7 @@
 % @version CVS $Id: materials.tex,v 1.22 2015/02/23 00:56:17 scott Exp $
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Materials}  \label{chap:materials}
+\section{Materials}  \label{chap:materials}
 
 This chapter contains a description of the material input.  There are two types of materials
 in the input file -- structural materials (input with a {\it mat} card) and fuel materials
@@ -27,7 +27,7 @@ cells, nozzles, core plates, baffles, grids, reflectors, etc.  Every material th
 is used in the input must be defined with either a {\it mat} card or a {\it fuel} card.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Structural Materials}
+\subsection{Structural Materials}
 
 Structural materials are not fuel and do not deplete.  Structural
 materials are defined with the following input card:
@@ -54,13 +54,13 @@ The material libraries are code-specific libraries.  Please refer to the specifi
 determine which library materials are available.
 
 Some example material cards are shown below.
-\begin{verbatim}
+\begin{Verbatim}[fontsize=\small]
   mat zirc4 6.56                   ! library-name defaults to user-name 
   mat zirx  6.56 zirc4 1.0         ! user-name does not equal to library-name
   mat B10   12.0 boron 1.0
   mat XYZ   6.0  zirc4 0.8 ss 0.2  ! define new mixture of 80% zirc4 and 20% ss
   mat ABCD  8.0  zirc4 0.8 ss 0.15 b4c 0.05
-\end{verbatim}
+\end{Verbatim}
 
 %% Fixed bug Andrew found below ~Feb 2014, atomic and weight were switched
 All of the material fractions must sum to either +1.0 or -1.0.
@@ -68,7 +68,7 @@ If positive fractions are used, the fractions refer to weight fractions.
 If negative fractions are used, the fractions refer to atomic fractions.
 
 %%%%%%%%%%%%%%%%%%%%%%
-\subsection{Search Order}
+\subsubsection{Search Order}
 
 Structural materials can be defined in either the [CORE] block or one of the
 geometry object blocks.  When a material is referred to in a block, it will look
@@ -85,7 +85,7 @@ One example of this is that two assemblies can be defined with the material ``zi
 the ``zirc'' can have different compositions in each of the assemblies.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Composition File}
+\subsection{Composition File}
 
 When using Shift all library materials must be included in a material composition file.
 The composition file is a code-specific file which contains a list of all
@@ -104,7 +104,7 @@ Examples of typical library materials that are present on the composition file i
 Refer to the code-specific composition file for a complete list of valid library materials.
 
 %%%%%%%%%%%%%%%%%%%%%%%%
-\section{Fuel Materials}
+\subsection{Fuel Materials}
 
 Fuel materials are defined with {\it fuel} cards.
 Fuel materials are heavy metal oxides which are usually UO$_2$ with different U-235 enrichments.
@@ -175,29 +175,29 @@ and/or U-236 enrichment of zero.
 Examples of typical {\it fuel} cards are shown below.  The user
 only has to specify the U-235 enrichment and the code will automatically add
 U-234, U-236, U-238, and oxygen to the fuel.
-\begin{verbatim}
+\begin{Verbatim}[fontsize=\small]
   fuel U21 10.4 95.2 / 2.1        ! 2.1% enriched UO2 fuel, no gad
   fuel UO2-35 10.297 95.0 / 3.5   ! 3.5% enriched UO2 fuel, no gad
   fuel U23    10.111 / 2.3        ! fuel with default thden
-\end{verbatim}
+\end{Verbatim}
 
 An example of a {\it fuel} card with gadolinia burnable poison is shown next.
 In this example, the gadolinia oxide is first defined with a {\it mat} card and 
 is mixed with the fuel as 5\%  gad oxide and 95\% UO$_2$ (weight percents). 
-\begin{verbatim}
+\begin{Verbatim}[fontsize=\small]
   mat gad5 7.407 gd2o3 1.0                ! define gad material separately
   fuel U49 10.111 94.5 / 1.8  / gad5=0.05 ! 1.8% enriched fuel with 5% gad
-\end{verbatim}
+\end{Verbatim}
 
 Some examples of MOX fuel cards are shown next.  In these cards, the user specifies
 the U-235 enrichment (the U-235 enrichment is usually small in MOX fuel) and the
 plutonium isotope enrichments.  The code will automatically add U-234, U-236, U-238,
 and oxygen.
-\begin{verbatim}
+\begin{Verbatim}[fontsize=\small]
   fuel PX1  10.111 94.5 / 0.711 Pu-239=23.4 Pu-241=1.9    ! Sample MOX fuel
   fuel MOX1 10.111 94.5 / 1.0   Pu-238=1.0  Pu-239=26.0 
                     Pu-240=12.0 Pu-241=8.0 Pu-242=3.0 
-\end{verbatim}
+\end{Verbatim}
 
 Only oxide fuel can be defined on the {\it fuel} card. Metallic fuel is not supported.
 

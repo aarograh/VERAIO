@@ -1,49 +1,32 @@
 %*-------------------------------------------------------------------------*
-%*                 Copyright 2013-2015 Core Physics, Inc.                  *
+%*                 Copyright 2013-2019 Core Physics, Inc.                  *
 %*  Under terms of the contract to support CASL, there is a non-exclusive  *
 %*  license for use of this work by or on behalf of the U.S. Government.   *
 %*-------------------------------------------------------------------------*
 %
-% @version CVS $Id: verain.tex,v 1.40 2015/02/23 01:48:13 scott Exp $
+%   VERA Common Input User Manual
+%   by Scott Palmtag and Andrew Godfrey
+%   CASL-U-2014-0014-002   Feb. 23, 2015
 %
-\documentclass{report}
+%   July 2019 - converted to use CASL template
 %
-%  various packages that you may wish to activate for usage
-\usepackage{graphics}
-\usepackage{epsfig}
-\usepackage{fancyhdr}
-\usepackage{amssymb,amsmath}
+%*-------------------------------------------------------------------------*
+%
+\documentclass[11pt]{caslreport}
+\title{VERA User Manual}             % short name
+\reportnum{CASL-U-2014-0014-003}
+%
 
-% These packages are copied in from this directory.  Tabu may not have been
-% included with the standard LaTeX distribution and InputTable was created
-% specifically for this manual.
-\usepackage[margin=1in]{geometry}
-\usepackage{ifthen}
-\usepackage{longtable}
+% package to allow small font size in verbatim
+\usepackage{fancyvrb}
+
 \usepackage{soul}
 \usepackage{xkeyval}
+\usepackage{longtable}
 \usepackage{tabu}
 \usepackage{VERAInputTable}
 
-\numberwithin{equation}{section}
 
-\usepackage[pdftex,
-  pdftitle={VERA Common Input},
-  pdfauthor={www.casl.gov},
-  pdfsubject={ },
-  bookmarks, bookmarksopen, bookmarksnumbered,
-  pdfstartview={FitH},
-  colorlinks,linkcolor={blue},citecolor={blue},
-  urlcolor={red}]{hyperref}
-
-\DeclareGraphicsExtensions{.eps}
-\DeclareGraphicsRule{.eps}{eps}{}{}
-
-%  standard margins are 1.875in for 10pt document
-%  this changes them to 1.25 inch
-\addtolength{\oddsidemargin}{-0.525in}
-\addtolength{\evensidemargin}{-0.525in}
-\addtolength{\textwidth}{1.05in}
 
 \setlength{\parindent}{0in}  % do not indent paragraphs, double space between
 \addtolength{\parskip}{1.0\baselineskip}
@@ -60,26 +43,31 @@
    \setlength{\itemsep}{0ex plus0.2ex} }}
 {\end{list}}
 
-%  Define page headers and footers
-\pagestyle{fancy}
-\newcommand{\tstamp}{\today}
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{#1}}
-\lhead[\fancyplain{}{\thepage}]         {\fancyplain{}{\rightmark}}
-\chead[\fancyplain{}{}]                 {\fancyplain{}{}}
-\rhead[\fancyplain{}{\rightmark}]       {\fancyplain{VERA Common Input}{VERA Common Input}}
-\lfoot[\fancyplain{}{}]                 {\fancyplain{}{}}
-\cfoot[\fancyplain{\thepage}{}]         {\fancyplain{\thepage}{\thepage}}
-\rfoot[\fancyplain{\tstamp} {\tstamp}]  {\fancyplain{}{}}
-
+%%---------------------------------------------------------------------------%%
 \begin{document}
-\include{titlepage}
-\tableofcontents
 
-% \listoffigures
+\frontmatter     % casl template
 
-\chapter*{List of Acronyms}
-\addcontentsline{toc}{chapter}{List of Acronyms}
+% make the table of contents
+\thispagestyle{plain}
+\tableofcontents%
+\clearpage%
+
+\phantomsection
+\addcontentsline{toc}{section}{FIGURES}
+\listoffigures
+\clearpage
+
+% \phantomsection
+% \addcontentsline{toc}{section}{TABLES}
+% \listoftables
+% \clearpage
+
+%%---------------------------------------------------------------------------%%
+
+\phantomsection
+\section*{\centerline{\large{Acronyms}}}
+\addcontentsline{toc}{section}{\texorpdfstring{\MakeUppercase{Acronyms}}{Acronyms}}
 
 \begin{table}[htb]
 \begin{tabular}{ll}
@@ -102,21 +90,20 @@
   PCI    & Pellet-Cladding Interaction \\
   PCM    & Percent Mille (10$^{-5}$) \\
   PPM    & Parts per Million (usually boron) \\
-  PSU    & Pennsylvania State University \\
   PWR    & Pressurized Water Reactor  \\
   QA     & Quality Assurance \\
   VERA   & Virtual Environment for Reactor Applications \\
 \end{tabular}
 \end{table}
 
-\vfill
+\clearpage
+\mainmatter
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%---------------------------------------------------------------------------%%
 
-\chapter{Introduction}
+\section{Introduction}
 
-\section{Introduction to CASL}
+\subsection{Introduction to CASL}
 The Consortium for Advanced Simulation of Light Water Reactors (CASL) is the first
 DOE Energy Innovation Hub, established in July 2010 for the purpose of providing
 advanced modeling and simulation (ModSim) solutions for commercial nuclear reactors.
@@ -150,7 +137,7 @@ science leadership, and a record of LWR design and regulatory accomplishments!
 More information on CASL can be found at the website \href{http://www.casl.gov}{www.casl.gov}.
 
 %%%%%%%%%%%%
-\section{VERA Core Simulator}
+\subsection{VERA Core Simulator}
 One component of VERA is the VERA Core Simulator (VERA-CS).  The core simulator is the specific collection
 of multi-physics computer codes used to model and deplete a LWR core over multiple cycles.
 Examples of the separate physics codes include cross sections, neutron transport, depletion,
@@ -173,7 +160,7 @@ Please refer to this location for the latest version of the input manual.
 
 
 %%%%%%%%%%%%
-\section{Manual Organization}
+\subsection{Manual Organization}
 
 This manual is organized into two parts.  
 
@@ -191,7 +178,7 @@ also be found in the code installation directory.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{User Manual}
+\section{User Manual}
 \label{chap:user}
 
 The VERA common input is an ASCII file.
@@ -247,7 +234,7 @@ Refer to Chapter~\ref{chap:cards} for a detailed listing of all input and option
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Section: Syntax
-\section{Input Syntax}
+\subsection{Input Syntax}
 
 VERA input files are text files that contain standard printable ASCII characters.
 The data is organized in blocks with names and purpose as described in the
@@ -283,7 +270,7 @@ Short commands are expected to complete within a single line. Longer commands, l
 can be split across multiple lines.
 
 An example input fragment showing blocks, comments, and cards, is shown below.
-\begin{verbatim}
+\begin{Verbatim}[fontsize=\small]
   ! comments start with an exclamation point
 
   [STATE]            ! block names are enclosed in square brackets
@@ -298,7 +285,7 @@ An example input fragment showing blocks, comments, and cards, is shown below.
   [CORE]             ! start of second block
     title  "Title must be enclosed in quotes if spaces are used"
 
-\end{verbatim}
+\end{Verbatim}
 
 Several legacy Fortran codes have special characters that allow you to skip
 or repeat input values.   There are no such special characters used in the VERA input.
@@ -329,7 +316,7 @@ All block names are listed with square brackets around them.
 \include{depletion}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Input Card Descriptions} \label{chap:cards}
+\section{Input Card Descriptions} \label{chap:cards}
 This chapter contains a complete listing of the available input cards.
 
 The input for each block is given in separate subsections.
@@ -350,14 +337,14 @@ An example of an input card is:
 %\include{cards_new}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Examples}
+\section{Examples}
 \label{chap:example}
 
 This chapter includes several input examples.  Additional examples can be found in the VERAIn Git repository.
 
 %%%%%%%%%%%%%%%%%%
 % Example 1
-\section{Example 1 -- Full-Core}
+\subsection{Example 1 -- Full-Core}
 The first example is a complete input for a full-core problem.
 This problem is Problem 7 of the CASL Progression Benchmark Problems and
 is based upon the publicly available description of the Watts Bar reactors.
@@ -378,7 +365,7 @@ CASL Technical Report: \href{http://www.casl.gov/docs/CASL-U-2013-0196-000.pdf}{
 
 %%%%%%%%%%%%%%%%%%
 % Example 2
-\section{Example 2 -- Single-Assembly}
+\subsection{Example 2 -- Single-Assembly}
 The second example is a partial input for a single-assembly with T/H feedback.
 This problem is Problem 6 of the CASL Progression Benchmark Problems.  See:
 \begin{itemize}
@@ -399,7 +386,7 @@ example problem if the user wishes to run this problem.
 
 %%%%%%%%%%%%%%%%%%
 % Example 3
-\section{Example 3 -- 2D Lattice Geometry}
+\subsection{Example 3 -- 2D Lattice Geometry}
 The third example is a complete input for a 2D lattice.
 This problem is Problem 2A of the CASL Progression Benchmark Problems. See:
 \begin{itemize}
