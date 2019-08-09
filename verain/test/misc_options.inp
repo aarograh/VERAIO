@@ -42,7 +42,7 @@
 [STATE]
   power  80.0     ! added multistate 1/30/2014 , must use --multistate command line option
 
-  tinlet_dist       
+  tinlet_dist
       1. -2.
      -2.
 
@@ -60,7 +60,7 @@
 
 [STATE]  power  60.0
 
-  tinlet_dist       
+  tinlet_dist
      2. -1.
      -1.
 
@@ -327,5 +327,3 @@
   log_message debug
   rx_components false
   summary_edits true
-[BISON]
-  ramp_data_transfers = true

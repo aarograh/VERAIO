@@ -440,9 +440,6 @@
       <Parameter name="summary_edits" type="bool" value="true"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="BISON">
-    <Parameter name="ramp_data_transfers" type="bool" value="true"/>
-  </ParameterList>
   <ParameterList name="TIAMAT">
     <Parameter name="conserve_power_in_tiamat_transfer" type="bool" value="true"/>
     <Parameter name="inner_evaluator" type="string" value="NeutronicsCTF"/>

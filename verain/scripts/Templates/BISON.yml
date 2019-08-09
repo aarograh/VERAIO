@@ -46,6 +46,13 @@ BISON:
         - copy BISON/$executioner_start_time
       _content:
 
+    executioner_dt:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$executioner_dt
+      _content:
+
     executioner_dtmin:
       _pltype: parameter
       _type: double
