@@ -17,11 +17,11 @@
   [STATE]
     power  100.0          ! % of rated power
     flow   100.0          ! % of rated flow
-    pressure 2250.0
+    pressure 2250.0       ! pressure (psia)
     feedback on
 
-    tinlet 565.0 K        !
-    tfuel  900.0 K        ! (HFP value)
+    tinlet 565.0 K        ! inlet temperature
+    tfuel  900.0 K        ! typical HFP value
     boron  1285           ! ppmB
     modden 0.743          ! g/cc
     sym qtr
@@ -37,9 +37,9 @@
 
   [CORE]
     size 15               ! assemblies across core
-    rated 3411 131.68     ! MW, Mlbs/hr
-    apitch 21.5
-    height 406.337
+    rated 3411 131.68     ! rated power and flow - MW, Mlbs/hr
+    apitch 21.5           ! assembly pitch (cm)
+    height 406.337        ! assembly height (cm)
 
     core_shape
       0 0 0 0 1 1 1 1 1 1 1 0 0 0 0
@@ -115,7 +115,7 @@
           1 - - 1 - 1 - - - - -
               - - 1 - - 1 -
 
-    baffle ss 0.19 2.85
+    baffle ss 0.19 2.85       ! baffle material, gap, and thickness (cm)
     vessel mod 219.71 cs 241.70
 
     lower_plate ss  5.0 0.5   ! mat, thickness, vol frac
@@ -134,8 +134,8 @@
 
   [ASSEMBLY]
     title "Westinghouse 17x17 Assembly"
-    npin 17
-    ppitch 1.260
+    npin 17                ! number of pins across assembly
+    ppitch 1.260           ! pin pitch (cm)
 
     fuel U21 10.257 94.5 / 2.110
     fuel U26 10.257 94.5 / 2.619
@@ -191,14 +191,16 @@
          5 5 5 5 5 5 5 5
          5 5 5 5 5 5 5 5 5
 
+! define three assemblies with labels 1, 2, 3
+
     axial  1  11.951 LAT21 377.711 PLEN 393.711
     axial  2  11.951 LAT26 377.711 PLEN 393.711
     axial  3  11.951 LAT31 377.711 PLEN 393.711
 
-    grid END inc  1017 3.866
-    grid MID zirc 875  3.810
+    grid END inc  1017 3.866   ! grid mass (g) and thickness (cm)
+    grid MID zirc  875 3.810
 
-    grid_axial
+    grid_axial                 ! axial grid positions - midpoints (cm)
         END  13.884
         MID  75.2
         MID 127.4
@@ -273,6 +275,8 @@
        1 - - 1 - - -
        - - - - - - - -
        - - - - - - - - -
+
+  ! define 5 insert types with labels 8, 12, 16, 20, and 24
 
     axial   8  15.761 PY8  376.441
     axial  12  15.761 PY12 376.441
@@ -353,27 +357,8 @@
         346.0262 353.9474 361.8686 369.7898 377.711
 
   [COBRATF]
-    nfuel   10            ! number of fuel rings in conduction model
-    nc      1             ! conduction option - radial conduction
-    irfc    2             ! friction factor correlation default=2
-    dhfrac  0.02          ! fraction of power deposited directly into coolant
-    hgap    5678.3        ! gap conductance
-    gridloss END 0.9070   ! spacer grid loss coefficient
-    gridloss MID 0.9065   ! spacer grid loss coefficient
-    dtmin   0.000001
-    dtmax   0.1
-    tend    0.1
-    rtwfp   1000.0
-    maxits  10000
-    courant 0.8
 
   [COUPLING]
-    epsk        5.0  ! pcm
-    epsp        1.0e-4
-    rlx_power   0.6
-    rlx_tfuel   1.0
-    rlx_den     1.0
-    maxiter     100
 
 \end{Verbatim}
 

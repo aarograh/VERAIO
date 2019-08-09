@@ -31,7 +31,7 @@ A typical PWR assembly is shown in Figure~\ref{fig:assembly}.  Refer to this fig
 \caption{\label{fig:assembly} PWR Fuel Assembly (source: Public internet).}
 \end{figure}
 
-A complete listing of all the input cards in the [ASSEMBLY] block is located in Section~\ref{sec:assemblycards}.
+A complete listing of all the input cards in the [ASSEMBLY] block is located in Chapter~\ref{chap:cards}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Initial Data}
@@ -89,7 +89,7 @@ The cell ID's are used in the rod maps described in the next section.
 In this example, in cell ``1'', the material ``U31'' extends from radius 0 to 0.4096.
 The material ``he'' extends from a radius 0.4096 to 0.418.
 The materials ``U31'' and ``he'' are defined on {\it fuel} and {\it mat} cards, respectively.
-(Refer to Chapter~\ref{chap:materials} for a complete description on defining materials.)
+(Refer to Chapter~\ref{chap:materials} for a complete description of material definitions.)
 
 The outside of each cell is automatically filled with the special material ``mod'', which
 refers to the moderator (or coolant).
@@ -100,9 +100,13 @@ In the example above, the guide tube (GT) and instrument tube (IT) descriptions
 use the special moderator material ``mod'' to define the moderator material on both
 the inside and outside of the tubes.
 
-Note that large water rods that span more than one lattice cell are not currently supported in the input
-(e.g. large CE water rods that span four lattice cells).
-In the future, an option will be added to the {\it cell} card to specify if a water rod spans more than one cell. 
+Large water rods that span more than one lattice cell can be specified by adding an optional keyword ``large4''
+to the end of the {\it cell} card.
+\begin{Verbatim}[fontsize=\small]
+! large CE 16x16 water rod
+  ppitch  1.28524
+  cell WR   cell WR    0.4096 0.418 0.475 / U31 he zirc
+\end{Verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Lattice Descriptions}
@@ -195,8 +199,8 @@ All axial elevations are defined relative to the top of the lower core plate.
 Grid cards are used to define unique grid spacer types.
 The following example defines two grid types, ``END'' and ``MID''.
 \begin{Verbatim}[fontsize=\small]
-  grid END inc   1017  3.866   ! grid spacer material, mass(g), height(cm)
-  grid MID zirc4  875  3.810
+  grid END inc   3.866 1017  ! grid spacer material, height(cm), mass (g)
+  grid MID zirc4 3.810  875
 \end{Verbatim}
 
 The grid types are placed axially with the {\it grid\_axial} card:
@@ -254,19 +258,19 @@ Therefore, this check should be performed in each of the individual physics code
 
 The [CONTROL] block contains the geometric description of a control assembly.
 
-A control rod assembly is defined in the same way that a fuel assembly is defined.
-The user specifies cells, lattices, and axial descriptions of the control rod assembly. 
+A control rod assembly is defined in a similar same way as fuel assembly is defined.
+The user specifies cells, lattices, and axial descriptions of the control rod assembly.
 The main difference between the control rod assembly and the fuel assembly is that
 the control rod assembly describes what is inside the guide tubes and the fuel assembly
 defines the guide tubes themselves.
 
 Control rod positions change during operation, so the geometric description of a control rod
 should always be for a rod in the {\bf fully inserted} position.
-In the example below, the bottom of the control rod in the fully inserted position is 
+In the example below, the bottom of the control rod in the fully inserted position is
 at an axial location of 15.46 cm.
 
 \begin{Verbatim}[fontsize=\small]
-  title "B4C control rods with AIC tips" 
+  title "B4C control rods with AIC tips"
   npin 17
 
   cell 1  0.382 0.386 0.484 / aic he ss      ! AIC cell
@@ -301,7 +305,7 @@ The name of the control rod ``CR1'' refers to the control rod type in the
 {\it crd\_map} in the [CORE] block.
 
 Control rods positions are assigned to a control rod bank with the {\it crd\_bank} map
-in the [CORE] block, and then the banks are positioned with the 
+in the [CORE] block, and then the banks are positioned with the
 {\it rodbank} card in the [STATE] block.
 
 Note that the locations of the control rod fingers must match the guide tube locations in the
@@ -314,7 +318,7 @@ This check should be performed in each of the individual physics codes.
 The user can define materials in the [CONTROL] block.  These materials only have scope in
 this block and are not accessible by other blocks.  See Chapter~\ref{chap:materials} for details.
 
-A complete listing of all the input cards in the [CONTROL] block is located in Section~\ref{sec:controlcards}.
+A complete listing of all the input cards in the [CONTROL] block is located in Chapter~\ref{chap:cards}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Control Rod Stroke}
@@ -327,7 +331,7 @@ The first value on the {\it stroke} card is the total length of the control rod 
 from fully inserted to fully withdrawn.
 
 The second value on the {\it stroke} card is the number of steps in the fully withdrawn position.
-Step 0 is the fully inserted position.  The number of steps in the fully withdrawn position 
+Step 0 is the fully inserted position.  The number of steps in the fully withdrawn position
 is specified by the user, but 228 steps is often used for typical Westinghouse PWR's.
 \begin{Verbatim}[fontsize=\small]
   stroke  360.0 228      ! stroke (cm), number of steps fully withdrawn
@@ -404,7 +408,7 @@ This check should be performed in each of the individual physics codes.
 As with [ASSEMBLY] blocks, multiple insert types can be defined in a single [INSERT]
 block by using multiple {\it axial} cards, each with a unique insert ID.
 
-A complete listing of all the input cards in the [INSERT] block is located in Section~\ref{sec:insertcards}.
+A complete listing of all the input cards in the [INSERT] block is located in Chapter~\ref{chap:cards}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Detector Description}
@@ -441,7 +445,7 @@ detectors have special properties used to calculate instrumentation signals.
 The name of the detector ``D1'' refers to a detector type defined in the
 {\it det\_map} in the [CORE] block.
 
-A complete listing of all the input cards in the [DETECTOR] block is located in Section~\ref{sec:detectorcards}.
+A complete listing of all the input cards in the [DETECTOR] block is located in Chapter~\ref{chap:cards}.
 
 
 

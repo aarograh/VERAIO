@@ -15,7 +15,7 @@ at a particular point in time.
 These values will typically change during a cycle depletion.
 
 An example showing the most common input cards in the [STATE] block is shown below.
-A complete listing of all the input cards in the [STATE] block is located in Section~\ref{sec:statecards}.
+A complete listing of all the input cards in the [STATE] block is located in Chapter~\ref{chap:cards}.
 
 \begin{Verbatim}[fontsize=\small]
   [STATE]
@@ -56,28 +56,28 @@ the [CONTROL] block (see Section~\ref{sec:stroke}). For Westinghouse PWR's, a ty
 
 The [EDITS] block is used to control the output edits.
 
-One of the edits produced by the core simulator is the rod power.   The user has 
-the ability to specify the axial levels that the power is averaged over with 
+One of the edits produced by the core simulator is the rod power.   The user has
+the ability to specify the axial levels that the power is averaged over with
 the {\it axial\_edit\_bounds} card.
 The user may choose to average power over uniform axial intervals (like most nodal codes),
 or to specify the edit intervals manually.
 
 (Note: the edit options are under development and more options will be added in the future.)
 
-A complete listing of all the input cards in the [EDITS] block is located in Section~\ref{sec:editscards}.
+A complete listing of all the input cards in the [EDITS] block is located in Chapter~\ref{chap:cards}.
 
-\subsubsection{COBRA-TF Nodalization}
+\subsubsection{CTF Nodalization}
 
 The {\it axial\_edit\_bounds} card is also used to set the axial nodalization when coupling
-the neutronics physics code to the COBRA-TF (CTF) subchannel code.
+the neutronics physics code to the CTF subchannel code.
 
 When running CTF, there is a restriction that the grid boundaries must be explicitly
 included in the {\it axial\_edit\_bounds}. This can get a little complicated for the user.
-In the VERA input, spacer grids are defined in the [ASSEMBLY] block by specifying the 
-grid heights on the {\it grid} card and the elevations of the grid midpoints 
+In the VERA input, spacer grids are defined in the [ASSEMBLY] block by specifying the
+grid heights on the {\it grid} card and the elevations of the grid midpoints
 on the {\it grid\_axial} card.
 From the grid heights and midpoints, the elevations at the top and bottom of the spacer grid
-can be calculated, and then the top and bottom elevations must be included 
+can be calculated, and then the top and bottom elevations must be included
 in the {\it axial\_edit\_bounds}.
 
 For example, if a grid is defined with a centerline at 75.0 and a height of 2.5, then the
@@ -97,7 +97,7 @@ For example, if a grid is defined with a centerline at 75.0 and a height of 2.5,
        ...
 \end{Verbatim}
 
-The reason for this restriction is because the power is already calculated on the {\it axial\_edit\_bounds},
+The reason for this restriction is because the power is calculated on the {\it axial\_edit\_bounds},
 so it is natural to use the same power distribution to couple to the CTF model as well.
 The grids must be explicitly included in the CTF boundaries so the loss coefficients are calculated correctly.
 
@@ -113,7 +113,7 @@ used when coupling different physics codes.  These values are used to determine
 convergence {\it between} physics codes.  Convergence criteria {\it within} a physics
 code is controlled by the code-specific block.
 
-Refer to Section~\ref{sec:couplingcards} for a complete listing of all the cards in the [COUPLING] block.
+Refer to Chapter~\ref{chap:cards} for a complete listing of all the cards in the [COUPLING] block.
 
 No code-specific information is included in the [COUPLING] block.  All code-specific information
 is contained in the code-specific blocks.  The [COUPLING] block is only used to define
@@ -167,5 +167,5 @@ An example [COUPLING] input block is shown below.
      maxiter     20   ! maximum number of coupled iterations
 \end{Verbatim}
 
-A complete listing of all the input cards in the [COUPLING] block is located in Section~\ref{sec:couplingcards}.
+A complete listing of all the input cards in the [COUPLING] block is located in Chapter~\ref{chap:cards}.
 
