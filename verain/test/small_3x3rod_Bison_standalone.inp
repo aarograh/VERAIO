@@ -170,52 +170,20 @@
 [BISON]
   solve_type standalone
   bc_type bulk_cool
-  auxkernels_fast_neutron_flux_axial_power_profile = axial_peaking_factors
-  auxkernels_fast_neutron_flux_factor = 3.e13
-  auxkernels_pelletid_a_lower = 0.00226
-  auxkernels_pelletid_a_upper = 0.5418
-  auxvariables_grain_radius_initial_condition = 3.0e-6
-  auxvariables_porosity_initial_condition = 0.07
   bcs_plenumpressure_plenumpressure_initial_pressure = 2.0e6
   bcs_plenumpressure_plenumpressure_startup_time = 1e4
-  bcs_pressure_coolantpressue_factor = 1.55e7
-  bcs_pressure_coolantpressue_function = coolant_pressure_ramp
-  functions_coolant_temperature_type = PiecewiseLinear
-  functions_coolant_temperature_x = -100 0
-  functions_coolant_temperature_y = 293 565
   burnup_burnup_num_radial = 6
   burnup_burnup_num_axial = 48
   executioner_dt = 1.0e3
   executioner_end_time = 6.0e7
-  executioner_num_steps = 2000
-  executioner_timestepper_time_dt = 1.0e3  1.0e5
-  executioner_timestepper_time_t = 0      1.0e5
   globalparams_a_lower = 0.01676
   globalparams_a_upper = 3.67436
   globalparams_energy_per_fission = 3.2e-11
-  materials_clad_density_density = 6551.0
-  materials_clad_solid_mechanics_cold_work_factor = 0.01
-  materials_clad_solid_mechanics_oxygen_concentration = 0.0
-  materials_fission_gas_release_axial_power_profile = axial_peaking_factors
-  materials_fission_gas_release_file_name = powerhistory_RISO_AN8.csv
-  materials_fission_gas_release_grain_radius = 5.0e-6
-  materials_fission_gas_release_initial_grain_radius = 3.0e-6
-  materials_fission_gas_release_initial_porosity = 0.07
-  materials_fuel_mech_grain_radius = 5.0e-6
-  materials_fuel_relocation_q = q
-  materials_fuel_thermal_initial_porosity = 0.07
   mesh_clad_bot_gap_height = 1.52e-3
-  nfuelrod = 8
   outputs_file_base = output_RISO_AN8_bump
-  postprocessors_rod_input_power_scale_factor = 3.66
-  porosity = 0.2
-  thermalcontact_initial_gas_fractions = 1 0 0 0 0 0 0 0 0 0
   fuel_pin_input_file_template = small_3x3rod_Bison.i.template
   non_fuel_pin_input_file_template = guide_tube.moose.i.template
-  ramping_time -100.0 0.0 1.0e5
-  ramping_factor 0.0 0.0 1.0
   mesh_type smeared_pellet
-  ramp_data_transfers = true
   output_average_axial_values = true
 
 [COUPLING]

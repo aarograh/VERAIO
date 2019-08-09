@@ -53,6 +53,7 @@ _DIRECTORY:
   MPACT:
   BISON:
   MAMBA:
+  TIAMAT:
   RUN:
 
 #>
@@ -729,6 +730,13 @@ STATE:
     _check:
       - is_word()
       - in_dictionary() on off
+
+  fuel_performance:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off inline
 #>
 #>   {\bf crud} crud\_option
 #>   \VERAInputTable{
@@ -14489,6 +14497,11 @@ BISON:
     _check:
       - is_int()
   executioner_start_time:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+  executioner_dt:
     <<: *dtdouble
     _content:
     _check:

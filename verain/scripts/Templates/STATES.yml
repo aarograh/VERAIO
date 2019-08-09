@@ -201,6 +201,13 @@ STATES:
             - copy %STATE/$(_loop)/$feedback
           _content:
 
+        fuel_performance:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %STATE/$(_loop)/$fuel_performance
+          _content:
+
         crud:
           _pltype: parameter
           _type: string
