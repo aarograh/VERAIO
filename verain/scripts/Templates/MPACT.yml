@@ -67,6 +67,13 @@ MPACT:
         - copy MPACT/$moc_mg_data_passing
       _content:
 
+    moc_blocking_data_passing:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy MPACT/$moc_blocking_data_passing
+      _content:
+
     shield_moc_kernel:
       _pltype: parameter
       _type: string
@@ -1062,6 +1069,13 @@ MPACT:
           _type: bool
           _do:
             - copy MPACT/$subgrid_spacers
+          _content:
+
+        subgrid_feedback:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy MPACT/$subgrid_feedback
           _content:
 
         num_subplanes:
