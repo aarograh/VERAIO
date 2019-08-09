@@ -9137,7 +9137,29 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+
 #>
+#>   {\bf moc\_blocing\_data\_passing} moc\_mg\_data\_passing
+#>   \VERAInputTable{
+#>     name={moc\_blocking\_data\_passing},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true},
+#>     limitations={},
+#>     description={This card is used to specify whether blocking or non-blocking        %
+#>       MOC data passing is used.},
+#>     notes={}
+#>   }
+  moc_blocking_data_passing:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
 #>   {\bf volume\_corr} volume\_corr
 #>   \VERAInputTable{
 #>     name={volume\_corr},
@@ -13003,6 +13025,28 @@ MPACT:
 #>     notes={}
 #>   }
   subgrid_spacers:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+
+#>
+#>   {\bf subgrid\_feedback} subgrid\_feedback
+#>   \VERAInputTable{
+#>     name={subgrid\_feedback},
+#>     type={Logical},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true,false},
+#>     limitations={},
+#>     description={This card is used to designate whether or not feedback logic is       %
+#>       used in subgrid solver setup,
+#>     notes={}
+#>   }
+  subgrid_feedback:
     <<: *dtbool
     _content:
     _check:
