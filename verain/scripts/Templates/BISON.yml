@@ -241,3 +241,45 @@ BISON:
       _do:
         - copy BISON/$fast_flux
       _content:
+
+    materials_fuel_relocation_relocation_activation1:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$materials_fuel_relocation_relocation_activation1
+      _content:
+
+    auxkernels_fast_neutron_flux_factor:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$auxkernels_fast_neutron_flux_factor
+      _content:
+
+    materials_fuel_mech_model_creep:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$materials_fuel_mech_model_creep
+      _content:
+
+    materials_fuel_relocation_burnup_relocation_stop:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$materials_fuel_relocation_burnup_relocation_stop
+      _content:
+
+    thermalcontact_roughness_fuel:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$thermalcontact_roughness_fuel
+      _content:
+
+    thermalcontact_roughness_clad:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$thermalcontact_roughness_clad
+      _content:
