@@ -14709,6 +14709,42 @@ BISON:
     _check:
       - is_word()
       - in_dictionary() true false
+  materials_fuel_relocation_relocation_activation1:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  auxkernels_fast_neutron_flux_factor:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  materials_fuel_mech_model_creep:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() true false
+  materials_fuel_relocation_burnup_relocation_stop:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  thermalcontact_roughness_fuel:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+  thermalcontact_roughness_clad:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
 
 #>
 #> \section{Block RUN}
