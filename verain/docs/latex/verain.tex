@@ -8,7 +8,10 @@
 %   by Scott Palmtag and Andrew Godfrey
 %   CASL-U-2014-0014-002   Feb. 23, 2015
 %
-%   July 2019 - converted to use CASL template
+%   July 2019 - converted to use CASL Latex template
+%
+%   Revision 3
+%   Aug  2019 - update to add NQA requirements and complete list of input
 %
 %*-------------------------------------------------------------------------*
 %
@@ -79,6 +82,7 @@
   PPM    & Parts per Million (usually boron) \\
   PWR    & Pressurized Water Reactor  \\
   QA     & Quality Assurance \\
+  RIA    & Reactivity Insertian Accident \\
   VERA   & Virtual Environment for Reactor Applications \\
 \end{tabular}
 \end{table}
@@ -88,87 +92,11 @@
 
 %%---------------------------------------------------------------------------%%
 
-\section{Introduction}
-
-\subsection{Introduction to CASL}
-The Consortium for Advanced Simulation of Light Water Reactors (CASL) is the first
-DOE Energy Innovation Hub, established in July 2010 for the purpose of providing
-advanced modeling and simulation (ModSim) solutions for commercial nuclear reactors.
-
-CASL's vision is to predict, with confidence, the performance of nuclear reactors
-through comprehensive, science-based modeling and simulation technology that is
-deployed and applied broadly throughout the nuclear energy industry to enhance safety,
-reliability, and economics.
-
-CASL's mission is to provide coupled, high-fidelity, usable modeling and simulation
-capabilities needed to address light water reactor operational and safety performance-defining phenomena.
-
-CASL's foundational technology products include CASL solutions and CASL ModSim Technologies.
-CASL's ModSim technology, the Virtual Environment for Reactor Applications (VERA), provides
-higher-fidelity results than the current industry approach by incorporating coupled physics
-and science-based models, state-of-the-art numerical methods, modern computational science,
-integrated uncertainty quantification (UQ) and validation against data from operating
-pressurized water reactors (PWRs), single-effect experiments, and integral tests.
-
-CASL will address, through new insights afforded by its ModSim technology, key nuclear
-energy industry challenges to furthering power uprates, higher fuel burnup, and lifetime
-extension while providing higher confidence in enhanced nuclear safety and this cleaner energy source.
-
-The CASL Team is a consortium that consists of ten core partners and numerous contributing members.
-The CASL organization is led by Oak Ridge National Lab, and CASL's research and development is executed
-in six technical teams called Focus Areas (FA) and one integrating technical area.
-This ground-breaking partnership provides unparalleled
-collective institutional knowledge, nuclear science and engineering talent, computational
-science leadership, and a record of LWR design and regulatory accomplishments!
-
-More information on CASL can be found at the website \href{http://www.casl.gov}{www.casl.gov}.
-
-Note that the VERA input processor (called VERAin) is an open source software project and can be
-found on the CASL Github website \href{http://www.github.com/casl/verain}{github.com/casl/verain}.
-The open source input processor does not include any physics packages.
-
-%%%%%%%%%%%%
-\subsection{VERA Core Simulator}
-One component of VERA is the VERA Core Simulator (VERA-CS).  The core simulator is the specific collection
-of multi-physics computer codes used to model and deplete a LWR core over multiple cycles.
-Examples of the separate physics modeled in the core simulator include cross section generation,
-neutron transport, isotopic depletion, thermal-hydraulics, and fuel performance.
-
-The purpose of the core simulator is to deplete the reactor core and provide data and boundary conditions to model
-CASL Challenge Problems such as CIPS, CILC, DNB, and PCI analyses.
-
-One important feature of the core simulator is that a single common input file is used to drive all
-of the different physics codes\footnote{The only exception to this is for CFD codes,
-which generally require a detailed CAD file to support mesh generation and perform meaningful analysis.}.
-One benefit of using a single common input is that users only need to understand and be proficient with one input,
-instead of having to understand multiple inputs for multiple physics codes.
-Another benefit of using a single common input is that all codes work from a single
-geometry description, and this reduces errors due to inconsistent geometries in different codes.
-
-The most up-to-date version of this document resides in the VERA Git repository file
-``VERAInExt/verain/docs/verain\_UM.pdf''.
-Please refer to this location for the latest version of the input manual.
-
-
-%%%%%%%%%%%%
-\subsection{Manual Organization}
-
-This manual is organized into three parts.
-
-The first part, which includes Chapters~\ref{chap:user} through \ref{chap:depletion}, is the ``User's Manual'',
-which describes how a user would set up a typical input.  This part of the manual gives
-the most common input cards that a user would need and describes how to use them.
-This part of the manual does not include a complete list of cards or show every available option.
-
-The second part of the manual, Chapter~\ref{chap:cards}, is a ``Reference Manual'' and includes
-a complete listing of every available input card.
-
-The third part of the manual, Chapter \ref{chap:example}, gives several example input decks.
-Additional example input files can be found in the code installation directory.
-
+\include{introduction}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
 \section{User Manual}
 \label{chap:user}
 
@@ -200,7 +128,7 @@ The VERA input blocks are:
   during a cycle depletion.
 \item[STATE] These blocks describes reactor core operating parameters (statepoint values)
   at a particular point in time.
-  Parameters include inlet temperature, pressure, power, and control rod positions.
+  Parameters include inlet temperature, pressure, power, control rod positions, and others.
   STATE values can (and usually do) change at each statepoint.
 \item[ASSEMBLY] These blocks contains the geometry and physical description of the nuclear fuel assemblies.
   The assembly descriptions do not include control rods, detectors, or inserts.
@@ -253,7 +181,11 @@ The block, keyword and tag names are case sensitive.  Therefore, it is recommend
 that users should not depend on the capitalization for differentiation between
 entries in the file.
 
-The exclamation mark, !,  is a special keyword that makes everything from it to the
+In this manual, the convention used is that all input examples are shown in {\tt typewriter font}.
+When input cards are used in the text (not in the examples), they are listed in {\it italic font}.
+All block names are listed with square brackets around them.
+
+The exclamation mark, !,  is a special character that makes everything from it to the
 end of line ignored for processing and is used for adding comments in an input file.
 
 The keyword {\it include} can be used to insert the contents of another file into the input file.
@@ -281,7 +213,7 @@ An example input fragment showing blocks, comments, and cards, is shown below.
 
 Lists of values can be generated by using the following bracket nomenclature
 $$ < n .. m \, \mbox{x} \, i > $$
-where $n$ is the starting list number, $m$ is the ending list number, $\mbox{x}$ is a keyword, and $i$ is the step.
+where $n$ is the starting list number, $m$ is the ending list number, $\mbox{x}$ is a delimiter, and $i$ is the step.
 If ``$\mbox{x} \, i$'' is ommitted, the step size is one.
 Examples of list generated list include:
 \begin{Verbatim}[fontsize=\small]
@@ -291,9 +223,6 @@ Examples of list generated list include:
 \end{Verbatim}
 Additional list options can be found on the \href{https://metacpan.org/pod/release/DCONWAY/List-Maker-0.005/lib/List/Maker.pm}{List::Maker} webpage.
 
-In this manual, the convention used is that all input examples are shown in {\tt typewriter font}.
-When input cards are used in the text (not in the examples), they are listed in {\it italic font}.
-All block names are listed with square brackets around them.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -328,6 +257,7 @@ Following each input card is a description of the parameters on that card.
 \include{cards}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
 \section{Examples}
 \label{chap:example}
 
@@ -396,8 +326,11 @@ input cards.
 This example problem also shows how multiple assembly, insert, and control types can be
 defined by using multiple {\it axial} cards in a single input block.
 
-
 \include{example3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Chapter: VERARun Script
+\include{verarun}
 
 
 \end{document}

@@ -56,7 +56,7 @@ The purpose of this map is to define the shape for subsequent core maps.
 Most physics codes support both calculations run in either full-core or quarter-core symmetry.
 If a calculation is run in quarter-core symmetry,  the code must know if the symmetry is
 mirror symmetric or rotationally symmetric.  The type of quarter-core symmetry is defined with the {\it bc\_sym}
-input card.  The symmetry option is not used if the calculation is run in full-core.
+input card.  The symmetry option is ignored if the calculation is run in full-core.
 \begin{Verbatim}[fontsize=\small]
   bc_sym mir    ! define quarter-core symmetry as mirror
 \end{Verbatim}

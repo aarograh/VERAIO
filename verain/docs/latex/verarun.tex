@@ -1,0 +1,121 @@
+%
+%  Description of VERARun
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{VERARun}  \label{chap:verarun}
+
+This chapter describes running cases with the VERARun script.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{VERARun}
+
+A simple case can be run with VERARun just by typing ``verarun'' followed by the input file name.
+For example, if you input deck is called ``2a.inp'', you would type:
+\begin{Verbatim}[fontsize=\small]
+   verarun 2a
+\end{Verbatim}
+
+Additional command line options can be found by typing {\tt verarun} with no arguments.
+Doing so will return the following options.
+
+\begin{Verbatim}[fontsize=\small]
+usage: verarun [-x] [-e email_addr] [-h] [-c config_file] [-N job_name] [-l]
+               [-n nprocs] [-O] [--ppn cpus_per_node] [-m mem_per_process]
+               [-s subdir] [-d vera_install_dir] [-v vera_version] [--verbose]
+               [-W] [-w job_id] [-t walltime] [--chain] [--debug]
+               [--hostname host] [-r {overwrite,readwrite}]
+               [--vera-installs-dir vera_installs_dir]
+               [input_path [input_path ...]]
+
+Creates and optionally submits machine-specific VERA jobs.
+
+positional arguments:
+  input_path            path to VERA input (.inp) or XML (.xml) files
+
+optional arguments:
+  -x, --dry-run         dry run only, create but don't execute the PBS script
+  -e email_addr, --email-addrs email_addr
+                        comma-delimited list of email addresses to notify of
+                        job completion, defaults to ${USER}@$(hostname)
+  -h, --help            print detailed help
+  -c config_file, --host-config-file config_file
+                        override host configuration file, supercedes
+                        --hostname and --vera-installs-dir
+  -N job_name, --job-name job_name
+                        name for the PBS job
+  -l, --list-vera-versions
+                        list available VERA versions
+  -n nprocs, --np nprocs, --nprocs nprocs, --num-procs nprocs
+                        total number of processors need for the job (mpiexec
+                        -np param), defaults to value computed from input
+  -O, --output-job-name
+                        print the job name to stdout
+  --ppn cpus_per_node, --pnode cpus_per_node
+                        specify processors per node, by default this is
+                        calculated
+  -m mem_per_process, --pmem mem_per_process, --proc-memory mem_per_process
+                        specify memory required per processor in GB, defaults
+                        to undefined
+  -s subdir, --subdir subdir
+                        create subdir, a value of "." specifies automatically
+                        generated subdir name
+  -d vera_install_dir, --vera-dir vera_install_dir
+                        path to VERA installation, superceding --vera-
+                        installs-dir, --vera-version, and the host
+                        configuration
+  -v vera_version, --vera-version vera_version
+                        name of VERA version to use
+  --verbose             turn on verbose messaging
+  -W                    wait on job last submitted via verarun, overrides -W
+  -w job_id, --wait-job-id job_id
+                        ID of job which must complete before starting this job
+  -t walltime, --wall-time walltime
+                        wallclock execution time in floating point hours,
+                        defaults to 24.0
+
+advanced arguments:
+  --chain, --chain-jobs
+                        each case depends on its predecessor
+  --debug               debug mode
+  --hostname host       force the hostname
+  -r {overwrite,readwrite}, --restart {overwrite,readwrite}
+                        optional restart mode
+  --vera-installs-dir vera_installs_dir
+                        path to vera_installs directory containing VERA
+                        versions
+
+\end{Verbatim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{VERARun Output}
+
+Upon completion of a VERA job, several output files may be created depending on the code options used.
+Some typical outputs include:
+\begin{itemize}
+\item VERAIn XML file.  This file is written upon the successful completion of VERAIn
+\item VERA HDF output file.  This is a binary file with results that can be visualized in VERAView, or post-processed with user utility codes.
+\item MPACT output file.  This file is written upon the successful completion of MPACT (if applicable).
+\item MPACT log File.  This file is written upon the successful completion of MPACT (if applicable).
+\item MPACT summary File.  This file is written upon the successful completion of MPACT (if applicable).
+\item Standard output file. This file is a log of all output written to the standard output.
+\item Standard error file.  this file is a log of all output written to the standard error file.
+\end{itemize}
+
+
+In case of errors, the user should examine the standard error file first.
+If there were any errors in the input processor (VERAIn), the errors will be written here.
+Any error messages from other VERA components will also be written to the standard error file.
+
+If the standard error file does not list any errors, example the VERA component output files and log files for messages.
+
+
+
+
+
+
+
+
+
+
+
