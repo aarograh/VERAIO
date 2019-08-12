@@ -1,0 +1,43 @@
+{
+"_VeraDefaultVersion": "VERA_4.0RC4",
+"VeraInstallsDir": "/software/user_tools/current/cades-nsed-veracs/VERA_builds/builds",
+"domain": "ornl.gov",
+"env": [],
+"hostname": "mod-condo-login02.ornl.gov",
+"specs":
+  {
+  "hwthreads": 1,
+  "units": 16,
+  "sockets": 2,
+  "nodes": 150,
+  "mem": 128
+  },
+
+"pbs_env":
+  [
+    "#PBS -N {job_name}",
+    "#PBS -o {case}.stdout",
+    "#PBS -l nodes={nodes:d}:ppn={ppn:d}",
+    "#PBS -l walltime={walltime}",
+    "#PBS -j oe",
+    "#PBS -A {account}",
+    "#PBS -q {queue}",
+    "#PBS -l qos=std",
+    "#PBS -W group_list=cades-nsed"
+  ],
+
+"email_env":
+  [
+    "#PBS -M {email_addrs}",
+    "#PBS -m ea"
+  ],
+
+"pmem_env":
+  [
+    "#PBS -l pmem={pmem:d}gb"
+  ],
+
+"env": [],
+
+"env_old": [ "module load mpi/mvapich/gnu/2.2rc1" ]
+}

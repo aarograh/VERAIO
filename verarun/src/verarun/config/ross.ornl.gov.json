@@ -1,0 +1,39 @@
+{
+"_VeraDefaultVersion": "VERA_20180915_540",
+"VeraInstallsDir": "/home/tools/VERA_builds/old_builds",
+"domain": "ornl.gov",
+"env": [],
+"hostname": "ross.ornl.gov",
+"specs":
+  {
+  "hwthreads": 2,
+  "mem": 128,
+  "nodes": 20,
+  "sockets": 2,
+  "units": 18
+  },
+
+"pbs_env":
+  [
+    "#PBS -N {job_name}",
+    "#PBS -o {case}.stdout",
+    "#PBS -l nodes={nodes:d}:ppn={ppn:d}",
+    "#PBS -l walltime={walltime}",
+    "#PBS -j oe",
+    "#PBS -A {account}",
+    "#PBS -q {queue}"
+  ],
+
+"email_env":
+  [
+    "#PBS -M {email_addrs}",
+    "#PBS -m ea"
+  ],
+
+"pmem_env":
+  [
+    "#PBS -l pmem={pmem:d}gb"
+  ],
+
+"env": []
+}
