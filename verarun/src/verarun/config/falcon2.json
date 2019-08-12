@@ -1,0 +1,44 @@
+{
+"_VeraDefaultVersion": "VERA_4.0RC4",
+"VeraInstallsDir": "/projects/vera-cs-user/VERA_builds_falcon/builds",
+"domain": "inl.gov",
+"env": [],
+"hostname": "falcon2",
+"specs":
+  {
+  "hwthreads": 1,
+  "units": 18,
+  "sockets": 2,
+  "nodes": 828,
+  "mem": 128
+  },
+
+"pbs_env":
+  [
+    "#PBS -N {job_name}",
+    "#PBS -o {case}.stdout",
+    "#PBS -l select={nodes:d}:ncpus=36:mpiprocs={ppn:d}",
+    "#PBS -l walltime={walltime}",
+    "#PBS -j oe",
+    "#PBS -P casl",
+    "#PBS -q casl"
+  ],
+
+"email_env":
+  [
+    "#PBS -M {email_addrs}",
+    "#PBS -m ea"
+  ],
+
+"pmem_env":
+  [
+    "#PBS -l pmem={pmem:d}gb"
+  ],
+
+"env": [],
+
+"env_old":
+  [
+    "module load MVAPICH2/2.2-GCC-5.4.0-2.28"
+  ]
+}

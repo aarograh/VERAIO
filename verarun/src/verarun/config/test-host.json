@@ -1,0 +1,43 @@
+{
+"_VeraDefaultVersion": "vera-3.7.0",
+"VeraInstallsDir": "/Users/re7x/src/verarun/test/vera_installs",
+"domain": "ornl.gov",
+"env":
+  [
+    "export TestEnvDir=\"$HOME/src/verarun/test\"",
+    "export TestEnvDir2=\"$TestEnvDir/vera_installs\""
+  ],
+"hostname": "test-host",
+"specs":
+  {
+  "hwthreads": 2,
+  "units": 18,
+  "sockets": 2,
+  "nodes": 20,
+  "mem": 128
+  },
+
+"pbs_env":
+  [
+    "#PBS -N {job_name}",
+    "#PBS -o {case}.stdout",
+    "#PBS -l nodes={nodes:d}:ppn={ppn:d}",
+    "#PBS -l walltime={walltime}",
+    "#PBS -j oe",
+    "#PBS -A {account}",
+    "#PBS -q {queue}"
+  ],
+
+"email_env":
+  [
+    "#PBS -M {email_addrs}",
+    "#PBS -m ea"
+  ],
+
+"pmem_env":
+  [
+    "#PBS -l pmem={pmem:d}gb"
+  ],
+
+"env": []
+}
