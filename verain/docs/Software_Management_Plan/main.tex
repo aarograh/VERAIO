@@ -1,0 +1,535 @@
+\documentclass[twoside]{report}
+
+% Use so that < and > get formatted correctly when printed in text
+%\usepackage[T1]{fontenc}
+\usepackage{acronym}
+\usepackage{amsmath}
+%\usepackage{array}
+\usepackage[blocks]{authblk}
+%\usepackage{booktabs}
+%\usepackage[toc]{appendix}
+%\usepackage{breqn}
+\usepackage[justification=justified,singlelinecheck=off,bf]{caption}
+\usepackage{chngcntr}
+\usepackage{changepage}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+%\usepackage[Glenn]{fncychap}
+\usepackage{fancybox}
+\usepackage{fancyvrb}
+\usepackage{float}
+%\usepackage{framed}
+%\usepackage{fullpage}
+%\usepackage{gensymb}
+\usepackage[top=1.0in,bottom=1.0in,inner=1.0in,outer=1.0in]{geometry}
+\usepackage{graphicx}
+\usepackage{lastpage}
+%\usepackage{listing}
+%\usepackage{lscape}
+%\usepackage{makecell}
+%\usepackage{multirow}
+%\usepackage{pdflscape}
+\usepackage{units}
+\usepackage{newfloat}
+\usepackage{wrapfig}
+%\usepackage{nicefrac}
+%\usepackage{multicol}
+%\usepackage{xr-hyper}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{siunitx}
+\usepackage{textcomp}
+\usepackage[pages=some]{background}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{titlesec}
+
+\newcommand{\CASLMilestoneNumber}{CASL-U-2019-1878-000}
+\title{VERAIO Software Management Plan}
+\newcommand{\subtitle}{}
+\newcommand{\shortTitle}{VERAIO Software Management Plan}
+\newcommand{\psm}{Scott Palmtag, VERAIO Product Software Manager}
+\newcommand{\reviewer}{Daniel Jabaay, Independent Reviewer}
+\newcommand{\techlead}{Scott Palmtag, Program Technical Leader}
+\author[1]{Scott Palmtag}
+\affil[1]{North Carolina State University}
+
+% Special thanks to authors of CTF and MPACT SMP documents!
+%    Bob Salko
+%    Thomas Downar
+%    Brendan Kochunas
+%    Shane Stimpson
+%    Benjamin Collins
+
+\newcommand{\publicationDate}{8/5/2019}
+
+%customize hyperref
+%uncomment to underline the hyperlinks in the document
+\hypersetup{
+        colorlinks,
+%	colorlinks=false,
+%	pdfborderstyle={/S/U/W 1},
+%	pdfborder=0 0 1,
+	linkcolor=black,
+	citecolor=black,
+	}
+
+
+% Make custom blue to match word blue
+\definecolor{DocNameBlue}{RGB}{154,189,251}
+% CASL blue
+\definecolor{CASLBlue}{RGB}{0,132,246}
+\definecolor{TitleBlue}{RGB}{37,65,96}
+
+
+% All the other pages style
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[LO,RE]{\includegraphics[width=1.5in]{template/CASL_logo.png}}
+\fancyhead[RO,LE]{\color{CASLBlue}\shortTitle}
+\fancyfoot[LE,RO]{\textcolor{CASLBlue}{C}onsortium for \textcolor{CASLBlue}{A}dvanced \textcolor{CASLBlue}{S}imulation of \textcolor{CASLBlue}{L}WRs}
+\fancyfoot[RE,LO]{\CASLMilestoneNumber}
+\fancyfoot[CO,CE]{\thepage}
+
+\fancypagestyle{plain}
+{
+\fancyhead[LO,RE]{\includegraphics[width=1.5in]{template/CASL_logo.png}}
+\fancyhead[RO,LE]{\color{CASLBlue}\shortTitle}
+\fancyfoot[LE,RO]{\textcolor{CASLBlue}{C}onsortium for \textcolor{CASLBlue}{A}dvanced \textcolor{CASLBlue}{S}imulation of \textcolor{CASLBlue}{L}WRs}
+\fancyfoot[RE,LO]{\CASLMilestoneNumber}
+\fancyfoot[CO,CE]{\thepage}
+}
+
+% The title page style
+\fancypagestyle{firststyle}
+{
+   \fancyhead[L]{}
+   \fancyhead[R]{\CASLMilestoneNumber}
+   \fancyfoot[]{}
+}
+
+
+\backgroundsetup{
+scale=1,
+color=black,
+opacity=1.0,
+angle=0,
+contents={%
+  \includegraphics[width=\paperwidth,height=\paperheight]{template/casl_background.pdf}
+  }%
+}
+
+% Define command to surround text in angle brackets
+\newcommand{\brackets}[1]{\textlangle{}#1\textrangle{}}
+
+% For formatting code
+\newcommand{\codeblock}[1]{\texttt{#1}}
+
+
+% define documents that are referenced often
+\newcommand{\VERAReq}{{\it VERA-QA-006, VERA Requirements and Design Process}}
+
+
+%increase space after captions
+\setlength{\belowcaptionskip}{2pt}
+
+% No indenting at start of paragraph
+\setlength{\parindent}{0pt}
+
+%increase space between paragraphs
+\parskip 1em
+
+\titleformat{\chapter}{\Huge\bfseries}{\thechapter. }{0pt}{\Huge\bfseries}
+
+% set the section numbering depth and TOC depth
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% Use continuous counting scheme for floats
+\counterwithout{table}{chapter}
+
+\let\DeclareUSUnit\DeclareSIUnit
+\let\US\SI
+\DeclareUSUnit\F{F}
+\DeclareUSUnit\ft{ft}
+
+% Set list spacing to zero
+%\setitemize{itemsep=0em}
+
+\begin{document}
+
+%clear the header/footer until TOC
+\pagenumbering{roman}
+
+\input{title}
+\input{signature}
+
+% no abstract in users' manual
+%\input{abstract}
+
+\chapter*{Acronyms}
+\input{acronym}
+
+% table of contents
+\tableofcontents
+
+% list of figures
+%\listoffigures    % No figures in SMP
+
+% list of tables
+% \listoftables
+\clearpage
+\pagenumbering{arabic}
+\pagestyle{fancy}
+
+\chapter{Project Background and Objectives}
+
+VERAIO is a set of utility codes used to provide a common set of input and outputs to the \ac{vera}.
+\ac{vera} is a collection of several different computer codes and having a common input and output,
+instead of having to deal with input and output from each individual code, allows VERA to be easy to use
+and reduces errors associated with code operability.
+The VERAIO utilities include VERAIn, VERAView, and VERARun. Each of these utilities is described below.
+
+VERAIn is an input processor that reads an ASCII input file generated by users, parses the file,
+performs some error checking, and writes an XML file that is intended to be read by other VERA codes.
+The main purpose of VERAIn is to provide a common input to all of the VERA codes so users only have
+to learn one input.   VERAIn is written in Perl and uses YAML configuration files to provide flexibility.
+
+VERAView is a \ac{gui} that reads a VERA HDF output file and allows users to visualize results.
+VERAView is written in Python.
+
+VERARun is a script that drives the VERA execution in a \ac{hpc} environment.
+
+Work performed at the code-level supports the {\it VERA-QA-001, \ac{qapp}} and {\it VERA-QA-002, VERA Software Quality Assurance Plan}.
+
+\chapter{Plan Description}
+
+The VERAIO code team is responsible for implementing software engineering and \ac{sqa} requirements under its control as defined in this Plan.
+Compliance with this Plan is required throughout the software life cycle including planning, requirements, acquisition, design, implementation, acceptance testing, maintenance and operations, and retirement.
+
+The purpose of this document is to define the VERAIO processes that are applicable the VERA project.
+VERAIO is a set of stand-alone codes and multiple organizations are associated with VERAIO development.
+
+The ``VERAIO Software Configuration Item List'' which is described in the
+``Software Configuration Management'' section of this Plan (Chapter~\ref{chap:config}).
+
+\section{Assumptions and Constraints}
+
+\begin{itemize}
+\item{Adequate funding, required hardware, and system software is available to complete planned VERAIO activities.}
+\item{Responsibilities can be delegated for a temporary period to alternate personnel; however, the personnel designated in this Plan retain ultimate responsibility.
+The designee must have the appropriate knowledge, required training, and required independence as identified in the ``Training'' section of this Plan.}
+\item{The hardware that serves VERAIO applications is managed by the ORNL Infrastructure team.
+Management of this hardware is outside the scope of this Plan.}
+\end{itemize}
+
+\chapter{References}
+
+The following VERA requirements documents apply to development of this plan:
+
+\begin{description}
+\item{\it VERA-QA-001, VERA Quality Assurance Program Plan (QAPP)}
+\item{\it VERA-QA-002, VERA Software Quality Assurance Plan (SQAP)}
+\item{\it VERA-QA-003, VERA Management of Controlled Documents and Records}
+\item{\it VERA-QA-004, VERA Software Configuration and Control}
+\item{\it VERA-QA-005, VERA User’s Manual and Theory Manual}
+\item{\VERAReq}
+%not used \item{VERA-QA-007, XX}
+%not used \item{VERA-QA-008, XX}
+\item{\it VERA-QA-009, VERA Release Process}
+\item{\it VERA-QA-010, VERA Problem Reporting and Corrective Action}
+\end{description}
+
+
+\chapter{Definitions and Acronyms}
+
+The following defines terms used in this Plan.
+Acronyms are defined with their first use in this Plan.
+Defined terms and document titles are annotated in this Plan by Italics.
+Plan section or appendix titles are annotated by quotation marks.
+
+\begin{description}
+\item{Baseline: A specification or product that has been formally reviewed and agreed upon, that thereafter serves as the basis for the use and further development, and that can be changed only by using an approved change control process.  Source: ASME NQA-1a-2009}
+\item{Branch: Also referred to as topic branch.  Refers to a branch in the VERAIO Git repository that is not the master branch.  More information can be found at \url{https://guides.github.com}.}
+\item{Code repository: Also referred to as VERAIO repository, VERAIO code repository, and simply repository.  The code repository stores all source code, tests, configuration instructions, and documentation.  Version control is performed using the Git version control system (see \url{https://guides.github.com}).}
+\item{Commit: A specific configuration of the code repository that is identified by a unique \ac{sha} number.  See \url{https://guides.github.com} for more information.}
+\item{Gitlab: Internal ORNL and UM website for hosting the VERAIO code repository, running automated continuous integration tests, and submitting and performing merge request reviews.  See \url{https://about.gitlab.com} for more information.}
+\item{TRAC: System for tracking activities and issues related to VERAIO development work.  Activities and issues are tracked using tickets through all stages of development, including planning, development and review.  After tickets are closed, they are archived indefinitely.
+TRAC also refers to the website managed by \ac{phi} Infrastructure where tickets are entered and edited.}
+\item{Merge request: A request to merge new code changes into the baseline version of the code.  A merge request is submitted by the developer to an independent reviewer who must approve changes before they can be merged.  Additionally, the new changeset must pass all automated tests prior to their merge.}
+\end{description}
+
+\chapter{Quality Management}
+
+\section{Organization}
+
+Each VERAIO code team member shall adhere to this Plan.
+The VERAIO \ac{psm} retains overall responsibility for ensuring adherence to this Plan.
+High level VERA Product Suite design requirements are made at the VERA leadership level and flow down to the VERA \acp{psm} in the form of individual code requirements.
+VERAIO code development, review and testing is conducted by a small group of VERAIO Code Developers and Independent Reviewers as supervised by the \ac{psm}.
+After approval at the code-level, additional reviews and tests are conducted at the VERA Product Suite level under processes defined in the VERA \ac{sqap}.
+
+\section{Roles and Responsibilities}
+
+Table \ref{tab:roles} identifies the roles and responsibilities for VERAIO software development and management activities.
+
+\begin{longtable}{>{\raggedleft}p{0.2\textwidth}p{0.7\textwidth}}
+\caption{Roles and Responsibilities}\label{tab:roles}\\
+\toprule
+Role & Responsibilities \\
+\midrule
+\endfirsthead
+\multicolumn{2}{c}{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\toprule
+Role & Responsibilities \\
+\midrule
+\endhead
+VERA Program Technical Leader &%
+\begin{itemize}[topsep=0pt]
+\item Approve this Plan.
+\item Define high-level software design requirements for VERA Product Suite and VERAIO.
+\item Determines and/or approves the software quality level and software type.
+\item Provide concurrence on initial software requirements documentation and all subsequent software requirement changes that are considered a major software change.
+\item Ensure code team members are properly qualified and trained per this Plan.
+\item Identify VERA Product Suite software risks and methods to mitigate those risks that are associated with VERA Product Suite release.
+\end{itemize} \\
+\midrule
+VERA \ac{sqa} Coordinator &
+\begin{itemize}[topsep=0pt]
+\item Provide concurrence on this Plan.
+\item Provide concurrence on initial software requirements documentation and all subsequent software requirement changes that are considered a major software change.
+\item Ensure the appropriate level of rigor for the \ac{sqa} activities.
+\item Provide oversight to ensure that identified software problem reporting and corrective actions are implemented per this Plan.
+\item Verify that actions have been completed to properly retire the software.
+\end{itemize} \\
+\midrule
+VERAIO \ac{psm} &%
+\begin{itemize}
+\item Perform system management and administration activities.
+\item Manage code release through VERA Product Suite release process.
+\item Responsible for administration and execution of this Plan.
+\item Provide task-specific training and mentoring for code team per this Plan.
+\item Ensure code software risks are mitigated as specified in this Plan.
+\item Address credible code software failures through \ac{vv} activities.
+\item Ensure that software configuration items are managed per this Plan.
+\item Acquire materials and services per this Plan.
+\item Assign access and authorities for VERAIO repositories.
+\item Approve software requirements and design documentation generated by code developers.
+\item Ensure proper handling of code change requests.
+\item Define and delineate work activities for code development and testing.
+\item Ensure that software problems are documented and dispositioned per the {\it VERA-QA-010, Problem Reporting and Corrective Action} procedure.
+\item Manage code software retirement, when needed.
+\end{itemize}\\
+\midrule
+Independent Technical Reviewer &%
+\begin{itemize}[topsep=0pt]
+\item Review this Plan and changes to this Plan.
+\item Review requirements and design documentation.
+\item Review and approve change requests (includes new feature implementation).
+\item Review and approve test results.
+\item Review and approve documentation changes associated with change requests.
+\item Perform additional review activities as assigned by the \ac{psm}.
+\end{itemize}\\
+\midrule
+Software Developer &%
+\begin{itemize}
+\item Perform and document design, coding, and unit testing of software code.
+\item Perform additional development and testing activities as assigned by the \ac{psm}.
+\end{itemize}\\
+\midrule
+Records Management Officer &%
+\begin{itemize}
+\item Ensure that code and documentation baseline is maintained.
+\item Ensure that identified code records are scheduled and maintained.
+\item Ensure that documents are numbered and controlled in accordance with \ac{sbms} requirements.
+\item Maintain documents repository to ensure easy retrieval for use and future revisions.
+\end{itemize}\\
+\bottomrule
+\end{longtable}
+
+\chapter{Documentation and Records}
+
+All documents and records generated through this Plan are managed per {\it VERA-QA-003, VERA Document Control and Records}.
+All VERAIO documentation is retained in the VERAIO code repository and is updated as necessary when modifications are made to VERAIO software.
+VERAIO change request reviews include a review of documentation.
+The following lifecycle documentation will be managed and maintained as \ac{qa} records for VERAIO:
+
+\begin{itemize}
+\item VERAIO Software Management Plan
+\item VERAView  User's Manual
+\item VERAView  Software Test Plan, Requirements, and Test Report
+\item VERAView  Programmer's Manual
+\item VERAIn  User's Manual
+\item VERAIn  Programmer's Manual
+\item VERAIn  Software Test Plan, Requirements, and Test Report
+\item Completed software \ac{qa} checklists
+\item Software Problem Reports
+\end{itemize}
+
+The VERAIn manuals also apply to VERARun.
+
+\chapter{Software Risk Management}
+
+The Software Risk Management described in {\it VERA-QA-002, VERA Software Quality Assurance Plan}, have been reviewed.
+The stated risks are applicable to the VERAIO product and no additional software risks have been identified.
+The software work activities implemented by the code team will ensure the software meets its intended function before release to the nuclear industry.
+
+\section{Software Quality Level}
+
+VERAIO has been determined to be SQL2 based on the fact that VERAIO will be used for supporting nuclear reactor safety analysis.
+This plan defines how the following software specific work activities will be implemented for the VERAIO product:
+\begin{enumerate}
+\item Configuration Management
+\item Software Acquisition
+\item Software Requirements
+\item Software Design
+\item Software Verification and Validation
+\item Software Problem Reporting and Corrective Action
+\item Training
+\end{enumerate}
+
+\section{Risk Management}
+
+Software risk management, which includes software failure analysis, provides a disciplined environment for proactive decision making to continuously assess what can go wrong, determine what risks are important to address, and implement actions to address those risks.
+VERAIO is in the maintenance phase of the development life cycle, which requires frequent changes to support the next VERA Product Suite software release.
+The \ac{psm} is responsible for managing identified code-level risks that would potentially impact the successful completion of the next VERA Product Suite software release:
+
+\begin{description}
+\item Introduction of code defects: Mitigating factors include software design and in-process code reviews, training and qualification of code developers, and PSM mentoring and oversight
+\item Inadequate resources for completing of software requirements implementation: Mitigating factors include the establishment of technical and resource-loaded performance parameters and milestones that are tracked and correlated with cost and schedule data
+\end{description}
+
+\chapter{Software Configuration Management}
+\label{chap:config}
+
+Software configuration management will be done in accordance with {\it VERA-QA-004, VERA Software Configuration and Control}.
+
+The ``VERAIO Software Configuration Item List'' can be found in the VERAIO Software Requirements, Test Plan and Test Report Documents.
+
+\chapter{Software Acquisition}
+
+Acquired software (including system software, software tools and third-party libraries) is obtained through the \ac{phi} Infrastructure Team and is controlled under the ORNL \ac{sbms} Acquisition Management System.
+
+Inclusion of acquired third-party libraries to support functionality of a VERA software product are covered through the software lifecycle activities including requirements definition, design reviews, testing and verification and validation.
+
+\chapter{Software Engineering Method}
+
+The tasks delineated in the following subsections encompass software engineering activities performed throughout the life cycle of a software product.
+VERAIO is already developed, has operational history, and is being maintained, although occasional enhancements and new features are added.
+
+\section{Reviews}
+
+Reviews are conducted in accordance with {\it VERA-QA-009, VERA Release Process}.
+
+\section{Software Requirements}
+
+The functional requirements for VERAIn and VERARun are included in the
+{\it VERAIn Software Requirements, Test Plan, and Test Report}.
+
+The functional requirements for VERAView are included in the
+{\it VERAView Software Requirements, Test Plan, and Test Report}.
+
+
+\subsection{Modeling Assumptions and Constraints}
+
+Code modeling assumptions and constraints are discussed in the respective VERAIO Programmer's Manuals and User's Manuals.
+
+\subsection{Requirements Traceability}
+
+A custom-developed requirements traceability tool is used to link the unique requirements identifiers to tests that test those requirements.  This allows for both backwards and forwards traceability.
+
+\section{Software Design}
+
+Software design follows \VERAReq.
+VERAIO does not have a single design document.
+Code design for code changes is discussed in TRAC tickets.
+TRAC tickets must be reviewed by an Independent Reviewer before closing.
+Closed TRAC tickets are archived indefinitely.
+See the ``Software Design Review'' section of this Plan for additional information on design reviews.
+% Code models and numerical solution are discussed in the VERAIO Theory Manual.
+A high level overview of code organization is given in the Programmer's Manuals.
+
+Design traceability is maintained by adding a TRAC ticket number to code changes and merge requests, which describes motivation, design, and testing related to the code changes.
+
+\section{Software Implementation and Control of Libraries}
+
+VERAIO software is implemented as outlined in the ``Configuration Change Control'' section of this Plan using designated VERAIO coding practices.
+Third-party code (functional libraries, such as solvers) and data (non-functional) libraries are utilized by VERAIO and are obtained from the VERA development environment.
+Regardless of type, all libraries are managed and controlled by the  \ac{phi} Infrastructure Team.
+VERAIO libraries are included on the Support Software and Libraries Software Configuration Item List.
+See the ``Coding Standards, Practices, and Conventions'' section of this Plan for additional information.
+
+\section{Software Testing}
+
+Testing is planned and conducted in accordance with \VERAReq\ and {\it VERA-QA-009, VERA Release Process}.
+
+\section{Code Availability for VERA Product Suite Integration}
+
+The master branch of the VERAIO Gitlab site is always available for VERA Product Suite integration.
+The master branch is synced to the casl-dev repository on a nightly basis using an automated sync script.
+The sync script performs VERA Product Suite level automated casl-dev system testing prior to syncing the VERAIO Gitlab site with the casl-dev repository.
+VERA Product Suite releases are made from the casl-dev repositories.
+
+\section{Security, Backup, and Recovery}
+
+Code access is controlled through the VERAIO Gitlab site.
+Access must be explicitly granted on a per-user basis by the \ac{psm}.
+Code backup and recovery services are managed by the ORNL Information Technology Services.
+
+\section{Software Retirement}
+
+VERAIO is an active software product with on-going support. This section will be updated in the event, it will be removed from distribution and support.
+
+\chapter{Verification and Validation}
+
+Verification and validation activities are planned and executed in accordance with \VERAReq\ and {\it VERA-QA-009, VERA Release Process}.
+
+\chapter{Coding Standards, Practices, and Conventions}
+
+Coding standards, practices and conventions are selected to meet code requirements, facilitate software life cycle activities, and to improve coding consistency, functionality, performance, and testability.
+VERAIO coding standards are documented in the VERAIO Programmer's Manuals.
+The VERAIO \ac{psm} is responsible for managing the VERAIO Programmer's Manuals.
+
+\chapter{Software Tools and Support Software}
+
+Support software consists of software tools and system software.
+All VERAIO support software is managed and controlled by the \ac{phi} Infrastructure Team.
+The \ac{psm} determines and communicates to the \ac{phi} Infrastructure Team the need for VERAIO support software changes, assesses the potential impact on the code, and sets the level of review and retesting required.
+Changes to VERAIO support software is controlled under the VERA-level configuration management provisions.
+
+VERAIO support software is included on the Support Software and Libraries Software Configuration Item List.
+
+\chapter{Problem Reporting and Corrective Action}
+
+Problem reporting and corrective action follow {\it VERA-QA-002, VERA Software Quality Assurance Plan} and
+{\it VERA-QA-004, VERA Software Configuration and Control}.
+
+\chapter{Training}
+
+Personnel performing or managing activities contained in this Plan shall receive training for their job responsibilities.
+All roles identified in the ``Roles and Responsibilities'' section of this Plan shall be qualified and trained as directed by the \ac{psm}.
+New Software Developers are required to review the VERA \ac{qapp} and associated procedures, this software management document and the VERAIO Style Guide.
+The following user support materials and training materials will be developed and supplied as part of the VERAIO product release:
+\begin{itemize}
+
+\item VERAIO Software Management Plan
+\item VERAView  User's Manual
+\item VERAView  Software Test Plan, Requirements, and Test Report
+\item VERAView  Programmer's Manual
+\item VERAIn  User's Manual
+\item VERAIn  Programmer's Manual
+\item VERAIn  Software Test Plan, Requirements, and Test Report
+\end{itemize}
+
+
+%\bibliographystyle{plain}
+%\bibliography{biblio}
+%\addcontentsline{toc}{chapter}{References}
+
+%\appendix
+
+
+\end{document}

@@ -1,0 +1,408 @@
+\begin{longtable}[!ht]{|p{1.4cm}|p{14cm}|}
+\caption{VERAIn Requirements}\label{tab:req}\\
+
+\hline
+\multirow{4}{*}{\textbf{Req. ID}} & \cellcolor{caslheader}\textcolor{white}{\textit{Requirement Description}} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \textit{Test Name} \\\cline{2-2}
+                   & \cellcolor{caslcolor2} \textit{Test Input} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \textit{Additional Info} \\\hline
+\endfirsthead
+
+\hline
+\multirow{4}{*}{\textbf{Req. ID}} & \cellcolor{caslheader}\textcolor{white}{\textit{Requirement Description}} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \textit{Test Name} \\\cline{2-2}
+                   & \cellcolor{caslcolor2} \textit{Test Input} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \textit{Additional Info} \\\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+
+\multirow{4}{*}{1} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse inputs in which multigrid solver
+ options are specified} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}MSED.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{2} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse 9 3D 17x17 assemblies with feedback
+ enabled in full symmetry} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_3x3.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{3} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse 49 3D 17x17 assemblies with feedback
+ enabled in full symmetry} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_7x7.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{4} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full 3D core.} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_full\_core.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{5} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full 3D core with fuel mixing.} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_full\_core\_fuelmix.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\newpage\multirow{4}{*}{6} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full 3D core with a combination
+ of full, quarter, and octant symmetric maps} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_full\_core\_maps.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{7} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full 3D core with material mixing.} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_full\_core\_matmix.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{8} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full 3D core with upper and lower
+ reflector regions} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_full\_core\_reflector.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{9} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full 3D core with numerous BISON
+ parameters enabled} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_full\_core\_wsym.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{10} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full 3D core with 18x18 assemblies.} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_full\_core\_wsym\_assm\_even.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{11} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full 3D core of size 16 with
+ numerous BISON parameters enabled} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_full\_core\_wsym\_even.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\newpage\multirow{4}{*}{12} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full 3D core with numerous BISON
+ parameters enabled with multiple states} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_full\_core\_wsym\_state.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{13} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full 3D core with numerous BISON
+ parameters enabled with multiple states where the assemblies are defined over multiple ASSEMBLY blocks rather than all being defined in the same ASSEMBLY block} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_full\_core\_wsym\_state\_assm.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{14} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full 3D core with numerous BISON
+ parameters enabled with multiple states where the assemblies are defined over multiple ASSEMBLY blocks rather than all being defined in the same ASSEMBLY block and material thermal expansion options are added} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_full\_core\_wsym\_state\_assm\_matopt.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{15} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full 3D core with numerous BISON
+ parameters enabled with multiple states where one of the lattice definitions is twice as large as the others} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_full\_core\_wsym\_state\_dsym.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{16} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse Problem 3, which is a single 3D 17x17
+ assembly at BOL without feedback} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_p3.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{17} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse Problem 3, which is a single 3D 17x17
+ assembly at BOL without feedback with numerous MPACT options} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_p3\_mpact.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\newpage\multirow{4}{*}{18} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse Problem 3, which is a single 3D 17x17
+ assembly at BOL without feedback where the materials are defined using an include statement} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_p3\_unit\_test.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{19} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse Problem 4, which are 9 3D 17x17
+ assemblies at BOL without feedback} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_p4.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{20} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse Problem 4, which are 9 3D 17x17
+ assemblies at BOL without feedback with numerous MPACT options} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_p4\_mpact.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{21} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse Problem 4a, which is a single 3D 17x17
+ assembly with a control rod at BOL without feedback} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_p4a\_unit\_test.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{22} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse Problem 6a, which is a single 3D 17x17
+ assembly at BOL with feedback} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_p6a.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{23} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse Problem 6a, which is a single 3D 17x17
+ assembly at BOL with feedback with more complicated fuel types} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_p6a\_multifuel.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}\href{https://vminfo.casl.gov/trac/casl\_phi\_kanban/ticket/2907}{\# 2907} \\\hline
+\newpage\multirow{4}{*}{24} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse Problem 7, which is a full core 3D
+ problem with feedback} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_p7.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{25} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse Problem 9, which is a full core 3D
+ problem with feedback and depletion while using the jumpin capability} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_p9\_jumpin.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{26} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse Problem 9, which is a full core 3D
+ problem with feedback and depletion while using the restart capability} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_p9\_restart.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{27} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse Problem 9, which is a full core 3D
+ problem with feedback and depletion while using the fuel shuffle capability} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_p9\_shuffle.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{28} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 3D core of 3x3 assemblies.} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Sample\_qtr\_core\_wsym\_3x3\_standalone.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{29} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 3D Seabrook 5x5 assembly to test
+ DNB runs} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}Seabrook\_5x5rod\_HFP.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\newpage\multirow{4}{*}{30} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 2D APR1000 Initial core in
+ quarter symmetry} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}apr1400-cyc1.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{31} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 2D GE9 BWR Lattice.} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}bwr-ge9.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{32} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 2D BWR Peach Bottom 2 7x7
+ assembly with 80 mil channel in full symmetry with no gad and no water rods} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}bwr-peach-1.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{33} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 2D BWR Peach Bottom 2 7x7
+ assembly with 80 mil channel in full symmetry with 3\% gad pins and no water rods} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}bwr-peach-2.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{34} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 2D BWR Peach Bottom 2 7x7
+ assembly with 80 mil channel in full symmetry with 3\% and 4\% gad pins and no water rods} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}bwr-peach-3.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{35} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 2D BWR Peach Bottom 2 8x8
+ assembly with 100 mil channel in full symmetry with 3\% gad pins and large water rods} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}bwr-peach-4.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\newpage\multirow{4}{*}{36} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 2D BWR Peach Bottom 2 8x8
+ assembly with 100 mil channel in full symmetry with 2\% gad pins and large water rods} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}bwr-peach-5.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{37} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 2D BWR Peach Bottom 2 8x8
+ assembly with 100 mil channel in full symmetry with 2\% gad pins and two large water rods} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}bwr-peach-6.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{38} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D 3x3 assembly with TH
+ feedback enabled} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}chen\_3x3.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{39} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse five 3D 3x3 assemblies with TH
+ feedback enabled arranged in a cross witha baffle} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}cross\_w\_baffle.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{40} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D 17x17 assembly with TH
+ feedback enabled and CTF convergence criteria specified} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}ctf\_convergence\_terms.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{41} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall not be able to parse an input in which the axial
+ heights are listed in descending order. The parser shall appropriately fail and describe input error} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}decreasing-axial.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\newpage\multirow{4}{*}{42} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse inputs in which the default density
+ has been changed} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}default\_density\_change.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{43} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse inputs in which xml2ctf is disabled
+ during VERA init} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}disable\_xml2ctf.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{44} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D 3x3 assembly at HFP.} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}fast\_3x3rod\_HFP.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{45} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall not be able to parse inputs in which a hyphen is
+ given before the assmbly name in the assembly map. The parser shall appropriately fail and describe input error} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}front-dash.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{46} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse inputs with complex fuel and material
+ specificaitons} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}fuel\_options.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{47} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse inputs in which the COBRATF/crud
+ and mass balance/steam generator cards are specified} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}mamba\_mass\_bal.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\newpage\multirow{4}{*}{48} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse inputs in which numerous miscellaneous
+ options are enabled simultaneously} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}misc\_options.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{49} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a sungle MOX PWR assembly with three
+ different plutonium enrichment zones} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}mox1.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}\href{https://vminfo.casl.gov/trac/casl\_phi\_kanban/ticket/4378}{\# 4378} \\\hline
+\multirow{4}{*}{50} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D 3x3 assembly at HFP with
+ numerous BISON options enabled with solve\_type=standalone} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_3x3rod\_Bison\_standalone.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{51} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse nine 3D 17x17 assemblies with no feedback
+ in quarter symmetry with VERASHIFT options enabled} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}test\_verashift\_4mini\_nonunique.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{52} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full 3D SMR core in quarter symmetry
+ with feedback enabled} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}smr-7x7.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{53} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D fuel pin at
+ HFP in full symmetry with a shortened height} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}test-short.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\newpage\multirow{4}{*}{54} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 3D 3x3 assembly at
+ HFP in full symmetry with CTF edits enabled} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}test\_cobra\_edits.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{55} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse inputs that have dashes in the
+ assembly names within the assm\_map} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}with-dash.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{56} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D 3x3 assembly at HFP.} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_3x3rod\_HFP.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{57} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D 3x3 assembly at HFP
+ with two fuel enrichments} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_3x3rod\_HFP\_2fuel.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{58} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D 3x3 assembly at 10\%
+ power} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_3x3rod\_HFP\_8g.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{59} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D 3x3 assembly at HZP.} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_3x3rod\_HZP.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\newpage\multirow{4}{*}{60} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D 3x3 assembly at HFP with
+ IFBA pins} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_3x3rod\_IFBA.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{61} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a five 3D 3x3 assemblies at HFP when
+ arranged in a cross} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_5cross\_assem\_3x3rod\_HFP.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{62} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a five 3D 3x3 assemblies at 10\% power
+ when arranged in a cross with numerous COUPLING block options} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_multibundle.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{63} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a five 3D 3x3 assemblies at 10\% power
+ when arranged in a cross in quarter symmetry with numerous COUPLING block options and CTF is run in parallel} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_multibundle\_par.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{64} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a full core of 3D 3x3 assemblies at
+ HFP in quarter symmetry} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_qtr\_core\_3x3rod\_HFP.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{65} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D fuel pin at
+ HFP in full symmetry} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_singlerod\_HFP.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\newpage\multirow{4}{*}{66} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D fuel pin at
+ HFP in full symmetry with materials defined in an include file} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_singlerod\_HFP\_8g.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{67} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D fuel pin at
+ HFP in full symmetry with materials defined in an include file with a boron search enabled} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_singlerod\_HFP\_8gb.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{68} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 3D 3x3 assembly at
+ HFP in full symmetry with CTF edits enabled when material definitions are increased by 100} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}test\_cobra\_edits\_inimat.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{69} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 3D 17x17 assembly with no feedback
+ in quarter symmetry with VERASHIFT options enabled} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}test\_verashift\_3a.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{70} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 3D 17x17 assembly with no feedback
+ in quarter symmetry with VERASHIFT CADIS options enabled} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}test\_verashift\_3a\_cadis.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{71} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse nine 3D 17x17 assemblies with no feedback
+ in quarter symmetry with VERASHIFT options enabled and a bioshield defined} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}test\_verashift\_4mini\_nonunique\_bioshield.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\newpage\multirow{4}{*}{72} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D 17x17 assembly with feedback
+ enabled with 1300ppm boron} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}p6a\_sa\_1300\_vuq.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{73} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse 5 3D 17x17 assemblies with feedback
+ enabled arranged in a cross with parallel 1 set in the COBRATF block} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}par\_cross.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{74} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 16x16 CE design PWR assembly
+ with Erbia and two enrichments} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}pwr-CE-2a.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{75} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 16x16 CE design PWR assembly.} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}pwr\_CE\_single\_16x16.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{76} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D 3x3 assembly at HFP with
+ numerous BISON options enabled} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_3x3rod\_Bison.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{77} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 16x16 CE design PWR assembly
+ with Erbia and three enrichments} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}pwr-CE-2b.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\newpage\multirow{4}{*}{78} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a single 3D 3x3 assembly at HFP with
+ a natural blanket} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}small\_3x3rod\_BProd.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+\multirow{4}{*}{79} & \cellcolor{caslheader}\textcolor{white}{The VERAIn package shall be able to parse a 3D 17x17 assembly with no feedback
+ in quarter symmetry with VERASHIFT problem\_mode=forward enabled} \\\cline{2-2}
+                   & \cellcolor{caslcolor1} \\\cline{2-2}
+                   & \cellcolor{caslcolor2}test\_verashift\_3a\_forward.inp \\\cline{2-2}
+                   & \cellcolor{caslcolor1}None \\\hline
+
+\end{longtable}

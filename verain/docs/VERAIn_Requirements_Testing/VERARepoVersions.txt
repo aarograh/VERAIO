@@ -1,0 +1,48 @@
+*** Base Git Repo: VERA
+b60a94b [Sat Jun 15 20:48:38 2019 -0400] <inb@mod-condo-login01.ornl.gov>
+Commiting load_env.sh for panacea
+*** Git Repo: TriBITS
+a9e4761 [Thu May 9 09:33:45 2019 -0600] <rabartl@sandia.gov>
+Merge remote-tracking branch 'github/master' into phi-5294-update-tribits (PHI-5
+*** Git Repo: Trilinos
+6c776f5 [Thu Sep 21 10:59:00 2017 -0600] <mhoemme@sandia.gov>
+Merge remote branch 'intermediate-repo/develop' into develop
+*** Git Repo: TeuchosWrappersExt
+e2a6573 [Thu Nov 9 11:59:24 2017 -0700] <rabartl@sandia.gov>
+Install CTeuchos_config.h
+*** Git Repo: Futility
+b979066 [Mon May 13 21:01:33 2019 -0400] <collinsbs@ornl.gov>
+Merge branch 'master' of https://github.com/CASL/Futility
+*** Git Repo: VERAInExt
+cbae95e [Thu Jun 13 13:54:01 2019 -0400] <stimpsonsg@ornl.gov>
+Updating Problem 6 per CTFFuel input defaults change.
+*** Git Repo: DataTransferKit
+19526ab [Fri Aug 18 09:14:16 2017 -0400] <dalg24@gmail.com>
+Merge pull request #297 from naughtont3/tjn-fortran-off
+*** Git Repo: COBRA-TF
+1fe4152 [Thu Jun 13 10:46:14 2019 -0400] <wysockiaj@ornl.gov>
+Adding SystemCoupling interface and surrogate model
+*** Git Repo: VERAData
+4903eb7 [Fri Mar 8 15:50:55 2019 -0500] <pandyatm@ornl.gov>
+Merge branch 'pole-data-link' into 'master'
+*** Git Repo: VERAData/CEData
+679cb03 [Tue Jun 25 11:50:31 2019 -0400] <pandyatm@ornl.gov>
+Merge branch 'update-ce-data' into 'master'
+*** Git Repo: MOOSEExt
+4daa739 [Fri May 17 09:59:50 2019 -0400] <bairdml@ornl.gov>
+Merge branch 'atf_compare_output_csv' into 'master'
+*** Git Repo: MOOSEExt/MOOSE
+68913d5 [Wed May 29 18:59:59 2019 -0400] <bairdml@ornl.gov>
+Merge branch 'correct_int_cast' into 'master'
+*** Git Repo: SCALE
+09ba8e9 [Wed Jun 5 18:10:11 2019 -0400] <pandyatm@ornl.gov>
+Merge remote branch 'gitlab/master'
+*** Git Repo: MPACT
+c18843e [Thu Jun 13 14:11:14 2019 -0400] <stimpsonsg@ornl.gov>
+Rebaselining per CTFFuel default input changes.
+*** Git Repo: VeraShift
+ac561d8 [Thu Jun 6 12:26:49 2019 -0400] <pandyatm@ornl.gov>
+Merge remote branch 'gitlab/master'
+*** Git Repo: Tiamat
+be65a18 [Mon Mar 4 16:21:24 2019 -0500] <roystonke@ornl.gov>
+Merge branch 'master' of code-int.ornl.gov:CASL/Tiamat

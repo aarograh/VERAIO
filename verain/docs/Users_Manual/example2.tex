@@ -8,7 +8,7 @@
 %
 % Single-Assembly
 %
-\begin{verbatim}
+\begin{Verbatim}[fontsize=\small]
   [CASEID]
     title 'CASL Benchmark Progression Problem 6'
   !==================================================================
@@ -44,22 +44,19 @@
     lower_ref   mod 26.0 1.0  ! material, thickness (cm), vol frac
     upper_ref   mod 25.0 1.0  ! material, thickness (cm), vol frac
 
-    bc_rad reflecting         ! boundary condition
+    bc_rad reflecting         ! radial boundary condition
 
   ! Materials defined in the [CORE] block are global and can be accessed
   ! from any assembly, insert, etc.
 
-    mat he     0.000176       ! list of materials and densities
-    mat inc    8.19           ! The library-name defaults to user-name
+    mat he     0.0001786
+    mat inc    8.19
     mat ss     8.0
     mat zirc   6.56 zirc4
-    mat aic   10.20
-    mat pyrex  2.23
-    mat b4c    6.56
 
   include  assembly.inc   ! Include [ASSEMBLY] block from Example 1
   include  edits.inc      ! Include [EDITS]    block from Example 1
   include  cobratf.inc    ! Include [COBRATF]  block from Example 1
-  include  coupling.inc   ! Include [COUPLING] block from Example 1
-\end{verbatim}
+
+\end{Verbatim}
 
