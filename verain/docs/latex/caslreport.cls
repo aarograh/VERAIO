@@ -97,9 +97,9 @@
    \renewcommand{\headrulewidth}{0pt}%
  }
 
- % make the cover pages
+ % make the cover pages   - update to include page 4 for signatures
  \thispagestyle{empty}
- \includepdf[pages=1-3, pagecommand={\thispagestyle{empty}}]{casl/cover.pdf}
+ \includepdf[pages=1-4, pagecommand={\thispagestyle{empty}}]{casl/cover.pdf}
  \def\and{and }
 
 }

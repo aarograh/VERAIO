@@ -4686,7 +4686,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={10},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={The number of rings in the fuel rod pellet (only effective when nc>0).},
      notes={}
@@ -4700,7 +4700,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={4},
-     valuesapplicable={>=0},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={The minimum number of iterations CTF should take during a solve},
      notes={}
@@ -4826,7 +4826,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={0.026},
-     valuesapplicable={>=0.0},
+     valuesapplicable={$\ge 0.0$},
      limitations={},
      description={Percentage of rod heat directly deposited into fluid (gamma heating)},
      notes={}
@@ -4840,7 +4840,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={0.0},
-     valuesapplicable={0.0<=guide\_tube\_coefficient<=1.0},
+     valuesapplicable={$0.0 \le $ guide\_tube\_coefficient $\le 1.0$},
      limitations={},
      description={Used to determine the temperature rise in guide tubes using the following:
            T\_guide\_tube(z) = (T\_fluid(z)-T\_inlet)*guide\_tube\_coefficient+T\_inlet
@@ -4859,7 +4859,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={0.2},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={The boiling heat transfer coefficient under-relaxation coefficient.  Because of the semi-implicit
         coupling of the fluid and energy equations in the CTF numerical solution, it is necessary to under-relax the
@@ -4876,7 +4876,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={0.3},
-     valuesapplicable={>0.0 and <1.0},
+     valuesapplicable={$>0.0$ and $<1.0$},
      limitations={},
      description={The under-relaxation coefficient used when calculating rod surface temperatures on the
         rod surface coupling mesh set up by CTF for coupling to MAMBA.  It may be necessary to reduce
@@ -4893,7 +4893,7 @@
      unitsdefault={W/m**2/K},
      unitsother={},
      valuedefault={5678.3},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets the gap conductance in the fuel rod gap (only applicable when using a constant gap conductance fuel rod model).},
      notes={}
@@ -4921,7 +4921,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-4},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Relative tolerance for the linear solver (pressure matrix solve).  Only applicable when using
         an iterative solver.  Setting too high can lead to numerical instability.},
@@ -4936,7 +4936,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={160},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Maximum number of iterations to take in the linear solve (pressure matrix solve).  Only
         applicable when using an iterative solver.  Setting too low can lead to numerical instabilities.},
@@ -4951,7 +4951,7 @@
      unitsdefault={s},
      unitsother={},
      valuedefault={1e-6},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Sets the minimum allowable timestep size.  Used for both transients and steady state (because CTF
         solves a transient to get to steady state).  If the timestep size needs to be reduced smaller than this value,
@@ -4967,7 +4967,7 @@
      unitsdefault={s},
      unitsother={},
      valuedefault={0.1},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Sets the maximum allowable timestep size.  Used for both transients and steady state (because CTF
         solves a transient to get to steady state).  CTF uses dynamic timestep selection which is mainly a function
@@ -4983,7 +4983,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={100.0},
-     valuesapplicable={>=1.0},
+     valuesapplicable={$\ge 1.0$},
      limitations={},
      description={Sets the ratio between the conduction and fluid timestep sizes.  For steady state problems,
         the timestep sizes of the conduction equation can be set larger than the fluid timestep sizes to reduce
@@ -5000,7 +5000,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={10000},
-     valuesapplicable={>=1},
+     valuesapplicable={$\ge 1$},
      limitations={},
      description={Sets the maximum number of iterations CTF will take during any individual steady state solve.
         If the iterations go over this maximum value, CTF will crash on an unable to converge exception.},
@@ -5015,7 +5015,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={0.8},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets the Courant number to use when setting timesteps size.  Setting this value lower will
         lead to overall smaller timestep sizes being used in CTF and setting it larger will lead to overall
@@ -5066,7 +5066,7 @@
      unitsdefault={percent},
      unitsother={},
      valuedefault={0.01},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance for energy balance (energy in minus energy out normalized to energy in) for steady state runs.},
      notes={}
@@ -5080,7 +5080,7 @@
      unitsdefault={percent},
      unitsother={},
      valuedefault={0.01},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance for mass balance (mass in minus mass out normalized to mass in) for steady state runs.},
      notes={}
@@ -5094,7 +5094,7 @@
      unitsdefault={percent},
      unitsother={},
      valuedefault={0.5},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance for energy storage in the fluid (change in energy over a timestep) for steady state runs.
         Only applicable when using the storage-based convergence criteria (specify fluid\_energy\_storage/solid\_energy\_storage/mass\_storage).
@@ -5110,7 +5110,7 @@
      unitsdefault={percent},
      unitsother={},
      valuedefault={0.5},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance for energy storage in the solid (change in energy over a timestep) for steady state runs.
         Only applicable when using the storage-based convergence criteria (specify fluid\_energy\_storage/solid\_energy\_storage/mass\_storage).
@@ -5126,7 +5126,7 @@
      unitsdefault={percent},
      unitsother={},
      valuedefault={0.5},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance for mass storage in the fluid (change in mass in system over a timestep) for steady state runs.
         Only applicable when using the storage-based convergence criteria (specify fluid\_energy\_storage/solid\_energy\_storage/mass\_storage).
@@ -5142,7 +5142,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-4},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of pressure change for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5163,7 +5163,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-3},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of coolant temperature for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5184,7 +5184,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-3},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of solid temperature for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5205,7 +5205,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-4},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of void for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5226,7 +5226,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-3},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of liquid velocity for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5247,7 +5247,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-2},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of vapor velocity for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5268,7 +5268,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-2},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of droplet velocity for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5289,7 +5289,7 @@
      unitsdefault={bar},
      unitsother={},
      valuedefault={1e-3},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-infinity of pressure for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5310,7 +5310,7 @@
      unitsdefault={K},
      unitsother={},
      valuedefault={1e-3},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-infinity of coolant temperature for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5331,7 +5331,7 @@
      unitsdefault={K},
      unitsother={},
      valuedefault={1e-3},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-infinity of solid temperature for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5352,7 +5352,7 @@
      unitsdefault={m/s},
      unitsother={},
      valuedefault={1e-3},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-infinity of liquid velocity for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5373,7 +5373,7 @@
      unitsdefault={m/s},
      unitsother={},
      valuedefault={1e-2},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-infinity of vapor velocity for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5394,7 +5394,7 @@
      unitsdefault={m/s},
      unitsother={},
      valuedefault={1e-2},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-infinity of droplet velocity for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5415,7 +5415,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-5},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of pressure for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5436,7 +5436,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-4},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of coolant temperature for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5457,7 +5457,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-4},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of solid temperature for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5478,7 +5478,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-5},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-2 of void for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5499,7 +5499,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-4},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of liquid velocity for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5520,7 +5520,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-4},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of vapor velocity for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5541,7 +5541,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-4},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of droplet velocity for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5562,7 +5562,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1e-5},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of pressure for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5583,7 +5583,7 @@
      unitsdefault={K},
      unitsother={},
      valuedefault={1e-5},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-2 of coolant temperature for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5604,7 +5604,7 @@
      unitsdefault={K},
      unitsother={},
      valuedefault={1e-5},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-2 of solid temperature for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5625,7 +5625,7 @@
      unitsdefault={m/s},
      unitsother={},
      valuedefault={1e-5},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-2 of liquid velocity for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5646,7 +5646,7 @@
      unitsdefault={m/s},
      unitsother={},
      valuedefault={1e-4},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-2 of vapor velocity for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5667,7 +5667,7 @@
      unitsdefault={m/s},
      unitsother={},
      valuedefault={1e-4},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-2 of droplet velocity for steady state runs.
         Only applicable when using the change-based convergence criteria (specify pressure\_criteria, pressurea\_criteria,
@@ -5889,7 +5889,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Use to set the number of sub-levels to divide each CTF axial level into when forming
         the coupling mesh with MAMBA.  Only applicable when using ROTHCON to reconstruct rod surface temperatures
@@ -5905,7 +5905,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Use to set the number of sub-sectors to divide each CTF rod sector into when forming
         the coupling mesh with MAMBA.  Only applicable when using ROTHCON to reconstruct rod surface temperatures
@@ -5981,7 +5981,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={0.005},
-     valuesapplicable={>=0.0},
+     valuesapplicable={$\ge 0.0$},
      limitations={},
      description={Sets the strength of turbulent mixing causing lateral cross-flow in CTF.  The default
         is currently 0.005, but it has been found that 0.037 is more reasonable for bundles with mixing
@@ -5997,7 +5997,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1.4},
-     valuesapplicable={>=0.0},
+     valuesapplicable={$\ge 0.0$},
      limitations={},
      description={Sets the equilibrium distribution weighting factor in the void drift model.  Decreasing
         this value leads to less void drift and increasing it leads to more.},
@@ -6056,7 +6056,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={100},
-     valuesapplicable={>=1},
+     valuesapplicable={$\ge 1$},
      limitations={},
      description={Sets the number of rings in the oxide region of the clad for Cicada runs.  Only
         applicable when Cicada used as the crud tool.  Only applicable when cicada\_dimension=3.},
@@ -6071,7 +6071,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={20},
-     valuesapplicable={>=1},
+     valuesapplicable={$\ge 1$},
      limitations={},
      description={Sets the number of rings in the clad region of the clad for Cicada runs.  Only
         applicable when Cicada used as the crud tool.  Only applicable when cicada\_dimension=3.},
@@ -6086,7 +6086,7 @@
      unitsdefault={m},
      unitsother={},
      valuedefault={100e-6},
-     valuesapplicable={>0.0},
+     valuesapplicable={$>0.0$},
      limitations={},
      description={Sets the thickness of the oxide modeling region of the clad.  Only applicable for
         crud simulations where Cicada is being used as the modeling tool.  Only applicable when cicada\_dimension=3.},
@@ -10163,7 +10163,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Prefactor for NiFe2O4 surface growth},
      notes={}
@@ -10177,7 +10177,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Activation energy for NiFe2O4 surface growth},
      notes={}
@@ -10191,7 +10191,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Prefactor for NiFe2O4 nucleation},
      notes={}
@@ -10205,7 +10205,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Activation energy for NiFe2O4 nucleation},
      notes={}
@@ -10219,7 +10219,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Boiling enhanced surface growth rate},
      notes={}
@@ -10233,7 +10233,7 @@
      unitsdefault={cm$^2$/s},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Diffusion coefficient for Ni},
      notes={}
@@ -10247,7 +10247,7 @@
      unitsdefault={cm$^2$/s},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Diffusion coefficient for Fe},
      notes={}
@@ -10261,7 +10261,7 @@
      unitsdefault={cm$^2$/s},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Diffusion coefficient for Boric Acid},
      notes={}
@@ -10275,7 +10275,7 @@
      unitsdefault={cm$^2$/s},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Diffusion coefficient for Li},
      notes={}
@@ -10289,7 +10289,7 @@
      unitsdefault={cm$^2$/s},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Diffusion coefficient for H$_2$},
      notes={}
@@ -10303,7 +10303,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={0.7},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Initial porosity of CRUD layer},
      notes={}
@@ -10317,7 +10317,7 @@
      unitsdefault={g/cm$^3$},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Density of solid NiFe2O4},
      notes={}
@@ -10331,7 +10331,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={0.25},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Fraction of the B-10 reaction rate applied to depletion},
      notes={}
@@ -10345,7 +10345,7 @@
      unitsdefault={W/cm$^2$-K},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Heat transfer coefficient inside a chimney},
      notes={}
@@ -10359,7 +10359,7 @@
      unitsdefault={num/cm$^2$},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Surface density of chimney},
      notes={}
@@ -10373,7 +10373,7 @@
      unitsdefault={cm},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Radius of average chimney},
      notes={}
@@ -10387,7 +10387,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0, <1},
+     valuesapplicable={$>0$, $<1$},
      limitations={},
      description={Void fraction of steam exiting chimney},
      notes={}
@@ -10401,7 +10401,7 @@
      unitsdefault={W/cm-K},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Thermal conductivity of precipitate in CRUD},
      notes={}
@@ -10415,7 +10415,7 @@
      unitsdefault={J/g-K},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Heat capacity for the CRUD skelaton},
      notes={Currently Cp is unused}
@@ -10429,7 +10429,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1.0E-12},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Scaling factor to convert from TKE to errosion},
      notes={}
@@ -10443,7 +10443,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1.0},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Multiplier for prefactor for source term model},
      notes={}
@@ -10457,7 +10457,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1.0},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Multiplier for activiation energy for source term model},
      notes={}
@@ -10471,7 +10471,7 @@
      unitsdefault={years},
      unitsother={},
      valuedefault={0.0},
-     valuesapplicable={>=0},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Initial age of the steam generator},
      notes={This is only needed for the first cycle simulated or for a steam generator replacement, %
@@ -10486,7 +10486,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1.0},
-     valuesapplicable={>=0},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Multiplier on steam generator source term},
      notes={This is required to scale the source term model to smaller reactor geometries, i.e. single asm.}
@@ -10500,7 +10500,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1.0},
-     valuesapplicable={>=0},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Multiplier on crud deposition mass term in the mass balance},
      notes={This is required to scale the source term model to smaller reactor geometries, i.e. single asm.}
@@ -10514,7 +10514,7 @@
      unitsdefault={years},
      unitsother={},
      valuedefault={0.0},
-     valuesapplicable={>=0},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Initial age of the hot and cold leg},
      notes={This is only needed for the first cycle simulated , %
@@ -10566,7 +10566,7 @@
      unitsdefault={ppm},
      unitsother={},
      valuedefault={},
-     valuesapplicable={>0},
+     valuesapplicable={$>0$},
      limitations={},
      description={Table of boron then lithium concentrations to define %
                   the lithium concentration based on boron concentration},

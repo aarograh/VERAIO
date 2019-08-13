@@ -6,12 +6,19 @@
 \section{VERARun}  \label{chap:verarun}
 
 This chapter describes running cases with the VERARun script.
+VERARun is the driver script that runs the input processor and corresponding VERA component codes.
+VERARun also submits the job to the parallel job queue.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{VERARun}
+\subsection{Running a Case}
 
-A simple case can be run with VERARun just by typing ``verarun'' followed by the input file name.
-For example, if you input deck is called ``2a.inp'', you would type:
+VERARun is run by specifying {\tt verarun} on the command line, followed by the name of the input file.
+There are additional command line options that are shown below.
+\begin{Verbatim}[fontsize=\small]
+   verarun <input file>
+\end{Verbatim}
+
+For example, if you input deck is called ``2a.inp'', you would enter:
 \begin{Verbatim}[fontsize=\small]
    verarun 2a
 \end{Verbatim}
@@ -103,11 +110,27 @@ Some typical outputs include:
 \end{itemize}
 
 
-In case of errors, the user should examine the standard error file first.
-If there were any errors in the input processor (VERAIn), the errors will be written here.
-Any error messages from other VERA components will also be written to the standard error file.
 
-If the standard error file does not list any errors, example the VERA component output files and log files for messages.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Input Errors}
+
+If the {\tt verarun} command does not work, the user should make sure that it is in the path.
+The user may need to consult with the system administrator for the correct path.
+
+The next step when looking for an error is to look at the standard error file.
+If the job ran successfully, the size of this file will be zero.
+
+If there were any errors in the input processor (VERAIn), the errors will be written to the standard error file.
+Common errors from the input processor include
+\begin{enumerate}
+\item invalid keywords
+\item invalid map sizes
+\item invalid input options
+\end{enumerate}
+
+If the input processor works correctly, an error may still occur in one of the VERA component codes.
+The user used look at the error message and consult the user manual for the component code.
+
 
 
 

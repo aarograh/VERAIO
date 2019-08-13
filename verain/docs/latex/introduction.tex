@@ -37,10 +37,6 @@ science leadership, and a record of LWR design and regulatory accomplishments!
 
 More information on CASL can be found at the website \href{http://www.casl.gov}{www.casl.gov}.
 
-Note that the VERA input processor (called VERAin) is an open source software project and can be
-found on the CASL Github website \href{http://www.github.com/casl/verain}{github.com/casl/verain}.
-The open source input processor does not include any physics packages.
-
 %%%%%%%%%%%%
 \subsection{VERA Core Simulator}
 One component of VERA is the VERA Core Simulator (VERA-CS).  The core simulator is the specific collection
@@ -80,7 +76,12 @@ a complete listing of every available input card.
 The third part of the manual, Chapter \ref{chap:example}, gives several example input decks.
 Additional example input files can be found in the code installation directory.
 
-In addition, a description of the VERARun script, used to run VERA jobs, is given in \ref{chap:verarun}.
+In addition, a description of the VERARun script, used to run VERA jobs, is given in Chapter~\ref{chap:verarun}.
+
+Note that the VERA input processor (called VERAin) is an open source software project and can be
+found on the CASL Github website \href{http://www.github.com/casl/verain}{github.com/casl/verain}.
+The open source input processor does not include any physics packages.
+
 
 %%%%%%%%%%%%
 \subsection{Training Requirements}
@@ -107,7 +108,7 @@ where applicable.
 
 The purpose of the VERA run script (VERARun) is to provide a single
 interface to run the VERA codes, usually in parallel computing environments.
-The specific functional requirements are:
+The specific functional requirements for VERARun are:
 \begin{enumerate}
 \item Run VERAIn to create an XML file that can be read by other VERA components.
 \item Run any input preprocessors as necessary (such as XML2CTF or XML2Bison).
