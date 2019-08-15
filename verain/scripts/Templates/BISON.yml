@@ -283,3 +283,17 @@ BISON:
       _do:
         - copy BISON/$thermalcontact_roughness_clad
       _content:
+
+    functions_coolant_pressure_ramp_x:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_coolant_pressure_ramp_x
+      _content:
+
+    functions_coolant_pressure_ramp_y:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$functions_coolant_pressure_ramp_y
+      _content:

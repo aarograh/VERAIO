@@ -14745,6 +14745,16 @@ BISON:
     _check:
       - is_float()
       - is_gt() 0
+  functions_coolant_pressure_ramp_x:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+  functions_coolant_pressure_ramp_y:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
 
 #>
 #> \section{Block RUN}
