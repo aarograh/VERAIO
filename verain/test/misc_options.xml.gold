@@ -434,6 +434,9 @@
       <Parameter name="moderator_mesh_ndiv" type="int" value="3"/>
       <Parameter name="moderator_mesh_pins" type="string" value="both"/>
     </ParameterList>
+    <Parameter name="nodal_edits" type="string" value="sanm-2"/>
+    <Parameter name="nodal_edits_adapt_adf" type="bool" value="true"/>
+    <Parameter name="nodal_edits_energy_cutoff" type="double" value="0.625"/>
     <Parameter name="rst_compress" type="string" value="none"/>
     <ParameterList name="transient">
       <Parameter name="rx_components" type="bool" value="false"/>

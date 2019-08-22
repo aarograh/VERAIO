@@ -327,3 +327,7 @@
   log_message debug
   rx_components false
   summary_edits true
+  nodal_edits true
+  nodal_edits sanm-2
+  nodal_edits_energy_cutoff 0.625
+  nodal_edits_adapt_adf true

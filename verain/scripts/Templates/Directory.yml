@@ -9658,24 +9658,31 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={true, false. These are described as:                            %
+#>     valuesapplicable={nem, sanm-2, sanm-4, false. These are described as:             %
 #>       \begin{enumerate}                                                               %
-#>         \item \texttt{true} --- enables MPACT nodal cross section edits               %
+#>         \item \texttt{nem} --- enables MPACT nodal cross section edits using a        %
+#>           quartic NEM kernel to generate ADFs                                         %
+#>         \item \texttt{sanm-2} --- enables MPACT nodal cross section edits using a     %
+#>           quadratic SANM kernel to generate ADFs                                      %
+#>         \item \texttt{sanm-4} --- enables MPACT nodal cross section edits using a     %
+#>           quartic SANM kernel to generate ADFs                                        %
 #>         \item \texttt{false} --- disables MPACT nodal cross section edits             %
 #>       \end{enumerate}},
 #>     limitations={},
 #>     description={This card is used to enable or disable MPACT's nodal cross section   %
 #>       capability.  If enabled, node-averaged cross sections, flux moments, kinetics   %
 #>       data, TH data, discontinuity factors, and other information will be written     %
-#>       to each block of the HDF5 file.},
+#>       to each block of the HDF5 file.  The different options will generate ADFs using %
+#>       different kernels.  The \texttt{true} option is a deprecated option, still      %
+#>       supported for backwards compatibility and is the same as \texttt{sanm-4}.},
 #>     notes={}
 #>   }
   nodal_edits:
-    <<: *dtbool
+    <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() true false
+      - in_dictionary() true false nem sanm-2 sanm-4
 #>
 #>   {\bf nodal\_edits\_energy\_cutoff} nodal\_edits\_energy\_cutoff
 #>   \VERAInputTable{
