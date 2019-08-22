@@ -390,6 +390,17 @@ class VERAOmnibusGenerator(object):
                 if dt.label == self.det_label_locs[d]:
                     det_type = dt
 
+            # Check if parameters are valid
+            if (self.bioshield_radii[-1] <
+                    self.det_rad_locs[d] + det_type.radii[-1]):
+                print("Error: detector cannot extend beyond bioshield")
+                exit()
+
+            if (self.det_rad_locs[d] - det_type.radii[-1] <
+                    self.vessel_rads[-1]):
+                print("Error: detector cannot extend into vessel")
+                exit()
+
             # Write out a shape for each radius and height
             shape_num = 0
             min_z     = self.det_elev_locs[d]
@@ -436,12 +447,27 @@ class VERAOmnibusGenerator(object):
 
             # Write out the well shape, if applicable
             if det_type.well_type == "wedge":
+                # Check for valid parameters
+                if (self.bioshield_radii[-1] < self.det_rad_locs[d] +
+                        np.sqrt(2.0) * det_type.radii[-1]):
+                    print("Error: detector well cannot extend beyond bioshield")
+                    exit()
+
+                if (self.det_rad_locs[d] + np.sqrt(2.0) * det_type.radii[-1] <
+                        self.bioshield_radii[0]):
+                    print("Error: detector well will not intersect bioshield")
+                    exit()
+
                 # Calculate well dimensions
                 azi = self.det_azi_locs[d]
-                a = 2.0 * det_type.radii[-1] / (2.0 - np.sqrt(2.0))
+                bio_r = self.bioshield_radii[0]
+                c = self.det_rad_locs[d] + (det_type.radii[-1] * np.sqrt(2.0))
+                xo = 0.5 * (c + np.sqrt(2.0 * bio_r * bio_r - c * c))
+                yo = xo - self.det_rad_locs[d] - det_type.radii[-1] * np.sqrt(2.0)
+                a = 2.0 * np.abs(yo) / np.sqrt(2.0)
                 height = min_z - self.det_elev_locs[d]
-                xo = self.det_rad_locs[d] - det_type.radii[-1]
-                yo = - a * np.sqrt(2) / 2.0
+
+                # Rotate the well to the detector location
                 well_pos = [xo * np.cos(np.deg2rad(-azi)) -
                             yo * np.sin(np.deg2rad(-azi)),
                             xo * np.sin(np.deg2rad(-azi)) +
