@@ -188,7 +188,7 @@ MPACT:
 
     nodal_edits:
       _pltype: parameter
-      _type: bool
+      _type: string
       _do:
         - copy MPACT/$nodal_edits
       _content:
