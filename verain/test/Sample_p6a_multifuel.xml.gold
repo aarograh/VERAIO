@@ -359,6 +359,10 @@
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
   <ParameterList name="MPACT">
+    <ParameterList name="cmfd">
+      <Parameter name="cmfd" type="string" value="mlcmfd"/>
+      <Parameter name="multilevel" type="string" value="space+energy"/>
+    </ParameterList>
     <ParameterList name="parallel_env">
       <Parameter name="num_angle" type="int" value="1"/>
       <Parameter name="num_space" type="int" value="29"/>
