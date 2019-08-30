@@ -8187,6 +8187,28 @@ COBRATF:
       - is_int()
       - is_geq() 1
 #>
+#>   {\bf hi2lo\_grid} hi2lo\_grid
+#>   \VERAInputTable{
+#>     name={hi2lo\_grid},
+#>     type={int},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Specify which grids should have their coupling mesh refined using hi2lo_sub_theta and
+#>        hi2lo\_sub\_axial.  Leaving this out means all grid spans will be refined.  The grid span numbering
+#>        goes from 1 to number of grid spans (number of grid_axial entries in the ASSEMBLY block).  The
+#>        region below the first grid does not count as a span.},
+#>     notes={}
+#>   }
+  hi2lo_grid:
+    <<: *dtlist
+    _content:
+    _check:
+      - fall(sub{is_int(shift)})
+
 #>   {\bf model\_corrosion} model\_corrosion
 #>   \VERAInputTable{
 #>     name={model\_corrosion},

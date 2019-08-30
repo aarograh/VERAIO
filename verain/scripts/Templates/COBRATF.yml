@@ -486,6 +486,13 @@ COBRATF:
         - copy COBRATF/$hi2lo_sub_theta
       _content:
 
+    hi2lo_grid:
+      _pltype: array
+      _type: int
+      _do:
+        - copyarray COBRATF/$hi2lo_grid
+      _content:
+
     model_corrosion:
       _pltype: parameter
       _type: int
