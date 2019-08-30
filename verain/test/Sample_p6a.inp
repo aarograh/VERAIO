@@ -233,6 +233,8 @@
   maxiter     100
 
 [MPACT]
+  cmfd mlcmfd
+  multilevel both
   include MPACT.ini
   num_space      29
   num_angle      1

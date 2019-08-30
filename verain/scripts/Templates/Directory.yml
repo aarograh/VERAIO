@@ -12062,7 +12062,7 @@ MPACT:
 #>     valuedefault={energy},
 #>     valuesapplicable={energy,space},
 #>     limitations={},
-#>     description={This card is used to specify whether space or energy multilevel CMFD is used},
+#>     description={This card is used to specify whether space, energy or both space and energy multilevel CMFD is used},
 #>     notes={Only active when mlcmfd is specified.}
 #>   }
 #
@@ -12071,7 +12071,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() energy space
+      - in_dictionary() energy space both space+energy
 #>
 #>   {\bf prolongation} prolongation
 #>   \VERAInputTable{
