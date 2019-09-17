@@ -9787,6 +9787,27 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 #>
+#>   {\bf native\_excore\_detector} native\_excore\_detector
+#>   \VERAInputTable{
+#>     name={native\_excore\_detector},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={\texttt{false}},
+#>     valuesapplicable={\texttt{true}},
+#>     limitations={},
+#>     description={This card is used to specify whether to perform the excore           %
+#>                  detector edits using the native simplified MPACT solver.},
+#>     notes={}
+#>   }
+  native_excore_detector:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf grid\_treatment} grid\_treatment
 #>   \VERAInputTable{
 #>     name={grid\_treatment},
