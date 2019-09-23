@@ -283,7 +283,7 @@
       <Parameter name="do_output" type="bool" value="true"/>
       <Parameter name="do_transport" type="bool" value="true"/>
       <Parameter name="downscatter" type="bool" value="true"/>
-      <Parameter name="eq_set" type="string" value="spn_fv"/>
+      <Parameter name="eq_set" type="string" value="sc"/>
       <Parameter name="extend_axial_mesh_size" type="double" value="10.0"/>
       <Parameter name="flux_decomposition" type="string" value="full"/>
       <Parameter name="grp_collapse_src" type="Array(double)" value="{5.0,4.0,3.0}"/>

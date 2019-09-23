@@ -6173,7 +6173,7 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={100 if eq\_set is spn\_fv, 30 otherwise},
+#>     valuedefault={30},
 #>     valuesapplicable={$>0$},
 #>     limitations={},
 #>     description={Maximum subspace size for upscatter solver},
@@ -6254,7 +6254,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={sc},
-#>     valuesapplicable={bld, bld\_2d, ld, sc, spn\_fv},
+#>     valuesapplicable={bld, bld\_2d, ld, sc},
 #>     limitations={},
 #>     description={Solution method or spatial discretization},
 #>     notes={Applicable to hybrid simulations}
@@ -6264,7 +6264,7 @@ SHIFT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() sc ld bld bld_2d spn_fv
+      - in_dictionary() sc ld bld bld_2d
 #>
 #>   {\bf upscatter\_verbosity} upscatter\_verbosity
 #>   \VERAInputTable{
