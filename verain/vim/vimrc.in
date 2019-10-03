@@ -1,0 +1,4 @@
+filetype plugin on
+so ${CMAKE_INSTALL_PREFIX}/share/VERAIn/vim/scripts.vim
+so ${CMAKE_INSTALL_PREFIX}/share/VERAIn/vim/ftplugin/verainput.vim
+so ${CMAKE_INSTALL_PREFIX}/share/VERAIn/vim/autoload/verainputcomplete.vim
