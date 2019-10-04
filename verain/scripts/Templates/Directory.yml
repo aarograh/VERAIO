@@ -14245,6 +14245,26 @@ MAMBA:
       - is_float()
       - is_gt() 0
 #>
+#>   {\bf chimney\_htc\_lin} htc_lin
+#>   \VERAInputTable{
+#>     name={chimney\_htc\_lin},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={W/cm$^2$-K^2},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={>0},
+#>     limitations={},
+#>     description={Linear-in-T heat transfer coefficient inside a chimney},
+#>     notes={}
+#>   }
+  chimney_htc_lin:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
 #>   {\bf chimney\_dens} dens
 #>   \VERAInputTable{
 #>     name={chimney\_dens},
