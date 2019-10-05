@@ -7898,7 +7898,7 @@ COBRATF:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={0},
+#>     valuedefault={9},
 #>     valuesapplicable={1 4 9 16},
 #>     limitations={},
 #>     description={Sets the number of domains to divide each full assembly into for parallel runs.
