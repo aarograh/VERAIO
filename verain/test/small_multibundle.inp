@@ -12,6 +12,13 @@
 !
 !================================================================================
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a five 3D 3x3 assemblies at 10% power
+!> when arranged in a cross with numerous COUPLING block options.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power   10.0         ! %
   tinlet 559.0 F         ! F
@@ -36,9 +43,9 @@
     0 1 0
 
   assm_map
-       A1   
+       A1
     A1 A1 A1
-       A1   
+       A1
 
   ! add material definitions for he, inc, ss, and zirc4.
   include casl_comp_r3_full.ini
@@ -108,7 +115,7 @@
           125.495
           129.305
           377.711
-          
+
 [COBRATF]
   nfuel   3             ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction

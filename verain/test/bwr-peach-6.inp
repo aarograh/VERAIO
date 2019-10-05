@@ -19,6 +19,14 @@
 !
 !------------------------------------------------------------------------------
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a 2D BWR Peach Bottom 2 8x8
+!> assembly with 100 mil channel in full symmetry with 2% gad pins and two
+!> large water rods.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power    100.0
   tinlet   575 F  ! *** average operating temperature, not inlet
@@ -26,7 +34,7 @@
   pressure 1040   ! psia
   sym      full
 
-  void  
+  void
     40.0
 
 !** at void 00,  rho=  0.736690 g/cc
@@ -54,31 +62,31 @@
   mat zr2  6.5514 zirc2      ! zirc density p. 39
   mat zr4  6.5514 zirc4
   mat he   0.000176 he-4
-   
+
 [ASSEMBLY]
   npin   8
   ppitch 1.6256          ! pin pitch - does not include channel gaps
-  
+
 !*** 100 mil design
   gap    0.9017 .42418   ! wide and narrow channel gap (cm)
-  channel_box zr4 0.254 0.9652 0.0 0.0   ! channel dimensions 
+  channel_box zr4 0.254 0.9652 0.0 0.0   ! channel dimensions
 
 !*** enrichments p. 18
 !*** density and materials p. 12
-  
+
   fuel U301  10.32 94.5 / 3.01
   fuel U222  10.32 94.5 / 2.22
   fuel U187  10.32 94.5 / 1.87
   fuel U145  10.32 94.5 / 1.45
   fuel U3G   10.23 94.5 / 3.01 / gad=2.0
- 
+
   cell 1   0.5207 0.53213 0.61341 / U301 he zr2
   cell 2   0.5207 0.53213 0.61341 / U222 he zr2
   cell 3   0.5207 0.53213 0.61341 / U187 he zr2
   cell 4   0.5207 0.53213 0.61341 / U145 he zr2
   cell 5G  0.5207 0.53213 0.61341 / U3G  he zr2
   cell WR         0.67437 0.75057 /    mod  zr2  ! large WR
- 
+
   lattice LAT
     4
     3  2

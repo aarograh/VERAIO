@@ -33,6 +33,13 @@
 !
 !================================================================================
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a single 3D 17x17 assembly with TH
+!> feedback enabled and CTF convergence criteria specified.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power  100.0         ! %
   tinlet 559.0 F         ! F

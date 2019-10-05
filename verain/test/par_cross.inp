@@ -11,6 +11,13 @@
 !
 !================================================================================
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse 5 3D 17x17 assemblies with feedback
+!> enabled arranged in a cross with parallel 1 set in the COBRATF block.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power  100.0         ! %
   tinlet 559.0 F         ! F

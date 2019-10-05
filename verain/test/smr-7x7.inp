@@ -18,6 +18,12 @@
 !      * used default CTF and MPACT options when applicable
 !      * 37 axial regions
 !
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a full 3D SMR core in quarter symmetry
+!> with feedback enabled.
+!> @endreq
+!===============================================================================
 [CASEID]
   title 'Nominal SMR 7x7 design'
 

@@ -10,6 +10,14 @@
 !
 !================================================================================
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a 3D 3x3 assembly at
+!> HFP in full symmetry with CTF edits enabled when material definitions are increased
+!> by 100.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power  100.0         ! %
   tinlet 559.0 F         ! F

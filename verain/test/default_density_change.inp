@@ -1,10 +1,17 @@
 [CASEID]
   title 'CASL AMA Benchmark Problem 1A - Pin Cell- Public'
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse inputs in which the default density
+!> has been changed.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power    0.0
   tinlet   565 K
-  tfuel    565 K 
+  tfuel    565 K
   modden   0.743         ! g/cc
   boron    1300          ! ppm
   sym      full          ! full symmetry
@@ -49,5 +56,5 @@
 [SHIFT]
   num_cycles           1100
   num_inactive_cycles  100
-  Np                   100000  
+  Np                   100000
 

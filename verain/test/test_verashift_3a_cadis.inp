@@ -1,3 +1,9 @@
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a 3D 17x17 assembly with no feedback
+!> in quarter symmetry with VERASHIFT CADIS options enabled.
+!> @endreq
+!===============================================================================
 [CASEID]
   title 'CASL AMA Problem 3a - Single 17x17 Assembly - Public'
 

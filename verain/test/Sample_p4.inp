@@ -3,6 +3,13 @@
 
 !  update 11/19/2012 - add comment about missing upper and lower gap definitions
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse Problem 4, which are 9 3D 17x17
+!> assemblies at BOL without feedback.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power  0.0        ! %
   tinlet 620.33 F     ! F - 600K
@@ -25,27 +32,27 @@
     1 1 1
     1 1 1
     1 1 1
-  
+
   assm_map
     A1 A2 A1
     A2 A1 A2
     A1 A2 A1
-           
+
   insert_map
     - 1 -
     1 - 1
     - 1 -
-    
+
   crd_map
     - - -
     - 1 -
     - - -
-    
+
   crd_bank
     - - -
     - A -
     - - -
-    
+
   det_map
     1 - -
     1 - -
@@ -64,7 +71,7 @@
 !  he he 0.000176
 !  inc inc 8.19
 !  ss ss 8.0
-!  zirc zirc 6.56 
+!  zirc zirc 6.56
 !  aic aic 10.20
 !  pyrex pyrex 2.23
 !  b4c b4c 6.56
@@ -72,7 +79,7 @@
   mat he     0.000176
   mat inc    8.19
   mat ss     8.0
-  mat zirc   6.56 
+  mat zirc   6.56
   mat aic   10.20
   mat pyrex  2.23
   mat b4c    6.56
@@ -81,7 +88,7 @@
   title "Westinghouse 17x17 A"
   npin 17
   ppitch 1.260
-  
+
 !  uo2 U21 10.257 / 2.11
 !  uo2 U26 10.257 / 2.62
 
@@ -160,7 +167,7 @@
 
   lower_nozzle  ss 6.053 6250.0  ! mat, height, mass (g)
   upper_nozzle  ss 8.827 6250.0  ! mat, height, mass (g)
-  
+
 [INSERT]
   title "Pyrex"
   npin 17
@@ -193,8 +200,8 @@
   axial 1 15.76 PY20 376.44 PLEN20 396.7
 
   [CONTROL]
-  title "B4C with AIC tips" 
-  npin 17 
+  title "B4C with AIC tips"
+  npin 17
   stroke  365.125 230     ! approx for 1.5875 step sizes and 360 max stroke
 
   cell 1  0.382 0.386 0.484 / aic he ss
@@ -225,10 +232,10 @@
   axial 1 17.031 AIC 118.6 B4C 377.71
 
 [DETECTOR]
-  title "double cheeseburger w/ fries" 
+  title "double cheeseburger w/ fries"
   npin 17
   cell 1 0.258 0.382 / vacuum ss
-  
+
   rodmap DET
      1
      - -

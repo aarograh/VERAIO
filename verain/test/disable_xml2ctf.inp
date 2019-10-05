@@ -6,6 +6,13 @@
 ! user and placed in the simulation directory.
 !================================================================================
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse inputs in which xml2ctf is disabled
+!> during VERA init.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power  100.0         ! %
   tinlet 559.0 F         ! F

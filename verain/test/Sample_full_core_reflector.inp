@@ -16,7 +16,7 @@
 !
 !  *** NOTE: This input is still in draft format, all input needs to be checked ****
 !
-!  Draft 2 - 
+!  Draft 2 -
 !    Changed maps to use dashes instead of "0" to signify blank space
 !    Changed crd_map and rodbank card to use bank names instead of numbers
 !    Added seperate ppitch card in [ASSEMBLY]
@@ -28,7 +28,7 @@
 !  Draft 4 -
 !    Update control rod maps "crd_map", "crd_bank"
 !
-!  Update 11/19/2012   
+!  Update 11/19/2012
 !     * added explict lattice models for:
 !         * lower_nozzle_gap_height
 !         * lower_pincap_height
@@ -43,6 +43,14 @@
 !     * add baffle
 !
 !-----------------------------------------------------------------------
+
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a full 3D core with upper and lower
+!> reflector regions.
+!> @endreq
+!===============================================================================
+
 [STATE]
   title 'HZP Statepoint BOL'            ! state_title
   power 0.0                             ! state_power (%)
@@ -177,7 +185,7 @@
                  -  -  -  -  -  -  -
            -  1  -  1  -  1  -  1  -  1  -
         -  -  -  1  -  1  -  1  -  1  -  -  -
-        1  -  1  -  -  -  1  -  -  -  1  -  1 
+        1  -  1  -  -  -  1  -  -  -  1  -  1
      -  -  1  -  1  -  -  -  -  -  1  -  1  -  -
      -  1  -  -  -  1  -  1  -  1  -  -  -  1  -
      -  -  1  -  -  -  -  -  -  -  -  -  1  -  -
@@ -222,7 +230,7 @@ upper_ref  mod  2.2 1.0   ! mat, thickness, vol frac
   ppitch 1.26                                     ! assembly_ppitch
 
   mat ss 8.0
- 
+
   fuel    U21 10.257 95.0 / 2.11
   fuel    U26 10.257 95.0 / 2.60
   fuel    U31 10.257 95.0 / 3.10

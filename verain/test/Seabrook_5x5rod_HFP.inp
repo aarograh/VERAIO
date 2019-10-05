@@ -8,6 +8,13 @@
 !
 !================================================================================
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a 3D Seabrook 5x5 assembly to test
+!> DNB runs.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power  100.0         ! %
   tinlet 558.8 F         ! F
@@ -16,7 +23,7 @@
 
 ! tfuel  600.0         ! K - 600K  Not used with T/H feedback!
 ! modden 0.743         ! g/cc      Not used with T/H feedback!
-  
+
   feedback on
 
   deplete GWDMT 0.0, 100.0, 200.0, 300.0, 400.0, 500.0, 600.0, 700.0, 800.0, 900.0, 1000.0, 1100.0, 1200.0
@@ -39,7 +46,7 @@
 
   core_shape
     1
-  
+
   assm_map
     A1
 
@@ -60,21 +67,21 @@
   title "5x5 Rod Assembly"
   npin 5
   ppitch 1.25984
-  
+
   fuel U48 10.351 95.60 / 4.802 U-234=0.046 U-236=0.001
 
 !=== material label, key_name, density
   mat he    0.000176
   mat inc   8.20
   mat ss    8.0
-  mat zirc  6.55 
+  mat zirc  6.55
 
   cell 1     0.409575 0.41783 0.47498   / U48 he zirc       ! fuel rod
   cell 2              0.56134 0.60198   / mod    zirc       ! instrument tube
   cell 7              0.41783 0.47498   / mod    mod        ! empty location
   cell 8              0.41783 0.47498   /     he zirc       ! plenum
   cell 9                      0.47498   /        zirc       ! pincap
-  
+
   lattice FUEL1
       2
       1 1
@@ -128,7 +135,7 @@
 [EDITS]
 
 !  3in intervals in active fuel + grid
-  axial_edit_bounds 
+  axial_edit_bounds
           10.3149
           10.9550
           14.8210
@@ -179,13 +186,13 @@
          316.357
          323.977
          331.597
-         334.2640 
+         334.2640
          338.0740
          345.694
          353.314
          360.934
          368.554
-         376.0749 
+         376.0749
 
 [COBRATF]
   nfuel   3          ! number of rings in fuel temp calc

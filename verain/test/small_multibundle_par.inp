@@ -1,3 +1,10 @@
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a five 3D 3x3 assemblies at 10% power
+!> when arranged in a cross in quarter symmetry with numerous COUPLING block options
+!> and CTF is run in parallel.
+!> @endreq
+!===============================================================================
 [CASEID]
   title '5 3x3 bundle cross, modeled qtr symmetry, using parallel cobra'
 
@@ -25,9 +32,9 @@
     0 1 0
 
   assm_map
-       A1   
+       A1
     A1 A1 A1
-       A1   
+       A1
 
   ! add material definitions for he, inc, ss, and zirc4.
   include casl_comp_r3_full.ini
