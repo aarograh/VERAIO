@@ -11,6 +11,13 @@
 !
 !================================================================================
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a single 3D 3x3 assembly at HFP with
+!> a natural blanket.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power  100.0         ! %
   tinlet 559.0 F       ! F
@@ -73,15 +80,15 @@
     B  B  B
 
   lattice LGAP1
-      IT 
+      IT
        7 7
 
   lattice PLEN1
-      IT 
+      IT
        8 8
 
   lattice PCAP1
-      IT 
+      IT
        9 9
 
   axial A1    6.050

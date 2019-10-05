@@ -16,6 +16,13 @@
 !
 !------------------------------------------------------------------------------
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a 2D BWR Peach Bottom 2 7x7
+!> assembly with 80 mil channel in full symmetry with no gad and no water rods.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power    100.0
   tinlet   575 F  ! *** average operating temperature, not inlet
@@ -23,7 +30,7 @@
   pressure 1040   ! psia
   sym      full
 
-  void  
+  void
     40.0
 
 !** at void 00,  rho=  0.736690 g/cc
@@ -51,24 +58,24 @@
   mat zr2  6.5514 zirc2      ! zirc density p. 39
   mat zr4  6.5514 zirc4
   mat he   0.000176 he-4
-  
+
 [ASSEMBLY]
   npin   7
   ppitch 1.87452         ! pin pitch - does not include channel gaps
-  
+
 !*** 80 mil design
   gap    0.9525 .47498   ! wide and narrow channel gap (cm)
-  channel_box  zr4 0.2032 0.9652 0.0 0.0   ! channel dimensions 
+  channel_box  zr4 0.2032 0.9652 0.0 0.0   ! channel dimensions
 
 !*** enrichments p. 16
 !*** density and materials p. 11
-  
+
   fuel U133  10.34 94.5 / 1.33
   fuel Unat  10.34 94.5 / 0.71
- 
+
   cell 1   0.61849 0.63373 0.71501 / U133 he zr2
   cell 2   0.61849 0.63373 0.71501 / Unat he zr2
- 
+
   lattice LAT
     2
     1  1

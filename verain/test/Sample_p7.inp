@@ -17,6 +17,14 @@
 !      * modify to use 11-groups
 !      * add cobra parallel option
 !
+
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse Problem 7, which is a full core 3D
+!> problem with feedback.
+!> @endreq
+!===============================================================================
+
 [CASEID]
   title 'CASL AMA Problem 7 - Watts Bar Unit 1 Cycle 1 - Public'
 

@@ -6,7 +6,7 @@
 !  Draft 2 - 6/28/2012 - updated with minor changes from Andrew (Wiki PL also updated)
 !  Draft 3 - 11/2/2012 - moved assembly description to include file (Scott)
 !
-!  Update 11/19/2012   
+!  Update 11/19/2012
 !     * added explicit lattice models for:
 !         * lower_nozzle_gap_height
 !         * lower_pincap_height
@@ -16,13 +16,20 @@
 !
 !================================================================================
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse inputs in which multigrid solver
+!> options are specified.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power  1.0e-7        ! %
   tinlet 620.33 F        ! F - 600K
   tfuel 600.0 K         ! K - 600K
   boron  1300          ! ppmB
   modden 0.743         ! g/cc
-  
+
   feedback off
 
 [CORE]
@@ -33,7 +40,7 @@
 
   core_shape
     1
-  
+
   assm_map
     A1
 
@@ -47,7 +54,7 @@
 !  he he 0.000176
 !  inc inc 8.19
 !  ss ss 8.0
-!  zirc zirc 6.56 
+!  zirc zirc 6.56
 !  aic aic 10.20
 !  pyrex pyrex 2.23
 !  b4c b4c 6.56
@@ -55,7 +62,7 @@
   mat he     0.000176
   mat inc    8.19
   mat ss     8.0
-  mat zirc   6.56 
+  mat zirc   6.56
   mat aic   10.20
   mat pyrex  2.23
   mat b4c    6.56
@@ -64,9 +71,9 @@
 
 [ASSEMBLY]
   title "Westinghouse 17x17"
-  npin 17 
+  npin 17
   ppitch 1.260
-  
+
 !  uo2 U31 10.257 / 3.1
   fuel U31 10.257 95.0 / 3.1
 

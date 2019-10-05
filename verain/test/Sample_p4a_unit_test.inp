@@ -10,6 +10,13 @@
 !
 !================================================================================
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse Problem 4a, which is a single 3D 17x17
+!> assembly with a control rod at BOL without feedback.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power  1.0e-7        ! %
   tinlet 620.33 F        ! F - 600K

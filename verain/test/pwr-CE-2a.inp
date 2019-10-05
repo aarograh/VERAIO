@@ -11,6 +11,13 @@
 !
 !  3/31/2017 - minor updates to match CASL-U-2017-1300-000
 !
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a single 16x16 CE design PWR assembly
+!> with Erbia and two enrichments.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power    0.0
   tinlet   600 K

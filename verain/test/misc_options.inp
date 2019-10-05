@@ -10,6 +10,13 @@
 !
 !================================================================================
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse inputs in which numerous miscellaneous
+!> options are enabled simultaneously.
+!> @endreq
+!===============================================================================
+
 [STATE]
   title "Test & in input - see Story # 3279"
   power  100.0         ! %

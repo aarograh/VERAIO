@@ -1,3 +1,9 @@
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse Problem 9, which is a full core 3D
+!> problem with feedback and depletion while using the fuel shuffle capability.
+!> @endreq
+!===============================================================================
 [CASEID]
   title 'CASL AMA Problem 9 - Public'
 
@@ -5,22 +11,22 @@
   op_date "2014/11/05"
   power    0.0          ! %
   tinlet 557.33 F       ! F - 565K
-  tfuel  565.0  K       ! K 
+  tfuel  565.0  K       ! K
   boron  1285           ! ppmB
   modden 0.743          ! g/cc
   pressure 2250.0       ! psia
   deplete EFPD 0
   search "boron"
   feedback on
-  sym qtr  
+  sym qtr
 
   rodbank SA 230
           SB 230
           SC 230
           SD 230
-           A 230 
+           A 230
            B 230
-           C 230 
+           C 230
            D 220
   restart_shuffle  p9_restart_cycl1.h5 440EFPD_65POW_DOUT
   shuffle_label
@@ -54,7 +60,7 @@
 [STATE]
   power    65.0
   deplete EFPD 440
-  rodbank  D 230 
+  rodbank  D 230
   restart_write  p9_restart_cycl2.h5 440EFPD_65POW_DOUT
 [STATE]
   power     100.0
@@ -64,7 +70,7 @@
   unit  1
   cycle 2
   size 15               ! assemblies across core
-  rated 3411 131.68     ! MW, Mlbs/hr 
+  rated 3411 131.68     ! MW, Mlbs/hr
   apitch 21.5
   height 406.337
 
@@ -108,41 +114,41 @@
     3 3 0 0
 
   insert_map
-     -     
-    20  -    
-     - 24  -   
-    20  - 20  -  
-     - 20  - 20  - 
+     -
+    20  -
+     - 24  -
+    20  - 20  -
+     - 20  - 20  -
     20  - 16  - 24 12
      - 24  - 16  -  -
     12  -  8  -
 
   crd_map
-    1 
-    - - 
-    1 - 1 
-    - - - 1 
-    1 - - - 1 
-    - 1 - 1 - - 
-    1 - 1 - 1 - 
-    - - - - 
- 
+    1
+    - -
+    1 - 1
+    - - - 1
+    1 - - - 1
+    - 1 - 1 - -
+    1 - 1 - 1 -
+    - - - -
+
   crd_bank
     D  -  A  -  D  -  C  -
     -  -  -  -  - SB  -  -
     A  -  C  -  -  -  B  -
     -  -  -  A  - SC  -  -
-    D  -  -  -  D  - SA 
-    - SB  - SD  -  -  - 
-    C  -  B  - SA  - 
+    D  -  -  -  D  - SA
+    - SB  - SD  -  -  -
+    C  -  B  - SA  -
     -  -  -  -
 
 ! the detector map is upside down for denovo
   det_map
-            1 - - 1 - - - 
-        1 - - - 1 - - 1 - 1 - 
-      - 1 - 1 - - 1 - - - - - 1 
-      - - - - 1 - - 1 - - 1 - - 
+            1 - - 1 - - -
+        1 - - - 1 - - 1 - 1 -
+      - 1 - 1 - - 1 - - - - - 1
+      - - - - 1 - - 1 - - 1 - -
     1 - - - 1 - - 1 - - 1 - - - 1
     - - - - 1 - 1 - - - - 1 - - -
     - 1 - - - - - - 1 - 1 - - - 1
@@ -152,17 +158,17 @@
     - - - - 1 - - - 1 - 1 - 1 - -
       1 1 - - - - 1 - - - - - -
       - - - - - - 1 - 1 - 1 - 1
-        1 - - 1 - 1 - - - - - 
-            - - 1 - - 1 - 
+        1 - - 1 - 1 - - - - -
+            - - 1 - - 1 -
 
-  baffle ss 0.19 2.85 
+  baffle ss 0.19 2.85
 ! vessel cs 219.71 21.99 - not functional yet
 
   lower_plate ss  5.0 0.5   ! mat, thickness, vol frac
   upper_plate ss  7.6 0.5   ! mat, thickness, vol frac
 
- lower_ref  mod 20.0 1.0   ! reduce this as much as possible for now                        
- upper_ref  mod 20.0 1.0    
+ lower_ref  mod 20.0 1.0   ! reduce this as much as possible for now
+ upper_ref  mod 20.0 1.0
 
   xlabel  R P N M L K J H G  F  E  D  C  B  A
   ylabel  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
@@ -173,12 +179,12 @@
 
 [ASSEMBLY]
   title "Westinghouse 17x17"
-  npin 17 
+  npin 17
   ppitch 1.260
-  
+
   fuel U21 10.257 94.5 / 2.110
   fuel U26 10.257 94.5 / 2.619
-  fuel U31 10.257 94.5 / 3.100 
+  fuel U31 10.257 94.5 / 3.100
 
   cell 1     0.4096 0.418 0.475 / U21 he zirc
   cell 2     0.4096 0.418 0.475 / U26 he zirc
@@ -187,7 +193,7 @@
   cell 5            0.418 0.475 /     spring zirc   ! plenum
   cell 6                  0.475 /        mod        ! plug
 
-  lattice LAT21 
+  lattice LAT21
        4
        1 1
        1 1 1
@@ -198,7 +204,7 @@
        1 1 1 1 1 1 1 1
        1 1 1 1 1 1 1 1 1
 
-  lattice LAT26  
+  lattice LAT26
        4
        2 2
        2 2 2
@@ -209,7 +215,7 @@
        2 2 2 2 2 2 2 2
        2 2 2 2 2 2 2 2 2
 
-  lattice LAT31 
+  lattice LAT31
        4
        3 3
        3 3 3
@@ -272,7 +278,7 @@
   cell 2                          0.437 0.484 /            spring ss    ! plenum
   cell 3                                0.484 /                   ss    ! plug
 
-  rodmap  PY8 
+  rodmap  PY8
      -
      - -
      - - -
@@ -282,8 +288,8 @@
      - - - - - - -
      - - - - - - - -
      - - - - - - - - -
- 
-  rodmap  PLEN8 
+
+  rodmap  PLEN8
      -
      - -
      - - -
@@ -294,7 +300,7 @@
      - - - - - - - -
      - - - - - - - - -
 
-  rodmap  PLUG8 
+  rodmap  PLUG8
      -
      - -
      - - -
@@ -305,7 +311,7 @@
      - - - - - - - -
      - - - - - - - - -
 
-  rodmap  PY12 
+  rodmap  PY12
      -
      - -
      - - -
@@ -315,8 +321,8 @@
      - - - 1 - - -
      - - - - - - - -
      - - - - - - - - -
-     
-  rodmap  PLEN12 
+
+  rodmap  PLEN12
      -
      - -
      - - -
@@ -327,7 +333,7 @@
      - - - - - - - -
      - - - - - - - - -
 
-  rodmap  PLUG12 
+  rodmap  PLUG12
      -
      - -
      - - -
@@ -337,7 +343,7 @@
      - - - 3 - - -
      - - - - - - - -
      - - - - - - - - -
-     
+
   rodmap  PY16
      -
      - -
@@ -359,7 +365,7 @@
      - - - 2 - - -
      - - - - - - - -
      - - - - - - - - -
-     
+
   rodmap  PLUG16
      -
      - -
@@ -370,7 +376,7 @@
      - - - 3 - - -
      - - - - - - - -
      - - - - - - - - -
-     
+
   rodmap  PY20
      -
      - -
@@ -381,7 +387,7 @@
      1 - - 1 - - -
      - - - - - - - -
      - - - - - - - - -
-     
+
   rodmap  PLEN20
      -
      - -
@@ -392,7 +398,7 @@
      2 - - 2 - - -
      - - - - - - - -
      - - - - - - - - -
-     
+
   rodmap  PLUG20
      -
      - -
@@ -404,7 +410,7 @@
      - - - - - - - -
      - - - - - - - - -
 
-  rodmap  PY24  
+  rodmap  PY24
      -
      - -
      - - -
@@ -414,8 +420,8 @@
      1 - - 1 - - -
      - - - - - - - -
      - - - - - - - - -
-     
-  rodmap  PLEN24  
+
+  rodmap  PLEN24
      -
      - -
      - - -
@@ -425,8 +431,8 @@
      2 - - 2 - - -
      - - - - - - - -
      - - - - - - - - -
-     
-  rodmap  PLUG24  
+
+  rodmap  PLUG24
      -
      - -
      - - -
@@ -478,7 +484,7 @@
      2 - - 2 - - -
      - - - - - - - -
      - - - - - - - - -
-     
+
   rodmap PLEN
      -
      - -
@@ -489,7 +495,7 @@
      3 - - 3 - - -
      - - - - - - - -
      - - - - - - - - -
-     
+
   rodmap PLUG
      -
      - -
@@ -505,18 +511,18 @@
         PLUG  17.031
          AIC 118.631
          B4C 377.711
-        PLEN 388.411 
+        PLEN 388.411
 
 [DETECTOR]
   title "Incore instrument thimble"
   npin 17
 
-  mat he 0.0001786 
+  mat he 0.0001786
   mat ss 8.0
 
   cell 1  0.258 0.382 / he ss
 
-  rodmap  LAT  
+  rodmap  LAT
      1
      - -
      - - -
@@ -530,56 +536,56 @@
   axial 1  0.0 LAT 406.337
 
 [EDITS]
-  axial_edit_bounds 
+  axial_edit_bounds
       11.951
-      15.817 
-      24.028 
-      32.239 
-      40.45 
-      48.662 
-      56.873 
-      65.084 
-      73.295 
-      77.105 
-      85.17 
-      93.235 
-      101.3 
-      109.365 
-      117.43 
-      125.495 
-      129.305 
-      137.37 
-      145.435 
-      153.5 
-      161.565 
-      169.63 
-      177.695 
-      181.505 
-      189.57 
-      197.635 
-      205.7 
-      213.765 
-      221.83 
-      229.895 
-      233.705 
-      241.77 
-      249.835 
-      257.9 
-      265.965 
-      274.03 
-      282.095 
-      285.905 
-      293.97 
-      302.035 
-      310.1 
-      318.165 
-      326.23 
-      334.295 
-      338.105 
-      346.0262 
-      353.9474 
-      361.8686 
-      369.7898 
+      15.817
+      24.028
+      32.239
+      40.45
+      48.662
+      56.873
+      65.084
+      73.295
+      77.105
+      85.17
+      93.235
+      101.3
+      109.365
+      117.43
+      125.495
+      129.305
+      137.37
+      145.435
+      153.5
+      161.565
+      169.63
+      177.695
+      181.505
+      189.57
+      197.635
+      205.7
+      213.765
+      221.83
+      229.895
+      233.705
+      241.77
+      249.835
+      257.9
+      265.965
+      274.03
+      282.095
+      285.905
+      293.97
+      302.035
+      310.1
+      318.165
+      326.23
+      334.295
+      338.105
+      346.0262
+      353.9474
+      361.8686
+      369.7898
       377.711
 
 [MPACT]

@@ -15,6 +15,12 @@
 ! Portland, Oregon, USA, April 30-May 4 (1995).
 !------------------------------------------------------------------------------
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a 2D GE9 BWR Lattice.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power    100.0
   tinlet   550 K  ! *** approximate
@@ -22,7 +28,7 @@
   pressure 1040   ! psia
   sym      full
 
-  void  
+  void
     40.0
 
 !** at void 00,  rho=  0.736690 g/cc
@@ -53,11 +59,11 @@
 [ASSEMBLY]
   npin   8
   ppitch 1.6256          ! pin pitch - does not include channel gaps
-  
+
 !*** 80 mil design
   gap    0.9525 .47498   ! wide and narrow channel gap (cm)
-  channel_box  zr4 0.2032 0.9652 0.0 0.0   ! channel dimensions  
-!  channel_box  zr42 0.2032 0.9652 0.0 0.0   ! channel dimensions  
+  channel_box  zr4 0.2032 0.9652 0.0 0.0   ! channel dimensions
+!  channel_box  zr42 0.2032 0.9652 0.0 0.0   ! channel dimensions
 
 !** Note that the automatic addition of U-234 does not agree with the spec
 !** and we may need to add U-234 explicitly

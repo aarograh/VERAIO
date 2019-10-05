@@ -1,3 +1,9 @@
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse inputs that have dashes in the
+!> assembly names within the assm_map.
+!> @endreq
+!===============================================================================
 [CASEID]
   title 'CASL AMA Benchmark Problem 2A - Fuel Lattice - Public'
 
@@ -7,12 +13,12 @@
   tfuel    565 K
   modden   0.743      ! g/cc
   boron    1300       ! ppm
-  sym      qtr  
+  sym      qtr
   feedback off
 
 [CORE]
   size   1
-  apitch 21.50 
+  apitch 21.50
   height 1.0
   rated  0.01 0.01
 
@@ -32,7 +38,7 @@
 [ASSEMBLY]
   npin   17
   ppitch 1.26
-  
+
   fuel U31 10.257 94.5 / 3.1 u-234=0.026347
 
   cell 1 0.4096 0.418 0.475 / U31 he zirc4
@@ -49,7 +55,7 @@
     1 1 1 1 1 1 1 1
     1 1 1 1 1 1 1 1 1
 
-  axial A-SSY 0.0 LAT 1.0 
+  axial A-SSY 0.0 LAT 1.0
 
 [MPACT]
   num_angle     -8
@@ -57,4 +63,4 @@
 [SHIFT]
   num_cycles           1100
   num_inactive_cycles  100
-  Np                   1000000  
+  Np                   1000000

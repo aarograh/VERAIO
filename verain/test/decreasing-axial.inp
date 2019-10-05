@@ -1,18 +1,26 @@
 [CASEID]
   title 'CASL AMA Benchmark Problem 2A - Fuel Lattice - Public'
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall not be able to parse an input in which the axial
+!> heights are listed in descending order. The parser shall appropriately
+!> fail and describe input error.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power    0.0
   tinlet   565 K
   tfuel    565 K
   modden   0.743      ! g/cc
   boron    1300       ! ppm
-  sym      qtr  
+  sym      qtr
   feedback off
 
 [CORE]
   size   1
-  apitch 21.50 
+  apitch 21.50
   height 1.0
   rated  0.01 0.01
 
@@ -32,7 +40,7 @@
 [ASSEMBLY]
   npin   17
   ppitch 1.26
-  
+
   fuel U31 10.257 94.5 / 3.1 u-234=0.026347
 
   cell 1 0.4096 0.418 0.475 / U31 he zirc4
@@ -49,7 +57,7 @@
     1 1 1 1 1 1 1 1
     1 1 1 1 1 1 1 1 1
 
-  axial ASSY 2.0 LAT 1.0 
+  axial ASSY 2.0 LAT 1.0
 
 [MPACT]
   num_angle     -8
@@ -57,4 +65,4 @@
 [SHIFT]
   num_cycles           1100
   num_inactive_cycles  100
-  Np                   1000000  
+  Np                   1000000

@@ -7,18 +7,27 @@
 !  This test case originally added to test stories #4378 and #4381
 !
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a sungle MOX PWR assembly with three
+!> different plutonium enrichment zones.
+!> - ticket 4378
+!> - ticket 4381
+!> @endreq
+!===============================================================================
+
 [STATE]
   power    0.0
   tinlet   565 K
   tfuel    565 K
   modden   0.743      ! g/cc
   boron    1300       ! ppm
-  sym      qtr  
+  sym      qtr
   feedback off
 
 [CORE]
   size   1
-  apitch 21.50 
+  apitch 21.50
   height 1.0
   rated  0.01 0.01
 
@@ -75,15 +84,15 @@
     2 2 2 2 2 2 2 3
     3 3 3 3 3 3 3 3 3
 
-  axial ASSY 0.0 LAT 1.0 
+  axial ASSY 0.0 LAT 1.0
 
 [MPACT]
-  num_space      1 
+  num_space      1
   num_angle     -8
   num_threads    1
 
 [SHIFT]
-  transport            ce       
+  transport            ce
   num_cycles           1100
   num_inactive_cycles  100
-  Np                   1000000  
+  Np                   1000000

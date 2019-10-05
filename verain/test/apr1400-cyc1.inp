@@ -8,6 +8,13 @@ SEID]
 !  December 2014
 !  ML15006A043
 !
+
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a 2D APR1000 Initial core in
+!> quarter symmetry.
+!> @endreq
+!===============================================================================
 [STATE]
   power    100.0
   tinlet   600 K
@@ -148,7 +155,7 @@ SEID]
   cell 4 0.409575 0.41783 0.47498 / U364 he zirc
   cell G 0.409575 0.41783 0.47498 / UG8  he zirc
 
-  cell W 1.143 1.2446 / mod zirc / large4 
+  cell W 1.143 1.2446 / mod zirc / large4
 
   rodmap  LATA0
     W

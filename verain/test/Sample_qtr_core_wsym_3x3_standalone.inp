@@ -43,6 +43,13 @@
 !     * add baffle
 !
 !-----------------------------------------------------------------------
+
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a 3D core of 3x3 assemblies.
+!> @endreq
+!===============================================================================
+
 [STATE]
   title 'HZP Statepoint BOL'            ! state_title
   power 0.0                             ! state_power (%)

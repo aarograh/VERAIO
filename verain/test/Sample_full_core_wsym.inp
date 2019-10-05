@@ -43,6 +43,14 @@
 !     * add baffle
 !
 !-----------------------------------------------------------------------
+
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse a full 3D core with numerous BISON
+!> parameters enabled.
+!> @endreq
+!===============================================================================
+
 [STATE]
   title 'HZP Statepoint BOL'            ! state_title
   power 0.0                             ! state_power (%)
