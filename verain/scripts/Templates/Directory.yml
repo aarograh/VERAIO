@@ -8939,7 +8939,7 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={MOC},
-#>     valuesapplicable={},
+#>     valuesapplicable={moc, sn, nodal-nem, nodal-sanm-2, nodal-sanm-4},
 #>     limitations={},
 #>     description={This card is used to specify whether Method of Characteristics, Sn,  %
 #>       or Nodal Diffusion transport methods are used for the global problem solution   %
@@ -8951,7 +8951,7 @@ MPACT:
     _content:
     _check:
       - is_string()
-      - in_dictionary() MOC MoC moc SN Sn sn NODAL Nodal nodal
+      - in_dictionary() MOC MoC moc SN Sn sn NODAL Nodal nodal nodal-nem nodal-sanm-2 nodal-sanm-4
 #>
 #>   {\bf sn\_numcart} sn\_numcart
 #>   \VERAInputTable{
