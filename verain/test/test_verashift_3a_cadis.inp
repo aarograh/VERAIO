@@ -208,7 +208,7 @@
   use_pole_data         true
 ! hybrid_db
   output_adjoint        true
-  eq_set                spn_fv
+  eq_set                sc
   adjoint               true
   max_delta_z           1.0
   xs_library            test-8grp
