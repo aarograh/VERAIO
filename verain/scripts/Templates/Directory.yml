@@ -8953,6 +8953,26 @@ MPACT:
       - is_string()
       - in_dictionary() MOC MoC moc SN Sn sn NODAL Nodal nodal nodal-nem nodal-sanm-2 nodal-sanm-4
 #>
+#>   {\bf gamma\_transport} gamma\_transport
+#>   \VERAInputTable{
+#>     name={gamma\_transport},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true},
+#>     limitations={},
+#>     description={This card is used to enable/disable the gamma transport calculation.},
+#>     notes={}
+#>   }
+  gamma_transport:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf sn\_numcart} sn\_numcart
 #>   \VERAInputTable{
 #>     name={sn\_numcart},
