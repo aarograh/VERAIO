@@ -6792,6 +6792,31 @@ COBRATF:
       - is_float()
       - is_geq() 0
 #>
+#>   {\bf fuel\_gap\_htc\_beta} fuel\_gap\_htc\_beta
+#>   \VERAInputTable{
+#>     name={fuel\_gap\_htc\_beta},
+#>     type={float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={>0.0 and <=1.0},
+#>     limitations={},
+#>     description={The under-relaxation coefficient used on the fuel rod gap heat transfer coefficient.
+#>        This is only used when modeling a steady-state simulation.  During transient portions of the
+#>        simulation, this value will be ignored.  This parameter only has an effect when using
+#>        gap_model="dynamic".}
+#>     notes={}
+#>   }
+  fuel_gap_htc_beta:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+      - is_leq() 1.0
+
+#>
 #>   {\bf rothcon\_temp\_beta} rothcon\_temp\_beta
 #>   \VERAInputTable{
 #>     name={rothcon\_temp\_beta},
