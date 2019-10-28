@@ -1581,24 +1581,64 @@ sub coremapmap {
 }
 
 sub file_from_path{
-    return key_defined($SOURCE_DB,@_[-@_ .. -2], $FILE_LABEL);
+    my $idx=2;
+    if(@_[-2] eq '_key'){
+        $idx = 1;
+    }
+    my @p=@_[-@_ .. -$idx];
+    print "file_from_path: @_ : @p\n"  if get_verbose();
+    return key_defined($SOURCE_DB,@_[-@_ .. -$idx], $FILE_LABEL);
 }
+
 sub line_from_path{
-    return key_defined($SOURCE_DB,@_[-@_ .. -2], $LINE_LABEL);
+    my $idx=2;
+    if(@_[-2] eq '_key'){
+        $idx = 1;
+    }
+    my @p=@_[-@_ .. -$idx];
+    print "line_from_path: @_ : @p\n"  if get_verbose();
+    return key_defined($SOURCE_DB,@_[-@_ .. -$idx], $LINE_LABEL);
 }
+
 sub name_from_path{
-    return @_[-2];
+    my $idx=2;
+    if(@_[-2] eq '_key'){
+        $idx = 1;
+    }
+    print "name_from_path: @_ : @_[-$idx]\n"  if get_verbose();
+    return @_[-$idx];
+}
+sub keyword_from_path{
+    my $idx=2;
+    if(@_[-2] eq '_key'){
+        $idx = 3;
+    }
+    print "keyword_from_path: @_ : @_[-$idx]\n"  if get_verbose();
+    return @_[-$idx];
 }
 sub fileline_from_path{
     my ($file, $line);
-    $file = key_defined($SOURCE_DB,@_[-@_ .. -2], $FILE_LABEL);
-    $line = key_defined($SOURCE_DB,@_[-@_ .. -2], $LINE_LABEL);
+    my $idx=2;
+    if(@_[-2] eq '_key'){
+        $idx = 1;
+    }
+    my @p=@_[-@_ .. -$idx];
+    $file = key_defined($SOURCE_DB,@_[-@_ .. -$idx], $FILE_LABEL);
+    $line = key_defined($SOURCE_DB,@_[-@_ .. -$idx], $LINE_LABEL);
+    print "fileline_from_path: @_ : @p : $file | : $line\n"  if get_verbose();
     return ($file, $line);
 }
 sub source_from_path{
     my ($file, $line);
-    $file = key_defined($SOURCE_DB,@_[-@_ .. -2], $FILE_LABEL);
-    $line = key_defined($SOURCE_DB,@_[-@_ .. -2], $LINE_LABEL);
+    my $idx=2;
+    if(@_[-2] eq '_key'){
+        $idx = 1;
+    }
+    my @p=@_[-@_ .. -$idx];
+
+    $file = key_defined($SOURCE_DB,@_[-@_ .. -$idx], $FILE_LABEL);
+    $line = key_defined($SOURCE_DB,@_[-@_ .. -$idx], $LINE_LABEL);
+    print "source_from_path: @_ : @p : $file | : $line\n"  if get_verbose();
     return join(":line ", $file, $line);
 }
 
@@ -1832,21 +1872,50 @@ sub namesunique{
 	$OPTIONS{$key}=$value;
     }
 
+    print "namesunique: $path\n" if get_verbose();
     my @trpath=find_keys($SOURCE_DB,$path);
     my @trsubs=();
-    print "namesunique: $path\n" if get_verbose();
+    my $keyw;
     foreach my $ipath ( @trpath ){
 	my @aipath = @{ $ipath };
-	print "namesunique: @aipath\n"  if get_verbose();
+	print "namesunique: aipath @aipath\n"  if get_verbose();
 	my $kr=key_defined($SOURCE_DB,@aipath);
 	die "namesunique: invalid reference for @aipath\n" unless $kr;
-	push @trsubs, pop @aipath;
+        my $file=file_from_path(@aipath);
+        my $line=line_from_path(@aipath);
+        $keyw=keyword_from_path(@aipath);
+	print "namesunique: file $file\n"  if get_verbose();
+	print "namesunique: line $line\n"  if get_verbose();
+        my $aaipath = pop @aipath;
+	push @trsubs, $aaipath;
+        err_set('NUNQ_VAR', $aaipath);
+        err_set('NUNQ_FILE', $file);
+        err_set('NUNQ_LINE', $line);
     }
 
     print "namesunique: trsubs @trsubs\n" if get_verbose();
     my @trtmp=@trsubs;
     if(@trsubs){
-	die "namesunique: duplicate @trtmp.\n" unless unique(@trsubs);
+        if(@trtmp != unique(@trsubs)){
+            my @dups=duplicate(@trsubs);
+            my @dupsidx=duplicateidx(@trsubs);
+            my @dup_var =err_list('NUNQ_VAR');
+            my @dup_file=err_list('NUNQ_FILE');
+            my @dup_line=err_list('NUNQ_LINE');
+            print "namesunique: duplicate input for keyword $keyw.\n";
+            print "   duplicate entries @dups in list @trtmp.\n";
+            for(my $i=0; $i<@trsubs; $i++){
+                if($dupsidx[$i]){
+                    print "   parameter $dup_var[$i] defined in $dup_file[$i], line $dup_line[$i]\n";
+                }
+            }
+            die "parser failed\n";
+        }
+        else{
+            err_flushkey('NUNQ_VAR');
+            err_flushkey('NUNQ_FILE');
+            err_flushkey('NUNQ_LINE');
+        }
     }
 
     undef;
