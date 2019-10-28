@@ -6,6 +6,8 @@ use Exporter;
 @ISA = ('Exporter');
 @EXPORT=('nonzero',
 	 'unique',
+         'duplicate',
+         'duplicateidx',
 	 'fany',
 	 'fall',
 	 'fnone',
@@ -75,6 +77,18 @@ sub nonstring { # remove strings from array entry
 sub unique (@) { # return unique entries from an array
     my %saw = ();
     grep { not $saw{$_}++ } @_;
+}
+
+sub duplicate(@) { # return indexed list of duplicates from an array 
+    my %saw = ();
+    my @dup = map { 1==$saw{$_}++ ? $_ : () } @_;
+}
+
+sub duplicateidx(@) { # return marked duplicate entries from an array 
+    my %saw = ();
+    my @dup  = map { 1==$saw{$_}++ ? $_ : () } @_;
+    my @dupi = map { $saw{$_} > 1 ? $saw{$_} : 0 } @_;
+    return @dupi;
 }
 
 # One argument is true, f* uses function for evaluation
