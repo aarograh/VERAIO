@@ -11909,6 +11909,36 @@ MPACT:
     _check:
       - is_word()
 #>
+#>   {\bf user\_defined\_crud\_filename} user\_defined\_crud\_filename
+#>   \VERAInputTable{
+#>     name={user\_defined\_crud\_filename},
+#>    type={Free-Form Character String, Max. Length = 200},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={N/A},
+#>    valuesapplicable={Filename of any valid HDF5 file with user defined CRUD conditions},
+#>    limitations={If the card is present, CRUD conditions defined for each state and    %
+#>      pincell will be used to set the CRUD variables of each pincell in the model      %
+#>      instead of calculating the CRUD condition using MAMBA},                          %
+#>    description={This card is used to indicate the name of the file                    %
+#>      containing the pin-wise CRUD conditions for each state.},
+#>    notes={The format of the HDF5 file must follow the same format as the HDF5 output  %
+#>      edits.  The head dataset of the file must contain STATE datasets following the   %
+#>      \textit{STATE\_****} nomenclature, which are populated with pin-wise data with   %
+#>      the same names as their output edit counterparts.  Currently supported dataset   %
+#>      name are \textit{pin\_avg\_crud\_thickness}, \textit{pin\_avg\_crud\_massdensity},%
+#>      and \textit{pin\_avg\_crud\_borondensity}.  The CRUD datasets must have the same %
+#>      shape as their corresponding output counterparts.  Users are required to provide %
+#>      the CRUD conditions for all states and CRUD variables, otherwise an error will   %
+#>      be thrown.}
+#>   }
+  user_defined_crud_filename:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+#>
 #>
 #>   {\bf dep\_edit} dep\_edit
 #>   \VERAInputTable{

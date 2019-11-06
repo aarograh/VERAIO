@@ -418,6 +418,7 @@
     <Parameter name="rod_treatment" type="string" value="polynomial"/>
     <Parameter name="rst_compress" type="string" value="0"/>
     <Parameter name="shield_ray_spacing" type="double" value="0.05"/>
+    <Parameter name="user_defined_crud_filename" type="string" value="th_file.h5"/>
     <Parameter name="vis_edits" type="string" value="none"/>
     <ParameterList name="xs_library">
       <Parameter name="res_up_scatter" type="string" value="false"/>
