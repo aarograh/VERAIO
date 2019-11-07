@@ -207,6 +207,8 @@
     </ParameterList>
     <ParameterList name="mesh">
       <Parameter name="axial_mesh" type="Array(double)" value="{5.0000,6.0500,5.9010,3.8660,8.2110,8.2110,8.2110,8.2120,8.2110,8.2110,8.2110,3.8100,8.0650,8.0650,8.0650,8.0650,8.0650,8.0650,3.8100,8.0650,8.0650,8.0650,8.0650,8.0650,8.0650,3.8100,8.0650,8.0650,8.0650,8.0650,8.0650,8.0650,3.8100,8.0650,8.0650,8.0650,8.0650,8.0650,8.0650,3.8100,8.0650,8.0650,8.0650,8.0650,8.0650,8.0650,3.8100,7.9212,7.9212,7.9212,7.9212,7.9212,8.5560,3.8660,3.5780,3.7990,8.8270,7.6000}"/>
+      <Parameter name="moderator_mesh_ndiv" type="int" value="0"/>
+      <Parameter name="moderator_mesh_pins" type="string" value="nonfuel"/>
       <ParameterList name="pinmesh">
         <ParameterList name="pinmesh_fuel">
           <Parameter name="label" type="string" value="fuel"/>
