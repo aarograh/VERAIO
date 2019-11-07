@@ -10138,9 +10138,8 @@ MPACT:
     _content:
     _check:
       - arraysize()==2
-      - is_int(nth(0,()))
+      - (is_int(nth(0,()))||nth(0,())==0)&&nth(0,())>=0
       - is_word(nth(1,()))
-      - nth(0,())>0
       - in_dictionary(nth(1,()),'fuel','nonfuel','both')
 #>
 #>   {\bf crud\_mesh} crud\_mesh
