@@ -426,6 +426,7 @@
       <Parameter name="sth_hgap" type="double" value="5200.0"/>
     </ParameterList>
     <ParameterList name="depletion">
+      <Parameter name="dep_shielder_dt" type="double" value="0.01"/>
       <Parameter name="exclude_depl_mats" type="Array(string)" value="{U31,U32,b4c}"/>
       <Parameter name="include_depl_mats" type="Array(string)" value="{U32,U33,aic,he}"/>
     </ParameterList>
