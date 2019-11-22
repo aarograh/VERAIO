@@ -11847,6 +11847,31 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 #>
+#>   {\bf dep_shielder\_dt} dep_shielder\_dt
+#>   \VERAInputTable{
+#>     name={dep_shielder\_dt},
+#>    type={Floating-Point Real Number},
+#>    need={Optional},
+#>    unitsdefault={\{GWD/MTU}},
+#>    unitsother={},
+#>    valuedefault={10.0},
+#>    valuesapplicable={any positive real number},
+#>    limitations={If the \texttt{xs{\_}shielder} card is set to \texttt{f} or           %
+#>      \texttt{false}, this card does nothing, since cross-section shielding            %
+#>      calculations will never be performed.},
+#>    description={This card is used to control how often cross-section shielding        %
+#>      calculations are performed when depleting.  It sets the maximum                  %
+#>      time in GWD/MTU that can be simulated without running a new shielding            %
+#>      calculations},
+#>    notes={}
+#>   }
+  dep_shielder_dt:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+#>
 #>   {\bf dep\_substep} dep\_substep
 #>   \VERAInputTable{
 #>     name={dep\_substep},

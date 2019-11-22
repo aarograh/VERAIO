@@ -591,6 +591,13 @@ MPACT:
             - copy MPACT/$dep_edit
           _content:
 
+        dep_shielder_dt:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$dep_shielder_dt
+          _content:
+
         dep_substep:
           _pltype: parameter
           _type: int
