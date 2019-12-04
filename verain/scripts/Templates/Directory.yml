@@ -11448,7 +11448,7 @@ MPACT:
 #>    need={Optional},
 #>    unitsdefault={\{unitless, K, g/cm$^3$\}},
 #>    unitsother={},
-#>    valuedefault={4, 25.0, 0.005},
+#>    valuedefault={100, 5.0, 0.01},
 #>    valuesapplicable={or any positive integer and any 2 positive real numbers          %
 #>      \newline\newline                                                                 %
 #>      The first input is the maximum number of outer                                   %
