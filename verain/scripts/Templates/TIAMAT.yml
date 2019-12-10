@@ -17,27 +17,6 @@ TIAMAT:
         - copy TIAMAT/$run_transient
       _content:
 
-    two_level_solver:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy TIAMAT/$two_level_solver
-      _content:
-
-    inner_solver:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy TIAMAT/$inner_solver
-      _content:
-
-    inner_evaluator:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy TIAMAT/$inner_evaluator
-      _content:
-
     conserve_power_in_tiamat_transfer:
       _pltype: parameter
       _type: bool

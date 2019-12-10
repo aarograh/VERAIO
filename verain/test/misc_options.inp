@@ -305,9 +305,6 @@
 [TIAMAT]
   solver jacobi
   conserve_power_in_tiamat_transfer true
-  two_level_solver false
-  inner_solver gauss-seidel
-  inner_evaluator NeutronicsCTF
 
 [COBRATF]
   nfuel   18            ! number of fuel rings in conduction model

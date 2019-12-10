@@ -446,9 +446,6 @@
   </ParameterList>
   <ParameterList name="TIAMAT">
     <Parameter name="conserve_power_in_tiamat_transfer" type="bool" value="true"/>
-    <Parameter name="inner_evaluator" type="string" value="NeutronicsCTF"/>
-    <Parameter name="inner_solver" type="string" value="gauss-seidel"/>
     <Parameter name="solver" type="string" value="jacobi"/>
-    <Parameter name="two_level_solver" type="bool" value="false"/>
   </ParameterList>
 </ParameterList>

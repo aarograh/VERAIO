@@ -730,7 +730,20 @@ STATE:
     _check:
       - is_word()
       - in_dictionary() on off
-
+#>
+#>   {\bf fuel\_performance} fuel\_performance\_option
+#>   \VERAInputTable{
+#>     name={fuel\_performance\_option},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={off},
+#>     valuesapplicable={on},
+#>     limitations={},
+#>     description={Flag to turn on and off Bison coupling.},
+#>     notes={}
+#>   }
   fuel_performance:
     <<: *dtword
     _content:
@@ -8888,63 +8901,120 @@ COUPLING:
 #> \section{Block TIAMAT}
 #> \label{sec:tiamatcards}
 TIAMAT:
-
+#>
+#>   {\bf solver} solver
+#>   \VERAInputTable{
+#>     name={solver},
+#>     type={Fixed Character String.},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={jacobi,gauss-seidel},
+#>     limitations={},
+#>     description={Tiamat solver type.},
+#>     notes={}
+#>   }
   solver:
     <<: *dtstring
     _content:
     _check:
       - is_string()
       - in_dictionary() jacobi gauss-seidel
-
+#>
+#>   {\bf run\_transient} run\_transient
+#>   \VERAInputTable{
+#>     name={run\_transient},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={false},
+#>     limitations={},
+#>     description={Boolean indicating if transient or not.},
+#>     notes={}
+#>   }
   run_transient:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
-
-  two_level_solver:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
-
-  inner_solver:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
-      - in_dictionary() jacobi gauss-seidel
-
-  inner_evaluator:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
-      - in_dictionary() BisonNeutronics BisonCTF NeutronicsCTF
-
+#>
+#>   {\bf conserve\_power\_in\_tiamat\_transfer} conserve\_power
+#>   \VERAInputTable{
+#>     name={conserve\_power},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={true,false},
+#>     limitations={},
+#>     description={Boolean indicating power is conserved in transfers.},
+#>     notes={}
+#>   }
   conserve_power_in_tiamat_transfer:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
-
+#>
+#>   {\bf num\_subcycle\_iterations\_before\_tiamat\_ramping} num\_subcycle
+#>   \VERAInputTable{
+#>     name={num\_subcycle},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>-1$},
+#>     limitations={},
+#>     description={Number of subcycle iterations before ramping in Tiamat.},
+#>     notes={}
+#>   }
   num_subcycle_iterations_before_tiamat_ramping:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() -1
-
+#>
+#>   {\bf coupling\_approach} coupling\_approach
+#>   \VERAInputTable{
+#>     name={coupling\_approach},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={inline},
+#>     valuesapplicable={coupled},
+#>     limitations={},
+#>     description={Describes whether inline (one-way) or coupled (two-way) coupling between MPACT/CTF and Bison is used.},
+#>     notes={}
+#>   }
   coupling_approach:
     <<: *dtstring
     _content:
     _check:
       - is_string()
       - in_dictionary() coupled inline
-
+#>
+#>   {\bf overlap\_procs} overlap\_procs
+#>   \VERAInputTable{
+#>     name={overlap\_procs},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true},
+#>     limitations={},
+#>     description={Describes whether Bison processors are overlapped with those for MPACT or completely separate.},
+#>     notes={}
+#>   }
   overlap_procs:
     <<: *dtbool
     _content:
@@ -14681,244 +14751,834 @@ MAMBA:
       - fall(sub{is_geq(shift,0)},stride(1,2,()))
 
 BISON:
-
+#>
+#>   {\bf bcs\_plenumpressure\_plenumpressure\_initial\_pressure} rod\_initial\_pressure
+#>   \VERAInputTable{
+#>     name={rod\_initial\_pressure},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Pascals},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>=0$},
+#>     limitations={},
+#>     description={Initial plenum pressure of (non-ifba) fuel rods.},
+#>     notes={}
+#>   }
   bcs_plenumpressure_plenumpressure_initial_pressure:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf bcs\_plenumpressure\_plenumpressure\_initial\_pressure\_ifba} rod\_initial\_pressure
+#>   \VERAInputTable{
+#>     name={rod\_initial\_pressure},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Pascals},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>=0$},
+#>     limitations={},
+#>     description={Initial plenum pressure of ifba-bearing fuel rods.},
+#>     notes={}
+#>   }
   bcs_plenumpressure_plenumpressure_initial_pressure_ifba:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf bcs\_plenumpressure\_plenumpressure\_startup\_time} startup\_time
+#>   \VERAInputTable{
+#>     name={startup\_time},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>=0$},
+#>     limitations={},
+#>     description={Time over which the simulation builds in the plenum pressure.},
+#>     notes={For numerical stability (if necessary)}
+#>   }
   bcs_plenumpressure_plenumpressure_startup_time:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
+#>
+#>   {\bf burnup\_burnup\_num\_radial} num\_radial
+#>   \VERAInputTable{
+#>     name={num\_radial},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>=1$},
+#>     limitations={},
+#>     description={Number of radial mesh points in the burnup mesh.},
+#>     notes={}
+#>   }
   burnup_burnup_num_radial:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 1
+#>
+#>   {\bf burnup\_burnup\_num\_axial} num\_axial
+#>   \VERAInputTable{
+#>     name={num\_axial},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>=1$},
+#>     limitations={},
+#>     description={Number of axial mesh points in the burnup mesh.},
+#>     notes={}
+#>   }
   burnup_burnup_num_axial:
     <<: *dtint
     _content:
     _check:
       - is_int()
+      - is_geq() 1
+#>
+#>   {\bf executioner\_start\_time} start\_time
+#>   \VERAInputTable{
+#>     name={start\_time},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={Any float (+/-)},
+#>     limitations={},
+#>     description={The starting time for the simulation.},
+#>     notes={Most standalone BISON cases use 0, but Tiamat typically uses -100 seconds.}
+#>   }
   executioner_start_time:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
+#>
+#>   {\bf executioner\_dt} dt
+#>   \VERAInputTable{
+#>     name={dt},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The initial timestep of the simulation.},
+#>     notes={Adaptive timestepping takes over from this immediately.}
+#>   }
   executioner_dt:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf executioner\_dtmin} dtmin
+#>   \VERAInputTable{
+#>     name={dtmin},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The minimum timestep at which the adaptive timestepping will terminate the simulation.},
+#>     notes={}
+#>   }
   executioner_dtmin:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf executioner\_dtmax} dtmax
+#>   \VERAInputTable{
+#>     name={dtmax},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The maximum timestep at which the adaptive timestepping will terminate the simulation.},
+#>     notes={}
+#>   }
   executioner_dtmax:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf executioner\_end\_time} end\_time
+#>   \VERAInputTable{
+#>     name={end\_time},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The end time of the simulation.},
+#>     notes={}
+#>   }
   executioner_end_time:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf globalparams\_a\_lower} a\_lower
+#>   \VERAInputTable{
+#>     name={a\_lower},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={meters},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The lower bound of the active fuel.},
+#>     notes={}
+#>   }
   globalparams_a_lower:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf globalparams\_a\_upper} a\_upper
+#>   \VERAInputTable{
+#>     name={a\_upper},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={meters},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The upper bound of the active fuel.},
+#>     notes={}
+#>   }
   globalparams_a_upper:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf globalparams\_energy\_per\_fission} energy\_per\_fission
+#>   \VERAInputTable{
+#>     name={energy\_per\_fission},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Joules/fission},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The energy per fission.},
+#>     notes={}
+#>   }
   globalparams_energy_per_fission:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf mesh\_file} meshfilename
+#>   \VERAInputTable{
+#>     name={meshfilename},
+#>     type={Fixed Character String.},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The external mesh file for the simulation.},
+#>     notes={Typically, the internal mesh generator is used, but this allows users to input a file if desired.}
+#>   }
   mesh_file:
     <<: *dtstring
     _content:
     _check:
       - is_string()
+#>
+#>   {\bf mesh\_nx\_p} nradial\_pellet
+#>   \VERAInputTable{
+#>     name={nradial\_pellet},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The number of radial elements in the fuel pellet.},
+#>     notes={}
+#>   }
   mesh_nx_p:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf mesh\_ny\_p} naxial\_pellet
+#>   \VERAInputTable{
+#>     name={naxial\_pellet},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The number of axial elements in the fuel pellet.},
+#>     notes={}
+#>   }
   mesh_ny_p:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf mesh\_nx\_c} nradial\_clad
+#>   \VERAInputTable{
+#>     name={nradial\_clad},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The number of radial elements in the cladding.},
+#>     notes={}
+#>   }
   mesh_nx_c:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf mesh\_ny\_c} naxial\_clad
+#>   \VERAInputTable{
+#>     name={naxial\_clad},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The number of axial elements in the cladding.},
+#>     notes={}
+#>   }
   mesh_ny_c:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf mesh\_bx\_p} radial\_bias
+#>   \VERAInputTable{
+#>     name={radial\_bias},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$,$<2$},
+#>     limitations={},
+#>     description={The biasing parameter for the fuel radial mesh.},
+#>     notes={This is used to enforce a non-uniform radial mesh to enhance accuracy.}
+#>   }
   mesh_bx_p:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+      - is_lt() 2
+#>
+#>   {\bf mesh\_clad\_bot\_gap\_height} bot\_gap\_height
+#>   \VERAInputTable{
+#>     name={bot\_gap\_height},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={meters},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The distance between the bottom of the fuel stack and the top of the lower clad region.},
+#>     notes={}
+#>   }
   mesh_clad_bot_gap_height:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf outputs\_file\_base} output\_filename
+#>   \VERAInputTable{
+#>     name={output\_filename},
+#>     type={Fixed Character String.},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The filename of the output file for the simulation.},
+#>     notes={}
+#>   }
   outputs_file_base:
     <<: *dtstring
     _content:
     _check:
       - is_string()
+#>
+#>   {\bf fuel\_pin\_input\_file\_template} fuel\_inp\_filename
+#>   \VERAInputTable{
+#>     name={fuel\_inp\_filenamee},
+#>     type={Fixed Character String.},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The filename of the template for fuel rods.},
+#>     notes={}
+#>   }
   fuel_pin_input_file_template:
     <<: *dtstring
     _content:
     _check:
       - is_string()
+#>
+#>   {\bf non\_fuel\_pin\_input\_file\_template} nonfuel\_inp\_filename
+#>   \VERAInputTable{
+#>     name={nonfuel\_inp\_filename},
+#>     type={Fixed Character String.},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The filename of the template for non-fuel rods.},
+#>     notes={}
+#>   }
   non_fuel_pin_input_file_template:
     <<: *dtstring
     _content:
     _check:
       - is_string()
+#>
+#>   {\bf power\_file} power\_filenames
+#>   \VERAInputTable{
+#>     name={power\_filenames},
+#>     type={List of Free Form Character Strings.},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The filenames of the VERA-generated HDF5 files with power and temperature data.},
+#>     notes={}
+#>   }
   power_file:
     <<: *dtlist
     _style: multi-line
     _content:
     _check:
       - fall(sub{is_string(shift)},())
+#>
+#>   {\bf cycle\_xml} cycle\_xml\_filenames
+#>   \VERAInputTable{
+#>     name={cycle\_xml\_filenames},
+#>     type={List of Free Form Character Strings.},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The filenames of the corresponding VERA cycle depletion XML files.},
+#>     notes={}
+#>   }
   cycle_xml:
     <<: *dtlist
     _style: multi-line
     _content:
     _check:
       - fall(sub{is_string(shift)},())
+#>
+#>   {\bf shuffle\_xml} shuffle\_xml\_filenames
+#>   \VERAInputTable{
+#>     name={shuffle\_xml\_filenames},
+#>     type={List of Free Form Character Strings.},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The filenames of the corresponding VERA shuffle XML files.},
+#>     notes={}
+#>   }
   shuffle_xml:
     <<: *dtlist
     _style: multi-line
     _content:
     _check:
       - fall(sub{is_string(shift)},())
+#>
+#>   {\bf only\_cycle} only\_cycle
+#>   \VERAInputTable{
+#>     name={only\_cycle},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The cycle index for which to generate Bison input files.},
+#>     notes={Otherwise, all cycles of files will be generated.}
+#>   }
   only_cycle:
     <<: *dtint
     _content:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf only\_assemblies} assembly\_locations
+#>   \VERAInputTable{
+#>     name={assembly\_locations},
+#>     type={List of Free Form Character Strings.},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The list of assembly locations for which to generate Bison input files.},
+#>     notes={Otherwise, all assemblies will be generated.}
+#>   }
   only_assemblies:
     <<: *dtlist
     _style: multi-line
     _content:
     _check:
       - fall(sub{is_string(shift)},())
+#>
+#>   {\bf mesh\_type} mesh\_type
+#>   \VERAInputTable{
+#>     name={mesh\_type},
+#>     type={Fixed Character String.},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={smeared\_pellet},
+#>     valuesapplicable={unit\_test},
+#>     limitations={},
+#>     description={The mesh type.},
+#>     notes={Used for Tiamat testing.}
+#>   }
   mesh_type:
     <<: *dtstring
     _content:
     _check:
       - is_string()
       - in_dictionary() unit_test smeared_pellet
+#>
+#>   {\bf output\_average\_axial\_values} output\_average\_axial\_values
+#>   \VERAInputTable{
+#>     name={output\_average\_axial\_values},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={true,false},
+#>     limitations={},
+#>     description={Logical governing whether or not to output average axial values.},
+#>     notes={}
+#>   }
   output_average_axial_values:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf solve\_type} solve\_type
+#>   \VERAInputTable{
+#>     name={solve\_type},
+#>     type={Fixed Character String.},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={standalone,tiamat,tiamat\_inline,temp\_table},
+#>     limitations={},
+#>     description={The solver scheme for the simulation.},
+#>     notes={Some options in the template are different depending on the solve type.}
+#>   }
   solve_type:
     <<: *dtstring
     _content:
     _check:
       - is_string()
       - in_dictionary() standalone tiamat tiamat_inline temp_table STANDALONE TIAMAT TIAMAT_INLINE TEMP_TABLE
+#>
+#>   {\bf bc\_type} bc\_type
+#>   \VERAInputTable{
+#>     name={bc\_type},
+#>     type={Fixed Character String.},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={bulk\_cool},
+#>     valuesapplicable={clad\_outer},
+#>     limitations={},
+#>     description={The boundary condition type used for the simulation.},
+#>     notes={Standalone Bison can use clad outer surface and bulk coolant temperature as the boundary condition.  Tiamat exclusively uses clad outer surface temperature.}
+#>   }
   bc_type:
     <<: *dtstring
     _content:
     _check:
       - is_string()
       - in_dictionary() clad_outer bulk_cool CLAD_OUTER BULK_COOL
+#>
+#>   {\bf axial\_shape} axial\_shape
+#>   \VERAInputTable{
+#>     name={axial\_shape},
+#>     type={Fixed Character String.},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={midpoint},
+#>     valuesapplicable={constant},
+#>     limitations={},
+#>     description={Governs the axial shaping of the power and temperature variables input from VERA.},
+#>     notes={Some options in the template are different depending on the solve type.}
+#>   }
   axial_shape:
     <<: *dtstring
     _content:
     _check:
       - is_string()
       - in_dictionary() midpoint constant MIDPOINT CONSTANT
+#>
+#>   {\bf fast\_flux} fast\_flux
+#>   \VERAInputTable{
+#>     name={fast\_flux},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true},
+#>     limitations={},
+#>     description={Logical governing whether or not to output average axial values.},
+#>     notes={}
+#>   }
   fast_flux:
     <<: *dtbool
     _content:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf materials\_fuel\_relocation\_relocation\_activation1} activation\_threshold
+#>   \VERAInputTable{
+#>     name={activation\_threshold},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={W/m},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Threshold for the first level of relocation activation.},
+#>     notes={}
+#>   }
   materials_fuel_relocation_relocation_activation1:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf auxkernels\_fast\_neutron\_flux\_factor} flux\_factor
+#>   \VERAInputTable{
+#>     name={flux\_factor},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={n/m2-s per W/m},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Fast flux factor for approximating fast neutron flux from local power.},
+#>     notes={}
+#>   }
   auxkernels_fast_neutron_flux_factor:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf materials\_fuel\_mech\_model\_creep} model\_creep
+#>   \VERAInputTable{
+#>     name={model\_creep},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={false},
+#>     limitations={},
+#>     description={Enables the fuel mechanics creep model.},
+#>     notes={}
+#>   }
   materials_fuel_mech_model_creep:
     <<: *dtstring
     _content:
     _check:
       - is_string()
       - in_dictionary() true false
+#>
+#>   {\bf materials\_fuel\_relocation\_burnup\_relocation\_stop} relocation\_stop
+#>   \VERAInputTable{
+#>     name={relocation\_stop},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={fissions per initial metal atom (fima)},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Burnup at which the relocation model turns off.},
+#>     notes={}
+#>   }
   materials_fuel_relocation_burnup_relocation_stop:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf thermalcontact\_roughness\_fuel} roughness\_fuel
+#>   \VERAInputTable{
+#>     name={roughness\_fuel},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={$\mu$m},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Fuel roughness value.},
+#>     notes={}
+#>   }
   thermalcontact_roughness_fuel:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf thermalcontact\_roughness\_clad} roughness\_clad
+#>   \VERAInputTable{
+#>     name={roughness\_clad},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={$\mu$m},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Clad roughness value.},
+#>     notes={}
+#>   }
   thermalcontact_roughness_clad:
     <<: *dtdouble
     _content:
     _check:
       - is_float()
       - is_gt() 0
+#>
+#>   {\bf functions\_coolant\_pressure\_ramp\_x} pressure\_ramp\_time\_values
+#>   \VERAInputTable{
+#>     name={pressure\_ramp\_time\_values},
+#>     type={Fixed Character String.},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Time values for coolant/system pressure ramp.},
+#>     notes={}
+#>   }
   functions_coolant_pressure_ramp_x:
     <<: *dtstring
     _content:
     _check:
       - is_string()
+#>
+#>   {\bf functions\_coolant\_pressure\_ramp\_y} pressure\_ramp\_pressure\_values
+#>   \VERAInputTable{
+#>     name={pressure\_ramp\_pressure\_values},
+#>     type={Fixed Character String.},
+#>     need={Optional},
+#>     unitsdefault={Pascals},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Pressure values for coolant/system pressure ramp.},
+#>     notes={}
+#>   }
   functions_coolant_pressure_ramp_y:
     <<: *dtstring
     _content:
@@ -14996,19 +15656,19 @@ RUN:
       - is_int()
       - is_gt() 0
 #>
-##>   {\bf nprocs} number of processors
-##>   \VERAInputTable{
-##>     name={nprocs},
-##>     type={Integer},
-##>     need={Optional},
-##>     unitsdefault={},
-##>     unitsother={},
-##>     valuedefault={Total number of system processors},
-##>     valuesapplicable={Greater than 0},
-##>     limitations={},
-##>     description={Total number of processors that will be used},
-##>     notes={}
-##>   }
+#>   {\bf nprocs} number of processors
+#>   \VERAInputTable{
+#>     name={nprocs},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={Total number of system processors},
+#>     valuesapplicable={Greater than 0},
+#>     limitations={},
+#>     description={Total number of processors that will be used},
+#>     notes={}
+#>   }
   nprocs:
     <<: *dtstring
     _content:
