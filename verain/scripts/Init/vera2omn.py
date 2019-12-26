@@ -212,11 +212,11 @@ class VERAOmnibusGenerator(object):
 
         if _strictly_increasing(self.bioshield_radii) == False:
             print("Error: bioshield radii must be monotonically increasing!")
-            exit()
+            exit(1)
 
         if self.bioshield_radii[0] < self.vessel_rads[-1]:
             print("Error: bioshield radii must be larger than vessel")
-            exit()
+            exit(1)
 
         # The pressure vessel from the VERA input should be pulled in
         translate_ref = [-self.vessel_rads[-1], -self.vessel_rads[-1], 0]
@@ -237,7 +237,7 @@ class VERAOmnibusGenerator(object):
         else:
             print("Error: vera_pressure_vessel is False but automated excore " +
                   "generator will only define the geometry beyond the vessel.")
-            exit()
+            exit(1)
 
         return True
 
@@ -319,7 +319,7 @@ class VERAOmnibusGenerator(object):
                                 shape_line)
                         if not "OMN_Z_UPPER" in shape_line:
                             print("Template error: OMN_Z_UPPER")
-                            exit()
+                            exit(1)
                         line_filled = re.sub(
                                 r'OMN_Z_UPPER',
                                 str(max_z),
@@ -353,7 +353,7 @@ class VERAOmnibusGenerator(object):
                             print("Error: material " +
                                     self.bioshield_mats[bio_num] +
                                     " not available.")
-                            exit()
+                            exit(1)
                     elif "OMN_DEFINE_CELL" in cell_line:
                         cell_def = ' +thecore'
                         if bio_num > 0:
@@ -419,12 +419,12 @@ class VERAOmnibusGenerator(object):
             if (self.bioshield_radii[-1] <
                     self.det_rad_locs[d] + det_type.radii[-1]):
                 print("Error: detector cannot extend beyond bioshield")
-                exit()
+                exit(1)
 
             if (self.det_rad_locs[d] - det_type.radii[-1] <
                     self.vessel_rads[-1]):
                 print("Error: detector cannot extend into vessel")
-                exit()
+                exit(1)
 
             # Write out a shape for each radius and height
             shape_num = 0
@@ -452,7 +452,7 @@ class VERAOmnibusGenerator(object):
                                         shape_line)
                                 if not "OMN_Z_UPPER" in shape_line:
                                     print("Template error: OMN_Z_UPPER")
-                                    exit()
+                                    exit(1)
                                 line_filled = re.sub(
                                         r'OMN_Z_UPPER',
                                         str(min_z + h),
@@ -476,12 +476,12 @@ class VERAOmnibusGenerator(object):
                 if (self.bioshield_radii[-1] < self.det_rad_locs[d] +
                         np.sqrt(2.0) * det_type.radii[-1]):
                     print("Error: detector well cannot extend beyond bioshield")
-                    exit()
+                    exit(1)
 
                 if (self.det_rad_locs[d] + np.sqrt(2.0) * det_type.radii[-1] <
                         self.bioshield_radii[0]):
                     print("Error: detector well will not intersect bioshield")
-                    exit()
+                    exit(1)
 
                 # Calculate well dimensions
                 azi = self.det_azi_locs[d]
@@ -555,7 +555,7 @@ class VERAOmnibusGenerator(object):
                                 else:
                                     print("Error: material " +
                                             m + " not available.")
-                                    exit()
+                                    exit(1)
                             elif "OMN_DEFINE_CELL" in cell_line:
                                 cell_def = " -detector_" + str(d) + \
                                         "_" + str(label_num)

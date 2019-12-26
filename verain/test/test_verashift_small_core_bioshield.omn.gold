@@ -1,0 +1,349 @@
+! ===========================================================
+! ******************  EX-CORE DETECTOR  *********************
+! ===========================================================
+[GEOMETRY]
+global "excore"
+
+! *********************  DEFINE SHAPES  **********************
+
+! Reactor core from Vera Input inserted into this universe
+[UNIVERSE=core reactor]
+
+! ============================================================
+!                       UNIVERSE: EX-CORE 
+! ============================================================
+
+! *****************  DEFINE PROBLEM BOUNDARY  ****************
+
+! Define the problem boundary
+[UNIVERSE=general excore]
+boundary "box"
+
+! boundary box
+[UNIVERSE][SHAPE=cuboid box]
+faces -48.0 48.0 -48.0 48.0 0.0 245.938
+
+! ****************  DEFINE BIOSHIELD SHAPES  *****************
+! Bioshield shape
+[UNIVERSE][SHAPE=cyl bioshield_0]
+radius 38.0
+extents 0.0 245.938
+origin 0 0 0
+axis z
+
+! Bioshield shape
+[UNIVERSE][SHAPE=cyl bioshield_1]
+radius 39.0
+extents 0.0 245.938
+origin 0 0 0
+axis z
+
+! Bioshield shape
+[UNIVERSE][SHAPE=cyl bioshield_2]
+radius 48.0
+extents 0.0 245.938
+origin 0 0 0
+axis z
+
+! *****************  DEFINE DETECTOR SHAPES  *****************
+! Detector 0 shape (PWR)
+[UNIVERSE][SHAPE=cyl detector_0_0]
+radius 1.5
+extents 70.0 122.4
+origin 35.0740288533 20.25 0
+axis z
+
+! Detector 0 shape (PWR)
+[UNIVERSE][SHAPE=cyl detector_0_1]
+radius 2.5
+extents 70.0 122.4
+origin 35.0740288533 20.25 0
+axis z
+
+! Detector 0 shape (PWR)
+[UNIVERSE][SHAPE=cyl detector_0_2]
+radius 1.5
+extents 122.4 174.8
+origin 35.0740288533 20.25 0
+axis z
+
+! Detector 0 shape (PWR)
+[UNIVERSE][SHAPE=cyl detector_0_3]
+radius 2.5
+extents 122.4 174.8
+origin 35.0740288533 20.25 0
+axis z
+
+! Detector 0 well
+[UNIVERSE][SHAPE=wedge well_0]
+corner_pt 9.35627563874 9.35627563874
+height 104.8
+origin 35.7143087052 12.9802986756 70.0
+xbase 9.35627563874
+euler 0.208333333333 0.0 0.0
+
+! Detector 1 shape (PWR)
+[UNIVERSE][SHAPE=cyl detector_1_0]
+radius 1.5
+extents 70.0 122.4
+origin 22.23 38.5034894523 0
+axis z
+
+! Detector 1 shape (PWR)
+[UNIVERSE][SHAPE=cyl detector_1_1]
+radius 2.5
+extents 70.0 122.4
+origin 22.23 38.5034894523 0
+axis z
+
+! Detector 1 shape (PWR)
+[UNIVERSE][SHAPE=cyl detector_1_2]
+radius 1.5
+extents 122.4 174.8
+origin 22.23 38.5034894523 0
+axis z
+
+! Detector 1 shape (PWR)
+[UNIVERSE][SHAPE=cyl detector_1_3]
+radius 2.5
+extents 122.4 174.8
+origin 22.23 38.5034894523 0
+axis z
+
+! Detector 1 well
+[UNIVERSE][SHAPE=wedge well_1]
+corner_pt 16.8436888422 16.8436888422
+height 104.8
+origin 28.3572344151 25.2955975681 70.0
+xbase 16.8436888422
+euler 0.291666666667 0.0 0.0
+
+! Detector 2 shape (SRC)
+[UNIVERSE][SHAPE=cyl detector_2_0]
+radius 2.0
+extents 100.0 148.0
+origin 38.0 -0.0 0
+axis z
+
+! Detector 2 shape (SRC)
+[UNIVERSE][SHAPE=cyl detector_2_1]
+radius 3.0
+extents 100.0 148.0
+origin 38.0 -0.0 0
+axis z
+
+! Detector 2 well
+[UNIVERSE][SHAPE=wedge well_2]
+corner_pt 6.38006718084 6.38006718084
+height 48.0
+origin 37.7312519191 -4.511388768 100.0
+xbase 6.38006718084
+euler 0.125 0.0 0.0
+
+! *********  CREATE HOLES AND FILL WITH UNIVERSES  ***********
+
+! The translate card corresponds to the outer radius of the RPV
+! The bottom left corner of the core is at 0,0,0
+! It must be translated except when performing a raytrace
+[UNIVERSE][HOLE thecore]
+fill reactor
+translate -34.5 -34.5 0
+
+! ***************  DEFINE BIOSHIELD CELLS  *******************
+! Bioshield cell
+[UNIVERSE][CELL bioshield_0]
+comp void
+shapes  +thecore -bioshield_0
+        +detector_0_1 +detector_0_3 +well_0 +detector_1_1
+         +detector_1_3 +well_1 +detector_2_1 +well_2
+        
+
+! Bioshield cell
+[UNIVERSE][CELL bioshield_1]
+comp ss
+shapes  +thecore +bioshield_0 -bioshield_1
+        +detector_0_1 +detector_0_3 +well_0 +detector_1_1
+         +detector_1_3 +well_1 +detector_2_1 +well_2
+        
+
+! Bioshield cell
+[UNIVERSE][CELL bioshield_2]
+comp concrete
+shapes  +thecore +bioshield_1 -bioshield_2
+        +detector_0_1 +detector_0_3 +well_0 +detector_1_1
+         +detector_1_3 +well_1 +detector_2_1 +well_2
+        
+
+[UNIVERSE][CELL outside_bioshield]
+comp void
+shapes  +thecore +bioshield_2 -box
+
+! ***************  DEFINE DETECTOR CELLS  *******************
+! Detector 0 cell (PWR)
+[UNIVERSE][CELL detector_0_0]
+comp void
+shapes  -detector_0_0
+
+! Detector 0 cell (PWR)
+[UNIVERSE][CELL detector_0_1]
+comp cs
+shapes  -detector_0_1 +detector_0_0
+
+! Detector 0 cell (PWR)
+[UNIVERSE][CELL detector_0_2]
+comp void
+shapes  -detector_0_2
+
+! Detector 0 cell (PWR)
+[UNIVERSE][CELL detector_0_3]
+comp cs
+shapes  -detector_0_3 +detector_0_2
+
+! Detector 0 well shape
+[UNIVERSE][CELL  well_0]
+comp void
+shapes -well_0 +detector_0_1 +detector_0_3 
+
+! Detector 1 cell (PWR)
+[UNIVERSE][CELL detector_1_0]
+comp void
+shapes  -detector_1_0
+
+! Detector 1 cell (PWR)
+[UNIVERSE][CELL detector_1_1]
+comp cs
+shapes  -detector_1_1 +detector_1_0
+
+! Detector 1 cell (PWR)
+[UNIVERSE][CELL detector_1_2]
+comp void
+shapes  -detector_1_2
+
+! Detector 1 cell (PWR)
+[UNIVERSE][CELL detector_1_3]
+comp cs
+shapes  -detector_1_3 +detector_1_2
+
+! Detector 1 well shape
+[UNIVERSE][CELL  well_1]
+comp void
+shapes -well_1 +detector_1_1 +detector_1_3 
+
+! Detector 2 cell (SRC)
+[UNIVERSE][CELL detector_2_0]
+comp void
+shapes  -detector_2_0
+
+! Detector 2 cell (SRC)
+[UNIVERSE][CELL detector_2_1]
+comp cs
+shapes  -detector_2_1 +detector_2_0
+
+! Detector 2 well shape
+[UNIVERSE][CELL  well_2]
+comp void
+shapes -well_2 +detector_2_1 
+
+! ============================================================
+!                   DEFINE THE COMPOSITIONS
+! ============================================================
+[COMP]
+
+[COMP][MATERIAL void]
+matid 0
+temperature 293
+zaid --
+nd   --
+
+! from page 114 of CASL progression problems (CASL-U-2012-0131-004)
+[COMP][MATERIAL mod]
+matid 1
+temperature 293
+zaid 1001 8016 5010 5011
+nd   6.667279121238251E-02  3.333639560619125E-02 3.325516211867062E-05
+     1.338562053118350E-04
+     
+! from page 114 of CASL progression problems (CASL-U-2012-0131-004)
+[COMP][MATERIAL ss]
+matid 2
+temperature 293
+zaid  6000 14028 14029 14030 15031 24050 24052 24053 24054 25055
+     26054 26056 26057 26058 28058 28060 28061 28062 28064
+nd   3.20895E-04 1.58197E-03 8.03653E-05 5.30394E-05 6.99938E-05
+     7.64915E-04 1.47506E-02 1.67260E-03 4.16346E-04 1.75387E-03
+     3.44776E-03 5.41225E-02 1.24992E-03 1.66342E-04 5.30854E-03
+     2.04484E-03 8.88879E-05 2.83413E-04 7.21770E-05
+     
+! from page 114 of CASL progression problems (CASL-U-2012-0131-004)
+[COMP][MATERIAL cs]
+matid 3
+temperature 293
+zaid 6000 26054 26056 26057 26058
+nd   3.93598E-03 4.89841E-03 7.68945E-02 1.77583E-03 2.36330E-04
+
+!    Concrete, Oak Ridge (ORNL), 2.300000 g/cm3
+!    material data from PNNL 15870 Rev 1
+!    The above density is estimated to be accurate to 2 significant digits.
+!    Uncertainties are not addressed. The following data were calculated
+!    from the input weight and converted to number densities.
+[COMP][MATERIAL concrete]
+matid 4
+temperature 293
+zaid  1001  1002  6012  6013  8016  8017  11023 12024 12025 12026
+      13027 14028 14029 14030 19039 19040 19041 20040 20042 20043
+      20044 20048 26054 26056 26057 26058
+nd    8.49996E-03 1.70019E-06 1.99790E-02 2.24257E-04 3.54247E-02
+      8.52237E-05 1.63354E-05 1.46966E-03 1.86056E-04 2.04848E-04
+      5.55961E-04 1.56827E-03 7.95785E-05 5.25422E-05 3.76029E-05
+      4.03217E-09 2.71356E-06 1.07627E-02 7.21657E-05 1.55434E-05
+      2.32041E-04 2.10946E-05 1.12950E-05 1.77148E-04  4.09321E-06
+      5.40617E-07
+
+[COMP][MATERIAL al]
+matid 5
+temperature 293
+zaid 13027
+nd   6.02626E-02
+
+!################################ RESPONSES ###################################
+
+[RESPONSE=xs]
+name       b10
+mt         101
+nuclide    5010
+physics    ce
+particle_type n
+tmp           293
+
+[RESPONSE=xs]
+name       u235
+mt         N_FISSION
+nuclide    92235
+physics    ce
+particle_type n
+tmp           293
+
+! =========================================================
+!                      DEFINE THE TALLIES
+! =========================================================
+[TALLY]
+
+[TALLY][CELL detector_0_0]
+cells detector_0_0
+responses u235
+
+[TALLY][CELL detector_0_2]
+cells detector_0_2
+responses u235
+
+[TALLY][CELL detector_1_0]
+cells detector_1_0
+responses u235
+
+[TALLY][CELL detector_1_2]
+cells detector_1_2
+responses u235
+
+[TALLY][CELL detector_2_0]
+cells detector_2_0
+responses b10
