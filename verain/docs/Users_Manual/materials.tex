@@ -58,6 +58,11 @@ Some example material cards are shown below.
   mat B10   12.0 boron 1.0
   mat XYZ   6.0  zirc4 0.8 ss 0.2  ! define new mixture of 80% zirc4 and 20% ss
   mat ABCD  8.0  zirc4 0.8 ss 0.15 b4c 0.05
+  mat waba  3.65 b-10  1.36210E-02 ! creates material from isotopes in the XS-library
+                 b-11  6.02818E-02
+                 c-00  2.05259E-02
+                 o-16  4.26297E-01
+                 al-27 4.79274E-01
 \end{Verbatim}
 
 %% Fixed bug Andrew found below ~Feb 2014, atomic and weight were switched
@@ -207,7 +212,7 @@ In this example, the gadolinia oxide is first defined with a {\it mat} card and
 is mixed with the fuel as 5\%  gad oxide and 95\% UO$_2$ (weight percents).
 \begin{Verbatim}[fontsize=\small]
   mat gad5 7.407 gd2o3 1.0                ! define gad material separately
-  fuel U49 10.111 94.5 / 1.8  / gad5=0.05 ! 1.8% enriched fuel with 5% gad
+  fuel U49 10.111 94.5 / 1.8  / gad5=5.0  ! 1.8% enriched fuel with 5% gad
 \end{Verbatim}
 
 Some examples of MOX fuel cards are shown next.  In these cards, the user specifies

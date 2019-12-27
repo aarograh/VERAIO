@@ -80,7 +80,7 @@ compact names so the maps remain legible.
 All of the maps require one entry for each assembly location defined in the {\it core\_shape} map.
 However, the input parser can be used to take advantage of core symmetry.  If the core is symmetric,
 the user only needs to input the maps in quarter or octant symmetry, and the input parser will automatically
-unfold the map to full-symmetry.
+unfold the map to full-symmetry using mirror symmetry, regardless of the value for {\it bc\_sym}.
 The symmetry used in the core maps is independent of the symmetry used to run the actual calculations.
 For example, the user can enter all of the core maps in octant symmetry and still run the calculations
 in quarter or full symmetry.

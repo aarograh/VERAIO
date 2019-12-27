@@ -105,7 +105,7 @@ to the end of the {\it cell} card.
 \begin{Verbatim}[fontsize=\small]
 ! large CE 16x16 water rod
   ppitch  1.28524
-  cell WR   cell WR    0.4096 0.418 0.475 / U31 he zirc
+  cell WR 1.26 1.28 / mod zirc4 / large4
 \end{Verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -199,8 +199,8 @@ All axial elevations are defined relative to the top of the lower core plate.
 Grid cards are used to define unique grid spacer types.
 The following example defines two grid types, ``END'' and ``MID''.
 \begin{Verbatim}[fontsize=\small]
-  grid END inc   3.866 1017  ! grid spacer material, height(cm), mass (g)
-  grid MID zirc4 3.810  875
+  grid END inc    3.866 1017 / loss=0.9070  ! material, height(cm), mass (g), loss coef
+  grid MID zirc4  3.810 875 / loss=0.9065
 \end{Verbatim}
 
 The grid types are placed axially with the {\it grid\_axial} card:
@@ -222,8 +222,8 @@ The elevations are the midpoints of the spacer grid and are relative to the top 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Nozzle Descriptions}
 
-The assembly nozzles are modeled in the neutronics codes as smeared materials.  This is a very good
-approximation since the nozzles are not in the active fuel region and are mostly
+The assembly nozzles are modeled in the neutronics codes as smeared materials.  This approximation is
+very good since the nozzles are not in the active fuel region and are mostly
 composed of water, steel, and zirconium.  The user only specifies a nozzle mass and a nozzle height.
 The total volume of the nozzle region is calculated from the assembly pitch and nozzle height.
 The volume of the nozzle is calculated from the nozzle mass and density.
@@ -304,7 +304,7 @@ at an axial location of 15.46 cm.
 The name of the control rod ``CR1'' refers to the control rod type in the
 {\it crd\_map} in the [CORE] block.
 
-Control rods positions are assigned to a control rod bank with the {\it crd\_bank} map
+Control rod positions are assigned to a control rod bank with the {\it crd\_bank} map
 in the [CORE] block, and then the banks are positioned with the
 {\it rodbank} card in the [STATE] block.
 
@@ -358,6 +358,8 @@ Using this formula, the bottom elevation of the AIC lattice at the following ste
  \item step 100 = 15.46 + 360.0 * 100 / 228 = 173.35 cm
  \item step 0 (fully inserted) = 15.46 + 360.0 * 0 / 228 = 15.46 cm
 \end{itemize}
+
+The steps withdrawn can be specified as real numbers and fractions of a step.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Insert Description}
