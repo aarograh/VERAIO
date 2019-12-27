@@ -56,7 +56,7 @@ generation is
 \subsection{Writing Restart Files}
 
 Often a user will want to run a depletion and save the isotopic data to a file that can be used to
-restart a calculation at a later time.  This is useful if a calculation is long-running and needs to be
+restart a calculation at a later time.  This feature is useful if a calculation is long-running and needs to be
 split into multiple cases.  Other times a user may want to save certain statepoints so they can go
 back and run perturbation or flux map calculations at the saved points.
 
@@ -184,8 +184,9 @@ The assembly locations are defined as ``xlabel dash ylabel'':
 \end{Verbatim}
 The restart file also include the cycle number (which is stored as a label),
 so the combination of the cycle number and location can be used to uniquely define any assembly location in any cycle.
-For example ``C3K-12'' refers to location ``K-12'' of cycle ``C3''.
-If no cycle number is specified, the cycle label defaults to the previous cycle number (i.e. cycle N-1).
+For example ``3K-12'' refers to location ``K-12'' of cycle ``3''.
+If no cycle number is specified, the cycle label defaults to the previous cycle number (i.e. cycle N-1). Therefore,
+cycle labels are limited to only integers.
 
 New, fresh assemblies are defined by using a plus sign followed by an optional string.
 (The string is not currently used for anything, but may refer to the fresh fuel assembly type in the future.)
@@ -193,7 +194,8 @@ For example ``+ASMA'' signifies a fresh fuel.
 
 Using these naming conventions, a new core loading pattern can be defined using a {\it shuffle\_label} map.
 The {\it shuffle\_label} map is a core map showing the the previous assembly locations and
-new assembly fuel types.
+new assembly fuel types. It is also possible to shuffle assembly inserts independently in a similar
+fashion using a separate {\it insert\_shuffle\_label} map.
 
 The following example is the full-core loading pattern for cycle 2 of the BEAVRS benchmark.
 The cycle numbers are not used in the location labels because all of the assemblies
@@ -201,7 +203,7 @@ were moved from the previous cycle (cycle 1), and the default behavior is to use
 the previous cycle number if no cycle label is specified.
 \begin{Verbatim}[fontsize=\small]
   [CORE]
-    cycle C2
+    cycle 2
     op_date 1996/03/02     ! cycle startup date
   [STATE]
     shuffle_label

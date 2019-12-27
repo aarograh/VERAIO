@@ -17,7 +17,7 @@
 %
 \documentclass[11pt]{caslreport}
 \title{VERA User Manual}             % short name
-\reportnum{CASL-U-2014-0014-003}
+\reportnum{CASL-U-2014-0014-004}
 
 % package to allow small font size in verbatim
 \usepackage{fancyvrb}
@@ -40,8 +40,8 @@
 
 % make the table of contents
 \thispagestyle{plain}
-\tableofcontents%
-\clearpage%
+\tableofcontents
+\clearpage
 
 \phantomsection
 \addcontentsline{toc}{section}{FIGURES}
@@ -126,18 +126,18 @@ The VERA input blocks are:
 \item[CORE] This block describes the core layout including core map, assembly locations,
   control rod locations, and assembly insert locations.  The CORE block contains data that does not change
   during a cycle depletion.
-\item[STATE] These blocks describes reactor core operating parameters (statepoint values)
+\item[STATE] These blocks describe reactor core operating parameters (statepoint values)
   at a particular point in time.
   Parameters include inlet temperature, pressure, power, control rod positions, and others.
   STATE values can (and usually do) change at each statepoint.
-\item[ASSEMBLY] These blocks contains the geometry and physical description of the nuclear fuel assemblies.
+\item[ASSEMBLY] These blocks contain the geometry and physical description of the nuclear fuel assemblies.
   The assembly descriptions do not include control rods, detectors, or inserts.
 \item[INSERT] These blocks contain the geometry and physical description of the assembly inserts.
    An insert is a generic term used to describe a removable burnable poison assembly or a thimble plug assembly.
-\item[CONTROL] This block contains the geometry and physical description of a control rod assembly.
+\item[CONTROL] These blocks contain the geometry and physical description of a control rod assembly.
    A control rod assembly is similar to an assembly insert, except that it can move
    during operations.
-\item[DETECTOR] This block contains the geometry and physical description of a detector string.
+\item[DETECTOR] These blocks contain the geometry and physical description of a detector string.
 \item[EDITS] This block contains information on what edits the code should produce.
 \item[COUPLING] This block contains parameters for coupling different physics codes together.
 \end{description}
@@ -161,7 +161,7 @@ The data is organized in blocks with names and purpose as described in the
 introduction. The start of a block is denoted by the block name enclosed in
 square brackets, e.g. [STATE]. The file block structure is flat, so that there is
 no hierarchy in the block segments. A start of a new block also implies the end of
-the previous block. There can be multiple instances of [ASSEMBLY], [INSERT], and i[STATE] blocks.
+the previous block. There can be multiple instances of [ASSEMBLY], [INSERT], and [STATE] blocks.
 Other blocks, like [CORE] and the code-specific blocks, are unique, so that a new
 block with the same name of an existing block will overwrite the existing block data.
 There is no required order of the blocks in input file, except for the [STATE] blocks,

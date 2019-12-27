@@ -1,6 +1,6 @@
 *** Base Git Repo: VERA
-b60a94b [Sat Jun 15 20:48:38 2019 -0400] <inb@mod-condo-login01.ornl.gov>
-Commiting load_env.sh for panacea
+cee2c38 [Fri Aug 23 12:07:55 2019 -0400] <bairdml@ornl.gov>
+Updating VERA version file
 *** Git Repo: TriBITS
 a9e4761 [Thu May 9 09:33:45 2019 -0600] <rabartl@sandia.gov>
 Merge remote-tracking branch 'github/master' into phi-5294-update-tribits (PHI-5
@@ -13,21 +13,21 @@ Install CTeuchos_config.h
 *** Git Repo: Futility
 b979066 [Mon May 13 21:01:33 2019 -0400] <collinsbs@ornl.gov>
 Merge branch 'master' of https://github.com/CASL/Futility
+*** Git Repo: MAMBA
+6bd9ab2 [Wed May 22 04:00:48 2019 -0400] <collinsbs@ornl.gov>
+Merge branch 'master' of code-int.ornl.gov:mamba/MAMBA
 *** Git Repo: VERAInExt
-cbae95e [Thu Jun 13 13:54:01 2019 -0400] <stimpsonsg@ornl.gov>
-Updating Problem 6 per CTFFuel input defaults change.
+ac2e962 [Fri Oct 18 20:13:33 2019 -0400] <bairdml@ornl.gov>
+Removing merge conflict
 *** Git Repo: DataTransferKit
 19526ab [Fri Aug 18 09:14:16 2017 -0400] <dalg24@gmail.com>
 Merge pull request #297 from naughtont3/tjn-fortran-off
 *** Git Repo: COBRA-TF
-1fe4152 [Thu Jun 13 10:46:14 2019 -0400] <wysockiaj@ornl.gov>
-Adding SystemCoupling interface and surrogate model
+97514a5 [Thu Nov 14 10:12:47 2019 -0500] <bairdml@ornl.gov>
+Removing deallocate statement for logfile
 *** Git Repo: VERAData
 4903eb7 [Fri Mar 8 15:50:55 2019 -0500] <pandyatm@ornl.gov>
 Merge branch 'pole-data-link' into 'master'
-*** Git Repo: VERAData/CEData
-679cb03 [Tue Jun 25 11:50:31 2019 -0400] <pandyatm@ornl.gov>
-Merge branch 'update-ce-data' into 'master'
 *** Git Repo: MOOSEExt
 4daa739 [Fri May 17 09:59:50 2019 -0400] <bairdml@ornl.gov>
 Merge branch 'atf_compare_output_csv' into 'master'
@@ -38,11 +38,17 @@ Merge branch 'correct_int_cast' into 'master'
 09ba8e9 [Wed Jun 5 18:10:11 2019 -0400] <pandyatm@ornl.gov>
 Merge remote branch 'gitlab/master'
 *** Git Repo: MPACT
-c18843e [Thu Jun 13 14:11:14 2019 -0400] <stimpsonsg@ornl.gov>
-Rebaselining per CTFFuel default input changes.
+869ab07 [Thu Oct 17 19:46:55 2019 -0400] <grahamam@ornl.gov>
+Fix a bug in identifying device labels (#6111)
 *** Git Repo: VeraShift
 ac561d8 [Thu Jun 6 12:26:49 2019 -0400] <pandyatm@ornl.gov>
 Merge remote branch 'gitlab/master'
-*** Git Repo: Tiamat
-be65a18 [Mon Mar 4 16:21:24 2019 -0500] <roystonke@ornl.gov>
-Merge branch 'master' of code-int.ornl.gov:CASL/Tiamat
+*** Git Repo: DakotaExt
+afd354f [Tue Aug 1 19:36:55 2017 -0400] <rhoope@sandia.gov>
+Fix tarball installation
+*** Git Repo: DakotaExt/Dakota
+7415238 [Thu Jun 15 12:40:49 2017 -0400] <rhoope@sandia.gov>
+Triage static builds of Dakota 6.6
+*** Git Repo: VERAView
+28e0f8a [Thu Mar 31 16:53:16 2016 -0400] <leerw@ornl.gov>
+Sync from code.ornl.gov for version 1.0

@@ -56,8 +56,8 @@
      need={Optional},
      unitsdefault={Percent},
      unitsother={},
-     valuedefault={1e-8},
-     valuesapplicable={$>=0$},
+     valuedefault={$1.0\times 10^{-8}$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Percent of rated operating power},
      notes={Cannot be zero when depleting}
@@ -70,8 +70,8 @@
      need={Optional},
      unitsdefault={Percent},
      unitsother={},
-     valuedefault={1e-8},
-     valuesapplicable={$>=0$},
+     valuedefault={$1.0\times 10^{-8}$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Percent of rated operating flow},
      notes={}
@@ -115,7 +115,7 @@
      unitsdefault={Percent},
      unitsother={},
      valuedefault={0},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Bypass flow fraction applied to the acutal flow.},
      notes={}
@@ -126,7 +126,7 @@
      name={inlet\_temperature},
      type={Float},
      need={Optional},
-     unitsdefault={},
+     unitsdefault={C},
      unitsother={F, K},
      valuedefault={326.85 C},
      valuesapplicable={$>0$},
@@ -170,7 +170,7 @@
      name={fuel\_temperature},
      type={Float},
      need={Optional},
-     unitsdefault={},
+     unitsdefault={K},
      unitsother={F, C},
      valuedefault={600 K},
      valuesapplicable={$>0K$, $<1600K$},
@@ -258,7 +258,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={0},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={This card is used to specify the order of polynomial approximation    %
        to use for extrapolation of microscopic cross sections and fluxes over           %
@@ -283,7 +283,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={0},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
     description={This card is used to specify the order of polynomial approximation    %
       to use for interpolation of microscopic cross sections and fluxes over %
@@ -299,7 +299,7 @@
      unitsdefault={ppm},
      unitsother={},
      valuedefault={0.0},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Soluble boron concentration in the moderator},
      notes={}
@@ -313,7 +313,7 @@
      unitsdefault={},
      unitsother={Atom fraction of B-10 in boron},
      valuedefault={0.199},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Boron-10 fraction in coolant},
      notes={}
@@ -339,7 +339,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={1.0},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Target eigenvalue used in boron search or rod search},
      notes={}
@@ -455,7 +455,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Steps withdrawn for each bank in list},
      notes={Every \texttt{bank\_pos} must have a corresponding \texttt{bank\_label}. Example:
@@ -473,6 +473,20 @@
      valuesapplicable={on},
      limitations={},
      description={Flag to turn on and off T/H feedback.},
+     notes={}
+   }
+
+   {\bf fuel\_performance} fuel\_performance\_option
+   \VERAInputTable{
+     name={fuel\_performance\_option},
+     type={Character String},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={off},
+     valuesapplicable={on},
+     limitations={},
+     description={Flag to turn on and off Bison coupling.},
      notes={}
    }
 
@@ -523,7 +537,7 @@
      name={fuel\_thermal\_expansion\_temperature},
      type={Float},
      need={Optional},
-     unitsdefault={},
+     unitsdefault={K},
      unitsother={F, C},
      valuedefault={293 K},
      valuesapplicable={},
@@ -539,7 +553,7 @@
      name={clad\_thermal\_expansion\_temperature},
      type={Float},
      need={Optional},
-     unitsdefault={},
+     unitsdefault={K},
      unitsother={F, C},
      valuedefault={293 K},
      valuesapplicable={},
@@ -618,10 +632,10 @@
      name={assembly\_pitch\_expansion\_coefficient},
      type={Float},
      need={Optional},
-     unitsdefault={K$^-1$},
+     unitsdefault={K$^{-1}$},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$, $<50.0e-6$},
+     valuesapplicable={$\ge 0$, $<50.0\times 10^{-6}$},
      limitations={},
      description={Thermal expansion coefficient to be used when expanding the assemblies in the
         problem. If not specified, the expansion coefficient will be calculated internally
@@ -634,10 +648,10 @@
      name={pin\_pitch\_expansion\_coefficient},
      type={Float},
      need={Optional},
-     unitsdefault={K$^-1$},
+     unitsdefault={K$^{-1}$},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$, $<50.0e-6$},
+     valuesapplicable={$\ge 0$, $<50.0\times 10^{-6}$},
      limitations={},
      description={Thermal expansion coefficient to be used when expanding the pins in the
         problem. If not specified, the expansion coefficient will be calculated internally
@@ -650,10 +664,10 @@
      name={axial\_tec},
      type={Float},
      need={Optional},
-     unitsdefault={K$^-1$},
+     unitsdefault={K$^{-1}$},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$, $<50.0e-6$},
+     valuesapplicable={$\ge 0$, $<50.0\times 10^{-6}$},
      limitations={},
      description={Thermal expansion coefficient to be used when expanding the axial
         dimension of the problem. If not specified, the expansion coefficient will
@@ -685,7 +699,7 @@
    {\bf kmul\_beta} kmul\_beta
    \VERAInputTable{
      name={kmul\_beta},
-     type={},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -772,8 +786,8 @@
    {\bf bank\_wd} bank\_wd
    \VERAInputTable{
      name={bank\_wd},
-     type={},
-     need={},
+     type={List of Free Form Character Strings paired with and Intefer and Float},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={},
@@ -789,7 +803,7 @@
          \item \texttt{pos\_N} --- The number of steps withdrawn at a given time step.  %
        \end{itemize}                                                                   %
        },
-     notes={}
+     notes={This feature is still under development and is not yet operational.}
    }
 
    {\bf scram\_lock} bank\_label
@@ -1019,7 +1033,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$, $<=1$},
+     valuesapplicable={$\ge 0$, $\le 1$},
      limitations={},
      description={Core-wide crud removal fraction.},
      notes={Does not carry over from state to state.}
@@ -1033,7 +1047,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Coolant chemistry concentrations to be used for crud formation:
         \begin{itemize}
@@ -1055,7 +1069,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Specific volume of hydrogen in the coolant to be used for
         crud formation.},
@@ -1070,7 +1084,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Soluble nickel concentration in the coolant to be used for
         crud formation.},
@@ -1085,7 +1099,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Particulate nickel concentration in the coolant to be used for
         crud formation.},
@@ -1100,7 +1114,7 @@
      unitsdefault={Percent},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$, $<=100$},
+     valuesapplicable={$\ge 0$, $\le 100$},
      limitations={},
      description={Percent of rated chemistry cleanup flow rate.},
      notes={Only used when coupled to CTF.}
@@ -1127,9 +1141,9 @@
 
    {\bf name} core\_name
    \VERAInputTable{
-     name={name},
+     name={core\_name},
      type={Character String},
-     need={Optinoal},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={},
@@ -1141,14 +1155,14 @@
 
    {\bf cycle} cycle\_num
    \VERAInputTable{
-     name={cycle},
+     name={cycle\_num},
      type={Character String},
      need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={},
      valuesapplicable={},
-     limitations={},
+     limitations={Currently only intergers are allowed for the cycle label.},
      description={Cycle number.},
      notes={}
    }
@@ -1170,7 +1184,7 @@
 
    {\bf op\_date} operation\_date
    \VERAInputTable{
-     name={op\_date},
+     name={operation\_date},
      type={Character String},
      need={Optional},
      unitsdefault={},
@@ -1201,10 +1215,10 @@
      name={rated\_power},
      type={Float},
      need={Required},
-     unitsdefault={},
-     unitsother={MW},
+     unitsdefault={MW},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Rated thermal power at 100\% power.},
      notes={}
@@ -1213,10 +1227,10 @@
      name={rated\_flow},
      type={Float},
      need={Required},
-     unitsdefault={},
-     unitsother={Mlbs/hr},
+     unitsdefault={Mlbs/hr},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Rated vessel flow at 100\% flow},
      notes={}
@@ -1241,8 +1255,8 @@
      name={apitch},
      type={Float},
      need={Required},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={$>0$},
      limitations={},
@@ -1267,10 +1281,10 @@
      name={baffle\_gap},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Gap between outside assembly (including assembly gap) and baffle.},
      notes={}
@@ -1279,10 +1293,10 @@
      name={baffle\_thick},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Thickness of baffle.},
      notes={}
@@ -1308,7 +1322,7 @@
      unitsdefault={cm},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={This card defines the inner radius to be used to construct all
         neutron pads.},
@@ -1321,7 +1335,7 @@
      unitsdefault={cm},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={This card defines the outer radius to be used to construct all
         neutron pads.},
@@ -1389,10 +1403,10 @@
      name={vessel\_radii},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Vessel radii.},
      notes={Every \texttt{vessel\_radii} must have a corresponding \texttt{vessel\_mats}. Example:
@@ -1579,10 +1593,10 @@
      name={lower\_thick},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Lower core plate thickness.},
      notes={}
@@ -1594,7 +1608,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$,$<=1$},
+     valuesapplicable={$\ge 0$,$\le 1$},
      limitations={},
      description={Lower core plate material volume fraction. Remainder of
         volume fraction will be filled with coolant.},
@@ -1618,10 +1632,10 @@
      name={upper\_thick},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Upper core plate thickness.},
      notes={}
@@ -1633,7 +1647,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$,$<=1$},
+     valuesapplicable={$\ge 0$,$\le 1$},
      limitations={},
      description={Upper core plate material volume fraction. Remainder of
         volume fraction will be filled with coolant.},
@@ -1746,10 +1760,10 @@
      name={height},
      type={Float},
      need={Required},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Total axial distance from bottom core plate to upper core
        plate. Distance does not include core plate thicknesses.},
@@ -1787,10 +1801,10 @@
      name={lower\_refl\_thicks},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Lower reflector thicknesses.},
      notes={}
@@ -1802,7 +1816,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$,$<=1$},
+     valuesapplicable={$\ge 0$,$\le 1$},
      limitations={},
      description={Lower reflector volume fractions.},
      notes={}
@@ -1825,10 +1839,10 @@
      name={upper\_refl\_thicks},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Upper reflector thicknesses.},
      notes={}
@@ -1840,7 +1854,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$,$<=1$},
+     valuesapplicable={$\ge 0$,$\le 1$},
      limitations={},
      description={Upper reflector volume fractions.},
      notes={}
@@ -1940,7 +1954,7 @@
    }
    \VERAInputTable{
      name={str\_mult},
-     type={},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -1987,7 +2001,7 @@
      unitsdefault={m$^2$},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Total surface area of steam generator tubing.},
      notes={Used in the chemistry source term calculation to determine amount of
@@ -2000,7 +2014,7 @@
      unitsdefault={none},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$,$<=1$},
+     valuesapplicable={$\ge 0$,$\le 1$},
      limitations={},
      description={Steam generator plugged area fraction.},
      notes={The effective area of the steam generator used in the chemistry
@@ -2028,7 +2042,7 @@
      unitsdefault={m$^2$},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Total surface area of hot leg piping.},
      notes={Used in the chemistry source term calculation to determine amount
@@ -2056,7 +2070,7 @@
      unitsdefault={m$^2$},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Total surface area of cold leg piping.},
      notes={Used in the chemistry source term calculation to determine amount of
@@ -2071,7 +2085,7 @@
      unitsdefault={kg/s},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Rated flow rate of coolant chemistry cleanup system.},
      notes={}
@@ -2173,8 +2187,8 @@
      name={ppitch},
      type={Float},
      need={Required},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={},
@@ -2268,8 +2282,8 @@
      name={axial\_elevations},
      type={Float},
      need={Required},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={},
@@ -2306,8 +2320,8 @@
      name={mass},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={g},
+     unitsdefault={g},
+     unitsother={},
      valuedefault={},
      valuesapplicable={$>0$},
      limitations={},
@@ -2318,8 +2332,8 @@
      name={height},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={},
@@ -2345,8 +2359,8 @@
      name={grid\_elev},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={},
@@ -2372,8 +2386,8 @@
      name={lower\_nozzle\_height},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={$>0$},
      limitations={},
@@ -2384,8 +2398,8 @@
      name={lower\_nozzle\_mass},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={g},
+     unitsdefault={g},
+     unitsother={},
      valuedefault={},
      valuesapplicable={$>0$},
      limitations={},
@@ -2411,8 +2425,8 @@
      name={upper\_nozzle\_height},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={$>0$},
      limitations={},
@@ -2423,8 +2437,8 @@
      name={upper\_nozzle\_mass},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={g},
+     unitsdefault={g},
+     unitsother={},
      valuedefault={},
      valuesapplicable={$>0$},
      limitations={},
@@ -2468,10 +2482,10 @@
      name={gapw},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Wide-gap width},
      notes={BWR only.}
@@ -2480,10 +2494,10 @@
      name={gapn},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Narrow-gap width},
      notes={BWR only.}
@@ -2506,10 +2520,10 @@
      name={chanth},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Channel box thickness.},
      notes={}
@@ -2518,10 +2532,10 @@
      name={chanrad},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Channel box inside corner radius.},
      notes={}
@@ -2530,10 +2544,10 @@
      name={cornerth},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Thickness of channel box corner.},
      notes={Not yet functional.}
@@ -2542,10 +2556,10 @@
      name={cornerlen},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Length of thick corners measured from the channel corner.},
      notes={Not yet functional.}
@@ -2614,8 +2628,8 @@
      name={stroke},
      type={Float},
      need={Required},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={},
@@ -2721,8 +2735,8 @@
      name={axial\_elevations},
      type={Float},
      need={Required},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={},
@@ -2774,8 +2788,8 @@
      name={bladespan},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={$>0$},
      limitations={},
@@ -2786,8 +2800,8 @@
      name={bladeth},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={$>0$},
      limitations={},
@@ -2798,8 +2812,8 @@
      name={bladerad},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={$>0$},
      limitations={},
@@ -2810,8 +2824,8 @@
      name={bladesheath},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={$>0$},
      limitations={},
@@ -2822,8 +2836,8 @@
      name={bladewing},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={$>0$},
      limitations={},
@@ -2960,8 +2974,8 @@
      name={axial\_elevations},
      type={Float},
      need={Required},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={},
@@ -3115,8 +3129,8 @@
      name={axial\_elevations},
      type={Float},
      need={Required},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={},
@@ -3147,8 +3161,8 @@
      name={axial\_edit\_bounds},
      type={Float},
      need={Required},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={},
@@ -3162,8 +3176,8 @@
      name={axial\_edit\_mesh\_delta},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={},
@@ -3189,8 +3203,8 @@
      name={points\_dim1},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={},
@@ -3203,8 +3217,8 @@
      name={points\_dim2},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm(CART), degrees(RTHETA)},
+     unitsdefault={cm(CART), degrees(RTHETA)},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={},
@@ -3217,8 +3231,8 @@
      name={points\_dim3},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={cm},
+     unitsdefault={cm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={},
@@ -3277,8 +3291,8 @@
    {\bf num\_threads} num\_threads
    \VERAInputTable{
      name={num\_threads},
-     type={integer},
-     need={},
+     type={Integer},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={1},
@@ -3291,8 +3305,8 @@
    {\bf seed} seed
    \VERAInputTable{
      name={seed},
-     type={integer},
-     need={},
+     type={Integer},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={121434},
@@ -3361,7 +3375,7 @@
    {\bf broaden\_xs} broaden\_xs
    \VERAInputTable{
      name={broaden\_xs},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3389,7 +3403,7 @@
    {\bf union\_energy} union\_energy
    \VERAInputTable{
      name={union\_energy},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3431,7 +3445,7 @@
    {\bf dbrc} dbrc
    \VERAInputTable{
      name={dbrc},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3473,7 +3487,7 @@
    {\bf do\_micro\_tally} do\_micro\_tally
    \VERAInputTable{
      name={do\_micro\_tally},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3487,7 +3501,7 @@
    {\bf do\_transport} do\_transport
    \VERAInputTable{
      name={do\_transport},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3501,7 +3515,7 @@
    {\bf do\_output} do\_output
    \VERAInputTable{
      name={do\_output},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3543,7 +3557,7 @@
    {\bf gamma\_flux} gamma\_flux
    \VERAInputTable{
      name={gamma\_flux},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3571,8 +3585,8 @@
    {\bf num\_cycles} num\_cycles
    \VERAInputTable{
      name={num\_cycles},
-     type={integer},
-     need={},
+     type={Integer},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={50},
@@ -3585,8 +3599,8 @@
    {\bf num\_inactive\_cycles} num\_inactive\_cycles
    \VERAInputTable{
      name={num\_inactive\_cycles},
-     type={integer},
-     need={},
+     type={Integer},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={10},
@@ -3600,7 +3614,7 @@
    \VERAInputTable{
      name={Np},
      type={double},
-     need={},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={1000},
@@ -3655,7 +3669,7 @@
    {\bf output\_geometry} output\_geometry
    \VERAInputTable{
      name={output\_geometry},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3669,7 +3683,7 @@
    {\bf output\_fission\_source} output\_fission\_source
    \VERAInputTable{
      name={output\_fission\_source},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3683,7 +3697,7 @@
    {\bf output\_external\_source} output\_external\_source
    \VERAInputTable{
      name={output\_external\_source},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3697,7 +3711,7 @@
    {\bf output\_micro\_tally} output\_micro\_tally
    \VERAInputTable{
      name={output\_micro\_tally},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3711,7 +3725,7 @@
    {\bf output\_ww} output\_ww
    \VERAInputTable{
      name={output\_ww},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3767,7 +3781,7 @@
    {\bf raytrace\_resolution} raytrace\_resolution
    \VERAInputTable{
      name={raytrace\_resolution},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3781,7 +3795,7 @@
    {\bf vera\_pressure\_vessel} vera\_pressure\_vessel
    \VERAInputTable{
      name={vera\_pressure\_vessel},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3806,10 +3820,26 @@
      notes={}
    }
 
+   {\bf rtk\_output\_format} rtk\_output\_format
+   \VERAInputTable{
+     name={rtk\_output\_format},
+     type={String},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={hdf5},
+     valuesapplicable={hdf5,xml},
+     limitations={},
+     description={The type of file format for the core dumped
+                  geometry description},
+     notes={Applicable to eigenvalue and cadis modes with
+            output\_geometry on}
+   }
+
    {\bf use\_pole\_data} use\_pole\_data
    \VERAInputTable{
      name={use\_pole\_data},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3823,7 +3853,7 @@
    {\bf use\_fission\_source} use\_fission\_source
    \VERAInputTable{
      name={use\_fission\_source},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3837,7 +3867,7 @@
    {\bf use\_external\_source} use\_external\_source
    \VERAInputTable{
      name={use\_external\_source},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3893,7 +3923,7 @@
    {\bf src\_disc\_samples\_per\_batch} src\_disc\_samples\_per\_batch
    \VERAInputTable{
      name={src\_disc\_samples\_per\_batch},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3907,7 +3937,7 @@
    {\bf src\_disc\_max\_samples} src\_disc\_max\_samples
    \VERAInputTable{
      name={src\_disc\_max\_samples},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3949,7 +3979,7 @@
    {\bf num\_theta} num\_theta
    \VERAInputTable{
      name={num\_theta},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -3963,7 +3993,7 @@
    {\bf num\_axial} num\_axial
    \VERAInputTable{
      name={num\_axial},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4019,7 +4049,7 @@
    {\bf homog\_ring\_radii} homog\_ring\_radii
    \VERAInputTable{
      name={homog\_ring\_radii},
-     type={},
+     type={List of Floats},
      need={Optional},
      unitsdefault={cm},
      unitsother={},
@@ -4033,7 +4063,7 @@
    {\bf homog\_pin\_rings} homog\_pin\_rings
    \VERAInputTable{
      name={homog\_pin\_rings},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4047,12 +4077,12 @@
    {\bf homog\_explicit\_ring} homog\_explicit\_ring
    \VERAInputTable{
      name={homog\_explicit\_ring},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={cm},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={Radius to homogenize within and have explicit pins outside of},
      notes={Experimental capability}
@@ -4132,7 +4162,7 @@
    {\bf create\_unique\_pins} create\_unique\_pins
    \VERAInputTable{
      name={create\_unique\_pins},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4174,8 +4204,8 @@
    {\bf mesh} mesh
    \VERAInputTable{
      name={mesh},
-     type={integer},
-     need={},
+     type={Integer},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={},
@@ -4189,7 +4219,7 @@
    \VERAInputTable{
      name={refl\_mesh\_size},
      type={double},
-     need={},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={},
@@ -4203,7 +4233,7 @@
    \VERAInputTable{
      name={extend\_axial\_mesh\_size},
      type={double},
-     need={},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={},
@@ -4216,7 +4246,7 @@
    {\bf output\_adjoint} output\_adjoint
    \VERAInputTable{
      name={output\_adjoint},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4230,7 +4260,7 @@
    {\bf adjoint} adjoint
    \VERAInputTable{
      name={adjoint},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4244,7 +4274,7 @@
    {\bf num\_blocks\_i} num\_blocks\_i
    \VERAInputTable{
      name={num\_blocks\_i},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4258,7 +4288,7 @@
    {\bf num\_blocks\_j} num\_blocks\_j
    \VERAInputTable{
      name={num\_blocks\_j},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4272,7 +4302,7 @@
    {\bf num\_z\_blocks} num\_z\_blocks
    \VERAInputTable{
      name={num\_z\_blocks},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4286,7 +4316,7 @@
    {\bf num\_sets} num\_sets
    \VERAInputTable{
      name={num\_sets},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4300,7 +4330,7 @@
    {\bf num\_groups} num\_groups
    \VERAInputTable{
      name={num\_groups},
-     type={integer},
+     type={Integer},
      need={Required for hybrid},
      unitsdefault={},
      unitsother={},
@@ -4328,7 +4358,7 @@
    {\bf partition\_upscatter} partition\_upscatter
    \VERAInputTable{
      name={partition\_upscatter},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4342,7 +4372,7 @@
    {\bf store\_fulcrum\_string} store\_fulcrum\_string
    \VERAInputTable{
      name={store\_fulcrum\_string},
-     type={string},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4384,7 +4414,7 @@
    {\bf iterate\_downscatter} iterate\_downscatter
    \VERAInputTable{
      name={iterate\_downscatter},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4398,7 +4428,7 @@
    {\bf downscatter} downscatter
    \VERAInputTable{
      name={downscatter},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4412,7 +4442,7 @@
    {\bf Pn\_order} Pn\_order
    \VERAInputTable{
      name={Pn\_order},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4426,11 +4456,11 @@
    {\bf upscatter\_subspace\_size} upscatter\_subspace\_size
    \VERAInputTable{
      name={upscatter\_subspace\_size},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={100 if eq\_set is spn\_fv, 30 otherwise},
+     valuedefault={30},
      valuesapplicable={$>0$},
      limitations={},
      description={Maximum subspace size for upscatter solver},
@@ -4440,7 +4470,7 @@
    {\bf within\_group\_subspace\_size} within\_group\_subspace\_size
    \VERAInputTable{
      name={within\_group\_subspace\_size},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4454,7 +4484,7 @@
    {\bf upscatter\_max\_itr} upscatter\_max\_itr
    \VERAInputTable{
      name={upscatter\_max\_itr},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4468,7 +4498,7 @@
    {\bf within\_group\_max\_itr} within\_group\_max\_itr
    \VERAInputTable{
      name={within\_group\_max\_itr},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4487,7 +4517,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={sc},
-     valuesapplicable={bld, bld\_2d, ld, sc, spn\_fv},
+     valuesapplicable={bld, bld\_2d, ld, sc},
      limitations={},
      description={Solution method or spatial discretization},
      notes={Applicable to hybrid simulations}
@@ -4566,7 +4596,7 @@
    {\bf polars\_octant} polars\_octant
    \VERAInputTable{
      name={polars\_octant},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4580,7 +4610,7 @@
    {\bf azimuthals\_octant} azimuthals\_octant
    \VERAInputTable{
      name={azimuthals\_octant},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4594,7 +4624,7 @@
    {\bf Sn\_order} Sn\_order
    \VERAInputTable{
      name={Sn\_order},
-     type={integer},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4636,7 +4666,7 @@
    {\bf cell\_homogenize} cell\_homogenize
    \VERAInputTable{
      name={cell\_homogenize},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4650,7 +4680,7 @@
    {\bf Pn\_correction} Pn\_correction
    \VERAInputTable{
      name={Pn\_correction},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4664,7 +4694,7 @@
    {\bf pin\_partitioning} pin\_partitioning
    \VERAInputTable{
      name={pin\_partitioning},
-     type={bool},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4681,21 +4711,21 @@
    {\bf nfuel} nfuel
    \VERAInputTable{
      name={nfuel},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={10},
      valuesapplicable={$>0$},
      limitations={},
-     description={The number of rings in the fuel rod pellet (only effective when nc>0).},
+     description={The number of rings in the fuel rod pellet (only effective when nc$>0$).},
      notes={}
    }
 
    {\bf min\_steps} min\_steps
    \VERAInputTable{
      name={min\_steps},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4709,14 +4739,14 @@
    {\bf imox} imox
    \VERAInputTable{
      name={imox},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={0},
      valuesapplicable={0, 1, 2, 3, 4, 5},
      limitations={},
-     description={The fuel thermal conductivity model to use in CTF (only effective when nc>0). Options are:
+     description={The fuel thermal conductivity model to use in CTF (only effective when nc$>0$). Options are:
         0 - MATPRO-11
         1 - Modified NFI (UO2)
         2 - Halden (UO2)
@@ -4729,7 +4759,7 @@
    {\bf nc} nc
    \VERAInputTable{
      name={nfuel},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4746,7 +4776,7 @@
    {\bf chf} chf
    \VERAInputTable{
      name={chf},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4765,7 +4795,7 @@
    {\bf debug} debug
    \VERAInputTable{
      name={debug},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4784,7 +4814,7 @@
    {\bf disable\_xml2ctf} disable\_xml2ctf
    \VERAInputTable{
      name={disable\_xml2ctf},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4802,7 +4832,7 @@
    {\bf irfc} irfc
    \VERAInputTable{
      name={irfc},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4821,7 +4851,7 @@
    {\bf dhfrac} dhfrac
    \VERAInputTable{
      name={dhfrac},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4835,7 +4865,7 @@
    {\bf guide\_tube\_coefficient} guide\_tube\_coefficient
    \VERAInputTable{
      name={guide\_tube\_coefficient},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4854,7 +4884,7 @@
    {\bf beta\_htc} beta\_htc
    \VERAInputTable{
      name={beta\_htc},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4868,10 +4898,27 @@
      notes={}
    }
 
+   {\bf fuel\_gap\_htc\_beta} fuel\_gap\_htc\_beta
+   \VERAInputTable{
+     name={fuel\_gap\_htc\_beta},
+     type={Float},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={1.0},
+     valuesapplicable={$>0.0$ and $\le 1.0$},
+     limitations={},
+     description={The under-relaxation coefficient used on the fuel rod gap heat transfer coefficient.
+        This is only used when modeling a steady-state simulation.  During transient portions of the
+        simulation, this value will be ignored.  This parameter only has an effect when using
+        gap\_model="dynamic".},
+     notes={}
+   }
+
    {\bf rothcon\_temp\_beta} rothcon\_temp\_beta
    \VERAInputTable{
      name={rothcon\_temp\_beta},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4881,16 +4928,16 @@
      description={The under-relaxation coefficient used when calculating rod surface temperatures on the
         rod surface coupling mesh set up by CTF for coupling to MAMBA.  It may be necessary to reduce
         this value if many iterations are failing during the temperature reconstruction process when
-        using the ROTHCON grid files.}
+        using the ROTHCON grid files.},
      notes={}
    }
 
    {\bf hgap} hgap
    \VERAInputTable{
      name={hgap},
-     type={float},
+     type={Float},
      need={Optional},
-     unitsdefault={W/m**2/K},
+     unitsdefault={W/m$^2$/K},
      unitsother={},
      valuedefault={5678.3},
      valuesapplicable={$>0.0$},
@@ -4916,11 +4963,11 @@
    {\bf epso} epso
    \VERAInputTable{
      name={epso},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-4},
+     valuedefault={$1.0\times 10^{-4}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Relative tolerance for the linear solver (pressure matrix solve).  Only applicable when using
@@ -4931,7 +4978,7 @@
    {\bf iitmax} iitmax
    \VERAInputTable{
      name={iitmax},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4946,11 +4993,11 @@
    {\bf dtmin} dtmin
    \VERAInputTable{
      name={dtmin},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={s},
      unitsother={},
-     valuedefault={1e-6},
+     valuedefault={$1.0\times 10^{-6}$},
      valuesapplicable={$>0$},
      limitations={},
      description={Sets the minimum allowable timestep size.  Used for both transients and steady state (because CTF
@@ -4962,7 +5009,7 @@
    {\bf dtmax} dtmax
    \VERAInputTable{
      name={dtmax},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={s},
      unitsother={},
@@ -4978,7 +5025,7 @@
    {\bf rtwfp} rtwfp
    \VERAInputTable{
      name={rtwfp},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -4995,7 +5042,7 @@
    {\bf maxits} maxits
    \VERAInputTable{
      name={maxits},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5010,7 +5057,7 @@
    {\bf courant} courant
    \VERAInputTable{
      name={courant},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5027,7 +5074,7 @@
    {\bf solver} solver
    \VERAInputTable{
      name={solver},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5047,7 +5094,7 @@
    {\bf parallel} parallel
    \VERAInputTable{
      name={parallel},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5061,7 +5108,7 @@
    {\bf global\_energy\_balance} global\_energy\_balance
    \VERAInputTable{
      name={global\_energy\_balance},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={percent},
      unitsother={},
@@ -5075,7 +5122,7 @@
    {\bf global\_mass\_balance} global\_mass\_balance
    \VERAInputTable{
      name={global\_mass\_balance},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={percent},
      unitsother={},
@@ -5089,7 +5136,7 @@
    {\bf fluid\_energy\_storage} fluid\_energy\_storage
    \VERAInputTable{
      name={fluid\_energy\_storage},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={percent},
      unitsother={},
@@ -5105,7 +5152,7 @@
    {\bf solid\_energy\_storage} solid\_energy\_storage
    \VERAInputTable{
      name={solid\_energy\_storage},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={percent},
      unitsother={},
@@ -5121,7 +5168,7 @@
    {\bf mass\_storage} mass\_storage
    \VERAInputTable{
      name={mass\_storage},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={percent},
      unitsother={},
@@ -5137,11 +5184,11 @@
    {\bf pressure\_criteria} pressure\_criteria
    \VERAInputTable{
      name={pressure\_criteria},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-4},
+     valuedefault={$1.0\times 10^{-4}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of pressure change for steady state runs.
@@ -5158,11 +5205,11 @@
    {\bf Tcool\_criteria} Tcool\_criteria
    \VERAInputTable{
      name={Tcool\_criteria},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-3},
+     valuedefault={$1.0\times 10^{-3}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of coolant temperature for steady state runs.
@@ -5179,11 +5226,11 @@
    {\bf Tsolid\_criteria} Tsolid\_criteria
    \VERAInputTable{
      name={Tsolid\_criteria},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-3},
+     valuedefault={$1.0\times 10^{-3}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of solid temperature for steady state runs.
@@ -5200,11 +5247,11 @@
    {\bf void\_criteria} void\_criteria
    \VERAInputTable{
      name={void\_criteria},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-4},
+     valuedefault={$1.0\times 10^{-4}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of void for steady state runs.
@@ -5221,11 +5268,11 @@
    {\bf vliq\_criteria} vliq\_criteria
    \VERAInputTable{
      name={vliq\_criteria},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-3},
+     valuedefault={$1.0\times 10^{-3}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of liquid velocity for steady state runs.
@@ -5242,11 +5289,11 @@
    {\bf vvap\_criteria} vvap\_criteria
    \VERAInputTable{
      name={vvap\_criteria},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-2},
+     valuedefault={$1.0\times 10^{-2}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of vapor velocity for steady state runs.
@@ -5263,11 +5310,11 @@
    {\bf vdrop\_criteria} vdrop\_criteria
    \VERAInputTable{
      name={vdrop\_criteria},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-2},
+     valuedefault={$1.0\times 10^{-2}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets tolerance on l-infinity of droplet velocity for steady state runs.
@@ -5284,11 +5331,11 @@
    {\bf pressurea\_criteria} pressurea\_criteria
    \VERAInputTable{
      name={pressurea\_criteria},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={bar},
      unitsother={},
-     valuedefault={1e-3},
+     valuedefault={$1.0\times 10^{-3}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-infinity of pressure for steady state runs.
@@ -5305,11 +5352,11 @@
    {\bf Tcoola\_criteria} Tcoola\_criteria
    \VERAInputTable{
      name={Tcoola\_criteria},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={K},
      unitsother={},
-     valuedefault={1e-3},
+     valuedefault={$1.0\times 10^{-3}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-infinity of coolant temperature for steady state runs.
@@ -5326,11 +5373,11 @@
    {\bf Tsolida\_criteria} Tsolida\_criteria
    \VERAInputTable{
      name={Tsolida\_criteria},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={K},
      unitsother={},
-     valuedefault={1e-3},
+     valuedefault={$1.0\times 10^{-3}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-infinity of solid temperature for steady state runs.
@@ -5347,11 +5394,11 @@
    {\bf vliqa\_criteria} vliqa\_criteria
    \VERAInputTable{
      name={vliqa\_criteria},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={m/s},
      unitsother={},
-     valuedefault={1e-3},
+     valuedefault={$1.0\times 10^{-3}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-infinity of liquid velocity for steady state runs.
@@ -5368,11 +5415,11 @@
    {\bf vvapa\_criteria} vvapa\_criteria
    \VERAInputTable{
      name={vvapa\_criteria},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={m/s},
      unitsother={},
-     valuedefault={1e-2},
+     valuedefault={$1.0\times 10^{-2}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-infinity of vapor velocity for steady state runs.
@@ -5389,11 +5436,11 @@
    {\bf vdropa\_criteria} vdropa\_criteria
    \VERAInputTable{
      name={vdropa\_criteria},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={m/s},
      unitsother={},
-     valuedefault={1e-2},
+     valuedefault={$1.0\times 10^{-2}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-infinity of droplet velocity for steady state runs.
@@ -5410,11 +5457,11 @@
    {\bf pressure\_criteria\_l2} pressure\_criteria\_l2
    \VERAInputTable{
      name={pressure\_criteria\_l2},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-5},
+     valuedefault={$1.0\times 10^{-5}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of pressure for steady state runs.
@@ -5431,11 +5478,11 @@
    {\bf Tcool\_criteria\_l2} Tcool\_criteria\_l2
    \VERAInputTable{
      name={Tcool\_criteria\_l2},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-4},
+     valuedefault={$1.0\times 10^{-4}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of coolant temperature for steady state runs.
@@ -5452,11 +5499,11 @@
    {\bf Tsolid\_criteria\_l2} Tsolid\_criteria\_l2
    \VERAInputTable{
      name={Tsolid\_criteria\_l2},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-4},
+     valuedefault={$1.0\times 10^{-4}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of solid temperature for steady state runs.
@@ -5473,11 +5520,11 @@
    {\bf void\_criteria\_l2} void\_criteria\_l2
    \VERAInputTable{
      name={void\_criteria\_l2},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-5},
+     valuedefault={$1.0\times 10^{-5}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-2 of void for steady state runs.
@@ -5494,11 +5541,11 @@
    {\bf vliq\_criteria\_l2} vliq\_criteria\_l2
    \VERAInputTable{
      name={vliq\_criteria\_l2},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-4},
+     valuedefault={$1.0\times 10^{-4}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of liquid velocity for steady state runs.
@@ -5515,11 +5562,11 @@
    {\bf vvap\_criteria\_l2} vvap\_criteria\_l2
    \VERAInputTable{
      name={vvap\_criteria\_l2},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-4},
+     valuedefault={$1.0\times 10^{-4}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of vapor velocity for steady state runs.
@@ -5536,11 +5583,11 @@
    {\bf vdrop\_criteria\_l2} vdrop\_criteria\_l2
    \VERAInputTable{
      name={vdrop\_criteria\_l2},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-4},
+     valuedefault={$1.0\times 10^{-4}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of droplet velocity for steady state runs.
@@ -5554,14 +5601,14 @@
      notes={}
    }
 
-   {\bf pressure\_criteria\_l2} pressure\_criteria\_l2
+   {\bf pressurea\_criteria\_l2} pressurea\_criteria\_l2
    \VERAInputTable{
-     name={pressure\_criteria\_l2},
-     type={float},
+     name={pressurea\_criteria\_l2},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1e-5},
+     valuedefault={$1.0\times 10^{-5}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets relative tolerance on l-2 of pressure for steady state runs.
@@ -5578,11 +5625,11 @@
    {\bf Tcoola\_criteria\_l2} Tcoola\_criteria\_l2
    \VERAInputTable{
      name={Tcoola\_criteria\_l2},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={K},
      unitsother={},
-     valuedefault={1e-5},
+     valuedefault={$1.0\times 10^{-5}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-2 of coolant temperature for steady state runs.
@@ -5599,11 +5646,11 @@
    {\bf Tsolida\_criteria\_l2} Tsolida\_criteria\_l2
    \VERAInputTable{
      name={Tsolida\_criteria\_l2},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={K},
      unitsother={},
-     valuedefault={1e-5},
+     valuedefault={$1.0\times 10^{-5}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-2 of solid temperature for steady state runs.
@@ -5620,11 +5667,11 @@
    {\bf vliqa\_criteria\_l2} vliqa\_criteria\_l2
    \VERAInputTable{
      name={vliqa\_criteria\_l2},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={m/s},
      unitsother={},
-     valuedefault={1e-5},
+     valuedefault={$1.0\times 10^{-5}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-2 of liquid velocity for steady state runs.
@@ -5638,14 +5685,14 @@
      notes={}
    }
 
-   {\bf vvpaa\_criteria\_l2} vvapa\_criteria\_l2
+   {\bf vvapa\_criteria\_l2} vvapa\_criteria\_l2
    \VERAInputTable{
      name={vvapa\_criteria\_l2},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={m/s},
      unitsother={},
-     valuedefault={1e-4},
+     valuedefault={$1.0\times 10^{-4}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-2 of vapor velocity for steady state runs.
@@ -5662,11 +5709,11 @@
    {\bf vdropa\_criteria\_l2} vdropa\_criteria\_l2
    \VERAInputTable{
      name={vdropa\_criteria\_l2},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={m/s},
      unitsother={},
-     valuedefault={1e-4},
+     valuedefault={$1.0\times 10^{-4}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets absolute tolerance on l-2 of droplet velocity for steady state runs.
@@ -5683,7 +5730,7 @@
    {\bf use\_sol\_stop\_crit} use\_sol\_stop\_crit
    \VERAInputTable{
      name={use\_sol\_stop\_crit},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5697,18 +5744,18 @@
             vvap\_criteria, vvapa\_criteria, vdrop\_criteria, vdropa\_criteria, void\_criteria\_l2, Tcool\_criteria\_l2,
             Tcoola\_criteria\_l2, Tsolid\_criteria\_l2, Tsolida\_criteria\_l2, pressure\_criteria\_l2, pressurea\_criteria\_l2,
             vliq\_criteria\_l2, vliqa\_criteria\_l2, vvap\_criteria\_l2, vvapa\_criteria\_l2, vdrop\_criteria\_l2, vdropa\_criteria\_l2)
-        All criteria are optional with defaults.}
+        All criteria are optional with defaults.},
      notes={}
    }
 
    {\bf proc\_per\_assem} proc\_per\_assem
    \VERAInputTable{
      name={proc\_per\_assem},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={0},
+     valuedefault={9},
      valuesapplicable={1 4 9 16},
      limitations={},
      description={Sets the number of domains to divide each full assembly into for parallel runs.
@@ -5721,7 +5768,7 @@
    {\bf edit\_gaps} edit\_gaps
    \VERAInputTable{
      name={edit\_gaps},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5736,7 +5783,7 @@
    {\bf edit\_main\_text\_output} edit\_main\_text\_output
    \VERAInputTable{
      name={edit\_main\_text\_output},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5751,7 +5798,7 @@
    {\bf edit\_channels} edit\_channels
    \VERAInputTable{
      name={edit\_channels},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5766,7 +5813,7 @@
    {\bf edit\_rods} edit\_rods
    \VERAInputTable{
      name={edit\_rods},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5781,7 +5828,7 @@
    {\bf edit\_dnb} edit\_dnb
    \VERAInputTable{
      name={edit\_dnb},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5795,7 +5842,7 @@
    {\bf edit\_dnb\_text\_file} edit\_dnb\_text\_file
    \VERAInputTable{
      name={edit\_dnb\_text\_file},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5809,7 +5856,7 @@
    {\bf edit\_convergence} edit\_convergence
    \VERAInputTable{
      name={edit\_convergence},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5823,21 +5870,21 @@
    {\bf edit\_hdf5} edit\_hdf5
    \VERAInputTable{
      name={edit\_hdf5},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={1},
      valuesapplicable={0 1},
      limitations={},
-     description={Set to 1 to write CTF data to the VERA-CS HDF5 file.}
+     description={Set to 1 to write CTF data to the VERA-CS HDF5 file.},
      notes={}
    }
 
    {\bf edit\_native\_hdf5} edit\_native\_hdf5
    \VERAInputTable{
      name={edit\_native\_hdf5},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5854,7 +5901,7 @@
    {\bf edit\_fluid\_vtk} edit\_fluid\_vtk
    \VERAInputTable{
      name={edit\_fluid\_vtk},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5869,7 +5916,7 @@
    {\bf edit\_rod\_vtk} edit\_rod\_vtk
    \VERAInputTable{
      name={edit\_rod\_vtk},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5884,7 +5931,7 @@
    {\bf hi2lo\_sub\_axial} hi2lo\_sub\_axial
    \VERAInputTable{
      name={hi2lo\_sub\_axial},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5900,7 +5947,7 @@
    {\bf hi2lo\_sub\_theta} hi2lo\_sub\_theta
    \VERAInputTable{
      name={hi2lo\_sub\_theta},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5913,10 +5960,27 @@
      notes={}
    }
 
+   {\bf hi2lo\_grid} hi2lo\_grid
+   \VERAInputTable{
+     name={hi2lo\_grid},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={Specify which grids should have their coupling mesh refined using hi2lo\_sub\_theta and
+        hi2lo\_sub\_axial.  Leaving this out means all grid spans will be refined.  The grid span numbering
+        goes from 1 to number of grid spans (number of grid\_axial entries in the ASSEMBLY block).  The
+        region below the first grid does not count as a span.},
+     notes={}
+   }
+
    {\bf model\_corrosion} model\_corrosion
    \VERAInputTable{
      name={model\_corrosion},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5976,7 +6040,7 @@
    {\bf beta\_sp} beta\_sp
    \VERAInputTable{
      name={beta\_sp},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -5992,7 +6056,7 @@
    {\bf k\_void\_drift} k\_void\_drift
    \VERAInputTable{
      name={k\_void\_drift},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -6014,7 +6078,8 @@
      valuedefault={MAMBA},
      valuesapplicable={MAMBA cicada},
      limitations={},
-     description={Sets the crud modeling tool.  Only applicable during a crud simulation.},
+     description={Sets the crud modeling tool.  Only applicable during a crud simulation.
+        Note that Cicada is an experimental feature.},
      notes={}
    }
 
@@ -6035,23 +6100,22 @@
    {\bf crud\_dT\_feedback} crud\_dT\_feedback
    \VERAInputTable{
      name={crud\_dT\_feedback},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={},
-     valuesapplicable={0, 1},
+     valuedefault={1},
+     valuesapplicable={0},
      limitations={},
      description={Set to 0 to shut off the crud thermal resistance effect on the rod internal temperaure calculation.
-                  Note that the crud thermal resistance will still affect the corrosion growth calculation.
-                  Defaults to 1. },
+                  Note that the crud thermal resistance will still affect the corrosion growth calculation.},
      notes={}
    }
 
    {\bf cicada\_outer\_radial\_zone\_num\_cells\_r} cicada\_outer\_radial\_zone\_num\_cells\_r
    \VERAInputTable{
      name={cicada\_outer\_radial\_zone\_num\_cells\_r},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -6059,14 +6123,15 @@
      valuesapplicable={$\ge 1$},
      limitations={},
      description={Sets the number of rings in the oxide region of the clad for Cicada runs.  Only
-        applicable when Cicada used as the crud tool.  Only applicable when cicada\_dimension=3.},
+        applicable when Cicada used as the crud tool.  Only applicable when cicada\_dimension=3.  Note
+        that Cicada is an experimental feature.},
      notes={}
    }
 
    {\bf cicada\_inner\_radial\_zone\_num\_cells\_r} cicada\_inner\_radial\_zone\_num\_cells\_r
    \VERAInputTable{
      name={cicada\_inner\_radial\_zone\_num\_cells\_r},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -6074,29 +6139,31 @@
      valuesapplicable={$\ge 1$},
      limitations={},
      description={Sets the number of rings in the clad region of the clad for Cicada runs.  Only
-        applicable when Cicada used as the crud tool.  Only applicable when cicada\_dimension=3.},
+        applicable when Cicada used as the crud tool.  Only applicable when cicada\_dimension=3.
+        Note that Cicada is an experimental feature.},
      notes={}
    }
 
    {\bf cicada\_outer\_radial\_zone\_thickness} cicada\_outer\_radial\_zone\_thickness
    \VERAInputTable{
      name={cicada\_outer\_radial\_zone\_thickness},
-     type={float},
+     type={Float},
      need={Optional},
      unitsdefault={m},
      unitsother={},
-     valuedefault={100e-6},
+     valuedefault={$100.0\times 10^{-6}$},
      valuesapplicable={$>0.0$},
      limitations={},
      description={Sets the thickness of the oxide modeling region of the clad.  Only applicable for
-        crud simulations where Cicada is being used as the modeling tool.  Only applicable when cicada\_dimension=3.},
+        crud simulations where Cicada is being used as the modeling tool.  Only applicable when cicada\_dimension=3.
+        Note that Cicada is an experimental feature.},
      notes={}
    }
 
    {\bf cicada\_dimensions} cicada\_dimension
    \VERAInputTable{
      name={cicada\_dimensions},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -6105,14 +6172,14 @@
      limitations={},
      description={Chooses the dimensions of the clad/oxide conduction solution in Cicada.  Only applicable
         when doing a crud simulation using Cicada as the crud tool.  Can either be 1 for radial conduction
-        only or 3 for radial/axial/azimuthal conduction.},
+        only or 3 for radial/axial/azimuthal conduction. Note that Cicada is an experimental feature.},
      notes={}
    }
 
    {\bf enable\_corrosion\_lithium} enable\_corrosion\_lithium
    \VERAInputTable{
      name={enable\_corrosion\_lithium},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -6127,7 +6194,7 @@
    {\bf crud\_details} crud\_details
    \VERAInputTable{
      name={crud\_details},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -6141,7 +6208,7 @@
    {\bf rod\_details} rod\_details
    \VERAInputTable{
      name={rod\_details},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -6168,7 +6235,7 @@
    {\bf clad\_corrosion\_model} clad\_corrosion\_model
    \VERAInputTable{
      name={clad\_corrosion\_model},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -6185,7 +6252,7 @@
    {\bf trans\_dnb} trans\_dnb
    \VERAInputTable{
      name={trans\_dnb},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -6199,7 +6266,7 @@
    {\bf cross\_flow} cross\_flow
    \VERAInputTable{
      name={cross\_flow},
-     type={int},
+     type={Integer},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -6218,8 +6285,8 @@
      name={epsk},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={pcm},
+     unitsdefault={pcm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={$>0$},
@@ -6232,8 +6299,8 @@
      name={epsp},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={L2 norm},
+     unitsdefault={L2 norm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={$>0$},
@@ -6246,8 +6313,8 @@
      name={eps\_temp},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={degrees F},
+     unitsdefault={degrees F},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={$>0$},
@@ -6288,8 +6355,8 @@
      name={eps\_boron},
      type={Float},
      need={Optional},
-     unitsdefault={},
-     unitsother={ppm},
+     unitsdefault={ppm},
+     unitsother={},
      valuedefault={},
      valuesapplicable={},
      limitations={$>0$},
@@ -6306,7 +6373,7 @@
      unitsother={},
      valuedefault={},
      valuesapplicable={},
-     limitations={$>0$,$<=1$},
+     limitations={$>0$,$\le 1$},
      description={Power relaxation factor.},
      notes={Recommend 0.5.}
    }
@@ -6320,7 +6387,7 @@
      unitsother={},
      valuedefault={},
      valuesapplicable={},
-     limitations={$>0$,$<=1$},
+     limitations={$>0$,$\le 1$},
      description={Fuel temperature relaxation factor.},
      notes={Recommend 1.0.}
    }
@@ -6334,7 +6401,7 @@
      unitsother={},
      valuedefault={},
      valuesapplicable={},
-     limitations={$>0$,$<=1$},
+     limitations={$>0$,$\le 1$},
      description={Density relaxation factor.},
      notes={Recommend 1.0.}
    }
@@ -6367,6 +6434,93 @@
      notes={}
    }
 
+ \subsection{Block TIAMAT}
+ \label{sec:tiamatcards}
+
+   {\bf solver} solver
+   \VERAInputTable{
+     name={solver},
+     type={Fixed Character String.},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={jacobi,gauss-seidel},
+     limitations={},
+     description={Tiamat solver type.},
+     notes={}
+   }
+
+   {\bf run\_transient} run\_transient
+   \VERAInputTable{
+     name={run\_transient},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={true},
+     valuesapplicable={false},
+     limitations={},
+     description={Boolean indicating if transient or not.},
+     notes={}
+   }
+
+   {\bf conserve\_power\_in\_tiamat\_transfer} conserve\_power
+   \VERAInputTable{
+     name={conserve\_power},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={true,false},
+     limitations={},
+     description={Boolean indicating power is conserved in transfers.},
+     notes={}
+   }
+
+   {\bf num\_subcycle\_iterations\_before\_tiamat\_ramping} num\_subcycle
+   \VERAInputTable{
+     name={num\_subcycle},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>-1$},
+     limitations={},
+     description={Number of subcycle iterations before ramping in Tiamat.},
+     notes={}
+   }
+
+   {\bf coupling\_approach} coupling\_approach
+   \VERAInputTable{
+     name={coupling\_approach},
+     type={Fixed Character String},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={inline},
+     valuesapplicable={coupled},
+     limitations={},
+     description={Describes whether inline (one-way) or coupled (two-way) coupling between MPACT/CTF and Bison is used.},
+     notes={}
+   }
+
+   {\bf overlap\_procs} overlap\_procs
+   \VERAInputTable{
+     name={overlap\_procs},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={false},
+     valuesapplicable={true},
+     limitations={},
+     description={Describes whether Bison processors are overlapped with those for MPACT or completely separate.},
+     notes={}
+   }
+
  \subsection{Block MPACT}
  \label{sec:mpactcards}
 
@@ -6378,11 +6532,25 @@
      unitsdefault={},
      unitsother={},
      valuedefault={MOC},
-     valuesapplicable={},
+     valuesapplicable={moc, sn, nodal-nem, nodal-sanm-2, nodal-sanm-4},
      limitations={},
      description={This card is used to specify whether Method of Characteristics, Sn,  %
        or Nodal Diffusion transport methods are used for the global problem solution   %
        method.},
+     notes={}
+   }
+
+   {\bf gamma\_transport} gamma\_transport
+   \VERAInputTable{
+     name={gamma\_transport},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={false},
+     valuesapplicable={true},
+     limitations={},
+     description={This card is used to enable/disable the gamma transport calculation.},
      notes={}
    }
 
@@ -6526,7 +6694,7 @@
    {\bf moc\_mg\_data\_passing} moc\_mg\_data\_passing
    \VERAInputTable{
      name={moc\_mg\_data\_passing},
-     type={Fixed Character String},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -6539,6 +6707,20 @@
             is only applicable when using moc\_kernel=MG.}
    }
 
+   {\bf moc\_blocking\_data\_passing} moc\_blocking\_data\_passing
+   \VERAInputTable{
+     name={moc\_blocking\_data\_passing},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={false},
+     valuesapplicable={true},
+     limitations={},
+     description={This card is used to specify whether blocking or non-blocking        %
+       MOC data passing is used.},
+     notes={}
+   }
    {\bf volume\_corr} volume\_corr
    \VERAInputTable{
      name={volume\_corr},
@@ -6620,7 +6802,7 @@
    {\bf jagged} jagged
    \VERAInputTable{
      name={jagged},
-     type={Fixed Character String},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -6801,8 +6983,9 @@
        higher the number, the more aggressive the compression and the more   %
        resources used. See documentation of gzip for information.},
      limitations={This only affects the WRITING of the restart file.         %
-       \texttt{restart\_read} cases and texttt{restart\_shuffle} cases are   %
-       not affected.}
+       \texttt{restart\_read} cases and \texttt{restart\_shuffle} cases are   %
+       not affected.},
+     description={},
      notes={The primary reason for this option is to disable compression     %
        because on some platforms decompression by HDF5 while reading may     %
        lead to an allocation error in HDF5 due to heap fragmentation. See    %
@@ -6908,7 +7091,7 @@
    {\bf explicit\_erg\_deposit} explicit\_erg\_deposit
    \VERAInputTable{
     name={explicit\_erg\_deposit},
-    type={Fixed Character String},
+    type={Boolean},
     need={Optional},
     unitsdefault={},
     unitsother={},
@@ -6931,16 +7114,23 @@
      unitsdefault={},
      unitsother={},
      valuedefault={false},
-     valuesapplicable={true, false. These are described as:                            %
+     valuesapplicable={nem, sanm-2, sanm-4, false. These are described as:             %
        \begin{enumerate}                                                               %
-         \item \texttt{true} --- enables MPACT nodal cross section edits               %
+         \item \texttt{nem} --- enables MPACT nodal cross section edits using a        %
+           quartic NEM kernel to generate ADFs                                         %
+         \item \texttt{sanm-2} --- enables MPACT nodal cross section edits using a     %
+           quadratic SANM kernel to generate ADFs                                      %
+         \item \texttt{sanm-4} --- enables MPACT nodal cross section edits using a     %
+           quartic SANM kernel to generate ADFs                                        %
          \item \texttt{false} --- disables MPACT nodal cross section edits             %
        \end{enumerate}},
      limitations={},
      description={This card is used to enable or disable MPACT's nodal cross section   %
        capability.  If enabled, node-averaged cross sections, flux moments, kinetics   %
        data, TH data, discontinuity factors, and other information will be written     %
-       to each block of the HDF5 file.},
+       to each block of the HDF5 file.  The different options will generate ADFs using %
+       different kernels.  The \texttt{true} option is a deprecated option, still      %
+       supported for backwards compatibility and is the same as \texttt{sanm-4}.},
      notes={}
    }
 
@@ -6989,7 +7179,7 @@
    {\bf nodal\_edits\_adapt\_adf} nodal\_edits\_adapt\_adf
    \VERAInputTable{
      name={nodal\_edits\_adapt\_adf},
-     type={Fixed Character String},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -7006,6 +7196,21 @@
        be modified to preserve neutrons, and the diffusion cross section will be       %
        modified to be consistent with the removal cross section.},
      notes={Has no effect if \texttt{nodal\_edits} is set to \texttt{false}.}
+   }
+
+   {\bf native\_excore\_detector} native\_excore\_detector
+   \VERAInputTable{
+     name={native\_excore\_detector},
+     type={Fixed Character String},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={\texttt{false}},
+     valuesapplicable={\texttt{true}},
+     limitations={},
+     description={This card is used to specify whether to perform the excore           %
+                  detector edits using the native simplified MPACT solver.},
+     notes={}
    }
 
    {\bf grid\_treatment} grid\_treatment
@@ -7098,7 +7303,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={},
-     valuesapplicable={$>=0$},
+     valuesapplicable={$\ge 0$},
      limitations={},
      description={This card is used to specify the fraction of crud to be depleted.},
      notes={}
@@ -7273,10 +7478,10 @@
          \hline                                                                        %
            Quadrature Name & Type & Order & Order $\Theta$ \\                          %
          \hline                                                                        %
-           \texttt{CHEBYSHEV-CHEBYSHEV} & Product & integers > 0             & integers > 0       \\ %
-           \texttt{CHEBYSHEV-GAUSS    } & Product & integers > 0             & integers > 0       \\ %
-           \texttt{CHEBYSHEV-BICKLEY  } & Product & integers > 0             & 1, 2, 3, or 4      \\ %
-           \texttt{CHEBYSHEV-YAMAMOTO } & Product & integers > 0             & 1, 2, or 3         \\ %
+           \texttt{CHEBYSHEV-CHEBYSHEV} & Product & integers $>$ 0             & integers $>$ 0       \\ %
+           \texttt{CHEBYSHEV-GAUSS    } & Product & integers $>$ 0             & integers $>$ 0       \\ %
+           \texttt{CHEBYSHEV-BICKLEY  } & Product & integers $>$ 0             & 1, 2, 3, or 4      \\ %
+           \texttt{CHEBYSHEV-YAMAMOTO } & Product & integers $>$ 0             & 1, 2, or 3         \\ %
            \texttt{LEVEL-SYMMETRIC    } & General & even integers in [2,16]  & N/A                \\ %
            \texttt{QUADRUPLE-RANGE    } & Product & integers in [1,37]       & integers in [1,18] \\ %
          \hline                                                                        %
@@ -7302,10 +7507,10 @@
          \hline                                                                        %
            Quadrature Name & Type & Order & Order $\Theta$ \\                          %
          \hline                                                                        %
-           \texttt{CHEBYSHEV-CHEBYSHEV} & Product & integers > 0             & integers > 0       \\ %
-           \texttt{CHEBYSHEV-GAUSS    } & Product & integers > 0             & integers > 0       \\ %
-           \texttt{CHEBYSHEV-BICKLEY  } & Product & integers > 0             & 1, 2, 3, or 4      \\ %
-           \texttt{CHEBYSHEV-YAMAMOTO } & Product & integers > 0             & 1, 2, or 3         \\ %
+           \texttt{CHEBYSHEV-CHEBYSHEV} & Product & integers $>$ 0             & integers $>$ 0       \\ %
+           \texttt{CHEBYSHEV-GAUSS    } & Product & integers $>$ 0             & integers $>$ 0       \\ %
+           \texttt{CHEBYSHEV-BICKLEY  } & Product & integers $>$ 0             & 1, 2, 3, or 4      \\ %
+           \texttt{CHEBYSHEV-YAMAMOTO } & Product & integers $>$ 0             & 1, 2, or 3         \\ %
            \texttt{LEVEL-SYMMETRIC    } & General & even integers in [2,16]  & N/A                \\ %
            \texttt{QUADRUPLE-RANGE    } & Product & integers in [1,37]       & integers in [1,18] \\ %
          \hline                                                                        %
@@ -7368,9 +7573,9 @@
      notes={None}
    }
 
-   {\bf polars\_octant} polars\_octant
+   {\bf shield\_polars\_octant} shield\_polars\_octant
    \VERAInputTable{
-     name={polars\_octant},
+     name={shield\_polars\_octant},
      type={Integer},
      need={Required},
      unitsdefault={},
@@ -7395,7 +7600,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={\texttt{NONE}},
-     valuesapplicable={\texttt{ORNL} or \texttt{SIMPLIFIED\_AMPX}},
+     valuesapplicable={\texttt{ORNL}, \texttt{SIMPLIFIED\_AMPX}, or \texttt{HELIOS}},
      limitations={},
      description={This card is used to specify the type of cross-section file         %
        to use.},
@@ -7655,7 +7860,7 @@
      notes={}
    }
 
-   {\bf k\_tol} k\_tol
+   {\bf k\_tolerance} k\_tol
    \VERAInputTable{
      name={k\_tol},
      type={Floating-Point Real Number},
@@ -7685,49 +7890,60 @@
      notes={}
    }
 
-   {\bf cmfd\_num\_outers} cmfd\_num\_outers
+   {\bf num\_outers} num\_outers
    \VERAInputTable{
-     name={cmfd\_num\_outers},
-    type={Integer},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={20},
-    valuesapplicable={Any positive value.},
-    limitations={},
-    description={This card is used to specify the number of outer eigenvalue           %
-      power iterations to perform during a CMFD acceleration calculation.},
+     name={num\_outers},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={500},
+     valuesapplicable={$\ge$1},
+     limitations={},
+     description={This card is used to specify the maximum number of outer             %
+       eigenvalue iterations. If the case is not converged to within the specified     %
+       tolerances, this input value is compared to the current outer iteration value.  %
+       If the current outer iteration value is equal to it, the program execution      %
+       will exit saying that the maximum number of iterations has been reached.},
+     notes={}
    }
 
-   {\bf cmfd\_num\_inners} cmfd\_num\_inners
+   {\bf num\_inners} num\_inners
    \VERAInputTable{
-     name={cmfd\_num\_inners},
-    type={Integer},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={100},
-    valuesapplicable={Any positive integer.},
-    limitations={},
-    description={This card is used to specify the max. number of linear solver         %
-      iterations per power iteration during a CMFD acceleration calculation.},
+     name={num\_inners},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={1},
+     valuesapplicable={$\ge$1},
+     limitations={},
+     description={This card is used to specify the number of inner 1-group transport   %
+       sweeps done during group sweeping every outer iteration.},
+     notes={For 2-D/1-D problems, it is usually optimal for ninner to be set to 1.     %
+       However, numerical instability is frequently an issue.  The instability         %
+       presents as an inability to converge to the desired tolerance.  The solution    %
+       will stagnate to within some tolerance and oscillate around that value until    %
+       the maximum number of outers are reached.  In this case, it is advised to use   %
+       additional inner sweeps for stabilization. If so,\texttt{num\_inners}=2 or 3    %
+       (with \texttt{up\_scatter}=1) is a typical value.}
    }
 
-   {\bf cmfd\_up\_scatter} cmfd\_up\_scatter
+   {\bf up\_scatter} up\_scatter
    \VERAInputTable{
-     name={cmfd\_up\_scatter},
-    type={Integer},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={2},
-    valuesapplicable={Any positive integer.},
-    limitations={Only applies to \texttt{1gsweep} CMFD solver.},
-    description={This card is used to specify the number of upscatter                  %
-      iterations when doing \texttt{1gsweep} CMFD. This can help to converge the       %
-      scattering source in thermal energy groups before updating the fission source.   %
-      In general, this can be used to help optimize run time for a given problem.},
-    notes={}
+     name={up\_scatter},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={1},
+     valuesapplicable={$\ge$1},
+     limitations={},
+     description={This card is used to specify the number of upscattering              %
+       iterations that occur during group sweeping, i.e. between fission source        %
+       iterations.},
+     notes={Increasing \texttt{up\_scatter} is one way to potentially remedy issues    %
+       with numerical instability. }
    }
 
    {\bf num\_extsrc\_itrs} num\_extsrc\_itrs
@@ -7807,7 +8023,7 @@
          \item \texttt{DP0} --- Use CMFD partial currents to scale transport angular   %
            fluxes.                                                                     %
          \item \texttt{P1} --- Use CMFD currents to scale transport angular fluxes.    %
-        \end{itemize}}
+        \end{itemize}},
      limitations={},
      description={},
      notes={The \texttt{DP0} and \texttt{P1} options are more complex and generally    %
@@ -7976,18 +8192,16 @@
     need={Optional},
     unitsdefault={},
     unitsother={},
-    valuedefault={\texttt{DEFAULT}},
-    valuesapplicable={\texttt{EXPLICITFILE}},
+    valuedefault={\texttt{ASSEMBLY}},
+    valuesapplicable={\texttt{GRAPH}, \texttt{ASSEMBLY}, \texttt{EXPLICITFILE}, \texttt{EXPLICITRADIAL}, \texttt{PS}},
     limitations={The \texttt{EXPLICITFILE} option may be used only if the user         %
       has created a partition file. For a description of the partition file, see       %
       the input option \texttt{par\_file}.},
     description={This card is used to specify the method of parallel decomposition.    %
       \begin{itemize}                                                                  %
-        \item \texttt{DEFAULT} --- The parallelization is specified by three           %
-          input options listed below: \texttt{num\_angle}, \texttt{num\_space},        %
-          \texttt{num\_threads}. The meanings of these input options are explained     %
-          below. \texttt{DEFAULT} is the simpler method for parallelizing the problem, %
-          and is recommended for most users.                                           %
+        \item \texttt{GRAPH} --- Spatially decomposes the core using graph             %
+          partitioning methods. This method is automated, more flexible, and           %
+          generally provides better load-balance than the other options.               %
         \item \texttt{ASSEMBLY} --- The parallelization scheme for decomposing         %
           a problem spatially.  The problem will be decomposed radially first,         %
           and if there are more processors, will then attempt to parallelize           %
@@ -7998,7 +8212,11 @@
         \item \texttt{EXPLICITFILE} --- For more advanced users who are running        %
           large problems, using the \texttt{EXPLICITFILE} option may enable the user   %
           to parallelize the problem more effectively. For a description of the        %
-          \texttt{EXPLICITFILE} method, see the input option \texttt{par\_file}.
+          \texttt{EXPLICITFILE} method, see the input option \texttt{par\_file}.       %
+        \item \texttt{EXPLICITRADIAL} --- Same as \texttt{EXPLICITFILE} except         %
+          that the decomposition is provided for a single plane, and is                %
+          applied to all planes.                                                       %
+        \item \texttt{PS} --- Same as \texttt{ASSEMBLY}.
       \end{itemize}},
     notes={}
    }
@@ -8121,9 +8339,9 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={},
-     valuesapplicable={'RSB', 'RIB', 'REB'},
-     limitations={},
+     valuedefault={'REB'},
+     valuesapplicable={'RSB', 'RIB'},
+     limitations={Only applicable if \texttt{par\_method} is \texttt{GRAPH}.},
      description={This card is used to read the decomposition/partition
         algorithms which will be used for spatial decomposition.},
      notes={}
@@ -8138,7 +8356,7 @@
      unitsother={},
      valuedefault={},
      valuesapplicable={'KL', 'SKL', 'None'},
-     limitations={},
+     limitations={Only applicable if \texttt{par\_method} is \texttt{GRAPH}.},
      description={This card is used to read the communication refinement
         algorithms which will be used during spatial decomposition.},
      notes={Should be of size 1 or same size as GRAPH\_PART\_METHOD}
@@ -8152,10 +8370,10 @@
      unitsdefault={number of modules},
      unitsother={},
      valuedefault={},
-     valuesapplicable={},
-     limitations={Positive},
+     valuesapplicable={$>0$},
+     limitations={Only applicable if \texttt{par\_method} is \texttt{GRAPH}.},
      description={This card reads inputs for smallest graph size (modules) for
-        each decomposition method.},
+        each decomposition method. This card should not be used by typical users.},
      notes={Should be of size 1 less than GRAPH\_PART\_METHOD}
    }
 
@@ -8168,14 +8386,14 @@
     unitsother={},
     valuedefault={\texttt{simplified} (if not configured with COBRA-TF)                %
       \emph{or} \texttt{ctf} (if configured with COBRA-TF)},
-    valuesapplicable={\texttt{ctf\_external}, texttt{user\_defined}, \texttt{none}     %
+    valuesapplicable={\texttt{ctf\_external}, \texttt{user\_defined}, \texttt{none}     %
       \newline\newline                                                                 %
       The \texttt{simplified} option uses MPACT's internal TH solver.  The             %
       \texttt{ctf} option internally couples COBRA-TF to MPACT, and                    %
       \texttt{ctf\_external} couples MPACT and COBRA-TF through the lime               %
       interface. The \texttt{user\_defined} option uses TH conditions defined in        %
-      the HDF5 file specified by the texttt{user\_defined\_th\_filename} card in the   %
-      texttt{MPACT} block. The \texttt{none} option will use parameters from the       %
+      the HDF5 file specified by the \texttt{user\_defined\_th\_filename} card in the   %
+      \texttt{MPACT} block. The \texttt{none} option will use parameters from the       %
       \texttt{STATE} block: fuel temperatures will be constant and equal to            %
       \texttt{tfuel}, moderator temperatures will be constant and equal to             %
       \texttt{tinlet}, and moderator densities will be constant and equal to           %
@@ -8192,7 +8410,7 @@
    {\bf extend\_coupling\_mesh} extend\_coupling\_mesh
    \VERAInputTable{
      name={extend\_coupling\_mesh},
-     type={Logical},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -8243,6 +8461,7 @@
     limitations={},
     description={This card is used to define the solver parameters for the             %
       Anderson nonlinear solver.},
+    notes={}
    }
 
    {\bf shielder\_th} shielder\_th
@@ -8252,7 +8471,7 @@
     need={Optional},
     unitsdefault={\{unitless, K, g/cm$^3$\}},
     unitsother={},
-    valuedefault={4, 25.0, 0.005},
+    valuedefault={100, 5.0, 0.01},
     valuesapplicable={or any positive integer and any 2 positive real numbers          %
       \newline\newline                                                                 %
       The first input is the maximum number of outer                                   %
@@ -8295,7 +8514,7 @@
    {\bf average\_ftemp} average\_ftemp
    \VERAInputTable{
      name={average\_ftemp},
-    type={Fixed Character String},
+    type={Boolean},
     need={Optional},
     unitsdefault={},
     unitsother={},
@@ -8311,7 +8530,7 @@
    {\bf radial\_power\_ctf\_coupling} radial\_power\_ctf\_coupling
    \VERAInputTable{
      name={radial\_power\_ctf\_coupling},
-    type={Fixed Character String},
+    type={Boolean},
     need={Optional},
     unitsdefault={},
     unitsother={},
@@ -8326,7 +8545,7 @@
    {\bf radial\_burnup\_ctf\_coupling} radial\_burnup\_ctf\_coupling
    \VERAInputTable{
      name={radial\_burnup\_ctf\_coupling},
-    type={Fixed Character String},
+    type={Boolean},
     need={Optional},
     unitsdefault={},
     unitsother={},
@@ -8341,7 +8560,7 @@
    {\bf radial\_temp\_ctf\_coupling} radial\_temp\_ctf\_coupling
    \VERAInputTable{
      name={radial\_temp\_ctf\_coupling},
-    type={Fixed Character String},
+    type={Boolean},
     need={Optional},
     unitsdefault={},
     unitsother={},
@@ -8388,7 +8607,7 @@
     notes={}
    }
 
-   {\bf sth{\_}hgap} sth{\_}hgap
+   {\bf sth\_hgap} sth\_hgap
    \VERAInputTable{
      name={sth{\_}hgap},
     type={Floating-Point Real Number},
@@ -8404,27 +8623,20 @@
     notes={Typical values range from 1000 (very low) to 10000 (very high).}
    }
 
-   {\bf temptable\_filename} temptable\_filename
+   {\bf sth\_channeltype} sth\_channeltype
    \VERAInputTable{
-     name={temptable\_filename},
-    type={Free-Form Character String, Max. Length = 200},
+     name={sth\_channeltype},
+    type={Character String},
     need={Optional},
     unitsdefault={},
     unitsother={},
-    valuedefault={N/A},
-    valuesapplicable={Filename of any valid fuel temperature table file},
-    limitations={If the card is present, temperature tables in the named file          %
-      will be used to calculate fuel temperatures instead of the internal              %
-      conduction solvers or COBRA-TF. If this card is not present, then                %
-      internal or COBRA-TF solvers are used.},
-    description={This card is used to indicate the name of the file                    %
-      containing the temperature tables.},
-    notes={Temperature tables contain fuel temperature values as functions of          %
-      power and burnup.  When depleting, the thermal properties of the fuel            %
-      change significantly.  Internal TH and COBRA-TF do not know how these            %
-      properties change when depleting, so temperature tables can be used to           %
-      more accurately perform TH calculations during depletion simulations             %
-      using tabulated data rather than fuel conduction solvers.}
+    valuedefault={},
+    valuesapplicable={assem, node, chan},
+    limitations={},
+    description={This card is used to set the size of the region over which average moderator
+       conditions will be applied.  Acceptably values are assembly, node (quarter assembly),
+       or pin (flow channel between four fuel pins).},
+    notes={}
    }
 
    {\bf sth\_tabletype} sth\_tabletype
@@ -8443,27 +8655,21 @@
      notes={}
    }
 
-   {\bf temptable\_filename} temptable\_filename
+   {\bf sth\_avgpin} sth\_avgpin
    \VERAInputTable{
-     name={temptable\_filename},
-    type={Free-Form Character String, Max. Length = 200},
+     name={sth\_avgpin},
+    type={Boolean},
     need={Optional},
     unitsdefault={},
     unitsother={},
-    valuedefault={N/A},
-    valuesapplicable={Filename of any valid fuel temperature table file},
-    limitations={If the card is present, temperature tables in the named file          %
-      will be used to calculate fuel temperatures instead of the internal              %
-      conduction solvers or COBRA-TF. If this card is not present, then                %
-      internal or COBRA-TF solvers are used.},
-    description={This card is used to indicate the name of the file                    %
-      containing the temperature tables.},
-    notes={Temperature tables contain fuel temperature values as functions of          %
-      power and burnup.  When depleting, the thermal properties of the fuel            %
-      change significantly.  Internal TH and COBRA-TF do not know how these            %
-      properties change when depleting, so temperature tables can be used to           %
-      more accurately perform TH calculations during depletion simulations             %
-      using tabulated data rather than fuel conduction solvers.}
+    valuedefault={false},
+    valuesapplicable={true},
+    limitations={},
+    description={This card is used to determine whether an average pin is used for
+      each region or if fuel conduction calculations are done for each pin uniquely.
+      If true, a representative pin will be used.  If sth\_channeltype is set to pin,
+      this card is ignored.},
+    notes={}
    }
 
    {\bf temptable\_shape} temptable\_shape
@@ -8598,6 +8804,31 @@
        \texttt{tinlet}.}
    }
 
+   {\bf user\_defined\_crud\_filename} user\_defined\_crud\_filename
+   \VERAInputTable{
+     name={user\_defined\_crud\_filename},
+    type={Free-Form Character String, Max. Length = 200},
+    need={Optional},
+    unitsdefault={},
+    unitsother={},
+    valuedefault={N/A},
+    valuesapplicable={Filename of any valid HDF5 file with user defined CRUD conditions},
+    limitations={If the card is present, CRUD conditions defined for each state and    %
+      pincell will be used to set the CRUD variables of each pincell in the model      %
+      instead of calculating the CRUD condition using MAMBA},                          %
+    description={This card is used to indicate the name of the file                    %
+      containing the pin-wise CRUD conditions for each state.},
+    notes={The format of the HDF5 file must follow the same format as the HDF5 output  %
+      edits.  The head dataset of the file must contain STATE datasets following the   %
+      \textit{STATE\_****} nomenclature, which are populated with pin-wise data with   %
+      the same names as their output edit counterparts.  Currently supported dataset   %
+      name are \textit{pin\_avg\_crud\_thickness}, \textit{pin\_avg\_crud\_massdensity},%
+      and \textit{pin\_avg\_crud\_borondensity}.  The CRUD datasets must have the same %
+      shape as their corresponding output counterparts.  Users are required to provide %
+      the CRUD conditions for all states and CRUD variables, otherwise an error will   %
+      be thrown.}
+   }
+
 
    {\bf dep\_edit} dep\_edit
    \VERAInputTable{
@@ -8616,6 +8847,25 @@
       number density file with all isotopes in the depletion library.},
     notes={The option has excessive memory requirements and is not advised for
       general usage. Only use when absolutely necessary.}
+   }
+
+   {\bf dep\_shielder\_dt} dep\_shielder\_dt
+   \VERAInputTable{
+     name={dep\_shielder\_dt},
+    type={Floating-Point Real Number},
+    need={Optional},
+    unitsdefault={GWD/MTU},
+    unitsother={},
+    valuedefault={10.0},
+    valuesapplicable={any positive real number},
+    limitations={If the \texttt{xs{\_}shielder} card is set to \texttt{f} or           %
+      \texttt{false}, this card does nothing, since cross-section shielding            %
+      calculations will never be performed.},
+    description={This card is used to control how often cross-section shielding        %
+      calculations are performed when depleting.  It sets the maximum                  %
+      time in GWD/MTU that can be simulated without running a new shielding            %
+      calculations},
+    notes={}
    }
 
    {\bf dep\_substep} dep\_substep
@@ -8768,8 +9018,8 @@
      valuedefault={energy},
      valuesapplicable={energy,space},
      limitations={},
-     description={This card is used to specify whether space or energy multilevel CMFD is used},
-     notes={Only active when mlcmfd is specified.}
+     description={This card is used to specify whether space, energy or both space and energy multilevel CMFD is used},
+     notes={Only active when \texttt{mlcmfd} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf prolongation} prolongation
@@ -8847,24 +9097,27 @@
      unitsdefault={},
      unitsother={},
      valuedefault={gmres},
-     valuesapplicable={gmres, bicgstab, or multigrid},
+     valuesapplicable={bicgstab, or multigrid},
      limitations={},
      description={This card is used to specify which linear solver from PETSc will     %
-       be used.  It does nothing if Trilinos is chosen as the linear solver.}
+       be used.  It does nothing if Trilinos is chosen as the linear solver.},
+     notes={}
    }
 
-   {\bf petsc\_linear\_solver\_method} petsc\_linear\_solver\_method
+   {\bf petsc\_linear\_solver\_method\_1G} petsc\_linear\_solver\_method\_1G
    \VERAInputTable{
-     name={petsc\_linear\_solver\_method},
+     name={petsc\_linear\_solver\_method\_1G},
      type={Fixed Character String},
      need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={gmres},
-     valuesapplicable={gmres, bicgstab, or multigrid},
+     valuesapplicable={bicgstab, or multigrid},
      limitations={},
      description={This card is used to specify which linear solver from PETSc will     %
-       be used.  It does nothing if Trilinos is chosen as the linear solver.}
+       be used in 1 group calculations. It does nothing if Trilinos is chosen as the   %
+       linear solver.},
+     notes={}
    }
 
    {\bf multigrid\_cg\_solver} multigrid\_cg\_solver
@@ -8888,7 +9141,8 @@
        \item \texttt{lu} -- Exact LU solver.  In parallel, superLU package             %
           must be enabled to use this.                                                 %
        \item Any of the options for the \texttt{multigrid\_smoother} card             %
-       \end{itemize}}
+       \end{itemize}},
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf multigrid\_cg\_solver\_its} multigrid\_cg\_solver\_its
@@ -8900,8 +9154,10 @@
      unitsother={},
      valuedefault={15},
      valuesapplicable={Any positive integer.},
+     limitations={},
      description={Number of cg\_solver iterations to perform on coarsest grid           %
-       of the multigrid solver.}
+       of the multigrid solver.},
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf multigrid\_cg\_tol} multigrid\_cg\_tol
@@ -8915,7 +9171,7 @@
      valuesapplicable={$>0$},
      limitations={},
      description={Set the tolerance for the coarsest grid on the multigrid system.},
-     notes={}
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf multigrid\_cg\_solver\_1G} multigrid\_cg\_solver\_1G
@@ -8939,7 +9195,8 @@
        \item \texttt{lu} -- Exact LU solver.  In parallel, superLU package             %
           must be enabled to use this.                                                 %
        \item Any of the options for the \texttt{multigrid\_smoother} card             %
-       \end{itemize}}
+       \end{itemize}},
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf multigrid\_cg\_solver\_its\_1G} multigrid\_cg\_solver\_its\_1G
@@ -8951,8 +9208,10 @@
      unitsother={},
      valuedefault={15},
      valuesapplicable={Any positive integer.},
+     limitations={},
      description={Number of cg\_solver iterations to perform on coarsest grid           %
-       of the multigrid solver.}
+       of the multigrid solver.},
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf multigrid\_cg\_tol\_1G} multigrid\_cg\_tol\_1G
@@ -8966,7 +9225,7 @@
      valuesapplicable={$>0$},
      limitations={},
      description={Set the tolerance for the coarsest grid on the 1G multigrid system.},
-     notes={}
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf multigrid\_smoother} multigrid\_smoother
@@ -8992,7 +9251,8 @@
        \item \texttt{bjacobi} -- Block Jacobi preconditioner where each proc           %
          is a block in the global matrix.  Each block is partially inverted            %
          by an ILU iteration.  (ILU locally, Jacobi globally)                          %
-       \end{itemize}}
+       \end{itemize}},
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf multigrid\_num\_smooth} multigrid\_num\_smooth
@@ -9011,7 +9271,8 @@
        on the way down and no smoother iterations on the way up.  If a value           %
        is given, it will do that many iterations on the way up and on the way          %
        down.  The only way to achieve the default behavior is to leave this            %
-       entry blank.}
+       entry blank.},
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf multigrid\_smoother\_1G} multigrid\_smoother\_1G
@@ -9035,7 +9296,8 @@
        \item \texttt{bjacobi} -- Block Jacobi preconditioner where each proc           %
          is a block in the global matrix.  Each block is partially inverted            %
          by an ILU iteration.  (ILU locally, Jacobi globally)                          %
-       \end{itemize}}
+       \end{itemize}},
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf multigrid\_num\_smooth\_1G} multigrid\_num\_smooth\_1G
@@ -9054,7 +9316,8 @@
        on the way down and no smoother iterations on the way up.  If a value           %
        is given, it will do that many iterations on the way up and on the way          %
        down.  The only way to achieve the default behavior is to leave this            %
-       entry blank.}
+       entry blank.},
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf multigrid\_log\_flag} multigrid\_log\_flag
@@ -9070,7 +9333,8 @@
      description={This card must be set to true for PETSc to printout                  %
        performance and logging information for the multigrid solver.                   %
        However, setting this to true is not sufficient.  You must also                 %
-       provide MPACT with the command line option -pc\_mg\_log at runtime.}
+       provide MPACT with the command line option -pc\_mg\_log at runtime.},
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf multigrid\_log\_flag\_1G} multigrid\_log\_flag\_1G
@@ -9086,7 +9350,8 @@
      description={This card must be set to true for PETSc to printout                  %
        performance and logging information for the multigrid solver.                   %
        However, setting this to true is not sufficient.  You must also                 %
-       provide MPACT with the command line option -pc\_mg\_log at runtime.}
+       provide MPACT with the command line option -pc\_mg\_log at runtime.},
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf multigrid\_precond\_flag} multigrid\_precond\_flag
@@ -9100,7 +9365,8 @@
      valuesapplicable={true or false},
      limitations={},
      description={Setting this card to true makes the code use multigrid as a
-       preconditioner to GMRES rather than as a standalone solver.}
+       preconditioner to GMRES rather than as a standalone solver.},
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
    {\bf multigrid\_precond\_flag\_1G} multigrid\_precond\_flag\_1G
@@ -9114,20 +9380,28 @@
      valuesapplicable={true or false},
      limitations={},
      description={Setting this card to true makes the code use multigrid as a
-       preconditioner to GMRES rather than as a standalone solver.}
+       preconditioner to GMRES rather than as a standalone solver.},
+     notes={Only active when \texttt{msed} is specified for the \texttt{cmfd} card.}
    }
 
-   {\bf multigrid\_cg\_solver\_its} multigrid\_cg\_solver\_its
+   {\bf preconditioner} preconditioner
    \VERAInputTable{
-     name={multigrid\_cg\_solver\_its},
-     type={Integer},
+     name={preconditioner},
+     type={Fixed Character String},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={15},
-     valuesapplicable={Any positive integer.},
-     description={Number of cg\_solver iterations to perform on coarsest grid           %
-       of the multigrid solver.}
+     valuedefault={default},
+     valuesapplicable={default, ilu, bilu, bjacobi\_ilu, mg, eisenstat, none},
+     limitations={},
+     description={This card is used to specify which preconditioner should be used in  %
+       the CMFD solver.  The ``default'' preconditioner depends on the method used to  %
+       solve the CMFD eigenvalue problem.  The ``mg'' preconditioner in PETSC is a bit %
+       misleading.  It is not actually a multigrid preconditioner since we never give  %
+       PETSc any information regarding the grid or interpolation/restriction; it       %
+       simply performs a smoothing step on the fine grid level using its default       %
+       smoother.},
+     notes={}
    }
 
    {\bf cmfd\_eigen\_solver} cmfd\_eigen\_solver
@@ -9200,57 +9474,14 @@
      unitsother={},
      valuedefault={1.0},
      valuesapplicable={},
-     limitations={}
+     limitations={},
      description={This card is for specifying the relaxation parameter for   %
        the CMFD flux update. The default value (1.0) corresponds to no
        relaxation of the update. Values below 1.0 under-relax the CMFD flux  %
        update to provide stability for cases with T/H or other feedback. For %
        standalone neutronics problems, no under-relaxation should be needed  %
        to achieve stability when using the adCMFD option, and any            %
-       under-relaxation will probably degrade the converegence rate.}
-   }
-
-   {\bf cmfd\_dhat\_relaxation} cmfd\_dhat\_relaxation
-   \VERAInputTable{
-     name={cmfd\_dhat\_relaxation},
-     type={Floating-Point Real Number},
-     need={Optional},
-     unitsdefault={},
-     unitsother={},
-     valuedefault={1.0},
-     valuesapplicable={},
-     limitations={},
-     description={This card is for specifying the relaxation parameter for   %
-       the CMFD dHat update. The default value (1.0) corresponds to no       %
-       relaxation of the update. Values below 1.0 under-relax the CMFD dHat  %
-       update to provide stability for cases with very large flux gradients. %
-       For typical neutronics problems, no under-relaxation should be needed %
-       to achieve stability when using the CMFD option, and any              %
-       under-relaxation will probably degrade the converegence rate.  When   %
-       running an external source driven problem, under-relaxation may be    %
-       necessary to obtain convergence, In the most extreme cases,           %
-       under-relaxation may be set to 0.0, which effectively removes the     %
-       dHat correction coefficient in the CMFD calculation, and results in   %
-       CMFD calculating a more traditional diffusion solution.  When running %
-       with no dHat correction coefficient, the equivalence between CMFD     %
-       and fine mesh transport solutions is no longer garuanteed!}
-   }
-
-   {\bf cmfd\_shift\_c0} cmfd\_shift\_c0
-   \VERAInputTable{
-     name={cmfd\_shift\_c0},
-     type={Floating-Point Real Number},
-     need={Optional},
-     unitsdefault={},
-     unitsother={},
-     valuedefault={0.02}
-     valuesapplicable={All positive real numbers},
-     limitations={Can only be used with the mgnode CMFD solver.  This card             %
-       is irrelevant unless the adaptive, ileps, or ilaps shift is being used.},
-     description={This card is used to specify the c0 parameter used in the            %
-       adaptive/ileps/ilaps shift.  c0 is used to reduce the shift to ensure           %
-       both a positive fission source and a subcritical diffusion operator             %
-       (i.e., to prevent overshifting).},
+       under-relaxation will probably degrade the converegence rate.},
      notes={}
    }
 
@@ -9277,7 +9508,70 @@
        dHat correction coefficient in the CMFD calculation, and results in   %
        CMFD calculating a more traditional diffusion solution.  When running %
        with no dHat correction coefficient, the equivalence between CMFD     %
-       and fine mesh transport solutions is no longer garuanteed!}
+       and fine mesh transport solutions is no longer garuanteed!},
+     notes={}
+   }
+
+   {\bf cmfd\_shift\_c0} cmfd\_shift\_c0
+   \VERAInputTable{
+     name={cmfd\_shift\_c0},
+     type={Floating-Point Real Number},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={0.02},
+     valuesapplicable={All positive real numbers},
+     limitations={Can only be used with the mgnode CMFD solver.  This card             %
+       is irrelevant unless the adaptive, ileps, or ilaps shift is being used.},
+     description={This card is used to specify the c0 parameter used in the            %
+       adaptive/ileps/ilaps shift.  c0 is used to reduce the shift to ensure           %
+       both a positive fission source and a subcritical diffusion operator             %
+       (i.e., to prevent overshifting).},
+     notes={}
+   }
+
+   {\bf cmfd\_shift\_method} cmfd\_shift\_method
+   \VERAInputTable{
+     name={cmfd\_shift\_method},
+     type={Fixed Character String},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={constant},
+     valuesapplicable={none, adaptive, sdws-ileps, sdws-ilaps, sdws-laps               %
+       described as:
+       \begin{itemize}
+         \item \texttt{none} --- does not apply a shift to the CMFD system.
+         \item \texttt{constant} --- applies a constant,                               %
+           iteration-independent shift to the CMFD system.  The constant is            %
+           given by the reciprocal of the input to the \texttt{cmfd} card.
+         \item \texttt{adaptive} --- uses a traditional Wielandt shift method.         %
+           The shift parameter is an iteration-dependent, spatially-constant           %
+           quantity defined by:
+             $$ \lambda_{adaptive}^{(n)}  = \max \left\{ \lambda^{(n)} - c_1           %
+                \left| \lambda^{(n)} - \lambda^{(n-1)} \right| - c_0 \,,               %
+                \lambda_{min} \right\} \,. $$
+           $c_1$, $c_0$, and $\lambda_{min}$ have been hard-coded to 10,               %
+           0.02, and 0.3, respectively.  Future implementations of the method          %
+           may allow the user to specify these parameters.
+         \item \texttt{sdws-ileps} --- uses a space- and iteration-dependent           %
+           Wielandt shift based on the local infinite-medium eigenvalues,              %
+           $\lambda_{adaptive}$, and the current guess of the eigenvalue:
+             $$ \lambda_{IPS}^{(n)}(\mathbf{x}) = \max \left\{                         %
+                \lambda_{adaptive}^{(n)} \,, \min \left\{                              %
+                \lambda_{\infty}(\mathbf{x}), \lambda^{(n)} - 0.01 \right\}            %
+                \right\} $$
+         \item \texttt{sdws-ilaps} --- combines sdws-laps with the adaptive            %
+           shift
+         \item \texttt{sdws-laps} --- uses a space- and iteration-dependent            %
+           Wielandt shift based on the local absorption values.  The shift is          %
+           limited in order to ensure a nonnegative fission source.
+       \end{itemize} },
+     limitations={ These methods can only be used with the mgnode CMFD                 %
+       solver or the MGRBSOR solver. },
+     description={This card is used to specify which Wielandt shift method             %
+       will be used to accelerate the power iterations on the CMFD problem.},
+     notes={}
    }
 
    {\bf cmfd\_shift\_method\_1G} cmfd\_shift\_method\_1G
@@ -9289,7 +9583,7 @@
      unitsother={},
      valuedefault={constant},
      valuesapplicable={none, adaptive, sdws-ileps, sdws-ilaps, sdws-laps.  See         %
-       texttt{cmfd\_shift\_method} card for description.  This card is only            %
+       \texttt{cmfd\_shift\_method} card for description.  This card is only            %
        applicable if a 1G CMFD system is being used to accelerate the MG CMFD          %
         system.},
      limitations={ This card is only used if the CMFD card is set to msed },           %
@@ -9300,143 +9594,153 @@
 
    {\bf cmfd\_ktol} cmfd\_ktol
    \VERAInputTable{
-    name={cmfd\_ktol},
-    type={Floating Point Number},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={1.e-6},
-    valuesapplicable={Any positive value.},
-    limitations={},
-    description={This card is used to specify the tolerance for the                    %
-      convergence of k in the overall CMFD eigenavlue problem.},
+     name={cmfd\_ktol},
+     type={Floating Point Number},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={$1.0\times 10^{-6}$},
+     valuesapplicable={Any positive value.},
+     limitations={},
+     description={This card is used to specify the tolerance for the                    %
+       convergence of k in the overall CMFD eigenavlue problem.},
+     notes={}
    }
 
    {\bf cmfd\_rtol} cmfd\_rtol
    \VERAInputTable{
-    name={cmfd\_rtol},
-    type={Floating Point Number},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={1.e-6},
-    valuesapplicable={Any positive value.},
-    limitations={},
-    description={This card is used to specify the tolerance for the                    %
-      relative residual reduction in a CMFD linear system solved each power iteration.},
+     name={cmfd\_rtol},
+     type={Floating Point Number},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={$1.0\times 10^{-6}$},
+     valuesapplicable={Any positive value.},
+     limitations={},
+     description={This card is used to specify the tolerance for the                    %
+       relative residual reduction in a CMFD linear system solved each power iteration.},
+     notes={}
    }
 
    {\bf cmfd\_ktol\_1G} cmfd\_ktol\_1G
    \VERAInputTable{
-    name={cmfd\_ktol\_1G},
-    type={Floating Point Number},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={1.e-6},
-    valuesapplicable={Any positive value.},
-    limitations={},
-    description={This card is used to specify the tolerance for the                    %
-      convergence of k in the 1G CMFD eigenavlue problem in MSED.},
+     name={cmfd\_ktol\_1G},
+     type={Floating Point Number},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={$1.0\times 10^{-6}$},
+     valuesapplicable={Any positive value.},
+     limitations={},
+     description={This card is used to specify the tolerance for the                    %
+       convergence of k in the 1G CMFD eigenavlue problem in MSED.},
+     notes={}
    }
 
    {\bf cmfd\_flxtol\_1G} cmfd\_flxtol\_1G
    \VERAInputTable{
-    name={cmfd\_flxtol\_1G},
-    type={Floating Point Number},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={1.e-6},
-    valuesapplicable={Any positive value.},
-    limitations={},
-    description={This card is used to specify the tolerance for the                    %
-       convergence of the flux in the 1G CMFD eigenavlue problem in MSED.},
+     name={cmfd\_flxtol\_1G},
+     type={Floating Point Number},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={$1.0\times 10^{-6}$},
+     valuesapplicable={Any positive value.},
+     limitations={},
+     description={This card is used to specify the tolerance for the                    %
+        convergence of the flux in the 1G CMFD eigenavlue problem in MSED.},
+     notes={}
    }
 
    {\bf max\_1G\_eig\_its} max\_1G\_eig\_its
    \VERAInputTable{
      name={max\_1G\_eig\_its},
-    type={Integer},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={20},
-    valuesapplicable={Any positive value.},
-    limitations={},
-    description={This card is used to specify the maximum number of power              %
-      power iterations allowed on the 1G CMFD system in MSED.},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={20},
+     valuesapplicable={Any positive value.},
+     limitations={},
+     description={This card is used to specify the maximum number of power              %
+       power iterations allowed on the 1G CMFD system in MSED.},
+     notes={}
    }
 
    {\bf cmfd\_num\_inners} cmfd\_num\_inners
    \VERAInputTable{
      name={cmfd\_num\_inners},
-    type={Integer},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={100},
-    valuesapplicable={Any positive integer.},
-    limitations={},
-    description={This card is used to specify the max. number of linear solver         %
-      iterations per power iteration during a CMFD acceleration calculation.},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={100},
+     valuesapplicable={Any positive integer.},
+     limitations={},
+     description={This card is used to specify the max. number of linear solver         %
+       iterations per power iteration during a CMFD acceleration calculation.},
+     notes={}
    }
 
    {\bf cmfd\_num\_inners\_1G} cmfd\_num\_inners\_1G
    \VERAInputTable{
      name={cmfd\_num\_inners\_1G},
-    type={Integer},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={100},
-    valuesapplicable={Any positive integer.},
-    limitations={},
-    description={This card is used to specify the maximum number of linear             %
-      solver iterations allowed per power iterations in the 1G CMFD system             %
-      in MSED.},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={100},
+     valuesapplicable={Any positive integer.},
+     limitations={},
+     description={This card is used to specify the maximum number of linear             %
+       solver iterations allowed per power iterations in the 1G CMFD system             %
+       in MSED.},
+     notes={}
    }
 
    {\bf linear\_solver\_tol} linear\_solver\_tol
    \VERAInputTable{
      name={linear\_solver\_tol},
-    type={Floating Point Number},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={1.e-10},
-    valuesapplicable={Any positive value.},
-    limitations={},
-    description={This card is used to specify the tolerance of linear solver          %
-      used at each power iteration during a CMFD acceleration calculation.},
+     type={Floating Point Number},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={$1.0\times 10^{-10}$},
+     valuesapplicable={Any positive value.},
+     limitations={},
+     description={This card is used to specify the tolerance of linear solver          %
+       used at each power iteration during a CMFD acceleration calculation.},
+     notes={}
    }
 
    {\bf linear\_solver\_tol\_1G} linear\_solver\_tol\_1G
    \VERAInputTable{
      name={linear\_solver\_tol\_1G},
-    type={Floating Point Number},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={1.e-10},
-    valuesapplicable={Any positive value.},
-    limitations={},
-    description={This card is used to specify the tolerance of linear solver          %
-      used at each power iteration on the 1G system in MSED.},
+     type={Floating Point Number},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={$1.0\times 10^{-10}$},
+     valuesapplicable={Any positive value.},
+     limitations={},
+     description={This card is used to specify the tolerance of linear solver          %
+       used at each power iteration on the 1G system in MSED.},
+     notes={}
    }
 
    {\bf cmfd\_num\_outers} cmfd\_num\_outers
    \VERAInputTable{
      name={cmfd\_num\_outers},
-    type={Integer},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={20},
-    valuesapplicable={Any positive value.},
-    limitations={},
-    description={This card is used to specify the number of outer eigenvalue           %
-      power iterations to perform during a CMFD acceleration calculation.},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={20},
+     valuesapplicable={Any positive value.},
+     limitations={},
+     description={This card is used to specify the number of outer eigenvalue           %
+       power iterations to perform during a CMFD acceleration calculation.},
+     notes={}
    }
 
    {\bf cmfd\_up\_scatter} cmfd\_up\_scatter
@@ -9491,14 +9795,29 @@
    {\bf subgrid\_spacers} subgrid\_spacers
    \VERAInputTable{
      name={subgrid\_spacers},
-     type={Logical},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={false},
-     valuesapplicable={true,false},
+     valuesapplicable={true},
      limitations={},
      description={This card is used to designate whether or not spacer grids are       %
+       used in subgrid solver setup},
+     notes={}
+   }
+
+   {\bf subgrid\_feedback} subgrid\_feedback
+   \VERAInputTable{
+     name={subgrid\_feedback},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={false},
+     valuesapplicable={true},
+     limitations={},
+     description={This card is used to designate whether or not feedback logic is       %
        used in subgrid solver setup},
      notes={}
    }
@@ -9525,7 +9844,7 @@
    {\bf cmfd\_angle\_decomp} cmfd\_angle\_decomp
    \VERAInputTable{
      name={cmfd\_angle\_decomp},
-     type={Logical},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -9542,7 +9861,7 @@
    {\bf split\_TL} split\_TL
    \VERAInputTable{
      name={split\_TL},
-    type={Logical},
+    type={Boolean},
     need={Optional},
     unitsdefault={},
     unitsother={},
@@ -9564,7 +9883,7 @@
    {\bf split\_RTL} split\_RTL
    \VERAInputTable{
      name={split\_RTL},
-    type={Logical},
+    type={Boolean},
     need={Optional},
     unitsdefault={},
     unitsother={},
@@ -9791,7 +10110,7 @@
    {\bf prompt} prompt
    \VERAInputTable{
      name={prompt},
-     type={Fixed Character String},
+     type={Boolean},
      need={Required},
      unitsdefault={},
      unitsother={},
@@ -9805,21 +10124,20 @@
      notes={}
    }
 
-   {\bf cmfd\_shift\_method\_1G} cmfd\_shift\_method\_1G
+   {\bf accel} accel
    \VERAInputTable{
-     name={cmfd\_shift\_method\_1G},
-     type={Fixed Character String},
+     name={accel},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={constant},
-     valuesapplicable={none, adaptive, sdws-ileps, sdws-ilaps, sdws-laps.  See         %
-       texttt{cmfd\_shift\_method} card for description.  This card is only            %
-       applicable if a 1G CMFD system is being used to accelerate the MG CMFD          %
-        system.},
-     limitations={ This card is only used if the CMFD card is set to msed },           %
-     description={ This card is used to specify which wielandt shift method            %
-       will be used to accelerate the power iterations on the 1G CMFD problem.},
+     valuedefault={\texttt{true}},
+     valuesapplicable={This option is used to specify whether CMFD acceleration %
+       is performed during the transient solve. The default is set to true.     %
+       When using the multilevel method, \texttt{true} must be used. },
+     limitations={Can only be used when TML is enabled.},
+     description={When just accel is input without \texttt{true|false}, the  %
+       option is set to \texttt{false}.},
      notes={}
    }
 
@@ -9869,7 +10187,7 @@
    {\bf delayenergy} delayenergy
    \VERAInputTable{
      name={delayenergy},
-     type={Fixed Character String},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -9877,9 +10195,9 @@
      valuesapplicable={\texttt{true}},
      limitations={},
      description={This option is used to specify whether to use         %
-       explicit delayed energy kernel during the transient solver. The default  %
+       explicit delayed energy kernel during the transient calculation. The default  %
        is false. The equilibrium delayed energy (about 7 percent of total fission energy %
-       including delayed beta and gamma) is assumed in default.},
+       including delayed beta and gamma) is assumed as default.},
      notes={}
    }
 
@@ -9891,7 +10209,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={library},
-     valuesapplicable={scale,keepin,tuttle,jeff3,santamarina,library,spert70f,spert250f,spert500f. These are described as:  %
+     valuesapplicable={scale, keepin, tuttle, jeff3, santamarina, library, spert70f, spert250f, spert500f. These are described as:  %
        \begin{enumerate}
          \item \texttt{scale} --- the 6-group transient data from SCALE        %
          \item \texttt{keepin} --- the 6-group transient data from G. R. Keepin's paper   %
@@ -9902,8 +10220,8 @@
          \item \texttt{spert70f,spert250f,spert500f} --- the 6-group transient data measured in spert experiments   %
        \end{enumerate}},
      limitations={},
-     description={This card is used to specify the set of kinetics data used in transient calculation. %
-         This card is only applied to MPACT cross section library for now. By default,               %
+     description={This card is used to specify the set of kinetics data used in the transient calculation. %
+         This card is only applied to the MPACT cross section library for now. By default,               %
          MPACT uses the 6-group transient data provided in MPACT MG cross section library.},
      notes={}
    }
@@ -9916,7 +10234,7 @@
      unitsdefault={},
      unitsother={},
      valuedefault={fissweight},
-     valuesapplicable={isotopic,fissweight,precursorconsv. These are described as:  %
+     valuesapplicable={isotopic, fissweight, precursorconsv. These are described as:  %
        \begin{enumerate}
          \item \texttt{isotopic} --- use exact isotope dependent lambdas        %
          \item \texttt{fissweight} --- collapse isotopic lambdas by fission rate   %
@@ -9924,15 +10242,15 @@
        \end{enumerate}},
      limitations={},
      description={This card controls the calculation of decay constant for each fissile region. %
-         The isotopic lambda is the exact approach, but can use a lot more memories.      %
-         In general, it is recommended to use precursor conservation option rather than fission source weighting.},
+         The isotopic lambda is the exact approach, but can use a lot more memory.      %
+         In general, it is recommended to use the precursor conservation option rather than fission source weighting.},
      notes={}
    }
 
    {\bf kinetics\_otfbeta} kinetics\_otfbeta
    \VERAInputTable{
      name={kinetics\_otfbeta},
-     type={Fixed Character String},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -9940,7 +10258,7 @@
      valuesapplicable={\texttt{true}},
      limitations={},
      description={This option specifies whether to compute the problem dependent      %
-       nubar for on-the-fly calculation of beta. By default, problem-independent beta %
+       nubar for on-the-fly calculation of beta. By default, the problem-independent beta %
        computed from a typical PWR spectrum is used.},
      notes={}
    }
@@ -9948,11 +10266,11 @@
    {\bf rx\_components} rx\_components
    \VERAInputTable{
      name={rx\_components},
-     type={Fixed Character String},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={},
+     valuedefault={false},
      valuesapplicable={\texttt{true}},
      limitations={Can only be used when acceleration is enabled.},
      description={This option is used to specify whether to         %
@@ -9979,11 +10297,11 @@
    {\bf summary\_edits} summary\_edits
    \VERAInputTable{
      name={summary\_edits},
-     type={Fixed Character String},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={},
+     valuedefault={false},
      valuesapplicable={\texttt{true}},
      limitations={Only used for transient cases.},
      description={This option is used to specify whether to         %
@@ -9993,26 +10311,18 @@
      notes={}
    }
 
-   {\bf split\_TL} split\_TL
+   {\bf tml} tml
    \VERAInputTable{
-     name={split\_TL},
-    type={Logical},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={true},
-    valuesapplicable={false},
-    limitations={Only applies to 3-D models run with 2-D/1-D.},
-    description={This card is used to specify whether transverse leakage               %
-      splitting will be enabled for a calculation using a 2-D/1-D method. \newline     %
-      \newline                                                                         %
-      In the 2-D/1-D method the axial transverse leakage is subtracted from the total  %
-      fission and scattering sources, thus in regions with relatively large axial      %
-      streaming sources, the total source may become negative. To avoid negative       %
-      total sources the transverse leakage is split between the right hand side and    %
-      left hand side of the 2-D transport equation, thus ensuring positivity of the    %
-      total source and neutron balance.},
-    notes={}
+     name={tml},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={true},
+     valuesapplicable={false},
+     limitations={},
+     description={Flag to enable the Transient Milti-Level Method.},
+     notes={}
    }
 
    {\bf tmllevel} nCMFD nEPKE/n1GCMFD n1GCMFD/nEPKE
@@ -10026,8 +10336,8 @@
      valuesapplicable={$>0$},
      limitations={},
      description={The number of CMFD acceleration steps taken for every transport
-        time step. Is always the first entry in the /texttt{tmllevel} card},
-     notes={Is only used when /texttt{tml} is set to \texttt{true}.}
+        time step. Is always the first entry in the \texttt{tmllevel} card},
+     notes={Is only used when \texttt{tml} is set to \texttt{true}.}
    }
    \VERAInputTable{
      name={nEPKE},
@@ -10039,10 +10349,10 @@
      valuesapplicable={$>0$},
      limitations={},
      description={The number of EPKE calculation steps taken for every transport
-        time step. If there are only 2 numbers listed in the /texttt{tmllevel} card,
-        the second number should be /texttt{nEPKE}. If there are 3 numbers listed
-        in the /texttt{tmllevel} card, the third number should be /texttt{nEPKE}.},
-     notes={Is only used when /texttt{tml} is set to \texttt{true}.}
+        time step. If there are only 2 numbers listed in the \texttt{tmllevel} card,
+        the second number should be \texttt{nEPKE}. If there are 3 numbers listed
+        in the \texttt{tmllevel} card, the third number should be \texttt{nEPKE}.},
+     notes={Is only used when \texttt{tml} is set to \texttt{true}.}
    }
    \VERAInputTable{
      name={n1GCMFD},
@@ -10055,8 +10365,8 @@
      limitations={},
      description={The number of 1G CMFD acceleration steps taken for every transport
         time step. This variable is only set if there are 3 numbers listed in the
-        /texttt{tmllevel} card. In which case, the second number is /texttt{nEPKE}.},
-     notes={Is only used when /texttt{tml} is set to \texttt{true}.}
+        \texttt{tmllevel} card. In which case, the second number is \texttt{nEPKE}.},
+     notes={Is only used when \texttt{tml} is set to \texttt{true}.}
    }
 
    {\bf transmethod} transmethod
@@ -10138,7 +10448,7 @@
    {\bf mat\_emit\_src} mat\_emit\_src
    \VERAInputTable{
      name={mat\_emit\_src},
-     type={Fixed Character String.},
+     type={Boolean},
      need={Optional},
      unitsdefault={},
      unitsother={},
@@ -10154,10 +10464,11 @@
    }
 
  \subsection{Block MAMBA}
+ \label{sec:mambacards}
 
    {\bf A\_NiFe2O4\_out} surface\_prefactor
    \VERAInputTable{
-     name={A\_NiFe2O4\_out},
+     name={surface\_prefactor},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={},
@@ -10171,7 +10482,7 @@
 
    {\bf E\_NiFe2O4\_out} surface\_activation\_energy
    \VERAInputTable{
-     name={E\_NiFe2O4\_out},
+     name={surface\_activation\_energy},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={},
@@ -10185,7 +10496,7 @@
 
    {\bf A\_NiFe2O4\_in} nucleation\_prefactor
    \VERAInputTable{
-     name={A\_NiFe2O4\_in},
+     name={nucleation\_prefactor},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={},
@@ -10199,7 +10510,7 @@
 
    {\bf E\_NiFe2O4\_in} nucleation\_activation\_energy
    \VERAInputTable{
-     name={E\_NiFe2O4\_in},
+     name={nucleation\_activation\_energy},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={},
@@ -10213,7 +10524,7 @@
 
    {\bf ksnb\_Fe2O4} boiling\_growth\_rate
    \VERAInputTable{
-     name={ksnb\_Fe2O4},
+     name={boiling\_growth\_rate},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={},
@@ -10227,7 +10538,7 @@
 
    {\bf D\_Ni} diffusion\_coefficient
    \VERAInputTable{
-     name={D\_Ni},
+     name={diffusion\_coefficient},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={cm$^2$/s},
@@ -10241,7 +10552,7 @@
 
    {\bf D\_Fe} diffusion\_coefficient
    \VERAInputTable{
-     name={D\_Fe},
+     name={diffusion\_coefficient},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={cm$^2$/s},
@@ -10255,7 +10566,7 @@
 
    {\bf D\_BOH3} diffusion\_coefficient
    \VERAInputTable{
-     name={D\_BOH3},
+     name={diffusion\_coefficient},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={cm$^2$/s},
@@ -10269,7 +10580,7 @@
 
    {\bf D\_Li} diffusion\_coefficient
    \VERAInputTable{
-     name={D\_Li},
+     name={diffusion\_coefficient},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={cm$^2$/s},
@@ -10283,7 +10594,7 @@
 
    {\bf D\_H2} diffusion\_coefficient
    \VERAInputTable{
-     name={D\_H2},
+     name={diffusion\_coefficient},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={cm$^2$/s},
@@ -10297,7 +10608,7 @@
 
    {\bf CRUD\_porosity} porosity
    \VERAInputTable{
-     name={CRUD\_porosity},
+     name={porosity},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={},
@@ -10311,7 +10622,7 @@
 
    {\bf CRUD\_solid\_dens} density
    \VERAInputTable{
-     name={CRUD\_solid\_dens},
+     name={density},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={g/cm$^3$},
@@ -10323,9 +10634,9 @@
      notes={}
    }
 
-   {\bf dep\_frac} fraction
+   {\bf CRUD\_dep\_frac} fraction
    \VERAInputTable{
-     name={dep\_frac},
+     name={fraction},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={},
@@ -10339,7 +10650,7 @@
 
    {\bf chimney\_htc} htc
    \VERAInputTable{
-     name={chimney\_htc},
+     name={htc},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={W/cm$^2$-K},
@@ -10351,9 +10662,23 @@
      notes={}
    }
 
+   {\bf chimney\_htc\_lin} htc\_lin
+   \VERAInputTable{
+     name={htc\_lin},
+     type={Floating-point Real Number},
+     need={Optional},
+     unitsdefault={W/cm$^2$-K$^2$},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={Linear-in-T heat transfer coefficient inside a chimney},
+     notes={}
+   }
+
    {\bf chimney\_dens} dens
    \VERAInputTable{
-     name={chimney\_dens},
+     name={dens},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={num/cm$^2$},
@@ -10367,7 +10692,7 @@
 
    {\bf chimney\_rad} radius
    \VERAInputTable{
-     name={chimney\_rad},
+     name={radius},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={cm},
@@ -10381,7 +10706,7 @@
 
    {\bf chimney\_vf} void\_fraction
    \VERAInputTable{
-     name={chimney\_vf},
+     name={void\_fraction},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={},
@@ -10395,7 +10720,7 @@
 
    {\bf CRUD\_therm\_cond} k\_crud
    \VERAInputTable{
-     name={CRUD\_therm\_cond},
+     name={k\_crud},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={W/cm-K},
@@ -10409,7 +10734,7 @@
 
    {\bf CRUD\_heat\_capacity} Cp
    \VERAInputTable{
-     name={CRUD\_heat\_capacity},
+     name={Cp},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={J/g-K},
@@ -10423,7 +10748,7 @@
 
    {\bf tke\_scale} factor
    \VERAInputTable{
-     name={tke\_scale},
+     name={factor},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={},
@@ -10437,7 +10762,7 @@
 
    {\bf src\_mult\_A} multiplier
    \VERAInputTable{
-     name={src\_mult\_A},
+     name={multiplier},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={},
@@ -10451,7 +10776,7 @@
 
    {\bf src\_mult\_E} multiplier
    \VERAInputTable{
-     name={src\_mult\_E},
+     name={multiplier},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={},
@@ -10465,7 +10790,7 @@
 
    {\bf steam\_generator\_age} age
    \VERAInputTable{
-     name={steam\_generator\_age},
+     name={age},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={years},
@@ -10480,7 +10805,7 @@
 
    {\bf sg\_mult} multiplier
    \VERAInputTable{
-     name={sg\_mult},
+     name={multiplier},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={},
@@ -10494,7 +10819,7 @@
 
    {\bf mass\_mult} multiplier
    \VERAInputTable{
-     name={mass\_mult},
+     name={multiplier},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={},
@@ -10508,7 +10833,7 @@
 
    {\bf piping\_age} age
    \VERAInputTable{
-     name={piping\_age},
+     name={age},
      type={Floating-point Real Number},
      need={Optional},
      unitsdefault={years},
@@ -10523,7 +10848,7 @@
 
    {\bf chem\_mass\_bal} option
    \VERAInputTable{
-     name={chem\_mass\_bal},
+     name={option},
      type={Integer},
      need={Optional},
      unitsdefault={},
@@ -10541,7 +10866,7 @@
 
    {\bf model\_erosion} option
    \VERAInputTable{
-     name={model\_erosion},
+     name={option},
      type={Integer},
      need={Optional},
      unitsdefault={},
@@ -10560,7 +10885,7 @@
 
    {\bf li\_table} boron  lithium
    \VERAInputTable{
-     name={li\_table},
+     name={lithium},
      type={List of Two Floating-point Real Numbers},
      need={Optional},
      unitsdefault={ppm},
@@ -10573,7 +10898,599 @@
      notes={}
    }
 
+ \subsection{Block BISON}
+ \label{sec:bisoncards}
+
+   {\bf bcs\_plenumpressure\_plenumpressure\_initial\_pressure} rod\_initial\_pressure
+   \VERAInputTable{
+     name={rod\_initial\_pressure},
+     type={Float},
+     need={Optional},
+     unitsdefault={Pascals},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>=0$},
+     limitations={},
+     description={Initial plenum pressure of (non-ifba) fuel rods.},
+     notes={}
+   }
+
+   {\bf bcs\_plenumpressure\_plenumpressure\_initial\_pressure\_ifba} rod\_initial\_pressure
+   \VERAInputTable{
+     name={rod\_initial\_pressure},
+     type={Float},
+     need={Optional},
+     unitsdefault={Pascals},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>=0$},
+     limitations={},
+     description={Initial plenum pressure of ifba-bearing fuel rods.},
+     notes={}
+   }
+
+   {\bf bcs\_plenumpressure\_plenumpressure\_startup\_time} startup\_time
+   \VERAInputTable{
+     name={startup\_time},
+     type={Float},
+     need={Optional},
+     unitsdefault={seconds},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>=0$},
+     limitations={},
+     description={Time over which the simulation builds in the plenum pressure.},
+     notes={For numerical stability (if necessary)}
+   }
+
+   {\bf burnup\_burnup\_num\_radial} num\_radial
+   \VERAInputTable{
+     name={num\_radial},
+     type={Float},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>=1$},
+     limitations={},
+     description={Number of radial mesh points in the burnup mesh.},
+     notes={}
+   }
+
+   {\bf burnup\_burnup\_num\_axial} num\_axial
+   \VERAInputTable{
+     name={num\_axial},
+     type={Float},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>=1$},
+     limitations={},
+     description={Number of axial mesh points in the burnup mesh.},
+     notes={}
+   }
+
+   {\bf executioner\_start\_time} start\_time
+   \VERAInputTable{
+     name={start\_time},
+     type={Float},
+     need={Optional},
+     unitsdefault={seconds},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={Any float (+/-)},
+     limitations={},
+     description={The starting time for the simulation.},
+     notes={Most standalone BISON cases use 0, but Tiamat typically uses -100 seconds.}
+   }
+
+   {\bf executioner\_dt} dt
+   \VERAInputTable{
+     name={dt},
+     type={Float},
+     need={Optional},
+     unitsdefault={seconds},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={The initial timestep of the simulation.},
+     notes={Adaptive timestepping takes over from this immediately.}
+   }
+
+   {\bf executioner\_dtmin} dtmin
+   \VERAInputTable{
+     name={dtmin},
+     type={Float},
+     need={Optional},
+     unitsdefault={seconds},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={The minimum timestep at which the adaptive timestepping will terminate the simulation.},
+     notes={}
+   }
+
+   {\bf executioner\_dtmax} dtmax
+   \VERAInputTable{
+     name={dtmax},
+     type={Float},
+     need={Optional},
+     unitsdefault={seconds},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={The maximum timestep at which the adaptive timestepping will terminate the simulation.},
+     notes={}
+   }
+
+   {\bf executioner\_end\_time} end\_time
+   \VERAInputTable{
+     name={end\_time},
+     type={Float},
+     need={Optional},
+     unitsdefault={seconds},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={The end time of the simulation.},
+     notes={}
+   }
+
+   {\bf globalparams\_a\_lower} a\_lower
+   \VERAInputTable{
+     name={a\_lower},
+     type={Float},
+     need={Optional},
+     unitsdefault={meters},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={The lower bound of the active fuel.},
+     notes={}
+   }
+
+   {\bf globalparams\_a\_upper} a\_upper
+   \VERAInputTable{
+     name={a\_upper},
+     type={Float},
+     need={Optional},
+     unitsdefault={meters},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={The upper bound of the active fuel.},
+     notes={}
+   }
+
+   {\bf globalparams\_energy\_per\_fission} energy\_per\_fission
+   \VERAInputTable{
+     name={energy\_per\_fission},
+     type={Float},
+     need={Optional},
+     unitsdefault={Joules/fission},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={The energy per fission.},
+     notes={}
+   }
+
+   {\bf mesh\_file} meshfilename
+   \VERAInputTable{
+     name={meshfilename},
+     type={Fixed Character String.},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={The external mesh file for the simulation.},
+     notes={Typically, the internal mesh generator is used, but this allows users to input a file if desired.}
+   }
+
+   {\bf mesh\_nx\_p} nradial\_pellet
+   \VERAInputTable{
+     name={nradial\_pellet},
+     type={Float},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={The number of radial elements in the fuel pellet.},
+     notes={}
+   }
+
+   {\bf mesh\_ny\_p} naxial\_pellet
+   \VERAInputTable{
+     name={naxial\_pellet},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={The number of axial elements in the fuel pellet.},
+     notes={}
+   }
+
+   {\bf mesh\_nx\_c} nradial\_clad
+   \VERAInputTable{
+     name={nradial\_clad},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={The number of radial elements in the cladding.},
+     notes={}
+   }
+
+   {\bf mesh\_ny\_c} naxial\_clad
+   \VERAInputTable{
+     name={naxial\_clad},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={The number of axial elements in the cladding.},
+     notes={}
+   }
+
+   {\bf mesh\_bx\_p} radial\_bias
+   \VERAInputTable{
+     name={radial\_bias},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$,$<2$},
+     limitations={},
+     description={The biasing parameter for the fuel radial mesh.},
+     notes={This is used to enforce a non-uniform radial mesh to enhance accuracy.}
+   }
+
+   {\bf mesh\_clad\_bot\_gap\_height} bot\_gap\_height
+   \VERAInputTable{
+     name={bot\_gap\_height},
+     type={Float},
+     need={Optional},
+     unitsdefault={meters},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={The distance between the bottom of the fuel stack and the top of the lower clad region.},
+     notes={}
+   }
+
+   {\bf outputs\_file\_base} output\_filename
+   \VERAInputTable{
+     name={output\_filename},
+     type={Fixed Character String.},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={The filename of the output file for the simulation.},
+     notes={}
+   }
+
+   {\bf fuel\_pin\_input\_file\_template} fuel\_inp\_filename
+   \VERAInputTable{
+     name={fuel\_inp\_filenamee},
+     type={Fixed Character String.},
+     need={Required},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={The filename of the template for fuel rods.},
+     notes={}
+   }
+
+   {\bf non\_fuel\_pin\_input\_file\_template} nonfuel\_inp\_filename
+   \VERAInputTable{
+     name={nonfuel\_inp\_filename},
+     type={Fixed Character String.},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={The filename of the template for non-fuel rods.},
+     notes={}
+   }
+
+   {\bf power\_file} power\_filenames
+   \VERAInputTable{
+     name={power\_filenames},
+     type={List of Free Form Character Strings.},
+     need={Required},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={The filenames of the VERA-generated HDF5 files with power and temperature data.},
+     notes={}
+   }
+
+   {\bf cycle\_xml} cycle\_xml\_filenames
+   \VERAInputTable{
+     name={cycle\_xml\_filenames},
+     type={List of Free Form Character Strings.},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={The filenames of the corresponding VERA cycle depletion XML files.},
+     notes={}
+   }
+
+   {\bf shuffle\_xml} shuffle\_xml\_filenames
+   \VERAInputTable{
+     name={shuffle\_xml\_filenames},
+     type={List of Free Form Character Strings.},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={The filenames of the corresponding VERA shuffle XML files.},
+     notes={}
+   }
+
+   {\bf only\_cycle} only\_cycle
+   \VERAInputTable{
+     name={only\_cycle},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={The cycle index for which to generate Bison input files.},
+     notes={Otherwise, all cycles of files will be generated.}
+   }
+
+   {\bf only\_assemblies} assembly\_locations
+   \VERAInputTable{
+     name={assembly\_locations},
+     type={List of Free Form Character Strings.},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={The list of assembly locations for which to generate Bison input files.},
+     notes={Otherwise, all assemblies will be generated.}
+   }
+
+   {\bf mesh\_type} mesh\_type
+   \VERAInputTable{
+     name={mesh\_type},
+     type={Fixed Character String.},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={smeared\_pellet},
+     valuesapplicable={unit\_test},
+     limitations={},
+     description={The mesh type.},
+     notes={Used for Tiamat testing.}
+   }
+
+   {\bf output\_average\_axial\_values} output\_average\_axial\_values
+   \VERAInputTable{
+     name={output\_average\_axial\_values},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={true,false},
+     limitations={},
+     description={Logical governing whether or not to output average axial values.},
+     notes={}
+   }
+
+   {\bf solve\_type} solve\_type
+   \VERAInputTable{
+     name={solve\_type},
+     type={Fixed Character String.},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={standalone,tiamat,tiamat\_inline,temp\_table},
+     limitations={},
+     description={The solver scheme for the simulation.},
+     notes={Some options in the template are different depending on the solve type.}
+   }
+
+   {\bf bc\_type} bc\_type
+   \VERAInputTable{
+     name={bc\_type},
+     type={Fixed Character String.},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={bulk\_cool},
+     valuesapplicable={clad\_outer},
+     limitations={},
+     description={The boundary condition type used for the simulation.},
+     notes={Standalone Bison can use clad outer surface and bulk coolant temperature as the boundary condition.  Tiamat exclusively uses clad outer surface temperature.}
+   }
+
+   {\bf axial\_shape} axial\_shape
+   \VERAInputTable{
+     name={axial\_shape},
+     type={Fixed Character String.},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={midpoint},
+     valuesapplicable={constant},
+     limitations={},
+     description={Governs the axial shaping of the power and temperature variables input from VERA.},
+     notes={Some options in the template are different depending on the solve type.}
+   }
+
+   {\bf fast\_flux} fast\_flux
+   \VERAInputTable{
+     name={fast\_flux},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={false},
+     valuesapplicable={true},
+     limitations={},
+     description={Logical governing whether or not to output average axial values.},
+     notes={}
+   }
+
+   {\bf materials\_fuel\_relocation\_relocation\_activation1} activation\_threshold
+   \VERAInputTable{
+     name={activation\_threshold},
+     type={Float},
+     need={Optional},
+     unitsdefault={W/m},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={Threshold for the first level of relocation activation.},
+     notes={}
+   }
+
+   {\bf auxkernels\_fast\_neutron\_flux\_factor} flux\_factor
+   \VERAInputTable{
+     name={flux\_factor},
+     type={Float},
+     need={Optional},
+     unitsdefault={n/m2-s per W/m},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={Fast flux factor for approximating fast neutron flux from local power.},
+     notes={}
+   }
+
+   {\bf materials\_fuel\_mech\_model\_creep} model\_creep
+   \VERAInputTable{
+     name={model\_creep},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={true},
+     valuesapplicable={false},
+     limitations={},
+     description={Enables the fuel mechanics creep model.},
+     notes={}
+   }
+
+   {\bf materials\_fuel\_relocation\_burnup\_relocation\_stop} relocation\_stop
+   \VERAInputTable{
+     name={relocation\_stop},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={fissions per initial metal atom (fima)},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={Burnup at which the relocation model turns off.},
+     notes={}
+   }
+
+   {\bf thermalcontact\_roughness\_fuel} roughness\_fuel
+   \VERAInputTable{
+     name={roughness\_fuel},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={$\mu$m},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={Fuel roughness value.},
+     notes={}
+   }
+
+   {\bf thermalcontact\_roughness\_clad} roughness\_clad
+   \VERAInputTable{
+     name={roughness\_clad},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={$\mu$m},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={$>0$},
+     limitations={},
+     description={Clad roughness value.},
+     notes={}
+   }
+
+   {\bf functions\_coolant\_pressure\_ramp\_x} pressure\_ramp\_time\_values
+   \VERAInputTable{
+     name={pressure\_ramp\_time\_values},
+     type={Fixed Character String.},
+     need={Optional},
+     unitsdefault={seconds},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={Time values for coolant/system pressure ramp.},
+     notes={}
+   }
+
+   {\bf functions\_coolant\_pressure\_ramp\_y} pressure\_ramp\_pressure\_values
+   \VERAInputTable{
+     name={pressure\_ramp\_pressure\_values},
+     type={Fixed Character String.},
+     need={Optional},
+     unitsdefault={Pascals},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={},
+     limitations={},
+     description={Pressure values for coolant/system pressure ramp.},
+     notes={}
+   }
+
  \subsection{Block RUN}
+ \label{sec:runcards}
 
    {\bf email} list\_of\_emails
    \VERAInputTable{
@@ -10587,6 +11504,21 @@
      limitations={},
      description={Email that is used to inform user of job status.  %
         A list of emails can be input by comma seperating the emails.},
+     notes={}
+   }
+
+   {\bf exe\_mode} exe\_mode
+   \VERAInputTable{
+     name={exe\_mode},
+     type={Character String},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={},
+     valuesapplicable={th},
+     limitations={},
+     description={If given an input of \texttt{th}, then VERARun will execute
+       \texttt{multistate\_cobra} instead of \texttt{MPACT.exe}.},
      notes={}
    }
 
@@ -10618,6 +11550,19 @@
      notes={}
    }
 
+   {\bf nprocs} number of processors
+   \VERAInputTable{
+     name={nprocs},
+     type={Integer},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={Total number of system processors},
+     valuesapplicable={Greater than 0},
+     limitations={},
+     description={Total number of processors that will be used},
+     notes={}
+   }
 
    {\bf walltime} maximum expected runtime
    \VERAInputTable{
