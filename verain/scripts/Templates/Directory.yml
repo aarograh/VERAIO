@@ -13306,6 +13306,27 @@ MPACT:
       - in_dictionary() true false
 
 #>
+#>   {\bf subgrid\_reflector} subgrid\_reflector
+#>   \VERAInputTable{
+#>     name={subgrid\_reflector},
+#>     type={Logical},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true},
+#>     limitations={},
+#>     description={This card is used to designate whether or not axial reflectors are       %
+#>       used in subgrid solver setup},
+#>     notes={}
+#>   }
+  subgrid_reflector:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf subgrid\_feedback} subgrid\_feedback
 #>   \VERAInputTable{
 #>     name={subgrid\_feedback},
