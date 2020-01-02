@@ -9273,7 +9273,6 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
-
 #>
 #>   {\bf moc\_blocking\_data\_passing} moc\_blocking\_data\_passing
 #>   \VERAInputTable{
@@ -9295,7 +9294,32 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
-
+#>
+#>   {\bf moc\_rational\_frac\_tol} moc\_rational\_frac\_tol
+#>   \VERAInputTable{
+#>     name={moc\_rational\_frac\_tol},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={$\max\left(0.001,\min\left(0.02,10^{(-1.2653-0.0271 \cdot n_{azi})}\right)\right)$},
+#>     valuesapplicable={Positive floating-point real numbers},
+#>     limitations={},
+#>     description={This card is used to set the tolerance of the Rational Fractions     %
+#>       calculation that is part of the modular angle-spacing pair setup.  A default    %
+#>       is defined to set reasonable values for the likely azimuthals\_octant values    %
+#>       ranging between $2$ and $64$.  However azimuthals\_octant$>=64$ may require a   %
+#>       tighter tolerance to achieve accurate results.  Therefore, the user may use     %
+#>       this card to override the default behavior as needed.},
+#>     notes={}
+#>   }
+  moc_rational_frac_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+#>
 #>   {\bf volume\_corr} volume\_corr
 #>   \VERAInputTable{
 #>     name={volume\_corr},
