@@ -81,6 +81,13 @@ MPACT:
         - copy MPACT/$moc_blocking_data_passing
       _content:
 
+    moc_rational_frac_tol:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MPACT/$moc_rational_frac_tol
+      _content:
+
     shield_moc_kernel:
       _pltype: parameter
       _type: string
