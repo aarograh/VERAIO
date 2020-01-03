@@ -604,7 +604,7 @@
   num_outers        20
   scattering        P2
 !cmfd
-  cmfd              ycmfd
+  cmfd              adcmfd
   cmfd_solver       1gsweep
   k_shift           1.15
   cmfd_num_outers   20
