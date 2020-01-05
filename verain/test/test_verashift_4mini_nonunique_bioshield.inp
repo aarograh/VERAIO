@@ -58,7 +58,7 @@
   det  PWR  power   5.5  6.5 / void cs / 52.4 52.4 / u235  wedge
   det  SRC  source  4.0  5.5 / void cs / 48.0      / b10   none
 
-  det_locations  PWR   52.0   45  70.0
+  det_locations  PWR   44.0   45  70.0
                  SRC   53.0  270  100.0
 
   bc_rad reflecting
