@@ -65,6 +65,7 @@ class VERAOmnibusGenerator(object):
     def __init__(self, basename, script_dir):
         self.infile           = basename + ".xml"
         self.outfile          = basename + ".omn"
+        self.xml_excore_file  = basename + ".excore.xml"
         self.xml_data         = None
         self.xml_shift        = None
         self.template_file    = script_dir + "Init/omnibus_template.txt"
@@ -85,9 +86,10 @@ class VERAOmnibusGenerator(object):
         self.det_rad_locs     = []
         self.det_azi_locs     = []
         self.det_elev_locs    = []
-        self.translate        = [0.0, 0.0, 0.0]
+        self.translate        = None
         self.materials        = []
         self.tally_cells      = []
+        self.vera_pv          = None
 
 ###############################################################################
 
@@ -195,6 +197,8 @@ class VERAOmnibusGenerator(object):
                                 shift_child.attrib['value'])
                         self.translate = trans_str.strip().split(',')
                         self.translate = [float(i) for i in self.translate]
+                    if shift_child.attrib['name'] == 'vera_pressure_vessel':
+                        self.vera_pv = shift_child.attrib['value'].strip()
 
         # To generate the Omnibus excore file, there must be a CORE block and
         # it must contain bioshield materials, bioshield radii, and vessel
@@ -208,11 +212,32 @@ class VERAOmnibusGenerator(object):
 
         if _strictly_increasing(self.bioshield_radii) == False:
             print("Error: bioshield radii must be monotonically increasing!")
-            exit()
+            exit(1)
 
         if self.bioshield_radii[0] < self.vessel_rads[-1]:
             print("Error: bioshield radii must be larger than vessel")
-            exit()
+            exit(1)
+
+        # The pressure vessel from the VERA input should be pulled in
+        translate_ref = [-self.vessel_rads[-1], -self.vessel_rads[-1], 0]
+        if self.vera_pv is None:
+            print("Warning: setting vera_pressure_vessel to True.")
+            self.vera_pv = "true"
+        if self.vera_pv.lower() == "true":
+            if self.translate is None:
+                self.translate = translate_ref
+                print("Setting core_translate in Shift block using outer" + \
+                        " vessel radius.")
+            else:
+                if (self.translate[0] != translate_ref[0] or
+                        self.translate[1] != translate_ref[1] or
+                        self.translate[2] != translate_ref[2]):
+                    print("Error: core_translate parameter should match " + \
+                            "outer vessel radius.")
+        else:
+            print("Error: vera_pressure_vessel is False but automated excore " +
+                  "generator will only define the geometry beyond the vessel.")
+            exit(1)
 
         return True
 
@@ -294,7 +319,7 @@ class VERAOmnibusGenerator(object):
                                 shape_line)
                         if not "OMN_Z_UPPER" in shape_line:
                             print("Template error: OMN_Z_UPPER")
-                            exit()
+                            exit(1)
                         line_filled = re.sub(
                                 r'OMN_Z_UPPER',
                                 str(max_z),
@@ -328,7 +353,7 @@ class VERAOmnibusGenerator(object):
                             print("Error: material " +
                                     self.bioshield_mats[bio_num] +
                                     " not available.")
-                            exit()
+                            exit(1)
                     elif "OMN_DEFINE_CELL" in cell_line:
                         cell_def = ' +thecore'
                         if bio_num > 0:
@@ -394,12 +419,12 @@ class VERAOmnibusGenerator(object):
             if (self.bioshield_radii[-1] <
                     self.det_rad_locs[d] + det_type.radii[-1]):
                 print("Error: detector cannot extend beyond bioshield")
-                exit()
+                exit(1)
 
             if (self.det_rad_locs[d] - det_type.radii[-1] <
                     self.vessel_rads[-1]):
                 print("Error: detector cannot extend into vessel")
-                exit()
+                exit(1)
 
             # Write out a shape for each radius and height
             shape_num = 0
@@ -427,7 +452,7 @@ class VERAOmnibusGenerator(object):
                                         shape_line)
                                 if not "OMN_Z_UPPER" in shape_line:
                                     print("Template error: OMN_Z_UPPER")
-                                    exit()
+                                    exit(1)
                                 line_filled = re.sub(
                                         r'OMN_Z_UPPER',
                                         str(min_z + h),
@@ -451,12 +476,12 @@ class VERAOmnibusGenerator(object):
                 if (self.bioshield_radii[-1] < self.det_rad_locs[d] +
                         np.sqrt(2.0) * det_type.radii[-1]):
                     print("Error: detector well cannot extend beyond bioshield")
-                    exit()
+                    exit(1)
 
                 if (self.det_rad_locs[d] + np.sqrt(2.0) * det_type.radii[-1] <
                         self.bioshield_radii[0]):
                     print("Error: detector well will not intersect bioshield")
-                    exit()
+                    exit(1)
 
                 # Calculate well dimensions
                 azi = self.det_azi_locs[d]
@@ -530,7 +555,7 @@ class VERAOmnibusGenerator(object):
                                 else:
                                     print("Error: material " +
                                             m + " not available.")
-                                    exit()
+                                    exit(1)
                             elif "OMN_DEFINE_CELL" in cell_line:
                                 cell_def = " -detector_" + str(d) + \
                                         "_" + str(label_num)
@@ -603,14 +628,24 @@ class VERAOmnibusGenerator(object):
         if len(self.tally_cells) == 0:
             return
 
-        # See if we have hybrid tally names and multipliers
+        # See if we have hybrid tally names and multipliers, core translate,
+        # and the excore filename
         xml_hybrid_tally = None
         xml_hybrid_mult  = None
+        xml_translate    = None
+        xml_excore_file  = None
+        xml_vera_pv      = None
         for shift_child in self.xml_shift:
             if shift_child.attrib['name'] == 'hybrid_tally_names':
                 xml_hybrid_tally = shift_child
             if shift_child.attrib['name'] == 'hybrid_multiplier_names':
                 xml_hybrid_mult = shift_child
+            if shift_child.attrib['name'] == 'core_translate':
+                xml_translate = shift_child
+            if shift_child.attrib['name'] == 'excore_filename':
+                xml_excore_file = shift_child
+            if shift_child.attrib['name'] == 'vera_pressure_vessel':
+                xml_vera_pv = shift_child
 
         # If the hybrid tally name(s) was not given in the VERA input,
         # we optimize for all tally cells
@@ -628,10 +663,11 @@ class VERAOmnibusGenerator(object):
             tally_tag.attrib['type'] = 'Array(string)'
             tally_tag.attrib['value'] = tally_names
 
-            mult_tag = etree.SubElement(self.xml_shift, 'Parameter')
-            mult_tag.attrib['name'] = 'hybrid_multiplier_names'
-            mult_tag.attrib['type'] = 'Array(string)'
-            mult_tag.attrib['value'] = tally_mults
+            etree.SubElement(
+                    self.xml_shift,  'Parameter',
+                    attrib={'name':  'hybrid_multiplier_names',
+                            'type':  'Array(string)',
+                            'value': tally_mults})
 
         # If the hybrid tally names are given we need to see if we have
         # detector types or specific tallies. We also need to update
@@ -659,12 +695,52 @@ class VERAOmnibusGenerator(object):
             # If no multiplier tag was given, add it. Otherwise, replace the
             # values to match the number of tallies.
             if xml_hybrid_mult == None:
-                mult_tag = etree.SubElement(self.xml_shift, 'Parameter')
-                mult_tag.attrib['name'] = 'hybrid_multiplier_names'
-                mult_tag.attrib['type'] = 'Array(string)'
-                mult_tag.attrib['value'] = tally_mults
+                etree.SubElement(
+                        self.xml_shift,  'Parameter',
+                        attrib={'name':  'hybrid_multiplier_names',
+                                'type':  'Array(string)',
+                                'value': tally_mults})
             else:
                 xml_hybrid_mult.set('value', tally_mults)
+
+        # If core_translate was not given in the VERA input,
+        # we need to add it.
+        if xml_translate == None:
+            translate_string = '{' + ','.join(map(str, self.translate)) + '}'
+            etree.SubElement(
+                    self.xml_shift, 'Parameter',
+                    attrib={'name':  'core_translate',
+                            'type':  'Array(double)',
+                            'value': translate_string})
+
+        # If excore_filename was not given in the VERA input,
+        # we need to add it.
+        if xml_excore_file == None:
+            etree.SubElement(
+                    self.xml_shift,  'Parameter',
+                    attrib={'name':  'excore_filename',
+                            'type':  'string',
+                            'value': self.xml_excore_file})
+        if xml_vera_pv == None:
+            etree.SubElement(
+                    self.xml_shift, 'Parameter',
+                    attrib={'name':  'vera_pressure_vessel',
+                            'type':  'bool',
+                            'value': self.vera_pv})
+        for hybrid_db in self.xml_shift:
+            if hybrid_db.attrib['name'] == 'hybrid_db':
+                if xml_excore_file == None:
+                    etree.SubElement(
+                            hybrid_db, 'Parameter',
+                            attrib={'name':  'excore_filename',
+                                    'type':  'string',
+                                    'value': self.xml_excore_file})
+                if xml_vera_pv == None:
+                    etree.SubElement(
+                            hybrid_db, 'Parameter',
+                            attrib={'name':  'vera_pressure_vessel',
+                                    'type':  'bool',
+                                    'value': self.vera_pv})
 
         # Write back to file
         self.xml_data.write(self.infile)
