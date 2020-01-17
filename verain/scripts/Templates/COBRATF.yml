@@ -640,3 +640,10 @@ COBRATF:
       _do:
         - copy COBRATF/$cross_flow
       _content:
+
+    plr_gap_effect:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$plr_gap_effect
+      _content:
