@@ -8671,6 +8671,33 @@ COBRATF:
       - is_int()
       - in_dictionary() 0 1
 #>
+#>   {\bf plr\_gap\_effect} plr\_gap\_effect
+#>   \VERAInputTable{
+#>     name={plr\_gap\_effect},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={1},
+#>     limitations={},
+#>     description={When modeling geometry that includes part-length fuel rods, setting this to
+#>        1 will include the effect of the gap (between adjacent fuel rods) width increasing downstream
+#>        of where the part-length rod disappears.  Leaving it to the default of 0 will keep the gap
+#>        width constant for the entire model.  It has been found that the discontinuity in the gap
+#>        width axially in the model can lead to more difficulty in converging CTF.  Because the effect
+#>        of the gap width is less significant than the change channel area and wetted perimeter (which
+#>        is always captured), this was made to be optional.},
+#>     notes={}
+#>   }
+  plr_gap_effect:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+
+#>
 #> \subsection{Block COUPLING}
 #> \label{sec:couplingcards}
 COUPLING:
