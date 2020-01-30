@@ -262,7 +262,10 @@ sub read_ascii {
 					       keytree=>$res,
 					       out_db=>$MAIN_DB,
 					       block=>$block,
-					       ctext=>$ctext,file=>$filename,line=>$.);
+					       file=>$filename,line=>$.);
+                  $command->table($ctext);
+                  $command->ctext($ctext);
+
 		  unless($command->is_multiline()){
 		      print  "[$filename:$.] End command on single line: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
 		      $command->keyin();
@@ -288,7 +291,10 @@ sub read_ascii {
 						   keytree=>$res,
 						   out_db=>$MAIN_DB,
 						   block=>$block,
-						   ctext=>$ctext,file=>$filename,line=>$.);
+						   file=>$filename,line=>$.);
+                      $command->table($ctext);
+                      $command->ctext($ctext);
+                      
 		      unless($command->is_multiline()){
 			  print  "[$filename:$.] End command: ", $command->keyword(), ": ", $command->ctext(), "\n"  if get_verbose();
 			  $command->keyin();
@@ -297,6 +303,8 @@ sub read_ascii {
 		      next;
 		  }
 	      };
+
+              $command->table($_);              
 	      $command->ctext($_); # if not a new command, keep accumulating
 	  };
       }  # end of multiple command loop

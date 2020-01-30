@@ -22,8 +22,30 @@ CORE:
       _pltype: parameter
       _type: double
       _do:
-        - copy CORE/@rated:1,apply=>$_[0]*125.9978
+        - copy CORE/@rated:1,apply=>$_[0]*125.9978805555556
       _content:
+
+    bypass_flow_table:
+      _pltype: list
+      _content:
+        x_labels:
+          _pltype: array
+          _type: double
+          _do:
+            - copytable %ASSEMBLY/$(_path)/@bypass_flow_table,columns=>1
+          _content:
+        y_labels:
+          _pltype: array
+          _type: double
+          _do:
+            - copytable %ASSEMBLY/$(_path)/@bypass_flow_table,rows=>1
+          _content:
+        table_data:
+          _pltype: array
+          _type: double
+          _do:
+            - copytable %ASSEMBLY/$(_path)/@bypass_flow_table,data=>1
+          _content:
 
     rcs_volume:
       _pltype: parameter
@@ -504,7 +526,7 @@ CORE:
         Excore_Detector_(_ldet):
           _pltype: list
           _content:
-            
+
             label:
               _pltype: parameter
               _type: string
@@ -553,4 +575,3 @@ CORE:
               _do:
                 - copy CORE/%det/@(_ldet),section=>3,select=>odd
               _content:
-

@@ -215,7 +215,6 @@ STATE:
       - fall(sub{is_word(shift)},())
       - fall(sub{is_float(shift)},())
       - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
-
 #>
 #>   {\bf bypass} bypass\_percent
 #>   \VERAInputTable{
@@ -1790,6 +1789,36 @@ CORE:
       - arraysize()==2
       - nth(0,())>=0
       - nth(1,())>=0
+#>
+#>   {\bf bypass\_flow\_table} bypass\_percent
+#>   \VERAInputTable{
+#>     name={bypass\_flow\_table},
+#>     type={2D Float Table},
+#>     need={Optional},
+#>     unitsdefault={Percent},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={$>=0$},
+#>     limitations={},
+#>     description={2D array with \% rated power as leftmost column, \% rated flow as top row,
+#>                  with remainder of table being bypass flow rate as a percent of full core
+#>                  flow at the corresponding data points. For example:
+#>                  \newline \newline
+#>                  bypass\_flow\_table
+#>                  \newline
+#>                  \begin{tabular}{lllll}
+#>                           & 30   & 70    & 100  & 105  \\ %
+#>                        50 & 13.3 & 14.2  & 14.8 & 15.0 \\ %
+#>                       100 & 13.0 & 13.9  & 14.5 & 14.7 \\ %
+#>                       105 & 12.9 & 13.8  & 14.4 & 14.6 \\ %
+#>                  \end{tabular}},
+#>     notes={BWR only.}
+#>   }
+  bypass_flow_table:
+    <<: *dtlist
+    _style: table
+    _check:
+      - arraysize()>1
 #>
 #>   {\bf rcs\_volume} rcs\_volume
 #>   \VERAInputTable{

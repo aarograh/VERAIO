@@ -133,6 +133,7 @@ sub dispatch {
     $DISPATCH={
 	copy       => \&dbcopy2,
 	copyarray  => \&copyarray,
+	copytable  => \&copytable,
 	copyhash   => \&copyhash,
 	setdb      => \&setdb,
 	matmap     => \&matmap,
@@ -884,6 +885,49 @@ sub copyarray{
 	    return undef;
 	}
     }
+    if(@result == 0){
+	return undef;
+    }
+    else{
+	return \@result;
+    }
+}
+
+sub copytable{
+    my( $home, $path, %userparam ) = @_ ;
+    my %OPTIONS;
+    my @a=();
+    my @result=();
+
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+
+    # get what
+    my @path=parse_path($path);
+    my $t=key_defined($SOURCE_DB,@path);
+    return undef if ref $t ne 'ARRAY';
+    @result=@{ $t };
+
+    my $nc=shift @result;
+    my $nr=shift @result;
+
+    if(exists($OPTIONS{columns})){
+	@a=splice(@result,0,$nc);
+	@result=@a;
+    }
+
+    if(exists($OPTIONS{rows})){
+	@a=splice(@result,$nc,$nr);
+	@result=@a;
+    }
+
+    if(exists($OPTIONS{data})){
+	@a=splice(@result,$nc+$nr);
+	@result=@a;
+    }
+
     if(@result == 0){
 	return undef;
     }

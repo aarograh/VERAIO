@@ -37,6 +37,9 @@ sub new
 	out_db  => $arg{out_db}  || croak("missing out_db"),
 	block   => $arg{block}   || croak("missing block"),
 
+        columns => exists($arg{columns}) ? $arg{columns}  : 0,
+        rows    => exists($arg{rows})    ? $arg{rows}     : 0,
+
 	ctext   => exists($arg{ctext})   ? $arg{ctext}  : undef,
 	tlist   => exists($arg{tlist})   ? $arg{tlist}  : undef,
 
@@ -53,6 +56,27 @@ sub new
     bless $self, $class;
 }
 
+sub tokens
+{
+    my ($self,$dtx)=@_;
+    my $myfun=(caller(0))[3];
+
+    croak "Bad call to $myfun" unless @_ == 2;
+
+    my @a;
+#   Split the command text into tokens
+    if($self->argexists('_slash')){
+        $dtx =~ s/\// \/ /g;
+    }
+    my $split_exp='\s+|=';
+    @a=quotewords($split_exp, 0, $dtx);
+    @a = grep {defined && $_ ne ''} @a;
+    unless($self->argexists('_slash')){
+        @a = grep {defined && $_ ne '/'} @a;
+    }
+    return @a;
+}
+
 sub ctokens
 {
     my ($self,$idx)=@_;
@@ -62,15 +86,7 @@ sub ctokens
 #   Split the command text into tokens
     unless(defined($self->{tlist})){
 	my $dtx=$self->ctext();
-	if($self->argexists('_slash')){
-	    $dtx =~ s/\// \/ /g;
-	}
-	my $split_exp='\s+|=';
-	@a=quotewords($split_exp, 0, $dtx);
-	@a = grep {defined && $_ ne ''} @a;
-	unless($self->argexists('_slash')){
-	    @a = grep {defined && $_ ne '/'} @a;
-	}
+        @a=$self->tokens($dtx);
 	foreach my $data (@a){
 	    txt2xml(\$data);
 	}
@@ -214,8 +230,94 @@ sub is_multiline
     croak "Too many arguments to $myfun" if @_ > 1;
 
     my $keyw_style=$self->argvalue('_style') || 0;
-    if($keyw_style eq 'multi-line'){
+    if($keyw_style eq 'multi-line' || $keyw_style eq 'table' ){
 	return 1;
+    }
+    return 0;
+}
+
+sub is_table
+{
+    my ($self)=@_;
+    my $myfun=(caller(0))[3];
+
+    croak "Too many arguments to $myfun" if @_ > 1;
+
+    my $keyw_style=$self->argvalue('_style') || 0;
+    if($keyw_style eq 'table'){
+	return 1;
+    }
+    return 0;
+}
+
+sub table
+{
+    my ($self,$ctext)=@_;
+    my $myfun=(caller(0))[3];
+
+    croak "Argument error in $myfun" if @_ != 2;
+
+    if($self->is_table()){
+        my $tokens=$self->tokens($ctext);
+        my $nc=$self->columns();
+        unless($nc){
+            $tokens-- if $self->argvalue("_named"); 
+            $self->columns($tokens);
+        }
+        $nc=$self->columns() + 1;
+        if($tokens){
+            $self->rows('add');
+            my $nr=$self->rows();
+            if($nr>1 && $tokens != $nc){
+                die "Error in ", $self->keyword(),
+                    ". Row: $nr, columns expected: $nc, provided: $tokens. File ",
+                    $self->file(), ", started on line ", $self->line(), ".\n";
+            }
+        }
+        print "Table ", $self->keyword(),
+            ", $tokens, cols ", $self->columns(),
+            ", rows ", $self->rows(),"\n"  if get_verbose();
+	return 1;
+    }
+    return 0;
+}
+
+sub table_reshuffle
+{
+    my ($self,$array)=@_;
+    my $myfun=(caller(0))[3];
+
+    croak "Argument error in $myfun" if @_ != 2;
+
+    if($self->is_table()){
+        my $nc=$self->columns();
+        my $nr=$self->rows()-1;
+        my $nr0=$nr;
+        if($nc * $nr == 0){
+            die "Error in ", $self->keyword(),
+                ". Rows: $nr, columns: $nc. File ",
+                $self->file(), ", started on line ", $self->line(), ".\n";
+        }
+        my @a=@{$array};
+        my @c=splice(@a,0,$nc);
+        my @r;
+        my $i= $nc+1;
+        my $p;
+        while($nr>0){
+            $p=splice @a, -$i, 1;
+            unshift @r, $p;
+            $i+=$nc;
+            $nr--;
+        }
+#        print "cols ($nc): @c\n";
+#        print "rows ($nr0): @r\n";
+#        print "data: @a\n";
+        unshift(@a, @r);
+        unshift(@a, @c);
+        unshift(@a, $nr0);
+        unshift(@a, $nc);
+
+        @$array=@a;
     }
     return 0;
 }
@@ -333,8 +435,29 @@ sub keyword
 
     croak "Too many arguments to $myfun" if @_ > 2;
     $self->{keyword} = $newval if @_ > 1;
-    croak "$myfun undefined" unless defined($self->{keyword});
     return $self->{keyword};
+}
+
+sub columns
+{
+    my ($self, $newval) = @_;
+    my $myfun=(caller(0))[3];
+
+    croak "Too many arguments to $myfun" if @_ > 2;
+    $self->{columns} = $newval if @_ > 1;
+    return $self->{columns};
+}
+
+sub rows
+{
+# increment or return value
+    my ($self, $newval) = @_;
+    my $myfun=(caller(0))[3];
+
+    croak "Too many arguments to $myfun" if @_ > 2;
+    $self->{rows}++ if @_ > 1;
+#    croak "$myfun undefined" unless defined($self->{rows});
+    return $self->{rows};
 }
 
 sub out_db
@@ -427,11 +550,12 @@ sub keyin{
     my $FILE_LABEL='_file';
     my $LINE_LABEL='_line';
 
-    my $templ=$self->keytree();
-    my @sr=$self->argarray('_check');
+    my $templ = $self->keytree();
+    my @sr    = $self->argarray('_check');
     my $parse = $self->argvalue('_parse');
-    my $type = $self->argvalue('_type');
-
+    my $type  = $self->argvalue('_type');
+#    my $style = $self->argvalue('_style');
+    
 # extract parameters if exist
     my %CPARMS;
     $self->extract_parameters(\%CPARMS);
@@ -488,6 +612,7 @@ sub keyin{
     }
     elsif($parse eq 'list'){
 	$result=&apply_evals(\@a0,\@sr,\$errmsg,$self);
+        $self->table_reshuffle(\@a);
 	key_on($templ,$CONTENT_LABEL,[@a]) if $result;
 #	print "keyon list $CONTENT_LABEL, [$#a]: @a\n";
     }
