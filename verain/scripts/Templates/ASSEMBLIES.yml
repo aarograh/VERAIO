@@ -46,23 +46,27 @@ ASSEMBLIES:
           _do:
             - matmap Material_,%ASSEMBLY/$(_path)/%mat/*
           _content:
+
         Fuels:
           _pltype: list
           _do:
             - fuelmap Fuel_,%ASSEMBLY/$(_path)/%fuel/*
           _content:
+
         title:
           _pltype: parameter
           _type: string
           _do:
             - copy %ASSEMBLY/$(_path)/$title
           _content:
+
         num_pins:
           _pltype: parameter
           _type: int
           _do:
             - copy %ASSEMBLY/$(_path)/$npin
           _content:
+
         ppitch:
           _pltype: parameter
           _type: double
@@ -138,7 +142,7 @@ ASSEMBLIES:
             (_lttabs):
               _pltype: list
               _content:
-            
+
                 qprime:
                   _pltype: parameter
                   _type: double
@@ -215,7 +219,6 @@ ASSEMBLIES:
                     - copy %ASSEMBLY/$(_path)/%grid/@(_lgrid):1
                   _content:
 
-
                 gridloss:
                   _pltype: parameter
                   _type: double
@@ -237,13 +240,13 @@ ASSEMBLIES:
                     - copy %ASSEMBLY/$(_path)/%grid/$(_lgrid)^/$gridmap
                   _content:
 
-                
         gapw:
           _pltype: parameter
           _type: double
           _do:
             - copy %ASSEMBLY/$(_path)/@gap:0
           _content:
+
         gapn:
           _pltype: parameter
           _type: double
@@ -257,31 +260,31 @@ ASSEMBLIES:
           _do:
             - copy %ASSEMBLY/$(_path)/@channel_box:0,existspath=>%ASSEMBLY/$(_path)/%mat/*:CORE/%mat/*
           _content:
+
         chanth:
           _pltype: parameter
           _type: double
           _do:
             - copy %ASSEMBLY/$(_path)/@channel_box:1
           _content:
+
         chanrad:
           _pltype: parameter
           _type: double
           _do:
             - copy %ASSEMBLY/$(_path)/@channel_box:2
           _content:
+
         cornerth:
           _pltype: parameter
           _type: double
           _do:
             - copy %ASSEMBLY/$(_path)/@channel_box:3
           _content:
+
         cornerlen:
           _pltype: parameter
           _type: double
           _do:
             - copy %ASSEMBLY/$(_path)/@channel_box:4
           _content:
-
-
-
-
