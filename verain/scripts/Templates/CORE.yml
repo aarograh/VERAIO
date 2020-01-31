@@ -22,7 +22,7 @@ CORE:
       _pltype: parameter
       _type: double
       _do:
-        - copy CORE/@rated:1,apply=>$_[0]*125.9978805555556
+        - copy CORE/@rated:1,apply=>$_[0]*125.9978
       _content:
 
     bypass_flow_table:
