@@ -335,4 +335,5 @@
   nodal_edits sanm-2
   nodal_edits_energy_cutoff 0.625
   nodal_edits_adapt_adf true
+  nodal_edits_collapse_axial_reflectors true
   dep_shielder_dt  0.01

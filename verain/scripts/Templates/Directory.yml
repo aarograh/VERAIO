@@ -9962,7 +9962,7 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={true, false. These are described as:                            %
+#>     valuesapplicable={true. These are described as:                            %
 #>       \begin{enumerate}                                                               %
 #>         \item \texttt{true} --- enables MPACT adaptive ADF calculations               %
 #>         \item \texttt{false} --- disables MPACT adaptive ADF calculations             %
@@ -9976,6 +9976,32 @@ MPACT:
 #>     notes={Has no effect if \texttt{nodal\_edits} is set to \texttt{false}.}
 #>   }
   nodal_edits_adapt_adf:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf nodal\_edits\_collapse\_axial\_reflectors} nodal\_edits\_collapse\_axial\_reflectors
+#>   \VERAInputTable{
+#>     name={nodal\_edits\_collapse\_axial\_reflectors},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true. These are described as:                            %
+#>       \begin{enumerate}                                                               %
+#>         \item \texttt{true} --- Collapse each axial reflector into a single plane     %
+#>         \item \texttt{false} --- Treats each axial reflector plane separately         %
+#>       \end{enumerate}},
+#>     limitations={},
+#>     description={This card is used to enable or disable collapsing the axial          %
+#>       reflector nodal data.  When enabled, each reflector will be collapsed into a    %
+#>       single plane regardless of how many planes are in the reflector.},
+#>     notes={Has no effect if \texttt{nodal\_edits} is set to \texttt{false}.}
+#>   }
+  nodal_edits_collapse_axial_reflectors:
     <<: *dtbool
     _content:
     _check:
