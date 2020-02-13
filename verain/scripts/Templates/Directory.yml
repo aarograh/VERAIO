@@ -1,4 +1,3 @@
----
 _DATATYPES:
   _dtword: &dtword
     _parse: 'scalar'
@@ -5707,65 +5706,59 @@ SHIFT:
 #>   {\bf x\_bnd\_mesh} x\_bnd\_mesh
 #>   \VERAInputTable{
 #>     name={x\_bnd\_mesh},
-#>     type={array of 2 doubles},
+#>     type={array of increasing doubles},
 #>     need={Optional},
 #>     unitsdefault={cm},
 #>     unitsother={},
 #>     valuedefault={},
 #>     valuesapplicable={},
 #>     limitations={},
-#>     description={Boundary mesh x-axis limits},
+#>     description={Boundary mesh x-axis edges},
 #>     notes={}
 #>   }
   x_bnd_mesh:
     <<: *dtlist
     _content:
     _check:
-      - arraysize()==2
-      - is_float(nth(0,()))
-      - is_float(nth(1,()))
+      - fall(sub{is_float(shift)},())
 #>
 #>   {\bf y\_bnd\_mesh} y\_bnd\_mesh
 #>   \VERAInputTable{
 #>     name={y\_bnd\_mesh},
-#>     type={array of 2 doubles},
+#>     type={array of increasing doubles},
 #>     need={Optional},
 #>     unitsdefault={cm},
 #>     unitsother={},
 #>     valuedefault={},
 #>     valuesapplicable={},
 #>     limitations={},
-#>     description={Boundary mesh y-axis limits},
+#>     description={Boundary mesh y-axis edges},
 #>     notes={}
 #>   }
   y_bnd_mesh:
     <<: *dtlist
     _content:
     _check:
-      - arraysize()==2
-      - is_float(nth(0,()))
-      - is_float(nth(1,()))
+      - fall(sub{is_float(shift)},())
 #>
 #>   {\bf z\_bnd\_mesh} z\_bnd\_mesh
 #>   \VERAInputTable{
 #>     name={z\_bnd\_mesh},
-#>     type={array of 2 doubles},
+#>     type={array of increasing doubles},
 #>     need={Optional},
 #>     unitsdefault={cm},
 #>     unitsother={},
 #>     valuedefault={},
 #>     valuesapplicable={},
 #>     limitations={},
-#>     description={Boundary mesh z-axis limits},
+#>     description={Boundary mesh z-axis edges},
 #>     notes={}
 #>   }
   z_bnd_mesh:
     <<: *dtlist
     _content:
     _check:
-      - arraysize()==2
-      - is_float(nth(0,()))
-      - is_float(nth(1,()))
+      - fall(sub{is_float(shift)},())
 #>
 #>   {\bf core\_translate} core\_translate
 #>   \VERAInputTable{
