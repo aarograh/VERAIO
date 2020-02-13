@@ -36,6 +36,20 @@ SHIFT:
             - copy SHIFT/$z_bnd_mesh
           _content:
 
+        overlap:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy SHIFT/$overlap
+          _content:
+
+        subblock_procs:
+          _pltype: array
+          _type: int
+          _do:
+            - copy SHIFT/$subblock_procs
+          content:
+
     broaden_db:
       _pltype: list
       _content:

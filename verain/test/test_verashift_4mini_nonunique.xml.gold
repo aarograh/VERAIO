@@ -637,9 +637,11 @@
     <Parameter name="Np" type="double" value="1000"/>
     <ParameterList name="boundary_mesh_db">
       <Parameter name="bc_bnd_mesh" type="Array(string)" value="{reflect,vacuum,reflect,vacuum,vacuum,vacuum}"/>
-      <Parameter name="x_bnd_mesh" type="Array(double)" value="{-100.0,100.0}"/>
-      <Parameter name="y_bnd_mesh" type="Array(double)" value="{-100.0,100.0}"/>
-      <Parameter name="z_bnd_mesh" type="Array(double)" value="{0.0,300.0}"/>
+      <Parameter name="overlap" type="double" value="0.02"/>
+      <Parameter name="subblock_procs" type="Array(int)" value="{1,1,1,1,1,1,1,1}"/>
+      <Parameter name="x_bnd_mesh" type="Array(double)" value="{-100.0,0.0,100.0}"/>
+      <Parameter name="y_bnd_mesh" type="Array(double)" value="{-100.0,0.0,100.0}"/>
+      <Parameter name="z_bnd_mesh" type="Array(double)" value="{0.0,150.0,300.0}"/>
     </ParameterList>
     <Parameter name="core_translate" type="Array(double)" value="{2.0,2.0,0.0}"/>
     <Parameter name="create_unique_pins" type="bool" value="false"/>
