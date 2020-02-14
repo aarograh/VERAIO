@@ -10,6 +10,7 @@
   rodbank  A 0       ! rod fully inserted 
   sym      qtr  
   feedback off
+  thexp    off
 
 [CORE]
   size   1

@@ -10,6 +10,7 @@
 
   sym      qtr
   feedback on
+  thexp    off
   edit     pin_cladtemps
 
 [CORE]

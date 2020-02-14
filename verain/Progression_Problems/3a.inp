@@ -9,6 +9,7 @@
   modden   0.743          ! g/cc
   sym      qtr  
   feedback off
+  thexp    off
 
 [CORE]
   size   1              ! one assembly   

@@ -9,6 +9,7 @@
   modden   0.743        ! g/cc
   sym      qtr  
   feedback off
+  thexp    off
 
         rodbank A 230 B 230 C 230 D 167 SA 230 SB 230 SC 230 SD 230; boron 1285.2 
 [STATE] rodbank                   D 230                            ; boron 1291.2

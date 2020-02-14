@@ -10,6 +10,7 @@
   rodbank  D 0           ! fully inserted
   sym      qtr 
   feedback off
+  thexp    off
 
 [CORE]
   size   3               ! nine assemblies

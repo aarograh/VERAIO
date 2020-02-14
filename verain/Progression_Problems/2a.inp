@@ -9,6 +9,7 @@
   boron    1300       ! ppm
   sym      qtr  
   feedback off
+  thexp    off
 
 [CORE]
   size   1

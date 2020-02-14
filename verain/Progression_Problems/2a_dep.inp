@@ -9,6 +9,7 @@
   boron    1300       ! ppm
   sym      qtr  
   feedback off
+  thexp    off
   deplete EFPD 0 10 20 40 60
   edit extended core_power
 

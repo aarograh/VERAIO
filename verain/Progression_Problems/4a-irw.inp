@@ -10,6 +10,7 @@
   rodbank  D 0          ! Bank D steps withdrawn
   sym      qtr  
   feedback off
+  thexp    off
 
 [STATE]  rodbank D 23
 [STATE]  rodbank D 46

@@ -9,6 +9,7 @@
 
   sym      qtr  
   feedback on 
+  thexp    off
   search   boron
   xenon    equil        ! equilibrium xenon
 

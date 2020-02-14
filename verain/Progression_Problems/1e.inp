@@ -8,6 +8,7 @@
   modden   0.743         ! g/cc
   boron    1300	         ! ppm
   feedback off
+  thexp    off
 
 [CORE]
   size   1
