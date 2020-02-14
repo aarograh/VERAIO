@@ -66,6 +66,13 @@ COBRATF:
         - copy COBRATF/$dhfrac
       _content:
 
+    crud_evap_coeff:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$crud_evap_coeff
+      _content:
+
     guide_tube_coefficient:
       _pltype: parameter
       _type: double
