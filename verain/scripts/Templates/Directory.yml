@@ -6778,6 +6778,31 @@ COBRATF:
       - is_float()
       - is_geq() 0
 #>
+#>   {\bf crud\_evap\_coeff} crud\_evap\_coeff
+#>   \VERAInputTable{
+#>     name={crud\_evap\_coeff},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={$\ge 0.0$ and $\le 1.0$},
+#>     limitations={},
+#>     description={Amount of crud chimney boiling that results in vapor generation in CTF.
+#>        A value of zero means none of the chimney boiling results in vapor generation in
+#>        CTF and a value of 1.0 means 100\% of the chimney boiling results in vapor generation
+#>        in CTF.},
+#>     notes={}
+#>   }
+  crud_evap_coeff:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0.0
+      - is_leq() 1.0
+
+#>
 #>   {\bf guide\_tube\_coefficient} guide\_tube\_coefficient
 #>   \VERAInputTable{
 #>     name={guide\_tube\_coefficient},
