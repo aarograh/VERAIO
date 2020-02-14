@@ -10,6 +10,7 @@
   rodbank  D 151         ! Bank D at 257.9 cm 
   sym      qtr  
   feedback off
+  thexp    off
 
 [CORE]
   size   3               ! nine assemblies

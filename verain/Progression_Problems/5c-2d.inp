@@ -10,6 +10,7 @@
   rodbank  D  0           ! 1 = fully withdrawn
   sym      qtr  
   feedback off
+  thexp    off
 
 
 [CORE]

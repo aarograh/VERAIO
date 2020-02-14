@@ -6,6 +6,7 @@
   pressure 2250 
   sym      qtr  
   feedback on 
+  thexp    off
   search   boron
 
   rodbank SA 230

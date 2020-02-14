@@ -10,6 +10,7 @@
   modden   0.743        ! g/cc
   sym      qtr
   feedback off
+  thexp    off
 
   rodbank SA 230
           SB 230

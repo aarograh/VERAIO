@@ -11,6 +11,7 @@
  
   sym      qtr  
   feedback off
+  thexp    off
   search   boron
   boron    1400         ! ppmB
    

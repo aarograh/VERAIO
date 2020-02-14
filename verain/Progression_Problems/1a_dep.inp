@@ -9,6 +9,7 @@
   boron    1300          ! ppm
   sym      full          ! full symmetry
   feedback off
+  thexp    off
   deplete EFPD 0 10 20
 
 [CORE]

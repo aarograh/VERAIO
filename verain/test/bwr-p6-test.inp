@@ -25,6 +25,7 @@
 
   sym      full
   feedback on
+  thexp    off
   xenon    zero
 
 [CORE]
