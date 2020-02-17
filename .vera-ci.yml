@@ -1,14 +1,21 @@
 stages:
    - testing
    - deploy
+
+.ecode: &ecode |
+    function ecc () {
+        "$@"
+        if [[ $? -ne 0 ]]; then exit 1; fi
+    }
  
 before_script:
+    - *ecode
     - echo "start"
-    - source /projects/vera/gcc-5.4.0/load_dev_env.sh
-    - /projects/vera/common_tools/gitdist pull
+    - if [[ -f "/data/test_gcc/gcc-5.4.0/load_dev_env.sh" ]]; then BASE_DIR="/data/gitlab-runner"; . /data/test_gcc/gcc-5.4.0/load_dev_env.sh; ENV_BASE=/data/test_gcc/gcc-5.4.0; else BASE_DIR="/localhome/gitlab-runner"; . /projects/vera/gcc-5.4.0/load_dev_env.sh; ENV_BASE=/projects/vera/gcc-5.4.0; fi 
+    - ${ENV_BASE}/common_tools/gitdist pull
     - SRC_DIR=${PWD}
     - SRC_BASE_DIR=${SRC_DIR}/..
-    - cd /localhome/gitlab-runner
+    - cd ${BASE_DIR}
     - PACKAGE_TEST=VERAInExt
     - (if [[ ! -d "builds" ]]; then mkdir builds; fi)
     - cd builds
@@ -18,9 +25,9 @@ before_script:
     - BASE_VERA_DIR=${PWD}
     - (if [[ ! -d "TriBITS" ]]; then git clone git@code-int.ornl.gov:CASL/TriBITS; fi)
     - env VERA_INCL_CEData=ON cmake/tribits/ci_support/clone_extra_repos.py
-    - /projects/vera/common_tools/gitdist pull
+    - ${ENV_BASE}/common_tools/gitdist pull
     - cd VERAData/CEData
-    - /projects/vera/gcc-5.4.0/common_tools/git-lfs pull
+    - ${ENV_BASE}/common_tools/git-lfs pull
     - cd ${BASE_VERA_DIR}
     - echo ${BASE_VERA_DIR}
     - ls -lrt 
@@ -30,10 +37,6 @@ before_script:
 .testing_base_setup: &testing_base_setup
     stage: testing
     only:
-        refs:
-           - web
-           - schedules
-           - pipelines
         variables:
             - $CI_RUN_ONLY == null
             - $CI_RUN_ONLY == ""
@@ -48,21 +51,24 @@ gnu-debug:
         BLD_NAME: "gnu_release_debug"
     script:
     - SRC_DIR=`pwd`
-    - BLD_DIR=/localhome/gitlab-runner/builds/VERAInExt
-    - (if [[  -d "${BUILD_DIR}" ]]; then rm -rf ${BLD_DIR}; fi)
+    - BLD_DIR=${BASE_DIR}/builds/VERAInExt
+    - (if [[  -d "${BLD_DIR}" ]]; then rm -rf ${BLD_DIR}; fi)
     - mkdir -p ${BLD_DIR}
     - cd $BLD_DIR
     - rm -rf do-configure
-    - ln -s ${SRC_DIR}/cmake/std/gcc-5.4.0/do-configure.MPI_RELEASE_DEBUG_SHARED do-configure
+    - ln -s ${BASE_VERA_DIR}/cmake/std/gcc-5.4.0/do-configure.MPI_RELEASE_DEBUG_SHARED do-configure
     - rm -rf CMake*
-    - ./do-configure -DVERA_ENABLE_VERAInExt:BOOL=ON
-    - env CTEST_BUILD_FLAGS=-j28 CTEST_PARALLEL_LEVEL=28 make dashboard
+    - ecc ./do-configure -DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON
+    - ecc make -j16
+    - ecc ctest -j28
     - cd ${BASE_VERA_DIR}
     - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)    
  
     tags:
         - linux
- 
+
+
+
 trigger_build:
     <<: *testing_base_setup
     stage: deploy
