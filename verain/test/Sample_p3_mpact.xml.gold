@@ -190,13 +190,6 @@
       <Parameter name="num_outers" type="int" value="20"/>
       <Parameter name="solver" type="string" value="mgnode"/>
     </ParameterList>
-    <ParameterList name="db_entry">
-      <ParameterList name="db_entry_targkeff">
-        <Parameter name="path" type="string" value="OPTION->CRITBORON->targetKeff"/>
-        <Parameter name="type" type="string" value="SRK"/>
-        <Parameter name="value" type="string" value="1.05"/>
-      </ParameterList>
-    </ParameterList>
     <ParameterList name="iteration_control">
       <Parameter name="flux_tolerance" type="double" value="1e-6"/>
       <Parameter name="k_tolerance" type="double" value="1e-6"/>

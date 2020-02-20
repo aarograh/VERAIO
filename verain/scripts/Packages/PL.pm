@@ -64,7 +64,7 @@ our $LINE_LABEL='_line';
     sub setvar{
 	my ($home,$name, $value, %userparam)=@_;
 	my %OPTIONS;
-	
+
 	while ( my ($key, $value) = each %userparam ) # to avoid perl bug of $$
 	{$OPTIONS{$key}=$value;}
 	my $def=undef;
@@ -72,7 +72,7 @@ our $LINE_LABEL='_line';
 	    $def = eval "sub { return $OPTIONS{apply};}";
 	    die "setvar: invalid apply string $OPTIONS{apply}\n" unless ref $def eq 'CODE';
 	}
-	
+
 	my @args=($value);
 	if(exists($OPTIONS{arg})){
 	    push @args, $OPTIONS{arg};
@@ -84,7 +84,7 @@ our $LINE_LABEL='_line';
     sub getvar{
 	my ($home, $name, %userparam)=@_;
 	my %OPTIONS;
-	
+
 	while ( my ($key, $value) = each %userparam ) # to avoid perl bug of $$
 	{$OPTIONS{$key}=$value;}
 	my $def=undef;
@@ -292,7 +292,7 @@ sub PLdo{
 	return undef;
     }
 }
-    
+
 sub PLnotempty {
     my ($ref,%userparam)=@_;
     my %OPTIONS;
@@ -434,7 +434,7 @@ sub PLlist{
     }
 
 # TODO: Need a major rewrite.
-# must be fully recursive with inheriting _tr varaibles.    
+# must be fully recursive with inheriting _tr varaibles.
 # problem is using array pairs instead of trees
 
 # applying actions:
@@ -446,7 +446,7 @@ sub PLlist{
 
     # first resolve _do and then _tr
     # TODO: should I do it other way around
-    
+
     my $val;
     if(my $todo=PLdo($ref)){
 	foreach my $ido (@{ $todo }){
@@ -501,7 +501,7 @@ sub PLlist{
 #	    $trcont =~ s/\($trvar\)/$trsub/g;
 #	    print "PLlist trcont new $trcont\n" if get_verbose();;
 #	}
-	
+
 	my @trpath=find_keys($SOURCE_DB,$trcont);
 	return unless(@trpath);  # to avoid empty loops
 	foreach my $ipath ( @trpath ){
@@ -542,7 +542,7 @@ sub PLlist{
 	    my $typ=PLtype($rref);
 	    print "PLlist typ: $typ\n" if get_verbose();;
 
-	    my $crref=$rref;	    
+	    my $crref=$rref;
 	    if(defined($trref)){
 		if($iaddr =~ m/\($trname\)/){
 		    $imaddr=$iaddr;
@@ -553,7 +553,7 @@ sub PLlist{
 		    PLkeyon($ref,$crref,$imaddr);
 		}
 	    }
-		
+
 
 	    if($typ eq 'parameter'){
 		&PLparameter($crref,$actions, trsub=>$trsub_arg, trvar=>$trvar_arg);
@@ -635,7 +635,7 @@ sub PLtrim{
 	die "PLtrim: undefined type @PLCONTENT\n";
     }
     print "\t" x $indent, "PLtrim: counter $empty at @PLcontent\n" if get_verbose();
-    
+
     $ref->{_content}={} unless $empty;
 
     return $empty;
@@ -745,7 +745,7 @@ sub dbcopy2{
 
     if(ref $t eq 'ARRAY'){
 	@ary = @{ $t };
-	
+
 	if(exists($OPTIONS{section})){      # for selection of data between /-s
 	    $section=$OPTIONS{section};
 	}
@@ -774,7 +774,7 @@ sub dbcopy2{
 		@ary=@aryw;
 	    }
 	    elsif(lc($OPTIONS{select}) eq 'even'){
-		@aryw=even(\@ary);	    
+		@aryw=even(\@ary);
 		@ary=@aryw;
 	    }
 	    else{
@@ -828,14 +828,14 @@ sub makemap {
 
     my @npin_path=parse_path($npin_path);
     my $npin=key_defined($SOURCE_DB,@npin_path);
-    die "makemap: npin not valid [$npin_path] [@npin_path] [$npin]\n" 
+    die "makemap: npin not valid [$npin_path] [@npin_path] [$npin]\n"
 	if ref $npin;
 
     my @cmap_path=parse_path($cmap_path);
     my $cm_ref=key_defined($SOURCE_DB,@cmap_path);
     return undef unless $cm_ref;
 
-    die "makemap: cm_ref not valid [$cmap_path] [@cmap_path] [$cm_ref]\n" 
+    die "makemap: cm_ref not valid [$cmap_path] [@cmap_path] [$cm_ref]\n"
 	unless ref $cm_ref eq 'ARRAY';
 
 #    my @a=fullcellmap($npin,@{ $cm_ref });
@@ -878,7 +878,7 @@ sub copyarray{
 	}
 	elsif(lc($OPTIONS{select}) eq 'even'){
 	    @a=@result;
-	    @result=even(\@a);	    
+	    @result=even(\@a);
 	}
 	else{
 	    warn "copyarray: select option $OPTIONS{select} not valid\n";
@@ -1002,7 +1002,7 @@ sub echos{
 
 sub setdb{
     my ($home,$db)=@_;
-    
+
     if($db eq 'MAIN_DB'){
 #	$SOURCE_DB=$MAIN_DB;
     }
@@ -1339,7 +1339,7 @@ sub rodmap{
 	@b=fullcellmap($npin,\@a);
 	$CELLMAP_CONTENT{$_}=[@b];
     }
- 
+
     # create hash of all cell ids and their values
     my @cell_rpath=@axial_rpath;
     $cell_rpath[$#cell_rpath-1]='cell';
@@ -1423,7 +1423,7 @@ sub rodmap{
 	# create entry for Basename_X
 	$a_ref=&key_on_list($home,$OPTIONS{basename}.$i);
 
-	# create entries for bank level 
+	# create entries for bank level
 	&key_on_parameter($a_ref,'label','string',$i);
 	&key_on_array($a_ref,'axial_labels','string',@{ $AXIAL_LABELS{$i} });
 	&key_on_array($a_ref,'axial_elevations','double',@{ $AXIAL_ELEVATIONS{$i} });
@@ -1516,7 +1516,7 @@ sub sourcemap{
         }
 
         if(@part1){
-          if(($#part1+1)==2){           
+          if(($#part1+1)==2){
             $iso_id=$part1[0];
             &key_on_parameter($mat_ref,'iso_id','string',$iso_id);
             $iso_scal=$part1[1];
@@ -1530,14 +1530,14 @@ sub sourcemap{
 
         if(!(@part1)){
           &key_on_array($mat_ref,'absolute_spectrum','double',@part2);
-        } 
+        }
 
         if(($#part3+1)==2){
             $stt_str=$part3[0];
             $src_mult=$part3[1];
             &key_on_parameter($mat_ref,'init_strength','double',$stt_str);
             &key_on_parameter($mat_ref,'strength_mult','double',$src_mult);
-        } 
+        }
     }
 }
 
@@ -1581,24 +1581,24 @@ sub coremapmap {
 
     my @csize_path=parse_path($csize_path);
     my $csize=key_defined($SOURCE_DB,@csize_path);
-    die "coremapmap: csize not valid [$csize_path] [@csize_path] [$csize]\n" 
+    die "coremapmap: csize not valid [$csize_path] [@csize_path] [$csize]\n"
 	if ref $csize;
 
     my @cmap_path=parse_path($cmap_path);
     my $cm_ref=key_defined($SOURCE_DB,@cmap_path);
     return undef unless $cm_ref;
-    die "coremapmap: cm_ref not valid [$cmap_path] [@cmap_path] [$cm_ref]\n" 
+    die "coremapmap: cm_ref not valid [$cmap_path] [@cmap_path] [$cm_ref]\n"
 	unless ref $cm_ref eq 'ARRAY';
 
     my @mmap_path=parse_path($mmap_path);
     my $mm_ref=key_defined($SOURCE_DB,@mmap_path);
     return undef unless $mm_ref;
-    die "coremapmap: mm_ref not valid [$mmap_path] [@mmap_path] [$mm_ref]\n" 
+    die "coremapmap: mm_ref not valid [$mmap_path] [@mmap_path] [$mm_ref]\n"
 	unless ref $mm_ref eq 'ARRAY';
 
     my @bc_sym_path=parse_path($bc_sym_path);
     my $bc_sym=key_defined($SOURCE_DB,@bc_sym_path);
-    die "coremapmap: bc_sym not valid [$bc_sym_path] [@bc_sym_path] [$bc_sym]\n" 
+    die "coremapmap: bc_sym not valid [$bc_sym_path] [@bc_sym_path] [$bc_sym]\n"
 	if ref $bc_sym;
 
     unless(defined($bc_sym)){
@@ -1612,7 +1612,7 @@ sub coremapmap {
     $NAME_CM = name_from_path(@cmap_path);
     $NAME_MM = name_from_path(@mmap_path);
 #    print "\nP1: $NAME_CM $PATH_CM\nP2: $NAME_MM $PATH_MM\n";
-    
+
     err_set('PATH', $PATH_CM);
     err_set('PATH', $PATH_MM);
     err_set('NAME', $NAME_CM);
@@ -1746,57 +1746,6 @@ sub mpact_mesh{
     }
 }
 
-sub mpact_db{
-    my ($home,$basename,@paths)=@_;
-
-    my @mats;
-    my @mats_names;
-
-    my $keyname;
-    my $mattype;
-
-    foreach my $ipath (@paths){
-	my @apaths=find_keys($SOURCE_DB,$ipath);
-	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
-	push @mats, @apaths if @apaths;
-	push @mats_names, @names if @names;
-    }
-
-    foreach my $imat_path (@mats){
-	my @keypath=@{ $imat_path };
-	$keyname=$keypath[$#keypath];
-	unless($keypath[$#keypath-2] eq 'db_entry'){
-	    die "mpact_db: invalid type: @keypath\n";
-	}
-
-	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
-
-# count slashes
-	my @slshs=indexes { $_ eq '/' } @content;
-	if(@slshs != 2){
-	    die "mpact_db: invalid number of slashes in MPACT command db_set @content\n";
-	}
-
-	my @part1=before {$_ eq '/'} @content;
-# part 2 will contain both 2 and 3, to be further seperated
-	my @part2=after  {$_ eq '/'} @content;
-	my @part3=after  {$_ eq '/'} @part2;
-	my @part2=before {$_ eq '/'} @part2;
-
-	
-# template
-	my @input_path = @part1;
-	my @data_type  = @part2;
-	my @data_value = @part3;
-
-	my $mat_ref=&key_on_list($home,$basename.$keyname);
-	&key_on_parameter($mat_ref,'path','string',@input_path);
-	&key_on_parameter($mat_ref,'type','string',@data_type);
-	&key_on_parameter($mat_ref,'value','string',@data_value);
-
-    }
-}
-
 # Tc=(Tf-32)/1.8
 # Tc=Tk-273.15
 # Tc=Tc
@@ -1850,7 +1799,7 @@ sub toCelsius{
 sub pathfind{
     my ($path, %userparam)=@_;
     my %OPTIONS;
-    
+
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
     {
 	$OPTIONS{$key}=$value;
@@ -1870,7 +1819,7 @@ sub pathfind{
 sub findfirst{
     my ($path, %userparam)=@_;
     my %OPTIONS;
-    
+
     while ( my ($key, $value) = each %userparam )
     {$OPTIONS{$key}=$value;}
 
@@ -1891,7 +1840,7 @@ sub pathlevel{
 
     $level=int $level;
     die "pathlevel: level $level too low.\n" if $level <= 0;
-    
+
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
     {
 	$OPTIONS{$key}=$value;
@@ -1910,7 +1859,7 @@ sub pathlevel{
 sub namesunique{
     my ($home,$path, %userparam)=@_;
     my %OPTIONS;
-    
+
     while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
     {
 	$OPTIONS{$key}=$value;
@@ -2074,7 +2023,7 @@ sub cellsmaps{
 	@b=fullcellmap($npin,\@a);
 	$CELLMAP_CONTENT{$_}=[@b];
     }
- 
+
     # create hash of all cell ids and their values
     my @cell_rpath = parse_path($cell_path);
     print  "cell_rpath: @cell_rpath\n" if get_verbose();
@@ -2132,7 +2081,7 @@ sub cellsmaps{
             $CELL_TABLE{$_}=$part3[0];
           }
         }
-        
+
         if(defined $OPTIONS{ matsearch }){
           foreach my $imat (@cmats){
             print  "    CELL mat $imat\n" if get_verbose();
@@ -2150,7 +2099,7 @@ sub cellsmaps{
             }
           }
         }
-        
+
 	    $CELL_mats{$_} =[@cmats];
 	    print  "    CELL radii @{ $CELL_radii{$_} }\n" if get_verbose();
 	    print  "    CELL mats  @{ $CELL_mats{$_} }\n" if get_verbose();
@@ -2294,7 +2243,7 @@ sub listscompare{
     else{
 	die   "listscompare: invalid comparison operator\n";
     }
-    
+
     undef;
 }
 

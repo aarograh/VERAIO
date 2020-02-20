@@ -13834,11 +13834,6 @@ MPACT:
     <<: *dtlistnamed
     _slash:
     _check:
-
-  db_entry:
-    <<: *dtlistnamed
-    _slash:
-    _check:
 #>
 #>   {\bf prompt} prompt
 #>   \VERAInputTable{

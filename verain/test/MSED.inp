@@ -157,7 +157,6 @@
 [MPACT]
 !  vis_edits         core
 !  ray_spacing       0.05
-!  db_entry  targkeff "OPTION->CRITBORON->targetKeff" / 'SRK' / '1.05'
 !!quad_set
 !  quad_type         CHEBYSHEV-YAMAMOTO
 !  polars_octant     3
