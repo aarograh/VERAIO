@@ -332,12 +332,6 @@ MPACT:
             - copy MPACT/@crud_depletion:1
           _content:
 
-    db_entry:
-      _pltype: list
-      _do:
-        - mpact_db db_entry_,MPACT/%db_entry/*
-      _content:
-
     quad_set:
       _pltype: list
       _content:
