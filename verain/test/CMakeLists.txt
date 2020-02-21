@@ -238,6 +238,31 @@ ENDFUNCTION()
 #
 ADD_THERMAL_EXPANSION_TEST(Sample_p6a)
 
+
+#===========================================================
+#
+#               Test Latex file content
+#
+#===========================================================
+
+
+SET(VERAIn_TEST_DIR ${${PACKAGE_NAME}_SOURCE_DIR})
+#file(COPY yml2tex.py DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/test/latex)
+
+  TRIBITS_ADD_ADVANCED_TEST(testVERAInMan
+    TEST_0 
+      CMND ${PYTHON_EXECUTABLE}
+      ARGS ${VERAIn_TEST_DIR}/docs/Users_Manual/yml2tex.py ${VERAIn_TEST_DIR}/scripts/Templates/Directory.yml test.tex
+      WORKING_DIRECTORY  ${CMAKE_CURRENT_BINARY_DIR}/latex
+      SKIP_CLEAN_WORKING_DIRECTORY
+      PASS_REGULAR_EXPRESSION_ALL
+        "starting to build tex file"
+      TIMEOUT 60
+      OVERALL_NUM_TOTAL_CORES_USED 1
+      CATEGORIES BASIC
+
+  )
+
 #===========================================================
 #
 #            Test automated excore generation
