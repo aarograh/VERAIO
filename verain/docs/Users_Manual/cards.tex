@@ -8709,29 +8709,6 @@
       using tabulated data rather than fuel conduction solvers.}
    }
 
-   {\bf temptable\_filename} temptable\_filename
-   \VERAInputTable{
-     name={temptable\_filename},
-    type={Free-Form Character String, Max. Length = 200},
-    need={Optional},
-    unitsdefault={},
-    unitsother={},
-    valuedefault={N/A},
-    valuesapplicable={Filename of any valid fuel temperature table file},
-    limitations={If the card is present, temperature tables in the named file          %
-      will be used to calculate fuel temperatures instead of the internal              %
-      conduction solvers or COBRA-TF. If this card is not present, then                %
-      internal or COBRA-TF solvers are used.},
-    description={This card is used to indicate the name of the file                    %
-      containing the temperature tables.},
-    notes={Temperature tables contain fuel temperature values as functions of          %
-      power and burnup.  When depleting, the thermal properties of the fuel            %
-      change significantly.  Internal TH and COBRA-TF do not know how these            %
-      properties change when depleting, so temperature tables can be used to           %
-      more accurately perform TH calculations during depletion simulations             %
-      using tabulated data rather than fuel conduction solvers.}
-   }
-
    {\bf temptable\_qprime} temptable\_qprime
    \VERAInputTable{
      name={temptable\_qprime},
