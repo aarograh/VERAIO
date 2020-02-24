@@ -622,17 +622,12 @@ properties
     cur_input_path = os.path.join( cur_rundir, input_path_base )
     self._document = self._read_input_doc( cur_input_path )
 
-#               -- Verify existence of restart and temptable files
+#               -- Verify existence of restart files
     restart_fnames = self._document.find_files( 'restart_read' )
     if restart_fnames:
       missing = [ x for x in restart_fnames if not os.path.exists( x ) ]
       assert len( missing ) == 0, \
           'Restart files not found: {0}'.format( ', '.join( missing ) )
-    temptable_fnames = self._document.find_files( 'temptable_filename' )
-    if temptable_fnames:
-      missing = [ x for x in temptable_fnames if not os.path.exists( x ) ]
-      assert len( missing ) == 0, \
-          'Temptable files not found: {0}'.format( ', '.join( missing ) )
 
 #               -- Infer job parameters and create script
     #params = params.VeraJobParams

@@ -833,13 +833,6 @@ MPACT:
             - copy MPACT/$temptable_shape
           _content:
 
-        temptable_filename:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy MPACT/$temptable_filename
-          _content:
-
         user_defined_th_filename:
           _pltype: parameter
           _type: string
