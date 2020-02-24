@@ -113,7 +113,7 @@ ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_3a_cadis)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_4mini_nonunique)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(with-dash)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(2a_LS)
-
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(2a_LS_default)
 #===========================================================
 #
 #               Test for the expected faiures.
