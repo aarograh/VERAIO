@@ -145,6 +145,7 @@ ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(front-dash)
 ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(decreasing-axial)
 ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(test_verashift_4mini_nonunique_bioshield)
 ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(test_verashift_small_core_bioshield_no_pv)
+ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST(multi_scalar_error)
 
 # copy temperature table files for Sample_full_core_wsym_state_assm
 TRIBITS_COPY_FILES_TO_BINARY_DIR(Temp_Table_Files
@@ -250,7 +251,7 @@ SET(VERAIn_TEST_DIR ${${PACKAGE_NAME}_SOURCE_DIR})
 #file(COPY yml2tex.py DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/test/latex)
 
   TRIBITS_ADD_ADVANCED_TEST(testVERAInMan
-    TEST_0 
+    TEST_0
       CMND ${PYTHON_EXECUTABLE}
       ARGS ${VERAIn_TEST_DIR}/docs/Users_Manual/yml2tex.py ${VERAIn_TEST_DIR}/scripts/Templates/Directory.yml test.tex
       WORKING_DIRECTORY  ${CMAKE_CURRENT_BINARY_DIR}/latex

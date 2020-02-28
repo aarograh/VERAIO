@@ -1,0 +1,15 @@
+[STATE]
+  sym               qtr
+  feedback          on
+  pressure          2250
+  tinlet            565 K
+  power             100
+  boron             1300
+  rodbank A         230
+  edit              pin_cladtemps pin_fueltemps pin_modtemps pin_moddens pin_gtubetemp pin_gtubedens
+ 
+[STATE]
+power     46    boron     1023  rodbank A  99
+[STATE]  power     22    boron     1184  rodbank A  25
+[STATE]  power     77    boron     1020  rodbank A  117
+[STATE]  power     57    boron     877   rodbank A  158
