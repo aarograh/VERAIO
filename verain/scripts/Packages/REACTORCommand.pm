@@ -568,6 +568,7 @@ sub keyin{
     if($name_idx){
 	$name=$a[$name_idx-1];
 	unless(defined($name)){
+            $errmsg="Invalid key";
 	    &error_report($self->keyword(),$dtx,$file,$line,$errmsg);
 	    die "keyin: named parameter does not have key name defined.\n";
 	}
@@ -604,6 +605,11 @@ sub keyin{
 	    }
 	}
 	else{
+            if(@a > 1){
+                $errmsg="Scalar command ".$self->keyword()." has too many entries";
+                &error_report($self->keyword(),$dtx,$file,$line,$errmsg);
+                die "Multiple entries in a scalar command.\n";
+            }
 	    $dtxs=$a[0];
 	}
 	$result=&apply_evals(\$dtxs,\@sr,\$errmsg,$self);
