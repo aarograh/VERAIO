@@ -353,7 +353,7 @@
       <Parameter name="user_defined_th_filename" type="string" value="th_file.h5"/>
     </ParameterList>
     <ParameterList name="cmfd">
-      <Parameter name="cmfd" type="string" value="adcmfd"/>
+      <Parameter name="cmfd" type="string" value="odcmfd"/>
       <Parameter name="k_shift" type="double" value="1.5"/>
       <Parameter name="multilevel" type="string" value="both"/>
       <Parameter name="num_outers" type="int" value="20"/>
