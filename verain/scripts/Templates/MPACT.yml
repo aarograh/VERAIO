@@ -387,6 +387,13 @@ MPACT:
             - mpact_mesh pinmesh_,MPACT/%mesh/*
           _content:
 
+        rad_fuel_mesh:
+          _pltype: array
+          _type: double
+          _do:
+            - copy MPACT/$rad_fuel_mesh
+          _content:
+
         automesh_bounds_min:
           _pltype: parameter
           _type: double

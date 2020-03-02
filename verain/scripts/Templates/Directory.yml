@@ -10336,6 +10336,28 @@ MPACT:
       - is_word(nth(1,()))
       - in_dictionary(nth(1,()),'fuel','nonfuel','both')
 #>
+#>   {\bf rad\_fuel\_mesh} rad\_fuel\_mesh
+#>   \VERAInputTable{
+#>     name={rad\_fuel\_mesh},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0.0$ or $<1.0$},
+#>     limitations={Size must match radial divisions specified for fuel on the           %
+#>       \texttt{mesh fuel} card. Not applicable to annular fuel},
+#>     description={Fractional radii of MOC source regions in fuel},
+#>     notes={}
+#>   }
+  rad_fuel_mesh:
+    <<: *dtlist
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())
+      - fall(sub{is_gt(shift,0.0)},())
+      - fall(sub{is_lt(shift,1.0)},())
+#>
 #>   {\bf crud\_mesh} crud\_mesh
 #>   \VERAInputTable{
 #>     name={crud\_mesh},
