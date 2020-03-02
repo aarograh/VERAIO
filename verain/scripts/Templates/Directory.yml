@@ -4634,7 +4634,6 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() all none pin
-
 #>
 #>   {\bf verbosity} verbosity
 #>   \VERAInputTable{
@@ -5759,6 +5758,50 @@ SHIFT:
     _content:
     _check:
       - fall(sub{is_float(shift)},())
+#>
+#>   {\bf subblock\_procs} subblock\_procs
+#>   \VERAInputTable{
+#>     name={subblock\_procs},
+#>     type={array of integers},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={Only applies to domain-decomposed},
+#>     description={Number of sub-block processors per domain block},
+#>     notes={This is an advanced parameter to further specify how to
+#>   domain decompose the Shift problem to handle load imbalance.}
+#>   }
+  subblock_procs:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_int(shift)},())
+      - fall(sub{is_geq(shift,0)},())
+#>
+#>   {\bf overlap} overlap
+#>   \VERAInputTable{
+#>     name={overlap},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={[0,1]},
+#>     limitations={Only applies to domain-decomposed},
+#>     description={Overlap percentage of domain blocks},
+#>     notes={This is an advanced parameter to help with message
+#>   passing at domain boundaries in DD problems.}
+#>   }
+  overlap:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+      - is_leq() 1
 #>
 #>   {\bf core\_translate} core\_translate
 #>   \VERAInputTable{
