@@ -5766,9 +5766,9 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={Only applies to domain-decomposed},
+#>     valuedefault={Unit array of size number of Shift blocks},
+#>     valuesapplicable={$\ge 1$},
+#>     limitations={Only applies to domain-decomposed problems},
 #>     description={Number of sub-block processors per domain block},
 #>     notes={This is an advanced parameter to further specify how to
 #>   domain decompose the Shift problem to handle load imbalance.}
@@ -5779,7 +5779,7 @@ SHIFT:
     _content:
     _check:
       - fall(sub{is_int(shift)},())
-      - fall(sub{is_geq(shift,0)},())
+      - fall(sub{is_geq(shift,1)},())
 #>
 #>   {\bf overlap} overlap
 #>   \VERAInputTable{
@@ -5788,12 +5788,12 @@ SHIFT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={},
+#>     valuedefault={0.0},
 #>     valuesapplicable={[0,1]},
-#>     limitations={Only applies to domain-decomposed},
+#>     limitations={Only applies to domain-decomposed problems},
 #>     description={Overlap percentage of domain blocks},
 #>     notes={This is an advanced parameter to help with message
-#>   passing at domain boundaries in DD problems.}
+#>   passing at domain boundaries in domain-decomposed problems.}
 #>   }
   overlap:
     <<: *dtdouble
