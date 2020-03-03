@@ -250,7 +250,7 @@
       <Parameter name="sth_hgap" type="double" value="4500"/>
     </ParameterList>
     <ParameterList name="cmfd">
-      <Parameter name="cmfd" type="string" value="odcmfd"/>
+      <Parameter name="cmfd" type="string" value="adcmfd"/>
       <Parameter name="k_shift" type="double" value="1.5"/>
       <Parameter name="num_outers" type="int" value="20"/>
       <Parameter name="prolongation" type="string" value="flat"/>
