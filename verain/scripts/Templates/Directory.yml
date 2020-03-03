@@ -14948,6 +14948,66 @@ MAMBA:
       - is_geq() 0
       - is_int()
 #>
+#>   {\bf nrmax} nrmax
+#>   \VERAInputTable{
+#>     name={nrmax},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={200},
+#>     valuesapplicable={$\ge 1$},
+#>     limitations={},
+#>     description={Option to set maximum number of radial crud nodes.},
+#>     notes={}
+#>   }
+  nrmax:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 1
+      - is_int()
+#>
+#>   {\bf deltar} deltar
+#>   \VERAInputTable{
+#>     name={deltar},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={0.0001},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Radial mesh spacing in MAMBA.},
+#>     notes={}
+#>   }
+  deltar:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+#>
+#>   {\bf maxthick} maxthick
+#>   \VERAInputTable{
+#>     name={maxthick},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={0.02},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Max allowed crud thickness in MAMBA.},
+#>     notes={}
+#>   }
+  maxthick:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+#>
 #>   {\bf li\_table} boron  lithium
 #>   \VERAInputTable{
 #>     name={lithium},

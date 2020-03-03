@@ -206,6 +206,27 @@ MAMBA:
         - copy MAMBA/$model_erosion
       _content:
 
+    nrmax:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MAMBA/$nrmax
+      _content:
+
+    deltar:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA/$deltar
+      _content:
+
+    maxthick:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA/$maxthick
+      _content:
+
     b_conc:
       _pltype: array
       _type: double
