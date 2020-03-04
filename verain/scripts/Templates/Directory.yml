@@ -12382,11 +12382,12 @@ MPACT:
 #>     valuedefault={cmfd},
 #>     valuesapplicable={cmfd, none described as:                                        %
 #>       \begin{itemize}                                                                 %
-#>         \item \texttt{cmfd} --- default CMFD method (currently adcmfd.)               %
-#>         \item \texttt{adcmfd} --- artificially diffusive CMFD method. (same as cmfd)  %
+#>         \item \texttt{cmfd} --- default CMFD method (currently odcmfd.)               %
+#>         \item \texttt{adcmfd} --- artificially diffusive CMFD method. (deprecated)    %
+#>         \item \texttt{odcmfd} --- optimally diffusive CMFD method. (replaces adcmfd)  %
 #>         \item \texttt{scmfd} --- standard CMFD method.                                %
 #>         \item \texttt{mlcmfd} --- a multi-level (currently 2) cmfd method.            %
-#>         \item \texttt{msed} --- same as \texttt{adcmfd}, but the CMFD                 %
+#>         \item \texttt{msed} --- same as \texttt{odcmfd}, but the CMFD                 %
 #>           system is now solved via the MSED method                                    %
 #>         \item \texttt{none} --- disables CMFD and can only be used in 2-D             %
 #>           problems.                                                                   %
@@ -12401,7 +12402,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() cmfd adcmfd scmfd mlcmfd msed none
+      - in_dictionary() cmfd adcmfd odcmfd scmfd mlcmfd msed none
 
 #>
 #>   {\bf multilevel} multilevel
@@ -13021,7 +13022,7 @@ MPACT:
 #>       relaxation of the update. Values below 1.0 under-relax the CMFD flux  %
 #>       update to provide stability for cases with T/H or other feedback. For %
 #>       standalone neutronics problems, no under-relaxation should be needed  %
-#>       to achieve stability when using the adCMFD option, and any            %
+#>       to achieve stability when using the odCMFD option, and any            %
 #>       under-relaxation will probably degrade the converegence rate.},
 #>     notes={}
 #>   }
