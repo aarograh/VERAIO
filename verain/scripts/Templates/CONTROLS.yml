@@ -9,8 +9,6 @@ CONTROLS:
     _name: _loop
     _content: %CONTROL/*/$/%axial
 
-#    - rodmap CONTROL/%axial,basename=>Control_,coremap=>CORE/@crd_map,matsearch=>CONTROL/%mat/*:CORE/%mat/*
-
   _content:
 
     Control_(_loop):
@@ -19,7 +17,10 @@ CONTROLS:
         - setdb MAIN_DB
         - setvar _path,%CONTROL/*/$/%axial/$(_loop),apply=>&findfirst
         - getvar _path,apply=>&pathlevel,arg=>3
+        - axialtype _axtyp,%CONTROL/$(_path)/%rodmap,%CONTROL/$(_path)/%bladetype,%CONTROL/$(_path)/%axial/$(_loop)
         - cellsmaps %CONTROL/$(_path)/%rodmap,%CONTROL/$(_path)/%cell,%CONTROL/$(_path)/$npin,%CONTROL/$(_path)/%axial/$(_loop),matsearch=>%CONTROL/$(_path)/%mat/*:CORE/%mat/*
+        - blademaps %CONTROL/$(_path)/%bladetype,%CONTROL/$(_path)/%bladegeom,%CONTROL/$(_path)/%cell,%CONTROL/$(_path)/%axial/$(_loop),matsearch=>%CONTROL/$(_path)/%mat/*:CORE/%mat/*
+        - clearvar _axtyp
 
       _content:
 

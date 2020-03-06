@@ -9,8 +9,6 @@ INSERTS:
     _name: _loop
     _content: %INSERT/*/$/%axial
 
-#    - rodmap INSERT/%axial,basename=>Insert_,coremap=>CORE/@insert_map,matsearch=>INSERT/%mat/*:CORE/%mat/*
-
   _content:
 
     Insert_(_loop):

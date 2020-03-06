@@ -3961,6 +3961,192 @@ CONTROL:
       - nth(6,())>0
       - is_string(nth(7,()))
 #>
+#>   {\bf bladegeom} bladegeomlabel span thickness tipradius sheaththickness winglength
+#>   \VERAInputTable{
+#>     name={bladegeomlabel},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Unique label name for each blade geometry specification.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={span},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Control blade span from center to wing tip.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={thickness},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Control blade wing thickness.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={tipradius},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Radius of control blade tip.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={sheaththickness},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Control blade sheath thickness.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={winglength},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Blade central structure wing length.},
+#>     notes={}
+#>   }
+  bladegeom:
+    <<: *dtlistnamed
+    _content:
+    _check:
+      - arraysize()==6
+      - is_string(nth(0,()))
+      - nth(1,())>0
+      - nth(2,())>0
+      - nth(3,())>0
+      - nth(4,())>0
+      - nth(5,())>0
+#>
+#>   {\bf bladetype} bladetypelabel bladegeomlabel blademat ntube tubecell tubefillermat tubeorient
+#>   \VERAInputTable{
+#>     name={bladetypelabel},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Unique label name for each blade geometry, material, and absorber loading.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={bladegeomlabel},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Unique label name for each blade geometry specification.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={blademat},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Sheath and wing material.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={ntube},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Number of rodlets in control blade wing.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={tubecell},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Cell label for rodlet.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={tubefillermat},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Material used for surrounding the tube cell.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={tubeorient},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={vert},
+#>     valuesapplicable={hor},
+#>     limitations={},
+#>     description={Specify whether the tubes are inserted vertically or horizontally
+#>        in the control blade. If the option is horizontal, MPACT will internally
+#>        rotate and adjust them to model them vertically.},
+#>     notes={}
+#>   }
+  bladetype:
+    <<: *dtlistnamed
+    _content:
+    _check:
+      - arraysize()==7
+      - is_string(nth(0,()))
+      - is_string(nth(1,()))
+      - is_string(nth(2,()))
+      - nth(3,())>=0
+      - is_string(nth(4,()))
+      - is_string(nth(5,()))
+      - is_string(nth(6,()))
+      - in_dictionary(nth(6,()),'vert','hor')
+#>
 #> \subsection{Block INSERT}
 #> \label{sec:insertcards}
 INSERT:
