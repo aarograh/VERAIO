@@ -81,6 +81,13 @@ our $LINE_LABEL='_line';
 	undef;
     }
 
+    sub clearvar{
+	my ($home,$name)=@_;
+        print "clearvar $name : $_VARS{$name}\n"  if exists $OPTIONS{debug};
+	delete($_VARS{$name});
+	undef;
+    }
+
     sub getvar{
 	my ($home, $name, %userparam)=@_;
 	my %OPTIONS;
@@ -125,6 +132,28 @@ our $LINE_LABEL='_line';
 	return $str;
     }
 
+    sub valuevar{
+	my( $home, $name, %userparam ) = @_ ;
+	my %OPTIONS;
+
+	while ( my ($key, $value) = each %userparam ) # to avoid perl bug of $$
+	{ $OPTIONS{$key}=$value;}
+
+        print "valuevar: $name : $_VARS{$name}\n" if exists $OPTIONS{debug};
+	die "valuevar: variable $name does not exist.\n" unless exists($_VARS{$name});
+	return $_VARS{$name};
+    }
+
+    sub existsvar{
+	my( $home, $name, %userparam ) = @_ ;
+	my %OPTIONS;
+
+	while ( my ($key, $value) = each %userparam ) # to avoid perl bug of $$
+	{ $OPTIONS{$key}=$value;}
+
+	return exists($_VARS{$name});
+    }
+
 }
 
 sub dispatch {
@@ -138,7 +167,6 @@ sub dispatch {
 	setdb      => \&setdb,
 	matmap     => \&matmap,
 	fuelmap    => \&fuelmap,
-	rodmap     => \&rodmap,
         sourcemap  => \&sourcemap,
 	makemap    => \&makemap,
 	echos      => \&echos,
@@ -148,11 +176,15 @@ sub dispatch {
 	mpact_db   => \&mpact_db,
 	tocelsius  => \&toCelsius,
 	setvar     => \&setvar,
+	clearvar   => \&clearvar,
 	getvar     => \&getvar,
+	valuevar   => \&valuevar,
 	namesunique=> \&namesunique,
 	value      => \&value,
 	cellsmaps  => \&cellsmaps,
-	isinmaps   => \&listscompare
+	isinmaps   => \&listscompare,
+        axialtype  => \&setaxialtype,
+	blademaps  => \&blademaps
     };
 
 #    if($version eq '007'){
@@ -1203,279 +1235,6 @@ sub fuelmap{
     }
 }
 
-sub rodmap{
-    my ($home,$axial_path,%userparam)=@_;
-    my ($i,$j,$k,$m,$n);
-    my (@a,@b,@c,@d);
-
-#    my @MATS_RESERVED=('mod','vacuum');
-#    my @MATS_RESERVED =('vacuum','zirc','pyrex','aic','he','b4c','inc','ss','water','mod','boron','o','b2o3');
-    my @MATS_RESERVED =('vacuum','mod');
-    my %CELL_TYPES_POSSIBLE=( 'large4' => 1 );
-
-    my %OPTIONS=('basename'=>'List','mapname'=>'rodmap');
-    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
-    {
-	$OPTIONS{$key}=$value;
-    }
-
-    # create hash of all axial ids and their values
-    my @axial_rpath = parse_path($axial_path);
-    my $axial_ref=key_defined($SOURCE_DB,@axial_rpath);
-    return unless $axial_ref;
-    my @axial_available = keys_at($axial_ref);
-    return unless @axial_available;
-    print  "available axials: @axial_available\n" if get_verbose();
-    my @axial_common=@axial_available;
-
-    if(exists($OPTIONS{coremap})){
-	# get unique ids for assemblies, 0 means missing
-	my $coremap_path=$OPTIONS{coremap};
-	my @coremap_path=parse_path($coremap_path);
-	my $coremap_ref=key_defined($SOURCE_DB,@coremap_path);
-	my @axials=unique(@{ $coremap_ref });    # labels of all unique axials
-	print  "axials w/path: [@axials] [@coremap_path]\n" if get_verbose();  # debug
-	@axials=nonstring('0',@axials);
-	@axials=nonstring('-',@axials);
-	print  "axials: @axials\n" if get_verbose();  # debug
-
-	my @axial_common=intersection(\@axials,\@axial_available);
-
-	unless($#axial_common == $#axials){
-	    print  "axial labels needed   : @axials\n";
-	    print  "axial labels available: @axial_available\n";
-	    die   "rodmap: missing axial definitions in $axial_path\n";
-	}
-    }
-
-    print  "axial_rpath: @axial_rpath\n" if get_verbose();
-    foreach (@axial_available){
-	$AXIAL_DEFS{$_} = key_exists($axial_ref,$_);
-	$AXIAL_CONTENT{$_}=[@{ $AXIAL_DEFS{$_}->{_content} }];
-	@a=@{ $AXIAL_CONTENT{$_} };
-	unless(@a%2){
-	    die "rodmap: axial $_ has even number of elements @a\n";
-	}
-	@b=even(\@a);
-	@c=odd(\@a);
-	$AXIAL_ELEVATIONS{$_}=[@b];
-	$AXIAL_LABELS{$_}=[@c];
-	print  "  AXIAL_DEFS{$_}: $AXIAL_DEFS{$_}\n" if get_verbose();
-	print  "         content: @{ $AXIAL_CONTENT{$_} }\n" if get_verbose();
-	print  "         heights: @b\n" if get_verbose();
-	print  "         labels : @c\n" if get_verbose();
-    }
-
-    # get material paths
-    my @block_rpath=@axial_rpath;
-    pop @block_rpath;
-    pop @block_rpath;
-    print  "block_path: @block_rpath\n" if get_verbose();
-    my %MATS_DB;
-    if(defined $OPTIONS{ matsearch }){
-	my $mat_search=$OPTIONS{ matsearch } ;
-	print  "mat_search: $mat_search\n" if get_verbose();
-	my @mat_array=split(':',$mat_search);
-	print "mat_array @mat_array\n" if get_verbose();
-	foreach my $imat (@mat_array){
-	    my @apaths=find_keys($SOURCE_DB,$imat);
-	    my @names =find_keys($SOURCE_DB,$imat,undef,strings=>'true');
-	    if(@apaths){
-		print "\timat  : $imat\n" if get_verbose();
-		print "\t\tapaths: @apaths\n" if get_verbose();
-		print "\t\tnames : @names\n" if get_verbose();
-		foreach my $iapath (@apaths){
-		    print "\t\t\t @{ $iapath }\n" if get_verbose();
-		    my @mat_path=@{ $iapath };
-		    my @mat_flags = ($mat_path[$#mat_path],'other');
-		    if( @mat_path[-3] =~ m/(fuel)/ ){  # cheeky
-			$mat_flags[1]='fuel';
-		    }
-
-		    if(exists $MATS_DB{ $mat_flags[0] }){
-			my $mat_type=$MATS_DB{ $mat_flags[0] };
-			if($mat_type ne $mat_flags[1]){
-			    die "rodmap2: material and fuel keyword use same identifiers.\n"
-			}
-		    }
-
-		    unless(exists $MATS_DB{ $mat_flags[0] }){
-			$MATS_DB{ $mat_flags[0] } = $mat_flags[1];
-			print "\t\t\t\tMATS_DB{$mat_flags[0]}=$mat_flags[1]\n" if get_verbose();
-		    }
-		}
-	    }
-
-	}
-    }
-
-    # get npin for setting the maps
-    my @npin_rpath=@axial_rpath;
-    $npin_rpath[$#cell_rpath-1]='npin';
-    $npin_rpath[$#cell_rpath]='_content';
-    print  "npin_rpath: @npin_rpath\n" if get_verbose();
-    my $npin=key_defined($SOURCE_DB,@npin_rpath);
-    print  "npin: $npin\n" if get_verbose();
-
-    # create hash of all rodmap ids and their values
-    my @cellmap_rpath=@axial_rpath;
-    $cellmap_rpath[$#cellmap_rpath-1]=$OPTIONS{mapname};
-    my $cellmap_ref=key_defined($SOURCE_DB,@cellmap_rpath);
-    my @cellmap_available = keys_at($cellmap_ref);
-    print  "cellmap_rpath: @cellmap_rpath\n" if get_verbose();
-    foreach (@cellmap_available){
-	$CELLMAP_DEFS{$_} = key_exists($cellmap_ref,$_);
-	$CELLMAP_CONTENT{$_}=[@{ $CELLMAP_DEFS{$_}->{_content} }];
-	print  "  CELLMAP_DEFS{$_}: $CELLMAP_DEFS{$_}\n" if get_verbose();
-
-	@a=@{ $CELLMAP_CONTENT{$_} };
-	@b=();
-	@c=unique(@a);   # why?
-#	@c=nonzero(@c);  # why?
-	@c=nonstring('-',@c);
-	$CELLMAP_CELLS{$_}=[@c];
-	print  "  CELLMAP_CELLS{$_}: @c\n" if get_verbose();
-
-	@b=fullcellmap($npin,\@a);
-	$CELLMAP_CONTENT{$_}=[@b];
-    }
-
-    # create hash of all cell ids and their values
-    my @cell_rpath=@axial_rpath;
-    $cell_rpath[$#cell_rpath-1]='cell';
-    my $cell_ref=key_defined($SOURCE_DB,@cell_rpath);
-    my @cell_available = keys_at($cell_ref);
-    print  "cell_rpath: @cell_rpath\n" if get_verbose();
-    foreach (@cell_available){
-	$CELL_DEFS{$_} = key_exists($cell_ref,$_);
-	$CELL_CONTENT{$_}=[@{ $CELL_DEFS{$_}->{_content} }];
-	print  "  CELL_DEFS{$_}: $CELL_DEFS{$_}\n" if get_verbose();
-	print  "        content: @{ $CELL_CONTENT{$_} }\n" if get_verbose();
-
-	@a=@{$CELL_CONTENT{$_}};
-	if(@a==1){
-	    if($a[0] ne 'mod'){
-		die "rodmap: cell $_ @a has one entry and is not a moderator\n";
-	    }
-	    $CELL_TYPE{$_}='mod';
-	    $CELL_radii{$_}=[];
-	    $CELL_mats{$_} =['mod'];
-	}
-	else{
-
-# Per Scott's three commands in one
-	    my @slshs=indexes { $_ eq '/' } @a;
-	    if(@slshs < 1 && @slshs > 2){
-		die "rodmap: invalid number of slashes in command cell $_ @a\n";
-	    }
-
-	    my @part1=before {$_ eq '/'} @a;
-	    my @part2=after  {$_ eq '/'} @a;
-	    my @part3=();
-	    if(@slshs == 2){
-		@part3=after  {$_ eq '/'} @part2;
-		@part2=before {$_ eq '/'} @part2;
-	    }
-	    die "rodmap: unequal number of entries for radii and materials in cell $_ @a\n" if (@part1 != @part2);
-	    $CELL_radii{$_}=\@part1;
-	    my @cmats=@part2;
-
-	    # start mod
-	    # have to search for available materials and fuels
-	    # bomb if mat and fuel are at the same level
-	    # if exists mat cell_type=other, if exists fuel =fuel
-
-	    $CELL_TYPE{$_}='other';
-	    if(@part3){
-		die "rodmap: invalid cell type for cell $_ @a\n" unless exists( $CELL_TYPES_POSSIBLE{$part3[0]} );
-		$CELL_TYPE{$_}=$part3[0];
-	    }
-
-	    if(defined $OPTIONS{ matsearch }){
-		foreach my $imat (@cmats){
-		    print  "    CELL mat $imat\n" if get_verbose();
-
-		    next if in_dictionary($imat, @MATS_RESERVED);
-
-		    if(exists($MATS_DB{ $imat })){
-			if($MATS_DB{ $imat } eq 'fuel'){
-			    die "rodmap: cell $_ @a type is $CELL_TYPE{$_} but it has fuel $imat\n"
-				if exists( $CELL_TYPES_POSSIBLE{ $CELL_TYPE{$_} } );
-			    $CELL_TYPE{$_}='fuel';
-			    print  "    \tCELL mat $imat is fuel\n" if get_verbose();
-			}
-		    }
-		    else{
-			die "rodmap: cell $_ @a has material $imat which is not defined\n";
-		    }
-		}
-	    }
-
-	    $CELL_mats{$_} =[@cmats];
-	    print  "    CELL radii @{ $CELL_radii{$_} }\n" if get_verbose();
-	    print  "    CELL mats  @{ $CELL_mats{$_} }\n" if get_verbose();
-	    print  "    CELL type  $CELL_TYPE{$_}\n" if get_verbose();
-	}
-    }
-
-    my ($iref, $jref, $a_ref, $cm_ref, $c_ref);
-    foreach $i (@axial_common){
-	# create entry for Basename_X
-	$a_ref=&key_on_list($home,$OPTIONS{basename}.$i);
-
-	# create entries for bank level
-	&key_on_parameter($a_ref,'label','string',$i);
-	&key_on_array($a_ref,'axial_labels','string',@{ $AXIAL_LABELS{$i} });
-	&key_on_array($a_ref,'axial_elevations','double',@{ $AXIAL_ELEVATIONS{$i} });
-
-	# see if we have all cellmaps needed
-	@b=unique( @{ $AXIAL_LABELS{$i} } );
-	my @cellmap_common=intersection(\@b,\@cellmap_available);
-	unless($#cellmap_common == $#b){
-	    print  "$OPTIONS{mapname} labels needed   : [@b]\n";
-	    print  "$OPTIONS{mapname} labels available: [@cellmap_available]\n";
-	    die   "missing $OPTIONS{mapname} definitions in $axial_path\n";
-	}
-
-	# Create CellMaps list in Assembly_X
-	$cm_ref=&key_on_list($a_ref,'CellMaps');
-	@c=();
-	foreach $j (@b){
-	    # Create CellMap in CellMaps list
-	    $iref=&key_on_list($cm_ref,'CellMap'.'_'.$j);
-
-	    &key_on_parameter($iref,'label','string',$j);
-	    &key_on_array($iref,'cell_map','string',@{ $CELLMAP_CONTENT{$j} });
-	    push @c, @{ $CELLMAP_CELLS{$j} }
-	}
-
-	@b=unique(@c);
-
-	# see if we have all cells needed
-	my @cell_common=intersection(\@b,\@cell_available);
-	unless($#cell_common == $#b){
-	    print  "cell labels needed   : [@b]\n";
-	    print  "cell labels available: [@cell_available]\n";
-	    die   "rodmap: missing cell definitions in $axial_path\n";
-	}
-
-	# Create Cells list in Assembly_X
-	$c_ref=&key_on_list($a_ref,'Cells');
-	foreach $j (@b){
-	    # Create Cells in Cells list
-	    $iref=&key_on_list($c_ref,'Cell'.'_'.$j);
-
-	    &key_on_parameter($iref,'label','string',$j);
-	    &key_on_parameter($iref,'type','string',$CELL_TYPE{$j});
-	    $k=@{ $CELL_radii{$j} };
-	    &key_on_parameter($iref,'num_rings','int',$k);
-	    &key_on_array($iref,'mats','string',@{ $CELL_mats{$j} });
-	    &key_on_array($iref,'radii','double',@{ $CELL_radii{$j} });
-	}
-    }
-}
-
-
 sub sourcemap{
     my ($home,$basename,@paths)=@_;
 
@@ -1926,13 +1685,19 @@ sub cellsmaps{
     my (@a,@b,@c,@d);
 
     my @MATS_RESERVED =('vacuum','mod');
-    my %CELL_TYPES_POSSIBLE=( 'large4' => 1 );
 
     my %OPTIONS=('cellmapname'=>'CellMap_',
 		 'cellname'=>'Cell_',
 		 'mapname'=>'rodmap');
     while ( my ($key, $value) = each %userparam )
     {$OPTIONS{$key}=$value;}
+
+    # check if internal variable is set to use blademap instead
+    if(existsvar($home, '_axtyp')){
+        my $vvar=valuevar($home,'_axtyp');
+        print "cellsmaps: exists _axtyp : $vvar : $axial_path\n" if get_verbose();
+        return unless $vvar eq $OPTIONS{'mapname'};
+    }
 
     # get axial id and content
     my @axial_rpath = parse_path($axial_path);
@@ -1943,7 +1708,7 @@ sub cellsmaps{
     my @AXIAL_CONTENT = @{ $axial_ref };
     @a=@AXIAL_CONTENT;
     unless(@a%2){
-	    die "cellsmaps: axial $axial_name has even number of elements @a\n";
+        die "cellsmaps: axial $axial_name has even number of elements @a\n";
     }
     @b=even(\@a);
     @c=odd(\@a);
@@ -1952,57 +1717,42 @@ sub cellsmaps{
     print  "         heights: @b\n" if get_verbose();
     print  "         labels : @c\n" if get_verbose();
 
-    # get material paths
-    my %MATS_DB;
+    # get materials from material paths
+    my $MATS_DB;
+    my $mat_search;
     if(defined $OPTIONS{ matsearch }){
-	my $mat_search=$OPTIONS{ matsearch } ;
+	$mat_search=$OPTIONS{ matsearch } ;
 	print  "mat_search: $mat_search\n" if get_verbose();
-	my @mat_array=split(':',$mat_search);
-	print "mat_array @mat_array\n" if get_verbose();
-	foreach my $imat (@mat_array){
-	    my @apaths=find_keys($SOURCE_DB,$imat);
-	    my @names =find_keys($SOURCE_DB,$imat,undef,strings=>'true');
-	    if(@apaths){
-		print "\timat  : $imat\n" if get_verbose();
-		print "\t\tapaths: @apaths\n" if get_verbose();
-		print "\t\tnames : @names\n" if get_verbose();
-		foreach my $iapath (@apaths){
-		    print "\t\t\t @{ $iapath }\n" if get_verbose();
-		    my @mat_path=@{ $iapath };
-		    my @mat_flags = ($mat_path[$#mat_path],'other');
-		    if( @mat_path[-3] =~ m/(fuel)/ ){  # cheeky
-			$mat_flags[1]='fuel';
-		    }
-
-		    if(exists $MATS_DB{ $mat_flags[0] }){
-			my $mat_type=$MATS_DB{ $mat_flags[0] };
-			if($mat_type ne $mat_flags[1]){
-			    die "cellsmaps: material and fuel keyword use same identifiers.\n"
-			}
-		    }
-
-		    unless(exists $MATS_DB{ $mat_flags[0] }){
-			$MATS_DB{ $mat_flags[0] } = $mat_flags[1];
-			print "\t\t\t\tMATS_DB{$mat_flags[0]}=$mat_flags[1]\n" if get_verbose();
-		    }
-		}
-	    }
-	}
+        $MATS_DB=matsearch($mat_search);
     }
+
+    # create hash of all cellmap ids and their values
+    my @cellmap_rpath = parse_path($cellmap_path);
+    print  "cellmap_rpath: @cellmap_rpath\n" if get_verbose();
+    my $cellmap_ref=key_defined($SOURCE_DB,@cellmap_rpath);
+    return unless $cellmap_ref;      # SSTODO: this would work for
+                                     # blade types. But it would not
+                                     # return error for messed up
+                                     # lattices. Let's have it this
+                                     # way and fix the error trigger
+                                     # later.
+    my @cellmap_available = keys_at($cellmap_ref);
 
     # get npin for setting the maps
     my @npin_rpath=parse_path($npin_path);
     print  "npin_rpath: @npin_rpath\n" if get_verbose();
     my $npin=key_defined($SOURCE_DB,@npin_rpath);
     print  "npin: $npin\n" if get_verbose();
-    return unless $npin;
+    return unless $npin; # should it bomb here?
 
-    # create hash of all cellmap ids and their values
-    my @cellmap_rpath = parse_path($cellmap_path);
-    print  "cellmap_rpath: @cellmap_rpath\n" if get_verbose();
-    my $cellmap_ref=key_defined($SOURCE_DB,@cellmap_rpath);
-    return unless $cellmap_ref;
-    my @cellmap_available = keys_at($cellmap_ref);
+    # see if we have all cellmaps needed
+    @AXIAL_LABELS_UNIQUE=unique( @AXIAL_LABELS );
+    my @cellmap_common=intersection(\@AXIAL_LABELS_UNIQUE,\@cellmap_available);
+    unless($#cellmap_common == $#AXIAL_LABELS_UNIQUE){
+	print  "axial labels needed   : [@AXIAL_LABELS_UNIQUE]\n";
+	print  "$OPTIONS{mapname} labels available: [@cellmap_available]\n";
+	die   "missing $OPTIONS{mapname} definitions in $axial_path\n";
+    }
 
     my %CELLMAP_DEFS;
     my %CELLMAP_CONTENT;
@@ -2024,105 +1774,15 @@ sub cellsmaps{
 	$CELLMAP_CONTENT{$_}=[@b];
     }
 
-    # create hash of all cell ids and their values
-    my @cell_rpath = parse_path($cell_path);
-    print  "cell_rpath: @cell_rpath\n" if get_verbose();
-    my $cell_ref=key_defined($SOURCE_DB,@cell_rpath);
-    my @cell_available = keys_at($cell_ref);
-    print  "cell_rpath: @cell_rpath\n" if get_verbose();
-
-    my %CELL_DEFS;
-    my %CELL_CONTENT;
-    foreach (@cell_available){
-	$CELL_DEFS{$_} = key_exists($cell_ref,$_);
-	$CELL_CONTENT{$_}=[@{ $CELL_DEFS{$_}->{_content} }];
-	print  "  CELL_DEFS{$_}: $CELL_DEFS{$_}\n" if get_verbose();
-	print  "        content: @{ $CELL_CONTENT{$_} }\n" if get_verbose();
-
-	@a=@{$CELL_CONTENT{$_}};
-	if(@a==1){
-	    if($a[0] ne 'mod'){
-		die "cellmaps: cell $_ @a has one entry and is not a moderator\n";
-	    }
-	    $CELL_TYPE{$_}='mod';
-	    $CELL_radii{$_}=[];
-	    $CELL_mats{$_} =['mod'];
-	}
-	else{
-
-# Per Scott's three commands in one
-	    my @slshs=indexes { $_ eq '/' } @a;
-	    if(@slshs < 1 && @slshs > 2){
-		die "cellmaps: invalid number of slashes in command cell $_ @a\n";
-	    }
-
-	    my @part1=before {$_ eq '/'} @a;
-	    my @part2=after  {$_ eq '/'} @a;
-	    my @part3=();
-	    if(@slshs == 2){
-		@part3=after  {$_ eq '/'} @part2;
-		@part2=before {$_ eq '/'} @part2;
-	    }
-	    die "cellmaps: unequal number of entries for radii and materials in cell $_ @a\n" if (@part1 != @part2);
-	    $CELL_radii{$_}=\@part1;
-	    my @cmats=@part2;
-
-        # start mod
-        # have to search for available materials and fuels
-        # bomb if mat and fuel are at the same level
-        # if exists mat cell_type=other, if exists fuel=fuel
-        $CELL_TYPE{$_}='other';
-        $CELL_TABLE{$_}='';
-        if(@part3){
-          if(exists $CELL_TYPES_POSSIBLE{$part3[0]} ){
-            $CELL_TYPE{$_}=$part3[0];
-          }
-          else {
-            $CELL_TABLE{$_}=$part3[0];
-          }
-        }
-
-        if(defined $OPTIONS{ matsearch }){
-          foreach my $imat (@cmats){
-            print  "    CELL mat $imat\n" if get_verbose();
-            next if in_dictionary($imat, @MATS_RESERVED);
-            if(exists($MATS_DB{ $imat })){
-            if($MATS_DB{ $imat } eq 'fuel'){
-              die "rodmap: cell $_ @a type is $CELL_TYPE{$_} but it has fuel $imat\n"
-              if exists( $CELL_TYPES_POSSIBLE{ $CELL_TYPE{$_} } );
-                $CELL_TYPE{$_}='fuel';
-                print  "    \tCELL mat $imat is fuel\n" if get_verbose();
-              }
-            }
-            else{
-              die "rodmap: cell $_ @a has material $imat which is not defined\n";
-            }
-          }
-        }
-
-	    $CELL_mats{$_} =[@cmats];
-	    print  "    CELL radii @{ $CELL_radii{$_} }\n" if get_verbose();
-	    print  "    CELL mats  @{ $CELL_mats{$_} }\n" if get_verbose();
-	    print  "    CELL type  $CELL_TYPE{$_}\n" if get_verbose();
-	    print  "    CELL table  $CELL_TABLE{$_}\n" if get_verbose();
-	}
-    }
+    my ($cell_available, $CELL_TYPE, $CELL_TABLE, $CELL_mats, $CELL_radii)=
+        cellsearch($cell_path, \@MATS_RESERVED, $mat_search, $MATS_DB);
 
     my ($iref, $jref, $a_ref, $cm_ref, $c_ref);
-
-    # see if we have all cellmaps needed
-    @b=unique( @AXIAL_LABELS  );
-    my @cellmap_common=intersection(\@b,\@cellmap_available);
-    unless($#cellmap_common == $#b){
-	print  "axial labels needed   : [@b]\n";
-	print  "$OPTIONS{mapname} labels available: [@cellmap_available]\n";
-	die   "missing $OPTIONS{mapname} definitions in $axial_path\n";
-    }
 
     # Create CellMaps list in Assembly_X
     $cm_ref=&key_on_list($home,'CellMaps');
     @c=();
-    foreach $j (@b){
+    foreach $j (@AXIAL_LABELS_UNIQUE){
 	# Create CellMap in CellMaps list
 	$iref=&key_on_list($cm_ref,$OPTIONS{cellmapname}.$j);
 
@@ -2133,10 +1793,10 @@ sub cellsmaps{
 
     @b=unique(@c);
     # see if we have all cells needed
-    my @cell_common=intersection(\@b,\@cell_available);
+    my @cell_common=intersection(\@b,$cell_available);
     unless($#cell_common == $#b){
 	print  "cell labels needed   : [@b]\n";
-	print  "cell labels available: [@cell_available]\n";
+	print  "cell labels available: [@{$cell_available}]\n";
 	die   "cellsmaps: missing cell definitions in $axial_path\n";
     }
 
@@ -2147,14 +1807,14 @@ sub cellsmaps{
 	$iref=&key_on_list($c_ref,$OPTIONS{cellname}.$j);
 
 	&key_on_parameter($iref,'label','string',$j);
-	&key_on_parameter($iref,'type','string',$CELL_TYPE{$j});
-	unless( $CELL_TABLE{$j} eq '' ) {
-	  &key_on_parameter($iref,'table_label','string',$CELL_TABLE{$j});
+	&key_on_parameter($iref,'type','string',$CELL_TYPE->{$j});
+	unless( $CELL_TABLE->{$j} eq '' ) {
+	  &key_on_parameter($iref,'table_label','string',$CELL_TABLE->{$j});
 	}
-	$k=@{ $CELL_radii{$j} };
+	$k=@{ $CELL_radii->{$j} };
 	&key_on_parameter($iref,'num_rings','int',$k);
-	&key_on_array($iref,'mats','string',@{ $CELL_mats{$j} });
-	&key_on_array($iref,'radii','double',@{ $CELL_radii{$j} });
+	&key_on_array($iref,'mats','string',@{ $CELL_mats->{$j} });
+	&key_on_array($iref,'radii','double',@{ $CELL_radii->{$j} });
     }
 }
 
@@ -2247,6 +1907,370 @@ sub listscompare{
     undef;
 }
 
+sub matsearch{
+    my $mat_search=shift @_;
+    
+    my %MATS_DB;
+    my @mat_array=split(':',$mat_search);
+    print "matsearch: mat_array @mat_array\n" if get_verbose();
+    foreach my $imat (@mat_array){
+        my @apaths=find_keys($SOURCE_DB,$imat);
+        my @names =find_keys($SOURCE_DB,$imat,undef,strings=>'true');
+        if(@apaths){
+            print "\timat  : $imat\n" if get_verbose();
+            print "\t\tapaths: @apaths\n" if get_verbose();
+            print "\t\tnames : @names\n" if get_verbose();
+            foreach my $iapath (@apaths){
+                print "\t\t\t @{ $iapath }\n" if get_verbose();
+                my @mat_path=@{ $iapath };
+                my @mat_flags = ($mat_path[$#mat_path],'other');
+                if( @mat_path[-3] =~ m/(fuel)/ ){  # cheeky
+                    $mat_flags[1]='fuel';
+                }
+                
+                if(exists $MATS_DB{ $mat_flags[0] }){
+                    my $mat_type=$MATS_DB{ $mat_flags[0] };
+                    if($mat_type ne $mat_flags[1]){
+                        die "matsearch: material and fuel keyword use same identifiers.\n"
+                    }
+                }
+                
+                unless(exists $MATS_DB{ $mat_flags[0] }){
+                    $MATS_DB{ $mat_flags[0] } = $mat_flags[1];
+                    print "\t\t\t\tMATS_DB{$mat_flags[0]}=$mat_flags[1]\n" if get_verbose();
+                }
+            }
+        }
+    }
+    return \%MATS_DB;
+}
 
+sub cellsearch{
+    my ($cell_path, $MATS_RESERVED, $matsearch, $MATS_DB)=@_;
+    my %CELL_TYPES_POSSIBLE=( 'large4' => 1 );
+
+    # create hash of all cell ids and their values
+    my @cell_rpath = parse_path($cell_path);
+    print  "cell_rpath: @cell_rpath\n" if get_verbose();
+    my $cell_ref=key_defined($SOURCE_DB,@cell_rpath);
+    my @cell_available = keys_at($cell_ref);
+    print  "cell_rpath: @cell_rpath\n" if get_verbose();
+
+    my %CELL_DEFS;
+    my %CELL_CONTENT;
+    foreach (@cell_available){
+	$CELL_DEFS{$_} = key_exists($cell_ref,$_);
+	$CELL_CONTENT{$_}=[@{ $CELL_DEFS{$_}->{_content} }];
+	print  "  CELL_DEFS{$_}: $CELL_DEFS{$_}\n" if get_verbose();
+	print  "        content: @{ $CELL_CONTENT{$_} }\n" if get_verbose();
+
+	@a=@{$CELL_CONTENT{$_}};
+	if(@a==1){
+	    if($a[0] ne 'mod'){
+		die "cellmaps: cell $_ @a has one entry and is not a moderator\n";
+	    }
+	    $CELL_TYPE{$_}='mod';
+	    $CELL_radii{$_}=[];
+	    $CELL_mats{$_} =['mod'];
+	}
+	else{
+
+# Per Scott's three commands in one
+	    my @slshs=indexes { $_ eq '/' } @a;
+	    if(@slshs < 1 && @slshs > 2){
+		die "cellmaps: invalid number of slashes in command cell $_ @a\n";
+	    }
+
+	    my @part1=before {$_ eq '/'} @a;
+	    my @part2=after  {$_ eq '/'} @a;
+	    my @part3=();
+	    if(@slshs == 2){
+		@part3=after  {$_ eq '/'} @part2;
+		@part2=before {$_ eq '/'} @part2;
+	    }
+	    die "cellmaps: unequal number of entries for radii and materials in cell $_ @a\n" if (@part1 != @part2);
+	    $CELL_radii{$_}=\@part1;
+	    my @cmats=@part2;
+
+        # start mod
+        # have to search for available materials and fuels
+        # bomb if mat and fuel are at the same level
+        # if exists mat cell_type=other, if exists fuel=fuel
+        $CELL_TYPE{$_}='other';
+        $CELL_TABLE{$_}='';
+        if(@part3){
+          if(exists $CELL_TYPES_POSSIBLE{$part3[0]} ){
+            $CELL_TYPE{$_}=$part3[0];
+          }
+          else {
+            $CELL_TABLE{$_}=$part3[0];
+          }
+        }
+
+        if($matsearch){
+          foreach my $imat (@cmats){
+            print  "    CELL mat $imat\n" if get_verbose();
+            next if in_dictionary($imat, @{$MATS_RESERVED});
+            if(exists($MATS_DB->{ $imat })){
+            if($MATS_DB->{ $imat } eq 'fuel'){
+              die "rodmap: cell $_ @a type is $CELL_TYPE{$_} but it has fuel $imat\n"
+              if exists( $CELL_TYPES_POSSIBLE{ $CELL_TYPE{$_} } );
+                $CELL_TYPE{$_}='fuel';
+                print  "    \tCELL mat $imat is fuel\n" if get_verbose();
+              }
+            }
+            else{
+              die "rodmap: cell $_ @a has material $imat which is not defined\n";
+            }
+          }
+        }
+
+	    $CELL_mats{$_} =[@cmats];
+	    print  "    CELL radii @{ $CELL_radii{$_} }\n" if get_verbose();
+	    print  "    CELL mats  @{ $CELL_mats{$_} }\n" if get_verbose();
+	    print  "    CELL type  $CELL_TYPE{$_}\n" if get_verbose();
+	    print  "    CELL table  $CELL_TABLE{$_}\n" if get_verbose();
+	}
+    }
+    return \@cell_available, \%CELL_TYPE, \%CELL_TABLE, \%CELL_mats, \%CELL_radii;
+}
+
+sub setaxialtype{
+    my ($home,
+        $varname,
+	$cellmap_path,
+	$blade_path,
+	$axial_path)=@_;
+
+    my ($i,$j,$k,$m,$n);
+    my (@a,@b,@c,@d);
+
+    # get axial id and content
+    my @axial_rpath = parse_path($axial_path);
+    print  "axial_rpath: @axial_rpath\n" if get_verbose();
+    my $axial_ref=key_defined($SOURCE_DB,@axial_rpath);
+    return unless $axial_ref;
+    my $axial_name=$axial_rpath[-2];
+    my @AXIAL_CONTENT = @{ $axial_ref };
+    @a=@AXIAL_CONTENT;
+    unless(@a%2){
+	    die "setaxialtype: axial $axial_name has even number of elements @a\n";
+    }
+    @b=even(\@a);
+    @c=odd(\@a);
+    my @AXIAL_LABELS = @c;
+    print  "         content: @AXIAL_CONTENT\n" if get_verbose();
+    print  "         heights: @b\n" if get_verbose();
+    print  "         labels : @c\n" if get_verbose();
+
+
+    # create hash of all cellmap ids and their values
+    my @cellmap_rpath = parse_path($cellmap_path);
+    print  "cellmap_rpath: @cellmap_rpath\n" if get_verbose();
+    my $cellmap_ref=key_defined($SOURCE_DB,@cellmap_rpath);
+
+    # create hash of all blade ids and their values
+    my @blademap_rpath = parse_path($blade_path);
+    print  "blademap_rpath: @blademap_rpath\n" if get_verbose();
+    my $blademap_ref=key_defined($SOURCE_DB,@blademap_rpath);
+
+    my @cellmap_available  = $cellmap_ref  ? keys_at($cellmap_ref)  : ();
+    my @blademap_available = $blademap_ref ? keys_at($blademap_ref) : ();
+
+    # see if we have all cell/blade maps needed
+    @AXIAL_LABELS_UNIQUE=unique( @AXIAL_LABELS );
+    my @cellmap_common =intersection(\@AXIAL_LABELS_UNIQUE,\@cellmap_available);
+    my @blademap_common=intersection(\@AXIAL_LABELS_UNIQUE,\@blademap_available);
+
+    if($#cellmap_common == $#AXIAL_LABELS_UNIQUE){
+        setvar($home,$varname,'rodmap');
+        return undef;
+    }
+    elsif($#blademap_common == $#AXIAL_LABELS_UNIQUE){
+        setvar($home,$varname,'bladetype');
+        return undef;
+    }
+    else{
+	print  "axial labels needed    : [@AXIAL_LABELS_UNIQUE]\n";
+	print  "rodmap labels available: [@cellmap_available]\n";
+	print  "blade labels available : [@blademap_available]\n";
+        die   "missing definitions in $axial_path\n";
+    }
+}
+
+sub blademaps{
+    my ($home,
+	$blade_path,
+	$blade_geom_path,
+	$cell_path,
+	$axial_path,
+	%userparam)=@_;
+
+    my ($i,$j,$k,$m,$n);
+    my (@a,@b,@c,@d);
+
+    my @MATS_RESERVED =('vacuum','mod');
+
+    my %OPTIONS=('cellmapname'=>'BladeType_',
+                 'cellgeomname' => 'BladeGeom_',
+		 'cellname'=>'BladeCell_',
+		 'mapname'=>'bladetype');
+    while ( my ($key, $value) = each %userparam )
+    {$OPTIONS{$key}=$value;}
+
+    # check if internal variable is set to use cellmap instead
+    if(existsvar($home, '_axtyp')){
+        my $vvar=valuevar($home,'_axtyp');
+        print "blademaps: exists _axtyp : $vvar : $axial_path\n" if get_verbose();
+        return unless $vvar eq $OPTIONS{'mapname'};
+    }
+
+    # get axial id and content
+    my @axial_rpath = parse_path($axial_path);
+    print  "axial_rpath: @axial_rpath\n" if get_verbose();
+    my $axial_ref=key_defined($SOURCE_DB,@axial_rpath);
+    return unless $axial_ref;
+    my $axial_name=$axial_rpath[-2];
+    my @AXIAL_CONTENT = @{ $axial_ref };
+    @a=@AXIAL_CONTENT;
+    unless(@a%2){
+        die "blademaps: axial $axial_name has even number of elements @a\n";
+    }
+    @b=even(\@a);
+    @c=odd(\@a);
+    my @AXIAL_LABELS = @c;
+    print  "         content: @AXIAL_CONTENT\n" if get_verbose();
+    print  "         heights: @b\n" if get_verbose();
+    print  "         labels : @c\n" if get_verbose();
+
+    # get materials from material paths
+    my $MATS_DB;
+    my $mat_search;
+    if(defined $OPTIONS{ matsearch }){
+	$mat_search=$OPTIONS{ matsearch } ;
+	print  "mat_search: $mat_search\n" if get_verbose();
+        $MATS_DB=matsearch($mat_search);
+    }
+
+    # create hash of all blade ids and their values
+    my @blademap_rpath = parse_path($blade_path);
+    print  "blademap_rpath: @blademap_rpath\n" if get_verbose();
+    my $blademap_ref=key_defined($SOURCE_DB,@blademap_rpath);
+    return unless $blademap_ref;
+    my @blademap_available = keys_at($blademap_ref);
+
+    # create hash of all blade_geom ids and their values
+    my @blade_geommap_rpath = parse_path($blade_geom_path);
+    print  "blade_geommap_rpath: @blade_geommap_rpath\n" if get_verbose();
+    my $blade_geommap_ref=key_defined($SOURCE_DB,@blade_geommap_rpath);
+    return unless $blade_geommap_ref;
+    my @blade_geommap_available = keys_at($blade_geommap_ref);
+
+    # see if we have all blademaps needed
+    @AXIAL_LABELS_UNIQUE=unique( @AXIAL_LABELS  );
+    my @blademap_common=intersection(\@AXIAL_LABELS_UNIQUE,\@blademap_available);
+    unless($#blademap_common == $#AXIAL_LABELS_UNIQUE){
+	print "axial labels needed   : [@AXIAL_LABELS_UNIQUE]\n";
+	print "$OPTIONS{mapname} labels available: [@blademap_available]\n";
+	die   "missing $OPTIONS{mapname} definitions in $blade_path\n";
+    }
+
+    my %BLADEMAP_DEFS;
+    my %BLADEMAP_CONTENT;
+    my @BLADEMAP_CELLS;
+    my @BLADEMAP_GEOMS;
+    @a=();
+    @b=();
+    foreach (@blademap_common){
+	$BLADEMAP_DEFS{$_} = key_exists($blademap_ref,$_);
+	$BLADEMAP_CONTENT{$_}=[@{ $BLADEMAP_DEFS{$_}->{_content} }];
+        $BLADEMAP_GEOM{$_}  = $BLADEMAP_CONTENT{$_}->[0];
+
+        push @a, $BLADEMAP_CONTENT{$_}->[0];
+        unless( $BLADEMAP_CONTENT{$_}->[3] eq '-' ){
+            push @b, $BLADEMAP_CONTENT{$_}->[3];
+        }
+	print  "  BLADEMAP_DEFS{$_}: $BLADEMAP_DEFS{$_}\n" if get_verbose();
+    }
+    @BLADEMAP_GEOMS=unique(@a);
+    @BLADEMAP_CELLS=unique(@b);
+
+    # see if we have all blade_geommaps needed
+    my @blade_geommap_common=intersection(\@BLADEMAP_GEOMS,\@blade_geommap_available);
+    unless($#blade_geommap_common == $#BLADEMAP_GEOMS){
+	print  "blade_geom labels needed   : [@BLADEMAP_GEOMS]\n";
+	print  "blade_geom labels available: [@blade_geommap_available]\n";
+	die    "missing blade_geom definitions in $blade_geom_path\n";
+    }
+
+    my %BLADE_GEOMMAP_DEFS;
+    my %BLADE_GEOMMAP_CONTENT;
+    foreach (@blade_geommap_common){
+        $BLADE_GEOMMAP_DEFS{$_} = key_exists($blade_geommap_ref,$_);
+        $BLADE_GEOMMAP_CONTENT{$_}=[@{ $BLADE_GEOMMAP_DEFS{$_}->{_content} }];
+	print  "  BLADE_GEOMMAP_DEFS{$_}: $BLADE_GEOMMAP_DEFS{$_}\n" if get_verbose();
+    }
+
+    my ($cell_available, $CELL_TYPE, $CELL_TABLE, $CELL_mats, $CELL_radii)=
+        cellsearch($cell_path, \@MATS_RESERVED, $mat_search, $MATS_DB);
+
+    # see if we have all cells needed
+    my @cell_common=intersection(\@BLADEMAP_CELLS,$cell_available);
+    unless($#cell_common == $#BLADEMAP_CELLS){
+	print "cell labels needed   : [@BLADEMAP_CELLS]\n";
+	print "cell labels available: [@{$cell_available}]\n";
+	die   "blademaps: missing cell definitions in $cell_path\n";
+    }
+
+    my ($iref, $cm_ref);
+
+    # Create Bladetypes list in Control_X
+    $cm_ref=&key_on_list($home,'BladeTypes');
+    foreach $j (@blademap_common){
+	# Create Blade_Type entries
+	$iref=&key_on_list($cm_ref,$OPTIONS{cellmapname}.$j);
+
+	&key_on_parameter($iref,'label','string',$j);
+
+	&key_on_parameter($iref,'bladegeomlabel','string',$BLADEMAP_CONTENT{$j}->[0]);
+	&key_on_parameter($iref,'blademat','string',$BLADEMAP_CONTENT{$j}->[1]);
+	&key_on_parameter($iref,'ntube','int',$BLADEMAP_CONTENT{$j}->[2]);
+	&key_on_parameter($iref,'tubecell','string',$BLADEMAP_CONTENT{$j}->[3]);
+	&key_on_parameter($iref,'tubefillermat','string',$BLADEMAP_CONTENT{$j}->[4]);
+	&key_on_parameter($iref,'tubeorient','string',$BLADEMAP_CONTENT{$j}->[5]);
+    }
+
+    # Create Bladegeoms list in Control_X
+    $cm_ref=&key_on_list($home,'BladeGeoms');
+    foreach $j (@blade_geommap_common){
+	# Create CellMap in CellMaps list
+	$iref=&key_on_list($cm_ref,$OPTIONS{cellgeomname}.$j);
+
+	&key_on_parameter($iref,'label','string',$j);
+
+	&key_on_parameter($iref,'span',           'double',$BLADE_GEOMMAP_CONTENT{$j}->[0]);
+	&key_on_parameter($iref,'thickness',      'double',$BLADE_GEOMMAP_CONTENT{$j}->[1]);
+	&key_on_parameter($iref,'tipradius',      'double',$BLADE_GEOMMAP_CONTENT{$j}->[2]);
+	&key_on_parameter($iref,'sheaththickness','double',$BLADE_GEOMMAP_CONTENT{$j}->[3]);
+	&key_on_parameter($iref,'winglength',     'double',$BLADE_GEOMMAP_CONTENT{$j}->[4]);
+    }
+
+    # Create Blade_cells list in Control_X
+    $cm_ref=&key_on_list($home,'BladeCells');
+    foreach $j (@cell_common){
+	# Create Cells in Cells list
+	$iref=&key_on_list($cm_ref,$OPTIONS{cellname}.$j);
+
+	&key_on_parameter($iref,'label','string',$j);
+	&key_on_parameter($iref,'type','string',$CELL_TYPE->{$j});
+	unless( $CELL_TABLE->{$j} eq '' ) {
+	  &key_on_parameter($iref,'table_label','string',$CELL_TABLE->{$j});
+	}
+	$k=@{ $CELL_radii->{$j} };
+	&key_on_parameter($iref,'num_rings','int',$k);
+	&key_on_array($iref,'mats','string',@{ $CELL_mats->{$j} });
+	&key_on_array($iref,'radii','double',@{ $CELL_radii->{$j} });
+    }
+}
 
 1;

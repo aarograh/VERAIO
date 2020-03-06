@@ -9,8 +9,6 @@ DETECTORS:
     _name: _loop
     _content: %DETECTOR/*/$/%axial
 
-#    - rodmap DETECTOR/%axial,basename=>Detector_,coremap=>CORE/@det_map,matsearch=>DETECTOR/%mat/*:CORE/%mat/*
-
   _content:
 
     Detector_(_loop):
