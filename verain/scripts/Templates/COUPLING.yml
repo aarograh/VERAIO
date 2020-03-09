@@ -66,6 +66,13 @@ COUPLING:
         - copy COUPLING/$rlx_den
       _content:
 
+    rlx_crud:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COUPLING/$rlx_crud
+      _content:
+
     maxiter:
       _pltype: parameter
       _type: int
