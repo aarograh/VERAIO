@@ -8571,9 +8571,11 @@ COBRATF:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={thom},
-#>     valuesapplicable={chen thom},
+#>     valuesapplicable={chen, thom, gorenflo},
 #>     limitations={},
-#>     description={Sets the boiling heat transfer model.  Options are chen or thom.},
+#>     description={Sets the boiling heat transfer model.  Note that when "gorenflo" is selected,
+#>        the ONB model is also used in CTF for determining when heat transfer transitioning to
+#>        boiling heat transfer.},
 #>     notes={}
 #>   }
   boil_ht_cor:
@@ -8581,7 +8583,7 @@ COBRATF:
     _content:
     _check:
       - is_string()
-      - in_dictionary() chen thom
+      - in_dictionary() chen thom gorenflo
 #>
 #>   {\bf property\_evaluations} property\_evaluations
 #>   \VERAInputTable{
