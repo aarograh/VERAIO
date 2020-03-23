@@ -32,19 +32,19 @@ CORE:
           _pltype: array
           _type: double
           _do:
-            - copytable %ASSEMBLY/$(_path)/@bypass_flow_table,columns=>1
+            - copytable CORE/@bypass_flow_table,columns=>1
           _content:
         y_labels:
           _pltype: array
           _type: double
           _do:
-            - copytable %ASSEMBLY/$(_path)/@bypass_flow_table,rows=>1
+            - copytable CORE/@bypass_flow_table,rows=>1
           _content:
         table_data:
           _pltype: array
           _type: double
           _do:
-            - copytable %ASSEMBLY/$(_path)/@bypass_flow_table,data=>1
+            - copytable CORE/@bypass_flow_table,data=>1
           _content:
 
     rcs_volume:

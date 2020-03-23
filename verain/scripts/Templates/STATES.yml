@@ -49,7 +49,7 @@ STATES:
 
         bypass:
           _pltype: parameter
-          _type: double
+          _type: string
           _do:
             - copy %STATE/$(_loop)/$bypass
           _content:

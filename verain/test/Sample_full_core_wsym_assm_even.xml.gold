@@ -7,7 +7,7 @@
       <Parameter name="bank_labels" type="Array(string)" value="{A,B,C,D,SA,SB,SC,SD}"/>
       <Parameter name="bank_pos" type="Array(double)" value="{228,216,228,228,228,228,228,228}"/>
       <Parameter name="boron" type="double" value="1300"/>
-      <Parameter name="bypass" type="double" value="8.98"/>
+      <Parameter name="bypass" type="string" value="8.98"/>
       <Parameter name="deplete" type="Array(double)" value="{0.0}"/>
       <Parameter name="deplete_units" type="string" value="GWDMT"/>
       <Parameter name="flow" type="double" value="100.0"/>
