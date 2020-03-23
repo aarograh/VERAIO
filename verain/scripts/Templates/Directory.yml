@@ -215,25 +215,25 @@ STATE:
       - fall(sub{is_float(shift)},())
       - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
 #>
-#>   {\bf bypass} bypass\_percent
+#>   {\bf bypass} bypass\_option
 #>   \VERAInputTable{
-#>     name={bypass\_percent},
-#>     type={Float},
+#>     name={bypass\_option},
+#>     type={Float or String},
 #>     need={Optional},
-#>     unitsdefault={Percent},
-#>     unitsother={},
+#>     unitsdefault={},
+#>     unitsother={Percent},
 #>     valuedefault={0},
-#>     valuesapplicable={$\ge 0$},
+#>     valuesapplicable={$\ge 0$, table},
 #>     limitations={},
-#>     description={Bypass flow fraction applied to the acutal flow.},
+#>     description={Bypass flow fraction applied to the actual flow, or the word ``table''
+#>                  indicating that a bypass flow rate table specified in [CORE] should be used.},
 #>     notes={}
 #>   }
   bypass:
-    <<: *dtdouble
+    <<: *dtstring
     _content:
     _check:
-      - is_float()
-      - is_geq() 0
+      - is_string()
 #>
 #>   {\bf tinlet} inlet\_temperature units
 #>   \VERAInputTable{
