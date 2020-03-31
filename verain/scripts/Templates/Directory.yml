@@ -51,6 +51,7 @@ _DIRECTORY:
   COUPLING:
   MPACT:
   BISON:
+  FAST:
   MAMBA:
   TIAMAT:
   RUN:
@@ -16079,6 +16080,329 @@ BISON:
     _content:
     _check:
       - is_string()
+#>
+#> \subsection{Block FAST}
+#> \label{sec:fastcards}
+FAST:
+#>
+#>   {\bf flux\_to\_power\_ratio} flux\_to\_power\_ratio
+#>   \VERAInputTable{
+#>     name={flux\_to\_power\_ratio},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={neutrons/m2/s per W/g of fuel},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The flux to power ratio.},
+#>     notes={}
+#>   }
+  flux_to_power_ratio:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf mesh\_nr} nradial\_pellet
+#>   \VERAInputTable{
+#>     name={nradial\_pellet},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The number of fuel radial nodes.},
+#>     notes={}
+#>   }
+  mesh_nr:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf mesh\_na} naxial\_pellet
+#>   \VERAInputTable{
+#>     name={naxial\_pellet},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The number of fuel axial nodes.},
+#>     notes={}
+#>   }
+  mesh_na:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf mesh\_nc} nradial\_clad
+#>   \VERAInputTable{
+#>     name={nradial\_clad},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The number of clad radial nodes.},
+#>     notes={}
+#>   }
+  mesh_nc:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf mesh\_clad\_bot\_gap\_height} bot\_gap\_height
+#>   \VERAInputTable{
+#>     name={bot\_gap\_height},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={meters},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The distance between the bottom of the fuel stack and the top of the lower clad region.},
+#>     notes={}
+#>   }
+  mesh_clad_bot_gap_height:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf fuel\_pin\_input\_file\_template} fuel\_inp\_filename
+#>   \VERAInputTable{
+#>     name={fuel\_inp\_filenamee},
+#>     type={Fixed Character String},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The filename of the template for fuel rods.},
+#>     notes={}
+#>   }
+  fuel_pin_input_file_template:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+#>
+#>   {\bf power\_file} power\_filenames
+#>   \VERAInputTable{
+#>     name={power\_filenames},
+#>     type={List of Free Form Character Strings},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The filenames of the VERA-generated HDF5 files with power and temperature data listed in sequential order.},
+#>     notes={}
+#>   }
+  power_file:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
+#>
+#>   {\bf cycle\_xml} cycle\_xml\_filenames
+#>   \VERAInputTable{
+#>     name={cycle\_xml\_filenames},
+#>     type={List of Free Form Character Strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The filenames of the corresponding VERA cycle depletion XML files in sequential order.},
+#>     notes={}
+#>   }
+  cycle_xml:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
+#>
+#>   {\bf shuffle\_xml} shuffle\_xml\_filenames
+#>   \VERAInputTable{
+#>     name={shuffle\_xml\_filenames},
+#>     type={List of Free Form Character Strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The filenames of the corresponding VERA shuffle XML files. There should be a shuffle file for the begining of each cycle after the first.},
+#>     notes={}
+#>   }
+  shuffle_xml:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
+#>
+#>   {\bf only\_cycle} only\_cycle
+#>   \VERAInputTable{
+#>     name={only\_cycle},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The cycle index for which to generate FAST input files.},
+#>     notes={Otherwise, all cycles of files will be generated.}
+#>   }
+  only_cycle:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf only\_assemblies} assembly\_locations
+#>   \VERAInputTable{
+#>     name={assembly\_locations},
+#>     type={List of Free Form Character Strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The list of assembly locations for which to generate Bison input files.},
+#>     notes={Otherwise, all assemblies will be generated.}
+#>   }
+  only_assemblies:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
+#>
+#>   {\bf solve\_type} solve\_type
+#>   \VERAInputTable{
+#>     name={solve\_type},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={standalone},
+#>     limitations={},
+#>     description={The solver scheme for the simulation.},
+#>     notes={}
+#>   }
+  solve_type:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() standalone STANDALONE
+#>
+#>   {\bf bc\_type} bc\_type
+#>   \VERAInputTable{
+#>     name={bc\_type},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={bulk\_cool},
+#>     valuesapplicable={clad\_outer},
+#>     limitations={},
+#>     description={The boundary condition type used for the simulation.},
+#>     notes={Standalone FAST can use clad outer surface and bulk coolant temperature as the boundary condition.}
+#>   }
+  bc_type:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() clad_outer bulk_cool CLAD_OUTER BULK_COOL
+#>
+#>   {\bf thermalcontact\_roughness\_fuel} roughness\_fuel
+#>   \VERAInputTable{
+#>     name={roughness\_fuel},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Fuel roughness value.},
+#>     notes={}
+#>   }
+  thermalcontact_roughness_fuel:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf thermalcontact\_roughness\_clad} roughness\_clad
+#>   \VERAInputTable{
+#>     name={roughness\_clad},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Clad roughness value.},
+#>     notes={}
+#>   }
+  thermalcontact_roughness_clad:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf rod\_fill\_gas\_pressure} rod\_fill\_gas\_pressure
+#>   \VERAInputTable{
+#>     name={rod\_fill\_gas\_pressure},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Pa},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Pressure of rod fill gas.},
+#>     notes={}
+#>   }
+  rod_fill_gas_pressure:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
 #>
 #> \subsection{Block RUN}
 #> \label{sec:runcards}
