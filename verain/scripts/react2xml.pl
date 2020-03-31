@@ -79,7 +79,7 @@ $SCHEMA="${directory}Templates/Directory.yml";
 @BLOCKS=('CASEID','STATES','CORE','ASSEMBLIES',
 	 'CONTROLS','DETECTORS','INSERTS',
 	 'SHIFT','EDITS','COBRATF','COUPLING',
-	 'MPACT','MAMBA','BISON','TIAMAT','RUN');
+	 'MPACT','MAMBA','BISON','FAST','TIAMAT','RUN');
 
 $SCH_PL{ 'CASEID' } = (
 #include pyml/CASEID.pyml
@@ -122,6 +122,9 @@ $SCH_PL{ 'MAMBA' } = (
 )[0];
 $SCH_PL{ 'BISON' } = (
 #include pyml/BISON.pyml
+)[0];
+$SCH_PL{ 'FAST' } = (
+#include pyml/FAST.pyml
 )[0];
 $SCH_PL{ 'TIAMAT' } = (
 #include pyml/TIAMAT.pyml

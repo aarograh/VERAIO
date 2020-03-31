@@ -1,0 +1,117 @@
+FAST:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+  _content:
+
+    flux_to_power_ratio:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy FAST/$flux_to_power_ratio
+      _content:
+
+    mesh_clad_bot_gap_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy FAST/$mesh_clad_bot_gap_height
+      _content:
+
+    mesh_nr:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy FAST/$mesh_nr
+      _content:
+
+    mesh_na:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy FAST/$mesh_na
+      _content:
+
+    mesh_nc:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy FAST/$mesh_nc
+      _content:
+
+    fuel_pin_input_file_template:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy FAST/$fuel_pin_input_file_template
+      _content:
+
+    power_file:
+      _pltype: array
+      _type: string
+      _do:
+        - copy FAST/$power_file
+      _content:
+
+    cycle_xml:
+      _pltype: array
+      _type: string
+      _do:
+        - copy FAST/$cycle_xml
+      _content:
+
+    shuffle_xml:
+      _pltype: array
+      _type: string
+      _do:
+        - copy FAST/$shuffle_xml
+      _content:
+
+    only_cycle:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy FAST/$only_cycle
+      _content:
+
+    only_assemblies:
+      _pltype: array
+      _type: string
+      _do:
+        - copy FAST/$only_assemblies
+      _content:
+
+    solve_type:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy FAST/$solve_type
+      _content:
+
+    bc_type:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy FAST/$bc_type
+      _content:
+
+    thermalcontact_roughness_fuel:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy FAST/$thermalcontact_roughness_fuel
+      _content:
+
+    thermalcontact_roughness_clad:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy FAST/$thermalcontact_roughness_clad
+      _content:
+
+    rod_fill_gas_pressure:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy FAST/$rod_fill_gas_pressure
+      _content:
