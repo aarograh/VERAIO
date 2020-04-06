@@ -4,12 +4,16 @@
   <Parameter name="case_id" type="string" value="Sample 2D GE9 BWR Lattice"/>
   <ParameterList name="STATES">
     <ParameterList name="State_1">
+      <Parameter name="bypass" type="string" value="10.0"/>
       <Parameter name="power" type="double" value="100.0"/>
       <Parameter name="pressure" type="double" value="7.1705475816"/>
       <Parameter name="sym" type="string" value="full"/>
       <Parameter name="tfuel" type="double" value="900"/>
       <Parameter name="tinlet" type="double" value="276.85"/>
       <Parameter name="void_map" type="Array(double)" value="{40.0}"/>
+    </ParameterList>
+    <ParameterList name="State_2">
+      <Parameter name="bypass" type="string" value="table"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">
@@ -32,6 +36,11 @@
     <Parameter name="bc_bot" type="string" value="reflecting"/>
     <Parameter name="bc_rad" type="string" value="reflecting"/>
     <Parameter name="bc_top" type="string" value="reflecting"/>
+    <ParameterList name="bypass_flow_table">
+      <Parameter name="table_data" type="Array(double)" value="{13.3,13.8,14.2,14.6,14.8,15.0,13.2,13.7,14.1,14.5,14.7,14.9,13.0,13.5,13.9,14.3,14.5,14.7,12.9,13.4,13.8,14.2,14.4,14.6}"/>
+      <Parameter name="x_labels" type="Array(double)" value="{30,40,60,80,100,110}"/>
+      <Parameter name="y_labels" type="Array(double)" value="{50,80,100,110}"/>
+    </ParameterList>
     <Parameter name="core_size" type="int" value="1"/>
     <Parameter name="height" type="double" value="1.0"/>
     <Parameter name="rated_flow" type="double" value="1.259978"/>
