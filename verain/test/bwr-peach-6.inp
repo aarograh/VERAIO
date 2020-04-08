@@ -69,7 +69,7 @@
 
 !*** 100 mil design
   gap    0.9017 .42418   ! wide and narrow channel gap (cm)
-  channel_box zr4 0.254 0.9652 0.0 0.0   ! channel dimensions
+  channel_box zr4 0.254 0.9652   ! channel dimensions
 
 !*** enrichments p. 18
 !*** density and materials p. 12
