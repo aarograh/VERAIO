@@ -3516,7 +3516,7 @@ ASSEMBLY:
       - nth(0,())>=0
       - nth(1,())>=0
 #>
-#>   {\bf channel\_box} chanmat chanth chanrad cornerth cornerlen
+#>   {\bf channel\_box} chanmat cornerth chanrad
 #>   \VERAInputTable{
 #>     name={chanmat},
 #>     type={Character String},
@@ -3530,15 +3530,15 @@ ASSEMBLY:
 #>     notes={}
 #>   }
 #>   \VERAInputTable{
-#>     name={chanth},
+#>     name={cornerth},
 #>     type={Float},
 #>     need={Optional},
 #>     unitsdefault={cm},
 #>     unitsother={},
 #>     valuedefault={},
-#>     valuesapplicable={$\ge 0$},
+#>     valuesapplicable={$>0$},
 #>     limitations={},
-#>     description={Channel box thickness.},
+#>     description={Channel box corner thickness.},
 #>     notes={}
 #>   }
 #>   \VERAInputTable{
@@ -3553,40 +3553,62 @@ ASSEMBLY:
 #>     description={Channel box inside corner radius.},
 #>     notes={}
 #>   }
-#>   \VERAInputTable{
-#>     name={cornerth},
-#>     type={Float},
-#>     need={Optional},
-#>     unitsdefault={cm},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$\ge 0$},
-#>     limitations={},
-#>     description={Thickness of channel box corner.},
-#>     notes={Not yet functional.}
-#>   }
-#>   \VERAInputTable{
-#>     name={cornerlen},
-#>     type={Float},
-#>     need={Optional},
-#>     unitsdefault={cm},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$\ge 0$},
-#>     limitations={},
-#>     description={Length of thick corners measured from the channel corner.},
-#>     notes={Not yet functional.}
-#>   }
   channel_box:
     <<: *dtlist
     _content:
     _check:
-      - arraysize()==5
+      - arraysize()==3
       - is_string(nth(0,()))
-      - nth(1,())>=0
+      - nth(1,())>0
       - nth(2,())>=0
-      - nth(3,())>=0
-      - nth(4,())>=0
+#>
+#>   {\bf channel\_box\_segments} chanth chanlen chanramp
+#>   \VERAInputTable{
+#>     name={chanth},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Thickness of a channel box segment.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={chanlen},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Length of channel box segment.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={chanramp},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={cm},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Length of channel box segment ramp.},
+#>     notes={}
+#>   }
+  channel_box_segments:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%3==0
+      - fall(sub{is_float(shift)},stride(0,1,()))
+      - fall(sub{is_gt(shift,0)},stride(0,3,()))
+      - fall(sub{is_gt(shift,0)},stride(1,3,()))
+      - fall(sub{is_geq(shift,0)},stride(2,3,()))
 #>
 #>   {\bf temptable} table\_tag
 #>   \VERAInputTable{

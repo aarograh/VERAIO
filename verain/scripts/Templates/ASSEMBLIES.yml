@@ -253,38 +253,39 @@ ASSEMBLIES:
           _do:
             - copy %ASSEMBLY/$(_path)/@gap:1
           _content:
-
         chanmat:
           _pltype: parameter
           _type: string
           _do:
             - copy %ASSEMBLY/$(_path)/@channel_box:0,existspath=>%ASSEMBLY/$(_path)/%mat/*:CORE/%mat/*
           _content:
-
-        chanth:
+        cornerth:
           _pltype: parameter
           _type: double
           _do:
             - copy %ASSEMBLY/$(_path)/@channel_box:1
           _content:
-
-        chanrad:
+        cornerrad:
           _pltype: parameter
           _type: double
           _do:
             - copy %ASSEMBLY/$(_path)/@channel_box:2
           _content:
-
-        cornerth:
-          _pltype: parameter
+        chanth:
+          _pltype: array
           _type: double
           _do:
-            - copy %ASSEMBLY/$(_path)/@channel_box:3
+            - copyarray %ASSEMBLY/$(_path)/@channel_box_segments,start=>0,stride=>3
           _content:
-
-        cornerlen:
-          _pltype: parameter
+        chanlen:
+          _pltype: array
           _type: double
           _do:
-            - copy %ASSEMBLY/$(_path)/@channel_box:4
+            - copyarray %ASSEMBLY/$(_path)/@channel_box_segments,start=>1,stride=>3
+          _content:
+        chanramp:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray %ASSEMBLY/$(_path)/@channel_box_segments,start=>2,stride=>3
           _content:

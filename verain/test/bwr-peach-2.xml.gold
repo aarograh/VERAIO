@@ -148,10 +148,8 @@
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{LAT}"/>
       <Parameter name="chanmat" type="string" value="zr4"/>
-      <Parameter name="chanrad" type="double" value="0.9652"/>
-      <Parameter name="chanth" type="double" value="0.2032"/>
-      <Parameter name="cornerlen" type="double" value="0.0"/>
-      <Parameter name="cornerth" type="double" value="0.0"/>
+      <Parameter name="cornerrad" type="double" value="0.9652"/>
+      <Parameter name="cornerth" type="double" value="0.2032"/>
       <Parameter name="gapn" type="double" value=".47498"/>
       <Parameter name="gapw" type="double" value="0.9525"/>
       <Parameter name="label" type="string" value="ASSY"/>
