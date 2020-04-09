@@ -53,6 +53,15 @@ INSTALL(
   COMPONENT ${PACKAGE_NAME}
   )
 
+# Install Plant Models
+
+INSTALL(
+  DIRECTORY plant_models/
+  DESTINATION "share/VERAIn/plant_models"
+  COMPONENT ${PACKAGE_NAME}
+  )
+
+
 # Install COBRA-TF/VERAIn examples
 
 #IF (${PACKAGE_NAME}_ENABLE_VERAIn_CTF)

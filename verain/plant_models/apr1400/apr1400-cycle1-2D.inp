@@ -1,0 +1,285 @@
+[CASEID]
+  title 'APR1400 Initial Core'
+!
+!  APR1400
+!  Design Control Document Tier 2
+!  Chapter 4 - Reactor
+!  APR1400-K-X-FS-14002-NP Revision 2
+!  December 2014
+!  ML15006A043
+!
+[STATE]
+  power    100.0
+! tinlet   555 F      ! [Table 4.4-1] tinlet 555 F
+  tinlet   585 F      ! [Table 4.4-1] tave   585 F
+  tfuel    900 K
+  modden   0.711074   ! g/cc  density at tave
+  boron    1200       ! ppm
+  search   boron
+  sym      qtr
+  feedback off
+  pressure 2250.0
+
+  rodbank B5 1 B4 1 B3 1 B2 1
+
+  deplete GWDMT 0.0 0.1 0.5 <1..20x1>
+
+[CORE]
+  size   17
+  apitch 20.7776
+  height 1.0
+  rated  10.45407 0.01   ! power for 241 assemblies (3983 MWt) divided by 150*2.54 cm
+
+  core_shape
+    0 0 0 0 0 1 1 1 1 1 1 1 0 0 0 0 0
+    0 0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0
+    0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+    0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0
+    0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0
+    0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0
+    0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0
+    0 0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0
+    0 0 0 0 0 1 1 1 1 1 1 1 0 0 0 0 0
+
+  assm_map
+    A0 A0 C3 A0 B1 A0 B3 C2 B0
+    A0 B3 A0 B3 A0 B1 A0 B3 C0
+    C3 A0 C2 A0 C3 A0 C3 B1 B0
+    A0 B3 A0 B3 A0 B3 A0 B2 C0
+    B1 A0 C3 A0 C2 A0 B1 C0
+    A0 B1 A0 B3 A0 B3 C1 C0
+    B3 A0 C3 A0 B1 C1 C0
+    C2 B3 B1 B2 C0 C0
+    B0 C0 B0 C0                    ! page 4.3-64  (pdf 160)
+
+  crd_map
+    CC  -  -  - CC  - CC  - CC
+     - CC  -  -  -  -  -  -  -
+     -  - CC  -  -  -  -  -  -
+     -  -  -  -  -  -  -  -  -
+    CC  -  -  - CC  - CC  -
+     -  -  -  -  -  -  -  -
+    CC  -  -  - CC  - CC
+     -  -  -  -  -  -
+    CC  -  -  -                   ! **** guess
+
+  crd_bank
+    B5  -  -  - B3  - B5  - B3
+     - B2  -  -  -  -  -  -  -
+     -  - B3  -  -  -  -  -  -
+     -  -  -  -  -  -  -  -  -
+    B3  -  -  - B4  - B2  -
+     -  -  -  -  -  -  -  -
+    B5  -  -  - B2  - B4
+     -  -  -  -  -  -
+    B3  -  -  -                   ! **** center B2 is actually 12finger, other 12-fingers not shown
+
+  bc_top reflecting
+  bc_bot reflecting
+
+  baffle ss 0.0 2.223             ! **** use baffle thickness from generic PWR
+
+  xlabel  T  S  R  P  N  M  L  K  J  H  G  F  E  D  C  B  A
+  ylabel  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17
+
+  mat he 0.000176 he-4
+  mat zirlo  6.55  o-16   1.20000E-03 ! WEC public paper run through SCALE
+                   fe-54  5.64554E-05 ! Effect of Concentration Ratios of Ni/Fe Ions on the Fuel Crud Deposition
+                   fe-56  9.19009E-04
+                   fe-57  2.16036E-05
+                   fe-58  2.92547E-06
+                   zr-90  4.95805E-01
+                   zr-91  1.09327E-01
+                   zr-92  1.68945E-01
+                   zr-94  1.74939E-01
+                   zr-96  2.87844E-02
+                   nb-93  9.99966E-03
+                   sn-112 9.14389E-05
+                   sn-114 6.33271E-05
+                   sn-115 3.29096E-05
+                   sn-116 1.41960E-03
+                   sn-117 7.56311E-04
+                   sn-118 2.40551E-03
+                   sn-119 8.60399E-04
+                   sn-120 3.29071E-03
+                   sn-122 4.75454E-04
+                   sn-124 6.04340E-04
+
+!
+!  Table 4.3-65  (pdf 161)
+!
+!  Assembly Type
+!     Number of Fuel Assemblies
+!        Fuel Rod Enrichment (w/o)
+!              No. of Rods Per Assembly
+!                  No. of Gd2O3 Rods per Assembly
+!                     Gd2O3 Contents (w/o)
+!  A0 77 1.71      236       -  -
+!  B0 12 3.14      236       -  -
+!  B1 28 3.14/2.64 172/52   12  8
+!  B2  8 3.14/2.64 124/100  12  8
+!  B3 40 3.14/2.64 168/52   16  8
+!  C0 36 3.64/3.14 184/52    -  -
+!  C1  8 3.64/3.14 172/52   12  8
+!  C2 12 3.64/3.14 168/52   16  8
+!  C3 20 3.64/3.14 120/100  16  8
+!
+
+[ASSEMBLY]
+  npin   16
+  ppitch 1.2852
+
+  fuel U171 10.313 95.25 / 1.71     ! type A0
+  fuel U264 10.313 95.25 / 2.64     ! type B
+  fuel U314 10.313 95.25 / 3.14     ! type B/C
+  fuel U364 10.313 95.25 / 3.64     ! type C
+  fuel U40  10.313 95.25 / 4.0      ! type X
+  fuel U45  10.313 95.25 / 4.5      ! type X
+  fuel UG8  10.169 94.5  / 2.00 / gad=8.0
+
+  cell 1 0.4096 0.41785 0.475 / U171 he zirlo    ! (pdf 77)
+  cell 2 0.4096 0.41785 0.475 / U264 he zirlo
+  cell 3 0.4096 0.41785 0.475 / U314 he zirlo
+  cell 4 0.4096 0.41785 0.475 / U364 he zirlo
+  cell G 0.4096 0.41785 0.475 / UG8  he zirlo
+
+  cell W 1.1430 1.2446 / mod zirlo / large4
+
+  rodmap  LATA0
+    W
+    1 1
+    1 1 1
+    1 1 1 W
+    1 1 1 W W
+    1 1 1 1 1 1
+    1 1 1 1 1 1 1
+    1 1 1 1 1 1 1 1
+
+  rodmap  LATB0
+    W
+    3 3
+    3 3 3
+    3 3 3 W
+    3 3 3 W W
+    3 3 3 3 3 3
+    3 3 3 3 3 3 3
+    3 3 3 3 3 3 3 3
+
+  rodmap  LATB1
+    W
+    2 3
+    3 3 G
+    3 3 2 W
+    3 3 2 W W
+    3 3 3 2 2 3
+    3 3 3 3 G 3 3
+    3 3 3 3 3 3 2 2
+
+  rodmap  LATB2
+    W
+    3 3
+    3 3 G
+    3 3 3 W
+    3 3 3 W W
+    3 3 3 3 3 3
+    3 3 3 3 G 3 3
+    2 2 2 2 2 2 2 2
+
+  rodmap  LATB3
+    W
+    2 3
+    3 3 3
+    3 G 2 W
+    3 3 2 W W
+    3 3 3 2 2 3
+    3 3 3 3 G 3 3
+    3 3 3 3 3 3 2 2
+
+  rodmap  LATC0
+    W
+    3 4
+    4 4 4
+    4 4 3 W
+    4 4 3 W W
+    4 4 4 3 3 4
+    4 4 4 4 4 4 4
+    4 4 4 4 4 4 3 3
+
+  rodmap  LATC1
+    W
+    3 4
+    4 4 G
+    4 4 3 W
+    4 4 3 W W
+    4 4 4 3 3 4
+    4 4 4 4 G 4 4
+    4 4 4 4 4 4 3 3
+
+  rodmap  LATC2
+    W
+    3 4
+    4 4 4
+    4 G 3 W
+    4 4 3 W W
+    4 4 4 3 3 4
+    4 4 4 4 G 4 4
+    4 4 4 4 4 4 3 3
+
+  rodmap  LATC3
+    W
+    3 4
+    4 4 4
+    4 G 3 W
+    4 4 3 W W
+    4 4 4 3 3 4
+    4 4 4 4 G 4 4
+    3 3 3 3 3 3 3 3
+
+  axial A0   0.0 LATA0 1.0
+  axial B0   0.0 LATB0 1.0
+  axial B1   0.0 LATB1 1.0
+  axial B2   0.0 LATB2 1.0
+  axial B3   0.0 LATB3 1.0
+  axial C0   0.0 LATC0 1.0
+  axial C1   0.0 LATC1 1.0
+  axial C2   0.0 LATC2 1.0
+  axial C3   0.0 LATC3 1.0
+
+[CONTROL]
+  npin   16
+
+  stroke 1.0 1
+
+  cell C 0.936 0.94742 1.03632  / b4c he inc / large4
+
+  rodmap  LAT
+    -
+    - -
+    - - -
+    - - - C
+    - - - C C
+    - - - - - -
+    - - - - - - -
+    - - - - - - - -
+
+  axial CC 0.0 LAT  1.0
+
+
+[MPACT]
+  par_method     GRAPH
+  graph_part_method REB
+  num_space      108    ! 3 nodes * 36 cores/node
+
+[RUN]
+  walltime 4.0
+
+
+
