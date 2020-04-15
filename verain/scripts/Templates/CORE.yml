@@ -47,6 +47,27 @@ CORE:
             - copytable CORE/@bypass_flow_table,data=>1
           _content:
 
+    tinlet_table_power:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray CORE/@tinlet_table,start=>0,stride=>3
+      _content:
+
+    tinlet_table_temp:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray CORE/@tinlet_table,start=>1,stride=>3
+      _content:
+
+    tinlet_table_units:
+      _pltype: array
+      _type: string
+      _do:
+        - copyarray CORE/@tinlet_table,start=>2,stride=>3
+      _content:
+
     rcs_volume:
       _pltype: parameter
       _type: double

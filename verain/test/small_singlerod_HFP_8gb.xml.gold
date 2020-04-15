@@ -13,7 +13,7 @@
       <Parameter name="search" type="string" value="boron"/>
       <Parameter name="sym" type="string" value="full"/>
       <Parameter name="tfuel" type="double" value="900"/>
-      <Parameter name="tinlet" type="double" value="292.777777777778"/>
+      <Parameter name="tinlet" type="string" value="559.0 F"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">

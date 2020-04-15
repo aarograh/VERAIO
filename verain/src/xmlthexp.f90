@@ -81,7 +81,6 @@
       integer :: lfuelcell
 
       real(8) :: tfuel               ! fuel temperature
-      real(8) :: tinlet              ! tinlet
       real(8) :: tmod                ! mod  temperature
       real(8) :: tfuelin             ! fuel temperature from argument list
       real(8) :: tmodin              ! mod  temperature from argument list
@@ -174,8 +173,6 @@
 
         tfuel=0.0d0
         tmod =583.0d0   ! use value from P6 CTF calculation
-        tinlet=-1.0d0
-
         ltfuel=0
         npins=0
 
@@ -188,14 +185,6 @@
             call read_value(line(n), 'tfuel', k1, k2)
             read (line(n)(k1:k2),*) tfuel      ! read tfuel value
 !d          write (*,*) 'tfuel=', tfuel
-          endif
-
-          kk=index(line(n),'"tinlet"')
-          if (kk.gt.0 .and. tinlet.lt.0.0d0) then
-            call read_value(line(n), 'tinlet', k1, k2)
-            read (line(n)(k1:k2),*) tinlet
-            tinlet=tinlet+273.15d0
-!d          write (*,*) 'tinlet =', tinlet
           endif
 
           kk=index(line(n),'"thexp_tmod"')         ! optional input
@@ -213,8 +202,6 @@
           endif
 
         enddo
-
-        if (tinlet.lt.0.0d0) tinlet=565.0d0    ! set to default value
 
         if (tfuelin.gt.0.0d0) then             ! use command line value override
           tfuel=tfuelin
