@@ -239,23 +239,25 @@ STATE:
 #>   {\bf tinlet} inlet\_temperature units
 #>   \VERAInputTable{
 #>     name={inlet\_temperature},
-#>     type={Float or String},
+#>     type={Float},
 #>     need={Optional},
 #>     unitsdefault={C},
 #>     unitsother={F, K},
 #>     valuedefault={326.85 C},
-#>     valuesapplicable={$>0$, table},
+#>     valuesapplicable={$>0$},
 #>     limitations={},
-#>     description={Core inlet temperature in given units. Examples of this card are
-#>                  \texttt{tinlet 560 F} or \texttt{tinlet 600 K}. Alternatively,
-#>                  \texttt{tinlet table} can be used to invoke the tinlet\_table.},
-#>     notes={Required when coupling to CTF.}
+#>     description={Core inlet temperature},
+#>     notes={Required when couping to CTF. Examples of this card are \texttt{560 F}
+#>        or \texttt{600 K}.}
 #>   }
   tinlet:
-    <<: *dtstring
+    <<: *dtlist
     _content:
     _check:
-      - is_string()
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_word(nth(1,()))
+      - in_dictionary(nth(1,()),'F','C','K')
 #>
 #>   {\bf tinlet\_dist} inlet\_temperature\_adder
 #>   \VERAInputTable{
@@ -1817,41 +1819,6 @@ CORE:
     _style: table
     _check:
       - arraysize()>1
-#>
-#>   {\bf tinlet\_table} percent\_power inlet\_temperature units
-#>   \VERAInputTable{
-#>     name={tinlet\_table},
-#>     type={2D Float/String Table},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$\ge 0$, $\ge 0$, C|K|F},
-#>     limitations={Number of rows must be > 1},
-#>     description={2D array with \% rated power as leftmost column, temperature as center
-#>                  column, and the rightmost column being units. All units must match. For example:
-#>                  \newline \newline
-#>                  tinlet\_table
-#>                  \newline
-#>                  \begin{tabular}{lll}
-#>                       20  & 598 & K \\
-#>                       50  & 595 & K \\
-#>                       70  & 593 & K \\
-#>                       90  & 590 & K \\
-#>                       100 & 587 & K \\
-#>                  \end{tabular}},
-#>     notes={}
-#>   }
-  tinlet_table:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - arraysize()%3==0
-      - fall(sub{is_float(shift)},stride(0,3,()))
-      - fall(sub{is_float(shift)},stride(1,3,()))
-      - fall(sub{is_string(shift)},stride(2,3,()))
-      - fall(sub{in_dictionary(shift,'F','C','K')},stride(2,3,()))
 #>
 #>   {\bf rcs\_volume} rcs\_volume
 #>   \VERAInputTable{
