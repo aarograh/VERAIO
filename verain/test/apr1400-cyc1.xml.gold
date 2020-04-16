@@ -14,7 +14,7 @@
       <Parameter name="search" type="string" value="boron"/>
       <Parameter name="sym" type="string" value="qtr"/>
       <Parameter name="tfuel" type="double" value="900"/>
-      <Parameter name="tinlet" type="string" value="600 K"/>
+      <Parameter name="tinlet" type="double" value="326.85"/>
     </ParameterList>
     <ParameterList name="State_2">
       <Parameter name="deplete" type="Array(double)" value="{0.0,0.1,0.5,1.0,2,3,4,5}"/>

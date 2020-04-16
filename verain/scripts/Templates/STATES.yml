@@ -126,9 +126,9 @@ STATES:
 
         tinlet:
           _pltype: parameter
-          _type: string
+          _type: double
           _do:
-            - copy %STATE/$(_loop)/@tinlet
+            - tocelsius %STATE/$(_loop)/@tinlet
           _content:
 
         pressure:
