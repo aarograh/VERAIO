@@ -15075,6 +15075,26 @@ MAMBA:
       - is_float()
       - is_geq() 0
 #>
+#>   {\bf sg\_mass} sg\_mass
+#>   \VERAInputTable{
+#>     name={sg\_mass},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={kg},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Initial surface particulate mass on steam generator.},
+#>     notes={This is ignored in case of restart.}
+#>   }
+  sg_mass:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+#>
 #>   {\bf sg\_mult} multiplier
 #>   \VERAInputTable{
 #>     name={multiplier},

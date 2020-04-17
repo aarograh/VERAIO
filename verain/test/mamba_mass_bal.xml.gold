@@ -238,4 +238,9 @@
     <Parameter name="rlx_power" type="double" value="0.5"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
+  <ParameterList name="MAMBA">
+    <Parameter name="sg_age" type="double" value="5.0"/>
+    <Parameter name="sg_mass" type="double" value="0.1"/>
+    <Parameter name="sg_mult" type="double" value="1.0"/>
+  </ParameterList>
 </ParameterList>

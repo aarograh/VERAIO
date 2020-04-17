@@ -178,6 +178,13 @@ MAMBA:
         - copy MAMBA/$sg_mult
       _content:
 
+    sg_mass:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA/$sg_mass
+      _content:
+
     mass_mult:
       _pltype: parameter
       _type: double
