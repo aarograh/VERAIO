@@ -199,3 +199,8 @@
   rlx_tfuel   1.0
   rlx_den     1.0
   maxiter     100
+
+[MAMBA]
+  steam_generator_age   5.0  ! yr
+  sg_mass  0.1  ! kg
+  sg_mult  1.0
