@@ -15108,9 +15108,9 @@ MAMBA:
       - is_float()
       - is_geq() 0
 #>
-#>   {\bf sg\_mass} sg_mass
+#>   {\bf sg\_mass} sg\_mass
 #>   \VERAInputTable{
-#>     name={sg_mass},
+#>     name={sg\_mass},
 #>     type={Floating-point Real Number},
 #>     need={Optional},
 #>     unitsdefault={kg},
