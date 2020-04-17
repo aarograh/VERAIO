@@ -168,6 +168,8 @@
     <Parameter name="cycle_xml" type="Array(string)" value="{c1.xml,c2.xml,c3.xml}"/>
     <Parameter name="flux_to_power_ratio" type="double" value="2.873e+17"/>
     <Parameter name="fuel_pin_input_file_template" type="string" value="../FAST_LOFT.template"/>
+    <Parameter name="initial_plenum_pressure" type="double" value="2.0e6"/>
+    <Parameter name="initial_plenum_pressure_ifba" type="double" value="1.0e6"/>
     <Parameter name="mesh_clad_bot_gap_height" type="double" value="1.52e-3"/>
     <Parameter name="mesh_na" type="int" value="12"/>
     <Parameter name="mesh_nc" type="int" value="5"/>
@@ -175,7 +177,6 @@
     <Parameter name="only_assemblies" type="Array(string)" value="{1,2}"/>
     <Parameter name="only_cycle" type="int" value="3"/>
     <Parameter name="power_file" type="Array(string)" value="{c1.h5,c2.h5,c3.h5}"/>
-    <Parameter name="rod_fill_gas_pressure" type="double" value="2.4e6"/>
     <Parameter name="shuffle_xml" type="Array(string)" value="{c2_shuffle.xml,c3_shuffle.xml}"/>
     <Parameter name="solve_type" type="string" value="standalone"/>
     <Parameter name="thermalcontact_roughness_clad" type="double" value="8e-7"/>

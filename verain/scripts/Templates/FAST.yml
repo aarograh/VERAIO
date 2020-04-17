@@ -4,6 +4,20 @@ FAST:
     - setdb MAIN_DB
   _content:
 
+    initial_plenum_pressure:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy FAST/$initial_plenum_pressure
+      _content:
+
+    initial_plenum_pressure_ifba:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy FAST/$initial_plenum_pressure_ifba
+      _content:
+
     flux_to_power_ratio:
       _pltype: parameter
       _type: double
@@ -107,11 +121,4 @@ FAST:
       _type: double
       _do:
         - copy FAST/$thermalcontact_roughness_clad
-      _content:
-
-    rod_fill_gas_pressure:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy FAST/$rod_fill_gas_pressure
       _content:
