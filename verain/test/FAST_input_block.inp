@@ -168,4 +168,5 @@
   only_assemblies = 1 2
   thermalcontact_roughness_clad = 8e-7
   thermalcontact_roughness_fuel = 9e-7
-  rod_fill_gas_pressure = 2.4e6
+  initial_plenum_pressure = 2.0e6
+  initial_plenum_pressure_ifba = 1.0e6

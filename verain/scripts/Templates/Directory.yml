@@ -16110,6 +16110,46 @@ BISON:
 #> \label{sec:fastcards}
 FAST:
 #>
+#>   {\bf initial\_plenum\_pressure} rod\_initial\_pressure
+#>   \VERAInputTable{
+#>     name={rod\_initial\_pressure},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Pascals},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Initial plenum pressure of (non-ifba) fuel rods.},
+#>     notes={}
+#>   }
+  initial_plenum_pressure:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf initial\_plenum\_pressure\_ifba} rod\_initial\_pressure\_ifba
+#>   \VERAInputTable{
+#>     name={rod\_initial\_pressure\_ifba},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Pascals},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Initial plenum pressure of ifba-bearing fuel rods.},
+#>     notes={}
+#>   }
+  initial_plenum_pressure_ifba:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
 #>   {\bf flux\_to\_power\_ratio} flux\_to\_power\_ratio
 #>   \VERAInputTable{
 #>     name={flux\_to\_power\_ratio},
@@ -16403,26 +16443,6 @@ FAST:
 #>     notes={}
 #>   }
   thermalcontact_roughness_clad:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-#>
-#>   {\bf rod\_fill\_gas\_pressure} rod\_fill\_gas\_pressure
-#>   \VERAInputTable{
-#>     name={rod\_fill\_gas\_pressure},
-#>     type={Float},
-#>     need={Optional},
-#>     unitsdefault={Pa},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={Pressure of rod fill gas.},
-#>     notes={}
-#>   }
-  rod_fill_gas_pressure:
     <<: *dtdouble
     _content:
     _check:
