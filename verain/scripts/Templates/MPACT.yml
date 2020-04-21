@@ -1526,7 +1526,7 @@ MPACT:
 
         tml1gmg:
           _pltype: parameter
-          _type: bool
+          _type: string
           _do:
             - copy MPACT/$tml1gmg
           _content:
@@ -1593,5 +1593,3 @@ MPACT:
           _do:
             - copy MPACT/$transmethod:1
           _content:
-
-

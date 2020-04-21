@@ -14194,27 +14194,6 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 #>
-#>   {\bf tml1gmg} tml1gmg
-#>   \VERAInputTable{
-#>     name={tml1gmg},
-#>     type={Boolean},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={false},
-#>     valuesapplicable={true},
-#>     limitations={},
-#>     description={Flag for using 1GCMFD for fission source and MGCMFD for flux (true)
-#>        or using 1GCMFD for flux (false)},
-#>     notes={}
-#>   }
-  tml1gmg:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
-#>
 #>   {\bf delayenergy} delayenergy
 #>   \VERAInputTable{
 #>     name={delayenergy},
@@ -14383,6 +14362,35 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf tml1gmg} tml1gmg
+#>   \VERAInputTable{
+#>     name={tml1gmg},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={none},
+#>     valuesapplicable={sweep, hybrid. These are described as:
+#>       \begin{enumerate}                                                               %
+#>         \item \texttt{none} --- is to use the 1GCMFD to update the flux;              %                                                                                %
+#>         \item \texttt{sweep} --- is to use 1GCMFD for fission source                  %
+#>           and MGCMFD for flux;                                                        %
+#>         \item \texttt{hybrid} --- is to not use 1GCMFD level when there is            %
+#>           external reactivity, and 1GCMFD for flux when there is no                   %
+#>           external reactivity.                                                        %
+#>       \end{enumerate}},
+#>     limitations={},
+#>     description={The \texttt{tml1gmg} option specifies how to use 1GCMFD level for %
+#>       new TML.},
+#>     notes={}
+#>   }
+  tml1gmg:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none sweep hybrid
 #>
 #>   {\bf tml} tml
 #>   \VERAInputTable{
