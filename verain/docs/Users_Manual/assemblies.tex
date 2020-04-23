@@ -48,6 +48,14 @@ The number of pins {\it npin} must be the same for every assembly in a core.
 
 The inter-assembly gap on each side of the assembly is calculated as $[apitch-npin*ppitch]/2$
 
+For a BWR, a channel box may be specified with the following cards. See section 2.7 for a complete
+description of the channel box inputs.
+\begin{Verbatim}[fontsize=\small]
+  channel_box zirc 0.254 0.10         ! mat, corner thickness (cm), corner radius (cm)
+  channel_box_segments 0.18 2.5 0.2   ! segment thickness (cm), segment length (cm),
+                                      ! segment ramp (cm)
+\end{Verbatim}
+
 The fuel and structural materials are defined with the following cards.
 See Chapter~\ref{chap:materials} for a complete description of the material inputs.
 \begin{Verbatim}[fontsize=\small]
@@ -449,5 +457,47 @@ The name of the detector ``D1'' refers to a detector type defined in the
 
 A complete listing of all the input cards in the [DETECTOR] block is located in Chapter~\ref{chap:cards}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Channel Box}
+The channel box that surrounds a BWR assembly may be modeled with the {\it channel\_box} and
+{\it channel\_box\_segments} cards. The {\it channel\_box} card allows the representation of a normal box
+with a nominal thickness and rounded corners. When paired with the {\it channel\_box\_segments} card,
+a general explicit geometry of thick-thin designs may be modeled.
 
+The input for each of the cards are shown in Figure~\ref{fig:cbcard}.
 
+\begin{figure}[h]
+\begin{center}
+  \includegraphics[width=5in]{figs/chanboxcard.jpg}
+\end{center}
+\caption{\label{fig:cbcard} Description of the channel box cards.}
+\end{figure}
+
+All of the dimensional quantities are in units of centimeters. The segment length and segment
+ramp are deltas in length. The segment ramp should be entered as the horizontal distance
+and not the slope. The definitions of the inputs are illustrated in Figure~\ref{fig:cbinputs}.
+\begin{figure}[h]
+\begin{center}
+  \includegraphics[width=3in]{figs/chanboxinputs.jpg}
+\end{center}
+\caption{\label{fig:cbinputs} Demonstration of the channel box cards.}
+\end{figure}
+
+The first channel box segment is entered at the halfspan of the box.
+Each additional segment is entered in the direction of the corner.
+It is assumed that the channels are symmetric about the corner and all corners are alike.
+The thick corner length is internally calculated from the given channel segments.
+
+For both the normal and thick-thin channel box designs, the wide and narrow gaps should be
+entered relative to the corner thickness. For the normal box this is equivalent to the nominal
+channel thickness.
+
+Sample inputs are provided in Figure~\ref{fig:cbexample}.
+\begin{figure}[h]
+\begin{center}
+  \includegraphics[width=5in]{figs/channelbox.jpg}
+\end{center}
+\caption{\label{fig:cbexample} Sample inputs for the channel box cards.}
+\end{figure}
+
+A complete listing for the channel box cards are located in Chapter~\ref{chap:cards}.
