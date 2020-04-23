@@ -425,6 +425,7 @@
       <Parameter name="sth_dhfrac" type="double" value="0.02"/>
       <Parameter name="sth_hgap" type="double" value="5200.0"/>
     </ParameterList>
+    <Parameter name="azimuthal_xs" type="bool" value="true"/>
     <ParameterList name="depletion">
       <Parameter name="dep_shielder_dt" type="double" value="0.01"/>
       <Parameter name="exclude_depl_mats" type="Array(string)" value="{U31,U32,b4c}"/>
