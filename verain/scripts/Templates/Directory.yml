@@ -10139,6 +10139,30 @@ MPACT:
       - is_word()
       - in_dictionary() ignore combine explicit
 #>
+#>   {\bf azimuthal\_xs} azimuthal\_xs
+#>   \VERAInputTable{
+#>    name={azimuthal\_xs},
+#>    type={Boolean},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={\texttt{false}},
+#>    valuesapplicable={\texttt{true}},
+#>    limitations={},
+#>    description={This card is used to specify the azimuthally dependent cross section %
+#>      generation procedure. The cross section will be generated using eight azimuthal %
+#>      division of MOC meshes},
+#>    notes={Presently this will generate the azimuthlly dependent cross section for    %
+#>    whole MOC meshes including moderator and non-resonant isotopes, which can be      %
+#>    further reduced by seleting target isotopes such as gadolinium bearing fuel.}
+#>   }
+  azimuthal_xs:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf explicit\_erg\_deposit} explicit\_erg\_deposit
 #>   \VERAInputTable{
 #>    name={explicit\_erg\_deposit},
