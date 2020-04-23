@@ -16242,9 +16242,9 @@ FAST:
       - is_int()
       - is_gt() 0
 #>
-#>   {\bf mesh\_na} naxial\_pellet
+#>   {\bf mesh\_na} naxial\_cells
 #>   \VERAInputTable{
-#>     name={naxial\_pellet},
+#>     name={naxial\_cells},
 #>     type={Integer},
 #>     need={Optional},
 #>     unitsdefault={},
@@ -16252,7 +16252,7 @@ FAST:
 #>     valuedefault={},
 #>     valuesapplicable={$>0$},
 #>     limitations={},
-#>     description={The number of fuel axial nodes.},
+#>     description={The number of fuel axial nodes. FAST will automatically create a uniformly sized mesh.},
 #>     notes={}
 #>   }
   mesh_na:
@@ -16260,6 +16260,27 @@ FAST:
     _content:
     _check:
       - is_int()
+      - is_gt() 0
+#>
+#>   {\bf mesh\_max\_deltaz} mesh\_max\_deltaz
+#>   \VERAInputTable{
+#>     name={mesh\_max\_deltaz},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={meters},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The maximum axial mesh size. This will refine the VERA axial
+#>                  grid so that all the axial cells are less than or equal to mesh\_max\_deltaz},
+#>     notes={}
+#>   }
+  mesh_max_deltaz:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
       - is_gt() 0
 #>
 #>   {\bf mesh\_nc} nradial\_clad
@@ -16280,6 +16301,26 @@ FAST:
     _content:
     _check:
       - is_int()
+      - is_gt() 0
+#>
+#>   {\bf max\_deltat} max\_deltat
+#>   \VERAInputTable{
+#>     name={max\_deltat},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The maximum size for timesteps. Otherwise the default timestep will be the time between states.},
+#>     notes={}
+#>   }
+  max_deltat:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
       - is_gt() 0
 #>
 #>   {\bf mesh\_clad\_bot\_gap\_height} bot\_gap\_height
@@ -16411,7 +16452,7 @@ FAST:
 #>     valuedefault={},
 #>     valuesapplicable={},
 #>     limitations={},
-#>     description={The list of assembly locations for which to generate Bison input files.},
+#>     description={The list of assembly locations for which to generate FAST input files.},
 #>     notes={Otherwise, all assemblies will be generated.}
 #>   }
   only_assemblies:

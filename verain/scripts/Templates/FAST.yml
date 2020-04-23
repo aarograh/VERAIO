@@ -46,11 +46,25 @@ FAST:
         - copy FAST/$mesh_na
       _content:
 
+    mesh_max_deltaz:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy FAST/$mesh_max_deltaz
+      _content:
+
     mesh_nc:
       _pltype: parameter
       _type: int
       _do:
         - copy FAST/$mesh_nc
+      _content:
+
+    max_deltat:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy FAST/$max_deltat
       _content:
 
     fuel_pin_input_file_template:
