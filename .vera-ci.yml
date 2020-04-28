@@ -1,5 +1,5 @@
 stages:
-   - testing
+   - test
    - deploy
 
 .ecode: &ecode |
@@ -33,17 +33,8 @@ before_script:
     - ls -lrt 
     - (if [[ -d "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)
     - (if [[ ! -L "${PACKAGE_TEST}" ]]; then ln -s ${SRC_DIR} VERAInExt; fi)
-    
-.testing_base_setup: &testing_base_setup
-    stage: testing
-    only:
-        variables:
-            - $CI_RUN_ONLY == null
-            - $CI_RUN_ONLY == ""
-            - $CI_RUN_ONLY == $CI_JOB_NAME
- 
-gnu-debug:
-    <<: *testing_base_setup
+
+vmcontinuous:
     variables:
         CTEST_BUILD_FLAGS: -j32
         CTEST_PARALLEL_LEVEL: "32"
@@ -58,29 +49,55 @@ gnu-debug:
     - rm -rf do-configure
     - ln -s ${BASE_VERA_DIR}/cmake/std/gcc-5.4.0/do-configure.MPI_RELEASE_DEBUG_SHARED do-configure
     - rm -rf CMake*
+    - ecc ./do-configure -DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON -DVERA_IGNORE_MISSING_EXTRA_REPOSITORIES:BOOL=ON -DVERA_ENABLE_KNOWN_EXTERNAL_REPOS_TYPE:STRING=Continuous -DVERA_ENABLE_TESTS:BOOL=ON -DVERA_TEST_CATEGORIES:STRING=CONTINUOUS
+    - ecc make -j16
+    - ecc ctest -j16
+    - cd ${BASE_VERA_DIR}
+    - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)
+    - echo $CI_COMMIT_REF_NAME
+    tags:
+        - linux
+    
+ 
+gnu-debug:
+    variables:
+        CTEST_BUILD_FLAGS: -j32
+        CTEST_PARALLEL_LEVEL: "32"
+        DART_TESTING_TIMEOUT: "3600"
+        BLD_NAME: "gnu_release_debug"
+    stage: test
+    script:
+    - SRC_DIR=`pwd`
+    - BLD_DIR=${BASE_DIR}/builds/VERAInExt
+    - (if [[  -d "${BLD_DIR}" ]]; then rm -rf ${BLD_DIR}; fi)
+    - mkdir -p ${BLD_DIR}
+    - cd $BLD_DIR
+    - rm -rf do-configure
+    - ln -s ${BASE_VERA_DIR}/cmake/std/gcc-5.4.0/do-configure.MPI_RELEASE_DEBUG_SHARED do-configure
+    - rm -rf CMake*
     - ecc ./do-configure -DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON
     - ecc make -j16
     - ecc ctest -j28
     - cd ${BASE_VERA_DIR}
-    - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)    
- 
+    - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)
+    - CI_RUN_ONLY=VMCONTINUOUS
+    - echo $CI_COMMIT_REF_NAME        
+    - echo "triggering downstream build"
+    - DOWNSTREAM=ON
+    rules:
+        - if: $CI_MERGE_REQUEST_ID  
     tags:
         - linux
-
-
 
 trigger_build:
-    <<: *testing_base_setup
     stage: deploy
-    tags:
-        - linux
     variables:
-        CI_JOB_NAME: "HEAVY"
-    script:
-        - echo "CI_JOB_TOKEN=${CI_JOB_TOKEN}"
-        - echo "CI_REPOSITORY_URL=${CI_REPOSITORY_URL}"
-        - echo "REF_CI_BUILD_REF_NAME=${CI_BUILD_REF_NAME}"
-        - echo "REF_CI_COMMIT_SHA=${CI_COMMIT_SHA}"
-        - echo "REF_NAME=${CI_PROJECT_NAME}"
-        - curl -X POST -F token=${CI_JOB_TOKEN} -F ref=test-ci -F "variables[REF_CI_REPOSITORY_URL]=${CI_REPOSITORY_URL}" -F "variables[REF_CI_BUILD_REF_NAME]=${CI_BUILD_REF_NAME}" -F "variables[REF_CI_COMMIT_SHA]=${CI_COMMIT_SHA}" -F "variables[REF_NAME]=${CI_PROJECT_NAME}" -F "variables[CI_RUN_ONLY]=HEAVY" https://code-int.ornl.gov/api/v4/projects/3204/trigger/pipeline
+        CI_RUN_ONLY: "NIGHTLY"
+        CI_VERAInExt_REF: $CI_COMMIT_REF_NAME
+    trigger: 
+        project: CASL/VERA
+        branch: $CI_COMMIT_REF_NAME
+    rules:
+        - if: $CI_MERGE_REQUEST_ID
 
+    
