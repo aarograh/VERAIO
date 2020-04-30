@@ -10,7 +10,7 @@
       <Parameter name="power" type="double" value="0.0"/>
       <Parameter name="sym" type="string" value="qtr"/>
       <Parameter name="tfuel" type="double" value="900"/>
-      <Parameter name="tinlet" type="double" value="326.85"/>
+      <Parameter name="tinlet" type="string" value="600 K"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">
