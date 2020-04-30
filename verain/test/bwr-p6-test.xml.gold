@@ -10,7 +10,8 @@
       <Parameter name="pressure" type="double" value="7.1705475816"/>
       <Parameter name="sym" type="string" value="full"/>
       <Parameter name="tfuel" type="double" value="900"/>
-      <Parameter name="tinlet" type="double" value="277.777777777778"/>
+      <Parameter name="thexp" type="string" value="off"/>
+      <Parameter name="tinlet" type="string" value="532 F"/>
       <Parameter name="xenopt" type="string" value="zero"/>
     </ParameterList>
   </ParameterList>
