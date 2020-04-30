@@ -92,8 +92,9 @@ gnu-debug:
 trigger_build:
     stage: deploy
     variables:
-        CI_RUN_ONLY: "NIGHTLY"
+        CI_RUN_ONLY: "CHECKIN"
         CI_VERAInExt_REF: $CI_COMMIT_REF_NAME
+        PACKAGE_TEST: VERAInExt
     trigger: 
         project: CASL/VERA
         branch: master
