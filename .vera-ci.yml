@@ -80,7 +80,7 @@ gnu-debug:
     - ecc ctest -j28
     - cd ${BASE_VERA_DIR}
     - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)
-    - CI_RUN_ONLY=VMCONTINUOUS
+    - CI_RUN_ONLY=NIGHTLY
     - echo $CI_COMMIT_REF_NAME        
     - echo "triggering downstream build"
     - DOWNSTREAM=ON
@@ -96,7 +96,7 @@ trigger_build:
         CI_VERAInExt_REF: $CI_COMMIT_REF_NAME
     trigger: 
         project: CASL/VERA
-        branch: 6166_downstream_testing
+        branch: master
     rules:
         - if: $CI_MERGE_REQUEST_ID
 
