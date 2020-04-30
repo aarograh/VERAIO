@@ -83,7 +83,6 @@ gnu-debug:
     - CI_RUN_ONLY=NIGHTLY
     - echo $CI_COMMIT_REF_NAME        
     - echo "triggering downstream build"
-    - DOWNSTREAM=ON
     rules:
         - if: $CI_MERGE_REQUEST_ID  
     tags:
