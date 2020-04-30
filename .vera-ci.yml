@@ -97,7 +97,7 @@ trigger_build:
         PACKAGE_TEST: VERAInExt
     trigger: 
         project: CASL/VERA
-        branch: master
+        branch: 6166_downstream_testing
         strategy: depend
     rules:
         - if: $CI_MERGE_REQUEST_ID
