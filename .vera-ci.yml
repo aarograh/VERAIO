@@ -96,7 +96,7 @@ trigger_build:
         CI_VERAInExt_REF: $CI_COMMIT_REF_NAME
     trigger: 
         project: CASL/VERA
-        branch: $CI_COMMIT_REF_NAME
+        branch: 6166_downstream_testing
     rules:
         - if: $CI_MERGE_REQUEST_ID
 
