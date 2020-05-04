@@ -8,7 +8,7 @@
       <Parameter name="pressure" type="double" value="7.1705475816"/>
       <Parameter name="sym" type="string" value="full"/>
       <Parameter name="tfuel" type="double" value="900"/>
-      <Parameter name="tinlet" type="string" value="575 F"/>
+      <Parameter name="tinlet" type="double" value="301.666666666667"/>
       <Parameter name="void_map" type="Array(double)" value="{40.0}"/>
     </ParameterList>
   </ParameterList>

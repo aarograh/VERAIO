@@ -21,7 +21,7 @@
       <Parameter name="search" type="string" value="boron"/>
       <Parameter name="sym" type="string" value="qtr"/>
       <Parameter name="tfuel" type="double" value="565"/>
-      <Parameter name="tinlet" type="string" value="557.33 F"/>
+      <Parameter name="tinlet" type="double" value="291.85"/>
     </ParameterList>
     <ParameterList name="State_2">
       <Parameter name="b10" type="double" value="0.199"/>

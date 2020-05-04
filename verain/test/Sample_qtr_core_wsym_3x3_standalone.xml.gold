@@ -17,7 +17,7 @@
       <Parameter name="samopt" type="string" value="zero"/>
       <Parameter name="search" type="string" value="boron"/>
       <Parameter name="sym" type="string" value="qtr"/>
-      <Parameter name="tinlet" type="string" value="559.0 F"/>
+      <Parameter name="tinlet" type="double" value="292.777777777778"/>
       <Parameter name="title" type="string" value="HZP Statepoint BOL"/>
       <Parameter name="xenopt" type="string" value="zero"/>
     </ParameterList>
