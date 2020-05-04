@@ -10,7 +10,7 @@
       <Parameter name="feedback" type="string" value="on"/>
       <Parameter name="power" type="double" value="100.0"/>
       <Parameter name="pressure" type="double" value="15.5132039025"/>
-      <Parameter name="tinlet" type="string" value="558.8 F"/>
+      <Parameter name="tinlet" type="double" value="292.666666666667"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">

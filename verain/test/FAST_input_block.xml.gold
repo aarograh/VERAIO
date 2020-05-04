@@ -11,7 +11,7 @@
       <Parameter name="pressure" type="double" value="15.5132039025"/>
       <Parameter name="search" type="string" value="keff"/>
       <Parameter name="sym" type="string" value="qtr"/>
-      <Parameter name="tinlet" type="string" value="565 K"/>
+      <Parameter name="tinlet" type="double" value="291.85"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">
