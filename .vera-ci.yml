@@ -11,12 +11,15 @@ stages:
 before_script:
     - *ecode
     - echo "start"
+#set base development enviornment based on machine directory structure
     - if [[ -f "/data/test_gcc/gcc-5.4.0/load_dev_env.sh" ]]; then BASE_DIR="/data/gitlab-runner"; . /data/test_gcc/gcc-5.4.0/load_dev_env.sh; ENV_BASE=/data/test_gcc/gcc-5.4.0; else BASE_DIR="/localhome/gitlab-runner"; . /projects/vera/gcc-5.4.0/load_dev_env.sh; ENV_BASE=/projects/vera/gcc-5.4.0; fi 
     - ${ENV_BASE}/common_tools/gitdist pull
     - SRC_DIR=${PWD}
     - SRC_BASE_DIR=${SRC_DIR}/..
     - cd ${BASE_DIR}
+#set package
     - PACKAGE_TEST=VERAInExt
+#clean out build directory
     - (if [[ ! -d "builds" ]]; then mkdir builds; fi)
     - cd builds
     - (if [[ ! -d "VERA" ]]; then git clone git@code-int.ornl.gov:CASL/VERA; fi)
@@ -31,6 +34,7 @@ before_script:
     - cd ${BASE_VERA_DIR}
     - echo ${BASE_VERA_DIR}
     - ls -lrt 
+#set up links to add package source to full source directory
     - (if [[ -d "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)
     - (if [[ ! -L "${PACKAGE_TEST}" ]]; then ln -s ${SRC_DIR} VERAInExt; fi)
 
