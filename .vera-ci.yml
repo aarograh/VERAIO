@@ -87,7 +87,8 @@ gnu-debug:
     - CI_RUN_ONLY=CHECKIN
     - echo $CI_COMMIT_REF_NAME        
     - echo "triggering downstream build"
-    - if git ls-remote --heads git@code-int.ornl.gov:CASL/VERA $CI_COMMIT_REF_NAME | wc -l >/dev/null; then BRANCH=$CI_COMMIT_REF_NAME; else BRANCH=master; fi
+    - if git ls-remote --heads git@code-int.ornl.gov:CASL/VERA $CI_COMMIT_REF_NAME | wc -l >/dev/null; then BRANCH=${CI_COMMIT_REF_NAME}; else BRANCH=master; fi
+    - echo "${BRANCH}"
     rules:
         - if: $CI_MERGE_REQUEST_ID  
     tags:
