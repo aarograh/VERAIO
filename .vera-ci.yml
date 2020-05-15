@@ -87,6 +87,7 @@ gnu-debug:
     - CI_RUN_ONLY=CHECKIN
     - echo $CI_COMMIT_REF_NAME        
     - echo "triggering downstream build"
+     if git ls-remote --heads git@code-int.ornl.gov:CASL/VERA $CI_COMMIT_REF_NAME | wc -l >/dev/null; then BRANCH=$CI_COMMIT_REF_NAME; else BRANCH=master"; fi
     rules:
         - if: $CI_MERGE_REQUEST_ID  
     tags:
@@ -98,10 +99,11 @@ trigger_build:
         CI_RUN_ONLY: "CHECKIN"
         CI_VERAInExt_REF: $CI_COMMIT_REF_NAME
         PACKAGE_TEST: VERAInExt
-        PACKAGE_ENABLES: "-DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON" 
+        VERA_ENABLES: "-DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON"
+        VERA_BRANCH:  $BRANCH
     trigger: 
         project: CASL/VERA
-        branch: downstream_test
+        branch: $BRANCH
         strategy: depend
     rules:
         - if: $CI_MERGE_REQUEST_ID
