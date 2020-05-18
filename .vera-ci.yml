@@ -80,15 +80,16 @@ gnu-debug:
     - rm -rf do-configure
     - ln -s ${BASE_VERA_DIR}/cmake/std/gcc-5.4.0/do-configure.MPI_RELEASE_DEBUG_SHARED do-configure
     - rm -rf CMake*
+#Base Configure
     - ecc ./do-configure -DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON
     - ecc make -j16
     - ecc ctest -j28
     - cd ${BASE_VERA_DIR}
     - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)
     - CI_RUN_ONLY=CHECKIN
-    - echo $CI_COMMIT_REF_NAME        
-    - echo "triggering downstream build"
+# Checking for available VERA branches for future development
     - if git ls-remote --heads git@code-int.ornl.gov:CASL/VERA $CI_COMMIT_REF_NAME | wc -l >/dev/null; then BRANCH=${CI_COMMIT_REF_NAME}; else BRANCH=master; fi
+# VERA Branch Check
     - echo "${BRANCH}"
     rules:
         - if: $CI_MERGE_REQUEST_ID  
