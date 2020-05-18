@@ -69,6 +69,7 @@ gnu-debug:
         CTEST_PARALLEL_LEVEL: "32"
         DART_TESTING_TIMEOUT: "3600"
         BLD_NAME: "gnu_release_debug"
+        VERA_BRANCH: $BRANCH
     stage: test
     script:
     - SRC_DIR=`pwd`
