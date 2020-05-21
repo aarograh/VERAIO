@@ -50,7 +50,6 @@ vmcontinuous:
     - (if [[  -d "${BLD_DIR}" ]]; then rm -rf ${BLD_DIR}; fi)
     - mkdir -p ${BLD_DIR}
     - cd $BLD_DIR
-    - rm -rf do-configure
     - ln -s ${BASE_VERA_DIR}/cmake/std/gcc-5.4.0/do-configure.MPI_RELEASE_DEBUG_SHARED do-configure
     - rm -rf CMake*
     - ecc ./do-configure -DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON -DVERA_IGNORE_MISSING_EXTRA_REPOSITORIES:BOOL=ON -DVERA_ENABLE_KNOWN_EXTERNAL_REPOS_TYPE:STRING=Continuous -DVERA_ENABLE_TESTS:BOOL=ON -DVERA_TEST_CATEGORIES:STRING=CONTINUOUS
@@ -69,7 +68,6 @@ gnu-debug:
         CTEST_PARALLEL_LEVEL: "32"
         DART_TESTING_TIMEOUT: "3600"
         BLD_NAME: "gnu_release_debug"
-        VERA_BRANCH: $BRANCH
     stage: test
     script:
     - SRC_DIR=`pwd`
