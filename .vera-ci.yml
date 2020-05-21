@@ -11,12 +11,15 @@ stages:
 before_script:
     - *ecode
     - echo "start"
+#set base development enviornment based on machine directory structure
     - if [[ -f "/data/test_gcc/gcc-5.4.0/load_dev_env.sh" ]]; then BASE_DIR="/data/gitlab-runner"; . /data/test_gcc/gcc-5.4.0/load_dev_env.sh; ENV_BASE=/data/test_gcc/gcc-5.4.0; else BASE_DIR="/localhome/gitlab-runner"; . /projects/vera/gcc-5.4.0/load_dev_env.sh; ENV_BASE=/projects/vera/gcc-5.4.0; fi 
     - ${ENV_BASE}/common_tools/gitdist pull
     - SRC_DIR=${PWD}
     - SRC_BASE_DIR=${SRC_DIR}/..
     - cd ${BASE_DIR}
+#set package
     - PACKAGE_TEST=VERAInExt
+#clean out build directory
     - (if [[ ! -d "builds" ]]; then mkdir builds; fi)
     - cd builds
     - (if [[ ! -d "VERA" ]]; then git clone git@code-int.ornl.gov:CASL/VERA; fi)
@@ -31,6 +34,7 @@ before_script:
     - cd ${BASE_VERA_DIR}
     - echo ${BASE_VERA_DIR}
     - ls -lrt 
+#set up links to add package source to full source directory
     - (if [[ -d "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)
     - (if [[ ! -L "${PACKAGE_TEST}" ]]; then ln -s ${SRC_DIR} VERAInExt; fi)
 
@@ -65,6 +69,7 @@ gnu-debug:
         CTEST_PARALLEL_LEVEL: "32"
         DART_TESTING_TIMEOUT: "3600"
         BLD_NAME: "gnu_release_debug"
+        VERA_BRANCH: $BRANCH
     stage: test
     script:
     - SRC_DIR=`pwd`
@@ -75,15 +80,17 @@ gnu-debug:
     - rm -rf do-configure
     - ln -s ${BASE_VERA_DIR}/cmake/std/gcc-5.4.0/do-configure.MPI_RELEASE_DEBUG_SHARED do-configure
     - rm -rf CMake*
+#Base Configure
     - ecc ./do-configure -DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON
     - ecc make -j16
     - ecc ctest -j28
     - cd ${BASE_VERA_DIR}
     - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)
-    - CI_RUN_ONLY=VMCONTINUOUS
-    - echo $CI_COMMIT_REF_NAME        
-    - echo "triggering downstream build"
-    - DOWNSTREAM=ON
+    - CI_RUN_ONLY=CHECKIN
+# Checking for available VERA branches for future development
+    - if git ls-remote --heads git@code-int.ornl.gov:CASL/VERA $CI_COMMIT_REF_NAME | wc -l >/dev/null; then BRANCH=${CI_COMMIT_REF_NAME}; else BRANCH=master; fi
+# VERA Branch Check
+    - echo "${BRANCH}"
     rules:
         - if: $CI_MERGE_REQUEST_ID  
     tags:
@@ -92,11 +99,15 @@ gnu-debug:
 trigger_build:
     stage: deploy
     variables:
-        CI_RUN_ONLY: "NIGHTLY"
+        CI_RUN_ONLY: "CHECKIN"
         CI_VERAInExt_REF: $CI_COMMIT_REF_NAME
+        PACKAGE_TEST: VERAInExt
+        VERA_ENABLES: "-DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON"
+        VERA_BRANCH:  $BRANCH
     trigger: 
         project: CASL/VERA
-        branch: $CI_COMMIT_REF_NAME
+        branch: downstream_test
+        strategy: depend
     rules:
         - if: $CI_MERGE_REQUEST_ID
 
