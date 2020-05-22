@@ -1684,7 +1684,7 @@ sub cellsmaps{
     my ($i,$j,$k,$m,$n);
     my (@a,@b,@c,@d);
 
-    my @MATS_RESERVED =('vacuum','mod');
+    my @MATS_RESERVED =('vacuum','mod','cool');
 
     my %OPTIONS=('cellmapname'=>'CellMap_',
 		 'cellname'=>'Cell_',
@@ -2109,7 +2109,7 @@ sub blademaps{
     my ($i,$j,$k,$m,$n);
     my (@a,@b,@c,@d);
 
-    my @MATS_RESERVED =('vacuum','mod');
+    my @MATS_RESERVED =('vacuum','mod','cool');
 
     my %OPTIONS=('cellmapname'=>'BladeType_',
                  'cellgeomname' => 'BladeGeom_',
