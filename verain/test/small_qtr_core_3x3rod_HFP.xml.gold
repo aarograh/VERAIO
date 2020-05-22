@@ -11,7 +11,7 @@
       <Parameter name="pressure" type="double" value="15.5132039025"/>
       <Parameter name="sym" type="string" value="qtr"/>
       <Parameter name="tfuel" type="double" value="900"/>
-      <Parameter name="tinlet" type="double" value="292.777777777778"/>
+      <Parameter name="tinlet" type="string" value="559.0 F"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">

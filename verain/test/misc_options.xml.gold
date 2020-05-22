@@ -27,7 +27,7 @@
       <Parameter name="thexp_tclad" type="double" value="623.15"/>
       <Parameter name="thexp_tfuel" type="double" value="875"/>
       <Parameter name="thexp_tmod" type="double" value="565.927777777778"/>
-      <Parameter name="tinlet" type="double" value="292.777777777778"/>
+      <Parameter name="tinlet" type="string" value="559.0 F"/>
       <Parameter name="title" type="string" value="Test &amp; in input - see Story # 3279"/>
     </ParameterList>
     <ParameterList name="State_2">
