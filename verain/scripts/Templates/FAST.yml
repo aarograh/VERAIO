@@ -25,13 +25,6 @@ FAST:
         - copy FAST/$flux_to_power_ratio
       _content:
 
-    mesh_clad_bot_gap_height:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy FAST/$mesh_clad_bot_gap_height
-      _content:
-
     mesh_nr:
       _pltype: parameter
       _type: int

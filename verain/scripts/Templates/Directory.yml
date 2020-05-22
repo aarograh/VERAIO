@@ -16323,26 +16323,6 @@ FAST:
       - is_float()
       - is_gt() 0
 #>
-#>   {\bf mesh\_clad\_bot\_gap\_height} bot\_gap\_height
-#>   \VERAInputTable{
-#>     name={bot\_gap\_height},
-#>     type={Float},
-#>     need={Optional},
-#>     unitsdefault={meters},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={The distance between the bottom of the fuel stack and the top of the lower clad region.},
-#>     notes={}
-#>   }
-  mesh_clad_bot_gap_height:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-#>
 #>   {\bf fuel\_pin\_input\_file\_template} fuel\_inp\_filename
 #>   \VERAInputTable{
 #>     name={fuel\_inp\_filenamee},

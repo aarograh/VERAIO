@@ -162,7 +162,6 @@
   mesh_nc = 5
   mesh_max_deltaz = 0.001
   max_deltat = 10000
-  mesh_clad_bot_gap_height = 1.52e-3
   power_file = c1.h5 c2.h5 c3.h5
   cycle_xml = c1.xml c2.xml c3.xml
   shuffle_xml = c2_shuffle.xml c3_shuffle.xml
