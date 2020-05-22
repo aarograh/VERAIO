@@ -171,7 +171,6 @@
     <Parameter name="initial_plenum_pressure" type="double" value="2.0e6"/>
     <Parameter name="initial_plenum_pressure_ifba" type="double" value="1.0e6"/>
     <Parameter name="max_deltat" type="double" value="10000"/>
-    <Parameter name="mesh_clad_bot_gap_height" type="double" value="1.52e-3"/>
     <Parameter name="mesh_max_deltaz" type="double" value="0.001"/>
     <Parameter name="mesh_na" type="int" value="12"/>
     <Parameter name="mesh_nc" type="int" value="5"/>
