@@ -3557,7 +3557,7 @@ ASSEMBLY:
     <<: *dtlist
     _content:
     _check:
-      - arraysize()==3
+      - arraysize()<=5
       - is_string(nth(0,()))
       - nth(1,())>0
       - nth(2,())>=0
