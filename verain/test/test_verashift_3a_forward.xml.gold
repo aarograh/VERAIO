@@ -272,6 +272,7 @@
     <ParameterList name="broaden_db">
       <Parameter name="delta_t" type="double" value="1.0"/>
       <Parameter name="energy_tol" type="double" value="1.0e-9"/>
+      <Parameter name="kinematics" type="bool" value="true"/>
       <Parameter name="temperature_tol" type="double" value="5.0"/>
       <Parameter name="union_energy" type="bool" value="true"/>
     </ParameterList>

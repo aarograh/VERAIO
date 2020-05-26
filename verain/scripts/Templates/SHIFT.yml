@@ -61,6 +61,13 @@ SHIFT:
             - copy SHIFT/$delta_t
           _content:
 
+        kinematics:
+          _pltype: parameter
+          _type: bool
+          _do:
+            - copy SHIFT/$kinematics
+          _content:
+
         energy_tol:
           _pltype: parameter
           _type: double
