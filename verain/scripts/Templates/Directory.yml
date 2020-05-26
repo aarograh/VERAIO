@@ -14938,6 +14938,27 @@ MAMBA:
       - is_float()
       - is_gt() 0
 #>
+#>   {\bf LTB\_dissolve\_scale} LTB\_dissolve\_scale
+#>   \VERAInputTable{
+#>     name={LTB\_dissolve\_scale},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={$\geq 0,\leq 1$},
+#>     limitations={},
+#>     description={Lithium Tetraborate (LTB) dissolution parameter.},
+#>     notes={0 to disable dissolution. 0.5 recommened for LTB dissolution.}
+#>   }
+  LTB_dissolve_scale:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+      - is_leq() 1.0
+#>
 #>   {\bf chimney\_htc} htc
 #>   \VERAInputTable{
 #>     name={htc},
