@@ -94,6 +94,13 @@ MAMBA:
         - copy MAMBA/$CRUD_dep_frac
       _content:
 
+    LTB_dissolve_scale:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA/$LTB_dissolve_scale
+      _content:
+
     chimney_htc:
       _pltype: parameter
       _type: double
