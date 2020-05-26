@@ -205,6 +205,7 @@
   seed                  123456
 ! these really only apply when doing coupling with CTF
   temperature_tol       5.0
+  kinematics            true
   union_energy          true
   delta_t               1.0
   energy_tol            1.0e-9

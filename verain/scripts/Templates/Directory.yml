@@ -4908,7 +4908,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Cross-section doppler broadening for temperature},
 #>     notes={}
@@ -4947,7 +4947,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={true},
-#>     valuesapplicable={},
+#>     valuesapplicable={false},
 #>     limitations={},
 #>     description={Unionize lower and upper library temperature energy grids},
 #>     notes={}
@@ -5000,6 +5000,26 @@ SHIFT:
       - is_gt() 0
       - is_lt() 1
 #>
+#>   {\bf kinematics} kinematics
+#>   \VERAInputTable{
+#>     name={kinematics},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true},
+#>     limitations={},
+#>     description={Apply broadening to collision data},
+#>     notes={}
+#>   }
+  kinematics:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf dbrc} dbrc
 #>   \VERAInputTable{
 #>     name={dbrc},
@@ -5008,7 +5028,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Apply doppler broadening resonance correction},
 #>     notes={}
@@ -5068,7 +5088,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Tally micro reactions in eigenvalue mode},
 #>     notes={Eigenvalue mode only}
@@ -5088,7 +5108,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={true},
-#>     valuesapplicable={},
+#>     valuesapplicable={false},
 #>     limitations={},
 #>     description={Perform MC transport},
 #>     notes={}
@@ -5108,7 +5128,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={true},
-#>     valuesapplicable={},
+#>     valuesapplicable={false},
 #>     limitations={},
 #>     description={Do Shift output},
 #>     notes={}
@@ -5164,7 +5184,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Tally the photon flux in each pincell},
 #>     notes={}
@@ -5324,7 +5344,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={true},
-#>     valuesapplicable={},
+#>     valuesapplicable={false},
 #>     limitations={},
 #>     description={Output HDF5 files of raytraced geometry (initial) and compositions (each state)},
 #>     notes={}
@@ -5344,7 +5364,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Output the initial fission source for each state},
 #>     notes={}
@@ -5364,7 +5384,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Output the external source for each state},
 #>     notes={}
@@ -5384,7 +5404,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Output micro reaction tallies},
 #>     notes={}
@@ -5404,7 +5424,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Output the weight windows, if used},
 #>     notes={}
@@ -5502,7 +5522,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Pull in the pressure vessel from the VERA geometry},
 #>     notes={Applicable to excore only}
@@ -5564,7 +5584,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Use the pole data for on-the-fly doppler broadening},
 #>     notes={}
@@ -5584,7 +5604,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={true},
-#>     valuesapplicable={},
+#>     valuesapplicable={false},
 #>     limitations={},
 #>     description={Use the fission source provided by MPACT},
 #>     notes={}
@@ -5604,7 +5624,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={true},
-#>     valuesapplicable={},
+#>     valuesapplicable={false},
 #>     limitations={},
 #>     description={Use the external source provided by MPACT},
 #>     notes={}
@@ -5882,7 +5902,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Homogenize according to pin locations or assembly locations},
 #>     notes={Applicable when homog\_type is rings; Experimental capability}
@@ -6078,7 +6098,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={true},
-#>     valuesapplicable={},
+#>     valuesapplicable={false},
 #>     limitations={},
 #>     description={Make all pincells unique compositions},
 #>     notes={}
@@ -6197,7 +6217,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Output adjoint flux to Shift HDF5 file and adjoint source to a separate HDF5 file},
 #>     notes={Applicable to hybrid simulations}
@@ -6217,7 +6237,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={true},
-#>     valuesapplicable={},
+#>     valuesapplicable={false},
 #>     limitations={},
 #>     description={Perform adjoint solve},
 #>     notes={Applicable to hybrid simulations}
@@ -6357,7 +6377,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Partition energy over upscatter groups only},
 #>     notes={Applicable to hybrid simulations}
@@ -6377,7 +6397,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={true if using 35 nodes or fewer},
-#>     valuesapplicable={},
+#>     valuesapplicable={false},
 #>     limitations={},
 #>     description={Save fulcrum string as file},
 #>     notes={Applicable to hybrid simulations}
@@ -6437,7 +6457,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Iterate over downscatter groups},
 #>     notes={Applicable to hybrid simulations}
@@ -6457,7 +6477,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Downscatter only},
 #>     notes={Applicable to hybrid simulations}
@@ -6801,7 +6821,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Homogenize material in cells},
 #>     notes={}
@@ -6821,7 +6841,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Use outscatter-corrected diffusion coefficient to reduce memory in solve},
 #>     notes={}
@@ -6841,7 +6861,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={},
+#>     valuesapplicable={true},
 #>     limitations={},
 #>     description={Partition mesh over pincells},
 #>     notes={}
