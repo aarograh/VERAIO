@@ -3267,7 +3267,7 @@ ASSEMBLY:
       - fall(sub{is_geq(shift,0)},stride(1,2,()))
       - is_strictlyincreasing(stride(1,2,()))
 #>
-#>   {\bf modden} label material mass height
+#>   {\bf grid} label material height mass
 #>   \VERAInputTable{
 #>     name={label},
 #>     type={Character String},
@@ -3293,18 +3293,6 @@ ASSEMBLY:
 #>     notes={See Section 2.3.5 for examples.}
 #>   }
 #>   \VERAInputTable{
-#>     name={mass},
-#>     type={Float},
-#>     need={Optional},
-#>     unitsdefault={g},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={Grid mass for this grid type.},
-#>     notes={See Section 2.3.5 for examples.}
-#>   }
-#>   \VERAInputTable{
 #>     name={height},
 #>     type={Float},
 #>     need={Optional},
@@ -3314,6 +3302,18 @@ ASSEMBLY:
 #>     valuesapplicable={},
 #>     limitations={},
 #>     description={Grid height for this grid type.},
+#>     notes={See Section 2.3.5 for examples.}
+#>   }
+#>   \VERAInputTable{
+#>     name={mass},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={g},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Grid mass for this grid type.},
 #>     notes={See Section 2.3.5 for examples.}
 #>   }
   grid:
