@@ -38,6 +38,13 @@ MAMBA:
         - copy MAMBA/$ksnb_Fe2O4
       _content:
 
+    D_mult:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA/$D_mult
+      _content:
+
     D_Ni:
       _pltype: parameter
       _type: double
@@ -99,6 +106,13 @@ MAMBA:
       _type: double
       _do:
         - copy MAMBA/$LTB_dissolve_scale
+      _content:
+
+    chimney_gamma_l_c:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA/$chimney_gamma_l_c
       _content:
 
     chimney_htc:

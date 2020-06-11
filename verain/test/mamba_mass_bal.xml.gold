@@ -239,7 +239,9 @@
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
   <ParameterList name="MAMBA">
+    <Parameter name="D_mult" type="double" value="0.267"/>
     <Parameter name="LTB_dissolve_scale" type="double" value="0.5"/>
+    <Parameter name="chimney_gamma_l_c" type="double" value="3.5e-2"/>
     <Parameter name="sg_age" type="double" value="5.0"/>
     <Parameter name="sg_mass" type="double" value="0.1"/>
     <Parameter name="sg_mult" type="double" value="1.0"/>

@@ -204,4 +204,7 @@
   steam_generator_age   5.0  ! yr
   sg_mass  0.1  ! kg
   sg_mult  1.0
+  D_mult   0.267
   LTB_dissolve_scale 0.5
+  chimney_gamma_l_c  3.5e-2
+
