@@ -14778,6 +14778,26 @@ MAMBA:
       - is_float()
       - is_gt() 0
 #>
+#>   {\bf D\_mult} diffusion\_coefficient\_prefactor
+#>   \VERAInputTable{
+#>     name={diffusion\_coefficient\_prefactor},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Diffusion coefficient prefactor for all species},
+#>     notes={}
+#>   }
+  D_mult:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
 #>   {\bf D\_Ni} diffusion\_coefficient
 #>   \VERAInputTable{
 #>     name={diffusion\_coefficient},
@@ -14958,6 +14978,26 @@ MAMBA:
       - is_float()
       - is_geq() 0
       - is_leq() 1.0
+#>
+#>   {\bf chimney\_gamma\_l\_c} chimney\_gamma\_l\_c
+#>   \VERAInputTable{
+#>     name={chimney\_gamma\_l\_c},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Species chimney liquid carryover fraction},
+#>     notes={}
+#>   }
+  chimney_gamma_l_c:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
 #>
 #>   {\bf chimney\_htc} htc
 #>   \VERAInputTable{
