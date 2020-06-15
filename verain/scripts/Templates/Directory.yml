@@ -9593,6 +9593,29 @@ MPACT:
     _check:
       - is_string()
       - in_dictionary() true false
+
+#>
+#>   {\bf refl\_extra\_assembly\_layers} refl\_extra\_assembly\_layers
+#>   \VERAInputTable{
+#>     name={refl\_extra\_assembly\_layers},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={<int>,all,default},
+#>     limitations={any integer value must be positive},
+#>     description={This card is used to specify how many assembly layers will be added
+#>        to the radial reflector beyond the single layer added for baffle representation.},
+#>     notes={If a large value is entered that exceeds what is necessary to fully represent
+#>            the vessel, only as many layers as needed will be added.}
+#>   }
+  refl_extra_assembly_layers:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+
 #>
 #>   {\bf refl\_highres} refl\_highres
 #>   \VERAInputTable{
