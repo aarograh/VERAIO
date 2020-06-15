@@ -53,6 +53,13 @@ MPACT:
         - copy MPACT/$refl_no_added_modules
       _content:
 
+    refl_extra_assembly_layers:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$refl_extra_assembly_layers
+      _content:
+
     refl_highres:
       _pltype: parameter
       _type: string
