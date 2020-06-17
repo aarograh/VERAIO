@@ -791,27 +791,6 @@ MPACT:
             - copy MPACT/$init_from_STH_outers
           _content:
 
-        depthAnderson:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy MPACT/$anderson_options:0
-          _content:
-
-        mixAnderson:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy MPACT/$anderson_options:1
-          _content:
-
-        startAnderson:
-          _pltype: parameter
-          _type: int
-          _do:
-            - copy MPACT/$anderson_options:2
-          _content:
-
         ctf_basename:
           _pltype: parameter
           _type: string
