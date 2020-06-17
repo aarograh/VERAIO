@@ -1159,7 +1159,7 @@ STATE:
 #>   {\bf bank\_wd} bank\_wd
 #>   \VERAInputTable{
 #>     name={bank\_wd},
-#>     type={List of Free Form Character Strings paired with and Intefer and Float},
+#>     type={List of Free Form Character Strings paired with an Integer and Float},
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
@@ -9283,6 +9283,125 @@ COUPLING:
       - is_gt() 0
       - is_leq() 1.0
 #>
+#>   {\bf nonlinear\_coupling\_method} unknown\_quantity method
+#>   \VERAInputTable{
+#>     name={unknown\_quantity},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={pin\_powers, mod\_dens},
+#>     limitations={},
+#>     description={Specifies which unknown quantities the user would like to choose the solution
+#>                  procedure for.},
+#>     notes={Only effective for coupled (multiphysics) simulations. If the
+#>            \texttt{nonlinear\_coupling\_method} card is not used all unknowns default to being
+#>            solved with Picard iterations.}
+#>   }
+#>   \VERAInputTable{
+#>     name={method},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={picard},
+#>     valuesapplicable={anderson},
+#>     limitations={},
+#>     description={Solution method to be used for the specified coupling unknown.},
+#>     notes={Only effective for coupled (multiphysics) simulations}
+#>   }
+  nonlinear_coupling_method:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%2==0
+      - fall(sub{is_word(shift)},())
+      - fall(sub{in_dictionary(shift,'pin_powers','mod_dens')},stride(0,2,()))
+      - fall(sub{in_dictionary(shift,'picard','anderson')},stride(1,2,()))
+#>
+#>   {\bf anderson\_options} unknown\_quantity depth mixing\_parameter starting\_iteration
+#>   \VERAInputTable{
+#>     name={unknown\_quantity},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={pin\_powers, mod\_dens},
+#>     limitations={},
+#>     description={Specifies which unknown quantities the user would like to set the anderson
+#>                  solver control parameters for.},
+#>     notes={Only effective for coupled (multiphysics) simulations and if anderson was
+#>            chosen for the \texttt{nonlinear\_coupling\_method} corresponding to the specified
+#>            \texttt{unknown\_quantity}}
+#>   }
+#>   \VERAInputTable{
+#>     name={depth},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={$ \ge1$, $<1000$},
+#>     limitations={},
+#>     description={In Anderson Acceleration the \texttt{depth} is the number of previous iterates
+#>                  the solver should use in generating better future iterates. Larger choices
+#>                  for \texttt{depth} result in more aggressive acceleration, however, this can lead
+#>                  to instability and slower speed overall for highly nonlinear problems.
+#>                  A \texttt{depth} of 0 is equivalent to classic Picard iteration.},
+#>     notes={Only effective for coupled (multiphysics) simulations}
+#>   }
+#>   \VERAInputTable{
+#>     name={mixing\_parameter},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.5},
+#>     valuesapplicable={$ >0.0$, $\le1.0$},
+#>     limitations={},
+#>     description={The \texttt{mixing\_parameter} can be viewed as a damping or under-relaxation
+#>                  factor in the Anderson solution scheme. Obviously this means larger choices for
+#>                  it can result in more aggressive acceleration, though that does not always
+#>                  translate into better performance. The optimum choice for it will be problem
+#>                  dependant, with the default of 0.5 being quite conservative.},
+#>     notes={Only effective for coupled (multiphysics) simulations}
+#>   }
+#>   \VERAInputTable{
+#>     name={starting\_iteration},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={$ >0$, $<1000$},
+#>     limitations={},
+#>     description={The \texttt{starting\_iteration} is the iteration the user would like Anderson
+#>                  to actually start accelerating the chosen unknown. While the iteration
+#>                  count is below this number the Anderson solver will proceed like classic
+#>                  Picard using the \texttt{mixing\_parameter} as an under-relaxation factor. Normally
+#>                  the default choice of 1 is best.},
+#>     notes={Only effective for coupled (multiphysics) simulations}
+#>   }
+  anderson_options:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%4==0
+      - fall(sub{in_dictionary(shift,'pin_powers','mod_dens')},stride(0,4,()))
+      - fall(sub{is_int(shift)},stride(1,4,()))
+      - fall(sub{is_float(shift)},stride(2,4,()))
+      - fall(sub{is_int(shift)},stride(3,4,()))
+      - fall(sub{0<=(shift)},stride(1,4,()))
+      - fall(sub{0.0<(shift)},stride(2,4,()))
+      - fall(sub{0<(shift)},stride(3,4,()))
+      - fall(sub{1000>(shift)},stride(1,4,()))
+      - fall(sub{1.0=>(shift)},stride(2,4,()))
+      - fall(sub{1000>(shift)},stride(3,4,()))
+#>
 #>   {\bf maxiter} maxiter
 #>   \VERAInputTable{
 #>     name={maxiter},
@@ -12012,65 +12131,6 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
-#>
-#>   {\bf th\_nonlinear\_solver} th\_nonlinear\_solver
-#>   \VERAInputTable{
-#>     name={th\_nonlinear\_solver},
-#>    type={Fixed Character String},
-#>    need={Optional},
-#>    unitsdefault={},
-#>    unitsother={},
-#>    valuedefault={\texttt{picard}},
-#>    valuesapplicable={\texttt{picard}, \texttt{anderson}                               %
-#>      \newline\newline                                                                 %
-#>      The \texttt{picard} option uses a direct underrelaxation of the power.           %
-#>      The \texttt{anderson} option uses the Anderson acceleration method in            %
-#>      Trilinos to accelerate on the power. },
-#>    limitations={For \texttt{anderson} the \texttt{anderson\_options} card should      %
-#>      be used to set parameters.},
-#>    description={This card is used to indicate which nonlinear solver should be        %
-#>      used for the coupling.},
-#>    notes={For the \texttt{anderson} option, MPACT must be configured with Trilinos.   %
-#>      The \texttt{picard} option may regardless of how MPACT is configured.}
-#>   }
-  th_nonlinear_solver:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() picard anderson
-#>
-#>   {\bf anderson\_options} anderson\_options
-#>   \VERAInputTable{
-#>     name={anderson\_options},
-#>    type={Integer, Floating-Point Real Number, Integer},
-#>    need={Optional},
-#>    unitsdefault={},
-#>    unitsother={},
-#>    valuedefault={2, 0.5, 1},
-#>    valuesapplicable={                                                                 %
-#>      The \texttt{depth} can be any non-negative integer which represents              %
-#>      depth of the Anderson solver.                                                    %
-#>      The \texttt{mixing parameter} must be greater than 0 and less than or            %
-#>      equal to 1.                                                                      %
-#>      The \texttt{starting iteration} must be a positive integer which represents      %
-#>      how many iterations of picard to perform before starting anderson.},
-#>    limitations={},
-#>    description={This card is used to define the solver parameters for the             %
-#>      Anderson nonlinear solver.},
-#>    notes={}
-#>   }
-  anderson_options:
-    <<: *dtlist
-    _content:
-    _check:
-      - arraysize()==3
-      - is_int(nth(0,()))
-      - is_float(nth(1,()))
-      - is_int(nth(2,()))
-      - nth(0,())>=0
-      - nth(1,())>0
-      - nth(2,())>0
 #>
 #>   {\bf shielder\_th} shielder\_th
 #>   \VERAInputTable{

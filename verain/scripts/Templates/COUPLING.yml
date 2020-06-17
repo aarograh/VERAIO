@@ -73,6 +73,50 @@ COUPLING:
         - copy COUPLING/$rlx_crud
       _content:
 
+    nonlinear_coupling_method:
+      _pltype: list
+      _content:
+        unknowns:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray COUPLING/$nonlinear_coupling_method,select=>even
+          _content:
+        method:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray COUPLING/$nonlinear_coupling_method,select=>odd
+          _content:
+
+    anderson_options:
+      _pltype: list
+      _content:
+        unknowns:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray COUPLING/$anderson_options,start=>0,stride=>4
+          _content:
+        depth:
+          _pltype: array
+          _type: int
+          _do:
+            - copyarray COUPLING/$anderson_options,start=>1,stride=>4
+          _content:
+        mixing_parameter:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray COUPLING/$anderson_options,start=>2,stride=>4
+          _content:
+        start:
+          _pltype: array
+          _type: int
+          _do:
+            - copyarray COUPLING/$anderson_options,start=>3,stride=>4
+          _content:
+
     maxiter:
       _pltype: parameter
       _type: int
@@ -86,4 +130,3 @@ COUPLING:
       _do:
         - copy COUPLING/$read_restart
       _content:
-
