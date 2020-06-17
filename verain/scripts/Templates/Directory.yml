@@ -5596,6 +5596,26 @@ SHIFT:
       - is_word()
       - in_dictionary() true false
 #>
+#>   {\bf use\_reduced\_xs} use\_reduced\_xs
+#>   \VERAInputTable{
+#>     name={use\_reduced\_xs},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true},
+#>     limitations={Only applies to CADIS},
+#>     description={Use reduced number of multigroup cross sections for adjoint},
+#>     notes={}
+#>   }
+  use_reduced_xs:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf use\_fission\_source} use\_fission\_source
 #>   \VERAInputTable{
 #>     name={use\_fission\_source},
