@@ -343,6 +343,7 @@
     <Parameter name="transfer" type="string" value="all"/>
     <Parameter name="transport" type="string" value="ce"/>
     <Parameter name="use_pole_data" type="bool" value="true"/>
+    <Parameter name="use_reduced_xs" type="bool" value="true"/>
     <Parameter name="verbosity" type="string" value="high"/>
   </ParameterList>
   <ParameterList name="EDITS">

@@ -206,6 +206,7 @@
   src_disc_max_samples  100000
   ww_decomp             full
   use_pole_data         true
+  use_reduced_xs        true
 ! hybrid_db
   output_adjoint        true
   eq_set                sc
