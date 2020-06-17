@@ -19,8 +19,6 @@ use Exporter;
 	 'gen_dia_list',
 	 'fullcellmap',
 	 'fullcellmap_rot',
-	 'extract_map',
-	 'map_on_core',
 	 'core_map'
     );
 
@@ -319,6 +317,7 @@ sub fullcellmap {
     my @b=();
 
     my @a=@{ $aref };
+    my $na=@a;
     my $qtrsize =qtr_size($npin);
     my $octsize =oct_size($npin);
     my $fullsize=full_size($npin);
@@ -338,7 +337,7 @@ sub fullcellmap {
 	@b=@a;
     }
     else{
-	die "fullcellmap: invalid map size ($#a) for map dimension ($npin): $qtrsize, $octsize, $diasize, \n";
+	die "fullcellmap: invalid map size ($na) for map size ($npin): [$qtrsize, $octsize, $diasize], [@a]\n";
     }
 
     return @b;
@@ -349,6 +348,7 @@ sub fullcellmap_rot {
     my @b=();
 
     my @a=@{ $aref };
+    my $na=@a;
     my $qtrsize =qtr_size($npin);
     my $octsize =oct_size($npin);
     my $fullsize=full_size($npin);
@@ -364,40 +364,40 @@ sub fullcellmap_rot {
 	@b=@a;
     }
     else{
-	die "fullcellmap_rot: invalid map $npin [@a]\n";
+	die "fullcellmap_rot: invalid map size ($na) for map size ($npin): [$qtrsize, $octsize, $fullsize], [@a]\n";
+#	die "fullcellmap_rot: invalid map $npin $na [$octsize, $qtrsize,$fullsize] [@a]\n";
     }
     return @b;
 }
 
 sub extract_map{
-    my($ary,$n,$m,$maptype)=@_;
+    my($ary,$n,$maptype)=@_;
     my $na=@{ $ary };
 
-    die "extract_map: indices not valid $n, $m, $na\n"
+    die "extract_map: indices not valid $n, $na\n"
 	if ($n <= 0 || 
-	    $m <= 0 || 
-	    ($n*$m > $na)
+	    ($n*$n > $na)
 	);
 
     my $nhalf=int($n/2);
-    my $mhalf=int($m/2);
-    my $icenter= $nhalf * $m + $mhalf;  # central location
+    my $icenter= $nhalf * $n + $nhalf;  # central location
 
-    $icenter += ($n%2) ? 0 : 1;
+    #    $icenter += ($n%2) ? 0 : 1;
+    $nhalf -= ($n%2) ? 0 : 1;
 
     my @result = ();
     if($maptype eq 'OCTANT'){
 	for(my $i=0; $i<=$nhalf;$i++){
 	    for(my $j=0; $j<=$i;$j++){
-		push @result, $ary->[$icenter+$i*$m+$j];
+		push @result, $ary->[$icenter+$i*$n+$j];
 	    }
 	}
 	return wantarray ? @result : \@result;
     }
     if($maptype eq 'QUARTER'){
 	for(my $i=0; $i<=$nhalf;$i++){
-	    for(my $j=0; $j<=$mhalf;$j++){
-		push @result, $ary->[$icenter+$i*$m+$j];
+	    for(my $j=0; $j<=$nhalf;$j++){
+		push @result, $ary->[$icenter+$i*$n+$j];
 	    }
 	}
 	return wantarray ? @result : \@result;
@@ -411,25 +411,24 @@ sub map_on_core{
     # writes map $ary2 onto core map $ary
     # map $ary is derived from original map by
     # filling it in by core map
-    my($ary,$n,$m,$ary2,$maptype)=@_;
+    my($ary,$n,$ary2,$maptype)=@_;
     my $na=@{ $ary };
     my @ary2  = @{ $ary2 };
     my $t;
 
-    die "map_on_core: indices not valid $n, $m, $na\n"
+    die "map_on_core: indices not valid $n, $na\n"
 	if ($n <= 0 || 
-	    $m <= 0 || 
-	    ($n*$m > $na)
+	    ($n*$n > $na)
 	);
 
     die "map_on_core: array to apply is empty\n"
 	unless(@ary2);
 
     my $nhalf=int($n/2);
-    my $mhalf=int($m/2);
-    my $icenter= $nhalf * $m + $mhalf;  # central location
+    my $icenter= $nhalf * $n + $nhalf;  # central location
 
-    $icenter += ($n%2) ? 0 : 1;
+#    $icenter += ($n%2) ? 0 : 1;
+    $nhalf -= ($n%2) ? 0 : 1;
 
     if($maptype eq 'OCTANT'){
 	for(my $i=0; $i<=$nhalf;$i++){
@@ -438,19 +437,19 @@ sub map_on_core{
 		unless(defined($t)){
 		    die "map_on_core: missing entry in OCTANT map to apply\n";
 		}
-		$ary->[$icenter+$i*$m+$j]=$t;
+		$ary->[$icenter+$i*$n+$j]=$t;
 	    }
 	}
 	return 1;
     }
     if($maptype eq 'QUARTER'){
 	for(my $i=0; $i<=$nhalf;$i++){
-	    for(my $j=0; $j<=$mhalf;$j++){
+	    for(my $j=0; $j<=$nhalf;$j++){
 		$t = shift @ary2;
 		unless(defined($t)){
 		    die "map_on_core: missing entry in OCTANT map to apply\n";
 		}
-		$ary->[$icenter+$i*$m+$j]=$t;
+		$ary->[$icenter+$i*$n+$j]=$t;
 	    }
 	}
 	return 1;
@@ -475,9 +474,9 @@ sub core_map{
     replace_in_array(\@core,0,'_EMPTY_');
     
     # get octant and quarter maps from core shape
-    my @core_map_o=extract_map(\@core,$n,$n,'OCTANT');
+    my @core_map_o=extract_map(\@core,$n,'OCTANT');
     my $noct      =times_in_array(\@core_map_o,'_USED_');
-    my @core_map_q=extract_map(\@core,$n,$n,'QUARTER');
+    my @core_map_q=extract_map(\@core,$n,'QUARTER');
     my $nquad     =times_in_array(\@core_map_q,'_USED_');
 
     # elements in the other map
@@ -495,14 +494,15 @@ sub core_map{
 	$IGNORE=$OPTIONS{ignore};
     }
     
-  MAPS: { 
+  MAPS: {
+      print "core_map: $nmmap $noct $nquad\n"  if get_verbose();
       if($nmmap == $noct){
 	  @ccmap=@core_map_o;
 	  @resmap=fillin(\@ccmap, $mmap, '_USED_');
 
 	  if(exists($OPTIONS{expand}) && $OPTIONS{expand} == 0){
 	      replace_in_array(\@fullm,'_USED_',$IGNORE);
-	      map_on_core(\@fullm,$n,$n,\@resmap,'OCTANT');
+	      map_on_core(\@fullm,$n,\@resmap,'OCTANT');
 	      last MAPS;
 	  }
 
@@ -518,9 +518,12 @@ sub core_map{
 	  @ccmap=@core_map_q;
 	  @resmap=fillin(\@ccmap, $mmap, '_USED_');
 
+          $nresmap=@resmap;
+#          print "resmap ($nresmap): [@resmap]\n";
+      
 	  if(exists($OPTIONS{expand}) && $OPTIONS{expand} == 0){
 	      replace_in_array(\@fullm,'_USED_',$IGNORE);
-	      map_on_core(\@fullm,$n,$n,\@resmap,'QUARTER');
+	      map_on_core(\@fullm,$n,\@resmap,'QUARTER');
 	      last MAPS;
 	  }
 

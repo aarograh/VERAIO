@@ -36,7 +36,6 @@ use Exporter;
 	 'PLkeys',
 	 'PLdelete',
 	 'PLkeyon',
-	 'rethread',
 	 'PLtrim'
     );
 
@@ -606,42 +605,6 @@ sub PLlist{
 
 }
 
-sub rethread {
-    my ($pref,$keyname,$reth_key)=@_;
-    my (@parents,@children);
-
-    my $ref=$pref->{$keyname};
-
-    my %DIR=PLkeys($ref);
-    foreach (keys %DIR){
-	next if /^_/;
-	if( /^$reth_key/ ){
-	    push @parents, $_;
-	}
-	else{
-	    push @children, $_;
-	}
-    }
-
-    print  "parents: @parents\n" if get_verbose();
-    print  "children: @children\n" if get_verbose();
-
-    my %clones;
-    my $ichild;
-    foreach $ichild (@children){
-	my $child_ref=$DIR{$ichild};
-	my $child_copy_ref=clone($child_ref);
-	PLdelete($ref,$ichild);
-	$clone{$ichild}=$child_copy_ref;
-    }
-
-    foreach my $iparent (@parents){
-	foreach $ichild (@children){
-	    PLkeyon($DIR{$iparent},$clone{$ichild},$ichild);
-	}
-    }
-}
-
 sub PLtrim{
     my ($ref,$indent)=@_;
 
@@ -688,40 +651,6 @@ sub dbcopy{
     my $t=key_defined($SOURCE_DB,@path);
 
     return $t;
-}
-
-sub dbcopy1{
-    my( $home, $path, %userparam ) = @_ ;
-    my %OPTIONS;
-    my @result;
-
-    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
-    {
-	$OPTIONS{$key}=$value;
-    }
-    my $def=undef;
-    if(exists($OPTIONS{apply})){
-	$def = eval "sub { return $OPTIONS{apply};}";
-	die "dbcopy: invalid apply string $OPTIONS{apply}\n" unless ref $def eq 'CODE';
-    }
-
-    my @path=parse_path($path);
-    my $t=key_defined($SOURCE_DB,@path);
-
-    return $t unless defined($t);
-
-    if(ref $t eq 'ARRAY'){
-	foreach (@{ $t }){
-	    push @result, $def ? $def->($_) : $_;
-	}
-	return \@result;
-    }
-    elsif(ref $t eq 'HASH'){
-	die "dbcopy: HASH copy not supported\n";
-    }
-    else{
-	return $def ? $def->($t) : $t;
-    }
 }
 
 sub dbcopy2{
@@ -1039,32 +968,6 @@ sub setdb{
 #	$SOURCE_DB=$MAIN_DB;
     }
     return undef;
-}
-
-sub gridmap{
-    my ($home,$basename,@paths)=@_;
-
-    my @mats;
-    my @mats_names;
-    foreach my $ipath (@paths){
-	my @apaths=find_keys($SOURCE_DB,$ipath);
-	my @names =find_keys($SOURCE_DB,$ipath,undef,strings=>'true');
-	push @mats, @apaths if @apaths;
-	push @mats_names, @names if @names;
-    }
-
-    foreach my $imat_path (@mats){
-	my @keypath=@{ $imat_path };
-	my $keyname=$keypath[$#keypath];
-	my @content=@{ key_defined($SOURCE_DB,@keypath,'_content') };
-
-	my $mat_ref=&key_on_list($home,$basename.$keyname);
-
-	&key_on_parameter($mat_ref,'label','string',$keyname);
-	&key_on_parameter($mat_ref,'material','string',$content[0]);
-	&key_on_parameter($mat_ref,'mass','double',$content[1]);
-	&key_on_parameter($mat_ref,'height','double',$content[2]);
-    }
 }
 
 sub matmap{
