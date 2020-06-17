@@ -11962,18 +11962,21 @@ MPACT:
 #>    unitsother={},
 #>    valuedefault={\texttt{simplified} (if not configured with COBRA-TF)                %
 #>      \emph{or} \texttt{ctf} (if configured with COBRA-TF)},
-#>    valuesapplicable={\texttt{ctf\_external}, \texttt{user\_defined}, \texttt{none}     %
+#>    valuesapplicable={\texttt{ctf\_external}, \texttt{tiamat}, \texttt{user\_defined}, %
+#>      \texttt{hybrid}, \texttt{none}                                                   %
 #>      \newline\newline                                                                 %
 #>      The \texttt{simplified} option uses MPACT's internal TH solver.  The             %
 #>      \texttt{ctf} option internally couples COBRA-TF to MPACT, and                    %
 #>      \texttt{ctf\_external} couples MPACT and COBRA-TF through the lime               %
-#>      interface. The \texttt{user\_defined} option uses TH conditions defined in        %
-#>      the HDF5 file specified by the \texttt{user\_defined\_th\_filename} card in the   %
-#>      \texttt{MPACT} block. The \texttt{none} option will use parameters from the       %
+#>      interface. The \texttt{user\_defined} option uses TH conditions defined in       %
+#>      the HDF5 file specified by the \texttt{user\_defined\_th\_filename} card in the  %
+#>      \texttt{MPACT} block. The \texttt{none} option will use parameters from the      %
 #>      \texttt{STATE} block: fuel temperatures will be constant and equal to            %
 #>      \texttt{tfuel}, moderator temperatures will be constant and equal to             %
 #>      \texttt{tinlet}, and moderator densities will be constant and equal to           %
-#>      \texttt{modden}. },
+#>      \texttt{modden}. The \texttt{hybrid} option will use the \texttt{simplified}     %
+#>      option for the first several iterations to obtain an approximate solution before %
+#>      switching to \texttt{ctf}.},
 #>    limitations={The \texttt{feedback} card in the \texttt{STATE} block                %
 #>      must be set to \texttt{on} for any of the TH coupling methods},
 #>    description={This card is used to indicate which TH coupling method                %
@@ -11987,7 +11990,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() ctf simplified ctf_external tiamat user_defined none
+      - in_dictionary() ctf simplified ctf_external tiamat user_defined none hybrid
 #>
 #>   {\bf extend\_coupling\_mesh} extend\_coupling\_mesh
 #>   \VERAInputTable{
@@ -12132,6 +12135,28 @@ MPACT:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf init\_from\_STH\_outers} init\_from\_STH\_outers
+#>   \VERAInputTable{
+#>     name={init\_from\_STH\_outers},
+#>    type={Integer},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={3},
+#>    valuesapplicable={or any positive integer},
+#>    limitations={},
+#>    description={If \texttt{coupling\_method} is set to \texttt{hybrid}, this card is  %
+#>      used to determine how many STH solves will be done before switching to CTF.},    %
+#>    notes={If \texttt{coupling\_method} is not set to \texttt{hybrid}, this card does  %
+#>      nothing}
+#>   }
+  init_from_STH_outers:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() -1
 #>
 #>   {\bf average\_ftemp} average\_ftemp
 #>   \VERAInputTable{

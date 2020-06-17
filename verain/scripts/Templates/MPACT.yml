@@ -784,6 +784,13 @@ MPACT:
             - copy MPACT/$outers_per_TH
           _content:
 
+        init_from_STH_outers:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$init_from_STH_outers
+          _content:
+
         depthAnderson:
           _pltype: parameter
           _type: int
