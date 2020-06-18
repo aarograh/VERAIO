@@ -573,6 +573,20 @@ STATES:
             - coremapmap CORE/$size,CORE/@core_shape,%STATE/$(_loop)/@void,CORE/$bc_sym
           _content:
 
+        axial_void_map:
+          _pltype: array
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$axial_void,select=>odd
+          _content:
+
+        axial_void_bounds:
+          _pltype: array
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/$axial_void,select=>even
+          _content:
+
         flow_dist:
           _pltype: array
           _type: double
