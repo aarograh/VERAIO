@@ -302,6 +302,41 @@ STATE:
       - fall(sub{is_float(shift)},())
       - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
 #>
+#>   {\bf axial\_void} axial\_void\_map axial\_void\_bounds
+#>   \VERAInputTable{
+#>     name={axial\_void\_map},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Percent},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$, $\le 100$},
+#>     limitations={},
+#>     description={List of axial void fractions.},
+#>     notes={BWR only.}
+#>   }
+#>   \VERAInputTable{
+#>     name={axial\_void\_bounds},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={List of axial elevations for axial void fractions.},
+#>     notes={BWR only.}
+#>   }
+  axial_void:
+    <<: *dtlist
+    _style: multi-line
+    _check:
+      - fall(sub{is_float(shift)},())
+      - arraysize()%2==1
+      - fall(sub{is_geq(shift,0)},odd([]))
+      - fall(sub{is_leq(shift,100)},odd([]))
+      - is_strictlyincreasing(even([]))
+#>
 #>   {\bf tfuel} fuel\_temperature units
 #>   \VERAInputTable{
 #>     name={fuel\_temperature},
