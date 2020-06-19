@@ -269,6 +269,7 @@
   </ParameterList>
   <ParameterList name="SHIFT">
     <Parameter name="Np" type="double" value="1000"/>
+    <Parameter name="balance_tol" type="double" value="0.8"/>
     <ParameterList name="broaden_db">
       <Parameter name="delta_t" type="double" value="1.0"/>
       <Parameter name="energy_tol" type="double" value="1.0e-9"/>
