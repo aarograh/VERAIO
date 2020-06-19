@@ -271,6 +271,7 @@
     <Parameter name="Np" type="double" value="1000"/>
     <Parameter name="broaden_xs" type="bool" value="false"/>
     <Parameter name="dbrc" type="bool" value="false"/>
+    <Parameter name="do_debug_history_tally" type="bool" value="true"/>
     <Parameter name="do_micro_tally" type="bool" value="false"/>
     <Parameter name="do_output" type="bool" value="true"/>
     <Parameter name="do_transport" type="bool" value="false"/>

@@ -4935,6 +4935,27 @@ SHIFT:
       - is_word()
       - in_dictionary() none low medium high
 #>
+#>   {\bf balance\_tol} balance\_tol
+#>   \VERAInputTable{
+#>     name={balance\_tol},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.5},
+#>     valuesapplicable={(0,1)},
+#>     limitations={},
+#>     description={Tolerance for checking balance of ce cross sections},
+#>     notes={}
+#>   }
+  balance_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+      - is_lt() 1
+#>
 #>   {\bf broaden\_xs} broaden\_xs
 #>   \VERAInputTable{
 #>     name={broaden\_xs},
@@ -5114,6 +5135,26 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() debug diagnostic status info warning error critical
+#>
+#>   {\bf do\_debug\_history\_tally} do\_debug\_history\_tally
+#>   \VERAInputTable{
+#>     name={do\_debug\_history\_tally},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true},
+#>     limitations={},
+#>     description={Output a particle history diagnostic tally if error occurs},
+#>     notes={}
+#>   }
+  do_debug_history_tally:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
 #>
 #>   {\bf do\_micro\_tally} do\_micro\_tally
 #>   \VERAInputTable{
@@ -5339,7 +5380,7 @@ SHIFT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={eigenvalue},
-#>     valuesapplicable={cadis, eigenvalue, forward},
+#>     valuesapplicable={cadis, eigenvalue, forward, fwcadis},
 #>     limitations={},
 #>     description={Run mode},
 #>     notes={}
@@ -5349,7 +5390,7 @@ SHIFT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() cadis eigenvalue forward
+      - in_dictionary() cadis eigenvalue forward fwcadis
 #>
 #>   {\bf mode} mode
 #>   \VERAInputTable{
@@ -5640,7 +5681,7 @@ SHIFT:
 #>     unitsother={},
 #>     valuedefault={false},
 #>     valuesapplicable={true},
-#>     limitations={Only applies to CADIS},
+#>     limitations={Only applies to CADIS and FWCADIS},
 #>     description={Use reduced number of multigroup cross sections for adjoint},
 #>     notes={}
 #>   }

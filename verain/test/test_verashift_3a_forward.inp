@@ -200,6 +200,7 @@
   broaden_xs            true
   transfer              all
   temp_transfer         none
+  balance_tol           0.8
   track_isotopes        full
   lost_particle_error_tol 1.0e-3
   seed                  123456
