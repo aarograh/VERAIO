@@ -628,6 +628,20 @@ SHIFT:
         - copy SHIFT/$mode
       _content:
 
+    n_energy_min:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy SHIFT/$n_energy_min
+      _content:
+
+    n_energy_max:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy SHIFT/$n_energy_max
+      _content:
+
     Np:
       _pltype: parameter
       _type: double
