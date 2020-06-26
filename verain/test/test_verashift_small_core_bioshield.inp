@@ -198,6 +198,8 @@ e[CASEID]
 [SHIFT]
   problem_mode cadis
   mode n
+  n_energy_min 0.01
+  n_energy_max 10.0e6
   Np 1000
   do_transport true
   output_geometry true

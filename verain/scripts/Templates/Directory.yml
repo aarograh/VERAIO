@@ -4956,6 +4956,46 @@ SHIFT:
       - is_gt() 0
       - is_lt() 1
 #>
+#>   {\bf n\_energy\_min} n\_energy\_min
+#>   \VERAInputTable{
+#>     name={n\_energy\_min},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={eV},
+#>     unitsother={},
+#>     valuedefault={0.00001},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Minimum neutron energy for transport},
+#>     notes={}
+#>   }
+  n_energy_min:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf n\_energy\_max} n\_energy\_max
+#>   \VERAInputTable{
+#>     name={n\_energy\_max},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={eV},
+#>     unitsother={},
+#>     valuedefault={20.0e6},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Maximum neutron energy for transport},
+#>     notes={}
+#>   }
+  n_energy_max:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
 #>   {\bf broaden\_xs} broaden\_xs
 #>   \VERAInputTable{
 #>     name={broaden\_xs},

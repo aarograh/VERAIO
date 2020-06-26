@@ -566,6 +566,8 @@
     <Parameter name="local_log" type="string" value="debug" />
     <Parameter name="mesh" type="int" value="1" />
     <Parameter name="mode" type="string" value="n" />
+    <Parameter name="n_energy_max" type="double" value="10.0e6" />
+    <Parameter name="n_energy_min" type="double" value="0.01" />
     <Parameter name="output_external_source" type="bool" value="false" />
     <Parameter name="output_fission_source" type="bool" value="true" />
     <Parameter name="output_geometry" type="bool" value="true" />
