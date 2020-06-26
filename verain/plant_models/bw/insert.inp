@@ -1,0 +1,232 @@
+![INSERT]
+  title "Lumped Burnable Poison Rod Assembly (BPRA)"
+  npin 15
+
+  mat spring 1.67 ss 1.0 / thexp=0.0             
+
+  mat bp00 3.7           al2o3 1.000 / thexp=7.8 !   0% B4C (depleted)
+  mat bp02 3.7 b4c 0.002 al2o3 0.998 / thexp=7.8 ! 0.2% B4C 
+  mat bp05 3.7 b4c 0.005 al2o3 0.995 / thexp=7.8 ! 0.5% B4C
+  mat bp08 3.7 b4c 0.008 al2o3 0.992 / thexp=7.8 ! 0.8% B4C
+  mat bp10 3.7 b4c 0.010 al2o3 0.990 / thexp=7.8 ! 1.0% B4C
+  mat bp11 3.7 b4c 0.011 al2o3 0.989 / thexp=7.8 ! 1.1% B4C
+  mat bp14 3.7 b4c 0.014 al2o3 0.986 / thexp=7.8 ! 1.4% B4C
+  mat bp17 3.7 b4c 0.017 al2o3 0.983 / thexp=7.8 ! 1.7% B4C
+  mat bp20 3.7 b4c 0.020 al2o3 0.980 / thexp=7.8 ! 2.0% B4C
+  mat bp23 3.7 b4c 0.023 al2o3 0.977 / thexp=7.8 ! 2.3% B4C
+  mat bp25 3.7 b4c 0.025 al2o3 0.975 / thexp=7.8 ! 2.5% B4C
+  mat bp26 3.7 b4c 0.026 al2o3 0.974 / thexp=7.8 ! 2.6% B4C
+  mat bp30 3.7 b4c 0.030 al2o3 0.970 / thexp=7.8 ! 3.0% B4C
+  mat bp35 3.7 b4c 0.035 al2o3 0.965 / thexp=7.8 ! 3.5% B4C
+
+  cell c00 0.4318 0.4572 0.5461 / bp00 he zirc4 
+  cell c02 0.4318 0.4572 0.5461 / bp02 he zirc4
+  cell c05 0.4318 0.4572 0.5461 / bp05 he zirc4
+  cell c08 0.4318 0.4572 0.5461 / bp08 he zirc4
+  cell c10 0.4318 0.4572 0.5461 / bp10 he zirc4
+  cell c11 0.4318 0.4572 0.5461 / bp11 he zirc4
+  cell c14 0.4318 0.4572 0.5461 / bp14 he zirc4
+  cell c17 0.4318 0.4572 0.5461 / bp17 he zirc4
+  cell c20 0.4318 0.4572 0.5461 / bp20 he zirc4
+  cell c23 0.4318 0.4572 0.5461 / bp23 he zirc4
+  cell c25 0.4318 0.4572 0.5461 / bp25 he zirc4
+  cell c26 0.4318 0.4572 0.5461 / bp26 he zirc4
+  cell c30 0.4318 0.4572 0.5461 / bp30 he zirc4
+  cell c35 0.4318 0.4572 0.5461 / bp35 he zirc4
+
+  cell P          0.4572 0.5461 /  spring zirc4
+  cell G                 0.5461 /         zirc4
+
+  rodmap BP00
+     -
+     - -
+     - - c00
+     - - - -
+     - - - - c00
+     - - c00 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap BP02
+     -
+     - -
+     - - c02
+     - - - -
+     - - - - c02
+     - - c02 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap BP05
+     -
+     - -
+     - - c05
+     - - - -
+     - - - - c05
+     - - c05 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap BP08
+     -
+     - -
+     - - c08
+     - - - -
+     - - - - c08
+     - - c08 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap BP10
+     -
+     - -
+     - - c10
+     - - - -
+     - - - - c10
+     - - c10 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap BP11
+     -
+     - -
+     - - c11
+     - - - -
+     - - - - c11
+     - - c11 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap BP14
+     -
+     - -
+     - - c14
+     - - - -
+     - - - - c14
+     - - c14 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap BP17
+     -
+     - -
+     - - c17
+     - - - -
+     - - - - c17
+     - - c17 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap BP20
+     -
+     - -
+     - - c20
+     - - - -
+     - - - - c20
+     - - c20 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap BP23
+     -
+     - -
+     - - c23
+     - - - -
+     - - - - c23
+     - - c23 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap BP25
+     -
+     - -
+     - - c25
+     - - - -
+     - - - - c25
+     - - c25 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap BP26
+     -
+     - -
+     - - c26
+     - - - -
+     - - - - c26
+     - - c26 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap BP30
+     -
+     - -
+     - - c30
+     - - - -
+     - - - - c30
+     - - c30 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap BP35
+     -
+     - -
+     - - c35
+     - - - -
+     - - - - c35
+     - - c35 - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap PLEN
+     -
+     - -
+     - - P
+     - - - -
+     - - - - P
+     - - P - - -
+     - - - - - - -
+     - - - - - - - -
+
+  rodmap PLUG
+     -
+     - -
+     - - G
+     - - - -
+     - - - - G
+     - - G - - -
+     - - - - - - -
+     - - - - - - - -
+
+! assume 126" axially centered in the fuel 
+! in gad fuel, poison is cut back to 123.2" 
+
+  axial  00  36.313 PLUG 38.313 BP00 358.353 PLEN 401.415  ! 0.0% B4C
+  axial  02  36.313 PLUG 38.313 BP02 358.353 PLEN 401.415  ! 0.2% B4C
+  axial  05  36.313 PLUG 38.313 BP05 358.353 PLEN 401.415  ! 0.5% B4C
+  axial  08  36.313 PLUG 38.313 BP08 358.353 PLEN 401.415  ! 0.8% B4C
+  axial  10  36.313 PLUG 38.313 BP10 358.353 PLEN 401.415  ! 1.0% B4C
+  axial  11  36.313 PLUG 38.313 BP11 358.353 PLEN 401.415  ! 1.1% B4C
+  axial  14  36.313 PLUG 38.313 BP14 358.353 PLEN 401.415  ! 1.4% B4C
+  axial  17  36.313 PLUG 38.313 BP17 358.353 PLEN 401.415  ! 1.7% B4C
+  axial  20  36.313 PLUG 38.313 BP20 358.353 PLEN 401.415  ! 2.0% B4C
+  axial  23  36.313 PLUG 38.313 BP23 358.353 PLEN 401.415  ! 2.3% B4C
+  axial  25  36.313 PLUG 38.313 BP25 358.353 PLEN 401.415  ! 2.5% B4C
+  axial  26  36.313 PLUG 38.313 BP26 358.353 PLEN 401.415  ! 2.6% B4C
+  axial  30  36.313 PLUG 38.313 BP30 358.353 PLEN 401.415  ! 3.0% B4C
+  axial  35  36.313 PLUG 38.313 BP35 358.353 PLEN 401.415  ! 3.5% B4C
+
+  axial  00g 39.869 PLUG 41.869 BP00 354.797 PLEN 401.415  ! 0.0% B4C
+  axial  02g 39.869 PLUG 41.869 BP02 354.797 PLEN 401.415  ! 0.2% B4C
+  axial  05g 39.869 PLUG 41.869 BP05 354.797 PLEN 401.415  ! 0.5% B4C
+  axial  08g 39.869 PLUG 41.869 BP08 354.797 PLEN 401.415  ! 0.8% B4C
+  axial  10g 39.869 PLUG 41.869 BP10 354.797 PLEN 401.415  ! 1.0% B4C
+  axial  11g 39.869 PLUG 41.869 BP11 354.797 PLEN 401.415  ! 1.1% B4C
+  axial  14g 39.869 PLUG 41.869 BP14 354.797 PLEN 401.415  ! 1.4% B4C
+  axial  17g 39.869 PLUG 41.869 BP17 354.797 PLEN 401.415  ! 1.7% B4C
+  axial  20g 39.869 PLUG 41.869 BP20 354.797 PLEN 401.415  ! 2.0% B4C
+  axial  23g 39.869 PLUG 41.869 BP23 354.797 PLEN 401.415  ! 2.3% B4C
+  axial  25g 39.869 PLUG 41.869 BP25 354.797 PLEN 401.415  ! 2.5% B4C
+  axial  26g 39.869 PLUG 41.869 BP26 354.797 PLEN 401.415  ! 2.6% B4C
+  axial  30g 39.869 PLUG 41.869 BP30 354.797 PLEN 401.415  ! 3.0% B4C
+  axial  35g 39.869 PLUG 41.869 BP35 354.797 PLEN 401.415  ! 3.5% B4C
+

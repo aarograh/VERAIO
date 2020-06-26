@@ -1,0 +1,59 @@
+[RUN]      walltime 1.0
+[CASEID]   title 'B&W Cycle N-1 Fuel Shuffle' 
+[STATE]  
+  power    0.0   
+  tinlet   532 F 
+  rodbank  1 100  2 100  3 100  4 100  5 100  6 100  7 100  8 35  ! ARO
+  pressure 2200
+
+  sym      qtr
+  feedback on   
+  thexp    on
+  search   boron
+
+! Cycle Name   Cycle Number in model
+!======================================
+!  N-3   2
+!  N-2   3
+!  N-1   4
+   
+  restart_shuffle  ../../n-2/depl/bw_n-2.res EOC
+                   ../../n-3/depl/bw_n-3.res EOC
+
+  shuffle_homog center
+  shuffle_label   
+    2H-1   +   G-4   +   H-2  G-10  +   E-8
+      +   G-6   +   B-9   +   B-10  +   M-6
+     D-9   +   C-6   +   E-3   +    +   N-5
+      +   K-2   +   F-3  N-3   +  2B-10
+     B-8   +   C-5  C-12 K-4   +   N-6
+     L-9  L-2   +    +    +   D-12
+      +    +    +  2L-2  F-12
+     H-11 F-11 E-12
+
+[STATE] 
+  restart_write shuf.res BOC
+
+[CORE]     include ../../core.inp
+           include ../../cycle_n-1.inp
+[ASSEMBLY] include ../../b6a_8g4.inp
+[ASSEMBLY] include ../../b6a_8g6.inp
+[ASSEMBLY] include ../../b6a_8g8.inp
+[ASSEMBLY] include ../../b6b_12g4.inp
+[ASSEMBLY] include ../../b6b_12g6.inp
+[ASSEMBLY] include ../../b6b_16g48.inp
+[ASSEMBLY] include ../../b6b_8g4.inp
+[ASSEMBLY] include ../../b6b_8g8.inp
+[ASSEMBLY] include ../../b5_8g6.inp
+[ASSEMBLY] include ../../b5_12g7.inp
+[ASSEMBLY] include ../../b5_8g4.inp
+[ASSEMBLY] include ../../b5_8g3.inp
+[ASSEMBLY] include ../../b5_12g8.inp
+[ASSEMBLY] include ../../b4.inp 
+[ASSEMBLY] include ../../b3a.inp 
+[INSERT]   include ../../insert.inp
+[CONTROL]  include ../../control.inp
+[DETECTOR] include ../../detector.inp
+[EDITS]    include ../../edits.inp
+[MPACT]    include ../../mpact.inp
+  num_space 1040

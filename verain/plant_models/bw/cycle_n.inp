@@ -1,0 +1,22 @@
+  cycle   5              ! Cycle N or target 24 month cycle
+  op_date 2020/01/01 
+
+  assm_map
+    B3A       B7B_8G4   B6A_8G6   B7B_8G4   B6B_16G48 B6A_8G8   B7C_12G6  B5_8G6    
+    B7B_8G4   B6A_8G4   B7B_8G4   B6B_12G6  B7B_8G4   B6B_16G48 B7C_12G6  B6A_8G6   
+    B6A_8G6   B7B_8G4   B6A_8G4   B7B_8G4   B6B_12G4  B7C_8G4   B7A_8G2   B5_8G6    
+    B7B_8G4   B6B_12G6  B7B_8G4   B6A_8G6   B6B_8G4   B7C_16G6  B4                  
+    B6B_16G48 B7B_8G4   B6B_12G4  B6B_8G4   B6A_8G6   B7C_8G2   B6B_8G8             
+    B6A_8G8   B6B_16G48 B7C_8G4   B7C_16G6  B7C_8G2   B3A                           
+    B7C_12G6  B7C_12G6  B7A_8G2   B4        B6B_8G8                                 
+    B5_8G6    B6A_8G6   B5_8G6                                                      
+
+  insert_map
+     -
+    25g  - 
+     -  25g  - 
+    25g  -  20g  -
+     -  20g  -   -   -
+     -   -  25g  -   -   -
+     -   -   -   -   -
+     -   -   -

@@ -1,0 +1,57 @@
+![MPACT]
+  extend_coupling_mesh false
+  meshing_method useraxialmesh
+  axial_mesh
+    17.78   ! lower core grid and lower pad
+    5.715   ! lower end fitting
+   11.008   ! end plug, lower plenum, and bottom end grid
+    7.6835
+    7.6835
+    6.223
+    3.556
+    7.8393
+    7.8394
+    7.8393
+    4.826
+    9.7548
+    9.7548
+    9.7548
+    9.7548
+    9.7548
+    4.826
+    8.96225
+    8.96225
+    8.96225
+    8.96225
+    6.4625
+    6.4625
+    4.826
+    9.7348
+    9.7348
+    9.7348
+    9.7348
+    9.7348
+    4.826
+    9.7548
+    9.7548
+    9.7548
+    9.7548
+    9.7548
+    4.826
+    8.79225
+    8.79225
+    8.79225
+    8.79225
+    6.8025
+    6.8025
+    4.826
+    8.342
+    8.342
+    3.556
+    6.223
+    7.6835
+    7.6835
+    7.344     ! upper plenum
+    14.128    ! top end grid, upper plenum, upper end plug, and shoulder gap
+    8.731     ! upper end fitting
+

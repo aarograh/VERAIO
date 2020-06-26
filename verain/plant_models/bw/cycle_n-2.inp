@@ -1,0 +1,22 @@
+  cycle   3            ! N-2 in this model
+  op_date 2016/01/01 
+
+  assm_map
+    B3A     B4      B4      B5_8G6  B4      B4      B5_12G7 B3A     
+    B4      B4      B5_8G6  B4      B5_8G6  B4      B5_12G7 B3A     
+    B4      B5_8G6  B4      B5_8G6  B4      B5_8G4  B5_8G3  B3B     
+    B5_8G6  B4      B5_8G6  B4      B4      B5_12G8 B3A             
+    B4      B5_8G6  B4      B4      B4      B5_8G3  B3B             
+    B4      B4      B5_8G4  B5_12G8 B5_8G3  B3A                     
+    B5_12G7 B5_12G7 B5_8G3  B3A     B3B                             
+    B3A     B3A     B3B                                             
+
+  insert_map
+      -
+      -   - 
+      -  30g  - 
+     30g  -  30g -
+      -  25g  -  -   - 
+      -   -  25g -   -   -
+      -   -   -  -   -
+      -   -   -

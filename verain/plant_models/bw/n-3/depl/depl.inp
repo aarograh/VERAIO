@@ -1,0 +1,41 @@
+[RUN]      walltime 24
+[CASEID]   title 'B&W Cycle N-3 Depletion'
+[STATE]  
+  restart_read ../shuf/shuf.res BOC
+
+  power    100.0
+  tinlet   557.8 F
+  pressure 2200
+  rodbank  1 100  2 100  3 100  4 100  5 100  6 100  7 92  8 35
+
+  sym      qtr
+  feedback on
+  thexp    on
+  search   boron
+  xenon    equil
+
+  deplete  EFPD 0 3 <30..420x30> 436
+ 
+[STATE]  rodbank 8 100 ;              deplete EFPD 462      ! APSR Withdrawal   
+[STATE]                               deplete EFPD 469 
+[STATE]  tinlet  551 F ;              deplete EFPD 483      ! Tave reduction
+[STATE]  tinlet  549 F ; power 96.0 ; deplete EFPD 490   
+[STATE]  tinlet  548 F ; power 75.0 ; deplete EFPD 506.1    ! power coastdown
+  op_date 2015/12/02
+  restart_write bw_n-3.res EOC 
+
+[CORE]     include ../../core.inp
+           include ../../cycle_n-3.inp
+           det_map 177*2              ! virtual detectors
+[ASSEMBLY] include ../../b4.inp 
+[ASSEMBLY] include ../../b3b.inp 
+[ASSEMBLY] include ../../b3a.inp 
+[ASSEMBLY] include ../../b2a.inp 
+[ASSEMBLY] include ../../b1.inp 
+[ASSEMBLY] include ../../b00.inp 
+[INSERT]   include ../../insert.inp
+[CONTROL]  include ../../control.inp
+[DETECTOR] include ../../detector.inp
+[EDITS]    include ../../edits.inp
+[MPACT]    include ../../mpact.inp
+  num_space 1248

@@ -1,0 +1,98 @@
+![CONTROL]
+!
+! Two types:  1) Solid black full length B4C rods
+!             2) Part length gray power shaping rods
+ 
+  title 'B&W Control Rods'
+  npin    15
+  stroke  353.06 100.0     
+
+  cell B  0.4978 0.5017 0.5601 / aic he inc   ! black absorber
+  cell BP        0.5017 0.5601 /     he inc   ! plenum (ignore spring)
+  cell BG               0.5601 /        inc   ! end plug
+
+  cell G  0.4763 0.4902 0.5588 / inc  he ss   ! gray absorber
+  cell GM        0.4902 0.5588 /     mod ss   ! upper half is flooded
+  cell GP        0.4902 0.5588 /      he ss   ! gap above inc poison
+  cell GG               0.5588 /         ss   ! end plug
+
+  rodmap AIC
+     -
+     -  -
+     -  -  B
+     -  -  -  -
+     -  -  -  -  B
+     -  -  B  -  -  -
+     -  -  -  -  -  -  -
+     -  -  -  -  -  -  -  -
+
+  rodmap AICPLEN
+     -
+     -  -
+     -  - BP
+     -  -  -  -
+     -  -  -  - BP
+     -  - BP  -  -  -
+     -  -  -  -  -  -  -
+     -  -  -  -  -  -  -  -
+
+  rodmap AICPLUG
+     -
+     -  -
+     -  - BG
+     -  -  -  -
+     -  -  -  - BG 
+     -  - BG  -  -  -
+     -  -  -  -  -  -  -
+     -  -  -  -  -  -  -  -
+
+  rodmap GRY
+     -
+     -  -
+     -  -  G
+     -  -  -  -
+     -  -  -  -  G
+     -  -  G  -  -  -
+     -  -  -  -  -  -  -
+     -  -  -  -  -  -  -  -
+
+  rodmap GRYPLEN
+     -
+     -  -
+     -  - GP
+     -  -  -  -
+     -  -  -  - GP
+     -  - GP  -  -  -
+     -  -  -  -  -  -  -
+     -  -  -  -  -  -  -  -
+
+  rodmap GRYMOD
+     -
+     -  -
+     -  - GM 
+     -  -  -  -
+     -  -  -  - GM
+     -  - GM  -  -  -
+     -  -  -  -  -  -  -
+     -  -  -  -  -  -  -  -
+
+  rodmap GRYPLUG
+     -
+     -  -
+     -  - GG
+     -  -  -  -
+     -  -  -  - GG
+     -  - GG  -  -  -
+     -  -  -  -  -  -  -
+     -  -  -  -  -  -  -  -
+
+! plenum extended to top of model
+! AIC absorber length is 139" 
+! APSR absorber length is 63"
+! Assume 2 cm plug and 1 cm gas gap above the poison
+! distance from core pad to CRA  poison is 33.677 cm 
+! distance from core pad to APSR poison is 36.091 cm 
+
+  axial  1  31.677 AICPLUG 33.677 AIC                                                 386.737 AICPLEN 401.415 ! BLACK  
+  axial  2  34.091 GRYPLUG 36.091 GRY 196.111 GRYPLEN 197.111 GRYPLUG 199.111 GRYMOD                  401.415 ! GRAY APSR        
+

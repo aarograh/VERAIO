@@ -1,0 +1,30 @@
+![DETECTOR]
+  title "Incore instrument thimble"
+  npin 15
+  type rh                        ! rhodium fixed incores
+  cell 1  0.275 0.3683 / he inc  ! ID is approximate
+  cell 2        0.3683 /    mod  ! virtual detector (for quarter core)
+  
+  rodmap  LAT1
+     1
+     - -
+     - - -
+     - - - -
+     - - - - -
+     - - - - - -
+     - - - - - - -
+     - - - - - - - -
+  
+  rodmap  LAT2
+     2
+     - -
+     - - -
+     - - - -
+     - - - - -
+     - - - - - -
+     - - - - - - -
+     - - - - - - - -
+  
+  axial 1  5.715 LAT1 401.415
+  axial 2  5.715 LAT2 401.415
+

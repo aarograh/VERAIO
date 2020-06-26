@@ -1,0 +1,23 @@
+  cycle   2               ! N-3 in this model
+  op_date 2014/07/01 
+
+  assm_map
+    B2A B4  B1  B3A B2A B4  B2A B3A 
+    B4  B1  B4  B3B B4  B2A B4  B3A 
+    B1  B4  B1  B4  B2A B4  B3A B3A 
+    B3A B3B B4  B2A B4  B3B B3A     
+    B2A B4  B2A B4  B3A B4  B3A     
+    B4  B2A B4  B3B B4  B00         
+    B2A B4  B3A B3A B3A             
+    B3A B3A B3A                     
+
+  insert_map
+     -
+    14  -
+     - 17  -
+     -  - 20  -
+     - 17  - 17  -
+    08  - 08  - 00  -
+     - 00  -  -  -
+     -  -  -
+

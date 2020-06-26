@@ -1,0 +1,22 @@
+  cycle   4              ! N-1 in this model
+  op_date 2018/01/01 
+
+  assm_map
+    B3A       B6A_8G6   B5_8G6    B6A_8G8   B5_12G7   B5_8G6    B6B_16G48 B5_8G6    
+    B6A_8G6   B5_8G6    B6A_8G6   B5_12G7   B6A_8G6   B5_8G3    B6B_16G48 B5_8G6    
+    B5_8G6    B6A_8G6   B5_8G4    B6A_8G4   B5_12G8   B6B_8G8   B6B_12G4  B4        
+    B6A_8G8   B5_12G7   B6A_8G4   B5_8G4    B5_8G3    B6B_12G6  B3A                 
+    B5_12G7   B6A_8G6   B5_12G8   B5_8G3    B5_8G6    B6B_8G4   B4                  
+    B5_8G6    B5_8G3    B6B_8G8   B6B_12G6  B6B_8G4   B4                            
+    B6B_16G48 B6B_16G48 B6B_12G4  B3A       B4                                      
+    B5_8G6    B5_8G6    B4                                                          
+
+  insert_map
+     - 
+    30g  - 
+     -  30g  - 
+    30g  -  30g  - 
+     -  25g  -   -   - 
+     -   -  25g  -   -   -
+     -   -   -   -   -
+     -   -   -
