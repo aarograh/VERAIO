@@ -1,0 +1,59 @@
+[RUN]      walltime 2.0
+[CASEID]   title 'Cycle N-3 Jump-In Assembly'
+[STATE]  
+  power    100.0
+  tinlet   557.8 F
+  pressure 2200
+  boron    700
+
+  sym      qtr
+  feedback on
+  thexp    on
+  search   keff  
+  xenon    equil
+
+  deplete GWDMT 0.0 0.1 <1..21> 21.6
+
+[STATE] 
+  op_date 2012/12/02  
+  restart_write shuf.res 21.6
+
+[CORE]
+  name    BW     
+  unit    1
+  size    1   
+  apitch  21.811 
+  rated   14.5085 0.752  
+  height  410.146    
+  bc_sym  rot
+
+  label_format y-x 
+  xlabel   0
+  ylabel   Z 
+
+  core_shape      
+     1
+
+  cycle   0
+
+  assm_map
+    B2A
+
+! upper_ref   ss 7.62   0.2491  
+!             ss 17.3   0.0726 
+! upper_plate ss 5.08   0.3418 
+  lower_plate ss 5.08   0.2848  
+  lower_ref   ss 12.7   0.2400  
+!             ss 12.22  0.03   
+
+  bc_rad reflecting
+
+[ASSEMBLY] include ../../../b3b.inp 
+[ASSEMBLY] include ../../../b3a.inp 
+[ASSEMBLY] include ../../../b2b.inp 
+[ASSEMBLY] include ../../../b2a.inp 
+[ASSEMBLY] include ../../../b1.inp 
+[ASSEMBLY] include ../../../b0.inp 
+[EDITS]    include ../../../edits.inp
+[MPACT]    include ../../../mpact.inp
+  num_space 52

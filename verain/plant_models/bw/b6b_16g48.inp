@@ -1,0 +1,44 @@
+![ASSEMBLY]
+!
+! This assembly is a little different because it has two gad enrichments
+
+  include assembly.inp
+
+  fuel FA  10.4108 96.0 / 4.79
+  fuel FG4 10.2907 96.0 / 3.83 / gad=4.0
+  fuel FG8 10.1705 96.0 / 2.87 / gad=8.0            
+
+  cell GD4 0.4743 0.4826 0.5461 / FG4 he  zirc4 
+  cell GD8 0.4743 0.4826 0.5461 / FG8 he  zirc4 
+
+  rodmap F16GX                   ! 16 gad
+    IT
+     A  A
+     A  A GT
+    GD8 A  A GD8
+     A  A  A  A GT
+     A  A GT  A  A  A
+     A  A  A GD4 A  A  A
+     A  A  A  A  A  A  A  A
+
+  rodmap F16GBLX                 ! 16 gad
+    IT
+     A  A
+     A  A GT
+    BL  A  A BL 
+     A  A  A  A GT
+     A  A GT  A  A  A
+     A  A  A BL  A  A  A
+     A  A  A  A  A  A  A  A
+
+  axial B6B_16G48 5.715  
+          PLUG    7.715  
+          PLEN    16.723 
+          FBLK    32.09  
+          F16GBLX 41.869 
+          F16GX   354.797
+          F16GBLX 364.576
+          FBLK    379.943
+          PLEN    397.415
+          PLUG    399.415
+          GAP     401.415

@@ -1,0 +1,46 @@
+[RUN]      walltime 2.0
+[CASEID]   title 'B&W Cycle N-2 Fuel Shuffle' 
+[STATE]  
+  power    0.0   
+  tinlet   532 F 
+  rodbank  1 100  2 100  3 100  4 100  5 100  6 100  7 100  8 35  ! ARO
+  pressure 2200
+
+  sym      qtr
+  feedback on   
+  thexp    on
+  search   boron
+
+! all fuel from cycle N-3 
+
+  restart_shuffle  ../../n-3/depl/bw_n-3.res EOC
+  shuffle_homog center
+  shuffle_label   
+    H-15 D-3  G-4   +   G-12 C-8   +   G-1 
+    C-12 K-8   +   M-6   +   E-4   +   F-1 
+    D-9   +   F-7   +   O-6   +    +   E-3 
+     +   F-11  +   F-9  P-7   +   D-2        
+    N-9   +   F-13 G-14 C-4   +   G-5        
+    H-13 D-5   +    +    +   A-7               
+     +    +    +   B-4  E-7                      
+    A-9  A-6  C-5                                    
+
+[STATE] 
+  restart_write shuf.res BOC
+
+[CORE]     include ../../core.inp
+           include ../../cycle_n-2.inp
+[ASSEMBLY] include ../../b5_8g6.inp
+[ASSEMBLY] include ../../b5_12g7.inp
+[ASSEMBLY] include ../../b5_8g4.inp
+[ASSEMBLY] include ../../b5_8g3.inp
+[ASSEMBLY] include ../../b5_12g8.inp
+[ASSEMBLY] include ../../b4.inp 
+[ASSEMBLY] include ../../b3a.inp 
+[ASSEMBLY] include ../../b3b.inp 
+[INSERT]   include ../../insert.inp
+[CONTROL]  include ../../control.inp
+[DETECTOR] include ../../detector.inp
+[EDITS]    include ../../edits.inp
+[MPACT]    include ../../mpact.inp
+  num_space 1248

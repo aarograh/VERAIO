@@ -1,0 +1,26 @@
+![ASSEMBLY]
+  include assembly.inp
+
+  fuel FA  10.4086 96.0 / 4.16
+  fuel FB  10.4086 96.0 / 3.86
+  fuel FBL 10.4086 96.0 / 2.00
+
+  cell  A  0.4591 0.4674 0.5283 / FA  he  zirc4
+  cell  B  0.4591 0.4674 0.5283 / FB  he  zirc4
+  cell BL  0.4591 0.4674 0.5283 / FBL he  zirc4
+  cell PL  0.4434 0.4674 0.5283 / he  ss  zirc4
+  cell PG                0.5283 /         zirc4
+  cell  X                0.5283 /     mod
+  cell GT         0.6325 0.6731 /     mod zirc4
+  cell IT         0.5601 0.6261 /     mod zirc4 
+
+  axial B0           5.715   
+              PLUG   7.715   
+              PLEN   16.723  
+              FBLK   32.09  
+              FZ     364.576 
+              FBLK   379.943 
+              PLEN   397.415 
+              PLUG   399.415 
+              GAP    401.415 
+

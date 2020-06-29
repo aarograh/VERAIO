@@ -1,0 +1,211 @@
+![ASSEMBLY]
+  title 'Public 15x15 Assembly based on Framatome HTP design' 
+  npin   15 
+  ppitch 1.4427
+
+  fuel FA  10.4108 96.0 / 0.01                       ! these are dummy enrichments
+  fuel FB  10.4108 96.0 / 0.01                       ! model accounts for 2 central enrichments, one gad 
+  fuel FG  10.2606 96.0 / 0.01 / gad=5.0             ! enrichment, and 1 blanket enrichment per assembly
+  fuel FBL 10.4108 96.0 / 2.50                       ! blanket enrichment
+
+  cell  A  0.4743 0.4826 0.5461 / FA  he  zirc4      ! fuel cell 1
+  cell  B  0.4743 0.4826 0.5461 / FB  he  zirc4      ! fuel cell 2
+  cell GD  0.4743 0.4826 0.5461 / FG  he  zirc4      ! gad cell - assumed gad pellet is same
+  cell BL  0.4743 0.4826 0.5461 / FBL he  zirc4      ! blanket cell - assume blanket pellet is same
+  cell PL  0.4578 0.4826 0.5461 / he  ss  zirc4      ! plenum approximated as 10% steel by vol.
+  cell PG                0.5461 /         zirc4      ! plug approximated as solid zirc4 cell
+  cell  X                0.5461 /     mod            ! empty cell for fuel rod shoulder gap
+  cell GT         0.6325 0.6731 /     mod zirc4      ! guide tube
+  cell IT         0.5080 0.6261 /     mod zirc4      ! instrument tube 
+
+  rodmap FZ                       ! radially-zoned fuel with no gad 
+    IT
+     B  A
+     A  A GT
+     A  A  A  A
+     A  A  A  A GT
+     A  A GT  A  A  A
+     A  A  A  A  A  A  A
+     A  A  A  A  A  A  B  B
+
+  rodmap FN                       ! non-zoned fuel with no gad
+    IT
+     A  A
+     A  A GT
+     A  A  A  A
+     A  A  A  A GT
+     A  A GT  A  A  A
+     A  A  A  A  A  A  A
+     A  A  A  A  A  A  A  A
+
+  rodmap F8G                      ! 8 gad
+    IT
+     A  A
+     A  A GT
+    GD  A  A  A
+     A  A  A  A GT
+     A  A GT  A  A  A
+     A  A  A  A  A  A GD
+     A  A  A  A  A  A  A  A
+
+  rodmap F8GBL                    ! 8 gad blankets
+    IT
+     A  A
+     A  A GT
+    BL  A  A  A
+     A  A  A  A GT
+     A  A GT  A  A  A
+     A  A  A  A  A  A BL
+     A  A  A  A  A  A  A  A
+
+  rodmap F8G_2                    ! 8 gad Pattern 2
+    IT
+     A  A
+     A  A GT
+     A  A  A  A
+     A  A  A  A GT
+     A  A GT  A  A  A
+    GD  A  A  A  A  A GD
+     A  A  A  A  A  A  A  A
+
+  rodmap F8GBL_2                  ! 8 gad blankets Pattern 2 
+    IT
+     A  A
+     A  A GT
+     A  A  A  A
+     A  A  A  A GT
+     A  A GT  A  A  A
+    BL  A  A  A  A  A BL
+     A  A  A  A  A  A  A  A
+
+  rodmap F12G                     ! 12 gad 
+    IT
+     A  A
+     A  A GT
+    GD  A  A  A
+     A  A  A  A GT
+     A  A GT GD  A  A
+     A  A  A  A  A  A  A
+     A  A  A  A  A  A  A  A
+
+  rodmap F12GBL                   ! 12 gad blankets
+    IT
+     A  A
+     A  A GT
+    BL  A  A  A
+     A  A  A  A GT
+     A  A GT BL  A  A
+     A  A  A  A  A  A  A
+     A  A  A  A  A  A  A  A
+
+  rodmap F12G_2                   ! 12 gad Pattern 3
+    IT
+     A  A
+     A  A GT
+     A  A  A GD
+     A  A  A  A GT
+     A  A GT  A  A GD
+    GD  A  A  A  A  A  A
+     A  A  A  A  A  A  A  A
+
+  rodmap F12GBL_2                 ! 12 gad blankets Pattern 3
+    IT
+     A  A
+     A  A GT
+     A  A  A BL
+     A  A  A  A GT
+     A  A GT  A  A BL
+    BL  A  A  A  A  A  A
+     A  A  A  A  A  A  A  A
+
+  rodmap F16G                     ! 16 gad
+    IT
+     A  A
+     A  A GT
+    GD  A  A GD
+     A  A  A  A GT
+     A  A GT  A  A GD
+    GD  A  A  A  A  A  A
+     A  A  A  A  A  A  A  A
+
+  rodmap F16GBL                   ! 16 gad blankets 
+    IT
+     A  A
+     A  A GT
+    BL  A  A BL
+     A  A  A  A GT
+     A  A GT  A  A BL
+    BL  A  A  A  A  A  A
+     A  A  A  A  A  A  A  A
+
+  rodmap FBLK                     ! uniform blanket fuel lattice
+    IT
+    BL BL
+    BL BL GT
+    BL BL BL BL
+    BL BL BL BL GT
+    BL BL GT BL BL BL
+    BL BL BL BL BL BL BL
+    BL BL BL BL BL BL BL BL
+
+  rodmap PLEN                     ! fuel plenum region lattice
+    IT
+    PL PL
+    PL PL GT
+    PL PL PL PL
+    PL PL PL PL GT
+    PL PL GT PL PL PL
+    PL PL PL PL PL PL PL
+    PL PL PL PL PL PL PL PL
+
+  rodmap PLUG                     ! fuel rod end plug lattice
+    IT
+    PG PG
+    PG PG GT
+    PG PG PG PG
+    PG PG PG PG GT
+    PG PG GT PG PG PG
+    PG PG PG PG PG PG PG
+    PG PG PG PG PG PG PG PG
+
+  rodmap GAP                      ! fuel rod shoulder gap lattice (moderator)
+    IT
+     X  X
+     X  X GT
+     X  X  X  X
+     X  X  X  X GT
+     X  X GT  X  X  X
+     X  X  X  X  X  X  X
+     X  X  X  X  X  X  X  X
+
+  grid MID  zirc4 4.826  724  
+  grid BOT    inc 4.826 1155 
+
+  grid_axial  BOT 12.219    
+              MID 67.8     
+              MID 121.4   
+              MID 175.0
+              MID 228.5
+              MID 282.1
+              MID 335.7 
+              BOT 389.7      
+
+  upper_nozzle  ss  8.731   9900  
+  lower_nozzle  ss  5.715  10500  
+
+! fuel rod length = 155" 
+! 6.05" axial blankets in non-god rods 
+! 9.9" axial blankets in gad rods 
+!
+! axial XXX      5.715     ! top of lower end fitting 
+!         PLUG   7.715     ! lower end plug 
+!         PLEN   16.723    ! BAF 
+!         FBLK   32.09     ! Lower axial blanket (no gad) 6.05" 
+!         F8GBL  41.869    ! Lower axial blanket (gad) 9.9" 
+!         F8G    354.797   ! Upper axial blanket (gad) 9.9"
+!         F8GBL  364.576   ! Upper axial blanket (no gad) 6.05"
+!         FBLK   379.943   ! Active fuel stack 143.0" 
+!         PLEN   397.415   ! Upper plenum height approximated from rod height and end plug
+!         PLUG   399.415   ! upper end plug assumed to be 2 cm with 155" rod 
+!         GAP    401.415   ! Shoulder gap assumed to be 2 cm
+                       

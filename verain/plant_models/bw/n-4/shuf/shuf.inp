@@ -1,0 +1,52 @@
+[RUN]      walltime 2.0
+[CASEID]   title 'B&W Cycle N-4 Jump-In'      
+[STATE]  
+  power    0.0   
+  tinlet   532 F 
+  rodbank  1 100  2 100  3 100  4 100  5 100  6 100  7 100  8 35  ! ARO
+  pressure 2200
+
+  sym      qtr
+  feedback on   
+  thexp    on
+  search   boron
+
+  restart_shuffle  1/shuf.res 39.6
+                   2/shuf.res 31.6 
+                   2/shuf.res 33.7
+                   2/shuf.res 36.5
+                   2/shuf.res 41.0
+                   2/shuf.res 41.8
+                   3/shuf.res 14.8
+                   3/shuf.res 16.8
+                   3/shuf.res 20.5
+                   3/shuf.res 21.5
+                   4/shuf.res 16.6
+
+  shuffle_label   
+    39.6A-1    +    21.5A-1    +    16.8A-1    +    16.8A-1 31.6A-1
+       +    36.5A-1    +    33.7A-1    +    21.5A-1    +    41.0A-1
+    21.5A-1    +    21.5A-1    +    20.5A-1    +    20.5A-1 41.8A-1
+       +    33.7A-1    +    21.5A-1    +    14.8A-1 41.8A-1 
+    16.8A-1    +    20.5A-1    +    21.5A-1    +    41.0A-1
+       +    21.5A-1    +    14.8A-1    +    16.6A-1 
+    16.8A-1    +    20.5A-1 41.8A-1 41.8A-1 
+    31.6A-1 41.0A-1 41.8A-1 
+ 
+[STATE] 
+  restart_write shuf.res BOC
+
+[CORE]     include ../../core.inp
+           include ../../cycle_n-4.inp
+[ASSEMBLY] include ../../b3b.inp 
+[ASSEMBLY] include ../../b3a.inp 
+[ASSEMBLY] include ../../b2b.inp 
+[ASSEMBLY] include ../../b2a.inp 
+[ASSEMBLY] include ../../b1.inp 
+[ASSEMBLY] include ../../b0.inp 
+[INSERT]   include ../../insert.inp
+[CONTROL]  include ../../control.inp
+[DETECTOR] include ../../detector.inp
+[EDITS]    include ../../edits.inp
+[MPACT]    include ../../mpact.inp
+  num_space 1040

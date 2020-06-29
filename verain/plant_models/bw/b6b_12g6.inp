@@ -1,0 +1,17 @@
+![ASSEMBLY]
+  include assembly.inp
+
+  fuel FA  10.4108 96.0 / 4.79
+  fuel FG  10.2306 96.0 / 3.35 / gad=6.0
+
+  axial B6B_12G6 5.715  
+          PLUG   7.715  
+          PLEN   16.723 
+          FBLK   32.09  
+          F12GBL 41.869 
+          F12G   354.797
+          F12GBL 364.576
+          FBLK   379.943
+          PLEN   397.415
+          PLUG   399.415
+          GAP    401.415

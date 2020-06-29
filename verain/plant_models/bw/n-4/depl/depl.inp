@@ -1,0 +1,42 @@
+[RUN]      walltime 24
+[CASEID]   title 'B&W Cycle N-4 Depletion'
+[STATE]  
+  restart_read ../shuf/shuf.res BOC
+
+  power   100.0      ! need a ramp for CTF
+  tinlet  557.8 F
+  pressure 2200
+  rodbank  1 100  2 100  3 100  4 100  5 100  6 100  7 92  8 35
+
+  sym      qtr
+  feedback on
+  thexp    on
+  search   boron
+  xenon    equil
+
+  deplete EFPD 0 3 <30..450x30> 453
+ 
+[STATE] rodbank 8 100 ; deplete EFPD 479     ! APSR Withdrawal
+[STATE]                 deplete EFPD 486 
+[STATE] tinlet  549 F ; deplete EFPD 500     ! Tave reduction
+[STATE] power   94.0  ; deplete EFPD 504.9   ! power coastdown
+  op_date 2014/06/01
+  restart_write bw_n-4.res EOC
+
+[CORE]     include ../../core.inp
+           include ../../cycle_n-4.inp
+           det_map 177*2              ! virtual detectors
+[ASSEMBLY] include ../../b3b.inp 
+[ASSEMBLY] include ../../b3a.inp 
+[ASSEMBLY] include ../../b2b.inp 
+[ASSEMBLY] include ../../b2a.inp 
+[ASSEMBLY] include ../../b1.inp 
+[ASSEMBLY] include ../../b0.inp 
+[INSERT]   include ../../insert.inp
+[CONTROL]  include ../../control.inp
+[DETECTOR] include ../../detector.inp
+[EDITS]    include ../../edits.inp
+[MPACT]    include ../../mpact.inp
+  num_space 1248
+![COBRATF]
+!  fuel_gap_htc_beta 0.1    !  under-relax the gap HTC for CTF convergence

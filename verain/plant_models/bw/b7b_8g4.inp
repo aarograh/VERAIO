@@ -1,0 +1,17 @@
+![ASSEMBLY]
+  include assembly.inp
+
+  fuel FA  10.4108 96.0 / 4.24
+  fuel FG  10.2907 96.0 / 3.39 / gad=4.0
+
+  axial B7B_8G4    5.715  
+          PLUG     7.715  
+          PLEN     16.723 
+          FBLK     32.09  
+          F8GBL_2  41.869 
+          F8G_2    354.797
+          F8GBL_2  364.576
+          FBLK     379.943
+          PLEN     397.415
+          PLUG     399.415
+          GAP      401.415

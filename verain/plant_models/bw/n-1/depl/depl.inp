@@ -1,0 +1,50 @@
+[RUN]      walltime 48.0
+[CASEID]   title 'B&W Cycle N-1 Depletion'
+[STATE]  
+  restart_read ../shuf/shuf.res BOC
+
+  power    100.0
+  tinlet   557.8 F
+  pressure 2200
+  rodbank  1 100  2 100  3 100  4 100  5 100  6 100  7 92  8 35
+
+  sym      qtr
+  feedback on
+  thexp    on
+  search   boron
+  xenon    equil
+
+  deplete  EFPD 0 3 15 <30..645x15>       ! fine steps
+! deplete  EFPD 0 3 15 <30..630x30> 645   ! coarse steps
+ 
+[STATE] rodbank 8 100 ; deplete EFPD 662  ! APSR Withdrawal
+[STATE]                 deplete EFPD 681
+[STATE] tinlet 548 F  ; deplete EFPD 693  ! Tave reduction
+[STATE] power  92     ; deplete EFPD 704  ! Power coastdown
+  op_date 2019/12/02
+  restart_write bw_n-1.res EOC
+
+[CORE]     include ../../core.inp
+           include ../../cycle_n-1.inp
+           det_map 177*2              ! virtual detectors
+[ASSEMBLY] include ../../b6a_8g4.inp
+[ASSEMBLY] include ../../b6a_8g6.inp
+[ASSEMBLY] include ../../b6a_8g8.inp
+[ASSEMBLY] include ../../b6b_12g4.inp
+[ASSEMBLY] include ../../b6b_12g6.inp
+[ASSEMBLY] include ../../b6b_16g48.inp
+[ASSEMBLY] include ../../b6b_8g4.inp
+[ASSEMBLY] include ../../b6b_8g8.inp
+[ASSEMBLY] include ../../b5_8g6.inp
+[ASSEMBLY] include ../../b5_12g7.inp
+[ASSEMBLY] include ../../b5_8g4.inp
+[ASSEMBLY] include ../../b5_8g3.inp
+[ASSEMBLY] include ../../b5_12g8.inp
+[ASSEMBLY] include ../../b4.inp 
+[ASSEMBLY] include ../../b3a.inp 
+[INSERT]   include ../../insert.inp
+[CONTROL]  include ../../control.inp
+[DETECTOR] include ../../detector.inp
+[EDITS]    include ../../edits.inp
+[MPACT]    include ../../mpact.inp
+  num_space 1248
