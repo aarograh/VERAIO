@@ -523,6 +523,12 @@ STATES:
             - copyarray %STATE/$(_loop)/@restart_jumpin,start=>3,stride=>4
           _content:
 
+        blade_pos:
+          _pltype: array
+          _type: double
+          _do:
+            - makemap CORE/$nblade,%STATE/$(_loop)/@blade_pos,CORE/$bc_sym
+          _content:
 
         shuffle_label:
           _pltype: array

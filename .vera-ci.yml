@@ -37,6 +37,11 @@ before_script:
 #set up links to add package source to full source directory
     - (if [[ -d "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)
     - (if [[ ! -L "${PACKAGE_TEST}" ]]; then ln -s ${SRC_DIR} VERAInExt; fi)
+after_script:
+    - if [[ -f "/data/test_gcc/gcc-5.4.0/load_dev_env.sh" ]]; then BASE_DIR="/data/gitlab-runner"; . /data/test_gcc/gcc-5.4.0/load_dev_env.sh; ENV_BASE=/data/test_gcc/gcc-5.4.0; else BASE_DIR="/localhome/gitlab-runner"; . /projects/vera/gcc-5.4.0/load_dev_env.sh; ENV_BASE=/projects/vera/gcc-5.4.0; fi 
+    - SRC_DIR=`pwd`
+    - BLD_DIR=${BASE_DIR}/builds/VERAInExt
+    - cp $BLD_DIR/Testing/Temporary/* $SRC_DIR/
 
 vmcontinuous:
     variables:
@@ -69,6 +74,13 @@ gnu-debug:
         DART_TESTING_TIMEOUT: "3600"
         BLD_NAME: "gnu_release_debug"
     stage: test
+    artifacts:
+      paths:
+        - LastTestsFailed.log
+        - LastTest.log
+        - CTestCostData.txt
+      expire_in: 1 week
+      when: always
     script:
     - SRC_DIR=`pwd`
     - BLD_DIR=${BASE_DIR}/builds/VERAInExt

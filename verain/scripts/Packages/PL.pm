@@ -167,7 +167,7 @@ sub dispatch {
 	matmap     => \&matmap,
 	fuelmap    => \&fuelmap,
         sourcemap  => \&sourcemap,
-	makemap    => \&makemap,
+	makemap    => \&make_map,
 	echos      => \&echos,
 	rename     => \&dbcopy,
 	coremapmap => \&coremapmap,
@@ -183,7 +183,8 @@ sub dispatch {
 	cellsmaps  => \&cellsmaps,
 	isinmaps   => \&listscompare,
         axialtype  => \&setaxialtype,
-	blademaps  => \&blademaps
+	blademaps  => \&blademaps,
+        exclude    => \&exclude
     };
 
 #    if($version eq '007'){
@@ -803,6 +804,51 @@ sub makemap {
     my @a=fullcellmap($npin,$cm_ref);
 
     return \@a;
+}
+
+sub make_map {
+    my( $home, $npin_path, $cmap_path, $bc_sym_path, %userparam ) = @_ ;
+    my %OPTIONS;
+
+    my @fullm;
+
+    while ( my ($key, $value) = each %userparam )        # to avoid perl bug of $$
+    {
+	$OPTIONS{$key}=$value;
+    }
+
+    my @npin_path=parse_path($npin_path);
+    my $npin=key_defined($SOURCE_DB,@npin_path);
+    die "make_map: npin not valid [$npin_path] [@npin_path] [$npin]\n"
+	if ref $npin;
+
+    my @cmap_path=parse_path($cmap_path);
+    my $cm_ref=key_defined($SOURCE_DB,@cmap_path);
+    return undef unless $cm_ref;
+
+    die "make_map: cm_ref not valid [$cmap_path] [@cmap_path] [$cm_ref]\n"
+	unless ref $cm_ref eq 'ARRAY';
+
+    my @bc_sym_path=parse_path($bc_sym_path);
+    my $bc_sym=key_defined($SOURCE_DB,@bc_sym_path);
+    die "make_map: bc_sym not valid [$bc_sym_path] [@bc_sym_path] [$bc_sym]\n"
+	if ref $bc_sym;
+
+    unless(defined($bc_sym)){
+	## ssmod
+#	$bc_sym='mir';
+	$bc_sym='rot';
+    }
+
+# SSMOD: TBD
+    if($bc_sym eq 'mir'){
+        @fullm=fullcellmap($npin,$cm_ref);
+    }
+    else{
+        @fullm=fullcellmap_rot($npin,$cm_ref);
+    }
+#    @fullm=fullcellmap_rot($npin,$cm_ref);
+    return \@fullm;
 }
 
 sub copyarray{
@@ -2175,5 +2221,51 @@ sub blademaps{
 	&key_on_array($iref,'radii','double',@{ $CELL_radii->{$j} });
     }
 }
+
+sub exclude{
+    my ($home,
+	$path1,
+	$path2,
+	%userparam)=@_;
+
+    my $idx=0;
+    my ($KEY1, $KEY2);
+    my @SRC1;
+    my @SRC2;
+    
+    my %OPTIONS=('compare'=>'need_one_or_less');
+    while ( my ($key, $value) = each %userparam )
+    {$OPTIONS{$key}=$value;}
+
+    # get path1
+    my @a_path = parse_path($path1);
+    print  "exclude: path1 @a_path\n" if get_verbose();
+    my $a_ref=key_defined($SOURCE_DB,@a_path);
+    $idx++ if defined($a_ref);
+
+    # get path2
+    my @b_path = parse_path($path2);
+    print  "exclude: path2 @b_path\n" if get_verbose();
+    my $b_ref=key_defined($SOURCE_DB,@b_path);
+    $idx++ if defined($b_ref);
+
+    if($OPTIONS{compare}=='need_one_or_less'){
+        if($idx<=1){
+            return undef;
+        }
+        else{
+            $KEY1 = keyword_from_path(@a_path);
+            $KEY2 = keyword_from_path(@b_path);
+            @SRC1 = fileline_from_path(@a_path);
+            @SRC2 = fileline_from_path(@b_path);
+            print STDERR "Both keywords $KEY1 and $KEY2 are defined.\n";
+            print STDERR "$KEY1: File $SRC1[0], line $SRC1[1]\n";
+            print STDERR "$KEY2: File $SRC2[0], line $SRC2[1]\n";
+            die "ERROR (exclude): Select only one.\n";
+        }
+    }
+    return undef;
+}
+
 
 1;

@@ -4,6 +4,7 @@ DETECTORS:
     - setdb MAIN_DB
     - namesunique %DETECTOR/*/$/%axial
     - isinmaps %DETECTOR/*/$/%axial,CORE/@det_map
+    - isinmaps %DETECTOR/*/$/%axial,CORE/@bwrdet_map
 
   _tr:
     _name: _loop
