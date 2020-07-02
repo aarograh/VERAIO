@@ -8,7 +8,7 @@
 >
 
 <!--
-    version 9.C:07/27/2012:463:13911:Srdjan Simunovic
+    version 9.C.4:06/28/2020:Srdjan Simunovic
     simunovics@ornl.gov
     http://thyme.ornl.gov/simunovics
     XSLT for ParameterList reactor file
@@ -132,6 +132,69 @@
 	    <xsl:call-template name="make_map">
 	      <xsl:with-param name="num_pins">
 		<xsl:value-of select="$num_pins" />
+	      </xsl:with-param>
+	      <xsl:with-param name="map">
+		<xsl:value-of select="$map" />
+	      </xsl:with-param>
+	    </xsl:call-template>
+	  </xsl:element>
+	</xsl:element>
+      </xsl:if>
+    </xsl:when>
+
+    <xsl:when test="@name = 'blade_map' or @name = 'blade_pos'">
+      <xsl:variable name="nblade">
+	<xsl:choose>
+	  <xsl:when test="../Parameter[@name = 'nblade']">
+	    <xsl:value-of select="../Parameter[@name = 'nblade']/@value" />
+	  </xsl:when>
+	  <xsl:when test="../../../ParameterList[@name = 'CORE']/Parameter[@name = 'nblade']">
+	    <xsl:value-of select="../../../ParameterList[@name = 'CORE']/Parameter[@name = 'nblade']/@value" />
+	  </xsl:when>
+	  <xsl:otherwise>
+	    <xsl:value-of select="0" />
+	  </xsl:otherwise>
+	</xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="map" select="@value" />
+
+      <xsl:if test="$nblade > 0">
+	<xsl:element name="li">
+	  <xsl:element name="p">
+	    <xsl:value-of select="@name" /> = 
+	    <xsl:call-template name="make_map">
+	      <xsl:with-param name="num_pins">
+		<xsl:value-of select="$nblade" />
+	      </xsl:with-param>
+	      <xsl:with-param name="map">
+		<xsl:value-of select="$map" />
+	      </xsl:with-param>
+	    </xsl:call-template>
+	  </xsl:element>
+	</xsl:element>
+      </xsl:if>
+    </xsl:when>
+
+    <xsl:when test="@name = 'bwrdet_map'">
+      <xsl:variable name="nbwrdet">
+	<xsl:choose>
+	  <xsl:when test="../Parameter[@name = 'nbwrdet']">
+	    <xsl:value-of select="../Parameter[@name = 'nbwrdet']/@value" />
+	  </xsl:when>
+	  <xsl:otherwise>
+	    <xsl:value-of select="0" />
+	  </xsl:otherwise>
+	</xsl:choose>
+      </xsl:variable>
+      <xsl:variable name="map" select="@value" />
+
+      <xsl:if test="$nbwrdet > 0">
+	<xsl:element name="li">
+	  <xsl:element name="p">
+	    <xsl:value-of select="@name" /> = 
+	    <xsl:call-template name="make_map">
+	      <xsl:with-param name="num_pins">
+		<xsl:value-of select="$nbwrdet" />
 	      </xsl:with-param>
 	      <xsl:with-param name="map">
 		<xsl:value-of select="$map" />

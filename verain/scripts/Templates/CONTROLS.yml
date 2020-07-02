@@ -4,6 +4,7 @@ CONTROLS:
     - setdb MAIN_DB
     - namesunique %CONTROL/*/$/%axial
     - isinmaps %CONTROL/*/$/%axial,CORE/@crd_map
+    - isinmaps %CONTROL/*/$/%axial,CORE/@blade_map
 
   _tr:
     _name: _loop

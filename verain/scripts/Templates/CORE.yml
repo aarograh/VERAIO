@@ -2,6 +2,8 @@ CORE:
   _pltype: list
   _do:
     - setdb MAIN_DB
+    - exclude CORE/@crd_map,CORE/@blade_map
+    - exclude CORE/@det_map,CORE/@bwrdet_map
   _content:
 
     op_date:
@@ -87,6 +89,20 @@ CORE:
       _type: int
       _do:
         - copy CORE/$size
+      _content:
+
+    nblade:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy CORE/$nblade
+      _content:
+
+    nbwrdet:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy CORE/$nbwrdet
       _content:
 
     unit:
@@ -213,6 +229,20 @@ CORE:
       _type: string
       _do:
         - coremapmap CORE/$size,CORE/@core_shape,CORE/@assm_map,CORE/$bc_sym
+      _content:
+
+    blade_map:
+      _pltype: array
+      _type: string
+      _do:
+        - makemap CORE/$nblade,CORE/@blade_map,CORE/$bc_sym
+      _content:
+
+    bwrdet_map:
+      _pltype: array
+      _type: string
+      _do:
+        - makemap CORE/$nbwrdet,CORE/@bwrdet_map,CORE/$bc_sym
       _content:
 
     rotate_map:
