@@ -2563,8 +2563,8 @@ CORE:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={rot, mir},
+#>     valuedefault={rot},
+#>     valuesapplicable={mir},
 #>     limitations={},
 #>     description={Symmetry flag for the core when using qtr-symmetry.
 #>        Flag is not used in full-symmetry.},
@@ -2625,7 +2625,7 @@ CORE:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={vacuum},
-#>     valuesapplicable={reflecting},
+#>     valuesapplicable={reflecting, periodic},
 #>     limitations={},
 #>     description={Radial neutron transport boundary condition.},
 #>     notes={}
@@ -2635,7 +2635,7 @@ CORE:
     _content:
     _check:
       - is_word()
-      - in_dictionary() reflecting vacuum
+      - in_dictionary() reflecting vacuum periodic
 #>
 #>   {\bf xlabel} xlabel
 #>   \VERAInputTable{
