@@ -2226,6 +2226,77 @@ CORE:
       - fall(sub{not_in_dictionary(shift,'0')},())
       - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
 #>
+#>   {\bf inlet\_orifice\_map} inlet\_orifice\_map
+#>   \VERAInputTable{
+#>     name={inlet\_orifice\_map},
+#>     type={2D Character String Map},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={2-D array that must match the shape of assm\_map in [CORE].
+#>        Specifies an ID for the inlet loss in that core location.  The actual loss for the ID
+#>        is later defined on the inlet\_orifice\_loss card.  This input is only valid for BWR.},
+#>     notes={}
+#>   }
+  inlet_orifice_map:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
+#>
+#>   {\bf inlet\_orifice\_loss} label form\_loss\_coefficient form\_loss\_area
+#>   \VERAInputTable{
+#>     name={label},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Label for the form loss being defined.  Must match a label given in inlet\_orifice\_map.},
+#>     notes={All labels in the inlet\_orifice\_map array must be defined in the inlet\_orifice\_loss
+#>        input.}
+#>   }
+#>   \VERAInputTable{
+#>     name={form\_loss\_coefficient},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0.0$},
+#>     limitations={},
+#>     description={Form loss coefficient for the loss.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={form\_loss\_area},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm$^2$},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={},
+#>     description={Flow area of the orifice being modeled by this loss.},
+#>     notes={}
+#>   }
+  inlet_orifice_loss:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - nth(1,())>=0.0
+      - nth(2,())>0.0
+      - arraysize()%3==0
+#>
 #>   {\bf rotate\_map} rotate\_map
 #>   \VERAInputTable{
 #>     name={rotate\_map},
