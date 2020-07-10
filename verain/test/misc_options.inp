@@ -337,4 +337,3 @@
   nodal_edits_adapt_adf true
   nodal_edits_collapse_axial_reflectors true
   dep_shielder_dt  0.01
-  azimuthal_xs true

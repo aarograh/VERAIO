@@ -10653,26 +10653,35 @@ MPACT:
 #>   {\bf azimuthal\_xs} azimuthal\_xs
 #>   \VERAInputTable{
 #>    name={azimuthal\_xs},
-#>    type={Boolean},
+#>    type={Fixed Character String},
 #>    need={Optional},
 #>    unitsdefault={},
 #>    unitsother={},
-#>    valuedefault={\texttt{false}},
-#>    valuesapplicable={\texttt{true}},
-#>    limitations={},
-#>    description={This card is used to specify the azimuthally dependent cross section %
-#>      generation procedure. The cross section will be generated using eight azimuthal %
-#>      division of MOC meshes},
-#>    notes={Presently this will generate the azimuthlly dependent cross section for    %
-#>    whole MOC meshes including moderator and non-resonant isotopes, which can be      %
-#>    further reduced by seleting target isotopes such as gadolinium bearing fuel.}
+#>     valuedefault={none},
+#>     valuesapplicable={full, fuel, gad. These are described as:                      %
+#>       \begin{enumerate}                                                             %
+#>         \item \texttt{none} --- original cross section generation scheme            %
+#>         \item \texttt{full} --- use azimuthal XS for all pin cell types             %
+#>         \item \texttt{fuel} --- use azimuthal XS for fuel pin cell types only       %
+#>         \item \texttt{gad}  --- use azimuthal XS for gadolinium pin cell types only %              
+#>       \end{enumerate}},
+#>     limitations={},
+#>     description={This card is used to specify the azimuthally dependent cross section     %
+#>       region option. By default, MPACT will genrate cross sections for radial rings only  %
+#>       to minimize computational resource requirements. For BWR applications, or other     %
+#>       special cases, increased accuracy may be needed by treating cross sections radially %
+#>       and azimuthally in the fuel pellet.},
+#>     notes={Several options are provided to fine tune the accuracy vs. computational %
+#>       resources. The \texttt{full} option causes the largest increase in run time   %
+#>       and memory usage, followed by \texttt{fuel} and \texttt{gad}. The depletion   % 
+#>       calculation will be performed for specified azimuthal regions as well.}
 #>   }
   azimuthal_xs:
     <<: *dtbool
     _content:
     _check:
       - is_word()
-      - in_dictionary() true false
+      - in_dictionary() none full fuel gad
 #>
 #>   {\bf explicit\_erg\_deposit} explicit\_erg\_deposit
 #>   \VERAInputTable{
