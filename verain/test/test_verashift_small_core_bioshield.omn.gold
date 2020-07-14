@@ -48,97 +48,97 @@ axis z
 ! *****************  DEFINE DETECTOR SHAPES  *****************
 ! Detector 0 shape (PWR)
 [UNIVERSE][SHAPE=cyl detector_0_0]
-radius 1.5
-extents 70.0 122.4
-origin 35.0740288533 20.25 0
+radius 1.500000
+extents 70.000000 122.400000
+origin 35.074029 20.250000 0.000000
 axis z
 
 ! Detector 0 shape (PWR)
 [UNIVERSE][SHAPE=cyl detector_0_1]
-radius 2.5
-extents 70.0 122.4
-origin 35.0740288533 20.25 0
+radius 2.500000
+extents 70.000000 122.400000
+origin 35.074029 20.250000 0.000000
 axis z
 
 ! Detector 0 shape (PWR)
 [UNIVERSE][SHAPE=cyl detector_0_2]
-radius 1.5
-extents 122.4 174.8
-origin 35.0740288533 20.25 0
+radius 1.500000
+extents 122.400000 174.800000
+origin 35.074029 20.250000 0.000000
 axis z
 
 ! Detector 0 shape (PWR)
 [UNIVERSE][SHAPE=cyl detector_0_3]
-radius 2.5
-extents 122.4 174.8
-origin 35.0740288533 20.25 0
+radius 2.500000
+extents 122.400000 174.800000
+origin 35.074029 20.250000 0.000000
 axis z
 
 ! Detector 0 well
 [UNIVERSE][SHAPE=wedge well_0]
-corner_pt 9.35627563874 9.35627563874
-height 104.8
-origin 35.7143087052 12.9802986756 70.0
-xbase 9.35627563874
-euler 0.208333333333 0.0 0.0
+corner_pt 9.356276 9.356276
+height 104.800000
+origin 35.714309 12.980299 70.000000
+xbase 9.356276
+euler 0.208333 0.0 0.0
 
 ! Detector 1 shape (PWR)
 [UNIVERSE][SHAPE=cyl detector_1_0]
-radius 1.5
-extents 70.0 122.4
-origin 22.23 38.5034894523 0
+radius 1.500000
+extents 70.000000 122.400000
+origin 22.230000 38.503489 0.000000
 axis z
 
 ! Detector 1 shape (PWR)
 [UNIVERSE][SHAPE=cyl detector_1_1]
-radius 2.5
-extents 70.0 122.4
-origin 22.23 38.5034894523 0
+radius 2.500000
+extents 70.000000 122.400000
+origin 22.230000 38.503489 0.000000
 axis z
 
 ! Detector 1 shape (PWR)
 [UNIVERSE][SHAPE=cyl detector_1_2]
-radius 1.5
-extents 122.4 174.8
-origin 22.23 38.5034894523 0
+radius 1.500000
+extents 122.400000 174.800000
+origin 22.230000 38.503489 0.000000
 axis z
 
 ! Detector 1 shape (PWR)
 [UNIVERSE][SHAPE=cyl detector_1_3]
-radius 2.5
-extents 122.4 174.8
-origin 22.23 38.5034894523 0
+radius 2.500000
+extents 122.400000 174.800000
+origin 22.230000 38.503489 0.000000
 axis z
 
 ! Detector 1 well
 [UNIVERSE][SHAPE=wedge well_1]
-corner_pt 16.8436888422 16.8436888422
-height 104.8
-origin 28.3572344151 25.2955975681 70.0
-xbase 16.8436888422
-euler 0.291666666667 0.0 0.0
+corner_pt 16.843689 16.843689
+height 104.800000
+origin 28.357234 25.295598 70.000000
+xbase 16.843689
+euler 0.291667 0.0 0.0
 
 ! Detector 2 shape (SRC)
 [UNIVERSE][SHAPE=cyl detector_2_0]
-radius 2.0
-extents 100.0 148.0
-origin 38.0 -0.0 0
+radius 2.000000
+extents 100.000000 148.000000
+origin 38.000000 -0.000000 0.000000
 axis z
 
 ! Detector 2 shape (SRC)
 [UNIVERSE][SHAPE=cyl detector_2_1]
-radius 3.0
-extents 100.0 148.0
-origin 38.0 -0.0 0
+radius 3.000000
+extents 100.000000 148.000000
+origin 38.000000 -0.000000 0.000000
 axis z
 
 ! Detector 2 well
 [UNIVERSE][SHAPE=wedge well_2]
-corner_pt 6.38006718084 6.38006718084
-height 48.0
-origin 37.7312519191 -4.511388768 100.0
-xbase 6.38006718084
-euler 0.125 0.0 0.0
+corner_pt 6.380067 6.380067
+height 48.000000
+origin 37.731252 -4.511389 100.000000
+xbase 6.380067
+euler 0.125000 0.0 0.0
 
 ! *********  CREATE HOLES AND FILL WITH UNIVERSES  ***********
 

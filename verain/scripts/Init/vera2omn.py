@@ -442,25 +442,28 @@ class VERAOmnibusGenerator(object):
                                 outfile.write(line_filled)
                             elif "OMN_RADIUS" in shape_line:
                                 line_filled = re.sub(r'OMN_RADIUS',
-                                        str(r),
+                                        '{:f}'.format(r),
                                         shape_line)
                                 outfile.write(line_filled)
                             elif "OMN_Z_LOWER" in shape_line:
                                 line_filled = re.sub(
                                         r'OMN_Z_LOWER',
-                                        str(min_z),
+                                        '{:f}'.format(min_z),
                                         shape_line)
                                 if not "OMN_Z_UPPER" in shape_line:
                                     print("Template error: OMN_Z_UPPER")
                                     exit(1)
                                 line_filled = re.sub(
                                         r'OMN_Z_UPPER',
-                                        str(min_z + h),
+                                        '{:f}'.format(min_z + h),
                                         line_filled)
                                 outfile.write(line_filled)
                             elif "OMN_ORIGIN" in shape_line:
+                                # line_filled = re.sub(r'OMN_ORIGIN',
+                                #         ' '.join([str(p) for p in pos]),
+                                #         shape_line)
                                 line_filled = re.sub(r'OMN_ORIGIN',
-                                        ' '.join([str(p) for p in pos]),
+                                        ' '.join(['{:f}'.format(p) for p in pos]),
                                         shape_line)
                                 outfile.write(line_filled)
                             else:
@@ -506,13 +509,14 @@ class VERAOmnibusGenerator(object):
                 outfile.write("! Detector " + str(d) + " well\n")
                 outfile.write("[UNIVERSE][SHAPE=" + det_type.well_type +
                         " well_" + str(d) + "]\n")
-                outfile.write("corner_pt " + str(a) + " " + str(a) + "\n")
-                outfile.write("height " + str(height) + "\n")
-                outfile.write("origin " + str(well_pos[0]) + " " +
-                                          str(well_pos[1]) + " " +
-                                          str(well_pos[2]) + "\n")
-                outfile.write("xbase " + str(a) + "\n")
-                outfile.write("euler " + str(rot) + " 0.0 0.0\n\n")
+                outfile.write("corner_pt " + '{:f}'.format(a) + " " +
+                                             '{:f}'.format(a) + "\n")
+                outfile.write("height " + '{:f}'.format(height) + "\n")
+                outfile.write("origin " + '{:f}'.format(well_pos[0]) + " " +
+                                          '{:f}'.format(well_pos[1]) + " " +
+                                          '{:f}'.format(well_pos[2]) + "\n")
+                outfile.write("xbase " + '{:f}'.format(a) + "\n")
+                outfile.write("euler " + '{:f}'.format(rot) + " 0.0 0.0\n\n")
 
                 # Append the well shape to use with bioshield cell definitions
                 det_outers.append("+well_" + str(d))
