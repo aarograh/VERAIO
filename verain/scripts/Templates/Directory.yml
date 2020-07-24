@@ -10663,7 +10663,7 @@ MPACT:
 #>         \item \texttt{none} --- original cross section generation scheme            %
 #>         \item \texttt{full} --- use azimuthal XS for all pin cell types             %
 #>         \item \texttt{fuel} --- use azimuthal XS for fuel pin cell types only       %
-#>         \item \texttt{gad}  --- use azimuthal XS for gadolinium pin cell types only %              
+#>         \item \texttt{gad}  --- use azimuthal XS for gadolinium pin cell types only %
 #>       \end{enumerate}},
 #>     limitations={},
 #>     description={This card is used to specify the azimuthally dependent cross section     %
@@ -10673,7 +10673,7 @@ MPACT:
 #>       and azimuthally in the fuel pellet.},
 #>     notes={Several options are provided to fine tune the accuracy vs. computational %
 #>       resources. The \texttt{full} option causes the largest increase in run time   %
-#>       and memory usage, followed by \texttt{fuel} and \texttt{gad}. The depletion   % 
+#>       and memory usage, followed by \texttt{fuel} and \texttt{gad}. The depletion   %
 #>       calculation will be performed for specified azimuthal regions as well.}
 #>   }
   azimuthal_xs:
@@ -15379,7 +15379,7 @@ MAMBA:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={0.25},
-#>     valuesapplicable={$>0$},
+#>     valuesapplicable={$>=0$},
 #>     limitations={},
 #>     description={Fraction of the B-10 reaction rate applied to depletion},
 #>     notes={}
@@ -15389,7 +15389,7 @@ MAMBA:
     _content:
     _check:
       - is_float()
-      - is_gt() 0
+      - is_geq() 0
 #>
 #>   {\bf LTB\_dissolve\_scale} LTB\_dissolve\_scale
 #>   \VERAInputTable{
