@@ -10663,7 +10663,7 @@ MPACT:
 #>         \item \texttt{none} --- original cross section generation scheme            %
 #>         \item \texttt{full} --- use azimuthal XS for all pin cell types             %
 #>         \item \texttt{fuel} --- use azimuthal XS for fuel pin cell types only       %
-#>         \item \texttt{gad}  --- use azimuthal XS for gadolinium pin cell types only %              
+#>         \item \texttt{gad}  --- use azimuthal XS for gadolinium pin cell types only %
 #>       \end{enumerate}},
 #>     limitations={},
 #>     description={This card is used to specify the azimuthally dependent cross section     %
@@ -10673,7 +10673,7 @@ MPACT:
 #>       and azimuthally in the fuel pellet.},
 #>     notes={Several options are provided to fine tune the accuracy vs. computational %
 #>       resources. The \texttt{full} option causes the largest increase in run time   %
-#>       and memory usage, followed by \texttt{fuel} and \texttt{gad}. The depletion   % 
+#>       and memory usage, followed by \texttt{fuel} and \texttt{gad}. The depletion   %
 #>       calculation will be performed for specified azimuthal regions as well.}
 #>   }
   azimuthal_xs:
@@ -11870,27 +11870,45 @@ MPACT:
       - is_int()
       - is_gt() 0
 #>
-#>   {\bf TL\_treatment} TL\_treatment
+#>   {\bf scattering} scattering
 #>   \VERAInputTable{
-#>     name={TL\_treatment},
+#>     name={scattering},
 #>     type={Fixed Character String},
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={lflat},
-#>     valuesapplicable={flat.  These are described as:                                  %
+#>     valuedefault={TCP0},
+#>     valuesapplicable={P0, P1, P2, P3, P4, P5, Pn0, LTCP0, FLTCP0.  There are          %
+#>       two primary categories: those which use the P0 sweeper and those which use the  %
+#>       Pn sweeper.  The P0 sweeper options are described as follows:                   %
 #>       \begin{itemize}                                                                 %
-#>         \item \texttt{lflat} --- checks the total / transport cross section.          %
-#>           If the value is below the threshold, leakage will not be put into           %
-#>           that region.  This process is usually to avoid leakage in the fuel-         %
-#>           clad gap.  It will then redistribute the leakage to the other               %
-#>           regions in that pin.                                                        %
-#>         \item \texttt{flat} --- does not perform leakage threshold checks.            %
+#>         \item \texttt{P0} --- Performs transport calculations using isotropic         %
+#>           scattering with no transport correction.                                    %
+#>         \item \texttt{TCP0} --- Performs transport calculations using isotropic       %
+#>           scattering with transport-corrected cross sections; this is the default.    %
+#>         \item \texttt{LTCP0} --- Performs the same transport calculations as TCP0,    %
+#>           except that for energies above 1 MeV, the transport correction is limited   %
+#>           to prevent negative self-scatter cross sections.  This can hinder accuracy  %
+#>           but help stability in certain cases.                                        %
+#>         \item \texttt{FLTCP0} --- Does the same thing as LTCP0, but for all energies. %
+#>       \end{itemize}                                                                   %
+#>       The Pn sweeper options are described as follows:                                %
+#>       \begin{itemize}                                                                 %
+#>         \item \texttt{Pn0} --- Uses the same physics as TCP0, but with the Pn sweeper.%
+#>         \item \texttt{P1} --- Uses linearly anisotropic scattering for the transport  %
+#>           calculations.                                                               %
+#>         \item \texttt{P2} --- Uses second order anisotropic scattering for transport  %
+#>           calculations.                                                               %
+#>         \item \texttt{P3} --- Uses third order anisotropic scattering for transport   %
+#>           calculations.                                                               %
+#>         \item \texttt{P4} --- Uses fourth order anisotropic scattering for transport  %
+#>           calculations.                                                               %
+#>         \item \texttt{P5} --- Uses fifth order anisotropic scattering for transport   %
+#>           calculations.                                                               %
 #>       \end{itemize}},
 #>     limitations={},
-#>     description={This card is used to specify the type of spatial shape of the        %
-#>       axial transverse leakage applied to the 2-D problem. Flat means it is constant  %
-#>       over a pin cell. This is primarily used to ensure stability of the iteration.},
+#>     description={This card is used to specify the scattering treatment to be used by  %
+#>       the radial neutron transport calculations in MPACT.},
 #>     notes={}
 #>   }
   scattering:
@@ -11898,7 +11916,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() P0 P1 P2 P3 P4 P5 Pn0 TCP0 LTCP0 ITCP0
+      - in_dictionary() P0 P1 P2 P3 P4 P5 Pn0 TCP0 LTCP0 FLTCP0
 #>
 #>   {\bf trim\_Pn\_moments} trim\_Pn\_moments
 #>   \VERAInputTable{
