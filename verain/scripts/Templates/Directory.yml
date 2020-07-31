@@ -7261,7 +7261,7 @@ COBRATF:
 #>
 #>   {\bf nc} nc
 #>   \VERAInputTable{
-#>     name={nfuel},
+#>     name={nc},
 #>     type={Integer},
 #>     need={Optional},
 #>     unitsdefault={},
