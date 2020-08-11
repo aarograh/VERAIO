@@ -10190,12 +10190,13 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={INTEGRAL},
+#>     valuedefault={none},
 #>     valuesapplicable={},
 #>     limitations={},
 #>     description={This card is used to specify the volume correction being applied   %
 #>       to the MOC segments.},
-#>     notes={}
+#>     notes={The \texttt{integral} option can be be used to greatly improve the       %
+#>       convergence properties of certain transient calculations.}
 #>   }
   volume_corr:
     <<: *dtstring
