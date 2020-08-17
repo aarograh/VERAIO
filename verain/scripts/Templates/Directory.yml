@@ -7459,7 +7459,7 @@ COBRATF:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={0.0},
+#>     valuedefault={0.5},
 #>     valuesapplicable={$0.0 \le $ guide\_tube\_coefficient $\le 1.0$},
 #>     limitations={},
 #>     description={Used to determine the temperature rise in guide tubes using the following:
@@ -7755,7 +7755,7 @@ COBRATF:
 #>     valuesapplicable={0, 3, 5, 6, 7, 8},
 #>     limitations={},
 #>     description={Selects the linear solver to use for the pressure matrix solve.  Options are:
-#>        0 - Direct (Gaussian elimination)     (serial runs only)
+#>        0 - Direct
 #>        3 - Internal Krylov solver (BiCGStab) (serial runs only, default for serial run)
 #>        5 - PETSc BiCGStab (default for parallel run)
 #>        6 - PETSc with pressure matrix reduced to root and solved in serial (used only for parallel verification cases, do not use for production parallel runs)
