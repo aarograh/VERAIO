@@ -1349,6 +1349,31 @@ STATE:
       - is_float(nth(2,()))&&nth(2,())>=0
       - (is_int(nth(3,()))||nth(3,())==0)&&nth(3,())>=0
 #>
+#>   {\bf restart\_shuffle\_errorchecking} restart\_shuffle\_errorchecking
+#>   \VERAInputTable{
+#>     name={restart\_shuffle\_errorchecking},
+#>     type={character string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={on},
+#>     valuesapplicable={off,true,false},
+#>     limitations={},
+#>     description={This card is used to toggle more thorough geometry input checking    %
+#>       between the shuffle\_label map and the assm\_map.  If the unexpanded xml input   %
+#>       parameter list is stored on the restart file, then the assembly parameter list  %
+#>       at a shuffle label position is compared to the corresponding assembly parameter %
+#>       list at the same core assm\_map position.                                       %
+#>        },
+#>     notes={}
+#>   }
+  restart_shuffle_errorchecking:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off true false
+#>
 #>   {\bf restart\_jumpin} target\_location restart\_file restart\_label source\_location
 #>   \VERAInputTable{
 #>     name={restart\_jumpin},

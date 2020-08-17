@@ -453,6 +453,13 @@ STATES:
             - copy %STATE/$(_loop)/$op_date
           _content:
 
+        restart_shuffle_errorchecking:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %STATE/$(_loop)/$restart_shuffle_errorchecking
+          _content:
+
         restart_shuffle_file:
           _pltype: array
           _type: string
