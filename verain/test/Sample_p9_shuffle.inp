@@ -28,6 +28,7 @@
            B 230
            C 230
            D 220
+  restart_shuffle_errorchecking on
   restart_shuffle  p9_restart_cycl1.h5 440EFPD_65POW_DOUT
   shuffle_label
 !   H     G     F     E     D     C     B     A
