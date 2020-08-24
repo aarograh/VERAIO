@@ -14434,6 +14434,38 @@ MPACT:
       - is_word()
       - in_dictionary() flat lflat
 #>
+#>   {\bf moc\_source\_splitting} moc\_source\_splitting
+#>   \VERAInputTable{
+#>     name={moc\_source\_splitting},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={none},
+#>     valuesapplicable={full.  These are described as:                            %
+#>       \begin{itemize}                                                                 %
+#>         \item \texttt{none} --- no source splitting is performed in MOC.              %
+#>         \item \texttt{full} --- if the source is negative before the MOC sweep, all   %
+#>           the source is moved from the right to left side of the equation by          %
+#>           modifying the transport cross section.                                      %
+#>       \end{itemize}},
+#>     limitations={},
+#>     description={This card is used to describe the type of source splitting that is   %
+#>       done before the MOC calculation to improve the stability of the calculation},
+#>     notes={Minor changes in the converged solution will occur when source splitting is%
+#>       enabled.  Source splitting is never done for gamma transport because of the     %
+#>       detrimental effects on accuracy for highly anisotropic calculations.  This card %
+#>       has no impact on the splitting of the axial transverse leakage source; the      %
+#>       splitting controlled by this card is done after the axial leakage splitting and %
+#>       after adding in the self-scatter source for the radial transport sweep.}
+#>   }
+  moc_source_splitting:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none full
+#>
 #>   {\bf nodal\_method} nodal\_method
 #>   \VERAInputTable{
 #>    name={nodal\_method},
