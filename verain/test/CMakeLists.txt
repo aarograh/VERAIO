@@ -124,6 +124,7 @@ ADD_REACTOR_AWARE_INPUT_PARSER_TEST(test_verashift_4mini_nonunique)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(with-dash)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(2a_LS)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(2a_LS_default)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(5cross_multiassem)
 #===========================================================
 #
 #               Test for the expected faiures.

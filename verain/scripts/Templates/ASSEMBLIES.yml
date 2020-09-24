@@ -189,6 +189,8 @@ ASSEMBLIES:
 
             Grid_(_lgrid):
               _pltype: list
+              _do:
+                - exclude %ASSEMBLY/$(_path)/%grid/$(_lgrid)^/$loss,%ASSEMBLY/$(_path)/%grid/$(_lgrid)^/$lossmap
               _content:
 
                 label:
@@ -226,6 +228,13 @@ ASSEMBLIES:
                     - copy %ASSEMBLY/$(_path)/%grid/$(_lgrid)^/$loss
                   _content:
 
+                lossmap:
+                  _pltype: parameter
+                  _type: string
+                  _do:
+                    - copy %ASSEMBLY/$(_path)/%grid/$(_lgrid)^/$lossmap
+                  _content:
+
                 gridblock:
                   _pltype: parameter
                   _type: double
@@ -239,6 +248,35 @@ ASSEMBLIES:
                   _do:
                     - copy %ASSEMBLY/$(_path)/%grid/$(_lgrid)^/$gridmap
                   _content:
+
+        LossMaps:
+          _pltype: list
+
+          _tr:
+            _name: _llossm
+            _content: %ASSEMBLY/$(_path)/%lossmap
+
+          _content:
+
+            LossMap_(_llossm):
+              _pltype: list
+              _content:
+
+                label:
+                  _pltype: parameter
+                  _type: string
+                  _do:
+                    - value (_llossm)
+                  _content:
+
+                lossmap:
+                  _pltype: array
+                  _type: double
+                  _do:
+                    - makemap %ASSEMBLY/$(_path)/$npin,%ASSEMBLY/$(_path)/%lossmap/@(_llossm),CORE/$bc_sym
+                  _content:
+
+
 
         gapw:
           _pltype: parameter

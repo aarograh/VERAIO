@@ -106,7 +106,7 @@
 <!-- SSMOD: Modify to explicit checking of each keyword -->
 
   <xsl:choose>
-    <xsl:when test="@name = 'shape' or @name = 'dancoff_map' or @name = 'cell_map'">
+    <xsl:when test="@name = 'shape' or @name = 'dancoff_map' or @name = 'cell_map' or @name = 'lossmap'">
       <xsl:variable name="num_pins">
 	<xsl:choose>
 	  <xsl:when test="../../../Parameter[@name = 'num_pins']">

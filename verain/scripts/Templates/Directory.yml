@@ -3568,6 +3568,10 @@ ASSEMBLY:
         _check:
           - is_float()
           - is_geq() 0
+      lossmap:
+        <<: *dtstring
+        _check:
+          - is_string()
       blockage:
         <<: *dtdouble
         _check:
@@ -3577,6 +3581,40 @@ ASSEMBLY:
         <<: *dtstring
         _check:
           - is_string()
+#>
+#>   {\bf lossmap} lossmap\_name loss\_coeff\_map
+#>   \VERAInputTable{
+#>     name={lossmap\_name},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The name for this map of loss coefficients.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={loss\_coeff\_map},
+#>     type={2D Float Map},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={A 2D map of loss coefficients.  The shape of the map shall be identical to
+#>        the the rod lattice shape for the assembly which the loss map is being defined.  Each
+#>        loss coefficient will be applied to the flow adjacent to the rod for which it is defined.},
+#>     notes={}
+#>   }
+  lossmap:
+    <<: *dtlistnamed
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},stride(1,1,()))
 #>
 #>   {\bf grid\_axial} grid\_map grid\_elev
 #>   \VERAInputTable{
