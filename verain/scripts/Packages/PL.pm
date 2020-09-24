@@ -2259,8 +2259,8 @@ sub exclude{
             @SRC1 = fileline_from_path(@a_path);
             @SRC2 = fileline_from_path(@b_path);
             print STDERR "Both keywords $KEY1 and $KEY2 are defined.\n";
-            print STDERR "$KEY1: File $SRC1[0], line $SRC1[1]\n";
-            print STDERR "$KEY2: File $SRC2[0], line $SRC2[1]\n";
+            print STDERR "$KEY1: File $SRC1[0], line $SRC1[1]\n";# if ($SRC1[0] && $SRC1[1]);
+            print STDERR "$KEY2: File $SRC2[0], line $SRC2[1]\n";# if ($SRC2[0] && $SRC2[1]);
             die "ERROR (exclude): Select only one.\n";
         }
     }

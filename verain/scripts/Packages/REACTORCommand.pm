@@ -630,7 +630,7 @@ sub keyin{
 	die "$myfun command check fail\n";
     }
 
-    $result=$self->encode_parameters(\%CPARMS,$templ,\$errmsg);
+    $result=$self->encode_parameters(\%CPARMS,$templ,$file,$line,\$errmsg);
     unless($result){
 	&error_report($self->keyword,$dtx,$file,$line,$errmsg);
 	die "$myfun parameter check fail\n";
@@ -749,13 +749,15 @@ sub extract_parameters {
 }
 
 sub encode_parameters {
-    my ($self,$href,$templ,$referrmsg)=@_;
+    my ($self,$href,$templ,$file,$line,$referrmsg)=@_;
     my $myfun=(caller(0))[3];
 
     my $split_exp='\s+';
     my $result=1;
     my $LABEL='_parameters';
     my $CONTENT_LABEL='_content';
+    my $FILE_LABEL='_file';
+    my $LINE_LABEL='_line';
 
     foreach my $ikey ( keys %{ $href } ){
 	$result=0;
@@ -766,6 +768,7 @@ sub encode_parameters {
 #	print "key: $ikey, parse: $parse, type: $type, check: @sr, named: $named\n";
 	if($named){
 	    print STDERR "Named parameter $ikey is not allowed in parameters.\n";
+	    print "File $file, line $line\n";
 	    die "Internal configuration error, invalid Directory.yml entry.\n";
 	}
 
@@ -775,21 +778,26 @@ sub encode_parameters {
 	if($parse eq 'scalar'){
 	    $result=&apply_evals(\$pvalue,\@sr,$referrmsg,$self);
 	    key_on($tp,$CONTENT_LABEL,$pvalue) if $result;
+            key_on($tp,$FILE_LABEL,$file) if $result;
+            key_on($tp,$LINE_LABEL,$line) if $result;
 	}
 	elsif($parse eq 'list'){
 	    my @a=quotewords($split_exp, 0, $pvalue);
 	    @a = grep {defined && $_ ne ''} @a;
 	    $result=&apply_evals(\@a,\@sr,$referrmsg,$self);
 	    key_on($tp,$CONTENT_LABEL,[@a]) if $result;
+            key_on($tp,$FILE_LABEL,$file) if $result;
+            key_on($tp,$LINE_LABEL,$line) if $result;
 	}
 	else{
 	    print STDERR "Invalid parse type for parameter $ikey.\n";
+	    print "File $file, line $line\n";
 	    die "Internal configuration error, invalid Directory.yml entry.\n";
 	}
 	return $result unless $result;
 
-	my $pw='%ASSEMBLY/$path/%axial/@loop^';
-	my @aa=parse_path( $pw );
+#	my $pw='%ASSEMBLY/$path/%axial/@loop^';
+#	my @aa=parse_path( $pw );
 #	print "aa: @aa\n";
 	
     }
