@@ -9665,10 +9665,12 @@ COUPLING:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={picard},
-#>     valuesapplicable={anderson},
+#>     valuesapplicable={anderson, partconv},
 #>     limitations={},
 #>     description={Solution method to be used for the specified coupling unknown.},
-#>     notes={Only effective for coupled (multiphysics) simulations}
+#>     notes={Only effective for coupled (multiphysics) simulations. When \texttt{partconv} is
+#>            is used, anderson should not be used for the other paramters and relaxation factor
+#>            should be 1.}
 #>   }
   nonlinear_coupling_method:
     <<: *dtlist
@@ -9678,7 +9680,7 @@ COUPLING:
       - arraysize()%2==0
       - fall(sub{is_word(shift)},())
       - fall(sub{in_dictionary(shift,'pin_powers','mod_dens')},stride(0,2,()))
-      - fall(sub{in_dictionary(shift,'picard','anderson')},stride(1,2,()))
+      - fall(sub{in_dictionary(shift,'picard','anderson','partconv')},stride(1,2,()))
 #>
 #>   {\bf anderson\_options} unknown\_quantity depth mixing\_parameter starting\_iteration
 #>   \VERAInputTable{
@@ -9760,6 +9762,131 @@ COUPLING:
       - fall(sub{1000>(shift)},stride(1,4,()))
       - fall(sub{1.0=>(shift)},stride(2,4,()))
       - fall(sub{1000>(shift)},stride(3,4,()))
+#>
+#>   {\bf partconv\_opt} gammamode est\_fdintense dperturb fdmul par\_nchk par\_multchk
+#>   \VERAInputTable{
+#>    name={gammamode},
+#>    type={String},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={hyb},
+#>    valuesapplicable={debug, maxave. These described as:                             %
+#>       \begin{itemize}
+#>          \item \texttt{debug} --- print out the feedback intensity for each         %
+#>            iteration                                                                %
+#>          \item \texttt{maxave} ---use either the maximum or flux-weighted feedback  %
+#>            intensity                                                                %
+#>          \item \texttt{hyb} ---use maximum feedback intensity when shielding        %
+#>            calulation has been performed; use flux-weighted feedback intensity      %
+#>            when not                                                                 %
+#>       \end{itemize}},
+#>    limitations={},
+#>    description={This card is used to define the solver method for the               %
+#>                 nearly-optimal partial converged CMFD nonlinear solver.},
+#>    notes={The card is only used when \texttt{partconv} is specified in              %
+#>           \texttt{nonlinear\_coupling\_method}.}
+#>   }
+#>   \VERAInputTable{
+#>    name={est\_fdintense},
+#>    type={Float},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={1.5e-3},
+#>    valuesapplicable={$ >0$, $<1$},
+#>    limitations={},
+#>    description={This card is used to specify the estimated feedback intensity     %
+#>                 before calculating the feedback intensity.},
+#>    notes={The card is only used when \texttt{partconv} is specified in            %
+#>           \texttt{nonlinear\_coupling\_method}.}
+#>   }
+#>   \VERAInputTable{
+#>    name={dperturb},
+#>    type={Float},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={5e-3},
+#>    valuesapplicable={$ >0$},
+#>    limitations={},
+#>    description={This card is used to specify the perturbation factor to calculate %
+#>                 the feedback intensity.},
+#>    notes={The card is only used when \texttt{partconv} is specified in            %
+#>           \texttt{nonlinear\_coupling\_method}.}
+#>   }
+#>   \VERAInputTable{
+#>    name={fdmul},
+#>    type={Float},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={1.0},
+#>    valuesapplicable={},
+#>    limitations={},
+#>    description={This card is used to specify the mulitplication factor applied to   %
+#>                 the feedback intensity calculated during the perturbation.          %
+#>                 When \texttt{gammamode} is \texttt{maxave} or \texttt{debug},       %
+#>                 a positive input makes the feedback intensity the maximum of all    %
+#>                 the feedback intensities;                                           %
+#>                 while a negative input makes value the flux-weighted of all the     %
+#>                 feedback intensities.},
+#>    notes={The card is only used when \texttt{partconv} is specified in              %
+#>           \texttt{nonlinear\_coupling\_method}. The mulfiplication factor is        %
+#>           applied to the feedback intensities that is calculated from perturbation.}
+#>   }
+#>   \VERAInputTable{
+#>    name={par\_nchk},
+#>    type={Integer},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={4},
+#>    valuesapplicable={$ >0$},
+#>    limitations={},
+#>    description={The initial guess of the flux is flat and far from its converged    %
+#>                 value for the single-state simulation and the first state of the    %
+#>                 multi-state simulation. The \texttt{par\_nchk} is the index of the  %
+#>                 iteration at which the user believes the flux is close to its       %
+#>                 converged value for the first state and the estimation of the       %
+#>                 feedback intensity can be performed.},
+#>    notes={The card is only used when \texttt{partconv} is specified in              %
+#>           \texttt{nonlinear\_coupling\_method} and the calculation is a multi-state %
+#>           simulation.}
+#>   }
+#>   \VERAInputTable{
+#>    name={par\_multchk},
+#>    type={Integer},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={2},
+#>    valuesapplicable={$ >0$},
+#>    limitations={},
+#>    description={The \texttt{par\_multchk} is the index of the iteration at which    %
+#>                 the user believes the flux is close to its converged value          %
+#>                 for the states other than the first state and the estimation of the %
+#>                 feedback intensity can be performed.},
+#>    notes={The card is only used when \texttt{partconv} is specified in              %
+#>           \texttt{nonlinear\_coupling\_method}.}
+#>   }
+  partconv_opt:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==6
+      - is_word(nth(0,()))
+      - in_dictionary(nth(0,()),'hyb','maxave','debug')
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+      - is_float(nth(3,()))
+      - is_int(nth(4,()))
+      - is_int(nth(5,()))
+      - nth(1,())>0
+      - nth(1,())<1
+      - nth(2,())>0
+      - nth(4,())>0
+      - nth(5,())>0
 #>
 #>   {\bf maxiter} maxiter
 #>   \VERAInputTable{
@@ -13925,7 +14052,7 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={constant},
-#>     valuesapplicable={none, adaptive, sdws-ileps, sdws-ilaps, sdws-laps               %
+#>     valuesapplicable={none, adaptive, sdws-ileps, sdws-ilaps, sdws-laps, adap-ratio   %
 #>       described as:
 #>       \begin{itemize}
 #>         \item \texttt{none} --- does not apply a shift to the CMFD system.
@@ -13953,7 +14080,14 @@ MPACT:
 #>         \item \texttt{sdws-laps} --- uses a space- and iteration-dependent            %
 #>           Wielandt shift based on the local absorption values.  The shift is          %
 #>           limited in order to ensure a nonnegative fission source.
-#>       \end{itemize} },
+#>         \item \texttt{adap-ratio} --- uses a traditional Wielandt shift method.         %
+#>           The shift parameter is an iteration-dependent, spatially-constant           %
+#>           quantity defined by:
+#>             $$ \lambda_{adaptive}^{(n)}  = \max \left\{ r\lambda^{(n)} - c_1           %
+#>                \left| \lambda^{(n)} - \lambda^{(n-1)} \right| \,,               %
+#>                \lambda_{min} \right\} \,. $$
+#>           $r$ is defined by adap-ratio.
+#>       \end{itemize}},
 #>     limitations={ These methods can only be used with the mgnode CMFD                 %
 #>       solver or the MGRBSOR solver. },
 #>     description={This card is used to specify which Wielandt shift method             %
@@ -13965,7 +14099,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps sdws-laps
+      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps sdws-laps adap-ratio
 #>
 #>   {\bf cmfd\_shift\_method\_1G} cmfd\_shift\_method\_1G
 #>   \VERAInputTable{
@@ -13975,8 +14109,8 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={constant},
-#>     valuesapplicable={none, adaptive, sdws-ileps, sdws-ilaps, sdws-laps.  See         %
-#>       \texttt{cmfd\_shift\_method} card for description.  This card is only            %
+#>     valuesapplicable={none, adaptive, sdws-ileps, sdws-ilaps, sdws-laps, adap-ratio.  %
+#>       See \texttt{cmfd\_shift\_method} card for description.  This card is only       %
 #>       applicable if a 1G CMFD system is being used to accelerate the MG CMFD          %
 #>        system.},
 #>     limitations={ This card is only used if the CMFD card is set to msed },           %
@@ -13989,7 +14123,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps sdws-laps
+      - in_dictionary() none constant adaptive sdws-ileps sdws-ilaps sdws-laps adap-ratio
 
 #>
 #>   {\bf cmfd\_ktol} cmfd\_ktol
@@ -14227,6 +14361,76 @@ MPACT:
     _check:
       - is_int()
       - is_gt() 0
+#>
+#>   {\bf cmfd\_num\_outers\_th} cmfd\_num\_outers\_th
+#>   \VERAInputTable{
+#>     name={cmfd\_num\_outers\_th},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={5},
+#>     valuesapplicable={Any positive integer.},
+#>     limitations={},
+#>     description={This card is used to specify the number of outer eigenvalue           %
+#>       power iterations to perform during a CMFD acceleration calculation when          %
+#>       near-optimal partial convergence CMFD is used.},
+#>     notes={}
+#>   }
+  cmfd_num_outers_th:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf cmfd\_shift\_r} cmfd\_shift\_r
+#>   \VERAInputTable{
+#>     name={cmfd\_shift\_r},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.667},
+#>     valuesapplicable={All positive real numbers},
+#>     limitations={Can only be used with the mgnode CMFD solver.  This card             %
+#>       is irrelevant unless the adap-ratio is used.},
+#>     description={This card is used to specify the r parameter used in the             %
+#>       adaptive-ratio shift.  r is used to reduce the shift to ensure                  %
+#>       both a positive fission source and a subcritical diffusion operator             %
+#>       (i.e., to prevent overshifting).},
+#>     notes={}
+#>   }
+  cmfd_shift_r:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+#>
+#>   {\bf cmfd\_shift\_r\_1G} cmfd\_shift\_r\_1G
+#>   \VERAInputTable{
+#>     name={cmfd\_shift\_r\_1G},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.667},
+#>     valuesapplicable={All positive real numbers},
+#>     limitations={Can only be used with the MSED solver.  This card                    %
+#>       is irrelevant unless the adap-ratio is used.},
+#>     description={This card is used to specify the r parameter used in the             %
+#>       adaptive-ratio shift.  r is used to reduce the shift to ensure                  %
+#>       both a positive fission source and a subcritical diffusion operator             %
+#>       (i.e., to prevent overshifting).},
+#>     notes={}
+#>   }
+  cmfd_shift_r_1G:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
 #>
 #>   {\bf subplane\_target} subplane\_target
 #>   \VERAInputTable{
