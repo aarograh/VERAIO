@@ -1135,6 +1135,27 @@ MPACT:
             - copy MPACT/$num_subplanes
           _content:
 
+        num_outers_th:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$cmfd_num_outers_th
+          _content:
+
+        cmfd_shift_r:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$cmfd_shift_r
+          _content:
+
+        cmfd_shift_r_1G:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$cmfd_shift_r_1G
+          _content:
+
         multigrid:
           _pltype: list
           _content:

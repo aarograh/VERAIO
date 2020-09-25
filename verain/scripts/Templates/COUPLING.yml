@@ -117,6 +117,51 @@ COUPLING:
             - copyarray COUPLING/$anderson_options,start=>3,stride=>4
           _content:
 
+    parconv_opt:
+      _pltype: list
+      _content:
+        gammamode:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy COUPLING/$partconv_opt:0
+          _content:
+
+        est_fdintense:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy COUPLING/$partconv_opt:1
+          _content:
+
+        dperturb:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy COUPLING/$partconv_opt:2
+          _content:
+
+        fd_mul:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy COUPLING/$partconv_opt:3
+          _content:
+
+        Par_nchk:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy COUPLING/$partconv_opt:4
+          _content:
+
+        Par_multchk:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy COUPLING/$partconv_opt:5
+          _content:
+
     maxiter:
       _pltype: parameter
       _type: int
