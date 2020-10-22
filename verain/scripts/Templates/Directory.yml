@@ -696,11 +696,59 @@ STATE:
 #>     valuesapplicable={},
 #>     limitations={},
 #>     description={A list of state variables to be edited. By default, MPACT edits
-#>        \texttt{pin\_powers} and \texttt{pin\_exposures}. Aditionally, individual
-#>        isotopes can be edited using \texttt{pin\_isotopes\_} followed by the
-#>        isotope in ZZ-AAA format. The edit flag \texttt{pin\_isotopes\_all} can be
-#>        used to edit all isotopes in the problem.},
-#>     notes={}
+#>        \texttt{pin\_powers}, \texttt{pin\_exposures}, \texttt{core\_flux},
+#>        \texttt{pin\_fuel\_temp}, and \texttt{pin\_isotopes\_Xe-135}.  For PWR cases,
+#>        \texttt{pin\_mod\_dens} and \texttt{pin\_mod\_temp} are added to the default
+#>        edits; for BWR cases, \texttt{pin\_cool\_dens}, \texttt{pin\_cool\_temp}, and
+#>        \texttt{pin\_cool\_void} are added to the default edits.  Once an edit is enabled,
+#>        it remains enabled until all edits are disabled using the \texttt{none} option.  If
+#>        the \texttt{none} option appears in the same state as other edit names, then all
+#>        previously enabled edits are disabled first, then the edits named at the same state
+#>        as \texttt{none} are enabled.  The default edits are never disabled, even if
+#>        \texttt{none} is specified. \newline
+#>        \newline
+#>        Individual isotopes can be edited using \texttt{pin\_isotopes\_} followed by the
+#>        isotope in ZZ-AAA format.  For example, \texttt{pin\_isotopes\_U-235}.  The same is
+#>        true for \texttt{intrapin\_isotopes\_}, \texttt{fsr\_isotopes\_}, and
+#>        \texttt{point\_isotopes\_}.  Similarly, group fluxes can be edited using
+#>        \texttt{pin\_flux\_} followed by a 3 digit group identifier.  For example,
+#>        \texttt{pin\_flux\_001} gives the fast group and \texttt{pin\_flux\_051} gives the
+#>        most thermal group when using a 51-group cross section library.  The same is
+#>        true for \texttt{point\_flux\_} and \texttt{fsr\_flux\_}.  It should be noted
+#>        that the \texttt{core\_flux} edit automatically implies the core-averaged flux
+#>        for each group, so \texttt{core\_flux\_001} is not a valid option. \newline
+#>        \newline
+#>        MPACT provides a number of collections of edits for ease of use:
+#>        \begin{itemize}
+#>          \item \texttt{pin\_flux\_2g} implies both \texttt{pin\_flux\_fast} and
+#>            \texttt{pin\_flux\_thermal}.  The same is true for \texttt{point\_flux\_2g}
+#>            and \texttt{fsr\_flux\_2g}
+#>          \item \texttt{pin\_flux} implies \texttt{pin\_flux\_001}, \texttt{pin\_flux\_002},
+#>            etc., up to the number of energy groups in the problem.  The same is true for
+#>            \texttt{point\_flux} and \texttt{fsr\_flux}
+#>          \item \texttt{pin\_isotopes\_all} implies every isotope that exists in the transport
+#>            and depletion libraries.  The same is true for \texttt{fsr\_isotopes\_all},
+#>            \texttt{point\_isotopes\_all}, and \texttt{intrapin\_isotopes\_all}.
+#>          \item \texttt{fsr\_delayed-chi} implies the delayed chi edits for each delayed
+#>            neutron group.
+#>          \item \texttt{fsr\_dnpy} implies the delayed neutron precursor yields edits for
+#>            each delayed neutron group.
+#>          \item \texttt{fsr\_dnpy} implies the delayed neutron precursor decay constants
+#>            edits for each delayed neutron group.
+#>        \end{itemize}
+#>        Users can define ``edit groups'' using the \texttt{edit\_group} option.  These can
+#>        be specified in this card as well to enable whole groups of edits.  This is a convenient
+#>        shorthand for when a particular set of edits will be enabled and disabled multiple times
+#>        during a simulation.},
+#>     notes={One limitation in this card occurs when a user enables an edit using its name, a
+#>       user-defined group, and an internal group of edits in MPACT all in the same calculation.
+#>       For example, enabling \texttt{pin\_flux\_001} by referring to \texttt{pin\_flux\_001},
+#>       \texttt{pin\_flux}, and a user-defined \texttt{edit\_group} option that includes
+#>       \texttt{pin\_flux\_001} will result in unpredictable behavior and potentially crash the code.
+#>       It is recommended that if any of the above built-in shorthands are used, that the user
+#>       should not name any of their components inside an \texttt{edit\_group} option.  However,
+#>       in this example, if the \texttt{edit\_group} option included \texttt{pin\_flux} instead of
+#>       \texttt{pin\_flux\_001}, the references will be correctly resolved.}
 #>   }
   edit:
     <<: *dtlist
@@ -5005,7 +5053,9 @@ EDITS:
 #>     limitations={},
 #>     description={A list of edits that can be turned on or off as a group using
 #>        the \texttt{edit} card in the [STATE] block.},
-#>     notes={}
+#>     notes={There are known issues with naming the same edit in multiple groups.
+#>       It is best to name each edit in at most one \texttt{edit\_group} input to
+#>       prevent unpredictable behavior.}
 #>   }
   edit_group:
     <<: *dtlistnamed
