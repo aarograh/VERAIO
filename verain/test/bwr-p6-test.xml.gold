@@ -307,6 +307,7 @@
     <Parameter name="beta_sp" type="double" value="0.005"/>
     <Parameter name="parallel" type="int" value="0"/>
     <Parameter name="property_evaluations" type="string" value="asme1968"/>
+    <Parameter name="tp_fric_model" type="string" value="chisolm"/>
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="iteration_control">

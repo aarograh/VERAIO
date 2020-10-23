@@ -179,6 +179,7 @@
   rtwfp   1000.0
   maxits  10000
   courant 0.8
+  tp_fric_model wallis
   boil_ht_cor chen ! Use the Chen correlation for subcooled/saturated boiling heat transfer
 
 

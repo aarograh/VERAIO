@@ -38,6 +38,13 @@ COBRATF:
         - copy COBRATF/$chf
       _content:
 
+    tp_fric_model:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy COBRATF/$tp_fric_model
+      _content:
+
     debug:
       _pltype: parameter
       _type: int
