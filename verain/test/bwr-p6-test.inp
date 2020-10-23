@@ -13,6 +13,10 @@
 !  ***** You must use the --init option to run this input deck *****
 !
 !
+!> @beginreq
+!> - VERAIn shall accept specification of the two-phase friction model which CTF shall use.
+!> @endreq
+
 [CASEID]
   title 'Sample 3D GE9 BWR Lattice *** with no channel'
 
@@ -52,7 +56,7 @@
 
   mat he    0.000176 he-4
   mat zirc  6.56 zirc4
-  
+
 !** Note that the automatic addition of U-234 does not agree with the spec
 !** and we may need to add U-234 explicitly
 
@@ -220,4 +224,5 @@
   beta_sp   0.005
   parallel       0
   property_evaluations asme1968
+  tp_fric_model chisolm
 

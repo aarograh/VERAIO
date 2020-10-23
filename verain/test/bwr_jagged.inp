@@ -215,4 +215,5 @@
   parallel 1
   proc_per_assem 1
   iitmax 10000
+  tp_fric_model lockhart
 

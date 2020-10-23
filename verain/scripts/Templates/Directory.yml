@@ -7420,6 +7420,34 @@ COBRATF:
       - is_int()
       - in_dictionary() 0 1 2 3
 #>
+#>   {\bf tp\_fric\_model} tp\_fric\_model
+#>   \VERAInputTable{
+#>     name={tp\_fric\_model},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={wallis},
+#>     valuesapplicable={chisolm, lockhart},
+#>     limitations={},
+#>     description={
+#>        Sets the two-phase multiplier model to use in CTF.  Options are:
+#>        \begin{itemize}
+#>        \item \texttt{wallis}: Two-phase multiplier calculated based on void
+#>        \item \texttt{chisolm}: Two-phase multiplier calculated using the Chisolm model
+#>        \item \texttt{lockhart}: Two-phase multiplier calculated using the Lockhart-Martinelli model
+#>        \end{itemize}
+#>        Descriptions of the models can be found in the CTF Theory Manual.},
+#>     notes={}
+#>   }
+  tp_fric_model:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() wallis chisolm lockhart
+
+#>
 #>   {\bf debug} debug
 #>   \VERAInputTable{
 #>     name={debug},

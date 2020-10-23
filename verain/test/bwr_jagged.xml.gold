@@ -336,6 +336,7 @@
     <Parameter name="parallel" type="int" value="1"/>
     <Parameter name="proc_per_assem" type="int" value="1"/>
     <Parameter name="rtwfp" type="double" value="500.0"/>
+    <Parameter name="tp_fric_model" type="string" value="lockhart"/>
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="parallel_env">
