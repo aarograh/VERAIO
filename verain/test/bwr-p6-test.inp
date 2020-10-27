@@ -224,5 +224,5 @@
   beta_sp   0.005
   parallel       0
   property_evaluations asme1968
-  tp_fric_model chisolm
+  tp_fric_model chisholm
 
