@@ -7428,13 +7428,13 @@ COBRATF:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={wallis},
-#>     valuesapplicable={chisolm, lockhart},
+#>     valuesapplicable={chisholm, lockhart},
 #>     limitations={},
 #>     description={
 #>        Sets the two-phase multiplier model to use in CTF.  Options are:
 #>        \begin{itemize}
 #>        \item \texttt{wallis}: Two-phase multiplier calculated based on void
-#>        \item \texttt{chisolm}: Two-phase multiplier calculated using the Chisolm model
+#>        \item \texttt{chisholm}: Two-phase multiplier calculated using the Chisholm model
 #>        \item \texttt{lockhart}: Two-phase multiplier calculated using the Lockhart-Martinelli model
 #>        \end{itemize}
 #>        Descriptions of the models can be found in the CTF Theory Manual.},
@@ -7445,7 +7445,7 @@ COBRATF:
     _content:
     _check:
       - is_string()
-      - in_dictionary() wallis chisolm lockhart
+      - in_dictionary() wallis chisholm lockhart
 
 #>
 #>   {\bf debug} debug
