@@ -29,6 +29,9 @@ before_script:
     - (if [[ ! -d "TriBITS" ]]; then git clone git@code-int.ornl.gov:CASL/TriBITS; fi)
     - env VERA_INCL_CEData=ON cmake/tribits/ci_support/clone_extra_repos.py
     - ${ENV_BASE}/common_tools/gitdist pull
+    - cd SCALE
+    - git submodule update --init external
+    - cd ${BASE_VERA_DIR}
     - cd VERAData/CEData
     - ${ENV_BASE}/common_tools/git-lfs pull
     - cd ${BASE_VERA_DIR}
