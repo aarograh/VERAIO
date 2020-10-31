@@ -337,3 +337,6 @@
   nodal_edits_adapt_adf true
   nodal_edits_collapse_axial_reflectors true
   dep_shielder_dt  0.01
+  cmfd_linear_solver native
+  cmfd_linear_solver trilinos
+  cmfd_linear_solver petsc

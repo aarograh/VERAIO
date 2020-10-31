@@ -13526,10 +13526,11 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={PETSC},
-#>     valuesapplicable={PETSC or TRILINOS described as:                      %
+#>     valuesapplicable={PETSC, TRILINOS, or NATIVE described as:                      %
 #>       \begin{itemize}                                                                 %
 #>         \item \texttt{PETSC} --- Uses PETSC (ANL) for linear solver and SLEPC for eigenvalue problems.                       %
 #>         \item \texttt{TRILINOS} --- Uses Trilinos (SNL) solvers Belos for linear solves and Anasazi for eigenvalue problems. %
+#>         \item \texttt{NATIVE} --- Uses native Futility code for linear solves and eigenvalue problems. %
 #>       \end{itemize}},
 #>     limitations={},
 #>     description={This card is used to specify which linear solver package will be used.},
@@ -13541,7 +13542,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() petsc trilinos
+      - in_dictionary() petsc trilinos native
 #>
 #>   {\bf petsc\_linear\_solver\_method} petsc\_linear\_solver\_method
 #>   \VERAInputTable{
