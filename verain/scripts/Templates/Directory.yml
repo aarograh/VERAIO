@@ -5105,6 +5105,44 @@ EDITS:
       - fall(sub{is_float(shift)},stride(6,8,()))
       - fall(sub{is_float(shift)},stride(7,8,()))
 #>
+#>   {\bf detector\_mesh} detector\_mesh\_type detector\_mesh
+#>   \VERAInputTable{
+#>     name={detector\_mesh\_type},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={pointwise, integral},
+#>     limitations={},
+#>     description={Defines what detector responses should be edited. \texttt{pointwise}
+#>        will edit the detector response at the meshes provided while \texttt{integral}
+#>        will provide the integral detector response between meshes.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={detector\_mesh},
+#>     type={Array of Floats},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={Must be listed in ascending order},
+#>     description={Axial heights used to define detector response.},
+#>     notes={}
+#>   }
+  detector_mesh:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},stride(0,1,()))
+      - nth(0,())eq"pointwise"||nth(0,())eq"integral"
+      - fall(sub{is_float(shift)},stride(1,1,()))
+      - fall(sub{is_geq(shift,0)},stride(1,1,()))
+      - is_strictlyincreasing(stride(1,1,()))
+#>
 #> \subsection{Block SHIFT}
 #> \label{sec:shiftcards}
 SHIFT:

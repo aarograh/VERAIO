@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
+<ParameterList name="CASEID">
+  <Parameter name="case_id" type="string" value="Mini Assembly - 3x3"/>
+  <ParameterList name="STATES">
+    <ParameterList name="State_1">
+      <Parameter name="boron" type="double" value="1300"/>
+      <Parameter name="edit" type="Array(string)" value="{pin_clad_fast_flux,pin_cladtemps,pin_gtubedens}"/>
+      <Parameter name="feedback" type="string" value="on"/>
+      <Parameter name="modden" type="double" value="0.743"/>
+      <Parameter name="power" type="double" value="100.0"/>
+      <Parameter name="pressure" type="double" value="15.5132039025"/>
+      <Parameter name="sym" type="string" value="full"/>
+      <Parameter name="tfuel" type="double" value="600"/>
+      <Parameter name="thexp" type="string" value="off"/>
+      <Parameter name="tinlet" type="string" value="565 K"/>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="CORE">
+    <ParameterList name="Materials">
+      <ParameterList name="Material_aic">
+        <Parameter name="density" type="double" value="10.2"/>
+        <Parameter name="key_name" type="string" value="aic"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{4.11010E-01,3.88990E-01,5.88834E-04,4.27156E-04,6.10564E-03,6.31415E-03,1.20104E-02,6.13654E-03,1.45556E-02,3.86137E-03,6.32772E-03,1.43672E-01}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{ag-107,ag-109,cd-106,cd-108,cd-110,cd-111,cd-112,cd-113,cd-114,cd-116,in-113,in-115}"/>
+      </ParameterList>
+      <ParameterList name="Material_air">
+        <Parameter name="density" type="double" value="1.189E-03"/>
+        <Parameter name="key_name" type="string" value="air"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{0.7649,0.2351}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{n-14,o-16}"/>
+      </ParameterList>
+      <ParameterList name="Material_al2o3">
+        <Parameter name="density" type="double" value="3.96"/>
+        <Parameter name="key_name" type="string" value="al2o3"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{5.29321E-01,4.70679E-01}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{al-27,o-16}"/>
+      </ParameterList>
+      <ParameterList name="Material_b2o3">
+        <Parameter name="density" type="double" value="2.55"/>
+        <Parameter name="key_name" type="string" value="b2o3"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{5.72412E-02,2.53330E-01,6.89429E-01}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{b-10,b-11,o-16}"/>
+      </ParameterList>
+      <ParameterList name="Material_b4c">
+        <Parameter name="density" type="double" value="1.7597"/>
+        <Parameter name="key_name" type="string" value="b4c"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1.44272E-01,6.38495E-01,2.17234E-01}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{b-10,b-11,c-00}"/>
+      </ParameterList>
+      <ParameterList name="Material_boron">
+        <Parameter name="density" type="double" value="2.37"/>
+        <Parameter name="key_name" type="string" value="boron"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1.84309E-01,8.15691E-01}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{b-10,b-11}"/>
+      </ParameterList>
+      <ParameterList name="Material_clad">
+        <Parameter name="density" type="double" value="6.56"/>
+        <Parameter name="key_name" type="string" value="clad"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{zirc4}"/>
+      </ParameterList>
+      <ParameterList name="Material_cs">
+        <Parameter name="density" type="double" value="7.85"/>
+        <Parameter name="key_name" type="string" value="cs"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{9.99216E-03,5.58916E-02,9.09832E-01,2.13879E-02,2.89625E-03}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{c-00,fe-54,fe-56,fe-57,fe-58}"/>
+      </ParameterList>
+      <ParameterList name="Material_gad">
+        <Parameter name="density" type="double" value="7.407"/>
+        <Parameter name="key_name" type="string" value="gad"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1.67644E-03,1.85136E-02,1.26506E-01,1.76101E-01,1.35500E-01,2.16438E-01,1.92889E-01,1.32376E-01}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{gd-152,gd-154,gd-155,gd-156,gd-157,gd-158,gd-160,o-16}"/>
+      </ParameterList>
+      <ParameterList name="Material_gap">
+        <Parameter name="density" type="double" value="0.17860E-03"/>
+        <Parameter name="key_name" type="string" value="gap"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1.0}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{he-4}"/>
+      </ParameterList>
+      <ParameterList name="Material_he">
+        <Parameter name="density" type="double" value="0.17860E-03"/>
+        <Parameter name="key_name" type="string" value="he"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1.0}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{he-4}"/>
+      </ParameterList>
+      <ParameterList name="Material_inc">
+        <Parameter name="density" type="double" value="8.19"/>
+        <Parameter name="key_name" type="string" value="inc"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{2.29667E-02,1.20841E-03,8.24955E-04,1.98001E-03,1.82443E-03,1.84688E-02,1.38303E-03,1.35121E-03,6.26047E-03,1.25547E-01,1.45103E-02,3.68004E-03,3.95183E-03,6.43299E-02,1.51224E-03,2.04780E-04,4.90541E-01,1.95463E-01,8.63849E-03,2.79938E-02,7.35945E-03}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{si-28,si-29,si-30,ti-46,ti-47,ti-48,ti-49,ti-50,cr-50,cr-52,cr-53,cr-54,fe-54,fe-56,fe-57,fe-58,ni-58,ni-60,ni-61,ni-62,ni-64}"/>
+      </ParameterList>
+      <ParameterList name="Material_pyrex">
+        <Parameter name="density" type="double" value="2.34249"/>
+        <Parameter name="key_name" type="string" value="pyrex"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{6.81945E-03,3.01805E-02,5.35000E-01,4.10000E-02,1.00000E-02,3.46337E-01,1.82228E-02,1.24406E-02}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{b-10,b-11,o-16,na-23,al-27,si-28,si-29,si-30}"/>
+      </ParameterList>
+      <ParameterList name="Material_pyrex-vera">
+        <Parameter name="density" type="double" value="2.24419"/>
+        <Parameter name="key_name" type="string" value="pyrex-vera"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{7.11823E-03,3.17015E-02,5.52167E-01,3.75747E-01,1.97702E-02,1.34967E-02}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{b-10,b-11,o-16,si-28,si-29,si-30}"/>
+      </ParameterList>
+      <ParameterList name="Material_sio2">
+        <Parameter name="density" type="double" value="2.18"/>
+        <Parameter name="key_name" type="string" value="sio2"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{5.32565E-01,4.29416E-01,2.25941E-02,1.54245E-02}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{o-16,si-28,si-29,si-30}"/>
+      </ParameterList>
+      <ParameterList name="Material_ss">
+        <Parameter name="density" type="double" value="8.0"/>
+        <Parameter name="key_name" type="string" value="ss"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{7.99365E-04,9.18684E-03,4.83373E-04,3.29987E-04,4.50008E-04,7.93005E-03,1.59029E-01,1.83800E-02,4.66146E-03,2.00001E-02,3.86016E-02,6.28376E-01,1.47715E-02,2.00030E-03,6.38386E-02,2.54373E-02,1.12420E-03,3.64308E-03,9.57752E-04}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{c-00,si-28,si-29,si-30,p-31,cr-50,cr-52,cr-53,cr-54,mn-55,fe-54,fe-56,fe-57,fe-58,ni-58,ni-60,ni-61,ni-62,ni-64}"/>
+      </ParameterList>
+      <ParameterList name="Material_tungsten">
+        <Parameter name="density" type="double" value="19.3"/>
+        <Parameter name="key_name" type="string" value="tungsten"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{0.00120000,0.26500000,0.14310000,0.30640000,0.28430000}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{o-16,w-182,w-183,w-184,w-186}"/>
+      </ParameterList>
+      <ParameterList name="Material_waba">
+        <Parameter name="density" type="double" value="3.65"/>
+        <Parameter name="key_name" type="string" value="waba"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1.36210E-02,6.02818E-02,2.05259E-02,4.26297E-01,4.79274E-01}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{b-10,b-11,c-00,o-16,al-27}"/>
+      </ParameterList>
+      <ParameterList name="Material_water">
+        <Parameter name="density" type="double" value="0.743"/>
+        <Parameter name="key_name" type="string" value="water"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{1.11915E-01,8.88085E-01}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{h-1,o-16}"/>
+      </ParameterList>
+      <ParameterList name="Material_zirc2">
+        <Parameter name="density" type="double" value="6.56"/>
+        <Parameter name="key_name" type="string" value="zirc2"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{4.17369E-05,8.36994E-04,9.67359E-05,2.45336E-05,7.62150E-05,1.24067E-03,2.91650E-05,3.94935E-06,3.69587E-04,1.47268E-04,6.50848E-06,2.10915E-05,5.54483E-06,4.98188E-01,1.09852E-01,1.69757E-01,1.75780E-01,2.89227E-02,1.32587E-04,9.18245E-05,4.77191E-05,2.05842E-03,1.09665E-03,3.48798E-03,1.24758E-03,4.77154E-03,6.89410E-04,8.76292E-04,1.55926E-07,5.18504E-06,1.84393E-05,2.71973E-05,1.36552E-05,3.53673E-05}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{cr-50,cr-52,cr-53,cr-54,fe-54,fe-56,fe-57,fe-58,ni-58,ni-60,ni-61,ni-62,ni-64,zr-90,zr-91,zr-92,zr-94,zr-96,sn-112,sn-114,sn-115,sn-116,sn-117,sn-118,sn-119,sn-120,sn-122,sn-124,hf-174,hf-176,hf-177,hf-178,hf-179,hf-180}"/>
+      </ParameterList>
+      <ParameterList name="Material_zirc4">
+        <Parameter name="density" type="double" value="6.56"/>
+        <Parameter name="key_name" type="string" value="zirc4"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{4.17369E-05,8.36988E-04,9.67361E-05,2.45339E-05,1.18556E-04,1.92992E-03,4.53675E-05,6.14347E-06,4.98086E-01,1.09830E-01,1.69723E-01,1.75744E-01,2.89168E-02,1.32586E-04,9.18243E-05,4.77190E-05,2.05842E-03,1.09665E-03,3.48799E-03,1.24758E-03,4.77153E-03,6.89408E-04,8.76293E-04,1.55926E-07,5.18504E-06,1.84393E-05,2.71973E-05,1.36552E-05,3.53673E-05}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{cr-50,cr-52,cr-53,cr-54,fe-54,fe-56,fe-57,fe-58,zr-90,zr-91,zr-92,zr-94,zr-96,sn-112,sn-114,sn-115,sn-116,sn-117,sn-118,sn-119,sn-120,sn-122,sn-124,hf-174,hf-176,hf-177,hf-178,hf-179,hf-180}"/>
+      </ParameterList>
+      <ParameterList name="Material_zirc4-xhf">
+        <Parameter name="density" type="double" value="6.55934"/>
+        <Parameter name="key_name" type="string" value="zirc4-xhf"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{4.17411E-05,8.37072E-04,9.67458E-05,2.45364E-05,1.18568E-04,1.93011E-03,4.53720E-05,6.14409E-06,4.98136E-01,1.09841E-01,1.69740E-01,1.75762E-01,2.89197E-02,1.32599E-04,9.18335E-05,4.77238E-05,2.05863E-03,1.09676E-03,3.48834E-03,1.24771E-03,4.77201E-03,6.89477E-04,8.76381E-04}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{cr-50,cr-52,cr-53,cr-54,fe-54,fe-56,fe-57,fe-58,zr-90,zr-91,zr-92,zr-94,zr-96,sn-112,sn-114,sn-115,sn-116,sn-117,sn-118,sn-119,sn-120,sn-122,sn-124}"/>
+      </ParameterList>
+      <ParameterList name="Material_zr">
+        <Parameter name="density" type="double" value="6.506"/>
+        <Parameter name="key_name" type="string" value="zr"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{5.07061E-01,1.11809E-01,1.72781E-01,1.78911E-01,2.94379E-02}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{zr-90,zr-91,zr-92,zr-94,zr-96}"/>
+      </ParameterList>
+    </ParameterList>
+    <Parameter name="apitch" type="double" value="3.86"/>
+    <Parameter name="assm_map" type="Array(string)" value="{2}"/>
+    <Parameter name="bc_rad" type="string" value="reflecting"/>
+    <Parameter name="core_size" type="int" value="1"/>
+    <Parameter name="det_map" type="Array(string)" value="{1}"/>
+    <Parameter name="height" type="double" value="245.938"/>
+    <Parameter name="lower_mat" type="string" value="ss"/>
+    <Parameter name="lower_refl_mats" type="Array(string)" value="{mod}"/>
+    <Parameter name="lower_refl_thicks" type="Array(double)" value="{10.0}"/>
+    <Parameter name="lower_refl_vfracs" type="Array(double)" value="{1.0}"/>
+    <Parameter name="lower_thick" type="double" value="5.0"/>
+    <Parameter name="lower_vfrac" type="double" value="0.5"/>
+    <Parameter name="rated_flow" type="double" value="2.67745325"/>
+    <Parameter name="rated_power" type="double" value="0.30118"/>
+    <Parameter name="shape" type="Array(int)" value="{1}"/>
+    <Parameter name="upper_mat" type="string" value="ss"/>
+    <Parameter name="upper_thick" type="double" value="7.6"/>
+    <Parameter name="upper_vfrac" type="double" value="0.5"/>
+  </ParameterList>
+  <ParameterList name="ASSEMBLIES">
+    <ParameterList name="Assembly_2">
+      <ParameterList name="CellMaps">
+        <ParameterList name="CellMap_LAT26">
+          <Parameter name="cell_map" type="Array(string)" value="{2,2,2,2,4,2,2,2,2}"/>
+          <Parameter name="label" type="string" value="LAT26"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLEN">
+          <Parameter name="cell_map" type="Array(string)" value="{5,5,5,5,4,5,5,5,5}"/>
+          <Parameter name="label" type="string" value="PLEN"/>
+        </ParameterList>
+        <ParameterList name="CellMap_PLUG">
+          <Parameter name="cell_map" type="Array(string)" value="{6,6,6,6,4,6,6,6,6}"/>
+          <Parameter name="label" type="string" value="PLUG"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Cells">
+        <ParameterList name="Cell_2">
+          <Parameter name="label" type="string" value="2"/>
+          <Parameter name="mats" type="Array(string)" value="{U26,he,zirc4}"/>
+          <Parameter name="num_rings" type="int" value="3"/>
+          <Parameter name="radii" type="Array(double)" value="{0.4096,0.418,0.475}"/>
+          <Parameter name="type" type="string" value="fuel"/>
+        </ParameterList>
+        <ParameterList name="Cell_4">
+          <Parameter name="label" type="string" value="4"/>
+          <Parameter name="mats" type="Array(string)" value="{mod,zirc4}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.561,0.602}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_5">
+          <Parameter name="label" type="string" value="5"/>
+          <Parameter name="mats" type="Array(string)" value="{he,zirc4}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.418,0.475}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="Cell_6">
+          <Parameter name="label" type="string" value="6"/>
+          <Parameter name="mats" type="Array(string)" value="{zirc4}"/>
+          <Parameter name="num_rings" type="int" value="1"/>
+          <Parameter name="radii" type="Array(double)" value="{0.475}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Fuels">
+        <ParameterList name="Fuel_U26">
+          <Parameter name="density" type="double" value="10.257"/>
+          <Parameter name="enrichments" type="Array(double)" value="{2.619}"/>
+          <Parameter name="fuel_names" type="Array(string)" value="{u-235}"/>
+          <Parameter name="key_name" type="string" value="U26"/>
+          <Parameter name="thden" type="double" value="94.5"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="SpacerGrids">
+        <ParameterList name="Grid_END">
+          <Parameter name="gridloss" type="double" value="0.9070"/>
+          <Parameter name="height" type="double" value="3.866"/>
+          <Parameter name="label" type="string" value="END"/>
+          <Parameter name="mass" type="double" value="31.6708"/>
+          <Parameter name="material" type="string" value="inc"/>
+        </ParameterList>
+        <ParameterList name="Grid_MID">
+          <Parameter name="gridloss" type="double" value="0.9065"/>
+          <Parameter name="height" type="double" value="3.810"/>
+          <Parameter name="label" type="string" value="MID"/>
+          <Parameter name="mass" type="double" value="27.2498"/>
+          <Parameter name="material" type="string" value="zirc4"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="axial_elevations" type="Array(double)" value="{10.281,11.951,221.111,237.111}"/>
+      <Parameter name="axial_labels" type="Array(string)" value="{PLUG,LAT26,PLEN}"/>
+      <Parameter name="grid_elev" type="Array(double)" value="{13.884,75.2,127.4,179.6,235.1}"/>
+      <Parameter name="grid_map" type="Array(string)" value="{END,MID,MID,MID,END}"/>
+      <Parameter name="label" type="string" value="2"/>
+      <Parameter name="lower_nozzle_comp" type="string" value="ss"/>
+      <Parameter name="lower_nozzle_height" type="double" value="10.281"/>
+      <Parameter name="lower_nozzle_mass" type="double" value="194.637"/>
+      <Parameter name="num_pins" type="int" value="3"/>
+      <Parameter name="ppitch" type="double" value="1.26"/>
+      <Parameter name="title" type="string" value="Mini 3x3"/>
+      <Parameter name="upper_nozzle_comp" type="string" value="ss"/>
+      <Parameter name="upper_nozzle_height" type="double" value="8.827"/>
+      <Parameter name="upper_nozzle_mass" type="double" value="194.637"/>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="DETECTORS">
+    <ParameterList name="Detector_1">
+      <ParameterList name="CellMaps">
+        <ParameterList name="CellMap_LAT">
+          <Parameter name="cell_map" type="Array(string)" value="{-,-,-,-,1,-,-,-,-}"/>
+          <Parameter name="label" type="string" value="LAT"/>
+        </ParameterList>
+      </ParameterList>
+      <ParameterList name="Cells">
+        <ParameterList name="Cell_1">
+          <Parameter name="label" type="string" value="1"/>
+          <Parameter name="mats" type="Array(string)" value="{he,ss}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.258,0.382}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+      </ParameterList>
+      <Parameter name="axial_elevations" type="Array(double)" value="{0.0,240.91}"/>
+      <Parameter name="axial_labels" type="Array(string)" value="{LAT}"/>
+      <Parameter name="label" type="string" value="1"/>
+      <Parameter name="num_pins" type="int" value="3"/>
+      <Parameter name="title" type="string" value="Incore instrument thimble"/>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="EDITS">
+    <Parameter name="axial_edit_bounds" type="Array(double)" value="{11.9510,15.8170,24.0280,32.2390,40.4500,48.6620,56.8730,65.0840,73.2950,77.1050,85.1700,93.2350,101.3000,109.3650,117.4300,125.4950,129.3050,137.3700,145.4350,153.5000,161.5650,169.6300,177.6950,181.5050,189.4262,197.3474,205.2686,213.1898,221.1110}"/>
+    <Parameter name="detector_mesh" type="Array(double)" value="{11.951,16.951,21.951,26.951,31.951,36.951,41.951,46.951,51.951,56.951,61.951,66.951,71.951,76.951,81.951,86.951,91.951,96.951,101.951,106.951,111.951,116.951,121.951,126.951,131.951,136.951,141.951,146.951,151.951,156.951,161.951,166.951,171.951,176.951,181.951,186.951,191.951,196.951,201.951,206.951,211.951,216.951,221.111}"/>
+    <Parameter name="detector_mesh_type" type="string" value="integral"/>
+  </ParameterList>
+  <ParameterList name="COBRATF">
+    <Parameter name="beta_sp" type="double" value="0.005"/>
+    <Parameter name="dhfrac" type="double" value="0.02"/>
+    <Parameter name="epso" type="double" value="0.00001"/>
+    <Parameter name="guide_tube_coefficient" type="double" value="0.5"/>
+    <Parameter name="iitmax" type="int" value="10000"/>
+    <Parameter name="parallel" type="int" value="0"/>
+    <Parameter name="solver" type="int" value="0"/>
+  </ParameterList>
+  <ParameterList name="MPACT">
+    <ParameterList name="TH">
+      <ParameterList name="temptable">
+        <Parameter name="a_linear" type="Array(double)" value="{2.14920235,2.14077616,2.13816987,2.13653431,2.13483072,2.13429236,2.13340406,2.13265695,2.13225895,2.13199275,2.13171226,2.13144586,2.13123434,2.13103966,2.13088250,2.13073654,2.13059300,2.13043323,2.13026721,2.13014116,2.12997840,2.12980139,2.12960680,2.12941010,2.12919812,2.12897392,2.12869696,2.12843228,2.12814585,2.12782397,2.12744146,2.12707614,2.12670065,2.12630460,2.12587824,2.12543417,2.12496070,2.12447561,2.12395835,2.12342498,2.12286653,2.12228228,2.12168488,2.12106652,2.12041971,2.11975588,2.11907358,2.11837601,2.11765367,2.11690823,2.11615487,2.11537911,2.11458962,2.11377221,2.11294715,2.11210582,2.11125072,2.11036980,2.10947880,2.10857491,2.10766405,2.10672425,2.10577565,2.10481596,2.10384985,2.10286271,2.10185909,2.10085097,2.09983463,2.09880329,2.09775317,2.09669845,2.09563730,2.09456722,2.09347458,2.09237681,2.09127560,2.09017045,2.08903837,2.08790451,2.08676712,2.08562244,2.08445349,2.08327279,2.08209124,2.08090540,2.07970548,2.07849754,2.07728924,2.07607603,2.07485289,2.07362029,2.07238610,2.07114539,2.06990509,2.06864436,2.06738290,2.06611915,2.06485294,2.06117325,2.05743514,2.05369436,2.04995197,2.04611001,2.04223481,2.03835643,2.03447889,2.03060143,2.02672060,2.02284076,2.01895918,2.01507440,2.01117811,2.00728040,2.00338440,1.99943107,1.99524695,1.99106357,1.98688063,1.98248159,1.97776003,1.97303934,1.96831825,1.96361390,1.95892056,1.95422682,1.94953397,1.94483869,1.94013869,1.93543591,1.93073429,1.92603134,1.92132742,1.91661239,1.91189836,1.90718452,1.90247131,1.89780247,1.89322997,1.88865794,1.88408619,1.87973302,1.87538433,1.87103388,1.86667936,1.86232440,1.85797126,1.85362098,1.84927203,1.84492558,1.84058120,1.83623732,1.83189468,1.82755465,1.82322506,1.81889693,1.81457103,1.81024588,1.80592918,1.80161611,1.79730383,1.79299250,1.78869776,1.78440629,1.78023333,1.77685294,1.77347736,1.77012597,1.76685750,1.76359178,1.76032081,1.75702414,1.75372871,1.75043466,1.74714474,1.74385929,1.74057479,1.73729436,1.73401588,1.73073952,1.72746820,1.72419839,1.72092993,1.71766030,1.71439477,1.71113520,1.70787682,1.70462376,1.70138128,1.69813932,1.69490106,1.69166668,1.68845406,1.68524650,1.68203986,1.67884114,1.67565896,1.67281703,1.67050717,1.66819935,1.66621956,1.66429837,1.66236933,1.66042245,1.65847573,1.65651981,1.65456179,1.65260736,1.65064642,1.64865728,1.64667032,1.64468526,1.64269829,1.64069312,1.63868777,1.63668054,1.63467376,1.63266747,1.63066119,1.62865412,1.62664829,1.62464791,1.62265403,1.62066179,1.61866879,1.61668033,1.61470289,1.61272489,1.61074891,1.60877657,1.60682369,1.60487130,1.60291742,1.60096365,1.59901898,1.59707747,1.59513910,1.59320305,1.59126662,1.58933008,1.58739464,1.58546248,1.58349641,1.58149964,1.57950322,1.57750847,1.57536175,1.57284909,1.57033535,1.56782163,1.56530475,1.56275314,1.56020233,1.55765040,1.55509827,1.55255046,1.55000327,1.54745738,1.54491120,1.54235945,1.53980832,1.53725636,1.53470173,1.53214713,1.52960029,1.52705286,1.52450408,1.52195868,1.51941926,1.51687747,1.51433639,1.51179357,1.50925909,1.50672362,1.50418833,1.50165647,1.49913444,1.49661354,1.49409313,1.49157187,1.48905623,1.48654852,1.48404167,1.48153078,1.47902437,1.47652840,1.47403498,1.47162386,1.46923046,1.46685048,1.46447245,1.46209506,1.45971470,1.45734935,1.45499055,1.45263240,1.45028470,1.44795154,1.44563276,1.44331775,1.44101883,1.43874519,1.43753010,1.43631397,1.43514896,1.43399839,1.43285889,1.43202353,1.43122400,1.43041973,1.42964652,1.42975594,1.43040265,1.43120062,1.43204081,1.43288935,1.43372501,1.43453514,1.43534592,1.43616401,1.43698326,1.43780361,1.43861759,1.43942270,1.44021841,1.44099955,1.44178002,1.44251264,1.44315577,1.44371475,1.44427279,1.44456005,1.44478169,1.44499175,1.44520288,1.44503794,1.44468033,1.44432144,1.44396249,1.44360427,1.44324884,1.44289348,1.44254101,1.44216373,1.44169765,1.44122745,1.44075720,1.44028732,1.43992828,1.43957130,1.43921965,1.43886834,1.43853789,1.43821367,1.43788686,1.43756132,1.43725399,1.43695414,1.43665441,1.43635498,1.43606215,1.43578585,1.43550835,1.43522890,1.43495075,1.43470175,1.43445310,1.43420214,1.43394825,1.43370442,1.43345885,1.43321262,1.43296409,1.43271895,1.43247064,1.43221665,1.43196247,1.43170178,1.43143612,1.43116957,1.43089835,1.43057109,1.43007610,1.42958202,1.42908725,1.42861128,1.42790011,1.42718857,1.42647966,1.42577581,1.42509187,1.42442298,1.42374995,1.42308029,1.42242620,1.42178154,1.42113681,1.42049222,1.41985709,1.41924057,1.41862382,1.41800409,1.41738698,1.41680485,1.41622354,1.41563961,1.41505354,1.41449295,1.41393481,1.41337750,1.41281593,1.41228455,1.41175891,1.41122961,1.41069512,1.41017859,1.40966990,1.40916097,1.40864702,1.40813419,1.40764348,1.40715034,1.40665983,1.40606573,1.40542524,1.40478584,1.40414235,1.40343314,1.40275730,1.40209624,1.40143399,1.40075908,1.40010582,1.39946959,1.39882863,1.39818921,1.39756912,1.39698259,1.39640019,1.39581972,1.39524337,1.39474561,1.39428708,1.39383146,1.39337912,1.39299715,1.39261891,1.39223986,1.39185971,1.39149370,1.39113479,1.39077205,1.39040690,1.39004166,1.38967711,1.38930978,1.38894039,1.38857186,1.38820402,1.38783362,1.38745703,1.38707424,1.38670793,1.38634087,1.38597224,1.38560321,1.38524208,1.38488218,1.38452362,1.38417042,1.38373846,1.38324514,1.38275387,1.38225419,1.38070532,1.37728066,1.37432653,1.37283725,1.37158141,1.37131452,1.37102466,1.37063461,1.37024177,1.36878803,1.36722621,1.36566599,1.36410300,1.36093886,1.35707312,1.35454708,1.35298149,1.35141111,1.34983763,1.34827800,1.34674440,1.34522943,1.34377606,1.34232106,1.47601551,1.72317832}"/>
+        <Parameter name="b_quadratic" type="Array(double)" value="{-0.00192506,-0.00195184,-0.00196850,-0.00197927,-0.00198459,-0.00199271,-0.00199688,-0.00200094,-0.00200605,-0.00201133,-0.00201615,-0.00202086,-0.00202574,-0.00203068,-0.00203578,-0.00204098,-0.00204622,-0.00205149,-0.00205678,-0.00206234,-0.00206783,-0.00207335,-0.00207881,-0.00208442,-0.00209000,-0.00209559,-0.00210104,-0.00210660,-0.00211213,-0.00211757,-0.00212282,-0.00212816,-0.00213351,-0.00213881,-0.00214401,-0.00214916,-0.00215424,-0.00215928,-0.00216421,-0.00216910,-0.00217389,-0.00217860,-0.00218327,-0.00218786,-0.00219234,-0.00219676,-0.00220112,-0.00220542,-0.00220961,-0.00221372,-0.00221779,-0.00222178,-0.00222571,-0.00222952,-0.00223330,-0.00223701,-0.00224067,-0.00224420,-0.00224770,-0.00225114,-0.00225456,-0.00225783,-0.00226107,-0.00226426,-0.00226742,-0.00227048,-0.00227347,-0.00227642,-0.00227935,-0.00228220,-0.00228496,-0.00228770,-0.00229041,-0.00229307,-0.00229562,-0.00229815,-0.00230066,-0.00230315,-0.00230550,-0.00230784,-0.00231017,-0.00231246,-0.00231463,-0.00231675,-0.00231887,-0.00232096,-0.00232297,-0.00232494,-0.00232691,-0.00232885,-0.00233073,-0.00233256,-0.00233439,-0.00233617,-0.00233794,-0.00233961,-0.00234128,-0.00234292,-0.00234454,-0.00233383,-0.00232281,-0.00231177,-0.00230072,-0.00228916,-0.00227742,-0.00226566,-0.00225391,-0.00224215,-0.00223037,-0.00221858,-0.00220679,-0.00219498,-0.00218310,-0.00217121,-0.00215932,-0.00214703,-0.00213311,-0.00211920,-0.00210528,-0.00208983,-0.00207209,-0.00205436,-0.00203662,-0.00201900,-0.00200144,-0.00198388,-0.00196631,-0.00194872,-0.00193111,-0.00191347,-0.00189583,-0.00187818,-0.00186051,-0.00184278,-0.00182505,-0.00180732,-0.00178958,-0.00177173,-0.00175375,-0.00173575,-0.00171776,-0.00169943,-0.00168108,-0.00166272,-0.00164438,-0.00162607,-0.00160777,-0.00158948,-0.00157118,-0.00155289,-0.00153461,-0.00151631,-0.00149803,-0.00147975,-0.00146151,-0.00144328,-0.00142506,-0.00140683,-0.00138864,-0.00137046,-0.00135228,-0.00133411,-0.00131599,-0.00129789,-0.00128008,-0.00126419,-0.00124832,-0.00123253,-0.00121694,-0.00120136,-0.00118577,-0.00117010,-0.00115443,-0.00113876,-0.00112310,-0.00110745,-0.00109181,-0.00107618,-0.00106056,-0.00104494,-0.00102935,-0.00101376,-0.00099819,-0.00098260,-0.00096704,-0.00095151,-0.00093598,-0.00092048,-0.00090503,-0.00088959,-0.00087416,-0.00085875,-0.00084345,-0.00082817,-0.00081289,-0.00079764,-0.00078248,-0.00076835,-0.00075584,-0.00074334,-0.00073186,-0.00072058,-0.00070926,-0.00069788,-0.00068649,-0.00067508,-0.00066366,-0.00065226,-0.00064082,-0.00062924,-0.00061766,-0.00060610,-0.00059453,-0.00058286,-0.00057119,-0.00055952,-0.00054785,-0.00053618,-0.00052451,-0.00051285,-0.00050119,-0.00048957,-0.00047799,-0.00046642,-0.00045484,-0.00044330,-0.00043182,-0.00042033,-0.00040886,-0.00039742,-0.00038608,-0.00037475,-0.00036342,-0.00035211,-0.00034084,-0.00032958,-0.00031833,-0.00030709,-0.00029585,-0.00028460,-0.00027336,-0.00026214,-0.00025074,-0.00023918,-0.00022763,-0.00021608,-0.00020377,-0.00018958,-0.00017538,-0.00016120,-0.00014700,-0.00013263,-0.00011827,-0.00010389,-0.00008952,-0.00007517,-0.00006083,-0.00004650,-0.00003217,-0.00001784,-0.00000351,0.00001081,0.00002514,0.00003945,0.00005372,0.00006799,0.00008225,0.00009650,0.00011071,0.00012491,0.00013912,0.00015331,0.00016746,0.00018161,0.00019576,0.00020988,0.00022396,0.00023801,0.00025207,0.00026613,0.00028016,0.00029415,0.00030814,0.00032217,0.00033617,0.00035013,0.00036410,0.00037781,0.00039146,0.00040503,0.00041859,0.00043215,0.00044571,0.00045920,0.00047265,0.00048610,0.00049950,0.00051284,0.00052611,0.00053937,0.00055258,0.00056568,0.00057530,0.00058491,0.00059435,0.00060373,0.00061304,0.00062125,0.00062933,0.00063743,0.00064538,0.00065032,0.00065337,0.00065589,0.00065824,0.00066056,0.00066292,0.00066535,0.00066776,0.00067012,0.00067247,0.00067483,0.00067722,0.00067964,0.00068213,0.00068473,0.00068734,0.00069019,0.00069367,0.00069776,0.00070184,0.00070731,0.00071316,0.00071909,0.00072502,0.00073287,0.00074170,0.00075053,0.00075937,0.00076820,0.00077701,0.00078583,0.00079463,0.00080355,0.00081293,0.00082231,0.00083170,0.00084108,0.00084988,0.00085868,0.00086746,0.00087624,0.00088491,0.00089354,0.00090218,0.00091080,0.00091933,0.00092780,0.00093627,0.00094472,0.00095313,0.00096145,0.00096977,0.00097809,0.00098639,0.00099453,0.00100266,0.00101078,0.00101892,0.00102700,0.00103508,0.00104315,0.00105123,0.00105928,0.00106735,0.00107543,0.00108352,0.00109163,0.00109975,0.00110788,0.00111601,0.00112446,0.00113381,0.00114316,0.00115251,0.00116172,0.00117208,0.00118246,0.00119283,0.00120316,0.00121338,0.00122359,0.00123382,0.00124400,0.00125411,0.00126417,0.00127422,0.00128424,0.00129421,0.00130408,0.00131394,0.00132378,0.00133359,0.00134323,0.00135284,0.00136244,0.00137205,0.00138152,0.00139095,0.00140038,0.00140981,0.00141909,0.00142835,0.00143761,0.00144690,0.00145609,0.00146525,0.00147442,0.00148361,0.00149280,0.00150189,0.00151099,0.00152009,0.00152992,0.00154019,0.00155047,0.00156078,0.00157153,0.00158223,0.00159286,0.00160349,0.00161410,0.00162455,0.00163491,0.00164528,0.00165567,0.00166595,0.00167606,0.00168619,0.00169632,0.00170642,0.00171634,0.00172630,0.00173624,0.00174619,0.00175599,0.00176577,0.00177555,0.00178534,0.00179504,0.00180470,0.00181437,0.00182404,0.00183371,0.00184336,0.00185301,0.00186268,0.00187233,0.00188196,0.00189159,0.00190125,0.00191092,0.00192050,0.00193009,0.00193969,0.00194928,0.00195881,0.00196835,0.00197787,0.00198737,0.00199727,0.00200748,0.00201768,0.00202794,0.00204355,0.00206876,0.00209160,0.00210704,0.00212149,0.00213088,0.00214044,0.00215034,0.00216023,0.00217556,0.00219139,0.00220721,0.00222304,0.00224703,0.00227460,0.00229532,0.00231113,0.00232696,0.00234279,0.00235854,0.00237415,0.00238965,0.00240481,0.00241998,0.00216064,0.00033787}"/>
+        <Parameter name="boundary" type="string" value="bulk_cool"/>
+        <Parameter name="burnup" type="Array(double)" value="{0.00,0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1.00,1.10,1.20,1.30,1.40,1.50,1.60,1.70,1.80,1.90,2.00,2.10,2.20,2.30,2.40,2.50,2.60,2.70,2.80,2.90,3.00,3.10,3.20,3.30,3.40,3.50,3.60,3.70,3.80,3.90,4.00,4.10,4.20,4.30,4.40,4.50,4.60,4.70,4.80,4.90,5.00,5.10,5.20,5.30,5.40,5.50,5.60,5.70,5.80,5.90,6.00,6.10,6.20,6.30,6.40,6.50,6.60,6.70,6.80,6.90,7.00,7.10,7.20,7.30,7.40,7.50,7.60,7.70,7.80,7.90,8.00,8.10,8.20,8.30,8.40,8.50,8.60,8.70,8.80,8.90,9.00,9.10,9.20,9.30,9.40,9.50,9.60,9.70,9.80,9.90,10.00,10.10,10.20,10.30,10.40,10.50,10.60,10.70,10.80,10.90,11.00,11.10,11.20,11.30,11.40,11.50,11.60,11.70,11.80,11.90,12.00,12.10,12.20,12.30,12.40,12.50,12.60,12.70,12.80,12.90,13.00,13.10,13.20,13.30,13.40,13.50,13.60,13.70,13.80,13.90,14.00,14.10,14.20,14.30,14.40,14.50,14.60,14.70,14.80,14.90,15.00,15.10,15.20,15.30,15.40,15.50,15.60,15.70,15.80,15.90,16.00,16.10,16.20,16.30,16.40,16.50,16.60,16.70,16.80,16.90,17.00,17.10,17.20,17.30,17.40,17.50,17.60,17.70,17.80,17.90,18.00,18.10,18.20,18.30,18.40,18.50,18.60,18.70,18.80,18.90,19.00,19.10,19.20,19.30,19.40,19.50,19.60,19.70,19.80,19.90,20.00,20.10,20.20,20.30,20.40,20.50,20.60,20.70,20.80,20.90,21.00,21.10,21.20,21.30,21.40,21.50,21.60,21.70,21.80,21.90,22.00,22.10,22.20,22.30,22.40,22.50,22.60,22.70,22.80,22.90,23.00,23.10,23.20,23.30,23.40,23.50,23.60,23.70,23.80,23.90,24.00,24.10,24.20,24.30,24.40,24.50,24.60,24.70,24.80,24.90,25.00,25.10,25.20,25.30,25.40,25.50,25.60,25.70,25.80,25.90,26.00,26.10,26.20,26.30,26.40,26.50,26.60,26.70,26.80,26.90,27.00,27.10,27.20,27.30,27.40,27.50,27.60,27.70,27.80,27.90,28.00,28.10,28.20,28.30,28.40,28.50,28.60,28.70,28.80,28.90,29.00,29.10,29.20,29.30,29.40,29.50,29.60,29.70,29.80,29.90,30.00,30.10,30.20,30.30,30.40,30.50,30.60,30.70,30.80,30.90,31.00,31.10,31.20,31.30,31.40,31.50,31.60,31.70,31.80,31.90,32.00,32.10,32.20,32.30,32.40,32.50,32.60,32.70,32.80,32.90,33.00,33.10,33.20,33.30,33.40,33.50,33.60,33.70,33.80,33.90,34.00,34.10,34.20,34.30,34.40,34.50,34.60,34.70,34.80,34.90,35.00,35.10,35.20,35.30,35.40,35.50,35.60,35.70,35.80,35.90,36.00,36.10,36.20,36.30,36.40,36.50,36.60,36.70,36.80,36.90,37.00,37.10,37.20,37.30,37.40,37.50,37.60,37.70,37.80,37.90,38.00,38.10,38.20,38.30,38.40,38.50,38.60,38.70,38.80,38.90,39.00,39.10,39.20,39.30,39.40,39.50,39.60,39.70,39.80,39.90,40.00,40.10,40.20,40.30,40.40,40.50,40.60,40.70,40.80,40.90,41.00,41.10,41.20,41.30,41.40,41.50,41.60,41.70,41.80,41.90,42.00,42.10,42.20,42.30,42.40,42.50,42.60,42.70,42.80,42.90,43.00,43.10,43.20,43.30,43.40,43.50,43.60,43.70,43.80,43.90,44.00,44.10,44.20,44.30,44.40,44.50,44.60,44.70,44.80,44.90,45.00,45.10,45.20,45.30,45.40,45.50,45.60,45.70,45.80,45.90,46.00,46.10,46.20,46.30,46.40,46.50,46.60,46.70,46.80,46.90,47.00,47.10,47.20,47.30,47.40,47.50,47.60,47.70,47.80,47.90,48.00,48.10,48.20,48.30,48.40,48.50,48.60,48.70,48.80,48.90,49.00,49.10,49.20,49.30,49.40,49.50,49.60,49.70,49.80,49.90}"/>
+        <Parameter name="qprime" type="double" value="1.000"/>
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="depletion">
+      <Parameter name="dep_substep" type="int" value="1"/>
+    </ParameterList>
+    <ParameterList name="mesh">
+      <Parameter name="axial_mesh" type="Array(double)" value="{10.000,5.000,11.9510,3.866,8.211,8.211,8.211,8.212,8.211,8.211,8.211,3.81,8.065,8.065,8.065,8.065,8.065,8.065,3.81,8.065,8.065,8.065,8.065,8.065,8.065,3.81,7.9212,7.9212,7.9212,7.9212,7.9212,12.056,3.866,8.905,7.600}"/>
+      <Parameter name="meshing_method" type="string" value="useraxialmesh"/>
+    </ParameterList>
+    <ParameterList name="parallel_env">
+      <Parameter name="num_angle" type="int" value="1"/>
+      <Parameter name="num_space" type="int" value="1"/>
+      <Parameter name="num_threads" type="int" value="1"/>
+    </ParameterList>
+    <ParameterList name="quad_set">
+      <Parameter name="azimuthals_octant" type="int" value="4"/>
+      <Parameter name="polars_octant" type="int" value="1"/>
+      <Parameter name="shield_azimuthals_octant" type="int" value="4"/>
+    </ParameterList>
+    <Parameter name="ray_spacing" type="double" value="0.08"/>
+    <Parameter name="shield_ray_spacing" type="double" value="0.08"/>
+    <ParameterList name="xs_library">
+      <Parameter name="res_up_scatter" type="string" value="false"/>
+      <Parameter name="xs_filename" type="string" value="mpact8g_70s_v4.0m0_02232015.fmt"/>
+    </ParameterList>
+  </ParameterList>
+</ParameterList>
