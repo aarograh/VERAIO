@@ -18,6 +18,20 @@ EDITS:
         - copy EDITS/$axial_edit_mesh_delta
       _content:
 
+    detector_mesh:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray EDITS/@detector_mesh,start=>1
+      _content:
+
+    detector_mesh_type:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy EDITS/@detector_mesh:0
+      _content:
+
     points_type:
       _pltype: array
       _type: string

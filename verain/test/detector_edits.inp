@@ -1,0 +1,187 @@
+!> @beginreq
+!> - VERAIn shall properly parse input cards for a user specified
+!>   detector edits mesh.
+!> - Ticket #3620
+!> @endreq
+[CASEID]
+  title 'Mini Assembly - 3x3'
+
+[STATE]
+  power    100.0
+  tinlet   565 K
+  tfuel    600 K
+  boron    1300           ! ppmB
+  modden   0.743          ! g/cc
+  pressure 2250           ! psia
+  sym     full
+  feedback on
+  thexp    off
+  edit pin_clad_fast_flux pin_cladtemps pin_gtubedens
+
+[CORE]
+  size   1              ! one assembly
+  rated  0.30118 0.02125  ! MW, Mlbs/hr
+  apitch 3.86
+  height 245.938
+
+  core_shape
+    1
+
+  assm_map
+    2
+
+  det_map
+    1
+
+  ! add material definitions for he, inc, ss, and zirc4.
+  include casl_comp_r3_full.ini
+
+  lower_plate ss  5.0 0.5   ! mat, thickness, vol frac
+  upper_plate ss  7.6 0.5
+  lower_ref   mod 10.0 1.0
+
+  bc_rad reflecting
+
+[ASSEMBLY]
+  title "Mini 3x3"
+  npin 3
+  ppitch 1.26
+
+  fuel U26 10.257 94.5 / 2.619
+
+  cell 2     0.4096 0.418 0.475 / U26 he zirc4
+  cell 4            0.561 0.602 / mod    zirc4      ! guide/instrument tube
+  cell 5            0.418 0.475 /     he zirc4      ! plenum
+  cell 6                  0.475 /        zirc4      ! plug
+
+  lattice LAT26
+       4
+       2 2
+
+  lattice PLEN
+       4
+       5 5
+
+  lattice PLUG
+       4
+       6 6
+
+  axial  2  10.281 PLUG 11.951 LAT26 221.111 PLEN 237.111
+
+  grid END inc   3.866 31.6708 / loss=0.9070
+  grid MID zirc4 3.810 27.2498 / loss=0.9065
+
+  grid_axial
+      END  13.884
+      MID  75.2
+      MID 127.4
+      MID 179.6
+      END 235.1
+
+  lower_nozzle  ss 10.281 194.637  ! mat, height, mass (g)
+  upper_nozzle  ss 8.827 194.637  ! mat, height, mass (g)
+
+[DETECTOR]
+  title "Incore instrument thimble"
+  npin 3
+
+  cell 1  0.258 0.382 / he ss
+
+  rodmap  LAT
+     1
+     - -
+
+  axial 1  0.0 LAT 240.91
+
+[EDITS]
+  detector_mesh integral <11.951..221.111x5.0> 221.111
+
+  axial_edit_bounds
+        11.9510
+        15.8170
+        24.0280
+        32.2390
+        40.4500
+        48.6620
+        56.8730
+        65.0840
+        73.2950
+        77.1050
+        85.1700
+        93.2350
+       101.3000
+       109.3650
+       117.4300
+       125.4950
+       129.3050
+       137.3700
+       145.4350
+       153.5000
+       161.5650
+       169.6300
+       177.6950
+       181.5050
+       189.4262
+       197.3474
+       205.2686
+       213.1898
+       221.1110
+
+[MPACT]
+  num_space      1
+  num_angle      1
+  num_threads    1
+  ray_spacing        0.08
+  shield_ray_spacing 0.08
+  azimuthals_octant 4
+  shield_azimuthals_octant 4
+  polars_octant     1
+  xs_filename       mpact8g_70s_v4.0m0_02232015.fmt
+  res_up_scatter    false
+  dep_substep       1
+  include bison_table_tavg_rev6.tab
+  meshing_method useraxialmesh
+  axial_mesh  10.000
+               5.000
+              11.9510
+               3.866
+               8.211
+               8.211
+               8.211
+               8.212
+               8.211
+               8.211
+               8.211
+               3.81
+               8.065
+               8.065
+               8.065
+               8.065
+               8.065
+               8.065
+               3.81
+               8.065
+               8.065
+               8.065
+               8.065
+               8.065
+               8.065
+               3.81
+               7.9212
+               7.9212
+               7.9212
+               7.9212
+               7.9212
+              12.056
+               3.866
+               8.905
+               7.600
+
+[COBRATF]
+  beta_sp   0.005
+  dhfrac    0.02
+  parallel  0
+  iitmax 10000
+  epso 0.00001
+  guide_tube_coefficient 0.5
+  solver 0
