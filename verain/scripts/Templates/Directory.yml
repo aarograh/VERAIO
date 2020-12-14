@@ -5527,6 +5527,26 @@ SHIFT:
       - is_word()
       - in_dictionary() true false
 #>
+#>   {\bf log\_memory} log\_memory
+#>   \VERAInputTable{
+#>     name={log\_memory},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true},
+#>     limitations={},
+#>     description={Output debug memory usage to stderr},
+#>     notes={}
+#>   }
+  log_memory:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf do\_micro\_tally} do\_micro\_tally
 #>   \VERAInputTable{
 #>     name={do\_micro\_tally},

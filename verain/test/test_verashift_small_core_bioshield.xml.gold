@@ -564,6 +564,7 @@
       <Parameter name="Np" type="double" value="1000" />
     </ParameterList>
     <Parameter name="local_log" type="string" value="debug" />
+    <Parameter name="log_memory" type="bool" value="true" />
     <Parameter name="mesh" type="int" value="1" />
     <Parameter name="mode" type="string" value="n" />
     <Parameter name="n_energy_max" type="double" value="10.0e6" />

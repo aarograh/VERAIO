@@ -210,6 +210,7 @@ e[CASEID]
   use_pole_data false
   global_log debug
   local_log debug
+  log_memory true
 ! excore stuff
   excore_filename  "../small_core_excore_cadis.excore.xml"
   hybrid_tally_names PWR SRC
