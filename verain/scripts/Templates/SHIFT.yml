@@ -614,6 +614,13 @@ SHIFT:
         - copy SHIFT/$local_log
       _content:
 
+    log_memory:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy SHIFT/$log_memory
+      _content:
+
     mesh:
       _pltype: parameter
       _type: int
