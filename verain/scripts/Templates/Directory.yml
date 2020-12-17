@@ -668,12 +668,12 @@ STATE:
 #>     name={deplete},
 #>     type={Float},
 #>     need={Optional},
-#>     unitsdefault={GWDMT},
-#>     unitsother={MWDMT, EFPD, hours},
+#>     unitsdefault={},
+#>     unitsother={GWDMT, MWDMT, EFPD, hours},
 #>     valuedefault={},
 #>     valuesapplicable={\texttt{depletion\_steps} must be listed in ascending order},
 #>     limitations={},
-#>     description={Specification of a single or multiple depletion steps.},
+#>     description={Specification of depletion units and a single or multiple depletion steps.},
 #>     notes={Recommended that depletion step sizes are less than 1 GWDMT, 1000 MWDMT, or 30 EFPD.}
 #>   }
   deplete:
@@ -684,6 +684,27 @@ STATE:
       - fall(sub{is_float(shift)},stride(1,1,()))
       - nth(0,())eq"GWDMT"||nth(0,())eq"MWDMT"||nth(0,())eq"EFPD"||nth(0,())eq"hours"
       - is_strictlyincreasing(stride(1,1,()))
+#>
+#>   {\bf jump\_in\_file} file\_name
+#>   \VERAInputTable{
+#>     name={jump\_in\_file},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Name of h5 file containing data needed to perform detailed isotopic
+#>        burn for cycle jump in. The inclusion of this card/file name will initiate an
+#>        Origen point depletion based "burn in" according to the data in the h5 file.},
+#>     notes={Origen must be present and enabled in order to use this feature.}
+#>   }
+  jump_in_file:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
 #>
 #>   {\bf edit} state\_edits
 #>   \VERAInputTable{

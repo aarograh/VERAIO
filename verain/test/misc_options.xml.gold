@@ -32,6 +32,7 @@
     </ParameterList>
     <ParameterList name="State_2">
       <Parameter name="flow_dist" type="Array(double)" value="{1.0,1.0,1.1,1.0,1.0}"/>
+      <Parameter name="jump_in_file" type="string" value="thisFile.h5"/>
       <Parameter name="pout_dist" type="Array(double)" value="{2.1,2.1,1.0,2.1,2.1}"/>
       <Parameter name="power" type="double" value="80.0"/>
       <Parameter name="tinlet_dist" type="Array(double)" value="{-2.,-2.,1.,-2.,-2.}"/>
