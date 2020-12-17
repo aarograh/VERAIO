@@ -173,6 +173,13 @@ STATES:
             - copy %STATE/$(_loop)/@deplete:0
           _content:
 
+        jump_in_file:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %STATE/$(_loop)/$jump_in_file
+          _content:
+
         edit:
           _pltype: array
           _type: string
