@@ -9158,6 +9158,47 @@ COBRATF:
       - is_int()
       - in_dictionary() 0 1
 #>
+#>   {\bf int\_drag\_model} int\_drag\_model
+#>   \VERAInputTable{
+#>     name={int\_drag\_model},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={legacy},
+#>     valuesapplicable={drift\_flux},
+#>     limitations={},
+#>     description={Use to set the interfacial drag model CTF shall use.},
+#>     notes={}
+#>   }
+  int_drag_model:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() legacy drift_flux
+#>
+#>   {\bf flow\_regime\_map} flow\_regime\_map
+#>   \VERAInputTable{
+#>     name={flow\_regime\_map},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={legacy},
+#>     valuesapplicable={ge\_nonprop},
+#>     limitations={},
+#>     description={Selects the flow regime map to be used in CTF.},
+#>     notes={}
+#>   }
+  flow_regime_map:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() legacy ge_nonprop
+
+#>
 #>   {\bf gap\_model} gap\_model
 #>   \VERAInputTable{
 #>     name={gap\_model},

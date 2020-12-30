@@ -521,6 +521,20 @@ COBRATF:
         - copy COBRATF/$model_corrosion
       _content:
 
+    int_drag_model:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy COBRATF/$int_drag_model
+      _content:
+
+    flow_regime_map:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy COBRATF/$flow_regime_map
+      _content:
+
     gap_model:
       _pltype: parameter
       _type: string

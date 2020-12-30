@@ -17,6 +17,14 @@
 !> - VERAIn shall accept specification of the two-phase friction model which CTF shall use.
 !> @endreq
 
+!> @beginreq
+!> - VERAIn shall accept specification of the flow regime map to use in CTF.
+!> @endreq
+
+!> @beginreq
+!> - VERAIn shall accept specification of the interfacial drag model to use in CTF.
+!> @endreq
+
 [CASEID]
   title 'Sample 3D GE9 BWR Lattice *** with no channel'
 
@@ -225,4 +233,6 @@
   parallel       0
   property_evaluations asme1968
   tp_fric_model chisholm
+  flow_regime_map ge_nonprop
+  int_drag_model drift_flux
 
