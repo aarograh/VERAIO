@@ -450,6 +450,27 @@ MPACT:
             - copy MPACT/$axial_mesh
           _content:
 
+        inter_assembly_gapmeshnum:
+          _pltype: array
+          _type: int
+          _do:
+            - copy MPACT/$inter_assembly_gapmeshnum
+          _content:
+
+        control_blade_meshnum:
+          _pltype: array
+          _type: int
+          _do:
+            - copy MPACT/$control_blade_meshnum
+          _content:
+
+        detector_meshnum:
+          _pltype: array
+          _type: int
+          _do:
+            - copy MPACT/$detector_meshnum
+          _content:
+
         crud_mesh_thickness:
           _pltype: parameter
           _type: double
