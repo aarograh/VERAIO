@@ -11537,6 +11537,164 @@ MPACT:
     _check:
       - fall(sub{is_float(shift)},())
 #>
+#>   {\bf inter\_assembly\_gapmeshnum} wide\_gap\_normal wide\_gap\_parallel
+#>     narrow\_gap\_normal narrow\_gap\_parallel inner\_gap
+#>   \VERAInputTable{
+#>     name={wide\_gap\_normal},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={3},
+#>     valuesapplicable={values must be on the interval [1,10]},
+#>     limitations={Only applicable to BWR cores.},
+#>     description={This card defines the number of MOC fine source mesh regions
+#>        in a pin cell in the wide gap along the direction normal to the channel box.},
+#>     notes={The \texttt{inter\_assembly\_gapmeshnum} card is optional, but this
+#>       parameter is required on this card.}
+#>   }
+#>   \VERAInputTable{
+#>     name={wide\_gap\_parallel},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={3},
+#>     valuesapplicable={values must be on the interval [1,10]},
+#>     limitations={Only applicable to BWR cores.},
+#>     description={This card defines the number of MOC fine source mesh regions in
+#>        a pin cell in the wide gap along the direction parallel to the channel box.},
+#>     notes={The \texttt{inter\_assembly\_gapmeshnum} card is optional, but this
+#>       parameter is required on this card.}
+#>   }
+#>   \VERAInputTable{
+#>     name={narrow\_gap\_normal},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={3},
+#>     valuesapplicable={values must be on the interval [1,10]},
+#>     limitations={Only applicable to BWR cores.},
+#>     description={This card defines the number of MOC fine source mesh regions in
+#>        a pin cell in the narrow gap along the direction normal to the channel box.},
+#>     notes={The \texttt{inter\_assembly\_gapmeshnum} card is optional, but this
+#>       parameter is required on this card.}
+#>   }
+#>   \VERAInputTable{
+#>     name={narrow\_gap\_parallel},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={3},
+#>     valuesapplicable={values must be on the interval [1,10]},
+#>     limitations={Only applicable to BWR cores.},
+#>     description={This card defines the number of MOC fine source mesh regions in
+#>        a pin cell in the narrow gap along the direction parallel to the channel box.},
+#>     notes={The \texttt{inter\_assembly\_gapmeshnum} card is optional, but this
+#>       parameter is required on this card.}
+#>   }
+#>   \VERAInputTable{
+#>     name={inner\_gap},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={values must be on the interval [1,10]},
+#>     limitations={Only applicable to BWR cores.},
+#>     description={This card defines the number of MOC fine source mesh regions in a
+#>        pin cell in the inner gap of the channel box and fuel pins parallel to channel
+#>        box.},
+#>     notes={The \texttt{inter\_assembly\_gapmeshnum} card is optional, but this
+#>       parameter is required on this card. The number of inner gap and channel box
+#>       mesh divisions normal to the channel box uses the corresponding values of the
+#>       \texttt{wide\_gap\_normal} and \texttt{narrow\_gap\_normal} parameters.}
+#>   }
+  inter_assembly_gapmeshnum:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_int(shift)},())
+      - fall(sub{is_gt(shift,0)},())
+      - fall(sub{is_lt(shift,11)},())
+#>
+#>   {\bf control\_blade\_meshnum} sheath\_num CR\_rodlet\_num
+#>   \VERAInputTable{
+#>     name={sheath\_num},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={3},
+#>     valuesapplicable={values must be on the interval [1,10]},
+#>     limitations={Only applicable to BWR cores.},
+#>     description={This card defines the number of MOC fine source regions along the
+#>       length of the sheath of the control blade in a pin cell.},
+#>     notes={The \texttt{control\_blade\_meshnum} card is optional, but this parameter
+#>       is required.}
+#>   }
+#>   \VERAInputTable{
+#>     name={CR\_rodlet\_num},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={2},
+#>     valuesapplicable={values must be on the interval [1,10]},
+#>     limitations={Only applicable to BWR cores.},
+#>     description={This card defines the number of MOC fine source radial mesh in the
+#>       rodlets of the control blade.},
+#>     notes={The \texttt{control\_blade\_meshnum} card is optional, but this parameter
+#>       is required.}
+#>   }
+  control_blade_meshnum:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_int(shift)},())
+      - fall(sub{is_gt(shift,0)},())
+      - fall(sub{is_lt(shift,11)},())
+#>
+#>   {\bf detector\_meshnum} DT\_gap\_num DT\_rodlet\_num
+#>   \VERAInputTable{
+#>     name={DT\_gap\_num},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={2},
+#>     valuesapplicable={values must be on the interval [1,10]},
+#>     limitations={Only applicable to detectors in BWR cores.},
+#>     description={This card defines the gap mesh number of detector region.},
+#>     notes={The \texttt{detector\_meshnum} card is optional, but this parameter
+#>       is required.}
+#>   }
+#>   \VERAInputTable{
+#>     name={DT\_rodlet\_num},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={2},
+#>     valuesapplicable={values must be on the interval [1,10]},
+#>     limitations={Only applicable to detectors in BWR cores.},
+#>     description={This card defines the rodlet mesh number of the detector},
+#>     notes={The \texttt{detector\_meshnum} card is optional, but this parameter
+#>       is required.}
+#>   }
+  detector_meshnum:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_int(shift)},())
+      - fall(sub{is_gt(shift,0)},())
+      - fall(sub{is_lt(shift,11)},())
+#>
 #>   {\bf pin\_cell\_mod\_mesh} pin\_cell\_mod\_mesh
 #>   \VERAInputTable{
 #>     name={pin\_cell\_mod\_mesh},

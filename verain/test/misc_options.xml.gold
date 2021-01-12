@@ -436,6 +436,9 @@
     </ParameterList>
     <Parameter name="log_message" type="string" value="debug"/>
     <ParameterList name="mesh">
+      <Parameter name="control_blade_meshnum" type="Array(int)" value="{6,6}"/>
+      <Parameter name="detector_meshnum" type="Array(int)" value="{6,6}"/>
+      <Parameter name="inter_assembly_gapmeshnum" type="Array(int)" value="{5,5,5,5,1}"/>
       <Parameter name="moderator_mesh_ndiv" type="int" value="3"/>
       <Parameter name="moderator_mesh_pins" type="string" value="both"/>
     </ParameterList>
