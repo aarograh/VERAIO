@@ -9,6 +9,7 @@
       <Parameter name="boron" type="double" value="1300"/>
       <Parameter name="deplete" type="Array(double)" value="{0.0,1.0,2.0,3.5,4.5}"/>
       <Parameter name="deplete_units" type="string" value="GWDMT"/>
+      <Parameter name="edit" type="Array(string)" value="{intrapin_fuel_isotopes_Pu-239,intrapin_fuel_isotopes_U-235,intrapin_fluence,intrapin_exposure,intrapin_dens,intrapin_temp,intrapin_volume,intrapin_fuel_dens,intrapin_fuel_temp,intrapin_fuel_volume,intrapin_clad_dens,intrapin_clad_temp,intrapin_clad_volume,intrapin_gap_dens,intrapin_gap_temp,intrapin_gap_volume,intrapin_mod_dens,intrapin_mod_temp,intrapin_mod_volume}"/>
       <Parameter name="expand3D" type="bool" value="true"/>
       <Parameter name="feedback" type="string" value="on"/>
       <Parameter name="kcrit" type="double" value="1.02"/>
