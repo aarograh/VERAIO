@@ -24,6 +24,12 @@
   boron  1300          ! ppmB
   search 'boron';  kcrit  1.02
   pressure 2250   ;     ! psia
+  edit intrapin_fuel_isotopes_Pu-239 intrapin_fuel_isotopes_U-235 intrapin_fluence intrapin_exposure
+       intrapin_dens       intrapin_temp       intrapin_volume
+       intrapin_fuel_dens  intrapin_fuel_temp  intrapin_fuel_volume
+       intrapin_clad_dens  intrapin_clad_temp  intrapin_clad_volume
+       intrapin_gap_dens   intrapin_gap_temp   intrapin_gap_volume
+       intrapin_mod_dens   intrapin_mod_temp   intrapin_mod_volume
 
   thexp  on
   thexp_tfuel 875.0 K

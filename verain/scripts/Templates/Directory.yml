@@ -730,7 +730,7 @@ STATE:
 #>        \newline
 #>        Individual isotopes can be edited using \texttt{pin\_isotopes\_} followed by the
 #>        isotope in ZZ-AAA format.  For example, \texttt{pin\_isotopes\_U-235}.  The same is
-#>        true for \texttt{intrapin\_isotopes\_}, \texttt{fsr\_isotopes\_}, and
+#>        true for \texttt{intrapin\_<mat\_type>\_isotopes\_}, \texttt{fsr\_isotopes\_}, and
 #>        \texttt{point\_isotopes\_}.  Similarly, group fluxes can be edited using
 #>        \texttt{pin\_flux\_} followed by a 3 digit group identifier.  For example,
 #>        \texttt{pin\_flux\_001} gives the fast group and \texttt{pin\_flux\_051} gives the
@@ -738,6 +738,24 @@ STATE:
 #>        true for \texttt{point\_flux\_} and \texttt{fsr\_flux\_}.  It should be noted
 #>        that the \texttt{core\_flux} edit automatically implies the core-averaged flux
 #>        for each group, so \texttt{core\_flux\_001} is not a valid option. \newline
+#>        \newline
+#>        Intrapin edits may be requested using the following entry format
+#>        \texttt{intrapin\_<mat\_type>\_<edit\_type>}.  Currently supported \texttt{mat\_type}
+#>        values include \texttt{fuel}, \texttt{gap}, \texttt{clad}, \texttt{mod}, and \texttt{cool}.
+#>        One may also use \texttt{intrapin\_<edit\_type>} for editing all material intrapin
+#>        values.  Currently supported \texttt{edit\_type} values include \texttt{dens},
+#>        \texttt{temp}, \texttt{volume}, and \texttt{isotopes\_}.  Two additional intrapin edits,
+#>        \texttt{intrapin\_fluence} for the fluence of all intrapin regions, and
+#>        \texttt{intrapin\_exposure} for the intrapin fuel burnup distribution are also supported.
+#>        When intrapin edits are requested, they are compressed into a 1-D array in the output
+#>        HDF5 file.  This 1-D array can be translated into a more traditional core map
+#>        representation using the accompaning \texttt{intrapin\_<mat\_type>\_PinFirstRegionIndex}
+#>        and \texttt{intrapin\_<mat\_type>\_PinNumRegions} datasets generated for each
+#>        \texttt{mat\_type} requested.  \texttt{intrapin\_<mat\_type>\_PinFirstRegionIndex}
+#>        indicates the starting index of a given pin location in the 1-D array, and
+#>        \texttt{intrapin\_<mat\_type>\_PinNumRegions} indicates the number of values
+#>        associated with said pin that occur sequentially in the 1-D array starting at the
+#>        corresponding \texttt{intrapin\_<mat\_type>\_PinFirstRegionIndex} starting index. \newline
 #>        \newline
 #>        MPACT provides a number of collections of edits for ease of use:
 #>        \begin{itemize}
