@@ -4771,11 +4771,12 @@ DETECTOR:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={},
-#>     valuesapplicable={u235, v, rh, gn},
+#>     valuesapplicable={u235, v, rh, gamma, gamma\_approx},
 #>     limitations={},
 #>     description={Flag used to specify the type of detector to be modeled. \texttt{u235}
 #>         is the U-235 fission reaction rate, \texttt{v} is the absorption reaction rate in
-#>         Vanadium, \texttt{rh} is the absorption reaction rate in rhodium, and \texttt{gn}
+#>         Vanadium, \texttt{rh} is the absorption reaction rate in rhodium, \texttt{gamma}
+#>         is the total gamma reaction rate in titanium, and \texttt{gamma\_approx}
 #>         is an approximate gamma response using the fastest neutron flux.},
 #>     notes={}
 #>   }
@@ -4784,7 +4785,7 @@ DETECTOR:
     _content:
     _check:
       - is_word()
-      - in_dictionary() u235 v rh gn
+      - in_dictionary() u235 v rh gamma gamma_approx
 #>
 #>   {\bf npin} num\_pins
 #>   \VERAInputTable{
