@@ -108,6 +108,13 @@ COBRATF:
         - copy COBRATF/$beta_htc
       _content:
 
+    beta_clad_creep:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$beta_clad_creep
+      _content:
+
     hgap:
       _pltype: parameter
       _type: double

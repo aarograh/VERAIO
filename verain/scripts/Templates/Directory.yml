@@ -7715,6 +7715,31 @@ COBRATF:
       - is_float()
       - is_geq() 0
 #>
+#>   {\bf beta\_clad\_creep} beta\_clad\_creep
+#>   \VERAInputTable{
+#>     name={beta\_clad\_creep},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={$>0.0$ and $<=1.0$},
+#>     limitations={},
+#>     description={This is an under-relaxation coefficient on the clad creep effect predicted by CTFFuel.
+#>        Setting this less than 1.0 will slow the impact of the effect in the CTF solution, but will not
+#>        affect results for steady-state and depletion simulations.  The coefficient will only have an effect
+#>        if the dynamic gap model is enabled in CTF and if a depletion is being modeled that would result
+#>        in clad creep.},
+#>     notes={}
+#>   }
+  beta_clad_creep:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+      - is_leq() 1.0
+#>
 #>   {\bf fuel\_gap\_htc\_beta} fuel\_gap\_htc\_beta
 #>   \VERAInputTable{
 #>     name={fuel\_gap\_htc\_beta},

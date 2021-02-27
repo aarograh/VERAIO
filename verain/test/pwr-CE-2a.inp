@@ -108,4 +108,7 @@
   num_threads    1
   xs_filename    mpact51g_71_v4.2m5_12062016_sph.fmt
 
+[COBRATF]
+  beta_clad_creep 0.2
+
 

@@ -300,6 +300,9 @@
       <Parameter name="stroke" type="double" value="1.0"/>
     </ParameterList>
   </ParameterList>
+  <ParameterList name="COBRATF">
+    <Parameter name="beta_clad_creep" type="double" value="0.2"/>
+  </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="parallel_env">
       <Parameter name="num_angle" type="int" value="1"/>
