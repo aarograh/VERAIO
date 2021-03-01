@@ -1681,6 +1681,28 @@ STATE:
       - is_float()
       - is_geq() 0
 #>
+#>   {\bf crud\_replenish\_b10} crud\_replenish\_b10
+#>   \VERAInputTable{
+#>     name={crud\_replenish\_b10},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$, $\le 1$},
+#>     limitations={},
+#>     description={Crud b10 replenishment fraction.
+#>        A value of 1 resets the crud b10 to the coolant b10 ratio.},
+#>     notes={Does not carry over from state to state.}
+#>   }
+  crud_replenish_b10:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+      - is_leq() 1
+#>
 #>   {\bf cool\_chem} h\_conc li\_conc ni\_sol ni\_par fe\_sol
 #>   \VERAInputTable{
 #>     name={cool\_chem},
@@ -16573,6 +16595,26 @@ MAMBA:
       - is_float()
       - is_geq() 0
 #>
+#>   {\bf chimney\_gamma\_v\_mult} chimney\_gamma\_v\_mult
+#>   \VERAInputTable{
+#>     name={chimney\_gamma\_v\_mult},
+#>     type={Floating-point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Crud chimney vapor fraction multiplier.},
+#>     notes={}
+#>   }
+  chimney_gamma_v_mult:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+#>
 #>   {\bf chimney\_htc} htc
 #>   \VERAInputTable{
 #>     name={htc},
@@ -16942,6 +16984,55 @@ MAMBA:
     _content:
     _check:
       - is_geq() 1
+      - is_int()
+#>
+#>   {\bf min\_substeps} min\_substeps
+#>   \VERAInputTable{
+#>     name={min\_substeps},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={4},
+#>     valuesapplicable={$\ge 1$},
+#>     limitations={},
+#>     description={Option to set minimum number of crud substeps per
+#>        outer MAMBA step call.},
+#>     notes={}
+#>   }
+  min_substeps:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 1
+      - is_int()
+#>
+#>   {\bf coupled\_t\_ltb\_solve} coupled\_t\_ltb\_solve
+#>   \VERAInputTable{
+#>     name={coupled\_t\_ltb\_solve},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Option to set coupled temperature and LTB solver in MAMBA.
+#>        Set to 0 for fast uncoupled solve. The uncoupled solve is the default.
+#>        The uncoupled solve is appropriate for cases where down-powers are
+#>        not explicitly modeled, but instead are modeled using the
+#>        crud\_replenish\_b10 card.
+#>        Set to 1 for fully coupled solve. The fully coupled solve is more
+#>        accurate for resolving fast crud transients which may occur in
+#>        simululation of down-power events with small time step size between
+#>        VERA state points.},
+#>     notes={}
+#>   }
+  coupled_t_ltb_solve:
+    <<: *dtint
+    _content:
+    _check:
+      - is_geq() 0
       - is_int()
 #>
 #>   {\bf deltar} deltar
