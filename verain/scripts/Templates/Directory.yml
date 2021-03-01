@@ -10389,6 +10389,27 @@ MPACT:
       - is_float()
       - is_gt() 0.0
 #>
+#>   {\bf gamma\_ray\_spacing} gamma\_ray\_spacing
+#>   \VERAInputTable{
+#>     name={gamma\_ray\_spacing},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={0.05},
+#>     valuesapplicable={Positive floating-point real numbers},
+#>     limitations={},
+#>     description={This card is used to specify the characteristic ray spacing          %
+#>       for the rays used in the MOC calculation for gammas.},
+#>     notes={}
+#>   }
+  gamma_ray_spacing:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+#>
 #>   {\bf shield\_ray\_spacing} shield\_ray\_spacing
 #>   {\bf shield\_ray\_spacing} shield\_ray\_spacing
 #>   \VERAInputTable{
@@ -10539,10 +10560,10 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={MG},
-#>     valuesapplicable={},
+#>     valuesapplicable={1G,kokkos},
 #>     limitations={},
 #>     description={This card is used to specify whether one-group or multi-group        %
-#>       MOC kernels are used.},
+#>       MOC kernels are used for neutron transport.},
 #>     notes={}
 #>   }
   moc_kernel:
@@ -10551,6 +10572,27 @@ MPACT:
     _check:
       - is_string()
       - in_dictionary() 1g mg 1G MG kokkos
+#>
+#>   {\bf gamma\_moc\_kernel} gamma\_moc\_kernel
+#>   \VERAInputTable{
+#>     name={gamma\_moc\_kernel},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={MG},
+#>     valuesapplicable={1G},
+#>     limitations={},
+#>     description={This card is used to specify whether one-group or multi-group        %
+#>       MOC kernels are used for gamma transport.},
+#>     notes={}
+#>   }
+  gamma_moc_kernel:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() 1g mg 1G MG
 #>
 #>   {\bf shield\_moc\_kernel} shield\_moc\_kernel
 #>   \VERAInputTable{
@@ -11851,9 +11893,43 @@ MPACT:
 #>     description={This card is used to specify the name of the angular                 %
 #>       quadrature to use for determining the angles at which the rays are              %
 #>       traced throughout the problem.},
-#>     notes={None}
+#>     notes={}
 #>   }
   quad_type:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+#>
+#>   {\bf gamma\_quad\_type} gamma\_quad\_type
+#>   \VERAInputTable{
+#>     name={gamma\_quad\_type},
+#>     type={Fixed Character String},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={None},
+#>     valuesapplicable={listed below                                                    %
+#>       \newline \newline                                                               %
+#>       \begin{tabular}{llll}                                                           %
+#>         \hline                                                                        %
+#>           Quadrature Name & Type & Order & Order $\Theta$ \\                          %
+#>         \hline                                                                        %
+#>           \texttt{CHEBYSHEV-CHEBYSHEV} & Product & integers $>$ 0             & integers $>$ 0       \\ %
+#>           \texttt{CHEBYSHEV-GAUSS    } & Product & integers $>$ 0             & integers $>$ 0       \\ %
+#>           \texttt{CHEBYSHEV-BICKLEY  } & Product & integers $>$ 0             & 1, 2, 3, or 4      \\ %
+#>           \texttt{CHEBYSHEV-YAMAMOTO } & Product & integers $>$ 0             & 1, 2, or 3         \\ %
+#>           \texttt{LEVEL-SYMMETRIC    } & General & even integers in [2,16]  & N/A                \\ %
+#>           \texttt{QUADRUPLE-RANGE    } & Product & integers in [1,37]       & integers in [1,18] \\ %
+#>         \hline                                                                        %
+#>       \end{tabular}},
+#>     limitations={},
+#>     description={This card is used to specify the name of the angular                 %
+#>       quadrature to use for determining the angles at which the rays are              %
+#>       traced throughout the problem for gamma transport.},
+#>     notes={}
+#>   }
+  gamma_quad_type:
     <<: *dtword
     _content:
     _check:
@@ -11885,7 +11961,7 @@ MPACT:
 #>     description={This card is used to specify the name of the angular                 %
 #>       quadrature to use for determining the angles at which the rays are              %
 #>       traced throughout the problem for the shielding calculation.},
-#>     notes={None}
+#>     notes={}
 #>   }
   shield_quad_type:
     <<: *dtword
@@ -11906,9 +11982,31 @@ MPACT:
 #>     description={This card is used to specify the number of azimuthal angles          %
 #>       per octant and corresponds to the Order column in the table in                  %
 #>       \texttt{quad\_type} card.},
-#>     notes={None}
+#>     notes={}
 #>   }
   azimuthals_octant:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf gamma\_azimuthals\_octant} gamma\_azimuthals\_octant
+#>   \VERAInputTable{
+#>     name={gamma\_azimuthals\_octant},
+#>     type={Integer},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={None},
+#>     valuesapplicable={Column Order in the above table},
+#>     limitations={},
+#>     description={This card is used to specify the number of azimuthal angles          %
+#>       per octant for gamma transport and corresponds to the Order column in           %
+#>       the table in \texttt{quad\_type} card.},
+#>     notes={}
+#>   }
+  gamma_azimuthals_octant:
     <<: *dtint
     _content:
     _check:
@@ -11931,9 +12029,34 @@ MPACT:
 #>       may be limited by the quadrature type used. Also, any non-product quadrature    %
 #>       types will not use this input card (i.e., in the only applicable case           %
 #>       \texttt{LEVEL-SYMMETRIC}).},
-#>     notes={None}
+#>     notes={}
 #>   }
   polars_octant:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf gamma\_polars\_octant} gamma\_polars\_octant
+#>   \VERAInputTable{
+#>     name={gamma\_polars\_octant},
+#>     type={Integer},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={None},
+#>     valuesapplicable={Column Order $\Theta$ in the above table},
+#>     limitations={},
+#>     description={This card is used to specify the number of polar angles per          %
+#>       octant for gamma transport and corresponds to the Order $\Theta$ column         %
+#>       in the quadrature table specified in \texttt{quad\_type} card. Note the         %
+#>       number of polar angles may be limited by the quadrature type used. Also,        %
+#>       any non-product quadrature types will not use this input card (i.e., in         %
+#>       the only applicable case \texttt{LEVEL-SYMMETRIC}).},
+#>     notes={}
+#>   }
+  gamma_polars_octant:
     <<: *dtint
     _content:
     _check:
@@ -11953,7 +12076,7 @@ MPACT:
 #>     description={This card is used to specify the number of azimuthal angles          %
 #>       per octant for the shielding sweeper and corresponds to the Order column        %
 #>       in the table in \texttt{quad\_type} card.},
-#>     notes={None}
+#>     notes={}
 #>   }
   shield_azimuthals_octant:
     <<: *dtint
@@ -11978,7 +12101,7 @@ MPACT:
 #>       number of polar angles may be limited by the quadrature type used. Also, any    %
 #>       non-product quadrature types will not use this input card (i.e., in the only    %
 #>       applicable case \texttt{LEVEL-SYMMETRIC}).},
-#>     notes={None}
+#>     notes={}
 #>   }
   shield_polars_octant:
     <<: *dtint
@@ -12387,6 +12510,27 @@ MPACT:
       - is_float()
       - is_gt() 0.0
 #>
+#>   {\bf gamma\_flux\_tolerance} gamma\_flux\_tolerance
+#>   \VERAInputTable{
+#>     name={gamma\_flux\_tolerance},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0E-4},
+#>     valuesapplicable={$>$0},
+#>     limitations={},
+#>     description={This card is used to specify the tolerance on the convergence        %
+#>       of the 2-norm of the gamma flux.},
+#>     notes={}
+#>   }
+  gamma_flux_tolerance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+#>
 #>   {\bf num\_outers} num\_outers
 #>   \VERAInputTable{
 #>     name={num\_outers},
@@ -12438,6 +12582,27 @@ MPACT:
       - is_int()
       - is_geq() 0
 #>
+#>   {\bf gamma\_num\_inners} gamma\_num\_inners
+#>   \VERAInputTable{
+#>     name={gamma\_num\_inners},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={$\ge$1},
+#>     limitations={},
+#>     description={This card is used to specify the number of inner 1-group transport   %
+#>       sweeps for gamma transport done during group sweeping every outer iteration.},
+#>     notes={}
+#>   }
+  gamma_num_inners:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 1
+#>
 #>   {\bf up\_scatter} up\_scatter
 #>   \VERAInputTable{
 #>     name={up\_scatter},
@@ -12446,7 +12611,7 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={1},
-#>     valuesapplicable={$\ge$1},
+#>     valuesapplicable={$\ge$0},
 #>     limitations={},
 #>     description={This card is used to specify the number of upscattering              %
 #>       iterations that occur during group sweeping, i.e. between fission source        %
@@ -12455,6 +12620,29 @@ MPACT:
 #>       with numerical instability. }
 #>   }
   up_scatter:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+#>
+#>   {\bf gamma\_up\_scatter} gamma\_up\_scatter
+#>   \VERAInputTable{
+#>     name={gamma\_up\_scatter},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={$\ge$0},
+#>     limitations={},
+#>     description={This card is used to specify the number of upscattering              %
+#>       iterations that occur during group sweeping for gamma transport,                %
+#>       i.e. between fission source iterations.},
+#>     notes={Increasing \texttt{up\_scatter} is one way to potentially remedy issues    %
+#>       with numerical instability. }
+#>   }
+  gamma_up_scatter:
     <<: *dtint
     _content:
     _check:
@@ -12534,6 +12722,39 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() P0 P1 P2 P3 P4 P5 Pn0 TCP0 LTCP0 FLTCP0
+#>
+#>   {\bf gamma\_scattering} gamma\_scattering
+#>   \VERAInputTable{
+#>     name={gamma\_scattering},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={TCP0},
+#>     valuesapplicable={P0, LTCP0, FLTCP0.  The options for gamma transport are         %
+#>       described as follows:                   %
+#>       \begin{itemize}                                                                 %
+#>         \item \texttt{P0} --- Performs transport calculations using isotropic         %
+#>           scattering with no transport correction.                                    %
+#>         \item \texttt{TCP0} --- Performs transport calculations using isotropic       %
+#>           scattering with transport-corrected cross sections; this is the default.    %
+#>         \item \texttt{LTCP0} --- Performs the same transport calculations as TCP0,    %
+#>           except that for energies above 1 MeV, the transport correction is limited   %
+#>           to prevent negative self-scatter cross sections.  This can hinder accuracy  %
+#>           but help stability in certain cases.                                        %
+#>         \item \texttt{FLTCP0} --- Does the same thing as LTCP0, but for all energies. %
+#>       \end{itemize}},
+#>     limitations={},
+#>     description={This card is used to specify the scattering treatment to be used by  %
+#>       the radial gamma transport calculations in MPACT.},
+#>     notes={}
+#>   }
+  gamma_scattering:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() P0 TCP0 LTCP0 FLTCP0
 #>
 #>   {\bf trim\_Pn\_moments} trim\_Pn\_moments
 #>   \VERAInputTable{
@@ -14774,7 +14995,7 @@ MPACT:
 #>    unitsdefault={},
 #>    unitsother={},
 #>    valuedefault={2},
-#>    valuesapplicable={Any positive integer.},
+#>    valuesapplicable={$\ge$0},
 #>    limitations={Only applies to \texttt{1gsweep} CMFD solver.},
 #>    description={This card is used to specify the number of upscatter                  %
 #>      iterations when doing \texttt{1gsweep} CMFD. This can help to converge the       %
@@ -15143,7 +15364,7 @@ MPACT:
 #>    unitsdefault={},
 #>    unitsother={},
 #>    valuedefault={sp3},
-#>    valuesapplicable={sanm, sn-0, sn-1, sn-2, sn-3, p1, p3, p5, hyp3,          %
+#>    valuesapplicable={nem, sanm, sn-0, sn-1, sn-2, sn-3, p1, p3, p5, hyp3,          %
 #>      fhp1, fhp3, none. \newline \newline Described as:                                %
 #>      \newline                                                                         %
 #>      \centering                                                                       %
@@ -15180,6 +15401,181 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() nem sanm nem-mg sp1 sp3 sp5 hysp3 fhp3 p1 p2 p3 hyp3 sn-0 sn-1 sn-2 sn-3 p3-mom none
+#>
+#>   {\bf gamma\_nodal\_method} gamma\_nodal\_method
+#>   \VERAInputTable{
+#>    name={gamma\_nodal\_method},
+#>    type={Fixed Character String},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={sp3},
+#>    valuesapplicable={nem, sanm, sn-0, sn-1, sn-2, sn-3, p1, p3, p5, hyp3,          %
+#>      fhp1, fhp3, none. \newline \newline Described as:                                %
+#>      \newline                                                                         %
+#>      \centering                                                                       %
+#>        \begin{tabular}{ll}                                                            %
+#>          \hline                                                                       %
+#>            Input Option & Full Name \\                                                %
+#>          \hline                                                                       %
+#>            SANM & Semi-Analytic Nodal Method \\                                       %
+#>            NEM & Nodal Expansion Method \\                                            %
+#>            NEM-MG & Multi-Group Nodal Expansion Method \\                             %
+#>            SN-0 & Discrete Ordinates with 0th Spatial Moment\\                      %
+#>            SN-1 & Discrete Ordinates with 1st Spatial Moment\\                      %
+#>            SN-2 & Discrete Ordinates with 2nd Spatial Moment\\                      %
+#>            SN-3 & Discrete Ordinates with 3rd Spatial Moment\\                      %
+#>            P1 & Pn 1st Order with One-Node NEM\\                                      %
+#>            P3 & Pn 3rd Order with One-Node NEM\\                                      %
+#>            P5 & Pn 5th Order with One-Node NEM\\                                      %
+#>            HYP3 & Hybrid Pn 3rd Order with NEM\\                                      %
+#>            FHP1 & 1st Order with Full Height NEM\\                                    %
+#>            FHP3 & 3rd Order with Full Height NEM\\                                    %
+#>            NONE & Finite-Difference Method\\                                          %
+#>          \hline                                                                       %
+#>        \end{tabular}},
+#>    limitations={Only applies to 3-D models run with 2-D/1-D.},
+#>    description={This card is used to specify the type of nodal axial solver           %
+#>      that will be used to solve the 1-D portion of the 2-D/1-D solution for gamma
+#>      transport.},
+#>    notes={The Sn methods are the most computationally intensive. SP3 is recommended   %
+#>      as the best balance of accuracy and speed. If convergence/stability issues       %
+#>      are encountered with SP3, then try running with NEM.}
+#>   }
+  gamma_nodal_method:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() nem sanm nem-mg sp1 sp3 sp5 hysp3 fhp3 p1 p2 p3 hyp3 sn-0 sn-1 sn-2 sn-3 p3-mom none
+#>
+#>   {\bf nodal\_inners} nodal\_inners
+#>   \VERAInputTable{
+#>     name={nodal\_inners},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={varies dependent on nodal method},
+#>     valuesapplicable={$\ge$1},
+#>     limitations={},
+#>     description={This card is used to specify the number of inner 1-group nodal      %
+#>       sweeps done during group sweeping every outer iteration.},
+#>     notes={}
+#>   }
+  nodal_inners:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 1
+#>
+#>   {\bf nodal\_group\_loop} nodal\_group\_loop
+#>   \VERAInputTable{
+#>     name={nodal\_group\_loop},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={varies dependent on nodal method},
+#>     valuesapplicable={$\ge$1},
+#>     limitations={},
+#>     description={This card is used to specify the number of iterations over energy %
+#>       groups done during the nodal solve every outer iteration.},
+#>     notes={}
+#>   }
+  nodal_group_loop:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 1
+#>
+#>   {\bf nodal\_leakage\_order} nodal\_leakage\_order
+#>   \VERAInputTable{
+#>     name={nodal\_leakage\_order},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={2},
+#>     valuesapplicable={0, 1, or 2},
+#>     limitations={},
+#>     description={This card is used to specify the interpolation order for radial %
+#>       transverse leakage for nodal solves.},
+#>     notes={}
+#>   }
+  nodal_leakage_order:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+      - is_leq() 2
+#>
+#>   {\bf gamma\_nodal\_inners} gamma\_nodal\_inners
+#>   \VERAInputTable{
+#>     name={gamma\_nodal\_inners},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={varies dependent on nodal method},
+#>     valuesapplicable={$\ge$1},
+#>     limitations={},
+#>     description={This card is used to specify the number of inner 1-group nodal      %
+#>       sweeps done during gamma group sweeping every outer iteration/.},
+#>     notes={}
+#>   }
+  gamma_nodal_inners:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 1
+#>
+#>   {\bf gamma\_nodal\_group\_loop} gamma\_nodal\_group\_loop
+#>   \VERAInputTable{
+#>     name={gamma\_nodal\_group\_loop},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={varies dependent on nodal method},
+#>     valuesapplicable={$\ge$1},
+#>     limitations={},
+#>     description={This card is used to specify the number of iterations over energy %
+#>       groups done during the gamma nodal solve every outer iteration.},
+#>     notes={}
+#>   }
+  gamma_nodal_group_loop:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 1
+#>
+#>   {\bf gamma\_nodal\_leakage\_order} gamma\_nodal\_leakage\_order
+#>   \VERAInputTable{
+#>     name={gamma\_nodal\_leakage\_order},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={2},
+#>     valuesapplicable={0, 1, or 2},
+#>     limitations={},
+#>     description={This card is used to specify the interpolation order for radial %
+#>       transverse leakage for gamma nodal solves.},
+#>     notes={}
+#>   }
+  gamma_nodal_leakage_order:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 0
+      - is_leq() 2
 #>
 #>   {\bf sntype} sntype
 #>   \VERAInputTable{

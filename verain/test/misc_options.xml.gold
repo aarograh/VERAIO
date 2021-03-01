@@ -423,6 +423,15 @@
     <Parameter name="read_restart" type="string" value="my_restart_file"/>
   </ParameterList>
   <ParameterList name="MPACT">
+    <ParameterList name="2d1d">
+      <Parameter name="gamma_nodal_group_loop" type="int" value="10"/>
+      <Parameter name="gamma_nodal_inners" type="int" value="40"/>
+      <Parameter name="gamma_nodal_leakage_order" type="int" value="0"/>
+      <Parameter name="gamma_nodal_method" type="string" value="nem"/>
+      <Parameter name="nodal_group_loop" type="int" value="3"/>
+      <Parameter name="nodal_inners" type="int" value="10"/>
+      <Parameter name="nodal_leakage_order" type="int" value="1"/>
+    </ParameterList>
     <ParameterList name="TH">
       <Parameter name="sth_dhfrac" type="double" value="0.02"/>
       <Parameter name="sth_hgap" type="double" value="5200.0"/>
@@ -434,6 +443,14 @@
       <Parameter name="dep_shielder_dt" type="double" value="0.01"/>
       <Parameter name="exclude_depl_mats" type="Array(string)" value="{U31,U32,b4c}"/>
       <Parameter name="include_depl_mats" type="Array(string)" value="{U32,U33,aic,he}"/>
+    </ParameterList>
+    <Parameter name="gamma_moc_kernel" type="string" value="1g"/>
+    <Parameter name="gamma_ray_spacing" type="double" value="0.08"/>
+    <ParameterList name="iteration_control">
+      <Parameter name="gamma_flux_tolerance" type="double" value="1e-3"/>
+      <Parameter name="gamma_num_inners" type="int" value="1"/>
+      <Parameter name="gamma_scattering" type="string" value="P0"/>
+      <Parameter name="gamma_up_scatter" type="int" value="1"/>
     </ParameterList>
     <Parameter name="log_message" type="string" value="debug"/>
     <ParameterList name="mesh">
@@ -447,6 +464,11 @@
     <Parameter name="nodal_edits_adapt_adf" type="bool" value="true"/>
     <Parameter name="nodal_edits_collapse_axial_reflectors" type="bool" value="true"/>
     <Parameter name="nodal_edits_energy_cutoff" type="double" value="0.625"/>
+    <ParameterList name="quad_set">
+      <Parameter name="gamma_azimuthals_octant" type="int" value="4"/>
+      <Parameter name="gamma_polars_octant" type="int" value="1"/>
+      <Parameter name="gamma_quad_type" type="string" value="CHEBYSHEV-CHEBYSHEV"/>
+    </ParameterList>
     <Parameter name="rst_compress" type="string" value="none"/>
     <ParameterList name="transient">
       <Parameter name="rx_components" type="bool" value="false"/>

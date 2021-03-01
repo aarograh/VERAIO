@@ -349,3 +349,19 @@
   inter_assembly_gapmeshnum 5 5 5 5 1
   control_blade_meshnum 6 6
   detector_meshnum 6 6
+  gamma_ray_spacing 0.08
+  gamma_moc_kernel  1g
+  gamma_quad_type   CHEBYSHEV-CHEBYSHEV
+  gamma_azimuthals_octant 4
+  gamma_polars_octant     1
+  gamma_flux_tolerance   1e-3
+  gamma_num_inners       1
+  gamma_up_scatter       1
+  gamma_scattering       P0
+  gamma_nodal_method     nem
+  nodal_inners    10
+  nodal_group_loop  3
+  nodal_leakage_order  1
+  gamma_nodal_inners   40
+  gamma_nodal_group_loop  10
+  gamma_nodal_leakage_order 0
