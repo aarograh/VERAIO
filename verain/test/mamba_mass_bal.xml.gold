@@ -34,6 +34,7 @@
     </ParameterList>
     <ParameterList name="State_4">
       <Parameter name="cleanup_flow" type="double" value="50.0"/>
+      <Parameter name="crud_replenish_b10" type="double" value="1.0"/>
       <Parameter name="deplete" type="Array(double)" value="{60.0}"/>
       <Parameter name="deplete_units" type="string" value="EFPD"/>
     </ParameterList>
@@ -242,6 +243,9 @@
     <Parameter name="D_mult" type="double" value="0.267"/>
     <Parameter name="LTB_dissolve_scale" type="double" value="0.5"/>
     <Parameter name="chimney_gamma_l_c" type="double" value="3.5e-2"/>
+    <Parameter name="chimney_gamma_v_mult" type="double" value="0.8"/>
+    <Parameter name="coupled_t_ltb_solve" type="int" value="1"/>
+    <Parameter name="min_substeps" type="int" value="4"/>
     <Parameter name="sg_age" type="double" value="5.0"/>
     <Parameter name="sg_mass" type="double" value="0.1"/>
     <Parameter name="sg_mult" type="double" value="1.0"/>

@@ -115,6 +115,13 @@ MAMBA:
         - copy MAMBA/$chimney_gamma_l_c
       _content:
 
+    chimney_gamma_v_mult:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MAMBA/$chimney_gamma_v_mult
+      _content:
+
     chimney_htc:
       _pltype: parameter
       _type: double
@@ -239,6 +246,20 @@ MAMBA:
       _type: int
       _do:
         - copy MAMBA/$nrmax
+      _content:
+
+    min_substeps:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MAMBA/$min_substeps
+      _content:
+
+    coupled_t_ltb_solve:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MAMBA/$coupled_t_ltb_solve
       _content:
 
     deltar:

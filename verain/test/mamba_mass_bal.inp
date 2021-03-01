@@ -31,6 +31,7 @@
 
 [STATE]
   deplete EFPD  60.0
+  crud_replenish_b10 1.0
   cleanup_flow  50.0  ! %
 
 [STATE]
@@ -207,4 +208,7 @@
   D_mult   0.267
   LTB_dissolve_scale 0.5
   chimney_gamma_l_c  3.5e-2
+  chimney_gamma_v_mult 0.8
+  coupled_t_ltb_solve 1
+  min_substeps 4
 
