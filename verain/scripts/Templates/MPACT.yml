@@ -32,6 +32,13 @@ MPACT:
         - copy MPACT/$ray_spacing
       _content:
 
+    gamma_ray_spacing:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy MPACT/$gamma_ray_spacing
+      _content:
+
     moc_source_splitting:
       _pltype: parameter
       _type: string
@@ -86,6 +93,13 @@ MPACT:
       _type: string
       _do:
         - copy MPACT/$moc_kernel
+      _content:
+
+    gamma_moc_kernel:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$gamma_moc_kernel
       _content:
 
     moc_mg_data_passing:
@@ -391,6 +405,27 @@ MPACT:
             - copy MPACT/$azimuthals_octant
           _content:
 
+        gamma_quad_type:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$gamma_quad_type
+          _content:
+
+        gamma_polars_octant:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$gamma_polars_octant
+          _content:
+
+        gamma_azimuthals_octant:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$gamma_azimuthals_octant
+          _content:
+
         shield_azimuthals_octant:
           _pltype: parameter
           _type: int
@@ -609,6 +644,13 @@ MPACT:
             - copy MPACT/$flux_tolerance
           _content:
 
+        gamma_flux_tolerance:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$gamma_flux_tolerance
+          _content:
+
         num_outers:
           _pltype: parameter
           _type: int
@@ -630,6 +672,20 @@ MPACT:
             - copy MPACT/$up_scatter
           _content:
 
+        gamma_num_inners:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$gamma_num_inners
+          _content:
+
+        gamma_up_scatter:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$gamma_up_scatter
+          _content:
+
         num_extsrc_itrs:
           _pltype: parameter
           _type: int
@@ -642,6 +698,13 @@ MPACT:
           _type: string
           _do:
             - copy MPACT/$scattering
+          _content:
+
+        gamma_scattering:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$gamma_scattering
           _content:
 
         trim_Pn_moments:
@@ -1320,6 +1383,55 @@ MPACT:
           _type: string
           _do:
             - copy MPACT/$nodal_method
+          _content:
+
+        gamma_nodal_method:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$gamma_nodal_method
+          _content:
+
+        nodal_inners:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$nodal_inners
+          _content:
+
+        nodal_group_loop:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$nodal_group_loop
+          _content:
+
+        nodal_leakage_order:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$nodal_leakage_order
+          _content:
+
+        gamma_nodal_inners:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$gamma_nodal_inners
+          _content:
+
+        gamma_nodal_group_loop:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$gamma_nodal_group_loop
+          _content:
+
+        gamma_nodal_leakage_order:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$gamma_nodal_leakage_order
           _content:
 
         sntype:
