@@ -365,3 +365,4 @@
   gamma_nodal_inners   40
   gamma_nodal_group_loop  10
   gamma_nodal_leakage_order 0
+  gad_dep_method qgd2

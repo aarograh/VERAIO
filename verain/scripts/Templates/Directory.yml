@@ -12872,6 +12872,33 @@ MPACT:
       - is_word()
       - in_dictionary() p-c semip-c postcorrector
 #>
+#>   {\bf gad\_dep\_method} gad\_dep\_method
+#>   \VERAInputTable{
+#>    name={gad\_dep\_method},
+#>    type={Fixed Character String},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={\texttt{none}},
+#>    valuesapplicable={\texttt{qgd2}},
+#>    limitations={},
+#>    description={This card is used to request a higher order treatment of gadolinium
+#>      isotopes during burnup calculations. Currently, the only option is
+#>      \texttt{qgd2}. When called with the \texttt{qgd2} option, gadolinium
+#>      isotopes are dealt with using the high order methodology described in
+#>      D. Lee, J. Rhodes, and K. Smith. ``Quadratic Depletion Method For Gadolinium
+#>      Isotopes in CASMO-5''. Nuclear Science and Engineering 174 (2013), pp. 79-86. If
+#>      the \texttt{none} option is used, no special treatment of gadolinium isotopes
+#>      will be considered.},
+#>    notes={}
+#>   }
+  gad_dep_method:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() qgd2 none
+#>
 #>   {\bf depl\_origen\_solver} depl\_origen\_solver
 #>   \VERAInputTable{
 #>     name={depl\_origen\_solver},

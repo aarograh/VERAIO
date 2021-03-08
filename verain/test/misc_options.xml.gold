@@ -442,6 +442,7 @@
     <ParameterList name="depletion">
       <Parameter name="dep_shielder_dt" type="double" value="0.01"/>
       <Parameter name="exclude_depl_mats" type="Array(string)" value="{U31,U32,b4c}"/>
+      <Parameter name="gad_dep_method" type="string" value="qgd2"/>
       <Parameter name="include_depl_mats" type="Array(string)" value="{U32,U33,aic,he}"/>
     </ParameterList>
     <Parameter name="gamma_moc_kernel" type="string" value="1g"/>
