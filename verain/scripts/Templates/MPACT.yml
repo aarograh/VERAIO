@@ -781,6 +781,13 @@ MPACT:
             - copy MPACT/$depl_time_method
           _content:
 
+        gad_dep_method:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$gad_dep_method
+          _content:
+
         depl_origen_solver:
           _pltype: parameter
           _type: string
