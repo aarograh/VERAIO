@@ -125,7 +125,7 @@ trigger_build:
         VERA_ENABLES: "-DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON"
         VERA_BRANCH:  $BRANCH
     trigger: 
-        project: CASL/VERA
+        project: VERA/VERA
         branch: master
         strategy: depend
     rules:
