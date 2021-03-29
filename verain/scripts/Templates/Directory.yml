@@ -2094,7 +2094,7 @@ CORE:
 #>     valuesapplicable={},
 #>     limitations={},
 #>     description={Baffle material.},
-#>     notes={}
+#>     notes={The \texttt{baffle} input is not valid for BWR calculations.}
 #>   }
 #>   \VERAInputTable{
 #>     name={baffle\_gap},
@@ -2103,10 +2103,15 @@ CORE:
 #>     unitsdefault={cm},
 #>     unitsother={},
 #>     valuedefault={},
-#>     valuesapplicable={$\ge 0$},
+#>     valuesapplicable={$= 0$, or $\ge \text{assembly gap}$ and $\le \text{apitch} - \text{assembly gap}$},
 #>     limitations={},
 #>     description={Gap between outside assembly (including assembly gap) and baffle.},
-#>     notes={}
+#>     notes={The end of the \texttt{baffle\_gap} must not fall in the assembly gap portion
+#>        of the reflector assembly, as specified above.  Additionally, \texttt{baffle\_gap}
+#>        $+$ \texttt{baffle\_thick} must also not fall in the assembly gap portion of the
+#>        assembly.  Their sum must be exactly 0.0, exactly the assembly pitch, or between
+#>        the assembly gap and the assembly pitch minus assembly gap.  In this context, the
+#>        assembly gap is defined as $\frac{\text{apitch}-\text{npin}*\text{ppitch}}{2}$.}
 #>   }
 #>   \VERAInputTable{
 #>     name={baffle\_thick},
@@ -2118,7 +2123,8 @@ CORE:
 #>     valuesapplicable={$\ge 0$},
 #>     limitations={},
 #>     description={Thickness of baffle.},
-#>     notes={}
+#>     notes={Restrictions on \texttt{baffle\_thick} values are dependent on the
+#>        \texttt{baffle\_gap} value.  See notes on \texttt{baffle\_gap} for further detail.}
 #>   }
   baffle:
     <<: *dtlist
