@@ -653,8 +653,9 @@ STATE:
 #>     valuesapplicable={$>0$},
 #>     limitations={},
 #>     description={Core exit pressure},
-#>     notes={Required when coupling to CTF or when modeling a BWR reactor type. Must
-#>        be set to 2250 psi when using internal or simplified T/H.}
+#>     notes={Required for BWR calculations.  For PWR calculations, the default
+#>       is 2250 psia.  When using simplified TH calculations for PWRs, this
+#>       value must be 2250 psia if it is specified.}
 #>   }
   pressure:
     <<: *dtdouble
