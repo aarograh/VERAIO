@@ -15381,12 +15381,15 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={none},
-#>     valuesapplicable={full.  These are described as:                            %
+#>     valuesapplicable={full, linear.  These are described as:                          %
 #>       \begin{itemize}                                                                 %
 #>         \item \texttt{none} --- no source splitting is performed in MOC.              %
 #>         \item \texttt{full} --- if the source is negative before the MOC sweep, all   %
 #>           the source is moved from the right to left side of the equation by          %
 #>           modifying the transport cross section.                                      %
+#>         \item \texttt{linear} --- if the linear source is negative before the MOC
+#>           sweep, the gradient of the linear source and the quantity of source
+#>           splitting are adjusted to ensure the non-negativitiy of the linear source.
 #>       \end{itemize}},
 #>     limitations={},
 #>     description={This card is used to describe the type of source splitting that is   %
@@ -15403,7 +15406,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() none full
+      - in_dictionary() none full linear
 #>
 #>   {\bf nodal\_method} nodal\_method
 #>   \VERAInputTable{
