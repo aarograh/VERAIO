@@ -18,7 +18,7 @@
 
 [STATE]
   power    100.0
-  tinlet   550 K  ! *** approximate
+  subcool  30.0
   tfuel    900 K
   pressure 1040   ! psia
   sym      full

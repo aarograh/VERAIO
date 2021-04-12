@@ -131,6 +131,13 @@ STATES:
             - copy %STATE/$(_loop)/@tinlet
           _content:
 
+        subcool:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %STATE/$(_loop)/@subcool
+          _content:
+
         pressure:
           _pltype: parameter
           _type: double
