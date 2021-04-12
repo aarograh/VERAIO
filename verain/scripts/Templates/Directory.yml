@@ -301,6 +301,26 @@ STATE:
       - fall(sub{is_float(shift)},())
       - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
 #>
+#>   {\bf subcool} inlet\_subcooled\_enthalpy
+#>   \VERAInputTable{
+#>     name={inlet\_subcooled\_enthalpy},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={BTU/lbm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={Cannot be used along with \texttt{tinlet} card.  Requires \texttt{pressure} card.},
+#>     description={The enthalpy below the saturated liquid enthalpy at the inlet.},
+#>     notes={\texttt{tinlet} or \texttt{subcool} cards are required and are exclusive}
+#>   }
+  subcool:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+#>
 #>   {\bf void} void\_distribution
 #>   \VERAInputTable{
 #>     name={void\_distribution},
