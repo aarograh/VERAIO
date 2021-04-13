@@ -12238,26 +12238,42 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={\texttt{subgroup}},
-#>     valuesapplicable={\texttt{essm}},
-#>     limitations={The \texttt{xs\_shielder} card must be enabled (default) in          %
-#>       order to enable this card, otherwise unshielded cross section                   %
+#>     valuesapplicable={\texttt{essm}, \texttt{subgroup-cell}, \texttt{essm-cell},
+#>       \texttt{sdessm-cell}.  The values are described below:
+#>       \begin{itemize}
+#>         \item \texttt{subgroup} --- Uses the whole-core subgroup self-shielding
+#>            method to calculate equivalence cross sections.
+#>         \item \texttt{essm} --- Uses the whole-core embedded self-shielding method (ESSM)
+#>            to calculate equivalence cross sections.
+#>         \item \texttt{subgroup-cell} --- Uses a cell-based subgroup self shielding
+#>            method to calculate equivalence cross sections.
+#>         \item \texttt{essm-cell} --- Uses a cell-based ESSM to calculate
+#>            equivalence cross sections.
+#>         \item \texttt{sdessm-cell} --- Uses a cell-based spatially dependent ESSM
+#>            to calculate equivalence cross sections.
+#>       \end{itemize}},
+#>     limitations={The \texttt{xs\_shielder} card must be enabled (default) in
+#>       order to enable this card, otherwise unshielded cross section
 #>       (infinite-dilute) will be used.},
-#>     description={This card is used to specify the method used to shield the           %
+#>     description={This card is used to specify the method used to shield the
 #>       cross sections.},
-#>     notes={In general, \texttt{subgroup} is slower than \texttt{essm}                 %
-#>       (by a factor of 2 to 5 depending on the \texttt{subgroup\_set} option).         %
-#>       However, subgroup method has a few advantages over ESSM, such                   %
-#>       as a better representation of distributed self-shielding within                 %
-#>       the fuel and the resonance category treatment (resonance isotopes are grouped   %
-#>       into categories). Therefore, subgroup method is an option with better accuracy  %
-#>       in the current version.}
+#>     notes={The subgroup method has a few advantages over ESSM, such
+#>       as a better representation of distributed self-shielding within
+#>       the fuel and the resonance category treatment (resonance isotopes are grouped
+#>       into categories). Therefore, subgroup method is an option with better accuracy
+#>       in the current version.\newline
+#>       \newline
+#>       The cell-based shelf-shielding methods still use a one-group whole-core subgroup
+#>       calculation to treat spacer grids, cladding, and other similar materials.  The
+#>       cell-based method is then applied to the fuel rods, control rods, and other
+#>       important resonance materials that have multiple subgroup categories and levels.}
 #>   }
   shield_method:
     <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() subgroup essm
+      - in_dictionary() subgroup essm subgroup-cell essm-cell sdessm-cell
 #>
 #>   {\bf shield\_nbatch} shield\_nbatch
 #>   \VERAInputTable{
@@ -12465,8 +12481,8 @@ MPACT:
 #>     unitsother={},
 #>     valuedefault={4},
 #>     valuesapplicable={integers 1 through 9},
-#>     limitations={The \texttt{shield\_method} must be set to \texttt{subgroup}.        %
-#>       ESSM ignores the \texttt{subgroup\_set} option.},
+#>     limitations={The \texttt{shield\_method} must be set to \texttt{subgroup} or
+#>       \texttt{subgroup-cell}.  Other shielding options ignore this input.},
 #>     description={This card is used to specify the subgroup set.},
 #>     notes={In most cases, 4 (the default) should be used. This option finds a         %
 #>       good balance on accuracy and computing time. In general, the                    %
