@@ -3643,6 +3643,62 @@ ASSEMBLY:
       - fall(sub{is_geq(shift,0)},stride(1,2,()))
       - is_strictlyincreasing(stride(1,2,()))
 #>
+#>   {\bf rpdlm} label rpdlm\_exposure rpdlm\_power
+#>   \VERAInputTable{
+#>     name={label},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Label for this assembly. Label corresponds to \texttt{assm\_map}
+#>        in [CORE] block.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={rpdlm\_exposure},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={GWDMT},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={Values must be listed in increasing order},
+#>     description={Assembly averaged exposure values that form the intervals of
+#>     the piecewise rpdlm function. The first exposure value is implied to be 
+#>     zero. Consecutive exposure points form an exposure interval over which the
+#>     provided linear heat rate limits are interpolated. The last exposure
+#>     value is taken to be infinity.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={rpdlm\_power},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={kW/ft},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Linear heat rate limit values that will be used to form the 
+#>     piecewise rpdlm function. The first rpdlm segment is assumed to be
+#>     constant, at the first provided heat rate, over the exposure interval
+#>     from 0.0 GWd/MT to the first exposure value. Subsequent limits are
+#>     defined by the line segment between consecutive exposure/power pairs. The
+#>     final segment is constant, at the last specified heat rate, from the last
+#>     specified exposure through infinite exposure.},
+#>     notes={}
+#>   }
+  rpdlm:
+    <<: *dtlistnamed
+    _style: multi-line
+    _check:
+      - fall(sub{is_geq(shift,0)},stride(1,1,()))
+      - is_strictlyincreasing(stride(1,2,()))
+      - fall(sub{is_float(shift)},stride(2,1,()))
+#>
 #>   {\bf grid} label material height mass
 #>   \VERAInputTable{
 #>     name={label},

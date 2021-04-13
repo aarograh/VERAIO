@@ -41,6 +41,20 @@ ASSEMBLIES:
             - copyarray %ASSEMBLY/$(_path)/%axial/$(_loop),select=>even
           _content:
 
+        rpdlm_exposure:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray %ASSEMBLY/$(_path)/%rpdlm/$(_loop),select=>even
+          _content:
+
+        rpdlm_power:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray %ASSEMBLY/$(_path)/%rpdlm/$(_loop),select=>odd
+          _content:
+
         Materials:
           _pltype: list
           _do:
