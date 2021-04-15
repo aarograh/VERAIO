@@ -1,6 +1,6 @@
 ################################################################################
 # Acknowledgement that Srdjan Simunovic wrote most if not all of the PERL code
-# in the VERAInExt Repo, without his efforts this wrapper would not be possible.
+# in the VERAIO Repo, without his efforts this wrapper would not be possible.
 #
 # VERAIn is an open source PERL parser for the common input for CASL codes. It
 # is found here - "VERA common input processor" https://github.com/CASL/VERAin
@@ -51,7 +51,7 @@ import VERADATATYPE as VDT
 import VERABLOCK as VB
 #import VERACARD as VC
 
-class VERAInExt:
+class VERAIO:
   'A class to encapsulate the PERL .yml files from VERAIn'
 
   def __init__(self, pathToDir):
@@ -110,7 +110,7 @@ class VERAInExt:
       self.createVimSyntax()
 
   def edit(self):
-    print('Class name =','VERAInExt')
+    print('Class name =','VERAIO')
     print('nDatatypes =',self.nDatatypes)
     print('datatypenames =',self.datatypenames)
     for k, v in self.datatypes.items():
@@ -422,7 +422,7 @@ class VERAInExt:
   #    tmpblock = BLOCK('',[],[])
 
   #  return tmpblock
-#File wide functions, makes the VERAInExt cleaner to initialize
+#File wide functions, makes the VERAIO cleaner to initialize
 def findBounds(lines,sttstr,stpstr):
   lread = False
   readstart = 0
@@ -494,4 +494,4 @@ def findVINBlockInd(lines,names,offset):
 # Main executable code.
 curDir = os.path.dirname(os.path.realpath(__file__))
 print('Generating vim dictionary for  "'+curDir+'/../scripts/Templates/Directory.yml"')
-vin = VERAInExt(curDir + '/../scripts/Templates/Directory.yml')
+vin = VERAIO(curDir + '/../scripts/Templates/Directory.yml')

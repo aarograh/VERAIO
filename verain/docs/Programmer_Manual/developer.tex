@@ -50,23 +50,23 @@ The VERAIn repository is used to translate the user defined ASCII input file to 
 The ParameterList format is defined in Trilinos Teuchos package at:\\
 \texttt{https://trilinos.org/docs/dev/packages/teuchos/doc/html/index.html\#TeuchosParameterList_src}.
 The VERAIn parser is a PERL script that translates individual variables that are specified in YAML files. 
-These YAML files are located in the \texttt{VERAInExt/verain/scripts/Templates} directory.
+These YAML files are located in the \texttt{VERAIO/verain/scripts/Templates} directory.
 To perform the translation, use the parser located in the scripts directory. 
 Run the parser with a command line like the following:
 
-\texttt{VERAInExt/verain/scripts/react2xml.pl \$CASE.inp \$CASE.xml}
+\texttt{VERAIO/verain/scripts/react2xml.pl \$CASE.inp \$CASE.xml}
 
 where \texttt{\$CASE} is the base name of your input file. 
 Parser error messages indicate errors in the input file. 
 More verbose diagnostic messages are currently being added. 
-Various input parameter examples can be found in the \texttt{VERAInExt/verain/test} directory.
+Various input parameter examples can be found in the \texttt{VERAIO/verain/test} directory.
 
 
 \chapter{Style Guide}
 
 \section{Adding New Variables}
 
-This section provides instructions for adding or modifying inputs to be used in the user provided ASCII input. For most cases, to add a new variable to the input, only the template files found in \texttt{VERAInExt/verain/scripts/Templates} need to be modified. Generally, two files need to be modified for every new input variable:
+This section provides instructions for adding or modifying inputs to be used in the user provided ASCII input. For most cases, to add a new variable to the input, only the template files found in \texttt{VERAIO/verain/scripts/Templates} need to be modified. Generally, two files need to be modified for every new input variable:
 \begin{itemize}
     \item{Directory.yml} --- gives a description of how to read the input cards
     \item{BLOCK.yml} --- gives a description of how to convert input cards to parameter names for a particular BLOCK
@@ -115,19 +115,19 @@ It is strongly advised that a new variable include a \texttt{_check:} section th
 \section{Testing New Variables}
 
 Whenever a new input card is added, a test case must also be added.
-To add a test case, either modify an existing test case or add a new one in the \texttt{VERAInExt/verain/test} directory.
+To add a test case, either modify an existing test case or add a new one in the \texttt{VERAIO/verain/test} directory.
 It is preferable to modify an existing case, but care must be taken not to impact another test that might use the same case.
 
 There is a special test input deck called \texttt{misc\_options.inp} that contains a bunch of random input variables. 
 The only purpose of this test is to make sure something gets written to the XML file correctly.
 If possible, try to use this test case instead of creating something new.
 Once a test case has been either modified or created, a "gold" xml file must be created to go along with it.
-If a new test is added, be sure to modify the \texttt{CMakeLists.txt} file in the \texttt{VERAInExt/verain/test} directory and add another entry to the long list of \texttt{ADD\_REACTOR\_AWARE\_INPUT\_PARSER\_TEST} cases.
+If a new test is added, be sure to modify the \texttt{CMakeLists.txt} file in the \texttt{VERAIO/verain/test} directory and add another entry to the long list of \texttt{ADD\_REACTOR\_AWARE\_INPUT\_PARSER\_TEST} cases.
 
 \chapter{VERARun}
 
 VERARun is a set of Python scripts that allow for the easy execution of problems in VERA. 
-The scripts are located in the VERAInExt repository in the \texttt{VERAInExt/verarun} directory.
+The scripts are located in the VERAIO repository in the \texttt{VERAIO/verarun} directory.
 
 To execute a problem using VERARun, a user simply types:
 \begin{Verbatim}
