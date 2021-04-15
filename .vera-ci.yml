@@ -23,7 +23,7 @@ before_script:
     - SRC_BASE_DIR=${SRC_DIR}/..
     - cd ${BASE_DIR}
 #set package
-    - PACKAGE_TEST=VERAInExt
+    - PACKAGE_TEST=VERAIO
 #clean out build directory
     - (if [[ ! -d "builds" ]]; then mkdir builds; fi)
     - cd builds
@@ -43,14 +43,14 @@ before_script:
     - echo ${BASE_VERA_DIR}
     - ls -lrt 
 #set up links to add package source to full source directory
-    - (if [[ -d "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)
-    - (if [[ ! -L "${PACKAGE_TEST}" ]]; then ln -s ${SRC_DIR} VERAInExt; fi)
+    - (if [[ -d "${PACKAGE_TEST}" ]]; then rm -rf VERAIO; fi)
+    - (if [[ ! -L "${PACKAGE_TEST}" ]]; then ln -s ${SRC_DIR} VERAIO; fi)
 after_script:
 #--- Load environment ---#
     - if [[ -z ${TEST_COMPILER} ]]; then VERA_COMPILER="8.3.0"; else VERA_COMPILER=${TEST_COMPILER}; fi
     - if [[ -f "/data/test_gcc/gcc-${VERA_COMPILER}/load_dev_env.sh" ]]; then BASE_DIR="/data/gitlab-runner"; . /data/test_gcc/gcc-${VERA_COMPILER}/load_dev_env.sh; ENV_BASE=/data/test_gcc/gcc-${VERA_COMPILER}; else BASE_DIR="/localhome/gitlab-runner"; . /projects/vera/test/gcc-${VERA_COMPILER}/load_dev_env.sh; ENV_BASE=/projects/vera/test/gcc-${VERA_COMPILER}/test; fi
     - SRC_DIR=`pwd`
-    - BLD_DIR=${BASE_DIR}/builds/VERAInExt
+    - BLD_DIR=${BASE_DIR}/builds/VERAIO
     - cp $BLD_DIR/Testing/Temporary/* $SRC_DIR/
 
 vmcontinuous:
@@ -61,7 +61,7 @@ vmcontinuous:
         BLD_NAME: "gnu_release_debug"
     script:
     - SRC_DIR=`pwd`
-    - BLD_DIR=${BASE_DIR}/builds/VERAInExt
+    - BLD_DIR=${BASE_DIR}/builds/VERAIO
     - (if [[  -d "${BLD_DIR}" ]]; then rm -rf ${BLD_DIR}; fi)
     - mkdir -p ${BLD_DIR}
     - cd $BLD_DIR
@@ -71,7 +71,7 @@ vmcontinuous:
     - ecc make -j16
     - ecc ctest -j16
     - cd ${BASE_VERA_DIR}
-    - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)
+    - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAIO; fi)
     - echo $CI_COMMIT_REF_NAME
     tags:
         - linux
@@ -93,7 +93,7 @@ gnu-debug:
       when: always
     script:
     - SRC_DIR=`pwd`
-    - BLD_DIR=${BASE_DIR}/builds/VERAInExt
+    - BLD_DIR=${BASE_DIR}/builds/VERAIO
     - (if [[  -d "${BLD_DIR}" ]]; then rm -rf ${BLD_DIR}; fi)
     - mkdir -p ${BLD_DIR}
     - cd $BLD_DIR
@@ -105,7 +105,7 @@ gnu-debug:
     - ecc make -j16
     - ecc ctest -j28
     - cd ${BASE_VERA_DIR}
-    - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAInExt; fi)
+    - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAIO; fi)
     - CI_RUN_ONLY=CHECKIN
 # Checking for available VERA branches for future development
     - if git ls-remote --heads git@code-int.ornl.gov:CASL/VERA $CI_COMMIT_REF_NAME | wc -l >/dev/null; then BRANCH=${CI_COMMIT_REF_NAME}; else BRANCH=master; fi
@@ -120,8 +120,8 @@ trigger_build:
     stage: deploy
     variables:
         CI_RUN_ONLY: "CHECKIN"
-        CI_VERAInExt_REF: $CI_COMMIT_REF_NAME
-        PACKAGE_TEST: VERAInExt
+        CI_VERAIO_REF: $CI_COMMIT_REF_NAME
+        PACKAGE_TEST: VERAIO
         VERA_ENABLES: "-DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON"
         VERA_BRANCH:  $BRANCH
     trigger: 

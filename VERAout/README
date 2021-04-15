@@ -16,7 +16,7 @@ To build the distribution do the following:
 > export PATH_TO_VERA=${PWD}/VERA
 > mkdir build
 > cd build
-> cmake -D VERA_EXTRA_REPOSITORIES:STRING=TriBITS,VERAInExt \
+> cmake -D VERA_EXTRA_REPOSITORIES:STRING=TriBITS,VERAIO \
         -D HDF5_PATH:PATH="Path to HDF5 folder" \
         -D SILO_PATH:PATH="Path to SILO folder" \
         -D CMAKE_INSTALL_PREFIX:PATH="Path to desired installation folder" \
@@ -26,7 +26,7 @@ To build the distribution do the following:
 
 Alternatively, this can be configured with a VERA options file:
 
-> cmake -D VERA_EXTRA_REPOSITORIES:STRING=TriBITS,VERAInExt \
+> cmake -D VERA_EXTRA_REPOSITORIES:STRING=TriBITS,VERAIO \
         -D VERA_CONFIGURE_OPTIONS_FILE:FILEPATH=${PATH_TO_VERA}'/cmake/ctest/drivers/fissile4/mpi-release-debug-shared-gcc-4.8.3-options.cmake' \
         -D CMAKE_INSTALL_PREFIX:PATH="Path to desired installation folder" \
         -D VERA_ENABLE_VERAout:BOOL=ON \

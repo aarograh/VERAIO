@@ -8,8 +8,8 @@ BUILD=/localhome/pmy/BUILDS/CHECKIN/MPI_DEBUG
 
 # set executables
 MPACT=$BUILD/MPACT/MPACT_Drivers/examples/MPACT/MPACT.exe
-VERADIFF=$BUILD/VERAInExt/verain/src/veradiff
-PARSER=$VERA/VERAInExt/verain/scripts/react2xml.pl
+VERADIFF=$BUILD/VERAIO/verain/src/veradiff
+PARSER=$VERA/VERAIO/verain/scripts/react2xml.pl
 
 export MPACT_DATA=$VERA/SCALE/test_data
 

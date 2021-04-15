@@ -1,5 +1,5 @@
 ###############################################################################
-# File  : VERAInExt/verain/scripts/utils/vera2omn.py
+# File  : VERAIO/verain/scripts/utils/vera2omn.py
 # Author: Katherine E Royston
 # Date  : Wed Feb 20 14:43:58 EST 2019
 #
@@ -779,5 +779,5 @@ if __name__ == "__main__":
     main()
 
 ###############################################################################
-# end of VERAInExt/verain/scripts/utils/vera2omn.py
+# end of VERAIO/verain/scripts/utils/vera2omn.py
 ###############################################################################
