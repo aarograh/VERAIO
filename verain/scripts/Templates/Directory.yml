@@ -17852,7 +17852,7 @@ BISON:
 #>     valuedefault={false},
 #>     valuesapplicable={true},
 #>     limitations={},
-#>     description={Logical governing whether or not to output average axial values.},
+#>     description={Logical governing whether or not to use pin clad fast flux from VERA.},
 #>     notes={}
 #>   }
   fast_flux:
