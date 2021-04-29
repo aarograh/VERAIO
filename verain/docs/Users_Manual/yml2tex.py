@@ -2,10 +2,24 @@ import os
 import sys
 import yaml
 import mmap
+import argparse
 
-#fin needs to be .yml file
-fin   = sys.argv[1]
-fout  = sys.argv[2]
+if sys.version_info > (3, 0):
+    raise RuntimeError("This script must be run using python2")
+
+parser = argparse.ArgumentParser(
+    description="Update the LaTeX documentation with the current .yml file content.  Run this script before building"+
+       " the LaTeX documentation for the most up-to-date documentation.  This must be run with Python 2.")
+parser.add_argument('--ymlpath', type=str, default='../../scripts/Templates/Directory.yml',
+        help="Path to the Directory.yml file.  Assumes this script is being run from its directory if not provided.")
+parser.add_argument('--card', type=str, default='cards.tex', help="Path to the cards.tex file.  Assumes this script is being run from its directory if not provided.")
+args = parser.parse_args()
+
+if not os.path.exists(args.ymlpath):
+    raise RuntimeError("Path to Directory.yml file does not exist: "+str(args.ymlpath))
+
+fin   = args.ymlpath
+fout  = args.card
 err_count=0
 content_found=0
 

@@ -54,8 +54,8 @@
     B2 B1 B1 B2
        B2 B2
 
-  inlet_orifice_loss B1 0.5 1e-2
-                     B2 1.0 1e-2
+  inlet_orifice_loss B1 0.5 / area=1.0e-2
+  inlet_orifice_loss B2 1.0
 
   bc_rad reflecting
   bc_top reflecting
@@ -142,6 +142,9 @@
       MID 284.0
       MID 336.2
       END 388.2
+
+  lower_nozzle  ss 6.05  194.64 / loss=0.5 area=1e-2! mat, height, mass (g)  *** mass scaled to 3x3
+  upper_nozzle  ss 6.05  194.64 / loss=0.4 ! mat, height, mass (g)  *** mass scaled to 3x3
 
 [EDITS]
 

@@ -252,27 +252,34 @@ CORE:
         - coremapmap CORE/$size,CORE/@core_shape,CORE/@inlet_orifice_map,CORE/$bc_sym
       _content:
 
-    inlet_orifice_loss:
+    InletOrifices:
       _pltype: list
+      _tr:
+        _name: _linlet_orifice_loss
+        _content: CORE/%inlet_orifice_loss
       _content:
-        label:
-          _pltype: array
-          _type: string
-          _do:
-            - copyarray CORE/$inlet_orifice_loss,start=>0,stride=>3
-          _content:
-        loss:
-          _pltype: array
-          _type: double
-          _do:
-            - copyarray CORE/$inlet_orifice_loss,start=>1,stride=>3
-          _content:
-        area:
-          _pltype: array
-          _type: double
-          _do:
-            - copyarray CORE/$inlet_orifice_loss,start=>2,stride=>3
-          _content:
+         InletOrifice_(_linlet_orifice_loss):
+            _pltype: list
+            _content:
+               label:
+                 _pltype: parameter
+                 _type: string
+                 _do:
+                   - value (_linlet_orifice_loss)
+                 _content:
+               loss:
+                 _pltype: parameter
+                 _type: double
+                 _do:
+                   - copy CORE/%inlet_orifice_loss/@(_linlet_orifice_loss):0
+
+               area:
+                 _pltype: parameter
+                 _type: double
+                 _do:
+                   - copy CORE/%inlet_orifice_loss/$(_linlet_orifice_loss)^/$area
+                 _content:
+
 
     rotate_map:
       _pltype: array
