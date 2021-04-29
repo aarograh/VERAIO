@@ -2438,25 +2438,29 @@ CORE:
 #>     notes={}
 #>   }
 #>   \VERAInputTable{
-#>     name={form\_loss\_area},
+#>     name={area},
 #>     type={Float},
 #>     need={Optional},
 #>     unitsdefault={cm$^2$},
 #>     unitsother={},
-#>     valuedefault={},
+#>     valuedefault={65.416},
 #>     valuesapplicable={$>0.0$},
 #>     limitations={},
 #>     description={Flow area of the orifice being modeled by this loss.},
 #>     notes={}
 #>   }
   inlet_orifice_loss:
-    <<: *dtlist
-    _style: multi-line
-    _content:
+    <<: *dtlistnamed
+    _style:
     _check:
-      - nth(1,())>=0.0
-      - nth(2,())>0.0
-      - arraysize()%3==0
+      - nth(2,())>=0.0
+      - arraysize()==2
+    _parameters:
+      area:
+        <<: *dtdouble
+        _check:
+          - is_float()
+          - is_gt() 0.0
 #>
 #>   {\bf rotate\_map} rotate\_map
 #>   \VERAInputTable{
@@ -3667,7 +3671,7 @@ ASSEMBLY:
 #>     valuesapplicable={$\ge 0$},
 #>     limitations={Values must be listed in increasing order},
 #>     description={Assembly averaged exposure values that form the intervals of
-#>     the piecewise rpdlm function. The first exposure value is implied to be 
+#>     the piecewise rpdlm function. The first exposure value is implied to be
 #>     zero. Consecutive exposure points form an exposure interval over which the
 #>     provided linear heat rate limits are interpolated. The last exposure
 #>     value is taken to be infinity.},
@@ -3682,7 +3686,7 @@ ASSEMBLY:
 #>     valuedefault={},
 #>     valuesapplicable={$\ge 0$},
 #>     limitations={},
-#>     description={Linear heat rate limit values that will be used to form the 
+#>     description={Linear heat rate limit values that will be used to form the
 #>     piecewise rpdlm function. The first rpdlm segment is assumed to be
 #>     constant, at the first provided heat rate, over the exposure interval
 #>     from 0.0 GWd/MT to the first exposure value. Subsequent limits are
@@ -3699,7 +3703,7 @@ ASSEMBLY:
       - is_strictlyincreasing(stride(1,2,()))
       - fall(sub{is_float(shift)},stride(2,1,()))
 #>
-#>   {\bf grid} label material height mass
+#>   {\bf grid} label material height mass / loss lossmap blockage gridmap
 #>   \VERAInputTable{
 #>     name={label},
 #>     type={Character String},
@@ -3747,6 +3751,62 @@ ASSEMBLY:
 #>     limitations={},
 #>     description={Grid mass for this grid type.},
 #>     notes={See Section 2.3.5 for examples.}
+#>   }
+#>   \VERAInputTable{
+#>     name={loss},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={$\ge 0.0$},
+#>     limitations={},
+#>     description={Loss coefficient for the spacer grid.  Do not provide \texttt{lossmap} input if providing this input.  This input shall be identified by keyword as \texttt{loss=value}},
+#>     notes={This input is not required on this card.}
+#>   }
+#>   \VERAInputTable{
+#>     name={lossmap},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Provides the name of a loss coefficient map, to be entered elsewhere in the [ASSEMBLY] block.
+#>        This name must match a \texttt{lossmap\_name} entered in a \texttt{lossmap} entry of the input.  This optional input
+#>        shall be identified by keyword as \texttt{lossmap=lossmap\_name}.},
+#>     notes={This input is not required on this card.}
+#>   }
+#>   \VERAInputTable{
+#>     name={blockage},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={$\ge 0.0$ and <1.0},
+#>     limitations={},
+#>     description={Provides the blockge ratio of this spacer grid.  A value of zero means the spacer grid
+#>        does not block the flow area and a value of 0.1 means it blocks 10\% of the flow area (for example).
+#>        Do not provide this input if providing the \texttt{gridmap} optional input.  This input shall be 
+#>        identified by keyword as \texttt{blockage=value}.},
+#>     notes={This input is not required on this card.}
+#>   }
+#>   \VERAInputTable{
+#>     name={gridmap},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Provides the name of the ROTHCON dataset to use for modeling grid heat transfer and turbulence
+#>        enhancement effects.  Do not provide a \texttt{blockage} input for this grid if specifying this input.  The specified
+#>        name must exist in a ROTHCON data file that is in the directory where the simulation will be run.
+#>        This input shall be identified by keyword as \texttt{gridmap=value}.},
+#>     notes={This input is not required on this card.}
 #>   }
   grid:
     <<: *dtlistnamed
@@ -3842,7 +3902,7 @@ ASSEMBLY:
     _check:
       - fall(sub{is_float(shift)},odd([]))
 #>
-#>   {\bf lower\_nozzle} lower\_nozzle\_comp lower\_nozzle\_height lower\_nozzle\_mass
+#>   {\bf lower\_nozzle} lower\_nozzle\_comp lower\_nozzle\_height lower\_nozzle\_mass / loss
 #>   \VERAInputTable{
 #>     name={lower\_nozzle\_comp},
 #>     type={Character String},
@@ -3880,14 +3940,49 @@ ASSEMBLY:
 #>        given the nozzle mass, and use coolant for remaining volume.},
 #>     notes={}
 #>   }
+#>   \VERAInputTable{
+#>     name={loss},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={$>=0.0$},
+#>     limitations={},
+#>     description={Loss coefficient associated with the lower nozzle.},
+#>     notes={This input is optional on this card and will default if not provided.}
+#>   }
+#>   \VERAInputTable{
+#>     name={area},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm$^2$},
+#>     unitsother={},
+#>     valuedefault={64.516},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={},
+#>     description={Area associated with the lower nozzle.},
+#>     notes={This input is optional on this card and will default if not provided.}
+#>   }
   lower_nozzle:
     <<: *dtlist
     _content:
     _check:
       - nth(1,())>0
       - nth(2,())>0
+    _parameters:
+      loss:
+        <<: *dtdouble
+        _check:
+          - is_float()
+          - is_geq() 0
+      area:
+        <<: *dtdouble
+        _check:
+          - is_float()
+          - is_gt() 0
 #>
-#>   {\bf upper\_nozzle} upper\_nozzle\_comp upper\_nozzle\_height upper\_nozzle\_mass
+#>   {\bf upper\_nozzle} upper\_nozzle\_comp upper\_nozzle\_height upper\_nozzle\_mass / loss
 #>   \VERAInputTable{
 #>     name={upper\_nozzle\_comp},
 #>     type={Character String},
@@ -3925,12 +4020,47 @@ ASSEMBLY:
 #>        given the nozzle mass, and use coolant for remaining volume.},
 #>     notes={}
 #>   }
+#>   \VERAInputTable{
+#>     name={loss},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={$>=0.0$},
+#>     limitations={},
+#>     description={Loss coefficient associated with the upper nozzle.},
+#>     notes={This input is optional on this card and will default if not provided.}
+#>   }
+#>   \VERAInputTable{
+#>     name={area},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm$^2$},
+#>     unitsother={},
+#>     valuedefault={64.516},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={},
+#>     description={Area associated with the upper nozzle.},
+#>     notes={This input is optional on this card and will default if not provided.}
+#>   }
   upper_nozzle:
     <<: *dtlist
     _content:
     _check:
       - nth(1,())>0
       - nth(2,())>0
+    _parameters:
+      loss:
+        <<: *dtdouble
+        _check:
+          - is_float()
+          - is_geq() 0
+      area:
+        <<: *dtdouble
+        _check:
+          - is_float()
+          - is_gt() 0
 #>
 #>   {\bf fuel} fuel
 #>   \VERAInputTable{

@@ -267,7 +267,7 @@ SET(VERAIn_TEST_DIR ${${PACKAGE_NAME}_SOURCE_DIR})
   TRIBITS_ADD_ADVANCED_TEST(testVERAInMan
     TEST_0
       CMND ${PYTHON_EXECUTABLE}
-      ARGS ${VERAIn_TEST_DIR}/docs/Users_Manual/yml2tex.py ${VERAIn_TEST_DIR}/scripts/Templates/Directory.yml test.tex
+      ARGS ${VERAIn_TEST_DIR}/docs/Users_Manual/yml2tex.py --ymlpath=${VERAIn_TEST_DIR}/scripts/Templates/Directory.yml --card=test.tex
       WORKING_DIRECTORY  ${CMAKE_CURRENT_BINARY_DIR}/latex
       SKIP_CLEAN_WORKING_DIRECTORY
       PASS_REGULAR_EXPRESSION_ALL

@@ -109,6 +109,20 @@ ASSEMBLIES:
             - copy %ASSEMBLY/$(_path)/@lower_nozzle:2
           _content:
 
+        lower_nozzle_loss:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %ASSEMBLY/$(_path)/$lower_nozzle^/$loss
+          _content:
+
+        lower_nozzle_area:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %ASSEMBLY/$(_path)/$lower_nozzle^/$area
+          _content:
+
         upper_nozzle_comp:
           _pltype: parameter
           _type: string
@@ -128,6 +142,20 @@ ASSEMBLIES:
           _type: double
           _do:
             - copy %ASSEMBLY/$(_path)/@upper_nozzle:2
+          _content:
+
+        upper_nozzle_loss:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %ASSEMBLY/$(_path)/$upper_nozzle^/$loss
+          _content:
+
+        upper_nozzle_area:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy %ASSEMBLY/$(_path)/$upper_nozzle^/$area
           _content:
 
         grid_elev:
