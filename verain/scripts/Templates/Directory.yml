@@ -17795,6 +17795,7 @@ BISON:
     _content:
     _check:
       - fall(sub{is_string(shift)},())
+      - arraysize()>0
 #>
 #>   {\bf cycle\_xml} cycle\_xml\_filenames
 #>   \VERAInputTable{
@@ -17815,6 +17816,7 @@ BISON:
     _content:
     _check:
       - fall(sub{is_string(shift)},())
+      - arraysize()>0
 #>
 #>   {\bf shuffle\_xml} shuffle\_xml\_filenames
 #>   \VERAInputTable{
@@ -17835,6 +17837,7 @@ BISON:
     _content:
     _check:
       - fall(sub{is_string(shift)},())
+      - arraysize()>0
 #>
 #>   {\bf only\_cycle} only\_cycle
 #>   \VERAInputTable{
@@ -18357,6 +18360,7 @@ FAST:
     _content:
     _check:
       - fall(sub{is_string(shift)},())
+      - arraysize()>0
 #>
 #>   {\bf cycle\_xml} cycle\_xml\_filenames
 #>   \VERAInputTable{
@@ -18377,6 +18381,7 @@ FAST:
     _content:
     _check:
       - fall(sub{is_string(shift)},())
+      - arraysize()>0
 #>
 #>   {\bf shuffle\_xml} shuffle\_xml\_filenames
 #>   \VERAInputTable{
@@ -18397,6 +18402,7 @@ FAST:
     _content:
     _check:
       - fall(sub{is_string(shift)},())
+      - arraysize()>0
 #>
 #>   {\bf only\_cycle} only\_cycle
 #>   \VERAInputTable{
