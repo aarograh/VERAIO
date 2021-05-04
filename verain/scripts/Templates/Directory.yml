@@ -2411,7 +2411,7 @@ CORE:
       - fall(sub{not_in_dictionary(shift,'0')},())
       - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
 #>
-#>   {\bf inlet\_orifice\_loss} label form\_loss\_coefficient form\_loss\_area
+#>   {\bf inlet\_orifice\_loss} label form\_loss\_coefficient / area
 #>   \VERAInputTable{
 #>     name={label},
 #>     type={Character String},
@@ -2446,8 +2446,8 @@ CORE:
 #>     valuedefault={65.416},
 #>     valuesapplicable={$>0.0$},
 #>     limitations={},
-#>     description={Flow area of the orifice being modeled by this loss.},
-#>     notes={}
+#>     description={Flow area of the orifice being modeled by this loss.  This input shall be identified by keyword as \texttt{area=value}.},
+#>     notes={This input is optional on this card and will default if not provided.}
 #>   }
   inlet_orifice_loss:
     <<: *dtlistnamed
@@ -3789,7 +3789,7 @@ ASSEMBLY:
 #>     limitations={},
 #>     description={Provides the blockge ratio of this spacer grid.  A value of zero means the spacer grid
 #>        does not block the flow area and a value of 0.1 means it blocks 10\% of the flow area (for example).
-#>        Do not provide this input if providing the \texttt{gridmap} optional input.  This input shall be 
+#>        Do not provide this input if providing the \texttt{gridmap} optional input.  This input shall be
 #>        identified by keyword as \texttt{blockage=value}.},
 #>     notes={This input is not required on this card.}
 #>   }
@@ -3902,7 +3902,7 @@ ASSEMBLY:
     _check:
       - fall(sub{is_float(shift)},odd([]))
 #>
-#>   {\bf lower\_nozzle} lower\_nozzle\_comp lower\_nozzle\_height lower\_nozzle\_mass / loss
+#>   {\bf lower\_nozzle} lower\_nozzle\_comp lower\_nozzle\_height lower\_nozzle\_mass / loss area
 #>   \VERAInputTable{
 #>     name={lower\_nozzle\_comp},
 #>     type={Character String},
@@ -3949,7 +3949,7 @@ ASSEMBLY:
 #>     valuedefault={0.0},
 #>     valuesapplicable={$>=0.0$},
 #>     limitations={},
-#>     description={Loss coefficient associated with the lower nozzle.},
+#>     description={Loss coefficient associated with the lower nozzle.  The input shall be identified by keyword as \texttt{loss=value}.},
 #>     notes={This input is optional on this card and will default if not provided.}
 #>   }
 #>   \VERAInputTable{
@@ -3961,7 +3961,7 @@ ASSEMBLY:
 #>     valuedefault={64.516},
 #>     valuesapplicable={$>0.0$},
 #>     limitations={},
-#>     description={Area associated with the lower nozzle.},
+#>     description={Area associated with the lower nozzle.  This input shall be identified by keyword as \texttt{area=value}.},
 #>     notes={This input is optional on this card and will default if not provided.}
 #>   }
   lower_nozzle:
@@ -3982,7 +3982,7 @@ ASSEMBLY:
           - is_float()
           - is_gt() 0
 #>
-#>   {\bf upper\_nozzle} upper\_nozzle\_comp upper\_nozzle\_height upper\_nozzle\_mass / loss
+#>   {\bf upper\_nozzle} upper\_nozzle\_comp upper\_nozzle\_height upper\_nozzle\_mass / loss area
 #>   \VERAInputTable{
 #>     name={upper\_nozzle\_comp},
 #>     type={Character String},
@@ -4029,7 +4029,7 @@ ASSEMBLY:
 #>     valuedefault={0.0},
 #>     valuesapplicable={$>=0.0$},
 #>     limitations={},
-#>     description={Loss coefficient associated with the upper nozzle.},
+#>     description={Loss coefficient associated with the upper nozzle.  The input shall be identified by keyword as \texttt{loss=value}.},
 #>     notes={This input is optional on this card and will default if not provided.}
 #>   }
 #>   \VERAInputTable{
@@ -4041,7 +4041,7 @@ ASSEMBLY:
 #>     valuedefault={64.516},
 #>     valuesapplicable={$>0.0$},
 #>     limitations={},
-#>     description={Area associated with the upper nozzle.},
+#>     description={Area associated with the upper nozzle.  The input shall be identified by keyword as \texttt{area=value}.},
 #>     notes={This input is optional on this card and will default if not provided.}
 #>   }
   upper_nozzle:
