@@ -307,6 +307,7 @@
 
 [COUPLING]
   read_restart  my_restart_file
+  extend_coupling_mesh above
 
 [TIAMAT]
   solver jacobi

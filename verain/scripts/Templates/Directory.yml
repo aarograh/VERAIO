@@ -3667,7 +3667,7 @@ ASSEMBLY:
 #>     valuesapplicable={$\ge 0$},
 #>     limitations={Values must be listed in increasing order},
 #>     description={Assembly averaged exposure values that form the intervals of
-#>     the piecewise rpdlm function. The first exposure value is implied to be 
+#>     the piecewise rpdlm function. The first exposure value is implied to be
 #>     zero. Consecutive exposure points form an exposure interval over which the
 #>     provided linear heat rate limits are interpolated. The last exposure
 #>     value is taken to be infinity.},
@@ -3682,7 +3682,7 @@ ASSEMBLY:
 #>     valuedefault={},
 #>     valuesapplicable={$\ge 0$},
 #>     limitations={},
-#>     description={Linear heat rate limit values that will be used to form the 
+#>     description={Linear heat rate limit values that will be used to form the
 #>     piecewise rpdlm function. The first rpdlm segment is assumed to be
 #>     constant, at the first provided heat rate, over the exposure interval
 #>     from 0.0 GWd/MT to the first exposure value. Subsequent limits are
@@ -9968,6 +9968,31 @@ COUPLING:
       - is_gt() 0
       - is_leq() 1.0
 #>
+#>   {\bf extend\_coupling\_mesh} extend\_coupling\_mesh
+#>   \VERAInputTable{
+#>     name={extend\_coupling\_mesh},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={\texttt{none}},
+#>     valuesapplicable={\texttt{above, below, both}},
+#>     limitations={},
+#>     description={This card is used to specify whether to enable coupling
+#>                  above and below the active fuel when using CTF.  The extended coupling
+#>                  can be enabled only above the fuel with \texttt{above}, only below
+#>                  it with \texttt{below}, or both above and below with \texttt{both}.
+#>                  Deprecated options \texttt{true} and \texttt{false} correspond to
+#>                  \texttt{both} and \texttt{none}, respectively.},
+#>     notes={}
+#>   }
+  extend_coupling_mesh:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() above below both none true false
+#>
 #>   {\bf rlx\_crud} rlx\_crud
 #>   \VERAInputTable{
 #>     name={rlx\_crud},
@@ -13373,27 +13398,6 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() ctf simplified ctf_external tiamat user_defined none hybrid
-#>
-#>   {\bf extend\_coupling\_mesh} extend\_coupling\_mesh
-#>   \VERAInputTable{
-#>     name={extend\_coupling\_mesh},
-#>     type={Boolean},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={\texttt{true}},
-#>     valuesapplicable={\texttt{false}},
-#>     limitations={},
-#>     description={This card is used to specify whether to enable coupling             %
-#>                  above and below the active fuel when using CTF.},
-#>     notes={}
-#>   }
-  extend_coupling_mesh:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
 #>
 #>   {\bf shielder\_th} shielder\_th
 #>   \VERAInputTable{

@@ -420,6 +420,7 @@
     <Parameter name="rtwfp" type="double" value="1000.0"/>
   </ParameterList>
   <ParameterList name="COUPLING">
+    <Parameter name="extend_coupling_mesh" type="string" value="above"/>
     <Parameter name="read_restart" type="string" value="my_restart_file"/>
   </ParameterList>
   <ParameterList name="MPACT">

@@ -73,6 +73,13 @@ COUPLING:
         - copy COUPLING/$rlx_crud
       _content:
 
+    extend_coupling_mesh:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy COUPLING/$extend_coupling_mesh
+      _content:
+
     nonlinear_coupling_method:
       _pltype: list
       _content:
