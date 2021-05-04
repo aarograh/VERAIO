@@ -10098,6 +10098,31 @@ COUPLING:
       - is_gt() 0
       - is_leq() 1.0
 #>
+#>   {\bf extend\_coupling\_mesh} extend\_coupling\_mesh
+#>   \VERAInputTable{
+#>     name={extend\_coupling\_mesh},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={\texttt{none}},
+#>     valuesapplicable={\texttt{above, below, both}},
+#>     limitations={},
+#>     description={This card is used to specify whether to enable coupling
+#>                  above and below the active fuel when using CTF.  The extended coupling
+#>                  can be enabled only above the fuel with \texttt{above}, only below
+#>                  it with \texttt{below}, or both above and below with \texttt{both}.
+#>                  Deprecated options \texttt{true} and \texttt{false} correspond to
+#>                  \texttt{both} and \texttt{none}, respectively.},
+#>     notes={}
+#>   }
+  extend_coupling_mesh:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() above below both none true false
+#>
 #>   {\bf rlx\_crud} rlx\_crud
 #>   \VERAInputTable{
 #>     name={rlx\_crud},
@@ -13503,27 +13528,6 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() ctf simplified ctf_external tiamat user_defined none hybrid
-#>
-#>   {\bf extend\_coupling\_mesh} extend\_coupling\_mesh
-#>   \VERAInputTable{
-#>     name={extend\_coupling\_mesh},
-#>     type={Boolean},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={\texttt{true}},
-#>     valuesapplicable={\texttt{false}},
-#>     limitations={},
-#>     description={This card is used to specify whether to enable coupling             %
-#>                  above and below the active fuel when using CTF.},
-#>     notes={}
-#>   }
-  extend_coupling_mesh:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
 #>
 #>   {\bf shielder\_th} shielder\_th
 #>   \VERAInputTable{
