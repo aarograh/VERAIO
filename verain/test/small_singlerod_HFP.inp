@@ -177,6 +177,7 @@
   cicada_dimensions 3
   enable_corrosion_lithium 0
   property_evaluations asme1968
+  crud_boil_coeff_model 1
 
 
 

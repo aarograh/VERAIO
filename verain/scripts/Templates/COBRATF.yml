@@ -80,6 +80,13 @@ COBRATF:
         - copy COBRATF/$crud_evap_coeff
       _content:
 
+    crud_boil_coeff_model:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$crud_boil_coeff_model
+      _content:
+
     guide_tube_coefficient:
       _pltype: parameter
       _type: double
