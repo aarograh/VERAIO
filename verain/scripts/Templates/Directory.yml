@@ -10897,6 +10897,28 @@ MPACT:
       - is_float()
       - is_gt() 0.0
 #>
+#>   {\bf moc\_min\_flux} moc\_min\_flux
+#>   \VERAInputTable{
+#>     name={moc\_min\_flux},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={This card is used to prevent a non-positive MOC scalar flux.
+#>       At the end of each MOC sweep, any MOC flux less than \texttt{moc\_min\_flux}
+#>       is set to  \texttt{moc\_min\_flux}.},
+#>     notes={A very small positive real number such as $1.0\times 10^{-20}$ is recommended.}
+#>   }
+  moc_min_flux:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0.0
+#>
 #>   {\bf volume\_corr} volume\_corr
 #>   \VERAInputTable{
 #>     name={volume\_corr},
@@ -14871,6 +14893,34 @@ MPACT:
       - is_float()
       - is_gt() 0.0
 #>
+#>   {\bf cmfd\_relax\_negative} cmfd\_relax\_negative
+#>   \VERAInputTable{
+#>     name={cmfd\_relax\_negative},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={\texttt{false}},
+#>     valuesapplicable={\texttt{true}},
+#>     limitations={},
+#>     description={This option is to under-relax the CMFD flux when negative CMFD
+#>       flux is calculated. If a negative CMFD flux is calculated at the end of
+#>       CMFD iteration, the CMFD flux is under-relaxed by the group-dependent
+#>       relaxation factor. The under-relaxation factor, $f_g$, is determined
+#>       to satisfy the following inequality:
+#>       $f_g \phi_g^\text{new} + (1-f_g)\phi_g^\text{old} > 0$.},
+#>     notes={This card can be used with \texttt{cmfd\_relaxation}.
+#>       This card changes the CMFD flux itself only if a negative CMFD flux is
+#>       calculated. On the other hand, the \texttt{cmfd\_relaxation} card changes
+#>       the projection factor.}
+#>   }
+  cmfd_relax_negative:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf cmfd\_dhat\_relaxation} cmfd\_dhat\_relaxation
 #>   \VERAInputTable{
 #>     name={cmfd\_dhat\_relaxation},
@@ -15502,6 +15552,30 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 #>
+#>   {\bf split\_TL\_tol} split\_TL\_tol
+#>   \VERAInputTable{
+#>     name={split\_TL\_tol},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge$0.0},
+#>     limitations={},
+#>     description={This card is used to specify the flux tolerance used in the transverse
+#>       leakage splitting or MOC source splitting. If scalar flux is less then the flux
+#>       flux tolerance, the transverse leakage splitting or MOC source splitting will not
+#>       be performed.},
+#>     notes={This card should be used with \texttt{split\_TL true} or
+#>       \texttt{moc\_source\_splitting full}.}
+#>   }
+  split_TL_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0.0
+#>
 #>   {\bf split\_RTL} split\_RTL
 #>   \VERAInputTable{
 #>     name={split\_RTL},
@@ -15751,6 +15825,94 @@ MPACT:
       - is_int()
       - is_geq() 0
       - is_leq() 2
+#>
+#>   {\bf nodal\_group\_start} nodal\_group\_start
+#>   \VERAInputTable{
+#>     name={nodal\_group\_start},
+#>    type={Integer},
+#>    need={Optional},
+#>    unitsdefault={},
+#>    unitsother={},
+#>    valuedefault={},
+#>    valuesapplicable={$>$0},
+#>    limitations={},
+#>    description={This card is used to specify the starting group index of nodal group
+#>      iterations when \texttt{nodal\_group\_loop} is larger than 1.},
+#>    notes={If this card is not specified, the starting group index is determined
+#>      according to the range of up-scattering.}
+#>   }
+  nodal_group_start:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf nodal\_inner\_tol} nodal\_inner\_tol
+#>   \VERAInputTable{
+#>     name={nodal\_inner\_tol},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>$0},
+#>     limitations={},
+#>     description={This card is used to specify the tolerance on the convergence
+#>       of the 2-norm of the nodal flux residual during within group nodal inner
+#>       iterations.},
+#>     notes={}
+#>   }
+  nodal_inner_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+#>
+#>   {\bf nodal\_group\_tol} nodal\_group\_tol
+#>   \VERAInputTable{
+#>     name={nodal\_group\_tol},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>$0},
+#>     limitations={},
+#>     description={This card is used to specify the tolerance on the convergence
+#>       of the 2-norm of the nodal flux residual during nodal group iterations.},
+#>     notes={}
+#>   }
+  nodal_group_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+#>
+#>   {\bf nodal\_relax\_negative} nodal\_relax\_negative
+#>   \VERAInputTable{
+#>     name={nodal\_relax\_negative},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={\texttt{false}},
+#>     valuesapplicable={\texttt{true}},
+#>     limitations={},
+#>     description={This option is used to under-relax the nodal flux when negative nodal
+#>       flux is calculated. The group-dependent under-relaxation factor, $f_g$, is determined
+#>       to satisfy the following inequality:
+#>       $f_g \phi_g^\text{new} + (1-f_g)\phi_g^\text{old} > 0$.},
+#>     notes={}
+#>   }
+  nodal_relax_negative:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
 #>
 #>   {\bf gamma\_nodal\_inners} gamma\_nodal\_inners
 #>   \VERAInputTable{
