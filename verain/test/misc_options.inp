@@ -367,3 +367,10 @@
   gamma_nodal_group_loop  10
   gamma_nodal_leakage_order 0
   gad_dep_method qgd2
+  nodal_group_start     1
+  nodal_inner_tol       1E-5
+  nodal_group_tol       5E-5
+  nodal_relax_negative  true
+  moc_min_flux          1E-20
+  split_TL_tol          0.0
+  cmfd_relax_negative   true

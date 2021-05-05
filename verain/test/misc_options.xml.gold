@@ -430,14 +430,20 @@
       <Parameter name="gamma_nodal_leakage_order" type="int" value="0"/>
       <Parameter name="gamma_nodal_method" type="string" value="nem"/>
       <Parameter name="nodal_group_loop" type="int" value="3"/>
+      <Parameter name="nodal_group_start" type="int" value="1"/>
+      <Parameter name="nodal_group_tol" type="double" value="5E-5"/>
+      <Parameter name="nodal_inner_tol" type="double" value="1E-5"/>
       <Parameter name="nodal_inners" type="int" value="10"/>
       <Parameter name="nodal_leakage_order" type="int" value="1"/>
+      <Parameter name="nodal_relax_negative" type="bool" value="true"/>
+      <Parameter name="splitTL_tol" type="double" value="0.0"/>
     </ParameterList>
     <ParameterList name="TH">
       <Parameter name="sth_dhfrac" type="double" value="0.02"/>
       <Parameter name="sth_hgap" type="double" value="5200.0"/>
     </ParameterList>
     <ParameterList name="cmfd">
+      <Parameter name="cmfd_relax_negative" type="bool" value="true"/>
       <Parameter name="linear_solver" type="string" value="petsc"/>
     </ParameterList>
     <ParameterList name="depletion">
@@ -462,6 +468,7 @@
       <Parameter name="moderator_mesh_ndiv" type="int" value="3"/>
       <Parameter name="moderator_mesh_pins" type="string" value="both"/>
     </ParameterList>
+    <Parameter name="moc_min_flux" type="double" value="1E-20"/>
     <Parameter name="nodal_edits" type="string" value="sanm-2"/>
     <Parameter name="nodal_edits_adapt_adf" type="bool" value="true"/>
     <Parameter name="nodal_edits_collapse_axial_reflectors" type="bool" value="true"/>
