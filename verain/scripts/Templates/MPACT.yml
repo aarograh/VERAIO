@@ -910,13 +910,6 @@ MPACT:
             - copy MPACT/$sth_channeltype
           _content:
 
-        sth_tabletype:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy MPACT/$sth_tabletype
-          _content:
-
         sth_avgpin:
           _pltype: parameter
           _type: bool
