@@ -3703,7 +3703,7 @@ ASSEMBLY:
       - is_strictlyincreasing(stride(1,2,()))
       - fall(sub{is_float(shift)},stride(2,1,()))
 #>
-#>   {\bf grid} label material height mass / loss lossmap blockage gridmap
+#>   {\bf grid} label material height mass / loss lossmap blockage gridmap yhl1 yhl2
 #>   \VERAInputTable{
 #>     name={label},
 #>     type={Character String},
@@ -3808,6 +3808,41 @@ ASSEMBLY:
 #>        This input shall be identified by keyword as \texttt{gridmap=value}.},
 #>     notes={This input is not required on this card.}
 #>   }
+#>   \VERAInputTable{
+#>     name={yhl1},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={5.55},
+#>     valuesapplicable={$\geq$0.0},
+#>     limitations={},
+#>     description={This is a coefficient in the Yao-Hochreiter-Leech grid spacer heat transfer enhancement model.
+#>        The model has the form, $M=\left(1+{yhl_1}\epsilon^2\exp{\left[{yhl_2}\frac{z}{D}\right]}\right)$, where
+#>        $M$ is the heat transfer coefficient multiplier, $z$ is the downstream distance from the grid location,
+#>        and $D$ is the hydraulic diameter.  The $\epsilon$ (blockage ratio), ${yhl_1}$, and ${yhl_2}$ terms are all user inputs that
+#>        may be set for this spacer grid.  This input provides the ${yhl_1}$ value.  All parameters will default if
+#>        not set by the user.  This input shall be identified by keyword as \texttt{yhl1=value}.},
+#>     notes={This input is not required on this card.  Do not enter this input if using a \emph{gridmap}.}
+#>   }
+#>   \VERAInputTable{
+#>     name={yhl2},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={-0.13},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={This is a coefficient in the Yao-Hochreiter-Leech grid spacer heat transfer enhancement model.
+#>        The model has the form, $M=\left(1+{yhl_1}\epsilon^2\exp{\left[{yhl_2}\frac{z}{D}\right]}\right)$, where
+#>        $M$ is the heat transfer coefficient multiplier, $z$ is the downstream distance from the grid location,
+#>        and $D$ is the hydraulic diameter.  The $\epsilon$ (blockage ratio), ${yhl_1}$, and ${yhl_2}$ terms are all user inputs that
+#>        may be set for this spacer grid.  This input provides the ${yhl_2}$ value.  All parameters will default if
+#>        not set by the user.  This input shall be identified by keyword as \texttt{yhl2=value}.},
+#>     notes={This input is not required on this card.  Do not enter this input if using a \emph{gridmap}.}
+#>   }
+
   grid:
     <<: *dtlistnamed
     _style:
@@ -3833,6 +3868,16 @@ ASSEMBLY:
         <<: *dtstring
         _check:
           - is_string()
+      yhl1:
+        <<: *dtstring
+        _check:
+          - is_float()
+          - is_geq() 0
+      yhl2:
+        <<: *dtstring
+        _check:
+          - is_float()
+
 #>
 #>   {\bf lossmap} lossmap\_name loss\_coeff\_map
 #>   \VERAInputTable{
