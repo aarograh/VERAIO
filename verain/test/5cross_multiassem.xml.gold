@@ -173,6 +173,7 @@
           <Parameter name="lossmap" type="string" value="MIDLOSS"/>
           <Parameter name="mass" type="double" value="27.25"/>
           <Parameter name="material" type="string" value="zirc"/>
+          <Parameter name="yhl1" type="double" value="4.0"/>
         </ParameterList>
       </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{6.050,10.281,11.951,377.711,393.711,395.381,397.501}"/>
@@ -290,6 +291,7 @@
           <Parameter name="lossmap" type="string" value="MIDLOSS"/>
           <Parameter name="mass" type="double" value="27.25"/>
           <Parameter name="material" type="string" value="zirc"/>
+          <Parameter name="yhl2" type="double" value="-0.1"/>
         </ParameterList>
       </ParameterList>
       <Parameter name="axial_elevations" type="Array(double)" value="{6.050,10.281,11.951,377.711,393.711,395.381,397.501}"/>

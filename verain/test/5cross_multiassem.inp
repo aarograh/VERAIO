@@ -15,6 +15,11 @@
 !> using octant symmetry.
 !> @endreq
 
+!> @beginreq
+!> - React2xml shall allow the user to set modeling coefficients in the Yao-Hochreiter-Leech model
+!> for each spacer grid definition.
+!> @endreq
+
 ! Channel map for ctf will be:
 !    0     0     0     1     2     3     4     0     0     0
 !    0     0     0     5     6     7     8     0     0     0
@@ -148,7 +153,7 @@
       LGAP1 397.501
 
   grid END inc 3.866 31.67 / loss=0.9070 ! height (cm), mass (g), loss coef *** scaled to 3x3
-  grid MID zirc 3.810 27.25 / lossmap=MIDLOSS ! height (cm), mass (g), loss coef *** scaled to 3x3
+  grid MID zirc 3.810 27.25 / lossmap=MIDLOSS yhl1=4.0 ! height (cm), mass (g), loss coef *** scaled to 3x3
 
   lossmap MIDLOSS
          1.0
@@ -213,7 +218,7 @@
       LGAP1 397.501
 
   grid END inc 3.866 31.67 / loss=0.9070 ! height (cm), mass (g), loss coef *** scaled to 3x3
-  grid MID zirc 3.810 27.25 / lossmap=MIDLOSS blockage=0.1! height (cm), mass (g), loss coef *** scaled to 3x3
+  grid MID zirc 3.810 27.25 / lossmap=MIDLOSS blockage=0.1 yhl2=-0.1 ! height (cm), mass (g), loss coef *** scaled to 3x3
 
   lossmap MIDLOSS
      0.6 0.8 0.6

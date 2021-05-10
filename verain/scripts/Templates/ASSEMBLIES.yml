@@ -284,6 +284,20 @@ ASSEMBLIES:
                     - copy %ASSEMBLY/$(_path)/%grid/$(_lgrid)^/$blockage
                   _content:
 
+                yhl1:
+                  _pltype: parameter
+                  _type: double
+                  _do:
+                    - copy %ASSEMBLY/$(_path)/%grid/$(_lgrid)^/$yhl1
+                  _content:
+
+                yhl2:
+                  _pltype: parameter
+                  _type: double
+                  _do:
+                    - copy %ASSEMBLY/$(_path)/%grid/$(_lgrid)^/$yhl2
+                  _content:
+
                 gridmap:
                   _pltype: parameter
                   _type: string
