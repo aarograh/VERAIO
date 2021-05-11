@@ -17016,6 +17016,38 @@ MAMBA:
       - is_float()
       - is_geq() 0
 #>
+#>   {\bf chimney\_htc\_model} chimney\_htc\_model
+#>   \VERAInputTable{
+#>     name={chimney\_htc\_model},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={$2$},
+#>     limitations={},
+#>     description={Boiling heat transfer model inside a chimney.
+#>        A value of 1 uses a chimney boiling htc model of the form
+#>        $ h_{boil,chimney} = h + T_{sup} h_{lin} $
+#>        where $h$ is the chimney htc given by the input $\mathbf{chimney\_htc}$
+#>        with units of $W/cm^2 K$,
+#>        $h_{lin}$ is the chimney htc given by the input $\mathbf{chimney\_htc\_lin}$
+#>        with units of $W/cm^2 K^2$,
+#>        and $T_{sup}$ is the local superheat inside the crud layer in Kelvin.
+#>        A value of 2 uses a conduction limited boiling heat transfer coefficient
+#>        model of the form $ h_{boil,chimney} = h f(k, c_n) $ where $f(k, c_n)$
+#>        is a function of the crud thermal conductivity, $k$, and $c_n$ is the
+#>        chimney surface density.},
+#>     notes={}
+#>   }
+  chimney_htc_model:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 1
+      - is_leq() 2
+#>
 #>   {\bf chimney\_htc} htc
 #>   \VERAInputTable{
 #>     name={htc},
