@@ -1303,7 +1303,7 @@ STATE:
 #>     description={This option is used to specify the scram type (of which %
 #>       the only current option is ``trip'') and the scram bank movement   %
 #>       speed intervals. These are specified using rate/time pairs, where  %
-#>       each rate is accociated with the following time interval. The      %
+#>       each rate is associated with the following time interval. The      %
 #>       units are RUs/second and seconds, respectively. At least one       %
 #>       time/rate pair must be present.},
 #>     notes={This card is only used in transient calculations.}
@@ -16216,52 +16216,6 @@ MPACT:
     _slash:
     _check:
 #>
-#>   {\bf prompt} prompt
-#>   \VERAInputTable{
-#>     name={prompt},
-#>     type={Boolean},
-#>     need={Required},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={\texttt{true}},
-#>     limitations={},
-#>     description={This option is used to specify whether to use         %
-#>       prompt kinetics calculation during the transient solver. The default is %
-#>       true. For now, this option is set to be true, no matter which option    %
-#>       is input.},
-#>     notes={}
-#>   }
-  prompt:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
-#>
-#>   {\bf accel} accel
-#>   \VERAInputTable{
-#>     name={accel},
-#>     type={Boolean},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={\texttt{true}},
-#>     valuesapplicable={This option is used to specify whether CMFD acceleration %
-#>       is performed during the transient solve. The default is set to true.     %
-#>       When using the multilevel method, \texttt{true} must be used. },
-#>     limitations={Can only be used when TML is enabled.},
-#>     description={When just accel is input without \texttt{true|false}, the  %
-#>       option is set to \texttt{false}.},
-#>     notes={}
-#>   }
-  accel:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
-#>
 #>   {\bf 1gacceltr} 1gacceltr
 #>   \VERAInputTable{
 #>     name={1gacceltr},
@@ -16596,35 +16550,6 @@ MPACT:
       - in_dictionary(nth(0,()),'theta','bdf')
       - is_float(nth(1,()))
       - is_geq(nth(1,()),0)
-#>
-#>   {\bf timestep} timestep
-#>   \VERAInputTable{
-#>     name={timestep},
-#>     type={Fixed double precision numbers. Length 3},
-#>     need={Optional},
-#>     unitsdefault={seconds},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={
-#>      \begin{itemize}                                                       %
-#>         \item \texttt{<dt>} --- the standard time step for transient calculation %
-#>         \item \texttt{<dt\_min>} --- the minimum time step for transient calculation %
-#>         \item \texttt{<t\_max>} --- the end time for the transient %
-#>       \end{itemize}},
-#>     limitations={},
-#>     description={This is used for defining the time steps and transient simulation time},
-#>     notes={Presently \texttt{<dt\_min>} is ignored.}
-#>   }
-  timestep:
-    <<: *dtlist
-    _content:
-    _check:
-      - is_float(nth(0,()))
-      - is_float(nth(1,()))
-      - is_float(nth(2,()))
-      - nth(0,())>0
-      - nth(1,())>0
-      - nth(2,())>0
 #>
 #>   {\bf perturb} perturb
 #>   \VERAInputTable{

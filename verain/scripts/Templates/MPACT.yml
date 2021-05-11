@@ -1667,25 +1667,6 @@ MPACT:
             - copyarray MPACT/@perturb,start=>6,stride=>7
           _content:
 
-        timestep_dt:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy MPACT/$timestep:0
-          _content:
-        timestep_dt_min:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy MPACT/$timestep:1
-          _content:
-        timestep_dt_max:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy MPACT/$timestep:2
-          _content:
-
         tml:
           _pltype: parameter
           _type: bool
@@ -1698,20 +1679,6 @@ MPACT:
           _type: int
           _do:
             - copy MPACT/$tmllevel
-
-        prompt:
-          _pltype: parameter
-          _type: bool
-          _do:
-            - copy MPACT/$prompt
-          _content:
-
-        accel:
-          _pltype: parameter
-          _type: bool
-          _do:
-            - copy MPACT/$accel
-          _content:
 
         1gaccel:
           _pltype: parameter
