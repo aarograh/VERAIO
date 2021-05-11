@@ -244,6 +244,7 @@
     <Parameter name="LTB_dissolve_scale" type="double" value="0.5"/>
     <Parameter name="chimney_gamma_l_c" type="double" value="3.5e-2"/>
     <Parameter name="chimney_gamma_v_mult" type="double" value="0.8"/>
+    <Parameter name="chimney_htc_model" type="int" value="2"/>
     <Parameter name="coupled_t_ltb_solve" type="int" value="1"/>
     <Parameter name="min_substeps" type="int" value="4"/>
     <Parameter name="sg_age" type="double" value="5.0"/>

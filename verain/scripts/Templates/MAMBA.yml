@@ -122,6 +122,13 @@ MAMBA:
         - copy MAMBA/$chimney_gamma_v_mult
       _content:
 
+    chimney_htc_model:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy MAMBA/$chimney_htc_model
+      _content:
+
     chimney_htc:
       _pltype: parameter
       _type: double

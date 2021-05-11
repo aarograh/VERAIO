@@ -207,6 +207,7 @@
   sg_mult  1.0
   D_mult   0.267
   LTB_dissolve_scale 0.5
+  chimney_htc_model 2
   chimney_gamma_l_c  3.5e-2
   chimney_gamma_v_mult 0.8
   coupled_t_ltb_solve 1
