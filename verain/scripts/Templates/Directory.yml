@@ -4747,7 +4747,7 @@ CONTROL:
       - nth(4,())>0
       - nth(5,())>0
 #>
-#>   {\bf bladetype} bladetypelabel bladegeomlabel blademat ntube tubecell tubefillermat tubeorient
+#>   {\bf bladetype} bladetypelabel bladegeomlabel blademat tubeorient ntube tubecelllist 
 #>   \VERAInputTable{
 #>     name={bladetypelabel},
 #>     type={Character String},
@@ -4785,42 +4785,6 @@ CONTROL:
 #>     notes={}
 #>   }
 #>   \VERAInputTable{
-#>     name={ntube},
-#>     type={Integer},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$\ge 0$},
-#>     limitations={},
-#>     description={Number of rodlets in control blade wing.},
-#>     notes={}
-#>   }
-#>   \VERAInputTable{
-#>     name={tubecell},
-#>     type={Character String},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={Cell label for rodlet.},
-#>     notes={}
-#>   }
-#>   \VERAInputTable{
-#>     name={tubefillermat},
-#>     type={Character String},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={Material used for surrounding the tube cell.},
-#>     notes={}
-#>   }
-#>   \VERAInputTable{
 #>     name={tubeorient},
 #>     type={Character String},
 #>     need={Optional},
@@ -4834,19 +4798,44 @@ CONTROL:
 #>        rotate and adjust them to model them vertically.},
 #>     notes={}
 #>   }
+#>   \VERAInputTable{
+#>     name={ntube},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Number of rodlets in control blade wing.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={tubecelllist},
+#>     type={Character String Array},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={A spatially dependent list of cell (rodlet) labels. The list of cells
+#>        are added from left to right from the center of the control blade to the tip. 
+#>        The number of labels in the list must match the value of \texttt{ntube}.},
+#>     notes={}
+#>   }
   bladetype:
     <<: *dtlistnamed
     _content:
     _check:
-      - arraysize()==7
+      - arraysize()>=6
       - is_string(nth(0,()))
       - is_string(nth(1,()))
       - is_string(nth(2,()))
-      - nth(3,())>=0
-      - is_string(nth(4,()))
+      - is_string(nth(3,()))
+      - in_dictionary(nth(3,()),'vert','hor')
+      - nth(4,())>=0
       - is_string(nth(5,()))
-      - is_string(nth(6,()))
-      - in_dictionary(nth(6,()),'vert','hor')
 #>
 #> \subsection{Block INSERT}
 #> \label{sec:insertcards}

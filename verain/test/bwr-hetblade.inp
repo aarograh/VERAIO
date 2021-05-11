@@ -118,14 +118,15 @@
   mat ss304 8.0  ss
   mat abs   4.62 b4c  ! ** check for 70% theoretical density
 !
-  cell TUBE 0.17526 0.23876 / abs ss304 ! <---  same data as "cell" card, referenced by blade_type card, optional.
+  cell TUBE0 0.17526 0.23876 / abs ss304 mod
+  cell newcell1 0.17526 0.23876 / ss304 ss304 ss304
 
 !            label  span   th       rad    sheath    wing
   bladegeom  OEM 12.3825 0.79248 0.39624 0.14224  1.98501  !split from old "blade" card.  Added a blade_geom label to be referenced in blade_type
 
 !            label  geomlabel mat ntube celllabel fillermat hor/vert
-  bladetype  rodlets  OEM ss304 21   TUBE mod    vert !<--- split from old "blade" card. References the blade_geom label, and blade_cell label.
-  bladetype  follower OEM ss304 0    -    ss304  vert !<--- blade_cell label is "-", meaning null/not used.
+  bladetype rodlets OEM ss304 vert 21 21*TUBE0
+  bladetype follower OEM ss304 vert 21 21*newcell1
 
   axial OEM_BLADE 0.0 rodlets 363.22 follower 365.76 !<--- The axial control blade description, references the blade_type labels.
   axial OEM_HOMOG 0.0 rodlets 365.76

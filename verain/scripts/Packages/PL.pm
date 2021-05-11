@@ -1637,6 +1637,7 @@ sub cellsmaps{
 
     my %OPTIONS=('cellmapname'=>'CellMap_',
 		 'cellname'=>'Cell_',
+		 'usepincellmat'=>'false',
 		 'mapname'=>'rodmap');
     while ( my ($key, $value) = each %userparam )
     {$OPTIONS{$key}=$value;}
@@ -1724,7 +1725,7 @@ sub cellsmaps{
     }
 
     my ($cell_available, $CELL_TYPE, $CELL_TABLE, $CELL_mats, $CELL_radii)=
-        cellsearch($cell_path, \@MATS_RESERVED, $mat_search, $MATS_DB);
+        cellsearch($cell_path, \@MATS_RESERVED, $mat_search, $MATS_DB, $OPTIONS{'usepincellmat'});
 
     my ($iref, $jref, $a_ref, $cm_ref, $c_ref);
 
@@ -1895,7 +1896,7 @@ sub matsearch{
 }
 
 sub cellsearch{
-    my ($cell_path, $MATS_RESERVED, $matsearch, $MATS_DB)=@_;
+    my ($cell_path, $MATS_RESERVED, $matsearch, $MATS_DB, $usepincellmat)=@_;
     my %CELL_TYPES_POSSIBLE=( 'large4' => 1 );
 
     # create hash of all cell ids and their values
@@ -1937,7 +1938,22 @@ sub cellsearch{
 		@part3=after  {$_ eq '/'} @part2;
 		@part2=before {$_ eq '/'} @part2;
 	    }
-	    die "cellmaps: unequal number of entries for radii and materials in cell $_ @a\n" if (@part1 != @part2);
+      #Adding the option to include the outer pin cell material for control blade tube cells.
+      if($usepincellmat eq "true"){
+        #Making the additional outer material optional, add 'mod' if nothing is present.
+        if (@part1 == @part2){
+          push @part2, 'mod';
+        }
+        #If the sizes don't include the optional mod, throw an error since the sizes are wrong.
+        elsif (@part1+1 != @part2){
+          die "cellmaps: unequal number of entries for radii and materials in cell $_ @a, must be equal or have one more material than radii.\n"
+        }
+      }
+      #Normal comparison of arrays, omitting the outer material.
+      else{
+        die "cellmaps: unequal number of entries for radii and materials in cell $_ @a\n" if (@part1 != @part2);
+      }
+
 	    $CELL_radii{$_}=\@part1;
 	    my @cmats=@part2;
 
@@ -2063,6 +2079,7 @@ sub blademaps{
     my %OPTIONS=('cellmapname'=>'BladeType_',
                  'cellgeomname' => 'BladeGeom_',
 		 'cellname'=>'BladeCell_',
+		 'usepincellmat'=>'true',
 		 'mapname'=>'bladetype');
     while ( my ($key, $value) = each %userparam )
     {$OPTIONS{$key}=$value;}
@@ -2136,9 +2153,22 @@ sub blademaps{
         $BLADEMAP_GEOM{$_}  = $BLADEMAP_CONTENT{$_}->[0];
 
         push @a, $BLADEMAP_CONTENT{$_}->[0];
-        unless( $BLADEMAP_CONTENT{$_}->[3] eq '-' ){
-            push @b, $BLADEMAP_CONTENT{$_}->[3];
+        #Loop over size ntubes, get all bladecell labels and push them to @b
+        #The unique entries in @b will be done later.
+        $k=@{ $BLADEMAP_CONTENT{$_} };
+        print  "  [k]: $k-4 $BLADEMAP_CONTENT{$_}->[3]\n" if get_verbose();
+        if($k-4 == $BLADEMAP_CONTENT{$_}->[3]){
+          $i=4;
+          do{
+            push @b, $BLADEMAP_CONTENT{$_}->[$i];
+            $i+=1
+          }while($i < $k);
         }
+        else{
+          die   "blademaps: number of tubes does not equal the number of cell labels in $OPTIONS{cellmapname}$j\n";
+        }
+	print  "  [3]: $BLADEMAP_CONTENT{$_}->[3]\n" if get_verbose();
+	print  "  BLADECELLS (\@b): [@b]\n" if get_verbose();
 	print  "  BLADEMAP_DEFS{$_}: $BLADEMAP_DEFS{$_}\n" if get_verbose();
     }
     @BLADEMAP_GEOMS=unique(@a);
@@ -2161,7 +2191,7 @@ sub blademaps{
     }
 
     my ($cell_available, $CELL_TYPE, $CELL_TABLE, $CELL_mats, $CELL_radii)=
-        cellsearch($cell_path, \@MATS_RESERVED, $mat_search, $MATS_DB);
+        cellsearch($cell_path, \@MATS_RESERVED, $mat_search, $MATS_DB, $OPTIONS{'usepincellmat'});
 
     # see if we have all cells needed
     my @cell_common=intersection(\@BLADEMAP_CELLS,$cell_available);
@@ -2183,10 +2213,23 @@ sub blademaps{
 
 	&key_on_parameter($iref,'bladegeomlabel','string',$BLADEMAP_CONTENT{$j}->[0]);
 	&key_on_parameter($iref,'blademat','string',$BLADEMAP_CONTENT{$j}->[1]);
-	&key_on_parameter($iref,'ntube','int',$BLADEMAP_CONTENT{$j}->[2]);
-	&key_on_parameter($iref,'tubecell','string',$BLADEMAP_CONTENT{$j}->[3]);
-	&key_on_parameter($iref,'tubefillermat','string',$BLADEMAP_CONTENT{$j}->[4]);
-	&key_on_parameter($iref,'tubeorient','string',$BLADEMAP_CONTENT{$j}->[5]);
+	&key_on_parameter($iref,'tubeorient','string',$BLADEMAP_CONTENT{$j}->[2]);
+	&key_on_parameter($iref,'ntube','int',$BLADEMAP_CONTENT{$j}->[3]);
+  #&key_on_parameter($iref,'tubecell','string',$BLADEMAP_CONTENT{$j}->[4]);
+  #Parse the remaining entries, 0-4 are fixed.
+  $k=@{ $BLADEMAP_CONTENT{$j} };
+  if($k-4 == $BLADEMAP_CONTENT{$j}->[3]){
+    $i=4;
+    @a=();
+    do{
+      push @a, $BLADEMAP_CONTENT{$j}->[$i];
+      $i+=1
+    }while($i < $k);
+    &key_on_array($iref,'tubecells','string',@a);
+  }
+  else{
+    die   "blademaps: number of tubes does not equal the number of cell labels in $OPTIONS{cellmapname}$j\n";
+  }
     }
 
     # Create Bladegeoms list in Control_X

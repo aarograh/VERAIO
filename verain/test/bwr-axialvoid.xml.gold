@@ -246,9 +246,16 @@
   <ParameterList name="CONTROLS">
     <ParameterList name="Control_OEM_BLADE">
       <ParameterList name="BladeCells">
-        <ParameterList name="BladeCell_TUBE">
-          <Parameter name="label" type="string" value="TUBE"/>
-          <Parameter name="mats" type="Array(string)" value="{abs,ss304}"/>
+        <ParameterList name="BladeCell_TUBE0">
+          <Parameter name="label" type="string" value="TUBE0"/>
+          <Parameter name="mats" type="Array(string)" value="{abs,ss304,mod}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.17526,0.23876}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="BladeCell_newcell1">
+          <Parameter name="label" type="string" value="newcell1"/>
+          <Parameter name="mats" type="Array(string)" value="{ss304,ss304,ss304}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.17526,0.23876}"/>
           <Parameter name="type" type="string" value="other"/>
@@ -269,9 +276,8 @@
           <Parameter name="bladegeomlabel" type="string" value="OEM"/>
           <Parameter name="blademat" type="string" value="ss304"/>
           <Parameter name="label" type="string" value="follower"/>
-          <Parameter name="ntube" type="int" value="0"/>
-          <Parameter name="tubecell" type="string" value="-"/>
-          <Parameter name="tubefillermat" type="string" value="ss304"/>
+          <Parameter name="ntube" type="int" value="21"/>
+          <Parameter name="tubecells" type="Array(string)" value="{newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1}"/>
           <Parameter name="tubeorient" type="string" value="vert"/>
         </ParameterList>
         <ParameterList name="BladeType_rodlets">
@@ -279,8 +285,7 @@
           <Parameter name="blademat" type="string" value="ss304"/>
           <Parameter name="label" type="string" value="rodlets"/>
           <Parameter name="ntube" type="int" value="21"/>
-          <Parameter name="tubecell" type="string" value="TUBE"/>
-          <Parameter name="tubefillermat" type="string" value="mod"/>
+          <Parameter name="tubecells" type="Array(string)" value="{TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0}"/>
           <Parameter name="tubeorient" type="string" value="vert"/>
         </ParameterList>
       </ParameterList>
@@ -308,9 +313,9 @@
     </ParameterList>
     <ParameterList name="Control_OEM_HOMOG">
       <ParameterList name="BladeCells">
-        <ParameterList name="BladeCell_TUBE">
-          <Parameter name="label" type="string" value="TUBE"/>
-          <Parameter name="mats" type="Array(string)" value="{abs,ss304}"/>
+        <ParameterList name="BladeCell_TUBE0">
+          <Parameter name="label" type="string" value="TUBE0"/>
+          <Parameter name="mats" type="Array(string)" value="{abs,ss304,mod}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.17526,0.23876}"/>
           <Parameter name="type" type="string" value="other"/>
@@ -332,8 +337,7 @@
           <Parameter name="blademat" type="string" value="ss304"/>
           <Parameter name="label" type="string" value="rodlets"/>
           <Parameter name="ntube" type="int" value="21"/>
-          <Parameter name="tubecell" type="string" value="TUBE"/>
-          <Parameter name="tubefillermat" type="string" value="mod"/>
+          <Parameter name="tubecells" type="Array(string)" value="{TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0}"/>
           <Parameter name="tubeorient" type="string" value="vert"/>
         </ParameterList>
       </ParameterList>
