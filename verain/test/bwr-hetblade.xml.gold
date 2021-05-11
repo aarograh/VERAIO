@@ -233,10 +233,8 @@
       <Parameter name="axial_elevations" type="Array(double)" value="{0.0,1.0}"/>
       <Parameter name="axial_labels" type="Array(string)" value="{LAT}"/>
       <Parameter name="chanmat" type="string" value="zr4"/>
-      <Parameter name="chanrad" type="double" value="0.9652"/>
-      <Parameter name="chanth" type="double" value="0.2032"/>
-      <Parameter name="cornerlen" type="double" value="0.0"/>
-      <Parameter name="cornerth" type="double" value="0.0"/>
+      <Parameter name="cornerrad" type="double" value="0.9652"/>
+      <Parameter name="cornerth" type="double" value="0.2032"/>
       <Parameter name="gapn" type="double" value=".47498"/>
       <Parameter name="gapw" type="double" value="0.9525"/>
       <Parameter name="label" type="string" value="ASSY"/>
@@ -247,9 +245,16 @@
   <ParameterList name="CONTROLS">
     <ParameterList name="Control_OEM_BLADE">
       <ParameterList name="BladeCells">
-        <ParameterList name="BladeCell_TUBE">
-          <Parameter name="label" type="string" value="TUBE"/>
-          <Parameter name="mats" type="Array(string)" value="{abs,ss304}"/>
+        <ParameterList name="BladeCell_TUBE0">
+          <Parameter name="label" type="string" value="TUBE0"/>
+          <Parameter name="mats" type="Array(string)" value="{abs,ss304,mod}"/>
+          <Parameter name="num_rings" type="int" value="2"/>
+          <Parameter name="radii" type="Array(double)" value="{0.17526,0.23876}"/>
+          <Parameter name="type" type="string" value="other"/>
+        </ParameterList>
+        <ParameterList name="BladeCell_newcell1">
+          <Parameter name="label" type="string" value="newcell1"/>
+          <Parameter name="mats" type="Array(string)" value="{ss304,ss304,ss304}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.17526,0.23876}"/>
           <Parameter name="type" type="string" value="other"/>
@@ -270,9 +275,8 @@
           <Parameter name="bladegeomlabel" type="string" value="OEM"/>
           <Parameter name="blademat" type="string" value="ss304"/>
           <Parameter name="label" type="string" value="follower"/>
-          <Parameter name="ntube" type="int" value="0"/>
-          <Parameter name="tubecell" type="string" value="-"/>
-          <Parameter name="tubefillermat" type="string" value="ss304"/>
+          <Parameter name="ntube" type="int" value="21"/>
+          <Parameter name="tubecells" type="Array(string)" value="{newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1,newcell1}"/>
           <Parameter name="tubeorient" type="string" value="vert"/>
         </ParameterList>
         <ParameterList name="BladeType_rodlets">
@@ -280,8 +284,7 @@
           <Parameter name="blademat" type="string" value="ss304"/>
           <Parameter name="label" type="string" value="rodlets"/>
           <Parameter name="ntube" type="int" value="21"/>
-          <Parameter name="tubecell" type="string" value="TUBE"/>
-          <Parameter name="tubefillermat" type="string" value="mod"/>
+          <Parameter name="tubecells" type="Array(string)" value="{TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0}"/>
           <Parameter name="tubeorient" type="string" value="vert"/>
         </ParameterList>
       </ParameterList>
@@ -309,9 +312,9 @@
     </ParameterList>
     <ParameterList name="Control_OEM_HOMOG">
       <ParameterList name="BladeCells">
-        <ParameterList name="BladeCell_TUBE">
-          <Parameter name="label" type="string" value="TUBE"/>
-          <Parameter name="mats" type="Array(string)" value="{abs,ss304}"/>
+        <ParameterList name="BladeCell_TUBE0">
+          <Parameter name="label" type="string" value="TUBE0"/>
+          <Parameter name="mats" type="Array(string)" value="{abs,ss304,mod}"/>
           <Parameter name="num_rings" type="int" value="2"/>
           <Parameter name="radii" type="Array(double)" value="{0.17526,0.23876}"/>
           <Parameter name="type" type="string" value="other"/>
@@ -333,8 +336,7 @@
           <Parameter name="blademat" type="string" value="ss304"/>
           <Parameter name="label" type="string" value="rodlets"/>
           <Parameter name="ntube" type="int" value="21"/>
-          <Parameter name="tubecell" type="string" value="TUBE"/>
-          <Parameter name="tubefillermat" type="string" value="mod"/>
+          <Parameter name="tubecells" type="Array(string)" value="{TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0,TUBE0}"/>
           <Parameter name="tubeorient" type="string" value="vert"/>
         </ParameterList>
       </ParameterList>

@@ -174,14 +174,14 @@
   mat ss304  7.41479 ss
   mat bwrb4c 1.764   b4c  ! ** check for 70% theoretical density
 
-  cell TUBE 0.17526 0.23876 / bwrb4c ss304
-  cell SS   0.17526 0.23876 / ss304  ss304
+  cell TUBE0 0.17526 0.23876 / bwrb4c ss304 mod
+  cell SS1 0.17526 0.23876 / ss304 ss304 ss304
 
 !                  span    thick  tipRad  thicksheath winglen
   bladegeom  OEM  12.3825 0.79248 0.39624   0.14224   1.98501
 
-  bladetype  rodlets  OEM ss304 21   TUBE mod   vert
-  bladetype  follower OEM ss304 21   SS   ss304 vert
+  bladetype rodlets OEM ss304 vert 21 21*TUBE0
+  bladetype follower OEM ss304 vert 21 21*SS1
   axial o   0.0 rodlets 1.0
   axial m   0.0 rodlets 1.0
   axial w   0.0 rodlets 1.0
