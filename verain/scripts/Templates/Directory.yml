@@ -17496,6 +17496,225 @@ MAMBA:
 #> \label{sec:bisoncards}
 BISON:
 #>
+#>   {\bf fuel\_grain\_radius\_initial} fuel\_grain\_radius\_initial
+#>   \VERAInputTable{
+#>     name={fuel\_grain\_radius\_initial},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={meters},
+#>     unitsother={},
+#>     valuedefault={$2.5\times 10^{-6}$},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The initial grain radius of the fuel.},
+#>     notes={Defines the initial\_condition parameter for the grain\_radius object in the BISON AuxVariables block.}
+#>   }
+  fuel_grain_radius_initial:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf mechanical\_contact\_penalty} mechanical\_contact\_penalty
+#>   \VERAInputTable{
+#>     name={mechanical\_contact\_penalty},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={$1.0\times 10^{7}$},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={The penalty applied within the fuel-cladding mechanical contact solver.},
+#>     notes={Defines the penalty parameter for the pellet\_clad\_mechanical object in the BISON Contact block.}
+#>   }
+  mechanical_contact_penalty:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+#>
+#>   {\bf thermal\_contact\_tol} thermal\_contact\_tol
+#>   \VERAInputTable{
+#>     name={thermal\_contact\_tol},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={meters},
+#>     unitsother={},
+#>     valuedefault={$1.0\times 10^{-6}$},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={The tangential distance to extend the edges of contact surfaces within the fuel-cladding thermal contact solver.},
+#>     notes={Defines the tangential\_tolerance parameter for the thermal\_contact object in the BISON ThermalContact block.}
+#>   }
+  thermal_contact_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+#>
+#>   {\bf fuel\_densification} fuel\_densification
+#>   \VERAInputTable{
+#>     name={fuel\_densification},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.005},
+#>     valuesapplicable={$\ge 0$, $\le 1$},
+#>     limitations={},
+#>     description={The fuel densification that will occur given as a fraction of its theoretical density.},
+#>     notes={Defines the total\_densification parameter for the fuel\_swelling object in the BISON Materials block.}
+#>   }
+  fuel_densification:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+      - is_leq() 1
+#>
+#>   {\bf temp\_max\_increment} temp\_max\_increment
+#>   \VERAInputTable{
+#>     name={temp\_max\_increment},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The maximum Newton increment when solving for the temperature of the fuel and cladding.},
+#>     notes={Defines the max\_increment parameter for the limitT object in the BISON Dampers block.}
+#>   }
+  temp_max_increment:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf linear\_tol} linear\_tol
+#>   \VERAInputTable{
+#>     name={linear\_tol},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={$1.0\times 10^{-5}$},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The convergence tolerance applied to linear iterations.},
+#>     notes={Defines l\_tol in the BISON Executioner block.}
+#>   }
+  linear_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf nonlinear\_max\_its} nonlinear\_max\_its
+#>   \VERAInputTable{
+#>     name={nonlinear\_max\_its},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={25},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The maximum number of nonlinear iterations.},
+#>     notes={Defines nl\_max\_its in the BISON Executioner block.}
+#>   }
+  nonlinear_max_its:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf nonlinear\_rel\_tol} nonlinear\_rel\_tol
+#>   \VERAInputTable{
+#>     name={nonlinear\_rel\_tol},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={$1.0\times 10^{-3}$},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The relative convergence tolerance applied to nonlinear iterations.},
+#>     notes={Defines nl\_rel\_tol in the BISON Executioner block.}
+#>   }
+  nonlinear_rel_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf nonlinear\_abs\_tol} nonlinear\_abs\_tol
+#>   \VERAInputTable{
+#>     name={nonlinear\_abs\_tol},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={$1.0\times 10^{-10}$},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The absolute convergence tolerance applied to nonlinear iterations.},
+#>     notes={Defines nl\_abs\_tol in the BISON Executioner block.}
+#>   }
+  nonlinear_abs_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf lhr\_axial\_peaking\_data\_file} lhr\_axial\_peaking\_data\_file
+#>   \VERAInputTable{
+#>     name={lhr\_axial\_peaking\_data\_file},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The external axial peaking factors data file to be used for the BISON simulation.},
+#>     notes={Defines the data\_file parameter for the axial\_peaking\_factors object in the BISON Functions block. Typically, the VERA power file is used, but this allows users to input a file if desired.}
+#>   }
+  lhr_axial_peaking_data_file:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+#>
+#>   {\bf bc\_temp\_data\_file} bc\_temp\_data\_file
+#>   \VERAInputTable{
+#>     name={bc\_temp\_data\_file},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The external boundary condition temperature data file to be used for the BISON simulation.},
+#>     notes={Defines the data\_file parameter for the bc\_temperature object in the BISON Functions block. Typically, VERA temperatures are used, but this allows users to input a file if desired.}
+#>   }
+  bc_temp_data_file:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+#>
 #>   {\bf bcs\_plenumpressure\_plenumpressure\_initial\_pressure} rod\_initial\_pressure
 #>   \VERAInputTable{
 #>     name={rod\_initial\_pressure},
@@ -17768,6 +17987,25 @@ BISON:
 #>     notes={Typically, the internal mesh generator is used, but this allows users to input a file if desired.}
 #>   }
   mesh_file:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+#>
+#>   {\bf avg\_lhr\_data\_file} avg\_lhr\_data\_file
+#>   \VERAInputTable{
+#>     name={avg\_lhr\_data\_file},
+#>     type={Fixed Character String.},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The external linear heat rate profile data file to be used for the BISON simulation.},
+#>     notes={Defines the data\_file parameter for the linear\_heat\_rate\_profile object in the BISON Functions block. Typically, the VERA power file is used, but this allows users to input a file if desired.}
+#>   }
+  avg_lhr_data_file:
     <<: *dtstring
     _content:
     _check:

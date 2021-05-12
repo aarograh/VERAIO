@@ -4,6 +4,83 @@ BISON:
     - setdb MAIN_DB
   _content:
 
+    fuel_grain_radius_initial:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$fuel_grain_radius_initial
+      _content:
+
+    mechanical_contact_penalty:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$mechanical_contact_penalty
+      _content:
+
+    thermal_contact_tol:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$thermal_contact_tol
+      _content:
+
+    fuel_densification:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$fuel_densification
+      _content:
+
+    temp_max_increment:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$temp_max_increment
+      _content:
+
+    linear_tol:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$linear_tol
+      _content:
+
+    nonlinear_max_its:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy BISON/$nonlinear_max_its
+      _content:
+
+    nonlinear_rel_tol:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$nonlinear_rel_tol
+      _content:
+
+    nonlinear_abs_tol:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy BISON/$nonlinear_abs_tol
+      _content:
+
+    lhr_axial_peaking_data_file:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$lhr_axial_peaking_data_file
+      _content:
+
+    bc_temp_data_file:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$bc_temp_data_file
+      _content:
+
     bcs_plenumpressure_plenumpressure_initial_pressure:
       _pltype: parameter
       _type: double
@@ -100,6 +177,13 @@ BISON:
       _type: string
       _do:
         - copy BISON/$mesh_file
+      _content:
+
+    avg_lhr_data_file:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy BISON/$avg_lhr_data_file
       _content:
 
     mesh_clad_bot_gap_height:

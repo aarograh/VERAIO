@@ -192,6 +192,18 @@
   non_fuel_pin_input_file_template = guide_tube.moose.i.template
   mesh_type smeared_pellet
   output_average_axial_values = true
+  fuel_grain_radius_initial = 1e-6
+  mechanical_contact_penalty = 1e-6
+  thermal_contact_tol = 1e-6
+  fuel_densification = 0.05
+  temp_max_increment = 5.0
+  linear_tol = 1e-3
+  nonlinear_max_its = 20
+  nonlinear_rel_tol = 1e-6
+  nonlinear_abs_tol = 1e-6
+  lhr_axial_peaking_data_file = test.csv
+  bc_temp_data_file = test.csv
+  avg_lhr_data_file = test.csv
 
 [COUPLING]
   epsk        5.0  ! pcm
