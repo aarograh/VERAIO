@@ -13868,28 +13868,6 @@ MPACT:
       - is_word()
       - in_dictionary() assem node chan
 #>
-#>   {\bf sth\_tabletype} sth\_tabletype
-#>   \VERAInputTable{
-#>     name={sth\_tabletype},
-#>     type={Character String},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={ctf},
-#>     valuesapplicable={simplified},
-#>     limitations={It is ignored if feedback is off or if coupling with
-#>        COBRA-TF is being used.},
-#>     description={This card is used to set the table type for
-#>        internal TH calculations.},
-#>     notes={}
-#>   }
-  sth_tabletype:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() ctf simplified
-#>
 #>   {\bf sth\_avgpin} sth\_avgpin
 #>   \VERAInputTable{
 #>     name={sth\_avgpin},
