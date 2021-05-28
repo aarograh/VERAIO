@@ -14319,6 +14319,27 @@ MPACT:
       - is_word()
       - in_dictionary() energy space both space+energy
 #>
+#>   {\bf max\_v\_cycles} max\_v\_cycles
+#>   \VERAInputTable{
+#>     name={max\_v\_cycles},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={Any positive integer},
+#>     limitations={},
+#>     description={The maximum number of multilevel CMFD V-cycles to be performed on each outer iteration.},
+#>     notes={Only active when \texttt{mlcmfd} is specified for the \texttt{cmfd} card.}
+#>   }
+#
+  max_v_cycles:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
 #>   {\bf prolongation} prolongation
 #>   \VERAInputTable{
 #>     name={prolongation},

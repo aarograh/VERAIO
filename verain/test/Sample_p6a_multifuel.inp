@@ -238,6 +238,7 @@
 [MPACT]
   cmfd mlcmfd
   multilevel space+energy
+  max_v_cycles 3
   num_space      29
   num_angle      1
   num_threads    1
