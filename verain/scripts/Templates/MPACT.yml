@@ -988,6 +988,13 @@ MPACT:
             - copy MPACT/$multilevel
           _content:
 
+        max_v_cycles:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$max_v_cycles
+          _content:
+
         prolongation:
           _pltype: parameter
           _type: string

@@ -361,6 +361,7 @@
   <ParameterList name="MPACT">
     <ParameterList name="cmfd">
       <Parameter name="cmfd" type="string" value="mlcmfd"/>
+      <Parameter name="max_v_cycles" type="int" value="3"/>
       <Parameter name="multilevel" type="string" value="space+energy"/>
     </ParameterList>
     <ParameterList name="parallel_env">
