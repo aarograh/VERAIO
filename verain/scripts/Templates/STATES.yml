@@ -502,6 +502,13 @@ STATES:
             - copy %STATE/$(_loop)/@restart_write:1
           _content:
 
+        restart_write_isotope_set:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %STATE/$(_loop)/$restart_isotope_set
+          _content:
+
         restart_read_file:
           _pltype: parameter
           _type: string
