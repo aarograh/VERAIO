@@ -1585,6 +1585,26 @@ STATE:
       - fall(sub{is_word(shift)},())
       - arraysize()==2
 #>
+#>   {\bf restart\_isotope\_set} restart\_isotope\_set\_option
+#>   \VERAInputTable{
+#>     name={restart\_isotope\_set\_option},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={transport},
+#>     valuesapplicable={depletion},
+#>     limitations={},
+#>     description={This option selects the isotope set to be edited to the restart file.},
+#>     notes={}
+#>   }
+  restart_isotope_set:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() transport depletion
+#>
 #>   {\bf shuffle\_label} shuffle\_label
 #>   \VERAInputTable{
 #>     name={shuffle\_label},
