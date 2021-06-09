@@ -15788,7 +15788,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() nem sanm nem-mg sp1 sp3 sp5 hysp3 fhp3 p1 p2 p3 hyp3 sn-0 sn-1 sn-2 sn-3 p3-mom none
+      - in_dictionary() nem sanm nem-mg sp1 sp3 sp5 hysp3 fhp3 p1 p3 p5 hyp3 sn-0 sn-1 sn-2 sn-3 p3-mom none
 #>
 #>   {\bf gamma\_nodal\_method} gamma\_nodal\_method
 #>   \VERAInputTable{
