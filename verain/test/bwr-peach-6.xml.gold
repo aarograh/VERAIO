@@ -149,6 +149,7 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="COBRATF">
+    <Parameter name="bwr_dp_tol" type="double" value="0.2"/>
     <Parameter name="property_evaluations" type="string" value="asme1968"/>
   </ParameterList>
   <ParameterList name="MPACT">

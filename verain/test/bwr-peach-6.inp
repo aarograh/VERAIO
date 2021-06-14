@@ -1,3 +1,8 @@
+!> @beginreq
+!> - VERAIO shall support setting the tolerance for the bwr pressure balance iteration loop
+!>    that is performed by CTF
+!> @endreq
+
 [CASEID]
   title 'BWR Peach Bottom 2 Design 6 8x8'
 
@@ -106,3 +111,4 @@
 
 [COBRATF]
   property_evaluations asme1968
+  bwr_dp_tol 0.2 ! psi
