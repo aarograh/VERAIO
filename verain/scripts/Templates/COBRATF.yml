@@ -73,6 +73,13 @@ COBRATF:
         - copy COBRATF/$dhfrac
       _content:
 
+    bwr_dp_tol:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$bwr_dp_tol
+      _content:
+
     crud_evap_coeff:
       _pltype: parameter
       _type: double

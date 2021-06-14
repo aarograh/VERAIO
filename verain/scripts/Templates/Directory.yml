@@ -7930,6 +7930,30 @@ COBRATF:
       - is_float()
       - is_geq() 0
 #>
+#>   {\bf bwr\_dp\_tol} bwr\_dp\_tol
+#>   \VERAInputTable{
+#>     name={bwr\_dp\_tol},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={psi},
+#>     unitsother={},
+#>     valuedefault={0.1},
+#>     valuesapplicable={$> 0.0$},
+#>     limitations={},
+#>     description={Solver tolerance for the pressure balance iteration loop performed in CTF for BWR
+#>        models.  The pressure drop in all bundles must be the same to within this tolerance for the
+#>        pressure loop to exit.  The pressure balance loop is used for adjusting inlet flow rates to
+#>        balance the pressure drops in all assemblies in the core.},
+#>     notes={}
+#>   }
+  bwr_dp_tol:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+
+#>
 #>   {\bf crud\_evap\_coeff} crud\_evap\_coeff
 #>   \VERAInputTable{
 #>     name={crud\_evap\_coeff},
