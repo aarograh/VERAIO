@@ -160,6 +160,7 @@ my $FOLLOW;
 	"debug"     => \$DEBUG,
 	"version"   => \$VERSION,
 	"help"      => \$HELP,
+	"schema"    => \$SCHEMA_PRINT,
 	"notrim"    => \$NOTRIM,
 	"init"      => \$INIT,
 	"xinit"     => \$XINIT,
@@ -167,6 +168,7 @@ my $FOLLOW;
 #	"update=s"  => \$_UPDATE         # hidden updates
 	);
 }
+
 (&help_print() && exit) if $HELP;;
 if($VERSION){
     print STDERR "@VERSION\n";
@@ -186,18 +188,19 @@ my $XSLT_HEADER="<?xml-stylesheet version=\"1.0\" type=\"text/xsl\" href=\"$XSLT
 
 my @ARGS=@ARGV;
 my $filebase;
-if(@ARGS == 1){
+
+if(@ARGS == 1 && !$SCHEMA_PRINT){
     my($filename, $dirs, $suffix) = fileparse($ARGS[0],qr/\.[^.]*/);
     $ARGS[1]=$dirs.$filename.".xml";
     $filebase=$dirs.$filename;
 }
-else{
+elsif(!$SCHEMA_PRINT){
     my($filename, $dirs, $suffix) = fileparse($ARGS[1],qr/\.[^.]*/);
     $filebase=$dirs.$filename;
 }
 
 
-if(@ARGS < 2){
+if(@ARGS < 2 &&  !$SCHEMA_PRINT){
     die "Usage: $pgnam [options ...] reactor_input_file output_xml_file
 options:
   --xml=(on|off)
@@ -228,20 +231,27 @@ foreach $iblock (@BLOCKS){
     $SCHEMA_PL{$iblock} = "${directory}Templates/$iblock.yml";
 }
 
+my ($ifile, $ofile);
 
-my ($ifile,$ofile)=@ARGS;
+if(!$SCHEMA_PRINT)
+{
+    ($ifile,$ofile)=@ARGS;
 
-die "$pgnam: input file $ifile does not exist or not readable.\n"
-    unless (-e $ifile && -r $ifile);
-if(-e $ofile){
-    die "$pgnam: files $ifile and $ofile files are the same\n"
-	if filesame($ifile, $ofile);
+    die "$pgnam: input file $ifile does not exist or not readable.\n"
+        unless (-e $ifile && -r $ifile );
+    if(-e $ofile && !$SCHEMA_PRINT){
+        die "$pgnam: files $ifile and $ofile files are the same\n"
+	    if filesame($ifile, $ofile);
+    }
 }
 
-# Follow file paths for include commands
-$fpath = abs_path($ifile);
-($ifile, $FOLLOW) = fileparse($fpath);
-$FOLLOW = canonpath( $FOLLOW );
+if(!$SCHEMA_PRINT)
+{
+    # Follow file paths for include commands
+    $fpath = abs_path($ifile);
+    ($ifile, $FOLLOW) = fileparse($fpath);
+    $FOLLOW = canonpath( $FOLLOW );
+}
 
 #
 # Initiate configuration template for data structures
@@ -258,6 +268,10 @@ unless ( $INPUT_DB ){
 # Need to fix in YAML package
     mergekeys_loop( $INPUT_DB );
 }
+
+(&schema_print() && exit) if $SCHEMA_PRINT;;
+
+
 #
 # Initiate main directory tree for storage of input data
 #
@@ -354,6 +368,78 @@ close $OFILE;
 my $VERA2OMN = "${directory}Init/vera2omn.py";
 system ("python", $VERA2OMN, $filebase, $directory) == 0 or die "VERA2OMN failed\n";
 
+sub recursive_json_print {
+
+    ### unpack multiple args with list assignment:
+    my $hash = shift;
+    my $depth = shift;
+    # Calculate the whitespace prefix/padding
+    my $ws_pad = " "x($depth*2);
+    # track the key index for comma emission
+    my $key_count = scalar(keys %$hash);
+    my $k=0;
+    my $delimiter = ',';
+	### Loop through all the values in the hash ref.
+    for my $key (keys %$hash) {
+        my $value = $hash->{$key};
+        $k = $k + 1;
+        if ($k == $key_count){  $delimiter = ''; }
+        ### YAML produces PERL REFS for HASH and ARRAY 
+        if (ref $value) {
+            if ( ref $value eq 'HASH') {
+                print $ws_pad, '"',$key,"\" : {\n";
+                recursive_json_print($value, $depth+1);
+                print $ws_pad,"}$delimiter\n"
+            }
+            elsif ( ref $value eq 'ARRAY') {
+                print $ws_pad, '"',$key,"\" : [\n";
+                # track the key index for comma emission
+                my $value_count = scalar(@{$value});
+                my $v = 0;
+                $vdelimiter = ',';
+                foreach (@{$value}){
+                    $v = $v + 1;
+                    if ( $v == $value_count ) { $vdelimiter = ''; } 
+                    $_ =~ s/\"/\\\"/g;
+                    print $ws_pad," "x($depth+1),"\"$_\"$vdelimiter\n";
+                }
+                print $ws_pad, "]$delimiter\n"
+            }
+        }
+        ### if not a ref, it must be a key:value pair.
+        elsif (defined $value){
+            $value =~ s/\"/\\\"/g;
+            print $ws_pad,"\"$key\" : \"",$value,"\"$delimiter\n";
+        }
+        else
+		{
+            print $ws_pad,"\"$key\" : null$delimiter\n"
+		}
+    }
+}
+
+sub schema_print{
+	print "{\n";
+    print "\"_directory.yml\":{\n";
+    recursive_json_print($INPUT_DB,1);
+    print "},\n";
+    print "\"_blocks\":{\n";
+    my $key_count = scalar(@BLOCKS);
+    my $k=0;
+    my $delimiter = ',';
+    foreach $iblock (@BLOCKS){
+        # Initiate each block
+        unless( $SCH_PL{$iblock} ){
+        $k = $k + 1;
+        if ($k == $key_count){  $delimiter = ''; }
+        ($SCH_PL{$iblock}) = YAML::LoadFile( $SCHEMA_PL{$iblock} );
+        recursive_json_print($SCH_PL{$iblock},1);
+        print $delimiter;
+        }
+    }
+    print "}\n"; # end of blocks
+    print "}\n";
+}
 #
 # User manual of sorts, will add pod
 #
@@ -389,5 +475,6 @@ Program switches:
 --debug   Create debug files for finding the errors in the converter
           program. Does not help much in tracing invalid input.
 
+--schema Write the VERAIn input schematic to STDOUT formatted as JSON.  
 EOF
 }
