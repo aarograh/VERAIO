@@ -12122,7 +12122,7 @@ MPACT:
 #>     name={pin\_cell\_mod\_mesh},
 #>     type={Array of mixed types int and string, Length = 2},
 #>     need={Optional},
-#>     unitsdefault={cm},
+#>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={\texttt{num\_rings} = 1, and \texttt{pin\_cell\_type} = fuel},
 #>     valuesapplicable={                                                                %
@@ -12134,15 +12134,19 @@ MPACT:
 #>       grid spacers set the \texttt{grid\_treatment} option to \texttt{homogenize}.},
 #>     description={This card is used to specify the MOC flat source region mesh         %
 #>       in moderator outside the defined cylindrical geometry in specified pin cells.   %
-#>       The radius of the outermost moderator ring is fixed at 0.95*sqrt(2)/2*pitch %
-#>       This gives more refined meshing in the pin cell corners which improves accuracy %
-#>       of calculations at room temperature},
+#>       The radius of the outermost moderator ring is fixed at 
+#>       \texttt{0.95*sqrt(2)/2*pitch}. This gives more refined meshing in the pin cell 
+#>       corners which improves accuracy of calculations at room temperature.},
 #>     notes={When this card is not specified, the following value is used for the 1     %
 #>       default moderator radius:                                                       %
-#>       \texttt{max\_radii} = \texttt{0.75*(pitch*0.5 - r\_last)+r\_last}\ ,            %
+#>       \texttt{max\_radii} = \texttt{0.75*(pitch*0.5 - r\_last)+r\_last}.              %
 #>       When this card is specified, that value changes to the following:               %
-#>       \texttt{max\_radii} = \texttt{0.95*(0.5*pitch*sqrt(2))}\ ,                     %
-#>       which is equal to 95\% of the way from the pin cell center to the corner.}
+#>       \texttt{max\_radii} = \texttt{0.95*(0.5*pitch*sqrt(2))},                        %
+#>       which is equal to 95\% of the way from the pin cell center to the corner.
+#>       The default moderator radius is also applied to pin cells which do not match
+#>       the \texttt{pin\_cell\_type} when the card is used. So, for example, if
+#>       \texttt{pin\_cell\_type} is set to "nonfuel" then fuel pins would still use
+#>       the default moderator radius.}
 #>   }
   pin_cell_mod_mesh:
     <<: *dtlist
