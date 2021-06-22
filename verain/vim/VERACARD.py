@@ -116,6 +116,8 @@ class CARD:
 
       #Latex things we want to replace with something else
       self.manual[-1][entry]=self.manual[-1][entry].replace(r'\newline',r'\n')
+      self.manual[-1][entry]=self.manual[-1][entry].replace(r'\times ','*')
+      self.manual[-1][entry]=self.manual[-1][entry].replace(r'*10^','E')
       self.manual[-1][entry]=self.manual[-1][entry].replace('\item','*')
       self.manual[-1][entry]=self.manual[-1][entry].replace('\_','_')
       self.manual[-1][entry]=self.manual[-1][entry].replace('\'s ','s ')
