@@ -183,6 +183,7 @@
   res_up_scatter    false
 
 [SHIFT]
+  problem_name          dummy-test
   transport             ce
   Np                    1000
   num_cycles            10

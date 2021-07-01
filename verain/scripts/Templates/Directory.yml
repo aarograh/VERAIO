@@ -734,14 +734,14 @@ STATE:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={pin\_powers, pin\_exposures, core\_flux, pin\_fuel\_temp, 
-#>        pin\_isotopes\_Xe-135, pin\_mod\_dens (if PWR), pin\_mod\_temp (if PWR), 
+#>     valuedefault={pin\_powers, pin\_exposures, core\_flux, pin\_fuel\_temp,
+#>        pin\_isotopes\_Xe-135, pin\_mod\_dens (if PWR), pin\_mod\_temp (if PWR),
 #>        pin\_cool\_dens (if BWR), pin\_cool\_temp (if BWR), pin\_cool\_void (if BWR)},
-#>     valuesapplicable={none, pin\_isotopes\_<ZZ-AAA> (isotope "all"), 
+#>     valuesapplicable={none, pin\_isotopes\_<ZZ-AAA> (isotope "all"),
 #>        intrapin\_<mat\_type>\_isotopes\_<ZZ-AAA> (isotope "all"),
-#>        fsr\_isotopes\_<ZZ-AAA> (isotope "all"), point\_isotopes\_<ZZ-AAA> (isotope "all"), 
-#>        pin\_flux\_<GGG> ("fast" "thermal" "2g" 3-digit Group omit for all groups), 
-#>        fsr\_flux\_<GGG> ("fast" "thermal" "2g" 3-digit Group omit for all groups), 
+#>        fsr\_isotopes\_<ZZ-AAA> (isotope "all"), point\_isotopes\_<ZZ-AAA> (isotope "all"),
+#>        pin\_flux\_<GGG> ("fast" "thermal" "2g" 3-digit Group omit for all groups),
+#>        fsr\_flux\_<GGG> ("fast" "thermal" "2g" 3-digit Group omit for all groups),
 #>        point\_flux\_<GGG> ("fast" "thermal" "2g" 3-digit Group omit for all groups), core\_flux,
 #>        intrapin\_<mat\_type>\_<edit\_type> (mat\_type: fuel gap clad mod cool edit\_type: dens temp volume isotopes\_<ZZ-AAA>)
 #>        intrapin\_fluence, intrapin\_exposure, fsr\_delayed-chi, fsr\_dnpy},
@@ -6120,6 +6120,25 @@ SHIFT:
     _check:
       - is_word()
       - in_dictionary() cadis eigenvalue forward fwcadis
+#>
+#>   {\bf problem\_name} problem\_name
+#>   \VERAInputTable{
+#>     name={problem\_name},
+#>     type={string},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Base prefix name for all Shift-produced output files},
+#>     notes={}
+#>   }
+  problem_name:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_word()
 #>
 #>   {\bf mode} mode
 #>   \VERAInputTable{
@@ -12232,7 +12251,7 @@ MPACT:
 #>     valuedefault={None},
 #>     valuesapplicable={CHEBYSHEV-CHEBYSHEV (Product), CHEBYSHEV-GAUSS (Product),       %
 #>        CHEBYSHEV-BICKLEY (Product), CHEBYSHEV-YAMAMOTO (Product),                     %
-#>        QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)}, 
+#>        QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)},
 #>     limitations={},
 #>     description={This card is used to specify the name of the angular                 %
 #>       quadrature to use for determining the angles at which the rays are              %
@@ -12268,7 +12287,7 @@ MPACT:
 #>     valuedefault={None},
 #>     valuesapplicable={CHEBYSHEV-CHEBYSHEV (Product), CHEBYSHEV-GAUSS (Product),       %
 #>        CHEBYSHEV-BICKLEY (Product), CHEBYSHEV-YAMAMOTO (Product),                     %
-#>        QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)}, 
+#>        QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)},
 #>     limitations={},
 #>     description={This card is used to specify the name of the angular                 %
 #>       quadrature to use for determining the angles at which the rays are              %
@@ -12304,7 +12323,7 @@ MPACT:
 #>     valuedefault={None},
 #>     valuesapplicable={CHEBYSHEV-CHEBYSHEV (Product), CHEBYSHEV-GAUSS (Product),       %
 #>        CHEBYSHEV-BICKLEY (Product), CHEBYSHEV-YAMAMOTO (Product),                     %
-#>        QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)}, 
+#>        QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)},
 #>     limitations={},
 #>     description={This card is used to specify the name of the angular                 %
 #>       quadrature to use for determining the angles at which the rays are              %
@@ -13060,7 +13079,7 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={TCP0},
-#>     valuesapplicable={P0, P1, P2, P3, P4, P5, Pn0, LTCP0, FLTCP0}, 
+#>     valuesapplicable={P0, P1, P2, P3, P4, P5, Pn0, LTCP0, FLTCP0},
 #>     limitations={},
 #>     description={This card is used to specify the scattering treatment to be used by  %
 #>       the radial neutron transport calculations in MPACT.  There are                  %
@@ -16398,7 +16417,7 @@ MPACT:
 #>     limitations={},
 #>     description={This card controls the calculation of decay constant for each fissile region. %
 #>       The isotopic lambda is the exact approach, but can use a lot more memory.      %
-#>       In general, it is recommended to use the precursor conservation option rather 
+#>       In general, it is recommended to use the precursor conservation option rather
 #>       than fission source weighting. These options are described as:                 %
 #>       \begin{enumerate}
 #>         \item \texttt{isotopic} --- use exact isotope dependent lambdas        %
@@ -16696,7 +16715,7 @@ MPACT:
 #>     steady state solution will ever be achieved},
 #>     description={When just \texttt{mat\_emit\_src} is input without \texttt{true|false}, the  %
 #>       option is set to \texttt{false}.
-#>     This option is used to specify whether or not neutron emission sources 
+#>     This option is used to specify whether or not neutron emission sources
 #>     from the decay of model materials will be treated.  The default is set to false.},
 #>     notes={}
 #>   }

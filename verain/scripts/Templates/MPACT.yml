@@ -812,13 +812,6 @@ MPACT:
             - copy MPACT/$coupling_method
           _content:
 
-        nonlinear_solver:
-          _pltype: parameter
-          _type: string
-          _do:
-            - copy MPACT/$th_nonlinear_solver
-          _content:
-
         average_ftemp:
           _pltype: parameter
           _type: bool
