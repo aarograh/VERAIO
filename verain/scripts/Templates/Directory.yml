@@ -13772,7 +13772,10 @@ MPACT:
 #>    description={If \texttt{coupling\_method} is set to \texttt{hybrid}, this card is  %
 #>      used to determine how many STH solves will be done before switching to CTF.},    %
 #>    notes={If \texttt{coupling\_method} is not set to \texttt{hybrid}, this card does  %
-#>      nothing}
+#>      nothing.  Additionally, if the solution converges before reaching the number of
+#>      iterations specified in this option, the code will switch to CTF immediately for
+#>      the subsequent iteration; this ensures that CTF is run at least once before the
+#>      solution is considered converged.}
 #>   }
   init_from_STH_outers:
     <<: *dtint
