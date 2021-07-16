@@ -158,20 +158,6 @@ MPACT:
         - copy MPACT/$power_edit
       _content:
 
-    valid_on:
-      _pltype: parameter
-      _type: bool
-      _do:
-        - copy MPACT/$valid_on
-      _content:
-
-    valid_delim:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy MPACT/$valid_delim
-      _content:
-
     checkpoint_mode:
       _pltype: parameter
       _type: string
