@@ -18587,6 +18587,49 @@ BISON:
       - is_float()
       - is_gt() 0
 #>
+#>   {\bf power\_ramp\_times} power\_ramp\_times
+#>   \VERAInputTable{
+#>     name={power\_ramp\_times},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Power ramp times before and after each cycle input file. These should be input as list of numbers in pairs with the first number corresponding to the begining of a cycle and the second correspoding to the end of a cycle.},
+#>     notes={}
+#>   }
+  power_ramp_times:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())
+      - arraysize()>0
+#>
+#>   {\bf temp\_ramp\_times} temp\_ramp\_times
+#>   \VERAInputTable{
+#>     name={temp\_ramp\_times},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Temperature ramp times before and after each cycle input file. These should be input as list of numbers in pairs with the first number corresponding to the begining of a cycle and the second correspoding to the end of a cycle.},
+#>     notes={}
+#>   }
+  temp_ramp_times:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())
+      - arraysize()>0
+#>
+#>   {\bf functions\_coolant\_pressure\_ramp\_x} pressure\_ramp\_time\_values
 #>   {\bf functions\_coolant\_pressure\_ramp\_x} pressure\_ramp\_time\_values
 #>   \VERAInputTable{
 #>     name={pressure\_ramp\_time\_values},

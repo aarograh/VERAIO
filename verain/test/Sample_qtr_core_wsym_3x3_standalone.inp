@@ -369,6 +369,8 @@ crd_map
   bc_type bulk_cool
   bcs_plenumpressure_plenumpressure_initial_pressure = 2.0e6
   bcs_plenumpressure_plenumpressure_startup_time = 0
+  temp_ramp_times  = 10800.0 0.0 0.0 10800.0
+  power_ramp_times  = 86400.0 0.0 0.0 86400.0
   executioner_dt = 1.0e3
   executioner_end_time = 6.0e7
   executioner_dtmin = 1000
