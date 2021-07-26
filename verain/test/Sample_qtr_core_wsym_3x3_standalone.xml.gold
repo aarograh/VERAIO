@@ -588,6 +588,8 @@
     <Parameter name="mesh_type" type="string" value="smeared_pellet"/>
     <Parameter name="non_fuel_pin_input_file_template" type="string" value="guide_tube.moose.i.template"/>
     <Parameter name="outputs_file_base" type="string" value="output_RISO_AN8_bump"/>
+    <Parameter name="power_ramp_times" type="Array(string)" value="{86400.0,0.0,0.0,86400.0}"/>
     <Parameter name="solve_type" type="string" value="standalone"/>
+    <Parameter name="temp_ramp_times" type="Array(string)" value="{10800.0,0.0,0.0,10800.0}"/>
   </ParameterList>
 </ParameterList>

@@ -368,6 +368,20 @@ BISON:
         - copy BISON/$thermalcontact_roughness_clad
       _content:
 
+    power_ramp_times:
+      _pltype: array
+      _type: string
+      _do:
+        - copy BISON/$power_ramp_times
+      _content:
+
+    temp_ramp_times:
+      _pltype: array
+      _type: string
+      _do:
+        - copy BISON/$temp_ramp_times
+      _content:
+
     functions_coolant_pressure_ramp_x:
       _pltype: parameter
       _type: string
