@@ -1,0 +1,19 @@
+{
+"account": "VCS-Test",
+"case": "ross1",
+"cores": 128,
+"email_addrs": "leerw@ornl.gov",
+"job_name": "ross-test1",
+"nodes": 32,
+"pbs_env": "#PBS -j oe\n#PBS -l select=\"{nodes:d}:ncpus={ppn:d}:mpiprocs={ppn:d}\"\n\nmodule load gmvapich2/4.5.0",
+"pmem": 32,
+"ppn": 16,
+"queue": "special",
+"run_ctf": true,
+"run_mpact": true,
+"run_shift": false,
+"run_thermal_exp": true,
+"run_verain": true,
+"vera_path": "/tools/vera_installs/vera-3.8.0",
+"walltime": 48.5
+}

@@ -1,0 +1,61 @@
+{
+"__account_default": "",
+"__account_env": "#SBATCH --account={project}",
+
+"default_queue": "burst",
+"domain": "ornl.gov",
+
+"email_env":
+  [
+    "#SBATCH --mail-type=ALL",
+    "#SBATCH --mail-user={email_addrs}"
+  ],
+
+"env":
+  [
+    "export TestEnvDir=\"$VeraRunTestsRootDir/src/verarun/test\"",
+    "export TestEnvDir2=\"$TestEnvDir/vera_installs\""
+  ],
+
+"hostname": "slurm-host",
+
+"mail_from": "no-reply@ornl.gov",
+
+"mem_default_env":
+  [
+    "#SBATCH --mem={nmem}"
+  ],
+
+"pbs": "Slurm",
+
+"pbs_env":
+  [
+    "#SBATCH --job-name={job_name}",
+    "#SBATCH --output={case}.stdout",
+    "#SBATCH --nodes={nodes:d}",
+    "#SBATCH --ntasks-per-node={ppn:d}",
+    "#SBATCH --partition={queue}",
+    "#SBATCH --time={walltime}"
+  ],
+
+"pmem_env":
+  [
+    "#SBATCH --mem-per-cpu={pmem}"
+  ],
+
+"project_default": "casl",
+"project_env": "#SBATCH --account={project}",
+
+"specs":
+  {
+  "hwthreads": 2,
+  "units": 18,
+  "sockets": 2,
+  "nodes": 20,
+  "mem": 128
+  },
+
+"_VeraDefaultVersion": "vera-3.7.0",
+"_VeraInstallsDir": "$VeraRunTestsRootDir/files/vera_installs",
+"VeraInstallsDir": "/Users/re7x/src/verarun/tests/files/vera_installs"
+}

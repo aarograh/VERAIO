@@ -41,22 +41,22 @@ A complete listing of all the input cards in the [STATE] block is located in Cha
 \end{Verbatim}
 
 The {\it sym} card tells the code to run the calculation in full-core or
-qtr-core symmetry. If the calculation is run in qtr-core symmetry, the symmetry is either
-set to qtr-core rotational or qtr-core mirror by the {\it bc\_sym} card in the [CORE] block.
+quarter-core symmetry. If the calculation is run in quarter-core symmetry, then the symmetry is either
+set to quarter-core rotational or quarter-core mirror by the {\it bc\_sym} card in the [CORE] block.
 
 The {\it rodbank} card is used to position the control rods. The {\it rodbank} input includes pairs of bank names
-and bank positions.  The bank names correspond to the {\it crd\_map} in the [CORE] block.
+and bank positions. The bank names correspond to the {\it crd\_map} in the [CORE] block.
 The positions indicate the position of the control rod bank in steps.
 Step 0 is fully inserted.
 The number of steps for a rod to be completely withdrawn is set by the {\it stroke} card in
-the [CONTROL] block (see Section~\ref{sec:stroke}). For Westinghouse PWR's, a typical value of fully-withdrawn is 228 steps.
+the [CONTROL] block (see Section~\ref{sec:stroke}). For Westinghouse PWRs, a typical value of fully withdrawn is 228 steps.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Edits Description}
 
 The [EDITS] block is used to control the output edits.
 
-One of the edits produced by the core simulator is the rod power.   The user has
+One of the edits produced by the core simulator is the rod power.  The user has
 the ability to specify the axial levels that the power is averaged over with
 the {\it axial\_edit\_bounds} card.
 The user may choose to average power over uniform axial intervals (like most nodal codes),
@@ -69,9 +69,9 @@ A complete listing of all the input cards in the [EDITS] block is located in Cha
 \subsubsection{CTF Nodalization}
 
 The {\it axial\_edit\_bounds} card is also used to set the axial nodalization when coupling
-the neutronics physics code to the CTF subchannel code.
+the neutronics physics code to the COBRA-TF (CTF) subchannel code.
 
-When running CTF, there is a restriction that the grid boundaries must be explicitly
+When running CTF, the grid boundaries must be explicitly
 included in the {\it axial\_edit\_bounds}. This process can get a little complicated for the user.
 In the VERA input, spacer grids are defined in the [ASSEMBLY] block by specifying the
 grid heights on the {\it grid} card and the elevations of the grid midpoints
@@ -97,9 +97,9 @@ For example, if a grid is defined with a centerline at 75.0 and a height of 2.5,
        ...
 \end{Verbatim}
 
-The reason for this restriction is because the power is calculated on the {\it axial\_edit\_bounds},
+The reason for this restriction is that the power is calculated on the {\it axial\_edit\_bounds},
 so it is natural to use the same power distribution to couple to the CTF model as well.
-The grids must be explicitly included in the CTF boundaries so the loss coefficients are calculated correctly.
+The grids must be explicitly included in the CTF boundaries so that the loss coefficients are calculated correctly.
 
 In the future, this restriction may be lifted and an additional edit bounds array may
 be added explicitly for CTF calculations.
@@ -109,14 +109,14 @@ be added explicitly for CTF calculations.
 \subsection{Coupling Description}
 
 The [COUPLING] block defines the relaxation parameters and convergence criteria to be
-used when coupling different physics codes.  These values are used to determine
-convergence {\it between} physics codes.  Convergence criteria {\it within} a physics
+used when coupling different physics codes. These values are used to determine
+convergence {\it between} physics codes. Convergence criteria {\it within} a physics
 code is controlled by the code-specific block.
 
 Refer to Chapter~\ref{chap:cards} for a complete listing of all the cards in the [COUPLING] block.
 
-No code-specific information is included in the [COUPLING] block.  All code-specific information
-is contained in the code-specific blocks.  The [COUPLING] block is only used to define
+No code-specific information is included in the [COUPLING] block; all code-specific information
+is contained in the code-specific blocks. The [COUPLING] block is only used to define
 generic coupling parameters.
 
 As an example, consider the following multi-physics code coupling:
@@ -139,7 +139,7 @@ the change in power between coupled iterations.
 Additional convergence checks are made on the peak fuel temperature, maximum change in density,
 and change in boron concentration (if applicable).
 
-The example shown above uses a Picard iteration to converge.  Picard iterations usually
+The example shown above uses a Picard iteration to converge. Picard iterations usually
 need to apply a relaxation factor (also called a damping factor or under-relaxation factor) to
 one or more of the calculated quantities to converge.
 The relaxation factors are applied in the following manner:
@@ -147,11 +147,11 @@ The relaxation factors are applied in the following manner:
   x = \omega \, x^{\mbox{new}} + (1 - \omega) x^{\mbox{old}}
 \end{equation}
 where $x$ is the calculated parameter and $\omega$ is the relaxation factor.
-A relaxation factor of 1.0 signifies no relaxation is performed.
+A relaxation factor of 1.0 signifies that no relaxation is performed.
 A relaxation factor $< 1.0$ signifies under-relaxation.
 
-Relaxation factors can be specified for the point-wise power, point-wise temperature, and/or point-wise density.
-The relaxation is applied to the transferred quantities sent between physics codes.  The state variables
+Relaxation factors can be specified for the point-wise power, point-wise temperature, and/or point-wise density. 
+The relaxation is applied to the transferred quantities sent between physics codes. The state variables
 within each physics code are not changed.
 
 An example [COUPLING] input block is shown below.

@@ -3,8 +3,8 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall not be able to parse an input in which the axial
-!> heights are listed in descending order. The parser shall appropriately
+!> - The VERAIn package shall throw an error for an input in which the axial
+!> heights are listed in descending order; the parser shall appropriately
 !> fail and describe input error.
 !> @endreq
 !===============================================================================

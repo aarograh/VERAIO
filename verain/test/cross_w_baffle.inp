@@ -14,7 +14,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse five 3D 3x3 assemblies with TH
-!> feedback enabled arranged in a cross witha baffle.
+!> feedback enabled arranged in a cross with a baffle.
 !> @endreq
 !===============================================================================
 

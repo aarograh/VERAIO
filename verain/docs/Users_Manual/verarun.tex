@@ -15,23 +15,43 @@ VERARun also submits the job to the parallel job queue.
 VERARun is run by specifying {\tt verarun} on the command line, followed by the name of the input file.
 There are additional command line options that are shown below.
 \begin{Verbatim}[fontsize=\small]
-   verarun <input file>
+--> verarun <input file>
 \end{Verbatim}
 
 For example, if you input deck is called ``2a.inp'', you would enter:
 \begin{Verbatim}[fontsize=\small]
-   verarun 2a
+--> verarun 2a
 \end{Verbatim}
 
-Additional command line options can be found by typing {\tt verarun} with no arguments.
-Doing so will return the following options.
+To see what versions of VERA are available, use the -l option:
+\begin{Verbatim}[fontsize=\small]
+--> verarun -l
+Available VERA versions (newest to oldest, * for default):
+  VERA_4.1
+  VERA_4.2 *
+\end{Verbatim}
+
+To use a different VERA version, use the -v option:
+\begin{Verbatim}[fontsize=\small]
+--> verarun -v VERA_4.2 file.inp
+\end{Verbatim}
+
+To use a development version of VERA (not usually recommended), use the --devs option:
+\begin{Verbatim}[fontsize=\small]
+--> verarun --devs -v VERA_4.3RC2 file.inp
+\end{Verbatim}
+
+To see additional verarun command line options, just execute verarun with no other command line input.
+To see detailed help and customizable environment variables use the -h option.
+Doing so will return the following:
 
 \begin{Verbatim}[fontsize=\small]
-usage: verarun [-x] [-e email_addr] [-h] [-c config_file] [-N job_name] [-l]
-               [-n nprocs] [-O] [--ppn cpus_per_node] [-m mem_per_process]
-               [-s subdir] [-d vera_install_dir] [-v vera_version] [--verbose]
-               [-W] [-w job_id] [-t walltime] [--chain] [--debug]
-               [--hostname host] [-r {overwrite,readwrite}]
+usage: verarun [--devs] [-x] [-e email_addr] [-h] [-c config_file]
+               [-N job_name] [-l] [-n nprocs] [-O] [--ppn cpus_per_node]
+               [-m mem_per_process] [-p project] [-q queue] [-s subdir]
+               [-d vera_install_dir] [-v vera_version] [--verbose] [-W]
+               [-w job_id] [-t walltime] [--chain] [--debug] [--hostname host]
+               [-r {overwrite,readwrite}]
                [--vera-installs-dir vera_installs_dir]
                [input_path [input_path ...]]
 
@@ -41,6 +61,8 @@ positional arguments:
   input_path            path to VERA input (.inp) or XML (.xml) files
 
 optional arguments:
+  --devs, --allow-devs  override VERA_PROD_VERSIONS and allow development VERA
+                        versions, implies -l
   -x, --dry-run         dry run only, create but don't execute the PBS script
   -e email_addr, --email-addrs email_addr
                         comma-delimited list of email addresses to notify of
@@ -54,16 +76,23 @@ optional arguments:
   -l, --list-vera-versions
                         list available VERA versions
   -n nprocs, --np nprocs, --nprocs nprocs, --num-procs nprocs
-                        total number of processors need for the job (mpiexec
-                        -np param), defaults to value computed from input
+                        total number of processors need for the MPACT run
+                        (mpiexec -np param), defaults to value computed from
+                        input
   -O, --output-job-name
-                        print the job name to stdout
+                        print the job id to stdout
   --ppn cpus_per_node, --pnode cpus_per_node
                         specify processors per node, by default this is
                         calculated
   -m mem_per_process, --pmem mem_per_process, --proc-memory mem_per_process
                         specify memory required per processor in GB, defaults
                         to undefined
+  -p project, --project project
+                        optional project or account to specify for the job,
+                        overriding any default, where a value of "none" omits
+                        a project
+  -q queue, --partition queue, --queue queue
+                        Torque queue or Slurm partition
   -s subdir, --subdir subdir
                         create subdir, a value of "." specifies automatically
                         generated subdir name
@@ -74,7 +103,7 @@ optional arguments:
   -v vera_version, --vera-version vera_version
                         name of VERA version to use
   --verbose             turn on verbose messaging
-  -W                    wait on job last submitted via verarun, overrides -W
+  -W                    wait on job last submitted via verarun, overrides -w
   -w job_id, --wait-job-id job_id
                         ID of job which must complete before starting this job
   -t walltime, --wall-time walltime
@@ -83,7 +112,7 @@ optional arguments:
 
 advanced arguments:
   --chain, --chain-jobs
-                        each case depends on its predecessor
+                        each job depends on its predecessor
   --debug               debug mode
   --hostname host       force the hostname
   -r {overwrite,readwrite}, --restart {overwrite,readwrite}
@@ -92,7 +121,112 @@ advanced arguments:
                         path to vera_installs directory containing VERA
                         versions
 
+Version 1.11
+
+Verarun uses machine-specific characteristics to determine batch system
+directives applied to a job script template.  Additional template parameters,
+such as which models and utilities to execute, are determined from the VERA
+input file (.inp).  Configurations are provided for machines commonly in the
+VERA program.  In order to port 'verarun' to another environment it will be
+necessary to create a machine spec file.
+
+Execution
+---------
+There are two verarun usage modes:
+
+* If the '-l' command-line argument is specified, available VERA installations
+  are listed.  If '--verbose' is also specified, required files that are
+  missing in each vera_installs_dir subdir are listed.
+
+* If one or more VERA input files (.inp) are specified, a job script is created
+  based on each input file.  Note pre-processed VERA input XML (.xml) may be
+  also be specified.  If no file extension is given '.inp' is assumed.
+
+By default the current directory will be used for all processing.
+Alternatively, you may specify that a subdir in the current directory be
+created and used as the working directory via the '-s' command-line argument.
+Specifying a directory value of '.' will tell verarun to create a subdir with
+name {input_name}_{datetime}, where {input_name] is the name of the input file
+without the '.inp' or '.xml' extension, and {datetime} is the ISO 8601 extended
+date format: yyyy-mm-ddThh:mm:ss.
+
+A job script named with a '.pbs' extension is created in the working directory.
+If the '-x' argument is not specified, the job is also submitted.  Output from
+the job will be in a file with extension '.stdout' in the working directory.
+
+Machine Specifications
+----------------------
+Machine specifications are stored in JSON ('.json') files under the verarun
+Python package installation directory:
+
+  ../lib/python2.7/site-packages/verarun-<version>-py2.7.egg/verarun/config/
+
+It is also possible to specify a configuration file with the '-c' command-line
+argument.
+
+Job Script Template
+-------------------
+The Job template is a Bash script named 'vera.pbs' stored under the verarun
+installation directory:
+
+  ../lib/python2.7/site-packages/verarun-<version>-py2.7.egg/verarun/job/
+
+Parameter values are substituted by name for curly-brace expressions in the
+template (.e.g., {job_name}).
+
+Environment Variables
+---------------------
+There are environment variables which can be set to override behavior.
+
+* PBS_EMAIL: sets the email address to be used for PBS notifications,
+  overridden by the '-e' (or '--email-addrs') parameter.
+
+* PBS_PROJECT: sets the project for the job, overriding any default set in
+  the host configuration but overridden by the '-p' (or '--project') parameter.
+
+* VERA_BUILDS: path to the directory containing VERA builds or installs,
+  overriding the "$(hostname).json" file but overridden by the
+  '--vera-installs-dir' parameter.  May also be specified as
+  VERA_BUILDS_DIR or VERA_INSTALLS_DIR.
+
+* VERA_BUILDS_DIR: alternative name for VERA_BUILDS, where VERA_BUILDS has
+  priority.
+
+* VERA_DEFAULT_VERSION: names the default version of VERA to use, overriding
+  what is specified in the host configuration file but overridden by the '-v'
+  (or '--vera-version') parameter.
+
+* VERA_INSTALLS_DIR: alternative name for VERA_BUILDS or VERA_BUILDS_DIR,
+  priority order being VERA_BUILDS, VERA_BUILDS_DIR, then VERA_INSTALLS_DIR
+
+* VERA_PROD_VERSIONS: comma-delimited list of allowed production VERA versions.
+
+* VERA_QSUB: custom 'qsub' command to execute for hosts running Torque or
+  PBS Pro.
+
+* VERA_SBATCH: custom 'sbatch' command to execute for hosts running SLURM.
+
+* VERA_SUMMARY_EMAIL:  if set and not blank, the 'case.sum' file is emailed
+  to the user when MPACT completes.
+
+* VERARUN_HOST_CONFIG_FILE: path to a host configuration file to use,
+  overriding the distributed "$(hostname).json" file but overridden by
+  the '-c' parameter.
 \end{Verbatim}
+
+Note that verarun will create a .pbs file that can also be modified and submitted manually using qsub.
+After job submittal, the job is managed by the typical queueing system commands (qdel, qhold, qrls, etc.)
+
+With VERARun 1.11 and beyond, you can receive emails summarizing your job when it completes successfully.
+Depending on the font of your email client, this summary can be more or less readable.
+In Outlook, you can force plain text emails to use a certain font (such as courier new) by going to Options -> Mail -> Stationary and Fonts -> Composing and reading plain test messages....
+
+To get information on past jobs submitted with verarun, use the verastat command. This will provide a listing of job ID, date/time, and file location. To get info on a specific job, use:
+\begin{Verbatim}[fontsize=\small]
+--> verastat job_id
+\end{Verbatim}
+
+For additional questions or support, please contact vera-support@ornl.gov.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{VERARun Output}
@@ -100,13 +234,13 @@ advanced arguments:
 Upon completion of a VERA job, several output files may be created depending on the code options used.
 Some typical outputs include:
 \begin{itemize}
-\item VERAIn XML file.  This file is written upon the successful completion of VERAIn
-\item VERA HDF output file.  This is a binary file with results that can be visualized in VERAView, or post-processed with user utility codes.
-\item MPACT output file.  This file is written upon the successful completion of MPACT (if applicable).
-\item MPACT log File.  This file is written upon the successful completion of MPACT (if applicable).
-\item MPACT summary File.  This file is written upon the successful completion of MPACT (if applicable).
+\item VERAIn XML file. This file is written upon the successful completion of VERAIn.
+\item VERA HDF output file. This is a binary file with results that can be visualized in VERAView, or post-processed with user utility codes.
+\item MPACT output file. This file is written upon the successful completion of MPACT (if applicable).
+\item MPACT log File. This file is written upon the successful completion of MPACT (if applicable).
+\item MPACT summary File. This file is written upon the successful completion of MPACT (if applicable).
 \item Standard output file. This file is a log of all output written to the standard output.
-\item Standard error file.  this file is a log of all output written to the standard error file.
+\item Standard error file. This file is a log of all output written to the standard error file.
 \end{itemize}
 
 
@@ -121,15 +255,15 @@ The next step when looking for an error is to look at the standard error file.
 If the job ran successfully, the size of this file will be zero.
 
 If there were any errors in the input processor (VERAIn), the errors will be written to the standard error file.
-Common errors from the input processor include
+Common errors from the input processor include:
 \begin{enumerate}
-\item invalid keywords
-\item invalid map sizes
-\item invalid input options
+\item Invalid keywords
+\item Invalid map sizes
+\item Invalid input options
 \end{enumerate}
 
 If the input processor works correctly, an error may still occur in one of the VERA component codes.
-The user used look at the error message and consult the user manual for the component code.
+The user should look at the error message and consult the user manual for the component code.
 
 
 

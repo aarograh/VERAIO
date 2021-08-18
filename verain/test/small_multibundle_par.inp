@@ -2,7 +2,7 @@
 !> @beginreq
 !> - The VERAIn package shall be able to parse a five 3D 3x3 assemblies at 10% power
 !> when arranged in a cross in quarter symmetry with numerous COUPLING block options
-!> and CTF is run in parallel.
+!> and when CTF is run in parallel.
 !> @endreq
 !===============================================================================
 [CASEID]

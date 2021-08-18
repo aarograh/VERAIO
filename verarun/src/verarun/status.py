@@ -3,12 +3,14 @@
 #------------------------------------------------------------------------
 #       NAME:           status.py                                       -
 #       HISTORY:                                                        -
+#               2020-04-16      leerw@ornl.gov                          -
+#         Adding jobid param, -p/--path, and -c/--clear.
+#               2020-03-03      leerw@ornl.gov                          -
+#         Accounting for job IDs as int and str.
 #               2019-04-04      leerw@ornl.gov                          -
 #------------------------------------------------------------------------
 from __future__ import print_function
-#import argparse, getpass, logging, os, re
-import argparse, getpass, logging, os, re, six, socket, sys
-#import shutil, six, socket, subprocess, sys, time, traceback
+import argparse, getpass, logging, os, re, six, socket, subprocess, sys
 from datetime import datetime
 import pdb
 
@@ -44,10 +46,11 @@ class VeraStatus( object ):
   #----------------------------------------------------------------------
   #     METHOD:         VeraStatus.__call__()                           -
   #----------------------------------------------------------------------
-  def __call__( self, *args, **kwargs ):
+  #def __call__( self, *args, **kwargs ):
+  def __call__( self ):
     """
 """
-    self.run( *args, **kwargs )
+    return  self.run()
   #end __call__
 
 
@@ -57,16 +60,135 @@ class VeraStatus( object ):
   def __init__( self, **kwargs ):
     """
     Args:
-        **kwargs (var args): parameters specified on the command line
-            run_dir (str): optional run directory for filtering
-            verbose (bool): True to provide more processing feedback
+        is_clear (boolean): clear job history
+        is_full (boolean): show job details if available
+        is_path (boolean): show only the job path
+        job_id (int): id of job to display
+        last_count (int): count of last jobs to show
 """
     self._logger = logging.getLogger( 'root' )
 
-    self._run_dir = kwargs.get( 'run_dir' )
+    self._is_clear = kwargs.get( 'is_clear' )
+    self._is_full = kwargs.get( 'is_full' )
+    self._is_path = kwargs.get( 'is_path' )
+    self._job_id = kwargs.get( 'job_id', -1 )
+    self._last_count = kwargs.get( 'last_count', -1 )
+    #self._run_dir = kwargs.get( 'run_dir' )
+    #self._verbose = kwargs.get( 'verbose', False )
+
     self._user_data = UserData()
-    self._verbose = kwargs.get( 'verbose', False )
   #end __init__
+
+
+  #----------------------------------------------------------------------
+  #     METHOD:         VeraStatus.exec_job_status_command()            -
+  #----------------------------------------------------------------------
+  def exec_job_status_command( self, job_id_str ):
+    """
+    Args:
+        job_id_str (str):
+    Returns:
+        int: exit status
+            0: okay
+            1: job status is no longer available
+            2: neither scontrol nor qstat were found
+"""
+#               -- Try SLURM first
+#               --
+    status = 0
+
+    output = ''
+    not_found = 0
+    return_code = 0
+
+    cmd = [ 'scontrol', 'show', 'job', job_id_str ]
+    try:
+      output = subprocess.check_output( cmd, stderr = subprocess.STDOUT )
+    except subprocess.CalledProcessError as ex:
+      output = ex.output
+      return_code = ex.returncode
+    except:
+      not_found += 1
+      return_code = -999
+
+#               -- Then Torque
+#               --
+    if return_code != 0:
+      cmd = [ 'qstat', '-f' , job_id_str ]
+      try:
+        output = subprocess.check_output( cmd, stderr = subprocess.STDOUT )
+        return_code = 0
+      except subprocess.CalledProcessError as ex:
+        output = ex.output
+        return_code = ex.returncode
+      except:
+        not_found += 1
+        return_code = -999
+
+    if not_found >= 2:
+      print( 'Error: neither scontrol nor qstat were found', file = sys.stderr )
+      status = 2
+
+    else:
+      if isinstance( output, bytes ):
+        output = output.decode( 'utf-8' )
+
+      if return_code == 0:
+        print( output )
+      else:
+        print( output, file = sys.stderr )
+        status = 1
+
+    return  status
+  #end exec_job_status_command
+
+
+  #----------------------------------------------------------------------
+  #     METHOD:         VeraStatus.exec_job_status_command_python3()    -
+  #----------------------------------------------------------------------
+  def exec_job_status_command_python3( self, job_id_str ):
+    """
+    Args:
+        job_id_str (str):
+    Returns:
+        int: exit status
+            0: okay
+            1: job status is no longer available
+            2: neither scontrol nor qstat were found
+"""
+#               -- Try SLURM first
+#               --
+    status = 0
+    proc = None
+    cmd = [ 'scontrol', 'show', 'job', job_id_str ]
+    try:
+      proc = subprocess.run( cmd, capture_output = True, encoding = 'utf-8' )
+    except:
+      pass
+
+#               -- Then Torque
+#               --
+    if proc is None or proc.returncode != 0:
+      cmd = [ 'qstat', '-f' , job_id_str ]
+      try:
+        proc = subprocess.run( cmd, capture_output = True, encoding = 'utf-8' )
+      except:
+        pass
+
+    if proc is None:
+      print( 'Error: neither scontrol nor qstat were found', file = sys.stderr )
+      status = 2
+
+    elif proc.returncode == 0:
+      print( proc.stdout )
+      print( proc.stderr )
+
+    else:
+      print( 'job status for {0} has been lost'.format( job_id_str ) )
+      status = 1
+
+    return  status
+  #end exec_job_status_command_python3
 
 
   #----------------------------------------------------------------------
@@ -89,7 +211,55 @@ class VeraStatus( object ):
   #----------------------------------------------------------------------
   #     METHOD:         VeraStatus.run()                                -
   #----------------------------------------------------------------------
-  def run( self, *args, **kwargs ):
+  #def run( self, *args, **kwargs ):
+  def run( self ):
+    """
+    Returns:
+        int: exit status
+            0: okay
+            1: job status is no longer available
+            2: neither scontrol nor qstat were found
+"""
+    status = 0
+#               -- Clear?
+#               --
+    if self._is_clear:
+      self._user_data.clear_job_history()
+
+    elif self._job_id < 0:
+      jobs = self._user_data.get_job_history()
+      if self._last_count > 0:
+        jobs = jobs[ -self._last_count : ]
+      self.write( jobs )
+
+    else:
+      jobs = self._user_data.get_job_history()
+      job_id_str = str( self._job_id )
+      cur_jobs = list( [ j for j in jobs if str( j.job_id ) == job_id_str ] )
+
+      if not cur_jobs:
+        print( 'Job {0:d} not found'.format( self._job_id ) )
+
+      elif self._is_path:
+        print( cur_jobs[ 0 ].run_dir )
+
+      elif self._is_full:
+        self.write( cur_jobs[ : 1 ] )
+        print()
+        status = self.exec_job_status_command( str( cur_jobs[ 0 ].job_id ) )
+
+      else:
+        self.write( cur_jobs[ : 1 ] )
+    #end else: not if self._is_clear or self._job_id < 0
+
+    return  status
+  #end run
+
+
+  #----------------------------------------------------------------------
+  #     METHOD:         VeraStatus.run_0()                              -
+  #----------------------------------------------------------------------
+  def run_0( self, *args, **kwargs ):
     """
 """
     filter_func = None
@@ -98,7 +268,7 @@ class VeraStatus( object ):
 
     jobs = self._user_data.get_job_history( filter_func )
     self.write( jobs )
-  #end run
+  #end run_0
 
 
   #----------------------------------------------------------------------
@@ -106,12 +276,6 @@ class VeraStatus( object ):
   #----------------------------------------------------------------------
   def write( self, jobs, fp = sys.stdout ):
     """
-Job id            Name             User              Time Use S Queue
-----------------  ---------------- ----------------  -------- - -----
-4613120.service2  beeler_lammps    beelbw            06:34:56 R general
-4613121.service2  beeler_lammps    beelbw            05:45:37 R general
-2019-12-31T23:59:59
-Depend
 """
 #               -- Prolog
 #               --
@@ -127,8 +291,8 @@ Depend
 #               --
     #name_len = max( [ len( x.get( 'job_name' ) ) for x in jobs ] + [ 16 ] )
     depend_len = \
-        max( [ len( x.depend_job_id_str ) for x in jobs ] + [ 6 ] )
-    name_len = max( [ len( x.job_id_str ) for x in jobs ] + [ 6 ] )
+        max( [ len( x.depend_job_id ) for x in jobs ] + [ 6 ] )
+    name_len = max( [ len( str( x.job_id ) ) for x in jobs ] + [ 6 ] )
     fmt = '{job_id:<%ds} {depend_job:<%ds} {dtg:<19s} {run_dir:<32s}' % \
         ( name_len, depend_len )
 
@@ -145,13 +309,11 @@ Depend
         run_dir = '-' * 32
         ) )
 
-    #fmt = fmt.replace( 's', 'd', 2 )
-    #print( os.linesep.join( [ fmt.format( **j ) for j in jobs ] ) )
     for j in jobs:
       print( fmt.format(
-          depend_job = j.depend_job_id_str,
+          depend_job = str( j.depend_job_id ),
           dtg = j.dtg,
-          job_id = j.job_id_str,
+          job_id = str( j.job_id ),
           run_dir = j.run_dir
           ) )
   #end write
@@ -160,8 +322,8 @@ Depend
 #               -- Properties
 #               --
 
-  verbose = property( lambda x: x._verbose )
-  """Flags more processing feedback"""
+# verbose = property( lambda x: x._verbose )
+# """Flags more processing feedback"""
 
 
 #               -- Static Methods
@@ -197,27 +359,69 @@ Depend
           prog = 'verastat'
           )
 
-      #pgroup = parser.add_mutually_exclusive_group()
       parser.add_argument(
-          '--verbose',
+          'job_id',
+          #default = [],
+          help = 'job identifier',
+          metavar = 'job_id',
+          nargs = '?',
+          type = int
+          )
+      parser.add_argument(
+          '-h', '--help',
           action = 'store_true',
-          help = 'turn on verbose messaging'
+          dest = 'is_help'
+          )
+
+      flag_group = parser.add_mutually_exclusive_group()
+      flag_group.add_argument(
+          '-c', '--clear', '--clear-job-history',
+          action = 'store_true',
+          dest = 'is_clear',
+          help = 'clear all job history, all other arguments ignored'
+          )
+
+      flag_group.add_argument(
+          '-f', '--full', '--show-full-status',
+          action = 'store_true',
+          dest = 'is_full',
+          help = 'if job_id specified, show full job details if available'
+          )
+
+      flag_group.add_argument(
+          '-l', '--last', '--show-latest-jobs',
+          default = -1,
+          dest = 'last_count',
+          help = 'show only the last N jobs, ignored if job_id specified',
+          metavar = 'N',
+          type = int
+          )
+
+      flag_group.add_argument(
+          '-p', '--path', '--show-job-path',
+          action = 'store_true',
+          dest = 'is_path',
+          help = 'if job_id specified, print only the path to the job directory'
           )
 
 #               -- Parse for basic args
 #               --
       #parser.set_defaults( vera_installs_dir = None )
       args = parser.parse_args()
+      if args.is_help:
+        parser.print_help()
 
-      kwargs = {}
-      for name in dir( args ):
-        if not name.startswith( '_' ):
-          val = getattr( args, name )
-          if val:
-            kwargs[ name ] = val
-      #end for name in dir( args )
+      else:
+        kwargs = {}
+        for name in dir( args ):
+          if not name.startswith( '_' ):
+            val = getattr( args, name )
+            if val:
+              kwargs[ name ] = val
+        #end for name in dir( args )
 
-      VeraStatus( **kwargs )()
+        sys.exit( VeraStatus( **kwargs )() )
+      #end else: not args.is_help
 
     except AssertionError as ex:
       logging.exception( ex )

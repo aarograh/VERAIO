@@ -1,54 +1,66 @@
 *** Base Git Repo: VERA
-cee2c38 [Fri Aug 23 12:07:55 2019 -0400] <bairdml@ornl.gov>
-Updating VERA version file
+4dd64f9 [Wed Aug 5 09:43:50 2020 -0400] <grahamam@ornl.gov>
+Merge branch 'set_MPI_EXEC_MAX_NUMPROCS' into 'master'
 *** Git Repo: TriBITS
-a9e4761 [Thu May 9 09:33:45 2019 -0600] <rabartl@sandia.gov>
-Merge remote-tracking branch 'github/master' into phi-5294-update-tribits (PHI-5
+91aaa7a [Mon Nov 11 14:33:26 2019 -0500] <bairdml@ornl.gov>
+Merge branch '6124-CheckinTest-update' into 'master'
 *** Git Repo: Trilinos
-6c776f5 [Thu Sep 21 10:59:00 2017 -0600] <mhoemme@sandia.gov>
-Merge remote branch 'intermediate-repo/develop' into develop
+3b9c7e3 [Thu Jan 30 00:18:02 2020 -0500] <collinsbs@ornl.gov>
+Merge pull request #1 from bartlettroscoe/casl-phi-6249-upgrade-tribits-trilinos
 *** Git Repo: TeuchosWrappersExt
-e2a6573 [Thu Nov 9 11:59:24 2017 -0700] <rabartl@sandia.gov>
-Install CTeuchos_config.h
+781aae8 [Fri May 10 09:51:36 2019 -0600] <rabartl@sandia.gov>
+Add missing std include (PHI-5294)
 *** Git Repo: Futility
-b979066 [Mon May 13 21:01:33 2019 -0400] <collinsbs@ornl.gov>
+6739369 [Thu Jul 30 20:00:39 2020 -0400] <collinsbs@ornl.gov>
 Merge branch 'master' of https://github.com/CASL/Futility
 *** Git Repo: MAMBA
-6bd9ab2 [Wed May 22 04:00:48 2019 -0400] <collinsbs@ornl.gov>
+fac6b4a [Sun Aug 16 04:00:35 2020 -0400] <collinsbs@ornl.gov>
 Merge branch 'master' of code-int.ornl.gov:mamba/MAMBA
 *** Git Repo: VERAInExt
-ac2e962 [Fri Oct 18 20:13:33 2019 -0400] <bairdml@ornl.gov>
-Removing merge conflict
+cb78eef [Fri Aug 21 00:20:49 2020 -0400] <walkered@ornl.gov>
+Merge branch 'fix_manual_errors' into 'master'
 *** Git Repo: DataTransferKit
 19526ab [Fri Aug 18 09:14:16 2017 -0400] <dalg24@gmail.com>
 Merge pull request #297 from naughtont3/tjn-fortran-off
 *** Git Repo: COBRA-TF
-97514a5 [Thu Nov 14 10:12:47 2019 -0500] <bairdml@ornl.gov>
-Removing deallocate statement for logfile
+854bf00 [Thu Aug 20 20:00:40 2020 -0400] <collinsbs@ornl.gov>
+Merge branch 'master' of code-int.ornl.gov:rsk/CTF
 *** Git Repo: VERAData
-4903eb7 [Fri Mar 8 15:50:55 2019 -0500] <pandyatm@ornl.gov>
-Merge branch 'pole-data-link' into 'master'
+a81122d [Tue Jul 2 16:05:52 2019 -0400] <stimpsonsg@ornl.gov>
+Merge branch 'endf8.0_mpact-51g_origenlibrary' into 'master'
+*** Git Repo: VERAData/CEData
+8252504 [Wed Jul 8 20:44:25 2020 -0400] <pandyatm@ornl.gov>
+Merge branch 'update-hydrogen-pole-data' into 'master'
 *** Git Repo: MOOSEExt
-4daa739 [Fri May 17 09:59:50 2019 -0400] <bairdml@ornl.gov>
-Merge branch 'atf_compare_output_csv' into 'master'
+f721711 [Thu Jun 11 18:39:51 2020 -0400] <stimpsonsg@ornl.gov>
+Merge branch 'decay-heat' into 'master'
 *** Git Repo: MOOSEExt/MOOSE
-68913d5 [Wed May 29 18:59:59 2019 -0400] <bairdml@ornl.gov>
-Merge branch 'correct_int_cast' into 'master'
+4dc6cda [Tue Oct 1 15:20:45 2019 -0400] <stimpsonsg@ornl.gov>
+Merge branch 'merge_sync' into 'master'
+*** Git Repo: VERAOneWay
+56037bf [Mon May 25 00:14:09 2020 -0400] <collinsbs@ornl.gov>
+Adds gitlab ci file
 *** Git Repo: SCALE
-09ba8e9 [Wed Jun 5 18:10:11 2019 -0400] <pandyatm@ornl.gov>
-Merge remote branch 'gitlab/master'
+90b01c0 [Wed Aug 19 20:42:22 2020 -0400] <pandyatm@ornl.gov>
+Merge branch 'sync-scale' into 'master'
+*** Git Repo: XSTools
+96c2e33 [Sat Aug 15 00:24:09 2020 -0400] <collinsbs@ornl.gov>
+Merge branch 'perturb_gamma' into 'master'
 *** Git Repo: MPACT
-869ab07 [Thu Oct 17 19:46:55 2019 -0400] <grahamam@ornl.gov>
-Fix a bug in identifying device labels (#6111)
+7b69e67 [Fri Aug 21 20:01:11 2020 -0400] <collinsbs@ornl.gov>
+Merge branch 'master' of code-int.ornl.gov:MPACT/MPACT
 *** Git Repo: VeraShift
-ac561d8 [Thu Jun 6 12:26:49 2019 -0400] <pandyatm@ornl.gov>
-Merge remote branch 'gitlab/master'
+90800d3 [Fri Aug 14 12:07:38 2020 -0400] <pandyatm@ornl.gov>
+Merge branch 'sync-verashift' into 'master'
 *** Git Repo: DakotaExt
 afd354f [Tue Aug 1 19:36:55 2017 -0400] <rhoope@sandia.gov>
 Fix tarball installation
 *** Git Repo: DakotaExt/Dakota
 7415238 [Thu Jun 15 12:40:49 2017 -0400] <rhoope@sandia.gov>
 Triage static builds of Dakota 6.6
+*** Git Repo: VUQDemos
+b2d0175 [Tue Oct 8 14:13:19 2019 -0400] <salkork@ornl.gov>
+Merge branch '1-correcting-hardcoded-python-paths-in-vuq-core' into 'master'
 *** Git Repo: VERAView
 28e0f8a [Thu Mar 31 16:53:16 2016 -0400] <leerw@ornl.gov>
 Sync from code.ornl.gov for version 1.0

@@ -1,5 +1,5 @@
 !> @beginreq
-!> - VERAIn shall allow the user to specify an orifice map for BWR models, which allows for the
+!> - VERAIn shall allow the user to specify an orifice map for BWR models which allows for the
 !> definition of inlet form losses and flow areas.
 !> @endreq
 

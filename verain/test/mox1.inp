@@ -9,7 +9,7 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a sungle MOX PWR assembly with three
+!> - The VERAIn package shall be able to parse a single MOX PWR assembly with three
 !> different plutonium enrichment zones.
 !> - ticket 4378
 !> - ticket 4381

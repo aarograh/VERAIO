@@ -2,7 +2,7 @@ import glob
 from setuptools import find_packages, setup
 
 PACKAGE = 'verarun'
-VERSION = '0.0.20'
+VERSION = '1.9'
 
 setup(
     name = PACKAGE,
@@ -17,7 +17,7 @@ setup(
     install_requires =
       [
 	'six'
-	#'argparse >= 1.1',
+	#'argparse >= 1.9',
 	#'logging', 'os', 'six', 'sys', 'threading', 'time', 'traceback'
       ],
     scripts = [ 'bin/verarun', 'bin/verastat' ],

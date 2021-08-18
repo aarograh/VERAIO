@@ -15,6 +15,13 @@
 ! Portland, Oregon, USA, April 30-May 4 (1995).
 !------------------------------------------------------------------------------
 
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall be able to parse inputs in which a BWR axial_void 
+!> distribution is specified.
+!> @endreq
+!===============================================================================
+
 [STATE]
   power    100.0
   tinlet   550 K  ! *** approximate

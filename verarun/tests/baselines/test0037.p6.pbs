@@ -1,0 +1,226 @@
+#!/bin/bash
+#PBS -N VERA-p6
+#PBS -o p6.stdout
+#PBS -l nodes=2:ppn=36
+#PBS -l walltime=24:00:00
+#PBS -j oe
+#PBS -q batch
+#PBS -P NSED
+
+export TestEnvDir="$VeraRunTestsRootDir/src/verarun/test"
+export TestEnvDir2="$TestEnvDir/vera_installs"
+
+cd "$PBS_O_WORKDIR"
+
+# Local environment
+VERA_PATH="/Users/re7x/src/verarun/tests/files/vera_installs/vera-3.7.0"
+. "${VERA_PATH}/load_env.sh"
+shopt -s extglob
+
+case=p6 
+excore_filename=
+cores=58
+restart=
+run_ctf=true
+run_mpact=true
+run_multistate_cobra=
+run_shift=
+run_thermal_exp=
+run_verain=
+
+#	-- Feedback
+#       --
+date +'%a %F %T %Z'
+cat <<END
+case = p6
+input = p6.inp
+job = $PBS_JOBID, $PBS_JOBNAME
+pwd = $PWD
+
+Control
+---------------------------------------------
+case=$case
+cores=$cores
+restart=$restart
+run_ctf=$run_ctf
+run_mpact=$run_mpact
+run_multistate_cobra=$run_multistate_cobra
+run_shift=$run_shift
+run_thermal_exp=$run_thermal_exp
+run_verain=$run_verain
+
+Environment
+---------------------------------------------
+VERA_PATH=$VERA_PATH
+MPACT_DATA=$MPACT_DATA
+SCALE=$SCALE
+DATA=$DATA
+PATH=$PATH
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+END
+module list
+
+#	-- VERARepoVersion.txt
+#       --
+if [ -r "$VERA_PATH/VERARepoVersion.txt" ]; then
+  cat <<END
+
+VERA Versions
+---------------------------------------------
+$(cat "$VERA_PATH/VERARepoVersion.txt")
+---------------------------------------------
+END
+fi
+
+
+#	-- VERAIn
+#	--
+if [ "$run_verain" ]; then
+  [ -f "$case.xml" ] && rm -f "$case.xml"
+  cat <<END
+
+=============================================
+  Parsing VERA input $case.inp
+=============================================
+END
+  react2xml.pl "$case.inp" "$case.xml"
+  ls -l "$case.xml"
+  date +'%a %F %T %Z'
+fi
+
+
+#	-- ThermalExpandXML
+#	--
+if [ "$run_thermal_exp" -a -f "$case.xml" ]; then
+  [ -f "$case.orig.xml" ] && rm -f "$case.orig.xml"
+  cat <<END
+
+=============================================
+  Thermally expanding input
+=============================================
+END
+  mv "$case.xml" "$case.orig.xml"
+  ThermalExpandXML.exe \
+      --input="$case.orig.xml" --output="$case.xml" \
+      --expand3D=false \
+      --verbosity=3
+  ls -l "$case.xml"
+  date +'%a %F %T %Z'
+fi
+
+
+# Not needed from VERA-4.0 and beyond
+#	-- xml2ctf
+#	--
+#if [ "$run_ctf" -a -f "$case.xml" ]; then
+#  rm -f *deck.*
+#  cat <<END
+#
+#=============================================
+#  Running CTF Preprocessor
+#=============================================
+#END
+#  xml2ctf --xmlfile="$case.xml"
+#  ls -l *deck.*
+#  date +'%a %F %T %Z'
+#fi
+
+
+#	-- multistate_cobra
+#	--
+if [ "$run_multistate_cobra" -a -f "$case.xml" ]; then
+  cp "$case.xml" deck.xml
+  cat <<END
+
+=================================================
+  Running multistate_cobra job on 58 cores
+=================================================
+END
+  #multistate_cobra -xmlfile=deck.xml
+  mpiexec -env MV2_HCA_AWARE_PROCESS_MAPPING 0 -env MV2_SHMEM_DIR "/tmp" \
+      -n $cores multistate_cobra deck.xml
+  date +'%a %F %T %Z'
+fi
+
+
+#	-- MPACT.exe
+#	--
+mpact_exe=
+if [ "$run_shift" ]; then
+  mpact_exe=vera_to_shift
+elif [ "$run_mpact" ]; then
+  mpact_exe=MPACT.exe
+fi
+
+if [ "$mpact_exe" -a -f "$case.xml" ]; then
+#		-- Restart staging
+#		--
+  if [[ "$restart" == *write ]]; then
+    [[ "$restart" != readwrite && -f *.res ]] && rm -f *.res
+    tmpdir="temp_$PBS_JOBID"
+    mkdir -p "$tmpdir"
+    cp * "$tmpdir"
+    pushd "$tmpdir"
+  fi
+  #rm -f *.res || true
+  cat <<END
+
+=============================================
+  Running $mpact_exe job on 58 cores
+=============================================
+END
+#  mpiexec \
+#      -env MV2_HCA_AWARE_PROCESS_MAPPING 0 \
+#      -env MV2_SHMEM_DIR "/tmp" \
+#      -n $cores $mpact_exe "$case.xml"
+  if [[ "$mpact_exe" == "MPACT.exe" ]]; then
+    mpiexec -env MV2_HCA_AWARE_PROCESS_MAPPING 0 -env MV2_SHMEM_DIR "/tmp" \
+        -n $cores $mpact_exe "$case.xml"
+
+  else  # you are running vera_to_shift
+    if [[ "$excore_filename" ]]; then
+      excore_omn_name="${excore_filename%%.excore.xml}.omn"
+      if [ ! -f "$excore_omn_name" ]; then
+        cat <<END
+************************************************************************
+!!!!! Error, please include $excore_omn_name !!!!!
+************************************************************************
+END
+      else
+        excore2xml "$excore_omn_name"
+      fi
+    fi
+
+    mpiexec -env MV2_HCA_AWARE_PROCESS_MAPPING 0 -env MV2_SHMEM_DIR "/tmp" \
+        -n $cores $mpact_exe --i="$case.xml"
+  fi
+  date +'%a %F %T %Z'
+
+#		-- Restart unstaging
+#		--
+  if [[ "$restart" == *write ]]; then
+    [[ "$restart" != readwrite && -f *.res ]] && rm -f *.res
+    mv !($case.xml) "$PBS_O_WORKDIR"
+    popd
+    rm -fr "$tmpdir"
+  fi
+fi # MPACT
+
+
+# Not needed from VERA-4.0 and beyond
+#	-- Cleanup
+#	--
+#  cat <<END
+#
+#=============================================
+#  Cleaning up
+#=============================================
+#END
+#if [ "$mpact_exe" -a "$run_ctf" ]; then
+##  if [ -f "$case.h5" -a -f pdeck.ctf.h5 ]; then
+##    get_ctf_data.sh "$case.h5"
+##    mv "$case.h5_new.h5" "$case_final.h5"
+##  fi
+#  rm -f cpld_temp_dens_summary.out pmaster* pdeck*.inp pdeck*.out || true
+#  date +'%a %F %T %Z'
+#fi

@@ -17,7 +17,7 @@
 %
 \documentclass[11pt]{caslreport}
 \title{VERA User Manual}             % short name
-\reportnum{CASL-U-2014-0014-004}
+\reportnum{CASL-U-2014-0014-005}
 
 % package to allow small font size in verbatim
 \usepackage{fancyvrb}
@@ -28,10 +28,12 @@
 \usepackage{longtable}
 \usepackage{tabu}
 \usepackage{VERAInputTable}
+\usepackage{enumitem}
 
 % set default paragraph styles
 \setlength{\parindent}{0in}  % do not indent paragraphs, double space between
 \addtolength{\parskip}{1.0\baselineskip}
+\frenchspacing
 
 %%---------------------------------------------------------------------------%%
 \begin{document}
@@ -56,34 +58,43 @@
 %%---------------------------------------------------------------------------%%
 
 \phantomsection
-\section*{\centerline{\large{Acronyms}}}
+\section*{\centerline{\large{Acronyms and Abbreviations}}}
 \addcontentsline{toc}{section}{\texorpdfstring{\MakeUppercase{Acronyms}}{Acronyms}}
 
 \begin{table}[htb]
 \begin{tabular}{ll}
-  CASL   & Consortium for Advanced Simulation of Light Water Reactors \\
-  BOC    & Beginning of Cycle \\
-  BWR    & Boiling Water Reactor \\
-  CFD    & Computational Fluid Dynamics \\
-  CILC   & Crud-Induced Localized Corrosion \\
-  CIPS   & Crud-Induced Power Shift (also called AOA) \\
-  CTF    & COBRA-TF (Subchannel Code) \\
-  DNB    & Departure from Nucleate Boiling \\
-  EFPD   & Effective Full Power Days \\
-  EOC    & End of Cycle \\
-  GWd/MT & Gigawatt-Days per Metric Ton Heavy Metal \\
-  HFP    & Hot Full Power \\
-  HZP    & Hot Zero Power \\
-  LWR    & Light Water Reactor \\
-  MOC    & Middle of Cycle \\
-  MWd/MT & Megawatt-Days per Metric Ton Heavy Metal \\
-  PCI    & Pellet-Cladding Interaction \\
-  PCM    & Percent Mille (10$^{-5}$) \\
-  PPM    & Parts per Million (usually boron) \\
-  PWR    & Pressurized Water Reactor  \\
-  QA     & Quality Assurance \\
-  RIA    & Reactivity Insertian Accident \\
-  VERA   & Virtual Environment for Reactor Applications \\
+  CASL    & Consortium for Advanced Simulation of Light Water Reactors \\
+  BEAVRS  & Benchmark for Evaluation And Validation of Reactor Simulations \\
+  BOC     & beginning of cycle \\
+  BWR     & boiling water reactor \\
+  CFD     & computational fluid dynamics \\
+  CHF     & critical heat flux \\
+  CILC    & crud-induced localized corrosion \\
+  CIPS    & crud-induced power shift (also called axial offset anomaly [AOA]) \\
+  CMFD    & coarse-mesh finite difference \\ 
+  CTF     & COBRA-TF (subchannel code) \\
+  DNB     & departure from nucleate boiling \\
+  EFPD    & effective full power day \\
+  EOC     & end of cycle \\
+  GT      & guide tube \\
+  GWd/MT  & gigawatt-days per metric ton heavy metal \\
+  HFP     & hot full power \\
+  HZP     & hot zero power \\
+  IT      & instrument tube \\ 
+  LWR     & light-water reactor \\
+  MOC     & middle of cycle \\
+  MOF     & mixed oxide fuel \\
+  ModSim  & modeling and simulation \\
+  MWd/MT  & megawatt-days per metric ton heavy metal \\
+  PCI     & pellet-cladding interaction \\
+  PCM     & per cent mille (10$^{-5}$) \\
+  PPM     & parts per million (usually boron) \\
+  PWR     & pressurized water reactor \\
+  QA      & quality assurance \\
+  RIA     & reactivity insertion accident \\
+  STH     & system thermal hydraulic \\
+  UQ      & uncertainty quantification \\
+  VERA    & Virtual Environment for Reactor Applications \\
 \end{tabular}
 \end{table}
 
@@ -101,55 +112,55 @@
 \label{chap:user}
 
 The VERA common input is an ASCII file and is designed to be modular.
-The input is split into separate modules
+The input is divided into separate modules
 (or blocks) to describe the different geometric objects in the core and
 to define specific modeling options for each of the physics codes.
 
 Geometric objects are defined as the physical ``parts'' of the reactor core, which includes
 fuel assemblies, control rod assemblies, removable burnable poison assemblies, and detectors.
 By defining each geometric object as a separate block, the objects can be described
-independently of each other and rely on very little global information.  The independent
-descriptions make quality assurance (QA) easier and allows objects to be defined in one cycle
-and be re-used in subsequent cycles without worrying about input conflicts.
-Another advantage of the module approach is that it makes it easier to shuffle fuel assemblies,
-and insert and withdraw ``inserts'' (such as control rods, detectors, and removable burnable
-poison assemblies) into the fuel assemblies as the core configuration changes.
+independently of each other, relying on very little global information. The independent
+descriptions make quality assurance (QA) easier, they allow objects to be defined in one cycle,
+and they allow objects to be reused in subsequent cycles without concerns about input conflicts.
+Another advantage of the module approach is that it is easier to shuffle fuel assemblies
+and to insert and withdraw ``inserts'' such as control rods, detectors, and removable burnable
+poison assemblies into the fuel assemblies as the core configuration changes.
 
 Additional modules/blocks are used to define modeling options and parameters for each of the physics
-codes.  Separating the geometry description from the modeling options allows all of the
-physics codes to share the same geometry description and also allows the same input to be
+codes. Separating the geometry description from the modeling options allows all of the
+physics codes to share the same geometry description, and it also allows the same input to be
 used with multiple physics codes.
 
-The VERA input blocks are:
+The VERA input blocks are as follows:
 \begin{description}
 \item[CASEID] This block contains an input title card.
-\item[CORE] This block describes the core layout including core map, assembly locations,
-  control rod locations, and assembly insert locations.  The CORE block contains data that does not change
+\item[CORE] This block describes the core layout, including the core map, assembly locations, 
+  control rod locations, and assembly insert locations. The CORE block contains data that does not change
   during a cycle depletion.
 \item[STATE] These blocks describe reactor core operating parameters (statepoint values)
   at a particular point in time.
   Parameters include inlet temperature, pressure, power, control rod positions, and others.
-  STATE values can (and usually do) change at each statepoint.
+  STATE values can, and usually do, change at each statepoint.
 \item[ASSEMBLY] These blocks contain the geometry and physical description of the nuclear fuel assemblies.
   The assembly descriptions do not include control rods, detectors, or inserts.
 \item[INSERT] These blocks contain the geometry and physical description of the assembly inserts.
-   An insert is a generic term used to describe a removable burnable poison assembly or a thimble plug assembly.
+   An \textit{insert} is a generic term used to describe a removable burnable poison assembly or a thimble plug assembly.
 \item[CONTROL] These blocks contain the geometry and physical description of a control rod assembly.
    A control rod assembly is similar to an assembly insert, except that it can move
    during operations.
-\item[DETECTOR] These blocks contain the geometry and physical description of a detector string.
-\item[EDITS] This block contains information on what edits the code should produce.
+\item[DETECTOR] This block contains the geometry and physical description of a detector string.
+\item[EDITS] This block contains information about what edits the code should produce.
 \item[COUPLING] This block contains parameters for coupling different physics codes together.
 \end{description}
 
-In addition to the blocks listed above, there are additional code-specific blocks that contain
+In addition to the blocks listed above, additional code-specific blocks contain
 options specific to each physics code.
 Examples of code-specific blocks are {\bf COBRATF}, {\bf MPACT}, and {\bf SHIFT}.
 Additional code-specific input blocks can be added as new physics codes are added to the core simulator.
 
 The following sections in this chapter describe the most common concepts and features of each input block.
 This section does not provide a comprehensive list of each input card or option on each card.
-Refer to Chapter~\ref{chap:cards} for a detailed listing of all input and options.
+Refer to Chapter~\ref{chap:cards} for a detailed list of all inputs and options.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Section: Syntax
@@ -157,43 +168,42 @@ Refer to Chapter~\ref{chap:cards} for a detailed listing of all input and option
 \label{sec:inputsyntax}
 
 VERA input files are text files that contain standard printable ASCII characters.
-The data is organized in blocks with names and purpose as described in the
+The data are organized in blocks with names and purposes, as described in the
 introduction. The start of a block is denoted by the block name enclosed in
-square brackets, e.g. [STATE]. The file block structure is flat, so that there is
-no hierarchy in the block segments. A start of a new block also implies the end of
+square brackets (e.g., [STATE]). The file block structure is flat, so there is
+no hierarchy in the block segments. The start of a new block also implies the end of
 the previous block. There can be multiple instances of [ASSEMBLY], [INSERT], and [STATE] blocks.
-Other blocks, like [CORE] and the code-specific blocks, are unique, so that a new
+Other blocks, like [CORE] and the code-specific blocks, are unique, so a new
 block with the same name of an existing block will overwrite the existing block data.
-There is no required order of the blocks in input file, except for the [STATE] blocks,
+There is no required order of the blocks in the input file except for the [STATE] blocks,
 in which each statepoint must be entered in chronological order.
 
 The blocks contain input cards that are generally organized as keyword-value pairs
-or keyword-tag-value triplets where tag denotes the keyword name tag that can be
-referenced in the other related commands. Keywords should not have blank spaces,
-as the spaces usually imply delimiters in the card data.  A value can be a single
-or list entry.
+or keyword-tag-value triplets, where \textit{tag} denotes the keyword name tag that can be
+referenced in the other related commands. Keywords should not have blank spaces
+since the spaces typically imply delimiters in the card data.  A value can be a single entry
+or a list entry.
 Input card value entries can contain different data types, depending on the card format.
 The data types are real numbers, integers, characters, and character strings.
 String entries that include spaces should be enclosed in
 single or double quote pairs.
 
-The block, keyword and tag names are case sensitive.  Therefore, it is recommended
-that users should not depend on the capitalization for differentiation between
+The block, keyword, and tag names are case sensitive. Therefore, users should not depend on capitalization for differentiation among
 entries in the file.
 
-In this manual, the convention used is that all input examples are shown in {\tt typewriter font}.
+In this manual, all input examples are shown in {\tt typewriter font}.
 When input cards are used in the text (not in the examples), they are listed in {\it italic font}.
-All block names are listed with square brackets around them.
+All block names are enclosed in square brackets.
 
-The exclamation mark, !,  is a special character that makes everything from it to the
-end of line ignored for processing and is used for adding comments in an input file.
+The exclamation mark, ``!'',  is a special character used for adding comments in an input file; everything from an exclamation point to the
+end of the line is a comment and is ignored by the processor.
 
 The keyword {\it include} can be used to insert the contents of another file into the input file.
 
 Short commands are expected to complete within a single line. Longer commands, like input maps,
 can be split across multiple lines.
 
-An example input fragment showing blocks, comments, and cards, is shown below.
+An example input fragment with blocks, comments, and cards is shown below.
 \begin{Verbatim}[fontsize=\small]
   ! comments start with an exclamation point
 
@@ -211,11 +221,11 @@ An example input fragment showing blocks, comments, and cards, is shown below.
 
 \end{Verbatim}
 
-Lists of values can be generated by using the following bracket nomenclature
+Lists of values can be generated by using the following bracket nomenclature:
 $$ < n .. m \, \mbox{x} \, i > $$
 where $n$ is the starting list number, $m$ is the ending list number, $\mbox{x}$ is a delimiter, and $i$ is the step.
-If ``$\mbox{x} \, i$'' is ommitted, the step size is one.
-Examples of list generated list include:
+If ``$\mbox{x} \, i$'' is ommitted, then the step size is one.
+Examples of generated lists include:
 \begin{Verbatim}[fontsize=\small]
   <0..5>         0, 1, 2, 3, 4, 5
   <10..16x2>     10, 12, 14, 16
@@ -247,7 +257,7 @@ Additional list options can be found on the \href{https://metacpan.org/pod/relea
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Input Card Descriptions} \label{chap:cards}
-This chapter contains a complete listing of the available input cards.
+This chapter contains a complete list of the available input cards.
 
 The input for each block is given in separate subsections.
 
@@ -265,9 +275,9 @@ This chapter includes several input examples.  Additional examples can be found 
 
 %%%%%%%%%%%%%%%%%%
 % Example 1
-\subsection{Example 1 -- Full-Core}
+\subsection{Example 1 -- Full Core}
 The first example is a complete input for a full-core problem.
-This problem is Problem 7 of the CASL Progression Benchmark Problems and
+This problem is Problem 7 of the VERA Core Physics Benchmark Progression Problem Specifications and
 is based upon the publicly available description of the Watts Bar reactors.
 
 More information on the CASL Progression Benchmark Problems can be found in the following CASL report:
@@ -276,7 +286,7 @@ More information on the CASL Progression Benchmark Problems can be found in the 
 CASL Technical Report: \href{http://www.casl.gov/sites/default/files/docs/CASL-U-2012-0131-004.pdf}{CASL-U-2012-0131-004}, August 2014.
 \end{itemize}
 
-More details on Problem 7 can be found in:
+More details on Problem 7 can be found in the following CASL report:
 \begin{itemize}
 \item ``Demonstration and Neutronics Coupled to Thermal-Hydraulics for a Full-Core Problem using VERA'',
 CASL Technical Report: \href{http://www.casl.gov/sites/default/files/docs/CASL-U-2013-0196-000.pdf}{CASL-U-2013-0196-000}, December 2013.
@@ -286,21 +296,21 @@ CASL Technical Report: \href{http://www.casl.gov/sites/default/files/docs/CASL-U
 
 %%%%%%%%%%%%%%%%%%
 % Example 2
-\subsection{Example 2 -- Single-Assembly}
+\subsection{Example 2 -- Single Assembly}
 The second example is a partial input for a single-assembly with T/H feedback.
-This problem is Problem 6 of the CASL Progression Benchmark Problems.  See:
+This problem is Problem 6 of the VERA Core Physics Benchmark Progression Problem Specifications.  See:
 \begin{itemize}
 \item A. Godfrey, ``VERA Core Physics Benchmark Progression Problem Specifications,''
-CASL Technical Report: \href{http://www.casl.gov/docs/CASL-U-2012-0131-004.pdf}{CASL-U-2012-0131-004}, August 2014.
+CASL Technical Report: \href{http://www.casl.gov/sites/default/files/docs/CASL-U-2012-0131-004.pdf}{CASL-U-2012-0131-004}, August 2014.
 \end{itemize}
 
-A single-assembly is defined by creating a core with one assembly in it,
+A single assembly is defined by creating a core with one assembly in it,
 as described in the small-core geometry discussion in Section~\ref{sec:smallcoregeom}.
 
 This input is also used to demonstrate the modular structure of the input.  The [ASSEMBLY],  [EDITS],
-[COBRATF], and [COUPLING] blocks are identical to Example Problem~1, and show how blocks
+[COBRATF], and [COUPLING] blocks are identical to Example~1, and they show how blocks
 can be re-used in different input decks.
-These blocks are not included here, but can be copied directly from the first
+These blocks are not included here, but they can be copied directly from the first
 example problem if the user wishes to run this problem.
 
 \include{example2}
@@ -309,14 +319,14 @@ example problem if the user wishes to run this problem.
 % Example 3
 \subsection{Example 3 -- 2D Lattice Geometry}
 The third example is a complete input for a 2D lattice.
-This problem is Problem 2A of the CASL Progression Benchmark Problems. See:
+This problem is Problem 2A of the VERA Core Physics Benchmark Progression Problem Specifications. See:
 \begin{itemize}
 \item A. Godfrey, ``VERA Core Physics Benchmark Progression Problem Specifications,''
-CASL Technical Report: \href{http://www.casl.gov/docs/CASL-U-2012-0131-004.pdf}{CASL-U-2012-0131-004}, August 2014.
+CASL Technical Report: \href{http://www.casl.gov/sites/default/files/docs/CASL-U-2012-0131-004.pdf}{CASL-U-2012-0131-004}, August 2014.
 \end{itemize}
 
 
-A single-assembly is defined by creating a core with a one assembly in it,
+A single assembly is defined by creating a core with one assembly in it,
 as described in the small-core geometry description in Section~\ref{sec:smallcoregeom}.
 
 The 2D lattice is defined by specifying an {\it axial} card with one level and defining

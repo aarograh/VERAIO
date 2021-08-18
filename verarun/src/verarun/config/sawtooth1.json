@@ -1,0 +1,48 @@
+{
+"domain": "inl.gov",
+
+"email_env":
+  [
+    "#PBS -M {email_addrs}",
+    "#PBS -m ea"
+  ],
+
+"env": [],
+
+"hostname": "sawtooth1",
+
+"mail_from": "hpc@inl.gov",
+
+"mpi_args": [],
+
+"pbs": "Torque",
+
+"pbs_env":
+  [
+    "#PBS -N {job_name}",
+    "#PBS -o {case}.stdout",
+    "#PBS -l select={nodes:d}:ncpus=48:mpiprocs={ppn:d}",
+    "#PBS -l walltime={walltime}",
+    "#PBS -j oe"
+  ],
+
+"pmem_env":
+  [
+    "#PBS -l pmem={pmem}"
+  ],
+
+"project_default": "vera",
+"project_env": "#PBS -P {project}",
+
+"specs":
+  {
+  "hwthreads": 1,
+  "units": 24,
+  "sockets": 2,
+  "nodes": 2052,
+  "mem": 180
+  },
+
+"_VeraDefaultVersion": "VERA_4.0RC3",
+"VeraInstallsDir": "/projects/vera-cs-user/VERA_builds_sawtooth/builds/"
+}

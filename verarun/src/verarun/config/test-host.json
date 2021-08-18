@@ -1,13 +1,52 @@
 {
-"_VeraDefaultVersion": "vera-3.7.0",
-"VeraInstallsDir": "/Users/re7x/src/verarun/test/vera_installs",
+"__account_default": "NSED",
+"__account_env": "#PBS -A {project}",
+
 "domain": "ornl.gov",
+
+"email_env":
+  [
+    "#PBS -m eab",
+    "#PBS -M {email_addrs}"
+  ],
+
 "env":
   [
     "export TestEnvDir=\"$HOME/src/verarun/test\"",
     "export TestEnvDir2=\"$TestEnvDir/vera_installs\""
   ],
+
 "hostname": "test-host",
+
+"mail_from": "no-reply@ornl.gov",
+
+"mpi_args":
+  [
+    "-env MV2_HCA_AWARE_PROCESS_MAPPING 0",
+    "-env MV2_SHMEM_DIR \"/tmp\""
+  ],
+
+"pbs": "Torque",
+
+"pbs_env":
+  [
+    "#PBS -N {job_name}",
+    "#PBS -o {case}.stdout",
+    "#PBS -l nodes={nodes:d}:ppn={ppn:d}",
+    "#PBS -l walltime={walltime}",
+    "#PBS -j oe",
+    "#PBS -q {queue}"
+  ],
+
+"pmem_env":
+  [
+    "#PBS -l pmem={pmem}"
+  ],
+
+"project_default": "NSED",
+"_project_env": "#PBS -A {project}",
+"project_env": "#PBS -P {project}",
+
 "specs":
   {
   "hwthreads": 2,
@@ -17,27 +56,6 @@
   "mem": 128
   },
 
-"pbs_env":
-  [
-    "#PBS -N {job_name}",
-    "#PBS -o {case}.stdout",
-    "#PBS -l nodes={nodes:d}:ppn={ppn:d}",
-    "#PBS -l walltime={walltime}",
-    "#PBS -j oe",
-    "#PBS -A {account}",
-    "#PBS -q {queue}"
-  ],
-
-"email_env":
-  [
-    "#PBS -M {email_addrs}",
-    "#PBS -m ea"
-  ],
-
-"pmem_env":
-  [
-    "#PBS -l pmem={pmem:d}gb"
-  ],
-
-"env": []
+"_VeraDefaultVersion": "vera-3.7.0",
+"VeraInstallsDir": "/Users/re7x/src/verarun/test/vera_installs"
 }

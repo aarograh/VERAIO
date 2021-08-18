@@ -1,4 +1,15 @@
-e[CASEID]
+!===============================================================================
+!> @beginreq
+!> - The VERAIn package shall throw an error for an input modeled
+!> in quarter symmetry and with automated ex-core detector and bioshield
+!> without a vessel definition; the vera2omn script should be triggered and
+!> the following error message produced---
+!> Error: vera_pressure_vessel is False but automated excore generator
+!> will only define the geometry beyond the vessel.
+!> VERA2OMN failed.
+!> @endreq
+!===============================================================================
+[CASEID]
   title 'Mini Core - using 7x7 assemblies'
 
 [STATE]

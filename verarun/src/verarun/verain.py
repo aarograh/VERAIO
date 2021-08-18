@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 # $Id$
 #------------------------------------------------------------------------
-#	NAME:		verain.py					-
-#	HISTORY:							-
-#		2018-07-16	leerw@ornl.gov				-
+#       NAME:           verain.py                                       -
+#       HISTORY:                                                        -
+#               2021-02-17      leerw@ornl.gov                          -
+#         Added find_single_state_param().
+#               2020-04-09      leerw@ornl.gov                          -
+#         Converting assertions to exceptions.
+#               2018-07-16      leerw@ornl.gov                          -
 #------------------------------------------------------------------------
 import logging, os, re, six, socket, sys
 from datetime import datetime
@@ -31,7 +35,7 @@ INT_KEYS = set([ 'pmem', 'ppn' ])
 
 
 #------------------------------------------------------------------------
-#	CLASS:		VeraInput					-
+#       CLASS:          VeraInput                                       -
 #------------------------------------------------------------------------
 class VeraInput( dict ):
   """
@@ -41,12 +45,12 @@ class VeraInput( dict ):
 Error: For excore transport in forward mode, you must specify nprocs"""
 
 
-#		-- Object Methods
-#		--
+#               -- Object Methods
+#               --
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInput.__init__()				-
+  #     METHOD:         VeraInput.__init__()                            -
   #----------------------------------------------------------------------
   def __init__( self, fpath = None ):
     """
@@ -61,38 +65,39 @@ Error: For excore transport in forward mode, you must specify nprocs"""
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInput.read()				-
+  #     METHOD:         VeraInput.read()                                -
   #----------------------------------------------------------------------
   def read( self, fpath ):
     """
     Args:
         fpath (str): path to inp file
 """
-    assert os.path.exists( fpath ), 'File not found: "{0}"'.format( fpath )
+    if not os.path.exists( fpath ):
+      raise Exception( 'File not found: "{0}"'.format( fpath ) )
 
-#		-- Read until [RUN] block
-#		--
+#               -- Read until [RUN] block
+#               --
     with open( fpath, 'rt' ) as fp:
       line = fp.readline()
       in_block = False
       while line:
         line = line.rstrip( '\r\n' ).lstrip( '\t ' )
         if line.find( '[RUN]' ) == 0:
-	  in_block = True
-	elif in_block:
-	  if line.find( '[' ) == 0:
-	    break
-	  elif in_block and len( line ) > 0:
-	    tokens = re.split( '\s+', line )
-	    if len( tokens ) >= 2:
-	      try:
-	        self[ tokens[ 0 ] ] = \
-	            float( tokens[ 1 ] )  if tokens[ 0 ] in FLOAT_KEYS else \
-	            int( tokens[ 1 ] )  if tokens[ 0 ] in INT_KEYS else \
-	            tokens[ 1 ]
-	      except Exception as ex:
-	        self.logger.exception( ex )
-	#end elif in_block:
+          in_block = True
+        elif in_block:
+          if line.find( '[' ) == 0:
+            break
+          elif in_block and len( line ) > 0:
+            tokens = re.split( '\s+', line )
+            if len( tokens ) >= 2:
+              try:
+                self[ tokens[ 0 ] ] = \
+                    float( tokens[ 1 ] )  if tokens[ 0 ] in FLOAT_KEYS else \
+                    int( tokens[ 1 ] )  if tokens[ 0 ] in INT_KEYS else \
+                    tokens[ 1 ]
+              except Exception as ex:
+                self.logger.exception( ex )
+        #end elif in_block:
 
         line = fp.readline()
       #end while line
@@ -103,19 +108,19 @@ Error: For excore transport in forward mode, you must specify nprocs"""
 
 
 #------------------------------------------------------------------------
-#	CLASS:		VeraInputXMLDoc					-
+#       CLASS:          VeraInputXMLDoc                                 -
 #------------------------------------------------------------------------
 class VeraInputXMLDoc( object ):
   """
 """
 
 
-#		-- Object Methods
-#		--
+#               -- Object Methods
+#               --
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInputXMLDoc.__init__()			-
+  #     METHOD:         VeraInputXMLDoc.__init__()                      -
   #----------------------------------------------------------------------
   def __init__( self, fpath = None ):
     """
@@ -131,18 +136,18 @@ class VeraInputXMLDoc( object ):
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInputXMLDoc._extract_attr_value()		-
+  #     METHOD:         VeraInputXMLDoc._extract_attr_value()           -
   #----------------------------------------------------------------------
   def _extract_attr_value( self, node, expr = None ):
     """
     Args:
-	node (xml.etree.ElementTree.Element): element from which to
-	    extract the value
+        node (xml.etree.ElementTree.Element): element from which to
+            extract the value
         expr (str): xpath expression to apply ``node``, or None to use
-	    the ``node`` itself
+            the ``node`` itself
     Returns:
         int,double,list,str: depending on 'type' attribute, or None if
-	    not found
+            not found
 """
     value = None
     if node is not None and expr:
@@ -151,20 +156,20 @@ class VeraInputXMLDoc( object ):
 
     if node is not None:
       try:
-	value_type = node.attrib.get( 'type', '' )
-	value_str = node.attrib.get( 'value', '' )
-	if value_type == 'double':
-	  value = float( value_str )
-	elif value_type == 'int':
-	  value = int( value_str )
-	elif value_type == 'Array(double)':
-	  value = [ float( x ) for x in value_str[ 1 : -1 ].split( ',' ) ]
-	elif value_type == 'Array(int)':
-	  value = [ int( x ) for x in value_str[ 1 : -1 ].split( ',' ) ]
-	elif value_type == 'Array(string)':
-	  value = value_str[ 1 : -1 ].split( ',' )
-	else:
-	  value = value_str
+        value_type = node.attrib.get( 'type', '' )
+        value_str = node.attrib.get( 'value', '' )
+        if value_type == 'double':
+          value = float( value_str )
+        elif value_type == 'int':
+          value = int( value_str )
+        elif value_type == 'Array(double)':
+          value = [ float( x ) for x in value_str[ 1 : -1 ].split( ',' ) ]
+        elif value_type == 'Array(int)':
+          value = [ int( x ) for x in value_str[ 1 : -1 ].split( ',' ) ]
+        elif value_type == 'Array(string)':
+          value = value_str[ 1 : -1 ].split( ',' )
+        else:
+          value = value_str
       except Exception as ex:
         self._logger.exception( ex )
 
@@ -173,86 +178,93 @@ class VeraInputXMLDoc( object ):
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInputXMLDoc.find_assm_map()			-
+  #     METHOD:         VeraInputXMLDoc.find_assm_map()                 -
   #----------------------------------------------------------------------
   def find_assm_map( self ):
     """
     Returns:
-	list(int): None if not found
+        list(int): None if not found
 """
-    assert self._document is not None, 'No document'
+    if  self._document is None:
+      raise Exception( 'No document' )
     result = self._extract_attr_value(
-	self._document.getroot(),
-	expr = 'ParameterList[@name="CORE"]/Parameter[@name="assm_map"]'
+        self._document.getroot(),
+        expr = 'ParameterList[@name="CORE"]/Parameter[@name="assm_map"]'
         )
     return  result
   #end find_assm_map
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInputXMLDoc.find_axial_mesh()		-
+  #     METHOD:         VeraInputXMLDoc.find_axial_mesh()               -
   #----------------------------------------------------------------------
   def find_axial_mesh( self ):
     """
     Returns:
-	list(float): None if not found
+        list(float): None if not found
 """
-    assert self._document is not None, 'No document'
+    if self._document is None:
+      raise Exception( 'No document' )
     result = self._extract_attr_value(
-	self._document.getroot(),
-	'ParameterList[@name="MPACT"]' +
-	'/ParameterList[@name="mesh"]' +
-	'/Parameter[@name="axial_mesh"]'
+        self._document.getroot(),
+        'ParameterList[@name="MPACT"]' +
+        '/ParameterList[@name="mesh"]' +
+        '/Parameter[@name="axial_mesh"]'
         )
     return  result
   #end find_axial_mesh
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInputXMLDoc.find_core_height()		-
+  #     METHOD:         VeraInputXMLDoc.find_core_height()              -
   #----------------------------------------------------------------------
   def find_core_height( self ):
     """
     Returns:
         float: core height in cm, None if not found
 """
-    assert self._document is not None, 'No document'
+    if self._document is None:
+      raise RuntimeError( 'No document' )
+
     result = self._extract_attr_value(
-	self._document.getroot(),
-	'ParameterList[@name="CORE"]/Parameter[@name="height"]'
+        self._document.getroot(),
+        'ParameterList[@name="CORE"]/Parameter[@name="height"]'
         )
     return  result
   #end find_core_height
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInputXMLDoc.find_core_size()		-
+  #     METHOD:         VeraInputXMLDoc.find_core_size()                -
   #----------------------------------------------------------------------
   def find_core_size( self ):
     """
     Returns:
         int: core size, None if not found
 """
-    assert self._document is not None, 'No document'
+    if self._document is None:
+      raise RuntimeError( 'No document' )
+
     result = self._extract_attr_value(
-	self._document.getroot(),
-	'ParameterList[@name="CORE"]/Parameter[@name="core_size"]'
+        self._document.getroot(),
+        'ParameterList[@name="CORE"]/Parameter[@name="core_size"]'
         )
     return  result
   #end find_core_size
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInputXMLDoc.find_files()			-
+  #     METHOD:         VeraInputXMLDoc.find_files()                    -
   #----------------------------------------------------------------------
   def find_files( self, card_name ):
     """xxxxx Need an example.
     Args:
         card_name (str): name of input param
     Returns:
-	list(str): list of filenames
+        list(str): list of filenames
 """
-    assert self._document is not None, 'No document'
+    if self._document is None:
+      raise RuntimeError( 'No document' )
 
     result = None
     expr = 'ParameterList[@name="RESTART"]/Parameter[@name="{0}"]'.\
@@ -260,8 +272,8 @@ class VeraInputXMLDoc( object ):
     nodes = self._document.getroot().findall( expr )
     if nodes:
       result = list( filter(
-	  lambda x : len( x ) > 0,
-	  [ node.attrib.get( 'value', '' ) for n in nodes ]
+          lambda x : len( x ) > 0,
+          [ node.attrib.get( 'value', '' ) for n in nodes ]
           ) )
 
     return  result
@@ -269,7 +281,7 @@ class VeraInputXMLDoc( object ):
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInputXMLDoc.find_param_blocks()		-
+  #     METHOD:         VeraInputXMLDoc.find_param_blocks()             -
   #----------------------------------------------------------------------
   def find_param_blocks( self, *names ):
     """Finds the ParameterList blocks matching the name attribute
@@ -277,15 +289,17 @@ values in hierarchical order.
     Args:
         *names: block name attribute values in order
     Returns:
-	list(xml.etree.ElementTree.Element): matching elements
+        list(xml.etree.ElementTree.Element): matching elements
 """
-    assert self._document is not None, 'No document'
+    if self._document is None:
+      raise RuntimeError( 'No document' )
+
     result = None
     if names:
       expr = ''
       for name in names:
-	if len( expr ) > 0:
-	  expr += '/'
+        if len( expr ) > 0:
+          expr += '/'
         expr += 'ParameterList[@name="{0}"]'.format( name )
 
       result = self._document.getroot().findall( expr )
@@ -295,14 +309,15 @@ values in hierarchical order.
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInputXMLDoc.find_run_params()		-
+  #     METHOD:         VeraInputXMLDoc.find_run_params()               -
   #----------------------------------------------------------------------
   def find_run_params( self ):
     """
     Returns:
-	dict: parameters in the RUN block (email, pmem, ppn, walltime)
+        dict: parameters in the RUN block (email, pmem, ppn, walltime)
 """
-    assert self._document is not None, 'No document'
+    if self._document is None:
+      raise RuntimeError( 'No document' )
 
     params = {}
 
@@ -311,34 +326,34 @@ values in hierarchical order.
     if nodes:
       for node in nodes:
         name = node.attrib.get( 'name' )
-	val = self._extract_attr_value( node )
-	if val and val != 'default':
-	  params[ name ] = self._extract_attr_value( node )
+        val = self._extract_attr_value( node )
+        if val and val != 'default':
+          params[ name ] = self._extract_attr_value( node )
     #end if nodes
 
 #               -- nprocs not specified?
 #               --
     if params.get( 'nprocs', 0 ) == 0:
-#		        -- Calculate MPACT nprocs
-#		        -- (MPACT/MPACT_exe/src/MPACT_get_ncore.f90)
+#                       -- Calculate MPACT nprocs
+#                       -- (MPACT/MPACT_exe/src/MPACT_get_ncore.f90)
       nodes = self._document.getroot().\
 findall( 'ParameterList[@name="MPACT"]/ParameterList[@name="parallel_env"]' )
       if nodes:
         nprocs = None
         for name in ( 'num_angle', 'num_energy', 'num_space', 'num_threads' ):
-	  expr = 'Parameter[@name="{0}"]'.format( name )
+          expr = 'Parameter[@name="{0}"]'.format( name )
           val = self._extract_attr_value( nodes[ 0 ], expr = expr )
-	  if val:
-	    if nprocs is None:
-	      nprocs = abs( val )
-	    else:
-	      nprocs *= abs( val )
+          if val:
+            if nprocs is None:
+              nprocs = abs( val )
+            else:
+              nprocs *= abs( val )
         if nprocs is not None:
           params[ 'nprocs' ] = nprocs
       #end if nodes
 
-#		        -- Add for Shift
-#		        --
+#                       -- Add for Shift
+#                       --
       excore_values = self.find_state_params( 'excore_transport' )
       if excore_values and 'on' in excore_values:
         problem_mode = self._extract_attr_value(
@@ -371,7 +386,7 @@ expr = 'ParameterList[@name="SHIFT"]/Parameter[@name="problem_mode"]'
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInputXMLDoc.find_shift_param()		-
+  #     METHOD:         VeraInputXMLDoc.find_shift_param()              -
   #----------------------------------------------------------------------
   def find_shift_param( self, name ):
     """Retrieves the parameter value from the SHIFT ParameterList
@@ -379,14 +394,15 @@ expr = 'ParameterList[@name="SHIFT"]/Parameter[@name="problem_mode"]'
         name (str): parameter name
     Returns:
         int,double,list,str: depending on 'type' attribute, or None if
-	    not found
+            not found
 """
-    assert self._document is not None, 'No document'
+    if self._document is None:
+      raise RuntimeError( 'No document' )
 
     result = None
     expr = \
         'ParameterList[@name="SHIFT"]/Parameter[@name="{0}"]'.\
-	format( name )
+        format( name )
     nodes = self._document.getroot().findall( expr )
     if nodes:
       result = self._extract_attr_value( nodes[ 0 ] )
@@ -396,14 +412,42 @@ expr = 'ParameterList[@name="SHIFT"]/Parameter[@name="problem_mode"]'
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInputXMLDoc.find_state_count()		-
+  #     METHOD:         VeraInputXMLDoc.find_single_state_param()       -
+  #----------------------------------------------------------------------
+  def find_single_state_param( self, st_ndx, param_name ):
+    """Retrieves a single parameter value from one state
+    Args:
+        st_ndx (int): 0-based state index
+        param_name (str): parameter name
+    Returns:
+        int,double,list,str: depending on 'type' attribute, or None if
+            not found
+"""
+    if self._document is None:
+      raise RuntimeError( 'No document' )
+
+    result = None
+    expr = \
+'ParameterList[@name="STATES"]/ParameterList[@name="State_{0:d}"]/Parameter[@name="{1}"]'.\
+        format( st_ndx + 1, param_name )
+    nodes = self._document.getroot().findall( expr )
+    if nodes:
+      result = self._extract_attr_value( nodes[ 0 ] )
+
+    return  result
+  #end find_single_state_param
+
+
+  #----------------------------------------------------------------------
+  #     METHOD:         VeraInputXMLDoc.find_state_count()              -
   #----------------------------------------------------------------------
   def find_state_count( self ):
     """
     Returns:
         int: number of states or None if no STATES found
 """
-    assert self._document is not None, 'No document'
+    if self._document is None:
+      raise RuntimeError( 'No document' )
 
     count = None
     nodes = self._document.getroot().\
@@ -416,46 +460,48 @@ expr = 'ParameterList[@name="SHIFT"]/Parameter[@name="problem_mode"]'
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInputXMLDoc.find_state_params()		-
+  #     METHOD:         VeraInputXMLDoc.find_state_params()             -
   #----------------------------------------------------------------------
   def find_state_params( self, name ):
     """Retrieves the parameter values for each state
     Args:
         name (str): parameter name
     Returns:
-	list: values for each state or None if not found
+        list: values for each state or None if not found
 """
-    assert self._document is not None, 'No document'
+    if self._document is None:
+      raise RuntimeError( 'No document' )
 
     result = None
     expr = \
         'ParameterList[@name="STATES"]/ParameterList/Parameter[@name="{0}"]'.\
-	format( name )
+        format( name )
     nodes = self._document.getroot().findall( expr )
     if nodes:
       result = []
       for n in nodes:
-	result.append( self._extract_attr_value( n ) )
+        result.append( self._extract_attr_value( n ) )
 
     return  result
   #end find_state_params
 
 
   #----------------------------------------------------------------------
-  #	METHOD:		VeraInputXMLDoc.read()				-
+  #     METHOD:         VeraInputXMLDoc.read()                          -
   #----------------------------------------------------------------------
   def read( self, fpath ):
     """Sets the `document` property.
     Args:
         fpath (str): path to XML file
 """
-    assert os.path.exists( fpath ), 'File not found: "{0}"'.format( fpath )
+    if not os.path.exists( fpath ):
+      raise Exception( 'File not found: "{0}"'.format( fpath ) )
     self._document = ET.parse( fpath )
   #end read
 
 
-#		-- Properties
-#		--
+#               -- Properties
+#               --
 
 
   document = property( lambda x: x._document )

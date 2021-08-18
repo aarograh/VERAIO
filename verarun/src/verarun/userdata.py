@@ -3,6 +3,10 @@
 #------------------------------------------------------------------------
 #       NAME:           userdata.py                                     -
 #       HISTORY:                                                        -
+#               2020-04-16      leerw@ornl.gov                          -
+#         Added clear_job_history(), changed sort order to ascending time.
+#               2020-03-03      leerw@ornl.gov                          -
+#         Equating job "name" to the job "ID".
 #               2019-04-04      leerw@ornl.gov                          -
 #               2019-03-11      leerw@ornl.gov                          -
 #------------------------------------------------------------------------
@@ -11,7 +15,8 @@ import json, logging, os, re, sys, time
 import pdb
 
 
-REGEX_JOB_ID = re.compile( r'^(\d+)(.*)$' )
+#REGEX_JOB_ID = re.compile( r'^(\d+)(.*)$' )
+REGEX_JOB_ID = re.compile( r'\d+' )
 
 
 #------------------------------------------------------------------------
@@ -25,23 +30,19 @@ class JobInfo( dict ):
   #----------------------------------------------------------------------
   #     METHOD:         JobInfo.__init__()                              -
   #----------------------------------------------------------------------
-  #def __init__( self, job_name, job_id, dtg, run_dir, depend_job = None ):
   def __init__( self, **kwargs ):
     """
     Args:
         **kwargs (dict):
-            job_name (str): job name
-            job_id (int): job ID
-            dtg (str): time of submission
-            run_dir (str): run directory
             depend_job (str): optional name of dependent job
+            dtg (str): time of submission
+            job_id (str): job ID
+            job_name (str): job name
+            run_dir (str): run directory
 """
     #super( dict, self ).__init__( **kwargs )
     if isinstance( kwargs, dict ):
       self.update( kwargs )
-
-    if 'job_id' in self:
-      self[ 'job_id' ] = int( self[ 'job_id' ] )
   #end __init__
 
 
@@ -51,84 +52,90 @@ class JobInfo( dict ):
   def create_sort_key( self ):
     """
 """
-    return  '{0}:{1}:{2}'.format( self.dtg, self.job_name, self.run_dir )
+    return  '{0}:{1}:{2}'.format( self.dtg, str( self.job_id ), self.run_dir )
   #end create_sort_key
 
 
   #----------------------------------------------------------------------
   #     METHOD:         JobInfo.get_depend_job_id()                     -
   #----------------------------------------------------------------------
-  def get_depend_job_id( self ):
-    """
-"""
-    depend_id = -1
-    depend_job = self.get( 'depend_job' )
-    if depend_job:
-      m = REGEX_JOB_ID.match( depend_job )
-      if m:
-        depend_id = int( m.group( 1 ) )
-
-    return  depend_id
-  #end get_depend_job_id
+#  def get_depend_job_id( self ):
+#    """
+#"""
+#    depend_id = -1
+#    depend_job = self.get( 'depend_job' )
+#    if depend_job:
+#      m = REGEX_JOB_ID.match( depend_job )
+#      if m:
+#        depend_id = int( m.group( 1 ) )
+#
+#    return  depend_id
+#  #end get_depend_job_id
 
 
   #----------------------------------------------------------------------
   #     METHOD:         JobInfo.get_depend_job_id_str()                 -
   #----------------------------------------------------------------------
-  def get_depend_job_id_str( self ):
-    """
-"""
-    depend_id = self.get_depend_job_id()
-    return  ('%d' % depend_id)  if depend_id >= 0  else ''
-  #end get_depend_job_id_str
+#  def get_depend_job_id_str( self ):
+#    """
+# ""
+#    depend_id = self.get_depend_job_id()
+#    return  ('%d' % depend_id)  if depend_id >= 0  else ''
+#  #end get_depend_job_id_str
 
 
   #----------------------------------------------------------------------
   #     METHOD:         JobInfo.get_job_id_str()                        -
   #----------------------------------------------------------------------
-  def get_job_id_str( self ):
-    """
-"""
-    job_id = int( self.get( 'job_id', -1 ) )
-    return  ('%d' % job_id)  if job_id >= 0  else ''
-  #end get_job_id_str
+#  def get_job_id_str( self ):
+#    """
+#"""
+#    job_id = int( self.get( 'job_id', -1 ) )
+#    return  ('%d' % job_id)  if job_id >= 0  else ''
+#  #end get_job_id_str
 
 
   #----------------------------------------------------------------------
-  #     METHOD:         JobInfo._set_depend_job()                       -
+  #     METHOD:         JobInfo.set_depend_job_id()                     -
   #----------------------------------------------------------------------
-  def _set_depend_job( self, value ):
+  def set_depend_job_id( self, value ):
     """
 """
-    self[ 'depend_job' ] = value
-  #end _set_depend_job
+    self[ 'depend_job_id' ] = value
+  #end set_depend_job_id
 
 
 #               -- Properties
 #               --
 
-  depend_job = property( lambda x: x.get( 'depend_job', '' ), _set_depend_job )
-  """Name of job for which this job depends"""
+  depend_job_id = property(
+      lambda self: self.get( 'depend_job_id', '' ),
+      set_depend_job_id
+      )
+  """ID of job for which this job depends"""
 
-  depend_job_id = property( get_depend_job_id )
-  """ID (int) of job for which this job depends"""
+# depend_job_id = property( get_depend_job_id )
+# """ID (int) of job for which this job depends"""
 
-  depend_job_id_str = property( get_depend_job_id_str )
-  """ID (str) of job for which this job depends"""
+# depend_job_id_str = property( get_depend_job_id_str )
+# """ID (str) of job for which this job depends"""
 
-  dtg = property( lambda x: x.get( 'dtg', '' ) )
+  dtg = property( lambda self: self.get( 'dtg', '' ) )
   """Start date/time"""
 
-  job_id = property( lambda x: x.get( 'job_id', -1 ) )
-  """Job ID int"""
+  job_id = property( lambda self: self.get( 'job_id', '' ) )
+  """Job ID"""
 
-  job_id_str = property( get_job_id_str )
-  """Job ID str"""
+# job_id = property( lambda self: self.get( 'job_id', -1 ) )
+# """Job ID int"""
 
-  job_name = property( lambda x: x.get( 'job_name', '' ) )
+# job_id_str = property( get_job_id_str )
+# """Job ID str"""
+
+  job_name = property( lambda self: self.get( 'job_name', '' ) )
   """Job name"""
 
-  run_dir = property( lambda x: x.get( 'run_dir', '' ) )
+  run_dir = property( lambda self: self.get( 'run_dir', '' ) )
   """Run directory"""
 
 #end JobInfo
@@ -213,19 +220,20 @@ class UserData( object ):
 
 
   #----------------------------------------------------------------------
-  #     METHOD:         append_job_history()                            -
+  #     METHOD:         UserData.append_job_history()                   -
   #----------------------------------------------------------------------
   def append_job_history( self, job_info ):
     """
     Args:
         job_info (dict or JobInfo): job properties
-            depend_job (str): name of dependent job
+            depend_job (str): optional name of dependent job
             dtg (str): time of submission
-            job_name (str): job_name
-            job_id (int): job_id
+            job_id (str): job ID
+            job_name (str): job name
             run_dir (str): run directory
 """
-    if job_info and 'job_name' in job_info and 'job_id' in job_info and \
+    #if job_info and 'job_name' in job_info and 'job_id' in job_info and ...
+    if job_info and 'job_id' in job_info and \
         'run_dir' in job_info and 'dtg' in job_info:
       history = self._params.get( 'job_history' )
       if history is None:
@@ -242,7 +250,25 @@ class UserData( object ):
 
 
   #----------------------------------------------------------------------
-  #     METHOD:         get_job_history()                               -
+  #     METHOD:         UserData.clear_job_history()                    -
+  #----------------------------------------------------------------------
+  def clear_job_history( self ):
+    """
+"""
+    self._read()
+    self._params[ 'job_history' ] = []
+    self._write()
+#   if os.path.exists( self._params_path ):
+#     with LockedFile( self._params_path, 'r+t' ) as fp:
+#       self._params = json.load( fp )
+#       self._params[ 'job_history' ] = []
+#       json.dump( self._params, fp, indent = 2 )
+#   #end if os.path.exists( self._params_path )
+  #end clear_job_history
+
+
+  #----------------------------------------------------------------------
+  #     METHOD:         UserData.get_job_history()                      -
   #----------------------------------------------------------------------
   def get_job_history( self, filter_by = None ):
     """
@@ -258,30 +284,37 @@ class UserData( object ):
     if items:
       if filter_by:
         items = filter( filter_by, items )
-      items = sorted( items, key = lambda x: x.create_sort_key(), reverse = True )
+      items = sorted(
+          items,
+          key = lambda x: x.create_sort_key(),
+          reverse = False
+          #reverse = True
+          )
 
     return  items
   #end get_job_history
 
 
   #----------------------------------------------------------------------
-  #     METHOD:         get_last_job_name()                             -
+  #     METHOD:         UserData.get_last_job_id()                      -
   #----------------------------------------------------------------------
-  def get_last_job_name( self ):
+  def get_last_job_id( self ):
     """
 """
-    return  self._params.get( 'last_job_name' )
-  #end get_last_job_name
+    return \
+        self._params.get( 'last_job_id', self._params.get( 'last_job_name' ) )
+    #return  self._params.get( 'last_job_name' )
+  #end get_last_job_id
 
 
   #----------------------------------------------------------------------
-  #     METHOD:         _read()                                         -
+  #     METHOD:         UserData._read()                                -
   #----------------------------------------------------------------------
   def _read( self ):
     """
 """
     if os.path.exists( self._params_path ):
-      with LockedFile( self._params_path, 'r' ) as fp:
+      with LockedFile( self._params_path, 'rt' ) as fp:
         self._params = json.load( fp )
 
       job_infos = self._params.get( 'job_history' )
@@ -292,35 +325,38 @@ class UserData( object ):
 
 
   #----------------------------------------------------------------------
-  #     METHOD:         set_last_job_name()                             -
+  #     METHOD:         UserData.set_last_job_id()                      -
   #----------------------------------------------------------------------
-  def set_last_job_name( self, value ):
+  def set_last_job_id( self, value ):
     """
 """
-    self._params[ 'last_job_name' ] = value
+    self._params[ 'last_job_id' ] = value
     self._write()
-  #end set_last_job_name
+  #end set_last_job_id
 
 
   #----------------------------------------------------------------------
-  #     METHOD:         _write()                                        -
+  #     METHOD:         UserData._write()                               -
   #----------------------------------------------------------------------
   def _write( self ):
     """
 """
     #with open( self._params_path, 'wt' ) as fp:
-    with LockedFile( self._params_path, 'w' ) as fp:
+    with LockedFile( self._params_path, 'wt' ) as fp:
       json.dump( self._params, fp, indent = 2 )
   #end _write
 
 
-#               -- Properties
+#               -- UserData Properties
 #               --
 
   job_history = property( get_job_history )
   """List of job history records"""
 
-  last_job_name = property( get_last_job_name, set_last_job_name )
-  """Last job name"""
+  last_job_id = property( get_last_job_id, set_last_job_id )
+  """Last job ID"""
+
+# last_job_name = property( get_last_job_name, set_last_job_name )
+# """Last job name"""
 
 #end UserData

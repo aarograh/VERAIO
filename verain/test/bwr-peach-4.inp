@@ -18,7 +18,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse a 2D BWR Peach Bottom 2 8x8
-!> assembly with 100 mil channel in full symmetry with 3% gad pins and
+!> assembly with a 100 mil channel in full symmetry with 3% gad pins and
 !> large water rods.
 !> @endreq
 !===============================================================================

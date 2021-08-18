@@ -1,0 +1,11 @@
+#!/bin/bash -a
+#echo "job ${3} not found" >&2
+#exit 1
+
+cat <<END
+Slurm Job_id=${3} Name=python3_test Ended
+Run time 00:00:09
+COMPLETED
+ExitCode 0
+END
+exit 0

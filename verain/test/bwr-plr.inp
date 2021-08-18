@@ -23,7 +23,7 @@
 
 !===============================================================================
 !> @beginreq
-!> - VERAIn shall include the default material name 'cool'
+!> - The VERAIn package shall be able to parse the default material name 'cool'
 !> - Ticket 6458
 !> @endreq
 !===============================================================================

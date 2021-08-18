@@ -3,9 +3,9 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall not be able to parse inputs in which a hyphen is
-!> given before the assmbly name in the assembly map. The parser shall appropriately
-!> fail and describe input error.
+!> - The VERAIn package shall throw an error for an input in which a hyphen is
+!> given before the assembly name in the assembly map. The parser shall appropriately
+!> fail and describe the input error.
 !> @endreq
 !===============================================================================
 

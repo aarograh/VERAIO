@@ -1,5 +1,5 @@
 <ParameterList name="CASEID">
-  <Parameter name="case_id" type="string" value="default" />
+  <Parameter name="case_id" type="string" value="Mini Core - using 7x7 assemblies" />
   <ParameterList name="STATES">
     <ParameterList name="State_1">
       <Parameter name="boron" type="double" value="1300" />

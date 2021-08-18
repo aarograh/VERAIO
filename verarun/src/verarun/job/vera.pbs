@@ -1,7 +1,7 @@
 #!/bin/bash
 {pbs_env}
 
-cd $PBS_O_WORKDIR
+cd "${work_dir_env}"
 
 # Local environment
 VERA_PATH="{vera_path}"
@@ -11,6 +11,7 @@ shopt -s extglob
 case={case} 
 excore_filename={excore_filename}
 cores={cores:d}
+head_hostname={head_hostname}
 restart={restart}
 run_ctf={run_ctf}
 run_mpact={run_mpact}
@@ -25,7 +26,7 @@ date +'%a %F %T %Z'
 cat <<END
 case = {case}
 input = {case}.inp
-job = $PBS_JOBID, $PBS_JOBNAME
+job = ${job_id_env}, ${job_name_env}
 pwd = $PWD
 
 Control
@@ -128,9 +129,7 @@ if [ "$run_multistate_cobra" -a -f "$case.xml" ]; then
 =================================================
 END
   #multistate_cobra -xmlfile=deck.xml
-  mpiexec \
-      -env MV2_HCA_AWARE_PROCESS_MAPPING 0 \
-      -env MV2_SHMEM_DIR "/tmp" \
+  mpiexec {mpi_args} \
       -n $cores multistate_cobra deck.xml
   date +'%a %F %T %Z'
 fi
@@ -150,7 +149,7 @@ if [ "$mpact_exe" -a -f "$case.xml" ]; then
 #		--
   if [[ "$restart" == *write ]]; then
     [[ "$restart" != readwrite && -f *.res ]] && rm -f *.res
-    tmpdir="temp_$PBS_JOBID"
+    tmpdir="temp_${job_id_env}"
     mkdir -p "$tmpdir"
     cp * "$tmpdir"
     pushd "$tmpdir"
@@ -167,9 +166,7 @@ END
 #      -env MV2_SHMEM_DIR "/tmp" \
 #      -n $cores $mpact_exe "$case.xml"
   if [[ "$mpact_exe" == "MPACT.exe" ]]; then
-    mpiexec \
-        -env MV2_HCA_AWARE_PROCESS_MAPPING 0 \
-        -env MV2_SHMEM_DIR "/tmp" \
+    mpiexec {mpi_args} \
         -n $cores $mpact_exe "$case.xml"
 
   else  # you are running vera_to_shift
@@ -186,9 +183,7 @@ END
       fi
     fi
 
-    mpiexec \
-        -env MV2_HCA_AWARE_PROCESS_MAPPING 0 \
-        -env MV2_SHMEM_DIR "/tmp" \
+    mpiexec {mpi_args} \
         -n $cores $mpact_exe --i="$case.xml"
   fi
   date +'%a %F %T %Z'
@@ -197,9 +192,48 @@ END
 #		--
   if [[ "$restart" == *write ]]; then
     [[ "$restart" != readwrite && -f *.res ]] && rm -f *.res
-    mv !($case.xml) "$PBS_O_WORKDIR"
+    mv !($case.xml) "${work_dir_env}"
     popd
     rm -fr "$tmpdir"
+  fi
+
+#               -- Summary email
+#               --
+  if [ -f "$case.sum" ]; then
+    if [ -z "$SLURM_JOB_ID" ]; then
+      shost="$PBS_O_HOST"
+      sjob_id="$PBS_JOBID"
+      sjob_name="$PBS_JOBNAME"
+      swork_dir="$PBS_O_WORKDIR"
+    else
+      shost="$SLURM_SUBMIT_HOST"
+      sjob_id="$SLURM_JOB_ID"
+      sjob_name="$SLURM_JOB_NAME"
+      swork_dir="$SLURM_SUBMIT_DIR"
+    fi
+    saddrs=$(echo "{email_addrs}" | sed -e 's/,/ /g')
+    sfile=$(mktemp -t vera.summary.XXXXXX)
+    ssubject="Finished running job $sjob_id on $shost"
+    stitle=$(grep -F title "$case.inp" | sed -e 's/^\s*//' -e 's/\s+/ /g' | cut -d' ' -f2)
+    cat > "$sfile" <<END
+Finished running VERA job on $shost
+
+Title: $stitle
+
+Run Directory:    $swork_dir
+PBS JOBID:        $sjob_id
+PBS JOBNAME:      $sjob_name
+HDF Output File:  $case.h5
+
+END
+    tail -n +$(grep -n -F 'Case Summary' $case.sum | cut -d: -f1) $case.sum >> "$sfile"
+    echo [verarun] ssh $head_hostname "mailx {mailfrom} -s '\"$ssubject\"' $saddrs"
+    cat "$sfile" | ssh $head_hostname "mailx {mailfrom} -s '\"$ssubject\"' $saddrs"
+    if [ $? -ne 0 ]; then
+      echo "[verarun] mailx failed, summary content"
+      cat "$sfile"
+    fi
+    unlink "$sfile"
   fi
 fi # MPACT
 

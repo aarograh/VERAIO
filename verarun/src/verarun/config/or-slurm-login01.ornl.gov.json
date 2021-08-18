@@ -1,0 +1,46 @@
+{
+"domain": "ornl.gov",
+
+"email_env":
+  [
+    "#SBATCH --mail-user={email_addrs}",
+    "#SBATCH --mail-type=ALL"
+  ],
+
+"env": [],
+
+"hostname": "or-slurm-login01.ornl.gov",
+"mail_from": "no-reply@ornl.gov",
+"mpi_args": [],
+"pbs": "Slurm",
+
+"pbs_env":
+  [
+    "#SBATCH --job-name={job_name}",
+    "#SBATCH --output={case}.stdout",
+    "#SBATCH --nodes={nodes:d}",
+    "#SBATCH --ntasks-per-node={ppn:d}",
+    "#SBATCH --partition=burst",
+    "#SBATCH --time={walltime}"
+  ],
+
+"pmem_env":
+  [
+    "#SBATCH --mem={pmem}"
+  ],
+
+"project_default": "birthright",
+"project_env": "#SBATCH --account={project}",
+
+"specs":
+  {
+  "hwthreads": 1,
+  "units": 16,
+  "sockets": 2,
+  "nodes": 16,
+  "mem": 128
+  },
+
+"_VeraDefaultVersion": "VERA_4.0RC4",
+"VeraInstallsDir": "/home/re7/tools/vera_installs"
+}

@@ -1,0 +1,19 @@
+#!/bin/bash -a
+#echo "job ${2} not found" >&2
+#exit 1
+
+cat <<END
+PBS Job Id: ${2}.mod-condo-pbs01
+Job Name:   VERA-1a
+Exec host:  mod-pbs-c46.ornl.gov/0-31
+Execution terminated
+Exit_status=0
+resources_used.cput=00:00:03
+resources_used.energy_used=0
+resources_used.mem=8152kb
+resources_used.vmem=183444kb
+resources_used.walltime=00:00:17
+Error_Path: mod-condo-login01.ornl.gov:/home/re7/work/1a/test2/1a.stdout
+Output_Path: mod-condo-login01.ornl.gov:/home/re7/work/1a/test2/1a.stdout
+END
+exit 0

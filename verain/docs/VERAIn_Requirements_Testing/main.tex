@@ -12,8 +12,8 @@
 \title{VERAIn Software Requirements, Test Plan, and Test Report}
 \newcommand{\shortTitle}{Test plan, report, and requirements}
 \newcommand{\subtitle}{}
-\newcommand{\CASLMilestoneNumber}{CASL-U-2019-1891-001}
-\newcommand{\publicationDate}{11/15/2019}
+\newcommand{\CASLMilestoneNumber}{CASL-U-2019-1891-002}
+\newcommand{\publicationDate}{10/1/2020}
 \newcommand{\psm}{Erik Walker, VERAIn Product Software Manager}
 \newcommand{\reviewer}{Independent Reviewer}
 
@@ -175,44 +175,44 @@ Built under VERA Environment with following packages and versions:
 VERAIn has no dependencies on any other code package contained within VERA.
 
 \subsection{System Software}
-The operating system on which these tests were performed was: Linux 3.10.0-1062.4.1.el7.x86\_64 .
+The operating system on which these tests were performed was Linux 3.10.0-1127.18.2.el7.x86\_64 .
 \subsection{Test Calibration}
 None.
-\subsection{Computer Hardware used for Testing}
-ross-login.ornl.gov
+\subsection{Computer Hardware Used for Testing}
+rnsdinf01.ornl.gov
 \section{Test Equipment Calibration}
 None.
 \section{Date of Test}
-Started: Nov 14, 2019 - 16:00 UTC\\
-Total Test Time: 2 minutes, 58 seconds
+Started: Aug. 23, 2020 - 05:40:32 UTC\\
+Total Test Time: 1 minute, 56 seconds
 \section{Data Recorder}
-CTest-3.10.2 and CDash Version trilinos-release-2018-08-prebuilt
+ctest-3.14.3 and CDash Version trilinos-release-2018-08-prebuilt
 \section{Simulation Models Used}
 Since VERAIn is only an input parser, it contains no simulation models.
 \section{Test Problems}
-A list of test problems and their requirements may be found in Section \ref{sec:A2} of this document.
+A list of test problems and their requirements may be found in Appendix \ref{sec:A2} of this document.
 \section{Results and Applicability}
 \subsection*{Results}
-Results are given in Section \ref{sec:A1}.
+Results are given in Appendix \ref{sec:A1}.
 \subsection*{Applicability}
-The test results from Section \ref{sec:A1} satisfy the requirements defined in the software requirements. 
+The test results from Appendix \ref{sec:A1} satisfy the defined software requirements. 
 \section{Action Taken in Connection with Noted Deviations}
 There were no noted deviations. Therefore, no actions were taken.
 \subsection{Person Evaluating Results}
 Erik Walker
 \section{Acceptability}
-The acceptance criterion is that all tests pass their individual criteria. As evidenced in column 4 of the table in Section \ref{sec:A1}, all tests passed their criteria.
-The primary type of test performed in the VERAIn test matrix are regression tests that compare a test output file to a version-controlled reference file deemed to be correct.
+The acceptance criterion is that all tests pass their individual criteria. As evidenced in column 4 of the table in Appendix \ref{sec:A1}, all tests passed their criteria.
+The primary type of tests performed in the VERAIn test matrix are regression tests that compare a test output file to a version-controlled reference file that is deemed to be correct.
 
 Regression test reference files are XML.gold files that have been generated and reviewed for correctness.
-Once the VERAIn parser is run on an input, the resulting XML file is compared to the corresponding XML.gold file using a straight diff. If the files are identical, then the test passes. If any differences exist in the files, the test fails. 
+Once the VERAIn parser is run on an input, the resulting XML file is compared to the corresponding XML.gold file using a straight diff. If the files are identical, the test passes. If any differences exist in the files, the test fails. 
 
-There are also a few tests that are designed to intentionally fail. These tests are intended to capture common input mistakes and ensure that the parser fails hard when these mistakes are encountered. 
+A few tests are designed to intentionally fail to capture common input mistakes and to ensure that the parser fails hard when these mistakes are encountered.  
 
-The test results were reviewed by the Product Support Manager and the Independent Technical Reviewer who have determined that the computer program is acceptable for integration with the VERA Product Suite.
-The test results have demonstrated the computer program(s) adequately and correctly performed.
+The test results were reviewed by the Product Support Manager and the Independent Technical Reviewer, who have determined that the computer program is acceptable for integration with the VERA Product Suite.
+The test results have demonstrated that the computer program(s) adequately and correctly performed.
 The testing covered the specified software requirements, proper handling of abnormal conditions or events, and interfaces with other components. 
-The testing verified the computer program did not introduce unintended consequences which degraded the overall software function. 
+The testing verified that the computer program did not introduce unintended consequences which degraded the overall software function. 
 No discrepancies between expected and observed software functioning were identified.
 
 \chapter{Applicable Standards and Procedures}
@@ -234,15 +234,15 @@ See Section \ref{sec:A2}.
     \label{sec:A1}
     The following table was obtained from a CDash report.
     CDash is a web application included with CMake and CTest.
-    CMake is the VERA build system and CTest is a program for automatically running tests defined with CMake and sending results to CDash.
-    All tests are included in the Git repositories noted in List \ref{lst:repos}.
-    Section \ref{sec:A2} provides a list of the test names along with the test input files and requirements.
+    CMake is the VERA build system, and CTest is a program that automatically runs the tests defined with CMake and sends results to CDash.
+    All tests are included in the Git repositories as noted in List \ref{lst:repos}.
+    Section \ref{sec:A2} provides a list of the test names, along with the test input files and requirements.
     \input{Appendix1.tex}
     \clearpage
     
     \chapter{Requirements and Test Traceability Matrix}
     \label{sec:A2}
-    For the entries in the Additional Info field, the \#NNNN is the CASL PHI Kanban ticket number with a hyperlink to this webpage.
+    For the entries in the \textit{Additional Info} field, the \#NNNN is the CASL PHI Kanban ticket number with a hyperlink to this webpage.
     \input{VERAIn_requirements.tex}
 \end{appendices}
 
@@ -253,7 +253,7 @@ See Section \ref{sec:A2}.
 
 \printnomenclature
 
-\addcontentsline{toc}{chapter}{Bibliography}
 \printbibliography
+\addcontentsline{toc}{chapter}{Bibliography}
 
 \end{document}

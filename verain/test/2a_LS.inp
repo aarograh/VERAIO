@@ -1,5 +1,5 @@
 !> @beginreq
-!> - MPACT shall compute solutions to the VERA Progression Problem 2A with linear source option. 
+!> - The VERAIn package shall be able to parse VERA Progression Problem 2A with specified linear source options.
 !> - Ticket
 !> @endreq
 [CASEID]

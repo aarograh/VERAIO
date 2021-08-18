@@ -47,9 +47,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse a full 3D core with numerous BISON
-!> parameters enabled with multiple states where the assemblies are defined over
-!> multiple ASSEMBLY blocks rather than all being defined in the same ASSEMBLY
-!> block and material thermal expansion options are added.
+!> parameters including material thermal expansion options.
 !> @endreq
 !===============================================================================
 

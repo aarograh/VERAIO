@@ -1,9 +1,44 @@
 {
-"_VeraDefaultVersion": "VERA_20180915_540",
-"VeraInstallsDir": "/home/tools/VERA_builds/old_builds",
 "domain": "ornl.gov",
+
+"email_env":
+  [
+    "#PBS -M {email_addrs}",
+    "#PBS -m ea"
+  ],
+
 "env": [],
+
 "hostname": "ross.ornl.gov",
+
+"mail_from": "no-reply@ornl.gov",
+
+"mpi_args":
+  [
+    "-env MV2_HCA_AWARE_PROCESS_MAPPING 0",
+    "-env MV2_SHMEM_DIR \"/tmp\""
+  ],
+
+"pbs": "Torque",
+
+"pbs_env":
+  [
+    "#PBS -N {job_name}",
+    "#PBS -o {case}.stdout",
+    "#PBS -l nodes={nodes:d}:ppn={ppn:d}",
+    "#PBS -l walltime={walltime}",
+    "#PBS -j oe",
+    "#PBS -q {queue}"
+  ],
+
+"pmem_env":
+  [
+    "#PBS -l pmem={pmem}"
+  ],
+
+"project_default": "NSED",
+"project_env": "#PBS -A {project}",
+
 "specs":
   {
   "hwthreads": 2,
@@ -13,27 +48,6 @@
   "units": 18
   },
 
-"pbs_env":
-  [
-    "#PBS -N {job_name}",
-    "#PBS -o {case}.stdout",
-    "#PBS -l nodes={nodes:d}:ppn={ppn:d}",
-    "#PBS -l walltime={walltime}",
-    "#PBS -j oe",
-    "#PBS -A {account}",
-    "#PBS -q {queue}"
-  ],
-
-"email_env":
-  [
-    "#PBS -M {email_addrs}",
-    "#PBS -m ea"
-  ],
-
-"pmem_env":
-  [
-    "#PBS -l pmem={pmem:d}gb"
-  ],
-
-"env": []
+"_VeraDefaultVersion": "VERA_20180915_540",
+"VeraInstallsDir": "/home/tools/VERA_builds/old_builds"
 }

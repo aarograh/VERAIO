@@ -1,8 +1,8 @@
 # $Id$
 #------------------------------------------------------------------------
-#	NAME:		config.py					-
-#	HISTORY:							-
-#		2018-07-07	leerw@ornl.gov				-
+#       NAME:           config.py                                       -
+#       HISTORY:                                                        -
+#               2018-07-07      leerw@ornl.gov                          -
 #------------------------------------------------------------------------
 import logging, logging.config, os
 

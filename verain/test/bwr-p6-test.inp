@@ -13,6 +13,7 @@
 !  ***** You must use the --init option to run this input deck *****
 !
 !
+!===============================================================================
 !> @beginreq
 !> - VERAIn shall accept specification of the two-phase friction model which CTF shall use.
 !> @endreq
@@ -24,6 +25,7 @@
 !> @beginreq
 !> - VERAIn shall accept specification of the interfacial drag model to use in CTF.
 !> @endreq
+!===============================================================================
 
 [CASEID]
   title 'Sample 3D GE9 BWR Lattice *** with no channel'

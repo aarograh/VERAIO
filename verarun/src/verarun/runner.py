@@ -3,6 +3,40 @@
 #------------------------------------------------------------------------
 #       NAME:           runner.py                                       -
 #       HISTORY:                                                        -
+#               2021-02-17      leerw@ornl.gov                          -
+#         New thexp logic.
+#               2021-02-12      leerw@ornl.gov                          -
+#         New VERA_PROD_VERSIONS env variable and --dev flag.
+#               2021-01-03      leerw@ornl.gov                          -
+#         Passing head hostname to VeraJobParams.
+#               2020-11-10      leerw@ornl.gov                          -
+#         Appending input index to job name if one is specified with
+#         -N and multiple input files are passed.
+#               2020-09-06      leerw@ornl.gov                          -
+#         Added HostInfo.mem_default_env property.
+#               2020-08-24      leerw@ornl.gov                          -
+#         Added -q/--partition/--queue
+#               2020-04-09      leerw@ornl.gov                          -
+#         Converting assertions to exceptions.
+#               2020-04-08      leerw@ornl.gov                          -
+#         Resolving explicit vera_dir assignment, overrides everything.
+#         Added support for VERA_BUILDS|VERA_BUILDS_DIR|VERA_INSTALLS_DIR.
+#               2020-03-26      leerw@ornl.gov                          -
+#         Checking for missing vera_dir in main().
+#               2020-03-20      leerw@ornl.gov                          -
+#         New account, project, and mpi_args in HostInfo.
+#               2020-03-05      leerw@ornl.gov                          -
+#         PBS type declared in host config.
+#               2020-03-03      leerw@ornl.gov                          -
+#         Using PBSWrapper.
+#               2019-10-23      leerw@ornl.gov                          -
+#         Dumping job id on -O only.
+#               2019-10-19      leerw@ornl.gov                          -
+#         Dumping old name, dir, depend message on -O.
+#               2019-10-17      leerw@ornl.gov                          -
+#         At Andrew's request, echoing only the job id on -O.
+#               2019-10-06      leerw@ornl.gov                          -
+#         Allowing floating point pmem value.
 #               2019-06-25      leerw@ornl.gov                          -
 #         Added check for no extension on input_path parameter.
 #         Changed email param (-e, --email-addrs) to be a comma-delmited
@@ -44,7 +78,7 @@
 from __future__ import print_function
 #import argparse, getpass, logging, os, re
 import argparse, logging, os, re
-import shutil, six, subprocess, sys, tempfile, time, traceback
+import shutil, six, socket, subprocess, sys, tempfile, time, traceback
 from datetime import datetime
 
 import verarun.config
@@ -52,6 +86,7 @@ from .config import config
 from .config.hostinfo import *
 #from verarun.job import *
 from .job.verajob import *
+from .pbs import create_instance
 from .userdata import *
 from .verain import *
 
@@ -83,6 +118,12 @@ REGEX_WS = re.compile( r'[,\s]+' )
 #------------------------------------------------------------------------
 class VeraRunner( object ):
   """
+PBS operations
+  command to execute:   qsub                    sbatch
+  env:                  VERA_QSUB               ???
+  dependency:           -W depend=afterok:{0}   --dependency=afterok:{0}
+  command output:       NNNN.host.name          Submitted batch job NNNN
+                        extract_job_id()
 """
 
 
@@ -145,49 +186,71 @@ template (.e.g., {job_name}).
 
 Environment Variables
 ---------------------
-There are three environment variables which can be set to override behavior.
+There are environment variables which can be set to override behavior.
 
 * PBS_EMAIL: sets the email address to be used for PBS notifications,
-  overridden by the '-e' parameter.
+  overridden by the '-e' (or '--email-addrs') parameter.
+
+* PBS_PROJECT: sets the project for the job, overriding any default set in
+  the host configuration but overridden by the '-p' (or '--project') parameter.
+
+* VERA_BUILDS: path to the directory containing VERA builds or installs,
+  overriding the "$(hostname).json" file but overridden by the
+  '--vera-installs-dir' parameter.  May also be specified as
+  VERA_BUILDS_DIR or VERA_INSTALLS_DIR.
+
+* VERA_BUILDS_DIR: alternative name for VERA_BUILDS, where VERA_BUILDS has
+  priority.
 
 * VERA_DEFAULT_VERSION: names the default version of VERA to use, overriding
   what is specified in the host configuration file but overridden by the '-v'
-  parameter.
+  (or '--vera-version') parameter.
 
-* VERA_QSUB: custom 'qsub' command to execute.
+* VERA_INSTALLS_DIR: alternative name for VERA_BUILDS or VERA_BUILDS_DIR,
+  priority order being VERA_BUILDS, VERA_BUILDS_DIR, then VERA_INSTALLS_DIR
+
+* VERA_PROD_VERSIONS: comma-delimited list of allowed production VERA versions.
+
+* VERA_QSUB: custom 'qsub' command to execute for hosts running Torque or
+  PBS Pro.
+
+* VERA_SBATCH: custom 'sbatch' command to execute for hosts running SLURM.
 
 * VERARUN_HOST_CONFIG_FILE: path to a host configuration file to use,
-  overriding the distributed "$(hostname).json" file but overriddent by
+  overriding the distributed "$(hostname).json" file but overridden by
   the '-c' parameter.
 """
 
-  MSG_machineConfig = """
-Error: Machine configuration cannot support request:
+  MSG_machineConfig = """Error: Machine configuration cannot support request:
   machine:   {0}
-  requested: nprocs={1:d}, pmem={2:d}
+  requested: nprocs={1:d}, nodes={2:d}, pmem={3:f}
 """
 
-  MSG_memoryWarning = """
-Warning: Requested memory and ppn exceed machine per-node memory:
-  available: pmem={0:d}
-  requested: ppn={1:d}, pmem={2:d}
+  MSG_memoryWarning = """Warning: Requested memory and ppn exceed machine per-node memory:
+  available:  mem={0:d} (per node)
+  requested:  ppn={1:d}, pmem={2:f}
+  changed to: ppn={3:d}
 """
 
-  MSG_tooManyProcessors = """
-Error: Too many processors requested for this machine:
+  MSG_tooManyProcessors = """Error: Too many processors requested for this machine:
   available={0:d}, requested={1:d}
 """
 
-  MSG_tooMuchMemory = """
-Error: Too much memory requested for nodes on this machine:
-  available={0:d}, requested={1:d}
+  MSG_tooMuchMemory = """Error: Too much memory requested for nodes on this machine:
+  available={0:d}, requested={1:f}
 """
 
-  MSG_veraDirNotFound ="""[verarun] VERA directory not found: "{0}"
+  MSG_veraDirNotFound = """Error: VERA directory not found:
+  "{0}"
 Check command-line arguments and host configuration.
 """
 
-  MSG_veraDirInvalid ="""[verarun] Invalid VERA directory: "{0}"
+  MSG_veraDirNotSpecified = """Error: VERA directory not specified.
+Check command-line arguments and host configuration.
+"""
+
+  MSG_veraDirInvalid = """Error: Invalid VERA directory:
+  "{0}"
 Check command-line arguments and host configuration.
 """
 
@@ -223,10 +286,11 @@ Check command-line arguments and host configuration.
         job_name (str): Optional explicit job name
         nprocs (int): Number of processors requested (defaults to 16)
         output_job_flag (bool): True to print to stdout the submitted
-            job name
+            job ids
         ppn (int): Number of processors per node, where None means to calculate
             it (defaults to None)
         proc_mem (int): Memory required per processor in GB (defaults to 16)
+        queue (str): override for Torque queue or Slurm partition (defaults to None)
         restart (str): One of 'overwrite', 'readwrite', or None
         vera_dir (str): optional path to VERA installation, overrides `vera_installs_dir`
             and `vera_version` params
@@ -235,8 +299,8 @@ Check command-line arguments and host configuration.
         vera_version (str): optional name of VERA version to use, where None means to
             use the latest available version
         verbose (bool): True to provide more processing feedback
-        wait_job_name (str): optional fully-qualified name of job
-            (e.g., "id.hostpbsname") for which to wait on completion
+        wait_job_id (str): optional ID of job to wait on before
+            starting this job
         wait_last (bool): True to wait on the most recent job submitted via
             verarun
         walltime (float): wallclock execution time in hours
@@ -254,13 +318,12 @@ Check command-line arguments and host configuration.
     self._job_name = kwargs.get( 'job_name' )
     self._output_job_flag = kwargs.get( 'output_job_flag', False )
 #    self._job_id = -1
-#    self._job_suffix = ''
     self._subdir = kwargs.get( 'subdir' )
     self._user_data = UserData()
     self._verbose = kwargs.get( 'verbose', False )
-    self._wait_job_name = kwargs.get( 'wait_job_name' )
+    self._wait_job_id = kwargs.get( 'wait_job_id' )
     if kwargs.get( 'wait_last', False ):
-      self._wait_job_name = 'last'
+      self._wait_job_id = 'last'
 
     for n in ( 'dry_run', 'subdir', 'verbose' ):
       if n in kwargs:  del kwargs[ n ]
@@ -271,25 +334,21 @@ Check command-line arguments and host configuration.
     self._vera_installs_dir = kwargs.get( 'vera_installs_dir' )
     self._vera_version = kwargs.get( 'vera_version' )
 
+    if self._vera_dir:
+      self._vera_installs_dir = os.path.dirname( self._vera_dir )
+      self._vera_version = os.path.basename( self._vera_dir )
+
     host_config_file = kwargs.get( 'host_config_file' )
     hostname = kwargs.get( 'hostname' )
-    self._hostinfo = \
-        HostInfo( host_config_file = host_config_file ) \
-        if host_config_file else \
-        HostInfo( hostname, vera_installs_dir = self._vera_installs_dir )
-
-#    self._email_addrs = None
-#    if isinstance( email_addrs, list ):
-#      self._email_addrs = ','.join( email_addrs )
-#    elif email_addrs:
-#      self._email_addrs = re.sub( r'\s*', '', email_addrs )
-
-#    self._nprocs = nprocs
-#    self._ppn = ppn
-#    self._proc_mem = proc_mem
-#    self._vera_dir = vera_dir
-#    self._vera_version = vera_version
-#    self._walltime = walltime
+    hi_args = dict(
+        vera_installs_dir = self._vera_installs_dir,
+        vera_default_version = self._vera_version
+        )
+    if host_config_file:
+      hi_args[ 'host_config_file' ] = host_config_file
+    else:
+      hi_args[ 'hostname' ] = hostname
+    self._hostinfo = HostInfo( **hi_args )
   #end __init__
 
 
@@ -355,8 +414,8 @@ Check command-line arguments and host configuration.
         self.log( 'creating "{0}"', xml_output_file )
         subprocess.check_call( [ react2xml_path, input_path ] )
 
-    assert os.path.exists( xml_output_file ), \
-        'XML file not found or not created: "{0}"'.format( xml_output_file )
+    if not os.path.exists( xml_output_file ):
+      raise Exception( 'XML file not found or not created: "{0}"'.format( xml_output_file ) )
 
     self.log( 'reading "{0}"', xml_output_file )
     return  VeraInputXMLDoc( xml_output_file )
@@ -381,12 +440,14 @@ properties
   #----------------------------------------------------------------------
   #     METHOD:         VeraRunner._resolve_params()                    -
   #----------------------------------------------------------------------
-  def _resolve_params( self, doc, input_path, params ):
+  def _resolve_params( self, doc, pbs, input_path, input_ndx, params ):
     """
     Args:
         doc (verain.VeraInputXMLDoc): document to consult
+        pbs (pbs.PBS): pbs object
         input_path (str): required path to input file, either a VERAIn or
             VERA XML file
+        input_ndx (int): 0-based input index/sequence
         params (dict): params specified on the command line, assumed not to
             be None
     Returns:
@@ -404,24 +465,31 @@ properties
       email = ','.join( email )
     if not email:
       email = os.environ.get( 'PBS_EMAIL' )
-    # future no email PBS directive
     #if not email:
       #email = getpass.getuser() + '@' + self._hostinfo.domain
 
-#x    nprocs = run_params.get( 'nprocs', 1 )
-#x    pmem = int( run_params.get( 'pmem', 8 ) )
-    nprocs = run_params.get( 'nprocs', self._hostinfo.specs.nprocs )
+    head_hostname = socket.gethostname()
+
+    machine_nprocs = self._hostinfo.specs.nprocs
+    mail_from = self._hostinfo.mail_from
+    mpi_args = self._hostinfo.mpi_args
+    nprocs = run_params.get( 'nprocs', machine_nprocs )
     pmem_str = run_params.get( 'pmem' )
-    pmem = int( pmem_str )  if pmem_str else  None
+    pmem = float( pmem_str )  if pmem_str else  None
     ppn = run_params.get( 'ppn' )
+
+    project = run_params.get( 'project' )
+    if not project:
+      project = os.environ.get( 'PBS_PROJECT' )
+
+    queue = run_params.get( 'queue', self._hostinfo.default_queue )
     restart = run_params.get( 'restart' )
     vera_version = run_params.get( 'vera_version' )
     walltime = run_params.get( 'walltime', 24.0 )
 
     ## if vera_shift, nprocs
-    machine_nprocs = self._hostinfo.specs.nprocs
-    assert nprocs <= machine_nprocs, \
-        VeraRunner.MSG_tooManyProcessors.format( machine_nprocs, nprocs )
+    if nprocs > machine_nprocs:
+      raise Exception( VeraRunner.MSG_tooManyProcessors.format( machine_nprocs, nprocs ) )
 
 #               -- 1. Compute number of nodes based on specs
 #               --
@@ -439,24 +507,29 @@ properties
 
 #               -- 3. pmem
 #               --
-    machine_mem = self._hostinfo.specs.mem
     if pmem:
-      if pmem * use_ppn > machine_mem:
+#                       -- Check per-node memory required
+      if pmem * use_ppn > self._hostinfo.specs.mem:
+        new_ppn = int( self._hostinfo.specs.mem / pmem )
         print(
-            VeraRunner.MSG_memoryWarning.format( machine_mem, use_ppn, pmem ),
+            VeraRunner.MSG_memoryWarning.format(
+                self._hostinfo.specs.mem, use_ppn, pmem, new_ppn
+                ),
             file = sys.stderr
             )
-        use_ppn = self._hostinfo.specs.mem // pmem
-        assert use_ppn > 0, \
-          VeraRunner.MSG_tooMuchMemory.\
-              format( self._hostinfo.specs.mem, pmem )
+        use_ppn = new_ppn
+        if use_ppn <= 0:
+          raise Exception( VeraRunner.MSG_tooMuchMemory.format(
+              self._hostinfo.specs.mem, pmem
+              ) )
         nodes = (nprocs + use_ppn - 1) // use_ppn
     #end if pmem
 
     machine_nodes = self._hostinfo.specs.nodes
-    assert nodes <= machine_nodes, \
-        VeraRunner.MSG_machineConfig.\
-            format( self._hostinfo.specs, nprocs, pmem )
+    if nodes > machine_nodes:
+      raise Exception( VeraRunner.MSG_machineConfig.format(
+          self._hostinfo.specs, nprocs, nodes, pmem
+          ) )
 
 #               -- Job params
 #               --
@@ -465,7 +538,13 @@ properties
         self._vera_dir  if self._vera_dir else \
         self._hostinfo.create_vera_path( self._vera_version )
 
-    job_name = self._job_name  if self._job_name else  'VERA-' + case_name
+#x  job_name = self._job_name  if self._job_name else  'VERA-' + case_name
+    if self._job_name:
+      job_name = self._job_name
+      if len( self._input_paths ) > 1:
+        job_name += '-{0:d}'.format( input_ndx )
+    else:
+      job_name = 'VERA-' + case_name
 
     feedback_values = doc.find_state_params( 'feedback' )
     run_ctf = feedback_values and 'on' in feedback_values
@@ -475,8 +554,11 @@ properties
     if run_multistate_cobra:
       run_mpact = False
 
-    excore_values = doc.find_state_params( 'excore_transport' )
-    run_shift = excore_values and 'on' in excore_values
+    #excore_values = doc.find_state_params( 'excore_transport' )
+    #run_shift = excore_values and 'on' in excore_values
+    #run_shift = excore_values and excore_values[ 0 ] == 'on'
+    excore_value = doc.find_single_state_param( 0, 'excore_transport' )
+    run_shift = True if excore_value and excore_value == 'on'  else False
 
     excore_filename = doc.find_shift_param( 'excore_filename' )
     if excore_filename:
@@ -484,9 +566,20 @@ properties
         excore_filename += '.excore.xml'
       #excore_omn_name = excore_filename[ : -11 ] + '.omn'
 
-    rt_values = doc.find_state_params( 'thexp' )
-    run_thermal_exp = rt_values and 'on' in rt_values and run_shift
+    #rt_values = doc.find_state_params( 'thexp' )
+    #run_thermal_exp = rt_values and 'on' in rt_values and run_shift
+    rt_value = doc.find_single_state_param( 0, 'thexp' )
+    run_thermal_exp = \
+        True if not( rt_value and rt_value == 'off' ) and run_shift \
+        else False
+
     run_verain = not input_path.endswith( '.xml' )
+
+#   pbs_env = self._hostinfo.resolve_env(
+#       email, pmem, project,
+#       pbs.create_project_directive
+#       #lambda msg: print( '[verarun] ' + msg, file = sys.stderr )
+#       )
 
     params = VeraJobParams(
         case_name, vera_path,
@@ -494,12 +587,16 @@ properties
         cores = nprocs,
         email_addrs = email,
         excore_filename = excore_filename,
+        head_hostname = head_hostname,
+        job_id_env = pbs.job_id_env,
         job_name = job_name,
+        job_name_env = pbs.job_name_env,
+        mail_from = mail_from,
+        mpi_args = mpi_args,
         nodes = nodes,
-#x        pbs_env = self._hostinfo.pbs_env,
-#x        pmem = pmem,
-        pbs_env = self._hostinfo.resolve_env( email, pmem ),
+        pbs_env = self._hostinfo.resolve_env( email, pmem, project ),
         ppn = use_ppn,
+        queue = queue,
         restart = restart,
         run_ctf = run_ctf,
         run_mpact = run_mpact,
@@ -507,7 +604,8 @@ properties
         run_shift = run_shift,
         run_thermal_exp = run_thermal_exp,
         run_verain = run_verain,
-        walltime = walltime
+        walltime = walltime,
+        work_dir_env = pbs.work_dir_env
         )
     return  params
   #end _resolve_params
@@ -519,62 +617,85 @@ properties
   def run( self, *args, **kwargs ):
     """
 """
+#   def extract_job_id( name ):
+#     ndx = name.find( '.' )
+#     return  name if ndx < 0 else name[ 0 : ndx ]
+#   #end extract_job_id
+
+#               -- Get, assert on PBS
+#               --
+    #pbs = get_pbs( self.log )
+    #assert pbs is not None, 'Error finding PBS (SLURM, Torque) commands'
+    pbs_type = self._hostinfo.pbs
+    try:
+      pbs = create_instance( pbs_type, self.log )
+    except:
+      raise Exception( 'Error loading PBS "' + pbs_type + '"' )
+
     start_dt = datetime.now()
     start_str = start_dt.strftime( '%Y-%m-%dT%H:%M:%S' )
     if self.logger.isEnabledFor( logging.INFO ):
       self.logger.info( 'starting run at %s', start_str )
 
-    last_mode = 'last' == self._wait_job_name
-    wait_job_name = \
-        self._user_data.last_job_name  if last_mode  else \
-        self._wait_job_name  if self._wait_job_name  else \
+    last_mode = 'last' == self._wait_job_id
+    wait_job_id = \
+        self._user_data.last_job_id  if last_mode  else \
+        self._wait_job_id  if self._wait_job_id  else \
         None
 
-    submit_names = []
+    submit_job_ids = []
+    #submit_names = []
 
+    input_ndx = 0
     for ipath in self._input_paths:
-#x    job_name, job_id, run_dir = self.run_case( ipath, wait_job_name )
-#x    if job_name and job_name[ 0 ]:
-#x      self._user_data.last_job_name = job_name
-#x      submit_names.append( job_name )
-      job_info = self.run_case( ipath, wait_job_name )
+      job_info = self.run_case( pbs, ipath, input_ndx, wait_job_id )
       if job_info:
-        job_name = job_info.get( 'job_name' )
-        self._user_data.last_job_name = job_name
-        submit_names.append( job_name )
+        #job_name = job_info.get( 'job_name' )
+        #submit_names.append( job_name )
+        job_id = job_info.job_id
+        self._user_data.last_job_id = job_id
+        submit_job_ids.append( job_id )
 
-        if wait_job_name:
-          job_info.depend_job = wait_job_name
-          #job_info[ 'depend_job' ] = wait_job_name
+        if wait_job_id:
+          job_info.depend_job_id = wait_job_id
         self._user_data.append_job_history( job_info )
-        wait_job_name = job_name if last_mode or self._chain_mode  else None
+        wait_job_id = job_id if self._chain_mode  else None
+        #wait_job_id = job_id if last_mode or self._chain_mode  else None
       else:
-        wait_job_name = None
+        wait_job_id = None
+
+      input_ndx += 1
     #end for ipath in self._input_paths
 
     if self._output_job_flag and not self._dry_run:
-      print( os.linesep.join( submit_names ) )
+      print( ' '.join( submit_job_ids ) )
+
+#Original
+#   if self._output_job_flag and not self._dry_run:
+#     print( os.linesep.join( submit_names ) )
+
+#2nd intepretation
+#   if not self._dry_run:
+#     if self._output_job_flag:
+#       print( os.linesep.join( submit_names ) )
+#     else:
+#       print( ' '.join( submit_job_ids ) )
   #end run
 
 
   #----------------------------------------------------------------------
   #     METHOD:         VeraRunner.run_case()                           -
   #----------------------------------------------------------------------
-  def run_case( self, input_path, wait_job_name ):
+  def run_case( self, pbs, input_path, input_ndx, wait_job_id ):
     """
     Args:
+        pbs (PBSWrapper): PBS object
         input_path (str): required path to input file, either a VERAIn or
             VERA XML file
-        wait_job_name (str): optional name of job on which this case depends
+        input_ndx (int): 0-based input index/sequence
+        wait_job_id (str): optional ID of job on which this case depends
     Returns:
         userdata.JobInfo: submitted job info or None if not submitted
-#x      dict: submitted job properties or None if not submitted
-#x          job_name (str): job_name
-#x          job_id (int): job_id
-#x          run_dir (str): run directory
-#x          dtg (str): time of submission
-#x      tuple(str,int,str): ( job_name, job_id, run_dir, dtg ) or
-#x          ( '',-1,'','' ) if not submitted
 """
     start_dt = datetime.now()
     #start_str = start_dt.strftime( '%Y-%m-%dT%H:%M:%S' )
@@ -606,7 +727,7 @@ properties
     else:
       cur_rundir = os.getcwd()
 
-#               -- Copy input file if necessary
+#               -- Copy VERAInput file if necessary, XML file if exists
 #               --
     if input_path_dir != os.path.abspath( cur_rundir ):
       self.log( 'copying "{0}"', input_path )
@@ -622,74 +743,64 @@ properties
     cur_input_path = os.path.join( cur_rundir, input_path_base )
     self._document = self._read_input_doc( cur_input_path )
 
-#               -- Verify existence of restart files
+#               -- Verify existence of restart and temptable files
     restart_fnames = self._document.find_files( 'restart_read' )
     if restart_fnames:
       missing = [ x for x in restart_fnames if not os.path.exists( x ) ]
-      assert len( missing ) == 0, \
-          'Restart files not found: {0}'.format( ', '.join( missing ) )
+      if len( missing ) > 0:
+        raise Exception( 'Restart files not found: {0}'.format(
+            ', '.join( missing )
+            ) )
+    temptable_fnames = self._document.find_files( 'temptable_filename' )
+    if temptable_fnames:
+      missing = [ x for x in temptable_fnames if not os.path.exists( x ) ]
+      if len( missing ) > 0:
+        raise Exception( 'Temptable files not found: {0}'.format(
+            ', '.join( missing )
+            ) )
 
 #               -- Infer job parameters and create script
-    #params = params.VeraJobParams
-    params = self._resolve_params( self._document, input_path, self._params )
+    params = self._resolve_params(
+        self._document, pbs, input_path, input_ndx, self._params
+        )
     if self._logger.isEnabledFor( logging.INFO ):
       self._logger.info(
           'creating job script with params:%s%s',
           os.linesep, str( params )
           )
 
+    #x pbs.script_extension
+    #job_fname = params.get( 'case', case_name ) + '.' + pbs.script_extension
     job_fname = params.get( 'case', case_name ) + '.pbs'
     job_pbs_path = os.path.join( cur_rundir, job_fname )
     self.log( 'creating {0}', job_pbs_path )
-    VeraJobScript().write( params, job_pbs_path )
+    #VeraJobScript( pbs.script_extension ).write( params, job_pbs_path )
+    VeraJobScript( 'pbs' ).write( params, job_pbs_path )
 
-    assert os.path.exists( job_pbs_path ), 'Job PBS script not created'
+    if not os.path.exists( job_pbs_path ):
+      raise Exception( 'PBS script not created' )
 
 #               -- Submit
-#x  result = '', -1, '', ''
     result = None
     if not self._dry_run:
-#      self.log( 'submitting job' )
-#      output = subprocess.check_output( [ 'qsub', job_fname ] )
-#      m = REGEX_JOB_ID.match( output )
-#      #assert m, 'Job not submitted'
-#      self._job_id = int( m.group( 1 ) ) if m else -1
-
-      args = [ 'qsub' ]
-#      if 'VERA_QSUB' in os.environ:
-#        args = REGEX_WS.split( os.environ.get( 'VERA_QSUB' ).lstrip( '\t ' ) )
-      vera_qsub = os.environ.get( 'VERA_QSUB', '' )
-      if vera_qsub:
-        args = REGEX_WS.split( vera_qsub.lstrip( '\t ' ) )
-
       dependency_msg = ''
-      if wait_job_name:
-        args.append( '-W' )
-        args.append( 'depend=afterok:{0}'.format( wait_job_name ) )
-        dependency_msg = ', depend=' + wait_job_name
-      args.append( job_fname )
-      self.log( 'submitting job: ' + str( args ) )
-      job_name = subprocess.check_output( args )
-      job_name = job_name.rstrip( '\r\n' )
-      self.log( 'job name: ' + job_name )
-      m = REGEX_JOB_ID.match( job_name )
-      job_id = int( m.group( 1 ) ) if m  else -1
+      if wait_job_id:
+        dependency_msg = ', depend=' + str( wait_job_id )
 
-#      msg = 'submitted job id={0:d}, dir={1}'.\
-#          format( self._job_id, self._cur_run_dir )
-      msg = 'submitted job={0}, dir={1}{2}'.\
-          format( job_name, cur_rundir, dependency_msg )
-      self._logger.info( msg )
-      print( '[verarun] ' + msg, file = sys.stderr )
-      result = JobInfo(
-          job_name = job_name, job_id = job_id,
-          dtg = start_str, run_dir = cur_rundir
-          )
-#x    result = job_name, job_id, cur_rundir
-#x    result = dict(
-#x        job_name = job_name, job_id = job_id,
-#x        run_dir = cur_rundir, dtg = start_str
-#x        )
+      try:
+        job_id, job_name = pbs.submit_job( job_fname, wait_job_id )
+
+        msg = 'submitted job={0}, dir={1}{2}'.\
+            format( job_name, cur_rundir, dependency_msg )
+        self._logger.info( msg )
+        print( '[verarun] ' + msg, file = sys.stderr )
+        result = JobInfo(
+            dtg = start_str,
+            job_id = job_id, job_name = job_name,
+            run_dir = cur_rundir
+            )
+      except Exception as ex:
+        raise Exception( 'Error submitting job: ' + str( ex ) )
 
     if pop_dir:
       os.chdir( pop_dir )
@@ -717,11 +828,11 @@ properties
   job_id = property( lambda x: x._job_id )
   """Current job id, -1 if no current job"""
 
-  job_suffix = property( lambda x: x._job_suffix )
-  """Job suffix string for qstat output"""
-
   logger = property( lambda x: x._logger )
   """Logger instance"""
+
+  queue = property( lambda x: x._queue )
+  """Override queue/partition name if specified"""
 
   vera_dir = property( lambda x: x._vera_dir )
   """Specified path to VERA installation"""
@@ -735,8 +846,8 @@ properties
   verbose = property( lambda x: x._verbose )
   """Flags more processing feedback"""
 
-  wait_job_name = property( lambda x: x._wait_job_name )
-  """Optional job name on which this job depends"""
+  wait_job_id = property( lambda x: x._wait_job_id )
+  """Optional ID of job on which this job depends"""
 
 
 #               -- Static Methods
@@ -852,6 +963,12 @@ properties
       #pgroup = parser.add_mutually_exclusive_group()
 
       parser.add_argument(
+          '--devs', '--allow-devs',
+          action = 'store_true',
+          dest = '_allow_devs',
+          help = "override VERA_PROD_VERSIONS and allow development VERA versions"
+          )
+      parser.add_argument(
           '-x', '--dry-run',
           action = 'store_true',
           dest = 'dry_run',
@@ -912,7 +1029,7 @@ properties
           '-O', '--output-job-name',
           action = 'store_true',
           dest = 'output_job_flag',
-          help = 'print the job name to stdout'
+          help = 'print the job id to stdout'
           )
       parser.add_argument(
           '--ppn', '--pnode',
@@ -928,7 +1045,19 @@ properties
           dest = 'pmem',
           help = 'specify memory required per processor in GB, defaults to undefined',
           metavar = 'mem_per_process',
-          type = int
+          type = float
+          )
+      parser.add_argument(
+          '-p', '--project',
+          dest = 'project',
+          help = 'optional project or account to specify for the job, overriding any default, where a value of "none" omits a project',
+          metavar = 'project'
+          )
+      parser.add_argument(
+          '-q', '--partition', '--queue',
+          dest = 'queue',
+          help = 'Torque queue or Slurm partition',
+          metavar = 'queue'
           )
       parser.add_argument(
           '-s', '--subdir',
@@ -958,12 +1087,12 @@ properties
           '-W',
           action = 'store_true',
           dest = 'wait_last',
-          help = 'wait on job last submitted via verarun, overrides -W'
+          help = 'wait on job last submitted via verarun, overrides -w'
           )
       parser.add_argument(
           '-w', '--wait-job-id',
           #default = 'last',
-          dest = 'wait_job_name',
+          dest = 'wait_job_id',
           #help = 'before running any jobs wait for completion of a previously submitted job (value of "last") or a fully qualified job name',
           help = 'ID of job which must complete before starting this job',
           metavar = 'job_id'
@@ -984,7 +1113,7 @@ properties
           '--chain', '--chain-jobs',
           action = 'store_true',
           dest = 'chain_mode',
-          help = "each case depends on its predecessor"
+          help = "each job depends on its predecessor"
           )
       adv_group.add_argument(
           '--debug',
@@ -1031,21 +1160,25 @@ properties
 #               -- List VERA versions
 #               --
       elif args.list_vera_versions:
+        vera_installs_dir = \
+            os.path.dirname( args.vera_dir )  if args.vera_dir else \
+            args.vera_installs_dir
         if host_config_file:
           hostinfo = HostInfo(
               host_config_file = host_config_file,
-              vera_installs_dir = args.vera_installs_dir
+              vera_installs_dir = vera_installs_dir
               )
         else:
           hostinfo = HostInfo(
               args.hostname,
-              vera_installs_dir = args.vera_installs_dir
+              vera_installs_dir = vera_installs_dir
               )
 
-        working_version = hostinfo.working_vera_version
+        working_version = hostinfo.get_working_vera_version()
         versions = map(
             lambda v: v + ' *' if v == working_version else v,
-            hostinfo.vera_versions
+            hostinfo.get_available_vera_versions( args._allow_devs )
+            #hostinfo.vera_versions
             )
         sep = os.linesep + '  '
         print(
@@ -1056,7 +1189,19 @@ properties
         if args.verbose:
           print( file = sys.stderr )
           print( '[verarun] Missing Files in VERA Subdirs', file = sys.stderr )
-          for subdir in sorted( hostinfo.missing_files.keys() ):
+
+          display_versions = hostinfo.missing_files.keys()
+          if not( hostinfo.vera_prod_versions is None or args._allow_devs ):
+            prod_dirs = REGEX_COMMAS.\
+                split( os.environ.get( 'VERA_PROD_VERSIONS' ) )
+            hostinfo.check_valid_vera_versions( prod_dirs )
+            missing_keys = hostinfo.missing_files.keys()
+            display_versions = list( filter(
+                lambda v: v in missing_keys, prod_dirs
+                ) )
+
+          #for subdir in sorted( hostinfo.missing_files.keys() ):
+          for subdir in sorted( display_versions ):
             files = hostinfo.missing_files.get( subdir )
             if files:
               print( subdir + os.sep + ':', file = sys.stderr )
@@ -1084,23 +1229,42 @@ properties
         #end for name in dir( args )
 
 #                       -- Create runner
-        #VeraRunner( args.input_path, **kwargs )()
         runner = VeraRunner( args.input_path, **kwargs )
 
 #                       -- Verify VERA directory
+        error_msg = None
         vera_dir = runner.resolve_vera_dir()
-        if not os.path.isdir( vera_dir ):
-          print(
-              VeraRunner.MSG_veraDirNotFound.format( vera_dir ),
-              file = sys.stderr
-              )
+        if not runner.vera_dir:  # i.e. not an explicit path CLI argument
+          error_msg = runner.hostinfo.\
+              check_working_vera_version( args._allow_devs )
+        elif not vera_dir:
+          error_msg = VeraRunner.MSG_veraDirNotSpecified
+        elif not os.path.isdir( vera_dir ):
+          error_msg = VeraRunner.MSG_veraDirNotFound.format( vera_dir )
         elif not runner.hostinfo.is_valid_vera_dir( vera_dir ):
-          print(
-              VeraRunner.MSG_veraDirInvalid.format( vera_dir ),
-              file = sys.stderr
-              )
+          error_msg = VeraRunner.MSG_veraDirInvalid.format( vera_dir )
+
+        if error_msg:
+          print( error_msg, file = sys.stderr )
         else:
           runner()
+#original
+#       vera_dir = runner.resolve_vera_dir()
+#       if not vera_dir:
+#         print( VeraRunner.MSG_veraDirNotSpecified, file = sys.stderr )
+#       elif not os.path.isdir( vera_dir ):
+#         print(
+#             VeraRunner.MSG_veraDirNotFound.format( vera_dir ),
+#             file = sys.stderr
+#             )
+#       elif not runner.hostinfo.is_valid_vera_dir( vera_dir ):
+#         print(
+#             VeraRunner.MSG_veraDirInvalid.format( vera_dir ),
+#             file = sys.stderr
+#             )
+#       else:
+#         runner()
+#original
 
 #               -- Short help
 #               --
@@ -1109,13 +1273,14 @@ properties
 
     except AssertionError as ex:
       logging.exception( ex )
-      print( '[verarun] ' + str( ex ), file = sys.stderr )
+      #print( '[verarun] ' + str( ex ), file = sys.stderr )
+      print( 'Error: ' + str( ex ), file = sys.stderr )
 
     except Exception as ex:
-      #msg = str( ex )
       logging.exception( ex )
       #traceback.print_exc( file = sys.stderr )
-      print( '[verarun] ' + str( ex ), file = sys.stderr )
+      #print( '[verarun] ' + str( ex ), file = sys.stderr )
+      print( 'Error: ' + str( ex ), file = sys.stderr )
   #end main
 
 #end VeraRunner

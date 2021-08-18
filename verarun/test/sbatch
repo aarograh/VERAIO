@@ -1,0 +1,5 @@
+#!/bin/bash -a
+#rid=$(awk 'BEGIN {srand()} END {print int(rand() * 1.e6)}' < /dev/null)
+cat <<END
+Submitted batch job ${RANDOM}
+END
