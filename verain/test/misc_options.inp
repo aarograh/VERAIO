@@ -338,6 +338,8 @@
   rst_compress      none !none or 0-9
   log_message debug
   rx_components false
+  checkpoint_write testWrite.h5 5
+  checkpoint_read testRead.h5 2
   summary_edits true
   nodal_edits true
   nodal_edits sanm-2

@@ -480,6 +480,10 @@
     </ParameterList>
     <Parameter name="rst_compress" type="string" value="none"/>
     <ParameterList name="transient">
+      <Parameter name="checkpoint_read_file" type="string" value="testRead.h5"/>
+      <Parameter name="checkpoint_read_label" type="string" value="2"/>
+      <Parameter name="checkpoint_write_file" type="string" value="testWrite.h5"/>
+      <Parameter name="checkpoint_write_label" type="string" value="5"/>
       <Parameter name="rx_components" type="bool" value="false"/>
       <Parameter name="summary_edits" type="bool" value="true"/>
     </ParameterList>

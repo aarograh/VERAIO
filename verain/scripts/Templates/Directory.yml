@@ -16534,6 +16534,74 @@ MPACT:
       - fall(sub{is_word(shift)},stride(5,7,()))
       - fall(sub{is_word(shift)},stride(6,7,()))
 #>
+#>   {\bf checkpoint\_read} checkpoint\_read\_file checkpoint\_read\_label
+#>   \VERAInputTable{
+#>     name={checkpoint\_read\_file},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={When used must have an associated checkpoint\_read\_label.},
+#>     description={The name of the file that should be read when restarting a 
+#>         a transient from a previously created checkpoint.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={checkpoint\_read\_label},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={Can only be used in conjunction with checkpoint\_read\_file.},
+#>     description={The perturbation completed before the checkpoint file was
+#>         written.},
+#>     notes={}
+#>   }
+  checkpoint_read:
+    <<: *dtlist
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - arraysize()==2
+#>
+#>   {\bf checkpoint\_write} checkpoint\_write\_file checkpoint\_write\_label
+#>   \VERAInputTable{
+#>     name={checkpoint\_write\_file},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={When used must have an associated checkpoint\_write\_label.},
+#>     description={The name of the file to be created when a checkpoint of a
+#>          transient case is desired.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={checkpoint\_write\_label},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={Can only be used in conjunction with checkpoint\_write\_file.},
+#>     description={The perturbation to be completed prior to writing the 
+#>         checkpoint file.},
+#>     notes={}
+#>   }
+  checkpoint_write:
+    <<: *dtlist
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - arraysize()==2
+#>
 #>   {\bf mat\_emit\_src} mat\_emit\_src
 #>   \VERAInputTable{
 #>     name={mat\_emit\_src},
