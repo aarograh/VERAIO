@@ -1603,6 +1603,33 @@ MPACT:
       _pltype: list
       _content:
 
+        checkpoint_write_file:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/@checkpoint_write:0
+          _content:
+
+        checkpoint_write_label:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/@checkpoint_write:1
+          _content:
+
+        checkpoint_read_file:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/@checkpoint_read:0
+          _content:
+
+        checkpoint_read_label:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/@checkpoint_read:1
+          _content:
         perturb_time_start:
           _pltype: array
           _type: double
