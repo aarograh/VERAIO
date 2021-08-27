@@ -15,6 +15,10 @@
 !> - The VERAIn package shall be able to parse a single 3D 3x3 assembly at 10%
 !> power.
 !> @endreq
+!> @beginreq
+!> - The VERAIn package shall allow the user to set the solve_heat_end option in the
+!>   COBRATF input block.
+!> @endreq
 !===============================================================================
 
 [STATE]
@@ -173,6 +177,7 @@
   rtwfp   1000.0
   maxits  10000
   courant 0.8
+  solve_heat_end 1
 
 [COUPLING]
   epsk        5.0  ! pcm

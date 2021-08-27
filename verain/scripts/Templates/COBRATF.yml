@@ -31,6 +31,13 @@ COBRATF:
         - copy COBRATF/$nc
       _content:
 
+    solve_heat_end:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$solve_heat_end
+      _content:
+
     chf:
       _pltype: parameter
       _type: int

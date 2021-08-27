@@ -7805,6 +7805,30 @@ COBRATF:
       - is_int()
       - in_dictionary() 0 1 2 3
 #>
+#>   {\bf solve\_heat\_end} solve\_heat\_end
+#>   \VERAInputTable{
+#>     name={solve\_heat\_end},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={1},
+#>     limitations={},
+#>     description={Set to 1 to perform the heat transfer and conduction solve done by CTF after the
+#>        steady-state fluid solve instead of during the fluid solve.},
+#>     notes={This option should not be used when modeling a transient.
+#>        Also note that this must not be used for two-phase problems (cases where significant void is
+#>        expected) because it will cause an innacurate vapor generation rate to be calculated.}
+#>   }
+  solve_heat_end:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+
+#>
 #>   {\bf chf} chf
 #>   \VERAInputTable{
 #>     name={chf},
@@ -9082,7 +9106,7 @@ COBRATF:
 #>     valuesapplicable={0 1},
 #>     limitations={},
 #>     description={Selects the stopping criteria to use for steady-state runs. Options are:
-#>        0 - storage-based criteria (\texttt{global\_energy\_balance}, \texttt{global\_mass\_balance}, 
+#>        0 - storage-based criteria (\texttt{global\_energy\_balance}, \texttt{global\_mass\_balance},
 #>            \texttt{fluid\_energy\_storage}, \texttt{solid\_energy\_storage}, \texttt{mass\_storage})
 #>        1 - change-based criteria (\texttt{global\_energy\_balance}, \texttt{global\_mass\_balance},
 #>            \texttt{pressure\_criteria}, \texttt{pressurea\_criteria}, \texttt{Tcool\_criteria},
@@ -16544,7 +16568,7 @@ MPACT:
 #>     valuedefault={},
 #>     valuesapplicable={},
 #>     limitations={When used must have an associated checkpoint\_read\_label.},
-#>     description={The name of the file that should be read when restarting a 
+#>     description={The name of the file that should be read when restarting a
 #>         a transient from a previously created checkpoint.},
 #>     notes={}
 #>   }
@@ -16591,7 +16615,7 @@ MPACT:
 #>     valuedefault={},
 #>     valuesapplicable={},
 #>     limitations={Can only be used in conjunction with checkpoint\_write\_file.},
-#>     description={The perturbation to be completed prior to writing the 
+#>     description={The perturbation to be completed prior to writing the
 #>         checkpoint file.},
 #>     notes={}
 #>   }

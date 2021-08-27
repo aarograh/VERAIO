@@ -315,6 +315,7 @@
     <Parameter name="nc" type="int" value="1"/>
     <Parameter name="nfuel" type="int" value="3"/>
     <Parameter name="rtwfp" type="double" value="1000.0"/>
+    <Parameter name="solve_heat_end" type="int" value="1"/>
   </ParameterList>
   <ParameterList name="COUPLING">
     <Parameter name="epsk" type="double" value="5.0"/>
