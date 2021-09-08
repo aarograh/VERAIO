@@ -92,3 +92,5 @@
   num_angle     -8
   num_threads    1
   moc_source_splitting none
+  nodal_method senmp3
+  gamma_nodal_method senmp3

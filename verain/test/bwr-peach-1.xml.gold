@@ -98,6 +98,10 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="MPACT">
+    <ParameterList name="2d1d">
+      <Parameter name="gamma_nodal_method" type="string" value="senmp3"/>
+      <Parameter name="nodal_method" type="string" value="senmp3"/>
+    </ParameterList>
     <Parameter name="moc_source_splitting" type="string" value="none"/>
     <ParameterList name="parallel_env">
       <Parameter name="num_angle" type="int" value="-8"/>
