@@ -10592,7 +10592,7 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={MOC},
-#>     valuesapplicable={moc, sn, nodal-nem, nodal-sanm-2, nodal-sanm-4},
+#>     valuesapplicable={moc, sn, nodal-nem, nodal-senm-2, nodal-senm-4},
 #>     limitations={},
 #>     description={This card is used to specify whether method of characteristics, Sn,
 #>        or nodal diffusion transport methods are used for the global problem solution
@@ -10604,7 +10604,7 @@ MPACT:
     _content:
     _check:
       - is_string()
-      - in_dictionary() MOC MoC moc SN Sn sn NODAL Nodal nodal nodal-nem nodal-sanm-2 nodal-sanm-4
+      - in_dictionary() MOC MoC moc SN Sn sn NODAL Nodal nodal nodal-nem nodal-senm-2 nodal-senm-4
 #>
 #>   {\bf gamma\_transport} gamma\_transport
 #>   \VERAInputTable{
@@ -11437,14 +11437,14 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={nem, sanm-2, sanm-4},
+#>     valuesapplicable={nem, sanm-2, sanm-4, senm-2, senm-4},
 #>     limitations={},
 #>     description={This card is used to enable or disable MPACT's nodal cross section
 #>        capability. If enabled, node-averaged cross sections, flux moments, kinetics
 #>        data, TH data, discontinuity factors, and other information will be written
 #>        to each block of the HDF5 file. The different options will generate ADFs using
 #>        different kernels. The \texttt{true} option is a deprecated option that is still
-#>        supported for backwards compatibility and is the same as \texttt{sanm-4}.
+#>        supported for backwards compatibility and is the same as \texttt{senm-4}.
 #>        These options are described as:
 #>        \begin{enumerate}
 #>          \item \texttt{nem} --- enables MPACT nodal cross section edits using a
@@ -11453,16 +11453,20 @@ MPACT:
 #>            quadratic SANM kernel to generate ADFs
 #>          \item \texttt{sanm-4} --- enables MPACT nodal cross section edits using a
 #>            quartic SANM kernel to generate ADFs
+#>          \item \texttt{senm-2} --- enables MPACT nodal cross section edits using a
+#>            quadratic SENM kernel to generate ADFs
+#>          \item \texttt{senm-4} --- enables MPACT nodal cross section edits using a
+#>            quartic SENM kernel to generate ADFs
 #>          \item \texttt{false} --- disables MPACT nodal cross section edits
 #>        \end{enumerate}},
-#>     notes={}
+#>     notes={The SANM input options do the same thing as the SENM options.}
 #>   }
   nodal_edits:
     <<: *dtword
     _content:
     _check:
       - is_word()
-      - in_dictionary() true false nem sanm-2 sanm-4
+      - in_dictionary() true false nem sanm-2 sanm-4 senm-2 senm-4
 #>
 #>   {\bf nodal\_edits\_energy\_cutoff} nodal\_edits\_energy\_cutoff
 #>   \VERAInputTable{
@@ -15682,8 +15686,8 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={sp3},
-#>     valuesapplicable={nem, sanm, sn-0, sn-1, sn-2, sn-3, p1, p3, p5, hyp3,
-#>        fhp1, fhp3, none},
+#>     valuesapplicable={nem, senm, sn-0, sn-1, sn-2, sn-3, p1, p3, p5, hyp3,
+#>        fhp1, fhp3, senmp1, senmp3, senmp5, none},
 #>     limitations={Only applies to 3D models run with 2D/1D.},
 #>     description={This card is used to specify the type of nodal axial solver
 #>        that will be used to solve the 1D portion of the 2D/1D solution.
@@ -15694,7 +15698,7 @@ MPACT:
 #>            \hline
 #>              Input Option & Full Name \\
 #>            \hline
-#>              SANM & Semi-Analytic Nodal Method \\
+#>              SENM & Two-Node Source Expansion Nodal Method \\
 #>              NEM & Nodal Expansion Method \\
 #>              NEM-MG & Multi-Group Nodal Expansion Method \\
 #>              SN-0 & Discrete Ordinates with 0th Spatial Moment\\
@@ -15707,6 +15711,9 @@ MPACT:
 #>              HYP3 & Hybrid Pn 3rd Order with NEM\\
 #>              FHP1 & 1st Order with Full Height NEM\\
 #>              FHP3 & 3rd Order with Full Height NEM\\
+#>              SENMP1 & Pn 1st Order with One-Node SENM\\
+#>              SENMP3 & Pn 3rd Order with One-Node SENM\\
+#>              SENMP5 & Pn 5th Order with One-Node SENM\\
 #>              NONE & Finite-Difference Method\\
 #>            \hline
 #>          \end{tabular}},
@@ -15719,7 +15726,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() nem sanm nem-mg sp1 sp3 sp5 hysp3 fhp3 p1 p3 p5 hyp3 sn-0 sn-1 sn-2 sn-3 p3-mom none
+      - in_dictionary() nem senm nem-mg sp1 sp3 sp5 hysp3 fhp3 p1 p3 p5 hyp3 sn-0 sn-1 sn-2 sn-3 p3-mom senmp1 senmp3 senmp5 none
 #>
 #>   {\bf gamma\_nodal\_method} gamma\_nodal\_method
 #>   \VERAInputTable{
@@ -15729,8 +15736,8 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={sp3},
-#>     valuesapplicable={nem, sanm, sn-0, sn-1, sn-2, sn-3, p1, p3, p5, hyp3,
-#>        fhp1, fhp3, none},
+#>     valuesapplicable={nem, senm, sn-0, sn-1, sn-2, sn-3, p1, p3, p5, hyp3,
+#>        fhp1, fhp3, senmp1, senmp3, senmp5, none},
 #>     limitations={Only applies to 3-D models run with 2-D/1-D.},
 #>     description={This card is used to specify the type of nodal axial solver
 #>        that will be used to solve the 1-D portion of the 2-D/1-D solution for gamma
@@ -15741,7 +15748,7 @@ MPACT:
 #>            \hline
 #>              Input Option & Full Name \\
 #>            \hline
-#>              SANM & Semi-Analytic Nodal Method \\
+#>              SENM & Two-Node Source Expansion Nodal Method \\
 #>              NEM & Nodal Expansion Method \\
 #>              NEM-MG & Multi-Group Nodal Expansion Method \\
 #>              SN-0 & Discrete Ordinates with 0th Spatial Moment\\
@@ -15754,6 +15761,9 @@ MPACT:
 #>              HYP3 & Hybrid Pn 3rd Order with NEM\\
 #>              FHP1 & 1st Order with Full Height NEM\\
 #>              FHP3 & 3rd Order with Full Height NEM\\
+#>              SENMP1 & Pn 1st Order with One-Node SENM\\
+#>              SENMP3 & Pn 3rd Order with One-Node SENM\\
+#>              SENMP5 & Pn 5th Order with One-Node SENM\\
 #>              NONE & Finite-Difference Method\\
 #>            \hline
 #>          \end{tabular}},
@@ -15766,7 +15776,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() nem sanm nem-mg sp1 sp3 sp5 hysp3 fhp3 p1 p2 p3 hyp3 sn-0 sn-1 sn-2 sn-3 p3-mom none
+      - in_dictionary() nem senm nem-mg sp1 sp3 sp5 hysp3 fhp3 p1 p3 p5 hyp3 sn-0 sn-1 sn-2 sn-3 p3-mom senmp1 senmp3 senmp5 none
 #>
 #>   {\bf nodal\_inners} nodal\_inners
 #>   \VERAInputTable{
