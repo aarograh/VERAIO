@@ -332,7 +332,19 @@ ASSEMBLIES:
                     - makemap %ASSEMBLY/$(_path)/$npin,%ASSEMBLY/$(_path)/%lossmap/@(_llossm),CORE/$bc_sym
                   _content:
 
+        xcentroidoffset:
+          _pltype: array
+          _type: double
+          _do:
+            - makemap %ASSEMBLY/$(_path)/$npin,%ASSEMBLY/$(_path)/@xcentoffset,CORE/$bc_sym
+          _content:
 
+        ycentroidoffset:
+          _pltype: array
+          _type: double
+          _do:
+            - makemap %ASSEMBLY/$(_path)/$npin,%ASSEMBLY/$(_path)/@ycentoffset,CORE/$bc_sym
+          _content:
 
         gapw:
           _pltype: parameter

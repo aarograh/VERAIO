@@ -4356,6 +4356,50 @@ ASSEMBLY:
       - nth(5,())eq'temptable_polynomial'
       - fall(sub{is_float(shift)},stride(6,1,()))
 #>
+#>   {\bf xcentoffset} 
+#>   \VERAInputTable{
+#>     name={xcentoffset},
+#>     type={2D Float Map},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={This input cannot cause the pin to be clipped by the surrounding cell.},
+#>     description={This input card will shift the pin centroid along the x-axis.
+#>        Positive values will shift the pin to the right, and negative values will shift
+#>        to the left.},
+#>     notes={}
+#>   }
+  xcentoffset:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},stride(0,1,()))
+#>
+#>   {\bf ycentoffset} 
+#>   \VERAInputTable{
+#>     name={ycentoffset},
+#>     type={2D Float Map},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={This input cannot cause the pin to be clipped by the surrounding cell.},
+#>     description={This input card will shift the pin centroid along the y-axis.
+#>        Positive values will shift the pin up, and negative values will shift
+#>        it down.},
+#>     notes={}
+#>   }
+  ycentoffset:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},stride(0,1,()))
+#>
 #> \subsection{Block CONTROL}
 #> \label{sec:controlcards}
 CONTROL:
