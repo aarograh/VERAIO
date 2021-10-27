@@ -112,3 +112,4 @@
 [COBRATF]
   property_evaluations asme1968
   bwr_dp_tol 0.2 ! psi
+  th_solver fireant

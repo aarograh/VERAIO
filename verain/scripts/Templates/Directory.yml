@@ -9548,6 +9548,30 @@ COBRATF:
     _check:
       - is_string()
       - in_dictionary() legacy ge_nonprop
+#>
+#>   {\bf th\_solver} th\_solver
+#>   \VERAInputTable{
+#>     name={th\_solver},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={ctf},
+#>     valuesapplicable={fireant, ants},
+#>     limitations={},
+#>     description={Selects the fluid solver to use for the thermal-hydraulics solution.  Options are
+#>        \texttt{ctf}, \texttt{fireant}, or \texttt{ants}.  The \texttt{fireant} and \texttt{ants} options are steady-state solvers
+#>        that are much faster than \texttt{ctf}, but which only do an axial sweep and lack many of the more
+#>        advanced models of \texttt{ctf}.  Regardless of the T/H solver, CTFFuel will be used for the pin
+#>        temperature solution.},
+#>     notes={}
+#>   }
+  th_solver:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() ctf ants fireant
 
 #>
 #>   {\bf gap\_model} gap\_model
