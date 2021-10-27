@@ -151,6 +151,7 @@
   <ParameterList name="COBRATF">
     <Parameter name="bwr_dp_tol" type="double" value="0.2"/>
     <Parameter name="property_evaluations" type="string" value="asme1968"/>
+    <Parameter name="th_solver" type="string" value="fireant"/>
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="parallel_env">

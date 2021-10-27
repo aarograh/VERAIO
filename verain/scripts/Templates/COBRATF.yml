@@ -563,6 +563,13 @@ COBRATF:
         - copy COBRATF/$flow_regime_map
       _content:
 
+    th_solver:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy COBRATF/$th_solver
+      _content:
+
     gap_model:
       _pltype: parameter
       _type: string
