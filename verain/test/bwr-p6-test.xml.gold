@@ -278,6 +278,7 @@
           <Parameter name="material" type="string" value="inc"/>
         </ParameterList>
         <ParameterList name="Grid_MID">
+          <Parameter name="area" type="double" value="65.0"/>
           <Parameter name="gridloss" type="double" value="0.9065"/>
           <Parameter name="height" type="double" value="3.810"/>
           <Parameter name="label" type="string" value="MID"/>
