@@ -155,7 +155,7 @@
 
 ! *** artificially reduced grid mass
   grid END inc 3.866 350 / loss=0.9070 ! grid height (cm), mass (g), loss coef
-  grid MID zirc 3.810 300 / loss=0.9065 ! grid height (cm), mass (g), loss coef
+  grid MID zirc 3.810 300 / loss=0.9065 area = 65.0 ! grid height (cm), mass (g), loss coef, reference area (cm^2)
 
   grid_axial
       END  13.884

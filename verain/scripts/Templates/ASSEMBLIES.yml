@@ -305,6 +305,13 @@ ASSEMBLIES:
                     - copy %ASSEMBLY/$(_path)/%grid/$(_lgrid)^/$gridmap
                   _content:
 
+                area:
+                  _pltype: parameter
+                  _type: double
+                  _do:
+                    - copy %ASSEMBLY/$(_path)/%grid/$(_lgrid)^/$area
+                  _content:
+
         LossMaps:
           _pltype: list
 

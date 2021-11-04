@@ -3732,7 +3732,7 @@ ASSEMBLY:
       - is_strictlyincreasing(stride(1,2,()))
       - fall(sub{is_float(shift)},stride(2,1,()))
 #>
-#>   {\bf grid} label material height mass / loss lossmap blockage gridmap yhl1 yhl2
+#>   {\bf grid} label material height mass / loss lossmap blockage gridmap yhl1 yhl2 area
 #>   \VERAInputTable{
 #>     name={label},
 #>     type={Character String},
@@ -3871,6 +3871,23 @@ ASSEMBLY:
 #>        not set by the user. This input shall be identified by keyword as \texttt{yhl2=value}.},
 #>     notes={This input is not required on this card. Do not enter this input if using a \emph{gridmap}.}
 #>   }
+#>   \VERAInputTable{
+#>     name={area},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm$^2$},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Provides the reference area for the spacer grid loss coefficient.  If this is a
+#>        BWR model, and this input is not provided, this will have a default of 64.516 cm$^2$ (10 in$^2$).
+#>        If this is a PWR model, this input has no effect.  This reference area is used to adjust the
+#>        form loss coefficient if the form loss coefficient was provided for a reference area.  If the
+#>        form loss coefficient provided is the actual form loss coefficient, the true flow area of
+#>        the bundle should be provided.},
+#>     notes={}
+#>   }
 
   grid:
     <<: *dtlistnamed
@@ -3906,6 +3923,11 @@ ASSEMBLY:
         <<: *dtstring
         _check:
           - is_float()
+      area:
+        <<: *dtdouble
+        _check:
+          - is_float()
+          - is_gt() 0
 
 #>
 #>   {\bf lossmap} lossmap\_name loss\_coeff\_map
@@ -4356,7 +4378,7 @@ ASSEMBLY:
       - nth(5,())eq'temptable_polynomial'
       - fall(sub{is_float(shift)},stride(6,1,()))
 #>
-#>   {\bf xcentoffset} 
+#>   {\bf xcentoffset}
 #>   \VERAInputTable{
 #>     name={xcentoffset},
 #>     type={2D Float Map},
@@ -4378,7 +4400,7 @@ ASSEMBLY:
     _check:
       - fall(sub{is_float(shift)},stride(0,1,()))
 #>
-#>   {\bf ycentoffset} 
+#>   {\bf ycentoffset}
 #>   \VERAInputTable{
 #>     name={ycentoffset},
 #>     type={2D Float Map},
