@@ -428,6 +428,118 @@ CORE:
         - copy CORE/$height
       _content:
 
+    sg_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@steam_gen_natcirc:0
+      _content:
+
+    sg_flow_area:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@steam_gen_natcirc:1
+      _content:
+
+    sg_dh:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@steam_gen_natcirc:2
+      _content:
+
+    sg_length:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@steam_gen_natcirc:3
+      _content:
+
+    sg_kf:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@steam_gen_natcirc^/$loss
+      _content:
+
+    sg_epsr:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@steam_gen_natcirc^/$roughness
+      _content:
+
+    chimney_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@chimney:0
+      _content:
+
+    chimney_area:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@chimney:1
+      _content:
+
+    chimney_dh:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@chimney:2
+      _content:
+
+    chimney_kf:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@chimney^/$loss
+      _content:
+
+    chimney_epsr:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@chimney^/$roughness
+      _content:
+
+    dc_height:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@downcomer:0
+      _content:
+
+    dc_area:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@downcomer:1
+      _content:
+
+    dc_dh:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@downcomer:2
+      _content:
+
+    dc_kf:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@downcomer^/$loss
+      _content:
+
+    dc_epsr:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/@downcomer^/$roughness
+      _content:
+
     upper_refl_mats:
       _pltype: array
       _type: string
@@ -662,3 +774,4 @@ CORE:
               _do:
                 - copy CORE/%det/@(_ldet),section=>3,select=>odd
               _content:
+

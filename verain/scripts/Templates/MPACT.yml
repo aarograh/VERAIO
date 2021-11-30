@@ -798,6 +798,13 @@ MPACT:
             - copy MPACT/$coupling_method
           _content:
 
+        friction_correlation:
+          _pltype: parameter
+          _type: int
+          _do:
+            - copy MPACT/$friction_correlation
+          _content:
+
         average_ftemp:
           _pltype: parameter
           _type: bool

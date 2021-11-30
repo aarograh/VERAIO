@@ -215,6 +215,13 @@ STATES:
             - copy %STATE/$(_loop)/$feedback
           _content:
 
+        natcirc:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %STATE/$(_loop)/$natcirc
+          _content:
+
         fuel_performance:
           _pltype: parameter
           _type: string
@@ -718,3 +725,4 @@ STATES:
           _do:
             - copy %STATE/$(_loop)/@temp_pert:1
           _content:
+
