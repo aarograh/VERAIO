@@ -901,6 +901,26 @@ STATE:
       - is_word()
       - in_dictionary() on off
 #>
+#>   {\bf natcirc} natcirc
+#>   \VERAInputTable{
+#>     name={natcirc},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={off},
+#>     valuesapplicable={on},
+#>     limitations={},
+#>     description={Flag to turn on and off natural circulation calculation.},
+#>     notes={}
+#>   }
+  natcirc:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off
+#>
 #>   {\bf fuel\_performance} fuel\_performance\_option
 #>   \VERAInputTable{
 #>     name={fuel\_performance\_option},
@@ -2980,6 +3000,284 @@ CORE:
     _check:
       - is_float()
       - is_geq() 0
+#>
+#>   {\bf steam\_gen\_natcirc} sg\_height sg\_flow\_area sg\_dh sg\_length / sg\_kf sg\_epsr
+#>   \VERAInputTable{
+#>     name={sg\_height},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Total axial distance from bottom core plate to steam generator exit.
+#>        Required if natural circulation is turned on and reactor is a PWR.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={sg\_flow\_area},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m$^2$},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$> 0$},
+#>     limitations={},
+#>     description={Total flow area of steam generator section.
+#>        Required if natural circulation is turned on and reactor is a PWR.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={sg\_dh},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$> 0$},
+#>     limitations={},
+#>     description={Steam generator hydraulic diameter.
+#>        Required if natural circulation is turned on and reactor is a PWR.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={sg\_length},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={$\texttt{sg\_length}-\texttt{sg\_height}$},
+#>     valuesapplicable={$\ge \texttt{chimney\_height}-\texttt{sg\_height}$},
+#>     limitations={},
+#>     description={Total flow length of the steam generator.},
+#>     notes={This input is not required on this card.}
+#>   }
+#>   \VERAInputTable{
+#>     name={sg\_kf},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Steam generator forms loss coefficient.
+#>        This input shall be identified as \texttt{loss=value}},
+#>     notes={This input is not required on this card.}
+#>   }
+#>   \VERAInputTable{
+#>     name={sg\_epsr},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={1.0E-7},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Steam generator roughness. Not used if \texttt{friction\_correlation} is 1 or 2.
+#>        Default value is the absolute roughness of stainless steel.
+#>        This input shall be identified as \texttt{roughness=value}},
+#>     notes={This input is not required on this card.}
+#>   }
+  steam_gen_natcirc:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()>=3
+      - arraysize()<=4
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+    _parameters:
+      loss:
+        <<: *dtdouble
+        _content:
+        _check:
+          - is_float()
+          - is_geq() 0
+      roughness:
+        <<: *dtdouble
+        _content:
+        _check:
+          - is_float()
+          - is_geq() 0
+#>
+#>   {\bf chimney} chimney\_height chimney\_area chimney\_dh / chimney\_kf chimney\_epsr
+#>   \VERAInputTable{
+#>     name={chimney\_height},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={\texttt{height}},
+#>     valuesapplicable={$\ge \texttt{height}$},
+#>     limitations={},
+#>     description={Total axial distance from bottom core plate to chimney exit.
+#>        Absence means assumption that chimney is modeled in core model.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={chimney\_area},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m$^2$},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={$> 0$},
+#>     limitations={},
+#>     description={Chimney flow area. Required if \texttt{chimney\_height} is given.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={chimney\_dh},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={$> 0$},
+#>     limitations={},
+#>     description={Chimney hydraulic diameter. Required if \texttt{chimney\_height} is given.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={chimney\_kf},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Chimney forms loss coefficient.
+#>        This input shall be identified as \texttt{loss=value}},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={chimney\_epsr},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={1.0E-7},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Chimney roughness. Not used if \texttt{friction\_correlation} is 1 or 2.
+#>        Default value is the absolute roughness of stainless steel.
+#>        This input shall be identified as \texttt{roughness=value}},
+#>     notes={}
+#>   }
+  chimney:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==3
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+    _parameters:
+      loss:
+        <<: *dtdouble
+        _content:
+        _check:
+          - is_float()
+          - is_geq() 0
+      roughness:
+        <<: *dtdouble
+        _content:
+        _check:
+          - is_float()
+          - is_geq() 0
+#>
+#>   {\bf downcomer} dc\_height dc\_area dc\_dh / dc\_kf dc\_epsr
+#>   \VERAInputTable{
+#>     name={dc\_height},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\le 0$},
+#>     limitations={},
+#>     description={Negative axial distance from top of the bottom core plate to downcomer exit.
+#>        Required if natural circulation is turned on. Should usually be 0.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={dc\_area},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m$^2$},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$> 0$},
+#>     limitations={},
+#>     description={Downcomer flow area.
+#>        Required if natural circulation is turned on.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={dc\_dh},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$> 0$},
+#>     limitations={},
+#>     description={Downcomer hydraulic diameter.
+#>        Required if natural circulation is turned on.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={dc\_kf},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Downcomer forms loss coefficient.
+#>        This input shall be identified as \texttt{loss=value}},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={dc\_epsr},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={1.0E-7},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={},
+#>     description={Downcomer roughness. Not used if \texttt{friction\_correlation} is 1 or 2.
+#>        Default value is the absolute roughness of stainless steel.
+#>        This input shall be identified as \texttt{roughness=value}},
+#>     notes={}
+#>   }
+  downcomer:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==3
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+    _parameters:
+      loss:
+        <<: *dtdouble
+        _content:
+        _check:
+          - is_float()
+          - is_geq() 0
+      roughness:
+        <<: *dtdouble
+        _content:
+        _check:
+          - is_float()
+          - is_geq() 0
 #>
 #>   {\bf mat} mat
 #>   \VERAInputTable{
@@ -13644,6 +13942,37 @@ MPACT:
       - is_word()
       - in_dictionary() ctf simplified ctf_external tiamat user_defined none hybrid
 #>
+#>   {\bf friction\_correlation} friction\_correlation
+#>   \VERAInputTable{
+#>     name={friction\_correlation},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={2, 3, 4, 5},
+#>     limitations={},
+#>     description={Thermal hydraulics friction factor correlation.
+#>        The following options are available:
+#>        \begin{enumerate}
+#>           \item Default Ben's Formulation - From previous BWRFluidFlow implementation.
+#>              Pulled from Dave Kropaczek's ANTS code. Does not use roughness.
+#>              Correlation is $f=0.1892Re^{-0.2}$
+#>           \item VUQ PIRT - Original CTF correlation, does not use roughness
+#>           \item McAdams Correlation - Does not use roughness
+#>           \item Ziagrang-Sylvester correlation - Used by RELAP5, uses roughness
+#>           \item Churchill Formulation - Uses roughness
+#>        \end{enumerate}},
+#>     notes={}
+#>   }
+  friction_correlation:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_int()
+      - is_geq() 1
+      - is_leq() 5
+#>
 #>   {\bf shielder\_th} shielder\_th
 #>   \VERAInputTable{
 #>     name={shielder\_th},
@@ -19232,3 +19561,4 @@ RUN:
     _check:
       - is_float()
       - is_gt() 0
+
