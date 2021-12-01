@@ -3072,11 +3072,11 @@ CORE:
 #>     need={Optional},
 #>     unitsdefault={m},
 #>     unitsother={},
-#>     valuedefault={1.0E-7},
+#>     valuedefault={2.5E-6},
 #>     valuesapplicable={$\ge 0$},
 #>     limitations={},
 #>     description={Steam generator roughness. Not used if \texttt{friction\_correlation} is 1 or 2.
-#>        Default value is the absolute roughness of stainless steel.
+#>        Default value is in the range of the absolute roughness of stainless steel.
 #>        This input shall be identified as \texttt{roughness=value}},
 #>     notes={This input is not required on this card.}
 #>   }
@@ -3160,11 +3160,11 @@ CORE:
 #>     need={Optional},
 #>     unitsdefault={m},
 #>     unitsother={},
-#>     valuedefault={1.0E-7},
+#>     valuedefault={2.5E-6},
 #>     valuesapplicable={$\ge 0$},
 #>     limitations={},
 #>     description={Chimney roughness. Not used if \texttt{friction\_correlation} is 1 or 2.
-#>        Default value is the absolute roughness of stainless steel.
+#>        Default value is in the range of the absolute roughness of stainless steel.
 #>        This input shall be identified as \texttt{roughness=value}},
 #>     notes={}
 #>   }
@@ -3249,11 +3249,11 @@ CORE:
 #>     need={Optional},
 #>     unitsdefault={m},
 #>     unitsother={},
-#>     valuedefault={1.0E-7},
+#>     valuedefault={2.5E-6},
 #>     valuesapplicable={$\ge 0$},
 #>     limitations={},
 #>     description={Downcomer roughness. Not used if \texttt{friction\_correlation} is 1 or 2.
-#>        Default value is the absolute roughness of stainless steel.
+#>        Default value is in the range of the absolute roughness of stainless steel.
 #>        This input shall be identified as \texttt{roughness=value}},
 #>     notes={}
 #>   }
