@@ -1,0 +1,259 @@
+TRANSIENT:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+  _content:
+
+    end_time:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy TRANSIENT/@end_time
+      _content:
+
+    scram:
+      _pltype: list
+      _content:
+
+        rates:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray TRANSIENT/@scram_type,start=>1,stride=>2
+          _content:
+
+        times:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray TRANSIENT/@scram_type,start=>2,stride=>2
+          _content:
+
+        lock:
+          _pltype: array
+          _type: string
+          _do:
+            - copy TRANSIENT/@scram_lock
+          _content:
+
+        trip:
+          _pltype: list
+          _content:
+            
+            timepoint:
+              _pltype: parameter
+              _type: double
+              _do:
+                - copy TRANSIENT/@trip_time
+              _content:
+
+
+            absolute:
+              _pltype: list
+              _dp:
+
+              _tr:
+                _name: _trip
+                _content: TRANSIENT/%trip_absolute
+
+              _content:
+
+                (_trip):
+                  _pltype: list
+                  _do:
+
+                  _content:
+
+                    high:
+                      _pltype: parameter
+                      _type: double
+                      _do:
+                        - copy TRANSIENT/%trip_absolute/$(_trip):0
+                      _content:
+
+                    low:
+                      _pltype: parameter
+                      _type: double
+                      _do:
+                        - copy TRANSIENT/%trip_absolute/$(_trip):1
+                      _content:
+
+                    delay:
+                      _pltype: parameter
+                      _type: double
+                      _do:
+                        - copy TRANSIENT/%trip_absolute/$(_trip):2
+                      _content:
+
+                    det_signals:
+                      _pltype: parameter
+                      _type: int
+                      _do:
+                        - copy TRANSIENT/%trip_absolute/$(_trip):3
+                      _content:
+
+            rate:
+              _pltype: list
+              _dp:
+
+              _tr:
+                _name: _trip
+                _content: TRANSIENT/%trip_rate
+
+              _content:
+
+                (_trip):
+                  _pltype: list
+                  _do:
+
+                  _content:
+
+                    high:
+                      _pltype: parameter
+                      _type: double
+                      _do:
+                        - copy TRANSIENT/%trip_rate/$(_trip):0
+                      _content:
+
+                    low:
+                      _pltype: parameter
+                      _type: double
+                      _do:
+                        - copy TRANSIENT/%trip_rate/$(_trip):1
+                      _content:
+
+                    delay:
+                      _pltype: parameter
+                      _type: double
+                      _do:
+                        - copy TRANSIENT/%trip_rate/$(_trip):2
+                      _content:
+
+                    det_signals:
+                      _pltype: parameter
+                      _type: int
+                      _do:
+                        - copy TRANSIENT/%trip_rate/$(_trip):3
+                      _content:
+
+    timestep:
+      _pltype: list
+      _content:
+        dt:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray TRANSIENT/@timestep,select=>even
+          _content:
+
+        tf:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray TRANSIENT/@timestep,select=>odd
+          _content:
+
+    linear_ramp:
+      _pltype: list
+      _do:
+
+      _tr:
+        _name: _var
+        _content: TRANSIENT/%linear_ramp
+
+      _content:
+
+        (_var):
+          _pltype: list
+          _do:
+
+          _content:
+            linear_ramp_value:
+              _pltype: array
+              _type: double
+              _do:
+                - copy TRANSIENT/%linear_ramp/$(_var),start=>0,stride=>2
+              _content:
+
+            linear_ramp_time:
+              _pltype: array
+              _type: double
+              _do:
+                - copy TRANSIENT/%linear_ramp/$(_var),start=>1,stride=>2
+              _content:
+
+    linear_rod_ramp:
+      _pltype: list
+      _do:
+
+      _tr:
+        _name: _bank
+        _content: TRANSIENT/%linear_rod_ramp
+
+      _content:
+
+        (_bank):
+          _pltype: list
+          _do:
+
+          _content:
+            linear_rod_ramp_value:
+              _pltype: array
+              _type: double
+              _do:
+                - copy TRANSIENT/%linear_rod_ramp/$(_bank),start=>0,stride=>2
+              _content:
+
+            linear_rod_ramp_time:
+              _pltype: array
+              _type: double
+              _do:
+                - copy TRANSIENT/%linear_rod_ramp/$(_bank),start=>1,stride=>2
+              _content:
+
+    linear_mat_ramp:
+      _pltype: list
+      _do:
+
+      _tr:
+        _name: _bank
+        _content: TRANSIENT/%linear_mat_ramp
+
+      _content:
+
+        (_bank):
+          _pltype: list
+          _do:
+
+          _content:
+            linear_mat_ramp_value:
+              _pltype: array
+              _type: string
+              _do:
+                - copy TRANSIENT/%linear_mat_ramp/$(_bank),start=>0,stride=>2
+              _content:
+
+            linear_mat_ramp_time:
+              _pltype: array
+              _type: double
+              _do:
+                - copy TRANSIENT/%linear_mat_ramp/$(_bank),start=>1,stride=>2
+              _content:
+
+    edit_schedule:
+      _pltype: list
+      _content:
+
+        dt:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray TRANSIENT/@edit_schedule,select=>even
+          _content:
+
+        tf:
+          _pltype: array
+          _type: double
+          _do:
+            - copyarray TRANSIENT/@edit_schedule,select=>odd
+          _content:
