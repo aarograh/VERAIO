@@ -340,7 +340,6 @@
   rx_components false
   checkpoint_write testWrite.h5 5
   checkpoint_read testRead.h5 2
-  summary_edits true
   nodal_edits true
   nodal_edits senm-2
   nodal_edits_energy_cutoff 0.625

@@ -50,6 +50,7 @@ _DIRECTORY:
   COBRATF:
   COUPLING:
   MPACT:
+  TRANSIENT:
   BISON:
   FAST:
   MAMBA:
@@ -436,8 +437,7 @@ STATE:
 #>        \item \texttt{zero} --- Sets $^{135}$I and $^{135}$Xe number densities to zero
 #>        \item \texttt{equil} --- Sets $^{135}$I and $^{135}$Xe number densities to calculated equilibrium values
 #>        \item \texttt{dep} --- Treats $^{135}$I and $^{135}$Xe explicitly as other isotopes in transport calculation
-#>     \end{itemize}
-#>     },
+#>     \end{itemize}},
 #>     notes={}
 #>   }
   xenon:
@@ -464,8 +464,7 @@ STATE:
 #>        \item \texttt{dep} --- Treats $^{149}$Pm and $^{149}$Sm explicitly as other isotopes in transport calculation
 #>        \item \texttt{peak} --- Adds $^{149}$Pm number density to $^{149}$Sm number density and then sets Pm-149
 #>                                number density to zero
-#>     \end{itemize}
-#>     },
+#>     \end{itemize}},
 #>     notes={}
 #>   }
   samar:
@@ -901,6 +900,28 @@ STATE:
       - is_word()
       - in_dictionary() on off
 #>
+#>   {\bf transient} transient\_option
+#>   \VERAInputTable{
+#>     name={transient\_option},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={on},
+#>     valuesapplicable={off},
+#>     limitations={},
+#>     description={Flag to turn on and off transient},
+#>     notes={The presence of the transient block implies that this option is
+#>        on. Set this option to off to disable transient when a transient block is
+#>        specified.}
+#>   }
+  transient:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off
+#>
 #>   {\bf natcirc} natcirc
 #>   \VERAInputTable{
 #>     name={natcirc},
@@ -1317,174 +1338,6 @@ STATE:
     _check:
       - is_gt() 0
       - is_leq() 100
-#>
-#>   {\bf scram\_type} scram\_type scram\_rate scram\_time
-#>   \VERAInputTable{
-#>     name={scram\_type},
-#>     type={Free Form Character String, Pairs of doubles},
-#>     need={Optional},
-#>     unitsdefault={false},
-#>     unitsother={true},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={Can only be used for transient cases, and at least one
-#>        ``trip\_'' card must be present to specify trip conditions.},
-#>     description={This option is used to specify the scram type (of which
-#>        the only current option is ``trip'') and the scram bank movement
-#>        speed intervals. These are specified using rate/time pairs, where
-#>        each rate is associated with the following time interval. The
-#>        units are RUs/second and seconds, respectively. At least one
-#>        time/rate pair must be present.},
-#>     notes={This card is only used in transient calculations.}
-#>   }
-  scram_type:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - is_word(nth(0,()))
-      - fall(sub{is_float(shift)},stride(1,2,()))
-      - fall(sub{is_geq(shift,0)},stride(1,2,()))
-      - fall(sub{is_float(shift)},stride(2,2,()))
-      - fall(sub{is_gt(shift,0)},stride(2,2,()))
-      - arraysize()%2!=0
-#>
-#>   {\bf bank\_wd} bank\_wd
-#>   \VERAInputTable{
-#>     name={bank\_wd},
-#>     type={List of Free Form Character Strings paired with an Integer and Float},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={Any control rod bank label and real values $>0$},
-#>     limitations={Currently only works for one control rod bank and for transient cases.},
-#>     description={This card is used to specify the position of a control rod bank
-#>        at a specified time. There is no limit to the number of time and position
-#>        pairs, and at least one pair must exist.
-#>        \begin{itemize}
-#>          \item \texttt{bank\_label} --- The bank to be withdrawn
-#>          \item \texttt{time\_N} --- The selected transient time that corresponds to the
-#>                                    bank position
-#>          \item \texttt{pos\_N} --- The number of steps withdrawn at a given time step
-#>        \end{itemize}
-#>        },
-#>     notes={This feature is still under development and is not yet operational.}
-#>   }
-  bank_wd:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - is_word(nth(0,()))
-      - fall(sub{is_float(shift)},stride(1,2,()))
-      - fall(sub{is_geq(shift,0)},stride(1,2,()))
-      - fall(sub{is_int(shift)},stride(2,2,()))
-      - fall(sub{is_gt(shift,0)},stride(2,2,()))
-      - arraysize()%2==1
-#>
-#>   {\bf scram\_lock} bank\_label
-#>   \VERAInputTable{
-#>     name={bank\_label},
-#>     type={List of Free Form Character Strings},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={At least one valid bank label},
-#>     limitations={Requires scram\_type card},
-#>     description={This option is used to specify the bank labels of the
-#>        banks that will not participate in the scram. These banks will
-#>        continue their normal movement. At least one bank label must be
-#>        specified.},
-#>     notes={This card is only used in transient calculations.}
-#>   }
-  scram_lock:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - fall(sub{is_word(shift)},())
-#>
-#>   {\bf trip\_time} trip\_time
-#>   \VERAInputTable{
-#>     name={trip\_time},
-#>     type={double},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$},
-#>     limitations={Requires scram\_type card},
-#>     description={This option is used to specify the simulation time at
-#>        which a trip will occur (in seconds) for scram functionality.},
-#>     notes={This card is only used in transient calculations.}
-#>   }
-  trip_time:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-#>
-#>   {\bf trip\_power} high\_power low\_power delay number\_detectors
-#>   \VERAInputTable{
-#>     name={trip\_power},
-#>     type={double, double, double, integer},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$ $\ge 0$ $\ge 0$ $\ge 0$},
-#>     limitations={Requires scram\_type card},
-#>     description={This option is used to specify the trip power
-#>        conditions for scram functionality. The high and low power entries
-#>        are in units of \% full power. The delay entry is the specified time after
-#>        delay before scram bank movement occurs (seconds). The last entry
-#>        is the number of detectors required to meet these conditions
-#>        before a trip occurs (currently, only the full-core power can be
-#>        assessed, with an option of 0).},
-#>     notes={This card is only used in transient calculations.}
-#>   }
-  trip_power:
-    <<: *dtlist
-    _content:
-    _check:
-      - arraysize()==4
-      - is_float(nth(0,()))&&nth(0,())>0
-      - is_float(nth(1,()))&&nth(1,())>=0
-      - is_float(nth(2,()))&&nth(2,())>=0
-      - (is_int(nth(3,()))||nth(3,())==0)&&nth(3,())>=0
-#>
-#>   {\bf trip\_rate} upper\_power\_threshold lower\_power\_threshold delay number\_detectors
-#>   \VERAInputTable{
-#>     name={trip\_rate},
-#>     type={double, double, double, integer},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$ $\ge 0$ $\ge 0$ $\ge 0$},
-#>     limitations={Requires scram\_type card},
-#>     description={This option is used to specify the trip power rate
-#>        change conditions for scram functionality. The first two entries
-#>        are the upper and lower power rate change thresholds in units of
-#>        \% full power/second. The delay entry is the specified time after delay
-#>        before scram bank movement occurs (seconds). The last entry is the
-#>        number of detectors required to meet these conditions before a
-#>        trip occurs (currently, only the full-core power can be assessed,
-#>        with an option of 0).},
-#>     notes={This card is only used in transient calculations.}
-#>   }
-  trip_rate:
-    <<: *dtlist
-    _content:
-    _check:
-      - arraysize()==4
-      - is_float(nth(0,()))
-      - is_float(nth(1,()))
-      - is_float(nth(2,()))&&nth(2,())>=0
-      - (is_int(nth(3,()))||nth(3,())==0)&&nth(3,())>=0
 #>
 #>   {\bf restart\_shuffle\_errorchecking} restart\_shuffle\_errorchecking
 #>   \VERAInputTable{
@@ -4644,7 +4497,7 @@ ASSEMBLY:
 #>     unitsother={},
 #>     valuedefault={},
 #>     valuesapplicable={},
-#>     limitations={requires a temperature table file to be included below},
+#>     limitations={Requires a temperature table file to be included below},
 #>     description={This flag defines a temperature table in the assembly block
 #>        that can be used in the cell definitions; each cell can have
 #>        a separate table if desired.},
@@ -13118,7 +12971,7 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={1.0E-5},
-#>     valuesapplicable={$>$0},
+#>     valuesapplicable={$>$0.0},
 #>     limitations={},
 #>     description={This card is used to specify the global tolerance on convergence
 #>        of the eigenvalue.},
@@ -13139,7 +12992,7 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={1.0E-4},
-#>     valuesapplicable={$>$0},
+#>     valuesapplicable={$>$0.0},
 #>     limitations={},
 #>     description={This card is used to specify the tolerance on the convergence
 #>        of the 2-norm of the flux.},
@@ -13160,7 +13013,7 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={1.0E-4},
-#>     valuesapplicable={$>$0},
+#>     valuesapplicable={$>$0.0},
 #>     limitations={},
 #>     description={This card is used to specify the tolerance on the convergence
 #>        of the 2-norm of the gamma flux.},
@@ -16291,7 +16144,7 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={},
-#>     valuesapplicable={$>$0},
+#>     valuesapplicable={$>$0.0},
 #>     limitations={},
 #>     description={This card is used to specify the tolerance on the convergence
 #>        of the 2-norm of the nodal flux residual during within group nodal inner
@@ -16313,7 +16166,7 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={},
-#>     valuesapplicable={$>$0},
+#>     valuesapplicable={$>$0.0},
 #>     limitations={},
 #>     description={This card is used to specify the tolerance on the convergence
 #>        of the 2-norm of the nodal flux residual during nodal group iterations.},
@@ -16595,46 +16448,6 @@ MPACT:
     _slash:
     _check:
 #>
-#>   {\bf 1gacceltr} 1gacceltr
-#>   \VERAInputTable{
-#>     name={1gacceltr},
-#>     type={Boolean},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={false},
-#>     valuesapplicable={true},
-#>     limitations={},
-#>     description={Flag for 1GCMFD acceleration for transport part of transient simulations},
-#>     notes={}
-#>   }
-  1gacceltr:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
-#>
-#>   {\bf 1gaccel} 1gaccel
-#>   \VERAInputTable{
-#>     name={1gaccel},
-#>     type={Boolean},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={false},
-#>     valuesapplicable={true},
-#>     limitations={},
-#>     description={Flag for 1GCMFD acceleration of transient simulations},
-#>     notes={}
-#>   }
-  1gaccel:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
-#>
 #>   {\bf delayenergy} delayenergy
 #>   \VERAInputTable{
 #>     name={delayenergy},
@@ -16783,23 +16596,107 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 #>
-#>   {\bf summary\_edits} summary\_edits
+#>   {\bf tml} tml
 #>   \VERAInputTable{
-#>     name={summary\_edits},
+#>     name={tml},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={false},
+#>     limitations={},
+#>     description={Flag to enable the transient multi-level (TML) method.},
+#>     notes={}
+#>   }
+  tml:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf tmllevel} nCMFD nEPKE n1GCMFD
+#>   \VERAInputTable{
+#>     name={nCMFD},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={5},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The number of CMFD acceleration steps taken for every transport
+#>        time step.},
+#>     notes={Is only used when \texttt{tml} is set to \texttt{true}}
+#>   }
+#>   \VERAInputTable{
+#>     name={nEPKE},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={10},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The number of EPKE calculation steps taken for every transport
+#>        time step.},
+#>     notes={Is only used when \texttt{tml} is set to \texttt{true}}
+#>   }
+#>   \VERAInputTable{
+#>     name={n1GCMFD},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The number of 1G CMFD acceleration steps taken for every transport
+#>        time step.},
+#>     notes={Is only used when \texttt{tml} is set to \texttt{true}}
+#>   }
+  tmllevel:
+    <<: *dtlist
+    _content:
+    _check:
+      - fall(sub{is_int(shift)})
+      - fall(sub{is_geq(shift,0)})
+#>
+#>   {\bf 1gacceltr} 1gacceltr
+#>   \VERAInputTable{
+#>     name={1gacceltr},
 #>     type={Boolean},
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={false},
-#>     valuesapplicable={\texttt{true}},
-#>     limitations={Only used for transient cases.},
-#>     description={This option is used to specify whether to
-#>        print a summary file (<caseid>.sum) containing data for each
-#>        transient timestep. The default is false. This option is
-#>        ignored for steady-state calculations.},
+#>     valuesapplicable={true},
+#>     limitations={},
+#>     description={Flag for coupled 1GCMFD/MGCMFD acceleration of the transient problem.},
 #>     notes={}
 #>   }
-  summary_edits:
+  1gacceltr:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf 1gaccel} 1gaccel
+#>   \VERAInputTable{
+#>     name={1gaccel},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true},
+#>     limitations={},
+#>     description={Flag for 1GCMFD acceleration of transient simulations},
+#>     notes={}
+#>   }
+  1gaccel:
     <<: *dtbool
     _content:
     _check:
@@ -16835,76 +16732,6 @@ MPACT:
       - is_word()
       - in_dictionary() none sweep hybrid
 #>
-#>   {\bf tml} tml
-#>   \VERAInputTable{
-#>     name={tml},
-#>     type={Boolean},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={true},
-#>     valuesapplicable={false},
-#>     limitations={},
-#>     description={Flag to enable the transient multi-level (TML) method.},
-#>     notes={}
-#>   }
-  tml:
-    <<: *dtbool
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
-#>
-#>   {\bf tmllevel} nCMFD nEPKE/n1GCMFD n1GCMFD/nEPKE
-#>   \VERAInputTable{
-#>     name={nCMFD},
-#>     type={Integer},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={5},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={The number of CMFD acceleration steps taken for every transport
-#>        time step, this is always the first entry in the \texttt{tmllevel} card},
-#>     notes={Is only used when \texttt{tml} is set to \texttt{true}}
-#>   }
-#>   \VERAInputTable{
-#>     name={nEPKE},
-#>     type={Integer},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={10},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={The number of EPKE calculation steps taken for every transport
-#>        time step. If there are only 2 numbers listed in the \texttt{tmllevel} card,
-#>        the second number should be \texttt{nEPKE}. If there are 3 numbers listed
-#>        in the \texttt{tmllevel} card, the third number should be \texttt{nEPKE}.},
-#>     notes={Is only used when \texttt{tml} is set to \texttt{true}}
-#>   }
-#>   \VERAInputTable{
-#>     name={n1GCMFD},
-#>     type={Integer},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={0},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={The number of 1G CMFD acceleration steps taken for every transport
-#>        time step. This variable is only set if there are 3 numbers listed in the
-#>        \texttt{tmllevel} card, in which case, the second number is \texttt{nEPKE}.},
-#>     notes={Is only used when \texttt{tml} is set to \texttt{true}}
-#>   }
-  tmllevel:
-    <<: *dtlist
-    _content:
-    _check:
-      - fall(sub{is_int(shift)})
-      - fall(sub{is_geq(shift,0)})
-#>
 #>   {\bf transmethod} transmethod
 #>   \VERAInputTable{
 #>     name={transmethod},
@@ -16932,60 +16759,6 @@ MPACT:
       - is_float(nth(1,()))
       - is_geq(nth(1,()),0)
 #>
-#>   {\bf perturb} perturb
-#>   \VERAInputTable{
-#>     name={perturb},
-#>     type={Array of String and doubles},
-#>     need={Required},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={This card is used to specify the parameters to drive the transient.
-#>        The options for perturbing the system are as follows:
-#>        \begin{itemize}
-#>          \item \texttt{t1}    --- The start time of perturbation
-#>          \item \texttt{t2}    --- The end time of perturbation
-#>          \item \texttt{dt}    --- The time step of perturbation (optional)
-#>        \end{itemize}
-#>        For the option \texttt{mat}, its interpretation varies with the perturbation type.
-#>        \begin{itemize}
-#>          \item \texttt{STEP}  --- For this perturbation type, the initial condition
-#>             for the $i$th material is \texttt{mat0(i)}, at time \texttt{t2}, it is turned
-#>             into \texttt{mat0} instantaneously.
-#>          \item \texttt{RAMP}  --- For this perturbation type, the initial condition
-#>             for the ith material is \texttt{mat0(i)}. Then it changes gradually from
-#>             \texttt{mat1(i)} to \texttt{mat2(i)}. This change is a fractional time-
-#>             weighted mixture of the two materials. The mixture at \texttt{t1} is
-#>             only \texttt{mat1}; halfway through the perturbation it is 0.5
-#>             \texttt(mat1) and 0.5 \texttt{mat2}. At the end of the perturbation,
-#>             it is only \texttt{mat2}.
-#>          \item \texttt{CONST} --- For this perturbation, there are no changes to the
-#>                system.
-#>          \item \texttt{MVCR} --- This perturbation is for moving a bank of control
-#>             rods. The rod positions are specified in [STATE] blocks corresponding to
-#>             each time step occurring during the perturbation.
-#>        \end{itemize}},
-#>     notes={}
-#>   }
-  perturb:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - arraysize()%7==0
-      - fall(sub{is_float(shift)},stride(0,7,()))
-      - fall(sub{is_geq(shift,0)},stride(0,7,()))
-      - fall(sub{is_float(shift)},stride(1,7,()))
-      - fall(sub{is_geq(shift,0)},stride(1,7,()))
-      - fall(sub{is_float(shift)},stride(2,7,()))
-      - fall(sub{is_geq(shift,0)},stride(2,7,()))
-      - fall(sub{is_word(shift)},stride(3,7,()))
-      - fall(sub{in_dictionary(shift,'step','const','ramp','mvcr','stcg')},stride(3,7,()))
-      - fall(sub{is_word(shift)},stride(4,7,()))
-      - fall(sub{is_word(shift)},stride(5,7,()))
-      - fall(sub{is_word(shift)},stride(6,7,()))
 #>
 #>   {\bf checkpoint\_read} checkpoint\_read\_file checkpoint\_read\_label
 #>   \VERAInputTable{
@@ -17003,7 +16776,7 @@ MPACT:
 #>   }
 #>   \VERAInputTable{
 #>     name={checkpoint\_read\_label},
-#>     type={Character String},
+#>     type={Float},
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
@@ -17018,7 +16791,8 @@ MPACT:
     <<: *dtlist
     _content:
     _check:
-      - fall(sub{is_word(shift)},())
+      - is_word(nth(0,()))
+      - is_float(nth(1,()))&&nth(1,())>=0
       - arraysize()==2
 #>
 #>   {\bf checkpoint\_write} checkpoint\_write\_file checkpoint\_write\_label
@@ -17037,7 +16811,7 @@ MPACT:
 #>   }
 #>   \VERAInputTable{
 #>     name={checkpoint\_write\_label},
-#>     type={Character String},
+#>     type={Float},
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
@@ -17052,7 +16826,8 @@ MPACT:
     <<: *dtlist
     _content:
     _check:
-      - fall(sub{is_word(shift)},())
+      - is_word(nth(0,()))
+      - is_float(nth(1,()))&&nth(1,())>=0
       - arraysize()==2
 #>
 #>   {\bf mat\_emit\_src} mat\_emit\_src
@@ -17079,6 +16854,498 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 #>
+#> \subsection{Block TRANSIENT}
+#> \label{sec:transientcards}
+#>
+TRANSIENT:
+#>
+#>   {\bf scram\_type} scram\_type scram\_rate scram\_time
+#>   \VERAInputTable{
+#>     name={scram\_type},
+#>     type={Free Form Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={trip},
+#>     limitations={Can only be used for transient cases, and at least one
+#>        ``trip\_'' card must be present to specify trip conditions.},
+#>     description={This option is used to specify the scram type (of which
+#>        the only current option is ``trip'').},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+#>   \VERAInputTable{
+#>     name={scram\_rate},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={RU/s},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={Can only be used for transient cases, and at least one
+#>        ``trip\_'' card must be present to specify trip conditions.},
+#>     description={The scram bank movement speed intervals. These are specified
+#>        in pairs where each rate is associated with the following time interval.
+#>        At least one rate/time pair must be present.},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+#>   \VERAInputTable{
+#>     name={scram\_time},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0.0$},
+#>     limitations={Can only be used for transient cases, and at least one
+#>        ``trip\_'' card must be present to specify trip conditions.},
+#>     description={The scram bank movement speed intervals. These are specified
+#>        in pairs where each rate is associated with the following time interval.
+#>        At least one rate/time pair must be present.},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+  scram_type:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - is_word(nth(0,()))
+      - fall(sub{is_float(shift)},stride(1,2,()))
+      - fall(sub{is_geq(shift,0)},stride(1,2,()))
+      - fall(sub{is_float(shift)},stride(2,2,()))
+      - fall(sub{is_gt(shift,0)},stride(2,2,()))
+      - arraysize()%2!=0
+#>
+#>   {\bf scram\_lock} bank\_label
+#>   \VERAInputTable{
+#>     name={bank\_label},
+#>     type={List of Free Form Character Strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={At least one valid bank label},
+#>     limitations={Requires \texttt{scram\_type} card},
+#>     description={This option is used to specify the bank labels of the
+#>        banks that will ignore a scram signal. These banks will either
+#>        continue with their specified \texttt{linear\_rod\_ramp} or
+#>        remain at their current position if no such ramp exists. At least one
+#>        bank label must be specified.},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+  scram_lock:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+#>
+#>   {\bf trip\_time} trip\_time
+#>   \VERAInputTable{
+#>     name={trip\_time},
+#>     type={double},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={Requires \texttt{scram\_type} card},
+#>     description={This option is used to specify the simulation time at
+#>        which a trip will occur (in seconds) for scram functionality.},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+  trip_time:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf trip\_absolute} trip\_variable high low delay number\_detectors
+#>   \VERAInputTable{
+#>     name={trip\_variable},
+#>     type={string},
+#>     need={optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={power},
+#>     limitations={Requires \texttt{scram\_type card}},
+#>     description={This options specifies an absolute magnitude trip for the
+#>        specified state variable},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+#>   \VERAInputTable{
+#>     name={high},
+#>     type={double},
+#>     need={optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={Requires \texttt{scram\_type card}},
+#>     description={This options specifies the high set point for the given variable.},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+#>   \VERAInputTable{
+#>     name={low},
+#>     type={double},
+#>     need={optional},
+#>     unitsdefault={percent full power},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={Requires \texttt{scram\_type card}},
+#>     description={This option specifies the low set point for the given variable},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+#>   \VERAInputTable{
+#>     name={delay},
+#>     type={double},
+#>     need={optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={Requires \texttt{scram\_type card}},
+#>     description={The delay entry specifies the delay before scram bank
+#>        movement occurs (seconds).},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+#>   \VERAInputTable{
+#>     name={number\_detectors},
+#>     type={integer},
+#>     need={optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={Requires \texttt{scram\_type card}},
+#>     description={The last entry is the number of detectors required to meet
+#>        these conditions before a trip occurs. Currently only 0 is supported,
+#>        which signifies that no detector modeling occurs.},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+  trip_absolute:
+    <<: *dtlistnamed
+    _content:
+    _check:
+      - arraysize()==5
+      - is_word(nth(0,()))
+      - is_float(nth(1,()))&&nth(1,())>0
+      - is_float(nth(2,()))&&nth(2,())>=0
+      - is_float(nth(3,()))&&nth(3,())>=0
+      - (is_int(nth(4,()))||nth(4,())==0)&&nth(4,())>=0
+#>
+#>   {\bf trip\_rate} trip\_variable high low delay number\_detectors
+#>   \VERAInputTable{
+#>     name={trip\_variable},
+#>     type={string},
+#>     need={optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={power},
+#>     limitations={Requires \texttt{scram\_type card}},
+#>     description={This options specifies a rate of changes trip for the
+#>        specified state variable},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+#>   \VERAInputTable{
+#>     name={high},
+#>     type={double},
+#>     need={optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={Requires \texttt{scram\_type card}},
+#>     description={This options specifies the high set point for the given variable.},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+#>   \VERAInputTable{
+#>     name={low},
+#>     type={double},
+#>     need={optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={Requires \texttt{scram\_type card}},
+#>     description={This option specifies the low set point for the given variable},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+#>   \VERAInputTable{
+#>     name={delay},
+#>     type={double},
+#>     need={optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={Requires \texttt{scram\_type card}},
+#>     description={The delay entry specifies the delay before scram bank
+#>        movement occurs (seconds).},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+#>   \VERAInputTable{
+#>     name={number\_detectors},
+#>     type={integer},
+#>     need={optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0$},
+#>     limitations={Requires \texttt{scram\_type card}},
+#>     description={The last entry is the number of detectors required to meet
+#>        these conditions before a trip occurs. Currently only 0 is supported,
+#>        which signifies that no detector modeling occurs.},
+#>     notes={This card is only used in transient calculations.}
+#>   }
+  trip_rate:
+    <<: *dtlistnamed
+    _content:
+    _check:
+      - arraysize()==5
+      - is_word(nth(0,()))
+      - is_float(nth(1,()))&&nth(1,())>0
+      - is_float(nth(2,()))
+      - is_float(nth(3,()))&&nth(3,())>=0
+      - (is_int(nth(4,()))||nth(4,())==0)&&nth(4,())>=0
+#>
+#>   {\bf end\_time }  end\_time\_value
+#>   \VERAInputTable{
+#>     name={end\_time\_value},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>$0.0},
+#>     limitations={},
+#>     description={The time at which the last transient step will be solved},
+#>     notes={}
+#>   }
+  end_time:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+#>
+#>   {\bf timestep } timestep\_dt timestep\_tf
+#>   \VERAInputTable{
+#>     name={timestep\_dt},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>$0.0},
+#>     limitations={},
+#>     description={The time step which will be used between the specified time
+#>     points},
+#>     notes={Time 0.0 is assumed to be the beginning of the transient. So the
+#>        the first time step is applied between 0.0 and the first \texttt{timestep\_tf}}
+#>   }
+#>   \VERAInputTable{
+#>     name={timestep\_tf},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>$0.0},
+#>     limitations={},
+#>     description={The list of ending times for each specified \texttt{timestep\_dt}.},
+#>     notes={If the last \texttt{timestep\_tf} is less than \texttt{end\_time}, then the last
+#>        specified \texttt{timestep\_dt} will be used until \texttt{end\_time}.}
+#>   }
+  timestep:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%2==0
+      - fall(sub{is_float(shift)},())
+      - fall(sub{is_gt(shift,0.0)},())
+      - is_strictlyincreasing(odd([]))
+#>
+#>   {\bf linear\_ramp } state\_variable linear\_ramp\_value linear\_ramp\_time
+#>   \VERAInputTable{
+#>     name={state\_variable},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={\texttt{'power','flow','bypass','tinlet','subcool','void','tfuel','modden','boron','pressure'}},
+#>     limitations={},
+#>     description={The state variable that this linear ramp will change.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={linear\_ramp\_value},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>$0.0},
+#>     limitations={},
+#>     description={The value which the state variable should have at the end of the ramp.},
+#>     notes={Excepting \texttt{tfuel}, which must be in Kelvin, state variables that have
+#>        units associated with them in the \texttt{STATE} block assume the same
+#>        units in the \texttt{TRANSIENT} block as in the \texttt{STATE} block.}
+#>   }
+#>   \VERAInputTable{
+#>     name={linear\_ramp\_time},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>$0.0},
+#>     limitations={},
+#>     description={The time during the transient which the ramp should end.},
+#>     notes={The first ramp is assumed to start at time 0.0.}
+#>   }
+  linear_ramp:
+    <<: *dtlistnamed
+    _style: multi-line
+    _content:
+    _check:
+      - is_word(nth(0,()))
+      - in_dictionary(nth(0,()),'power','flow','bypass','tinlet','subcool','void','tfuel','modden','boron','pressure')
+      - fall(sub{is_geq(shift,0)},stride(1,1,()))
+#>
+#>   {\bf linear\_rod\_ramp } bank\_name linear\_rod\_ramp\_value linear\_rod\_ramp\_time
+#>   \VERAInputTable{
+#>     name={bank\_name},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The name of the rod bank to move through this ramp.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={linear\_rod\_ramp\_value},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The rod position at the end of the ramp},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={linear\_rod\_ramp\_time},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>$0.0},
+#>     limitations={},
+#>     description={The time during the transient which the ramp should end.},
+#>     notes={The first ramp is assumed to start at time 0.0.}
+#>   }
+  linear_rod_ramp:
+    <<: *dtlistnamed
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_geq(shift,0)},stride(1,1,()))
+#>
+#>   {\bf linear\_mat\_ramp } mat\_name linear\_mat\_ramp\_value linear\_mat\_ramp\_time
+#>   \VERAInputTable{
+#>     name={mat\_name},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The name of the material to move through this ramp.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={linear\_mat\_ramp\_value},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The material specification at the end of the ramp},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={linear\_mat\_ramp\_time},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>$0.0},
+#>     limitations={},
+#>     description={The time during the transient which the ramp should end.},
+#>     notes={The first ramp is assumed to start at time 0.0.}
+#>   }
+  linear_mat_ramp:
+    <<: *dtlistnamed
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_geq(shift,0)},stride(2,2,()))
+#>
+#>   {\bf edit\_schedule } edit\_schedule\_dt edit\_schedule\_tf
+#>   \VERAInputTable{
+#>     name={edit\_schedule\_dt},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>$0.0},
+#>     limitations={},
+#>     description={The time interval which should elapse between edits. The
+#>        first \texttt{edit\_schedule\_dt} is applied between 0.0 and the first
+#>        \texttt{edit\_schedule\_tf}},
+#>     notes={Time 0.0 is assumed to be the beginning of the transient. So the
+#>        the first \texttt{edit\_schedule\_dt} is applied between 0.0 and the
+#>        first \texttt{edit\_schedule\_tf}.}
+#>   }
+#>   \VERAInputTable{
+#>     name={edit\_schedule\_tf},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={seconds},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>$0.0},
+#>     limitations={},
+#>     description={The list of ending times for each specified \texttt{edit\_schedule\_dt}.},
+#>     notes={If the last \texttt{edit\_schedule\_tf} is less than \texttt{end\_time}, then the last
+#>        specified \texttt{edit\_schedule\_dt} will be used until \texttt{end\_time}.}
+#>   }
+  edit_schedule:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - arraysize()%2==0
+      - fall(sub{is_float(shift)},())
+      - fall(sub{is_gt(shift,0.0)},())
+      - is_strictlyincreasing(odd([]))
 #> \subsection{Block MAMBA}
 #> \label{sec:mambacards}
 MAMBA:
