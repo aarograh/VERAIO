@@ -205,7 +205,8 @@ STATE:
 #>     valuesapplicable={$\ge 0$},
 #>     limitations={},
 #>     description={Steps withdrawn for each blade location},
-#>     notes={}
+#>     notes={The map must be in full symmetry, regardless
+#>        of how other maps in the \texttt{CORE} block are entered.}
 #>   }
   blade_pos:
     <<: *dtlist
@@ -2536,7 +2537,8 @@ CORE:
 #>     limitations={},
 #>     description={This is a core map of the control blade types and locations. The control blade types
 #>        correspond to control rod labels in the [CONTROL] block. Use a dash to specify
-#>        assemblies with no control blades.},
+#>        assemblies with no control blades.  The map must be in full symmetry, regardless
+#>        of how other maps in the \texttt{CORE} block are entered.},
 #>     notes={}
 #>   }
   blade_map:
@@ -17229,7 +17231,39 @@ TRANSIENT:
 #>     valuedefault={},
 #>     valuesapplicable={},
 #>     limitations={},
-#>     description={The name of the rod bank to move through this ramp.},
+#>     description={The name of the rod bank to move through this ramp.  For PWRs, this corresponds
+#>        to the bank name given in the \texttt{crd\_bank} input map.  For BWRs, blades can be defined
+#>        two different ways.  The first is to use the \texttt{crd\_map}, \texttt{crd\_bank}, and
+#>        \texttt{rodbank} inputs.  In this case, the meaning of \texttt{bank\_name} for
+#>        \texttt{linear\_rod\_ramp} is the same as for PWRs.
+#>        \newline\newline
+#>        The other method of defining BWR blades is to use the \texttt{blade\_map} and \texttt{blade\_pos}
+#>        options.  In this case, \texttt{bank\_name} should refer to the x-y location of the BWR blade
+#>        in \texttt{blade\_map} that the user wishes to move.  For example, for a small 4$\times$4 core:
+#>        \newline
+#>        \begin{tabular}{cccc}
+#>          A11 & A12 & A13 & A14 \\
+#>          A21 & A22 & A23 & A24 \\
+#>          A31 & A32 & A33 & A34 \\
+#>          A41 & A42 & A43 & A44 \\
+#>        \end{tabular}
+#>        \newline
+#>        The \texttt{blade\_map} could be defined as follows, using 4 unique blade definitions:
+#>        \newline
+#>        \begin{tabular}{cc}
+#>          B11 & B12 \\
+#>          B21 & B22 \\
+#>        \end{tabular}
+#>        \newline
+#>        With this blade map, assigning a value of 1-2 to \texttt{bank\_name} would move blade B12.
+#>        Similarly, a value of 2-1 would move Bank B21.  The x location must also come first, followed
+#>        by the y location.  The x numbering proceeds from left to right, and the y numbering proceeds
+#>        from top to bottom.  If the \texttt{blade\_map} is in quarter symmetry, the numbering scheme
+#>        used for \texttt{bank\_name} is still based on the unfolded version of the map to allow for
+#>        moving a single blade in any region of the core without requiring the unfolded maps to be
+#>        specified by the user.  If the length or height of the blade map is greater than 9, then
+#>        leading 0s should not be used for lower numbers.  The user should use 12-7, not 12-07 to
+#>        move a blade at x=12 and y=7 in \texttt{blade\_map}.},
 #>     notes={}
 #>   }
 #>   \VERAInputTable{
