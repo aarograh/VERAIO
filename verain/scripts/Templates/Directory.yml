@@ -10699,6 +10699,28 @@ COUPLING:
     _check:
       - is_string()
 #>
+#>   {\bf bypass\_treatment} bypass\_treatment
+#>   \VERAInputTable{
+#>     name={bypass\_treatment},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={saturated},
+#>     valuesapplicable={inlet, outlet},
+#>     limitations={},
+#>     description={This controls the treatment of the bypass flow in BWR models.  The default value
+#>        is saturation conditions at the input pressure, but inlet and outlet conditions can also
+#>        be used.  This input is ignored for non-BWR models or if feedback is off.},
+#>     notes={}
+#>   }
+  bypass_treatment:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() saturated inlet outlet
+#>
 #> \subsection{Block TIAMAT}
 #> \label{sec:tiamatcards}
 TIAMAT:

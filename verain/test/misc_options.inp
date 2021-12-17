@@ -310,6 +310,7 @@
 [COUPLING]
   read_restart  my_restart_file
   extend_coupling_mesh above
+  bypass_treatment inlet
 
 [TIAMAT]
   solver jacobi
