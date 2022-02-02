@@ -311,6 +311,7 @@
   read_restart  my_restart_file
   extend_coupling_mesh above
   bypass_treatment inlet
+  bypass_heating 0.05
 
 [TIAMAT]
   solver jacobi

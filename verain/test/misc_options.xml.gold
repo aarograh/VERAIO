@@ -420,6 +420,7 @@
     <Parameter name="rtwfp" type="double" value="1000.0"/>
   </ParameterList>
   <ParameterList name="COUPLING">
+    <Parameter name="bypass_heating" type="double" value="0.05"/>
     <Parameter name="bypass_treatment" type="string" value="inlet"/>
     <Parameter name="extend_coupling_mesh" type="string" value="above"/>
     <Parameter name="read_restart" type="string" value="my_restart_file"/>
