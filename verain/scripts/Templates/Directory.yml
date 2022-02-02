@@ -10707,11 +10707,15 @@ COUPLING:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={saturated},
-#>     valuesapplicable={inlet, outlet},
+#>     valuesapplicable={inlet, outlet, heating},
 #>     limitations={},
 #>     description={This controls the treatment of the bypass flow in BWR models.  The default value
 #>        is saturation conditions at the input pressure, but inlet and outlet conditions can also
-#>        be used.  This input is ignored for non-BWR models or if feedback is off.},
+#>        be used.  A simplified bypass heating model can also be used by specifying the \texttt{heating}
+#>        option.  For that option, the \texttt{bypass\_heating} and \texttt{bypass} inputs should also
+#>        be set to non-zero values.\newline
+#>        \newline
+#>        This input is ignored for non-BWR models or if feedback is off.},
 #>     notes={}
 #>   }
   bypass_treatment:
@@ -10719,7 +10723,30 @@ COUPLING:
     _content:
     _check:
       - is_word()
-      - in_dictionary() saturated inlet outlet
+      - in_dictionary() saturated inlet outlet heating
+#>
+#>   {\bf bypass\_heating} bypass\_heating
+#>   \VERAInputTable{
+#>     name={bypass\_heating},
+#>     type={Floating Point Number},
+#>     need={Optional},
+#>     unitsdefault={Percent},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={$\ge 0.0$, $\le 1.0$},
+#>     limitations={},
+#>     description={This controls the treatment of the bypass heating in BWR models.  The default value
+#>        is 0.0.  The \texttt{bypass\_heating} fraction determines how much of the reactor power is
+#>        deposited directly into the bypass region, having no impact on fuel conduction or active
+#>        coolant inside the bundles.},
+#>     notes={}
+#>   }
+  bypass_heating:
+    <<: *dtword
+    _content:
+    _check:
+      - is_geq() 0
+      - is_leq() 1
 #>
 #> \subsection{Block TIAMAT}
 #> \label{sec:tiamatcards}

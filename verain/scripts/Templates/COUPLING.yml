@@ -189,3 +189,10 @@ COUPLING:
       _do:
         - copy COUPLING/$bypass_treatment
       _content:
+
+    bypass_heating:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COUPLING/$bypass_heating
+      _content:
