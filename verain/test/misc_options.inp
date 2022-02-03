@@ -312,6 +312,7 @@
   extend_coupling_mesh above
   bypass_treatment inlet
   bypass_heating 0.05
+  dhfrac 0.02
 
 [TIAMAT]
   solver jacobi

@@ -66,6 +66,13 @@ COUPLING:
         - copy COUPLING/$rlx_den
       _content:
 
+    dhfrac:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COUPLING/$dhfrac
+      _content:
+
     rlx_crud:
       _pltype: parameter
       _type: double
