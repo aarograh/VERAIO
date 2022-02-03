@@ -10368,6 +10368,27 @@ COUPLING:
       - is_gt() 0
       - is_leq() 1.0
 #>
+#>   {\bf dhfrac} dhfrac
+#>   \VERAInputTable{
+#>     name={dhfrac},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.026},
+#>     valuesapplicable={$\ge 0.0$, $\le 1.0$},
+#>     limitations={},
+#>     description={Fraction of rod heat directly deposited into fluid (gamma heating)},
+#>     notes={}
+#>   }
+  dhfrac:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0
+      - is_leq() 1
+#>
 #>   {\bf extend\_coupling\_mesh} extend\_coupling\_mesh
 #>   \VERAInputTable{
 #>     name={extend\_coupling\_mesh},
