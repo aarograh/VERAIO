@@ -739,7 +739,7 @@
     <ParameterList name="xs_library">
       <Parameter name="res_up_scatter" type="string" value="false"/>
       <Parameter name="subgroup_set" type="int" value="4"/>
-      <Parameter name="xs_filename" type="string" value="mpact51g_71_4.3m2_03262018.fmt"/>
+      <Parameter name="xs_filename" type="string" value="mpact51g_71_4.3m3_01222019.fmt"/>
       <Parameter name="xs_type" type="string" value="ORNL"/>
     </ParameterList>
   </ParameterList>
