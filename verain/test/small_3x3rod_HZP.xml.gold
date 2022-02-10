@@ -304,7 +304,6 @@
   </ParameterList>
   <ParameterList name="COBRATF">
     <Parameter name="courant" type="double" value="0.8"/>
-    <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="dtmax" type="double" value="0.1"/>
     <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="epso" type="double" value="0.001"/>
@@ -315,5 +314,8 @@
     <Parameter name="nc" type="int" value="1"/>
     <Parameter name="nfuel" type="int" value="3"/>
     <Parameter name="rtwfp" type="double" value="1000.0"/>
+  </ParameterList>
+  <ParameterList name="COUPLING">
+    <Parameter name="dhfrac" type="double" value="0.02"/>
   </ParameterList>
 </ParameterList>

@@ -335,7 +335,6 @@
   nfuel   8             ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction
   irfc    2             ! friction factor correlation default=2
-  dhfrac  0.0           ! fraction of power deposited directly into coolant *** remove for 7x7
   hgap    5678.3        ! gap conductance
   epso    0.001
   iitmax  40
@@ -347,6 +346,7 @@
   parallel 1          ! ** parallel for 7x7
 
 [COUPLING]
+  dhfrac  0.0           ! fraction of power deposited directly into coolant *** remove for 7x7
   epsk        5.0  ! pcm
   epsp        1.0e-4
   eps_boron   2.0

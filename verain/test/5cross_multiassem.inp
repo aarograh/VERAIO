@@ -296,8 +296,10 @@
 
 [COBRATF]
   nfuel   3             ! number of fuel rings in conduction model
-  dhfrac  0.02          ! fraction of power deposited directly into coolant
   hgap    5678.3        ! gap conductance
   solver 0
   edit_native_hdf5 1
   parallel 0
+
+[COUPLING]
+  dhfrac  0.02          ! fraction of power deposited directly into coolant

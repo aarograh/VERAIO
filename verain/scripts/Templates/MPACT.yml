@@ -875,13 +875,6 @@ MPACT:
             - copy MPACT/$ctf_basename
           _content:
 
-        sth_dhfrac:
-          _pltype: parameter
-          _type: double
-          _do:
-            - copy MPACT/$sth_dhfrac
-          _content:
-
         sth_hgap:
           _pltype: parameter
           _type: double

@@ -8176,26 +8176,6 @@ COBRATF:
       - is_int()
       - in_dictionary() 1 2 3 4
 #>
-#>   {\bf dhfrac} dhfrac
-#>   \VERAInputTable{
-#>     name={dhfrac},
-#>     type={Float},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={0.026},
-#>     valuesapplicable={$\ge 0.0$},
-#>     limitations={},
-#>     description={Percentage of rod heat directly deposited into fluid (gamma heating)},
-#>     notes={}
-#>   }
-  dhfrac:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_geq() 0
-#>
 #>   {\bf bwr\_dp\_tol} bwr\_dp\_tol
 #>   \VERAInputTable{
 #>     name={bwr\_dp\_tol},
@@ -14095,28 +14075,6 @@ MPACT:
     _content:
     _check:
       - is_word()
-#>
-#>   {\bf sth\_dhfrac} sth\_dhfrac
-#>   \VERAInputTable{
-#>     name={sth\_dhfrac},
-#>     type={Floating-Point Real Number},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={0.02},
-#>     valuesapplicable={0.0--1.0},
-#>     limitations={It is ignored if feedback is off or if coupling with
-#>        COBRA-TF is being used.},
-#>     description={This card is used to set the fraction of the power which is
-#>        directly deposited in the moderator in internal TH calculations.},
-#>     notes={}
-#>   }
-  sth_dhfrac:
-    <<: *dtfloat
-    _content:
-    _check:
-      - is_float()
-      - is_geq() 0
 #>
 #>   {\bf sth\_hgap} sth\_hgap
 #>   \VERAInputTable{

@@ -279,7 +279,6 @@
   </ParameterList>
   <ParameterList name="COBRATF">
     <Parameter name="courant" type="double" value="0.8"/>
-    <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="dtmax" type="double" value="0.1"/>
     <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="epso" type="double" value="0.001"/>
@@ -299,6 +298,7 @@
   <ParameterList name="COUPLING">
     <Parameter name="ctf_iters_growth" type="double" value="1.2"/>
     <Parameter name="ctf_iters_max" type="int" value="200"/>
+    <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="eps_boron" type="double" value="2.0"/>
     <Parameter name="epsk" type="double" value="2.0"/>
     <Parameter name="maxiter" type="int" value="20"/>

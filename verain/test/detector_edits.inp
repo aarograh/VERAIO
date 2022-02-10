@@ -179,9 +179,11 @@
 
 [COBRATF]
   beta_sp   0.005
-  dhfrac    0.02
   parallel  0
   iitmax 10000
   epso 0.00001
   guide_tube_coefficient 0.5
   solver 0
+
+[COUPLING]
+  dhfrac    0.02

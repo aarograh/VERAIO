@@ -16,7 +16,7 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a modified Problem 6a, which is 
+!> - The VERAIn package shall be able to parse a modified Problem 6a, which is
 !> a single 3D 17x17 assembly at BOL with feedback with more complicated fuel types.
 !> - ticket 2907
 !> - ticket 2815
@@ -217,7 +217,6 @@
   nfuel   3             ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction
   irfc    2             ! friction factor correlation default=2
-  dhfrac  0.02          ! fraction of power deposited directly into coolant
 !!hgap    5678.3        ! gap conductance
   epso    0.001
   iitmax  40
@@ -228,6 +227,7 @@
   courant 0.8
 
 [COUPLING]
+  dhfrac  0.02          ! fraction of power deposited directly into coolant
   epsk        5.0  ! pcm
   epsp        1.0e-4
   rlx_power   0.6

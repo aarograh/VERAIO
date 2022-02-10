@@ -294,12 +294,14 @@
   </ParameterList>
   <ParameterList name="COBRATF">
     <Parameter name="beta_sp" type="double" value="0.005"/>
-    <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="epso" type="double" value="0.00001"/>
     <Parameter name="guide_tube_coefficient" type="double" value="0.5"/>
     <Parameter name="iitmax" type="int" value="10000"/>
     <Parameter name="parallel" type="int" value="0"/>
     <Parameter name="solver" type="int" value="0"/>
+  </ParameterList>
+  <ParameterList name="COUPLING">
+    <Parameter name="dhfrac" type="double" value="0.02"/>
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="TH">

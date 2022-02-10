@@ -312,7 +312,6 @@
   </ParameterList>
   <ParameterList name="COBRATF">
     <Parameter name="courant" type="double" value="0.8"/>
-    <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="dtmax" type="double" value="0.1"/>
     <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="edit_channels" type="int" value="1"/>
@@ -328,6 +327,7 @@
     <Parameter name="rtwfp" type="double" value="1000.0"/>
   </ParameterList>
   <ParameterList name="COUPLING">
+    <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="epsk" type="double" value="5.0"/>
     <Parameter name="epsp" type="double" value="1.0e-4"/>
     <Parameter name="maxiter" type="int" value="100"/>
@@ -347,7 +347,6 @@
       <Parameter name="radial_burnup_ctf_coupling" type="bool" value="true"/>
       <Parameter name="radial_power_ctf_coupling" type="bool" value="true"/>
       <Parameter name="radial_temp_ctf_coupling" type="bool" value="true"/>
-      <Parameter name="sth_dhfrac" type="double" value="0.026"/>
       <Parameter name="sth_hgap" type="double" value="5678.3"/>
       <Parameter name="temptable_shape" type="bool" value="true"/>
       <Parameter name="user_defined_th_filename" type="string" value="th_file.h5"/>
