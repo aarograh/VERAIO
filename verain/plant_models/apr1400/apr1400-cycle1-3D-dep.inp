@@ -530,7 +530,6 @@
     388.0
 
 [COBRATF]
-  dhfrac  0.026
   guide_tube_coefficient 0.0
 
 [MPACT]

@@ -181,7 +181,6 @@
     <Parameter name="cicada_outer_radial_zone_num_cells_r" type="int" value="10"/>
     <Parameter name="cicada_outer_radial_zone_thickness" type="double" value="80.0e-6"/>
     <Parameter name="crud_boil_coeff_model" type="int" value="1"/>
-    <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="edit_channels" type="int" value="1"/>
     <Parameter name="enable_corrosion_lithium" type="int" value="0"/>
     <Parameter name="hgap" type="double" value="5678.3"/>
@@ -192,6 +191,7 @@
     <Parameter name="property_evaluations" type="string" value="asme1968"/>
   </ParameterList>
   <ParameterList name="COUPLING">
+    <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="eps_temp" type="double" value="1.0"/>
     <Parameter name="epsk" type="double" value="5.0"/>
     <Parameter name="maxiter" type="int" value="100"/>

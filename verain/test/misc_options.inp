@@ -322,7 +322,6 @@
   nfuel   18            ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction
   irfc    2             ! friction factor correlation default=2
-  dhfrac  0.02          ! fraction of power deposited directly into coolant
   hgap    5678.3        ! gap conductance
   epso    0.001
   iitmax  40
@@ -334,7 +333,6 @@
 
 [MPACT]
   sth_hgap   5200.0   ! internal t/h option
-  sth_dhfrac 0.02     ! internal t/h option
   exclude_depl_mats U31 U32 b4c
   include_depl_mats U32 U33 aic he
   pin_cell_mod_mesh  3 both

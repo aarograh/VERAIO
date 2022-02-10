@@ -716,7 +716,6 @@
   </ParameterList>
   <ParameterList name="COBRATF">
     <Parameter name="courant" type="double" value="0.8"/>
-    <Parameter name="dhfrac" type="double" value="0.0"/>
     <Parameter name="dtmax" type="double" value="0.1"/>
     <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="epso" type="double" value="0.001"/>
@@ -730,6 +729,7 @@
     <Parameter name="rtwfp" type="double" value="1000.0"/>
   </ParameterList>
   <ParameterList name="COUPLING">
+    <Parameter name="dhfrac" type="double" value="0.0"/>
     <Parameter name="epsk" type="double" value="5.0"/>
     <Parameter name="epsp" type="double" value="1.0e-4"/>
     <Parameter name="maxiter" type="int" value="100"/>

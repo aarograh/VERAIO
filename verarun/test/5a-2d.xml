@@ -589,7 +589,6 @@
     <ParameterList name="TH">
       <Parameter name="average_ftemp" type="bool" value="false"/>
       <Parameter name="coupling_method" type="string" value="ctf"/>
-      <Parameter name="sth_dhfrac" type="double" value="0.026"/>
       <Parameter name="sth_hgap" type="double" value="5678.3"/>
       <Parameter name="temptable_shape" type="bool" value="true"/>
     </ParameterList>
@@ -662,5 +661,8 @@
       <Parameter name="xs_filename" type="string" value="mpact51g_71_4.3m3_01222019.fmt"/>
       <Parameter name="xs_type" type="string" value="ORNL"/>
     </ParameterList>
+  </ParameterList>
+  <ParameterList name="COUPLING">
+    <Parameter name="dhfrac" type="double" value="0.026"/>
   </ParameterList>
 </ParameterList>

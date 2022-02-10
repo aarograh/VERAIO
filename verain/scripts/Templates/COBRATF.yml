@@ -73,13 +73,6 @@ COBRATF:
         - copy COBRATF/$irfc
       _content:
 
-    dhfrac:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy COBRATF/$dhfrac
-      _content:
-
     bwr_dp_tol:
       _pltype: parameter
       _type: double

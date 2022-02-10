@@ -181,7 +181,6 @@
   nc      1             ! conduction option - radial conduction
   chf     2             ! User Biasi CHF model
   irfc    2             ! friction factor correlation default=2
-  dhfrac  0.02          ! fraction of power deposited directly into coolant
   hgap    5678.3        ! gap conductance
   epso    0.001
   iitmax  40
@@ -203,6 +202,7 @@
   edit_fluid_vtk 1
 
 [COUPLING]
+  dhfrac  0.02          ! fraction of power deposited directly into coolant
   epsk        2.0  ! pcm
   eps_boron   2.0  ! boron convergence (ppm)
   rlx_power   0.5

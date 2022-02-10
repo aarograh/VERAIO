@@ -193,7 +193,6 @@
     <Parameter name="Tcool_criteria" type="double" value="1e-4"/>
     <Parameter name="Tsolid_criteria" type="double" value="1e-4"/>
     <Parameter name="courant" type="double" value="0.8"/>
-    <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="dtmax" type="double" value="0.1"/>
     <Parameter name="dtmin" type="double" value="0.000001"/>
     <Parameter name="edit_channels" type="int" value="1"/>
@@ -213,6 +212,7 @@
     <Parameter name="vvap_criteria" type="double" value="1e-4"/>
   </ParameterList>
   <ParameterList name="COUPLING">
+    <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="epsk" type="double" value="5.0"/>
     <Parameter name="epsp" type="double" value="1.0e-4"/>
     <Parameter name="maxiter" type="int" value="100"/>

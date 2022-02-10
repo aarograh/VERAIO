@@ -349,7 +349,6 @@
   </ParameterList>
   <ParameterList name="COBRATF">
     <Parameter name="courant" type="double" value="0.8"/>
-    <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="epso" type="double" value="0.001"/>
     <Parameter name="hgap" type="double" value="10000.0"/>
     <Parameter name="iitmax" type="int" value="10000"/>
@@ -361,6 +360,9 @@
     <Parameter name="proc_per_assem" type="int" value="1"/>
     <Parameter name="rtwfp" type="double" value="500.0"/>
     <Parameter name="tp_fric_model" type="string" value="lockhart"/>
+  </ParameterList>
+  <ParameterList name="COUPLING">
+    <Parameter name="dhfrac" type="double" value="0.02"/>
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="parallel_env">

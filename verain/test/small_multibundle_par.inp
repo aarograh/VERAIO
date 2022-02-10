@@ -108,7 +108,6 @@
   nfuel   3             ! number of fuel rings in conduction model
   nc      1             ! conduction option - radial conduction
   irfc    2             ! friction factor correlation default=2
-  dhfrac  0.02          ! fraction of power deposited directly into coolant
   hgap    5678.3        ! gap conductance
   epso    0.0001
   iitmax  80
@@ -125,6 +124,7 @@
   parallel 1
 
 [COUPLING]
+  dhfrac  0.02          ! fraction of power deposited directly into coolant
   read_restart cobra_denovo_restart.out  ! generated when run the first time.
   epsk        2.0  ! pcm
   epsp        0.002 ! with relaxation of 0.5, makes a convergence of 1e-3.

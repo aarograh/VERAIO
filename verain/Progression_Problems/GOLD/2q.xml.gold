@@ -255,7 +255,6 @@
     </ParameterList>
     <ParameterList name="TH">
       <Parameter name="coupling_method" type="string" value="ctf"/>
-      <Parameter name="sth_dhfrac" type="double" value="0.02"/>
       <Parameter name="sth_hgap" type="double" value="4500"/>
     </ParameterList>
     <ParameterList name="cmfd">
@@ -317,5 +316,8 @@
       <Parameter name="xs_filename" type="string" value="mpact47g_70s_v4.0_11032014.fmt"/>
       <Parameter name="xs_type" type="string" value="ORNL"/>
     </ParameterList>
+  </ParameterList>
+  <ParameterList name="COUPLING">
+    <Parameter name="dhfrac" type="double" value="0.02"/>
   </ParameterList>
 </ParameterList>
