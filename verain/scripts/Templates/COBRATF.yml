@@ -206,6 +206,13 @@ COBRATF:
         - copy COBRATF/$parallel
       _content:
 
+    domain_decomp:
+      _pltype: array
+      _type: int
+      _do:
+        - coremapmap CORE/$size,CORE/@core_shape,COBRATF/@domain_decomp,CORE/$bc_sym
+      _content:
+
     global_energy_balance:
       _pltype: parameter
       _type: double
@@ -702,4 +709,25 @@ COBRATF:
       _type: int
       _do:
         - copy COBRATF/$plr_gap_effect
+      _content:
+
+    nodal_inter_assem_gap_width_uniform:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$nodal_inter_assem_gap_width_uniform
+      _content:
+
+    nodal_gap_len_node_centers:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$nodal_gap_len_node_centers
+      _content:
+
+    nodal_inter_assem_loss:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COBRATF/$nodal_inter_assem_loss
       _content:

@@ -8590,6 +8590,36 @@ COBRATF:
       - is_int()
       - in_dictionary() 0 1
 #>
+#>   {\bf domain\_decomp} domain\_decomp
+#>   \VERAInputTable{
+#>     name={domain\_decomp},
+#>     type={2D Integer Map},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 1$},
+#>     limitations={},
+#>     description={This is a core map of the assembly domains.  A domain is a group of entities that
+#>        will be solved by one processor in a parallel simulation.  This input is only required for
+#>        nodal parallel models and will have no impact on pin-resolved models.  The shape shall be
+#>        the same as the core map and each entry shall define an ID for the domain.  All assemblies
+#>        with the same ID will be solved by the same processor.  Note that domain IDs must begin
+#>        at 1 and increase incrementally.  Generally, domains should be organized so that they
+#>        are as compact as possible, meaning that ``surface area'' or interaction with adjacnet
+#>        domains is minimized because this will limit the number of communications that are
+#>        required between solution domains.},
+#>     notes={}
+#>   }
+  domain_decomp:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_int(shift)},())
+      - fall(sub{is_geq(shift,0)},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
+#>
 #>   {\bf global\_energy\_balance} global\_energy\_balance
 #>   \VERAInputTable{
 #>     name={global\_energy\_balance},
@@ -10159,6 +10189,72 @@ COBRATF:
     _check:
       - is_int()
       - in_dictionary() 0 1
+#>
+#>   {\bf nodal\_inter\_assem\_gap\_width\_uniform} nodal\_inter\_assem\_gap\_width\_uniform
+#>   \VERAInputTable{
+#>     name={nodal\_inter\_assem\_gap\_width\_uniform},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={0},
+#>     limitations={},
+#>     description={If set to 1 (true) and creating a nodal model, the width of the gaps between
+#>         assemblies will use the gap width of the gaps inside the assemblies, which results in
+#>         more uniform gap widths throughout the model.  This only has an impact for nodal models.},
+#>     notes={}
+#>   }
+  nodal_inter_assem_gap_width_uniform:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+#>
+#>   {\bf nodal\_gap\_len\_node\_centers} nodal\_gap\_len\_node\_centers
+#>   \VERAInputTable{
+#>     name={nodal\_gap\_len\_node\_centers},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1},
+#>     valuesapplicable={0},
+#>     limitations={},
+#>     description={If set to 1 (true) and creating a nodal model, the length of the gaps
+#>         will be calculated using the distance between the node centers.  If set to 0 (false),
+#>         the distance between the actual subchannels on either side of the node boundary (pin pitch plus
+#>         assembly spacing) will be used.  This only has an impact for nodal models.},
+#>     notes={}
+#>   }
+  nodal_gap_len_node_centers:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+#>
+#>   {\bf nodal\_inter\_assem\_loss} nodal\_inter\_assem\_loss
+#>   \VERAInputTable{
+#>     name={nodal\_inter\_assem\_loss},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0.5},
+#>     valuesapplicable={$\ge 0.0$},
+#>     limitations={},
+#>     description={Sets the form loss coefficient in the gaps between assemblies in nodal models.
+#>         This only has an impact for nodal models.},
+#>     notes={}
+#>   }
+  nodal_inter_assem_loss:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_geq() 0.0
 
 #>
 #> \subsection{Block COUPLING}
