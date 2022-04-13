@@ -41,7 +41,7 @@
   bc_rad reflecting
   bc_top reflecting
   bc_bot reflecting
-  include mpact_test_mats.ini  
+  include mpact_test_mats.ini
 
 [ASSEMBLY]
   npin 17
@@ -232,4 +232,3 @@
   axial_mesh        1.0000
 !linear source options
   include linear_moc.ini
-

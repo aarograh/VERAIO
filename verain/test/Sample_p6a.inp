@@ -243,6 +243,9 @@
   cmfd mlcmfd
   multilevel both
   include MPACT.ini
+  mesh fuel         3 1 1 / 8 8 8 8 8 8
+  mesh gtube        3 1   / 8 8 8 8 8
+  mesh gad          10 1 1 / 8 8 8 8 8 8 8 8 8 8 8 8 8
   num_space      29
   num_angle      1
   num_threads    1

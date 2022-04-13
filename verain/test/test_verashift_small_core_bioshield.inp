@@ -169,6 +169,9 @@
   xs_filename       mpact8g_70s_v4.0m0_02232015.fmt
   res_up_scatter    false
   dep_substep       1
+  mesh fuel         3 1 1 / 8 8 8 8 8 8
+  mesh gtube        3 1   / 8 8 8 8 8
+  mesh gad          10 1 1 / 8 8 8 8 8 8 8 8 8 8 8 8 8
   meshing_method    useraxialmesh
   axial_mesh  11.9510
                3.866
