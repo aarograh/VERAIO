@@ -1231,12 +1231,13 @@ STATE:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={full},
-#>     valuesapplicable={qtr},
+#>     valuesapplicable={qtr, south},
 #>     limitations={},
 #>     description={This is an option for specifying the symmetry of the problem. The \texttt{full}
 #>        option specifies that the problem will be modeled in full and that ray tracing
 #>        will be performed across the whole geometry. The \texttt{qtr} option will
-#>        only model the south-east quarter of the geometry. In quarter-symmetry, the
+#>        only model the south-east quarter of the geometry. The \texttt{south} option will
+#>        only model the southern half of the geometry. In quarter or half symmetry, the
 #>        boundary conditions along the symmetry boundary are determined by the
 #>        \texttt{bc\_sym} card.},
 #>     notes={For multistate simulations, if \texttt{sym} is not specified in the first state,
@@ -1247,7 +1248,7 @@ STATE:
     _content:
     _check:
       - is_word()
-      - in_dictionary() full qtr
+      - in_dictionary() full qtr south
 #>
 #>   {\bf kmul\_beta} kmul\_beta
 #>   \VERAInputTable{
