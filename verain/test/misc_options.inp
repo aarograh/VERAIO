@@ -330,6 +330,7 @@
   rtwfp   1000.0
   maxits  10000
   courant 0.8
+  allow_fuzzy_grid_placement 0
 
 [MPACT]
   sth_hgap   5200.0   ! internal t/h option
