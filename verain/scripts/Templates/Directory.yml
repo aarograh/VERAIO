@@ -10191,6 +10191,29 @@ COBRATF:
       - is_int()
       - in_dictionary() 0 1
 #>
+#>   {\bf allow\_fuzzy\_grid\_placement} allow\_fuzzy\_grid\_placement
+#>   \VERAInputTable{
+#>     name={allow\_fuzzy\_grid\_placement},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={1},
+#>     limitations={},
+#>     description={If set to 1 (true), it relaxes the requirement that mesh cell boundaries line up
+#>         with the spacer grid bottom and top.  In this case, the grid effects will be moved to
+#>         the nearest mesh boundary in the CTF model and a warning will be printed.  If set to 0,
+#>         an error will be raised if the grid top and bottom does not line up with mesh cell boundaries.},
+#>     notes={}
+#>   }
+  allow_fuzzy_grid_placement:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+#>
 #>   {\bf nodal\_inter\_assem\_gap\_width\_uniform} nodal\_inter\_assem\_gap\_width\_uniform
 #>   \VERAInputTable{
 #>     name={nodal\_inter\_assem\_gap\_width\_uniform},

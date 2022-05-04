@@ -711,6 +711,13 @@ COBRATF:
         - copy COBRATF/$plr_gap_effect
       _content:
 
+    allow_fuzzy_grid_placement:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$allow_fuzzy_grid_placement
+      _content:
+
     nodal_inter_assem_gap_width_uniform:
       _pltype: parameter
       _type: int
