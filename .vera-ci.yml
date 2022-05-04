@@ -119,7 +119,7 @@ gnu-debug:
 trigger_build:
     stage: deploy
     variables:
-        CI_RUN_ONLY: "CHECKIN"
+        CI_RUN_ONLY: "CONTINUOUS"
         CI_VERAIO_REF: $CI_COMMIT_REF_NAME
         PACKAGE_TEST: VERAIO
         VERA_ENABLES: "-DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON"
@@ -132,3 +132,18 @@ trigger_build:
         - if: $CI_MERGE_REQUEST_ID
 
     
+trigger_build_HEAVY:
+    stage: deploy
+    variables:
+        CI_RUN_ONLY: "HEAVY"
+        CI_VERAIO_REF: $CI_COMMIT_REF_NAME
+        PACKAGE_TEST: VERAIO
+        VERA_ENABLES: "-DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON"
+        VERA_BRANCH:  $BRANCH
+    trigger: 
+        project: VERA/VERA
+        branch: master
+        strategy: depend
+    rules:
+        - if: $CI_MERGE_REQUEST_ID
+          when: manual
