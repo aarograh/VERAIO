@@ -9444,6 +9444,27 @@ COBRATF:
       - is_int()
       - in_dictionary() 0 1
 #>
+#>   {\bf edit\_th\_details} edit\_th\_details
+#>   \VERAInputTable{
+#>     name={edit\_th\_details},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={1},
+#>     limitations={},
+#>     description={Set this to 1 to write more detailed fluid solution data from CTF to the VERA HDF5
+#>        output file.},
+#>     notes={}
+#>   }
+  edit_th_details:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+#>
 #>   {\bf edit\_rods} edit\_rods
 #>   \VERAInputTable{
 #>     name={edit\_rods},

@@ -331,6 +331,7 @@
   maxits  10000
   courant 0.8
   allow_fuzzy_grid_placement 0
+  edit_th_details 1
 
 [MPACT]
   sth_hgap   5200.0   ! internal t/h option
