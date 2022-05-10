@@ -960,6 +960,34 @@ MPACT:
             - copy MPACT/$cmfd
           _content:
 
+        cmfd_num_groups:
+          _pltype: parameter
+          _type: int 
+          _do:
+            - copy MPACT/$cmfd_num_groups
+          _content:
+
+        fgcmfd_type:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$fgcmfd_type
+          _content:
+
+        fgcmfd_ubound:
+          _pltype: array 
+          _type: int 
+          _do:
+            - copy MPACT/$fgcmfd_ubound
+          _content:
+
+        fgcmfd_fmr:
+          _pltype: parameter
+          _type: bool 
+          _do:
+            - copy MPACT/$fgcmfd_fmr
+          _content:
+
         multilevel:
           _pltype: parameter
           _type: string

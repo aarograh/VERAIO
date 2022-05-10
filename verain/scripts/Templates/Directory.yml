@@ -14669,7 +14669,111 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() cmfd adcmfd odcmfd scmfd mlcmfd msed none
-
+#>
+#>   {\bf cmfd\_num\_groups} cmfd\_num\_groups
+#>   \VERAInputTable{
+#>     name={cmfd\_num\_groups},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={the number of transport energy groups},
+#>     valuesapplicable={$ > 0$, $\le$ the number of transport energy groups},
+#>     limitations={},
+#>     description={This input is used to define the number of CMFD energy groups.},
+#>     notes={The number of CMFD energy groups is identical to the number of
+#>       transport energy groups by default. The few-group CMFD is used when 
+#>       \texttt{cmfd\_num\_groups} is smaller than the number of transport
+#>       energy groups.}
+#>   }
+  cmfd_num_groups:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf fgcmfd\_type} fgcmfd\_type
+#>   \VERAInputTable{
+#>     name={fgcmfd\_type},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={dynamic},
+#>     valuesapplicable={constant},
+#>     limitations={},
+#>     description={This input is used to define the method to determine few-group
+#>        structure of few-group CMFD. These are described as:
+#>        \begin{itemize}
+#>           \item \texttt{dynamic} --- The flux residual from the transport
+#>             calculation is used as a weight factor to collapse the transport
+#>             energy group structure to a few-group structure, resulting in
+#>             each group of the few-group structure having similar residuals.
+#>             The group structure can be dynamically changed during the
+#>             calculation.
+#>           \item \texttt{constant} --- A few-group structure is determined
+#>             such that each group of the few-group structure contains an
+#>             approximately equal number of groups from the transport energy
+#>             group structure. The structure does not change throughout the
+#>             calculation.
+#>        \end{itemize}},
+#>     notes={This input does nothing unless \texttt{cmfd\_num\_groups} is also
+#>       specified with a value less than the number of transport energy groups.}
+#>   }
+  fgcmfd_type:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() dynamic constant
+#>
+#>   {\bf fgcmfd\_ubound} fgcmfd\_ubound
+#>   \VERAInputTable{
+#>     name={fgcmfd\_ubound},
+#>     type={Array of Integers},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$ > 0$, $\le$ the number of transport energy groups},
+#>     limitations={},
+#>     description={This input is used to define the CMFD upper boundary of
+#>       transport energy group structure to be collapsed to few-group.},
+#>     notes={When this input is used, the \texttt{cmfd\_num\_groups} input is ignored
+#>       and the group structure is set to match \texttt{fgcmfd\_ubound}.
+#>       The first element should be 1.}
+#>   }
+  fgcmfd_ubound:
+    <<: *dtlist
+    _style: multi-line
+    _check:
+      - fall(sub{is_int(shift)},())
+      - is_strictlyincreasing()
+      - nth(0,())==1
+#>
+#>   {\bf fgcmfd\_fmr} fgcmfd\_fmr
+#>   \VERAInputTable{
+#>     name={fgcmfd\_fmr},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true},
+#>     limitations={},
+#>     description={Enables the fundamental mode rebalance to accelerate
+#>       the flux on the transport energy group structure.},
+#>     notes={Use this input when the few-group CMFD takes significantly more outer
+#>       iterations than default multi-group CMFD. This input is more useful for
+#>       smaller problems than for larger ones.}
+#>   }
+  fgcmfd_fmr:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
 #>
 #>   {\bf multilevel} multilevel
 #>   \VERAInputTable{
