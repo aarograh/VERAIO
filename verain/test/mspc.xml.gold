@@ -199,9 +199,13 @@
       <Parameter name="cmfd" type="string" value="msed"/>
       <Parameter name="cmfd_flxtol_1G" type="double" value="1.0e-9"/>
       <Parameter name="cmfd_ktol" type="double" value="1.0e-6"/>
+      <Parameter name="cmfd_num_groups" type="int" value="8"/>
       <Parameter name="cmfd_rtol" type="double" value="2.0e-3"/>
       <Parameter name="cmfd_shift_method" type="string" value="none"/>
       <Parameter name="cmfd_shift_method_1G" type="string" value="constant"/>
+      <Parameter name="fgcmfd_fmr" type="bool" value="true"/>
+      <Parameter name="fgcmfd_type" type="string" value="dynamic"/>
+      <Parameter name="fgcmfd_ubound" type="Array(int)" value="{1,10,20,30,45}"/>
       <Parameter name="k_shift_1G" type="double" value="8"/>
       <Parameter name="max_1G_eig_its" type="int" value="5"/>
       <ParameterList name="multigrid">
