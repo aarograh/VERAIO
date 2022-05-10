@@ -458,6 +458,13 @@ COBRATF:
         - copy COBRATF/$edit_channels
       _content:
 
+    edit_th_details:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$edit_th_details
+      _content:
+
     edit_rods:
       _pltype: parameter
       _type: int
