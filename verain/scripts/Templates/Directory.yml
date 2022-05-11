@@ -7149,6 +7149,28 @@ SHIFT:
       - is_float(nth(1,()))
       - is_float(nth(2,()))
 #>
+#>   {\bf rtk\_corner} rtk\_corner
+#>   \VERAInputTable{
+#>     name={rtk\_corner},
+#>     type={array of 3 doubles},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={0.0, 0.0, 0.0},
+#>     valuesapplicable={},
+#>     limitations={Only applies to non-excore problems},
+#>     description={Position of RTK geometry bottom left corner},
+#>     notes={}
+#>   }
+  rtk_corner:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==3
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
+#>
 #>   {\bf create\_unique\_pins} create\_unique\_pins
 #>   \VERAInputTable{
 #>     name={create\_unique\_pins},
@@ -14703,7 +14725,7 @@ MPACT:
 #>     limitations={},
 #>     description={This input is used to define the number of CMFD energy groups.},
 #>     notes={The number of CMFD energy groups is identical to the number of
-#>       transport energy groups by default. The few-group CMFD is used when 
+#>       transport energy groups by default. The few-group CMFD is used when
 #>       \texttt{cmfd\_num\_groups} is smaller than the number of transport
 #>       energy groups.}
 #>   }
@@ -20135,4 +20157,3 @@ RUN:
     _check:
       - is_float()
       - is_gt() 0
-

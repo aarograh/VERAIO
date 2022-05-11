@@ -192,6 +192,7 @@
   output_fission_source true
   output_geometry       true
   rtk_output_format     xml
+  rtk_corner            0.0 0.0 0.0
   output_micro_tally    true
   global_log            debug
   problem_mode          eigenvalue
