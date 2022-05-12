@@ -298,6 +298,7 @@
     <Parameter name="output_geometry" type="bool" value="true"/>
     <Parameter name="output_micro_tally" type="bool" value="true"/>
     <Parameter name="problem_mode" type="string" value="eigenvalue"/>
+    <Parameter name="rtk_corner" type="Array(double)" value="{0.0,0.0,0.0}"/>
     <Parameter name="rtk_output_format" type="string" value="xml"/>
     <ParameterList name="tally_db">
       <Parameter name="micro_rxns" type="Array(int)" value="{1,18,27}"/>

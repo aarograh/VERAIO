@@ -807,6 +807,13 @@ SHIFT:
             - copyarray SHIFT/$radial_mesh
           _content:
 
+    rtk_corner:
+      _pltype: array
+      _type: double
+      _do:
+        - copy SHIFT/$rtk_corner
+      _content:
+
     temp_transfer:
       _pltype: parameter
       _type: string
