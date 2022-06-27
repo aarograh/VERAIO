@@ -280,6 +280,39 @@ CORE:
                    - copy CORE/%inlet_orifice_loss/$(_linlet_orifice_loss)^/$area
                  _content:
 
+    inlet_orifice_bypass_map:
+      _pltype: array
+      _type: string
+      _do:
+        - coremapmap CORE/$size,CORE/@core_shape,CORE/@inlet_orifice_bypass_map,CORE/$bc_sym
+      _content:
+
+    InletOrificesBypass:
+      _pltype : list
+      _tr:
+        _name: _linlet_orifice_bypass_loss
+        _content: CORE/%inlet_orifice_bypass_loss
+      _content:
+        InletOrificeBypass_(_linlet_orifice_bypass_loss):
+          _pltype: list
+          _content:
+            label:
+              _pltype: parameter
+              _type: string
+              _do:
+                - value (_linlet_orifice_bypass_loss)
+              _content:
+            loss:
+              _pltype: parameter
+              _type: double
+              _do:
+                - copy CORE/%inlet_orifice_bypass_loss/@(_linlet_orifice_bypass_loss):0
+            area:
+              _pltype: parameter
+              _type: double
+              _do:
+                - copy CORE/%inlet_orifice_bypass_loss/$(_linlet_orifice_bypass_loss)^/$area
+              _content:
 
     rotate_map:
       _pltype: array
