@@ -2345,13 +2345,88 @@ CORE:
 #>     need={Optional},
 #>     unitsdefault={cm$^2$},
 #>     unitsother={},
-#>     valuedefault={65.416},
+#>     valuedefault={64.516},
 #>     valuesapplicable={$>0.0$},
 #>     limitations={},
 #>     description={Flow area of the orifice being modeled by this loss. This input shall be identified by keyword as \texttt{area=value}.},
 #>     notes={This input is optional on this card and will default if not provided.}
 #>   }
   inlet_orifice_loss:
+    <<: *dtlistnamed
+    _style:
+    _check:
+      - nth(2,())>=0.0
+      - arraysize()==2
+    _parameters:
+      area:
+        <<: *dtdouble
+        _check:
+          - is_float()
+          - is_gt() 0.0
+#>
+#>   {\bf inlet\_orifice\_bypass\_map} inlet\_orifice\_map
+#>   \VERAInputTable{
+#>     name={inlet\_orifice\_map},
+#>     type={2D Character String Map},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={This is a 2D array that must match the shape of \texttt{assm\_map} in [CORE].
+#>        It specifies an ID for the inlet loss in that core location's bypass. The actual loss for the ID
+#>        is later defined on the \texttt{inlet\_orifice\_bypass\_loss} card. This input is only valid for BWRs.},
+#>     notes={This map does nothing unless \texttt{bypass\_treatment} is set to \texttt{heating}}
+#>   }
+  inlet_orifice_bypass_map:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
+#>
+#>   {\bf inlet\_orifice\_bypass\_loss} label form\_loss\_coefficient / area
+#>   \VERAInputTable{
+#>     name={label},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={This is a label for the form loss being defined. It must match a label given in \texttt{inlet\_orifice\_bypass\_map}.},
+#>     notes={All labels in the \texttt{inlet\_orifice\_bypass\_map} array must be defined in the \texttt{inlet\_orifice\_bypass\_loss}
+#>        input.}
+#>   }
+#>   \VERAInputTable{
+#>     name={form\_loss\_coefficient},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$\ge 0.0$},
+#>     limitations={},
+#>     description={Form loss coefficient for the loss},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={area},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm$^2$},
+#>     unitsother={},
+#>     valuedefault={64.516},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={},
+#>     description={Flow area of the orifice being modeled by this loss. This input shall be identified by keyword as \texttt{area=value}.},
+#>     notes={This input is optional on this card and will default if not provided.}
+#>   }
+  inlet_orifice_bypass_loss:
     <<: *dtlistnamed
     _style:
     _check:

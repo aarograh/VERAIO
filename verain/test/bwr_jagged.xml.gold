@@ -25,6 +25,17 @@
         <Parameter name="loss" type="double" value="1.0"/>
       </ParameterList>
     </ParameterList>
+    <ParameterList name="InletOrificesBypass">
+      <ParameterList name="InletOrificeBypass_B1">
+        <Parameter name="area" type="double" value="1.0e-2"/>
+        <Parameter name="label" type="string" value="B1"/>
+        <Parameter name="loss" type="double" value="0.5"/>
+      </ParameterList>
+      <ParameterList name="InletOrificeBypass_B2">
+        <Parameter name="label" type="string" value="B2"/>
+        <Parameter name="loss" type="double" value="1.0"/>
+      </ParameterList>
+    </ParameterList>
     <ParameterList name="Materials">
       <ParameterList name="Material_he">
         <Parameter name="density" type="double" value="0.000176"/>
@@ -58,6 +69,7 @@
     <Parameter name="bc_top" type="string" value="reflecting"/>
     <Parameter name="core_size" type="int" value="4"/>
     <Parameter name="height" type="double" value="365.76"/>
+    <Parameter name="inlet_orifice_bypass_map" type="Array(string)" value="{B2,B2,B2,B1,B1,B2,B2,B1,B1,B2,B2,B2}"/>
     <Parameter name="inlet_orifice_map" type="Array(string)" value="{B2,B2,B2,B1,B1,B2,B2,B1,B1,B2,B2,B2}"/>
     <Parameter name="rated_flow" type="double" value="243.5199799896"/>
     <Parameter name="rated_power" type="double" value="103.04"/>

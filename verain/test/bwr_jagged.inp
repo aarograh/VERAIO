@@ -57,6 +57,15 @@
   inlet_orifice_loss B1 0.5 / area=1.0e-2
   inlet_orifice_loss B2 1.0
 
+  inlet_orifice_bypass_map
+       B2 B2
+    B2 B1 B1 B2
+    B2 B1 B1 B2
+       B2 B2
+
+  inlet_orifice_bypass_loss B1 0.5 / area=1.0e-2
+  inlet_orifice_bypass_loss B2 1.0
+
   bc_rad reflecting
   bc_top reflecting
   bc_bot reflecting
