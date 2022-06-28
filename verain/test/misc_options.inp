@@ -352,6 +352,7 @@
   cmfd_linear_solver native
   cmfd_linear_solver trilinos
   cmfd_linear_solver petsc
+  mlcmfd_num_levels 5
   inter_assembly_gapmeshnum 5 5 5 5 1
   control_blade_meshnum 6 6
   detector_meshnum 6 6

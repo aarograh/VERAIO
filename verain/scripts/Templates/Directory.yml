@@ -14772,7 +14772,7 @@ MPACT:
 #>          \item \texttt{adcmfd} --- artificially diffusive CMFD method. (deprecated)
 #>          \item \texttt{odcmfd} --- optimally diffusive CMFD method. (replaces adcmfd)
 #>          \item \texttt{scmfd} --- standard CMFD method.
-#>          \item \texttt{mlcmfd} --- a multi-level (currently 2) cmfd method.
+#>          \item \texttt{mlcmfd} --- a multi-level cmfd method.
 #>          \item \texttt{msed} --- same as \texttt{odcmfd}, but the CMFD
 #>            system is now solved via the MSED method
 #>          \item \texttt{none} --- disables CMFD and can only be used in 2D
@@ -14929,6 +14929,27 @@ MPACT:
 #>   }
 #
   max_v_cycles:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf mlcmfd\_num\_levels} mlcmfd\_num\_levels
+#>   \VERAInputTable{
+#>     name={mlcmfd\_num\_levels},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={3},
+#>     valuesapplicable={Any positive integer},
+#>     limitations={},
+#>     description={The number of levels to use for multilevel CMFD.},
+#>     notes={Only active when \texttt{mlcmfd} is specified for the \texttt{cmfd} card.}
+#>   }
+#
+  mlcmfd_num_levels:
     <<: *dtint
     _content:
     _check:
