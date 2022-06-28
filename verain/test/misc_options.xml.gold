@@ -448,6 +448,7 @@
     <ParameterList name="cmfd">
       <Parameter name="cmfd_relax_negative" type="bool" value="true"/>
       <Parameter name="linear_solver" type="string" value="petsc"/>
+      <Parameter name="num_levels" type="int" value="5"/>
     </ParameterList>
     <ParameterList name="depletion">
       <Parameter name="dep_shielder_dt" type="double" value="0.01"/>
