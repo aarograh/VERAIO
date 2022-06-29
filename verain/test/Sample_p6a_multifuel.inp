@@ -18,9 +18,9 @@
 !> @beginreq
 !> - The VERAIn package shall be able to parse a modified Problem 6a, which is
 !> a single 3D 17x17 assembly at BOL with feedback with more complicated fuel types.
-!> - ticket 2907
-!> - ticket 2815
-!> - ticket 2888
+!> - ticket 757
+!> - ticket 665
+!> - ticket 738
 !> @endreq
 !===============================================================================
 

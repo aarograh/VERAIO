@@ -1,6 +1,5 @@
 !> @beginreq
 !> - VERAIn shall process BWR blade and detector maps.
-!> - Ticket
 !> @endreq
 [CASEID]
   title 'GE14 Progression Problem'

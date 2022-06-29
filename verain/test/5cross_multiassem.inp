@@ -3,11 +3,11 @@
 ! Description:
 !    5 3x3 assemblies in cross configuration with different assembly types.
 !    A form loss coefficient map is defined for a selection of spacer grids in the model.
-!    See Gitlab ticket 3547.
 
 !> @beginreq
 !> - React2xml shall support definition of a channel-dependent form loss coefficient map for each
 !> spacer grid in the model.
+!> - ticket 3547
 !> @endreq
 
 !> @beginreq

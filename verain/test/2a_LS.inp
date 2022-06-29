@@ -1,6 +1,5 @@
 !> @beginreq
 !> - The VERAIn package shall be able to parse VERA Progression Problem 2A with specified linear source options.
-!> - Ticket
 !> @endreq
 [CASEID]
   title '2a_LS'
