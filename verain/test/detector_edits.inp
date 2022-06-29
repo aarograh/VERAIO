@@ -1,7 +1,7 @@
 !> @beginreq
 !> - VERAIn shall properly parse input cards for a user specified
 !>   detector edits mesh.
-!> - Ticket #3620
+!> - ticket 3620
 !> @endreq
 [CASEID]
   title 'Mini Assembly - 3x3'
