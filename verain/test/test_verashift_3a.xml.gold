@@ -294,6 +294,7 @@
       <Parameter name="num_inactive_cycles" type="int" value="5"/>
     </ParameterList>
     <Parameter name="mode" type="string" value="n"/>
+    <Parameter name="num_rejection_samples" type="int" value="50000"/>
     <Parameter name="output_fission_source" type="bool" value="true"/>
     <Parameter name="output_geometry" type="bool" value="true"/>
     <Parameter name="output_micro_tally" type="bool" value="true"/>
