@@ -188,6 +188,7 @@
   Np                    1000
   num_cycles            10
   num_inactive_cycles   5
+  num_rejection_samples 50000
   do_output             true
   output_fission_source true
   output_geometry       true

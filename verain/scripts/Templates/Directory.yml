@@ -5795,6 +5795,26 @@ SHIFT:
       - is_int()
       - is_gt() 0
 #>
+#>   {\bf num\_rejection\_samples} num\_rejection\_samples
+#>   \VERAInputTable{
+#>     name={num\_rejection\_samples},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1000},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Number of allowed initial source sampling rejections},
+#>     notes={}
+#>   }
+  num_rejection_samples:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
 #>   {\bf seed} seed
 #>   \VERAInputTable{
 #>     name={seed},
