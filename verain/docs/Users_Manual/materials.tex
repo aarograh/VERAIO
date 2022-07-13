@@ -38,7 +38,7 @@ materials are defined with the following input card:
 where:
 \begin{itemize}
 \item {\it user-mat} is a user-defined material name. The name is case sensitive. {\it user-mat} is used to
-define material names in other input cards such as {\it cell}, {\it grid}, {\it nozzle}, etc. (No default). 
+define material names in other input cards such as {\it cell}, {\it grid}, {\it nozzle}, etc. (No default).
 \item {\it density} is the material density in grams per cubic centimeter (g/cc). (No default).
 \item {\it library-name} is a corresponding library name(s) for the user material. The library name
 must be defined in the cross section library. (Default = {\it user-mat}). Multiple library materials
@@ -53,6 +53,7 @@ The user is not allowed to define a user material named ``mod'' or ``vacuum'' on
 
 Some example material cards are shown below.
 \begin{Verbatim}[fontsize=\small]
+
   mat zirc4 6.56                   ! library-name defaults to user-name
   mat zirx  6.56 zirc4 1.0         ! user-name does not equal to library-name
   mat B10   12.0 boron 1.0
@@ -63,6 +64,7 @@ Some example material cards are shown below.
                  c-00  2.05259E-02
                  o-16  4.26297E-01
                  al-27 4.79274E-01
+
 \end{Verbatim}
 
 %% Fixed bug Andrew found below ~Feb 2014, atomic and weight were switched
@@ -93,7 +95,7 @@ One example of this is that two assemblies can be defined with the material ``zi
 There are many default files available to the users. The default materials and their compositions
 are defined on the initialization file CORE.ini.
 A list of default materials is given in Table~\ref{table:mat}.
-\begin{table}
+\begin{table}[hbt!]
 \centering
 \caption{Default Material List}
 \label{table:mat}
@@ -202,17 +204,21 @@ Examples of typical {\it fuel} cards are shown below. The user
 only has to specify the $^{235}$U enrichment, and the code will automatically add
 $^{234}$U, $^{236}$U, $^{238}$U, and oxygen to the fuel.
 \begin{Verbatim}[fontsize=\small]
+
   fuel U21 10.4 95.2 / 2.1        ! 2.1% enriched UO2 fuel, no gad
   fuel UO2-35 10.297 95.0 / 3.5   ! 3.5% enriched UO2 fuel, no gad
   fuel U23    10.111 / 2.3        ! fuel with default thden
+
 \end{Verbatim}
 
 An example of a {\it fuel} card with gadolinia burnable poison is shown next.
 In this example, the gadolinia oxide is first defined with a {\it mat} card and
 is mixed with the fuel as 5\% gad oxide and 95\% UO$_2$ (weight percents).
 \begin{Verbatim}[fontsize=\small]
+
   mat gad5 7.407 gd2o3 1.0                ! define gad material separately
   fuel U49 10.111 94.5 / 1.8  / gad5=5.0  ! 1.8% enriched fuel with 5% gad
+
 \end{Verbatim}
 
 Some examples of MOX fuel cards are shown next. In these cards, the user specifies
@@ -220,8 +226,10 @@ the $^{235}$U enrichment (the $^{235}$U enrichment is usually small in MOX fuel)
 plutonium isotope enrichments. The code will automatically add $^{234}$U, $^{236}$U, $^{238}$U,
 and oxygen.
 \begin{Verbatim}[fontsize=\small]
+
   fuel MOX1 10.11 94.5 / 0.16174 u-234 0 u-236 0 pu-238 0.40232 pu-239 10.42187
                   pu-240 4.78046 pu-241 1.77834 pu-242 1.22383 am-241 0.51632
+
 \end{Verbatim}
 
 Only oxide fuel can be defined on the {\it fuel} card. Metallic fuel is not supported.

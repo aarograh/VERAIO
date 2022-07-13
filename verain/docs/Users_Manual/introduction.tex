@@ -5,42 +5,29 @@
 \section{Introduction}
 
 \subsection{Introduction to CASL}
-The Consortium for Advanced Simulation of Light Water Reactors (CASL) is the first
-US Department of Energy (DOE) Energy Innovation Hub, established in July 2010 for the purpose of providing
+The Consortium for Advanced Simulation of Light Water Reactors (CASL), the first
+US Department of Energy (DOE) Energy Innovation Hub, was established in July 2010 to provide
 advanced modeling and simulation (ModSim) solutions for commercial nuclear reactors.
 
-CASL's vision is to predict, with confidence, the performance of nuclear reactors
-through comprehensive, science-based modeling and simulation technology that is
+CASL's objective was to predict, with confidence, the performance of nuclear reactors
+through comprehensive, science-based modeling and simulation technology that would be
 deployed and applied broadly throughout the nuclear energy industry to enhance safety,
 reliability, and economics.
 
-CASL's mission is to provide coupled, high-fidelity, usable modeling and simulation
-capabilities needed to address light-water reactor (LWR) operational and safety performance-defining phenomena.
+CASL's mission was to provide the coupled, high-fidelity, usable modeling and simulation
+capabilities needed to address light-water reactor (LWR) operational and safety performance--defining phenomena.
 
-CASL's foundational technology products include CASL solutions and CASL ModSim Technologies.
+CASL's foundational technology products include CASL solutions and CASL ModSim Technologies.\\
 CASL's ModSim technology, the Virtual Environment for Reactor Applications (VERA), provides
 higher fidelity results than those offered by the current industry approach by incorporating coupled physics
 and science-based models, state-of-the-art numerical methods, modern computational science,
 integrated uncertainty quantification (UQ) and validation against data from operating
 pressurized water reactors (PWRs), single-effect experiments, and integral tests.
 
-Through new insights afforded by its ModSim technology, CASL will address key nuclear
-energy industry challenges to increasing power uprates, ensuring higher fuel burnup, and extending lifetimes
-while providing higher confidence in enhanced nuclear safety and this cleaner energy source.
-
-The CASL team is a consortium that consists of ten core partners and numerous contributing members.
-The CASL organization is led by Oak Ridge National Laboratory (ORNL), and CASL's research and development is executed
-by six technical teams or \textit{focus areas} (FAs) and one integrating technical area.
-This groundbreaking partnership provides unparalleled
-collective institutional knowledge, nuclear science and engineering talent, computational
-science leadership, and a record of LWR design and regulatory accomplishments.
-
-More information on CASL can be found at the website \href{http://www.casl.gov}{www.casl.gov}.
-
 %%%%%%%%%%%%
 \subsection{VERA}
 VERA is a specific collection
-of multi-physics computer codes used to model and simulate depletion of an LWR core over multiple cycles.
+of multiphysics computer codes used to model and simulate depletion of an LWR core over multiple cycles.
 Examples of the separate physics modeled in the core simulator include cross section generation,
 neutron transport, isotopic depletion, thermal hydraulics, and fuel performance.
 
@@ -55,10 +42,11 @@ instead of having to understand multiple inputs for multiple physics codes.
 Another benefit of using a single common input is that all codes work from a single
 geometry description, and this reduces errors due to inconsistent geometries in different codes.
 
-The most up-to-date version of this document resides in the VERA Git repository file
-``VERAIO/verain/docs/verain\_UM.pdf''.
-Please refer to this location for the latest version of the input manual.
+The most up-to-date version of this document resides in the VERA Git repository file\\
+``VERAIO/verain/docs/verain\_UM.pdf'';
+please refer to this location for the latest version of the input manual.
 
+Additional information can be found on the VERA website: \href{https://vera.ornl.gov/}{https://vera.ornl.gov/}.
 
 %%%%%%%%%%%%
 \subsection{Manual Organization}
@@ -90,7 +78,7 @@ There is no required training for running VERA, but users should have a basic un
 of LWR technology. Users who perform any engineering or safety-related work with VERA should
 follow the procedures of their own organizations.
 
-Optional user training is periodically available from the VERA Users Group. 
+Optional user training is periodically available from the VERA Users Group.
 Please contact support (contact information given below) to inquire about training opportunities.
 
 %%%%%%%%%%%%
@@ -112,7 +100,7 @@ The specific functional requirements for VERARun are:
 \begin{enumerate}
 \item Run VERAIn to create an XML file that can be read by other VERA components.
 \item Run any input preprocessors as necessary (such as XML2CTF or XML2Bison).
-\item Submit jobs to a parallel computing cluster. 
+\item Submit jobs to a parallel computing cluster.
 \end{enumerate}
 
 
@@ -124,7 +112,7 @@ Requirements not explicitly stated in this list are assumed to be limitations.
 
 One general limitation in the input processor is that the input is limited to standard LWR designs.
 For example, the input processor does not support reactors with hexagonal or plate fuel or with coolant
-that is not water. 
+that is not water.
 
 Other VERA components may have limitations; the user should refer to the documentation
 of the other VERA components for these limitations.
@@ -147,14 +135,7 @@ VERAIn and VERARun should not be run with administrative level access permission
 \subsection{Software Support}
 
 For specific questions about the use of VERAIn or VERARun, the licensing of the code, or to report bugs,
-users should send an email to {\tt casl-support@ornl.gov}.
+users should send an email to {\tt vera-support@ornl.gov}.
 
-Additional user information may also be found on the CASL website \href{http://www.casl.gov}{www.casl.gov}.
-
-
-
-
-
-
-
+Additional user information may also be found on the VERA website \href{https://vera.ornl.gov/}{https://vera.ornl.gov/}.
 

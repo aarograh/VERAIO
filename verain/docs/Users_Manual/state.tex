@@ -18,6 +18,7 @@ An example showing the most common input cards in the [STATE] block is shown bel
 A complete listing of all the input cards in the [STATE] block is located in Chapter~\ref{chap:cards}.
 
 \begin{Verbatim}[fontsize=\small]
+
   [STATE]
     power   98.0       ! % of rated power - rated values defined in [CORE] block
     flow   100.0       ! % of rated flow
@@ -38,6 +39,7 @@ A complete listing of all the input cards in the [STATE] block is located in Cha
              B 228
              C 228
              D 167
+
 \end{Verbatim}
 
 The {\it sym} card tells the code to run the calculation in full-core or
@@ -84,6 +86,7 @@ For example, if a grid is defined with a centerline at 75.0 and a height of 2.5,
 {\it axial\_edit\_bounds} must include the points $75.0 \pm 1.25 = 73.75$ and $76.25$.
 
 \begin{Verbatim}[fontsize=\small]
+
    [ASSEMBLY]
     grid GRID1 inc 1000 2.5    ! grid name, material, mass (g), and height (cm)
     grid_axial                 ! locations of grid midpoints (cm)
@@ -95,6 +98,7 @@ For example, if a grid is defined with a centerline at 75.0 and a height of 2.5,
        73.75           ! this array must include top and bottom grid boundaries
        76.25
        ...
+
 \end{Verbatim}
 
 The reason for this restriction is that the power is calculated on the {\it axial\_edit\_bounds},
@@ -119,7 +123,7 @@ No code-specific information is included in the [COUPLING] block; all code-speci
 is contained in the code-specific blocks. The [COUPLING] block is only used to define
 generic coupling parameters.
 
-As an example, consider the following multi-physics code coupling:
+As an example, consider the following multiphysics code coupling:
 \begin{enumerate}
   \item  Run T/H calculation
   \item  Run neutronics calculation
@@ -150,13 +154,14 @@ where $x$ is the calculated parameter and $\omega$ is the relaxation factor.
 A relaxation factor of 1.0 signifies that no relaxation is performed.
 A relaxation factor $< 1.0$ signifies under-relaxation.
 
-Relaxation factors can be specified for the point-wise power, point-wise temperature, and/or point-wise density. 
+Relaxation factors can be specified for the point-wise power, point-wise temperature, and/or point-wise density.
 The relaxation is applied to the transferred quantities sent between physics codes. The state variables
 within each physics code are not changed.
 
 An example [COUPLING] input block is shown below.
 
 \begin{Verbatim}[fontsize=\small]
+
    [COUPLING]
      epsk        5.0  ! eigenvalue convergence (pcm)
      eps_temp    1.0  ! temperature convergence (deg C)
@@ -165,6 +170,7 @@ An example [COUPLING] input block is shown below.
      rlx_tfuel   1.0  ! fuel temperature relaxation factor
      rlx_den     1.0  ! density relaxation factor
      maxiter     20   ! maximum number of coupled iterations
+
 \end{Verbatim}
 
 A complete listing of all the input cards in the [COUPLING] block is located in Chapter~\ref{chap:cards}.
