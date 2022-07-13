@@ -11,7 +11,7 @@
 
 This chapter describes depletion and working with restart files.
 
-Depletion and restart files are only available with MPACT. 
+Depletion and restart files are only available with MPACT.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Depletion}
@@ -21,8 +21,10 @@ Depletion and restart files are only available with MPACT.
 A problem is depleted by including a {\it deplete} card in the [STATE] block,
 as in the following example:
 \begin{Verbatim}[fontsize=\small]
+
   [STATE]
     deplete EFPD 0.0 1.0 10.0 30.0
+
 \end{Verbatim}
 The first parameter on the card is the units used in the depletion and can be ``EFPD'' for effective full power days,
 ``GWDMT'' for giga-watt days per metric ton of initial heavy metal, or ``hours''.
@@ -37,19 +39,23 @@ In the following example, the code depletes three statepoints at 50\% power, cha
 to 100\%, and depletes for four more statepoints.
 The depletion step at 10 EFPDs is run at both 50 and 100\% power.
 \begin{Verbatim}[fontsize=\small]
+
   [STATE]
     power 50.0
     deplete EFPD 0.0 1.0 10.0
   [STATE]
     power 100.0
     deplete EFPD 10.0 30.0 60.0 90.0
+
 \end{Verbatim}
 
 The automatic list generation feature described in Section~\ref{sec:inputsyntax} is especially
 useful when defining depletion cases. An example of a {\it deplete} card with automatic list
 generation is as follows:
 \begin{Verbatim}[fontsize=\small]
+
   deplete EFPD 0 1 5 <10..200x10>
+
 \end{Verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -69,6 +75,7 @@ overwrite the fresh isotopic concentrations with the isotopic concentrations on 
 A restart file can be written at any statepoint by using a {\it restart\_write} card,
 \begin{Verbatim}[fontsize=\small]
   restart_write filename restart_label
+
 \end{Verbatim}
 where ``filename'' is the name of the restart file, and ``restart\_label'' is an arbitrary user label used
 to differentiate multiple statepoints written to the same file. Examples of restart labels
@@ -80,6 +87,7 @@ exposure step of the depletion.
 
 In the following example, a depletion is performed, and restart files are written at multiple statepoints.
 \begin{Verbatim}[fontsize=\small]
+
   [STATE]
     deplete EFPD 0.0
     restart_write  restart_cyc12.h5 "BOC"
@@ -101,6 +109,7 @@ In the following example, a depletion is performed, and restart files are writte
     power 80.0
     deplete EFPD 423.4
     restart_write  restart_cyc12.h5 "EFPD423_EOC"
+
 \end{Verbatim}
 
 Another application of restart files is to write the final isotopic information at the end of cycle (EOC)
@@ -115,7 +124,9 @@ during the outage. An example of the {\it op\_date} card is shown in the last [S
 
 A restart file can be read by including a {\it restart\_read} card in the [STATE] block,
 \begin{Verbatim}[fontsize=\small]
+
   restart_read filename restart_label
+
 \end{Verbatim}
 where ``restart\_label'' is the label that was used to write the restart file.
 The {\it restart\_read} card is used to restart an existing calculation; it is
@@ -128,6 +139,7 @@ is read, and a new calculation is performed with a different power and boron con
     power 50.0
     boron 800
     restart_read restart_cyc12.h5 "200EFPD"
+
 \end{Verbatim}
 
 It is possible to write a statepoint in quarter-symmetry and then read the restart back in full-symmetry,
@@ -137,10 +149,12 @@ There is currently a restriction that a user should not include a {\it deplete} 
 [STATE] block where a restart is read. Instead, the user should divide the restart read and depletion
 into separate blocks, as shown here:
 \begin{Verbatim}[fontsize=\small]
+
   [STATE]
     restart_read restart_cycx.h5 "EFPD30"  ! read restart at 30 EFPD
   [STATE]
     deplete EFPD 60 90
+
 \end{Verbatim}
 
 
@@ -160,12 +174,15 @@ The {\it xlabel}s start on the left side of the map and run horizontally.
 The {\it ylabel}s start at the top of the map and run down.
 For example, with the following labels defined:
 \begin{Verbatim}[fontsize=\small]
+
   [CORE]
     xlabel   R  P  N  M  L  K  J  H  G  F  E  D  C  B  A
     ylabel  01 02 03 04 05 06 07 08 09 10 11 12 13 14 15
+
 \end{Verbatim}
 the assembly locations are defined as ``xlabel dash ylabel'':
 \begin{Verbatim}[fontsize=\small]
+
                      L-01 K-01 J-01 H-01 G-01 F-01 E-01
            N-02 M-02 L-02 K-02 J-02 H-02 G-02 F-02 E-02 D-02 C-02
       P-03 N-03 M-03 L-03 K-03 J-03 H-03 G-03 F-03 E-03 D-03 C-03 B-03
@@ -190,7 +207,7 @@ cycle labels are limited to integers only.
 
 New fresh assemblies are defined by using a plus sign followed by an optional string.
 (The string is not currently used for anything, but it may be used to refer to the fresh fuel assembly type in the future.)
-For example, ``+ASMA'' signifies a fresh fuel assembly. 
+For example, ``+ASMA'' signifies a fresh fuel assembly.
 
 Using these naming conventions, a new core loading pattern can be defined using a {\it shuffle\_label} map.
 The {\it shuffle\_label} map is a core map showing the the previous assembly locations and
@@ -202,6 +219,7 @@ The cycle numbers are not used in the location labels because all of the assembl
 were moved from the previous cycle (cycle 1), and the default behavior is to use
 the previous cycle number if no cycle label is specified.
 \begin{Verbatim}[fontsize=\small]
+
   [CORE]
     cycle 2
     op_date 1996/03/02     ! cycle startup date
@@ -222,11 +240,13 @@ the previous cycle number if no cycle label is specified.
         F-07 +X34 N-14 N-06 +X32 D-05 A-06 M-05 +X32 C-06 C-14 +X34 K-07
              G-06 +X32 +X32 L-14 P-04 C-13 B-04 E-14 +X32 +X32 J-06
                        L-06 +X34 +X32 +X34 +X32 +X34 E-06
+
 \end{Verbatim}
 
 The next example shows a quarter-core shuffle map. This map is not realistic,
 but it shows how fresh assemblies are inserted, along with assemblies from
 cycles 8, 19, 20, and 21. The fresh assemblies all have fuel type ``A12.''
+\vfill
 \begin{Verbatim}[fontsize=\small]
   [CORE]
     cycle 22               ! new cycle number
@@ -241,6 +261,7 @@ cycles 8, 19, 20, and 21. The fresh assemblies all have fuel type ``A12.''
       21B-09 21F-05  +A12  21F-13  +A12  21L-06
       21H-09  +A12  21D-09 21F-02 21M-07
       21D-04 21C-09 21G-01
+
 \end{Verbatim}
 
 At this time, there is a restriction that also requires the user to include an {\it assm\_map} card
@@ -251,11 +272,13 @@ In addition to the loading patterns, a list of restart files must be included to
 define the restart search path. The order of the restart files is important: they
 must be in reverse chronological order.
 \begin{Verbatim}[fontsize=\small]
+
   restart_shuffle
     restart_file_12.h5 EOC12
     restart_file_11.h5 EOC11
     restart_file_10.h5 EOC10
     restart_file_5.h5  EOC5
+
 \end{Verbatim}
 The first restart file is used to define the ``previous'' cycle number. The cycle number
 from this file will be used as the default cycle number in the shuffle map.
@@ -275,6 +298,7 @@ to perform the core shuffle.
 
 The EOC 1 restart file was generated with the following input:
 \begin{Verbatim}[fontsize=\small]
+
   [CORE]
     cycle 1    ! could be any arbitrary string like CYC1, etc.
     xlabel   R  P  N  M  L  K  J  H  G  F  E  D  C  B  A
@@ -285,10 +309,12 @@ The EOC 1 restart file was generated with the following input:
     restart_write restart_cyc1.h5 "EOC1"
   [ASSEMBLY]
     ! this input includes a definition of assembly type ASMA
+
 \end{Verbatim}
 
 The EOC 2 restart file was generated with the following input:
 \begin{Verbatim}[fontsize=\small]
+
   [CORE]
     cycle 2
     xlabel   R  P  N  M  L  K  J  H  G  F  E  D  C  B  A
@@ -300,10 +326,12 @@ The EOC 2 restart file was generated with the following input:
   [ASSEMBLY]
    ! this input includes a definition of assembly type ASMB
    ! and ASMA from cycle 1
+
 \end{Verbatim}
 
 The following input is used to shuffle to cycle 3:
 \begin{Verbatim}[fontsize=\small]
+
   [CORE]
     cycle 3
     op_date "1994/04/07"    ! start-up date of cycle 3
@@ -335,6 +363,7 @@ The following input is used to shuffle to cycle 3:
   [ASSEMBLY]
    ! include descriptions for ASMA, ASMB, ASMC if they are
    ! all used in cycle 3
+
 \end{Verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -355,7 +384,9 @@ The shuffling methodology can support cross-unit shuffles.
 
 To use cross-unit shuffling, the unit number must be specified in the [CORE] block.
 \begin{Verbatim}[fontsize=\small]
+
   unit 1    ! unit 1 of a 2 unit site
+
 \end{Verbatim}
 
 To read an assembly from a different unit, the unit label is prepended to the front of the location label
@@ -365,6 +396,7 @@ For example, ``U2:C3G-04'' is used to read the assembly from Unit ``U2,'' cycle 
 Once the location labels have been defined, the user can mix and match restart files from different units
 in the {\it restart\_shuffle} card:
 \begin{Verbatim}[fontsize=\small]
+
   restart_shuffle
     restart_file_U1_12.h5 EOC12
     restart_file_U2_5.h5  EOC
@@ -373,6 +405,7 @@ in the {\it restart\_shuffle} card:
     restart_file_U1_10.h5 EOC10
     restart_file_U2_3.h5  EOC
     restart_file_U1_5.h5  EOC5
+
 \end{Verbatim}
 The only ``trick'' is to list the restart points in the correct reverse chronological order since an
 assembly could theoretically go from U2:CYC3 to U1:CYC10 and then back to U2:CYC6. Therefore, the restarts
@@ -383,5 +416,4 @@ so there is no natural ``order'' to them. The order is defined by the order spec
 The shutdown dates are written to each restart file so that the shutdown decay will be correctly
 calculated for each assembly.
 It does not matter what unit the assembly came from---the correct shutdown dates will be used.
-
 

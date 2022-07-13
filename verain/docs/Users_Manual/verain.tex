@@ -1,26 +1,21 @@
-%*-------------------------------------------------------------------------*
-%*                 Copyright 2013-2019 Core Physics, Inc.                  *
-%*  Under terms of the contract to support CASL, there is a non-exclusive  *
-%*  license for use of this work by or on behalf of the U.S. Government.   *
-%*-------------------------------------------------------------------------*
-%
-%   VERA Common Input User Manual
-%   by Scott Palmtag and Andrew Godfrey
-%   CASL-U-2014-0014-002   Feb. 23, 2015
-%
-%   July 2019 - converted to use CASL Latex template
-%
-%   Revision 3
-%   Aug  2019 - update to add NQA requirements and complete list of input
-%
-%*-------------------------------------------------------------------------*
-%
-\documentclass[11pt]{caslreport}
-\title{VERA User Manual}             % short name
-\reportnum{CASL-U-2014-0014-005}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Use the ``draft'' option to compile more quickly. Remove the ``twoside''
+% argument if you want fewer blank pages (e.g. for an online-only version).
+\documentclass{vera-ornltm}
+%\documentclass[draft,twoside]{ornltm}
 
-% package to allow small font size in verbatim
-\usepackage{fancyvrb}
+\reportdraft
+
+% Uncomment these to hide a particular page.
+%\renewcommand\makeostipage\relax
+%\renewcommand\makecoverpage\relax
+%\renewcommand\maketitlepage\relax
+
+% Optional packages that are simply part of this example document
+\usepackage{threeparttable} % Table with captions and tablenotes
+\usepackage{booktabs} % Toprule, midrule, bottomrule
+\usepackage{multirow} % Extend table entries over multiple rows
+\usepackage{fancyvrb} % package to allow small font size in verbatim
 
 % following packages used in appendix of input cards
 \usepackage{soul}
@@ -30,39 +25,142 @@
 \usepackage{VERAInputTable}
 \usepackage{enumitem}
 
-% set default paragraph styles
-\setlength{\parindent}{0in}  % do not indent paragraphs, double space between
-\addtolength{\parskip}{1.0\baselineskip}
-\frenchspacing
+% Bibliography styling. WARNING: the biblatex-chicago package removes the
+% footnote rule.
+% \usepackage[authordate,strict,backend=biber,autolang=other,bibencoding=inputenc]{biblatex-chicago}
 
-%%---------------------------------------------------------------------------%%
+% Use inline small italic blue for comments rather than placing them in the
+% margin.
+\definecolor{note}{RGB}{48,96,192}
+\renewcommand{\marginpar}[1]{{\small\em\color{note}[#1]}}
+
+\usepackage{amssymb}
+\usepackage[mathcal]{euscript}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{cite}
+\usepackage{subcaption}
+\usepackage{longtable}
+\usepackage{placeins}
+\usepackage{enumitem}
+\usepackage{authblk}
+
+% Define commands used in this document
+\input{local}
+
+% Ensure that the list of figures (lof) and list of tables (lot) are evenly spaced
+% regardless of if they are located in different sections. If that behavior is not desired,
+% comment out the corresponding lof or lot line.
+\newcommand*{\noaddvspace}{\renewcommand*{\addvspace}[1]{}}
+\addtocontents{lof}{\protect\noaddvspace}
+\addtocontents{lot}{\protect\noaddvspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AUTHORSHIP & PUBLISHING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Specify authors below.
+\author[1]{Scott Palmtag}
+\affil[1]{North Carolina State University}
+\author[2]{Andrew Godfrey}
+\affil[2]{Oak Ridge National Laboratory}
+\author[2]{Mark Baird}
+\author[2]{Erik Walker}
+
+% Specify title.
+% Note: if using an explicit linebreak in the title, you must use the \protect
+% command before it.
+\title{VERAIn User's Manual}
+
+% Specify date of publication.
+\date{July 5, 2022}
+%\date{\today}
+
+% Define report number.
+% Note: Defining the report number causes the 'draft' notices to be removed.
+% Remove comment "%" below if that is desired.
+\reportnum{ORNL/SPR-2022/2509}
+
+% Add a restriction notice to the cover page. Remove comment "%" below if that
+% is desired.
+%\restrict{Official use only}
+%\restrict{Business Sensitive}
+% \restrict{Not for public release.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABBREVIATIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Note that abbreviations that aren't used in the document won't be printed in the
+%  list.
+\makeglossaries
+\newacronym{casl}{CASL}{Consortium for Advanced Simulation of Light Water Reactors}
+\newacronym{beavrs}{BEAVRS}{Benchmark for Evaluation And Validation of Reactor Simulations}
+\newacronym{boc}{BOC}{beginning of cycle}
+\newacronym{bwr}{BWR}{boiling water reactor}
+\newacronym{cfd}{CFD}{computational fluid dynamics}
+\newacronym{chf}{CHF}{critical heat flux}
+\newacronym{cilc}{CILC}{crud-induced localized corrosion}
+\newacronym{cips}{CIPS}{crud-induced power shift (also called axial offset anomaly [AOA])}
+\newacronym{cmfd}{CMFD}{coarse-mesh finite difference}
+\newacronym{vtf}{CTF}{COBRA-TF (subchannel code)}
+\newacronym{dnb}{DNB}{departure from nucleate boiling}
+\newacronym{efpd}{EFPD}{effective full power day}
+\newacronym{eoc}{EOC}{end of cycle}
+\newacronym{gt}{GT}{guide tube}
+\newacronym{gwd/mt}{GWd/MT}{gigawatt-days per metric ton heavy metal}
+\newacronym{hfp}{HFP}{hot full power}
+\newacronym{hzp}{HZP}{hot zero power}
+\newacronym{it}{IT}{instrument tube}
+\newacronym{lwr}{LWR}{light-water reactor}
+\newacronym{moc}{MOC}{middle of cycle}
+\newacronym{mof}{MOF}{mixed oxide fuel}
+\newacronym{modsim}{ModSim}{modeling and simulation}
+\newacronym{mwd/mt}{MWd/MT}{megawatt-days per metric ton heavy metal}
+\newacronym{pci}{PCI}{pellet-cladding interaction}
+\newacronym{pcm}{PCM}{per cent mille (10$^{-5}$)}
+\newacronym{ppm}{PPM}{parts per million (usually boron)}
+\newacronym{pwr}{PWR}{pressurized water reactor}
+\newacronym{qa}{QA}{quality assurance}
+\newacronym{ria}{RIA}{reactivity insertion accident}
+\newacronym{sth}{STH}{system thermal hydraulic}
+\newacronym{uq}{UQ}{uncertainty quantification}
+\newacronym{vera}{VERA}{Virtual Environment for Reactor Applications}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FRONT MATTER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+\frontmatter
 
-\frontmatter     % casl template
+%Add the revision log and page descriptions
+\revisionlog{
+0 & 6/17/2022 & All & New template and updates for VERA 4.3 release.
+This version supersedes previous document version CASL-U-2014-0014-005. \\
+}{None}{None}{None}{All}
 
-% make the table of contents
-\thispagestyle{plain}
+%Here's how to add a signature page (class provides 2, 3, 4, or 5 signatures)
+\signaturepagetwo{Erik Walker, VERAIO Product Software Manager}{Aaron Graham, Independent Reviewer}
+
 \tableofcontents
-\clearpage
-
-\phantomsection
-\addcontentsline{toc}{section}{FIGURES}
+% LIST OF FIGURES: optional if fewer than 5 are used
 \listoffigures
-\clearpage
-
-% \phantomsection
-% \addcontentsline{toc}{section}{TABLES}
-% \listoftables
-% \clearpage
-
-%%---------------------------------------------------------------------------%%
+% \marginpar{The list of figures tables may be omitted if fewer than 5 are used.}
+% LIST OF TABLES: optional if fewer than 5 are used
+%\listoftables
+% \marginpar{The list of tables may be omitted if fewer than 5 are used.}
+% LIST OF ABBREVIATIONS
+% NOTE: this will only print if `makeindex X.ist -o X.acr X.acn` is executed.
+% This is part of the included Makefile.
+\printacronyms[title=Abbreviations]
 
 \phantomsection
-\section*{\centerline{\large{Acronyms and Abbreviations}}}
-\addcontentsline{toc}{section}{\texorpdfstring{\MakeUppercase{Acronyms}}{Acronyms}}
+\section*{\centerline{\large{Abbreviations}}}
+\addcontentsline{toc}{section}{\texorpdfstring{\MakeUppercase{Abbreviations}}{Abbreviations}}
 
 \begin{table}[htb]
 \begin{tabular}{ll}
+  AOA     & axial offset anomaly \\
   CASL    & Consortium for Advanced Simulation of Light Water Reactors \\
   BEAVRS  & Benchmark for Evaluation And Validation of Reactor Simulations \\
   BOC     & beginning of cycle \\
@@ -70,8 +168,8 @@
   CFD     & computational fluid dynamics \\
   CHF     & critical heat flux \\
   CILC    & crud-induced localized corrosion \\
-  CIPS    & crud-induced power shift (also called axial offset anomaly [AOA]) \\
-  CMFD    & coarse-mesh finite difference \\ 
+  CIPS    & crud-induced power shift (also called \textit{axial offset anomaly} [AOA]) \\
+  CMFD    & coarse-mesh finite difference \\
   CTF     & COBRA-TF (subchannel code) \\
   DNB     & departure from nucleate boiling \\
   EFPD    & effective full power day \\
@@ -80,13 +178,13 @@
   GWd/MT  & gigawatt-days per metric ton heavy metal \\
   HFP     & hot full power \\
   HZP     & hot zero power \\
-  IT      & instrument tube \\ 
+  IT      & instrument tube \\
   LWR     & light-water reactor \\
   MOC     & middle of cycle \\
   MOF     & mixed oxide fuel \\
   ModSim  & modeling and simulation \\
   MWd/MT  & megawatt-days per metric ton heavy metal \\
-  PCI     & pellet-cladding interaction \\
+  PCI     & pellet--cladding interaction \\
   PCM     & per cent mille (10$^{-5}$) \\
   PPM     & parts per million (usually boron) \\
   PWR     & pressurized water reactor \\
@@ -98,15 +196,15 @@
 \end{tabular}
 \end{table}
 
-\clearpage
-\mainmatter
 
-%%---------------------------------------------------------------------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
 
 \include{introduction}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \section{User Manual}
 \label{chap:user}
@@ -134,7 +232,7 @@ used with multiple physics codes.
 The VERA input blocks are as follows:
 \begin{description}
 \item[CASEID] This block contains an input title card.
-\item[CORE] This block describes the core layout, including the core map, assembly locations, 
+\item[CORE] This block describes the core layout, including the core map, assembly locations,
   control rod locations, and assembly insert locations. The CORE block contains data that does not change
   during a cycle depletion.
 \item[STATE] These blocks describe reactor core operating parameters (statepoint values)
@@ -162,7 +260,7 @@ The following sections in this chapter describe the most common concepts and fea
 This section does not provide a comprehensive list of each input card or option on each card.
 Refer to Chapter~\ref{chap:cards} for a detailed list of all inputs and options.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Section: Syntax
 \subsection{Input Syntax}
 \label{sec:inputsyntax}
@@ -205,6 +303,7 @@ can be split across multiple lines.
 
 An example input fragment with blocks, comments, and cards is shown below.
 \begin{Verbatim}[fontsize=\small]
+
   ! comments start with an exclamation point
 
   [STATE]            ! block names are enclosed in square brackets
@@ -230,32 +329,37 @@ Examples of generated lists include:
   <0..5>         0, 1, 2, 3, 4, 5
   <10..16x2>     10, 12, 14, 16
   <0..4x0.5>     0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0
+
 \end{Verbatim}
 Additional list options can be found on the \href{https://metacpan.org/pod/release/DCONWAY/List-Maker-0.005/lib/List/Maker.pm}{List::Maker} webpage.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Section: Core Description
-\include{core}
+\input{core}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %  Section: Assemblies
-\include{assemblies}
+\input{assemblies}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %  Section: State
 \include{state}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %  Chapter: Materials
 \include{materials}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %  Chapter: Depletion
 \include{depletion}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Input Card Descriptions} \label{chap:cards}
 This chapter contains a complete list of the available input cards.
 
@@ -266,7 +370,7 @@ Following each input card is a description of the parameters on that card.
 
 \include{cards}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \section{Examples}
 \label{chap:example}
@@ -283,13 +387,13 @@ is based upon the publicly available description of the Watts Bar reactors.
 More information on the CASL Progression Benchmark Problems can be found in the following CASL report:
 \begin{itemize}
 \item A. Godfrey, ``VERA Core Physics Benchmark Progression Problem Specifications,''
-CASL Technical Report: \href{http://www.casl.gov/sites/default/files/docs/CASL-U-2012-0131-004.pdf}{CASL-U-2012-0131-004}, August 2014.
+CASL Technical Report: CASL-U-2012-0131-004, August 2014.
 \end{itemize}
 
 More details on Problem 7 can be found in the following CASL report:
 \begin{itemize}
 \item ``Demonstration and Neutronics Coupled to Thermal-Hydraulics for a Full-Core Problem using VERA'',
-CASL Technical Report: \href{http://www.casl.gov/sites/default/files/docs/CASL-U-2013-0196-000.pdf}{CASL-U-2013-0196-000}, December 2013.
+CASL Technical Report: CASL-U-2013-0196-000, December 2013.
 \end{itemize}
 
 \include{example}
@@ -301,7 +405,7 @@ The second example is a partial input for a single-assembly with T/H feedback.
 This problem is Problem 6 of the VERA Core Physics Benchmark Progression Problem Specifications.  See:
 \begin{itemize}
 \item A. Godfrey, ``VERA Core Physics Benchmark Progression Problem Specifications,''
-CASL Technical Report: \href{http://www.casl.gov/sites/default/files/docs/CASL-U-2012-0131-004.pdf}{CASL-U-2012-0131-004}, August 2014.
+CASL Technical Report: CASL-U-2012-0131-004, August 2014.
 \end{itemize}
 
 A single assembly is defined by creating a core with one assembly in it,
@@ -322,7 +426,7 @@ The third example is a complete input for a 2D lattice.
 This problem is Problem 2A of the VERA Core Physics Benchmark Progression Problem Specifications. See:
 \begin{itemize}
 \item A. Godfrey, ``VERA Core Physics Benchmark Progression Problem Specifications,''
-CASL Technical Report: \href{http://www.casl.gov/sites/default/files/docs/CASL-U-2012-0131-004.pdf}{CASL-U-2012-0131-004}, August 2014.
+CASL Technical Report: CASL-U-2012-0131-004, August 2014.
 \end{itemize}
 
 
@@ -338,9 +442,10 @@ defined by using multiple {\it axial} cards in a single input block.
 
 \include{example3}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %  Chapter: VERARun Script
 \include{verarun}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}

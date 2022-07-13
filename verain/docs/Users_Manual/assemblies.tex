@@ -24,11 +24,11 @@ One advantage to having separate blocks for each assembly design is that each de
 modeled (and archived) independently without the need to rely on global definitions.
 
 A typical PWR assembly is shown in Figure~\ref{fig:assembly}. Refer to this figure in the following discussions.
-\begin{figure}
+\begin{figure}[hbt!]
 \begin{center}
-\includegraphics[width=4in]{figs/PWR-assembly.jpg}
+\includegraphics[scale=0.47]{figs/assembly.PNG}
 \end{center}
-\caption{\label{fig:assembly} PWR fuel assembly (source: Public internet).} 
+\caption{\label{fig:assembly} PWR fuel assembly (Image courtesy of the US Nuclear Regulatory Commission).}
 \end{figure}
 
 A complete list of all the input cards in the [ASSEMBLY] block is located in Chapter~\ref{chap:cards}.
@@ -39,31 +39,37 @@ A complete list of all the input cards in the [ASSEMBLY] block is located in Cha
 Each assembly block must contain a geometry description with the number of pins across the assembly and
 the pin pitch.  An assembly block can also include an optional title card.
 \begin{Verbatim}[fontsize=\small]
+
   title "Westinghouse 17x17"      ! assembly title
   npin 17                         ! number of pins across one side
   ppitch 1.260                    ! pin pitch (cm)
+
 \end{Verbatim}
 
 The number of pins {\it npin} must be the same for every assembly in a core.
 
 The inter-assembly gap on each side of the assembly is calculated as $[apitch-npin*ppitch]/2$
 
-For a boiling water reactor (BWR), a channel box may be specified with the following cards. See Section 2.7 for a complete
+For a boiling water reactor (BWR), a channel box may be specified with the following cards. See Section~\ref{sec:channel_box} for a complete
 description of the channel box inputs.
 \begin{Verbatim}[fontsize=\small]
+
   channel_box zirc 0.254 0.10         ! mat, corner thickness (cm), corner radius (cm)
   channel_box_segments 0.18 2.5 0.2   ! segment thickness (cm), segment length (cm),
                                       ! segment ramp (cm)
+
 \end{Verbatim}
 
 The fuel and structural materials are defined with the following cards.
 See Chapter~\ref{chap:materials} for a complete description of the material inputs.
 \begin{Verbatim}[fontsize=\small]
+
   fuel U31 10.257 95.0 / 3.1   ! mat, density (g/cc), Theoretical density (%)
                                !    / U-235 enrichment (%)
   mat inc   8.19               ! mat, density (g/cc)
   mat ss    8.0
   mat zirc4 6.56
+
 \end{Verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -86,12 +92,14 @@ After the slash is a list of materials that comprise each ring.
 The cell IDs are used in the rod maps described in the next section.
 
 \begin{Verbatim}[fontsize=\small]
+
   cell 1     0.4096 0.418 0.475 / U31 he zirc4
   cell GT           0.561 0.602 / mod    zirc4      ! guide tube
   cell IT           0.561 0.602 / mod    zirc4      ! instrument tube
   cell 7            0.418 0.475 / mod    mod        ! empty location
   cell 8            0.418 0.475 /     he zirc4      ! plenum
   cell 9                  0.475 /        zirc4      ! pincap
+
 \end{Verbatim}
 
 In this example, in cell ``1,'' the material ``U31'' extends from radius 0 to 0.4096.
@@ -111,9 +119,11 @@ the inside and outside of the tubes.
 Large water rods that span more than one lattice cell can be specified by adding an optional keyword ``large4''
 to the end of the {\it cell} card.
 \begin{Verbatim}[fontsize=\small]
+
 ! large CE 16x16 water rod
   ppitch  1.28524
   cell WR 1.26 1.28 / mod zirc4 / large4
+
 \end{Verbatim}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -167,6 +177,7 @@ or octant-symmetry. The maps below are octant-symmetric maps for 17$\times$17 as
       GT 9 9 GT 9  9 9
        9 9 9  9 9  9 9 9
        9 9 9  9 9  9 9 9 9
+
 \end{Verbatim}
 
 Rod maps define each unique axial level in the assembly.
@@ -189,6 +200,7 @@ an assembly using an {\it axial} card as shown below.
       PLEN1 393.711
       PCAP1 395.381
       LGAP1 397.501
+
 \end{Verbatim}
 
 The {\it axial} card tells the code how to place the lattices axially.
@@ -207,13 +219,16 @@ All axial elevations are defined relative to the top of the lower core plate.
 Grid cards are used to define unique grid spacer types.
 The following example defines two grid types, ``END'' and ``MID.''
 \begin{Verbatim}[fontsize=\small]
+
   grid END inc    3.866 1017 / loss=0.9070  ! material, height(cm), mass (g), loss coef
   grid MID zirc4  3.810 875 / loss=0.9065
+
 \end{Verbatim}
 
 The grid types are placed axially with the {\it grid\_axial} card:
-\vfill   % don't split map
+%\vfill   % don't split map
 \begin{Verbatim}[fontsize=\small]
+
   grid_axial
       END  13.884
       MID  75.2
@@ -223,6 +238,7 @@ The grid types are placed axially with the {\it grid\_axial} card:
       MID 284.0
       MID 336.2
       END 388.2
+
 \end{Verbatim}
 
 The elevations are the midpoints of the spacer grid and are relative to the top of the lower core plate.
@@ -247,6 +263,7 @@ The coolant density is updated with the local T/H conditions.
 % \end{figure}
 
 \begin{Verbatim}[fontsize=\small]
+
   lower_nozzle  ss 6.05  6250.0  ! mat, height (cm), mass (g)
   upper_nozzle  ss 8.827 6250.0  ! mat, height (cm), mass (g)
 \end{Verbatim}
@@ -278,6 +295,7 @@ In the example below, the bottom of the control rod in the fully inserted positi
 at an axial location of 15.46 cm.
 
 \begin{Verbatim}[fontsize=\small]
+
   title "B4C control rods with AIC tips"
   npin 17
 
@@ -307,6 +325,7 @@ at an axial location of 15.46 cm.
      - - - - - - - - -
 
   axial CR1 15.46 AIC  376.44 B4C  394.3
+
 \end{Verbatim}
 
 The name of the control rod ``CR1'' refers to the control rod type in the
@@ -341,8 +360,11 @@ from fully inserted to fully withdrawn.
 The second value on the {\it stroke} card is the number of steps in the fully withdrawn position.
 Step 0 is the fully inserted position. The number of steps in the fully withdrawn position
 is specified by the user, but 228 steps is often the number used for typical Westinghouse PWRs.
+
 \begin{Verbatim}[fontsize=\small]
+
   stroke  360.0 228      ! stroke (cm), number of steps fully withdrawn
+
 \end{Verbatim}
 
 To position the control rods in percent withdrawn (\%), the number of steps should be set to 100, and
@@ -365,7 +387,7 @@ Using this formula, the bottom elevation of the AIC lattice at the following ste
  \item step 228 (fully withdrawn) = 15.46 + 360.0 * 228 / 228 = 375.46 cm
  \item step 100 = 15.46 + 360.0 * 100 / 228 = 173.35 cm
  \item step 0 (fully inserted) = 15.46 + 360.0 * 0 / 228 = 15.46 cm
-\end{itemize} 
+\end{itemize}
 
 The steps withdrawn can be specified as real numbers and fractions of a step.
 
@@ -386,6 +408,7 @@ during operations.
 The following example shows a definition of a Pyrex insert.
 
 \begin{Verbatim}[fontsize=\small]
+
 [INSERT]
     title "Pyrex"
     npin 17
@@ -403,6 +426,7 @@ The following example shows a definition of a Pyrex insert.
        - - - - - - - - -
 
     axial INS24  15.76 PY24 376.441
+
 \end{Verbatim}
 
 The name of the insert ``INS24'' refers to an insert type defined in the
@@ -427,7 +451,7 @@ The user defines cells, lattices, and axial descriptions for the detector string
 
 The insert and detector descriptions are very similar, with the difference being that
 detectors have special properties used to calculate instrumentation signals.
-
+\vfill   % don't split map
 \begin{Verbatim}[fontsize=\small]
   [DETECTOR]
     title "Incore instrument thimble"
@@ -450,6 +474,7 @@ detectors have special properties used to calculate instrumentation signals.
        - - - - - - - - -
 
     axial D1  0.0 LAT 406.337
+
 \end{Verbatim}
 
 The name of the detector ``D1'' refers to a detector type defined in the
@@ -459,10 +484,12 @@ A complete list of all the input cards in the [DETECTOR] block is located in Cha
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Channel Box}
+\label{sec:channel_box}
+
 The channel box that surrounds a BWR assembly may be modeled with the {\it channel\_box} and
 {\it channel\_box\_segments} cards. The {\it channel\_box} card allows the representation of a normal box
 with a nominal thickness and rounded corners. When paired with the {\it channel\_box\_segments} card,
-a general explicit geometry of thick-thin designs may be modeled. 
+a general explicit geometry of thick-thin designs may be modeled.
 
 The card inputs are shown in Figure~\ref{fig:cbcard}.
 
@@ -495,9 +522,10 @@ channel thickness.
 Sample inputs are provided in Figure~\ref{fig:cbexample}.
 \begin{figure}[h]
 \begin{center}
-  \includegraphics[width=5in]{figs/channelbox.jpg}
+  \includegraphics[width=4.5in]{figs/channelbox.jpg}
 \end{center}
 \caption{\label{fig:cbexample} Sample inputs for the channel box cards.}
 \end{figure}
 
 A complete list of the channel box cards is located in Chapter~\ref{chap:cards}.
+

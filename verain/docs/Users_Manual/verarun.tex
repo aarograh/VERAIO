@@ -15,30 +15,40 @@ VERARun also submits the job to the parallel job queue.
 VERARun is run by specifying {\tt verarun} on the command line, followed by the name of the input file.
 There are additional command line options that are shown below.
 \begin{Verbatim}[fontsize=\small]
+
 --> verarun <input file>
+
 \end{Verbatim}
 
 For example, if you input deck is called ``2a.inp'', you would enter:
 \begin{Verbatim}[fontsize=\small]
+
 --> verarun 2a
+
 \end{Verbatim}
 
 To see what versions of VERA are available, use the -l option:
 \begin{Verbatim}[fontsize=\small]
+
 --> verarun -l
 Available VERA versions (newest to oldest, * for default):
   VERA_4.1
   VERA_4.2 *
+
 \end{Verbatim}
 
 To use a different VERA version, use the -v option:
 \begin{Verbatim}[fontsize=\small]
+
 --> verarun -v VERA_4.2 file.inp
+
 \end{Verbatim}
 
 To use a development version of VERA (not usually recommended), use the --devs option:
 \begin{Verbatim}[fontsize=\small]
+
 --> verarun --devs -v VERA_4.3RC2 file.inp
+
 \end{Verbatim}
 
 To see additional verarun command line options, just execute verarun with no other command line input.
@@ -46,6 +56,7 @@ To see detailed help and customizable environment variables use the -h option.
 Doing so will return the following:
 
 \begin{Verbatim}[fontsize=\small]
+
 usage: verarun [--devs] [-x] [-e email_addr] [-h] [-c config_file]
                [-N job_name] [-l] [-n nprocs] [-O] [--ppn cpus_per_node]
                [-m mem_per_process] [-p project] [-q queue] [-s subdir]
@@ -212,6 +223,7 @@ There are environment variables which can be set to override behavior.
 * VERARUN_HOST_CONFIG_FILE: path to a host configuration file to use,
   overriding the distributed "$(hostname).json" file but overridden by
   the '-c' parameter.
+
 \end{Verbatim}
 
 Note that verarun will create a .pbs file that can also be modified and submitted manually using qsub.
@@ -223,7 +235,9 @@ In Outlook, you can force plain text emails to use a certain font (such as couri
 
 To get information on past jobs submitted with verarun, use the verastat command. This will provide a listing of job ID, date/time, and file location. To get info on a specific job, use:
 \begin{Verbatim}[fontsize=\small]
+
 --> verastat job_id
+
 \end{Verbatim}
 
 For additional questions or support, please contact vera-support@ornl.gov.
@@ -264,15 +278,4 @@ Common errors from the input processor include:
 
 If the input processor works correctly, an error may still occur in one of the VERA component codes.
 The user should look at the error message and consult the user manual for the component code.
-
-
-
-
-
-
-
-
-
-
-
 
