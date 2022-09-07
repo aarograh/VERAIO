@@ -7244,9 +7244,9 @@ SHIFT:
       - is_float(nth(1,()))
       - is_float(nth(2,()))
 #>
-#>   {\bf rtk\_corner} rtk\_corner
+#>   {\bf rtk\_corner\_translate} rtk\_corner\_translate
 #>   \VERAInputTable{
-#>     name={rtk\_corner},
+#>     name={rtk\_corner\_translate},
 #>     type={array of 3 doubles},
 #>     need={Optional},
 #>     unitsdefault={cm},
@@ -7254,10 +7254,10 @@ SHIFT:
 #>     valuedefault={0.0, 0.0, 0.0},
 #>     valuesapplicable={},
 #>     limitations={Only applies to non-excore problems},
-#>     description={Position of RTK geometry bottom left corner},
+#>     description={Translation of RTK geometry bottom left corner},
 #>     notes={}
 #>   }
-  rtk_corner:
+  rtk_corner_translate:
     <<: *dtlist
     _content:
     _check:
