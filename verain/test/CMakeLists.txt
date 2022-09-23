@@ -131,6 +131,7 @@ ADD_REACTOR_AWARE_INPUT_PARSER_TEST(with-dash)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(2a_LS)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(2a_LS_default)
 ADD_REACTOR_AWARE_INPUT_PARSER_TEST(5cross_multiassem)
+ADD_REACTOR_AWARE_INPUT_PARSER_TEST(1a_branch_test)
 #===========================================================
 #
 #               Test for the expected faiures.

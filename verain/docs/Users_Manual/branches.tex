@@ -1,0 +1,294 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Branch Cases}  \label{chap:branches}
+
+The [BRANCH] block can be used to define a set of branch calculations to be done after a particular time step.  Multiple [BRANCH] blocks may be used in a single input file.  They are called out by name in the [STATE] block, allowing each [STATE] block to have a unique set of branch calculations, if desired.  The [STATE] block input \emph{branch <name\_1> .. <name\_n>} will execute the [BRANCH] block inputs in the order listed.  The names listed in the \emph{branch} input are specified in the \emph{title} input of each [BRANCH] block.
+
+When branch calculations are enabled in a [STATE] block, the following calculation sequence occurs:
+\begin{enumerate}[noitemsep]
+    \item nominal condition / depletion time step,
+    \item all branch cases,
+    \item return to nominal condition to obtain the solution required for the depletion.
+\end{enumerate}
+If multiple depletion timesteps are specified in a [STATE] block that also has branch calculations enabled, the branch calculations and extra nominal condition calculation are conducted for every depletion timestep.  If the \emph{branch} variable is set in one [STATE] block but not the next [STATE] block, no branch calculations are performed in the second [STATE] block calculations.  The user must explicitly enable the branch calculations in every [STATE] block for which they desire branch calculations.
+
+\subsection{Input Syntax}
+
+\subsubsection{Title}
+
+The first input, \emph{title}, has already been discussed.  It simply assigns a unique name to the [BRANCH] block so it can be referenced later in the [STATE] block.
+
+\subsubsection{Branch\_set}
+
+The second input is the \emph{branch\_set} input.  This input takes a list of state variable names, modes, and values and uses them to generate a set of branch calculations.  The following variables are allowed:
+\begin{itemize}[noitemsep]
+    \item power,
+    \item pressure,
+    \item tfuel,
+    \item flow,
+    \item modden,
+    \item rodbank,
+    \item tinlet,
+    \item bypass,
+    \item boron,
+    \item b10,
+    \item subcool,
+    \item coolden.
+\end{itemize}
+
+Each variable may have any number of values listed.  Every permutation of values will be used to generate a new branch calculation.  The syntax is defined as follows:
+\begin{verbatim}
+    branch_set name_1 variable_1 [special_1] mode_1 <values_1(:)>
+                      variable_2 [special_2] mode_2 <values_2(:)>
+                      ...
+                      variable_n [special_n] mode_n <values_n(:)>
+    branch_set name_2 variable_1 [special_1] mode_1 <values_1(:)>
+                      variable_2 [special_2] mode_2 <values_2(:)>
+                      ...
+                      variable_n [special_n] mode_n <values_n(:)>
+\end{verbatim}
+Every permutation the values in \emph{name\_1} will be used to create a new state point; the same will be done with every permutation of values in \emph{name\_2}.  Permutations of a value in \emph{name\_1} with a value in \emph{name\_2} are not considered.  This allows the user a high degree of control over how variable values are combined.  Examples will be shown in Section \ref{sec:branch-examples} to illustrate these permutations and special values more clearly.
+
+The \emph{special} inputs are additional values that are required for certain values of \emph{variable}.  These will be discussed in Section \ref{sec:branch-special-values}.
+
+The \emph{mode} inputs are required and can have the value of either \emph{abs} or \emph{rel}.  If \emph{abs}, then the \emph{values} inputs are treated as the actual value of \emph{variable}; if \emph{rel}, the \emph{values} inputs are treated as an additive perturbation to the nominal case.  This will also be demonstrated more thoroughly in Section \ref{sec:branch-examples}.
+
+\subsubsection{State\_control}
+
+The final input is the \emph{state\_control} input, used to modify certain state variables.  An example of this would be depleting with feedback on, but disabling feedback during the branch calculations to isolate effects of modifying other variables.  The following state variables may be modified with the \emph{state\_control} input:
+\begin{itemize}[noitemsep]
+    \item xenon,
+    \item samar,
+    \item search,
+    \item reset\_sol,
+    \item feedback,
+    \item crud.
+\end{itemize}
+For all variables, the acceptable values are the same as when they appear in the [STATE] block.  The state variables will only be modified for any branch calculations defined in the same [BRANCH] block as the \emph{state\_control} variable.  If multiple [BRANCH] names are specified in a single [STATE] block, the \emph{state\_control} input from each block will be applied only to the permutations from that block.
+
+\subsection{Special Values}\label{sec:branch-special-values}
+
+There are two state variables which require use of the \emph{special} input.  For both of these variables that input is required, but \emph{special} must not be used for any other variables.  The first of these is the \emph{tinlet} input, which requires that the temperature unit be placed in the \emph{special} location.  Inputs of \emph{branch\_set name boron abs 0 100 2000} and \emph{branch\_set name tinlet K abs 500 550 600} are valid, but an input of \emph{branch\_set name tinlet abs 500 550 600} is not.
+
+The second variable which requires use of the \emph{special} input is \emph{rodbank}.  In this case, the \emph{special} input must contain the name of the bank label to be moved.  The input \emph{branch\_set name rodbank abs 0 230} is invalid because the code has not been told which bank to move, but the input \emph{branch\_set name rodbank A abs 0 230} is valid because the code knows to move bank \emph{A}.
+
+\subsection{Examples}\label{sec:branch-examples}
+
+\subsubsection{One Branch Block}
+
+\begin{verbatim}
+    [STATE]
+      search boron
+      tinlet 500 K
+      power 100
+      xenon equil
+      deplete GWDMT <0..5x1.0>
+      branch 1
+    [BRANCH]
+      title 1
+      branch_set 1a boron rel 200 -200
+      branch_set 1b tinlet K rel 50 -50
+      branch_set 1c power abs 0 118
+      state_control feedback off search keff
+\end{verbatim}
+
+Table \ref{tab:branch-example-simple} shows the sequence of state calculations that will occur at each depletion time step \emph{D} for $D \in [0, 1, 2, 3, 4, 5]$.  For the final depletion step, the last nominal calculation will be skipped since there is no need to prepare for an additional depletion step.  This leads to a total of 59 state points for this example.
+
+\begin{table}[h]
+    \centering
+    \caption{Resulting states for simple branch block example; \emph{D} denotes depletion time step index}\label{tab:branch-example-simple}
+    \begin{tabular}{|l|l|l|l|l|l|l|}\hline
+    \textbf{State Index} & \textbf{boron} & \textbf{tinlet} & \textbf{power} & \textbf{feedback} & \textbf{search} & \textbf{xenon} \\\hline
+    1+D*10 & critical & 500 K & 100 & on & boron & equil \\\hline
+    2+D*10 & critical + 200 & 550 K & 0 & off & keff & equil \\\hline
+    3+D*10 & critical - 200 & 550 K & 0 & off & keff & equil \\\hline
+    4+D*10 & critical + 200 & 450 K & 0 & off & keff & equil \\\hline
+    5+D*10 & critical - 200 & 450 K & 0 & off & keff & equil \\\hline
+    6+D*10 & critical + 200 & 550 K & 118 & off & keff & equil \\\hline
+    7+D*10 & critical - 200 & 550 K & 118 & off & keff & equil \\\hline
+    8+D*10 & critical + 200 & 450 K & 118 & off & keff & equil \\\hline
+    9+D*10 & critical - 200 & 450 K & 118 & off & keff & equil \\\hline
+    10+D*10 & critical & 500 K & 100 & on & boron & equil \\\hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Rod Positions}
+
+\begin{verbatim}
+    [STATE]
+      feedback on
+      search boron
+      xenon equil
+      rodbank A  226
+              B  226
+              C  226
+              D  226
+              SA 226
+              SB 226
+              SC 226
+              SC 226
+      deplete GWDMT <0..5x1.0>
+      branch 2
+    [BRANCH]
+      title 2
+      branch_set 2a rodbank  A abs 0 230
+      branch_set 2b rodbank  D abs 0 230
+      branch_set 2c rodbank  A abs 230
+                    rodbank  B abs 230
+                    rodbank  C abs 230
+                    rodbank  D abs 230
+                    rodbank SA abs 230
+                    rodbank SB abs 230
+                    rodbank SC abs 230
+                    rodbank SD abs 230
+      branch_set 2d rodbank  A abs   0
+                    rodbank  B abs   0
+                    rodbank  C abs   0
+                    rodbank  D abs   0
+                    rodbank SA abs 230
+                    rodbank SB abs 230
+                    rodbank SC abs 230
+                    rodbank SD abs 230
+      branch_set 2e rodbank  A abs 230
+                    rodbank  B abs 230
+                    rodbank  C abs 230
+                    rodbank  D abs 230
+                    rodbank SA abs   0
+                    rodbank SB abs   0
+                    rodbank SC abs   0
+                    rodbank SD abs   0
+      branch_set 2f rodbank  A abs   0
+                    rodbank  B abs   0
+                    rodbank  C abs   0
+                    rodbank  D abs   0
+                    rodbank SA abs   0
+                    rodbank SB abs   0
+                    rodbank SC abs   0
+                    rodbank SD abs   0
+      state_control feedback off search off xenon dep
+\end{verbatim}
+
+Table \ref{tab:branch-example-rods} shows the sequence of state calculations that will occur at each depletion time step \emph{D} for $D \in [0, 1, 2, 3, 4, 5]$.  For the final depletion step, the last nominal calculation will be skipped since there is no need to prepare for an additional depletion step.  This leads to a total of 59 state points for this example.
+
+\begin{table}[h]
+    \centering
+    \caption{Resulting states for control rod branch block example; \emph{D} denotes depletion time step index}\label{tab:branch-example-rods}
+    \begin{tabular}{|l|l|l|l|l|}\hline
+    \textbf{State} & \textbf{rodbank,} & \textbf{feedback} & \textbf{search} & \textbf{xenon} \\
+    \textbf{Index} & \textbf{alphabetically} &  &  & \\\hline
+    1+D*10 & 226, 226, 226, 226, 226, 226, 226, 226 & on & boron & equil \\\hline
+    2+D*10 & 0, 226, 226, 226, 226, 226, 226, 226 & off & keff & dep \\\hline
+    3+D*10 & 230, 226, 226, 226, 226, 226, 226, 226 & off & keff & dep \\\hline
+    4+D*10 & 226, 226, 226, 0, 226, 226, 226, 226 & off & keff & dep \\\hline
+    5+D*10 & 226, 226, 226, 230, 226, 226, 226, 226 & off & keff & dep \\\hline
+    6+D*10 & 230, 230, 230, 230, 230, 230, 230, 230 & off & keff & dep \\\hline
+    7+D*10 & 0, 0, 0, 0, 230, 230, 230, 230 & off & keff & dep \\\hline
+    8+D*10 & 230, 230, 230, 230, 0, 0, 0, 0 & off & keff & dep \\\hline
+    9+D*10 & 0, 0, 0, 0, 0, 0, 0, 0 & off & keff & dep \\\hline
+    10+D*10 & 226, 226, 226, 226, 226, 226, 226, 226 & on & boron & equil \\\hline
+    \end{tabular}
+\end{table}
+
+\FloatBarrier
+
+\subsubsection{Complicated}
+
+This example combines the previous two to show the interactions between two [BRANCH] blocks.
+
+\begin{verbatim}
+    [STATE]
+      search boron
+      tinlet 500 K
+      power 100
+      deplete GWDMT <0..5x1.0>
+      branch TH
+      branch rods
+    [BRANCH]
+      title TH
+      branch_set 1a boron rel 200 -200
+      branch_set 1b tinlet K rel 50 -50
+      branch_set 1c power abs 0 118
+      state_control feedback off search keff
+    [BRANCH]
+      title rods
+      branch_set 2a rodbank  A abs 0 230
+      branch_set 2b rodbank  D abs 0 230
+      branch_set 2c rodbank  A abs 230
+                    rodbank  B abs 230
+                    rodbank  C abs 230
+                    rodbank  D abs 230
+                    rodbank SA abs 230
+                    rodbank SB abs 230
+                    rodbank SC abs 230
+                    rodbank SD abs 230
+      branch_set 2d rodbank  A abs   0
+                    rodbank  B abs   0
+                    rodbank  C abs   0
+                    rodbank  D abs   0
+                    rodbank SA abs 230
+                    rodbank SB abs 230
+                    rodbank SC abs 230
+                    rodbank SD abs 230
+      branch_set 2e rodbank  A abs 230
+                    rodbank  B abs 230
+                    rodbank  C abs 230
+                    rodbank  D abs 230
+                    rodbank SA abs   0
+                    rodbank SB abs   0
+                    rodbank SC abs   0
+                    rodbank SD abs   0
+      branch_set 2f rodbank  A abs   0
+                    rodbank  B abs   0
+                    rodbank  C abs   0
+                    rodbank  D abs   0
+                    rodbank SA abs   0
+                    rodbank SB abs   0
+                    rodbank SC abs   0
+                    rodbank SD abs   0
+\end{verbatim}
+
+Table \ref{tab:branch-example-complicated} shows the sequence of state calculations that will occur at each depletion time step \emph{D} for $D \in [0, 1, 2, 3, 4, 5]$.  It also shows the behavior when multiple [BRANCH] blocks are used with different \emph{state\_control} inputs.  For the final depletion step, the last nominal calculation will be skipped since there is no need to prepare for an additional depletion step.  This leads to a total of 107 state points for this example.
+
+\begin{table}[h]
+    \centering
+    \caption{Resulting states for control branch block example; \emph{D} denotes depletion time step index}\label{tab:branch-example-complicated}
+    \begin{tabular}{|l|l|l|l|l|l|l|l|l|}\hline
+    \textbf{State} & \textbf{boron} & \textbf{tinlet} & \textbf{power} & \textbf{rodbank,} & \textbf{feedback} & \textbf{search} & \textbf{xenon} \\
+    \textbf{Index} & & & & \textbf{alphabetically} &  &  & \\\hline
+    1+D*18 & critical & 500 K & 100 & 226, 226, 226, 226, & on & boron & equil \\
+    &  &  &  & 226, 226, 226, 226  &  &  & \\\hline
+    2+D*18 & critical & 550 K & 0 & 226, 226, 226, 226, & off & keff & equil \\
+    & +200 &  &  & 226, 226, 226, 226  &  &  & \\\hline
+    3+D*18 & critical & 550 K & 0 & 226, 226, 226, 226, & off & keff & equil \\
+    & -200 &  &  & 226, 226, 226, 226  &  &  & \\\hline
+    4+D*18 & critical & 450 K & 0 & 226, 226, 226, 226, & off & keff & equil \\
+    & +200 &  &  & 226, 226, 226, 226  &  &  & \\\hline
+    5+D*18 & critical & 450 K & 0 & 226, 226, 226, 226, & off & keff & equil \\
+    & -200 &  &  & 226, 226, 226, 226  &  &  & \\\hline
+    6+D*18 & critical & 550 K & 118 & 226, 226, 226, 226, & off & keff & equil \\
+    & +200 &  &  & 226, 226, 226, 226  &  &  & \\\hline
+    7+D*18 & critical & 550 K & 118 & 226, 226, 226, 226, & off & keff & equil \\
+    & -200 &  &  & 226, 226, 226, 226  &  &  & \\\hline
+    8+D*18 & critical  & 450 K & 118 & 226, 226, 226, 226, & off & keff & equil \\
+    & +200 &  &  & 226, 226, 226, 226  &  &  & \\\hline
+    9+D*18 & critical & 450 K & 118 & 226, 226, 226, 226, & off & keff & equil \\
+    & -200 &  &  & 226, 226, 226, 226  &  &  & \\\hline
+    10+D*18 & critical & 500 K & 100 & 0, 226, 226, 226, & off & keff & dep \\
+     &  &  &  & 226, 226, 226, 226  &  & & \\\hline
+    11+D*18 & critical & 500 K & 100 & 230, 226, 226, 226, & off & keff & dep \\
+     &  &  &  & 226, 226, 226, 226  &  & & \\\hline
+    12+D*18 & critical & 500 K & 100 & 226, 226, 226, 0, & off & keff & dep \\
+     &  &  &  & 226, 226, 226, 226  &  & & \\\hline
+    13+D*18 & critical & 500 K & 100 & 226, 226, 226, 230, & off & keff & dep \\
+     &  &  &  & 226, 226, 226, 226  &  & & \\\hline
+    14+D*18 & critical & 500 K & 100 & 230, 230, 230, 230, & off & keff & dep \\
+     &  &  &  & 230, 230, 230, 230  &  & & \\\hline
+    15+D*18 & critical & 500 K & 100 & 0, 0, 0, 0, & off & keff & dep \\
+     &  &  &  & 230, 230, 230, 230  &  & & \\\hline
+    16+D*18 & critical & 500 K & 100 & 230, 230, 230, 230, & off & keff & dep \\
+     &  &  &  & 0, 0, 0, 0  &  & & \\\hline
+    17+D*18 & critical & 500 K & 100 & 0, 0, 0, 0, & off & keff & dep \\
+     &  &  &  & 0, 0, 0, 0  &  & & \\\hline
+    18+D*18 & critical & 500 K & 100 & 226, 226, 226, 226 & on & boron & equil \\
+    &  &  &  & 226, 226, 226, 226,  &  & & \\\hline
+    \end{tabular}
+\end{table}

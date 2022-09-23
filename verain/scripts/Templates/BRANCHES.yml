@@ -1,0 +1,65 @@
+BRANCHES:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+
+  _tr:
+    _name: _loop
+    _content: %BRANCH
+
+  _content:
+
+    Branch_(_loop):
+      _pltype: list
+      _do:
+        - setvar _path,%BRANCH/$(_loop)
+        - getvar _path,apply=>&pathlevel,arg=>2
+
+      _content:
+
+        id:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %BRANCH/$(_loop)/$id
+          _content:
+
+        title:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %BRANCH/$(_loop)/$title
+          _content:
+
+        BranchSets:
+          _pltype: list
+
+          _tr:
+            _name: _bloop
+            _content: %BRANCH/(_path)/%branch_set
+
+          _content:
+            BranchSet_(_bloop):
+              _pltype: array
+              _type: string
+              _do:
+                - copyarray %BRANCH/(_path)/%branch_set/@(_bloop)
+              _content:
+
+        state_control:
+          _pltype: list
+
+          _content:
+            variables:
+              _pltype: array
+              _type: string
+              _do:
+                - copyarray %BRANCH/(_path)/@state_control,select=>even
+              _content:
+
+            values:
+              _pltype: array
+              _type: string
+              _do:
+                - copyarray %BRANCH/(_path)/@state_control,select=>odd
+              _content:

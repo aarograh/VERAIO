@@ -76,13 +76,16 @@ my @BLOCKS;
 # below with #include line and follow syntax of other entries.
 #
 $SCHEMA="${directory}Templates/Directory.yml";
-@BLOCKS=('CASEID','STATES','CORE','ASSEMBLIES',
+@BLOCKS=('CASEID','BRANCHES','STATES','CORE','ASSEMBLIES',
 	 'CONTROLS','DETECTORS','INSERTS',
 	 'SHIFT','EDITS','COBRATF','COUPLING',
 	 'MPACT','MAMBA','BISON','FAST','TIAMAT','RUN','TRANSIENT');
 
 $SCH_PL{ 'CASEID' } = (
 #include pyml/CASEID.pyml
+)[0];
+$SCH_PL{ 'BRANCHES' } = (
+#include pyml/BRANCHES.pyml
 )[0];
 $SCH_PL{ 'STATES' } = (
 #include pyml/STATES.pyml
@@ -387,7 +390,7 @@ sub recursive_json_print {
         my $value = $hash->{$key};
         $k = $k + 1;
         if ($k == $key_count){  $delimiter = ''; }
-        ### YAML produces PERL REFS for HASH and ARRAY 
+        ### YAML produces PERL REFS for HASH and ARRAY
         if (ref $value) {
             if ( ref $value eq 'HASH') {
                 print $ws_pad, '"',$key,"\" : {\n";
@@ -402,7 +405,7 @@ sub recursive_json_print {
                 $vdelimiter = ',';
                 foreach (@{$value}){
                     $v = $v + 1;
-                    if ( $v == $value_count ) { $vdelimiter = ''; } 
+                    if ( $v == $value_count ) { $vdelimiter = ''; }
                     $_ =~ s/\"/\\\"/g;
                     print $ws_pad," "x($depth+1),"\"$_\"$vdelimiter\n";
                 }
@@ -478,6 +481,6 @@ Program switches:
 --debug   Create debug files for finding the errors in the converter
           program. Does not help much in tracing invalid input.
 
---schema Write the VERAIn input schematic to STDOUT formatted as JSON.  
+--schema Write the VERAIn input schematic to STDOUT formatted as JSON.
 EOF
 }

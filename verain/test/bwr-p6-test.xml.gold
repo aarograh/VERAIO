@@ -12,7 +12,7 @@
       <Parameter name="tfuel" type="double" value="900"/>
       <Parameter name="thexp" type="string" value="off"/>
       <Parameter name="tinlet" type="string" value="532 F"/>
-      <Parameter name="xenopt" type="string" value="zero"/>
+      <Parameter name="xenon" type="string" value="zero"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">

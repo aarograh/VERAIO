@@ -239,6 +239,9 @@ The VERA input blocks are as follows:
   at a particular point in time.
   Parameters include inlet temperature, pressure, power, control rod positions, and others.
   STATE values can, and usually do, change at each statepoint.
+\item[BRANCH] These blocks describe branch calculations that can be done after each state point.
+  They can be used to perturb a variety of operational parameters defined in the [STATE] block.
+  They will typically be be used to generate nodal cross section data with {\bf MPACT}.
 \item[ASSEMBLY] These blocks contain the geometry and physical description of the nuclear fuel assemblies.
   The assembly descriptions do not include control rods, detectors, or inserts.
 \item[INSERT] These blocks contain the geometry and physical description of the assembly inserts.
@@ -349,7 +352,10 @@ Additional list options can be found on the \href{https://metacpan.org/pod/relea
 \include{state}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Chapter: Branch
+\include{branches}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Chapter: Materials
 \include{materials}
 
