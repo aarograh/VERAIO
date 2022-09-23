@@ -1,0 +1,35 @@
+[CASEID]
+  title 'CASL AMA Benchmark Problem 1A - Pin Cell- Public'
+
+[BRANCH]
+  title branch_1
+  branch_set name1 power abs 0 130
+  branch_set name2 tinlet K abs 500 600
+  state_control feedback off search keff xenon dep samar dep
+[BRANCH]
+  title branch_2
+  branch_set name1 boron rel 200 -200
+                   modden abs 0.6 0.8
+
+[STATE]
+  power    100.0
+  tinlet   565 K
+  tfuel    565 K
+  modden   0.743         ! g/cc
+  sym      full          ! full symmetry
+  thexp    off
+  feedback on
+  search   boron
+  xenon    equil
+  samar    equil
+  deplete GWDMT 0.0 1.0 5.0
+  branch branch_1 branch_2
+
+[MPACT]
+  coupling_method simplified
+  nodal_edits nem
+
+[SHIFT]
+  num_cycles           1100
+  num_inactive_cycles  100
+  Np                   100000

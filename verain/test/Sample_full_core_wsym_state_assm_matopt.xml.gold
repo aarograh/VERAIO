@@ -14,11 +14,11 @@
       <Parameter name="kcrit" type="double" value="1.0"/>
       <Parameter name="power" type="double" value="0.0"/>
       <Parameter name="pressure" type="double" value="15.5132039025"/>
-      <Parameter name="samopt" type="string" value="zero"/>
+      <Parameter name="samar" type="string" value="zero"/>
       <Parameter name="search" type="string" value="boron"/>
       <Parameter name="tinlet" type="string" value="559.0 F"/>
       <Parameter name="title" type="string" value="HZP Statepoint BOL 1"/>
-      <Parameter name="xenopt" type="string" value="zero"/>
+      <Parameter name="xenon" type="string" value="zero"/>
     </ParameterList>
     <ParameterList name="State_2">
       <Parameter name="bank_labels" type="Array(string)" value="{A,B,C,D,SA,SB,SC,SD}"/>
@@ -31,11 +31,11 @@
       <Parameter name="kcrit" type="double" value="1.0"/>
       <Parameter name="power" type="double" value="0.0"/>
       <Parameter name="pressure" type="double" value="15.5132039025"/>
-      <Parameter name="samopt" type="string" value="zero"/>
+      <Parameter name="samar" type="string" value="zero"/>
       <Parameter name="search" type="string" value="boron"/>
       <Parameter name="tinlet" type="string" value="559.0 F"/>
       <Parameter name="title" type="string" value="HZP Statepoint BOL 2"/>
-      <Parameter name="xenopt" type="string" value="zero"/>
+      <Parameter name="xenon" type="string" value="zero"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">

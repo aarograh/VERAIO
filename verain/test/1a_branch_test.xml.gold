@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet version="1.0" type="text/xsl" href="PL9.xsl"?>
+<ParameterList name="CASEID">
+  <Parameter name="case_id" type="string" value="CASL AMA Benchmark Problem 1A - Pin Cell- Public"/>
+  <ParameterList name="BRANCHES">
+    <ParameterList name="Branch_1">
+      <ParameterList name="BranchSets">
+        <Parameter name="BranchSet_name1" type="Array(string)" value="{power,abs,0,130}"/>
+        <Parameter name="BranchSet_name2" type="Array(string)" value="{tinlet,K,abs,500,600}"/>
+      </ParameterList>
+      <ParameterList name="state_control">
+        <Parameter name="values" type="Array(string)" value="{off,keff,dep,dep}"/>
+        <Parameter name="variables" type="Array(string)" value="{feedback,search,xenon,samar}"/>
+      </ParameterList>
+      <Parameter name="title" type="string" value="branch_1"/>
+    </ParameterList>
+    <ParameterList name="Branch_2">
+      <ParameterList name="BranchSets">
+        <Parameter name="BranchSet_name1" type="Array(string)" value="{boron,rel,200,-200,modden,abs,0.6,0.8}"/>
+      </ParameterList>
+      <Parameter name="title" type="string" value="branch_2"/>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="STATES">
+    <ParameterList name="State_1">
+      <Parameter name="branch" type="Array(string)" value="{branch_1,branch_2}"/>
+      <Parameter name="deplete" type="Array(double)" value="{0.0,1.0,5.0}"/>
+      <Parameter name="deplete_units" type="string" value="GWDMT"/>
+      <Parameter name="feedback" type="string" value="on"/>
+      <Parameter name="modden" type="double" value="0.743"/>
+      <Parameter name="power" type="double" value="100.0"/>
+      <Parameter name="samar" type="string" value="equil"/>
+      <Parameter name="search" type="string" value="boron"/>
+      <Parameter name="sym" type="string" value="full"/>
+      <Parameter name="tfuel" type="double" value="565"/>
+      <Parameter name="thexp" type="string" value="off"/>
+      <Parameter name="tinlet" type="string" value="565 K"/>
+      <Parameter name="xenon" type="string" value="equil"/>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="SHIFT">
+    <Parameter name="Np" type="double" value="100000"/>
+    <ParameterList name="kcode_db">
+      <Parameter name="Np" type="double" value="100000"/>
+      <Parameter name="num_cycles" type="int" value="1100"/>
+      <Parameter name="num_inactive_cycles" type="int" value="100"/>
+    </ParameterList>
+  </ParameterList>
+  <ParameterList name="MPACT">
+    <ParameterList name="TH">
+      <Parameter name="coupling_method" type="string" value="simplified"/>
+    </ParameterList>
+    <Parameter name="nodal_edits" type="string" value="nem"/>
+  </ParameterList>
+</ParameterList>

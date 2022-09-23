@@ -33,6 +33,13 @@ STATES:
             - copy %STATE/$(_loop)/$title
           _content:
 
+        branch:
+          _pltype: array
+          _type: string
+          _do:
+            - copy %STATE/$(_loop)/$branch
+          _content:
+
         power:
           _pltype: parameter
           _type: double
@@ -54,14 +61,14 @@ STATES:
             - copy %STATE/$(_loop)/$bypass
           _content:
 
-        xenopt:
+        xenon:
           _pltype: parameter
           _type: string
           _do:
             - copy %STATE/$(_loop)/$xenon
           _content:
 
-        samopt:
+        samar:
           _pltype: parameter
           _type: string
           _do:

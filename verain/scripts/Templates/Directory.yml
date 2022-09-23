@@ -39,6 +39,7 @@ _DATATYPES:
 
 _DIRECTORY:
   CASEID:
+  BRANCH:
   STATE:
   CORE:
   ASSEMBLY:
@@ -81,6 +82,83 @@ CASEID:
     _check:
       - is_string()
 #>
+#> \subsection{Block BRANCH}
+#> \label{sec:branchcards}
+BRANCH:
+  <<: *dtblocknamed
+  id:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+#>
+#>   {\bf title} branch\_name
+#>   \VERAInputTable{
+#>     name={branch\_name},
+#>     type={Character Strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Name of the set of branch cases defined by this \texttt{BRANCH} block},
+#>     notes={}
+#>   }
+  title:
+    <<: *dtstring
+    _style: multi-line
+    _content:
+    _check:
+      - is_string()
+#>
+#>   {\bf branch\_set} branch\_set
+#>   \VERAInputTable{
+#>     name={branch\_set},
+#>     type={Array of mixed types},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Defines one set of branch calculations.  Every permutation of values
+#>        listed in the \texttt{branch\_set} input will generate a new state.  For detailed
+#>        documentation and examples, please see Section \ref{chap:branches}.},
+#>     notes={This input does nothing unless the \texttt{[BRANCH]} block title
+#>        is named in the texttt{[STATE]} block's \texttt{branch} input.}
+#>   }
+  branch_set:
+    <<: *dtlistnamed
+    _style: multi-line
+    _content:
+    _check:
+#>
+#>   {\bf state\_control} state\_control
+#>   \VERAInputTable{
+#>     name={state\_control},
+#>     type={Array of Strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Applies temporary modifications to state variables; these modifications
+#>        will only be applied during the branch calculations, not during the depletion and
+#>        nominal calculations.  For detailed documentation and examples, please see
+#>        Section \ref{chap:branches}.},
+#>     notes={This input does nothing unless the \texttt{[BRANCH]} block title
+#>        is named in the texttt{[STATE]} block's \texttt{branch} input.}
+#>   }
+  state_control:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{in_dictionary(shift,'xenon','samar','search','reset_sol','feedback','crud')},even([]))
+#>
 #> \subsection{Block STATE}
 #> \label{sec:statecards}
 STATE:
@@ -90,6 +168,26 @@ STATE:
     _content:
     _check:
       - is_string()
+#>
+#>   {\bf branch} branch
+#>   \VERAInputTable{
+#>     name={branch},
+#>     type={Array of Strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Names the [BRANCH] blocks that should be applied after each state
+#>        point defined by this [STATE] block},
+#>     notes={This input does not persist to following [STATE] blocks}
+#>   }
+  branch:
+    <<: *dtlist
+    _content:
+    _check:
+      - fall(sub{is_word(shift)})
 #>
 #>   {\bf title} state\_name
 #>   \VERAInputTable{
