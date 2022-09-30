@@ -213,6 +213,13 @@ COBRATF:
         - coremapmap CORE/$size,CORE/@core_shape,COBRATF/@domain_decomp,CORE/$bc_sym
       _content:
 
+    nodal_subregion_map:
+      _pltype: array
+      _type: int
+      _do:
+        - coremapmap CORE/$size,CORE/@core_shape,COBRATF/@nodal_subregion_map,CORE/$bc_sym
+      _content:
+
     global_energy_balance:
       _pltype: parameter
       _type: double
