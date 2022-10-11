@@ -444,6 +444,7 @@
     </ParameterList>
     <ParameterList name="TH">
       <Parameter name="sth_hgap" type="double" value="5200.0"/>
+      <Parameter name="sth_trfluid" type="bool" value="true"/>
     </ParameterList>
     <ParameterList name="cmfd">
       <Parameter name="cmfd_relax_negative" type="bool" value="true"/>
