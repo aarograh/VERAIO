@@ -14524,6 +14524,27 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 #>
+#>   {\bf sth\_trfluid} sth\_trfluid
+#>   \VERAInputTable{
+#>     name={sth\_trfluid},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={false},
+#>     limitations={},
+#>     description={This input is used to determine whether the simplified TH solver uses the
+#>        transient fluid convection model.},
+#>     notes={This input may be used for a long transient calculation such as load-follow.}
+#>   }
+  sth_trfluid:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf temptable\_shape} temptable\_shape
 #>   \VERAInputTable{
 #>     name={temptable\_shape},

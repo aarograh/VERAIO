@@ -380,3 +380,4 @@
   moc_min_flux          1E-20
   split_TL_tol          0.0
   cmfd_relax_negative   true
+  sth_trfluid           true
