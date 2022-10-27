@@ -1,259 +1,242 @@
-% Template Author: Bob Salko
-\documentclass[twoside]{report}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Use the ``draft'' option to compile more quickly. Remove the ``twoside''
+% argument if you want fewer blank pages (e.g. for an online-only version).
+\documentclass{vera-ornltm}
+%\documentclass[draft,twoside]{ornltm}
 
+%\reportdraft
 
-\input{template/template}
+% Uncomment these to hide a particular page.
+%\renewcommand\makeostipage\relax
+%\renewcommand\makecoverpage\relax
+%\renewcommand\maketitlepage\relax
 
-\usepackage{todonotes}
+% Optional packages that are simply part of this example document
+\usepackage{threeparttable} % Table with captions and tablenotes
+\usepackage{booktabs} % Toprule, midrule, bottomrule
+\usepackage{multirow} % Extend table entries over multiple rows
+\usepackage{colortbl} % Allow for table coloring
 
-\newcommand*{\Appendixautorefname}{Appendix}
+% Bibliography styling. WARNING: the biblatex-chicago package removes the
+% footnote rule.
+% \usepackage[authordate,strict,backend=biber,autolang=other,bibencoding=inputenc]{biblatex-chicago}
 
+% Use inline small italic blue for comments rather than placing them in the
+% margin.
+\definecolor{note}{RGB}{48,96,192}
+\renewcommand{\marginpar}[1]{{\small\em\color{note}[#1]}}
 
-\title{VERAIn Software Requirements, Test Plan, and Test Report}
-\newcommand{\shortTitle}{Test plan, report, and requirements}
-\newcommand{\subtitle}{}
-\newcommand{\CASLMilestoneNumber}{CASL-U-2019-1891-002}
-\newcommand{\publicationDate}{10/1/2020}
-\newcommand{\psm}{Erik Walker, VERAIn Product Software Manager}
-\newcommand{\reviewer}{Independent Reviewer}
+\usepackage{amssymb}
+\usepackage[mathcal]{euscript}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{cite}
+\usepackage{subcaption}
+\usepackage{longtable}
+\usepackage{placeins}
+\usepackage{enumitem}
+\usepackage{authblk}
+\usepackage{listings}
 
+% Define commands used in this document
+\input{local}
+
+% Ensure that the list of figures (lof) and list of tables (lot) are evenly spaced
+% regardless of if they are located in different sections. If that behavior is not desired,
+% comment out the corresponding lof or lot line.
+\newcommand*{\noaddvspace}{\renewcommand*{\addvspace}[1]{}}
+\addtocontents{lof}{\protect\noaddvspace}
+\addtocontents{lot}{\protect\noaddvspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AUTHORSHIP & PUBLISHING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Specify authors below.
 \author[1]{Erik Walker}
-
 \affil[1]{Oak Ridge National Laboratory}
 
+% Specify title.
+% Note: if using an explicit linebreak in the title, you must use the \protect
+% command before it.
+\title{VERAI\lowercase{n} Software Requirements, Test Plan, \protect\\and Test Report}
 
-\addbibresource{biblio.bib}
+% Specify date of publication.
+\date{July 27, 2022}
+%\date{\today}
 
+% Define report number.
+% Note: Defining the report number causes the 'draft' notices to be removed.
+% Remove comment "%" below if that is desired.
+ \reportnum{ORNL/SPR-2022/2530}
 
+% Add a restriction notice to the cover page. Remove comment "%" below if that
+% is desired.
+%\restrict{Official use only}
+%\restrict{Business Sensitive}
+% \restrict{Not for public release.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABBREVIATIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Note that Abbreviations that aren't used in the document won't be printed in the
+%  list.
+\makeglossaries
+\newacronym{doe}{DOE}{Department of Energy}
+\newacronym{nrc}{NRC}{Nuclear Regulatory Commission}
+\newacronym{tm}{TM}{technical memo}
+\newacronym{ornl}{ORNL}{Oak Ridge National Laboratory}
+\newacronym{3d}{3D}{three-dimensional}
+\newacronym{lwr}{LWR}{light-water reactor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FRONT MATTER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+\frontmatter
 
-% CASL front matter uses roman numerals
-\pagenumbering{roman}
+%Add the revision log and page descriptions
+\revisionlog{
+0 & 6/25/2022 & All & Implements new template and editorial updates for VERA 4.3 release.
+This version supersedes previous document version CASL-U-2019-1891-002. \\
+}{None}{None}{None}{All}
 
-\input{title}
+%Here's how to add a signature page (class provides 2, 3, 4, or 5 signatures)
+\signaturepagetwo{Erik Walker, VERAIO Product Software Manager}{Aaron Graham, Independent Reviewer}
 
-\pagestyle{fancy}
-\input{signature}
+\addcontentsline{toc}{section}{{EXECUTIVE SUMMARY}}
+\section*{{EXECUTIVE SUMMARY}}
 
+This document describes the software test plan for VERAIn and provides appendices for the software requirements and software test report. In this document, the test platform hardware and software are described. Appendix A provides a list of the tests run and their acceptability as a test report, and Appendix B provides the list of low-level software requirements as a requirements traceability matrix.
 
-% The CASL title page is 2 pages long and will be attached to the front
-% of this document
-%\setcounter{page}{3}
-
-% CASL front-matter headers are centered
-%\sectionfont{\centering}
-
-%\listoftodos
-
-\addcontentsline{toc}{section}{Executive Summary}
-\chapter*{Executive Summary}
-
-This document describes the software test plan for VERAIn and provides appendices for the software requirements and software test report.
-In this document, the test platform hardware and software are described.
-Section \ref{sec:A1} provides a list of the tests run and their acceptability as a test report.
-Section \ref{sec:A2} provides the list of low-level software requirements as a requirements traceability matrix.
-
-%\newpage
-%\begin{center}
-%(This page intentionally left blank)
-%\end{center}
-%{\pagestyle{empty}\cleardoublepage }
-
-%\renewcommand{\contentsname}{CONTENTS}
-%\addcontentsline{toc}{chapter}{CONTENTS}
 \tableofcontents
-
-%\begin{center}
-%(This page intentionally left blank)
-%\end{center}
-%{\pagestyle{empty}\cleardoublepage }
-
-%\renewcommand{\listfigurename}{FIGURES}
-%\addcontentsline{toc}{section}{FIGURES} 
+% LIST OF FIGURES: optional if fewer than 5 are used
 %\listoffigures
+% \marginpar{The list of figures tables may be omitted if fewer than 5 are used.}
+% LIST OF TABLES: optional if fewer than 5 are used
+%\listoftables
+% \marginpar{The list of tables may be omitted if fewer than 5 are used.}
+% LIST OF ABBREVIATIONS
+% NOTE: this will only print if `makeindex X.ist -o X.acr X.acn` is executed.
+% This is part of the included Makefile.
+%\printacronyms[title=Abbreviations]
+\setcounter{table}{0}
 
-%\renewcommand{\listtablename}{TABLES}
-%\addcontentsline{toc}{section}{TABLES} 
-\listoftables
-
-%\newpage
-
-%\addcontentsline{toc}{section}{Acronyms} 
-%\chapter*{Acronyms}
-
-\begin{acronym}
-  \acro{1D}[1D]{one-dimensional}
-  \acro{2D}[2D]{two-dimensional}
-  \acro{3D}[3D]{three-dimensional}
-  \acro{ama}[AMA]{Advanced Modeling Applications}
-  \acro{api}[API]{application interface}
-  \acro{bfbt}[BFBT]{BWR fine-mesh bundle tests}
-  \acro{bwr}[BWR]{boiling water reactor}
-  \acro{cad}[CAD]{computer-aided drafting}
-  \acro{casl}[CASL]{Consortium for Advanced Simulation of Light Water
-  Reactors}
-  \acro{ce}[CE]{Combustion Engineering}
-  \acro{cea}[CEA]{Commissariat \`a l'\'energie atomique}
-  \acro{cilc}[CILC]{crud-induced localized corrosion}
-  \acro{fy}[FY]{fiscal year}
-  \acro{cfd}[CFD]{computational fluid dynamics}
-  \acro{chf}[CHF]{critical heat flux}
-  \acro{cips}[CIPS]{crud-induced power shift}
-  \acro{dnb}[DNB]{departure from nucleate boiling}
-  \acro{edf}[EDF]{\'Electricit\'e de France}
-  \acro{efpd}[EFPD]{effective full power days}
-  \acro{eohl}[EOHL]{end of heated length}
-  \acro{epri}[EPRI]{Electric Power Research Institute}
-  \acro{farea}[FA]{focus area}
-  \acro{fmc}[FMC]{Fuels, Materials, and Chemistry \ac{farea}}
-  \acro{gsce}[GSCE]{grid-spacer cooling enhancement}
-  \acro{hdf5}[HDF5]{Hierarchical Data Format 5}
-  \acro{hn}[HN]{Hancox--Nicoll}
-  \acro{htc}[HTC]{heat transfer coefficient}
-  \acro{ifba}[IFBA]{integral fuel burnable absorber}
-  \acro{ldv}[LDV]{laser doppler velocimetry}
-  \acro{lwr}[LWR]{light water reactor}
-  \acro{mit}[MIT]{Massachusetts Institute of Technology}
-  \acro{mvg}[MVG]{mixing vane grid}
-  \acro{nda}[NDA]{nondisclosure agreement}
-  \acro{nestor}[NESTOR]{New Experimental Studies on Rod Bundles}
-  \acro{nist}[NIST]{National Institute of Standards and Technology}
-  \acro{nrc}[NRC]{US Nuclear Regulatory Commission}
-  \acro{onb}[ONB]{onset of nucleate boiling}
-  \acro{ornl}[ORNL]{Oak Ridge National Laboratory}
-  \acro{psbt}[PSBT]{PWR subchannel and bundle tests}
-  \acro{pwr}[PWR]{pressurized water reactor}
-  \acro{phi}[PHI]{physics-integration focus area}
-  \acro{rms}[RMS]{root-mean-square}
-  \acro{rmse}[RMSE]{root-mean-square error}
-  \acro{rothcon}[ROTHCON]{rod thermal hydraulic reconstruction}
-  \acro{rRMSE}[rRMSE]{relative root-mean-square error}
-  \acro{ssg}[SSG]{simple support grid}
-  \acro{th}[T/H]{thermal-hydraulics}
-  \acro{thm}[THM]{thermal-hydraulics methods focus area}
-  \acro{tke}[TKE]{turbulent kinetic energy}
-  \acro{TRACE}[TRACE]{TRAC/RELAP Advanced Computational Engine}
-  \acro{verain}[VERAIn]{VERA-CS common input file}
-  \acro{vv}[V\&V]{verification and validation}
-  \acro{wec}[WEC]{Westinghouse Electric Company}
-  \acro{yhl}[YHL]{Yao--Hochreiter--Leech}
-\end{acronym}
-
-%\textbf{Acknowledgements:}  This work is supported by the
-%Consortium for Advanced Simulation of Light Water Reactors
-%(www.casl.gov), an Energy Innovation Hub for Modeling and Simulation of
-%Nuclear Reactors under US Department of Energy Contract No.
-%DE-AC05-00OR22725.
-	
-\newpage
-
-\acresetall
-
-\newpage
-
-%\begin{center}
-%(This page intentionally left blank)
-%\end{center}
-%{\pagestyle{empty}\cleardoublepage }
-
-\pagenumbering{arabic}
-
-% Return section headers to left-justified
-\sectionfont{}
-
-%\todo{remove fig, table, etc. pages}
-%\todo{possibly combine nomenclature page with nomenclature table}
-
-\chapter{Testing Procedure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+\section{Testing Procedure}
 \label{sec:test_procedure}
 
-\section{Computer Program Tested}
-\subsection{Program: VERAIn}
+\subsection{Computer Program Tested}
+\subsubsection{Program: VERAIn}
 Built under VERA Environment with following packages and versions:
 \lstinputlisting[caption={Software Versions Evaluated},label={lst:repos}]{VERARepoVersions.txt}
 
 VERAIn has no dependencies on any other code package contained within VERA.
 
-\subsection{System Software}
-The operating system on which these tests were performed was Linux 3.10.0-1127.18.2.el7.x86\_64 .
-\subsection{Test Calibration}
+\subsubsection{System Software}
+These tests were performed on the Centos 7.9.2009 Linux 3.10.0-1160.66.1.el7.x86\_64 operating system.
+\subsubsection{Test Calibration}
 None.
-\subsection{Computer Hardware Used for Testing}
-rnsdinf01.ornl.gov
-\section{Test Equipment Calibration}
+\subsubsection{Computer Hardware Used for Testing}
+casl-vera01.ornl.gov
+\subsection{Test Equipment Calibration}
 None.
-\section{Date of Test}
-Started: Aug. 23, 2020 - 05:40:32 UTC\\
-Total Test Time: 1 minute, 56 seconds
-\section{Data Recorder}
-ctest-3.14.3 and CDash Version trilinos-release-2018-08-prebuilt
-\section{Simulation Models Used}
-Since VERAIn is only an input parser, it contains no simulation models.
-\section{Test Problems}
+\subsection{Date of Test}
+Started: July 21, 2022 - 15:18:34 UTC\\
+Total Test Time: 2 minutes, 30 seconds
+\subsection{Data Recorder}
+ctest-3.17.3 and CDash Version 2.5.0
+\subsection{Simulation Models Used}
+Because VERAIn is only an input parser, it contains no simulation models.
+\subsection{Test Problems}
 A list of test problems and their requirements may be found in Appendix \ref{sec:A2} of this document.
-\section{Results and Applicability}
-\subsection*{Results}
+\subsection{Results and Applicability}
+\subsubsection*{Results}
 Results are given in Appendix \ref{sec:A1}.
-\subsection*{Applicability}
+\subsubsection*{Applicability}
 The test results from Appendix \ref{sec:A1} satisfy the defined software requirements. 
-\section{Action Taken in Connection with Noted Deviations}
+\subsection{Action Taken in Connection with Noted Deviations}
 There were no noted deviations. Therefore, no actions were taken.
-\subsection{Person Evaluating Results}
+\subsubsection{Person Evaluating Results}
 Erik Walker
-\section{Acceptability}
+\subsection{Acceptability}
 The acceptance criterion is that all tests pass their individual criteria. As evidenced in column 4 of the table in Appendix \ref{sec:A1}, all tests passed their criteria.
-The primary type of tests performed in the VERAIn test matrix are regression tests that compare a test output file to a version-controlled reference file that is deemed to be correct.
+The primary type of test performed, as shown in the VERAIn test matrix, was a regression test to compare a test output file to a version-controlled reference file deemed to be correct.
 
 Regression test reference files are XML.gold files that have been generated and reviewed for correctness.
-Once the VERAIn parser is run on an input, the resulting XML file is compared to the corresponding XML.gold file using a straight diff. If the files are identical, the test passes. If any differences exist in the files, the test fails. 
+Once the VERAIn parser is run on an input, the resulting XML file is compared to the corresponding XML.gold file using a straight diff. If the files are identical, then the test passes. If any differences exist in the files, then the test fails. 
 
 A few tests are designed to intentionally fail to capture common input mistakes and to ensure that the parser fails hard when these mistakes are encountered.  
 
-The test results were reviewed by the Product Support Manager and the Independent Technical Reviewer, who have determined that the computer program is acceptable for integration with the VERA Product Suite.
-The test results have demonstrated that the computer program(s) adequately and correctly performed.
-The testing covered the specified software requirements, proper handling of abnormal conditions or events, and interfaces with other components. 
-The testing verified that the computer program did not introduce unintended consequences which degraded the overall software function. 
+The test results were reviewed by the product support manager and the independent technical reviewer, who determined that the computer program is acceptable for integration with the VERA product suite.
+The test results demonstrated that the computer program(s) performed adequately and correctly.
+Testing covered the specified software requirements, the proper handling of abnormal conditions or events, and the interfaces with other components. 
+Testing verified that the computer program did not introduce unintended consequences which degraded the overall software function. 
 No discrepancies between expected and observed software functioning were identified.
 
-\chapter{Applicable Standards and Procedures}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Applicable Standards and Procedures}
+
 \begin{itemize}
     \item NQA-1-2008 with NQA-1a-2009 Addenda \cite{NQA12008}
     \item VERA-QA-004, VERA Software Configuration and Control
     \item VERA-QA-006, VERA Software Requirements, Design, and Testing
 \end{itemize}
-\chapter{Required Records}
-\section{CDash Test Results}
-See Section \ref{sec:A1}.
-\section{Requirements Traceability Matrix}
-See Section \ref{sec:A2}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Required Records}
+
+\subsection{CDash Test Results}
+See Appendix \ref{sec:A1}.
+\subsection{Requirements Traceability Matrix}
+See Appendix \ref{sec:A2}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Acknowledgments}
+
+This research was supported by the US Department of Energy and the Nuclear Energy Advanced Modeling and Simulation Program.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFERENCES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Bibliography support via biblatex
 \clearpage
-%\titleformat{\section}{\bf\large}{\appendixname~\thetitle}{1ex}[]
-\begin{appendices}
-    \chapter{VERAIn Test Report}
-    \label{sec:A1}
-    The following table was obtained from a CDash report.
-    CDash is a web application included with CMake and CTest.
-    CMake is the VERA build system, and CTest is a program that automatically runs the tests defined with CMake and sends results to CDash.
-    All tests are included in the Git repositories as noted in List \ref{lst:repos}.
-    Section \ref{sec:A2} provides a list of the test names, along with the test input files and requirements.
-    \input{Appendix1.tex}
-    \clearpage
+\phantomsection
+\addcontentsline{toc}{section}{REFERENCES}
+\bibliography{references}
+\bibliographystyle{unsrt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APPENDICES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+\section{CDASH Test Results}
+\label{sec:A1}
+
+The following table was obtained from a CDash report.
+CDash is a web application included with CMake and CTest.
+CMake is the VERA build system, and CTest is a program that automatically runs the tests defined with CMake and sends results to CDash.
+All tests are included in the Git repositories as noted in List \ref{lst:repos}.
+Appendix \ref{sec:A2} provides a list of the test names, along with the test input files and requirements.
+\input{Appendix1.tex}
+\clearpage
     
-    \chapter{Requirements and Test Traceability Matrix}
-    \label{sec:A2}
-    For the entries in the \textit{Additional Info} field, the \#NNNN is the CASL PHI Kanban ticket number with a hyperlink to this webpage.
-    \input{VERAIn_requirements.tex}
-\end{appendices}
+\section{Requirements and Test Traceability Matrix}
+\label{sec:A2}
 
+For entries in the \textit{Additional Info} field, the \#NNNN is the VERA ticket number hyperlinked to the appropriate webpage.
+\input{VERAIn_requirements.tex}
 
-
-%\section*{ACKNOWLEDGMENTS}
-
-
-\printnomenclature
-
-\printbibliography
-\addcontentsline{toc}{chapter}{Bibliography}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
+
+
+
+
+
