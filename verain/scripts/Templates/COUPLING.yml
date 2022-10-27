@@ -199,7 +199,7 @@ COUPLING:
 
     bypass_heating:
       _pltype: parameter
-      _type: double
+      _type: string
       _do:
         - copy COUPLING/$bypass_heating
       _content:

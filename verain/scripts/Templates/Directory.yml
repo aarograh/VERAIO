@@ -5475,8 +5475,8 @@ DETECTOR:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={u235, v, rh, gamma, gamma\_approx},
+#>     valuedefault={u235},
+#>     valuesapplicable={v, rh, gamma, gamma\_approx},
 #>     limitations={},
 #>     description={This is a flag used to specify the type of detector to be modeled. \texttt{u235}
 #>        is the $^{235}$U fission reaction rate, \texttt{v} is the absorption reaction rate in
@@ -11115,20 +11115,18 @@ COUPLING:
 #>     unitsdefault={Percent},
 #>     unitsother={},
 #>     valuedefault={0.0},
-#>     valuesapplicable={$\ge 0.0$, $\le 1.0$},
+#>     valuesapplicable={$\ge 0.0$, $\le 1.0$, explicit},
 #>     limitations={},
 #>     description={This controls the treatment of the bypass heating in BWR models.  The default value
 #>        is 0.0.  The \texttt{bypass\_heating} fraction determines how much of the reactor power is
 #>        deposited directly into the bypass region, having no impact on fuel conduction or active
-#>        coolant inside the bundles},
+#>        coolant inside the bundles.  If \texttt{explicit} is input, then the neutron flux is used to
+#>        calculate the actual heating; a channel box conduction model is also applied in this case.},
 #>     notes={}
 #>   }
   bypass_heating:
     <<: *dtword
     _content:
-    _check:
-      - is_geq() 0
-      - is_leq() 1
 #>
 #> \subsection{Block TIAMAT}
 #> \label{sec:tiamatcards}
