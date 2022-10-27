@@ -380,4 +380,8 @@
   moc_min_flux          1E-20
   split_TL_tol          0.0
   cmfd_relax_negative   true
+  crit_buckling none
+  crit_buckling fmode
+  crit_buckling B1
+  crit_buckling P1
   sth_trfluid           true

@@ -12251,6 +12251,39 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 #>
+#>   {\bf crit\_buckling} crit\_buckling
+#>   \VERAInputTable{
+#>     name={crit\_buckling},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={none},
+#>     valuesapplicable={fmode, B1, P1},
+#>     limitations={The input must be a single square lattice.},
+#>     description={This card calls for the use of a critical buckling calculation. The
+#>        solver can be choosen for use on the fundamental mode, P1, or B1
+#>        equations. The MoC scalar flux is corrected with the critical
+#>        spectrum. Generated homogenized cross sections are representative of
+#>        a critical configuration.  These inputs are:
+#>       \begin{enumerate}
+#>         \item \texttt{fmode} --- Corrects the scalar flux with a critical spectrum
+#>           obtained from the solution of the fundamental mode equation.
+#>         \item \texttt{B1} --- Corrects the scalar flux with a critical spectrum
+#>           obtained from the solution of the B1 equations.
+#>         \item \texttt{P1} --- Corrects the scalar flux with a critical spectrum
+#>           obtained from the solution of the P1 equations.
+#>         \item \texttt{none} --- No critical buckling calculation.
+#>       \end{enumerate}},
+#>     notes={}
+#>   }
+  crit_buckling:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() none fmode B1 P1
+#>
 #>   {\bf native\_excore\_detector} native\_excore\_detector
 #>   \VERAInputTable{
 #>     name={native\_excore\_detector},

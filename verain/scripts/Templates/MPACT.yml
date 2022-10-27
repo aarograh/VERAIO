@@ -263,6 +263,13 @@ MPACT:
         - copy MPACT/$nodal_edits_collapse_axial_reflectors
       _content:
 
+    crit_buckling:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy MPACT/$crit_buckling
+      _content:
+
     rod_treatment:
       _pltype: parameter
       _type: string
