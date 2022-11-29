@@ -11089,13 +11089,13 @@ COUPLING:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={saturated},
-#>     valuesapplicable={inlet, outlet, heating},
+#>     valuesapplicable={inlet, outlet, fixed\_heating, explicit\_heating},
 #>     limitations={},
 #>     description={This controls the treatment of the bypass flow in BWR models.  The default value
 #>        is saturation conditions at the input pressure, but inlet and outlet conditions can also
-#>        be used.  A simplified bypass heating model can also be used by specifying the \texttt{heating}
-#>        option.  For that option, the \texttt{bypass\_heating} and \texttt{bypass} inputs should also
-#>        be set to non-zero values.\newline
+#>        be used.  A simplified bypass heating model can also be used by specifying the \texttt{fixed\_heating}
+#>        or \texttt{explicit\_heating} options.  For these options, the \texttt{bypass\_heating} and 
+#>        \texttt{bypass} inputs should also be set to non-zero values.\newline
 #>        \newline
 #>        This input is ignored for non-BWR models or if feedback is off},
 #>     notes={}
@@ -11105,7 +11105,7 @@ COUPLING:
     _content:
     _check:
       - is_word()
-      - in_dictionary() saturated inlet outlet heating
+      - in_dictionary() saturated inlet outlet fixed_heating explicit_heating
 #>
 #>   {\bf bypass\_heating} bypass\_heating
 #>   \VERAInputTable{
@@ -11125,7 +11125,7 @@ COUPLING:
 #>     notes={}
 #>   }
   bypass_heating:
-    <<: *dtword
+    <<: *dtfloat
     _content:
 #>
 #> \subsection{Block TIAMAT}
