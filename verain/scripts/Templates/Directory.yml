@@ -14576,6 +14576,90 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 #>
+#>   {\bf sth\_C0\_mult} sth\_C0\_mult
+#>   \VERAInputTable{
+#>     name={sth{\_}C0{\_}mult},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={This is only used for BWR STH runs},
+#>     description={This card is used to set a multiplier on the void distribution
+#>                  parameter in the internal BWR fluid solver.},
+#>     notes={}
+#>   }
+  sth_C0_mult:
+    <<: *dtfloat
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf sth\_Vgj\_mult} sth\_Vgj\_mult
+#>   \VERAInputTable{
+#>     name={sth{\_}Vgj{\_}mult},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={This is only used for BWR STH runs},
+#>     description={This card is used to set a multiplier on the void drift
+#>                  velocity in the internal BWR fluid solver.},
+#>     notes={}
+#>   }
+  sth_Vgj_mult:
+    <<: *dtfloat
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf sth\_hd\_mult} sth\_hd\_mult
+#>   \VERAInputTable{
+#>     name={sth{\_}hd{\_}mult},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={This is only used for BWR STH runs},
+#>     description={This card is used to set a multiplier on the detachment
+#>                  enthalpy in the internal BWR fluid solver.},
+#>     notes={}
+#>   }
+  sth_hd_mult:
+    <<: *dtfloat
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf sth\_f2p\_mult} sth\_f2p\_mult
+#>   \VERAInputTable{
+#>     name={sth{\_}f2p{\_}mult},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={1.0},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={This is only used for BWR STH runs},
+#>     description={This card is used to set a multiplier on the two phase friction
+#>                  factor in the internal BWR fluid solver.},
+#>     notes={}
+#>   }
+  sth_f2p_mult:
+    <<: *dtfloat
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
 #>   {\bf temptable\_shape} temptable\_shape
 #>   \VERAInputTable{
 #>     name={temptable\_shape},
