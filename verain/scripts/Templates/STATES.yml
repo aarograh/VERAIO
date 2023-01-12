@@ -628,3 +628,9 @@ STATES:
             - copy %STATE/$(_loop)/@temp_pert:1
           _content:
 
+        neutron_transport:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %STATE/$(_loop)/$neutron_transport
+          _content:
