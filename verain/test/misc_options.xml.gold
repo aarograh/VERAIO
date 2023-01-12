@@ -16,6 +16,7 @@
       <Parameter name="kmul_beta" type="double" value="0.95"/>
       <Parameter name="kmul_crw" type="double" value="3.00"/>
       <Parameter name="modden" type="double" value="0.743"/>
+      <Parameter name="neutron_transport" type="string" value="on"/>
       <Parameter name="power" type="double" value="100.0"/>
       <Parameter name="ppitch_tec" type="double" value="1.5"/>
       <Parameter name="pressure" type="double" value="15.5132039025"/>

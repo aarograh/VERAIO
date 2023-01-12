@@ -999,6 +999,26 @@ STATE:
       - is_word()
       - in_dictionary() on off
 #>
+#>   {\bf neutron\_transport} neutron\_transport\_option
+#>   \VERAInputTable{
+#>     name={neutron\_transport\_option},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={on},
+#>     valuesapplicable={off},
+#>     limitations={},
+#>     description={Flag to turn on and off neutron transport},
+#>     notes={If not specified, value carries forward from previous state or restart file.}
+#>   }
+  neutron_transport:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off
+#>
 #>   {\bf transient} transient\_option
 #>   \VERAInputTable{
 #>     name={transient\_option},
