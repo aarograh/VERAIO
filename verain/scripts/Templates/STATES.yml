@@ -222,6 +222,13 @@ STATES:
             - copy %STATE/$(_loop)/$feedback
           _content:
 
+        decay_heat:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy %STATE/$(_loop)/$decay_heat
+          _content:
+
         transient:
           _pltype: parameter
           _type: string

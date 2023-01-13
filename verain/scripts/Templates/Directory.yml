@@ -999,6 +999,31 @@ STATE:
       - is_word()
       - in_dictionary() on off
 #>
+#>   {\bf decay\_heat} decay\_heat\_option
+#>   \VERAInputTable{
+#>     name={decay\_heat\_option},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={off},
+#>     valuesapplicable={on},
+#>     limitations={Does nothing if \texttt{feedback} is off.},
+#>     description={Flag to turn on and off coupling of decay heat
+#>        calculation with T/H feedback and transient},
+#>     notes={Should only be used in the first \texttt{STATE} block.
+#>        \newline
+#>        It is strongly recommended to use the full depletion chain
+#>        if this option is enabled.  To do so, set \texttt{dep\_filename}
+#>        in the \texttt{MPACT} block to \texttt{origen\_data\_paths\_scale62.txt}}
+#>   }
+  decay_heat:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off
+#>
 #>   {\bf neutron\_transport} neutron\_transport\_option
 #>   \VERAInputTable{
 #>     name={neutron\_transport\_option},
@@ -11114,7 +11139,7 @@ COUPLING:
 #>     description={This controls the treatment of the bypass flow in BWR models.  The default value
 #>        is saturation conditions at the input pressure, but inlet and outlet conditions can also
 #>        be used.  A simplified bypass heating model can also be used by specifying the \texttt{fixed\_heating}
-#>        or \texttt{explicit\_heating} options.  For these options, the \texttt{bypass\_heating} and 
+#>        or \texttt{explicit\_heating} options.  For these options, the \texttt{bypass\_heating} and
 #>        \texttt{bypass} inputs should also be set to non-zero values.\newline
 #>        \newline
 #>        This input is ignored for non-BWR models or if feedback is off},
