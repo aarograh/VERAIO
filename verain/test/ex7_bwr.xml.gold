@@ -127,11 +127,11 @@
         <Parameter name="thexp" type="double" value="16.79"/>
       </ParameterList>
       <ParameterList name="Material_tungsten">
-        <Parameter name="density" type="double" value="19.3"/>
+        <Parameter name="density" type="double" value="19.27733"/>
         <Parameter name="key_name" type="string" value="tungsten"/>
-        <Parameter name="mat_fracs" type="Array(double)" value="{0.00120000,0.26500000,0.14310000,0.30640000,0.28430000}"/>
-        <Parameter name="mat_names" type="Array(string)" value="{o-16,w-182,w-183,w-184,w-186}"/>
-        <Parameter name="thexp" type="double" value="16.79"/>
+        <Parameter name="mat_fracs" type="Array(double)" value="{0.262578914,0.142573489,0.306942448,0.287905149}"/>
+        <Parameter name="mat_names" type="Array(string)" value="{w-182,w-183,w-184,w-186}"/>
+        <Parameter name="thexp" type="double" value="4.5"/>
       </ParameterList>
       <ParameterList name="Material_waba">
         <Parameter name="density" type="double" value="3.65"/>
