@@ -11172,6 +11172,9 @@ COUPLING:
   bypass_heating:
     <<: *dtfloat
     _content:
+    _check:
+      - is_geq() 0.0
+      - is_leq() 1.0
 #>
 #> \subsection{Block TIAMAT}
 #> \label{sec:tiamatcards}
