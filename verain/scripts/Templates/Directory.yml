@@ -711,7 +711,7 @@ STATE:
 #>     valuedefault={1.0},
 #>     valuesapplicable={$\ge 0$},
 #>     limitations={},
-#>     description={Target eigenvalue used in boron search or rod search},
+#>     description={Target eigenvalue used in boron, rod, power, flow, and tinlet search},
 #>     notes={}
 #>   }
   kcrit:
@@ -729,7 +729,7 @@ STATE:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={keff},
-#>     valuesapplicable={boron, rod},
+#>     valuesapplicable={boron, rod, power, flow, tinlet},
 #>     limitations={},
 #>     description={Search option},
 #>     notes={}
@@ -739,7 +739,7 @@ STATE:
     _content:
     _check:
       - is_word()
-      - in_dictionary() keff boron rod
+      - in_dictionary() keff boron rod power flow tinlet
 #>
 #>   {\bf search\_bank} rod\_search\_bank
 #>   \VERAInputTable{
