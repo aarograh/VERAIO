@@ -123,6 +123,13 @@ MPACT:
         - copy MPACT/$shield_moc_kernel
       _content:
 
+    group_structure:
+      _pltype: array
+      _type: double
+      _do:
+        - copy MPACT/$group_structure
+      _content:
+
     volume_corr:
       _pltype: parameter
       _type: string

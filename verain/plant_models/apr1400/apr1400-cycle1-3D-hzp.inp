@@ -528,8 +528,10 @@
     388.0
 
 [COBRATF]
-  dhfrac  0.026
   guide_tube_coefficient 0.0
+
+[COUPLING]
+  dhfrac  0.026
 
 [MPACT]
   mesh cell_G 10 1 1 / 10*8 8 8 8

@@ -462,6 +462,7 @@
     </ParameterList>
     <Parameter name="gamma_moc_kernel" type="string" value="1g"/>
     <Parameter name="gamma_ray_spacing" type="double" value="0.08"/>
+    <Parameter name="group_structure" type="Array(double)" value="{10,8,6,2,1e-1}"/>
     <ParameterList name="iteration_control">
       <Parameter name="gamma_flux_tolerance" type="double" value="1e-3"/>
       <Parameter name="gamma_num_inners" type="int" value="1"/>

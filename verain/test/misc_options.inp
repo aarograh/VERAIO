@@ -375,6 +375,9 @@
   gamma_nodal_group_loop  10
   gamma_nodal_leakage_order 0
   gad_dep_method qgd2
+  group_structure 10 8
+                  6  2
+                  1e-1
   nodal_group_start     1
   nodal_inner_tol       1E-5
   nodal_group_tol       5E-5

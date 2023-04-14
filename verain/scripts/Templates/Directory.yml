@@ -11575,6 +11575,35 @@ MPACT:
       - is_string()
       - in_dictionary() 1g mg 1G MG
 #>
+#>   {\bf group\_structure} group\_structure
+#>   \VERAInputTable{
+#>     name={group\_structure},
+#>     type={Array of Floating-Point Real Numbers, Length = User Specified},
+#>     need={Optional},
+#>     unitsdefault={eV},
+#>     unitsother={},
+#>     valuedefault={same structure as provided by XS library named in \texttt{xs\_filename}},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Gives the list of energy group boundaries to use for the multigroup transport,
+#>        calculations.  If the input is not provided, the XS library structure is used.  The
+#>        list of energies must be provided in descending order.  Each energy will be treated
+#>        as the upper bounday of a group.  The final group has a lower boundary of 0 eV, which
+#>        should not be input by the user.  All user-specified energy group boundaries must
+#>        be equal to one of the energy boundaries in the XS library (splitting XS library groups
+#>        is disallowed), and the first user-specified energy boundary must always be equal to the
+#>        first group boundary in the XS library.},
+#>     notes={}
+#>   }
+  group_structure:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_float(shift)},())
+      - fall(sub{is_gt(shift,0)},())
+      - is_strictlydecreasing(stride(1,1,()))
+#>
 #>   {\bf moc\_mg\_data\_passing} moc\_mg\_data\_passing
 #>   \VERAInputTable{
 #>     name={moc\_mg\_data\_passing},
@@ -17679,7 +17708,7 @@ TRANSIENT:
     _content:
     _check:
       - is_float()
-      - is_gt() 0
+      - is_geq() 0
 #>
 #>   {\bf trip\_absolute} trip\_variable high low delay number\_detectors
 #>   \VERAInputTable{
