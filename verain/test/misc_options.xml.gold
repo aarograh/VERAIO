@@ -115,7 +115,9 @@
     <Parameter name="apitch" type="double" value="3.78"/>
     <Parameter name="assm_map" type="Array(string)" value="{A1,A1,A1,A1,A1}"/>
     <Parameter name="bc_rad" type="string" value="reflecting"/>
+    <Parameter name="boron_search_range" type="Array(double)" value="{0.1,3000.}"/>
     <Parameter name="core_size" type="int" value="3"/>
+    <Parameter name="flow_search_range" type="Array(double)" value="{20.0,150.}"/>
     <Parameter name="height" type="double" value="406.328"/>
     <Parameter name="lower_mat" type="string" value="ss"/>
     <Parameter name="lower_refl_mats" type="Array(string)" value="{mod}"/>
@@ -123,10 +125,13 @@
     <Parameter name="lower_refl_vfracs" type="Array(double)" value="{1.0}"/>
     <Parameter name="lower_thick" type="double" value="5.0"/>
     <Parameter name="lower_vfrac" type="double" value="0.5"/>
+    <Parameter name="power_search_range" type="Array(double)" value="{1e-8,150.}"/>
     <Parameter name="rated_flow" type="double" value="13.38726625"/>
     <Parameter name="rated_power" type="double" value="2.67725"/>
     <Parameter name="rotate_map" type="Array(int)" value="{2,3,0,1,0}"/>
     <Parameter name="shape" type="Array(int)" value="{0,1,0,1,1,1,0,1,0}"/>
+    <Parameter name="tinlet_search_range" type="Array(double)" value="{500.,600.}"/>
+    <Parameter name="tinlet_search_range_unit" type="string" value="F"/>
     <Parameter name="upper_mat" type="string" value="ss"/>
     <Parameter name="upper_refl_mats" type="Array(string)" value="{mod}"/>
     <Parameter name="upper_refl_thicks" type="Array(double)" value="{25.0}"/>
@@ -468,6 +473,7 @@
       <Parameter name="gamma_num_inners" type="int" value="1"/>
       <Parameter name="gamma_scattering" type="string" value="P0"/>
       <Parameter name="gamma_up_scatter" type="int" value="1"/>
+      <Parameter name="search_tolerance" type="double" value="0.1"/>
     </ParameterList>
     <Parameter name="log_message" type="string" value="debug"/>
     <ParameterList name="mesh">

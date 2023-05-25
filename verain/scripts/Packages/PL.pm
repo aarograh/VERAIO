@@ -873,6 +873,11 @@ sub copyarray{
 	@result=@a;
     }
 
+    if(exists($OPTIONS{length})){
+	@a=splice(@result,0,$OPTIONS{length});
+	@result=@a;
+    }
+
     if(exists($OPTIONS{stride})){
 	@a=stride(0,$OPTIONS{stride},@result);
 	@result=@a;
