@@ -3075,6 +3075,164 @@ CORE:
       - is_float()
       - is_geq() 0
 #>
+#>   {\bf boron\_search\_range} min\_boron max\_boron
+#>   \VERAInputTable{
+#>     name={min\_boron},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={ppm},
+#>     unitsother={},
+#>     valuedefault={0.1},
+#>     valuesapplicable={$> 0$},
+#>     limitations={},
+#>     description={Minimum boron concentration for search.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={max\_boron},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={ppm},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$> 0$},
+#>     limitations={Must be larger than minium value},
+#>     description={Maximum boron concentration for search},
+#>     notes={}
+#>   }
+  boron_search_range:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - nth(0,())>=0
+      - nth(1,())>=0
+      - nth(0,())<=nth(1,())
+#>
+#>   {\bf power\_search\_range} min\_power max\_power
+#>   \VERAInputTable{
+#>     name={min\_power},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Percent},
+#>     unitsother={},
+#>     valuedefault={0.1},
+#>     valuesapplicable={$> 0$},
+#>     limitations={},
+#>     description={Minimum percent power allowed in search.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={max\_power},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Percent},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$> 0$},
+#>     limitations={Must be larger than minium value},
+#>     description={Maximum percent power allowed in search},
+#>     notes={}
+#>   }
+  power_search_range:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - nth(0,())>=0
+      - nth(1,())>=0
+      - nth(0,())<=nth(1,())
+#>
+#>   {\bf flow\_search\_range} min\_flow max\_flow
+#>   \VERAInputTable{
+#>     name={min\_flow},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Percent},
+#>     unitsother={},
+#>     valuedefault={0.1},
+#>     valuesapplicable={$> 0$},
+#>     limitations={},
+#>     description={Minimum percent flow allowed in search.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={max\_flow},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={Percent},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$> 0$},
+#>     limitations={Must be larger than minium value},
+#>     description={Maximum percent flow allowed in search},
+#>     notes={}
+#>   }
+  flow_search_range:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==2
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - nth(0,())>=0
+      - nth(1,())>=0
+      - nth(0,())<=nth(1,())
+#>
+#>   {\bf tinlet\_search\_range} min\_tinlet max\_tinlet temperature\_units
+#>   \VERAInputTable{
+#>     name={min\_tinlet},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={$> 0$},
+#>     limitations={},
+#>     description={Minimum inlet temperature used in search.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={max\_tinlet},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$> 0$},
+#>     limitations={Must be larger than minium value},
+#>     description={Maximum inlet temperature used in search},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={temperature\_units},
+#>     type={String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={F, C, K},
+#>     limitations={},
+#>     description={Inlet temperature units used for setting range.},
+#>     notes={}
+#>   }
+  tinlet_search_range:
+    <<: *dtlist
+    _content:
+    _check:
+      - arraysize()==3
+      - is_float(nth(0,()))
+      - is_float(nth(1,()))
+      - nth(0,())>=0
+      - nth(1,())>=0
+      - nth(0,())<=nth(1,())
+      - is_word(nth(2,()))
+      - in_dictionary(nth(2,()),'F','C','K')
+#>
 #>   {\bf steam\_gen\_natcirc} sg\_height sg\_flow\_area sg\_dh sg\_length / sg\_kf sg\_epsr
 #>   \VERAInputTable{
 #>     name={sg\_height},
@@ -13561,6 +13719,27 @@ MPACT:
 #>     notes={}
 #>   }
   gamma_flux_tolerance:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+#>
+#>   {\bf search\_tolerance} search\_tol
+#>   \VERAInputTable{
+#>     name={search\_tol},
+#>     type={Floating-Point Real Number},
+#>     need={Optional},
+#>     unitsdefault={units will follow what is searched: ppm for boron, \% for power and flow, and C for Tinlet, etc.},
+#>     unitsother={},
+#>     valuedefault={1.0E-2},
+#>     valuesapplicable={$>$0.0},
+#>     limitations={},
+#>     description={This card is used to specify the global tolerance for search variables including boron
+#>        power, flow, and tinlet.  There is no convergence criteria for critical rod search.},
+#>     notes={}
+#>   }
+  search_tolerance:
     <<: *dtdouble
     _content:
     _check:

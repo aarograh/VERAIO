@@ -100,6 +100,11 @@
   apitch 3.78           ! *** scaled to 3x3, no gap
   height 406.328
 
+  boron_search_range 0.1 3000.
+  power_search_range 1e-8 150.
+  flow_search_range  20.0 150.
+  tinlet_search_range 500. 600. F
+  
   core_shape
     0 1 0
     1 1 1
@@ -336,6 +341,7 @@
   edit_th_details 1
 
 [MPACT]
+  search_tolerance 0.1
   sth_hgap   5200.0   ! internal t/h option
   exclude_depl_mats U31 U32 b4c
   include_depl_mats U32 U33 aic he

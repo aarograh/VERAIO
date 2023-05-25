@@ -461,6 +461,41 @@ CORE:
         - copy CORE/$height
       _content:
 
+    boron_search_range:
+      _pltype: array
+      _type: double
+      _do:
+        - copy CORE/@boron_search_range
+      _content:
+
+    power_search_range:
+      _pltype: array
+      _type: double
+      _do:
+        - copy CORE/@power_search_range
+      _content:
+
+    flow_search_range:
+      _pltype: array
+      _type: double
+      _do:
+        - copy CORE/@flow_search_range
+      _content:
+
+    tinlet_search_range:
+      _pltype: array
+      _type: double
+      _do:
+        - copyarray CORE/@tinlet_search_range,length=>2
+      _content:
+
+    tinlet_search_range_unit:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/@tinlet_search_range:2
+      _content:
+
     sg_height:
       _pltype: parameter
       _type: double
