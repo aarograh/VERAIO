@@ -454,10 +454,9 @@ sub help_print{
 
 Converts reactor input file (reactor_input_file) into ParameterList
 XML file (output_xml_file). ParameterList format is defined in
-Trilinos Teuchos package http://trilinos.sandia.gov/packages/teuchos/
+Trilinos Teuchos package: https://docs.trilinos.org/dev/packages/teuchos/doc/html/
 
-Program errors messages indicate errors in the input file. More
-verbose diagnostic messages are currently being added.
+Program error messages indicate errors in the input file.
 
 Program switches:
 
@@ -471,10 +470,8 @@ Program switches:
           Write XSLT processing instruction as the second line of the
           ParameterList XML file. Turns on --xml switch, as well. XSLT
           style file PL9.xsl should be in the same directory as the
-          resulting ParameterListXML file in order for transofrmation
-          to work in a browser. See additional information in
-          "User-Friendly Formatting of VERA Input" on CASL
-          Wiki. Default=on.
+          resulting ParameterListXML file in order for transformation
+          to work in a browser. Default=on.
 
 --verbose Add processing printouts as the code executes.
 
