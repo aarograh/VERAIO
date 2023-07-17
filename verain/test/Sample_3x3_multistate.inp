@@ -34,11 +34,13 @@
   apitch 21.5
   height 406.337
 
-  tinlet_table   0 565 K
-                25 570 K
-                50 575 K
-                75 572 K
-               100 571 K
+  tinlet_table
+       100
+     0 565
+    25 570
+    50 575
+    75 572
+   100 571
 
   core_shape
     1 1 1
