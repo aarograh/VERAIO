@@ -62,9 +62,11 @@
     <Parameter name="rated_flow" type="double" value="773.82808848"/>
     <Parameter name="rated_power" type="double" value="159.03"/>
     <Parameter name="shape" type="Array(int)" value="{1,1,1,1,1,1,1,1,1}"/>
-    <Parameter name="tinlet_table_power" type="Array(double)" value="{0,25,50,75,100}"/>
-    <Parameter name="tinlet_table_temp" type="Array(double)" value="{565,570,575,572,571}"/>
-    <Parameter name="tinlet_table_units" type="Array(string)" value="{K,K,K,K,K}"/>
+    <ParameterList name="tinlet_table">
+      <Parameter name="table_data" type="Array(double)" value="{565,570,575,572,571}"/>
+      <Parameter name="x_labels" type="Array(double)" value="{100}"/>
+      <Parameter name="y_labels" type="Array(double)" value="{0,25,50,75,100}"/>
+    </ParameterList>
     <Parameter name="upper_mat" type="string" value="ss"/>
     <Parameter name="upper_refl_mats" type="Array(string)" value="{mod}"/>
     <Parameter name="upper_refl_thicks" type="Array(double)" value="{20.0}"/>
