@@ -12470,6 +12470,34 @@ MPACT:
       - is_word()
       - in_dictionary() true false
 #>
+#>   {\bf nodal\_edits\_transient\_data} nodal\_edits\_transient\_data
+#>   \VERAInputTable{
+#>     name={nodal\_edits\_transient\_data},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={true},
+#>     valuesapplicable={false},
+#>     limitations={},
+#>     description={This card is used to enable or disable editing transient data in the
+#>        nodal edits. When enabled, MPACT will solve for the adjoint flux and collapse all
+#>        transient data such as velocity, delayed neutron fraction and decay rate, and delayed
+#>        fisison spectrum.
+#>        These options are described as follows:
+#>        \begin{enumerate}
+#>          \item \texttt{true}: enables MPACT editing transient data
+#>          \item \texttt{false}: disables MPACT editing transient data
+#>        \end{enumerate}},
+#>     notes={Has no effect if \texttt{nodal\_edits} is set to \texttt{false}}
+#>   }
+  nodal_edits_transient_data:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf nodal\_edits\_collapse\_axial\_reflectors} nodal\_edits\_collapse\_axial\_reflectors
 #>   \VERAInputTable{
 #>     name={nodal\_edits\_collapse\_axial\_reflectors},
