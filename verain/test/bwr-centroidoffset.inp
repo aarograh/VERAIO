@@ -146,21 +146,12 @@
 
   cell TUBE 0.17526 0.23876 / abs ss304
 
-!       ntube     span   th       rad    sheath    wing   mat
-  blade 21 TUBE 12.3825 0.79248 0.39624 0.14224  1.98501  ss304
+!            label  span   th       rad    sheath    wing
+  bladegeom  OEM 12.3825 0.79248 0.39624 0.14224  1.98501  !split from old "blade" card.  Added a blade_geom label to be referenced in blade_type
+!            label  geomlabel mat ntube celllabel fillermat hor/vert
+  bladetype rodlets OEM ss304 vert 21 21*TUBE
 
-!*** TUBE must be included in map, or it will be excluded from parameter list
-  rodmap  EMPTY
-     TUBE
-     - -
-     - - -
-     - - - -
-     - - - - -
-     - - - - - -
-     - - - - - - -
-     - - - - - - - -
-
-  axial BLADE 0.0 EMPTY 1.0
+  axial BLADE 0.0 rodlets 1.0
 
 [MPACT]
   num_space      1
