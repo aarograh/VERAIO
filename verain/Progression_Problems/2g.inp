@@ -90,6 +90,7 @@
   axial B4C  0.0 LAT_B4C 1.0
 
 [MPACT]
+num_space 1
 
 [SHIFT]
   num_cycles           1100

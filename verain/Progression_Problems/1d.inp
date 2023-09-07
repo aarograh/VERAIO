@@ -42,6 +42,7 @@
   axial ASSY1 0.0 LAT1 1.0
 
 [MPACT]
+num_space 1
 
 [SHIFT]
   num_cycles           1100

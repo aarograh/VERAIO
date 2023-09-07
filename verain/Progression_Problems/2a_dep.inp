@@ -55,6 +55,7 @@
   edit_group extended radial_power 2D_assem_exposure core_exposure
 
 [MPACT]
+num_space 1
 
 [SHIFT]    
   num_cycles           1100
