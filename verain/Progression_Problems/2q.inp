@@ -53,6 +53,7 @@
   grid_axial MID 0.5 
      
 [MPACT]
+num_space 1
 
 [SHIFT]
   num_cycles           1100

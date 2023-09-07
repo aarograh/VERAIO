@@ -49,6 +49,7 @@
   axial IFBA  0.0 LAT 1.0
 
 [MPACT]
+num_space 1
   ray_spacing    0.005
 
 [SHIFT]

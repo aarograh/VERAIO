@@ -11897,8 +11897,8 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={none},
-#>     valuesapplicable={polynomial,1dcpm},
+#>     valuedefault={polynomial},
+#>     valuesapplicable={none,1dcpm},
 #>     limitations={The pre-generated polynomials were generated using AIC, B4C,
 #>        and tungsten control rods for Watts Bar Unit 1. Materials with any other
 #>        name will be ignored, and the results may not be improved as much for
@@ -12037,7 +12037,7 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={5},
+#>     valuedefault={0},
 #>     valuesapplicable={none, 0 through 9},
 #>     limitations={This only affects the WRITING of the restart file.
 #>        \texttt{restart\_read} cases and \texttt{restart\_shuffle} cases are
@@ -12068,8 +12068,8 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={core},
-#>     valuesapplicable={none, fsr},
+#>     valuedefault={none},
+#>     valuesapplicable={core, fsr},
 #>     limitations={},
 #>     description={This card is used to specify the type of visualization
 #>        outputs (edits). The visualization outputs are created in the form of
@@ -12475,8 +12475,8 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={\texttt{homogenize}},
-#>     valuesapplicable={\texttt{equal\_mass}, \texttt{equal\_thickness}},
+#>     valuedefault={\texttt{equal\_mass}},
+#>     valuesapplicable={\texttt{homogenize}, \texttt{equal\_thickness}},
 #>     limitations={For grids with large masses that fall within axially narrow
 #>        lattices, there is a possibility that the grid will intersect one or more
 #>        pins for the \texttt{equal\_thickness} and \texttt{equal\_mass} options.
@@ -12657,7 +12657,7 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={cm},
 #>     unitsother={},
-#>     valuedefault={2.0 10.0 (when automeshing is enabled)},
+#>     valuedefault={2.0 20.0 (when automeshing is enabled)},
 #>     valuesapplicable={Positive real numbers greater than zero. The maximum value
 #>        must be at least 1.0 greater than the minimum value},
 #>     limitations={},
@@ -12976,10 +12976,9 @@ MPACT:
 #>     need={Required},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={None},
+#>     valuedefault={CHEBYSHEV-YAMAMOTO},
 #>     valuesapplicable={CHEBYSHEV-CHEBYSHEV (Product), CHEBYSHEV-GAUSS (Product),
-#>        CHEBYSHEV-BICKLEY (Product), CHEBYSHEV-YAMAMOTO (Product),
-#>        QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)},
+#>        CHEBYSHEV-BICKLEY (Product), QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)},
 #>     limitations={},
 #>     description={This card is used to specify the name of the angular
 #>        quadrature to use when determining the angles at which the rays are
@@ -13012,10 +13011,9 @@ MPACT:
 #>     need={Required},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={None},
+#>     valuedefault={\texttt{quad\_type} value},
 #>     valuesapplicable={CHEBYSHEV-CHEBYSHEV (Product), CHEBYSHEV-GAUSS (Product),
-#>        CHEBYSHEV-BICKLEY (Product), CHEBYSHEV-YAMAMOTO (Product),
-#>        QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)},
+#>        CHEBYSHEV-BICKLEY (Product), QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)},
 #>     limitations={},
 #>     description={This card is used to specify the name of the angular
 #>        quadrature to use when determining the angles at which the rays are
@@ -13048,10 +13046,9 @@ MPACT:
 #>     need={Required},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={None},
+#>     valuedefault={CHEBYSHEV-YAMAMOTO},
 #>     valuesapplicable={CHEBYSHEV-CHEBYSHEV (Product), CHEBYSHEV-GAUSS (Product),
-#>        CHEBYSHEV-BICKLEY (Product), CHEBYSHEV-YAMAMOTO (Product),
-#>        QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)},
+#>        CHEBYSHEV-BICKLEY (Product), QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)},
 #>     limitations={},
 #>     description={This card is used to specify the name of the angular
 #>        quadrature to use when determining the angles at which the rays are
@@ -13084,7 +13081,7 @@ MPACT:
 #>     need={Required},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={None},
+#>     valuedefault={16},
 #>     valuesapplicable={Column Order in the above table},
 #>     limitations={},
 #>     description={This card is used to specify the number of azimuthal angles
@@ -13106,7 +13103,7 @@ MPACT:
 #>     need={Required},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={None},
+#>     valuedefault={\texttt{azimuthals\_octant} value},
 #>     valuesapplicable={Column Order in the above table},
 #>     limitations={},
 #>     description={This card is used to specify the number of azimuthal angles
@@ -13128,7 +13125,7 @@ MPACT:
 #>     need={Required},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={None},
+#>     valuedefault={2},
 #>     valuesapplicable={Column Order $\Theta$ in the above table},
 #>     limitations={},
 #>     description={This card is used to specify the number of polar angles per
@@ -13153,7 +13150,7 @@ MPACT:
 #>     need={Required},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={None},
+#>     valuedefault={\texttt{polars\_octant} value},
 #>     valuesapplicable={Column Order $\Theta$ in the above table},
 #>     limitations={},
 #>     description={This card is used to specify the number of polar angles per
@@ -13178,7 +13175,7 @@ MPACT:
 #>     need={Required},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={None},
+#>     valuedefault={8},
 #>     valuesapplicable={Column Order in the above table},
 #>     limitations={},
 #>     description={This card is used to specify the number of azimuthal angles
@@ -13200,7 +13197,7 @@ MPACT:
 #>     need={Required},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={None},
+#>     valuedefault={\texttt{polars\_octant} value},
 #>     valuesapplicable={Column Order $\Theta$ in the above table},
 #>     limitations={},
 #>     description={This card is used to specify the number of polar angles per
@@ -13225,8 +13222,8 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={\texttt{NONE}},
-#>     valuesapplicable={\texttt{ORNL}, \texttt{SIMPLIFIED\_AMPX}, or \texttt{HELIOS}},
+#>     valuedefault={\texttt{ORNL}},
+#>     valuesapplicable={\texttt{HELIOS}},
 #>     limitations={},
 #>     description={This card is used to specify the type of cross section file
 #>        to use},
@@ -13245,7 +13242,7 @@ MPACT:
 #>     need={Required},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={No default value},
+#>     valuedefault={\texttt{mpact51g\_71\_4.3m3\_01222019.fmt}},
 #>     valuesapplicable={filename of a supported cross section library},
 #>     limitations={},
 #>     description={This card is used to specify the name of the cross section
@@ -13466,13 +13463,16 @@ MPACT:
 #>     need={Required},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={No default value},
-#>     valuesapplicable={filename of a supported cross section library},
-#>     limitations={The format of this file should be consistent with the standard
-#>        MPACT depletion library file \texttt{MPACT.dpl}},
+#>     valuedefault={\texttt{origen\_data\_paths\_casl2.2.txt}},
+#>     valuesapplicable={\texttt{origen\_data\_paths\_scale62.txt}, \texttt{MPACT.dpl}},
+#>     limitations={},
 #>     description={This card is used to specify the depletion file to use, which
 #>        provides all the data required, in addition to the data in the transport
-#>        library for depletion calculation},
+#>        library for depletion calculation.  The \texttt{MPACT.dpl} option must be used
+#>        if \texttt{dep\_kernel} is set to \texttt{internal}.
+#>        \newline\newline
+#>        The depletion libraries listed here are provided with VERA, but others can
+#>        can also be used if the user supplies them.},
 #>     notes={}
 #>   }
   dep_filename:
@@ -13599,7 +13599,7 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={1.0E-5},
+#>     valuedefault={1.0E-6},
 #>     valuesapplicable={$>$0.0},
 #>     limitations={},
 #>     description={This card is used to specify the global tolerance on convergence
@@ -13620,7 +13620,7 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={1.0E-4},
+#>     valuedefault={5.0E-5},
 #>     valuesapplicable={$>$0.0},
 #>     limitations={},
 #>     description={This card is used to specify the tolerance on the convergence
@@ -14129,8 +14129,8 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={1},
+#>     valuedefault={1},
+#>     valuesapplicable={},
 #>     limitations={},
 #>     description={Energy decomposition is not yet supported. MPACT will only run with
 #>        \texttt{num\_energy}=1},
@@ -14177,8 +14177,8 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={\texttt{ASSEMBLY}},
-#>     valuesapplicable={\texttt{GRAPH}, \texttt{ASSEMBLY}, \texttt{EXPLICITFILE}, \texttt{EXPLICITRADIAL}, \texttt{PS}},
+#>     valuedefault={\texttt{GRAPH}},
+#>     valuesapplicable={\texttt{ASSEMBLY}, \texttt{EXPLICITFILE}, \texttt{EXPLICITRADIAL}, \texttt{PS}, \texttt{FULLCORE}},
 #>     limitations={The \texttt{EXPLICITFILE} option may be used only if the user
 #>        has created a partition file. For a description of the partition file, see
 #>        the input option \texttt{par\_file}},
@@ -14202,6 +14202,8 @@ MPACT:
 #>            that the decomposition is provided for a single plane and is
 #>            applied to all planes.
 #>          \item \texttt{PS}: same as \texttt{ASSEMBLY}.
+#>          \item \texttt{FULLCORE}: assumes axial decomposition only; each 2D plane should
+#>            be on the same process.
 #>        \end{itemize}},
 #>     notes={}
 #>   }
@@ -14210,7 +14212,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() explicitradial EXPLICITRADIAL explicitfile EXPLICITFILE assembly ASSEMBLY ps PS graph GRAPH
+      - in_dictionary() explicitradial EXPLICITRADIAL explicitfile EXPLICITFILE assembly ASSEMBLY ps PS graph GRAPH fullcore FULLCORE
 #>
 #>   {\bf par\_file} par\_file
 #>   \VERAInputTable{
@@ -14572,8 +14574,8 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={\texttt{true}},
-#>     valuesapplicable={\texttt{false}},
+#>     valuedefault={\texttt{false}},
+#>     valuesapplicable={\texttt{true}},
 #>     limitations={},
 #>     description={If true, this card applies a volume-averaged fuel temperature
 #>        to each fuel pin. If false, it applies a radially dependent fuel
@@ -14616,7 +14618,7 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={\texttt{true}},
-#>     valuesapplicable={\texttt{true}},
+#>     valuesapplicable={\texttt{false}},
 #>     limitations={},
 #>     description={If true, this card calculates the radial burnup Zernike
 #>        coefficients to pass to CTF. If false, no coefficients are calculated},
@@ -14637,7 +14639,7 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={\texttt{true}},
-#>     valuesapplicable={\texttt{true}},
+#>     valuesapplicable={\texttt{false}},
 #>     limitations={},
 #>     description={If true, this card will use the radial fuel temperature
 #>        Zernike coefficients from CTF to set the fuel temps in MPACT. If false,
@@ -14681,7 +14683,7 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={W/m$^2 \cdot$ K},
 #>     unitsother={},
-#>     valuedefault={4500.0},
+#>     valuedefault={5678.3},
 #>     valuesapplicable={$>0.0$},
 #>     limitations={It is ignored if feedback is off or if coupling with
 #>        COBRA-TF is being used},
@@ -14853,8 +14855,8 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={false},
-#>     valuesapplicable={true},
+#>     valuedefault={true},
+#>     valuesapplicable={false},
 #>     limitations={},
 #>     description={Logical to interpolate shape onto fuel temperature table value},
 #>     notes={}
@@ -15018,32 +15020,6 @@ MPACT:
     _check:
       - is_word()
 #>
-#>
-#>   {\bf dep\_edit} dep\_edit
-#>   \VERAInputTable{
-#>     name={dep\_edit},
-#>     type={Fixed Character String},
-#>     need={Optional},
-#>     unitsdefault={atoms\/volume of pincell},
-#>     unitsother={},
-#>     valuedefault={\texttt{true}},
-#>     valuesapplicable={\texttt{false}},
-#>     limitations={},
-#>     description={This card is used to specify if the depletion \texttt{Isum}
-#>        and \texttt{Pnum} files are written, which print the pin-wise averaged
-#>        isotope number densities. \texttt{Isum} prints the isotope summary file
-#>        with isotopes tracked in XSMesh, and \texttt{Pnum} file prints the particle
-#>        number density file with all isotopes in the depletion library},
-#>     notes={The option has excessive memory requirements and is not advised for
-#>        general usage. Only use when absolutely necessary}
-#>   }
-  dep_edit:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() true false
-#>
 #>   {\bf dep\_shielder\_dt} dep\_shielder\_dt
 #>   \VERAInputTable{
 #>     name={dep\_shielder\_dt},
@@ -15160,8 +15136,8 @@ MPACT:
 #>     need={Required},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={\texttt{internal}(MPACT's internal depletion kernel)},
-#>     valuesapplicable={\texttt{origen}(coupled \texttt{origen} kernel)},
+#>     valuedefault={\texttt{origen}},
+#>     valuesapplicable={\texttt{internal}},
 #>     limitations={},
 #>     description={This card is used to specify the depletion kernel to use.
 #>        The MPACT internal depletion kernel is based on the same methodology
@@ -15227,15 +15203,14 @@ MPACT:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={cmfd},
-#>     valuesapplicable={odcmfd, scmfd, mlcmfd, msed, none (2D only)},
+#>     valuedefault={odcmfd},
+#>     valuesapplicable={scmfd, mlcmfd, msed, none (2D only)},
 #>     limitations={},
 #>     description={This card is used to specify which CMFD method will be used.
 #>        The options are described as follows:
 #>        \begin{itemize}
 #>          \item \texttt{cmfd}: default CMFD method (currently odcmfd.)
-#>          \item \texttt{adcmfd}: artificially diffusive CMFD method. (deprecated)
-#>          \item \texttt{odcmfd}: optimally diffusive CMFD method. (replaces adcmfd)
+#>          \item \texttt{odcmfd}: optimally diffusive CMFD method.
 #>          \item \texttt{scmfd}: standard CMFD method.
 #>          \item \texttt{mlcmfd}: a multi-level cmfd method.
 #>          \item \texttt{msed}: same as \texttt{odcmfd}, but the CMFD
