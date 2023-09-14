@@ -10,8 +10,8 @@
 \section{Materials}  \label{chap:materials}
 
 This chapter contains a description of the material input. There are two types of materials
-in the input file: structural materials (input with a {\it mat} card) and fuel materials
-(input with a {\it fuel} card).
+in the input file: structural materials (input with a {\it mat} input) and fuel materials
+(input with a {\it fuel} input).
 
 Structural materials can be defined in either the [CORE] block or in the
 geometry object blocks [ASSEMBLY], [INSERT], [CONTROL], and [DETECTOR].
@@ -22,23 +22,23 @@ This maintains the modularity of the geometry objects.
 
 Fuel materials can only be defined in [ASSEMBLY] blocks.
 
-Materials are used in many different input cards. They are used to define
+Materials are used in many different inputs. They are used to define
 cells, nozzles, core plates, baffles, grids, reflectors, etc. Every material
-used in the input must be defined with either a {\it mat} card or a {\it fuel} card
+used in the input must be defined with either a {\it mat} input or a {\it fuel} input
 (see notes on the material ``mod'' below).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Structural Materials}
 
 Structural materials are not fuel and do not deplete. Structural
-materials are defined with the following input card:
+materials are defined with the following input:
 
 {\bf mat} {\it user-mat} {\it density} ({\it library-name$_i$}, {\it frac$_i$}, i=1, I)
 
 where:
 \begin{itemize}
 \item {\it user-mat} is a user-defined material name. The name is case sensitive. {\it user-mat} is used to
-define material names in other input cards such as {\it cell}, {\it grid}, {\it nozzle}, etc. (No default).
+define material names in other inputs such as {\it cell}, {\it grid}, {\it nozzle}, etc. (No default).
 \item {\it density} is the material density in grams per cubic centimeter (g/cc). (No default).
 \item {\it library-name} is a corresponding library name(s) for the user material. The library name
 must be defined in the cross section library. (Default = {\it user-mat}). Multiple library materials
@@ -46,12 +46,18 @@ can be mixed to form a single user material.
 \item {\it frac} is the fraction of the library material in the user material. (Default=1.0 if there is only one library material in the user material).
 \end{itemize}
 
-There are two special user materials, ``mod'' and ``vacuum.''
+There are three special user materials, ``mod,'' ``cool,'' and ``vacuum.''
 The user can use these materials in cell definitions, but the code will automatically
-determine the composition of these materials based on T/H feedback and soluble boron concentrations.
-The user is not allowed to define a user material named ``mod'' or ``vacuum'' on a {\it mat} card.
+determine the composition of these materials based on \ac{th} feedback and soluble boron concentrations.
+The user is not allowed to define a user material named ``mod,'' ``cool,'' or ``vacuum'' on a {\it mat} input.
+The ``mod'' material will automatically be defined as borated water, with the boron concentration coming
+from either the \texttt{boron} input of the \texttt{[STATE]} block or from the results of a critical
+boron search.  The ``cool'' material will be defined as water without boron; this input is only used
+for \ac{bwr} models.  It is crucial that the ``cool'' input be used anywhere that \ac{th} feedback should be applied
+(e.g., inside the channel box); ``mod'' should be used when specifying materials for the bypass regions or
+outside the active core region (such as between the fuel assemblies and the shroud).
 
-Some example material cards are shown below.
+Some example material inputs are shown below.
 \begin{Verbatim}[fontsize=\small]
 
   mat zirc4 6.56                   ! library-name defaults to user-name
@@ -133,17 +139,17 @@ A list of default materials is given in Table~\ref{table:mat}.
 %%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Fuel Materials}
 
-Fuel materials are defined with {\it fuel} cards.
+Fuel materials are defined with {\it fuel} inputs.
 Fuel materials are heavy metal oxides, usually UO$_2$ with different $^{235}$U enrichments.
 Fuel materials may also include mixed oxide (MOX) fuel, which consists of mixtures of uranium, plutonium and other actinides.
 Fuel materials may also contain integral burnable absorbers, such as gadolinia.
 Fuel materials are different from structural materials in that they deplete and have
 additional properties, as described below.
 
-Fuel can only be defined in [ASSEMBLY] blocks, and fuel materials can only be referenced by {\it cell} cards
+Fuel can only be defined in [ASSEMBLY] blocks, and fuel materials can only be referenced by {\it cell} inputs
 in the [ASSEMBLY] block in which they are defined.
 
-Fuel materials are defined with the following input card:
+Fuel materials are defined with the following input:
 
 {\bf fuel} {\it user-mat} {\it density} {\it thden} / {\it U-235\_enrichment}
     \{{\it HM\_material$_i$}={\it HM\_enrichment$_i$}, i=1, N\}  \\
@@ -169,11 +175,11 @@ Where:
     The names of the HM materials must be valid library names.
   \item {\it HM\_enrichment$_i$} is the enrichment of HM isotope $i$ in weight \% (optional).
   \item {\it gad\_material} is the material name for gadolinia or other integral burnable absorber material (optional).
-        The gad material is usually a mixture defined on a separate {\it mat} card.
+        The gad material is usually a mixture defined on a separate {\it mat} input.
   \item {\it gad\_fraction} is the weight percent of the gad material relative to the total fuel mass (optional).
 \end{itemize}
 
-Oxygen should not be included on the {\it fuel} card. The correct amount of oxygen will automatically
+Oxygen should not be included on the {\it fuel} input. The correct amount of oxygen will automatically
 be added to the HM to create an oxide (either UO$_2$ or (HM)O$_2$).
 
 The {\it density} is the ``stack density'' or ``smeared density'' and should include the volume
@@ -200,7 +206,7 @@ in percent.\footnote{Earlier versions of the code used a different formula for t
 If the user specifically does NOT want $^{234}$U or $^{236}$U, then a $^{234}$U
 and/or $^{236}$U enrichment of zero should be specified.
 
-Examples of typical {\it fuel} cards are shown below. The user
+Examples of typical {\it fuel} inputs are shown below. The user
 only has to specify the $^{235}$U enrichment, and the code will automatically add
 $^{234}$U, $^{236}$U, $^{238}$U, and oxygen to the fuel.
 \begin{Verbatim}[fontsize=\small]
@@ -211,8 +217,8 @@ $^{234}$U, $^{236}$U, $^{238}$U, and oxygen to the fuel.
 
 \end{Verbatim}
 
-An example of a {\it fuel} card with gadolinia burnable poison is shown next.
-In this example, the gadolinia oxide is first defined with a {\it mat} card and
+An example of a {\it fuel} input with gadolinia burnable poison is shown next.
+In this example, the gadolinia oxide is first defined with a {\it mat} input and
 is mixed with the fuel as 5\% gad oxide and 95\% UO$_2$ (weight percents).
 \begin{Verbatim}[fontsize=\small]
 
@@ -221,7 +227,7 @@ is mixed with the fuel as 5\% gad oxide and 95\% UO$_2$ (weight percents).
 
 \end{Verbatim}
 
-Some examples of MOX fuel cards are shown next. In these cards, the user specifies
+Some examples of MOX fuel inputs are shown next. In these inputs, the user specifies
 the $^{235}$U enrichment (the $^{235}$U enrichment is usually small in MOX fuel) and the
 plutonium isotope enrichments. The code will automatically add $^{234}$U, $^{236}$U, $^{238}$U,
 and oxygen.
@@ -232,5 +238,4 @@ and oxygen.
 
 \end{Verbatim}
 
-Only oxide fuel can be defined on the {\it fuel} card. Metallic fuel is not supported.
-
+Only oxide fuel can be defined on the {\it fuel} input. Metallic fuel is not supported.

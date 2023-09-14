@@ -93,7 +93,7 @@ The second variable which requires use of the \emph{special} input is \emph{rodb
 
 Table \ref{tab:branch-example-simple} shows the sequence of state calculations that will occur at each depletion time step \emph{D} for $D \in [0, 1, 2, 3, 4, 5]$.  For the final depletion step, the last nominal calculation will be skipped since there is no need to prepare for an additional depletion step.  This leads to a total of 59 state points for this example.
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \caption{Resulting states for simple branch block example; \emph{D} denotes depletion time step index}\label{tab:branch-example-simple}
     \begin{tabular}{|l|l|l|l|l|l|l|}\hline
@@ -169,7 +169,7 @@ Table \ref{tab:branch-example-simple} shows the sequence of state calculations t
 
 Table \ref{tab:branch-example-rods} shows the sequence of state calculations that will occur at each depletion time step \emph{D} for $D \in [0, 1, 2, 3, 4, 5]$.  For the final depletion step, the last nominal calculation will be skipped since there is no need to prepare for an additional depletion step.  This leads to a total of 59 state points for this example.
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \caption{Resulting states for control rod branch block example; \emph{D} denotes depletion time step index}\label{tab:branch-example-rods}
     \begin{tabular}{|l|l|l|l|l|}\hline
@@ -246,9 +246,9 @@ This example combines the previous two to show the interactions between two [BRA
                     rodbank SD abs   0
 \end{verbatim}
 
-Table \ref{tab:branch-example-complicated} shows the sequence of state calculations that will occur at each depletion time step \emph{D} for $D \in [0, 1, 2, 3, 4, 5]$.  It also shows the behavior when multiple [BRANCH] blocks are used with different \emph{state\_control} inputs.  For the final depletion step, the last nominal calculation will be skipped since there is no need to prepare for an additional depletion step.  This leads to a total of 107 state points for this example.
+Table \ref{tab:branch-example-complicated} shows the sequence of state calculations that will occur at each depletion time step \emph{D} for $D \in [0, 1, 2, 3, 4, 5]$. It also shows the impact of different \emph{state\_control} inputs for multiple [BRANCH] blocks.  For the final depletion step, the last nominal calculation will be skipped since there is no need to prepare for an additional depletion step.  This leads to a total of 107 state points for this example.
 
-\begin{table}[h]
+\begin{table}[ht]
     \centering
     \caption{Resulting states for control branch block example; \emph{D} denotes depletion time step index}\label{tab:branch-example-complicated}
     \begin{tabular}{|l|l|l|l|l|l|l|l|l|}\hline

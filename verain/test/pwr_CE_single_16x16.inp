@@ -60,7 +60,7 @@
   fuel U31 10.257 95.0 / 3.1
 
 
-!  "large4" at end of cell card specifies that this is a large 2x2 rod
+!  "large4" at end of cell input specifies that this is a large 2x2 rod
 
   cell 1 0.41339 0.42164 0.48514 / U31 he zirc
   cell 2         1.24    1.28    / mod    zirc / large4   ! large WR

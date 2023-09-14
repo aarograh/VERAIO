@@ -16,7 +16,7 @@
 !  * In general, the active core is known but we had to approximate many things outside of core.
 !  * The baffle thickness is estimated.
 !  * The upper and lower reflectors and nozzles are estimated.
-!  * No vessel cards are used because vessel size is unknown.
+!  * No vessel inputs are used because vessel size is unknown.
 !  * Bottom plug has been manually smeared into lower nozzle.
 !    Top plug has been artificially increased to fix problem with small regions.
 !    These approximations are work-arounds for an error in axial homogenization of
@@ -129,7 +129,7 @@
 
   baffle ss 0.0 2.223             ! **** use baffle thickness from generic PWR.  Real thickness unknown
 
-  ! no vessel card used.  Not sure what the vessel size is for the APR1400
+  ! no vessel input used.  Not sure what the vessel size is for the APR1400
 
   lower_plate ss  5.0 0.5   ! mat, thickness, vol frac  - from WB
   upper_plate ss  7.6 0.5   ! mat, thickness, vol frac  - from WB

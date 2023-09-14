@@ -211,9 +211,3 @@
   rlx_tfuel   1.0
   rlx_den     1.0
   maxiter     100
-
-[TIAMAT]
-  solver jacobi
-  run_transient false
-  conserve_power_in_tiamat_transfer true
-  num_subcycle_iterations_before_tiamat_ramping 0

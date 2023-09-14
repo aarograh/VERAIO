@@ -16,3 +16,21 @@
 .DS_Store
 *.dSYM
 
+# Latex stuff
+*.aux
+*.acn
+*.fdb_latexmk
+*.fis
+*.glo
+*.ist
+*.lof
+*.log
+*.out
+*.synctex
+*.synctex.gz
+*.toc
+*.fls
+verain/docs/Users_Manual/*.pdf
+
+#VS Code
+*.code-workspace

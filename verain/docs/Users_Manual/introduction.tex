@@ -5,9 +5,9 @@
 \section{Introduction}
 
 \subsection{Introduction to CASL}
-The Consortium for Advanced Simulation of Light Water Reactors (CASL), the first
+The \acrfull{casl}, the first
 US Department of Energy (DOE) Energy Innovation Hub, was established in July 2010 to provide
-advanced modeling and simulation (ModSim) solutions for commercial nuclear reactors.
+advanced \ac{modsim} solutions for commercial nuclear reactors.
 
 CASL's objective was to predict, with confidence, the performance of nuclear reactors
 through comprehensive, science-based modeling and simulation technology that would be
@@ -15,14 +15,14 @@ deployed and applied broadly throughout the nuclear energy industry to enhance s
 reliability, and economics.
 
 CASL's mission was to provide the coupled, high-fidelity, usable modeling and simulation
-capabilities needed to address light-water reactor (LWR) operational and safety performance--defining phenomena.
+capabilities needed to address \ac{lwr} operational and safety performance--defining phenomena.
 
 CASL's foundational technology products include CASL solutions and CASL ModSim Technologies.\\
-CASL's ModSim technology, the Virtual Environment for Reactor Applications (VERA), provides
+CASL's ModSim technology, the \ac{vera}, provides
 higher fidelity results than those offered by the current industry approach by incorporating coupled physics
 and science-based models, state-of-the-art numerical methods, modern computational science,
-integrated uncertainty quantification (UQ) and validation against data from operating
-pressurized water reactors (PWRs), single-effect experiments, and integral tests.
+integrated \ac{uq} and validation against data from operating
+\acp{pwr}, single-effect experiments, and integral tests.
 
 %%%%%%%%%%%%
 \subsection{VERA}
@@ -32,7 +32,7 @@ Examples of the separate physics modeled in the core simulator include cross sec
 neutron transport, isotopic depletion, thermal hydraulics, and fuel performance.
 
 The purpose of the core simulator is to simulate depletion of the reactor core and provide data and boundary conditions to model
-CASL Challenge Problems such as crud-induced power shift (CIPS), crud-induced localized corrosion (CILC), departure from nucleate boiling (DNB), pellet-cladding interaction (PCI), and reactivity insertion accident (RIA) analyses.
+CASL Challenge Problems such as \ac{cips}, \ac{cilc}, \ac{dnb}, \ac{pci}, and \ac{ria} analyses.
 
 One important feature of the core simulator is that a single common input file is used to drive all
 of the different physics codes.\footnote{The only exception to this is for computational fluid dynamics codes,
@@ -53,13 +53,13 @@ Additional information can be found on the VERA website: \href{https://vera.ornl
 
 This manual is organized into three main parts.
 
-The first part, which includes chapters~\ref{chap:user} through \ref{chap:depletion}, is the ``User's Manual,''
+The first part, which includes chapters~\ref{chap:user} through \ref{chap:edits}, is the ``User's Manual,''
 which describes how a user would set up a typical input. This part of the manual gives
-the most common input cards a user would need and describes how to use them.
-It does not include a complete list of cards or show every available option.
+the most common inputs a user would need and describes how to use them.
+It does not include a complete list of inputs or show every available option.
 
-The second part of the manual, Chapter~\ref{chap:cards}, is a ``Reference Manual'' and includes
-a complete list of every available input card.
+The second part of the manual, Chapter~\ref{chap:inputs}, is a ``Reference Manual'' and includes
+a complete list of every available input.
 
 The third part of the manual, Chapter \ref{chap:example}, gives several example input decks.
 Additional example input files can be found in the code installation directory.
@@ -120,8 +120,8 @@ of the other VERA components for these limitations.
 %%%%%%%%%%%%
 \subsection{Testing}
 
-Information regarding system testing can be found in the respective VERAIn and VERARun Software Test Plan
-Requirements and Test Reports. These documents contain summaries of all system testing and associated requirements.
+Information regarding system testing can be found in the respective VERAIn and VERARun Software Requirements, Test Plan,
+and Test Reports. These documents contain summaries of all system testing and associated requirements.
 Any feature not covered in these reports is considered to be untested.
 
 %%%%%%%%%%%%
@@ -138,4 +138,3 @@ For specific questions about the use of VERAIn or VERARun, the licensing of the 
 users should send an email to {\tt vera-support@ornl.gov}.
 
 Additional user information may also be found on the VERA website \href{https://vera.ornl.gov/}{https://vera.ornl.gov/}.
-

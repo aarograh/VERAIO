@@ -142,7 +142,7 @@ euler 0.125000 0.0 0.0
 
 ! *********  CREATE HOLES AND FILL WITH UNIVERSES  ***********
 
-! The translate card corresponds to the outer radius of the RPV
+! The translate input corresponds to the outer radius of the RPV
 ! The bottom left corner of the core is at 0,0,0
 ! It must be translated except when performing a raytrace
 [UNIVERSE][HOLE thecore]

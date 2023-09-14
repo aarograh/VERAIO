@@ -507,8 +507,4 @@
       <Parameter name="rx_components" type="bool" value="false"/>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="TIAMAT">
-    <Parameter name="conserve_power_in_tiamat_transfer" type="bool" value="true"/>
-    <Parameter name="solver" type="string" value="jacobi"/>
-  </ParameterList>
 </ParameterList>

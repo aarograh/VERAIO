@@ -25,13 +25,13 @@ Here are some instructions to help find your way.
 
    You will generally need to modify two files.
 
-     Directory.yml  gives a description of how to read the input cards
-     BLOCK.yml      gives a description of how to convert input cards to
+     Directory.yml  gives a description of how to read the inputs
+     BLOCK.yml      gives a description of how to convert inputs to
                      parameter names for a particular BLOCK
 
 4. Add or modify test cases
 
-   Whenever you add new input cards, you must add a test case!!!
+   Whenever you add new inputs, you must add a test case!!!
 
    To add a test case, either modify an existing test case or add a new one.
    It is preferable to modify an existing case, just make sure you don't

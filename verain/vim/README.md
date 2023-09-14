@@ -25,12 +25,12 @@ This can be done from the command line, through environment-modules, or in a log
 ## Usage
 When you have opened a VERA input in VIM with the VERAVim plugin loaded you will note that there is syntax highlighting.
 Additionally, you can
-- "tab-complete" a card or see a list of available cards within each block by pressing the `<TAB>` key twice in insert mode.
-  - This also opens a help window at the top with the card's documentation.
+- "tab-complete" a input or see a list of available inputs within each block by pressing the `<TAB>` key twice in insert mode.
+  - This also opens a help window at the top with the input's documentation.
   - The arrow keys scroll through the pop-up menu.
-  - Pressing any key inserts the highlighted card from the menu, closes the menu,  and continues in insert mode.
-  - Pressing `<ESC>` inserts the highlighted card, closes the menu, and returns to command mode.
-- see the documentation on the current highlighted card.
+  - Pressing any key inserts the highlighted input from the menu, closes the menu,  and continues in insert mode.
+  - Pressing `<ESC>` inserts the highlighted input, closes the menu, and returns to command mode.
+- see the documentation on the current highlighted input.
 - scroll in the help window by holding down `<CTRL>` and pressing the arrow keys.
 - close the help window by pressing `<TAB>` then `<ESC>`.
 

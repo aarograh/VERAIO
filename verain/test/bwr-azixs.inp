@@ -129,7 +129,7 @@
 
 
 !            label  span   th       rad    sheath    wing
-  bladegeom  OEM 12.3825 0.79248 0.39624 0.14224  1.98501  !split from old "blade" card.  Added a blade_geom label to be referenced in blade_type
+  bladegeom  OEM 12.3825 0.79248 0.39624 0.14224  1.98501  !split from old "blade" input.  Added a blade_geom label to be referenced in blade_type
 !            label  geomlabel mat ntube celllabel fillermat hor/vert
   bladetype rodlets OEM ss304 vert 21 21*TUBE
 

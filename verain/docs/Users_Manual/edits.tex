@@ -1,0 +1,322 @@
+\section{Edits} \label{chap:edits}
+
+A wide range of output edits can be enabled by the user.  This chapter will briefly describe the possible edits that can be enabled by the user along with several other useful input options related to controlling the edits.
+
+\subsection{Enabling Edits}
+
+Output edits are enabled using the {\it edit} input in the {\it [STATE]} block.  The {\it edit} input should only be used once per state block, with a list of all the edits the user wishes to enable.  Once edits are enabled in a state block, they will remain enabled in all subsequent states.  If a user wants to disable them later, then including the keyword {\it none} will disable all previously enabled edits.  There is a list of default edits which cannot be disabled; those will be described in Section \ref{sec:default-edits}.  If {\it none} and other valid edits appear next to each other in the same {\it edit} input, then {\it none} will disable all previously enabled edits first, then the other edits listed alongside {\it none} will be enabled.
+
+As an example, one regression test uses the following {\it [STATE]} blocks:
+\begin{verbatim}
+[STATE]
+  power    0.0
+  tinlet   565 K
+  tfuel    565 K
+  modden   0.743         ! g/cc
+  boron    1300          ! ppm
+  sym      full          ! full symmetry
+  feedback off
+  thexp    off
+[STATE] edit pin_flux
+[STATE] power 0.0
+[STATE] edit none
+[STATE] edit pin_isotopes_U-235
+[STATE] edit pin_isotopes_U-238
+[STATE] edit none pin_isotopes_U-235 pin_isotopes_U-238
+[STATE] power 0.0
+[STATE] edit pin_flux
+[STATE] power 0.0
+[STATE] edit none
+[STATE] edit pin_powers
+[STATE] edit pin_isotopes_U-235
+\end{verbatim}
+This produces 13 states, with the following edits enabled for each state:
+\begin{enumerate}[noitemsep]
+    \item default edits
+    \item default edits + {\it pin\_flux}
+    \item default edits + {\it pin\_flux}
+    \item default edits
+    \item default edits + {\it pin\_isotopes\_U-235}
+    \item default edits + {\it pin\_isotopes\_U-235} + {\it pin\_isotopes\_U-238}
+    \item default edits + {\it pin\_isotopes\_U-235} + {\it pin\_isotopes\_U-238}
+    \item default edits + {\it pin\_isotopes\_U-235} + {\it pin\_isotopes\_U-238}
+    \item default edits + {\it pin\_isotopes\_U-235} + {\it pin\_isotopes\_U-238} + {\it pin\_flux}
+    \item default edits + {\it pin\_isotopes\_U-235} + {\it pin\_isotopes\_U-238} + {\it pin\_flux}
+    \item default edits
+    \item default edits (because {\it pin\_powers} is a default edit)
+    \item default edits + {\it pin\_isotopes\_U-235}
+\end{enumerate}
+This illustrates enabling and disabling various edits separately and simultaneously.
+
+\subsection{Edit Groups}
+
+Another useful option is the {\it edit\_group} input in the {\it [EDITS]} block.  This allows the user to create a group of edits that can be enabled or disabled together.  The name of the group is then used in the {\it edit} input of the {\it [STATE]} block just like any of the other edits.  When the group name appears in the {\it edit} input, each component of the group is enabled as if it were explicitly named.  The {\it none} input will disable groups the same way it disables individual edits.
+
+\subsection{Point Edit Locations}
+
+One specific category of edits is a point edit, which is used to return a particular mesh or solution value at one point in the mesh.  To use point edits, the {\it points} input must be specified in the {\it [EDITS]} block.  This input takes a set of four values.  Each set contains the coordinate type and 3 values.  The coordinate type can be either {\it cart} or {\it rtheta}.  If {\it cart}, the 3 values are the $x$, $y$, and $z$ coordinates in the mesh; if {\it rtheta}, the 3 values are the radius, angle (degrees counter-clockwise from the positive x axis), and $z$ coordinate.  In both cases, the origin is the center of the reactor.  There is no limit on the number of points specified in the {\it points} input, and each one can use a different coordinate type if desired.  The actual point edits supported by the codes will be described in Section \ref{sec:point-edits}.
+
+\subsection{Supported Edits}
+
+There is a wide range of supported edits.  They can be grouped according to the level of resolution of the edit.  Doing so results in the following categories: {\it fsr}, {\it intrapin}, {\it pin}, {\it channel}, {\it core}, and {\it point}.  Any edit that can be enabled from input will fall into one of these categories; the category is always used as a prefix for the name of the edit in the input (e.g., {\it pin\_powers} is part of the {\it pin} category).
+
+Grouping edits by resolution category is useful because it is guaranteed that all edits of a particular category will have the same shape.  The following terms will be used to describe the shape of the edits:
+\begin{itemize}[noitemsep]
+    \item {\it nFuelReg} the number of burnup regions in the model
+    \item {\it nxpin} the number of pins across an assembly in the x direction
+    \item {\it nypin} the number of pins across an assembly in the y direction
+    \item {\it nz} the number of axial levels in the active fuel region
+    \item {\it nasy} the number of assemblies in the model
+    \item {\it nxchan} the number of channels across an assembly (usually equal to {\it nxpin} + 1)
+    \item {\it nychan} the number of channels across an assembly (usually equal to {\it nypin} + 1)
+\end{itemize}
+The following sections will provide the shape of the edit category and a list of supported edits in that category.  Additional information about the output formats may be found in the VERAOut specifications \cite{godfrey2014}.  Note that the shape and units will be provided in the tables as a reference, but all HDF5 datasets also have HDF5 attributes containing units, descriptions, and the name of the code that produced it.
+
+Several edits used indexes, which refer to the following:
+\begin{itemize}[noitemsep]
+    \item {\it <group>} the neutron energy group
+    \item {\it <gamma group>} the gamma energy group
+    \item {\it <isotope>} the isotope using the element name and mass number separate by a hyphen (e.g., {\it U-235}, {\it B-10}, etc.)
+    \item {\it <delayed group>} the delayed neutron precursor group
+    \item {\it <reaction>} the reaction type: {\it abs}, {\it fis}, or {\it nufis}
+\end{itemize}
+
+\subsubsection{Default Edits}\label{sec:default-edits}
+
+Table \ref{tab:default-edits} contains the list of default edits.  These edits are always enabled by the codes and cannot be disabled from the user input.  The shape of each of these edits is the same as others in the resolution category and can be found in subsequent sections.
+
+\hl{Add stuff from the CORE block in this table too}
+
+\begin{table}[h]
+    \centering
+    \caption{List of default edits in VERA}
+    \label{tab:default-edits}
+    \begin{tabular}{|l|c|c|}\hline
+    {\bf Name} & {\bf Units} & {\bf Notes}\\\hline
+    pin\_powers &  &  \\\hline
+    pin\_exposure &  &  \\\hline
+    core\_flux &  &  \\\hline
+    pin\_mod\_dens &  & default only for \acp{pwr} \\\hline
+    pin\_mod\_temp &  & default only for \acp{pwr} \\\hline
+    pin\_cool\_dens &  & default only for \acp{bwr} \\\hline
+    pin\_cool\_temp &  & default only for \acp{bwr} \\\hline
+    pin\_fuel\_temp &  &  \\\hline
+    pin\_isotopes\_Xe-135 &  &  \\\hline
+    pin\_cool\_void &  & default only for \acp{bwr} \\\hline
+    \end{tabular}
+\end{table}
+
+There are numerous other datasets in the HDF5 file that are either scalars or small arrays.  These are not described in this manual because they are not considered solution data that is controlled by the user.  They contain high level information about the simulation or reactor state at each time step, often providing an echo or interpretation of user inputs from the {\it [STATE]} or {\it [CORE]} blocks.  For more information on these datasets, consult their HDF5 attributes or contact the developers.
+
+\FloatBarrier
+
+\subsubsection{FSR Edits}\label{sec:fsr-edits}
+
+The {\it fsr} edits are unique compared to the rest of the categories because they are not placed in the VERAOut (HDF5) file.  Instead, they are used for visualization.  The name of the edit is placed in the {\it [STATE]} block's {\it edit} input like the others, but the {\it vis\_edits} input in the {\it [MPACT]} block must also be set to either {\it fsr} to obtain VTK edits or {\it fsrvtu} to obtain VTU edits.  If the {\it vis\_edits} input is not set, then the {\it fsr} edits will not do anything.  The resulting VTK or VTU files can be opened in a visualization program, such as VisIt or ParaView, to view the fine mesh solution data produced as an {\it fsr} edit.  Table \ref{tab:fsr-edits} lists the allowed {\it fsr} edits.
+
+\begin{table}[h]
+    \centering
+    \caption{List of {\it fsr} edits in VERA}
+    \label{tab:fsr-edits}
+    \begin{tabular}{|l|c|}\hline
+    {\bf Name} & {\bf Units} \\\hline
+    fsr\_flux\_<group> &  \\\hline
+    fsr\_flux\_fast &  \\\hline
+    fsr\_flux\_thermal &  \\\hline
+    fsr\_gammaflux\_<gamma group> &  \\\hline
+    fsr\_gammaflux\_total &  \\\hline
+    fsr\_power &  \\\hline
+    fsr\_temperature &  \\\hline
+    fsr\_density &  \\\hline
+    fsr\_burnup &  \\\hline
+    fsr\_isotopes\_<isotope> &  \\\hline
+    fsr\_rr-total\_<group> &  \\\hline
+    fsr\_rr-absorption\_<group> &  \\\hline
+    fsr\_rr-fission\_<group> &  \\\hline
+    fsr\_rr-nufission\_<group> &  \\\hline
+    fsr\_rr-kappafission\_<group> &  \\\hline
+    fsr\_rr-outscatter\_<group> &  \\\hline
+    fsr\_lambda\_<delayed group> &  \\\hline
+    fsr\_dnpy\_<delayed group> &  \\\hline
+    fsr\_delayed-chi\_<delayed group> &  \\\hline
+    fsr\_chi\_<group> &  \\\hline
+    \end{tabular}
+\end{table}
+
+\FloatBarrier
+
+\subsubsection{Intrapin Edits}\label{sec:intrapin-edits}
+
+The {\it intrapin} edits are the only HDF5 dataset type that provides intrapin resolution.  If any {\it intrapin} edits are enabled, there are some additional support datasets that are generated to support indexing through the regions of each pin; those datasets are not listed here.  The shape of the {\it intrapin} datasets is a 1D array of all the regions; the support dataset has the shape {\it (nasy, nz, nxpin, nypin)} and contains the number of each regions for each axial level of each pin; this can be used to unfold the {\it intrapin} dataset for a particular rod and level.  The supported intrapin datasets are listed in Table \ref{tab:intrapin-edits}.
+
+\begin{table}[h]
+    \centering
+    \caption{List of {\it intrapin} edits in VERA}
+    \label{tab:intrapin-edits}
+    \begin{tabular}{|l|c|}\hline
+    {\bf Name} & {\bf Units} \\\hline
+    intrapin\_isotopes\_<isotope> &   \\\hline
+    intrapin\_fuel\_isotopes\_<isotope> &   \\\hline
+    intrapin\_gap\_isotopes\_<isotope> &   \\\hline
+    intrapin\_clad\_isotopes\_<isotope> &   \\\hline
+    intrapin\_mod\_isotopes\_<isotope> &   \\\hline
+    intrapin\_cool\_isotopes\_<isotope &   \\\hline
+    intrapin\_volume &   \\\hline
+    intrapin\_fuel\_volume &   \\\hline
+    intrapin\_gap\_volume &   \\\hline
+    intrapin\_clad\_volume &   \\\hline
+    intrapin\_mod\_volume &   \\\hline
+    intrapin\_cool\_volume &   \\\hline
+    intrapin\_temp &   \\\hline
+    intrapin\_fuel\_temp &   \\\hline
+    intrapin\_gap\_temp &   \\\hline
+    intrapin\_clad\_temp &   \\\hline
+    intrapin\_mod\_temp &   \\\hline
+    intrapin\_cool\_temp &   \\\hline
+    intrapin\_dens &   \\\hline
+    intrapin\_fuel\_dens &   \\\hline
+    intrapin\_gap\_dens &   \\\hline
+    intrapin\_clad\_dens &   \\\hline
+    intrapin\_mod\_dens &   \\\hline
+    intrapin\_cool\_dens &   \\\hline
+    intrapin\_exposure &   \\\hline
+    intrapin\_fluence &   \\\hline
+    \end{tabular}
+\end{table}
+
+\FloatBarrier
+
+\subsubsection{Pin Edits}\label{sec:pin-edits}
+
+The {\it pin} datasets have the shape {\it (nasy, nz, nxpin, nyping)}.  Supported datasets are listed in Table \ref{tab:pin-edits}.
+
+\begin{table}[h]
+    \centering
+    \caption{List of {\it pin} edits in VERA}
+    \label{tab:pin-edits}
+    \begin{tabular}{|l|c|}\hline
+    {\bf Name} & {\bf Units} \\\hline
+    pin\_powers &   \\\hline
+    pin\_neutronflux &   \\\hline
+    pin\_gammaflux\_total &   \\\hline
+    pin\_gammaheat &   \\\hline
+    pin\_power\_allRegions &   \\\hline
+    pin\_fuel\_all\_power &   \\\hline
+    pin\_mod\_all\_power &   \\\hline
+    pin\_cool\_all\_power &   \\\hline
+    pin\_clad\_all\_power &   \\\hline
+    pin\_gt\_all\_power &   \\\hline
+    pin\_decay\_heat &   \\\hline
+    pin\_prompt\_heat &   \\\hline
+    pin\_prompt\_powers &   \\\hline
+    pin\_flux\_fast &   \\\hline
+    pin\_flux\_thermal &   \\\hline
+    pin\_clad\_fast\_flux &   \\\hline
+    pin\_clad\_temp &   \\\hline
+    pin\_mod\_temp &   \\\hline
+    pin\_mod\_dens &   \\\hline
+    pin\_cool\_temp &   \\\hline
+    pin\_cool\_dens &   \\\hline
+    pin\_exposure &   \\\hline
+    pin\_fuel\_temp &   \\\hline
+    pin\_gap\_temp &   \\\hline
+    pin\_cool\_void &   \\\hline
+    pin\_gtube\_dens &   \\\hline
+    pin\_gtube\_temp &   \\\hline
+    pin\_isotopes\_<isotope> &   \\\hline
+    pin\_rr\_<isotope>\_<reaction> &   \\\hline
+    pin\_macrorr\_<isotope>\_<reaction> &   \\\hline
+    pin\_crud\_rr\_<isotope>\_<reaction> &   \\\hline
+    pin\_flux\_<group> &   \\\hline
+    \end{tabular}
+\end{table}
+
+\FloatBarrier
+
+\subsubsection{Channel Edits}\label{sec:channel-edits}
+
+The {\it channel} datasets have the shape {\it (nasy, nz, nxchan, nychan)}.  Supported datasets are listed in Table \ref{tab:channel-edits}.
+
+\begin{table}[h]
+    \centering
+    \caption{List of {\it channel} edits in VERA}
+    \label{tab:channel-edits}
+    \begin{tabular}{|l|c|}\hline
+    {\bf Name} & {\bf Units} \\\hline
+    \end{tabular}
+\end{table}
+
+\FloatBarrier
+
+\subsubsection{Core Edits}\label{sec:core-edits}
+
+At this time, the only available {\it core} edit is {\it core\_flux}, which is a default edit and is therefore always enabled.  The units of {\it core\_flux} are \hl{fill this in}.  Its shape is a 1D array with length equal to the number of neutron energy grouops.
+
+\FloatBarrier
+
+\subsubsection{Point Edits}\label{sec:point-edits}
+
+The {\it point} edits are 1D arrays whose length is equal to the number of coordinate sets in the {\it points} input of the {\it [EDITS]} block.  The values in the {\it point} edits are given in the same order that the {\it points} coordinates were specified by the user.  Supported datasets are listed in Table \ref{tab:point-edits}.
+
+\begin{table}[h]
+    \centering
+    \caption{List of {\it point} edits in VERA}
+    \label{tab:point-edits}
+    \begin{tabular}{|l|c|}\hline
+    {\bf Name} & {\bf Units} \\\hline
+    point\_flux\_fast &   \\\hline
+    point\_flux\_thermal &   \\\hline
+    point\_matid &   \\\hline
+    point\_temp &   \\\hline
+    point\_dens &   \\\hline
+    point\_fsr\_volume &   \\\hline
+    point\_xsr\_volume &   \\\hline
+    point\_hm\_mass &   \\\hline
+    point\_isotopes\_<isotope> &   \\\hline
+    point\_power &   \\\hline
+    point\_flux\_<group> &   \\\hline
+    \end{tabular}
+\end{table}
+
+\FloatBarrier
+
+\subsubsection{Edit Collections}\label{sec:edit-collections}
+
+There are several special edits which are merely a convenient shorthand for a group of edits.  These edits are internally unfolded into a list of edits by the code and allow the user to enable or disable a large number of edits at once.  These collections of edits behave identically to a group defined in the {\it edit\_group} input.  The supported edit collections and their constituents are listed in Table \ref{tab:collection-edits}.
+
+\begin{table}[h]
+    \centering
+    \caption{List of edit collections in VERA}
+    \label{tab:collection-edits}
+    \begin{tabular}{|l|c|}\hline
+    {\bf Name} & {\bf Component Datasets} \\\hline
+    fsr\_flux & fsr\_flux\_<group> for every neutron energy group \\\hline
+    fsr\_flux\_2g & fsr\_flux\_fast, fsr\_flux\_thermal \\\hline
+    fsr\_gammaflux & fsr\_gammaflux\_<gamma group> for every gamma energy group \\\hline
+    fsr\_isotopes\_all & fsr\_isotopes\_<isotope> for every isotope \\\hline
+    fsr\_rr-total & fsr\_rr-total\_<isotope> for every isotope \\\hline
+    fsr\_rr-absorption & fsr\_rr-absorption\_<isotope> for every isotope \\\hline
+    fsr\_rr-fission & fsr\_rr-fission\_<isotope> for every isotope \\\hline
+    fsr\_rr-nufission & fsr\_rr-nufission\_<isotope> for every isotope \\\hline
+    fsr\_rr-kappafission & fsr\_rr-kappafission\_<isotope> for every isotope \\\hline
+    fsr\_rr-outscatter & fsr\_rr-outscatter\_<isotope> for every isotope \\\hline
+    fsr\_lambda & fsr\_lambda\_<delayed group> for every delayed neutron precursor group \\\hline
+    fsr\_dnpy & fsr\_dnpy\_<delayed group> for every delayed neutron precursor group \\\hline
+    fsr\_delayed-chi & fsr\_delayed-chi\_<delayed group> for every delayed neutron precursor group \\\hline
+    fsr\_chi & fsr\_chi\_<group> for every neutron energy group \\\hline
+    intrapin\_isotopes\_all & intrapin\_isotopes\_<isotope> for every isotope \\\hline
+    intrapin\_fuel\_isotopes\_all & intrapin\_fuel\_isotopes\_<isotope> for every isotope \\\hline
+    intrapin\_gap\_isotopes\_all & intrapin\_gap\_isotopes\_<isotope> for every isotope \\\hline
+    intrapin\_clad\_isotopes\_all & intrapin\_clad\_isotopes\_<isotope> for every isotope \\\hline
+    intrapin\_mod\_isotopes\_all & intrapin\_mod\_isotopes\_<isotope> for every isotope \\\hline
+    intrapin\_cool\_isotopes\_all & intrapin\_cool\_isotopes\_<isotope> for every isotope \\\hline
+    pin\_flux & pin\_flux\_<group> for every neutron energy group \\\hline
+    pin\_flux\_2g & pin\_flux\_fast, pin\_flux\_thermal \\\hline
+    pin\_isotopes\_all & pin\_isotopes\_<isotope> for every isotope \\\hline
+    point\_flux & point\_flux\_<group> for every neutron energy group \\\hline
+    point\_flux\_2g & point\_flux\_fast, point\_flux\_thermal \\\hline
+    point\_isotopes\_all & point\_isotopes\_<isotope> for every isotope \\\hline
+    \end{tabular}
+\end{table}
+
+\FloatBarrier

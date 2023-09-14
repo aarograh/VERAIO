@@ -4,7 +4,7 @@
 \documentclass{vera-ornltm}
 %\documentclass[draft,twoside]{ornltm}
 
-\reportdraft
+%\reportdraft
 
 % Uncomment these to hide a particular page.
 %\renewcommand\makeostipage\relax
@@ -17,7 +17,7 @@
 \usepackage{multirow} % Extend table entries over multiple rows
 \usepackage{fancyvrb} % package to allow small font size in verbatim
 
-% following packages used in appendix of input cards
+% following packages used in appendix of inputs
 \usepackage{soul}
 \usepackage{xkeyval}
 \usepackage{longtable}
@@ -60,17 +60,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Specify authors below.
-\author[1]{Scott Palmtag}
-\affil[1]{North Carolina State University}
-\author[2]{Andrew Godfrey}
-\affil[2]{Oak Ridge National Laboratory}
-\author[2]{Mark Baird}
-\author[2]{Erik Walker}
+\author{Aaron Graham}
+\author{Mark Baird}
+\affil{Oak Ridge National Laboratory}
 
 % Specify title.
 % Note: if using an explicit linebreak in the title, you must use the \protect
 % command before it.
-\title{VERAIn User's Manual}
+\title{VERAIn User's Manual Version 4.4}
 
 % Specify date of publication.
 \date{July 5, 2022}
@@ -79,7 +76,7 @@
 % Define report number.
 % Note: Defining the report number causes the 'draft' notices to be removed.
 % Remove comment "%" below if that is desired.
-\reportnum{ORNL/SPR-2022/2509}
+\reportnum{ORNL/SPR-2023/3091}
 
 % Add a restriction notice to the cover page. Remove comment "%" below if that
 % is desired.
@@ -93,36 +90,29 @@
 % Note that abbreviations that aren't used in the document won't be printed in the
 %  list.
 \makeglossaries
-\newacronym{casl}{CASL}{Consortium for Advanced Simulation of Light Water Reactors}
 \newacronym{beavrs}{BEAVRS}{Benchmark for Evaluation And Validation of Reactor Simulations}
-\newacronym{boc}{BOC}{beginning of cycle}
 \newacronym{bwr}{BWR}{boiling water reactor}
-\newacronym{cfd}{CFD}{computational fluid dynamics}
+\newacronym{casl}{CASL}{Consortium for Advanced Simulation of Light Water Reactors}
 \newacronym{chf}{CHF}{critical heat flux}
 \newacronym{cilc}{CILC}{crud-induced localized corrosion}
 \newacronym{cips}{CIPS}{crud-induced power shift (also called axial offset anomaly [AOA])}
 \newacronym{cmfd}{CMFD}{coarse-mesh finite difference}
-\newacronym{vtf}{CTF}{COBRA-TF (subchannel code)}
 \newacronym{dnb}{DNB}{departure from nucleate boiling}
 \newacronym{efpd}{EFPD}{effective full power day}
 \newacronym{eoc}{EOC}{end of cycle}
 \newacronym{gt}{GT}{guide tube}
-\newacronym{gwd/mt}{GWd/MT}{gigawatt-days per metric ton heavy metal}
-\newacronym{hfp}{HFP}{hot full power}
-\newacronym{hzp}{HZP}{hot zero power}
+\newacronym{gwdmt}{GWd/MT}{gigawatt-days per metric ton heavy metal}
 \newacronym{it}{IT}{instrument tube}
 \newacronym{lwr}{LWR}{light-water reactor}
-\newacronym{moc}{MOC}{middle of cycle}
-\newacronym{mof}{MOF}{mixed oxide fuel}
 \newacronym{modsim}{ModSim}{modeling and simulation}
-\newacronym{mwd/mt}{MWd/MT}{megawatt-days per metric ton heavy metal}
 \newacronym{pci}{PCI}{pellet-cladding interaction}
-\newacronym{pcm}{PCM}{per cent mille (10$^{-5}$)}
+\newacronym{ppb}{PPB}{parts per billion}
 \newacronym{ppm}{PPM}{parts per million (usually boron)}
 \newacronym{pwr}{PWR}{pressurized water reactor}
 \newacronym{qa}{QA}{quality assurance}
 \newacronym{ria}{RIA}{reactivity insertion accident}
 \newacronym{sth}{STH}{system thermal hydraulic}
+\newacronym{th}{T/H}{thermal hydraulic}
 \newacronym{uq}{UQ}{uncertainty quantification}
 \newacronym{vera}{VERA}{Virtual Environment for Reactor Applications}
 
@@ -135,12 +125,12 @@
 
 %Add the revision log and page descriptions
 \revisionlog{
-0 & 6/17/2022 & All & New template and updates for VERA 4.3 release.
-This version supersedes previous document version CASL-U-2014-0014-005. \\
+0 & 6/17/2022 & All & input updates for VERA 4.4 release.
+This version supersedes previous document version ORNL/SPR-2022/2509. \\
 }{None}{None}{None}{All}
 
 %Here's how to add a signature page (class provides 2, 3, 4, or 5 signatures)
-\signaturepagetwo{Erik Walker, VERAIO Product Software Manager}{Aaron Graham, Independent Reviewer}
+\signaturepagetwo{Aaron Graham, VERAIO Product Software Manager}{Bob Salko, Independent Reviewer}
 
 \tableofcontents
 % LIST OF FIGURES: optional if fewer than 5 are used
@@ -152,50 +142,7 @@ This version supersedes previous document version CASL-U-2014-0014-005. \\
 % LIST OF ABBREVIATIONS
 % NOTE: this will only print if `makeindex X.ist -o X.acr X.acn` is executed.
 % This is part of the included Makefile.
-\printacronyms[title=Abbreviations]
-
-\phantomsection
-\section*{\centerline{\large{Abbreviations}}}
-\addcontentsline{toc}{section}{\texorpdfstring{\MakeUppercase{Abbreviations}}{Abbreviations}}
-
-\begin{table}[htb]
-\begin{tabular}{ll}
-  AOA     & axial offset anomaly \\
-  CASL    & Consortium for Advanced Simulation of Light Water Reactors \\
-  BEAVRS  & Benchmark for Evaluation And Validation of Reactor Simulations \\
-  BOC     & beginning of cycle \\
-  BWR     & boiling water reactor \\
-  CFD     & computational fluid dynamics \\
-  CHF     & critical heat flux \\
-  CILC    & crud-induced localized corrosion \\
-  CIPS    & crud-induced power shift (also called \textit{axial offset anomaly} [AOA]) \\
-  CMFD    & coarse-mesh finite difference \\
-  CTF     & COBRA-TF (subchannel code) \\
-  DNB     & departure from nucleate boiling \\
-  EFPD    & effective full power day \\
-  EOC     & end of cycle \\
-  GT      & guide tube \\
-  GWd/MT  & gigawatt-days per metric ton heavy metal \\
-  HFP     & hot full power \\
-  HZP     & hot zero power \\
-  IT      & instrument tube \\
-  LWR     & light-water reactor \\
-  MOC     & middle of cycle \\
-  MOF     & mixed oxide fuel \\
-  ModSim  & modeling and simulation \\
-  MWd/MT  & megawatt-days per metric ton heavy metal \\
-  PCI     & pellet--cladding interaction \\
-  PCM     & per cent mille (10$^{-5}$) \\
-  PPM     & parts per million (usually boron) \\
-  PWR     & pressurized water reactor \\
-  QA      & quality assurance \\
-  RIA     & reactivity insertion accident \\
-  STH     & system thermal hydraulic \\
-  UQ      & uncertainty quantification \\
-  VERA    & Virtual Environment for Reactor Applications \\
-\end{tabular}
-\end{table}
-
+\printacronyms[title=ABBREVIATIONS]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DOCUMENT CONTENT
@@ -218,7 +165,7 @@ Geometric objects are defined as the physical ``parts'' of the reactor core, whi
 fuel assemblies, control rod assemblies, removable burnable poison assemblies, and detectors.
 By defining each geometric object as a separate block, the objects can be described
 independently of each other, relying on very little global information. The independent
-descriptions make quality assurance (QA) easier, they allow objects to be defined in one cycle,
+descriptions make \ac{qa} easier, they allow objects to be defined in one cycle,
 and they allow objects to be reused in subsequent cycles without concerns about input conflicts.
 Another advantage of the module approach is that it is easier to shuffle fuel assemblies
 and to insert and withdraw ``inserts'' such as control rods, detectors, and removable burnable
@@ -231,7 +178,7 @@ used with multiple physics codes.
 
 The VERA input blocks are as follows:
 \begin{description}
-\item[CASEID] This block contains an input title card.
+\item[CASEID] This block contains an input title input.
 \item[CORE] This block describes the core layout, including the core map, assembly locations,
   control rod locations, and assembly insert locations. The CORE block contains data that does not change
   during a cycle depletion.
@@ -252,16 +199,17 @@ The VERA input blocks are as follows:
 \item[DETECTOR] This block contains the geometry and physical description of a detector string.
 \item[EDITS] This block contains information about what edits the code should produce.
 \item[COUPLING] This block contains parameters for coupling different physics codes together.
+\item[TRANSIENT] This block contains parameters for transient calculations.
+\item[RUN] This block contains runtime parameters for the execution of \ac{vera} calculations.
 \end{description}
 
 In addition to the blocks listed above, additional code-specific blocks contain
-options specific to each physics code.
-Examples of code-specific blocks are {\bf COBRATF}, {\bf MPACT}, and {\bf SHIFT}.
+options specific to each physics code: {\bf COBRATF}, {\bf MPACT}, {\bf MAMBA}, {\bf SHIFT}, {\bf BISON}, and {\bf FAST}.
 Additional code-specific input blocks can be added as new physics codes are added to the core simulator.
 
 The following sections in this chapter describe the most common concepts and features of each input block.
-This section does not provide a comprehensive list of each input card or option on each card.
-Refer to Chapter~\ref{chap:cards} for a detailed list of all inputs and options.
+This section does not provide a comprehensive list of each input or option on each input.
+Refer to Chapter~\ref{chap:inputs} for a detailed list of all inputs and options.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Section: Syntax
@@ -279,12 +227,12 @@ block with the same name of an existing block will overwrite the existing block 
 There is no required order of the blocks in the input file except for the [STATE] blocks,
 in which each statepoint must be entered in chronological order.
 
-The blocks contain input cards that are generally organized as keyword-value pairs
+The blocks contain inputs that are generally organized as keyword-value pairs
 or keyword-tag-value triplets, where \textit{tag} denotes the keyword name tag that can be
 referenced in the other related commands. Keywords should not have blank spaces
-since the spaces typically imply delimiters in the card data.  A value can be a single entry
+since the spaces typically imply delimiters in the input data.  A value can be a single entry
 or a list entry.
-Input card value entries can contain different data types, depending on the card format.
+input value entries can contain different data types, depending on the input format.
 The data types are real numbers, integers, characters, and character strings.
 String entries that include spaces should be enclosed in
 single or double quote pairs.
@@ -293,27 +241,29 @@ The block, keyword, and tag names are case sensitive. Therefore, users should no
 entries in the file.
 
 In this manual, all input examples are shown in {\tt typewriter font}.
-When input cards are used in the text (not in the examples), they are listed in {\it italic font}.
+When inputs are used in the text (not in the examples), they are listed in {\it italic font}.
 All block names are enclosed in square brackets.
 
 The exclamation mark, ``!'',  is a special character used for adding comments in an input file; everything from an exclamation point to the
 end of the line is a comment and is ignored by the processor.
+
+The semicolon, ``;'', is a record termination character that can be used to list several input options on a single line.  Using the semicolon causes the processor to behave as if everything following the semicolon were placed on a new line.  This is useful primarily for visual organization of the input file.
 
 The keyword {\it include} can be used to insert the contents of another file into the input file.
 
 Short commands are expected to complete within a single line. Longer commands, like input maps,
 can be split across multiple lines.
 
-An example input fragment with blocks, comments, and cards is shown below.
+An example input fragment with blocks, comments, and inputs is shown below.
 \begin{Verbatim}[fontsize=\small]
 
   ! comments start with an exclamation point
 
   [STATE]            ! block names are enclosed in square brackets
-    power   85.0     ! cards with parameters(s)
-    flow    80.0     ! cards and parameters are separated by one or more spaces
+    power   85.0     ! inputs with parameters(s)
+    flow    80.0     ! inputs and parameters are separated by one or more spaces
 
-    rodbank A 228    ! cards can span more than one line
+    rodbank A 228    ! inputs can span more than one line
             B 228
             C 228
             D 228
@@ -366,13 +316,18 @@ Additional list options can be found on the \href{https://metacpan.org/pod/relea
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Input Card Descriptions} \label{chap:cards}
-This chapter contains a complete list of the available input cards.
+%  Chapter: Edits
+\include{edits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Input Descriptions} \label{chap:inputs}
+This chapter contains a complete list of the available inputs.
 
 The input for each block is given in separate subsections.
 
-In this chapter, input cards are given in {\bf bold} text followed by the parameters on the card.
-Following each input card is a description of the parameters on that card.
+In this chapter, inputs are given in {\bf bold} text followed by the parameters on the input.
+Following each input is a description of the parameters on that input.
 
 \include{cards}
 
@@ -407,7 +362,7 @@ CASL Technical Report: CASL-U-2013-0196-000, December 2013.
 %%%%%%%%%%%%%%%%%%
 % Example 2
 \subsection{Example 2 -- Single Assembly}
-The second example is a partial input for a single-assembly with T/H feedback.
+The second example is a partial input for a single-assembly with \ac{th} feedback.
 This problem is Problem 6 of the VERA Core Physics Benchmark Progression Problem Specifications.  See:
 \begin{itemize}
 \item A. Godfrey, ``VERA Core Physics Benchmark Progression Problem Specifications,''
@@ -439,12 +394,12 @@ CASL Technical Report: CASL-U-2012-0131-004, August 2014.
 A single assembly is defined by creating a core with one assembly in it,
 as described in the small-core geometry description in Section~\ref{sec:smallcoregeom}.
 
-The 2D lattice is defined by specifying an {\it axial} card with one level and defining
+The 2D lattice is defined by specifying an {\it axial} input with one level and defining
 reflective boundary conditions on the top and bottom of the core with the {\it bc\_top} and {\it bc\_bot}
-input cards.
+inputs.
 
 This example problem also shows how multiple assembly, insert, and control types can be
-defined by using multiple {\it axial} cards in a single input block.
+defined by using multiple {\it axial} inputs in a single input block.
 
 \include{example3}
 
@@ -452,6 +407,29 @@ defined by using multiple {\it axial} cards in a single input block.
 
 %  Chapter: VERARun Script
 \include{verarun}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Acknowledgments}
+
+This research was supported by the US Department of Energy and the Nuclear Energy Advanced Modeling and Simulation Program.
+
+The current version of this document was prepared by the authors listed on the title page.  
+However, substantial parts of this document were originally written as part of prior revisions and the authors wish to acknowledge
+the contributions of past authors (their affiliation at the time of their contribution is listed after their names):
+\begin{itemize}[noitemsep]
+  \item Scott Palmtag, North Carolina State University
+  \item Andrew Godfrey, Oak Ridge National Laboratory
+  \item Erik Walker, Oak Ridge National Laboratory
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{REFERENCES}
+\nocite{*}
+\bibliography{references}
+\bibliographystyle{unsrt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}

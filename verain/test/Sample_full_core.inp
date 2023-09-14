@@ -18,8 +18,8 @@
 !
 !  Draft 2 -
 !    Changed maps to use dashes instead of "0" to signify blank space
-!    Changed crd_map and rodbank card to use bank names instead of numbers
-!    Added seperate ppitch card in [ASSEMBLY]
+!    Changed crd_map and rodbank input to use bank names instead of numbers
+!    Added seperate ppitch input in [ASSEMBLY]
 !    Add [DETECTOR] block
 !
 !  Draft 3 -
@@ -372,7 +372,7 @@
   mat pyrex  2.23
   mat ss     8.0
 
-! *** check cell cards
+! *** check cell inputs
   cell 1  0.214 0.230 0.241 0.427 0.437 0.484 / he ss he  pyrex he ss     ! radial pyrex geometry
   cell 2                          0.437 0.484 /                 he ss     ! pyrex plenum
   cell 3  0.538 / ss                                                      ! thimble plug
