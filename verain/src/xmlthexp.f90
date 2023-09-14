@@ -24,7 +24,7 @@
 !               a) do not require tfuel in input if specified on command line
 !               b) use *first* occurence of tinlet in XML file instead of *last*
 !               c) update HZP logic
-!  2016-06-02 - add MPACT axial_mesh card
+!  2016-06-02 - add MPACT axial_mesh input
 !  2016-06-05 - increase output from 5 to 8 decimal places, volume of IFBA was not being preserved
 !  2016-11-08 - (Ben) Increased maxline to 15000
 !  2016-11-09 - Make number of lines allocatable

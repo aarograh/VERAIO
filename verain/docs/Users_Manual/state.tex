@@ -14,8 +14,8 @@ The [STATE] block defines the state of the core
 at a particular point in time.
 These values will typically change during a cycle depletion.
 
-An example showing the most common input cards in the [STATE] block is shown below.
-A complete listing of all the input cards in the [STATE] block is located in Chapter~\ref{chap:cards}.
+An example showing the most common inputs in the [STATE] block is shown below.
+A complete listing of all the inputs in the [STATE] block is located in Chapter~\ref{chap:inputs}.
 
 \begin{Verbatim}[fontsize=\small]
 
@@ -24,7 +24,7 @@ A complete listing of all the input cards in the [STATE] block is located in Cha
     flow   100.0       ! % of rated flow
     pressure 2250.0    ! psia
     tinlet 557.33 F    !
-    feedback on        ! turn on T/H feedback
+    feedback on        ! turn on \ac{th} feedback
 
     boron   1285       ! initial boron ppmB
     search  boron      ! turn on boron search
@@ -42,15 +42,15 @@ A complete listing of all the input cards in the [STATE] block is located in Cha
 
 \end{Verbatim}
 
-The {\it sym} card tells the code to run the calculation in full-core or
+The {\it sym} input tells the code to run the calculation in full-core or
 quarter-core symmetry. If the calculation is run in quarter-core symmetry, then the symmetry is either
-set to quarter-core rotational or quarter-core mirror by the {\it bc\_sym} card in the [CORE] block.
+set to quarter-core rotational or quarter-core mirror by the {\it bc\_sym} input in the [CORE] block.
 
-The {\it rodbank} card is used to position the control rods. The {\it rodbank} input includes pairs of bank names
+The {\it rodbank} input is used to position the control rods. The {\it rodbank} input includes pairs of bank names
 and bank positions. The bank names correspond to the {\it crd\_map} in the [CORE] block.
 The positions indicate the position of the control rod bank in steps.
 Step 0 is fully inserted.
-The number of steps for a rod to be completely withdrawn is set by the {\it stroke} card in
+The number of steps for a rod to be completely withdrawn is set by the {\it stroke} input in
 the [CONTROL] block (see Section~\ref{sec:stroke}). For Westinghouse PWRs, a typical value of fully withdrawn is 228 steps.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -60,24 +60,24 @@ The [EDITS] block is used to control the output edits.
 
 One of the edits produced by the core simulator is the rod power.  The user has
 the ability to specify the axial levels that the power is averaged over with
-the {\it axial\_edit\_bounds} card.
+the {\it axial\_edit\_bounds} input.
 The user may choose to average power over uniform axial intervals (like most nodal codes),
 or to specify the edit intervals manually.
 
 (Note: the edit options are under development and more options will be added in the future.)
 
-A complete listing of all the input cards in the [EDITS] block is located in Chapter~\ref{chap:cards}.
+A complete listing of all the inputs in the [EDITS] block is located in Chapter~\ref{chap:inputs}.
 
 \subsubsection{CTF Nodalization}
 
-The {\it axial\_edit\_bounds} card is also used to set the axial nodalization when coupling
-the neutronics physics code to the COBRA-TF (CTF) subchannel code.
+The {\it axial\_edit\_bounds} input is also used to set the axial nodalization when coupling
+the neutronics physics code to the CTF subchannel code.
 
 When running CTF, the grid boundaries must be explicitly
 included in the {\it axial\_edit\_bounds}. This process can get a little complicated for the user.
 In the VERA input, spacer grids are defined in the [ASSEMBLY] block by specifying the
-grid heights on the {\it grid} card and the elevations of the grid midpoints
-on the {\it grid\_axial} card.
+grid heights on the {\it grid} input and the elevations of the grid midpoints
+on the {\it grid\_axial} input.
 From the grid heights and midpoints, the elevations at the top and bottom of the spacer grid
 can be calculated, and then the top and bottom elevations must be included
 in the {\it axial\_edit\_bounds}.
@@ -117,7 +117,7 @@ used when coupling different physics codes. These values are used to determine
 convergence {\it between} physics codes. Convergence criteria {\it within} a physics
 code is controlled by the code-specific block.
 
-Refer to Chapter~\ref{chap:cards} for a complete listing of all the cards in the [COUPLING] block.
+Refer to Chapter~\ref{chap:inputs} for a complete listing of all the inputs in the [COUPLING] block.
 
 No code-specific information is included in the [COUPLING] block; all code-specific information
 is contained in the code-specific blocks. The [COUPLING] block is only used to define
@@ -125,25 +125,25 @@ generic coupling parameters.
 
 As an example, consider the following multiphysics code coupling:
 \begin{enumerate}
-  \item  Run T/H calculation
+  \item  Run \ac{th} calculation
   \item  Run neutronics calculation
   \item  Check eigenvalue convergence \label{stepepsk}
   \item  Check power convergence \label{stepepsp}
   \item  Relax/dampen the power shape
   \item  If not converged, go to step 1.
 \end{enumerate}
-The eigenvalue convergence in step~\ref{stepepsk} uses the card {\it epsk} to check
+The eigenvalue convergence in step~\ref{stepepsk} uses the input {\it epsk} to check
 the change in eigenvalue between coupled iterations.
 There are additional eigenvalue convergence criteria {\it within} the neutronics
 code, but the internal parameters are specified in the individual code blocks.
 
-The power convergence in step~\ref{stepepsp} uses the card {\it epsp} to check
+The power convergence in step~\ref{stepepsp} uses the input {\it epsp} to check
 the change in power between coupled iterations.
 
 Additional convergence checks are made on the peak fuel temperature, maximum change in density,
 and change in boron concentration (if applicable).
 
-The example shown above uses a Picard iteration to converge. Picard iterations usually
+The example shown above uses a Piinput iteration to converge. Piinput iterations usually
 need to apply a relaxation factor (also called a damping factor or under-relaxation factor) to
 one or more of the calculated quantities to converge.
 The relaxation factors are applied in the following manner:
@@ -173,5 +173,4 @@ An example [COUPLING] input block is shown below.
 
 \end{Verbatim}
 
-A complete listing of all the input cards in the [COUPLING] block is located in Chapter~\ref{chap:cards}.
-
+A complete listing of all the inputs in the [COUPLING] block is located in Chapter~\ref{chap:inputs}.

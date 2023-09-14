@@ -345,12 +345,6 @@
     <Parameter name="non_fuel_pin_input_file_template" type="string" value="guide_tube.moose.i.template"/>
     <Parameter name="output_average_axial_values" type="bool" value="true"/>
     <Parameter name="outputs_file_base" type="string" value="output_RISO_AN8_bump"/>
-    <Parameter name="solve_type" type="string" value="tiamat_inline"/>
-  </ParameterList>
-  <ParameterList name="TIAMAT">
-    <Parameter name="conserve_power_in_tiamat_transfer" type="bool" value="true"/>
-    <Parameter name="num_subcycle_iterations_before_tiamat_ramping" type="int" value="0"/>
-    <Parameter name="run_transient" type="bool" value="false"/>
-    <Parameter name="solver" type="string" value="jacobi"/>
+    <Parameter name="solve_type" type="string" value="standalone"/>
   </ParameterList>
 </ParameterList>

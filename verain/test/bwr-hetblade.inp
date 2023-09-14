@@ -113,7 +113,7 @@
 
 !*** 3D BWR control blades have not been designed yet.
 !*** How do we indicate control blades from bottom of core?
-!*** Do we need a rodmap and axial card?
+!*** Do we need a rodmap and axial input?
 
   mat ss304 8.0  ss
   mat abs   4.62 b4c  ! ** check for 70% theoretical density
@@ -122,7 +122,7 @@
   cell newcell1 0.17526 0.23876 / ss304 ss304 ss304
 
 !            label  span   th       rad    sheath    wing
-  bladegeom  OEM 12.3825 0.79248 0.39624 0.14224  1.98501  !split from old "blade" card.  Added a blade_geom label to be referenced in blade_type
+  bladegeom  OEM 12.3825 0.79248 0.39624 0.14224  1.98501  !split from old "blade" input.  Added a blade_geom label to be referenced in blade_type
 
 !            label  geomlabel mat ntube celllabel fillermat hor/vert
   bladetype rodlets OEM ss304 vert 21 21*TUBE0

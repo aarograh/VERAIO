@@ -4,7 +4,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse multiple state blocks containing
-!> differing options selected for the tinlet card and table input for inlet
+!> differing options selected for the tinlet input and table input for inlet
 !> temperature as a function of power.
 !> @endreq
 !===============================================================================

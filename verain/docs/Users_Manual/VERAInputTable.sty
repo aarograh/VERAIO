@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Command to abstract the creation of card/parameter description tables in
+% Command to abstract the creation of input/parameter description tables in
 % computer code user manuals.
 %
 % Arguments are as follows:
 %
-%   name             = Input identifier (e.g., card or parameter name)
+%   name             = Input identifier (e.g., input or parameter name)
 %   type             = Input datum/data format (e.g., integer, floating point real number)
 %   need             = Required or optional
 %   unitsdefault     = Default unit (leave blank if N/A)
@@ -24,6 +24,28 @@
 
 %\usepackage{lmodern}
 \usepackage[T1]{fontenc}
+% Create a conditional to check for whether fragile, unexpanded, arguments are
+% indeed null.
+\newcommand{\ifnoapplicable}[3]{%
+  \setbox1=\vbox{#1}%
+  \setbox2=\vbox{#2}%
+  \ifdim\wd1=0pt %
+    {#2}% if #1 is empty
+  \else%
+    \ifdim1pt=\dimexpr\ht1+\dp1\relax
+      {#2}% if #1 is empty
+    \else% #1 is not empty
+      \ifdim\wd2=0pt
+      \else
+        \ifdim2pt=\dimexpr\ht2+\dp2\relax% #2 is empty
+        \else
+          {#3}% #1 and #2 are not empty
+        \fi
+      \fi
+    \fi
+  \fi%
+}
+
 % Create a conditional to check for whether fragile, unexpanded, arguments are
 % indeed null.
 \newcommand{\ifnotext}[3]{%
@@ -72,7 +94,7 @@
 
   % Actual table code.
   \tabulinesep=2pt
-  \begin{longtabu} to 1.000\linewidth {|X[6,l]|X[3,c]|X[1,r]|}
+  \begin{longtabu} to 0.99\linewidth {|X[6,l]|X[3,c]|X[1,r]|}
 % \caption{}\\
     \hline
       \texttt{\cmdDOC@vals@name} & \cmdDOC@vals@type & \cmdDOC@vals@need \\
@@ -88,7 +110,7 @@
     \endlastfoot
 
     \hline
-      \multicolumn{3}{|p{\dimexpr\linewidth-2\tabcolsep\relax}|}{Units: %
+      \multicolumn{3}{|p{\dimexpr0.99\linewidth-2\tabcolsep\relax}|}{Units: %
          \ifthenelse{\equal{\cmdDOC@vals@unitsdefault}{}}%
            {N/A}%
            {\cmdDOC@vals@unitsdefault\ (default)}%
@@ -96,22 +118,22 @@
            {\cmdDOC@vals@unitsother}%
            {, \cmdDOC@vals@unitsother}} \\
     \hline
-      \multicolumn{3}{|p{\dimexpr\linewidth-2\tabcolsep\relax}|}{Applicable Value(s): %
+      \multicolumn{3}{|p{\dimexpr0.99\linewidth-2\tabcolsep\relax}|}{Applicable Value(s): %
          \ifthenelse{\equal{\cmdDOC@vals@valuedefault}{}}%
            {}%
            {\cmdDOC@vals@valuedefault\ (default)}%
-         \ifnotext{\unexpanded{\cmdDOC@vals@valuesapplicable}}%
+         \ifnoapplicable{\unexpanded{\cmdDOC@vals@valuedefault}}%
            {\cmdDOC@vals@valuesapplicable}%
            {, \cmdDOC@vals@valuesapplicable}} \\
     \hline
-      \multicolumn{3}{|p{\dimexpr\linewidth-2\tabcolsep\relax}|}{Limitation(s): %
+      \multicolumn{3}{|p{\dimexpr0.99\linewidth-2\tabcolsep\relax}|}{Limitation(s): %
          \ifnotext{\unexpanded{\cmdDOC@vals@limitations}}%
            {None}%
            {\cmdDOC@vals@limitations}} \\
     \hline
-      \multicolumn{3}{|p{\dimexpr\linewidth-2\tabcolsep\relax}|}{Description: \cmdDOC@vals@description} \\
+      \multicolumn{3}{|p{\dimexpr0.99\linewidth-2\tabcolsep\relax}|}{Description: \cmdDOC@vals@description} \\
     \hline
-      \multicolumn{3}{|p{\dimexpr\linewidth-2\tabcolsep\relax}|}{Notes: %
+      \multicolumn{3}{|p{\dimexpr0.99\linewidth-2\tabcolsep\relax}|}{Notes: %
          \ifnotext{\unexpanded{\cmdDOC@vals@notes}}%
            {None}%
            {\cmdDOC@vals@notes}} \\
@@ -122,4 +144,3 @@
 \makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

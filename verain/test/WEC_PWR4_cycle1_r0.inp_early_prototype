@@ -51,10 +51,10 @@
 ! ref-keyword followed by integer_id label_id  (1, 2.03) not needed, throw out
 ! MOD- keyword for moderator, SSL-stainless steel, INC-Inconel, ZR4-Zircalloy, composition volume fraction, must add to 100  
   ref 11 RF1 / MOD  30.1         ! custom reflector materials
-                      SSL  69.9         ! unlike the mixture card,
+                      SSL  69.9         ! unlike the mixture input,
   ref 12 RF2 / MOD  36.0         ! the reflector input uses volume fractions
                       SSL  56.2         !
-                      INC   7.8         ! the mixture card allows flexibility for input
+                      INC   7.8         ! the mixture input allows flexibility for input
   ref 13 RF3 / MOD  27.4         ! of isotopes or materials by weight fraction
                       SSL  17.3
                       INC   8.2

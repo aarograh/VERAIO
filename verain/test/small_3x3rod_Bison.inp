@@ -178,7 +178,7 @@
 
 [BISON]
   executioner_start_time = -100
-  solve_type tiamat_inline
+  solve_type standalone
   bcs_plenumpressure_plenumpressure_initial_pressure = 2.0e6
   bcs_plenumpressure_plenumpressure_startup_time = 1e4
   burnup_burnup_num_radial = 6
@@ -202,9 +202,3 @@
   rlx_tfuel   1.0
   rlx_den     1.0
   maxiter     100
-
-[TIAMAT]
-  solver jacobi
-  run_transient false
-  conserve_power_in_tiamat_transfer true
-  num_subcycle_iterations_before_tiamat_ramping 0

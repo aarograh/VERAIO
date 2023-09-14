@@ -18,8 +18,8 @@
 !
 !  Draft 2 -
 !    Changed maps to use dashes instead of "0" to signify blank space
-!    Changed crd_map and rodbank card to use bank names instead of numbers
-!    Added seperate ppitch card in [ASSEMBLY]
+!    Changed crd_map and rodbank input to use bank names instead of numbers
+!    Added seperate ppitch input in [ASSEMBLY]
 !    Add [DETECTOR] block
 !
 !  Draft 3 -
@@ -243,7 +243,7 @@ crd_map
      9 9 9 9 9 9 9 9
      9 9 9 9 9 9 9 9 9
 
-! Parser: First label on following card is assembly_id (which corresponds to core maps)
+! Parser: First label on following input is assembly_id (which corresponds to core maps)
 
 ! *** add top and bottom "shoulders"
 ! *** check plug lengths
@@ -315,8 +315,8 @@ crd_map
      - - - - - - - -
      - - - - - - - - -
 
-! Parser: First label on following card is control_id.  This is currently not used.
-! Parser: Following card is used to define control_num_levels, control_axial_heights,
+! Parser: First label on following input is control_id.  This is currently not used.
+! Parser: Following input is used to define control_num_levels, control_axial_heights,
 !   and control_cellmap_axial_level  (from the cellmap sublist)
 
 ! ** check elevations
@@ -328,7 +328,7 @@ crd_map
   title "Pyrex Inserts"  ! insert_title
   npin 17                ! insert_num_pins
 
-! *** check cell cards
+! *** check cell inputs
   cell 1  0.214 0.230 0.241 0.427 0.437 0.484 / he ss he  pyrex he ss     ! radial pyrex geometry
   cell 2                          0.437 0.484 /                 he ss     ! pyrex plenum
   cell 3  0.538 / ss                                                      ! thimble plug
@@ -404,8 +404,8 @@ crd_map
      - - - - - - - -
      - - - - - - - - -
 
-! Parser: First label on following card is insert_id (which corresponds to core maps)
-! Parser: Following card is used to define insert_num_levels, insert_axial_heights,
+! Parser: First label on following input is insert_id (which corresponds to core maps)
+! Parser: Following input is used to define insert_num_levels, insert_axial_heights,
 !   and insert_cellmap_axial_level  (from the cellmap sublist)
 
   axial BP8  15.76 PY8  376.44 PLEN 394.3

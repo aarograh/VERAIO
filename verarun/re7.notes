@@ -129,7 +129,7 @@ build hierarchy
 - future don't need "th_exp" param
 - add option -s to create subdirectory,
     -- default current dir (must remove outputs)
-    -- all occurrences "restart_write" card in XML (p9)
+    -- all occurrences "restart_write" input in XML (p9)
 - env for email address
 - option to clobber all restart files
 - take out multistate_cobra

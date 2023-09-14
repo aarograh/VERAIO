@@ -14,7 +14,7 @@ Multiple [ASSEMBLY] blocks are permitted to describe different assembly designs 
 
 If there are multiple assembly designs that are geometrically identical (i.e., everything is the same except
 the enrichments), then they can all be defined in a single [ASSEMBLY] block.
-Each assembly type will have a unique {\it axial} card with possibly unique axial levels and lattice types.
+Each assembly type will have a unique {\it axial} input with possibly unique axial levels and lattice types.
 Assemblies within a single reload typically have a design similar enough that they can share a single
 [ASSEMBLY] block.
 
@@ -31,13 +31,14 @@ A typical PWR assembly is shown in Figure~\ref{fig:assembly}. Refer to this figu
 \caption{\label{fig:assembly} PWR fuel assembly (Image courtesy of the US Nuclear Regulatory Commission).}
 \end{figure}
 
-A complete list of all the input cards in the [ASSEMBLY] block is located in Chapter~\ref{chap:cards}.
+A complete list of all the inputs in the [ASSEMBLY] block is located in Chapter~\ref{chap:inputs}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Initial Data}
+\label{sec:assembly-initial-data}
 
 Each assembly block must contain a geometry description with the number of pins across the assembly and
-the pin pitch.  An assembly block can also include an optional title card.
+the pin pitch.  An assembly block can also include an optional title input.
 \begin{Verbatim}[fontsize=\small]
 
   title "Westinghouse 17x17"      ! assembly title
@@ -50,7 +51,7 @@ The number of pins {\it npin} must be the same for every assembly in a core.
 
 The inter-assembly gap on each side of the assembly is calculated as $[apitch-npin*ppitch]/2$
 
-For a boiling water reactor (BWR), a channel box may be specified with the following cards. See Section~\ref{sec:channel_box} for a complete
+For a \ac{bwr}, a channel box may be specified with the following inputs. See Section~\ref{sec:channel_box} for a complete
 description of the channel box inputs.
 \begin{Verbatim}[fontsize=\small]
 
@@ -60,7 +61,7 @@ description of the channel box inputs.
 
 \end{Verbatim}
 
-The fuel and structural materials are defined with the following cards.
+The fuel and structural materials are defined with the following inputs.
 See Chapter~\ref{chap:materials} for a complete description of the material inputs.
 \begin{Verbatim}[fontsize=\small]
 
@@ -75,9 +76,9 @@ See Chapter~\ref{chap:materials} for a complete description of the material inpu
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Cell Descriptions}
 
-Cell cards are used to describe ``pincells.''  A pincell is defined as a configuration
+Cell inputs are used to describe ``pincells.''  A pincell is defined as a configuration
 of concentric cylinders (or rings) centered in a square region of coolant.
-Cell configurations can be used to model fuel rods or guide tubes (GTs),
+Cell configurations can be used to model fuel rods or \acp{gt},
 as shown in Figure~\ref{fig:pincell}.
 \begin{figure}
 \begin{center}
@@ -86,7 +87,7 @@ as shown in Figure~\ref{fig:pincell}.
 \caption{\label{fig:pincell} Pincell diagrams of a fuel rod and a guide tube.}
 \end{figure}
 
-The first parameter on the {\it cell} card is the cell ID.
+The first parameter on the {\it cell} input is the cell ID.
 This is followed by a list of radii for each ring in the cell, followed by a slash.
 After the slash is a list of materials that comprise each ring.
 The cell IDs are used in the rod maps described in the next section.
@@ -104,20 +105,20 @@ The cell IDs are used in the rod maps described in the next section.
 
 In this example, in cell ``1,'' the material ``U31'' extends from radius 0 to 0.4096.
 The material ``he'' extends from a radius 0.4096 to 0.418.
-The materials ``U31''  and ``he'' are defined on {\it fuel} and {\it mat} cards, respectively.
+The materials ``U31''  and ``he'' are defined on {\it fuel} and {\it mat} inputs, respectively.
 (Refer to Chapter~\ref{chap:materials} for a complete description of material definitions.)
 
 The outside of each cell is automatically filled with the special material ``mod,'' which
 refers to the moderator (or coolant).
-The composition of ``mod'' is calculated by the codes using the local thermal hydraulic (T/H) conditions and the
-soluble boron concentration and cannot be specified by a user on a {\it mat} card.
+The composition of ``mod'' is calculated by the codes using the local thermal hydraulic (\ac{th}) conditions and the
+soluble boron concentration and cannot be specified by a user on a {\it mat} input.
 
-In the example above, the GT and instrument tube (IT) descriptions
+In the example above, the \ac{gt} and \ac{it} descriptions
 use the special moderator material ``mod'' to define the moderator material on both
 the inside and outside of the tubes.
 
 Large water rods that span more than one lattice cell can be specified by adding an optional keyword ``large4''
-to the end of the {\it cell} card.
+to the end of the {\it cell} input.
 \begin{Verbatim}[fontsize=\small]
 
 ! large CE 16x16 water rod
@@ -190,7 +191,7 @@ Each entry in a rod map must be a valid cell ID.
 \subsubsection{Axial Descriptions}
 
 After rod maps are defined for each axial level, the lattices are ``stacked'' into
-an assembly using an {\it axial} card as shown below.
+an assembly using an {\it axial} input as shown below.
 
 \begin{Verbatim}[fontsize=\small]
   axial A1    6.050
@@ -203,20 +204,20 @@ an assembly using an {\it axial} card as shown below.
 
 \end{Verbatim}
 
-The {\it axial} card tells the code how to place the lattices axially.
+The {\it axial} input tells the code how to place the lattices axially.
 The first parameter is the name of the assembly (A1), followed by a
 list of elevations and lattice types.
 For example, lattice ``FUEL1'' extends from 11.951 to 377.711 cm axially.
 
 Multiple assembly types can be defined in a single [ASSEMBLY] block by using
-multiple {\it axial} cards, each with a unique assembly ID.
+multiple {\it axial} inputs, each with a unique assembly ID.
 
 All axial elevations are defined relative to the top of the lower core plate.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Grid Spacer Descriptions}
 
-Grid cards are used to define unique grid spacer types.
+Grid inputs are used to define unique grid spacer types.
 The following example defines two grid types, ``END'' and ``MID.''
 \begin{Verbatim}[fontsize=\small]
 
@@ -225,7 +226,7 @@ The following example defines two grid types, ``END'' and ``MID.''
 
 \end{Verbatim}
 
-The grid types are placed axially with the {\it grid\_axial} card:
+The grid types are placed axially with the {\it grid\_axial} input:
 %\vfill   % don't split map
 \begin{Verbatim}[fontsize=\small]
 
@@ -252,7 +253,7 @@ composed of water, steel, and zirconium. The user only specifies a nozzle mass a
 The total volume of the nozzle region is calculated from the assembly pitch and nozzle height.
 The volume of the nozzle is calculated from the nozzle mass and density.
 The volume of the coolant is then calculated as the total volume minus the volume of the nozzle.
-The coolant density is updated with the local T/H conditions.
+The coolant density is updated with the local \ac{th} conditions.
 
 % A typical PWR assembly nozzle is shown in Figure~\ref{fig:nozzle}.
 % \begin{figure}
@@ -268,12 +269,12 @@ The coolant density is updated with the local T/H conditions.
   upper_nozzle  ss 8.827 6250.0  ! mat, height (cm), mass (g)
 \end{Verbatim}
 
-Only a single material can be specified on a nozzle card.  To use
+Only a single material can be specified on a nozzle input.  To use
 more than one material to define a nozzle, the user can define a custom material that
-is a mixture of the materials and then use the custom material in the nozzle card.
+is a mixture of the materials and then use the custom material in the nozzle input.
 
-Note that the {\it lower\_nozzle} height should match the bottom elevation on the {\it axial} card.
-The {\it upper\_nozzle} height + the top elevation on the {\it axial} card must match the
+Note that the {\it lower\_nozzle} height should match the bottom elevation on the {\it axial} input.
+The {\it upper\_nozzle} height + the top elevation on the {\it axial} input must match the
 core {\it height} in the [CORE] block.
 The input parser does not currently perform a check to make sure the elevations are consistent.
 Therefore, this check should be performed in each of the individual physics codes.
@@ -333,7 +334,7 @@ The name of the control rod ``CR1'' refers to the control rod type in the
 
 Control rod positions are assigned to a control rod bank with the {\it crd\_bank} map
 in the [CORE] block, and then the banks are positioned with the
-{\it rodbank} card in the [STATE] block.
+{\it rodbank} input in the [STATE] block.
 
 Note that the locations of the control rod fingers must match the GT locations in the
 corresponding [ASSEMBLY] block descriptions.  Furthermore, the outer radii of the control
@@ -345,19 +346,19 @@ This check should be performed in each of the individual physics codes.
 The user can define materials in the [CONTROL] block.  These materials only have scope in
 this block and are not accessible by other blocks. See Chapter~\ref{chap:materials} for details.
 
-A complete list of all the input cards in the [CONTROL] block is provided in Chapter~\ref{chap:cards}.
+A complete list of all the inputs in the [CONTROL] block is provided in Chapter~\ref{chap:inputs}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Control Rod Stroke}
 \label{sec:stroke}
 
 The difference between control rod descriptions and assembly descriptions is that
-the control rods move during operation. This movement is defined with a {\it stroke} card.
+the control rods move during operation. This movement is defined with a {\it stroke} input.
 
-The first value on the {\it stroke} card is the total length of the control rod travel (stroke)
+The first value on the {\it stroke} input is the total length of the control rod travel (stroke)
 from fully inserted to fully withdrawn.
 
-The second value on the {\it stroke} card is the number of steps in the fully withdrawn position.
+The second value on the {\it stroke} input is the number of steps in the fully withdrawn position.
 Step 0 is the fully inserted position. The number of steps in the fully withdrawn position
 is specified by the user, but 228 steps is often the number used for typical Westinghouse PWRs.
 
@@ -374,8 +375,8 @@ The geometry description in the input is for a control rod in the fully inserted
 
 \subsubsection{Control Rod Position Example}
 
-From the {\it axial} card shown above, the bottom of the AIC at the fully inserted position is 15.46 cm.
-From the {\it stroke} card, the total stroke is 360.0 cm, and the number of steps in the fully withdrawn
+From the {\it axial} input shown above, the bottom of the AIC at the fully inserted position is 15.46 cm.
+From the {\it stroke} input, the total stroke is 360.0 cm, and the number of steps in the fully withdrawn
 position is 228 steps.
 Therefore, the bottom elevation of the AIC lattice at step \textit{N} will be
 \begin{equation}
@@ -398,7 +399,7 @@ The user defines the insert using cells, lattices, and axial descriptions.
 
 The fuel assembly description should contain the GT descriptions, and the insert description
 defines what is inserted into the GTs. Assembly inserts can be inserted and withdrawn
-during a core shuffle (by specifying an {\it insert\_map} card in the [CORE] block),
+during a core shuffle (by specifying an {\it insert\_map} input in the [CORE] block),
 but they cannot be moved during a cycle depletion.
 
 The insert and control rod descriptions are very similar, with the only difference being that the
@@ -440,9 +441,9 @@ descriptions are consistent with the GT descriptions.
 This check should be performed in each physics code.
 
 As with [ASSEMBLY] blocks, multiple insert types can be defined in a single [INSERT]
-block by using multiple {\it axial} cards, each with a unique insert ID.
+block by using multiple {\it axial} inputs, each with a unique insert ID.
 
-A complete list of all the input cards in the [INSERT] block is provided in Chapter~\ref{chap:cards}.
+A complete list of all the inputs in the [INSERT] block is provided in Chapter~\ref{chap:inputs}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Detector Description}
@@ -480,34 +481,34 @@ detectors have special properties used to calculate instrumentation signals.
 The name of the detector ``D1'' refers to a detector type defined in the
 {\it det\_map} in the [CORE] block.
 
-A complete list of all the input cards in the [DETECTOR] block is located in Chapter~\ref{chap:cards}.
+A complete list of all the inputs in the [DETECTOR] block is located in Chapter~\ref{chap:inputs}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Channel Box}
 \label{sec:channel_box}
 
-The channel box that surrounds a BWR assembly may be modeled with the {\it channel\_box} and
-{\it channel\_box\_segments} cards. The {\it channel\_box} card allows the representation of a normal box
-with a nominal thickness and rounded corners. When paired with the {\it channel\_box\_segments} card,
+The {\it channel\_box} and
+{\it channel\_box\_segments} inputs can be used to model the channel box that surrounds a BWR assembly. The {\it channel\_box} input allows the representation of a normal box
+with a nominal thickness and rounded corners. When paired with the {\it channel\_box\_segments} input,
 a general explicit geometry of thick-thin designs may be modeled.
 
-The card inputs are shown in Figure~\ref{fig:cbcard}.
+The input inputs are shown in Figure~\ref{fig:cbinput}.
 
 \begin{figure}[h]
 \begin{center}
   \includegraphics[width=5in]{figs/chanboxcard.jpg}
 \end{center}
-\caption{\label{fig:cbcard} Description of the channel box cards.}
+\caption{\label{fig:cbinput} Description of the channel box inputs.}
 \end{figure}
 
 All of the dimensional quantities are in units of centimeters. The segment length and segment
 ramp are deltas in length. The segment ramp should be entered as the horizontal distance
 and not the slope. The definitions of the inputs are illustrated in Figure~\ref{fig:cbinputs}.
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
   \includegraphics[width=3in]{figs/chanboxinputs.jpg}
 \end{center}
-\caption{\label{fig:cbinputs} Demonstration of the channel box cards.}
+\caption{\label{fig:cbinputs} Demonstration of the channel box inputs.}
 \end{figure}
 
 The first channel box segment is entered at the halfspan of the box.
@@ -520,12 +521,11 @@ entered relative to the corner thickness. For the normal box, this is equivalent
 channel thickness.
 
 Sample inputs are provided in Figure~\ref{fig:cbexample}.
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
   \includegraphics[width=4.5in]{figs/channelbox.jpg}
 \end{center}
-\caption{\label{fig:cbexample} Sample inputs for the channel box cards.}
+\caption{\label{fig:cbexample} Sample inputs for the channel box inputs.}
 \end{figure}
 
-A complete list of the channel box cards is located in Chapter~\ref{chap:cards}.
-
+A complete list of the channel box inputs is located in Chapter~\ref{chap:inputs}.

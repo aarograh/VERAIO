@@ -9,7 +9,7 @@
 !     * remove "tfuel" and "modden" because these will be set by T/H feedback
 !
 !  Draft 2 - 10/13/2012
-!     * added "mat" card in front of material cards
+!     * added "mat" input in front of material inputs
 !
 !  Update 11/19/2012
 !     * added explicit lattice models for:
@@ -21,7 +21,7 @@
 !
 !  Update 03/18/2013
 !     * fixed tinlet
-!     * added sym and reflector cards
+!     * added sym and reflector inputs
 !     * updated dhfrac to default value
 !
 !  Update 04/10/2013

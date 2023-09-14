@@ -10,7 +10,7 @@
 !  2014/01/04 - modified to match input used for Problem 7 Milestone
 !  This case:
 !      * quarter symmetry
-!      * remove vessel card
+!      * remove vessel input
 !      * remove detectors
 !      * remove control rods
 !      * modify insert axial boundaries to line up with axial edit bounds

@@ -51,13 +51,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Specify authors below.
-\author[1]{Erik Walker}
-\affil[1]{Oak Ridge National Laboratory}
+\author{Aaron Graham}
+\affil{Oak Ridge National Laboratory}
 
 % Specify title.
 % Note: if using an explicit linebreak in the title, you must use the \protect
 % command before it.
-\title{VERAIn Programmer's Manual}
+\title{VERAIn Programmer's Manual 4.4}
 
 % Specify date of publication.
 \date{May 31, 2022}
@@ -66,7 +66,7 @@
 % Define report number.
 % Note: Defining the report number causes the 'draft' notices to be removed.
 % Remove comment "%" below if that is desired.
- \reportnum{ORNL/SPR-2022/2480}
+ \reportnum{ORNL/SPR-2023/3093}
 
 % Add a restriction notice to the cover page. Remove comment "%" below if that
 % is desired.
@@ -100,7 +100,7 @@ This version supersedes previous document version CASL-U-2019-1884-001. \\
 }{None}{None}{None}{All}
 
 %Here's how to add a signature page (class provides 2, 3, 4, or 5 signatures)
-\signaturepagetwo{Erik Walker, VERAIO Product Software Manager}{Andrew Godfrey, Independent Reviewer}
+\signaturepagetwo{Aaron Graham, VERAIO Product Software Manager}{Bob Salko, Independent Reviewer}
 
 \addcontentsline{toc}{section}{Executive Summary}
 \section*{Executive Summary}
@@ -211,13 +211,13 @@ If the standard error file does not list any errors, then check the VERA compone
 This section provides instructions for adding or modifying inputs to be used in the user-provided ASCII input. For most cases, to add a new variable to the input, only the template files found in\\
 \texttt{VERAIO/verain/scripts/Templates} must be modified. Generally, two files must be modified for every new input variable:
 \begin{itemize}
-    \item{Directory.yml}---describes how to read the input cards
-    \item{BLOCK.yml}---describes how to convert input cards to parameter names for a particular BLOCK
+    \item{Directory.yml}---describes how to read the inputs
+    \item{BLOCK.yml}---describes how to convert inputs to parameter names for a particular BLOCK
 \end{itemize}
 
 The different BLOCK options available in an input file are:
 
-\texttt{STATE, CORE, ASSEMBLY, CONTROL, INSERT, DETECTOR, EDITS, SHIFT, COBRATF, COUPLING, MPACT, BISON, MAMBA, and RUN}
+\texttt{STATE}, \texttt{BRANCH}, \texttt{TRANSIENT}, \texttt{CORE}, \texttt{ASSEMBLY}, \texttt{CONTROL}, \texttt{INSERT}, \texttt{DETECTOR}, \texttt{EDITS}, \texttt{SHIFT}, \texttt{COBRATF}, \texttt{COUPLING}, \texttt{MPACT}, \texttt{BISON}, \texttt{FAST}, \texttt{MAMBA}, and \texttt{RUN}
 
 For example, if a new variable is to be added to the ASSEMBLY block of the user input, then it must be added to the ASSEMBLY section of the Directory.yml file, as well as to the ASSEMBLY.yml file. 
 
@@ -243,7 +243,7 @@ If a new variable is added to the Directory.yml file, proper documentation must 
 \end{verbatim}
 \end{small}
 
-It is strongly advised that a new variable include a \texttt{\_check:} section that checks to ensure that a given variable is the proper type and within the expected input variable range. An example of a two-variable input card with description is shown in Figure \ref{fig:Directory_example}. This example input, \texttt{b10}, is located in the STATE block. Therefore, the corresponding entries in the STATES.yml file are shown in Figure \ref{fig:States_example}. The names given in the BLOCK.yml file will correspond to the variable name that will be given in the ParameterList XML file. 
+It is strongly advised that a new variable include a \texttt{\_check:} section that checks to ensure that a given variable is the proper type and within the expected input variable range. An example of a two-variable input with description is shown in Figure \ref{fig:Directory_example}. This example input, \texttt{b10}, is located in the STATE block. Therefore, the corresponding entries in the STATES.yml file are shown in Figure \ref{fig:States_example}. The names given in the BLOCK.yml file will correspond to the variable name that will be given in the ParameterList XML file. 
 
 \begin{figure}
    \centering
@@ -259,7 +259,7 @@ It is strongly advised that a new variable include a \texttt{\_check:} section t
    
 \subsection{Testing New Variables}
 
-If a new input card is added, then a test must also be added.
+If a new input is added, then a test must also be added.
 To add a test, the user must either modify an existing test or add a new one in the \texttt{VERAIO/verain/test} directory.
 It is preferable to modify an existing test, but when doing so, care must be taken not to impact another test that might use the same input.
 
@@ -320,6 +320,7 @@ optional arguments:
                         input
   -O, --output-job-name
                         print the job id to stdout
+  -M, --messages        print messages as process is run
   --ppn cpus_per_node, --pnode cpus_per_node
                         specify processors per node, by default this is
                         calculated
@@ -371,4 +372,3 @@ This research was supported by the US Department of Energy and the Nuclear Energ
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \end{document}
-
