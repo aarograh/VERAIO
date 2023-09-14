@@ -17994,6 +17994,28 @@ TRANSIENT:
       - fall(sub{is_float(shift)},())
       - fall(sub{is_gt(shift,0.0)},())
       - is_strictlyincreasing(odd([]))
+#>
+#>   {\bf xenon} xenon\_option
+#>   \VERAInputTable{
+#>     name={xenon\_option},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true},
+#>     limitations={},
+#>     description={This is an option to enable transient xenon calculations.  If disabled,
+#>        the xenon will becalculated by the depletion solver.  If enabled, a more precise
+#>        numerical solver will be used to calculate the xenon.},
+#>     notes={}
+#>   }
+  xenon:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
 #> \subsection{Block MAMBA}
 #> \label{sec:mambainputs}
 MAMBA:
