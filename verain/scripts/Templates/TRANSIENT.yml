@@ -257,3 +257,10 @@ TRANSIENT:
           _do:
             - copyarray TRANSIENT/@edit_schedule,select=>odd
           _content:
+    
+    xenon:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy TRANSIENT/$xenon
+      _content:
