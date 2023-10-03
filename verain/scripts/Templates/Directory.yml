@@ -11140,6 +11140,27 @@ COUPLING:
       - is_word()
       - in_dictionary() saturated inlet outlet fixed_heating explicit_heating
 #>
+#>   {\bf channel\_box\_conduction} channel\_box\_conduction
+#>   \VERAInputTable{
+#>     name={channel\_box\_conduction},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={\texttt{false}},
+#>     valuesapplicable={\texttt{true}},
+#>     limitations={},
+#>     description={This enables the channel box conduction model.  This input is
+#>        ignored unless \texttt{bypass\_treatment} is set to \texttt{explicit}.},
+#>     notes={}
+#>   }
+  channel_box_conduction:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf bypass\_heating} bypass\_heating
 #>   \VERAInputTable{
 #>     name={bypass\_heating},

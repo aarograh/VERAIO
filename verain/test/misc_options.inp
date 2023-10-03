@@ -104,7 +104,7 @@
   power_search_range 1e-8 150.
   flow_search_range  20.0 150.
   tinlet_search_range 500. 600. F
-  
+
   core_shape
     0 1 0
     1 1 1
@@ -319,6 +319,7 @@
   extend_coupling_mesh above
   bypass_treatment inlet
   bypass_heating 0.05
+  channel_box_conduction true
   dhfrac 0.02
 
 [COBRATF]

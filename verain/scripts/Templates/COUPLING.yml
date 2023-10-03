@@ -197,6 +197,13 @@ COUPLING:
         - copy COUPLING/$bypass_treatment
       _content:
 
+    channel_box_conduction:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy COUPLING/$channel_box_conduction
+      _content:
+
     bypass_heating:
       _pltype: parameter
       _type: double
