@@ -57,8 +57,8 @@ Doing so will return the following:
 
 \begin{Verbatim}[fontsize=\small]
 
-usage: verarun [--devs] [-x] [-e email_addr] [-h] [-c config_file]
-               [-N job_name] [-l] [-n nprocs] [-O] [--ppn cpus_per_node]
+usage: verarun [--devs] [-x] [--schema] [-e email_addr] [-h] [-c config_file]
+               [-N job_name] [-l] [-n nprocs] [-O] [-M] [--ppn cpus_per_node]
                [-m mem_per_process] [-p project] [-q queue] [-s subdir]
                [-d vera_install_dir] [-v vera_version] [--verbose] [-W]
                [-w job_id] [-t walltime] [--chain] [--debug] [--hostname host]
@@ -75,6 +75,7 @@ optional arguments:
   --devs, --allow-devs  override VERA_PROD_VERSIONS and allow development VERA
                         versions, implies -l
   -x, --dry-run         dry run only, create but don't execute the PBS script
+  --schema              schema from react2xml.pl
   -e email_addr, --email-addrs email_addr
                         comma-delimited list of email addresses to notify of
                         job completion, defaults to ${USER}@$(hostname)
@@ -92,6 +93,7 @@ optional arguments:
                         input
   -O, --output-job-name
                         print the job id to stdout
+  -M, --messages        print messages as process is run
   --ppn cpus_per_node, --pnode cpus_per_node
                         specify processors per node, by default this is
                         calculated
@@ -132,7 +134,8 @@ advanced arguments:
                         path to vera_installs directory containing VERA
                         versions
 
-Version 1.11
+Version 1.12
+\end{verbatim}
 
 Verarun uses machine-specific characteristics to determine batch system
 directives applied to a job script template.  Additional template parameters,

@@ -39,11 +39,11 @@ where:
 \begin{itemize}
 \item {\it user-mat} is a user-defined material name. The name is case sensitive. {\it user-mat} is used to
 define material names in other inputs such as {\it cell}, {\it grid}, {\it nozzle}, etc. (No default).
-\item {\it density} is the material density in grams per cubic centimeter (g/cc). (No default).
+\item {\it density} is the material density in grams per cubic centimeter (g/cc). Setting {\it density} to 0.0 will cause {\it frac} to be treated as number densities instead of fractions. (No default).
 \item {\it library-name} is a corresponding library name(s) for the user material. The library name
 must be defined in the cross section library. (Default = {\it user-mat}). Multiple library materials
 can be mixed to form a single user material.
-\item {\it frac} is the fraction of the library material in the user material. (Default=1.0 if there is only one library material in the user material).
+\item {\it frac} is the fraction of the library material in the user material. If values are positive, they will be treated as weight fractions; if they are negative, they will be treated as atom fractions.  (Default=1.0 if there is only one library material in the user material).
 \end{itemize}
 
 There are three special user materials, ``mod,'' ``cool,'' and ``vacuum.''

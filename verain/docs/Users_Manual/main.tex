@@ -60,9 +60,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Specify authors below.
-\author{Aaron Graham}
-\author{Mark Baird}
-\affil{Oak Ridge National Laboratory}
+\author[1]{Aaron Graham}
+\author[1]{Bob Salko}
+\author[1]{Mark Baird}
+\author[2]{Scott Palmtag}
+\author[3]{Andrew Godfrey}
+\author[4]{Erik Walker}
+\affil[1]{Oak Ridge National Laboratory}
+\affil[2]{North Carolina State University}
+\affil[3]{Veracity Nuclear, LLC.}
+\affil[4]{Last Energy}
 
 % Specify title.
 % Note: if using an explicit linebreak in the title, you must use the \protect
@@ -70,7 +77,7 @@
 \title{VERAIn User's Manual Version 4.4}
 
 % Specify date of publication.
-\date{July 5, 2022}
+\date{September 2023}
 %\date{\today}
 
 % Define report number.
@@ -97,11 +104,14 @@
 \newacronym{cilc}{CILC}{crud-induced localized corrosion}
 \newacronym{cips}{CIPS}{crud-induced power shift (also called axial offset anomaly [AOA])}
 \newacronym{cmfd}{CMFD}{coarse-mesh finite difference}
+\newacronym{crud}{CRUD}{Chalk River unidentified deposit}
 \newacronym{dnb}{DNB}{departure from nucleate boiling}
+\newacronym{dnbr}{DNBR}{departure from nucleate boiling ratio}
 \newacronym{efpd}{EFPD}{effective full power day}
 \newacronym{eoc}{EOC}{end of cycle}
 \newacronym{gt}{GT}{guide tube}
 \newacronym{gwdmt}{GWd/MT}{gigawatt-days per metric ton heavy metal}
+\newacronym{hdf5}{HDF5}{hierarchical data format 5}
 \newacronym{it}{IT}{instrument tube}
 \newacronym{lwr}{LWR}{light-water reactor}
 \newacronym{modsim}{ModSim}{modeling and simulation}
@@ -125,7 +135,7 @@
 
 %Add the revision log and page descriptions
 \revisionlog{
-0 & 6/17/2022 & All & input updates for VERA 4.4 release.
+0 & 9/30/2023 & 43--end & input updates for VERA 4.4 release.
 This version supersedes previous document version ORNL/SPR-2022/2509. \\
 }{None}{None}{None}{All}
 
@@ -412,15 +422,6 @@ defined by using multiple {\it axial} inputs in a single input block.
 \section{Acknowledgments}
 
 This research was supported by the US Department of Energy and the Nuclear Energy Advanced Modeling and Simulation Program.
-
-The current version of this document was prepared by the authors listed on the title page.  
-However, substantial parts of this document were originally written as part of prior revisions and the authors wish to acknowledge
-the contributions of past authors (their affiliation at the time of their contribution is listed after their names):
-\begin{itemize}[noitemsep]
-  \item Scott Palmtag, North Carolina State University
-  \item Andrew Godfrey, Oak Ridge National Laboratory
-  \item Erik Walker, Oak Ridge National Laboratory
-\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

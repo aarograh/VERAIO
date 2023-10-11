@@ -1017,26 +1017,6 @@ STATE:
       - is_word()
       - in_dictionary() on off
 #>
-#>   {\bf fuel\_performance} fuel\_performance\_option
-#>   \VERAInputTable{
-#>     name={fuel\_performance\_option},
-#>     type={Character String},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={\texttt{off}},
-#>     valuesapplicable={\texttt{on}},
-#>     limitations={},
-#>     description={Flag to turn on and off BISON coupling},
-#>     notes={}
-#>   }
-  fuel_performance:
-    <<: *dtword
-    _content:
-    _check:
-      - is_word()
-      - in_dictionary() on off inline
-#>
 #>   {\bf crud} crud\_option
 #>   \VERAInputTable{
 #>     name={crud\_option},
@@ -2533,7 +2513,7 @@ CORE:
 #>     valuedefault={},
 #>     valuesapplicable={0, 1, 2, or 3},
 #>     limitations={},
-#>     description={Core map of assembly rotations},
+#>     description={Core map of clockwise 90-degree assembly rotations},
 #>     notes={}
 #>   }
   rotate_map:
@@ -2556,7 +2536,7 @@ CORE:
 #>     valuedefault={},
 #>     valuesapplicable={0, 1, 2, or 3},
 #>     limitations={},
-#>     description={Core map of assembly insert rotations},
+#>     description={Core map of clockwise 90-degree assembly insert rotations},
 #>     notes={}
 #>   }
   insert_rotate_map:
@@ -12678,7 +12658,7 @@ MPACT:
 #>     limitations={Only applicable to detectors in \ac{bwr} cores},
 #>     description={This input defines the gap mesh number of the \ac{bwr} detector region.
 #>        This is the number of radial divisions in the water outside the detector,
-#>        inside the detector cell.  24 azimuthal divisons are used.},
+#>        inside the detector cell.},
 #>     notes={The \texttt{detector\_meshnum} input is optional, but this parameter
 #>        is required if \texttt{detector\_meshnum} is present}
 #>   }
@@ -12692,8 +12672,7 @@ MPACT:
 #>     valuesapplicable={values must be on the interval [1,10]},
 #>     limitations={Only applicable to detectors in \ac{bwr} cores},
 #>     description={This input defines the rodlet mesh number of the \ac{bwr} detector.
-#>        This is the number of radial divisions in the detector cell.  8 azimuthal
-#>        divisions are used.},
+#>        This is the number of radial divisions in the detector cell.},
 #>     notes={The \texttt{detector\_meshnum} input is optional, but this parameter
 #>        is required if \texttt{detector\_meshnum} is present}
 #>   }
@@ -13773,8 +13752,9 @@ MPACT:
 #>     unitsdefault={},
 #>     unitsother={},
 #>     valuedefault={\texttt{p-c}(predictor-corrector)},
-#>     valuesapplicable={\texttt{semip-c}(semi-predictor-corrector), or
-#>     \texttt{postcorrector}(semi-predictor-corrector-post-corrector)},
+#>     valuesapplicable={\texttt{semip-c}(semi-predictor-corrector),
+#>        \texttt{postcorrector}(semi-predictor-corrector-post-corrector),
+#>        \texttt{explicit}},
 #>     limitations={},
 #>     description={This input is used to specify the time stepping method in
 #>        depletion. The \texttt{p-c} method computes a predicted nuclide
@@ -13792,7 +13772,13 @@ MPACT:
 #>        calculation are ``post-corrected'' so that they more closely represent the
 #>        averaged number densities of the full \texttt{p-c} method. This allows for
 #>        accuracy comparable to the full \texttt{p-c} method while still skipping the
-#>        second steady-state eigenvalue calculation},
+#>        second steady-state eigenvalue calculation.  The \texttt{explicit} method simply
+#>        does one forward step in time using an explicit time step; this is not a recommended
+#>        method because it will provide poor accuracy, but it can be useful for testing.
+#>        The \texttt{explicit} option is what is used during transient calculations because
+#>        the time steps are small enough for the \texttt{explicit} option to be accurate, and
+#>        transient calculations are computationally expensive enough to warrant using the
+#>        fastest possible depletion method.},
 #>     notes={The \texttt{semip-c} method can result in an inconsistency when
 #>        restarting. However, the differences that arise from a \texttt{semip-c} restart
 #>        are smaller in magnitude than the differences between \texttt{semip-c} and
@@ -13805,7 +13791,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() p-c semip-c postcorrector
+      - in_dictionary() p-c semip-c postcorrector explicit
 #>
 #>   {\bf gad\_dep\_method} gad\_dep\_method
 #>   \VERAInputTable{

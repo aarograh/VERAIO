@@ -685,20 +685,6 @@
      notes={}
    }
 
-   {\bf fuel\_performance} fuel\_performance\_option
-   \VERAInputTable{
-     name={fuel\_performance\_option},
-     type={Character String},
-     need={Optional},
-     unitsdefault={},
-     unitsother={},
-     valuedefault={\texttt{off}},
-     valuesapplicable={\texttt{on}},
-     limitations={},
-     description={Flag to turn on and off BISON coupling},
-     notes={}
-   }
-
    {\bf crud} crud\_option
    \VERAInputTable{
      name={crud\_option},
@@ -1810,7 +1796,7 @@
      valuedefault={},
      valuesapplicable={0, 1, 2, or 3},
      limitations={},
-     description={Core map of assembly rotations},
+     description={Core map of clockwise 90-degree assembly rotations},
      notes={}
    }
 
@@ -1824,7 +1810,7 @@
      valuedefault={},
      valuesapplicable={0, 1, 2, or 3},
      limitations={},
-     description={Core map of assembly insert rotations},
+     description={Core map of clockwise 90-degree assembly insert rotations},
      notes={}
    }
 
@@ -7775,7 +7761,7 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={},
+     valuedefault={0.5},
      valuesapplicable={$>0$,$\le 1$},
      limitations={},
      description={Power relaxation factor},
@@ -7789,7 +7775,7 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={},
+     valuedefault={1.0},
      valuesapplicable={$>0$,$\le 1$},
      limitations={},
      description={Fuel temperature relaxation factor},
@@ -7803,7 +7789,7 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={},
+     valuedefault={0.8 (BWR), 1.0 (non-BWR)},
      valuesapplicable={$>0$,$\le 1$},
      limitations={},
      description={Density relaxation factor},
@@ -8106,6 +8092,21 @@
         \texttt{bypass} inputs should also be set to non-zero values.\newline
         \newline
         This input is ignored for non-\ac{bwr} models or if feedback is off},
+     notes={}
+   }
+
+   {\bf channel\_box\_conduction} channel\_box\_conduction
+   \VERAInputTable{
+     name={channel\_box\_conduction},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={\texttt{false}},
+     valuesapplicable={\texttt{true}},
+     limitations={},
+     description={This enables the channel box conduction model.  This input is
+        ignored unless \texttt{bypass\_treatment} is set to \texttt{explicit}.},
      notes={}
    }
 
@@ -8524,8 +8525,8 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={\texttt{none}},
-     valuesapplicable={polynomial,1dcpm},
+     valuedefault={polynomial},
+     valuesapplicable={none,1dcpm},
      limitations={The pre-generated polynomials were generated using AIC, B4C,
         and tungsten control rods for Watts Bar Unit 1. Materials with any other
         name will be ignored, and the results may not be improved as much for
@@ -8641,8 +8642,8 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={5},
-     valuesapplicable={\texttt{none}, 0 through 9},
+     valuedefault={0},
+     valuesapplicable={none, 0 through 9},
      limitations={This only affects the WRITING of the restart file.
         \texttt{restart\_read} cases and \texttt{restart\_shuffle} cases are
         not affected},
@@ -8666,8 +8667,8 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={core},
-     valuesapplicable={\texttt{none}, fsr},
+     valuedefault={none},
+     valuesapplicable={core, fsr},
      limitations={},
      description={This input is used to specify the type of visualization
         outputs (edits). The visualization outputs are created in the form of
@@ -8988,8 +8989,8 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={\texttt{homogenize}},
-     valuesapplicable={\texttt{equal\_mass}, \texttt{equal\_thickness}},
+     valuedefault={\texttt{equal\_mass}},
+     valuesapplicable={\texttt{homogenize}, \texttt{equal\_thickness}},
      limitations={For grids with large masses that fall within axially narrow
         lattices, there is a possibility that the grid will intersect one or more
         pins for the \texttt{equal\_thickness} and \texttt{equal\_mass} options.
@@ -9133,7 +9134,7 @@
      need={Optional},
      unitsdefault={cm},
      unitsother={},
-     valuedefault={2.0 10.0 (when automeshing is enabled)},
+     valuedefault={2.0 20.0 (when automeshing is enabled)},
      valuesapplicable={Positive real numbers greater than zero. The maximum value
         must be at least 1.0 greater than the minimum value},
      limitations={},
@@ -9303,7 +9304,7 @@
      limitations={Only applicable to detectors in \ac{bwr} cores},
      description={This input defines the gap mesh number of the \ac{bwr} detector region.
         This is the number of radial divisions in the water outside the detector,
-        inside the detector cell.  24 azimuthal divisons are used.},
+        inside the detector cell.},
      notes={The \texttt{detector\_meshnum} input is optional, but this parameter
         is required if \texttt{detector\_meshnum} is present}
    }
@@ -9317,8 +9318,7 @@
      valuesapplicable={values must be on the interval [1,10]},
      limitations={Only applicable to detectors in \ac{bwr} cores},
      description={This input defines the rodlet mesh number of the \ac{bwr} detector.
-        This is the number of radial divisions in the detector cell.  8 azimuthal
-        divisions are used.},
+        This is the number of radial divisions in the detector cell.},
      notes={The \texttt{detector\_meshnum} input is optional, but this parameter
         is required if \texttt{detector\_meshnum} is present}
    }
@@ -9393,13 +9393,12 @@
    \VERAInputTable{
      name={quad\_type},
      type={Fixed Character String},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={CHEBYSHEV-YAMAMOTO},
      valuesapplicable={CHEBYSHEV-CHEBYSHEV (Product), CHEBYSHEV-GAUSS (Product),
-        CHEBYSHEV-BICKLEY (Product),
-        QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)},
+        CHEBYSHEV-BICKLEY (Product), QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)},
      limitations={},
      description={This input is used to specify the name of the angular
         quadrature to use when determining the angles at which the rays are
@@ -9419,10 +9418,10 @@
    \VERAInputTable{
      name={gamma\_quad\_type},
      type={Fixed Character String},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={CHEBYSHEV-YAMAMOTO},
+     valuedefault={\texttt{quad\_type} value},
      valuesapplicable={CHEBYSHEV-CHEBYSHEV (Product), CHEBYSHEV-GAUSS (Product),
         CHEBYSHEV-BICKLEY (Product), QUADRUPLE-RANGE (Product), LEVEL-SYMMETRIC (Base)},
      limitations={},
@@ -9444,7 +9443,7 @@
    \VERAInputTable{
      name={shield\_quad\_type},
      type={Fixed Character String},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={CHEBYSHEV-YAMAMOTO},
@@ -9469,10 +9468,10 @@
    \VERAInputTable{
      name={azimuthals\_octant},
      type={Integer},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={\texttt{none}},
+     valuedefault={16},
      valuesapplicable={Column Order in the above table},
      limitations={},
      description={This input is used to specify the number of azimuthal angles
@@ -9485,10 +9484,10 @@
    \VERAInputTable{
      name={gamma\_azimuthals\_octant},
      type={Integer},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={\texttt{none}},
+     valuedefault={\texttt{azimuthals\_octant} value},
      valuesapplicable={Column Order in the above table},
      limitations={},
      description={This input is used to specify the number of azimuthal angles
@@ -9501,10 +9500,10 @@
    \VERAInputTable{
      name={polars\_octant},
      type={Integer},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={\texttt{none}},
+     valuedefault={2},
      valuesapplicable={Column Order $\Theta$ in the above table},
      limitations={},
      description={This input is used to specify the number of polar angles per
@@ -9520,10 +9519,10 @@
    \VERAInputTable{
      name={gamma\_polars\_octant},
      type={Integer},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={\texttt{none}},
+     valuedefault={\texttt{polars\_octant} value},
      valuesapplicable={Column Order $\Theta$ in the above table},
      limitations={},
      description={This input is used to specify the number of polar angles per
@@ -9539,10 +9538,10 @@
    \VERAInputTable{
      name={shield\_azimuthals\_octant},
      type={Integer},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={\texttt{none}},
+     valuedefault={8},
      valuesapplicable={Column Order in the above table},
      limitations={},
      description={This input is used to specify the number of azimuthal angles
@@ -9555,10 +9554,10 @@
    \VERAInputTable{
      name={shield\_polars\_octant},
      type={Integer},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={\texttt{none}},
+     valuedefault={\texttt{polars\_octant} value},
      valuesapplicable={Column Order $\Theta$ in the above table},
      limitations={},
      description={This input is used to specify the number of polar angles per
@@ -9577,8 +9576,8 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={\texttt{NONE}},
-     valuesapplicable={\texttt{ORNL}, \texttt{SIMPLIFIED\_AMPX}, or \texttt{HELIOS}},
+     valuedefault={\texttt{ORNL}},
+     valuesapplicable={\texttt{HELIOS}},
      limitations={},
      description={This input is used to specify the type of cross section file
         to use},
@@ -9589,10 +9588,10 @@
    \VERAInputTable{
      name={xs\_filename},
      type={Free-Form Character String, Max. Length = 200},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={No default value},
+     valuedefault={\texttt{mpact51g\_71\_4.3m3\_01222019.fmt}},
      valuesapplicable={filename of a supported cross section library},
      limitations={},
      description={This input is used to specify the name of the cross section
@@ -9758,16 +9757,19 @@
    \VERAInputTable{
      name={dep\_filename},
      type={Free-Form Character String, Max. Length = 200},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={No default value},
-     valuesapplicable={filename of a supported cross section library},
-     limitations={The format of this file should be consistent with the standard
-        MPACT depletion library file \texttt{MPACT.dpl}},
+     valuedefault={\texttt{origen\_data\_paths\_casl2.2.txt}},
+     valuesapplicable={\texttt{origen\_data\_paths\_scale62.txt}, \texttt{MPACT.dpl}},
+     limitations={},
      description={This input is used to specify the depletion file to use, which
         provides all the data required, in addition to the data in the transport
-        library for depletion calculation},
+        library for depletion calculation.  The \texttt{MPACT.dpl} option must be used
+        if \texttt{dep\_kernel} is set to \texttt{internal}.
+        \newline\newline
+        The depletion libraries listed here are provided with VERA, but others can
+        can also be used if the user supplies them.},
      notes={}
    }
 
@@ -9861,7 +9863,7 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1.0E-5},
+     valuedefault={1.0E-6},
      valuesapplicable={$>$0.0},
      limitations={},
      description={This input is used to specify the global tolerance on convergence
@@ -9876,7 +9878,7 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={1.0E-4},
+     valuedefault={5.0E-5},
      valuesapplicable={$>$0.0},
      limitations={},
      description={This input is used to specify the tolerance on the convergence
@@ -10136,12 +10138,13 @@
    \VERAInputTable{
      name={depl\_time\_method},
      type={Fixed Character String},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={\texttt{p-c}(predictor-corrector)},
-     valuesapplicable={\texttt{semip-c}(semi-predictor-corrector), or
-     \texttt{postcorrector}(semi-predictor-corrector-post-corrector)},
+     valuesapplicable={\texttt{semip-c}(semi-predictor-corrector),
+        \texttt{postcorrector}(semi-predictor-corrector-post-corrector),
+        \texttt{explicit}},
      limitations={},
      description={This input is used to specify the time stepping method in
         depletion. The \texttt{p-c} method computes a predicted nuclide
@@ -10159,7 +10162,13 @@
         calculation are ``post-corrected'' so that they more closely represent the
         averaged number densities of the full \texttt{p-c} method. This allows for
         accuracy comparable to the full \texttt{p-c} method while still skipping the
-        second steady-state eigenvalue calculation},
+        second steady-state eigenvalue calculation.  The \texttt{explicit} method simply
+        does one forward step in time using an explicit time step; this is not a recommended
+        method because it will provide poor accuracy, but it can be useful for testing.
+        The \texttt{explicit} option is what is used during transient calculations because
+        the time steps are small enough for the \texttt{explicit} option to be accurate, and
+        transient calculations are computationally expensive enough to warrant using the
+        fastest possible depletion method.},
      notes={The \texttt{semip-c} method can result in an inconsistency when
         restarting. However, the differences that arise from a \texttt{semip-c} restart
         are smaller in magnitude than the differences between \texttt{semip-c} and
@@ -10193,7 +10202,7 @@
    \VERAInputTable{
      name={depl\_origen\_solver},
      type={Fixed Character String},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={\texttt{cram}(CRAM solver)},
@@ -10315,8 +10324,8 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={\texttt{[ASSEMBLY]}},
-     valuesapplicable={\texttt{GRAPH}, \texttt{EXPLICITFILE}, \texttt{EXPLICITRADIAL}, \texttt{PS}},
+     valuedefault={\texttt{GRAPH}},
+     valuesapplicable={\texttt{ASSEMBLY}, \texttt{EXPLICITFILE}, \texttt{EXPLICITRADIAL}, \texttt{PS}, \texttt{FULLCORE}},
      limitations={The \texttt{EXPLICITFILE} option may be used only if the user
         has created a partition file. For a description of the partition file, see
         the input option \texttt{par\_file}},
@@ -10339,7 +10348,9 @@
           \item \texttt{EXPLICITRADIAL}: same as \texttt{EXPLICITFILE}, except
             that the decomposition is provided for a single plane and is
             applied to all planes.
-          \item \texttt{PS}: same as \texttt{[ASSEMBLY]}.
+          \item \texttt{PS}: same as \texttt{ASSEMBLY}.
+          \item \texttt{FULLCORE}: assumes axial decomposition only; each 2D plane should
+            be on the same process.
         \end{itemize}},
      notes={}
    }
@@ -10630,8 +10641,8 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={\texttt{true}},
-     valuesapplicable={\texttt{false}},
+     valuedefault={\texttt{false}},
+     valuesapplicable={\texttt{true}},
      limitations={},
      description={If true, this input applies a volume-averaged fuel temperature
         to each fuel pin. If false, it applies a radially dependent fuel
@@ -10710,7 +10721,7 @@
      need={Optional},
      unitsdefault={W/m$^2 \cdot$ K},
      unitsother={},
-     valuedefault={4500.0},
+     valuedefault={5678.3},
      valuesapplicable={$>0.0$},
      limitations={It is ignored if feedback is off or if coupling with
         CTF is being used},
@@ -10834,8 +10845,8 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={\texttt{false}},
-     valuesapplicable={\texttt{true}},
+     valuedefault={true},
+     valuesapplicable={false},
      limitations={},
      description={Logical to interpolate shape onto fuel temperature table value},
      notes={}
@@ -10961,26 +10972,6 @@
         be thrown}
    }
 
-
-   {\bf dep\_edit} dep\_edit
-   \VERAInputTable{
-     name={dep\_edit},
-     type={Fixed Character String},
-     need={Optional},
-     unitsdefault={atoms\/volume of pincell},
-     unitsother={},
-     valuedefault={\texttt{true}},
-     valuesapplicable={\texttt{false}},
-     limitations={},
-     description={This input is used to specify if the depletion \texttt{Isum}
-        and \texttt{Pnum} files are written, which print the pin-wise averaged
-        isotope number densities. \texttt{Isum} prints the isotope summary file
-        with isotopes tracked in XSMesh, and \texttt{Pnum} file prints the particle
-        number density file with all isotopes in the depletion library},
-     notes={The option has excessive memory requirements and is not advised for
-        general usage. Only use when absolutely necessary}
-   }
-
    {\bf dep\_shielder\_dt} dep\_shielder\_dt
    \VERAInputTable{
      name={dep\_shielder\_dt},
@@ -11070,11 +11061,11 @@
    \VERAInputTable{
      name={dep\_kernel},
      type={Fixed Character String},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={\texttt{origen}(coupled \texttt{origen} kernel)},
-     valuesapplicable={\texttt{internal}(MPACT's internal depletion kernel)},
+     valuedefault={\texttt{origen}},
+     valuesapplicable={\texttt{internal}},
      limitations={},
      description={This input is used to specify the depletion kernel to use.
         The MPACT internal depletion kernel is based on the same methodology
@@ -11122,14 +11113,14 @@
      need={Optional},
      unitsdefault={},
      unitsother={},
-     valuedefault={cmfd},
-     valuesapplicable={odcmfd, scmfd, mlcmfd, msed, \texttt{none} (2D only)},
+     valuedefault={odcmfd},
+     valuesapplicable={scmfd, mlcmfd, msed, none (2D only)},
      limitations={},
      description={This input is used to specify which \ac{cmfd} method will be used.
         The options are described as follows:
         \begin{itemize}
           \item \texttt{cmfd}: default CMFD method (currently odcmfd.)
-          \item \texttt{odcmfd}: optimally diffusive CMFD method. (replaces adcmfd)
+          \item \texttt{odcmfd}: optimally diffusive CMFD method.
           \item \texttt{scmfd}: standard CMFD method.
           \item \texttt{mlcmfd}: a multi-level cmfd method.
           \item \texttt{msed}: same as \texttt{odcmfd}, but the CMFD
@@ -12644,7 +12635,7 @@
      name={mesh},
      type={Fixed Character String Followed by Two Arrays of Integers Separated
         by a `/'},
-     need={Required},
+     need={Optional},
      unitsdefault={},
      unitsother={},
      valuedefault={num\_rad = 3, 1 and num\_azi = 1, 8, 8, 8, 12},
@@ -13436,6 +13427,22 @@
      description={The list of ending times for each specified \texttt{edit\_schedule\_dt}},
      notes={If the last \texttt{edit\_schedule\_tf} is less than \texttt{end\_time}, then the last
         specified \texttt{edit\_schedule\_dt} will be used until \texttt{end\_time}}
+   }
+
+   {\bf xenon} xenon\_option
+   \VERAInputTable{
+     name={xenon\_option},
+     type={Boolean},
+     need={Optional},
+     unitsdefault={},
+     unitsother={},
+     valuedefault={false},
+     valuesapplicable={true},
+     limitations={},
+     description={This is an option to enable transient xenon calculations.  If disabled,
+        the xenon will becalculated by the depletion solver.  If enabled, a more precise
+        numerical solver will be used to calculate the xenon.},
+     notes={}
    }
  \subsection{Block MAMBA}
  \label{sec:mambainputs}

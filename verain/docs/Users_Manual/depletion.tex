@@ -58,6 +58,8 @@ generation is as follows:
 
 \end{Verbatim}
 
+Note that some materials, such as gad fuel, may require more refined time steps in order to obtain accurate solutions.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Writing Restart Files}
 
@@ -474,7 +476,7 @@ It is also possible to execute a shuffle calculation using {\it restart\_jumpin}
    ! The cycle number is unnecessary because every assembly is
    ! directed at a specific file.  The true is for the other assemblies
    ! that came from cycle 2.
-   
+
    ! Assemblies not listed in the restart_jumpin input will be treated as fresh
 
   [ASSEMBLY]
