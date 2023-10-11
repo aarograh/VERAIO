@@ -99,7 +99,7 @@
     \@title
   }}
   \vspace{\baselineskip}
-  
+
   \large\textbsf{\textcolor{white}{\@date}}
 \end{minipage}%
 
@@ -244,8 +244,8 @@ its endorsement, recommendation, or favoring by the United States Government or
 any agency thereof. The views and opinions of authors expressed herein do not
 necessarily state or reflect those of the United States Government or any agency
 thereof.
-    
-\vspace{0.4cm}    
+
+\vspace{0.4cm}
 }}
 
 % \vspace*{0.4cm}
@@ -339,7 +339,7 @@ under contract DE-AC05-00OR22725
 
 \begin{center}
     {\Large\bf Document pages that are:}
-    
+
     \vspace{-0.5cm}
     \begin{tabular}{ll}\\
     Export Controlled: & #2 \\
@@ -552,7 +552,7 @@ under contract DE-AC05-00OR22725
 % Caption with more than one sentence: the first sentence is the first argument,
 % the rest are the second. This allows table of contents to just show the first
 % sentence but display the whole thing in the text. It also clears the boldface
-% from the second 
+% from the second
 \newcommand\longcaption[2]{\caption[#1]{#1 \normalfont #2}}
 
 
@@ -561,4 +561,3 @@ under contract DE-AC05-00OR22725
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % end of vera-ornltm.cls
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

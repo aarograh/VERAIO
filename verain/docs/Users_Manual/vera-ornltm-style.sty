@@ -60,11 +60,11 @@
    \topsep\z@ \parsep\parskip \itemsep\z@}
 \let\@listi\@listI
 \@listi
-     
+
 \def\@listii{\leftmargin\leftmarginii
    \labelwidth\leftmarginii\advance\labelwidth-\labelsep
    \topsep\z@ \parsep\parskip \itemsep\z@}
-     
+
 \def\@listiii{\leftmargin\leftmarginiii
     \labelwidth\leftmarginiii\advance\labelwidth-\labelsep
     \topsep\z@ \parsep\parskip \itemsep\z@}
@@ -105,14 +105,14 @@
 \fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TITLE STYLES 
+% TITLE STYLES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \RequirePackage{titlesec} % title modification: use text size
-      
+
 % Show five levels of depth in title labels
-\setcounter{secnumdepth}{5} 
-            
+\setcounter{secnumdepth}{5}
+
 % Sections go at the top of right-hand-side page.
 \titleclass{\section}{top}
 \newcommand{\sectionbreak}{}
@@ -161,7 +161,7 @@
   \cleardoublepage
   % Reset page style
   \pagenumbering{arabic}%
-  
+
   \renewcommand\thepage{\thesection--\arabic{page}}%
   % Reset section numbering
   \gdef\thesection{\@Alph\c@section}%
@@ -190,4 +190,3 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % end of vera-ornltm-style.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-

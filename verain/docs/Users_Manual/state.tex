@@ -53,6 +53,57 @@ Step 0 is fully inserted.
 The number of steps for a rod to be completely withdrawn is set by the {\it stroke} input in
 the [CONTROL] block (see Section~\ref{sec:stroke}). For Westinghouse PWRs, a typical value of fully withdrawn is 228 steps.
 
+\subsubsection{State Variable Persistence}
+
+Some inputs in the \texttt{[STATE]} block only apply to the state where the input is named, while some others will persist to the following states.  Table \ref{tab:state-variable-persistence} provides a list of all the state inputs and whether or not they persist.  The persistence described in these tables also applies to reading from a restart file as well; the persistent state variables will be updated based on the values in the restart file, then overwritten by any values present in the input.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c||c|c|c|}\hline
+    \textbf{Variable} & \textbf{Persists?} & \textbf{Other Notes} & \textbf{Variable} & \textbf{Persists?} & \textbf{Other Notes} \\\hline
+apitch\_tec            & No  & First State Only & pout\_dist                        & Yes &                  \\\hline
+axial\_tec             & No  & First State Only & power                             & Yes &                  \\\hline
+axial\_void            & Yes &                  & ppitch\_tec                       & No  & First State Only \\\hline
+b10                    & Yes &                  & pred\_order                       & No  &                  \\\hline
+blade\_pos             & Yes &                  & pressure                          & Yes &                  \\\hline
+boron                  & Yes &                  & reset\_sol                        & No  &                  \\\hline
+branch                 & No  &                  & restart\_isotope\_set             & No  &                  \\\hline
+bypass                 & Yes &                  & restart\_jumpin                   & No  &                  \\\hline
+cleanup\_flow          & Yes &                  & restart\_read                     & No  &                  \\\hline
+cool\_chem             & Yes &                  & restart\_shuffle                  & No  &                  \\\hline
+corr\_order            & No  &                  & restart\_shuffle\_error\_checking & No  &                  \\\hline
+crud                   & Yes &                  & restart\_write                    & No  &                  \\\hline
+crud\_cleaning         & No  & First State Only & rlx\_xesm                         & Yes &                  \\\hline
+crud\_removal          & No  &                  & rodbank                           & Yes &                  \\\hline
+crud\_replenish\_b10   & No  &                  & samar                             & Yes &                  \\\hline
+decay\_heat            & Yes &                  & search                            & Yes &                  \\\hline
+deplete                & No  &                  & search\_bank                      & Yes &                  \\\hline
+edit                   & Yes &                  & shuffle\_homog                    & No  &                  \\\hline
+excore\_transport      & Yes &                  & shuffle\_label                    & No  &                  \\\hline
+expand3D               & No  & First State Only & subcool                           & Yes &                  \\\hline
+feedback               & Yes &                  & sym                               & No  & First State Only \\\hline
+flow                   & Yes &                  & temp\_pert                        & Yes &                  \\\hline
+flow\_dist             & Yes &                  & tfuel                             & Yes &                  \\\hline
+insert\_shuffle\_label & No  &                  & thexp                             & No  & First State Only \\\hline
+jump\_in\_file         & No  & First State Only & thexp\_info                       & No  & First State Only \\\hline
+kcrit                  & Yes &                  & thexp\_outfile                    & No  & First State Only \\\hline
+kmul\_beta             & Yes &                  & thexp\_tclad                      & No  & First State Only \\\hline
+kmul\_crw              & Yes &                  & thexp\_tfuel                      & No  & First State Only \\\hline
+kmul\_doppler          & Yes &                  & thexp\_tmod                       & No  & First State Only \\\hline
+kmul\_modtemp          & Yes &                  & tinlet                            & Yes &                  \\\hline
+modden                 & Yes &                  & tinlet\_dist                      & Yes &                  \\\hline
+natcirc                & Yes &                  & title                             & No  &                  \\\hline
+neutron\_transport     & No  &                  & transient                         & No  & First State Only \\\hline
+ni\_p                  & Yes &                  & vh2                               & Yes &                  \\\hline
+ni\_s                  & Yes &                  & void                              & Yes &                  \\\hline
+op\_date               & No  &                  & xenon                             & Yes &                  \\\hline
+    \end{tabular}
+    \caption{List of state variables and their persistence between states}
+    \label{tab:state-variable-persistence}
+\end{table}
+
+\FloatBarrier
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Edits Description}
 
