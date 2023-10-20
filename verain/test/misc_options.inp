@@ -319,6 +319,7 @@
   extend_coupling_mesh above
   bypass_treatment inlet
   bypass_heating 0.05
+  water_rod_heating 0.005
   channel_box_conduction true
   dhfrac 0.02
 

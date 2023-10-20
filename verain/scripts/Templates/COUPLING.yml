@@ -210,3 +210,10 @@ COUPLING:
       _do:
         - copy COUPLING/$bypass_heating
       _content:
+
+    water_rod_heating:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy COUPLING/$water_rod_heating
+      _content:

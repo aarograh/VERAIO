@@ -434,6 +434,7 @@
     <Parameter name="dhfrac" type="double" value="0.02"/>
     <Parameter name="extend_coupling_mesh" type="string" value="above"/>
     <Parameter name="read_restart" type="string" value="my_restart_file"/>
+    <Parameter name="water_rod_heating" type="double" value="0.005"/>
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="2d1d">
