@@ -11149,16 +11149,38 @@ COUPLING:
 #>     unitsdefault={Percent},
 #>     unitsother={},
 #>     valuedefault={0.0},
-#>     valuesapplicable={$\ge 0.0$, $\le 1.0$, explicit},
+#>     valuesapplicable={$\ge 0.0$, $\le 1.0$},
 #>     limitations={},
 #>     description={This controls the treatment of the bypass heating in \ac{bwr} models.  The default value
 #>        is 0.0.  The \texttt{bypass\_heating} fraction determines how much of the reactor power is
 #>        deposited directly into the bypass region, having no impact on fuel conduction or active
-#>        coolant inside the bundles.  If \texttt{explicit} is input, then the neutron flux is used to
-#>        calculate the actual heating; a channel box conduction model is also applied in this case.},
+#>        coolant inside the bundles.},
 #>     notes={}
 #>   }
   bypass_heating:
+    <<: *dtfloat
+    _content:
+    _check:
+      - is_geq() 0.0
+      - is_leq() 1.0
+#>
+#>   {\bf water\_rod\_heating} water\_rod\_heating
+#>   \VERAInputTable{
+#>     name={water\_rod\_heating},
+#>     type={Floating Point Number},
+#>     need={Optional},
+#>     unitsdefault={Percent},
+#>     unitsother={},
+#>     valuedefault={0.0},
+#>     valuesapplicable={$\ge 0.0$, $\le 1.0$},
+#>     limitations={},
+#>     description={This controls the treatment of the water rod heating in \ac{bwr} models.  The default value
+#>        is 0.0.  The \texttt{water\_rod\_heating} fraction determines how much of the reactor power is
+#>        deposited directly into the water rods, having no impact on fuel conduction or active
+#>        coolant inside the bundles.},
+#>     notes={}
+#>   }
+  water_rod_heating:
     <<: *dtfloat
     _content:
     _check:
