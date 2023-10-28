@@ -97,12 +97,13 @@
 % Note that abbreviations that aren't used in the document won't be printed in the
 %  list.
 \makeglossaries
-\newacronym{beavrs}{BEAVRS}{Benchmark for Evaluation And Validation of Reactor Simulations}
+\newacronym{aic}{AIC}{silver-indium-cadmium}
+%\newacronym{beavrs}{BEAVRS}{Benchmark for Evaluation And Validation of Reactor Simulations}
 \newacronym{bwr}{BWR}{boiling water reactor}
 \newacronym{casl}{CASL}{Consortium for Advanced Simulation of Light Water Reactors}
+\newacronym{ce}{CE}{continuous energy}
 \newacronym{chf}{CHF}{critical heat flux}
-\newacronym{cilc}{CILC}{crud-induced localized corrosion}
-\newacronym{cips}{CIPS}{crud-induced power shift (also called axial offset anomaly [AOA])}
+%\newacronym{cilc}{CILC}{crud-induced localized corrosion}
 \newacronym{cmfd}{CMFD}{coarse-mesh finite difference}
 \newacronym{crud}{CRUD}{Chalk River unidentified deposit}
 \newacronym{dnb}{DNB}{departure from nucleate boiling}
@@ -115,7 +116,7 @@
 \newacronym{it}{IT}{instrument tube}
 \newacronym{lwr}{LWR}{light-water reactor}
 \newacronym{modsim}{ModSim}{modeling and simulation}
-\newacronym{pci}{PCI}{pellet-cladding interaction}
+%\newacronym{pci}{PCI}{pellet-cladding interaction}
 \newacronym{ppb}{PPB}{parts per billion}
 \newacronym{ppm}{PPM}{parts per million (usually boron)}
 \newacronym{pwr}{PWR}{pressurized water reactor}
@@ -123,9 +124,16 @@
 \newacronym{ria}{RIA}{reactivity insertion accident}
 \newacronym{sth}{STH}{system thermal hydraulic}
 \newacronym{th}{T/H}{thermal hydraulic}
-\newacronym{uq}{UQ}{uncertainty quantification}
 \newacronym{vera}{VERA}{Virtual Environment for Reactor Applications}
-
+\newacronym{xml}{XML}{extensible markup language}
+\newacronym{mox}{MOX}{mixed oxide}
+\newacronym{hm}{HM}{heavy metal}
+\newacronym{essm}{ESSM}{embedded self-shielding method}
+\newacronym{cram}{CRAM}{Chebyshev Rational Approximation Method}
+\newacronym{tml}{TML}{transient multilevel}
+\newacronym{ltb}{LTB}{lithium tetraborate}
+\newacronym{verain}{VERAIn}{VERA input processor}
+\newacronym{verarun}{VERARun}{VERA run script}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % FRONT MATTER
@@ -153,6 +161,7 @@ This version supersedes previous document version ORNL/SPR-2022/2509. \\
 % NOTE: this will only print if `makeindex X.ist -o X.acr X.acn` is executed.
 % This is part of the included Makefile.
 \printacronyms[title=ABBREVIATIONS]
+\setcounter{table}{0}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DOCUMENT CONTENT
@@ -171,19 +180,19 @@ The input is divided into separate modules
 (or blocks) to describe the different geometric objects in the core and
 to define specific modeling options for each of the physics codes.
 
-Geometric objects are defined as the physical ``parts'' of the reactor core, which includes
+Geometric objects are defined as the physical ``parts'' of the reactor core and include
 fuel assemblies, control rod assemblies, removable burnable poison assemblies, and detectors.
 By defining each geometric object as a separate block, the objects can be described
 independently of each other, relying on very little global information. The independent
-descriptions make \ac{qa} easier, they allow objects to be defined in one cycle,
-and they allow objects to be reused in subsequent cycles without concerns about input conflicts.
+descriptions make quality assurance easier and allow objects to be defined in one cycle
+and to be reused in subsequent cycles without concerns about input conflicts.
 Another advantage of the module approach is that it is easier to shuffle fuel assemblies
 and to insert and withdraw ``inserts'' such as control rods, detectors, and removable burnable
 poison assemblies into the fuel assemblies as the core configuration changes.
 
 Additional modules/blocks are used to define modeling options and parameters for each of the physics
 codes. Separating the geometry description from the modeling options allows all of the
-physics codes to share the same geometry description, and it also allows the same input to be
+physics codes to share the same geometry description and the same input to be
 used with multiple physics codes.
 
 The VERA input blocks are as follows:
@@ -192,13 +201,13 @@ The VERA input blocks are as follows:
 \item[CORE] This block describes the core layout, including the core map, assembly locations,
   control rod locations, and assembly insert locations. The CORE block contains data that does not change
   during a cycle depletion.
-\item[STATE] These blocks describe reactor core operating parameters (statepoint values)
+\item[STATE] These blocks describe reactor core operating parameters (state point values)
   at a particular point in time.
   Parameters include inlet temperature, pressure, power, control rod positions, and others.
-  STATE values can, and usually do, change at each statepoint.
+  STATE values can, and usually do, change at each state point.
 \item[BRANCH] These blocks describe branch calculations that can be done after each state point.
   They can be used to perturb a variety of operational parameters defined in the [STATE] block.
-  They will typically be be used to generate nodal cross section data with {\bf MPACT}.
+  They will typically be be used to generate nodal cross-section data with {\bf MPACT}.
 \item[ASSEMBLY] These blocks contain the geometry and physical description of the nuclear fuel assemblies.
   The assembly descriptions do not include control rods, detectors, or inserts.
 \item[INSERT] These blocks contain the geometry and physical description of the assembly inserts.
@@ -210,14 +219,14 @@ The VERA input blocks are as follows:
 \item[EDITS] This block contains information about what edits the code should produce.
 \item[COUPLING] This block contains parameters for coupling different physics codes together.
 \item[TRANSIENT] This block contains parameters for transient calculations.
-\item[RUN] This block contains runtime parameters for the execution of \ac{vera} calculations.
+\item[RUN] This block contains run time parameters for the execution of \ac{vera} calculations.
 \end{description}
 
-In addition to the blocks listed above, additional code-specific blocks contain
+In addition to the previously listed blocks, additional code-specific blocks contain
 options specific to each physics code: {\bf COBRATF}, {\bf MPACT}, {\bf MAMBA}, {\bf SHIFT}, {\bf BISON}, and {\bf FAST}.
 Additional code-specific input blocks can be added as new physics codes are added to the core simulator.
 
-The following sections in this chapter describe the most common concepts and features of each input block.
+The rest of this chapter describes the most common concepts and features of each input block.
 This section does not provide a comprehensive list of each input or option on each input.
 Refer to Chapter~\ref{chap:inputs} for a detailed list of all inputs and options.
 
@@ -228,24 +237,24 @@ Refer to Chapter~\ref{chap:inputs} for a detailed list of all inputs and options
 
 VERA input files are text files that contain standard printable ASCII characters.
 The data are organized in blocks with names and purposes, as described in the
-introduction. The start of a block is denoted by the block name enclosed in
+Introduction. The start of a block is denoted by the block name enclosed in
 square brackets (e.g., [STATE]). The file block structure is flat, so there is
 no hierarchy in the block segments. The start of a new block also implies the end of
 the previous block. There can be multiple instances of [ASSEMBLY], [INSERT], and [STATE] blocks.
 Other blocks, like [CORE] and the code-specific blocks, are unique, so a new
 block with the same name of an existing block will overwrite the existing block data.
 There is no required order of the blocks in the input file except for the [STATE] blocks,
-in which each statepoint must be entered in chronological order.
+in which each state point must be entered in chronological order.
 
 The blocks contain inputs that are generally organized as keyword-value pairs
 or keyword-tag-value triplets, where \textit{tag} denotes the keyword name tag that can be
 referenced in the other related commands. Keywords should not have blank spaces
 since the spaces typically imply delimiters in the input data.  A value can be a single entry
 or a list entry.
-input value entries can contain different data types, depending on the input format.
+Input value entries can contain different data types, depending on the input format.
 The data types are real numbers, integers, characters, and character strings.
 String entries that include spaces should be enclosed in
-single or double quote pairs.
+single or double quotation marks.
 
 The block, keyword, and tag names are case sensitive. Therefore, users should not depend on capitalization for differentiation among
 entries in the file.
@@ -264,7 +273,7 @@ The keyword {\it include} can be used to insert the contents of another file int
 Short commands are expected to complete within a single line. Longer commands, like input maps,
 can be split across multiple lines.
 
-An example input fragment with blocks, comments, and inputs is shown below.
+An example input fragment with blocks, comments, and inputs follows:
 \begin{Verbatim}[fontsize=\small]
 
   ! comments start with an exclamation point
@@ -294,7 +303,7 @@ Examples of generated lists include:
   <0..4x0.5>     0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0
 
 \end{Verbatim}
-Additional list options can be found on the \href{https://metacpan.org/pod/release/DCONWAY/List-Maker-0.005/lib/List/Maker.pm}{List::Maker} webpage.
+Additional list options can be found on the \href{https://metacpan.org/pod/release/DCONWAY/List-Maker-0.005/lib/List/Maker.pm}{List::Maker} web page.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -350,10 +359,10 @@ This chapter includes several input examples.  Additional examples can be found 
 
 %%%%%%%%%%%%%%%%%%
 % Example 1
-\subsection{Example 1 -- Full Core}
+\subsection{Example 1---Full Core}
 The first example is a complete input for a full-core problem.
 This problem is Problem 7 of the VERA Core Physics Benchmark Progression Problem Specifications and
-is based upon the publicly available description of the Watts Bar reactors.
+is based on the publicly available description of the Watts Bar reactors.
 
 More information on the CASL Progression Benchmark Problems can be found in the following CASL report:
 \begin{itemize}
@@ -363,7 +372,7 @@ CASL Technical Report: CASL-U-2012-0131-004, August 2014.
 
 More details on Problem 7 can be found in the following CASL report:
 \begin{itemize}
-\item ``Demonstration and Neutronics Coupled to Thermal-Hydraulics for a Full-Core Problem using VERA'',
+\item ``Demonstration and Neutronics Coupled to Thermal-Hydraulics for a Full-Core Problem using VERA,''
 CASL Technical Report: CASL-U-2013-0196-000, December 2013.
 \end{itemize}
 
@@ -371,13 +380,9 @@ CASL Technical Report: CASL-U-2013-0196-000, December 2013.
 
 %%%%%%%%%%%%%%%%%%
 % Example 2
-\subsection{Example 2 -- Single Assembly}
+\subsection{Example 2---Single Assembly}
 The second example is a partial input for a single-assembly with \ac{th} feedback.
-This problem is Problem 6 of the VERA Core Physics Benchmark Progression Problem Specifications.  See:
-\begin{itemize}
-\item A. Godfrey, ``VERA Core Physics Benchmark Progression Problem Specifications,''
-CASL Technical Report: CASL-U-2012-0131-004, August 2014.
-\end{itemize}
+This problem is Problem 6 of the VERA Core Physics Benchmark Progression Problem Specifications \cite{godfrey2014}.
 
 A single assembly is defined by creating a core with one assembly in it,
 as described in the small-core geometry discussion in Section~\ref{sec:smallcoregeom}.
@@ -392,13 +397,9 @@ example problem if the user wishes to run this problem.
 
 %%%%%%%%%%%%%%%%%%
 % Example 3
-\subsection{Example 3 -- 2D Lattice Geometry}
+\subsection{Example 3---2D Lattice Geometry}
 The third example is a complete input for a 2D lattice.
-This problem is Problem 2A of the VERA Core Physics Benchmark Progression Problem Specifications. See:
-\begin{itemize}
-\item A. Godfrey, ``VERA Core Physics Benchmark Progression Problem Specifications,''
-CASL Technical Report: CASL-U-2012-0131-004, August 2014.
-\end{itemize}
+This problem is Problem 2A of the VERA Core Physics Benchmark Progression Problem Specifications \cite{godfrey2014}.
 
 
 A single assembly is defined by creating a core with one assembly in it,

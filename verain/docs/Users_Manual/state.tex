@@ -14,7 +14,7 @@ The [STATE] block defines the state of the core
 at a particular point in time.
 These values will typically change during a cycle depletion.
 
-An example showing the most common inputs in the [STATE] block is shown below.
+The following example shows the most common inputs in the [STATE] block.
 A complete listing of all the inputs in the [STATE] block is located in Chapter~\ref{chap:inputs}.
 
 \begin{Verbatim}[fontsize=\small]
@@ -55,11 +55,13 @@ the [CONTROL] block (see Section~\ref{sec:stroke}). For Westinghouse PWRs, a typ
 
 \subsubsection{State Variable Persistence}
 
-Some inputs in the \texttt{[STATE]} block only apply to the state where the input is named, while some others will persist to the following states.  Table \ref{tab:state-variable-persistence} provides a list of all the state inputs and whether or not they persist.  The persistence described in these tables also applies to reading from a restart file as well; the persistent state variables will be updated based on the values in the restart file, then overwritten by any values present in the input.
+Some inputs in the \texttt{[STATE]} block apply only to the state where the input is named, while some others will persist to the following states.  Table \ref{tab:state-variable-persistence} provides a list of all the state inputs and whether or not they persist.  The persistence described in these tables also applies to reading from a restart file as well; the persistent state variables will be updated based on the values in the restart file, then overwritten by any values present in the input.
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{|c|c|c||c|c|c|}\hline
+        \caption{List of state variables and their persistence between states}
+        \resizebox{\textwidth}{!}{
+        \begin{tabular}{|c|c|c||c|c|c|}\hline
     \textbf{Variable} & \textbf{Persists?} & \textbf{Other Notes} & \textbf{Variable} & \textbf{Persists?} & \textbf{Other Notes} \\\hline
 apitch\_tec            & No  & First State Only & pout\_dist                        & Yes &                  \\\hline
 axial\_tec             & No  & First State Only & power                             & Yes &                  \\\hline
@@ -98,7 +100,7 @@ ni\_p                  & Yes &                  & vh2                           
 ni\_s                  & Yes &                  & void                              & Yes &                  \\\hline
 op\_date               & No  &                  & xenon                             & Yes &                  \\\hline
     \end{tabular}
-    \caption{List of state variables and their persistence between states}
+    }
     \label{tab:state-variable-persistence}
 \end{table}
 
@@ -112,10 +114,10 @@ The [EDITS] block is used to control the output edits.
 One of the edits produced by the core simulator is the rod power.  The user has
 the ability to specify the axial levels that the power is averaged over with
 the {\it axial\_edit\_bounds} input.
-The user may choose to average power over uniform axial intervals (like most nodal codes),
+The user can choose to average power over uniform axial intervals (like most nodal codes)
 or to specify the edit intervals manually.
 
-(Note: the edit options are under development and more options will be added in the future.)
+(Note: the edit options are under development, and more options will be added in the future.)
 
 A complete listing of all the inputs in the [EDITS] block is located in Chapter~\ref{chap:inputs}.
 
@@ -156,7 +158,7 @@ The reason for this restriction is that the power is calculated on the {\it axia
 so it is natural to use the same power distribution to couple to the CTF model as well.
 The grids must be explicitly included in the CTF boundaries so that the loss coefficients are calculated correctly.
 
-In the future, this restriction may be lifted and an additional edit bounds array may
+In the future, this restriction might be lifted and an additional edit bounds array might
 be added explicitly for CTF calculations.
 
 
@@ -171,7 +173,7 @@ code is controlled by the code-specific block.
 Refer to Chapter~\ref{chap:inputs} for a complete listing of all the inputs in the [COUPLING] block.
 
 No code-specific information is included in the [COUPLING] block; all code-specific information
-is contained in the code-specific blocks. The [COUPLING] block is only used to define
+is contained in the code-specific blocks. The [COUPLING] block is used only to define
 generic coupling parameters.
 
 As an example, consider the following multiphysics code coupling:
@@ -194,12 +196,12 @@ the change in power between coupled iterations.
 Additional convergence checks are made on the peak fuel temperature, maximum change in density,
 and change in boron concentration (if applicable).
 
-The example shown above uses a Piinput iteration to converge. Piinput iterations usually
+The previous example uses a Piinput iteration to converge. Piinput iterations usually
 need to apply a relaxation factor (also called a damping factor or under-relaxation factor) to
 one or more of the calculated quantities to converge.
 The relaxation factors are applied in the following manner:
 \begin{equation}
-  x = \omega \, x^{\mbox{new}} + (1 - \omega) x^{\mbox{old}}
+  x = \omega \, x^{\mbox{new}} + (1 - \omega) x^{\mbox{old}}~~,
 \end{equation}
 where $x$ is the calculated parameter and $\omega$ is the relaxation factor.
 A relaxation factor of 1.0 signifies that no relaxation is performed.
@@ -209,7 +211,7 @@ Relaxation factors can be specified for the point-wise power, point-wise tempera
 The relaxation is applied to the transferred quantities sent between physics codes. The state variables
 within each physics code are not changed.
 
-An example [COUPLING] input block is shown below.
+The following example shows a [COUPLING] input block.
 
 \begin{Verbatim}[fontsize=\small]
 

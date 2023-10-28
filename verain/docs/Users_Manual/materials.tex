@@ -16,48 +16,48 @@ in the input file: structural materials (input with a {\it mat} input) and fuel 
 Structural materials can be defined in either the [CORE] block or in the
 geometry object blocks [ASSEMBLY], [INSERT], [CONTROL], and [DETECTOR].
 If the materials are defined in the [CORE] block, they have global scope.
-If the materials are defined in the geometry object blocks, then they only have
-scope in the block in which they are defined.
+If the materials are defined in the geometry object blocks, then they have
+scope only in the block in which they are defined.
 This maintains the modularity of the geometry objects.
 
-Fuel materials can only be defined in [ASSEMBLY] blocks.
+Fuel materials can be defined only in [ASSEMBLY] blocks.
 
 Materials are used in many different inputs. They are used to define
 cells, nozzles, core plates, baffles, grids, reflectors, etc. Every material
 used in the input must be defined with either a {\it mat} input or a {\it fuel} input
-(see notes on the material ``mod'' below).
+(see the notes on the material ``mod'' in Section \ref{sec:structural-materials}).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Structural Materials}
+\subsection{Structural Materials}\label{sec:structural-materials}
 
 Structural materials are not fuel and do not deplete. Structural
 materials are defined with the following input:
 
-{\bf mat} {\it user-mat} {\it density} ({\it library-name$_i$}, {\it frac$_i$}, i=1, I)
+{\bf mat} {\it user-mat} {\it density} ({\it library-name$_i$}, {\it frac$_i$}, i=1, I),
 
-where:
+where
 \begin{itemize}
 \item {\it user-mat} is a user-defined material name. The name is case sensitive. {\it user-mat} is used to
 define material names in other inputs such as {\it cell}, {\it grid}, {\it nozzle}, etc. (No default).
 \item {\it density} is the material density in grams per cubic centimeter (g/cc). Setting {\it density} to 0.0 will cause {\it frac} to be treated as number densities instead of fractions. (No default).
 \item {\it library-name} is a corresponding library name(s) for the user material. The library name
-must be defined in the cross section library. (Default = {\it user-mat}). Multiple library materials
+must be defined in the cross-section library. (Default = {\it user-mat}). Multiple library materials
 can be mixed to form a single user material.
-\item {\it frac} is the fraction of the library material in the user material. If values are positive, they will be treated as weight fractions; if they are negative, they will be treated as atom fractions.  (Default=1.0 if there is only one library material in the user material).
+\item {\it frac} is the fraction of the library material in the user material. If values are positive, they will be treated as weight fractions; if they are negative, they will be treated as atom fractions.  (Default = 1.0 if there is only one library material in the user material).
 \end{itemize}
 
-There are three special user materials, ``mod,'' ``cool,'' and ``vacuum.''
+There are three special user materials: ``mod,'' ``cool,'' and ``vacuum.''
 The user can use these materials in cell definitions, but the code will automatically
 determine the composition of these materials based on \ac{th} feedback and soluble boron concentrations.
 The user is not allowed to define a user material named ``mod,'' ``cool,'' or ``vacuum'' on a {\it mat} input.
 The ``mod'' material will automatically be defined as borated water, with the boron concentration coming
 from either the \texttt{boron} input of the \texttt{[STATE]} block or from the results of a critical
-boron search.  The ``cool'' material will be defined as water without boron; this input is only used
-for \ac{bwr} models.  It is crucial that the ``cool'' input be used anywhere that \ac{th} feedback should be applied
+boron search.  The ``cool'' material will be defined as water without boron; this input is used
+only for \ac{bwr} models.  It is crucial that the ``cool'' input be used anywhere that \ac{th} feedback should be applied
 (e.g., inside the channel box); ``mod'' should be used when specifying materials for the bypass regions or
 outside the active core region (such as between the fuel assemblies and the shroud).
 
-Some example material inputs are shown below.
+The following show some example material inputs.
 \begin{Verbatim}[fontsize=\small]
 
   mat zirc4 6.56                   ! library-name defaults to user-name
@@ -90,7 +90,7 @@ for the material definition in the following order:
 \end{enumerate}
 
 If materials are defined in the [CORE] block, then they have global scope over the entire input;
-if materials are defined in other blocks, they only have scope over the local block. This means
+if materials are defined in other blocks, they have scope only over the local block. This means
 that two geometry object blocks can use different material definitions with the same name.
 One example of this is that two assemblies can be defined with the material ``zirc,'' but
 ``zirc'' can have different compositions in each of the assemblies.
@@ -98,7 +98,7 @@ One example of this is that two assemblies can be defined with the material ``zi
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Default Materials}
 
-There are many default files available to the users. The default materials and their compositions
+There are many default files available to users. The default materials and their compositions
 are defined on the initialization file CORE.ini.
 A list of default materials is given in Table~\ref{table:mat}.
 \begin{table}[hbt!]
@@ -141,34 +141,34 @@ A list of default materials is given in Table~\ref{table:mat}.
 
 Fuel materials are defined with {\it fuel} inputs.
 Fuel materials are heavy metal oxides, usually UO$_2$ with different $^{235}$U enrichments.
-Fuel materials may also include mixed oxide (MOX) fuel, which consists of mixtures of uranium, plutonium and other actinides.
-Fuel materials may also contain integral burnable absorbers, such as gadolinia.
+Fuel materials might also include \ac{mox} fuel, which consists of mixtures of uranium, plutonium, and other actinides.
+Fuel materials might also contain integral burnable absorbers, such as gadolinia.
 Fuel materials are different from structural materials in that they deplete and have
-additional properties, as described below.
+additional properties, as described subsequently.
 
-Fuel can only be defined in [ASSEMBLY] blocks, and fuel materials can only be referenced by {\it cell} inputs
+Fuel can be defined only in [ASSEMBLY] blocks, and fuel materials can be referenced only by {\it cell} inputs
 in the [ASSEMBLY] block in which they are defined.
 
 Fuel materials are defined with the following input:
 
 {\bf fuel} {\it user-mat} {\it density} {\it thden} / {\it U-235\_enrichment}
     \{{\it HM\_material$_i$}={\it HM\_enrichment$_i$}, i=1, N\}  \\
-   \{ / {\it gad\_material}={\it gad\_fraction} \}
+   \{ / {\it gad\_material}={\it gad\_fraction} \},
 
-Where:
+where
 \begin{itemize}   % itemize = bullet list
   \item {\it user-mat} is a user-defined fuel name. It is case sensitive (no default).
   \item {\it density} is the fuel material density in g/cc (no default).
      The density is used to calculate number densities.
-  \item {\it thden} is the percent of theoretical density in the pellet (\%) (no default).
-   The theoretical density is only used to look up material properties in the fuel performance;
+  \item {\it thden} is the percentage of theoretical density in the pellet (\%) (no default).
+   The theoretical density is used only to look up material properties in the fuel performance;
    it is not used to calculate number densities. There is no ``double counting'' between
    {\it density} and {\it thden}.
-  \item {\it U-235\_enrichment} is the $^{235}$U enrichment in the fuel in weight \% (no default).
+  \item {\it Uranium-235\_enrichment} is the $^{235}$U enrichment in the fuel in weight \% (no default).
   \begin{itemize}   % itemize = bullet list
     \item If $^{234}$U and $^{236}$U are not specified, then they will automatically be added to the
-       fuel by a pre-determined function (see below).
-    \item If the sum of the heavy metal (HM) enrichments does not equal 100\%, then the remainder of the
+       fuel by a pre-determined function (see the following).
+    \item If the sum of the \ac{hm} enrichments does not equal 100\%, then the remainder of the
         HM composition will be assigned to $^{238}$U.
   \end{itemize}
   \item {\it HM\_material$_i$} is the material name for HM isotope $i$ ($^{239}$Pu, $^{241}$Pu, etc.) (optional).
@@ -176,7 +176,7 @@ Where:
   \item {\it HM\_enrichment$_i$} is the enrichment of HM isotope $i$ in weight \% (optional).
   \item {\it gad\_material} is the material name for gadolinia or other integral burnable absorber material (optional).
         The gad material is usually a mixture defined on a separate {\it mat} input.
-  \item {\it gad\_fraction} is the weight percent of the gad material relative to the total fuel mass (optional).
+  \item {\it gad\_fraction} is the weight percentage of the gad material relative to the total fuel mass (optional).
 \end{itemize}
 
 Oxygen should not be included on the {\it fuel} input. The correct amount of oxygen will automatically
@@ -186,10 +186,10 @@ The {\it density} is the ``stack density'' or ``smeared density'' and should inc
 of the pellet dishing and chamfers.
 It is calculated as the total mass of the fuel pellets divided by the total volume of the fuel
 \begin{equation}
-  \mbox{stack density} = \frac{ (\mbox{fuel mass})} { \pi (\mbox{pellet radius})^2 \, (\mbox{fuel height}) }
+  \mbox{stack density} = \frac{ (\mbox{fuel mass})} { \pi (\mbox{pellet radius})^2 \, (\mbox{fuel height}) }~~.
 \end{equation}
 
-The {\it thden} refers to the actual theoretical density of the pellet. This quantity may be
+The {\it thden} refers to the actual theoretical density of the pellet. This quantity can be
 used in fuel performance codes to evaluate material properties.
 
 If $^{234}$U or $^{236}$U enrichments are not included in the fuel definition, then they are automatically
@@ -198,7 +198,7 @@ added to the fuel with the following formulas:
    W_{234} = 0.0089 \cdot W_{235}
 \end{equation}
 \begin{equation}
-  W_{236} = 0.0046 \cdot W_{235},
+  W_{236} = 0.0046 \cdot W_{235}~~,
 \end{equation}
 where $W_{23x}$ is the enrichment of each of the uranium isotopes
 in percent.\footnote{Earlier versions of the code used a different formula for the default $^{234}$U concentration.}
@@ -206,7 +206,7 @@ in percent.\footnote{Earlier versions of the code used a different formula for t
 If the user specifically does NOT want $^{234}$U or $^{236}$U, then a $^{234}$U
 and/or $^{236}$U enrichment of zero should be specified.
 
-Examples of typical {\it fuel} inputs are shown below. The user
+The following examples are of typical {\it fuel} inputs. The user
 only has to specify the $^{235}$U enrichment, and the code will automatically add
 $^{234}$U, $^{236}$U, $^{238}$U, and oxygen to the fuel.
 \begin{Verbatim}[fontsize=\small]

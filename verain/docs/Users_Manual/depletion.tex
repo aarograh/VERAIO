@@ -11,7 +11,7 @@
 
 This chapter describes depletion and working with restart files.
 
-Depletion and restart files are only available with MPACT.
+Depletion and restart files are available only with MPACT.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Depletion}
@@ -27,17 +27,17 @@ as in the following example:
 
 \end{Verbatim}
 The first parameter on the input is the units used in the depletion and can be ``EFPD'' for \ac{efpd},
-``GWDMT'' for \ac{gwdmt}, or ``hours''.
+``GWDMT'' for \ac{gwdmt}, or ``hours.''
 Following the unit is a list of depletion steps to take.
-Each depletion step is referred to as a ``statepoint'' calculation.
+Each depletion step is referred to as a ``state point'' calculation.
 The first depletion step must always be zero.
 
 Listing multiple depletion steps on a single {\it deplete} input will deplete with all of the other
 values in the [STATE] block held constant. To change a state parameter between
 depletion steps (power, flow, etc.), the user can split the depletion over multiple [STATE] blocks.
-In the following example, the code depletes three statepoints at 50\% power, changes the power
-to 100\%, and depletes for four more statepoints.
-The depletion step at 10 EFPDs is run at both 50 and 100\% power.
+In the following example, the code depletes three state points at 50\% power, changes the power
+to 100\%, and depletes for four more state points.
+The depletion step at 10 EFPDs is run at both 50\% and 100\% power.
 \begin{Verbatim}[fontsize=\small]
 
   [STATE]
@@ -58,14 +58,14 @@ generation is as follows:
 
 \end{Verbatim}
 
-Note that some materials, such as gad fuel, may require more refined time steps in order to obtain accurate solutions.
+Note that some materials, such as gad fuel, might require more refined time steps to obtain accurate solutions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Writing Restart Files}
 
 A user will often want to run a depletion and save the isotopic data to a file that can be used to
 restart a calculation at a later time. This feature is useful if a calculation is long-running and needs to be
-divided into multiple cases. Other times, a user may want to save certain statepoints to go
+divided into multiple cases. At other times, a user might want to save certain state points to go
 back and run perturbation or flux map calculations at the saved points.
 
 The restart file includes {\bf only} isotopic data needed to restart a calculation and
@@ -74,20 +74,20 @@ The restart file does not include the geometry description, so a regular input d
 A user should set up an input deck for a fresh core and then use the restart file to
 overwrite the fresh isotopic concentrations with the isotopic concentrations on the restart file.
 
-A restart file can be written at any statepoint by using a {\it restart\_write} input,
+A restart file can be written at any state point by using a {\it restart\_write} input,
 \begin{Verbatim}[fontsize=\small]
   restart_write filename restart_label
 
 \end{Verbatim}
 where ``filename'' is the name of the restart file, and ``restart\_label'' is an arbitrary user label used
-to differentiate multiple statepoints written to the same file. Examples of restart labels
-include ``100EFPD'', ``HZP'', ``22.56'', ``100EFPD\_ARO'', etc.
-A restart file can include multiple statepoints, as long as each one uses a different restart label.
+to differentiate multiple state points written to the same file. Examples of restart labels
+include ``100EFPD,'' ``HZP,'' ``22.56,'' ``100EFPD\_ARO,'' etc.
+A restart file can include multiple state points, as long as each one uses a different restart label.
 
 If a {\it restart\_label} input is used with a {\it deplete} input, then the restart file is written at the last
 exposure step of the depletion.
 
-In the following example, a depletion is performed, and restart files are written at multiple statepoints.
+In the following example, a depletion is performed, and restart files are written at multiple state points.
 \begin{Verbatim}[fontsize=\small]
 
   [STATE]
@@ -118,16 +118,16 @@ Another application of restart files is to write the final isotopic information 
 so the data can be shuffled to a new cycle. (Core shuffles are discussed in a later section.)
 If writing a restart file at the EOC, the shutdown date should be included using the {\it op\_date} input.
 The reason for including the shutdown date is so that the code will be able to calculate the isotopic decay
-during the outage. An example of the {\it op\_date} input is shown in the last [STATE] block in the example above.
+during the outage. An example of the {\it op\_date} input is shown in the last [STATE] block in the preceding example.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Reading Restart Files}
 
-A restart file can be read by including a {\it restart\_read} input in the [STATE] block,
+A restart file can be read by including a {\it restart\_read} input in the [STATE] block
 \begin{Verbatim}[fontsize=\small]
 
-  restart_read filename restart_label
+  restart_read filename restart_label~~,
 
 \end{Verbatim}
 where ``restart\_label'' is the label that was used to write the restart file.
@@ -144,10 +144,10 @@ is read, and a new calculation is performed with a different power and boron con
 
 \end{Verbatim}
 
-It is possible to write a statepoint in quarter-symmetry and then read the restart back in full-symmetry,
+It is possible to write a state point in quarter symmetry and then read the restart back in full symmetry,
 or \textit{vice versa}.
 
-There is currently a restriction that a user should not include a {\it deplete} input in any
+A current restriction states that a user should not include a {\it deplete} input in any
 [STATE] block where a restart is read. Instead, the user should divide the restart read and depletion
 into separate blocks, as shown here:
 \begin{Verbatim}[fontsize=\small]
@@ -174,7 +174,7 @@ When fuel isotopics are written to a restart file, the assembly locations are sa
 based on the {\it xlabel} and {\it ylabel} labels.
 The {\it xlabel}s start on the left side of the map and run horizontally.
 The {\it ylabel}s start at the top of the map and run down.
-For example, with the following labels defined:
+For example, with the following labels defined
 \begin{Verbatim}[fontsize=\small]
 
   [CORE]
@@ -204,19 +204,21 @@ the assembly locations are defined as ``xlabel dash ylabel'':
 The restart file also includes the cycle number (which is stored as a label),
 so the combination of the cycle number and location can be used to uniquely define any assembly location in any cycle.
 For example, ``3K-12'' refers to location ``K-12'' of cycle ``3.''
-If no cycle number is specified, then the cycle label defaults to the previous cycle number (i.e., cycle N-1). Therefore,
-cycle labels are limited to integers only.
+If no cycle number is specified, then the cycle label defaults to the previous cycle number (i.e., cycle N-1) if the
+cycle label is an integer; for this reason, it is recommended to use integers for the cycle labels. If the cycle label
+is not an integer, then no default can be calculated and the code will print an error before exiting.
 
 New fresh assemblies are defined by using a plus sign followed by an optional string.
-(The string is not currently used for anything, but it may be used to refer to the fresh fuel assembly type in the future.)
+(The string is not currently used for anything, but it could be used in the future to refer to the fresh fuel assembly type.)
 For example, ``+ASMA'' signifies a fresh fuel assembly.
 
 Using these naming conventions, a new core loading pattern can be defined using a {\it shuffle\_label} map.
-The {\it shuffle\_label} map is a core map showing the the previous assembly locations and
-new assembly fuel types. It is also possible to shuffle assembly inserts independently in a similar
+The {\it shuffle\_label} map is a core map showing the previous assembly locations and
+new assembly fuel types. Assembly inserts  can also be independently shuffled in a similar
 fashion using a separate {\it insert\_shuffle\_label} map.
 
-The following example is the full-core loading pattern for cycle 2 of the \ac{beavrs} benchmark.
+The following example is the full-core loading pattern for cycle 2 of the Benchmark for Evaluation and
+Validation of Reactor Simulations benchmark.
 The cycle numbers are not used in the location labels because all of the assemblies
 were moved from the previous cycle (cycle 1), and the default behavior is to use
 the previous cycle number if no cycle label is specified.
@@ -266,7 +268,13 @@ cycles 8, 19, 20, and 21. The fresh assemblies all have fuel type ``A12.''
 
 \end{Verbatim}
 
-At this time, there is a restriction that also requires the user to include an {\it assm\_map} input
+The {\it shuffle\_label} must cover the entire model.  For full symmetry calculations, the map
+must be entered in full symemtry; for quarter symmetry calculations, the map must be entered in
+quarter or full symmetry.  The code will not unfold the map like it does for other inputs such
+as {\it assm\_map}.  Octant symmetry is never allowed for {\it shuffle\_label}.  These rules
+also apply ti {\it insert\_shuffle\_label}.
+
+A current restriction also requires the user to include an {\it assm\_map} input
 in the input to specify the fresh fuel assemblies. This restriction will be removed in the
 future so that the fresh assembly types specified after the plus sign on the {\it shuffle\_label} input will be used.
 
@@ -375,7 +383,7 @@ the shutdown decay time. The shutdown decay calculation is important for calcula
 buildup of fission products such as xenon and samarium.
 
 The shutdown decay time is calculated using the shutdown date from when the assembly was discharged
-and the new cycle startup date. The discharge date is the {\it op\_date} on the restart file
+and the new cycle startup date. The discharge date is the {\it op\_date} on the restart file to which
 the assembly data was written.
 The cycle startup date is the {\it op\_date} in the core shuffle deck.
 
@@ -422,9 +430,9 @@ It does not matter what unit the assembly came from---the correct shutdown dates
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Jumpin-In Calculations}
 
-Another option for core loading is a jump-in calculation, using the {\it restart\_jumpin} input.  This type of calculation manually loads assemblies from restart files one location at a time.  Each assembly can come from its own restart file or several assemblies can come from a single restart file.  This capability is useful for modeling reactors that are many cycles past their first; it allows the user to skip many of the early cycles by running individual assembly calculations to the proper burnup and then loading all their restart files into a core to begin a new cycle in the middle of the reactor's life.
+Another option for core loading is a jump-in calculation, using the {\it restart\_jumpin} input.  This type of calculation manually loads assemblies from restart files one location at a time.  Each assembly can come from its own restart file, or several assemblies can come from a single restart file.  This capability is useful for modeling reactors that are many cycles past their first; it allows the user to skip many of the early cycles by running individual assembly calculations to the proper burnup and then loading all the restart files into a core to begin a new cycle in the middle of the reactor's life.
 
-It is also possible to execute a shuffle calculation using {\it restart\_jumpin} instead of {\it restart\_shuffle} since {\it restart\_jumpin} is effectively a more flexible, verbose form of {\it restart\_shuffle}.  As an example, the cycle 3 shuffle example from Section \ref{sec:core-shuffle-example} is repeated below using the {\it restart\_jumpin} input.  This input would produce identical results to the first version.  If a true jump-in calculation were performed, there would be many more unique {\it .h5} files in the list and the source locations would be {\it A-01} for many or all of the source assemblies, but this example is sufficient to illustrate the use of the input.
+A shuffle calculation can also be executed using {\it restart\_jumpin} instead of {\it restart\_shuffle} since {\it restart\_jumpin} is effectively a more flexible, verbose form of {\it restart\_shuffle}.  As an example, the cycle 3 shuffle example from Section \ref{sec:core-shuffle-example} is repeated subsequently using the {\it restart\_jumpin} input.  This input would produce identical results to the first version.  If a true jump-in calculation were performed, there would be many more unique {\it .h5} files in the list and the source locations would be {\it A-01} for many or all of the source assemblies, but this example is sufficient to illustrate the use of the input.
 
 \begin{Verbatim}[fontsize=\small]
 

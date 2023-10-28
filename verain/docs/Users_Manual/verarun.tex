@@ -13,14 +13,14 @@ VERARun also submits the job to the parallel job queue.
 \subsection{Running a Case}
 
 VERARun is run by specifying {\tt verarun} on the command line, followed by the name of the input file.
-There are additional command line options that are shown below.
+Additional command line options are shown subsequently.
 \begin{Verbatim}[fontsize=\small]
 
 --> verarun <input file>
 
 \end{Verbatim}
 
-For example, if you input deck is called ``2a.inp'', you would enter:
+For example, if your input deck is called \texttt{2a.inp,} you would enter
 \begin{Verbatim}[fontsize=\small]
 
 --> verarun 2a
@@ -51,7 +51,7 @@ To use a development version of VERA (not usually recommended), use the --devs o
 
 \end{Verbatim}
 
-To see additional verarun command line options, just execute verarun with no other command line input.
+To see additional VERARun command line options, just execute VERARun with no other command line input.
 To see detailed help and customizable environment variables use the -h option.
 Doing so will return the following:
 
@@ -135,127 +135,120 @@ advanced arguments:
                         versions
 
 Version 1.12
-\end{verbatim}
+\end{Verbatim}
 
-Verarun uses machine-specific characteristics to determine batch system
+VERARun uses machine-specific characteristics to determine batch system
 directives applied to a job script template.  Additional template parameters,
 such as which models and utilities to execute, are determined from the VERA
 input file (.inp).  Configurations are provided for machines commonly in the
-VERA program.  In order to port 'verarun' to another environment it will be
+VERA program.  In order to port \texttt{verarun} to another environment it will be
 necessary to create a machine spec file.
 
-Execution
----------
+\subsection{Execution}
+
 There are two verarun usage modes:
-
-* If the '-l' command-line argument is specified, available VERA installations
-  are listed.  If '--verbose' is also specified, required files that are
-  missing in each vera_installs_dir subdir are listed.
-
-* If one or more VERA input files (.inp) are specified, a job script is created
+\begin{itemize}
+    \item If the \texttt{-l} command-line argument is specified, available VERA installations
+  are listed.  If \texttt{--verbose} is also specified, required files that are
+  missing in each \texttt{vera\_installs\_dir} subdir are listed.
+  \item If one or more VERA input files (.inp) are specified, a job script is created
   based on each input file.  Note pre-processed VERA input XML (.xml) may be
-  also be specified.  If no file extension is given '.inp' is assumed.
+  also be specified.  If no file extension is given \texttt{.inp} is assumed.
+\end{itemize}
 
 By default the current directory will be used for all processing.
-Alternatively, you may specify that a subdir in the current directory be
-created and used as the working directory via the '-s' command-line argument.
-Specifying a directory value of '.' will tell verarun to create a subdir with
-name {input_name}_{datetime}, where {input_name] is the name of the input file
-without the '.inp' or '.xml' extension, and {datetime} is the ISO 8601 extended
-date format: yyyy-mm-ddThh:mm:ss.
+Alternatively, you may specify that a subdirectory in the current directory be
+created and used as the working directory via the \texttt{-s} command-line argument.
+Specifying a directory value of \texttt{.} will tell \texttt{verarun} to create a subdirectory with
+name \texttt{\{input\_name\}\_\{datetime\}}, where \texttt{\{input\_name\}} is the name of the input file
+without the \texttt{.inp} or \texttt{.xml} extension, and \texttt{\{datetime\}} is the ISO 8601 extended
+date format: \texttt{yyyy-mm-ddThh:mm:ss}.
 
-A job script named with a '.pbs' extension is created in the working directory.
-If the '-x' argument is not specified, the job is also submitted.  Output from
-the job will be in a file with extension '.stdout' in the working directory.
+A job script named with a \texttt{.pbs} extension is created in the working directory.
+If the \texttt{-x} argument is not specified, the job is also submitted.  Output from
+the job will be in a file with extension \texttt{.stdout} in the working directory.
 
-Machine Specifications
-----------------------
-Machine specifications are stored in JSON ('.json') files under the verarun
+\subsection{Machine Specifications}
+
+Machine specifications are stored in JSON (\texttt{.json}) files under the \texttt{verarun}
 Python package installation directory:
 
-  ../lib/python2.7/site-packages/verarun-<version>-py2.7.egg/verarun/config/
-
-It is also possible to specify a configuration file with the '-c' command-line
-argument.
-
-Job Script Template
--------------------
-The Job template is a Bash script named 'vera.pbs' stored under the verarun
-installation directory:
-
-  ../lib/python2.7/site-packages/verarun-<version>-py2.7.egg/verarun/job/
-
-Parameter values are substituted by name for curly-brace expressions in the
-template (.e.g., {job_name}).
-
-Environment Variables
----------------------
-There are environment variables which can be set to override behavior.
-
-* PBS_EMAIL: sets the email address to be used for PBS notifications,
-  overridden by the '-e' (or '--email-addrs') parameter.
-
-* PBS_PROJECT: sets the project for the job, overriding any default set in
-  the host configuration but overridden by the '-p' (or '--project') parameter.
-
-* VERA_BUILDS: path to the directory containing VERA builds or installs,
-  overriding the "$(hostname).json" file but overridden by the
-  '--vera-installs-dir' parameter.  May also be specified as
-  VERA_BUILDS_DIR or VERA_INSTALLS_DIR.
-
-* VERA_BUILDS_DIR: alternative name for VERA_BUILDS, where VERA_BUILDS has
-  priority.
-
-* VERA_DEFAULT_VERSION: names the default version of VERA to use, overriding
-  what is specified in the host configuration file but overridden by the '-v'
-  (or '--vera-version') parameter.
-
-* VERA_INSTALLS_DIR: alternative name for VERA_BUILDS or VERA_BUILDS_DIR,
-  priority order being VERA_BUILDS, VERA_BUILDS_DIR, then VERA_INSTALLS_DIR
-
-* VERA_PROD_VERSIONS: comma-delimited list of allowed production VERA versions.
-
-* VERA_QSUB: custom 'qsub' command to execute for hosts running Torque or
-  PBS Pro.
-
-* VERA_SBATCH: custom 'sbatch' command to execute for hosts running SLURM.
-
-* VERA_SUMMARY_EMAIL:  if set and not blank, the 'case.sum' file is emailed
-  to the user when MPACT completes.
-
-* VERARUN_HOST_CONFIG_FILE: path to a host configuration file to use,
-  overriding the distributed "$(hostname).json" file but overridden by
-  the '-c' parameter.
-
+\begin{Verbatim}
+../lib/python2.7/site-packages/verarun-<version>-py2.7.egg/verarun/config/
 \end{Verbatim}
 
-Note that verarun will create a .pbs file that can also be modified and submitted manually using qsub.
-After job submittal, the job is managed by the typical queueing system commands (qdel, qhold, qrls, etc.)
+It is also possible to specify a configuration file with the \texttt{-c} command-line
+argument.
+
+\subsection{Job Script Template}
+
+The Job template is a Bash script named \texttt{vera.pbs} stored under the \texttt{verarun}
+installation directory:
+
+\begin{Verbatim}
+  ../lib/python2.7/site-packages/verarun-<version>-py2.7.egg/verarun/job/
+\end{Verbatim}
+
+Parameter values are substituted by name for curly-brace expressions in the
+template (.e.g., \texttt{\{job\_name\}}).
+
+\subsection{Environment Variables}
+
+There are environment variables which can be set to override behavior.
+\begin{itemize}
+\item \texttt{PBS\_EMAIL}: sets the email address to be used for PBS notifications,
+  overridden by the \texttt{-e}  parameter (or \texttt{\-\-email-addrs}).
+\item \texttt{PBS\_PROJECT}: sets the project for the job, overriding any default set in
+  the host configuration but overridden by the \texttt{-p} (or \texttt{--project}) parameter.
+\item \texttt{VERA\_BUILDS}: path to the directory containing VERA builds or installs.  May also be specified as
+  \texttt{VERA\_BUILDS\_DIR} or \texttt{VERA\_INSTALLS\_DIR}.
+  Overrides the \texttt{\$(hostname).json} file but  is overridden by the
+  \texttt{--vera-installs-dir} parameter.
+\item \texttt{VERA\_BUILDS\_DIR}: alternative name for \texttt{VERA\_BUILDS}, where \texttt{VERA\_BUILDS} has
+  priority.
+\item \texttt{VERA\_DEFAULT\_VERSION}: names the default version of VERA to use, overriding
+  what is specified in the host configuration file but overridden by the \texttt{-v}
+  (or \texttt{--vera-version}) parameter.
+\item \texttt{VERA\_INSTALLS\_DIR}: alternative name for \texttt{VERA\_BUILDS} or \texttt{VERA\_BUILDS\_DIR},
+  priority order being \texttt{VERA\_BUILDS}, \texttt{VERA\_BUILDS\_DIR}, then \texttt{VERA\_INSTALLS\_DIR}
+\item \texttt{VERA\_PROD\_VERSIONS}: comma-delimited list of allowed production VERA versions.
+\item \texttt{VERA\_QSUB}: custom \texttt{qsub} command to execute for hosts running Torque or
+  PBS Pro.
+\item \texttt{VERA\_SBATCH}: custom \texttt{sbatch} command to execute for hosts running SLURM.
+\item \texttt{VERA\_SUMMARY\_EMAIL}:  if set and not blank, the \texttt{case.sum} file is emailed
+  to the user when MPACT completes.
+\item \texttt{VERARUN\_HOST\_CONFIG\_FILE}: path to a host configuration file to use,
+  overriding the distributed \texttt{\$(hostname).json} file but overridden by
+  the \texttt{-c} parameter.
+\end{itemize}
+
+Note that VERARun will create a \texttt{.pbs} file that can also be modified and submitted manually using \texttt{qsub}.
+After job submittal, the job is managed by the typical queueing system commands (\texttt{qdel}, \texttt{qhold}, \texttt{qrls}, etc.).
 
 With VERARun 1.11 and beyond, you can receive emails summarizing your job when it completes successfully.
 Depending on the font of your email client, this summary can be more or less readable.
-In Outlook, you can force plain text emails to use a certain font (such as courier new) by going to Options -> Mail -> Stationary and Fonts -> Composing and reading plain test messages....
+In Outlook, you can force plain text emails to use a certain font (such as Courier New) by going to \texttt{Options -> Mail -> Stationary and Fonts -> Composing and reading plain test messages...}.
 
-To get information on past jobs submitted with verarun, use the verastat command. This will provide a listing of job ID, date/time, and file location. To get info on a specific job, use:
+To get information on past jobs submitted with VERARun, use the \texttt{verastat} command. This will provide a listing of job ID, date/time, and file location. To get info on a specific job, use
 \begin{Verbatim}[fontsize=\small]
 
 --> verastat job_id
 
 \end{Verbatim}
 
-For additional questions or support, please contact vera-support@ornl.gov.
+For additional questions or support, please contact \href{vera-support@ornl.gov}{vera-support@ornl.gov}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{VERARun Output}
 
-Upon completion of a VERA job, several output files may be created depending on the code options used.
-Some typical outputs include:
+Upon completion of a VERA job, several output files might be created depending on the code options used.
+Some typical outputs include the following:
 \begin{itemize}
-\item VERAIn XML file. This file is written upon the successful completion of VERAIn.
-\item VERA HDF output file. This is a binary file with results that can be visualized in VERAView, or post-processed with user utility codes.
+\item VERAIn XML file. This file is written upon successful completion of VERAIn.
+\item VERA HDF5 output file. This is a binary file with results that can be visualized in VERAView or be postprocessed with user utility codes.
 \item MPACT output file. This file is written upon the successful completion of MPACT (if applicable).
-\item MPACT log File. This file is written upon the successful completion of MPACT (if applicable).
-\item MPACT summary File. This file is written upon the successful completion of MPACT (if applicable).
+\item MPACT log file. This file is written upon the successful completion of MPACT (if applicable).
+\item MPACT summary file. This file is written upon the successful completion of MPACT (if applicable).
 \item Standard output file. This file is a log of all output written to the standard output.
 \item Standard error file. This file is a log of all output written to the standard error file.
 \end{itemize}
@@ -266,18 +259,18 @@ Some typical outputs include:
 \subsection{Input Errors}
 
 If the {\tt verarun} command does not work, the user should make sure that it is in the path.
-The user may need to consult with the system administrator for the correct path.
+The user might need to consult with the system administrator for the correct path.
 
 The next step when looking for an error is to look at the standard error file.
 If the job ran successfully, the size of this file will be zero.
 
-If there were any errors in the input processor (VERAIn), the errors will be written to the standard error file.
-Common errors from the input processor include:
+If there were any errors in VERAIn, the errors will be written to the standard error file.
+Common errors from the input processor include the following:
 \begin{enumerate}
 \item Invalid keywords
 \item Invalid map sizes
 \item Invalid input options
 \end{enumerate}
 
-If the input processor works correctly, an error may still occur in one of the VERA component codes.
+If the input processor works correctly, an error still might occur in one of the VERA component codes.
 The user should look at the error message and consult the user manual for the component code.

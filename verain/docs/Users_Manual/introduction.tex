@@ -15,24 +15,24 @@ deployed and applied broadly throughout the nuclear energy industry to enhance s
 reliability, and economics.
 
 CASL's mission was to provide the coupled, high-fidelity, usable modeling and simulation
-capabilities needed to address \ac{lwr} operational and safety performance--defining phenomena.
+capabilities needed to address \ac{lwr} operational and safety performance-defining phenomena.
 
 CASL's foundational technology products include CASL solutions and CASL ModSim Technologies.\\
 CASL's ModSim technology, the \ac{vera}, provides
 higher fidelity results than those offered by the current industry approach by incorporating coupled physics
 and science-based models, state-of-the-art numerical methods, modern computational science,
-integrated \ac{uq} and validation against data from operating
+integrated uncertainty quantification, and validation against data from operating
 \acp{pwr}, single-effect experiments, and integral tests.
 
 %%%%%%%%%%%%
 \subsection{VERA}
 VERA is a specific collection
 of multiphysics computer codes used to model and simulate depletion of an LWR core over multiple cycles.
-Examples of the separate physics modeled in the core simulator include cross section generation,
+Examples of the separate physics modeled in the core simulator include cross-section generation,
 neutron transport, isotopic depletion, thermal hydraulics, and fuel performance.
 
 The purpose of the core simulator is to simulate depletion of the reactor core and provide data and boundary conditions to model
-CASL Challenge Problems such as \ac{cips}, \ac{cilc}, \ac{dnb}, \ac{pci}, and \ac{ria} analyses.
+CASL Challenge Problems such as crud-induced power shift (CIPS, also called axial offset anomaly), crud-induced localized corrosion (CILC), \ac{dnb}, pellet-cladding interaction (PCI), and \ac{ria} analyses.
 
 One important feature of the core simulator is that a single common input file is used to drive all
 of the different physics codes.\footnote{The only exception to this is for computational fluid dynamics codes,
@@ -40,7 +40,7 @@ which generally require a detailed CAD file to support mesh generation and perfo
 One benefit of using a single common input is that users only need to understand and be proficient with one input
 instead of having to understand multiple inputs for multiple physics codes.
 Another benefit of using a single common input is that all codes work from a single
-geometry description, and this reduces errors due to inconsistent geometries in different codes.
+geometry description, and this reduces errors from inconsistent geometries in different codes.
 
 The most up-to-date version of this document resides in the VERA Git repository file\\
 ``VERAIO/verain/docs/verain\_UM.pdf'';
@@ -53,8 +53,8 @@ Additional information can be found on the VERA website: \href{https://vera.ornl
 
 This manual is organized into three main parts.
 
-The first part, which includes chapters~\ref{chap:user} through \ref{chap:edits}, is the ``User's Manual,''
-which describes how a user would set up a typical input. This part of the manual gives
+The first part, which includes Chapters~\ref{chap:user} through \ref{chap:edits}, is the ``User's Manual,''
+which describes how a user would set up typical input. This part of the manual gives
 the most common inputs a user would need and describes how to use them.
 It does not include a complete list of inputs or show every available option.
 
@@ -66,37 +66,37 @@ Additional example input files can be found in the code installation directory.
 
 In addition, a description of the VERARun script that is used to run VERA jobs is given in Chapter~\ref{chap:verarun}.
 
-Note that the VERA input processor, VERAIn, is an open-source software project and can be
-found on the CASL Github website \href{http://www.github.com/casl/verain}{github.com/casl/verain}.
+Note that the \ac{verain} is an open-source software project and can be
+found on the CASL Github website: \href{http://www.github.com/casl/verain}{github.com/casl/verain}.
 The open-source input processor does not include any physics packages.
 
 
 %%%%%%%%%%%%
 \subsection{Training Requirements}
 
-There is no required training for running VERA, but users should have a basic understanding
+No training is required to run VERA, but users should have a basic understanding
 of LWR technology. Users who perform any engineering or safety-related work with VERA should
 follow the procedures of their own organizations.
 
 Optional user training is periodically available from the VERA Users Group.
-Please contact support (contact information given below) to inquire about training opportunities.
+Please contact support (see Section 1.9, ``Software Support'') to inquire about training opportunities.
 
 %%%%%%%%%%%%
 \subsection{Purpose and Functional Requirements}
 
-The purpose and functional requirements of the VERA common input processor (VERAIn) are:
+The purpose and functional requirements of \ac{verain} are as follows:
 \begin{enumerate}
 \item Read an ASCII input provided by the user as described in this manual.
 \item Perform basic error checking on the ASCII input. Additional error checking is performed by
 other VERA components.
 \item Perform basic geometry processing such as expanding input maps from octant to full geometry
 where applicable.
-\item Create an extensible markup language (XML) output file that can easily be read by other VERA components.
+\item Create an \ac{xml} output file that can easily be read by other VERA components.
 \end{enumerate}
 
-The purpose of the VERA run script (VERARun) is to provide a single
+The purpose of the \ac{verarun} is to provide a single
 interface to run the VERA codes, usually in parallel computing environments.
-The specific functional requirements for VERARun are:
+The specific functional requirements for VERARun are as follows:
 \begin{enumerate}
 \item Run VERAIn to create an XML file that can be read by other VERA components.
 \item Run any input preprocessors as necessary (such as XML2CTF or XML2Bison).
@@ -107,14 +107,14 @@ The specific functional requirements for VERARun are:
 %%%%%%%%%%%%
 \subsection{Code Capabilities and Limitations}
 
-The current code capabilities of VERAIn and VERARun are specified by the functional requirements listed above.
+The current code capabilities of VERAIn and VERARun are specified by the functional requirements listed previously.
 Requirements not explicitly stated in this list are assumed to be limitations.
 
 One general limitation in the input processor is that the input is limited to standard LWR designs.
 For example, the input processor does not support reactors with hexagonal or plate fuel or with coolant
 that is not water.
 
-Other VERA components may have limitations; the user should refer to the documentation
+Other VERA components might have limitations; the user should refer to the documentation
 of the other VERA components for these limitations.
 
 %%%%%%%%%%%%
@@ -129,7 +129,7 @@ Any feature not covered in these reports is considered to be untested.
 
 Running VERAIn or VERARun on any machine is not known to expose the system to any security
 vulnerabilities at this time.
-VERAIn and VERARun should not be run with administrative level access permissions.
+VERAIn and VERARun should not be run with administrative-level access permissions.
 
 %%%%%%%%%%%%
 \subsection{Software Support}
@@ -137,4 +137,4 @@ VERAIn and VERARun should not be run with administrative level access permission
 For specific questions about the use of VERAIn or VERARun, the licensing of the code, or to report bugs,
 users should send an email to {\tt vera-support@ornl.gov}.
 
-Additional user information may also be found on the VERA website \href{https://vera.ornl.gov/}{https://vera.ornl.gov/}.
+Additional user information can be found on the VERA website: \href{https://vera.ornl.gov/}{https://vera.ornl.gov/}.
