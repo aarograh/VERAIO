@@ -49,7 +49,7 @@ the pin pitch.  An assembly block can also include an optional title input.
 
 The number of pins {\it npin} must be the same for every assembly in a core.
 
-The inter-assembly gap on each side of the assembly is calculated as $[apitch-npin*ppitch]/2$
+The inter-assembly gap on each side of the assembly is calculated as $[apitch-npin*ppitch]/2$~~.
 
 For a \ac{bwr}, a channel box may be specified with the following inputs. See Section~\ref{sec:channel_box} for a complete
 description of the channel box inputs.
@@ -110,10 +110,10 @@ The materials ``U31''  and ``he'' are defined on {\it fuel} and {\it mat} inputs
 
 The outside of each cell is automatically filled with the special material ``mod,'' which
 refers to the moderator (or coolant).
-The composition of ``mod'' is calculated by the codes using the local thermal hydraulic (\ac{th}) conditions and the
+The composition of ``mod'' is calculated by the codes using the local \ac{th} conditions and the
 soluble boron concentration and cannot be specified by a user on a {\it mat} input.
 
-In the example above, the \ac{gt} and \ac{it} descriptions
+In the preceding example, the \ac{gt} and \ac{it} descriptions
 use the special moderator material ``mod'' to define the moderator material on both
 the inside and outside of the tubes.
 
@@ -130,9 +130,9 @@ to the end of the {\it cell} input.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Lattice Descriptions}
 
-Once the cells are defined, they are placed into 2D ``lattices'' as shown below.
+Once the cells are defined, they are placed into 2D ``lattices,'' shown subsequently.
 Like the core maps, lattice maps can be entered with either full-symmetry, quarter-symmetry,
-or octant-symmetry. The maps below are octant-symmetric maps for 17$\times$17 assembly designs.
+or octant-symmetry. The following maps are octant-symmetric maps for 17~$\times$~17 assembly designs.
 \vfill   % don't split map
 \begin{Verbatim}[fontsize=\small]
   rodmap FUEL1
@@ -191,7 +191,7 @@ Each entry in a rod map must be a valid cell ID.
 \subsubsection{Axial Descriptions}
 
 After rod maps are defined for each axial level, the lattices are ``stacked'' into
-an assembly using an {\it axial} input as shown below.
+an assembly using an {\it axial} input as shown in the following.
 
 \begin{Verbatim}[fontsize=\small]
   axial A1    6.050
@@ -292,7 +292,7 @@ defines the GTs themselves.
 
 Control rod positions change during operation, so the geometric description of a control rod
 should always be for a rod in the {\bf fully inserted} position.
-In the example below, the bottom of the control rod in the fully inserted position is
+In the following example, the bottom of the control rod in the fully inserted position is
 at an axial location of 15.46 cm.
 
 \begin{Verbatim}[fontsize=\small]
@@ -375,19 +375,19 @@ The geometry description in the input is for a control rod in the fully inserted
 
 \subsubsection{Control Rod Position Example}
 
-From the {\it axial} input shown above, the bottom of the AIC at the fully inserted position is 15.46 cm.
+From the {\it axial} input shown previously, the bottom of the \ac{aic} at the fully inserted position is 15.46 cm.
 From the {\it stroke} input, the total stroke is 360.0 cm, and the number of steps in the fully withdrawn
 position is 228 steps.
-Therefore, the bottom elevation of the AIC lattice at step \textit{N} will be
+Therefore, the bottom elevation of the \ac{aic} lattice at step \textit{N} will be
 \begin{equation}
-   E(N) = 15.46 + \frac{360.0 \cdot N}{228}
+   E(N) = 15.46 + \frac{360.0 \cdot N}{228}~~.
 \end{equation}
 
 Using this formula, the bottom elevation of the AIC lattice at the following step positions is as follows:
 \begin{itemize}   % itemize = bullet list
- \item step 228 (fully withdrawn) = 15.46 + 360.0 * 228 / 228 = 375.46 cm
- \item step 100 = 15.46 + 360.0 * 100 / 228 = 173.35 cm
- \item step 0 (fully inserted) = 15.46 + 360.0 * 0 / 228 = 15.46 cm
+ \item Step 228 (fully withdrawn) = 15.46 + 360.0 * 228 / 228 = 375.46 cm
+ \item Step 100 = 15.46 + 360.0 * 100 / 228 = 173.35 cm
+ \item Step 0 (fully inserted) = 15.46 + 360.0 * 0 / 228 = 15.46 cm
 \end{itemize}
 
 The steps withdrawn can be specified as real numbers and fractions of a step.
@@ -490,9 +490,9 @@ A complete list of all the inputs in the [DETECTOR] block is located in Chapter~
 The {\it channel\_box} and
 {\it channel\_box\_segments} inputs can be used to model the channel box that surrounds a BWR assembly. The {\it channel\_box} input allows the representation of a normal box
 with a nominal thickness and rounded corners. When paired with the {\it channel\_box\_segments} input,
-a general explicit geometry of thick-thin designs may be modeled.
+a general explicit geometry of thick-thin designs can be modeled.
 
-The input inputs are shown in Figure~\ref{fig:cbinput}.
+The inputs are shown in Figure~\ref{fig:cbinput}.
 
 \begin{figure}[h]
 \begin{center}

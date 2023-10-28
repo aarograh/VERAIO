@@ -1,12 +1,12 @@
 \section{Edits} \label{chap:edits}
 
-A wide range of output edits can be enabled by the user.  This chapter will briefly describe the possible edits that can be enabled by the user along with several other useful input options related to controlling the edits.
+A wide range of output edits can be enabled by the user.  This chapter briefly describes the possible edits that can be enabled by the user, along with several other useful input options related to controlling the edits.
 
 \subsection{The \texttt{edit} Input}
 
 \subsubsection{Enabling Edits through the \texttt{edit} Input}
 
-Most output edits are enabled using the \texttt{edit} input in the \texttt{[STATE]} block.  The \texttt{edit} input should only be used once per state block, with a list of all the edits the user wishes to enable.  Once edits are enabled in a state block, they will remain enabled in all subsequent states.  If a user wants to disable them later, then including the keyword \texttt{none} will disable all previously enabled edits.  There is a list of default edits which cannot be disabled; those will be described in Section \ref{sec:default-edits}.  If \texttt{none} and other valid edits appear next to each other in the same \texttt{edit} input, then \texttt{none} will disable all previously enabled edits first, then the other edits listed alongside \texttt{none} will be enabled.
+Most output edits are enabled using the \texttt{edit} input in the \texttt{[STATE]} block.  The \texttt{edit} input should be used only once per \texttt{[STATE]} block, with a list of all the edits the user wishes to enable.  Once edits are enabled in a \texttt{[STATE]} block, they will remain enabled in all subsequent states.  If a user wants to disable them later, then including the keyword \texttt{none} will disable all previously enabled edits.  There is a list of default edits that cannot be disabled; those are described in Section \ref{sec:default-edits}.  If \texttt{none} and other valid edits appear next to each other in the same \texttt{edit} input, then \texttt{none} will disable all previously enabled edits first, then the other edits listed alongside \texttt{none} will be enabled.
 
 As an example, one regression test uses the following \texttt{[STATE]} blocks:
 \begin{verbatim}
@@ -50,7 +50,7 @@ This produces 13 states, with the following edits enabled for each state:
 \end{enumerate}
 This illustrates enabling and disabling various edits separately and simultaneously.
 
-There are a few other edits which are not enabled in the \texttt{[STATE]} block by the \texttt{edit} input, but rather through other code-specific options.  These are discussed separate in Section \ref{sec:other-hdf5-edits}.
+A few other edits are not enabled in the \texttt{[STATE]} block by the \texttt{edit} input but rather through other code-specific options.  These are discussed separately in Section \ref{sec:other-hdf5-edits}.
 
 \subsubsection{Edit Groups}
 
@@ -58,13 +58,13 @@ Another useful option is the \texttt{edit\_group} input in the \texttt{[EDITS]} 
 
 \subsubsection{Point Edit Locations}
 
-One specific category of edits is a point edit, which is used to return a particular mesh or solution value at one point in the mesh.  To use point edits, the \texttt{points} input must be specified in the \texttt{[EDITS]} block.  This input takes a set of four values.  Each set contains the coordinate type and 3 values.  The coordinate type can be either \texttt{cart} or \texttt{rtheta}.  If \texttt{cart}, the 3 values are the $x$, $y$, and $z$ coordinates in the mesh; if \texttt{rtheta}, the 3 values are the radius, angle (degrees counter-clockwise from the positive x axis), and $z$ coordinate.  In both cases, the origin is the center of the reactor.  There is no limit on the number of points specified in the \texttt{points} input, and each one can use a different coordinate type if desired.  The actual point edits supported by the codes will be described in Section \ref{sec:point-edits}.
+One specific category of edits is a point edit, which is used to return a particular mesh or solution value at one point in the mesh.  To use point edits, the \texttt{points} input must be specified in the \texttt{[EDITS]} block.  This input takes a set of four values.  Each set contains the coordinate type and three values.  The coordinate type can be either \texttt{cart} or \texttt{rtheta}.  If \texttt{cart}, the three values are the $x$, $y$, and $z$ coordinates in the mesh; if \texttt{rtheta}, the three values are the radius, angle (degrees counterclockwise from the positive x axis), and $z$ coordinate.  In both cases, the origin is the center of the reactor.  There is no limit on the number of points specified in the \texttt{points} input, and each one can use a different coordinate type if desired.  The actual point edits supported by the codes are described in Section \ref{sec:point-edits}.
 
 \subsubsection{Supported Edits}
 
-There is a wide range of supported edits.  They can be grouped according to the level of resolution of the edit.  Doing so results in the following categories: \texttt{fsr}, \texttt{intrapin}, \texttt{pin}, \texttt{channel}, \texttt{core}, and \texttt{point}.  Any edit that can be enabled from input will fall into one of these categories; the category is always used as a prefix for the name of the edit in the input (e.g., \texttt{pin\_powers} is part of the \texttt{pin} category).
+A wide range of supported edits exists.  They can be grouped according to the level of resolution of the edit.  Doing so results in the following categories: \texttt{fsr}, \texttt{intrapin}, \texttt{pin}, \texttt{channel}, \texttt{core}, and \texttt{point}.  Any edit that can be enabled from input will fall into one of these categories; the category is always used as a prefix for the name of the edit in the input (e.g., \texttt{pin\_powers} is part of the \texttt{pin} category).
 
-Grouping edits by resolution category is useful because it is guaranteed that all edits of a particular category will have the same shape.  The following terms will be used to describe the shape of the edits:
+Grouping edits by resolution category is useful because it is guaranteed that all edits of a particular category will have the same shape.  The following terms are used to describe the shape of the edits:
 \begin{itemize}[noitemsep]
     \item \texttt{nFuelReg} the number of burnup regions in the model
     \item \texttt{nxpin} the number of pins across an assembly in the x direction
@@ -74,27 +74,27 @@ Grouping edits by resolution category is useful because it is guaranteed that al
     \item \texttt{nxchan} the number of channels across an assembly (usually equal to \texttt{nxpin} + 1)
     \item \texttt{nychan} the number of channels across an assembly (usually equal to \texttt{nypin} + 1)
 \end{itemize}
-The following sections will provide the shape of the edit category and a list of supported edits in that category.  Additional information about the output formats may be found in the VERAOut specifications \cite{godfrey2014}.  Note that the shape and units will be provided in the tables as a reference, but all \ac{hdf5} datasets also have \ac{hdf5} attributes containing units, descriptions, and the name of the code that produced it.
+The following sections provide the shape of the edit category and a list of supported edits in that category.  Additional information about the output formats can found in the VERAOut specifications \cite{godfrey2014}.  Note that the shape and units are provided in the tables as a reference, but all \ac{hdf5} datasets also have \ac{hdf5} attributes containing units, descriptions, and the name of the code that produced it.
 
 Several edits used indexes, which refer to the following:
 \begin{itemize}[noitemsep]
     \item \texttt{<group>} the neutron energy group
     \item \texttt{<gamma group>} the gamma energy group
-    \item \texttt{<isotope>} the isotope using the element name and mass number separate by a hyphen (e.g., \texttt{U-235}, \texttt{B-10}, etc.)
+    \item \texttt{<isotope>} the isotope using the element name and mass number separated by a hyphen (e.g., \texttt{U-235}, \texttt{B-10}, etc.)
     \item \texttt{<delayed group>} the delayed neutron precursor group
     \item \texttt{<reaction>} the reaction type: \texttt{abs}, \texttt{fis}, or \texttt{nufis}
 \end{itemize}
 
 \paragraph{FSR Edits}\label{sec:fsr-edits}
 
-The \texttt{fsr} edits are unique compared to the rest of the categories because they are not placed in the VERAOut (\ac{hdf5}) file.  Instead, they are used for visualization.  The name of the edit is placed in the \texttt{[STATE]} block's \texttt{edit} input like the others, but the \texttt{vis\_edits} input in the \texttt{[MPACT]} block must also be set to either \texttt{fsr} to obtain VTK edits or \texttt{fsrvtu} to obtain VTU edits.  If the \texttt{vis\_edits} input is not set, then the \texttt{fsr} edits will not do anything.  The resulting VTK or VTU files can be opened in a visualization program, such as VisIt or ParaView, to view the fine mesh solution data produced as an \texttt{fsr} edit.  Table \ref{tab:fsr-edits} lists the allowed \texttt{fsr} edits.
+The flat source region (\texttt{fsr}) edits are unique compared with the rest of the categories because they are not placed in the VERAOut (\ac{hdf5}) file.  Instead, they are used for visualization.  The name of the edit is placed in the \texttt{[STATE]} block's \texttt{edit} input like the others, but the \texttt{vis\_edits} input in the \texttt{[MPACT]} block must also be set to either \texttt{fsr} to obtain VTK edits or \texttt{fsrvtu} to obtain VTU edits.  If the \texttt{vis\_edits} input is not set, then the \texttt{fsr} edits will not do anything.  The resulting VTK or VTU files can be opened in a visualization program, such as VisIt or ParaView, to view the fine mesh solution data produced as an \texttt{fsr} edit.  Table \ref{tab:fsr-edits} lists the allowed \texttt{fsr} edits.
 
 \begin{table}[h]
     \centering
     \caption{List of \texttt{fsr} edits in VERA}
     \label{tab:fsr-edits}
-    \begin{tabular}{|l|p{0.5\textwidth}|c|}\hline
-    {\bf Name} & {\bf Units} \\\hline
+    \begin{tabular}{|l|p{0.38\textwidth}|c|}\hline
+    {\bf Name} & {\bf Description} & {\bf Units} \\\hline
     fsr\_flux\_<group> & Region-wise neutron flux distribution for group <group> & Neutrons/(cm$^2$-s) \\\hline
     fsr\_flux\_fast & Region-wise neutron fast flux distribution & Neutrons/(cm$^2$-s) \\\hline
     fsr\_flux\_thermal & Region-wise neutron thermal flux distribution & Neutrons/(cm$^2$-s) \\\hline
@@ -124,12 +124,25 @@ The \texttt{fsr} edits are unique compared to the rest of the categories because
 
 The \texttt{intrapin} edits are the only \ac{hdf5} dataset type that provides intrapin resolution.  If any \texttt{intrapin} edits are enabled, there are some additional support datasets that are generated to support indexing through the regions of each pin; those datasets are not listed here.  The shape of the \texttt{intrapin} datasets is a 1D array of all the regions; the support dataset has the shape \texttt{(nasy, nz, nxpin, nypin)} and contains the number of each regions for each axial level of each pin; this can be used to unfold the \texttt{intrapin} dataset for a particular rod and level.  The supported intrapin datasets are listed in Table \ref{tab:intrapin-edits}.
 
-\begin{table}[h]
-    \centering
+\begin{longtable}[h]{|l|p{0.38\textwidth}|c|}
     \caption{List of \texttt{intrapin} edits in VERA}
     \label{tab:intrapin-edits}
-    \begin{tabular}{|l|p{0.5\textwidth}|l|}\hline
-    {\bf Name} & {\bf Description} & {\bf Units} \\\hline
+    \\
+
+    \hline
+    {\bf Name} & {\bf Description} & {\bf Units} \\
+    \hline
+    \endfirsthead
+    \hline
+    {\bf Name} & {\bf Description} & {\bf Units} \\
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    \hline
+    \
 intrapin\_all\_dens & Intrapin region densities for all regions & g/cm$^3$ \\\hline
 intrapin\_all\_flux\_<group> & Region-wise neutron scalar flux for all regions & path-length/(cm$^2$-s) \\\hline
 intrapin\_all\_flux\_fast & Region-wise fast neutron scalar flux for all regions & path-length/(cm$^2$-s) \\\hline
@@ -159,8 +172,7 @@ intrapin\_mod\_dens & Intrapin region densities for mod regions & g/cm$^3$ \\\hl
 intrapin\_mod\_isotopes\_<isotope> & Intrapin volume-average isotopic number densities for mod regions & atoms/(cm*10$^{24}$) \\\hline
 intrapin\_mod\_temps & Intrapin region temperatures for all regions & C \\\hline
 intrapin\_mod\_volumes & Intrapin region volumes for mod regions & cm$^3$ \\\hline
-    \end{tabular}
-\end{table}
+\end{longtable}
 
 \FloatBarrier
 
@@ -168,7 +180,7 @@ intrapin\_mod\_volumes & Intrapin region volumes for mod regions & cm$^3$ \\\hli
 
 The \texttt{pin} datasets have the shape \texttt{(nasy, nz, nxpin, nyping)}.  Supported datasets are listed in Table \ref{tab:pin-edits}.
 
-\begin{longtable}[h]{|l|p{0.5\textwidth}|l|}
+\begin{longtable}[h]{|l|p{0.38\textwidth}|c|}
     \caption{List of \texttt{pin} edits in VERA}
     \label{tab:pin-edits}
     \\
@@ -187,23 +199,23 @@ The \texttt{pin} datasets have the shape \texttt{(nasy, nz, nxpin, nyping)}.  Su
     \endlastfoot
     \hline
     \
-pin\_clad\_all\_power & Pin cladding power. & W/cm \\\hline
-pin\_clad\_fast\_flux & Pinwise fast fluxes in the clad. & Neutrons/(cm$^2$-s) \\\hline
+pin\_clad\_all\_power & Pin cladding power & W/cm \\\hline
+pin\_clad\_fast\_flux & Pinwise fast fluxes in the clad & Neutrons/(cm$^2$-s) \\\hline
 pin\_clad\_temp & Volume average fuel clad temperature & C \\\hline
-pin\_cool\_all\_power & Pin coolant power. & W/cm \\\hline
-pin\_crud\_rr\_<isotope>\_<reaction> & Microscopic isotopic reaction rates in CRUD regions & Reactions/(atom*s) \\\hline
+pin\_cool\_all\_power & Pin coolant power & W/cm \\\hline
+pin\_crud\_rr\_<isotope>\_<reaction> & Microscopic isotopic reaction rates in Chalk River unidentified deposit (CRUD) regions & Reactions/(atom*s) \\\hline
 pin\_decay\_heat & Fuel rod volume averaged decay heat & W/cm \\\hline
-pin\_flux\_<group> & Pinwise fluxes. & Neutrons/(cm$^2$-s) \\\hline
-pin\_fuel\_all\_power & Pin fuel power. & W/cm \\\hline
-pin\_gammaflux & Gamma flux distribution. & Neutrons/(cm$^2$-s) \\\hline
-pin\_gammaheat & Gamma heat deposition. & W \\\hline
+pin\_flux\_<group> & Pinwise fluxes & Neutrons/(cm$^2$-s) \\\hline
+pin\_fuel\_all\_power & Pin fuel power & W/cm \\\hline
+pin\_gammaflux & Gamma flux distribution & Neutrons/(cm$^2$-s) \\\hline
+pin\_gammaheat & Gamma heat deposition & W \\\hline
 pin\_gap\_temp & Volume average fuel-clad gap temperature & C \\\hline
-pin\_gt\_all\_power & Pin guide tube power. & W/cm \\\hline
+pin\_gt\_all\_power & Pin guide tube power & W/cm \\\hline
 pin\_isotopes\_<isotope> & Pinwise isotopics: volume-averaged number densities divided by height, multiplied by 10$^{24}$ & atoms/(cm*10$^{24}$) \\\hline
 pin\_macrorr\_<isotope>\_<reaction> & Macroscopic isotopic reaction rates & (Reactions/(cm$^3$*s) \\\hline
-pin\_mod\_all\_power & Pin moderator power. & W/cm \\\hline
-pin\_neutronflux & Neutron flux distribution. & Neutrons/(cm$^2$-s) \\\hline
-pin\_powers\_allRegions & Normalized pin powers. & Unitless \\\hline
+pin\_mod\_all\_power & Pin moderator power & W/cm \\\hline
+pin\_neutronflux & Neutron flux distribution & Neutrons/(cm$^2$-s) \\\hline
+pin\_powers\_allRegions & Normalized pin powers & Unitless \\\hline
 pin\_prompt\_heat & Prompt linear heat generation & W/cm \\\hline
 pin\_prompt\_powers & Normalized prompt linear power generation & Unitless \\\hline
 pin\_rr\_<isotope>\_<reaction> & Microscopic isotopic reaction rates & Reactions/(atom*s) \\\hline
@@ -219,14 +231,14 @@ The \texttt{channel} datasets have the shape \texttt{(nasy, nz, nxchan, nychan)}
     \centering
     \caption{List of \texttt{channel} edits in VERA}
     \label{tab:channel-edits}
-\begin{tabular}{|l|p{0.5\textwidth}|l|}\hline
+\begin{tabular}{|l|p{0.5\textwidth}|c|}\hline
    \textbf{Name} & \textbf{Description} & \textbf{Units} \\\hline
-   channel\_liquid\_density & Liquid density in the channel level. & kg/m**3 \\ \hline
-   channel\_liquid\_temps & Coolant temperature of channel level. & C \\\hline
-   channel\_mixture\_mass\_flux & Coolant mass flux in the axial direction in the center of the channel level. & kg/m**2/s \\ \hline
-   channel\_pressure & Absolute pressure in channel level. & bar \\ \hline
-   channel\_vapor\_void & Vapor void fraction in channel level. & n/a \\\hline
-   equilibrium\_quality & Equalibrium quality in channel level. & n/a \\ \hline
+   channel\_liquid\_density & Liquid density in the channel level & kg/m**3 \\ \hline
+   channel\_liquid\_temps & Coolant temperature of channel level & C \\\hline
+   channel\_mixture\_mass\_flux & Coolant mass flux in the axial direction in the center of the channel level & kg/m**2/s \\ \hline
+   channel\_pressure & Absolute pressure in channel level & bar \\ \hline
+   channel\_vapor\_void & Vapor void fraction in channel level & n/a \\\hline
+   equilibrium\_quality & Equalibrium quality in channel level & n/a \\ \hline
 \end{tabular}
 
 \end{table}
@@ -235,7 +247,7 @@ The \texttt{channel} datasets have the shape \texttt{(nasy, nz, nxchan, nychan)}
 
 \paragraph{Assembly Edits}\label{sec:assembly-edits}
 
-The \texttt{assembly} datasets have the shape \texttt{(nasy, nz)}.  Currently the only \texttt{assembly} datasets that are generated by \ac{vera} are not controlled through the \texttt{edit} input.  They are discussed in section \ref{sec:bwr-edits}.
+The \texttt{assembly} datasets have the shape \texttt{(nasy, nz)}.  Currently the only \texttt{assembly} datasets that are generated by \ac{vera} are not controlled through the \texttt{edit} input.  They are discussed in Section \ref{sec:bwr-edits}.
 
 \paragraph{Core Edits}\label{sec:core-edits}
 
@@ -253,17 +265,17 @@ The \texttt{point} edits are 1D arrays whose length is equal to the number of co
     \label{tab:point-edits}
     \begin{tabular}{|l|p{0.5\textwidth}|c|}\hline
     {\bf Name} & {\bf Description} & {\bf Units} \\\hline
-    point\_dens & Point densities. & g/cm$^3$  \\\hline
-    point\_flux\_<group> & Point fluxes. & Neutrons/(cm$^2$-s)  \\\hline
-    point\_flux\_fast & Point fast fluxes. & Neutrons/(cm$^2$-s)  \\\hline
-    point\_flux\_thermal & Point thermal fluxes. & Neutrons/(cm$^2$-s)  \\\hline
-    point\_fsr\_volume & Flux mesh region volume at point. &  cm$^3$ \\\hline
-    point\_hm\_mass & Point exposures. & GWd/MT  \\\hline
-    point\_isotopes\_<isotope> & Point isotopic number densities. & atoms/(cm*10$^{24}$  \\\hline
-    point\_matid & Material ID. & Unitless  \\\hline
-    point\_power & Point power density. & W/cm$^3$  \\\hline
-    point\_temp & Point temperatures. & C  \\\hline
-    point\_xsr\_volume & Cross section mesh region volume at point. & cm$^3$  \\\hline
+    point\_dens & Point densities & g/cm$^3$  \\\hline
+    point\_flux\_<group> & Point fluxes & Neutrons/(cm$^2$-s)  \\\hline
+    point\_flux\_fast & Point fast fluxes & Neutrons/(cm$^2$-s)  \\\hline
+    point\_flux\_thermal & Point thermal fluxes & Neutrons/(cm$^2$-s)  \\\hline
+    point\_fsr\_volume & Flux mesh region volume at point &  cm$^3$ \\\hline
+    point\_hm\_mass & Point exposures & GWd/MT  \\\hline
+    point\_isotopes\_<isotope> & Point isotopic number densities & atoms/(cm*10$^{24}$  \\\hline
+    point\_matid & Material ID & Unitless  \\\hline
+    point\_power & Point power density & W/cm$^3$  \\\hline
+    point\_temp & Point temperatures & C  \\\hline
+    point\_xsr\_volume & Cross section mesh region volume at point & cm$^3$  \\\hline
     \end{tabular}
 \end{table}
 
@@ -271,13 +283,13 @@ The \texttt{point} edits are 1D arrays whose length is equal to the number of co
 
 \subsubsection{Edit Collections}\label{sec:edit-collections}
 
-There are several special edits which are merely a convenient shorthand for a group of edits.  These edits are internally unfolded into a list of edits by the code and allow the user to enable or disable a large number of edits at once.  These collections of edits behave identically to a group defined in the \texttt{edit\_group} input.  The supported edit collections and their constituents are listed in Table \ref{tab:collection-edits}.
+Several special edits are merely a convenient shorthand for a group of edits.  These edits are internally unfolded into a list of edits by the code and allow the user to enable or disable a large number of edits at once.  These collections of edits behave identically to a group defined in the \texttt{edit\_group} input.  The supported edit collections and their constituents are listed in Table \ref{tab:collection-edits}.
 
 \begin{table}[h]
     \centering
     \caption{List of edit collections in VERA}
     \label{tab:collection-edits}
-    \begin{tabular}{|l|c|}\hline
+    \begin{tabular}{|l|p{0.68\textwidth}|}\hline
     {\bf Name} & {\bf Component Datasets} \\\hline
     fsr\_flux & fsr\_flux\_<group> for every neutron energy group \\\hline
     fsr\_flux\_2g & fsr\_flux\_fast, fsr\_flux\_thermal \\\hline
@@ -314,13 +326,13 @@ There are several special edits which are merely a convenient shorthand for a gr
 
 \subsection{Default Edits}\label{sec:default-edits}
 
-There are many default edits that the code always generates, regardless of the input or type of calculation.  These edits are always enabled by the codes and cannot be disabled from the user input.  The shape of each of these edits is the same as others in the resolution category and can be found in subsequent sections.
+The code always generates many default edits regardless of the input or type of calculation.  These edits are always enabled by the codes and cannot be disabled from the user input.  The shape of each of these edits is the same as others in the resolution category and can be found in subsequent sections.
 
 \subsubsection{\texttt{[CORE]} Block Edits}
 
-Several data sets are written to the \texttt{CORE} block which reflect fixed model parameters that do not change over time.  However, these are useful for edits and postprocessing, so they are listed below in Table \ref{tab:default-core-edits}.  This list is meant to highlight data sets that are commonly useful for postprocessing; it is not meant to be an exhaustive list.
+Several datasets are written to the \texttt{CORE} block and reflect fixed model parameters that do not change over time.  However, these are useful for edits and postprocessing, so they are listed in Table \ref{tab:default-core-edits}.  This list is meant to highlight datasets that are commonly useful for postprocessing; it is not meant to be an exhaustive list.
 
-\begin{longtable}[h]{|l|p{0.35\textwidth}|l|p{0.15\textwidth}|}
+\begin{longtable}[h]{|l|p{0.35\textwidth}|c|p{0.15\textwidth}|}
     \caption{List of \texttt{[CORE]} block edits in VERA}
     \label{tab:default-core-edits}
     \\
@@ -339,8 +351,8 @@ Several data sets are written to the \texttt{CORE} block which reflect fixed mod
     \
     {\bf Name} & {\bf Description} & {\bf Units} & {\bf Notes} \\\hline
     \multicolumn{4}{|c|}{\textbf{Pin edits; shape described in Section \ref{sec:pin-edits}}} \\\hline
-    initial\_mass & Initial pinwise masses. & kg &  \\\hline
-    pin\_volumes & Volume of fuel per axial region. & cm$^3$ &  \\\hline
+    initial\_mass & Initial pinwise masses & kg &  \\\hline
+    pin\_volumes & Volume of fuel per axial region & cm$^3$ &  \\\hline
     \multicolumn{4}{|c|}{\textbf{Radial assembly edits; shape is a 2D map}} \\\hline
     core\_map & Core assembly map & Unitless &  \\\hline
     detector\_map & Core detector map & Unitless &  \\\hline
@@ -348,7 +360,7 @@ Several data sets are written to the \texttt{CORE} block which reflect fixed mod
     axial\_mesh & Axial fuel plane boundaries, post thermal expansion & cm & Length is one greater than number of fuel planes \\\hline
     \multicolumn{4}{|c|}{\textbf{Scalar edits}} \\\hline
     apitch & Assembly pitch, post thermal expansion & cm &  \\\hline
-    nominal\_linear\_heat\_rate & Average linear heat rate across the core. & W/cm &  \\\hline
+    nominal\_linear\_heat\_rate & Average linear heat rate across the core & W/cm &  \\\hline
     rated\_flow & Rated flow of the core, adjusted for symmetry & kg/s &  \\\hline
     rated\_power & Rated power of the core, adjusted for symmetry & MW &  \\\hline
 \end{longtable}
@@ -357,10 +369,10 @@ Several data sets are written to the \texttt{CORE} block which reflect fixed mod
 
 \subsubsection{\texttt{[STATE]} Block Edits}
 
-The other set of default edits are placed in the normal \texttt{STATE\_\#\#\#\#} blocks of the VERAOut file.  There are listed in Table \ref{tab:default-state-edits}.  There is also a \texttt{times} group written to each \texttt{STATE\_\#\#\#\#} group to provide the timing breakdown for each part of the solve during that state.  A \texttt{times} group is also written to the \texttt{MPACT/times} that contains cumulative timing data.  Finally, a \texttt{memory} group is written to \texttt{MPACT/memory} to provide parallel memory data for the calculation.
+The other set of default edits are placed in the normal \texttt{STATE\_\#\#\#\#} blocks of the VERAOut file and  are listed in Table \ref{tab:default-state-edits}. A \texttt{times} group is also written to each \texttt{STATE\_\#\#\#\#} group to provide the timing breakdown for each part of the solve during that state.  A \texttt{times} group is also written to the \texttt{MPACT/times} that contains cumulative timing data.  Finally, a \texttt{memory} group is written to \texttt{MPACT/memory} to provide parallel memory data for the calculation.
 
 
-\begin{longtable}[h]{|l|p{0.35\textwidth}|l|p{0.15\textwidth}|}
+\begin{longtable}[h]{|l|p{0.3\textwidth}|c|p{0.15\textwidth}|}
     \caption{List of default edits in VERA}
     \label{tab:default-state-edits}
     \\
@@ -379,61 +391,57 @@ The other set of default edits are placed in the normal \texttt{STATE\_\#\#\#\#}
     \
     {\bf Name} & {\bf Description} & {\bf Units} & {\bf Notes} \\\hline
     \multicolumn{4}{|c|}{\textbf{Pin edits; shape described in Section \ref{sec:pin-edits}}} \\\hline
-    pin\_powers &  Normalized pinwise reaction rates. & Unitless &  \\\hline
-    pin\_exposure & Pinwise volume averaged total fuel exposure. & \acrshort{gwdmt} &  \\\hline
-    pin\_mod\_dens & Pincell averaged moderator density. & g/cm$^3$ & default only for \acp{pwr} \\\hline
-    pin\_mod\_temp & Pincell averaged moderator temperatures. & C & default only for \acp{pwr} \\\hline
-    pin\_cool\_dens & Pincell averaged coolant density. & g/cm$^3$ & default only for \acp{bwr} \\\hline
-    pin\_cool\_temp & Pincell averaged clad temperatures. & C & default only for \acp{bwr} \\\hline
-    pin\_fuel\_temp & Volume averaged pinwise fuel temperatures. & C &  \\\hline
+    pin\_powers &  Normalized pinwise reaction rates & Unitless &  \\\hline
+    pin\_exposure & Pinwise volume averaged total fuel exposure & \acrshort{gwdmt} &  \\\hline
+    pin\_mod\_dens & Pincell averaged moderator density & g/cm$^3$ & default only for \acp{pwr} \\\hline
+    pin\_mod\_temp & Pincell averaged moderator temperatures & C & default only for \acp{pwr} \\\hline
+    pin\_cool\_dens & Pincell averaged coolant density & g/cm$^3$ & default only for \acp{bwr} \\\hline
+    pin\_cool\_temp & Pincell averaged clad temperatures & C & default only for \acp{bwr} \\\hline
+    pin\_fuel\_temp & Volume averaged pinwise fuel temperatures & C &  \\\hline
     pin\_isotopes\_Xe-135 & Pinwise isotopics: volume-averaged number densities divided by height, multiplied by 10$^{24}$ & atoms/(cm*10$^{24}$) &  \\\hline
     pin\_cool\_void & Pincell averaged void fraction. & n/a & default only for \acp{bwr} \\\hline\hline
     \multicolumn{4}{|c|}{\textbf{Core edits}} \\\hline
-    avg\_flux & Core averaged groupwise fluxes. & Neutrons/(cm$^2$*s) & 1D array; length equal to number of neutron energy groups \\\hline\hline
+    avg\_flux & Core averaged groupwise fluxes & Neutrons/(cm$^2$*s) & 1D array; length equal to number of neutron energy groups \\\hline\hline
     \multicolumn{4}{|c|}{\textbf{Scalar or other small datasets}} \\\hline
-b10 & Boron-10 fraction in Coolant &  & Could be echo of input or calculated by code \\\hline
+b10 & Boron-10 fraction in coolant &  & Could be echo of input or calculated by code \\\hline
 bank\_pos & Steps withdrawn for each bank in \texttt{bank\_labels} &  & Could be echo of input or calculated by code \\\hline
-boron & Soluble Boron Concentration (ppmB) &  & Could be echo of input or calculated by code \\\hline
+boron & Soluble boron concentration (ppmB) &  & Could be echo of input or calculated by code \\\hline
 bypass & \% Bypass &  & Could be echo of input or calculated by code via table \\\hline
-   cool\_max\_liquid\_temp & Maximum liquid temperature in the model. & C &  \\ \hline
-   core\_avg\_density & Volume averaged mixture density in the core. & kg/m**3 &  \\ \hline
-   core\_avg\_fuel\_temp & Volume averaged fuel temperature in the core. & C &  \\ \hline
-   core\_avg\_temp & Mass flow rate weighted average coolant temperature in the core. & C &  \\ \hline
-   core\_inlet\_density & Volume averaged mixture density in the first level of the model. & kg/m**3 &  \\ \hline
-   core\_inlet\_mass\_flux & The core inlet mass flux for this state (adjusted for state relatve flow rate). & kg/m**2/s &  \\ \hline
-   core\_inlet\_temp & Mass flow rate weighted average coolant temperature at bottom boundary of model. & C &  \\ \hline
-   core\_outlet\_density & Volume averaged mixture density in the top level of the model. & kg/m**3 &  \\ \hline
-   core\_outlet\_temp & Mass flow rate weighted average coolant temperature at top boundary of model. & C &  \\\hline
+   cool\_max\_liquid\_temp & Maximum liquid temperature in the model & C &  \\ \hline
+   core\_avg\_density & Volume-averaged mixture density in the core. & kg/m**3 &  \\ \hline
+   core\_avg\_fuel\_temp & Volume-averaged fuel temperature in the core & C &  \\ \hline
+   core\_avg\_temp & Mass flow rate weighted average coolant temperature in the core & C &  \\ \hline
+   core\_inlet\_density & Volume-averaged mixture density in the first level of the model & kg/m**3 &  \\ \hline
+   core\_inlet\_mass\_flux & The core inlet mass flux for this state (adjusted for state relatve flow rate) & kg/m**2/s &  \\ \hline
+   core\_inlet\_temp & Mass flow rate weighted average coolant temperature at bottom boundary of model & C &  \\ \hline
+   core\_outlet\_density & Volume-averaged mixture density in the top level of the model & kg/m**3 &  \\ \hline
+   core\_outlet\_temp & Mass flow rate weighted average coolant temperature at top boundary of model & C &  \\\hline
 exposure\_hours & End of State Core Exposure (hours); cumulative hours of combined decay/depletion time calculated by the code & h &  \\\hline
-flow & \% of Rated Flow (\%) & \% & Could be echo of input or calculated by code via table \\\hline
+flow & \% of rated flow (\%) & \% & Could be echo of input or calculated by code via table \\\hline
 fluxnormfactor & Normalization factor to multiply by the flux & W/Unnormalized flux &  \\\hline
 iState & State index &  Unitless &  \\\hline
 keff & Multiplication factor resulting from eigenvalue calculation & Unitless &  \\\hline
 outer\_timer & Elapsed time for all states so far & s &  \\\hline
 outers & Number of coupled iterations for this state point & Unitless &  \\\hline
-power & \% of Rated Power (\%) & \% & Could be echo of input or calculated by code \\\hline
-transient\_time & Physics simulation time elapsed since transient initial condition & s & 0.0 for non-transient state points \\\hline
+power & \% of rated power (\%) & \% & Could be echo of input or calculated by code \\\hline
+transient\_time & Physics simulation time elapsed since transient initial condition & s & 0.0 for nontransient state points \\\hline
 \end{longtable}
 
 \FloatBarrier
 
 \subsection{Other HDF5 Edits}\label{sec:other-hdf5-edits}
 
-There are a few other sets of edits that are enabled via individual code blocks or specific types of calculations, but are never controlled through the \texttt{edit} input.  Those edits are described briefly in the following sections.  The details of the relevant input options are also given in the detailed input documentation in Section \ref{chap:inputs}.
-
+A few other sets of edits are enabled via individual code blocks or specific types of calculations but are never controlled through the \texttt{edit} input.  Those edits are described briefly in the following sections.  The details of the relevant input options are also given in the detailed input documentation in Section \ref{chap:inputs}.
 \subsubsection{Detector Edits}\label{sec:detector-edits}
-
-If detectors are modeled, then the detector response will be placed in \texttt{STATE\_\#\#\#\#/detector\_response} for each state.
-
 \subsubsection{Feedback Calculations}\label{sec:feedback-edits}
 
-When performing a coupled calculation using \texttt{feedback on}, a number of additional edits are produced by default.  These are listed in \ref{tab:feedback-edits}. enabled if the \texttt{rx\_components} input in the \texttt{[MPACT]} block is also used.
+When performing a coupled calculation using \texttt{feedback on}, a number of additional edits are produced by default.  These are listed in Table \ref{tab:feedback-edits}.
 
 \begin{table}[h]
 \centering
 \caption{Outputs generated by feedback calculations}
 \label{tab:feedback-edits}
-\begin{tabular}{|l|p{0.5\textwidth}|l|}\hline
+\begin{tabular}{|l|p{0.5\textwidth}|c|}\hline
 channel\_clad\_inner\_temp & Channel-wise inner clad temperatures & C \\\hline
 channel\_clad\_outer\_temp & Channel-wise outer clad temperatures & C \\\hline
 channel\_clad\_temp & Channel-wise average clad temperatures & C \\\hline
@@ -442,41 +450,41 @@ channel\_coolant\_temp & Channel-wise average coolant temperatures & C \\\hline
 channel\_fuel\_center\_temp & Channel-wise fuel centerline temperatures & C \\\hline
 channel\_fuel\_surf\_temp & Channel-wise fuel surface temperatures & C \\\hline
 channel\_fuel\_temp & Channel-wise channel averaged fuel temperatures & C \\\hline
-channel\_liquid\_density & Liquid density in the channel level. & kg/m**3 \\\hline
-channel\_liquid\_temps & Coolant temperature of channel level. & C \\\hline
-channel\_mixture\_mass\_flux & Coolant mass flux in the axial direction in the center of the channel level. & kg/m**2/s \\\hline
+channel\_liquid\_density & Liquid density in the channel level & kg/m**3 \\\hline
+channel\_liquid\_temps & Coolant temperature of channel level & C \\\hline
+channel\_mixture\_mass\_flux & Coolant mass flux in the axial direction in the center of the channel level & kg/m**2/s \\\hline
 channel\_mod\_dens & Channel-wise moderator densities & kg/m$^3$ \\\hline
 channel\_mod\_temp & Channel-wise average moderator temperatures & C \\\hline
-channel\_pressure & Absolute pressure in channel level. & bar \\\hline
-channel\_vapor\_void & Vapor void fraction in channel level. & n/a \\\hline
-core\_pressure\_drop\textsuperscript{*} & Total core pressure drop, including nozzle and orifice form losses, spacer grid form losses, friction, acceleration, and gravitational losses. & bar \\\hline
-pin\_avg\_clad\_surface\_heat\_flux & Average heat flux through surface of the clad at rod level. & W/m**2 \\\hline
-pin\_avg\_surf\_tke & Average turbulent kinetic energy at the surface of the rod level. & J/kg \\\hline
-pin\_fuel\_enthalpy\textsuperscript{*} & Volume average fuel pellet enthalpy. & kJ/kg \\\hline
-pin\_gtube\_dens & Volume averaged moderator density within a guidetube. & g/cm$^3$ \\\hline
-pin\_gtube\_temp & Volume averaged moderator temperatures within a guidetube. & C \\\hline
-pin\_min\_dnbr & Minimum \ac{dnbr} in the model. & n/a \\\hline
-pin\_max\_clad\_surface\_temp & Maximum rod clad surface temperature. & C \\\hline
+channel\_pressure & Absolute pressure in channel level & bar \\\hline
+channel\_vapor\_void & Vapor void fraction in channel level & n/a \\\hline
+core\_pressure\_drop\textsuperscript{*} & Total core pressure drop, including nozzle and orifice form losses, spacer grid form losses, friction, acceleration, and gravitational losses & bar \\\hline
+pin\_avg\_clad\_surface\_heat\_flux & Average heat flux through surface of the clad at rod level & W/m**2 \\\hline
+pin\_avg\_surf\_tke & Average turbulent kinetic energy at the surface of the rod level & J/kg \\\hline
+pin\_fuel\_enthalpy\textsuperscript{*} & Volume average fuel pellet enthalpy & kJ/kg \\\hline
+pin\_gtube\_dens & Volume-averaged moderator density within a guidetube & g/cm$^3$ \\\hline
+pin\_gtube\_temp & Volume-averaged moderator temperatures within a guidetube & C \\\hline
+pin\_min\_dnbr & Minimum \ac{dnbr} in the model & n/a \\\hline
+pin\_max\_clad\_surface\_temp & Maximum rod clad surface temperature & C \\\hline
 pin\_max\_clad\_temp & Maximum temperature of fuel pin clad in the model. & C \\\hline
 pin\_max\_linear\_power & Maximum linear power in the model. & W/cm \\\hline
 pin\_max\_temp & Maximum centerline temperature in fuel pins. & C \\\hline
 pin\_steamrate & Total steam generation (does not consider vapor that condenses due to subcooled boiling & kg/m**2/s \\\hline
 \end{tabular}
 \\
-\small\textsuperscript{*}Only when CTFFuel conduction solve is enabled
+\small\textsuperscript{*}Only when CTF Fuel conduction solve is enabled.
 \end{table}
 
 \FloatBarrier
 
 \subsubsection{BWR Calculations}\label{sec:bwr-edits}
 
-For \ac{bwr} calculations, there are several edits that are enabled when setting \texttt{bypass\_treatment} to \texttt{fixed\_heating} or \texttt{explicit\_heating}.  There are listed in Table \ref{tab:bwr-edits}.  Some entries are available for either value of \texttt{bypass\_treatment}, but the remaining entries are only enabled for \texttt{explicit\_heating}; the latter group is noted with a footnote.
+\Ac{bwr} calculations have several edits that are enabled when setting \texttt{bypass\_treatment} to \texttt{fixed\_heating} or \texttt{explicit\_heating}.  These are listed in Table \ref{tab:bwr-edits}.  Some entries are available for either value of \texttt{bypass\_treatment}, but the remaining entries are  enabled only for \texttt{explicit\_heating}; the latter group is noted with a footnote.
 
 \begin{table}[h]
     \centering
     \caption{List of \acrshort{bwr} edits in VERA}
     \label{tab:bwr-edits}
-    \begin{tabular}{|l|p{0.5\textwidth}|l|}\hline
+    \begin{tabular}{|l|p{0.4\textwidth}|c|}\hline
     \textbf{Name} & \textbf{Description} & \textbf{Units} \\\hline
 bypass\_inlet\_orifice\_loss\_coefficient & The inlet loss orifice coefficient for the bypass flow that was found by iterating on the bypass pressure drop & normalized \\\hline
 radial\_assembly\_bypass\_exit\_dens & Assembly-wise distribution of exit bypass flow density; Shape: (assemblies) & g/cc \\\hline
@@ -492,20 +500,20 @@ assembly\_channelbox\_temp\textsuperscript{*} & Axial temperature distribution f
 assembly\_controlblade\_power\textsuperscript{*} & Assembly-wise axial distribution of linear power deposition in the control blades; Shape: (assemblies, axial levels) & W/cm \\\hline
     \end{tabular}
     \\
-    \small\textsuperscript{*}Only produced for \texttt{bypass\_treatment explicit\_heating}
+    \small\textsuperscript{*}Produced only for \texttt{bypass\_treatment explicit\_heating.}
 \end{table}
 
 \FloatBarrier
 
 \subsubsection{Transient Calculations}
 
-If \texttt{transient} is set to \texttt{on} to perform a transient calculation, several datasets will be produced, shown in table \ref{tab:transient-edits}.  Some of those are only enabled if the \texttt{rx\_components} input in the \texttt{[MPACT]} block is also used.
+If \texttt{transient} is set to \texttt{on} to perform a transient calculation, several datasets will be produced, as shown in Table \ref{tab:transient-edits}.  Some of those are  enabled only if the \texttt{rx\_components} input in the \texttt{[MPACT]} block is also used.
 
 \begin{table}[h]
 \centering
 \caption{Outputs generated by transient calculations}
 \label{tab:transient-edits}
-\begin{tabular}{|l|p{0.5\textwidth}|l|}\hline
+\begin{tabular}{|l|p{0.5\textwidth}|c|}\hline
 \textbf{Name} & \textbf{Description} & \textbf{Units} \\\hline
 beta & Total delayed neutron yield & Unitless \\\hline
 control\_rod\_reactivity\textsuperscript{*} & Reactivity due to control rod movement & \$ \\\hline
@@ -521,34 +529,41 @@ total\_power & Total core power for modeled portion of core & W \\\hline
 total\_reactivity & Total reactivity & \$ \\\hline
 \end{tabular}
 \\
-\small\textsuperscript{*}These outputs are only generated if \texttt{rx\_components} is used.
+\small\textsuperscript{*}These outputs are  generated only if \texttt{rx\_components} is used.
 \end{table}
 
-\subsubsection{Ex-core Transport}
+\subsubsection{Ex-Core Transport}
 
-If \texttt{excore\_transport} is set to \texttt{on} to use the VeraShift coupling, then the \texttt{STATE\_\#\#\#\#/excore\_detector\_response\_PWR} dataset will be produced, containing the results of the Shift ex-core detector calculations.
+The \texttt{STATE\_\#\#\#\#/excore\_detector\_response\_PWR} dataset will be produced if VeraShift coupling is enabled with \texttt{excore\_transport on}. This dataset containins the results of the Shift ex-core detector calculations.
 
 \subsubsection{MPACT Inputs}
 
 \paragraph{\acrshort{sth} Edits}
 
-For feedback calculations that set \texttt{coupling\_method simplified} in the \texttt{[MPACT]} block, the list of feedback edits from Section \ref{sec:feedback-edits} will not be generated.  Instead, the \ac{sth} solver will be used, which generates a smaller set of outputs.  Specifically, for \ac{bwr} calculations, a \texttt{radial\_assembly\_flow\_dist} dataset will be produced, which has the flow in kg/s for each assembly in the core.
+For feedback calculations that set \texttt{coupling\_method simplified} in the \texttt{[MPACT]} block, the list of feedback edits from Section \ref{sec:feedback-edits} will not be generated.  Instead, the \ac{sth} solver will be used, which generates a smaller set of outputs.  Specifically, a \texttt{radial\_assembly\_flow\_dist} dataset will be produced for \ac{bwr} calculations, which has the flow in kilograms/second for each assembly in the core.
 
-If the \texttt{[BRANCH]} block is used to generate the nodal cross sections, then a group called \texttt{BRANCHES} is placed at the root of the VERAOut file, and it contains directories for each unique branch case.  Each \texttt{STATE\_\#\#\#\#} group will then have an integer \texttt{active\_branch} that identifies which entry in \texttt{BRANCHES} that state point corresponds to; a value of 0 indicates nominal conditions.  Additional detail on brnach calculations is given in Section \ref{chap:branches}.
+If the \texttt{[BRANCH]} block is used to generate the nodal cross sections, then a group called \texttt{BRANCHES} is placed at the root of the VERAOut file, and it contains directories for each unique branch case.  Each \texttt{STATE\_\#\#\#\#} group will then have an integer \texttt{active\_branch} that identifies which entry in \texttt{BRANCHES} that state point corresponds to; a value of 0 indicates nominal conditions.  Additional detail on branch calculations is given in Section \ref{chap:branches}.
 
-\paragraph{Nodal Cross Section Edits}
+\paragraph{Nodal Cross-Section Edits}
 
-Nodal cross section edits can be enabled using the \texttt{nodal\_edits} input described in Section \ref{sec:mpactinputs}.  When enabled, each \texttt{STATE\_\#\#\#\#} group in the VERAOut file will contain the following new groups:
+Nodal cross-section edits can be enabled using the \texttt{nodal\_edits} input described in Section \ref{sec:mpactinputs}.  When enabled, each \texttt{STATE\_\#\#\#\#} group in the VERAOut file will contain the following new groups:
 \begin{enumerate}[noitemsep]
     \item \texttt{CORE\_XS}, which contains a few core-homogenized datasets;
-    \item \texttt{ASSEMBLY\_XS}, which contains a full set of nodal cross section data for every axial level and assembly in the model, including reflector regions; and
-    \item \texttt{NODAL\_XS}, which is the same as \texttt{ASSEMBLY\_XS}, but provides 4 nodes of data for each axial level and assembly.
+    \item \texttt{ASSEMBLY\_XS}, which contains a full set of nodal cross-section data for every axial level and assembly in the model, including reflector regions; and
+    \item \texttt{NODAL\_XS}, which is the same as \texttt{ASSEMBLY\_XS} but provides four nodes of data for each axial level and assembly.
 \end{enumerate}
-These data can be used directly to drive the 3D nodal solver in MPACT, or they can be post-processed to drive external nodal codes.
+These data can be used directly to drive the 3D nodal solver in MPACT, or they can be postprocessed to drive external nodal codes.
 
 \paragraph{Critical Buckling Calculations}
 
-If the \texttt{crit\_buckling} input from Section \ref{sec:mpactinputs} is used, then several datasets are produced: \texttt{critical\_buckling}, \texttt{critical\_buckling\_method}, \texttt{critical\_keff}, and \texttt{critical\_spectrum}.  These can be used for postprocessing and analysis; if nodal cross section edits are enabled, then the critical spectrum will be used in the generation of nodal data as well.
+If the \texttt{crit\_buckling} input from Section \ref{sec:mpactinputs} is used, the following datasets are produced for use in postprocessing:
+\begin{itemize}[noitemsep]
+\item \texttt{critical\_buckling},
+\item \texttt{critical\_buckling\_method},
+\item \texttt{critical\_keff}, and
+\item \texttt{critical\_spectrum}.
+\end{itemize}
+If nodal cross-section edits are enabled, then the critical spectrum will also be used in the generation of nodal data.
 
 \paragraph{Reaction Rate Edits}
 
@@ -558,37 +573,37 @@ The \texttt{rr\_edits} and \texttt{rr\_edits\_opt} inputs, described in Section 
 
 \subsubsection{\texttt{[COBRATF]} Inputs}
 
-When performing feedback calculations, additional detailed \ac{th} edits can be obtained from CTF by using the \texttt{edit\_detailed\_th} option.
+When performing feedback calculations, additional detailed \ac{th} edits can be obtained from CTF by using the \texttt{edit\_detailed\_th} option.  These are shown in Table \ref{tab:detailed-th-edits}.
 
 \begin{table}[h]
 \centering
 \caption{Detailed outputs generated by feedback calculations}
 \label{tab:detailed-th-edits}
 \begin{tabular}{|l|p{0.5\textwidth}|l|}\hline
-   channel\_lateral\_liq\_mass\_in & Amount of liquid mass entering channel from connected channels. & kg/s \\\hline
-   channel\_vapor\_enthalpy & Coolant vapor enthalpy of channel level. & kJ/kg \\\hline
-   channel\_droplet\_void & Droplet void fraction in channel level. & n/a \\\hline
-   channel\_mdotv & Coolant vapor mass flow rate in the axial direction at the bottom of the channel level. & kg/s \\\hline
-   channel\_mdotl & Coolant liquid mass flow rate in the axial direction at the bottom face of the channel level. & kg/s \\\hline
-   channel\_liquid\_velocity & Coolant liquid velocity of channel level. & m/s \\\hline
-   channel\_lateral\_vap\_mass\_in & Amount of vapor mass entering channel from connected channels. & kg/s \\\hline
-   channel\_vapor\_velocity & Coolant vapor velocity of channel level. & m/s \\\hline
-   channel\_liquid\_enthalpy & Coolant liquid enthalpy of channel level. & kJ/kg \\\hline
+   channel\_lateral\_liq\_mass\_in & Amount of liquid mass entering channel from connected channels & kg/s \\\hline
+   channel\_vapor\_enthalpy & Coolant vapor enthalpy of channel level & kJ/kg \\\hline
+   channel\_droplet\_void & Droplet void fraction in channel level & n/a \\\hline
+   channel\_mdotv & Coolant vapor mass flow rate in the axial direction at the bottom of the channel level & kg/s \\\hline
+   channel\_mdotl & Coolant liquid mass flow rate in the axial direction at the bottom face of the channel level & kg/s \\\hline
+   channel\_liquid\_velocity & Coolant liquid velocity of channel level & m/s \\\hline
+   channel\_lateral\_vap\_mass\_in & Amount of vapor mass entering channel from connected channels & kg/s \\\hline
+   channel\_vapor\_velocity & Coolant vapor velocity of channel level & m/s \\\hline
+   channel\_liquid\_enthalpy & Coolant liquid enthalpy of channel level & kJ/kg \\\hline
 \end{tabular}
 \end{table}
 
 \paragraph{DNB Calculations}
 
-When performing \ac{dnb} calculations, the \texttt{edit\_dnb} option can be used to produce additional edits, shown in Table \ref{tab:dnb-edits}.
+When performing \ac{dnb} calculations, the \texttt{edit\_dnb} option can be used to produce additional edits, as shown in Table \ref{tab:dnb-edits}.
 
 \begin{table}[h]
 \centering
 \caption{Detailed outputs generated by \acrshort{dnb} calculations}
 \label{tab:dnb-edits}
-\begin{tabular}{|l|p{0.5\textwidth}|l|}\hline
+\begin{tabular}{|l|p{0.5\textwidth}|c|}\hline
    \textbf{Name} & \textbf{Description} & \textbf{Units} \\\hline
-   clad\_outer\_heatflux & Heat flux at azimuthal location where DNBR is minimum. & kW/m**2 \\\hline
-   pin\_dnbr & Minimum departure from nucleate boiling ratio at rod level. & n/a \\\hline
+   clad\_outer\_heatflux & Heat flux at azimuthal location where DNBR is minimum & kW/m**2 \\\hline
+   pin\_dnbr & Minimum departure from nucleate boiling ratio at rod level & n/a \\\hline
    clad\_outer\_criticalheatflux & Critical heat flux adjacent azimuthal location where DNBR is minimum & kW/m**2 \\\hline
 \end{tabular}
 \end{table}
@@ -603,24 +618,24 @@ If the \texttt{crud} option is enabled, then MAMBA will generate many new output
     \centering
     \caption{List of edits generated by MAMBA for \acrshort{crud} calculations}
     \label{tab:mamba-edits}
-\begin{tabular}{|l|p{0.5\textwidth}|l|}\hline
+\begin{tabular}{|l|p{0.5\textwidth}|c|}\hline
     \textbf{Name} & \textbf{Description} & \textbf{Units} \\\hline
-cleanup\_flow\_abs & The absolute cleanup flow for this state (adjusted for symmetry and state relatve rate. & kg/s \\ \hline
-cool\_hydrogen & Global dissolved hydrogen in coolant. & m**3/kg \\\hline
-cool\_lithium & Global lithium concentration in coolant. & ppm \\\hline
+cleanup\_flow\_abs & The absolute cleanup flow for this state (adjusted for symmetry and state relatve rate & kg/s \\ \hline
+cool\_hydrogen & Global dissolved hydrogen in coolant & m**3/kg \\\hline
+cool\_lithium & Global lithium concentration in coolant & ppm \\\hline
 cool\_mass & Total mass of coolant in primary loop. & kg \\\hline
-cool\_nickel\_particulate & Global nickel particulate concentration in coolant. & ppb \\\hline
-cool\_outlet\_pressure & Coolant pressure at the core outlet. & bar \\\hline
-cool\_soluble\_iron & Global soluble iron concentration in coolant. & ppb \\\hline
-cool\_soluble\_nickel & Global soluble nickel concentration in coolant. & ppb \\\hline
-core\_avg\_linear\_heatrate & Core average linear heat rate. & W/cm \\\hline
+cool\_nickel\_particulate & Global nickel particulate concentration in coolant & ppb \\\hline
+cool\_outlet\_pressure & Coolant pressure at the core outlet & bar \\\hline
+cool\_soluble\_iron & Global soluble iron concentration in coolant & ppb \\\hline
+cool\_soluble\_nickel & Global soluble nickel concentration in coolant & ppb \\\hline
+core\_avg\_linear\_heatrate & Core average linear heat rate & W/cm \\\hline
 core\_crud\_boron\_mass & Total boron mass trapped in CRUD layer in model at end of this STATE & kg \\\hline
 core\_crud\_mass & Total CRUD mass in model at end of this STATE & kg \\\hline
-pin\_avg\_boron\_thickness & Volume averaged boron thickness at rod axial level. & micrometers \\\hline
-pin\_avg\_crud\_borondensity & Surface area weighted average boron mass density at rod axial level. & g/cm**2 \\\hline
-pin\_avg\_crud\_massdensity & Surface area weighted average crud mass density at rod axial level. & g/cm**2 \\\hline
-pin\_avg\_crud\_thickness & Volume averaged crud thickness at rod axial level. & micron \\\hline
-pin\_crud\_inner\_surface\_temp & Temperature at the crud/clad interface. & C \\\hline
+pin\_avg\_boron\_thickness & Volume-averaged boron thickness at rod axial level & micrometers \\\hline
+pin\_avg\_crud\_borondensity & Surface area weighted average boron mass density at rod axial level & g/cm**2 \\\hline
+pin\_avg\_crud\_massdensity & Surface area weighted average crud mass density at rod axial level & g/cm**2 \\\hline
+pin\_avg\_crud\_thickness & Volume-averaged crud thickness at rod axial level & micron \\\hline
+pin\_crud\_inner\_surface\_temp & Temperature at the crud/clad interface & C \\\hline
     \end{tabular}
 \end{table}
 

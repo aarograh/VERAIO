@@ -165,20 +165,6 @@ MPACT:
         - copy MPACT/$power_edit
       _content:
 
-    checkpoint_mode:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy MPACT/$checkpoint_mode
-      _content:
-
-    checkpoint_file:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy MPACT/$checkpoint_file
-      _content:
-
     rst_compress:
       _pltype: parameter
       _type: string
