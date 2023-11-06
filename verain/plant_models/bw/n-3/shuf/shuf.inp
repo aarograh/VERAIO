@@ -11,23 +11,41 @@
   thexp    on
   search   boron
 
-  restart_shuffle  ../../n-4/depl/bw_n-4.res EOC
-                   ./1/shuf.res 41.0
-                   ./2/shuf.res 31.6
-                   ./2/shuf.res 40.1
-                   ./2/shuf.res 41.0
-                   ./3/shuf.res 21.6
-
   shuffle_homog center
-  shuffle_label   
-        N-12     +  31.6Z-0  H-7  B-8      + 21.6Z-0  E-8
-         +  40.1Z-0      +   P-7   +      E-3     +   N-7
-    31.6Z-0      +  41.0Z-0   +   F-2      +     F-3  E-10
-        G-8     G-14     +   N-8   +      C-12   E-4
-        H-14     +      B-6   +   C-8      +     L-7
-         +      C-5      +   N-3   +  41.0Y-0
-    21.6Z-0      +      C-6  D-5  G-10
-        H-11    G-12    L-5
+  restart_jumpin  H-8  ../../n-4/depl2/bw_n-4.res EOC  N-12
+                  H-10                2/shuf.res 31.6 Z-0
+                  H-11 ../../n-4/depl2/bw_n-4.res EOC  H-7
+                  H-12 ../../n-4/depl2/bw_n-4.res EOC  B-8
+                  H-14                3/shuf.res 21.6 Z-0
+                  H-15 ../../n-4/depl2/bw_n-4.res EOC  E-8
+                  K-9                 2/shuf.res 40.1 Z-0
+                  K-11 ../../n-4/depl2/bw_n-4.res EOC  P-7
+                  K-13 ../../n-4/depl2/bw_n-4.res EOC  E-3
+                  K-15 ../../n-4/depl2/bw_n-4.res EOC  N-7
+                  L-8                 2/shuf.res 31.6 Z-0
+                  L-10                2/shuf.res 41.0 Z-0
+                  L-12 ../../n-4/depl2/bw_n-4.res EOC  F-2
+                  L-14 ../../n-4/depl2/bw_n-4.res EOC  F-3
+                  L-15 ../../n-4/depl2/bw_n-4.res EOC  E-10
+                  M-8  ../../n-4/depl2/bw_n-4.res EOC  G-8
+                  M-9  ../../n-4/depl2/bw_n-4.res EOC  G-14
+                  M-11 ../../n-4/depl2/bw_n-4.res EOC  N-8
+                  M-13 ../../n-4/depl2/bw_n-4.res EOC  C-12
+                  M-14 ../../n-4/depl2/bw_n-4.res EOC  E-4
+                  N-8  ../../n-4/depl2/bw_n-4.res EOC  H-14
+                  N-10 ../../n-4/depl2/bw_n-4.res EOC  B-6
+                  N-12 ../../n-4/depl2/bw_n-4.res EOC  C-8
+                  N-14 ../../n-4/depl2/bw_n-4.res EOC  L-7
+                  O-9  ../../n-4/depl2/bw_n-4.res EOC  C-5
+                  O-11 ../../n-4/depl2/bw_n-4.res EOC  N-3
+                  O-13                1/shuf.res 41.0 Y-0
+                  P-8                 3/shuf.res 21.6 Z-0
+                  P-10 ../../n-4/depl2/bw_n-4.res EOC  C-6
+                  P-11 ../../n-4/depl2/bw_n-4.res EOC  D-5
+                  P-12 ../../n-4/depl2/bw_n-4.res EOC  G-10
+                  R-8  ../../n-4/depl2/bw_n-4.res EOC  H-11
+                  R-9  ../../n-4/depl2/bw_n-4.res EOC  G-12
+                  R-10 ../../n-4/depl2/bw_n-4.res EOC  L-5
 
 [STATE] 
   restart_write shuf.res BOC
