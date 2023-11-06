@@ -11,27 +11,38 @@
   thexp    on
   search   boron
 
-  restart_shuffle  1/shuf.res 39.6
-                   2/shuf.res 31.6 
-                   2/shuf.res 33.7
-                   2/shuf.res 36.5
-                   2/shuf.res 41.0
-                   2/shuf.res 41.8
-                   3/shuf.res 14.8
-                   3/shuf.res 16.8
-                   3/shuf.res 20.5
-                   3/shuf.res 21.5
-                   4/shuf.res 16.6
-
-  shuffle_label   
-    39.6A-1    +    21.5A-1    +    16.8A-1    +    16.8A-1 31.6A-1
-       +    36.5A-1    +    33.7A-1    +    21.5A-1    +    41.0A-1
-    21.5A-1    +    21.5A-1    +    20.5A-1    +    20.5A-1 41.8A-1
-       +    33.7A-1    +    21.5A-1    +    14.8A-1 41.8A-1 
-    16.8A-1    +    20.5A-1    +    21.5A-1    +    41.0A-1
-       +    21.5A-1    +    14.8A-1    +    16.6A-1 
-    16.8A-1    +    20.5A-1 41.8A-1 41.8A-1 
-    31.6A-1 41.0A-1 41.8A-1 
+  restart_jumpin  H-8  1/shuf.res 39.6 A-1
+                  H-10 3/shuf.res 21.5 A-1
+                  H-12 3/shuf.res 16.8 A-1
+                  H-14 3/shuf.res 16.8 A-1
+                  H-15 2/shuf.res 31.6 A-1
+                  K-9  2/shuf.res 36.5 A-1
+                  K-11 2/shuf.res 33.7 A-1
+                  K-13 3/shuf.res 21.5 A-1
+                  K-15 2/shuf.res 41.0 A-1
+                  L-8  3/shuf.res 21.5 A-1
+                  L-10 3/shuf.res 21.5 A-1
+                  L-12 3/shuf.res 20.5 A-1
+                  L-14 3/shuf.res 20.5 A-1
+                  L-15 2/shuf.res 41.8 A-1
+                  M-9  2/shuf.res 33.7 A-1
+                  M-11 3/shuf.res 21.5 A-1
+                  M-13 3/shuf.res 14.8 A-1
+                  M-14 2/shuf.res 41.8 A-1
+                  N-8  3/shuf.res 16.8 A-1
+                  N-10 3/shuf.res 20.5 A-1
+                  N-12 3/shuf.res 21.5 A-1
+                  N-14 2/shuf.res 41.0 A-1
+                  O-9  3/shuf.res 21.5 A-1
+                  O-11 3/shuf.res 14.8 A-1
+                  O-13 4/shuf.res 16.6 A-1
+                  P-8  3/shuf.res 16.8 A-1
+                  P-10 3/shuf.res 20.5 A-1
+                  P-11 2/shuf.res 41.8 A-1
+                  P-12 2/shuf.res 41.8 A-1
+                  R-8  2/shuf.res 31.6 A-1
+                  R-9  2/shuf.res 41.0 A-1
+                  R-10 2/shuf.res 41.8 A-1
  
 [STATE] 
   restart_write shuf.res BOC

@@ -1,5 +1,4 @@
 ![MPACT]
-  extend_coupling_mesh false
   meshing_method useraxialmesh
   axial_mesh
     17.78   ! lower core grid and lower pad
