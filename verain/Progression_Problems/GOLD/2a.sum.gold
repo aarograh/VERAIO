@@ -1,0 +1,146 @@
+MPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACT
+
+
+MMMMMMM         MMMMMMM  PPPPPPPPPPPPPPP          AAA              CCCCCCCCC     TTTTTTTTTTTTTTTTTT
+MMMMMMMM       MMMMMMMM  PPPPPPPPPPPPPPPP        AAAAA           CCCCCCCCCCCCC   TTTTTTTTTTTTTTTTTT
+ MMMM MMM     MMM MMMM    PPPP        PPPP      AAAAAAA         CCCC       CCCC  TTT    TTTT    TTT
+ MMMM  MMM   MMM  MMMM    PPPP         PPPP     AAA AAA        CCCC         CCCC        TTTT       
+ MMMM   MMM MMM   MMMM    PPPP         PPPP    AAAA AAAA      CCCC                      TTTT       
+ MMMM    MMMMM    MMMM    PPPP        PPPP    AAAA   AAAA     CCCC                      TTTT       
+ MMMM     MMM     MMMM    PPPPPPPPPPPPPPP    AAAA     AAAA    CCCC                      TTTT       
+ MMMM             MMMM    PPPPPPPPPPPPPP     AAAA     AAAA    CCCC                      TTTT       
+ MMMM             MMMM    PPPP              AAAAAAAAAAAAAAA   CCCC          CCCC        TTTT       
+ MMMM             MMMM    PPPP              AAAAAAAAAAAAAAA   CCCC          CCCC        TTTT       
+ MMMM             MMMM    PPPP             AAAA         AAAA   CCCC         CCCC        TTTT       
+ MMMM             MMMM    PPPP             AAAA         AAAA    CCCC       CCCC         TTTT       
+MMMMMM           MMMMMM  PPPPPP           AAAAA         AAAAA    CCCCCCCCCCCCC        TTTTTTTT     
+MMMMMM           MMMMMM  PPPPPP           AAAAA         AAAAA      CCCCCCCCC          TTTTTTTT     
+
+
+MPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACTMPACT
+
+
+================================================================================
+                                MPACT v4.4 (dev)               ( SHA1: 6340070)
+                                                  (built: 09:27:03 Nov  9 2023)
+           Executing case: 2a
+           by ag6 on ross2 at 01:53:37, Nov. 11, 2023...
+
+================================================================================
+     Input Filename    2a.xml
+     Command Line      /home/ag6/master/build_vera/BUILD/GCC-8.3.0/RELEASE-DEBUG/MPACT/MPACT_exe/src/MPACT.exe 2a.xml
+     Working Directory /home/ag6/master/build_vera/BUILD/GCC-8.3.0/RELEASE-DEBUG/MPACT/MPACT_exe/tests/Progression_Problems/2a_TEST
+     Summary Results   /home/ag6/master/build_vera/BUILD/GCC-8.3.0/RELEASE-DEBUG/MPACT/MPACT_exe/tests/Progression_Problems/2a_TEST/2a.out
+     Messages Log      /home/ag6/master/build_vera/BUILD/GCC-8.3.0/RELEASE-DEBUG/MPACT/MPACT_exe/tests/Progression_Problems/2a_TEST/2a.log
+--------------------------------------------------------------------------------
+
+     General Model Parameters                       Core Model Description
+     ------------------------                       ------------------------
+     Rated Thermal Power       0.05 MWt             Core Symmetry: Qtr rotational
+     Rated Coolant Flow        1.26 kg/s            Boundary Conditions
+     Coolant Inlet Temp      291.85 C               Top: reflecting
+     System Pressure          15.51 MPa             Bottom: reflecting
+     Initial Boron          1300.00 ppm             Radial: reflecting
+
+     Total Core Mass            1.26 kg
+     Nominal LHR              183.03 W/cm (5.58 kW/ft)
+
+     Core Map by Assembly Index
+        1
+
+                           Assembly Initial Mass (kg)                            
+--------------------------------------------------------------------------------
+              A
+    1    1.2581
+
+********************************************************************************
+******************************* STATE_0001 *************************************
+********************************************************************************
+
+     State Summary
+     -----------------------
+     Core Exposure           0.00 GWD/MTHM
+     Cycle Exposure          0.00 EFPD  (0.00 GWD/MTHM)
+     Relative Power          0.00 %
+     Thermal Power           0.00 MWt
+     Relative Flow         100.00 %
+     Absolute Flow           1.26 kg/s
+     Inlet Temperature     557.33 F
+     Inlet Density           0.74 g/cc
+     Boron Conc.          1300.00 ppm
+     Xenon Option            dep
+     Samarium Option         dep
+     k-eff                   1.182278
+
+                             Assembly Average Power                              
+--------------------------------------------------------------------------------
+              A
+    1    1.0000
+
+                              Maximum 3D Pin Power                               
+--------------------------------------------------------------------------------
+              A
+    1    1.0514
+
+                              Maximum 2D Pin Power                               
+--------------------------------------------------------------------------------
+              A
+    1    1.0514
+
+                            Lattice at Max Pin Power                             
+--------------------------------------------------------------------------------
+
+  0.9487  0.9432  0.9470  0.9559  0.9657  0.9743  0.9725  0.9725  0.9762  0.9725  0.9725  0.9743  0.9657  0.9559  0.9470  0.9432  0.9487
+  0.9432  0.9403  0.9491  0.9641  0.9835  1.0113  0.9892  0.9888  1.0106  0.9888  0.9892  1.0113  0.9835  0.9641  0.9491  0.9403  0.9432
+  0.9470  0.9491  0.9740  1.0171  1.0362  0.0000  1.0267  1.0247  0.0000  1.0247  1.0267  0.0000  1.0362  1.0171  0.9740  0.9491  0.9470
+  0.9559  0.9641  1.0171  0.0000  1.0514  1.0435  1.0097  1.0061  1.0311  1.0061  1.0097  1.0435  1.0514  0.0000  1.0171  0.9641  0.9559
+  0.9657  0.9835  1.0362  1.0514  1.0335  1.0437  1.0113  1.0086  1.0342  1.0086  1.0113  1.0437  1.0335  1.0514  1.0362  0.9835  0.9657
+  0.9743  1.0113  0.0000  1.0435  1.0437  0.0000  1.0370  1.0364  0.0000  1.0364  1.0370  0.0000  1.0437  1.0435  0.0000  1.0113  0.9743
+  0.9725  0.9892  1.0267  1.0097  1.0113  1.0370  1.0104  1.0106  1.0359  1.0106  1.0104  1.0370  1.0113  1.0097  1.0267  0.9892  0.9725
+  0.9725  0.9888  1.0247  1.0061  1.0086  1.0364  1.0106  1.0097  1.0350  1.0097  1.0106  1.0364  1.0086  1.0061  1.0247  0.9888  0.9725
+  0.9762  1.0106  0.0000  1.0311  1.0342  0.0000  1.0359  1.0350  0.0000  1.0350  1.0359  0.0000  1.0342  1.0311  0.0000  1.0106  0.9762
+  0.9725  0.9888  1.0247  1.0061  1.0086  1.0364  1.0106  1.0097  1.0350  1.0097  1.0106  1.0364  1.0086  1.0061  1.0247  0.9888  0.9725
+  0.9725  0.9892  1.0267  1.0097  1.0113  1.0370  1.0104  1.0106  1.0359  1.0106  1.0104  1.0370  1.0113  1.0097  1.0267  0.9892  0.9725
+  0.9743  1.0113  0.0000  1.0435  1.0437  0.0000  1.0370  1.0364  0.0000  1.0364  1.0370  0.0000  1.0437  1.0435  0.0000  1.0113  0.9743
+  0.9657  0.9835  1.0362  1.0514  1.0335  1.0437  1.0113  1.0086  1.0342  1.0086  1.0113  1.0437  1.0335  1.0514  1.0362  0.9835  0.9657
+  0.9559  0.9641  1.0171  0.0000  1.0514  1.0435  1.0097  1.0061  1.0311  1.0061  1.0097  1.0435  1.0514  0.0000  1.0171  0.9641  0.9559
+  0.9470  0.9491  0.9740  1.0171  1.0362  0.0000  1.0267  1.0247  0.0000  1.0247  1.0267  0.0000  1.0362  1.0171  0.9740  0.9491  0.9470
+  0.9432  0.9403  0.9491  0.9641  0.9835  1.0113  0.9892  0.9888  1.0106  0.9888  0.9892  1.0113  0.9835  0.9641  0.9491  0.9403  0.9432
+  0.9487  0.9432  0.9470  0.9559  0.9657  0.9743  0.9725  0.9725  0.9762  0.9725  0.9725  0.9743  0.9657  0.9559  0.9470  0.9432  0.9487
+
+                       Assembly Average Exposure (GWd/MT)                        
+--------------------------------------------------------------------------------
+              A
+    1    0.0000
+
+                        Maximum 2D Pin Exposure (GWd/MT)                         
+--------------------------------------------------------------------------------
+              A
+    1    0.0000
+
+                          Assembly Exit Density (g/cc)                           
+--------------------------------------------------------------------------------
+              A
+    1    0.7430
+
+                         Assembly Exit Temperature (F)                           
+--------------------------------------------------------------------------------
+              A
+    1  557.3300
+
+     Selected 1D Core Data
+----------------------------------------------------------------------------------------------------------------
+     Level           Height           powers        exposures  isotopes_Xe-135        fuel_temp         mod_dens
+         1          1.00000      1.00000E+00      0.00000E+00      0.00000E+00      2.91850E+02      7.43000E-01
+----------------------------------------------------------------------------------------------------------------
+
+                      Avg        1.00000E+00      0.00000E+00      0.00000E+00      2.91850E+02      7.43000E-01
+                      A-O %          0.00000          0.00000          0.00000          0.00000          0.00000
+
+=============================================================================================================================================================================
+                                    Case Summary
+=============================================================================================================================================================================
+State     EFPD     Ecyc    Ecore     Emax    k-eff   Boron     %Pow    A-O %   Fassy      FdH       Fz       Fq Tfuel(K) Tfmax(K)   Tin(F)  Tavg(F)  Tout(F) OutDens. Av.Dens.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    1    0.000    0.000    0.000    0.000 1.182278 1300.00     0.00   0.0000 1.00000  1.05136  1.00000  1.05136   565.00   565.00   557.33   557.33   557.33   0.7430   0.7430
+
