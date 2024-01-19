@@ -1027,8 +1027,10 @@ STATE:
 #>     valuedefault={\texttt{off}},
 #>     valuesapplicable={\texttt{on}},
 #>     limitations={},
-#>     description={Flag to turn on and off MAMBA CRUD deposition coupling},
-#>     notes={}
+#>     description={Flag to turn on and off CRUD deposition coupling},
+#>     notes={MAMBA will be used for any CRUD modeling by default, but
+#>        other options are available such as \texttt{uniform\_crud} and
+#>        \texttt{user\_defined\_crud\_filename} in the \texttt{[MPACT]} block.}
 #>   }
   crud:
     <<: *dtword
