@@ -402,3 +402,23 @@ ASSEMBLIES:
           _do:
             - copyarray %ASSEMBLY/$(_path)/@channel_box_segments,start=>2,stride=>3
           _content:
+
+    RodFilters:
+      _pltype: list
+      _do:
+        - setdb MAIN_DB
+        - setvar _path,%ASSEMBLY/*/$/%axial/$(_loop),apply=>&findfirst
+        - getvar _path,apply=>&pathlevel,arg=>3
+
+      _tr:
+        _name: _floop
+        _content: %ASSEMBLY/$(_path)/%rod_filter
+
+      _content:
+
+        (_floop):
+          _pltype: array
+          _type: string
+          _do:
+            - makemap %ASSEMBLY/$(_path)/$npin,%ASSEMBLY/$(_path)/%rod_filter/$(_floop),CORE/$bc_sym
+          _content:

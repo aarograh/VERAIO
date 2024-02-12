@@ -364,9 +364,12 @@ crd_map
      369.7890
      377.7100   ! TAF
 
-[BISON]
+[VERAONEWAY]
+  fuel_pin_input_file_template = bison.i.template
   solve_type standalone
   bc_type bulk_cool
+
+[BISON]
   bcs_plenumpressure_plenumpressure_initial_pressure = 2.0e6
   bcs_plenumpressure_plenumpressure_startup_time = 0
   temp_ramp_times  = 10800.0 0.0 0.0 10800.0
@@ -380,6 +383,5 @@ crd_map
   globalparams_energy_per_fission = 3.2e-11
   mesh_clad_bot_gap_height = 1.52e-3
   outputs_file_base = output_RISO_AN8_bump
-  fuel_pin_input_file_template = bison.i.template
   non_fuel_pin_input_file_template = guide_tube.moose.i.template
   mesh_type = smeared_pellet

@@ -48,7 +48,7 @@ Produced `~/src/verarun/dist/verarun-x.y.z.tar.gz`
 
 # Run block in VERAIn
   - wall time [execution time hh:mm:ss]
-  - run type (VeraCS | Tiamat | VeraShift)
+  - run type (VeraCS | VeraShift)
 
   wall time = hh:mm:ss
 ---

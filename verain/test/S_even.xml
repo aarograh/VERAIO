@@ -14,11 +14,11 @@
       <Parameter name="kcrit" type="double" value="1.0"/>
       <Parameter name="power" type="double" value="0.0"/>
       <Parameter name="pressure" type="double" value="15.5132039025"/>
-      <Parameter name="samopt" type="string" value="zero"/>
+      <Parameter name="samar" type="string" value="zero"/>
       <Parameter name="search" type="string" value="boron"/>
-      <Parameter name="tinlet" type="double" value="292.777777777778"/>
+      <Parameter name="tinlet" type="string" value="559.0 F"/>
       <Parameter name="title" type="string" value="HZP Statepoint BOL"/>
-      <Parameter name="xenopt" type="string" value="zero"/>
+      <Parameter name="xenon" type="string" value="zero"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="CORE">
@@ -780,15 +780,18 @@
   <ParameterList name="EDITS">
     <Parameter name="axial_edit_bounds" type="Array(double)" value="{11.9500,15.8160,24.0273,32.2386,40.4499,48.6611,56.8724,65.0837,73.2950,77.1050,85.1700,93.2350,101.3000,109.3650,117.4300,125.4950,129.3050,137.3700,145.4350,153.5000,161.5650,169.6300,177.6950,181.5050,189.5700,197.6350,205.7000,213.7650,221.8300,229.8950,233.7050,241.7700,249.8350,257.9000,265.9650,274.0300,282.0950,285.9050,293.9700,302.0350,310.1000,318.1650,326.2300,334.2950,338.1050,346.0260,353.9470,361.8680,369.7890,377.7100}"/>
   </ParameterList>
-  <ParameterList name="BISON">
+  <ParameterList name="VERAONEWAY">
     <Parameter name="bc_type" type="string" value="bulk_cool"/>
+    <Parameter name="fuel_pin_input_file_template" type="string" value="bison.i.template"/>
+    <Parameter name="solve_type" type="string" value="standalone"/>
+  </ParameterList>
+  <ParameterList name="BISON">
     <Parameter name="bcs_plenumpressure_plenumpressure_initial_pressure" type="double" value="2.0e6"/>
     <Parameter name="bcs_plenumpressure_plenumpressure_startup_time" type="double" value="0"/>
     <Parameter name="executioner_dt" type="double" value="1.0e3"/>
     <Parameter name="executioner_dtmax" type="double" value="1000"/>
     <Parameter name="executioner_dtmin" type="double" value="1000"/>
     <Parameter name="executioner_end_time" type="double" value="6.0e7"/>
-    <Parameter name="fuel_pin_input_file_template" type="string" value="bison.i.template"/>
     <Parameter name="globalparams_a_lower" type="double" value="0.01676"/>
     <Parameter name="globalparams_a_upper" type="double" value="3.67436"/>
     <Parameter name="globalparams_energy_per_fission" type="double" value="3.2e-11"/>
@@ -796,6 +799,5 @@
     <Parameter name="mesh_type" type="string" value="smeared_pellet"/>
     <Parameter name="non_fuel_pin_input_file_template" type="string" value="guide_tube.moose.i.template"/>
     <Parameter name="outputs_file_base" type="string" value="output_RISO_AN8_bump"/>
-    <Parameter name="solve_type" type="string" value="tiamat"/>
   </ParameterList>
 </ParameterList>
