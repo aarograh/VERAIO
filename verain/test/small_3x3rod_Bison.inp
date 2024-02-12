@@ -176,9 +176,12 @@
   maxits  10000
   courant 0.8
 
+[VERAONEWAY]
+  fuel_pin_input_file_template = small_3x3rod_Bison.i.template
+  solve_type standalone
+
 [BISON]
   executioner_start_time = -100
-  solve_type standalone
   bcs_plenumpressure_plenumpressure_initial_pressure = 2.0e6
   bcs_plenumpressure_plenumpressure_startup_time = 1e4
   burnup_burnup_num_radial = 6
@@ -190,7 +193,6 @@
   globalparams_energy_per_fission = 3.2e-11
   mesh_clad_bot_gap_height = 1.52e-3
   outputs_file_base = output_RISO_AN8_bump
-  fuel_pin_input_file_template = small_3x3rod_Bison.i.template
   non_fuel_pin_input_file_template = guide_tube.moose.i.template
   mesh_type smeared_pellet
   output_average_axial_values = true

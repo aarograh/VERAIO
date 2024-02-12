@@ -53,6 +53,7 @@ _DIRECTORY:
   MPACT:
   TRANSIENT:
   BISON:
+  VERAONEWAY:
   FAST:
   MAMBA:
   RUN:
@@ -2355,6 +2356,30 @@ CORE:
       - fall(sub{not_in_dictionary(shift,'0')},())
       - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
 #>
+#>   {\bf assm\_filter} assm\_filter
+#>   \VERAInputTable{
+#>     name={assm\_filter},
+#>     type={2D Character String Map},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={Core map of valid assembly filter labels},
+#>     limitations={},
+#>     description={This is a core map of fuel assembly filters used by VERAOneWay.
+#         The filters correspond to \texttt{rod\_filters} in the [ASSEMBLY] block.},
+#>     notes={Unfolds partial maps using symmetry. To position filters asymmetrically,
+#>            users are required to use a full map.}
+#>   }
+  assm_filter:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},())
+      - fall(sub{not_in_dictionary(shift,'_EMPTY_')},())
+#>
 #>   {\bf inlet\_orifice\_map} inlet\_orifice\_map
 #>   \VERAInputTable{
 #>     name={inlet\_orifice\_map},
@@ -4048,6 +4073,40 @@ ASSEMBLY:
       - fall(sub{is_word(shift)},())
       - fall(sub{not_in_dictionary(shift,'0')},stride(1,1,()))
     _alias: rodmap
+#>
+#>   {\bf rod\_filter} filter\_label filter\_map
+#>   \VERAInputTable{
+#>     name={filter\_label},
+#>     type={Character String},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Label for this filter.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={filter\_map},
+#>     type={2D Character String Map},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={\texttt{+}, \texttt{-}},
+#>     limitations={},
+#>     description={This is the map of indicating which rods, VERAOneWay should
+#         filter from its calculations.},
+#>     notes={Uses symmetry to unfold partial maps. To exclude rods assymetrically
+#>            input a full map is required.}
+#>   }
+  rod_filter:
+    <<: *dtlistnamed
+    _style: multi-line
+    _check:
+      - fall(sub{is_word(shift)},())
+      - fall(sub{not_in_dictionary(shift,'0')},stride(1,1,()))
 #>
 #>   {\bf rodmap} axial\_label cell\_map
 #>   \VERAInputTable{
@@ -18837,6 +18896,256 @@ MAMBA:
       - fall(sub{is_geq(shift,0)},stride(0,2,()))
       - fall(sub{is_geq(shift,0)},stride(1,2,()))
 #>
+#> \subsection{Block VERAOneWay}
+#> \label{sec:veraonewaycards}
+VERAONEWAY:
+#>
+#>   {\bf power\_file} power\_filenames
+#>   \VERAInputTable{
+#>     name={power\_filenames},
+#>     type={List of Free Form Character Strings},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The filenames of the VERA-generated HDF5 files with power and temperature data listed in sequential order},
+#>     notes={}
+#>   }
+  power_file:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
+      - arraysize()>0
+#>
+#>   {\bf cycle\_xml} cycle\_xml\_filenames
+#>   \VERAInputTable{
+#>     name={cycle\_xml\_filenames},
+#>     type={List of Free Form Character Strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The filenames of the corresponding VERA cycle depletion XML files in sequential order},
+#>     notes={}
+#>   }
+  cycle_xml:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
+      - arraysize()>0
+#>
+#>   {\bf shuffle\_xml} shuffle\_xml\_filenames
+#>   \VERAInputTable{
+#>     name={shuffle\_xml\_filenames},
+#>     type={List of Free Form Character Strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={These are the filenames of the corresponding VERA shuffle XML files. There should be a shuffle file for the beginning of each cycle after the first},
+#>     notes={}
+#>   }
+  shuffle_xml:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
+      - arraysize()>0
+#>
+#>   {\bf only\_cycle} only\_cycle
+#>   \VERAInputTable{
+#>     name={only\_cycle},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={The cycle index for which to generate fuel performance input files},
+#>     notes={Otherwise, all cycles of files will be generated}
+#>   }
+  only_cycle:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - is_gt() 0
+#>
+#>   {\bf only\_assemblies} assembly\_locations
+#>   \VERAInputTable{
+#>     name={assembly\_locations},
+#>     type={List of Free Form Character Strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The list of assembly locations for which to generate fuel performance input files},
+#>     notes={Otherwise, all assemblies will be generated}
+#>   }
+  only_assemblies:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_string(shift)},())
+#>   {\bf solve\_type} solve\_type
+#>   \VERAInputTable{
+#>     name={solve\_type},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={standalone, temp\_table},
+#>     limitations={},
+#>     description={The solver scheme for the simulation},
+#>     notes={Some options in the template are different, depending on the solve type}
+#>   }
+  solve_type:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() standalone temp_table STANDALONE TEMP_TABLE
+#>
+#>   {\bf bc\_type} bc\_type
+#>   \VERAInputTable{
+#>     name={bc\_type},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={bulk\_cool},
+#>     valuesapplicable={clad\_outer},
+#>     limitations={},
+#>     description={The boundary condition type used for the simulation},
+#>     notes={Standalone BISON can use clad outer surface and bulk coolant
+#>        temperature as the boundary condition. Standalone FAST can use 
+#>        clad outer surface and bulk coolant temperature as the boundary condition}
+#>   }
+  bc_type:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+      - in_dictionary() clad_outer bulk_cool CLAD_OUTER BULK_COOL
+#>
+#>
+#>   {\bf thermalcontact\_roughness\_fuel} roughness\_fuel
+#>   \VERAInputTable{
+#>     name={roughness\_fuel},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Fuel roughness value},
+#>     notes={}
+#>   }
+  thermalcontact_roughness_fuel:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf thermalcontact\_roughness\_clad} roughness\_clad
+#>   \VERAInputTable{
+#>     name={roughness\_clad},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={m},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$},
+#>     limitations={},
+#>     description={Clad roughness value},
+#>     notes={}
+#>   }
+  thermalcontact_roughness_clad:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0
+#>
+#>   {\bf fuel\_pin\_input\_file\_template} fuel\_inp\_filename
+#>   \VERAInputTable{
+#>     name={fuel\_inp\_filename},
+#>     type={Fixed Character String},
+#>     need={Required},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={The filename of the template for fuel rods},
+#>     notes={}
+#>   }
+  fuel_pin_input_file_template:
+    <<: *dtstring
+    _content:
+    _check:
+      - is_string()
+#>
+#>   {\bf generate\_inputs} generate\_option
+#>   \VERAInputTable{
+#>     name={generate\_option},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={on},
+#>     valuesapplicable={off},
+#>     limitations={},
+#>     description={Indicate if VERAOneWay should process data and generate, inputs
+#>        for the fuel performance codes.},
+#>     notes={}
+#>   }
+    #> on
+  generate_inputs:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off
+#>
+#>   {\bf geometric\_filter} filter\_option
+#>   \VERAInputTable{
+#>     name={filter\_option},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={on},
+#>     valuesapplicable={off},
+#>     limitations={},
+#>     description={Indicate if VERAOneWay should apply geometric filtering to
+#>        determine which rods will be in the inputs for the fuel performance codes.},
+#>     notes={}
+#>   }
+  geometric_filter:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() on off
 #> \subsection{Block BISON}
 #> \label{sec:bisoninputs}
 BISON:
@@ -18852,7 +19161,7 @@ BISON:
 #>     valuesapplicable={$>0$},
 #>     limitations={},
 #>     description={The initial grain radius of the fuel},
-#>     notes={Defines the initial\_condition parameter for the grain\_radius object in the BISON AuxVariables block}
+#>     notes={Defines the \texttt{initial\_condition} parameter for the \texttt{grain\_radius} object in the BISON \texttt{AuxVariables} block}
 #>   }
   fuel_grain_radius_initial:
     <<: *dtdouble
@@ -18872,7 +19181,7 @@ BISON:
 #>     valuesapplicable={$\ge 0$},
 #>     limitations={},
 #>     description={The penalty applied within the fuel-cladding mechanical contact solver},
-#>     notes={Defines the penalty parameter for the pellet\_clad\_mechanical object in the BISON Contact block}
+#>     notes={Defines the penalty parameter for the \texttt{pellet\_clad\_mechanical} object in the BISON \texttt{Contact} block}
 #>   }
   mechanical_contact_penalty:
     <<: *dtdouble
@@ -18892,7 +19201,7 @@ BISON:
 #>     valuesapplicable={$\ge 0$},
 #>     limitations={},
 #>     description={The tangential distance to extend the edges of contact surfaces within the fuel-cladding thermal contact solver},
-#>     notes={Defines the tangential\_tolerance parameter for the thermal\_contact object in the BISON ThermalContact block}
+#>     notes={Defines the \texttt{tangential\_tolerance} parameter for the \texttt{thermal\_contact} object in the BISON \texttt{ThermalContact} block}
 #>   }
   thermal_contact_tol:
     <<: *dtdouble
@@ -18912,7 +19221,7 @@ BISON:
 #>     valuesapplicable={$\ge 0$, $\le 1$},
 #>     limitations={},
 #>     description={The fuel densification that will occur given as a fraction of its theoretical density},
-#>     notes={Defines the total\_densification parameter for the fuel\_swelling object in the BISON Materials block}
+#>     notes={Defines the \texttt{total\_densification} parameter for the \texttt{fuel\_swelling} object in the BISON \texttt{Materials} block}
 #>   }
   fuel_densification:
     <<: *dtdouble
@@ -18933,7 +19242,7 @@ BISON:
 #>     valuesapplicable={$>0$},
 #>     limitations={},
 #>     description={The maximum Newton increment when solving for the temperature of the fuel and cladding},
-#>     notes={Defines the max\_increment parameter for the limitT object in the BISON Dampers block}
+#>     notes={Defines the \texttt{max\_increment} parameter for the limitT object in the BISON \texttt{Dampers} block}
 #>   }
   temp_max_increment:
     <<: *dtdouble
@@ -18953,7 +19262,7 @@ BISON:
 #>     valuesapplicable={$>0$},
 #>     limitations={},
 #>     description={The convergence tolerance applied to linear iterations},
-#>     notes={Defines l\_tol in the BISON Executioner block}
+#>     notes={Defines \texttt{l\_tol} in the BISON \texttt{Executioner} block}
 #>   }
   linear_tol:
     <<: *dtdouble
@@ -18973,7 +19282,7 @@ BISON:
 #>     valuesapplicable={$>0$},
 #>     limitations={},
 #>     description={The maximum number of nonlinear iterations},
-#>     notes={Defines nl\_max\_its in the BISON Executioner block}
+#>     notes={Defines \texttt{nl\_max\_its} in the BISON \texttt{Executioner} block}
 #>   }
   nonlinear_max_its:
     <<: *dtint
@@ -18993,7 +19302,7 @@ BISON:
 #>     valuesapplicable={$>0$},
 #>     limitations={},
 #>     description={The relative convergence tolerance applied to nonlinear iterations},
-#>     notes={Defines nl\_rel\_tol in the BISON Executioner block}
+#>     notes={Defines \texttt{nl\_rel\_tol} in the BISON \texttt{Executioner} block}
 #>   }
   nonlinear_rel_tol:
     <<: *dtdouble
@@ -19013,7 +19322,7 @@ BISON:
 #>     valuesapplicable={$>0$},
 #>     limitations={},
 #>     description={The absolute convergence tolerance applied to nonlinear iterations},
-#>     notes={Defines nl\_abs\_tol in the BISON Executioner block}
+#>     notes={Defines \texttt{nl\_abs\_tol} in the BISON \texttt{Executioner} block}
 #>   }
   nonlinear_abs_tol:
     <<: *dtdouble
@@ -19033,7 +19342,7 @@ BISON:
 #>     valuesapplicable={},
 #>     limitations={},
 #>     description={The external axial peaking factors data file to be used for the BISON simulation},
-#>     notes={Defines the data\_file parameter for the axial\_peaking\_factors object in the BISON Functions block. Typically, the VERA power file is used, but this allows users to input a file if desired}
+#>     notes={Defines the \texttt{data\_file} parameter for the \texttt{axial\_peaking\_factors} object in the BISON \texttt{Functions} block. Typically, the VERA power file is used, but this allows users to input a file if desired}
 #>   }
   lhr_axial_peaking_data_file:
     <<: *dtstring
@@ -19052,7 +19361,7 @@ BISON:
 #>     valuesapplicable={},
 #>     limitations={},
 #>     description={The external boundary condition temperature data file to be used for the BISON simulation},
-#>     notes={Defines the data\_file parameter for the bc\_temperature object in the BISON Functions block. Typically, VERA temperatures are used, but this allows users to input a file if desired}
+#>     notes={Defines the \texttt{data\_file} parameter for the \texttt{bc\_temperature} object in the BISON \texttt{Functions} block. Typically, VERA temperatures are used, but this allows users to input a file if desired}
 #>   }
   bc_temp_data_file:
     <<: *dtstring
@@ -19349,7 +19658,7 @@ BISON:
 #>     limitations={},
 #>     description={The external linear heat rate profile data file to be used for the BISON simulation},
 #>     notes={Defines the \texttt{data\_file parameter} for the
-#>        \texttt{linear\_heat\_rate\_profile} object in the BISON Functions block.
+#>        \texttt{linear\_heat\_rate\_profile} object in the BISON \texttt{Functions} block.
 #>        Typically, the VERA power file is used, but this allows users to input a file if desired}
 #>   }
   avg_lhr_data_file:
@@ -19498,25 +19807,6 @@ BISON:
     _check:
       - is_string()
 #>
-#>   {\bf fuel\_pin\_input\_file\_template} fuel\_inp\_filename
-#>   \VERAInputTable{
-#>     name={fuel\_inp\_filenamee},
-#>     type={Fixed Character String},
-#>     need={Required},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={The filename of the template for fuel rods},
-#>     notes={}
-#>   }
-  fuel_pin_input_file_template:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
-#>
 #>   {\bf non\_fuel\_pin\_input\_file\_template} nonfuel\_inp\_filename
 #>   \VERAInputTable{
 #>     name={nonfuel\_inp\_filename},
@@ -19535,109 +19825,6 @@ BISON:
     _content:
     _check:
       - is_string()
-#>
-#>   {\bf power\_file} power\_filenames
-#>   \VERAInputTable{
-#>     name={power\_filenames},
-#>     type={List of Free Form Character Strings},
-#>     need={Required},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={The filenames of the VERA-generated HDF5 files with power and temperature data},
-#>     notes={}
-#>   }
-  power_file:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - fall(sub{is_string(shift)},())
-      - arraysize()>0
-#>
-#>   {\bf cycle\_xml} cycle\_xml\_filenames
-#>   \VERAInputTable{
-#>     name={cycle\_xml\_filenames},
-#>     type={List of Free Form Character Strings},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={The filenames of the corresponding VERA cycle depletion XML files},
-#>     notes={}
-#>   }
-  cycle_xml:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - fall(sub{is_string(shift)},())
-      - arraysize()>0
-#>
-#>   {\bf shuffle\_xml} shuffle\_xml\_filenames
-#>   \VERAInputTable{
-#>     name={shuffle\_xml\_filenames},
-#>     type={List of Free Form Character Strings},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={The filenames of the corresponding VERA shuffle XML files},
-#>     notes={}
-#>   }
-  shuffle_xml:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - fall(sub{is_string(shift)},())
-      - arraysize()>0
-#>
-#>   {\bf only\_cycle} only\_cycle
-#>   \VERAInputTable{
-#>     name={only\_cycle},
-#>     type={Integer},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={The cycle index for which to generate BISON input files},
-#>     notes={Otherwise, all cycles of files will be generated}
-#>   }
-  only_cycle:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-#>
-#>   {\bf only\_assemblies} assembly\_locations
-#>   \VERAInputTable{
-#>     name={assembly\_locations},
-#>     type={List of Free Form Character Strings},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={The list of assembly locations for which to generate BISON input files},
-#>     notes={Otherwise, all assemblies will be generated}
-#>   }
-  only_assemblies:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - fall(sub{is_string(shift)},())
 #>
 #>   {\bf mesh\_type} mesh\_type
 #>   \VERAInputTable{
@@ -19678,47 +19865,6 @@ BISON:
     _check:
       - is_word()
       - in_dictionary() true false
-#>
-#>   {\bf solve\_type} solve\_type
-#>   \VERAInputTable{
-#>     name={solve\_type},
-#>     type={Fixed Character String},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={standalone, temp\_table},
-#>     limitations={},
-#>     description={The solver scheme for the simulation},
-#>     notes={Some options in the template are different, depending on the solve type}
-#>   }
-  solve_type:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
-      - in_dictionary() standalone temp_table STANDALONE TEMP_TABLE
-#>
-#>   {\bf bc\_type} bc\_type
-#>   \VERAInputTable{
-#>     name={bc\_type},
-#>     type={Fixed Character String},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={bulk\_cool},
-#>     valuesapplicable={clad\_outer},
-#>     limitations={},
-#>     description={The boundary condition type used for the simulation},
-#>     notes={Standalone BISON can use clad outer surface and bulk coolant
-#>        temperature as the boundary condition}
-#>   }
-  bc_type:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
-      - in_dictionary() clad_outer bulk_cool CLAD_OUTER BULK_COOL
 #>
 #>   {\bf axial\_shape} axial\_shape
 #>   \VERAInputTable{
@@ -19834,46 +19980,6 @@ BISON:
 #>     notes={}
 #>   }
   materials_fuel_relocation_burnup_relocation_stop:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-#>
-#>   {\bf thermalcontact\_roughness\_fuel} roughness\_fuel
-#>   \VERAInputTable{
-#>     name={roughness\_fuel},
-#>     type={Boolean},
-#>     need={Optional},
-#>     unitsdefault={$\mu$m},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={Fuel roughness value},
-#>     notes={}
-#>   }
-  thermalcontact_roughness_fuel:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-#>
-#>   {\bf thermalcontact\_roughness\_clad} roughness\_clad
-#>   \VERAInputTable{
-#>     name={roughness\_clad},
-#>     type={Boolean},
-#>     need={Optional},
-#>     unitsdefault={$\mu$m},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={Clad roughness value},
-#>     notes={}
-#>   }
-  thermalcontact_roughness_clad:
     <<: *dtdouble
     _content:
     _check:
@@ -20081,7 +20187,7 @@ FAST:
 #>     valuesapplicable={$>0$},
 #>     limitations={},
 #>     description={This is the maximum axial mesh size. This will refine the VERA axial
-#>        grid so that all the axial cells are less than or equal to mesh\_max\_deltaz},
+#>        grid so that all the axial cells are less than or equal to \texttt{mesh\_max\_deltaz},} 
 #>     notes={}
 #>   }
   mesh_max_deltaz:
@@ -20125,208 +20231,6 @@ FAST:
 #>     notes={}
 #>   }
   max_deltat:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-#>
-#>   {\bf fuel\_pin\_input\_file\_template} fuel\_inp\_filename
-#>   \VERAInputTable{
-#>     name={fuel\_inp\_filenamee},
-#>     type={Fixed Character String},
-#>     need={Required},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={The filename of the template for fuel rods},
-#>     notes={}
-#>   }
-  fuel_pin_input_file_template:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
-#>
-#>   {\bf power\_file} power\_filenames
-#>   \VERAInputTable{
-#>     name={power\_filenames},
-#>     type={List of Free Form Character Strings},
-#>     need={Required},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={The filenames of the VERA-generated HDF5 files with power and temperature data listed in sequential order},
-#>     notes={}
-#>   }
-  power_file:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - fall(sub{is_string(shift)},())
-      - arraysize()>0
-#>
-#>   {\bf cycle\_xml} cycle\_xml\_filenames
-#>   \VERAInputTable{
-#>     name={cycle\_xml\_filenames},
-#>     type={List of Free Form Character Strings},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={The filenames of the corresponding VERA cycle depletion XML files in sequential order},
-#>     notes={}
-#>   }
-  cycle_xml:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - fall(sub{is_string(shift)},())
-      - arraysize()>0
-#>
-#>   {\bf shuffle\_xml} shuffle\_xml\_filenames
-#>   \VERAInputTable{
-#>     name={shuffle\_xml\_filenames},
-#>     type={List of Free Form Character Strings},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={These are the filenames of the corresponding VERA shuffle XML files. There should be a shuffle file for the beginning of each cycle after the first},
-#>     notes={}
-#>   }
-  shuffle_xml:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - fall(sub{is_string(shift)},())
-      - arraysize()>0
-#>
-#>   {\bf only\_cycle} only\_cycle
-#>   \VERAInputTable{
-#>     name={only\_cycle},
-#>     type={Integer},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={The cycle index for which to generate FAST input files},
-#>     notes={Otherwise, all cycles of files will be generated}
-#>   }
-  only_cycle:
-    <<: *dtint
-    _content:
-    _check:
-      - is_int()
-      - is_gt() 0
-#>
-#>   {\bf only\_assemblies} assembly\_locations
-#>   \VERAInputTable{
-#>     name={assembly\_locations},
-#>     type={List of Free Form Character Strings},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={},
-#>     limitations={},
-#>     description={The list of assembly locations for which to generate FAST input files},
-#>     notes={Otherwise, all assemblies will be generated}
-#>   }
-  only_assemblies:
-    <<: *dtlist
-    _style: multi-line
-    _content:
-    _check:
-      - fall(sub{is_string(shift)},())
-#>
-#>   {\bf solve\_type} solve\_type
-#>   \VERAInputTable{
-#>     name={solve\_type},
-#>     type={Fixed Character String},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={standalone},
-#>     limitations={},
-#>     description={The solver scheme for the simulation},
-#>     notes={}
-#>   }
-  solve_type:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
-      - in_dictionary() standalone STANDALONE
-#>
-#>   {\bf bc\_type} bc\_type
-#>   \VERAInputTable{
-#>     name={bc\_type},
-#>     type={Fixed Character String},
-#>     need={Optional},
-#>     unitsdefault={},
-#>     unitsother={},
-#>     valuedefault={bulk\_cool},
-#>     valuesapplicable={clad\_outer},
-#>     limitations={},
-#>     description={The boundary condition type used for the simulation},
-#>     notes={Standalone FAST can use clad outer surface and bulk coolant temperature as the boundary condition}
-#>   }
-  bc_type:
-    <<: *dtstring
-    _content:
-    _check:
-      - is_string()
-      - in_dictionary() clad_outer bulk_cool CLAD_OUTER BULK_COOL
-#>
-#>   {\bf thermalcontact\_roughness\_fuel} roughness\_fuel
-#>   \VERAInputTable{
-#>     name={roughness\_fuel},
-#>     type={Float},
-#>     need={Optional},
-#>     unitsdefault={m},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={Fuel roughness value},
-#>     notes={}
-#>   }
-  thermalcontact_roughness_fuel:
-    <<: *dtdouble
-    _content:
-    _check:
-      - is_float()
-      - is_gt() 0
-#>
-#>   {\bf thermalcontact\_roughness\_clad} roughness\_clad
-#>   \VERAInputTable{
-#>     name={roughness\_clad},
-#>     type={Float},
-#>     need={Optional},
-#>     unitsdefault={m},
-#>     unitsother={},
-#>     valuedefault={},
-#>     valuesapplicable={$>0$},
-#>     limitations={},
-#>     description={Clad roughness value},
-#>     notes={}
-#>   }
-  thermalcontact_roughness_clad:
     <<: *dtdouble
     _content:
     _check:

@@ -235,53 +235,11 @@ BISON:
         - copy BISON/$outputs_file_base
       _content:
 
-    fuel_pin_input_file_template:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy BISON/$fuel_pin_input_file_template
-      _content:
-
     non_fuel_pin_input_file_template:
       _pltype: parameter
       _type: string
       _do:
         - copy BISON/$non_fuel_pin_input_file_template
-      _content:
-
-    power_file:
-      _pltype: array
-      _type: string
-      _do:
-        - copy BISON/$power_file
-      _content:
-
-    cycle_xml:
-      _pltype: array
-      _type: string
-      _do:
-        - copy BISON/$cycle_xml
-      _content:
-
-    shuffle_xml:
-      _pltype: array
-      _type: string
-      _do:
-        - copy BISON/$shuffle_xml
-      _content:
-
-    only_cycle:
-      _pltype: parameter
-      _type: int
-      _do:
-        - copy BISON/$only_cycle
-      _content:
-
-    only_assemblies:
-      _pltype: array
-      _type: string
-      _do:
-        - copy BISON/$only_assemblies
       _content:
 
     mesh_type:
@@ -296,20 +254,6 @@ BISON:
       _type: bool
       _do:
         - copy BISON/$output_average_axial_values
-      _content:
-
-    solve_type:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy BISON/$solve_type
-      _content:
-
-    bc_type:
-      _pltype: parameter
-      _type: string
-      _do:
-        - copy BISON/$bc_type
       _content:
 
     axial_shape:
@@ -352,20 +296,6 @@ BISON:
       _type: double
       _do:
         - copy BISON/$materials_fuel_relocation_burnup_relocation_stop
-      _content:
-
-    thermalcontact_roughness_fuel:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy BISON/$thermalcontact_roughness_fuel
-      _content:
-
-    thermalcontact_roughness_clad:
-      _pltype: parameter
-      _type: double
-      _do:
-        - copy BISON/$thermalcontact_roughness_clad
       _content:
 
     power_ramp_times:

@@ -328,6 +328,10 @@
     <Parameter name="rlx_power" type="double" value="0.5"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
+  <ParameterList name="VERAONEWAY">
+    <Parameter name="fuel_pin_input_file_template" type="string" value="small_3x3rod_Bison.i.template"/>
+    <Parameter name="solve_type" type="string" value="standalone"/>
+  </ParameterList>
   <ParameterList name="BISON">
     <Parameter name="bcs_plenumpressure_plenumpressure_initial_pressure" type="double" value="2.0e6"/>
     <Parameter name="bcs_plenumpressure_plenumpressure_startup_time" type="double" value="1e4"/>
@@ -336,7 +340,6 @@
     <Parameter name="executioner_dt" type="double" value="1.0e3"/>
     <Parameter name="executioner_end_time" type="double" value="6.0e7"/>
     <Parameter name="executioner_start_time" type="double" value="-100"/>
-    <Parameter name="fuel_pin_input_file_template" type="string" value="small_3x3rod_Bison.i.template"/>
     <Parameter name="globalparams_a_lower" type="double" value="0.01676"/>
     <Parameter name="globalparams_a_upper" type="double" value="3.67436"/>
     <Parameter name="globalparams_energy_per_fission" type="double" value="3.2e-11"/>
@@ -345,6 +348,5 @@
     <Parameter name="non_fuel_pin_input_file_template" type="string" value="guide_tube.moose.i.template"/>
     <Parameter name="output_average_axial_values" type="bool" value="true"/>
     <Parameter name="outputs_file_base" type="string" value="output_RISO_AN8_bump"/>
-    <Parameter name="solve_type" type="string" value="standalone"/>
   </ParameterList>
 </ParameterList>

@@ -1,0 +1,89 @@
+VERAONEWAY:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+  _content:
+
+    fuel_pin_input_file_template:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy VERAONEWAY/$fuel_pin_input_file_template
+      _content:
+
+    thermalcontact_roughness_clad:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy VERAONEWAY/$thermalcontact_roughness_clad
+      _content:
+
+    thermalcontact_roughness_fuel:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy VERAONEWAY/$thermalcontact_roughness_fuel
+      _content:
+
+    bc_type:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy VERAONEWAY/$bc_type
+      _content:
+
+    solve_type:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy VERAONEWAY/$solve_type
+      _content:
+
+    power_file:
+      _pltype: array
+      _type: string
+      _do:
+        - copy VERAONEWAY/$power_file
+      _content:
+
+    cycle_xml:
+      _pltype: array
+      _type: string
+      _do:
+        - copy VERAONEWAY/$cycle_xml
+      _content:
+
+    shuffle_xml:
+      _pltype: array
+      _type: string
+      _do:
+        - copy VERAONEWAY/$shuffle_xml
+      _content:
+
+    only_cycle:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy VERAONEWAY/$only_cycle
+      _content:
+
+    only_assemblies:
+      _pltype: array
+      _type: string
+      _do:
+        - copy VERAONEWAY/$only_assemblies
+      _content:
+
+    generate_inputs:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy VERAONEWAY/$generate_inputs
+
+    geometric_filter:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy VERAONEWAY/$geometric_filter
+
+

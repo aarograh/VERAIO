@@ -323,10 +323,14 @@
     <Parameter name="rlx_power" type="double" value="0.5"/>
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
+  <ParameterList name="VERAONEWAY">
+    <Parameter name="bc_type" type="string" value="bulk_cool"/>
+    <Parameter name="fuel_pin_input_file_template" type="string" value="small_3x3rod_Bison.i.template"/>
+    <Parameter name="solve_type" type="string" value="standalone"/>
+  </ParameterList>
   <ParameterList name="BISON">
     <Parameter name="avg_lhr_data_file" type="string" value="test.csv"/>
     <Parameter name="bc_temp_data_file" type="string" value="test.csv"/>
-    <Parameter name="bc_type" type="string" value="bulk_cool"/>
     <Parameter name="bcs_plenumpressure_plenumpressure_initial_pressure" type="double" value="2.0e6"/>
     <Parameter name="bcs_plenumpressure_plenumpressure_startup_time" type="double" value="1e4"/>
     <Parameter name="burnup_burnup_num_axial" type="int" value="48"/>
@@ -335,7 +339,6 @@
     <Parameter name="executioner_end_time" type="double" value="6.0e7"/>
     <Parameter name="fuel_densification" type="double" value="0.05"/>
     <Parameter name="fuel_grain_radius_initial" type="double" value="1e-6"/>
-    <Parameter name="fuel_pin_input_file_template" type="string" value="small_3x3rod_Bison.i.template"/>
     <Parameter name="globalparams_a_lower" type="double" value="0.01676"/>
     <Parameter name="globalparams_a_upper" type="double" value="3.67436"/>
     <Parameter name="globalparams_energy_per_fission" type="double" value="3.2e-11"/>
@@ -350,7 +353,6 @@
     <Parameter name="nonlinear_rel_tol" type="double" value="1e-6"/>
     <Parameter name="output_average_axial_values" type="bool" value="true"/>
     <Parameter name="outputs_file_base" type="string" value="output_RISO_AN8_bump"/>
-    <Parameter name="solve_type" type="string" value="standalone"/>
     <Parameter name="temp_max_increment" type="double" value="5.0"/>
     <Parameter name="thermal_contact_tol" type="double" value="1e-6"/>
   </ParameterList>
