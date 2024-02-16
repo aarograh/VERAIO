@@ -54,3 +54,4 @@ Here are some instructions to help find your way.
 5. If this file is not useful to you, please modify it to make it better.
 
 
+Documentation can be found at https://code.ornl.gov/vera/verain_usersmanual
