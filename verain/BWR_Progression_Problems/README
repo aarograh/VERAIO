@@ -1,0 +1,12 @@
+This directory contains the BWR Progression Problems developed by Chase Lawing et al.
+They are adapted from https://github.com/cdlawing1/BWRProgressionProblemInputs, having
+been updated for more recent versions of VERA.  Reference solutions generated with
+Serpent-2 and MCNP are also available in the GitHub repository.
+
+The complete documentation of these problems can be found in https://www.osti.gov/servlets/purl/1838995.
+
+When referencing these problems, please cite the above report:
+Lawing, Chase, Scott Palmtag, and Mehdi Asgari.
+BWR Progression Problems. No. ORNL/TM-2020/1792.
+Oak Ridge National Lab.(ORNL), Oak Ridge, TN (United States), 2021.
+

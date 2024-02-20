@@ -1,0 +1,114 @@
+[CASEID]
+  title 'BWR Peach Bottom 2 Design 6 8x8 at 0.0% void'
+
+! ==============================================================
+!
+!    CASL BWR Progression Problems
+!    Initial Version: Draft Release 1
+!    Current Version: Release Rev. 1
+!    https://github.com/cdlawing1/BWRProgressionProblemInputs
+!    Input Release Date: 6/15/2020
+!    Date Last Updated:  8/09/2021
+!
+!    Updates:
+!      *) 9/30/2020:
+!          - Specifically turn off feedback
+!          - Specifically turn off thermal expansion
+!          - Use P2 scattering
+!      *) 8/09/2021:
+!          - Modified the inputs to use include files for the
+!            MPACT block, for water rod cells, and for the
+!            CONTROL block in controlled problems
+!
+! ==============================================================
+
+!------------------------------------------------------------------------------
+!
+!  Design 6 (LTA)
+!  8x8 with 100 mil channel
+!  2 water rods
+!  2% gad
+!
+! Reference 1:
+!   NEA/NSC/DOC(2001)1
+!   BOILING WATER REACTOR TURBINE TRIP (TT) BENCHMARK
+!   Volume I: Final Specifications
+!   February 2001
+!
+! Reference 2:
+!   APED-4426
+!   EFFECTS OF IRRADIATION ON B4C FILLED STAINLESS STEEL TUBES
+!        IN THE DRESDEN NUCLEAR POWER STATION
+!   March 1964
+!   Williamson & Zimmerman
+!
+!------------------------------------------------------------------------------
+
+[STATE]
+  power    100.0
+  ! modify temps to compare with Monte Carlo reference
+  tinlet   600 K  ! *** average operating temperature, not inlet
+  tfuel    900 K
+  pressure 1040   ! psia
+  sym      full
+  feedback  off
+  thexp     off
+  void      0.0
+
+[CORE]
+  reactor_type BWR
+  size   1
+  apitch 15.24
+  height 1.0
+  rated  0.01 0.01   ! *** approximate
+  core_shape
+    1
+  assm_map
+    ASSY
+  bc_rad reflecting
+  bc_top reflecting
+  bc_bot reflecting
+  mat zr2  6.5514 zirc2      ! zirc density Ref. 1, p. 39
+  mat zr4  6.5514 zirc4
+  mat he   0.000176 he-4
+
+[ASSEMBLY]
+  npin   8
+  ppitch 1.6256          ! pin pitch - does not include channel gaps
+
+!*** 100 mil design
+  gap    0.9017 .42418   ! wide and narrow channel gap (cm)
+  channel_box zr4 0.254 0.9652   ! channel dimensions
+
+!*** enrichments Ref. 1, p. 18
+!*** density and materials Ref. 1, p. 12
+
+  fuel U301  10.32 94.5 / 3.01
+  fuel U222  10.32 94.5 / 2.22
+  fuel U187  10.32 94.5 / 1.87
+  fuel U145  10.32 94.5 / 1.45
+  fuel U3G   10.23 94.5 / 3.01 / gad=2.0
+
+  cell 1   0.5207 0.53213 0.61341 / U301 he zr2
+  cell 2   0.5207 0.53213 0.61341 / U222 he zr2
+  cell 3   0.5207 0.53213 0.61341 / U187 he zr2
+  cell 4   0.5207 0.53213 0.61341 / U145 he zr2
+  cell 5G  0.5207 0.53213 0.61341 / U3G  he zr2
+
+  ! import water rod
+  include include/pb6-wr.ini
+
+  lattice LAT
+    4
+    3  2
+    2  1  1
+    2  5G 1  1
+    2  1  1 WR  1
+    2  1  1  1  1  1
+    2  1  5G 1  1  1 5G
+    3  2  1  1  1  1  1  2
+
+  axial ASSY 0.0 LAT 1.0
+
+[MPACT]
+  include include/mpact2d.ini
