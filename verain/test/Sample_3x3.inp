@@ -7,8 +7,8 @@
 !
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse 9 3D 17x17 assemblies with feedback
-!> enabled in full symmetry.
+!> - The VERAIn package shall be able to parse 9 3D $17\times17$ assemblies with feedback
+!> enabled in full symmetry
 !> @endreq
 !===============================================================================
 [CASEID]

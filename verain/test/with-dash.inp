@@ -1,7 +1,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse inputs that have dashes in the
-!> assembly names within the assm_map.
+!> assembly names within the assm_map
 !> @endreq
 !===============================================================================
 [CASEID]

@@ -46,7 +46,7 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a full 3D core with 18x18 assemblies.
+!> - The VERAIn package shall be able to parse a full 3D core with $18\times18$ assemblies
 !> @endreq
 !===============================================================================
 

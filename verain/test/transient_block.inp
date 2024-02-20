@@ -16,7 +16,7 @@
   pressure 2250     ! psia
   rodbank A 167
   feedback off !??
-  transient on 
+  transient on
   sym qtr
 
 [CORE]

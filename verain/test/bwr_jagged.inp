@@ -1,6 +1,6 @@
 !> @beginreq
 !> - VERAIn shall allow the user to specify an orifice map for BWR models which allows for the
-!> definition of inlet form losses and flow areas.
+!> definition of inlet form losses and flow areas
 !> @endreq
 
 ! This is essentially a copy of the 4x4_assem_par_sym case, but with the corner assemblies

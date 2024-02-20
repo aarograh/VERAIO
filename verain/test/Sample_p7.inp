@@ -21,7 +21,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse Problem 7, which is a full core 3D
-!> problem with feedback.
+!> problem with feedback
 !> @endreq
 !===============================================================================
 

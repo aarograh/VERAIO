@@ -12,8 +12,8 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a single 3D 3x3 assembly at HFP
-!> with two fuel enrichments.
+!> - The VERAIn package shall be able to parse a single 3D $3\times3$ assembly at HFP
+!> with two fuel enrichments
 !> @endreq
 !===============================================================================
 

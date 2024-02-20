@@ -1,8 +1,8 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall not be able to parse an input in which multiple
-!> scalar parameters are specified on the same line. The parser shall
-!> appropriately fail and describe the input error.
+!> scalar parameters are specified on the same line; the parser shall
+!> appropriately fail and describe the input error
 !> @endreq
 !===============================================================================
 
@@ -15,7 +15,7 @@
   boron             1300
   rodbank A         230
   edit              pin_cladtemps pin_fueltemps pin_modtemps pin_moddens pin_gtubetemp pin_gtubedens
- 
+
 [STATE]
 power     46    boron     1023  rodbank A  99
 [STATE]  power     22    boron     1184  rodbank A  25

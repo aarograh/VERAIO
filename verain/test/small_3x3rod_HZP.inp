@@ -12,7 +12,7 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a single 3D 3x3 assembly at HZP.
+!> - The VERAIn package shall be able to parse a single 3D $3\times3$ assembly at HZP
 !> @endreq
 !===============================================================================
 

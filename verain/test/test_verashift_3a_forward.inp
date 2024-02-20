@@ -1,7 +1,7 @@
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a 3D 17x17 assembly with no feedback
-!> in quarter symmetry and with VERASHIFT problem_mode=forward enabled.
+!> - The VERAIn package shall be able to parse a 3D $17\times17$ assembly with no feedback
+!> in quarter symmetry and with VERASHIFT problem_mode=forward enabled
 !> @endreq
 !===============================================================================
 [CASEID]

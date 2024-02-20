@@ -10,8 +10,8 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a 3D Seabrook 5x5 assembly to test
-!> DNB runs.
+!> - The VERAIn package shall be able to parse a 3D Seabrook $5\times5$ assembly to test
+!> DNB runs
 !> @endreq
 !===============================================================================
 

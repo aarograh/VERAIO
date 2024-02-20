@@ -3,10 +3,10 @@
 !> - The VERAIn package shall throw an error for an input modeled
 !> in quarter symmetry with VERAShift options enabled and with detectors
 !> and a bioshield defined; the vera2omn script shall produce the following---
-!> Error: core_translate parameter should match outer vessel radius.
+!> ``Error: core_translate parameter should match outer vessel radius
 !> Writing Omnibus excore input file
 !> Error: detector cannot extend into vessel
-!> VERA2OMN failed.
+!> VERA2OMN failed''
 !> @endreq
 !===============================================================================
 [CASEID]

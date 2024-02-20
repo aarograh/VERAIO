@@ -17,8 +17,8 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse inputs in which a BWR axial_void 
-!> distribution is specified.
+!> - The VERAIn package shall be able to parse inputs in which a BWR axial_void
+!> distribution is specified
 !> @endreq
 !===============================================================================
 

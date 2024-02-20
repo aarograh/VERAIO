@@ -9,7 +9,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse inputs in which xml2ctf is disabled
-!> during VERA init.
+!> during VERA init
 !> @endreq
 !===============================================================================
 
@@ -27,7 +27,7 @@
 
 [CORE]
   size 1                ! 1x1 single-assembly
-  rated 0.066932 0.00260  ! MW, Mlbs/hr  *** scaled to 1x1, increased flow to match 17x17 outlet conditions
+  rated 0.066932 0.00260  ! MW, Mlbs/hr  *** scaled to 1x1, increased flow to match $17\times17$ outlet conditions
   apitch 1.270            ! *** scaled to 1x1, no gap but larger flow area
   height 406.328
 

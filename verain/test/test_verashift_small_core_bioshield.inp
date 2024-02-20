@@ -1,9 +1,9 @@
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a 5x5 mini core with no feedback
+!> - The VERAIn package shall be able to parse a $5\times5$ mini core with no feedback
 !> in quarter symmetry and with automated ex-core detector and bioshield
 !> setup with a vessel; the vera2omn script should be triggered and should
-!> produce the proper ex-core geometry input file.
+!> produce the proper ex-core geometry input file
 !> @endreq
 !===============================================================================
 [CASEID]

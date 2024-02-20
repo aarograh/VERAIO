@@ -35,8 +35,8 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a single 3D 17x17 assembly with TH
-!> feedback enabled and CTF convergence criteria specified.
+!> - The VERAIn package shall be able to parse a single 3D $17\times17$ assembly with TH
+!> feedback enabled and CTF convergence criteria specified
 !> @endreq
 !===============================================================================
 

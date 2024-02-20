@@ -12,7 +12,7 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a 2D GE9 BWR lattice.
+!> - The VERAIn package shall be able to parse a 2D GE9 BWR lattice
 !> @endreq
 !===============================================================================
 

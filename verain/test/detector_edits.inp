@@ -1,6 +1,6 @@
 !> @beginreq
-!> - VERAIn shall properly parse inputs for a user specified
-!>   detector edits mesh.
+!> - VERAIn shall properly parse inputs for a user-specified
+!>   detector edits mesh
 !> - ticket 3620
 !> @endreq
 [CASEID]
