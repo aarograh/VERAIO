@@ -18,8 +18,8 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse nonlinear Anderson Acceleration 
-!> input options.
+!> - The VERAIn package shall be able to parse nonlinear Anderson acceleration
+!> input options
 !> @endreq
 !===============================================================================
 

@@ -4,7 +4,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse inputs in which the default density
-!> has been changed.
+!> has been changed
 !> @endreq
 !===============================================================================
 

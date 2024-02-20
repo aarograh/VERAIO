@@ -4,8 +4,8 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall throw an error for an input in which a hyphen is
-!> given before the assembly name in the assembly map. The parser shall appropriately
-!> fail and describe the input error.
+!> given before the assembly name in the assembly map; the parser shall appropriately
+!> fail and describe the input error
 !> @endreq
 !===============================================================================
 

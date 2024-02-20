@@ -13,7 +13,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse inputs in which BWR lattice
-!> centroid offset maps are specified.
+!> centroid offset maps are specified
 !> @endreq
 !===============================================================================
 

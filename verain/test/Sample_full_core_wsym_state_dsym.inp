@@ -47,8 +47,8 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse a full 3D core with numerous BISON
-!> parameters enabled with multiple states where one of the lattice definitions is
-!> twice as large as the others.
+!> parameters enabled with multiple states in which one of the lattice definitions is
+!> twice as large as the others
 !> @endreq
 !===============================================================================
 

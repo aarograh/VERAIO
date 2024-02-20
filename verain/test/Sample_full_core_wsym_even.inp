@@ -47,7 +47,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse a full 3D core of size 16 with
-!> numerous BISON parameters enabled.
+!> numerous BISON parameters enabled
 !> @endreq
 !===============================================================================
 

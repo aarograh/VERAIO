@@ -18,9 +18,9 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse Problem 3, which is a single 3D 17x17
-!> assembly at BOL without feedback where the materials are defined using an include
-!> statement.
+!> - The VERAIn package shall be able to parse Problem 3, which is a single 3D $17\times17$
+!> assembly at BOL without feedback in which the materials are defined using an include
+!> statement
 !> @endreq
 !===============================================================================
 

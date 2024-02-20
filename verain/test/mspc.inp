@@ -3,7 +3,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse inputs in which multigrid solver
-!> options are specified.
+!> options are specified
 !> @endreq
 !===============================================================================
 
@@ -153,7 +153,7 @@
   multigrid_smoother_1G         sor
   multigrid_cg_solver_1G        gmres
   multigrid_cg_solver_its_1G    15
-  
+
   cmfd_num_groups 8
   fgcmfd_type dynamic
   fgcmfd_ubound 1 10 20 30 45

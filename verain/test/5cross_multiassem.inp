@@ -6,18 +6,18 @@
 
 !> @beginreq
 !> - React2xml shall support definition of a channel-dependent form loss coefficient map for each
-!> spacer grid in the model.
+!> spacer grid in the model
 !> - ticket 3547
 !> @endreq
 
 !> @beginreq
 !> - React2xml shall allow spacer grid channel-dependent form loss coefficient maps to be defined
-!> using octant symmetry.
+!> using octant symmetry
 !> @endreq
 
 !> @beginreq
 !> - React2xml shall allow the user to set modeling coefficients in the Yao-Hochreiter-Leech model
-!> for each spacer grid definition.
+!> for each spacer grid definition
 !> @endreq
 
 ! Channel map for ctf will be:

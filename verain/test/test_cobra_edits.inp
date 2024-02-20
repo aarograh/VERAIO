@@ -12,8 +12,8 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a 3D 3x3 assembly at
-!> HFP in full symmetry with CTF edits enabled.
+!> - The VERAIn package shall be able to parse a 3D $3\times3$ assembly at
+!> HFP in full symmetry with CTF edits enabled
 !> @endreq
 !===============================================================================
 

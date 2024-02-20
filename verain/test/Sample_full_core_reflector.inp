@@ -47,7 +47,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse a full 3D core with upper and lower
-!> reflector regions.
+!> reflector regions
 !> @endreq
 !===============================================================================
 

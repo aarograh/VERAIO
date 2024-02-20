@@ -9,7 +9,7 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a single 16x16 CE design PWR assembly.
+!> - The VERAIn package shall be able to parse a single 16x16 CE design PWR assembly
 !> @endreq
 !===============================================================================
 

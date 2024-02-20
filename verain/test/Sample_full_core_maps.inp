@@ -33,7 +33,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse a full 3D core with a combination
-!> of full, quarter, and octant symmetric maps.
+!> of full, quarter, and octant symmetric maps
 !> @endreq
 !===============================================================================
 

@@ -5,8 +5,8 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse Problem 4, which are 9 3D 17x17
-!> assemblies at BOL without feedback.
+!> - The VERAIn package shall be able to parse Problem 4, which include 9 3D $17\times17$
+!> assemblies at BOL without feedback
 !> @endreq
 !===============================================================================
 

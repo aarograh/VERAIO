@@ -35,8 +35,8 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a single 3D 17x17 assembly with feedback
-!> enabled with 1,300 ppm boron.
+!> - The VERAIn package shall be able to parse a single 3D $17\times17$ assembly with feedback
+!> enabled with 1,300 ppm boron
 !> @endreq
 !===============================================================================
 

@@ -6,7 +6,7 @@
 
 !> @beginreq
 !> - VERAIO shall support the user inputting a domain decomposition map that can be used by
-!> CTF for decomposing the model for parallel solution.
+!> CTF for decomposing the model for parallel solution
 !> @endreq
 
 

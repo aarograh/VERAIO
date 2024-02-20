@@ -12,12 +12,12 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a single 3D 3x3 assembly at 10%
-!> power.
+!> - The VERAIn package shall be able to parse a single 3D $3\times3$ assembly at 10%
+!> power
 !> @endreq
 !> @beginreq
 !> - The VERAIn package shall allow the user to set the solve_heat_end option in the
-!>   COBRATF input block.
+!>   COBRATF input block
 !> @endreq
 !===============================================================================
 

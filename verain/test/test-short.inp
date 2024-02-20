@@ -13,7 +13,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse a single 3D fuel pin at
-!> HFP in full symmetry with a shortened height.
+!> HFP in full symmetry with a shortened height
 !> @endreq
 !===============================================================================
 

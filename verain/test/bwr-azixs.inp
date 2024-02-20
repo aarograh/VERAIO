@@ -12,7 +12,7 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to process the azimuthal XS option.
+!> - The VERAIn package shall be able to process the azimuthal XS option
 !> - ticket 3806
 !> - ticket 4280
 !> @endreq

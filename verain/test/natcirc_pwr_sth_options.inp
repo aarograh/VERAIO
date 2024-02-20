@@ -1,7 +1,7 @@
 !> @beginreq
-!> - MPACT shall compute solutions to a 3-D single assembly PWR model using assembly channel
+!> - MPACT shall compute solutions to a 3D single assembly PWR model using assembly channel
 !>   coupling with internal TH Feedback and a flow rate determined by natural circulation using a
-!>   chimney adapted from NuScale measurements to a single assembly.
+!>   chimney adapted from NuScale measurements to a single assembly
 !> @endreq
 [CASEID]
   title 'STH Natural Circulation Single Assembly PWR'

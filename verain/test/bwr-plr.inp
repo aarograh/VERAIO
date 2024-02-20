@@ -4,8 +4,8 @@
 !         https://skb.se/upload/publications/pdf/tr-10-13.pdf
 ! Ref. 2: UK ABWR Generic Design Assessment, GE Hitachi, SE-GD-0136
 !         http://www.hitachi-hgne-uk-abwr.co.uk/downloads/2017-12-14/UKABWR-GA91-9101-0101-11000-RevC-PB.pdf
-! Ref. 3: Optimum Boiling Water Reactor Fuel Design Strategies to 
-!         Enhance Reactor Shutdown by the Standby Liquid Control 
+! Ref. 3: Optimum Boiling Water Reactor Fuel Design Strategies to
+!         Enhance Reactor Shutdown by the Standby Liquid Control
 !         System, Michael Fensin, UF thesis 2004.
 !         http://etd.fcla.edu/UF/UFE0005364/fensin_m.pdf
 ! Ref. 4: BWR TT Benchmark Final Specifications (Feb. 2001)
@@ -23,7 +23,7 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse the default material name 'cool'
+!> - The VERAIn package shall be able to parse the default material name ``cool''
 !> - ticket 4306
 !> @endreq
 !===============================================================================
@@ -33,23 +33,23 @@
 
 [STATE]
   power               100.0
-  tinlet              600.0 K 
-  tfuel               900.0 K 
+  tinlet              600.0 K
+  tfuel               900.0 K
   pressure             1040 ! psia Ref. 2
   sym                  full
   feedback              off
   void                 80.0
-  
-  
+
+
 [CORE]
   reactor_type          BWR
   size                    1
   apitch              15.24 ! for BWR (Ref. 2 has this as the pitch for BWR5 assemblies)
   height                1.0
   rated           0.0122 0.01 ! estimate using ABWR data assume 10% bypass flow
-  core_shape       
+  core_shape
       1
-  assm_map       
+  assm_map
      ASSY1
   bc_rad         reflecting
   bc_top         reflecting
@@ -77,9 +77,9 @@
 
 ! gad pin density estimated using Ref. 4
 
-  fuel           U40G8 10.19  94.5 / 3.95 / gad=8.0 
+  fuel           U40G8 10.19  94.5 / 3.95 / gad=8.0
   fuel           U44G6 10.19  94.5 / 4.4  / gad=6.0
-  fuel           U44G3 10.19  94.5 / 4.4  / gad=3.0 
+  fuel           U44G3 10.19  94.5 / 4.4  / gad=3.0
   fuel           U49G8 10.19  94.5 / 4.9  / gad=8.0
   fuel           U49G6 10.19  94.5 / 4.9  / gad=6.0
 
@@ -104,7 +104,7 @@
 
 
 
-  
+
   lattice        LAT
 
   ! pattern from ref. 3 VAN region
@@ -117,7 +117,7 @@
     5  V  6H  WR WR 7G 7
     5  6H 6   7  7  7  7  7
     5  V  6H  V  7  7G V  7G V
-    2  5  7   7  7  7  7  7  7  3 
+    2  5  7   7  7  7  7  7  7  3
 
 
 

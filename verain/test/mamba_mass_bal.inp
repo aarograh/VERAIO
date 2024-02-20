@@ -3,7 +3,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse inputs in which the COBRATF/crud
-!> and mass balance/steam generator inputs are specified.
+!> and mass balance/steam generator inputs are specified
 !> @endreq
 !===============================================================================
 

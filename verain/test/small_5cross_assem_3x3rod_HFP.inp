@@ -12,8 +12,8 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a five 3D 3x3 assemblies at HFP when
-!> arranged in a cross.
+!> - The VERAIn package shall be able to parse a five 3D $3\times3$ assemblies at HFP when
+!> arranged in a cross
 !> @endreq
 !===============================================================================
 

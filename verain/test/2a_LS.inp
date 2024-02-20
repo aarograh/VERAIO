@@ -1,5 +1,5 @@
 !> @beginreq
-!> - The VERAIn package shall be able to parse VERA Progression Problem 2A with specified linear source options.
+!> - The VERAIn package shall be able to parse VERA Progression Problem 2A with specified linear source options
 !> @endreq
 [CASEID]
   title '2a_LS'
@@ -40,7 +40,7 @@
   bc_rad reflecting
   bc_top reflecting
   bc_bot reflecting
-  include mpact_test_mats.ini  
+  include mpact_test_mats.ini
 
 [ASSEMBLY]
   npin 17

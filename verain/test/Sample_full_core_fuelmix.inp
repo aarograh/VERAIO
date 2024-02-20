@@ -46,7 +46,7 @@
 
 !===============================================================================
 !> @beginreq
-!> - The VERAIn package shall be able to parse a full 3D core with fuel mixing.
+!> - The VERAIn package shall be able to parse a full 3D core with fuel mixing
 !> @endreq
 !===============================================================================
 

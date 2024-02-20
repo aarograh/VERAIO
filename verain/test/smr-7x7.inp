@@ -21,7 +21,7 @@
 !===============================================================================
 !> @beginreq
 !> - The VERAIn package shall be able to parse a full 3D SMR core in quarter symmetry
-!> with feedback enabled.
+!> with feedback enabled
 !> @endreq
 !===============================================================================
 [CASEID]

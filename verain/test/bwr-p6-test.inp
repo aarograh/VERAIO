@@ -15,15 +15,15 @@
 !
 !===============================================================================
 !> @beginreq
-!> - VERAIn shall accept specification of the two-phase friction model which CTF shall use.
+!> - VERAIn shall accept specification of the two-phase friction model which CTF shall use
 !> @endreq
 
 !> @beginreq
-!> - VERAIn shall accept specification of the flow regime map to use in CTF.
+!> - VERAIn shall accept specification of the flow regime map to use in CTF
 !> @endreq
 
 !> @beginreq
-!> - VERAIn shall accept specification of the interfacial drag model to use in CTF.
+!> - VERAIn shall accept specification of the interfacial drag model to use in CTF
 !> @endreq
 !===============================================================================
 
