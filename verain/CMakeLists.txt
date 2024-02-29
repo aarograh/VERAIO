@@ -32,14 +32,6 @@ INSTALL(
 # Install documentation
 
 INSTALL(
-  DIRECTORY docs/
-  DESTINATION "share/VERAIn/doc"
-  COMPONENT ${PACKAGE_NAME}
-  )
-
-# Install documentation
-
-INSTALL(
   FILES install/README.VERAIn
   DESTINATION "."
   COMPONENT ${PACKAGE_NAME}
@@ -50,6 +42,14 @@ INSTALL(
 INSTALL(
   DIRECTORY Progression_Problems/
   DESTINATION "share/VERAIn/Progression_Problems"
+  COMPONENT ${PACKAGE_NAME}
+  )
+
+# Install BWR Progression Problems
+
+INSTALL(
+  DIRECTORY BWR_Progression_Problems/
+  DESTINATION "share/VERAIn/BWR_Progression_Problems"
   COMPONENT ${PACKAGE_NAME}
   )
 
