@@ -243,6 +243,8 @@
         </ParameterList>
       </ParameterList>
     </ParameterList>
+    <Parameter name="nodal_edits_energy_ubound" type="Array(double)" value="{20e+7,1000.0,0.625}"/>
+    <Parameter name="nodal_edits_geometry" type="string" value="pin"/>
     <ParameterList name="parallel_env">
       <Parameter name="num_space" type="int" value="1"/>
     </ParameterList>

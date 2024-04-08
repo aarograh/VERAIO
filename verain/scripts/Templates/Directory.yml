@@ -12091,6 +12091,59 @@ MPACT:
       - is_word()
       - in_dictionary() true false nem sanm-2 sanm-4 senm-2 senm-4
 #>
+#>   {\bf nodal\_edits\_geometry} nodal\_edits\_geometry
+#>   \VERAInputTable{
+#>     name={nodal\_edits\_geometry},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={assembly},
+#>     valuesapplicable={pin, both},
+#>     limitations={},
+#>     description={This input is used to select the type of geometry for nodal edits.
+#>        The available options are described as follows:
+#>        \begin{enumerate}
+#>          \item \texttt{assembly}: Cross sections are edited for the
+#>              assembly or for 4 nodes per assembly.
+#>          \item \texttt{pin}: Cross sections are edits for
+#>              individual pins.
+#>          \item \texttt{both}: Cross sections are edited for both
+#>              the assembly and the pin levels.
+#>        \end{enumerate}},
+#>     notes={}.
+#>   }
+  nodal_edits_geometry:
+    <<: *dtword
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() pin assembly both
+#>
+#>   {\bf nodal\_edits\_energy\_ubound} nodal\_edits\_energy\_ubound
+#>   \VERAInputTable{
+#>     name={nodal\_edits\_energy\_ubound},
+#>     type={Array of Floating-Point Real Numbers},
+#>     need={Optional},
+#>     unitsdefault={eV},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$ > 0$, $\le$ the highest energy boundary of the library},
+#>     limitations={},
+#>     description={This input defines the upper energy boundaries for the
+#>         homogenization of the transport energy group structure
+#>         in nodal edits.},
+#>     notes={When this input is specified, the number of energy groups
+#>         used in nodal edit is automatically adjusted to correspond with
+#>         the number of upper energy boundaries provided.}
+#>   }
+  nodal_edits_energy_ubound:
+    <<: *dtlist
+    _style: multi-line
+    _check:
+      - fall(sub{is_float(shift)},())
+      - is_strictlydecreasing()
+#>
 #>   {\bf nodal\_edits\_energy\_cutoff} nodal\_edits\_energy\_cutoff
 #>   \VERAInputTable{
 #>     name={nodal\_edits\_energy\_cutoff},

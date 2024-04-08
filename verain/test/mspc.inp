@@ -159,6 +159,9 @@
   fgcmfd_ubound 1 10 20 30 45
   fgcmfd_fmr true
 
+  nodal_edits_energy_ubound 20e+7 1000.0 0.625
+  nodal_edits_geometry pin
+
 !parallel
   num_space         1
 
