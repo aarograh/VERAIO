@@ -329,6 +329,12 @@
     <Parameter name="rlx_tfuel" type="double" value="1.0"/>
   </ParameterList>
   <ParameterList name="VERAONEWAY">
+    <ParameterList name="filter">
+      <ParameterList name="peak_lhr">
+        <Parameter name="max" type="double" value="2.0"/>
+        <Parameter name="min" type="double" value="0.0"/>
+      </ParameterList>
+    </ParameterList>
     <Parameter name="fuel_pin_input_file_template" type="string" value="small_3x3rod_Bison.i.template"/>
     <Parameter name="solve_type" type="string" value="standalone"/>
   </ParameterList>

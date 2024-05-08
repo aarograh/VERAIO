@@ -87,3 +87,34 @@ VERAONEWAY:
         - copy VERAONEWAY/$geometric_filter
 
 
+    filter:
+      _pltype: list
+      _tr:
+        _name: _filter
+        _content: VERAONEWAY/%filter
+      _content:
+
+        (_filter):
+          _pltype: list
+          _content:
+
+                min:
+                  _pltype: parameter
+                  _type: double
+                  _do:
+                    - copy VERAONEWAY/%filter/$(_filter):0
+                  _content:
+
+                max:
+                  _pltype: parameter
+                  _type: double
+                  _do:
+                    - copy VERAONEWAY/%filter/$(_filter):1
+                  _content:
+
+                discharge:
+                  _pltype: parameter
+                  _type: bool
+                  _do:
+                    - copy VERAONEWAY/%filter/$(_filter):2
+                  _content:

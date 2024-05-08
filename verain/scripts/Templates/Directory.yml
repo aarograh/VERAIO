@@ -2367,7 +2367,7 @@ CORE:
 #>     valuesapplicable={Core map of valid assembly filter labels},
 #>     limitations={},
 #>     description={This is a core map of fuel assembly filters used by VERAOneWay.
-#         The filters correspond to \texttt{rod\_filters} in the [ASSEMBLY] block.},
+#>        The filters correspond to \texttt{rod\_filters} in the [ASSEMBLY] block.},
 #>     notes={Unfolds partial maps using symmetry. To position filters asymmetrically,
 #>            users are required to use a full map.}
 #>   }
@@ -4097,7 +4097,7 @@ ASSEMBLY:
 #>     valuesapplicable={\texttt{+}, \texttt{-}},
 #>     limitations={},
 #>     description={This is the map of indicating which rods, VERAOneWay should
-#         filter from its calculations.},
+#>        filter from its calculations.},
 #>     notes={Uses symmetry to unfold partial maps. To exclude rods assymetrically
 #>            input a full map is required.}
 #>   }
@@ -19199,6 +19199,66 @@ VERAONEWAY:
     _check:
       - is_word()
       - in_dictionary() on off
+#>
+#>   {\bf filter} variable min\_value max\_value discharge
+#>   \VERAInputTable{
+#>     name={variable},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={\texttt{peak\_lhr}, \texttt{avg\_lhr}, \texttt{peak\_exposure}, or \texttt{avg\_exposure}},
+#>     limitations={},
+#>     description={The \texttt{variable} that the filter will use when determining
+#>     which rods to filter out.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={min\_value},
+#>     type={Fixed Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0.0$},
+#>     limitations={},
+#>     description={The minimum value of the supplied \texttt{variable}, below
+#>     rods with values less than this value will be excluded.},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={max\_value},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0.0$},
+#>     description={The maximum value of the supplied \texttt{variable},
+#>     rods with values greater than this value will be excluded.},
+#>     limitations={},
+#>     notes={}
+#>   }
+#>   \VERAInputTable{
+#>     name={discharge},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={false},
+#>     valuesapplicable={true},
+#>     limitations={},
+#>     description={Indicates if a rod should only be filtered based on its
+#>     values during the last state of the last cycle it is in-core.},
+#>     notes={}
+#>   }
+  filter:
+    <<: *dtlistnamed
+    _check:
+      - is_word(nth(0,()))
+      - is_float(nth(1,()))
+      - is_float(nth(2,()))
 #> \subsection{Block BISON}
 #> \label{sec:bisoninputs}
 BISON:
