@@ -179,6 +179,7 @@
 [VERAONEWAY]
   fuel_pin_input_file_template = small_3x3rod_Bison.i.template
   solve_type standalone
+  filter peak_lhr 0.0 2.0
 
 [BISON]
   executioner_start_time = -100
