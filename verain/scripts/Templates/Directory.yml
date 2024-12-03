@@ -13868,11 +13868,13 @@ MPACT:
 #>     valuesapplicable={\texttt{qgd2}},
 #>     limitations={},
 #>     description={This input is used to request a higher order treatment of gadolinium
-#>        isotopes during burnup calculations. Currently, the only option is
-#>        \texttt{qgd2}. When called with the \texttt{qgd2} option, gadolinium
-#>        isotopes are dealt with using the high-order methodology described in
+#>        isotopes during burnup calculations. The options are
+#>        \texttt{qgd2} and \texttt{m5}. When called with the \texttt{qgd2} option, gadolinium
+#>        isotopes are dealt with using the high order methodology described in
 #>        D. Lee, J. Rhodes, and K. Smith. ``Quadratic Depletion Method for Gadolinium
-#>        Isotopes in CASMO-5,'' \textit{Nuclear Science and Engineering} 174 (2013), pp. 79--86. If
+#>        Isotopes in CASMO-5,'' \textit{Nuclear Science and Engineering} 174 (2013), pp. 79--86. When called with
+#>        the \texttt{m5} method, the high order method from C. Lawing and S. Palmtag. ``Improved Methodology
+#>        for Depletion of Gadolinia Bearing Nuclear Fuel,'' M&C 2023. If
 #>        the \texttt{none} option is used, then no special treatment of gadolinium isotopes
 #>        will be considered},
 #>     notes={}
@@ -13882,7 +13884,7 @@ MPACT:
     _content:
     _check:
       - is_word()
-      - in_dictionary() qgd2 none
+      - in_dictionary() qgd2 m5 none
 #>
 #>   {\bf depl\_origen\_solver} depl\_origen\_solver
 #>   \VERAInputTable{
@@ -19087,7 +19089,7 @@ VERAONEWAY:
 #>     limitations={},
 #>     description={The boundary condition type used for the simulation},
 #>     notes={Standalone BISON can use clad outer surface and bulk coolant
-#>        temperature as the boundary condition. Standalone FAST can use 
+#>        temperature as the boundary condition. Standalone FAST can use
 #>        clad outer surface and bulk coolant temperature as the boundary condition}
 #>   }
   bc_type:
@@ -20300,7 +20302,7 @@ FAST:
 #>     valuesapplicable={$>0$},
 #>     limitations={},
 #>     description={This is the maximum axial mesh size. This will refine the VERA axial
-#>        grid so that all the axial cells are less than or equal to \texttt{mesh\_max\_deltaz},} 
+#>        grid so that all the axial cells are less than or equal to \texttt{mesh\_max\_deltaz},}
 #>     notes={}
 #>   }
   mesh_max_deltaz:
