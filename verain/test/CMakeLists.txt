@@ -30,7 +30,7 @@ FUNCTION(ADD_REACTOR_AWARE_INPUT_PARSER_TEST FILE_NAME)
     TEST_1
       CMND ${PERL_EXECUTABLE}
       ARGS
-        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl --xInit
+      ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl --python_exe ${PYTHON_EXECUTABLE} --xInit
         ../${FILE_NAME}.inp  ${FILE_NAME}.xml
     TEST_2
       CMND diff ARGS ${FILE_NAME}.xml ../${FILE_NAME}.xml.gold
@@ -164,7 +164,7 @@ FUNCTION(ADD_REACTOR_AWARE_INPUT_PARSER_FAIL_TEST FILE_NAME)
     TEST_1
       CMND ${PERL_EXECUTABLE}
       ARGS
-        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl --xInit
+        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl --python_exe ${PYTHON_EXECUTABLE} --xInit
         ../${FILE_NAME}.inp  ${FILE_NAME}.xml
       WILL_FAIL
     )
@@ -265,7 +265,7 @@ FUNCTION(ADD_THERMAL_EXPANSION_TEST FILE_NAME)
     TEST_1
       CMND ${PERL_EXECUTABLE}
       ARGS
-        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl --xInit
+        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl --python_exe ${PYTHON_EXECUTABLE} --xInit
         ../${FILE_NAME}.inp  ${FILE_NAME}.xml
     TEST_2
       CMND diff ARGS ${FILE_NAME}.xml ../${FILE_NAME}.xml.gold
@@ -312,7 +312,7 @@ FUNCTION(ADD_AUTO_EXCORE_TEST FILE_NAME)
     TEST_1
       CMND ${PERL_EXECUTABLE}
       ARGS
-        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl
+        ${VERAIn_SOURCE_DIR}/scripts/react2xml.pl --python_exe ${PYTHON_EXECUTABLE}
         ../${FILE_NAME}.inp  ${FILE_NAME}.xml
     TEST_2
       CMND diff ARGS ${FILE_NAME}.xml ../${FILE_NAME}.xml.gold

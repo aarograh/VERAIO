@@ -158,6 +158,7 @@ my $NOTRIM;
 my $INIT;
 my $XINIT;
 my $FOLLOW;
+my $PYTHON_EXE="python";
 { # process options
     GetOptions(
 	"xml=s"     => \$XML,
@@ -170,6 +171,7 @@ my $FOLLOW;
 	"notrim"    => \$NOTRIM,
 	"init"      => \$INIT,
 	"xinit"     => \$XINIT,
+  "python_exe=s" => \$PYTHON_EXE,
 
 #	"update=s"  => \$_UPDATE         # hidden updates
 	);
@@ -372,7 +374,7 @@ close $OFILE;
 
 # Generate an Omnibus excore input
 my $VERA2OMN = "${directory}Init/vera2omn.py";
-system ("python", $VERA2OMN, $filebase, $directory) == 0 or die "VERA2OMN failed\n";
+system ($PYTHON_EXE, $VERA2OMN, $filebase, $directory) == 0 or die "VERA2OMN failed\n";
 
 sub recursive_json_print {
 
@@ -479,5 +481,7 @@ Program switches:
           program. Does not help much in tracing invalid input.
 
 --schema Write the VERAIn input schematic to STDOUT formatted as JSON.
+
+--python_exe=path_to_python Override to use a specific instance of python
 EOF
 }
