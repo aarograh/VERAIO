@@ -2,119 +2,76 @@ stages:
    - test
    - deploy
 
-.ecode: &ecode |
-    function ecc () {
-        "$@"
-        if [[ $? -ne 0 ]]; then exit 1; fi
-    }
- 
+.testing_base:
+  tags:
+    - linux
+  artifacts:
+    paths:
+      - build/Testing/Temporary/LastTestsFailed.log
+      - build/Testing/Temporary/LastTest.log
+      - build/Testing/Temporary/CTestCostData.txt
+      - build/make.out
+    expire_in: 1 week
+    when: always
+
 before_script:
-    - *ecode
-    - echo "start"
-#--- Load environment ---#
-    - if [[ -z ${TEST_COMPILER} ]]; then VERA_COMPILER="8.3.0"; else VERA_COMPILER=${TEST_COMPILER}; fi
-    - echo "$VERA_COMPILER"
-    - DRIVER_COMPILER=${VERA_COMPILER//[.]/}
-    - echo ${DRIVER_COMPILER}
-      #set base development enviornment based on machine directory structure
-    - if [[ -f "/data/test_gcc/gcc-${VERA_COMPILER}/load_dev_env.sh" ]]; then BASE_DIR="/data/gitlab-runner"; . /data/test_gcc/gcc-${VERA_COMPILER}/load_dev_env.sh; ENV_BASE=/data/test_gcc/gcc-${VERA_COMPILER}; else BASE_DIR="/localhome/gitlab-runner"; . /projects/vera/test/gcc-${VERA_COMPILER}/load_dev_env.sh; ENV_BASE=/projects/vera/test/gcc-${VERA_COMPILER}/test; fi
-    - ${ENV_BASE}/common_tools/gitdist pull
-    - SRC_DIR=${PWD}
-    - SRC_BASE_DIR=${SRC_DIR}/..
-    - cd ${BASE_DIR}
-#set package
-    - PACKAGE_TEST=VERAIO
-#clean out build directory
-    - (if [[ ! -d "builds" ]]; then mkdir builds; fi)
-    - cd builds
-    - (if [[ ! -d "VERA" ]]; then git clone git@code-int.ornl.gov:CASL/VERA; fi)
-    - cd VERA
-    - git pull
-    - BASE_VERA_DIR=${PWD}
-    - (if [[ ! -d "TriBITS" ]]; then git clone git@code-int.ornl.gov:CASL/TriBITS; fi)
-    - env VERA_INCL_CEData=ON cmake/tribits/ci_support/clone_extra_repos.py
-    - ${ENV_BASE}/common_tools/gitdist pull
-    - cd SCALE
-    - git submodule update --init external
-    - cd ${BASE_VERA_DIR}
-    - cd VERAData/CEData
-    - ${ENV_BASE}/common_tools/git-lfs pull
-    - cd ${BASE_VERA_DIR}
-    - echo ${BASE_VERA_DIR}
-    - ls -lrt 
-#set up links to add package source to full source directory
-    - (if [[ -d "${PACKAGE_TEST}" ]]; then rm -rf VERAIO; fi)
-    - (if [[ ! -L "${PACKAGE_TEST}" ]]; then ln -s ${SRC_DIR} VERAIO; fi)
-after_script:
-#--- Load environment ---#
-    - if [[ -z ${TEST_COMPILER} ]]; then VERA_COMPILER="8.3.0"; else VERA_COMPILER=${TEST_COMPILER}; fi
-    - if [[ -f "/data/test_gcc/gcc-${VERA_COMPILER}/load_dev_env.sh" ]]; then BASE_DIR="/data/gitlab-runner"; . /data/test_gcc/gcc-${VERA_COMPILER}/load_dev_env.sh; ENV_BASE=/data/test_gcc/gcc-${VERA_COMPILER}; else BASE_DIR="/localhome/gitlab-runner"; . /projects/vera/test/gcc-${VERA_COMPILER}/load_dev_env.sh; ENV_BASE=/projects/vera/test/gcc-${VERA_COMPILER}/test; fi
-    - SRC_DIR=`pwd`
-    - BLD_DIR=${BASE_DIR}/builds/VERAIO
-    - cp $BLD_DIR/Testing/Temporary/* $SRC_DIR/
+  - source /data/test_gcc/gcc-8.3.0/load_dev_env.sh
+  - export MPACT_DATA_DIR=/data/gitlab-runner/ref_repos/VERAData/MPACT
+  - export SCALE_DATA_DIR=/data/gitlab-runner/ref_repos/VERAData/SCALE
+  - VERA_DIR="/data/gitlab-runner/ref_repos/VERA"
 
 vmcontinuous:
-    variables:
-        CTEST_BUILD_FLAGS: -j32
-        CTEST_PARALLEL_LEVEL: "32"
-        DART_TESTING_TIMEOUT: "3600"
-        BLD_NAME: "gnu_release_debug"
-    script:
-    - SRC_DIR=`pwd`
-    - BLD_DIR=${BASE_DIR}/builds/VERAIO
-    - (if [[  -d "${BLD_DIR}" ]]; then rm -rf ${BLD_DIR}; fi)
-    - mkdir -p ${BLD_DIR}
-    - cd $BLD_DIR
-    - ln -s ${BASE_VERA_DIR}/cmake/std/gcc-${VERA_COMPILER}/do-configure.MPI_RELEASE_DEBUG_SHARED do-configure
-    - rm -rf CMake*
-    - ecc ./do-configure -DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON -DVERA_IGNORE_MISSING_EXTRA_REPOSITORIES:BOOL=ON -DVERA_ENABLE_KNOWN_EXTERNAL_REPOS_TYPE:STRING=Continuous -DVERA_ENABLE_TESTS:BOOL=ON -DVERA_TEST_CATEGORIES:STRING=CONTINUOUS
-    - ecc make -j16
-    - ecc ctest -j16
-    - cd ${BASE_VERA_DIR}
-    - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAIO; fi)
-    - echo $CI_COMMIT_REF_NAME
-    tags:
-        - linux
+  extends: .testing_base
+  variables:
+    CTEST_BUILD_FLAGS: -j32
+    CTEST_PARALLEL_LEVEL: "32"
+    DART_TESTING_TIMEOUT: "3600"
+    BLD_NAME: "gnu_release_debug"
+  script:
+    - cmake
+      -D VERA_CONFIGURE_OPTIONS_FILE:FILEPATH="/data/gitlab-runner/ref_repos/VERA/cmake/std/gcc-8.3.0/mpi-release-debug-shared-options.cmake"
+      -D VERA_ENABLE_TESTS:BOOL=ON
+      -D DART_TESTING_TIMEOUT:STRING=600.00
+      -D VERA_ENABLE_VERAIn:BOOL=ON
+      -D VERAData_DIR=/data/gitlab-runner/ref_repos/VERAData
+      -D VERA_ENABLE_VERAout:BOOL=ON
+      -D VERA_IGNORE_MISSING_EXTRA_REPOSITORIES:BOOL=ON 
+      -D VERA_ENABLE_KNOWN_EXTERNAL_REPOS_TYPE:STRING=Continuous
+      -D VERA_ENABLE_TESTS:BOOL=ON
+      -D VERA_TEST_CATEGORIES:STRING=CONTINUOUS
+      -D VERA_TRIBITS_DIR=/data/gitlab-runner/ref_repos/TriBITS/tribits
+      -D Trilinos_SOURCE_DIR="/data/gitlab-runner/ref_repos/Trilinos"
+      -S /data/gitlab-runner/ref_repos/VERA -B ${CI_PROJECT_DIR}/build
+    - cmake --build ${CI_PROJECT_DIR}/build -j16
+    - ctest --test-dir ${CI_PROJECT_DIR}/build -j16
     
- 
 gnu-debug:
+    extends: .testing_base
     variables:
         CTEST_BUILD_FLAGS: -j32
         CTEST_PARALLEL_LEVEL: "32"
         DART_TESTING_TIMEOUT: "3600"
         BLD_NAME: "gnu_release_debug"
     stage: test
-    artifacts:
-      paths:
-        - LastTestsFailed.log
-        - LastTest.log
-        - CTestCostData.txt
-      expire_in: 1 week
-      when: always
     script:
-    - SRC_DIR=`pwd`
-    - BLD_DIR=${BASE_DIR}/builds/VERAIO
-    - (if [[  -d "${BLD_DIR}" ]]; then rm -rf ${BLD_DIR}; fi)
-    - mkdir -p ${BLD_DIR}
-    - cd $BLD_DIR
-    - rm -rf do-configure
-    - ln -s ${BASE_VERA_DIR}/cmake/std/gcc-${VERA_COMPILER}/do-configure.MPI_RELEASE_DEBUG_SHARED do-configure
-    - rm -rf CMake*
-#Base Configure
-    - ecc ./do-configure -DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON
-    - ecc make -j16
-    - ecc ctest -j28
-    - cd ${BASE_VERA_DIR}
-    - (if [[ -L "${PACKAGE_TEST}" ]]; then rm -rf VERAIO; fi)
-    - CI_RUN_ONLY=CHECKIN
-# Checking for available VERA branches for future development
-    - if git ls-remote --heads git@code-int.ornl.gov:CASL/VERA $CI_COMMIT_REF_NAME | wc -l >/dev/null; then BRANCH=${CI_COMMIT_REF_NAME}; else BRANCH=master; fi
-# VERA Branch Check
-    - echo "${BRANCH}"
+    - cmake
+      -D VERA_CONFIGURE_OPTIONS_FILE:FILEPATH="/data/gitlab-runner/ref_repos/VERA/cmake/std/gcc-8.3.0/mpi-release-debug-shared-options.cmake"
+      -D VERA_ENABLE_TESTS:BOOL=ON
+      -D DART_TESTING_TIMEOUT:STRING=600.00
+      -D VERA_ENABLE_VERAIn:BOOL=ON
+      -D VERAData_DIR=/data/gitlab-runner/ref_repos/VERAData
+      -D VERA_ENABLE_VERAout:BOOL=ON
+      -D VERA_IGNORE_MISSING_EXTRA_REPOSITORIES:BOOL=ON 
+      -D VERA_ENABLE_KNOWN_EXTERNAL_REPOS_TYPE:STRING=Continuous
+      -D VERA_ENABLE_TESTS:BOOL=ON
+      -D VERA_TEST_CATEGORIES:STRING=CONTINUOUS
+      -D VERA_TRIBITS_DIR=/data/gitlab-runner/ref_repos/TriBITS/tribits
+      -D Trilinos_SOURCE_DIR="/data/gitlab-runner/ref_repos/Trilinos"
+      -S /data/gitlab-runner/ref_repos/VERA -B ${CI_PROJECT_DIR}/build
+    - cmake --build ${CI_PROJECT_DIR}/build -j16
+    - ctest --test-dir ${CI_PROJECT_DIR}/build -j16
     rules:
         - if: $CI_MERGE_REQUEST_ID  
-    tags:
-        - linux
 
 trigger_build:
     stage: deploy
