@@ -1617,6 +1617,38 @@ STATE:
       - is_word()
       - in_dictionary() none center all
 #>
+#>   {\bf rod\_replace} target\_asy target\_rod source\_asy source\_rod
+#>   \VERAInputTable{
+#>     name={rod\_replace},
+#>     type={Array of Strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={This input is used to replace a fuel rod with another fuel rod from a restart file.
+#>        The input values must come in sets of 4:
+#>        \begin{itemize}
+#>          \item \texttt{target\_asy}: assembly label where a rod will be replaced; uses the format
+#>                defined in \texttt{label\_format}
+#>          \item \texttt{target\_rod}: rod label to be replaced; uses the \texttt{<column>-<row>} format
+#>          \item \texttt{source\_asy}: assembly label where the replacement rod is located; uses the format
+#>                defined in \texttt{label\_format}
+#>          \item \texttt{source\_rod}: rod label to be used as the replacement; uses the
+#>                \texttt{<column>-<row>} format
+#>        \end{itemize}
+#>     },
+#>     notes={The source rod fuel boundary elevations must match those of the target rod.}
+#>   }
+  rod_replace:
+    <<: *dtlist
+    _style: multi-line
+    _content:
+    _check:
+      - fall(sub{is_word(shift)},())
+      - arraysize()%4==0
+#>
 #>   {\bf crud\_cleaning} crud\_cleaning\_map
 #>   \VERAInputTable{
 #>     name={crud\_cleaning\_map},
@@ -11912,6 +11944,91 @@ MPACT:
       - is_word()
       - in_dictionary() none core fsr fsrvtu
 #>
+#>   {\bf edit\_ray\_trace} edit\_ray\_trace
+#>   \VERAInputTable{
+#>     name={edit\_ray\_trace},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={\texttt{false}},
+#>     valuesapplicable={\texttt{true}},
+#>     limitations={},
+#>     description={This input is used to specify whether ray tracing edits
+#>        should be generated. If enabled, the ray tracing edits will be written
+#>        to the HDF5 file.},
+#>     notes={}
+#>   }
+  edit_ray_trace:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf edit\_cmfd\_matrix} edit\_cmfd\_matrix
+#>   \VERAInputTable{
+#>     name={edit\_cmfd\_matrix},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={\texttt{false}},
+#>     valuesapplicable={\texttt{true}},
+#>     limitations={},
+#>     description={This input is used to specify whether the CMFd matrix should
+#>       be written to the HDF5 file.},
+#>     notes={Does nothing if CMFd is not enabled}
+#>   }
+  edit_cmfd_matrix:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf edit\_cmfd\_coarse\_mesh} edit\_cmfd\_coarse\_mesh
+#>   \VERAInputTable{
+#>     name={edit\_cmfd\_coarse\_mesh},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={\texttt{false}},
+#>     valuesapplicable={\texttt{true}},
+#>     limitations={},
+#>     description={This input is used to specify whether the CMFD coarse mesh
+#>       data should be written to the HDF5 file.},
+#>     notes={Does nothing if CMFD is not enabled}
+#>   }
+  edit_cmfd_coarse_mesh:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
+#>   {\bf edit\_cmfd\_fine\_mesh} edit\_cmfd\_fine\_mesh
+#>   \VERAInputTable{
+#>     name={edit\_cmfd\_fine\_mesh},
+#>     type={Boolean},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={\texttt{false}},
+#>     valuesapplicable={\texttt{true}},
+#>     limitations={},
+#>     description={This input is used to specify whether the CMFD fine mesh
+#>       data should be written to the HDF5 file.},
+#>     notes={Does nothing if CMFD is not enabled}
+#>   }
+  edit_cmfd_fine_mesh:
+    <<: *dtbool
+    _content:
+    _check:
+      - is_word()
+      - in_dictionary() true false
+#>
 #>   {\bf rr\_edits} rr\_edits
 #>   \VERAInputTable{
 #>     name={rr\_edits},
@@ -13874,7 +13991,7 @@ MPACT:
 #>        D. Lee, J. Rhodes, and K. Smith. ``Quadratic Depletion Method for Gadolinium
 #>        Isotopes in CASMO-5,'' \textit{Nuclear Science and Engineering} 174 (2013), pp. 79--86. When called with
 #>        the \texttt{m5} method, the high order method from C. Lawing and S. Palmtag. ``Improved Methodology
-#>        for Depletion of Gadolinia Bearing Nuclear Fuel,'' M&C 2023. If
+#>        for Depletion of Gadolinia Bearing Nuclear Fuel,'' M\&C 2023. If
 #>        the \texttt{none} option is used, then no special treatment of gadolinium isotopes
 #>        will be considered},
 #>     notes={}
@@ -17082,6 +17199,67 @@ MPACT:
       - is_float()
       - is_gt() 0.0
       - is_lt() 2.0
+#>
+#>   {\bf 2d1d\_relax} 2d1d\_relax
+#>   \VERAInputTable{
+#>     name={2d1d\_relax},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={flat},
+#>     valuesapplicable={smooth, glbmin, smoothglbmin},
+#>     limitations={},
+#>     description={The underrelaxation method to use when doing 2D/1D},
+#>     notes={}
+#>   }
+  2d1d_relax:
+    <<: *dtstring
+    _content:
+    _check:
+      - in_dictionary() flat smooth glbmin smoothglbmin
+#>
+#>   {\bf 2d1d\_smooth} 2d1d\_smooth
+#>   \VERAInputTable{
+#>     name={2d1d\_smooth},
+#>     type={Character String},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={theta},
+#>     valuesapplicable={weight},
+#>     limitations={Only applies if \texttt{2d1d\_relax} is not set to \texttt{flat}},
+#>     description={The smoothing method to use when doing space-dependent 2D/1D relaxation},
+#>     notes={}
+#>   }
+  2d1d_smooth:
+    <<: *dtstring
+    _content:
+    _check:
+      - in_dictionary() theta weight
+#>
+#>   {\bf 2d1d\_smooth\_factor} 2d1d\_smooth\_factor
+#>   \VERAInputTable{
+#>     name={2d1d\_smooth\_factor},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={$>0$, $\le 1$},
+#>     limitations={},
+#>     description={The underrelaxation factor to use when doing 2D/1D.  The default
+#>       value is 0.5 when \texttt{2d1d\_smooth} is set to \texttt{theta}, and 0.9
+#>       when \texttt{2d1d\_smooth} is set to \texttt{weight}},
+#>     notes={}
+#>   }
+  2d1d_smooth_factor:
+    <<: *dtdouble
+    _content:
+    _check:
+      - is_float()
+      - is_gt() 0.0
+      - is_leq() 1.0
 #>
 #>   {\bf mesh} mesh
 #>   \VERAInputTable{

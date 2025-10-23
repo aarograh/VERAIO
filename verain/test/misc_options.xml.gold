@@ -22,6 +22,10 @@
       <Parameter name="ppitch_tec" type="double" value="1.5"/>
       <Parameter name="pressure" type="double" value="15.5132039025"/>
       <Parameter name="restart_write_isotope_set" type="string" value="depletion"/>
+      <Parameter name="rod_replace_source_asy" type="Array(string)" value="{B-1,B-1}"/>
+      <Parameter name="rod_replace_source_rod" type="Array(string)" value="{3-1,4-1}"/>
+      <Parameter name="rod_replace_target_asy" type="Array(string)" value="{A-1,A-2}"/>
+      <Parameter name="rod_replace_target_rod" type="Array(string)" value="{2-1,1-2}"/>
       <Parameter name="search" type="string" value="boron"/>
       <Parameter name="sym" type="string" value="full"/>
       <Parameter name="tfuel" type="double" value="900"/>
@@ -438,6 +442,9 @@
   </ParameterList>
   <ParameterList name="MPACT">
     <ParameterList name="2d1d">
+      <Parameter name="2d1d_relax" type="string" value="smooth"/>
+      <Parameter name="2d1d_smooth" type="string" value="weight"/>
+      <Parameter name="2d1d_smooth_factor" type="double" value="0.2"/>
       <Parameter name="gamma_nodal_group_loop" type="int" value="10"/>
       <Parameter name="gamma_nodal_inners" type="int" value="40"/>
       <Parameter name="gamma_nodal_leakage_order" type="int" value="0"/>
@@ -467,6 +474,10 @@
       <Parameter name="gad_dep_method" type="string" value="qgd2"/>
       <Parameter name="include_depl_mats" type="Array(string)" value="{U32,U33,aic,he}"/>
     </ParameterList>
+    <Parameter name="edit_cmfd_coarse_mesh" type="bool" value="true"/>
+    <Parameter name="edit_cmfd_fine_mesh" type="bool" value="true"/>
+    <Parameter name="edit_cmfd_matrix" type="bool" value="true"/>
+    <Parameter name="edit_ray_trace" type="bool" value="true"/>
     <Parameter name="gamma_moc_kernel" type="string" value="1g"/>
     <Parameter name="gamma_ray_spacing" type="double" value="0.08"/>
     <Parameter name="group_structure" type="Array(double)" value="{10,8,6,2,1e-1}"/>
