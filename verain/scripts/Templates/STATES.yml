@@ -488,6 +488,34 @@ STATES:
             - copy %STATE/$(_loop)/$shuffle_homog
           _content:
 
+        rod_replace_target_asy:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray %STATE/$(_loop)/@rod_replace,start=>0,stride=>4
+          _content:
+
+        rod_replace_target_rod:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray %STATE/$(_loop)/@rod_replace,start=>1,stride=>4
+          _content:
+
+        rod_replace_source_asy:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray %STATE/$(_loop)/@rod_replace,start=>2,stride=>4
+          _content:
+
+        rod_replace_source_rod:
+          _pltype: array
+          _type: string
+          _do:
+            - copyarray %STATE/$(_loop)/@rod_replace,start=>3,stride=>4
+          _content:
+
         crud_cleaning:
           _pltype: array
           _type: string

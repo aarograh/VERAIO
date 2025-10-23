@@ -179,6 +179,34 @@ MPACT:
         - copy MPACT/$vis_edits
       _content:
 
+    edit_ray_trace:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy MPACT/$edit_ray_trace
+      _content:
+
+    edit_cmfd_matrix:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy MPACT/$edit_cmfd_matrix
+      _content:
+
+    edit_cmfd_coarse_mesh:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy MPACT/$edit_cmfd_coarse_mesh
+      _content:
+
+    edit_cmfd_fine_mesh:
+      _pltype: parameter
+      _type: bool
+      _do:
+        - copy MPACT/$edit_cmfd_fine_mesh
+      _content:
+
     rr_edits:
       _pltype: parameter
       _type: string
@@ -1586,6 +1614,27 @@ MPACT:
           _type: double
           _do:
             - copy MPACT/$under_relax
+          _content:
+
+        2d1d_relax:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$2d1d_relax
+          _content:
+
+        2d1d_smooth:
+          _pltype: parameter
+          _type: string
+          _do:
+            - copy MPACT/$2d1d_smooth
+          _content:
+
+        2d1d_smooth_factor:
+          _pltype: parameter
+          _type: double
+          _do:
+            - copy MPACT/$2d1d_smooth_factor
           _content:
 
     xs_library:
