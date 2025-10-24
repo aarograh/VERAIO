@@ -4431,6 +4431,18 @@ ASSEMBLY:
 #>        the bundle should be provided},
 #>     notes={}
 #>   }
+#>   \VERAInputTable{
+#>     name={thickness},
+#>     type={Float},
+#>     need={Optional},
+#>     unitsdefault={cm},
+#>     unitsother={},
+#>     valuedefault={0.02},
+#>     valuesapplicable={},
+#>     limitations={},
+#>     description={Provides the thickness of the spacer grid strap},
+#>     notes={}
+#>   }
 
   grid:
     <<: *dtlistnamed
@@ -4467,6 +4479,11 @@ ASSEMBLY:
         _check:
           - is_float()
       area:
+        <<: *dtdouble
+        _check:
+          - is_float()
+          - is_gt() 0
+      thickness:
         <<: *dtdouble
         _check:
           - is_float()
@@ -8344,6 +8361,69 @@ COBRATF:
     _check:
       - is_int()
       - in_dictionary() 0 1 2 3
+#>
+#>   {\bf grid\_droplet\_breakup} grid\_droplet\_breakup
+#>   \VERAInputTable{
+#>     name={grid\_droplet\_breakup},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={1},
+#>     limitations={},
+#>     description={Enables the spacer grid droplet breakup model if set to 1.  Note that this
+#>        model is meant to be used in dryout or LOCA conditions},
+#>     notes={}
+#>   }
+  grid_droplet_breakup:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+#>
+#>   {\bf grid\_quench} grid\_quench
+#>   \VERAInputTable{
+#>     name={grid\_quench},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={1},
+#>     limitations={},
+#>     description={Enables the spacer grid quenching model, which models the heat capacitance
+#>        of the spacer grid and tracks quenching time of the grid during LOCA conditions},
+#>     notes={}
+#>   }
+  grid_quench:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
+#>
+#>   {\bf drop\_heat\_transfer\_enhancement} drop\_heat\_transfer\_enhancement
+#>   \VERAInputTable{
+#>     name={drop\_heat\_transfer\_enhancement},
+#>     type={Integer},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={0},
+#>     valuesapplicable={1},
+#>     limitations={},
+#>     description={Enables the heat transfer enchancement due to droplet-induced turbulence
+#>        enhancement.  This is only applicable for post-dryout conditions},
+#>     notes={}
+#>   }
+  drop_heat_transfer_enhancement:
+    <<: *dtint
+    _content:
+    _check:
+      - is_int()
+      - in_dictionary() 0 1
 #>
 #>   {\bf solve\_heat\_end} solve\_heat\_end
 #>   \VERAInputTable{

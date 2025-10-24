@@ -31,6 +31,27 @@ COBRATF:
         - copy COBRATF/$nc
       _content:
 
+    grid_droplet_breakup:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$grid_droplet_breakup
+      _content:
+
+    grid_quench:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$grid_quench
+      _content:
+
+    drop_heat_transfer_enhancement:
+      _pltype: parameter
+      _type: int
+      _do:
+        - copy COBRATF/$drop_heat_transfer_enhancement
+      _content:
+
     solve_heat_end:
       _pltype: parameter
       _type: int
