@@ -2,105 +2,152 @@ stages:
    - test
    - deploy
 
-.testing_base:
+#.testing_base:
+#  tags:
+#    - linux
+#  artifacts:
+#    paths:
+#      - build/Testing/Temporary/LastTestsFailed.log
+#      - build/Testing/Temporary/LastTest.log
+#      - build/Testing/Temporary/CTestCostData.txt
+#      - build/make.out
+#    expire_in: 1 week
+#    when: always
+#
+#before_script:
+#  - source /data/test_gcc/gcc-8.3.0/load_dev_env.sh
+#  - export MPACT_DATA_DIR=/data/gitlab-runner/ref_repos/VERAData/MPACT
+#  - export SCALE_DATA_DIR=/data/gitlab-runner/ref_repos/VERAData/SCALE
+#  - VERA_DIR="/data/gitlab-runner/ref_repos/VERA"
+#
+#vmcontinuous:
+#  extends: .testing_base
+#  variables:
+#    CTEST_BUILD_FLAGS: -j32
+#    CTEST_PARALLEL_LEVEL: "32"
+#    DART_TESTING_TIMEOUT: "3600"
+#    BLD_NAME: "gnu_release_debug"
+#  script:
+#    - cmake
+#      -D VERA_CONFIGURE_OPTIONS_FILE:FILEPATH="/data/gitlab-runner/ref_repos/VERA/cmake/std/gcc-8.3.0/mpi-release-debug-shared-options.cmake"
+#      -D VERA_ENABLE_TESTS:BOOL=ON
+#      -D DART_TESTING_TIMEOUT:STRING=600.00
+#      -D VERA_ENABLE_VERAIn:BOOL=ON
+#      -D VERAData_DIR=/data/gitlab-runner/ref_repos/VERAData
+#      -D VERA_ENABLE_VERAout:BOOL=ON
+#      -D VERA_IGNORE_MISSING_EXTRA_REPOSITORIES:BOOL=ON 
+#      -D VERA_ENABLE_KNOWN_EXTERNAL_REPOS_TYPE:STRING=Continuous
+#      -D VERA_ENABLE_TESTS:BOOL=ON
+#      -D VERA_TEST_CATEGORIES:STRING=CONTINUOUS
+#      -D VERA_TRIBITS_DIR=/data/gitlab-runner/ref_repos/TriBITS/tribits
+#      -D Trilinos_SOURCE_DIR="/data/gitlab-runner/ref_repos/Trilinos"
+#      -S /data/gitlab-runner/ref_repos/VERA -B ${CI_PROJECT_DIR}/build
+#    - cmake --build ${CI_PROJECT_DIR}/build -j16
+#    - ctest --test-dir ${CI_PROJECT_DIR}/build -j16
+#    
+#gnu-debug:
+#    extends: .testing_base
+#    variables:
+#        CTEST_BUILD_FLAGS: -j32
+#        CTEST_PARALLEL_LEVEL: "32"
+#        DART_TESTING_TIMEOUT: "3600"
+#        BLD_NAME: "gnu_release_debug"
+#    stage: test
+#    script:
+#    - cmake
+#      -D VERA_CONFIGURE_OPTIONS_FILE:FILEPATH="/data/gitlab-runner/ref_repos/VERA/cmake/std/gcc-8.3.0/mpi-release-debug-shared-options.cmake"
+#      -D VERA_ENABLE_TESTS:BOOL=ON
+#      -D DART_TESTING_TIMEOUT:STRING=600.00
+#      -D VERA_ENABLE_VERAIn:BOOL=ON
+#      -D VERAData_DIR=/data/gitlab-runner/ref_repos/VERAData
+#      -D VERA_ENABLE_VERAout:BOOL=ON
+#      -D VERA_IGNORE_MISSING_EXTRA_REPOSITORIES:BOOL=ON 
+#      -D VERA_ENABLE_KNOWN_EXTERNAL_REPOS_TYPE:STRING=Continuous
+#      -D VERA_ENABLE_TESTS:BOOL=ON
+#      -D VERA_TEST_CATEGORIES:STRING=CONTINUOUS
+#      -D VERA_TRIBITS_DIR=/data/gitlab-runner/ref_repos/TriBITS/tribits
+#      -D Trilinos_SOURCE_DIR="/data/gitlab-runner/ref_repos/Trilinos"
+#      -S /data/gitlab-runner/ref_repos/VERA -B ${CI_PROJECT_DIR}/build
+#    - cmake --build ${CI_PROJECT_DIR}/build -j16
+#    - ctest --test-dir ${CI_PROJECT_DIR}/build -j16
+#    rules:
+#        - if: $CI_MERGE_REQUEST_ID  
+#
+#trigger_build:
+#    stage: deploy
+#    variables:
+#        CI_RUN_ONLY: "CONTINUOUS"
+#        CI_VERAIO_REF: $CI_COMMIT_REF_NAME
+#        PACKAGE_TEST: VERAIO
+#        VERA_ENABLES: "-DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON"
+#        VERA_BRANCH:  $BRANCH
+#    trigger: 
+#        project: VERA/VERA
+#        branch: master
+#        strategy: depend
+#    rules:
+#        - if: $CI_MERGE_REQUEST_ID
+#
+#    
+#trigger_build_HEAVY:
+#    stage: deploy
+#    variables:
+#        CI_RUN_ONLY: "HEAVY"
+#        CI_VERAIO_REF: $CI_COMMIT_REF_NAME
+#        PACKAGE_TEST: VERAIO
+#        VERA_ENABLES: "-DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON"
+#        VERA_BRANCH:  $BRANCH
+#    trigger: 
+#        project: VERA/VERA
+#        branch: master
+#        strategy: depend
+#    rules:
+#        - if: $CI_MERGE_REQUEST_ID
+#          when: manual
+
+verain_standalone:
   tags:
-    - linux
-  artifacts:
-    paths:
-      - build/Testing/Temporary/LastTestsFailed.log
-      - build/Testing/Temporary/LastTest.log
-      - build/Testing/Temporary/CTestCostData.txt
-      - build/make.out
-    expire_in: 1 week
-    when: always
+    - heavy
+    - vm
+  before_script:
+    - REPO_DIR=$CI_BUILDS_DIR/../repos
+    - git clone --depth 1 --reference $REPO_DIR/TriBITS --dissociate file://$REPO_DIR/TriBITS
+    - TPL_DIR="/data/test_gcc/vera_tpls/TPL_build/install"
+    - HDF5_DIR="${TPL_DIR}/hdf5-1.10.11"
+    - HDF5_LIBRARY_NAMES="hdf5;hdf5_cpp;hdf5_fortran;hdf5_hl;hdf5_hl_cpp;hdf5_hl_fortran;z"
+    - HDF5_INCLUDE_DIRS=${HDF5_DIR}/include
+    - HDF5_LIBRARY_DIRS=${HDF5_DIR}/lib
+    - export PATH="/opt/gcc/bin:/opt/mpi/openmpi/gcc-8.3.0/bin:${HDF5_DIR}/bin:$PATH"
+    - export LD_LIBRARY_PATH="/opt/gcc/lib64:/opt/mpi/openmpi/gcc-8.3.0/lib:$BLAS_LIBRARY_DIRS:$LAPACK_LIBRARY_DIRS:$PETSC_LIBRARY_DIRS:$HDF_LIBRARY_DIRS:$LD_LIBRARY_PATH"
 
-before_script:
-  - source /data/test_gcc/gcc-8.3.0/load_dev_env.sh
-  - export MPACT_DATA_DIR=/data/gitlab-runner/ref_repos/VERAData/MPACT
-  - export SCALE_DATA_DIR=/data/gitlab-runner/ref_repos/VERAData/SCALE
-  - VERA_DIR="/data/gitlab-runner/ref_repos/VERA"
-
-vmcontinuous:
-  extends: .testing_base
-  variables:
-    CTEST_BUILD_FLAGS: -j32
-    CTEST_PARALLEL_LEVEL: "32"
-    DART_TESTING_TIMEOUT: "3600"
-    BLD_NAME: "gnu_release_debug"
   script:
-    - cmake
-      -D VERA_CONFIGURE_OPTIONS_FILE:FILEPATH="/data/gitlab-runner/ref_repos/VERA/cmake/std/gcc-8.3.0/mpi-release-debug-shared-options.cmake"
-      -D VERA_ENABLE_TESTS:BOOL=ON
-      -D DART_TESTING_TIMEOUT:STRING=600.00
-      -D VERA_ENABLE_VERAIn:BOOL=ON
-      -D VERAData_DIR=/data/gitlab-runner/ref_repos/VERAData
-      -D VERA_ENABLE_VERAout:BOOL=ON
-      -D VERA_IGNORE_MISSING_EXTRA_REPOSITORIES:BOOL=ON 
-      -D VERA_ENABLE_KNOWN_EXTERNAL_REPOS_TYPE:STRING=Continuous
-      -D VERA_ENABLE_TESTS:BOOL=ON
-      -D VERA_TEST_CATEGORIES:STRING=CONTINUOUS
-      -D VERA_TRIBITS_DIR=/data/gitlab-runner/ref_repos/TriBITS/tribits
-      -D Trilinos_SOURCE_DIR="/data/gitlab-runner/ref_repos/Trilinos"
-      -S /data/gitlab-runner/ref_repos/VERA -B ${CI_PROJECT_DIR}/build
-    - cmake --build ${CI_PROJECT_DIR}/build -j16
-    - ctest --test-dir ${CI_PROJECT_DIR}/build -j16
-    
-gnu-debug:
-    extends: .testing_base
-    variables:
-        CTEST_BUILD_FLAGS: -j32
-        CTEST_PARALLEL_LEVEL: "32"
-        DART_TESTING_TIMEOUT: "3600"
-        BLD_NAME: "gnu_release_debug"
-    stage: test
-    script:
-    - cmake
-      -D VERA_CONFIGURE_OPTIONS_FILE:FILEPATH="/data/gitlab-runner/ref_repos/VERA/cmake/std/gcc-8.3.0/mpi-release-debug-shared-options.cmake"
-      -D VERA_ENABLE_TESTS:BOOL=ON
-      -D DART_TESTING_TIMEOUT:STRING=600.00
-      -D VERA_ENABLE_VERAIn:BOOL=ON
-      -D VERAData_DIR=/data/gitlab-runner/ref_repos/VERAData
-      -D VERA_ENABLE_VERAout:BOOL=ON
-      -D VERA_IGNORE_MISSING_EXTRA_REPOSITORIES:BOOL=ON 
-      -D VERA_ENABLE_KNOWN_EXTERNAL_REPOS_TYPE:STRING=Continuous
-      -D VERA_ENABLE_TESTS:BOOL=ON
-      -D VERA_TEST_CATEGORIES:STRING=CONTINUOUS
-      -D VERA_TRIBITS_DIR=/data/gitlab-runner/ref_repos/TriBITS/tribits
-      -D Trilinos_SOURCE_DIR="/data/gitlab-runner/ref_repos/Trilinos"
-      -S /data/gitlab-runner/ref_repos/VERA -B ${CI_PROJECT_DIR}/build
-    - cmake --build ${CI_PROJECT_DIR}/build -j16
-    - ctest --test-dir ${CI_PROJECT_DIR}/build -j16
-    rules:
-        - if: $CI_MERGE_REQUEST_ID  
+    - cmake -S . -B build
+      -D VERAIO_TRIBITS_DIR="${CI_PROJECT_DIR}/TriBITS/tribits"
+      -D VERAIO_ENABLE_VERAIn:BOOL=ON
+      -D PYTHON_EXECUTABLE=/usr/bin/python2
+      -D TPL_ENABLE_HDF5=ON
+        -DHDF5_LIBRARY_DIRS:FILEPATH=${HDF5_LIBRARY_DIRS}
+        -DHDF5_INCLUDE_DIRS:FILEPATH="${HDF5_INCLUDE_DIRS};${HDF5_INCLUDE_DIRS}/shared;${HDF5_INCLUDE_DIRS}/static"
+        -DTPL_HDF5_INCLUDE_DIRS:FILEPATH="${HDF5_INCLUDE_DIRS};${HDF5_INCLUDE_DIRS}/shared;${HDF5_INCLUDE_DIRS}/static"
+        -DHDF5_LIBRARY_NAMES:STRING=${HDF5_LIBRARY_NAMES}
+      -D VERAIO_ENABLE_TESTS=ON
+    - cmake --build build
+    - ctest --test-dir build --output-on-failure
 
-trigger_build:
-    stage: deploy
-    variables:
-        CI_RUN_ONLY: "CONTINUOUS"
-        CI_VERAIO_REF: $CI_COMMIT_REF_NAME
-        PACKAGE_TEST: VERAIO
-        VERA_ENABLES: "-DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON"
-        VERA_BRANCH:  $BRANCH
-    trigger: 
-        project: VERA/VERA
-        branch: master
-        strategy: depend
-    rules:
-        - if: $CI_MERGE_REQUEST_ID
-
-    
-trigger_build_HEAVY:
-    stage: deploy
-    variables:
-        CI_RUN_ONLY: "HEAVY"
-        CI_VERAIO_REF: $CI_COMMIT_REF_NAME
-        PACKAGE_TEST: VERAIO
-        VERA_ENABLES: "-DVERA_ENABLE_VERAIn:BOOL=ON -DVERA_ENABLE_VERAout:BOOL=ON"
-        VERA_BRANCH:  $BRANCH
-    trigger: 
-        project: VERA/VERA
-        branch: master
-        strategy: depend
-    rules:
-        - if: $CI_MERGE_REQUEST_ID
-          when: manual
+build_doc:
+  image: savannah.ornl.gov/vera/veraio-docs:latest
+  tags:
+     - podman
+  before_script:
+    - REPO_DIR=$CI_BUILDS_DIR/../repos
+    - git clone --depth 1 --reference $REPO_DIR/verain_usersmanual --dissociate file://$REPO_DIR/verain_usersmanual
+  script:
+    - podman pull savannah.ornl.gov/vera/veraio-docs
+    - podman run --rm -v "$PWD":/workspace veraio-docs generate
+    - podman run --rm -v "$PWD":/workspace veraio-docs build
+    - cp verain_usersmanual/main.pdf verain_usersmanual.pdf
+  artifacts:
+    name: doc
+    expire_in: 1 week
+    paths:
+      - verain_usersmanual.pdf
