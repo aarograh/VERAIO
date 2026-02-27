@@ -502,6 +502,7 @@
     <Parameter name="nodal_edits_collapse_axial_reflectors" type="bool" value="true"/>
     <Parameter name="nodal_edits_energy_cutoff" type="double" value="0.625"/>
     <Parameter name="nodal_edits_transient_data" type="string" value="true"/>
+    <Parameter name="nodal_edits_iso_abs_xs" type="Array(string)" value="{U-235}"/>
     <ParameterList name="quad_set">
       <Parameter name="gamma_azimuthals_octant" type="int" value="4"/>
       <Parameter name="gamma_polars_octant" type="int" value="1"/>

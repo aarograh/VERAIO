@@ -305,6 +305,13 @@ MPACT:
         - copy MPACT/$nodal_edits_collapse_axial_reflectors
       _content:
 
+    nodal_edits_iso_abs_xs:
+      _pltype: array
+      _type: string
+      _do:
+        - copy MPACT/$nodal_edits_iso_abs_xs
+      _content:
+
     crit_buckling:
       _pltype: parameter
       _type: string
