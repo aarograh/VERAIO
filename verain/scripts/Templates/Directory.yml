@@ -12151,7 +12151,7 @@ MPACT:
 #>     valuesapplicable={\texttt{isotope\_reaction} (absorption, fission, nu*fission, inscatter, outscatter, selfscatter)},
 #>     limitations={This input can be used only if \texttt{rr\_edits} is turned on},
 #>     description={This input is used to specify the reaction rate edits for user-specified
-#>        isotopes and reactions. The \texttt{isotope} is in a format of xx-AAA,
+#>        isotopes and reactions. The \texttt{isotope} is in a format of ZZ-AAA,
 #>        (e.g., U-235 and Pu-239). The available reaction types are \texttt{absorption},
 #>        \texttt{fission}, \texttt{nu*fission}, \texttt{inscatter}, \texttt{outscatter},
 #>        and \texttt{selfscatter}},
@@ -12477,6 +12477,30 @@ MPACT:
     _check:
       - is_word()
       - in_dictionary() true false
+#>
+#>   {\bf nodal\_edits\_iso\_abs\_xs} nodal\_edits\_iso\_abs\_xs
+#>   \VERAInputTable{
+#>     name={nodal\_edits\_iso\_abs\_xs},
+#>     type={Array of Strings},
+#>     need={Optional},
+#>     unitsdefault={},
+#>     unitsother={},
+#>     valuedefault={},
+#>     valuesapplicable={Isotope names in the format of ZZ-AAA[m] (e.g., U-235, Pu-239, Am-242m)},
+#>     limitations={},
+#>     description={This input is used to add additional isotopes to the nodal edits
+#>        data.  The number density and microscopioc absorption XS for each node will
+#>        be calculated for each isotope in the list.  By default, number densities and
+#>        microscopic absorption XS are calculated for B-10, Xe-135, Pm-148, Pm-148m,
+#>        and Sm-149.  Additionally, number densities are calculated by default for
+#>        I-135 and Pm-149.},
+#>     notes={Has no effect if \texttt{nodal\_edits} is set to \texttt{false}}
+#>   }
+  nodal_edits_iso_abs_xs:
+    <<: *dtlist
+    _content:
+    _check:
+      - is_word()
 #>
 #>   {\bf crit\_buckling} crit\_buckling
 #>   \VERAInputTable{
