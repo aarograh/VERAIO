@@ -12500,7 +12500,7 @@ MPACT:
     <<: *dtlist
     _content:
     _check:
-      - is_word()
+      - fall(sub{is_word(shift)},())
 #>
 #>   {\bf crit\_buckling} crit\_buckling
 #>   \VERAInputTable{

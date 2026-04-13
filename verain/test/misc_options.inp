@@ -360,7 +360,7 @@
   nodal_edits_adapt_adf true
   nodal_edits_transient_data true
   nodal_edits_collapse_axial_reflectors true
-  nodal_edits_iso_abs_xs U-235
+  nodal_edits_iso_abs_xs U-235 Pu-239
   dep_shielder_dt  0.01
   cmfd_linear_solver native
   cmfd_linear_solver trilinos
