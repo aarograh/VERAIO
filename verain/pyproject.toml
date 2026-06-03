@@ -1,0 +1,160 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "verain"
+version = "1.0.0"
+description = "VERA Input Parser - Reactor-aware ASCII input parser for VERA"
+readme = "README.md"
+license = {text = "BSD-3-Clause"}
+authors = [
+    {name = "VERA Development Team", email = "vera-dev@ornl.gov"},
+    {name = "Veracity Nuclear LLC", email = "support@veracitynuclear.com"}
+]
+maintainers = [
+    {name = "VERA Development Team", email = "vera-dev@ornl.gov"}
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Text Processing :: Markup :: XML",
+]
+keywords = ["nuclear", "reactor", "physics", "vera", "input-parser", "xml"]
+requires-python = ">=3.7"
+dependencies = [
+    "numpy>=1.19",
+    "PyYAML>=5.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.10",
+    "black==26.3.1",
+    "pylint==3.3.1",
+    "mypy>=0.812",
+    "pre-commit>=2.0",
+]
+docs = [
+    "sphinx>=4.0",
+    "sphinx-rtd-theme>=1.0",
+]
+examples = [
+    "matplotlib>=3.0",
+]
+
+[project.urls]
+"Homepage" = "https://code.ornl.gov/vera/verain"
+"Documentation" = "https://code.ornl.gov/vera/verain_usersmanual"
+"Bug Tracker" = "https://code.ornl.gov/vera/verain/issues"
+"Source Code" = "https://code.ornl.gov/vera/verain"
+
+[project.scripts]
+react2xml = "verain.scripts.react2xml:main"
+vera2omn = "verain.init.vera2omn:main"
+
+[project.entry-points."verain.parsers"]
+yaml_parser = "verain.core.parser:YamlParser"
+xml_generator = "verain.core.generator:XmlGenerator"
+
+[tool.setuptools]
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["verain*"]
+exclude = ["regresion_tests*", "unit_tests*", "*test*"]
+
+[tool.setuptools.package-data]
+"verain" = ["py.typed"]
+"verain.templates" = ["*.yml", "*.yaml"]
+"verain.init" = ["*.ini", "*.tab", "*.txt", "*.py"]
+
+[tool.black]
+line-length = 127
+target-version = ['py37']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+| vera2omn\.py$
+'''
+
+[tool.mypy]
+python_version = "3.7"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pylint.'messages control']
+disable = [
+    "duplicate-code",
+    "fixme",
+    "invalid-name",
+    "missing-module-docstring",
+    "too-few-public-methods",
+    "too-many-ancestors",
+    "too-many-arguments",
+    "too-many-branches",
+    "too-many-instance-attributes",
+    "too-many-lines",
+    "too-many-locals",
+    "too-many-nested-blocks",
+    "too-many-positional-arguments",
+    "too-many-public-methods",
+    "too-many-return-statements",
+    "too-many-statements"
+]
+
+[tool.pylint.'format']
+max-line-length = 127
+
+[tool.pylint]
+extension-pkg-allow-list = ["mpi4py"]
+ignore-patterns = ["vera2omn\\.py"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "unit_tests",
+    "verain/tests",
+]
+
+[tool.coverage.run]
+source = ["verain"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
