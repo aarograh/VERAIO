@@ -34,3 +34,9 @@ verain/docs/Users_Manual/*.pdf
 
 #VS Code
 *.code-workspace
+
+# Python installation stuff
+*.egg-info
+__pycache__/
+*.py[cod]
+verain/build/

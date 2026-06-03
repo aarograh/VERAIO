@@ -801,7 +801,7 @@ STATE:
     _content:
     _check:
       - fall(sub{is_float(shift)},stride(1,1,()))
-      - nth(0,())eq"GWDMT"||nth(0,())eq"MWDMT"||nth(0,())eq"EFPD"||nth(0,())eq"hours"
+      - in_dictionary(nth(0,()),"GWDMT","MWDMT","EFPD","hours")
       - is_strictlyincreasing(stride(1,1,()))
 #>
 #>   {\bf jump\_in\_file} file\_name
@@ -3089,7 +3089,7 @@ CORE:
       - is_float(nth(1,()))
       - nth(0,())>=0
       - nth(1,())>=0
-      - nth(0,())<=nth(1,())
+      - is_increasing()
 #>
 #>   {\bf power\_search\_range} min\_power max\_power
 #>   \VERAInputTable{
@@ -3125,7 +3125,7 @@ CORE:
       - is_float(nth(1,()))
       - nth(0,())>=0
       - nth(1,())>=0
-      - nth(0,())<=nth(1,())
+      - is_increasing()
 #>
 #>   {\bf flow\_search\_range} min\_flow max\_flow
 #>   \VERAInputTable{
@@ -3161,7 +3161,7 @@ CORE:
       - is_float(nth(1,()))
       - nth(0,())>=0
       - nth(1,())>=0
-      - nth(0,())<=nth(1,())
+      - is_increasing()
 #>
 #>   {\bf tinlet\_search\_range} min\_tinlet max\_tinlet temperature\_units
 #>   \VERAInputTable{
@@ -11099,7 +11099,7 @@ COUPLING:
       - fall(sub{0.0<(shift)},stride(2,4,()))
       - fall(sub{0<(shift)},stride(3,4,()))
       - fall(sub{1000>(shift)},stride(1,4,()))
-      - fall(sub{1.0=>(shift)},stride(2,4,()))
+      - fall(sub{1.0>=(shift)},stride(2,4,()))
       - fall(sub{1000>(shift)},stride(3,4,()))
 #>
 #>   {\bf partconv\_opt} gammamode est\_fdintense dperturb fdmul par\_nchk par\_multchk

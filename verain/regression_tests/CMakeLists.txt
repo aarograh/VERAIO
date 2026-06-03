@@ -199,7 +199,7 @@ TRIBITS_COPY_FILES_TO_BINARY_DIR(Temp_Table_Files
 #===========================================================
 
 
-SET(VERAIn_TEST_DIR ${${PACKAGE_NAME}_SOURCE_DIR}/test)
+SET(VERAIn_TEST_DIR ${${PACKAGE_NAME}_SOURCE_DIR}/regression_tests)
 
 
 SET(TESTNAME_IN veradiff_match)
@@ -208,7 +208,7 @@ TRIBITS_ADD_ADVANCED_TEST( ${TESTNAME_IN}
   TEST_0 CMND ${VERADIFF_EXE}
     ARGS ${VERAIn_TEST_DIR}/Sample_2a.h5 ${VERAIn_TEST_DIR}/Sample_2a.h5
     PASS_REGULAR_EXPRESSION_ALL
-      "reading h5 file: .+/verain/test/Sample_2a.h5"
+      "reading h5 file: .+/verain/regression_tests/Sample_2a.h5"
       "reading dataset: STATE_0001/keff"
       "keff1"
       "keff2"
@@ -227,8 +227,8 @@ TRIBITS_ADD_ADVANCED_TEST( ${TESTNAME_IN}
   TEST_0 CMND ${VERADIFF_EXE}
     ARGS ${VERAIn_TEST_DIR}/Sample_2a.h5 ${VERAIn_TEST_DIR}/Sample_2b.h5
     PASS_REGULAR_EXPRESSION_ALL
-      "reading h5 file: .+/verain/test/Sample_2a.h5"
-      "reading h5 file: .+/verain/test/Sample_2b.h5"
+      "reading h5 file: .+/verain/regression_tests/Sample_2a.h5"
+      "reading h5 file: .+/verain/regression_tests/Sample_2b.h5"
       "reading dataset: STATE_0001/keff"
       "keff1"
       "keff2"

@@ -10,6 +10,7 @@ from __future__ import (division, absolute_import, print_function, )
 import numpy as np
 import re
 import sys
+import os
 import xml.etree.ElementTree as etree
 ###############################################################################
 
@@ -68,10 +69,14 @@ class VERAOmnibusGenerator(object):
         self.xml_excore_file  = basename + ".excore.xml"
         self.xml_data         = None
         self.xml_shift        = None
-        self.template_file    = script_dir + "Init/omnibus_template.txt"
-        self.cell_file        = script_dir + "Init/cell_template.txt"
-        self.shape_file       = script_dir + "Init/shape_template.txt"
-        self.tally_file       = script_dir + "Init/tally_template.txt"
+        # Locate template files relative to this module's own directory so the
+        # class works correctly whether imported from the source tree or from
+        # an installed package, regardless of the script_dir casing convention.
+        _here = os.path.dirname(os.path.abspath(__file__)) + os.sep
+        self.template_file    = _here + "omnibus_template.txt"
+        self.cell_file        = _here + "cell_template.txt"
+        self.shape_file       = _here + "shape_template.txt"
+        self.tally_file       = _here + "tally_template.txt"
         self.bioshield_mats   = None
         self.bioshield_radii  = None
         self.vessel_rads      = None
