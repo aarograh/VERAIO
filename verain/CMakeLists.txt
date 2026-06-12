@@ -25,7 +25,7 @@ INSTALL(
 
 # Install Python script as alternative entry point
 INSTALL(
-  PROGRAMS scripts/react2xml.py
+  PROGRAMS verain/scripts/react2xml.py
   DESTINATION "${${PROJECT_NAME}_INSTALL_RUNTIME_DIR}"
   COMPONENT ${PACKAGE_NAME}
   )
@@ -91,8 +91,12 @@ INSTALL(
 #   2. Runs pip install --user <src>[dev] to get pytest/black/pylint.
 # Build-time target ensures deps are present before ctest runs (even when
 # cmake --install is never called, as in CI).
+OPTION(VERAIN_ENABLE_PYTHON_INSTALL
+  "Install the verain Python package via pip"
+  ON
+)
 FIND_PACKAGE(Python3 COMPONENTS Interpreter QUIET)
-IF(Python3_EXECUTABLE)
+IF(VERAIN_ENABLE_PYTHON_INSTALL AND Python3_EXECUTABLE)
   SET(_verain_pip_script "${CMAKE_CURRENT_SOURCE_DIR}/cmake/BootstrapPipAndInstall.cmake")
 
   # Build-time: runs on every cmake --build, before ctest
@@ -114,6 +118,8 @@ IF(Python3_EXECUTABLE)
         -P \"${_verain_pip_script}\"
     )
   ")
+ELSEIF(NOT VERAIN_ENABLE_PYTHON_INSTALL)
+  MESSAGE(STATUS "Skipping verain Python pip install because VERAIN_ENABLE_PYTHON_INSTALL=OFF.")
 ELSE()
   MESSAGE(STATUS "Python3 interpreter not found; skipping verain pip install.")
 ENDIF()
