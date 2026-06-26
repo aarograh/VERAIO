@@ -372,10 +372,12 @@ class InputParser:
             inner = token[1:-1]
 
             # Split on 'x' to get range and spacing
-            if "x" not in inner:
+            if "x" not in inner and ".." in inner:
+                range_part, spacing_str = inner, "1"
+            elif "x" not in inner:
                 return [token]  # Return original if invalid format
-
-            range_part, spacing_str = inner.split("x", 1)
+            else:
+                range_part, spacing_str = inner.split("x", 1)
             spacing = float(spacing_str)
 
             # Split range on '..'
@@ -390,7 +392,7 @@ class InputParser:
             values = []
             current = start
             while current <= stop + 1e-10:  # Small epsilon for floating point comparison
-                values.append(str(current))
+                values.append(str(int(current)) if current.is_integer() else str(current))
                 current += spacing
 
             return values

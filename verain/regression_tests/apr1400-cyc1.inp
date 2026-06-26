@@ -29,11 +29,11 @@
   rodbank B5 1 B4 1 B3 1 B2 1
 
 [STATE]
-  deplete GWDMT 0.0 0.1 0.5 1.0 2 3 4 5
+  deplete GWDMT 0.0 0.1 <0.5..1.0x0.5> <2..5>
   restart_write apr1400-cyc1.res EXP05
 
 [STATE]
-  deplete GWDMT 6 7 8 9 10
+  deplete GWDMT <6..8x1> 9 10
   restart_write apr1400-cyc1.res EXP10
 
 [STATE]
