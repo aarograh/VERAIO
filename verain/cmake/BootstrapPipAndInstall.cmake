@@ -40,11 +40,21 @@ EXECUTE_PROCESS(
   OUTPUT_VARIABLE _in_venv
   OUTPUT_STRIP_TRAILING_WHITESPACE
 )
-IF(_in_venv STREQUAL "1")
-  SET(_pip_user_flag "")
-ELSE()
-  SET(_pip_user_flag "--user")
-ENDIF()
+# Check for PYTHONNOUSERSITE (any non-empty value counts as "disabled")
+set(_no_user_site OFF)
+if(_in_venv STREQUAL "1")
+  set(_no_user_site ON)
+elseif(DEFINED ENV{PYTHONNOUSERSITE})
+  if(NOT "$ENV{PYTHONNOUSERSITE}" STREQUAL "")
+    set(_no_user_site ON)
+  endif()
+endif()
+
+if(_no_user_site)
+  set(_pip_user_flag "")
+else()
+  set(_pip_user_flag "--user")
+endif()
 
 EXECUTE_PROCESS(
   COMMAND "${PYTHON_EXE}" -m pip install ${_pip_user_flag} --force-reinstall "${VERAIN_SOURCE_DIR}[dev]"
