@@ -6,17 +6,21 @@
 # Dynamic path setting to accomodate vri repositories
 #
 my ($filename, $directory) = GetPaths();
-eval "use lib qw(${directory}Packages);
-use YAML;
-use YAMLUtil;
-use KeyTree;
-use REACTOR;
-use REACTORBlock;
-use PL;
-use XMLPack;
-use Clone::PP qw(clone);
-use TypeUtils;
-use Cellmaps";
+eval qq{
+    use lib "$directory/Packages";
+    use YAML;
+    use YAMLUtil;
+    use KeyTree;
+    use REACTOR;
+    use REACTORBlock;
+    use PL;
+    use XMLPack;
+    use Clone::PP qw(clone);
+    use TypeUtils;
+    use Cellmaps;
+};
+
+die "Module loading failed: $@" if $@;
 
 sub GetPaths()
 {
