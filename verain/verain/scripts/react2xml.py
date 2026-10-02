@@ -171,6 +171,12 @@ def main(argv=None):
     parsed_data = inp.parse_file(input_file)
     line_lengths = inp.line_lengths
 
+    if not inp.validate_input(parsed_data):
+        for err in inp.get_validation_errors():
+            print(f"Error in {input_file}: {err}", file=sys.stderr)
+        print("react2xml: input validation failed", file=sys.stderr)
+        return 1
+
     if args.verbose:
         print(f"File {input_file} read.\n", file=sys.stderr)
 
