@@ -625,6 +625,7 @@ class InputParser:
                             InputParser._directory_processor.get_block_parameter_checks(
                                 self.base_block_name(block), parameter
                             ),
+                            self.base_block_name(block),
                         )
                     )
                 # pylint: disable=broad-exception-caught

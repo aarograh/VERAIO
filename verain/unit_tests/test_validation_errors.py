@@ -36,11 +36,32 @@ def test_validation_with_errors():
     # Check for validation errors
     errors = parser_with_validation.get_validation_errors()
     assert len(errors) == 2, f"Expected 2 validation errors, got {errors}"
-    assert errors[0] == "Parameter 'height' failed validation: is_float()"
-    assert errors[1] == "Parameter 'power' failed validation: is_geq() 0"
+    assert errors[0] == "Parameter 'height' failed validation: is_float() (in [CORE], value: abc)"
+    assert errors[1] == "Parameter 'power' failed validation: is_geq() 0 (in [STATE], value: -3400.0)"
 
     # Cleanup
     test_input_path.unlink()
+
+def test_unrecognized_keyword_is_echoed_in_the_previous_keywords_error():
+    """
+    A keyword the block does not define is read as more values of the keyword
+    before it, so the error must show the values to be traceable.
+    """
+    test_input_path = Path("test_input_stray_keyword.inp")
+    test_input_path.write_text(
+        "[COBRATF]\n  parallel 0\n  solver 0\n  not_a_cobratf_keyword false\n", encoding="utf-8"
+    )
+    try:
+        parser = InputParser()
+        data = parser.parse_file(test_input_path)
+        assert not parser.validate_input(data)
+        errors = parser.get_validation_errors()
+    finally:
+        test_input_path.unlink()
+    assert errors
+    assert all("'solver'" in e for e in errors)
+    assert all("in [COBRATF], values: 0 not_a_cobratf_keyword false" in e for e in errors), errors
+
 
 if __name__ == "__main__":
     test_validation_with_errors()

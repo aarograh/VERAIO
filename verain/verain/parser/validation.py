@@ -7,7 +7,7 @@ including type checking, range validation, array size validation, and custom che
 
 from operator import __eq__, __ge__, __gt__, __le__, __lt__, __mod__, __ne__
 import re
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 
 
 class ValidationEngine:
@@ -258,7 +258,22 @@ class ValidationEngine:
 
         return filtered
 
-    def validate_parameter(self, param_name: str, values: List[str], checks: List[str]) -> List[str]:
+    # Longest value list echoed in an error message; a map can hold hundreds.
+    _MAX_ECHOED_VALUES = 12
+
+    def _describe_values(self, values: List[str], block: Optional[str] = None) -> str:
+        """Where a parameter's values came from, for an error message"""
+        shown = [str(v) for v in values[: self._MAX_ECHOED_VALUES]]
+        text = " ".join(shown)
+        if len(values) > self._MAX_ECHOED_VALUES:
+            text += f" ... ({len(values)} values in all)"
+        label = "value" if len(values) == 1 else "values"
+        where = f"in [{block}], " if block else ""
+        return f"{where}{label}: {text}"
+
+    def validate_parameter(
+        self, param_name: str, values: List[str], checks: List[str], block: Optional[str] = None
+    ) -> List[str]:
         """
         Validate parameter values against all specified checks
 
@@ -266,9 +281,14 @@ class ValidationEngine:
             param_name: Name of parameter being validated
             values: List of string values from input
             checks: List of check specifications
+            block: Name of the block the parameter was read from, echoed in
+                error messages (optional)
 
         Returns:
-            List of validation error messages (empty if all valid)
+            List of validation error messages (empty if all valid).  Each
+            message echoes the values that were checked: an unrecognized
+            keyword is read as more values of the keyword before it, so the
+            values are what show where the input went wrong.
         """
         errors = []
 
@@ -278,10 +298,16 @@ class ValidationEngine:
         for check in checks:
             try:
                 if not self._evaluate_check(filtered_values, check):
-                    errors.append(f"Parameter '{param_name}' failed validation: {check}")
+                    errors.append(
+                        f"Parameter '{param_name}' failed validation: {check} "
+                        f"({self._describe_values(filtered_values, block)})"
+                    )
             # pylint: disable=broad-exception-caught
             except Exception as e:
-                errors.append(f"Parameter '{param_name}' validation error for " f"check '{check}': {e}")
+                errors.append(
+                    f"Parameter '{param_name}' validation error for check '{check}': {e} "
+                    f"({self._describe_values(filtered_values, block)})"
+                )
 
         return errors
 
