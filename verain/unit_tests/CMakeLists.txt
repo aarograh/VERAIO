@@ -21,13 +21,19 @@ ENDIF()
 SET(VERAIN_PYTEST_FILES
   test_basic
   test_directory_processor
+  test_directory_processor_merge
   test_input_parser
+  test_input_parser_plugin
   test_integration
+  test_plugin_registry
   test_react2xml
+  test_react2xml_plugins
+  test_setvar_resolve
   test_validation_engine
   test_validation_errors
   test_validation_integration
   test_xml_generator
+  test_xml_generator_plugin
 )
 
 FOREACH(TEST_FILE ${VERAIN_PYTEST_FILES})

@@ -58,8 +58,17 @@ _SCHEMA_GOLD = os.path.join(os.path.dirname(__file__), "schema.json.gold")
 
 
 def test_schema_matches_gold(capsys):
-    """--schema output must match schema.json.gold (order-independent)."""
-    rc = react2xml_main(["--schema"])
+    """--schema --no-plugins must match schema.json.gold (order-independent).
+
+    --no-plugins matters: schema.json.gold is core's own baseline schema, and
+    a real plugin may legitimately be entry-point installed in this
+    environment for someone to use `react2xml` directly with (verain-mongoose,
+    for one) -- this test should verify core hasn't drifted regardless of
+    that, not fail because something else is installed. See spec/24 S3.9:
+    "--schema --no-plugins emits core only... the gold file never churns
+    when a plugin is installed."
+    """
+    rc = react2xml_main(["--schema", "--no-plugins"])
     assert rc == 0
     captured = capsys.readouterr()
     generated = json.loads(captured.out)

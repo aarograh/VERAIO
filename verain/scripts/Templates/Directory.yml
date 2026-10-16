@@ -10213,8 +10213,8 @@ COBRATF:
 #>     need={Optional},
 #>     unitsdefault={},
 #>     unitsother={},
-#>     valuedefault={constant},
-#>     valuesapplicable={dynamic},
+#>     valuedefault={dynamic},
+#>     valuesapplicable={constant},
 #>     limitations={},
 #>     description={This sets the fuel rod pellet/clad gap thermal conductivity model. It can either be constant (user-specified value) or dynamic (CTF will calculate based on thermal expansion and burnup effects)},
 #>     notes={}
