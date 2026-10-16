@@ -2,13 +2,15 @@
 """react2xml - Convert VERA ASCII input files to XML format."""
 
 import argparse
+import copy
 import os
 import sys
 import json
-
-import yaml
+from collections import defaultdict
 
 from verain.parser.parser import InputParser
+from verain.plugins import PluginRegistry
+from verain.templates import build_directory_processor
 from verain.xml.xml_generator import XMLGenerator
 from verain.init.vera2omn import VERAOmnibusGenerator
 
@@ -70,6 +72,16 @@ def _build_parser():
         action="store_true",
         help="Write the VERAIn input schematic to stdout as JSON",
     )
+    parser.add_argument(
+        "--no-plugins",
+        action="store_true",
+        help="Ignore discovered verain plugins (core grammar and templates only)",
+    )
+    parser.add_argument(
+        "--plugins",
+        action="store_true",
+        help="List discovered verain plugins and what they add, then exit",
+    )
     init_group = parser.add_mutually_exclusive_group()
     init_group.add_argument(
         "--init",
@@ -119,18 +131,40 @@ def _stringify_scalars(data):
                 _stringify_scalars(val)
 
 
+def _plugin_contributions(processor):
+    """Split a merged DirectoryProcessor's provenance into new blocks vs. added keywords.
+
+    Returns ``(blocks_added, keywords_added)``: ``blocks_added[plugin]`` is the
+    list of wholly-new block names that plugin contributed;
+    ``keywords_added[plugin][block]`` is the list of keywords it added to an
+    existing (core) block.
+    """
+    core_names = set(build_directory_processor(enabled=False).keys())
+    blocks_added = defaultdict(list)
+    keywords_added = defaultdict(lambda: defaultdict(list))
+    for block, kw_sources in processor.sources.items():
+        if block not in core_names:
+            owners = set(kw_sources.values())
+            owner = next(iter(owners)) if len(owners) == 1 else "multiple"
+            blocks_added[owner].append(block)
+        else:
+            for kw, owner in kw_sources.items():
+                if owner != "core":
+                    keywords_added[owner][block].append(kw)
+    return blocks_added, keywords_added
+
+
 def main(argv=None):
     """Entry point for the react2xml console script."""
-    # Handle --version and --schema before argparse to avoid required-arg errors
+    # Handle --version/--schema/--plugins before argparse to avoid required-arg errors
     raw = argv if argv is not None else sys.argv[1:]
+    no_plugins = "--no-plugins" in raw
     if "--version" in raw:
         print(f"major {VERSION_MAJOR}\nminor {VERSION_MINOR}\ndate  {VERSION_DATE}", file=sys.stderr)
         return 0
     if "--schema" in raw:
-        gen = XMLGenerator()
-        directory_yml = os.path.join(gen.template_dir, "Directory.yml")
-        with open(directory_yml, "r", encoding="utf-8") as f:
-            directory_data = yaml.safe_load(f.read())
+        gen = XMLGenerator(plugins_enabled=not no_plugins)
+        directory_data = copy.deepcopy(gen.directory_processor.raw_data)
         _stringify_scalars(directory_data)
         blocks = {}
         for name in gen.TEMPLATE_ORDER:
@@ -141,6 +175,22 @@ def main(argv=None):
                 blocks.update(tmpl)
         schema = {"_directory.yml": directory_data, "_blocks": blocks}
         print(json.dumps(schema, indent=2))
+        return 0
+    if "--plugins" in raw:
+        registry = PluginRegistry.load(enabled=True)
+        plugins = registry.plugins()
+        if not plugins:
+            print("No verain plugins discovered.")
+            return 0
+        gen = XMLGenerator(plugins_enabled=True)
+        blocks_added, keywords_added = _plugin_contributions(gen.directory_processor)
+        for p in plugins:
+            print(f"{p.name} {p.version} ({p.source})")
+            for block in sorted(blocks_added.get(p.name, [])):
+                print(f"  + block {block}")
+            for block, kws in sorted(keywords_added.get(p.name, {}).items()):
+                for kw in sorted(kws):
+                    print(f"  + {block}.{kw}")
         return 0
 
     parser = _build_parser()
@@ -167,7 +217,7 @@ def main(argv=None):
         print(f"Reading {input_file} ...", file=sys.stderr)
 
     # Parse
-    inp = InputParser()
+    inp = InputParser(plugins_enabled=not args.no_plugins)
     parsed_data = inp.parse_file(input_file)
     line_lengths = inp.line_lengths
 
@@ -188,7 +238,7 @@ def main(argv=None):
             print(f"Debug data written to {debug_file}", file=sys.stderr)
 
     # Generate XML
-    gen = XMLGenerator()
+    gen = XMLGenerator(plugins_enabled=not args.no_plugins)
     xinit = bool(args.xinit)
 
     xml = gen.generate(parsed_data, xinit=xinit, line_lengths=line_lengths)

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "verain"
-version = "1.0.0"
+version = "1.1.0"
 description = "VERA Input Parser - Reactor-aware ASCII input parser for VERA"
 readme = "README.md"
 license = {text = "BSD-3-Clause"}
@@ -64,10 +64,6 @@ examples = [
 [project.scripts]
 react2xml = "verain.scripts.react2xml:main"
 vera2omn = "verain.init.vera2omn:main"
-
-[project.entry-points."verain.parsers"]
-yaml_parser = "verain.core.parser:YamlParser"
-xml_generator = "verain.core.generator:XmlGenerator"
 
 [tool.setuptools]
 zip-safe = false
