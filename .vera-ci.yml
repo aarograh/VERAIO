@@ -111,7 +111,7 @@ verain_standalone:
     - vm
   before_script:
     - REPO_DIR=$CI_BUILDS_DIR/../repos
-    - git clone --depth 1 --reference $REPO_DIR/TriBITS --dissociate file://$REPO_DIR/TriBITS
+    - git clone --depth 1 --reference $REPO_DIR/tribits --dissociate file://$REPO_DIR/tribits TriBITS
     - TPL_DIR="/data/test_gcc/vera_tpls/TPL_build/install"
     - HDF5_DIR="${TPL_DIR}/hdf5-1.10.11"
     - HDF5_LIBRARY_NAMES="hdf5;hdf5_cpp;hdf5_fortran;hdf5_hl;hdf5_hl_cpp;hdf5_hl_fortran;z"

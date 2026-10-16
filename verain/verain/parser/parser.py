@@ -6,10 +6,11 @@ This module provides classes and functions for parsing VERA ASCII input files.
 
 import os
 from pathlib import Path
-from typing import Dict, Any, List, Tuple, Union
+from typing import Dict, Any, List, Optional, Tuple, Union
 import shlex
 
-from verain.templates import DirectoryProcessor
+from verain.plugins import PluginRegistry, default_enabled
+from verain.templates import build_directory_processor
 from verain.parser.validation import ValidationEngine
 
 
@@ -21,22 +22,22 @@ class InputParser:
     structured data that can be converted to XML or other formats.
     """
 
-    _directory_processor_is_init = False
-    _directory_processor = DirectoryProcessor(None)
+    def __init__(self, plugins_enabled: Optional[bool] = None):
+        """Initialize the input parser.
 
-    def __init__(self):
-        """Initialize the input parser."""
+        Args:
+            plugins_enabled: Whether to merge discovered verain plugins into
+                the grammar. Defaults to the ``VERAIN_PLUGINS``
+                environment variable (unset/anything but ``"off"`` means on).
+        """
         self.parsed_data = {}
         self.blocks = {}
         self.validation_errors = []
         self.line_lengths: dict = {}
         self.directory_yml_path = Path(os.path.abspath(__file__)).parent.parent / "templates" / "Directory.yml"
 
-        if not InputParser._directory_processor_is_init:
-            InputParser._directory_processor = DirectoryProcessor(self.directory_yml_path)
-            InputParser._directory_processor.load_yaml()
-            InputParser._directory_processor.process_all_blocks()
-            InputParser._directory_processor_is_init = True
+        self._plugins_enabled = plugins_enabled if plugins_enabled is not None else default_enabled()
+        self._directory_processor = build_directory_processor(enabled=self._plugins_enabled)
 
         self.validation_engine = ValidationEngine()
 
@@ -95,7 +96,7 @@ class InputParser:
         """
         if "_" in block_name:
             base_block = "_".join(block_name.split("_")[:-1])
-            return base_block if InputParser._directory_processor.is_multi_instance_block(base_block) else block_name
+            return base_block if self._directory_processor.is_multi_instance_block(base_block) else block_name
         return block_name
 
     def base_parameter_name(self, block_name: str, param_name: str) -> str:
@@ -112,11 +113,7 @@ class InputParser:
         if "_" in param_name:
             base_param = "_".join(param_name.split("_")[:-1])
             base_block = self.base_block_name(block_name)
-            return (
-                base_param
-                if InputParser._directory_processor.is_multi_instance_parameter(base_block, base_param)
-                else param_name
-            )
+            return base_param if self._directory_processor.is_multi_instance_parameter(base_block, base_param) else param_name
         return param_name
 
     def parse_file(self, input_file: Union[str, Path]) -> Dict[str, Any]:
@@ -484,7 +481,7 @@ class InputParser:
                 is_multi_instance = False
 
                 # Handle special case for parameters that can appear multiple times
-                if InputParser._directory_processor.is_multi_instance_parameter(base_block, param_name):
+                if self._directory_processor.is_multi_instance_parameter(base_block, param_name):
                     is_multi_instance = True
                     param_counters.setdefault(param_name, 0)
                     param_counters[param_name] += 1
@@ -570,9 +567,9 @@ class InputParser:
         Returns:
             True if block can appear multiple times
         """
-        if not InputParser._directory_processor:
+        if not self._directory_processor:
             return False
-        return InputParser._directory_processor.is_multi_instance_block(block_name)
+        return self._directory_processor.is_multi_instance_block(block_name)
 
     def _is_parameter(self, token: str, current_block: str) -> bool:
         """
@@ -590,14 +587,22 @@ class InputParser:
             return True
 
         # Cannot validate without directory processor or block context
-        if not InputParser._directory_processor or not current_block:
+        if not self._directory_processor or not current_block:
             return False
 
         # Get base block name for lookup
         lookup_block = self.base_block_name(current_block)
 
+        # An unrecognized block (e.g. a plugin's, with that plugin not
+        # installed or --no-plugins passed) has no entry to look up; treat it
+        # the same as an unrecognized keyword within a known block, rather
+        # than raising, so a deck that names a plugin block just parses that
+        # block empty when the plugin isn't present.
+        if lookup_block not in self._directory_processor.keys():
+            raise KeyError(f"Unrecognized block name [{lookup_block}]")
+
         # Get valid parameters for this block
-        block_params = InputParser._directory_processor[lookup_block].keys()
+        block_params = self._directory_processor[lookup_block].keys()
         return token in block_params
 
     def validate_input(self, blocks: Dict[str, Any]) -> bool:
@@ -622,9 +627,7 @@ class InputParser:
                         self.validation_engine.validate_parameter(
                             parameter,
                             values,
-                            InputParser._directory_processor.get_block_parameter_checks(
-                                self.base_block_name(block), parameter
-                            ),
+                            self._directory_processor.get_block_parameter_checks(self.base_block_name(block), parameter),
                         )
                     )
                 # pylint: disable=broad-exception-caught
@@ -660,6 +663,12 @@ class InputParser:
         """
         Write blocks to the file handle.
 
+        A plugin's new block is inserted into the write order per its
+        manifest's ``emit_order``, the same way it lands in
+        the XML; a block with no ``emit_order`` (or one this parser can't
+        resolve) is appended at the end, sorted, same as before this
+        framework existed.
+
         Args:
             file_handle: Open file handle to write to
             data: Dictionary containing parsed input data
@@ -686,15 +695,38 @@ class InputParser:
             "RUN",
         ]
 
-        # Write blocks in preferred order first
+        order = list(preferred_order)
+        core_set = set(order)
+        extra_bases = sorted({self.base_block_name(k) for k in data if self.base_block_name(k) not in core_set})
+        if extra_bases:
+            try:
+                emit_order = PluginRegistry.load(enabled=self._plugins_enabled).emit_order()
+            # pylint: disable=broad-exception-caught
+            except Exception:
+                emit_order = {}
+            placed = set(order)
+            unplaced = []
+            for block in extra_bases:
+                spec = emit_order.get(block)
+                rel_target = list(spec.items())[0] if isinstance(spec, dict) and len(spec) == 1 else None
+                if rel_target is None or rel_target[0] not in ("after", "before") or rel_target[1] not in placed:
+                    unplaced.append(block)
+                    continue
+                rel, target = rel_target
+                idx = order.index(target)
+                order.insert(idx + 1 if rel == "after" else idx, block)
+                placed.add(block)
+            order.extend(unplaced)
+
+        # Write blocks in order first
         written_order = set()
-        for block in preferred_order:
+        for block in order:
             for k in sorted(data.keys()):
                 if self.base_block_name(k) == block:
                     self._write_block(file_handle, self.base_block_name(k), data[k])
                     written_order.add(k)
 
-        # Write any remaining blocks not in preferred order
+        # Write any remaining blocks not in that order
         for k in sorted(data.keys()):
             if k not in written_order:
                 self._write_block(file_handle, self.base_block_name(k), data[k])

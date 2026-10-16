@@ -2,13 +2,26 @@
 Directory processor for VERAIn hierarchical YAML data.
 
 This module provides the DirectoryProcessor class for handling Directory.yml files
-that contain hierarchical VERA input specifications.
+that contain hierarchical VERA input specifications, and the plugin merge that lets
+a separately-installed plugin extend that grammar.
 """
 
 import json
+import re
 from pathlib import Path
-from typing import Dict, Any, Optional, Tuple, Union, List
+from typing import Dict, Any, Optional, Tuple, Union, List, FrozenSet, Sequence
 import yaml
+
+from verain.plugins import PluginRegistry, default_enabled
+
+
+class PluginMergeError(Exception):
+    """A plugin grammar fragment could not be merged into the base grammar.
+
+    Every raise here names the plugin and the file responsible, per a
+    hard-error-at-merge-time requirement: a keyword collision or a bad
+    ``_datatype`` reference must stop the run, never be silently dropped.
+    """
 
 
 class DirectoryProcessor:
@@ -27,6 +40,9 @@ class DirectoryProcessor:
             self.yaml_file_path = None
         self.raw_data = None
         self.processed_data = {}
+        #: block -> {keyword: owner}, owner is "base" or a plugin name.
+        self.sources: Dict[str, Dict[str, str]] = {}
+        self._named_prefixes_cache: Optional[set] = None
 
     def __contains__(self, item: Union[str, Tuple[str, str]]) -> bool:
         """
@@ -88,14 +104,189 @@ class DirectoryProcessor:
         """
         return list(self.processed_data.get("input_blocks", {}).keys())
 
-    def load_yaml(self) -> None:
-        """Load the YAML file and parse it."""
+    def load_yaml(
+        self,
+        extra_sources: Optional[Sequence[Tuple[str, Union[str, Path], FrozenSet[str]]]] = None,
+    ) -> None:
+        """Load the YAML file, optionally merging plugin grammar fragments on top.
+
+        Args:
+            extra_sources: Optional ``(plugin_name, fragment_path, overrides)`` triples,
+                one per plugin grammar file, in the order they should be merged. Omitting
+                this (the default) is exactly the original single-file behaviour.
+                ``overrides`` is the set of fully-qualified ``BLOCK.keyword`` names that
+                plugin's manifest declares it may tighten.
+        """
         if self.yaml_file_path is None or not self.yaml_file_path.exists():
             raise FileNotFoundError(f"Error: YAML file not found at {self.yaml_file_path}")
 
         with open(self.yaml_file_path, "r", encoding="utf-8") as file:
             # Use safe_load to avoid executing arbitrary code
             self.raw_data = yaml.safe_load(file)
+
+        self.sources = self._base_provenance(self.raw_data)
+        if extra_sources:
+            self._merge_plugins(extra_sources)
+
+    @staticmethod
+    def _base_provenance(raw_data: Optional[Dict[str, Any]]) -> Dict[str, Dict[str, str]]:
+        """Attribute every keyword already in ``raw_data`` to ``"base"``."""
+        sources: Dict[str, Dict[str, str]] = {}
+        if not raw_data:
+            return sources
+        for block_name, block_data in raw_data.items():
+            if block_name.startswith("_") or not isinstance(block_data, dict):
+                continue
+            sources[block_name] = {key: "base" for key in block_data if not key.startswith("_")}
+        return sources
+
+    def _merge_plugins(self, extra_sources: Sequence[Tuple[str, Union[str, Path], FrozenSet[str]]]) -> None:
+        """Apply every plugin grammar fragment in ``extra_sources`` to ``self.raw_data``.
+
+        Fragments are grouped by plugin first, because a plugin's own
+        ``_DATATYPES`` section (for its own reuse) has to be
+        visible to every one of its fragment files, not just the one that
+        declares it.
+        """
+        base_datatypes = (self.raw_data or {}).get("_DATATYPES", {}) or {}
+
+        by_plugin: "Dict[str, Dict[str, Any]]" = {}
+        for plugin_name, path, overrides in extra_sources:
+            entry = by_plugin.setdefault(plugin_name, {"paths": [], "overrides": overrides})
+            entry["paths"].append(Path(path))
+
+        for plugin_name in sorted(by_plugin):
+            info = by_plugin[plugin_name]
+            fragment_docs = []
+            plugin_datatypes: Dict[str, Any] = {}
+            for path in info["paths"]:
+                if not path.exists():
+                    raise PluginMergeError(f"plugin '{plugin_name}': grammar file not found: {path}")
+                with open(path, "r", encoding="utf-8") as f:
+                    doc = yaml.safe_load(f) or {}
+                dts = doc.pop("_DATATYPES", None)
+                if dts:
+                    plugin_datatypes.update(dts)
+                fragment_docs.append((path, doc))
+
+            datatypes_table = {**base_datatypes, **plugin_datatypes}
+
+            for path, doc in fragment_docs:
+                for block_name, block_data in doc.items():
+                    if block_name.startswith("_"):
+                        raise PluginMergeError(f"plugin '{plugin_name}' ({path}): unexpected top-level key '{block_name}'")
+                    self._merge_one_block(plugin_name, path, block_name, block_data, datatypes_table, info["overrides"])
+
+    def _merge_one_block(
+        self,
+        plugin_name: str,
+        path: Path,
+        block_name: str,
+        block_data: Any,
+        datatypes_table: Dict[str, Any],
+        overrides: FrozenSet[str],
+    ) -> None:
+        """Merge one plugin grammar block into ``self.raw_data``."""
+        if not isinstance(block_data, dict):
+            raise PluginMergeError(f"plugin '{plugin_name}' ({path}): block '{block_name}' must be a mapping")
+        if block_name != block_name.upper():
+            raise PluginMergeError(f"plugin '{plugin_name}' ({path}): block name '{block_name}' must be upper-case")
+        if re.search(r"_\d{4}$", block_name):
+            raise PluginMergeError(
+                f"plugin '{plugin_name}' ({path}): block name '{block_name}' ends in a reserved " "instance suffix (_NNNN)"
+            )
+
+        self._resolve_datatypes(block_data, datatypes_table, f"plugin '{plugin_name}' ({path}) block '{block_name}'")
+
+        extends = bool(block_data.pop("_extends", False))
+        exists = isinstance(self.raw_data.get(block_name), dict)
+
+        if extends and not exists:
+            raise PluginMergeError(
+                f"plugin '{plugin_name}' ({path}): block '{block_name}' declares _extends: true " "but no such block exists"
+            )
+        if not extends and exists:
+            raise PluginMergeError(
+                f"plugin '{plugin_name}' ({path}): block '{block_name}' already exists (base or "
+                "another plugin) and must declare _extends: true to add keywords to it"
+            )
+
+        if not extends:
+            self.raw_data[block_name] = {}
+            directory = self.raw_data.setdefault("_DIRECTORY", {})
+            if directory is None:
+                directory = self.raw_data["_DIRECTORY"] = {}
+            directory[block_name] = None
+
+        target_block = self.raw_data[block_name]
+        target_sources = self.sources.setdefault(block_name, {})
+
+        for key, key_data in block_data.items():
+            if key.startswith("_"):
+                if not extends:
+                    # Block-level metadata from this block's own _datatype expansion
+                    # (e.g. _parse/_named from `_datatype: dtblock`).
+                    target_block[key] = key_data
+                continue
+
+            block_input_name = f"{block_name}.{key}"
+            if not isinstance(key_data, dict):
+                raise PluginMergeError(f"plugin '{plugin_name}' ({path}): keyword '{block_input_name}' must be a mapping")
+
+            node_override = bool(key_data.pop("_override", False))
+            manifest_has = block_input_name in overrides
+            if node_override != manifest_has:
+                raise PluginMergeError(
+                    f"plugin '{plugin_name}' ({path}): '{block_input_name}' "
+                    + (
+                        "sets _override: true but is not listed in the manifest's overrides"
+                        if node_override
+                        else "is listed in the manifest's overrides but its grammar node does " "not set _override: true"
+                    )
+                )
+
+            collides = key in target_sources
+            if collides and not node_override:
+                owner = target_sources[key]
+                raise PluginMergeError(
+                    f"plugin '{plugin_name}' ({path}): keyword '{block_input_name}' collides with "
+                    + ("a base keyword" if owner == "base" else f"plugin '{owner}'s keyword")
+                )
+            if node_override and not collides:
+                raise PluginMergeError(
+                    f"plugin '{plugin_name}' ({path}): '{block_input_name}' is declared as an override but "
+                    "no existing keyword exists to override"
+                )
+
+            target_block[key] = key_data
+            target_sources[key] = plugin_name
+
+    @staticmethod
+    def _resolve_datatypes(node: Any, datatypes_table: Dict[str, Any], context: str) -> None:
+        """Expand ``_datatype: <name>`` nodes the way ``<<: *name`` would, recursively.
+
+        YAML anchors are per-document, so a plugin fragment in its own file
+        cannot write ``<<: *dtword`` against an anchor defined in base's
+        Directory.yml. ``_datatype`` is the cross-file substitute: look the name
+        up, lay its keys under the node's own (so the node's explicit keys win,
+        exactly as ``<<:`` merge-key precedence does), then recurse into
+        whatever the node still holds.
+        """
+        if not isinstance(node, dict):
+            return
+        if "_datatype" in node:
+            name = node.pop("_datatype")
+            key = name if str(name).startswith("_") else f"_{name}"
+            if key not in datatypes_table:
+                available = sorted(str(k).lstrip("_") for k in datatypes_table)
+                raise PluginMergeError(f"{context}: unknown _datatype '{name}' (available: {', '.join(available)})")
+            expansion = datatypes_table[key]
+            if not isinstance(expansion, dict):
+                raise PluginMergeError(f"{context}: _datatype '{name}' is not a mapping")
+            for ek, ev in expansion.items():
+                node.setdefault(ek, ev)
+        for v in list(node.values()):
+            DirectoryProcessor._resolve_datatypes(v, datatypes_table, context)
 
     def extract_datatypes(self) -> Dict[str, Any]:
         """
@@ -221,6 +412,7 @@ class DirectoryProcessor:
                 "source_file": str(self.yaml_file_path),
                 "datatypes": datatypes,
                 "directory_structure": directory,
+                "sources": self.sources,
             },
             "input_blocks": input_blocks,
             "block_count": len(input_blocks),
@@ -228,6 +420,27 @@ class DirectoryProcessor:
         }
 
         return self.processed_data
+
+    def source_of(self, block_name: str, parameter_name: str) -> Optional[str]:
+        """Which plugin (or ``"base"``) contributed ``block_name.parameter_name``."""
+        return self.sources.get(block_name, {}).get(parameter_name)
+
+    def named_prefixes(self) -> set:
+        """Every parameter name anywhere in the grammar that is multi-instance.
+
+        Cached on this instance: since callers share one processor per
+        plugin-``enabled`` state (see ``build_directory_processor``), this is
+        effectively computed once per process per state, plugin keywords
+        included with no extra wiring on the caller's side.
+        """
+        if self._named_prefixes_cache is None:
+            prefixes = set()
+            for block_name in self.keys():  # pylint: disable=consider-using-dict-items
+                for param_name in self[block_name]:
+                    if self.is_multi_instance_parameter(block_name, param_name):
+                        prefixes.add(param_name)
+            self._named_prefixes_cache = prefixes
+        return self._named_prefixes_cache
 
     def get_block_parameter_checks(self, block_name: str, parameter_name: str) -> List[Any]:
         """
@@ -390,3 +603,36 @@ def process_directory(yaml_path) -> Dict[str, Any]:
     processor = DirectoryProcessor(yaml_path)
     processor.load_yaml()
     return processor.process_all_blocks()
+
+
+_processor_cache: Dict[bool, "DirectoryProcessor"] = {}
+
+
+def build_directory_processor(enabled: Optional[bool] = None) -> "DirectoryProcessor":
+    """Build (or return the cached) processor for base grammar plus discovered plugins.
+
+    This is the one place ``InputParser`` and ``XMLGenerator`` both go to get
+    a merged grammar, so they always agree on it. Cached by ``enabled`` so
+    repeated construction -- one ``InputParser``/``XMLGenerator`` per
+    ``react2xml`` call, or hundreds across a test session -- does not re-parse
+    the 20,000-line base Directory.yml every time.
+    """
+    if enabled is None:
+        enabled = default_enabled()
+    if enabled in _processor_cache:
+        return _processor_cache[enabled]
+
+    base_path = Path(__file__).parent / "Directory.yml"
+    processor = DirectoryProcessor(base_path)
+    registry = PluginRegistry.load(enabled=enabled)
+    extra_sources = [(plugin.name, path, plugin.overrides()) for plugin, path in registry.grammar_files()]
+    processor.load_yaml(extra_sources=extra_sources or None)
+    processor.process_all_blocks()
+
+    _processor_cache[enabled] = processor
+    return processor
+
+
+def reset_directory_processor_cache() -> None:
+    """Drop the cached merged processors (for tests that change discovery inputs)."""
+    _processor_cache.clear()

@@ -7,11 +7,12 @@ into XML output that matches the .xml.gold reference files exactly.
 import os
 import re
 import tempfile
-from typing import Any, Optional
+from typing import Any, Dict, Optional
 from xml.sax.saxutils import escape as xml_escape
 import yaml
 from verain.parser import InputParser
-from verain.templates.directory_processor import DirectoryProcessor
+from verain.plugins import Plugin, PluginError, PluginRegistry, default_enabled
+from verain.templates.directory_processor import build_directory_processor
 
 
 class XMLGenerator:
@@ -25,9 +26,15 @@ class XMLGenerator:
     template_dir : str, optional
         Directory containing YAML templates (default: "templates" subdir of this module);
         this usually does not need to be provided.
+    plugins_enabled : bool, optional
+        Whether to merge discovered verain plugins' templates and grammar
+        into this generator. Defaults to the ``VERAIN_PLUGINS``
+        environment variable (unset/anything but ``"off"`` means on).
     """
 
-    TEMPLATE_ORDER = [
+    #: The 19 core blocks' XML child order. Fixed: a plugin may insert new
+    #: entries around these (its own ``emit_order``), but may never move one.
+    _CORE_TEMPLATE_ORDER = [
         "CASEID",
         "BRANCHES",
         "STATES",
@@ -49,20 +56,23 @@ class XMLGenerator:
         "TRANSIENT",
     ]
 
-    _named_prefixes_cache: Optional[set] = None
-
-    def __init__(self, template_dir: Optional[str] = None):
+    def __init__(self, template_dir: Optional[str] = None, plugins_enabled: Optional[bool] = None):
         if template_dir is None:
             template_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "templates")
         self.template_dir = template_dir
+        self._plugins_enabled = plugins_enabled if plugins_enabled is not None else default_enabled()
         self.templates = {}
         self._db = {}
         self._vars = {}
         self._excludes = set()
+        self._directory = build_directory_processor(enabled=self._plugins_enabled)
         self._load_templates()
-        if XMLGenerator._named_prefixes_cache is None:
-            XMLGenerator._named_prefixes_cache = self._build_named_prefixes()
-        self._named_prefixes = XMLGenerator._named_prefixes_cache
+        self._named_prefixes = self._directory.named_prefixes()
+
+    @property
+    def directory_processor(self):
+        """The merged DirectoryProcessor (core grammar plus any plugins') this generator uses."""
+        return self._directory
 
     @staticmethod
     def _preprocess_yaml(text: str) -> str:
@@ -81,43 +91,169 @@ class XMLGenerator:
         return re.sub(r"(:\s+)(%\S+.*)$", r'\1"\2"', text, flags=re.MULTILINE)
 
     def _load_templates(self) -> None:
-        """Loads all the block-specific template files."""
-        for name in self.TEMPLATE_ORDER:
+        """Loads all the block-specific template files, core first, then plugins'.
+
+        Core templates are loaded under their fixed ``_CORE_TEMPLATE_ORDER``
+        names. Each plugin template file is then merged in: a fresh
+        top-level key becomes a new block (inserted into ``TEMPLATE_ORDER``
+        per its manifest's ``emit_order``); a key matching a core block name
+        must declare ``_extends: true`` and is merged into that block's
+        ``_content`` instead.
+        """
+        self.templates = {}
+        for name in self._CORE_TEMPLATE_ORDER:
             filepath = os.path.join(self.template_dir, f"{name}.yml")
             if os.path.exists(filepath):
                 with open(filepath, "r", encoding="utf-8") as f:
                     text = self._preprocess_yaml(f.read())
                     self.templates[name] = yaml.safe_load(text)
 
-    def _build_named_prefixes(self) -> set:
-        """Build the set of parameter names that are multi-instance (named).
+        self._plugin_new_blocks: list = []
+        emit_order: Dict[str, Dict[str, str]] = {}
+        if self._plugins_enabled:
+            registry = PluginRegistry.load(enabled=True)
+            for plugin, path in registry.template_files():
+                with open(path, "r", encoding="utf-8") as f:
+                    text = self._preprocess_yaml(f.read())
+                doc = yaml.safe_load(text) or {}
+                for top_key, top_val in doc.items():
+                    self._merge_template_fragment(plugin, path, top_key, top_val)
+            emit_order = registry.emit_order()
 
-        These are parameters with ``_named: 1`` in Directory.yml — they can
-        appear multiple times with numeric suffixes (e.g. mat_1, mat_2) and
-        their first token is treated as a name/key.
+        self._emit_order = emit_order
+        self.TEMPLATE_ORDER = self._compute_template_order()
+
+    def _merge_template_fragment(self, plugin: Plugin, path: str, top_key: str, top_val: Any) -> None:
+        """Merge one top-level key from a plugin template file.
+
+        See ``_load_templates`` for the extend-vs-new-block rule this enforces.
         """
-        directory_yml = os.path.join(self.template_dir, "Directory.yml")
-        processor = DirectoryProcessor(directory_yml)
-        processor.load_yaml()
-        processor.process_all_blocks()
-        prefixes = set()
-        for block_name in processor.keys():  # pylint: disable=consider-using-dict-items
-            for param_name in processor[block_name]:
-                if processor.is_multi_instance_parameter(block_name, param_name):
-                    prefixes.add(param_name)
-        return prefixes
+        is_core_name = top_key in self._CORE_TEMPLATE_ORDER
+        extends = bool(isinstance(top_val, dict) and top_val.get("_extends", False))
+
+        if is_core_name:
+            if not extends:
+                raise PluginError(
+                    f"plugin '{plugin.name}' ({path}): template '{top_key}' already exists as a "
+                    "core block's template; a plugin may not replace it, only extend it with "
+                    "'_extends: true'"
+                )
+            core_doc = self.templates.get(top_key)
+            if core_doc is None or top_key not in core_doc:
+                raise PluginError(f"plugin '{plugin.name}' ({path}): core template '{top_key}.yml' was not found to extend")
+            self._merge_template_content(plugin, path, top_key, core_doc[top_key], top_val)
+            return
+
+        if top_key in self.templates:
+            raise PluginError(f"plugin '{plugin.name}' ({path}): template block '{top_key}' already defined by another plugin")
+        if extends:
+            raise PluginError(
+                f"plugin '{plugin.name}' ({path}): '_extends: true' on '{top_key}', but no core "
+                "template of that name exists"
+            )
+
+        self.templates[top_key] = {top_key: top_val}
+        self._plugin_new_blocks.append(top_key)
+
+    @classmethod
+    def _merge_template_content(cls, plugin: Plugin, path: str, block_name: str, core_inner: dict, ext_tmpl: dict) -> None:
+        """Merge an extension template's ``_content`` children into the core block's.
+
+        A flat block's whole ``_content`` is one list, so this is where a
+        plugin keyword ends up. A repeatable block's template nests one more
+        level -- ``ASSEMBLIES``'s own ``_content`` holds exactly one
+        per-instance list, ``Assembly_(_loop)``, and *that* list's own
+        ``_content`` is where a per-instance keyword like a plugin's
+        ``grid_loss_mult`` has to land. So the merge recurses: a child name
+        that already exists on both sides is only ever a hard error unless
+        both are themselves ``_pltype: list`` containers, in which case it
+        descends into their own ``_content`` and tries again -- which is how
+        a plugin fragment reaches ``Assembly_(_loop)._content`` by writing
+        that same nested shape (see ``PLUGINS.md``'s per-instance node name
+        table). Depth is not hard-coded to one extra level; it walks however
+        deep the plugin's fragment and the core template agree to go.
+        """
+        ext_content = ext_tmpl.get("_content") or {}
+        core_content = core_inner.setdefault("_content", {})
+        cls._merge_content_dict(plugin, path, block_name, core_content, ext_content)
+
+    @classmethod
+    def _merge_content_dict(cls, plugin: Plugin, path: str, context_label: str, core_content: dict, ext_content: dict) -> None:
+        """Recursive worker for :meth:`_merge_template_content`.
+
+        Collision-checked the same way grammar merging is: a plugin child
+        name already present is a hard error, never a silent replace --
+        unless both sides are ``_pltype: list`` containers, the signal that
+        the plugin means "merge into this nested list," not "replace it."
+        Order doesn't matter here -- the emitter sorts a list's children
+        alphabetically before writing XML -- so a merged child can only ever
+        appear, never reorder existing output.
+        """
+        for child_name, child_tmpl in ext_content.items():
+            if child_name.startswith("_"):
+                continue
+            if child_name not in core_content:
+                core_content[child_name] = child_tmpl
+                continue
+
+            core_child = core_content[child_name]
+            ext_is_list = isinstance(child_tmpl, dict) and child_tmpl.get("_pltype") == "list"
+            core_is_list = isinstance(core_child, dict) and core_child.get("_pltype") == "list"
+            if not (ext_is_list and core_is_list):
+                raise PluginError(
+                    f"plugin '{plugin.name}' ({path}): template child '{context_label}.{child_name}' "
+                    "collides with an existing template entry"
+                )
+
+            core_grandchildren = core_child.setdefault("_content", {})
+            ext_grandchildren = child_tmpl.get("_content") or {}
+            cls._merge_content_dict(plugin, path, f"{context_label}.{child_name}", core_grandchildren, ext_grandchildren)
+
+    def _compute_template_order(self) -> list:
+        """The 19 core names, unchanged, with plugin blocks inserted per ``emit_order``.
+
+        A block without an ``emit_order`` entry is appended at the end, in
+        plugin-name order (``self._plugin_new_blocks`` is already in that
+        order, since ``PluginRegistry`` sorts plugins by name). A core name
+        is never moved: it is only ever a landmark other blocks are placed
+        ``after``/``before``.
+        """
+        order = list(self._CORE_TEMPLATE_ORDER)
+        placed = set(order)
+        unplaced = []
+        for block in self._plugin_new_blocks:
+            spec = self._emit_order.get(block)
+            if not spec:
+                unplaced.append(block)
+                continue
+            if not isinstance(spec, dict) or len(spec) != 1:
+                raise PluginError(f"emit_order for '{block}' must name exactly one of 'after'/'before'")
+            ((rel, target),) = spec.items()
+            if rel not in ("after", "before"):
+                raise PluginError(f"emit_order for '{block}': expected key 'after' or 'before', got '{rel}'")
+            if target not in placed:
+                raise PluginError(f"emit_order for '{block}': unknown block '{target}'")
+            idx = order.index(target)
+            order.insert(idx + 1 if rel == "after" else idx, block)
+            placed.add(block)
+        order.extend(unplaced)
+        return order
 
     # =========================================================================
     # Public API
     # =========================================================================
 
-    @staticmethod
-    def _load_init_data(parsed_data: dict) -> None:
+    def _load_init_data(self, parsed_data: dict) -> None:
         """Load Init/*.ini files and merge default data into parsed_data.
 
         Init data is used for each block when --xinit is NOT set:
         for each block, if an Init/{BLOCK}.ini file exists, its contents
         are parsed and merged as defaults (input data takes priority).
+
+        A plugin may contribute its own defaults, named the same way core's are:
+        a defaults file's stem is the block it applies to. It may not supply one
+        for a core block -- that would silently change the meaning of every
+        existing deck that omits ``--xinit``.
 
         Parameters
         ----------
@@ -126,11 +262,27 @@ class XMLGenerator:
         """
 
         init_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "init")
-        # Process all blocks that exist in both parsed_data and init/
+
+        plugin_defaults: Dict[str, Any] = {}
+        if self._plugins_enabled:
+            core_block_names = set(build_directory_processor(enabled=False).keys())
+            for plugin, path in PluginRegistry.load(enabled=True).defaults_files():
+                block = os.path.splitext(os.path.basename(str(path)))[0]
+                if block in core_block_names:
+                    raise PluginError(
+                        f"plugin '{plugin.name}' ({path}): supplies a default for core block "
+                        f"'{block}'; a plugin may only supply defaults for its own blocks"
+                    )
+                plugin_defaults[block] = (plugin, str(path))
+
+        # Process all blocks that exist in both parsed_data and a default source
         for block in list(parsed_data.keys()):
             ini_path = os.path.join(init_dir, f"{block}.ini")
             if not os.path.exists(ini_path):
-                continue
+                plugin_entry = plugin_defaults.get(block)
+                if plugin_entry is None:
+                    continue
+                ini_path = plugin_entry[1]
             # Parse the init file by wrapping it in a block header
             with (
                 tempfile.NamedTemporaryFile(mode="w", suffix=".inp", delete=False, encoding="utf-8") as tmp,
@@ -139,7 +291,7 @@ class XMLGenerator:
                 tmp.write(f"[{block}]\n" + tmp_ini.read())
                 tmp_path = tmp.name
             try:
-                init_parser = InputParser()
+                init_parser = InputParser(plugins_enabled=self._plugins_enabled)
                 init_data = init_parser.parse_file(tmp_path)
             finally:
                 os.unlink(tmp_path)
@@ -293,7 +445,7 @@ class XMLGenerator:
             base = self._strip_instance_suffix(block_key)
             num = self._get_instance_num(block_key)
 
-            if base in ("STATE", "ASSEMBLY", "CONTROL", "INSERT", "DETECTOR", "BRANCH"):
+            if self._directory.is_multi_instance_block(base):
                 if base not in db:
                     db[base] = {}
                 idx = str(num) if num else "1"
@@ -2072,8 +2224,17 @@ class XMLGenerator:
     def _handle_setvar(self, cmd: str) -> None:
         """Handle setvar directive.
 
-        Stores the RAW path string (after variable substitution) as the variable value.
-        It does NOT resolve the path through the data structure.
+        Plain form stores the RAW path string (after variable substitution) as
+        the variable value -- it does NOT resolve the path through the data
+        structure. ``apply=>&findfirst`` searches for a matching *key* and
+        stores the path to it. ``apply=>&resolve`` is the other direction:
+        it resolves an already-fully-specified path to its scalar *value*
+        (via ``_resolve_path_scalar``, the same resolution every ``copy``
+        parameter node already uses) and stores that -- which is what lets a
+        later command's ``$(var)`` substitution turn a parsed value (e.g. one
+        keyword's content referencing another keyword by name) into a usable
+        path segment, something no other combination of existing verbs can
+        do (they only ever search for or manipulate path *text*).
 
         Parameters
         ----------
@@ -2100,6 +2261,12 @@ class XMLGenerator:
             val = self._find_first_path(path)
             if val:
                 self._vars[var_name] = val
+            return
+
+        if apply_expr and "resolve" in apply_expr:
+            val = self._resolve_path_scalar(path)
+            if val is not None:
+                self._vars[var_name] = str(val)
             return
 
         # Store the raw path string
