@@ -16,6 +16,7 @@ _EXAMPLE_DECK = os.path.join(
 
 
 def _has_example_plugin():
+    print(_EXAMPLE_PLUGIN_ROOT, os.path.isdir(_EXAMPLE_PLUGIN_ROOT))
     return os.path.isdir(_EXAMPLE_PLUGIN_ROOT)
 
 
@@ -45,8 +46,10 @@ def test_new_block_emits_in_requested_slot(example_plugin):
 def test_core_extension_keyword_emits_inside_core_list(example_plugin):
     parser = InputParser()
     parsed = parser.parse_file(_EXAMPLE_DECK)
+    print(parsed)
     gen = XMLGenerator()
     xml = gen.generate(parsed, xinit=True, line_lengths=parser.line_lengths)
+    print(xml)
     core_start = xml.index('<ParameterList name="CORE">')
     core_end = xml.index("</ParameterList>", core_start)
     core_body = xml[core_start:core_end]

@@ -131,6 +131,8 @@ class XMLGenerator:
         is_core_name = top_key in self._CORE_TEMPLATE_ORDER
         extends = bool(isinstance(top_val, dict) and top_val.get("_extends", False))
 
+        print(top_key, self._CORE_TEMPLATE_ORDER)
+        print(top_val)
         if is_core_name:
             if not extends:
                 raise PluginError(

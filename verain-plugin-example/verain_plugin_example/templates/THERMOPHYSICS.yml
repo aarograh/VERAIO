@@ -1,0 +1,14 @@
+THERMOPHYSICS:
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+
+  _content:
+
+    thermophysics_constant:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy THERMOPHYSICS/$thermophysics_constant
+      _content:
+

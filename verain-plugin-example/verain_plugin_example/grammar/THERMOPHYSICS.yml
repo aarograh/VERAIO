@@ -1,0 +1,9 @@
+THERMOPHYSICS:
+  _datatype: dtblock
+
+  thermophysics_constant:
+    _datatype: dtfloat
+    _check:
+      - is_float()
+      - is_geq() 0.0
+

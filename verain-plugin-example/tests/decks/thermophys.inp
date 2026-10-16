@@ -1,0 +1,10 @@
+[CASEID]
+  title "test"
+
+[CORE]
+  gas_gap_model dynamic
+  bypass_fraction 0.0875
+
+[THERMOPHYSICS]
+  thermophysics_constant 0.5
+

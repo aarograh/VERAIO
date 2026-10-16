@@ -1,0 +1,22 @@
+CORE:
+  _extends: true
+  _pltype: list
+  _do:
+    - setdb MAIN_DB
+
+  _content:
+  
+    gas_gap_model:
+      _pltype: parameter
+      _type: string
+      _do:
+        - copy CORE/$gas_gap_model
+      _content:
+
+    bypass_fraction:
+      _pltype: parameter
+      _type: double
+      _do:
+        - copy CORE/$bypass_fraction
+      _content:
+

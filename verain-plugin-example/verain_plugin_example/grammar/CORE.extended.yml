@@ -1,0 +1,7 @@
+CORE:
+  _extends: true
+  gas_gap_model:
+    _datatype: dtstring
+  bypass_fraction:
+    _datatype: dtfloat
+

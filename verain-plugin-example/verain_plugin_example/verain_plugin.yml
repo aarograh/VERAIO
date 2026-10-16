@@ -1,0 +1,17 @@
+plugin:
+  name: verain-plugin-example
+  version: 0.1.0
+  api_version: 1
+  requires_verain: ">=1.1,<2"
+  description: "Example plugin"
+
+grammar:
+  - grammar/THERMOPHYSICS.yml
+  - grammar/CORE.extended.yml
+
+templates:
+  - templates/THERMOPHYSICS.yml
+  - templates/CORE.extended.yml
+
+emit_order:
+  THERMOPHYSICS: {after: MPACT}
